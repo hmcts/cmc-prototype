@@ -1,0 +1,60 @@
+{% macro addressInput(addresses) %}
+
+  <fieldset class="form-group">
+    <legend class="visually-hidden">Address</legend>
+    <label class="form-label" for="postcode">Enter a UK postcode</label>
+    <input class="form-control postcode" id="postcode" name="postcodeFinder" type="text"
+           value="{{ postcode }}">
+    <a id="find-button" class="button button-secondary" onclick="postcodeLookup()">Find UK
+      address</a>
+    <div id="select-address" class="js-hidden">
+      <label class="form-label">
+        Pick an address
+      </label>
+      <select id="address-select-input" class="form-control" name="addressSelect" title="Pick an address">
+      </select>
+      <br/><br/>
+      <a id="select-button" class="button button-secondary" onclick="updateAddress()">Select address</a>
+    </div>
+    <br/>
+    <a class="link" href="#" onclick="showAddressFull(); return false">Enter address manually</a>
+    <div id=address-fields class="js-hidden">
+      <label class="form-label" for="address-full">Full address</label>
+      <textarea id="address-full" class="form-control-1-2"></textarea>
+    </div>
+  </fieldset>
+
+  <script>
+    function postcodeLookup() {
+      $.ajax({
+        url: '/postcode',
+        data: { postcode: $('#postcode').val() }
+      }).done(function (data) {
+        $('#address-select-input').html(data)
+        showAddressSelect()
+      })
+      return false
+    }
+
+    function showAddressSelect() {
+      $('#select-address').removeClass('js-hidden');
+    }
+    function updateAddress() {
+      if ($('#address-select-input').find(':selected').val()) {
+        var address = $('#address-select-input').find(':selected').text();
+        $('#address-full').val(address);
+      }
+      showAddressFull()
+    }
+
+    function showAddressFull() {
+      $('#address-fields').removeClass('js-hidden');
+      $('#enter-manually').addClass('js-hidden');
+      $('#find-button').removeClass('button-primary');
+      $('#find-button').addClass('secondary-button');
+      $('#continue-button').removeClass('secondary-button');
+      $('#continue-button').addClass('button');
+    }
+  </script>
+
+{% endmacro %}

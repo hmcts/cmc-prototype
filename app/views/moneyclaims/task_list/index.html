@@ -1,0 +1,404 @@
+{% extends "layout.html" %}
+{% block page_title %} Task list {% endblock %}
+
+{% block extra_css %}<link rel="stylesheet" href="/stylesheets/dm_list.css" />{% endblock %}
+
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+
+   <div id="">
+
+  <div class="grid-row">
+
+    <div class="column-two-thirds">
+
+        <header class="page-heading page-heading-with-context page-heading-without-breadcrumb">
+
+          <p class="context">Overview</p>
+          <h1>Learn to drive</h1>
+
+        </header>
+
+        <p class="">Complete these tasks:</p>
+
+        <br>
+
+
+    {{formData | safe}}
+
+    </div>
+
+  </div>
+
+
+  <div class="grid-row">
+
+    <div class="column-three-quarters">
+
+
+  <table id="table-of-tasks">
+
+    <thead>
+      <tr>
+        <th scope="col" id="col-task">
+          <span class="task-group">
+            <span class="group-number" id="task-number"></span>
+              Before you start
+          </span>
+        </th>
+        <th class="numeric" id="task-status" scope="col" id="col-status"></th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <!-- check eligibility -->
+      <tr>
+        <td class="task">
+          <a href="/driving/questions/reason{{formQuery}}">
+            <span class="task-name"> Check eligibility, cost and time</span>
+          </a>
+        </td>
+        <td class="numeric" id="task-status">
+          {% if data.driving_lessons %}
+            {% include "includes/task_status_complete.html" %}
+          {% endif %}
+        </td>
+      </tr>
+
+      <!-- Give medical information -->
+      {% if data.disability_medical=="yes" %}
+        <tr id="give_medical_information">
+          <td class="task">
+            <a href="/driving/task_list/give_medical_information{{formQuery}}">
+
+              <span class="task-name"> Give medical information</span>
+            </a>
+          </td>
+          <td class="numeric" id="task-status">
+            {% if data.give_medical_information=="complete" %}
+              {% include "includes/task_status_complete.html" %}
+            {% endif %}
+          </td>
+        </tr>
+      {% endif %}
+
+      <!-- Have eye test -->
+      {% if data.needs_glasses_or_contacts=="yes" %}
+        <tr id="eye_test">
+          <td class="task">
+            <a href="/driving/task_list/eye_test{{formQuery}}">
+
+              <span class="task-name"> Have an eye test</span>
+            </a>
+          </td>
+          <td class="numeric" id="task-status">
+            {% if data.eye_test=="complete" %}
+              {% include "includes/task_status_complete.html" %}
+            {% endif %}
+          </td>
+        </tr>
+      {% endif %}
+
+      <!-- Apply for provisional licence -->
+      <tr id="apply_for_provisional">
+        <td class="task">
+          <a href="/driving/task_list/apply_for_provisional{{formQuery}}">
+            <span class="task-name"> Apply for your provisional licence</span>
+          </a>
+        </td>
+        <td class="numeric" id="task-status">
+          {% if data.apply_for_provisional=="complete" %}
+            {% include "includes/task_status_complete.html" %}
+          {% endif %}
+        </td>
+      </tr>
+
+      <!-- Get adapted car -->
+      {% if data.mobility_need=="yes" %}
+        <tr id="get_adapted_car">
+          <td class="task">
+            <a href="/driving/task_list/get_adapted_car{{formQuery}}">
+
+              <span class="task-name"> Get an adapted car</span>
+            </a>
+          </td>
+          <td class="numeric" id="task-status">
+            {% if data.get_adapted_car=="complete" %}
+              {% include "includes/task_status_complete.html" %}
+            {% endif %}
+          </td>
+        </tr>
+      {% endif %}
+
+      <!-- Insure your car-->
+      {% if data.practing_in_own_car=="yes" or data.practing_in_own_car=="not sure yet" %}
+        <tr id="insure_car">
+          <td class="task">
+            <a href="/driving/task_list/insure_car{{formQuery}}">
+
+              <span class="task-name"> Insure your car</span>
+            </a>
+          </td>
+          <td class="numeric" id="task-status">
+            {% if data.insure_car=="complete" %}
+              {% include "includes/task_status_complete.html" %}
+            {% endif %}
+          </td>
+        </tr>
+      {% endif %}
+
+    </tbody>
+  </table>
+
+  <br>
+  <br>
+
+  <table id="table-of-tasks">
+
+    <thead>
+      <tr>
+        <th scope="col" id="col-task">
+          <span class="task-group">
+            <span class="group-number" id="task-number"></span>
+              Practise driving
+          </span>
+        </th>
+        <th class="numeric" id="task-status" scope="col" id="col-status"></th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <!-- Read rules for practicing driving -->
+      <tr id="practice_driving">
+        <td class="task">
+          <a href="/driving/task_list/practice_driving{{formQuery}}">
+            <span class="task-name"> Learn practising rules</span>
+          </a>
+        </td>
+        <td class="numeric" id="task-status">
+          {% if data.practice_driving=="complete" %}
+            {% include "includes/task_status_complete.html" %}
+          {% endif %}
+        </td>
+      </tr>
+
+      <!-- Find a driving instructor -->
+      {% if data.driving_lessons=="yes" or data.driving_lessons=="not sure yet" %}
+      <tr id="find_instructor">
+        <td class="task">
+          <a href="/driving/task_list/find_instructor{{formQuery}}">
+            <span class="task-name"> Find a driving instructor</span>
+          </a>
+        </td>
+        <td class="numeric" id="task-status">
+          {% if data.find_instructor=="complete" %}
+            {% include "includes/task_status_complete.html" %}
+          {% endif %}
+        </td>
+      </tr>
+      {% endif %}
+
+    </tbody>
+  </table>
+
+  <br>
+  <br>
+
+  <table id="table-of-tasks">
+
+    <thead>
+      <tr>
+        <th scope="col" id="col-task">
+          <span class="task-group">
+            <span class="group-number" id="task-number"></span>
+              Take your theory test
+          </span>
+        </th>
+        <th class="numeric" id="task-status" scope="col" id="col-status"></th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <!-- Book theory test -->
+      <tr id="book_theory_test">
+        <td class="task">
+          <a href="/driving/task_list/book_theory_test{{formQuery}}">
+            <span class="task-name"> Book your theory test</span>
+          </a>
+        </td>
+        <td class="numeric" id="task-status">
+          {% if data.book_theory_test=="complete" %}
+            {% include "includes/task_status_complete.html" %}
+          {% endif %}
+        </td>
+      </tr>
+
+      <!-- Revise for theory test -->
+      <tr id="revise_for_theory_test">
+        <td class="task">
+          <a href="/driving/task_list/revise_for_theory_test{{formQuery}}">
+            <span class="task-name"> Revise for your theory test</span>
+          </a>
+        </td>
+        <td class="numeric" id="task-status">
+          {% if data.revise_for_theory_test=="complete" %}
+            {% include "includes/task_status_complete.html" %}
+          {% endif %}
+        </td>
+      </tr>
+
+      <!-- Take theory test -->
+      <tr id="check_theory_test_details">
+        <td class="task">
+          <a href="/driving/task_list/check_theory_test_details{{formQuery}}">
+            <span class="task-name"> Check your theory test details</span>
+          </a>
+        </td>
+        <td class="numeric" id="task-status">
+          {% if data.check_theory_test_details=="complete" %}
+            {% include "includes/task_status_complete.html" %}
+          {% endif %}
+        </td>
+      </tr>
+
+      <!-- Take practical test -->
+      <tr id="take_theory_test">
+        <td class="task">
+          <a href="/driving/task_list/take_theory_test{{formQuery}}">
+            <span class="task-name"> Take your theory test</span>
+          </a>
+        </td>
+        <td class="numeric" id="task-status">
+          {% if data.take_theory_test=="complete" %}
+            {% include "includes/task_status_complete.html" %}
+          {% endif %}
+        </td>
+      </tr>
+
+    </tbody>
+  </table>
+
+  <br>
+  <br>
+
+  <table id="table-of-tasks">
+
+    <thead>
+      <tr>
+        <th scope="col" id="col-task">
+          <span class="task-group">
+            <span class="group-number" id="task-number"></span>
+              Take your driving test
+          </span>
+        </th>
+        <th class="numeric" id="task-status" scope="col" id="col-status"></th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <!-- Book practical test -->
+      <tr id="book_driving_test">
+        <td class="task">
+          <a href="/driving/task_list/book_driving_test{{formQuery}}">
+            <span class="task-name"> Book your driving test</span>
+          </a>
+        </td>
+        <td class="numeric" id="task-status">
+          {% if data.book_driving_test=="complete" %}
+            {% include "includes/task_status_complete.html" %}
+          {% endif %}
+        </td>
+      </tr>
+
+      <!-- Check your driving test details -->
+      <tr id="check_driving_test_details">
+        <td class="task">
+          <a href="/driving/task_list/check_driving_test_details{{formQuery}}">
+            <span class="task-name"> Check your driving test details
+            </span>
+          </a>
+        </td>
+        <td class="numeric" id="task-status">
+          {% if data.check_driving_test_details=="complete" %}
+            {% include "includes/task_status_complete.html" %}
+          {% endif %}
+        </td>
+      </tr>
+
+      <!-- Take your driving test -->
+      <tr id="take_driving_test">
+        <td class="task">
+          <a href="/driving/task_list/take_driving_test{{formQuery}}">
+            <span class="task-name"> Take your driving test</span>
+          </a>
+        </td>
+        <td class="numeric" id="task-status">
+          {% if data.take_driving_test=="complete" %}
+            {% include "includes/task_status_complete.html" %}
+          {% endif %}
+        </td>
+      </tr>
+
+    </tbody>
+  </table>
+
+  <br>
+  <br>
+
+  <table id="table-of-tasks">
+
+    <thead>
+      <tr>
+        <th scope="col" id="col-task">
+          <span class="task-group">
+            <span class="group-number" id="task-number"></span>
+              After you pass
+          </span>
+        </th>
+        <th class="numeric" id="task-status" scope="col" id="col-status"></th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <!-- Get licence -->
+      <tr id="get_full_licence">
+        <td class="task">
+          <a href="/driving/task_list/get_full_licence{{formQuery}}">
+            <span class="task-name"> Get full licence</span>
+          </a>
+        </td>
+        <td class="numeric" id="task-status">
+          {% if data.get_full_licence=="complete" %}
+            {% include "includes/task_status_complete.html" %}
+          {% endif %}
+        </td>
+      </tr>
+
+      <!-- Learn driving rules -->
+      <tr id="after_you_pass">
+        <td class="task">
+          <a href="/driving/task_list/after_you_pass{{formQuery}}">
+            <span class="task-name"> Learn driving rules</span>
+          </a>
+        </td>
+        <td class="numeric" id="task-status">
+          {% if data.after_you_pass=="complete" %}
+            {% include "includes/task_status_complete.html" %}
+          {% endif %}
+        </td>
+      </tr>
+
+    </tbody>
+  </table>
+
+    </div>
+
+  </div>
+
+  </div>
+
+</main>
+{% endblock %}
+{% block extra_js_1 %}<!-- ticky list javascript one -->{% endblock %}
+{% block extra_js_2 %}<!-- ticky list javascript two -->{% endblock %}

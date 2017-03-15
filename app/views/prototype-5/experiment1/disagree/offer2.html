@@ -1,0 +1,164 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+
+{% block content %}
+
+
+<main id="content" role="main">
+
+  <script>
+    $(document).ready(function () {
+      $('#yourOfferContent').html(formParam('claim-details1'));
+    });
+  </script>
+
+  <div class="phase-banner-alpha">
+    <p>
+      <strong class="phase-tag">ALPHA</strong>
+      <span>This is a new service – your <a href="#">feedback</a> will help us to improve it.</span>
+    </p>
+  </div>
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+      <a href="#" class="link-back">Back</a>
+
+      <h1 class="heading-xlarge">
+        Make a suggestion
+      </h1>
+
+      <p class="lede">You can now make a suggestion to reach a common ground with them.</p>
+
+      <h3 class="heading-medium">What do you want to suggest?</h3>
+
+      <form action="offer-confirmation" method="get" class="form">
+
+        <div class="form-group">
+          <fieldset>
+
+            <legend class="visually-hidden">What do you want to suggest?</legend>
+
+            <!--<label class="form-label-bold" for="who">-->
+            <!--Who-->
+            <!--<span class="form-hint">-->
+            <!--For example, the other party or yourself.-->
+            <!--</span>-->
+            <!--</label>-->
+            <!--<input class="form-control" id="who" type="text">-->
+            <!--<br>-->
+            <!--<br>-->
+
+
+            <label class="form-label-bold" for="offer">
+              You will...
+              <span class="form-hint">For example, pay the rent, fix the problem, return goods, etc.</span>
+            </label>
+            <textarea class="form-control"
+                      id="offer"
+                      rows="3"
+                      name="offer"
+                      type="text"
+                      style="width: 90%"></textarea>
+            <br>
+
+            <label class="form-label-bold" for="claimant_date_of_birth_day">
+              By when</label>
+            <div class="input form-group date optional claimant_date_of_birth field_with_hint"><p
+              class="form-hint text">For example, 23 04 2017</p>
+              <div class="input form-group know-date-input">
+                <div class="input form-group tel required claimant_date_of_birth_day"><label
+                  class="tel required form-label"
+                  for="claimant_date_of_birth_day">Day</label><input
+                  class="string tel required form-control" maxlength="2" type="tel"
+                  size="2" name="claimant[date_of_birth][day]"
+                  id="claimant_date_of_birth_day"></div>
+                <div class="input form-group tel required claimant_date_of_birth_month"><label
+                  class="tel required form-label"
+                  for="claimant_date_of_birth_month">Month</label><input
+                  class="string tel required form-control" maxlength="2" type="tel"
+                  size="2" name="claimant[date_of_birth][month]"
+                  id="claimant_date_of_birth_month"></div>
+                <div class="input form-group tel required claimant_date_of_birth_year"><label
+                  class="tel required form-label"
+                  for="claimant_date_of_birth_year">Year</label><input
+                  class="string tel required form-control" maxlength="4" type="tel"
+                  size="4" name="claimant[date_of_birth][year]"
+                  id="claimant_date_of_birth_year"></div>
+              </div>
+              <!--</div>-->
+
+              <label class="form-label-bold" for="offer">
+                What do you want Jan Clark to do in return?
+                <span class="form-hint">For example, pay the rent, fix the problem, return goods, etc.</span>
+              </label>
+              <textarea class="form-control"
+                        id="offer"
+                        rows="3"
+                        name="offer"
+                        type="text"
+                        style="width: 90%"></textarea>
+
+
+              <!--<label class="form-label-bold" for="who">-->
+              <!--For whom-->
+              <!--<span class="form-hint">-->
+              <!--For example, the other party or yourself.-->
+              <!--</span>-->
+              <!--</label>-->
+              <!--<input class="form-control" id="who" type="text">-->
+
+              <fieldset></fieldset>
+
+              <div id="claim-details"></div>
+
+              <div id="addClaimDetailsBtn" class="form-group">
+                <a href="javascript:void(0);">Additional request - eg send proof of completion (optional)</a>
+              </div>
+
+              <script>
+                $(document).ready(function () {
+                  var currentBoxId = 5;
+
+                  function newClaimDetailsBox(boxId) {
+                    return '' +
+                      '<div id="describe-wrapper-claim-details-' + boxId + '" class="form-group">' +
+                      '  <label class="form-label-bold" for="claim-details-' + boxId + '">' +
+                      'Conditions' +
+                      '   <a style="float: right;" href="javascript:void(0);" onclick="$(\'#describe-wrapper-claim-details-' + boxId + '\').remove()">Remove</a>' +
+                      '</label>' +
+                      '  <textarea class="form-control" id="claim-details-' + boxId + '" rows="4" name="claim-details-' + boxId + '" type="text" style="width: 100%">' +
+                      'Please ... email me proof of completion.</textarea>' +
+                      '</div>';
+                  }
+
+                  $('#addClaimDetailsBtn').click(function () {
+                    $('#claim-details').append(newClaimDetailsBox(currentBoxId++));
+                  });
+                });
+              </script>
+
+              <p class="panel panel-border-wide">
+                Jan Clark can accept your suggestion, reject it or suggest an alternative. If they don't want to
+                negotiate
+                further the claim will continue to a hearing unless you can reach an agreement.
+              </p>
+
+              <div class="form-group">
+                <input type="submit" class="button" value="Continue">
+              </div>
+            </div>
+          </fieldset>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</main>
+
+
+{% endblock %}
+

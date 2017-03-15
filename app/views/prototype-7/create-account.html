@@ -1,0 +1,175 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+
+{% block content %}
+
+
+<main id="content" role="main">
+
+  <div class="phase-banner-alpha">
+    <p>
+      <strong class="phase-tag">ALPHA</strong>
+      <span>This is a new service – your <a href="#">feedback</a> will help us to improve it.</span>
+    </p>
+  </div>
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+      <a href="#" class="link-back">Back</a>
+
+      <header class="main-header" role="banner">
+        <div class="page-trail">
+          <span class="page-number">Page 2 of 15</span>
+          <span class="page-title">Create an account</span>
+        </div>
+      </header>
+
+      <!--<h1 class="heading-xlarge">-->
+      <!--Create an account-->
+      <!--</h1>-->
+
+      <fieldset></fieldset>
+
+      <form action="making-changes" method="get" class="form">
+
+        <form>
+          <div class="form-group">
+            <fieldset>
+
+              <legend class="visually-hidden">Create an account</legend>
+
+              <div class="form-field-group">
+                <label class="bold">Email address</label>
+                <!--<span id="email-error-message" class="error-notification" role="alert" data-input-name="email">-->
+                <!--Please enter their email address-->
+                <!--</span>-->
+                <input type="text" name="email" id="email" class="form-control--block input--medium"
+                       aria-required="true" minlength="5" maxlength="50" required="" data-rule-email="true"
+                       data-msg-email="Please enter a valid email address" data-msg-required="Please enter their email"
+                       data-msg-minlength="Please enter 5 or more characters"
+                       data-msg-maxlength="Please enter less than 50 characters">
+
+                <!--<input class="form-control" type="text">-->
+              </div>
+
+            </fieldset>
+
+            <form
+              name="aspnetForm"
+              method="POST"
+              class="js-form"
+              autocomplete="off"
+              novalidate="novalidate"
+              onsubmit="if ( validateForm(event) ) { postTo('check-email'); } return false;">
+              <input type="hidden" name="permission" id="permission"/>
+              <input type="hidden" name="twofactor" id="twofactor" value="false"/>
+              <input type="hidden" name="loggedIn" id="loggedIn" value="false"/>
+
+              <!--<div class="flash error-summary" id="error-summary-display"-->
+              <!--aria-labelledby="error-summary-heading"-->
+              <!--role="alert" tabindex="-1">-->
+              <!--<h2 id="error-summary-heading" class="h3-heading">Summary Heading</h2>-->
+              <!--<ul class="js-error-summary-messages">-->
+              <!--</ul>-->
+              <!--</div>-->
+
+              <fieldset>
+                <div class="form-field-group">
+                  <label class="bold">
+                    Password
+                    <!--<span id="password-error-message" class="error-notification" role="alert"-->
+                    <!--data-input-name="password">Enter your new password</span>-->
+                    <br>
+                    <input type="password"
+                           name="password"
+                           id="password"
+                           class="form-control--block input--small js-form-hint-helper"
+                           aria-required="true"
+                           minlength="8"
+                           maxlength="12"
+                           required
+                           pattern="^(?=.*\d)(?=.*[a-z])[0-9a-zA-Z]{8,12}$"
+                           data-hint-rules="js-hint-password-rule"
+                           data-msg-pattern="Please use at least one letter (a-z) and number (0-9)"
+                           data-msg-required="Please enter a password"
+                           data-msg-minlength="Please enter 8 or more characters"
+                           data-msg-maxlength="Please enter less than 12 characters"/>
+                  </label>
+                  <br>
+                  <p class="form-hint">Your password must:</p>
+                  <ul class="form-hint-list">
+                    <li class="form-hint-list-item form-hint js-hint-password-rule"
+                        data-hint-rule="^[A-Za-z0-9]{8,12}$"
+                        data-hint-rule-flag="i">
+                      <span class="form-hint-list-item__indicator"></span>
+                      - be between 8 and 12 characters (letters and numbers only, no special characters)
+                    </li>
+                    <li class="form-hint-list-item form-hint js-hint-password-rule"
+                        data-hint-rule="[A-Za-z]+">
+                      <span class="form-hint-list-item__indicator"></span>
+                      - contain at least one letter (a-z)
+                    </li>
+                    <li class="form-hint-list-item form-hint js-hint-password-rule" data-hint-rule="[0-9]+">
+                      <span class="form-hint-list-item__indicator"></span>
+                      - contain at least one number (0-9)
+                    </li>
+                    <li class="form-hint-list-item form-hint js-hint-password-rule"
+                        data-hint-rule="^((?!password)[\S])+$"
+                        data-hint-rule-flag="i">
+                      <span class="form-hint-list-item__indicator"></span>
+                      - not contain the word 'password'
+                    </li>
+                  </ul>
+                </div>
+              </fieldset>
+
+              <fieldset>
+                <div class="form-field-group">
+                  <label class="bold">
+                    Confirm password
+                    <!--<span id="confirmPassword-error-message" class="error-notification" role="alert"-->
+                    <!--data-input-name="confirmPassword">Please confirm your new password</span>-->
+                    <br>
+                    <input type="password"
+                           name="confirmPassword"
+                           id="confirmPassword"
+                           class="form-control--block input--small"
+                           required
+                           aria-required="true"
+                           data-rule-equalto="#password"
+                           data-msg-required="Please enter confirm password"
+                           data-msg-equalto="Please enter same password"/>
+                  </label>
+                </div>
+              </fieldset>
+
+              <!--<div class="form-field&#45;&#45;submit">-->
+              <!--<button class="button" type="submit" data-ignore-double-submit="true">Create account</button>-->
+              <!--</div>-->
+            </form>
+
+            <div class="clearfix">
+              <a class="button" href="making-changes" role="button">Create account</a> &nbsp;
+            </div>
+
+          </div>
+        </form>
+
+        <!--<p class="panel panel-border-wide">You can save your claim and return to it at any time.</p>-->
+
+        <p>You can save your claim and return to it at any time.</p>
+
+        <!--<p class="print"><a class="print-page" href="javascript:window.print();">Print this page</a>&nbsp;to keep a-->
+        <!--copy-->
+        <!--of your claim reference.</p>-->
+    </div>
+  </div>
+</main>
+
+
+{% endblock %}
+

@@ -1,0 +1,196 @@
+/*
+Tabular Data
+
+ A way to display tabular data of up to three elements.
+ At desktop and tablet breakpoints, displayed as one row
+ with three columns; and at the mobile breakpoint,
+ one column with three rows.
+
+Markup:
+<div class="tabular-data__entry {{modifier_class}}">
+  <span class="tabular-data__heading tabular-data__heading--label">Name</span>
+  <div class="tabular-data__data-1">John Smith</div>
+  <a class="tabular-data__data-2" href="#edit">Change</a>
+</div>
+<div class="tabular-data__entry {{modifier_class}}">
+  <span class="tabular-data__heading tabular-data__heading--label">Date of birth</span>
+  <span class="tabular-data__data-1 tabular-data__data-1--2-col" href="#changepwd">1 January 1980</span>
+</div>
+<div class="tabular-data__entry">
+  <details class="tabular-data__details">
+      <summary class="tabular-data__heading--label">Mobile phone number</summary>
+      <p>we need this to send a one-time access code by SMS</p>
+  </details>
+  <div class="tabular-data__data-1 tabular-data__data-1--after-details">0755555555</div>
+  <a class="tabular-data__data-2 tabular-data__data-2--after-details" href="#foo.html">Change</a>
+</div>
+
+.tabular-data__entry--grouped - less padding between sections with the 'tabular-data__entry--grouped' class
+
+Discussion: https://hmrcdigital.hackpad.com/Tabular-Data-jSbxZ0ptWIm
+
+Styleguide Tabular Data
+ */
+
+/** each data entry */
+.tabular-data__entry {
+  display: table;
+  width: 100%;
+  position: relative;
+  padding: em(15) 0;
+}
+
+.tabular-data__entry--grouped:first-child {
+  padding-top: em(15);
+}
+
+.tabular-data__entry--grouped:last-child {
+  padding-bottom: em(15);
+}
+
+.tabular-data__entry--grouped + .tabular-data__entry:not(.tabular-data__entry--grouped) {
+  padding-top: em(30);
+
+  .tabular-data__data-1--after-details {
+    top: em(20);
+  }
+
+  .tabular-data__data-2--after-details {
+    top: em(20);
+  }
+}
+
+.tabular-data__entry--grouped {
+  padding-bottom: em(5);
+
+  & + & {
+    padding-top: em(5);
+  }
+
+  .tabular-data__data-1 {
+    margin-top: 0;
+  }
+
+  .tabular-data__data-2 {
+    margin-top: 0;
+  }
+}
+
+.tabular-data__entry * {
+  @include core-16;
+}
+
+.tabular-data__heading--label {
+  @include bold-16;
+}
+
+/** first position */
+.tabular-data__heading {
+  display: inline-block;
+  @include media(tablet) {
+    display: table-cell;
+    width: 40%;
+  }
+}
+
+/** details element in first position */
+.tabular-data__details {
+  margin: 0;
+  summary {
+    @include media(tablet) {
+      width: 38%;
+    }
+  }
+}
+
+/** second position */
+.tabular-data__data-1 {
+  display: block;
+  margin: em(10) 0;
+  @include media(tablet) {
+    display: table-cell;
+    width: 50%;
+  }
+  li {
+    margin: 0;
+  }
+}
+
+/** need to use absolute positioning where the heading uses a details element */
+.tabular-data__data-1--after-details {
+  @include media(tablet) {
+    position: absolute;
+    left: 40%;
+    top: em(5);
+  }
+}
+
+/** third position */
+.tabular-data__data-2 {
+  display: block;
+  margin: em(10) 0;
+  @include media(tablet) {
+    display: table-cell;
+    width: 10%;
+    text-align: right;
+    padding-right: em(10);
+  }
+}
+
+/** need to use absolute positioning where the heading uses a details element */
+.tabular-data__data-2--after-details {
+  @include media(tablet) {
+    position: absolute;
+    top: em(5);
+    right: 0;
+  }
+}
+
+/** when second position spans two columns */
+.tabular-data__data-1--2-col {
+  @include media(tablet) {
+    width: 60%;
+  }
+}
+
+/** reduce spacing between multi-entry rows in same grouping */
+.tabular-data__cell--multi-entry + .tabular-data__cell--multi-entry {
+  padding-top: 0;
+  margin-top: 0;
+  @include media(tablet) {
+    margin-top: em(5);
+  }
+}
+
+/** cell in vertical centre */
+.tabular-data__cell--centred {
+  vertical-align: middle;
+}
+
+/** simulate cell in vertical centre */
+.tabular-data__cell--pull-up {
+  @include media(tablet) {
+    position: absolute;
+    top: em(-30);
+    right: 0;
+  }
+}
+
+.tabular-data__tab-content {
+  border-bottom: 1px solid #bfc1c3;
+  padding: em(20) 0 0;
+
+  @include media(tablet) {
+    border: 1px solid #bfc1c3;
+    border-top: 0;
+    padding: em(5) em(15) 0;
+  }
+}
+
+.tabular-data__divider--full-width {
+  border-bottom: 1px solid #bfc1c3;
+
+  @include media(tablet) {
+    margin: 0 em(-13);
+  }
+}

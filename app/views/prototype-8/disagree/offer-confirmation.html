@@ -1,0 +1,80 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+
+{% block content %}
+
+
+<main id="content" role="main">
+
+  <script>
+    $(document).ready(function () {
+      var offerText = '';
+      if (formParam('offer-me')) {
+        if (offerText.length > 0) {
+          offerText += '<br/>'
+        }
+        offerText += 'You will ' + formParam('offer-me').toLocaleLowerCase();
+        if (formParam('offerDateDay') && formParam('offerDateMonth') && formParam('offerDateYear')) {
+          offerText += ' by ' + formParam('offerDateDay') + '/' + formParam('offerDateMonth') + '/' + formParam('offerDateYear')
+        }
+      }
+      if (formParam('offer-them')) {
+        if (offerText.length > 0) {
+          offerText += '<br/>'
+        }
+        offerText += 'They will ' + formParam('offer-them').toLocaleLowerCase();
+      }
+      $('#yourOfferContent').html(offerText);
+    });
+  </script>
+
+  <div class="phase-banner-alpha">
+    <p>
+      <strong class="phase-tag">ALPHA</strong>
+      <span>This is a new service – your <a href="#">feedback</a> will help us to improve it.</span>
+    </p>
+  </div>
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+      <!--<a href="#" class="link-back">Back</a>-->
+
+      <h1 class="heading-xlarge">
+        Suggestion sent to Jan Clark
+      </h1>
+
+      <p class="heading-medium">Your suggestion</p>
+
+      <div class="clearfix">
+        <div id="yourOfferContent" class="callout callout-fee">
+
+        </div>
+      </div>
+
+      <fieldset>
+        <p>We've emailed Jan Clark your suggestion.</p>
+
+        <h2 class="heading-medium">What happens next</h2>
+        <p>Jan Clark can accept or reject your suggestion, or suggest an alternative. We'll update you by email and SMS
+          if this happens.</p>
+        <p>We'll contact you <span class="bold">within 5 days</span> and explain what to do if Jan Clark doesn't
+          reply.</p>
+
+      </fieldset>
+
+      <p>We've emailed you this confirmation.
+        <!---->
+        <!--<a href="#">Print this page</a>-->
+
+      </p>
+
+    </div>
+  </div>
+</main>
+
+
+{% endblock %}
