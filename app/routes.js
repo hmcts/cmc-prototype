@@ -65,18 +65,6 @@ router.get(agreementPage, (req, res) => {
   res.render('prototype-13/review-agreement', cookie)
 })
 
-
-let setAgreementStateToDone = function (req, res, field) {
-  let cookie = getAgreementStateCookie(req)
-
-  cookie[field] = {
-    css_class: "done",
-    status: "Reviewed"
-  }
-
-  setAgreementStateCookie(res, cookie, 'claim')
-}
-
 router.post('/prototype-13/agreement/details-defendant', (req, res) => {
   setAgreementStateToDone(req, res, 'claim')
 
@@ -101,18 +89,8 @@ router.post('/prototype-13/agreement/breached', (req, res) => {
   res.redirect(agreementPage)
 })
 
-const stateCookieName = 'AGREEMENT_STATE'
-
-const getAgreementStateCookie = (req) => {
-  return req.cookies[stateCookieName] ? JSON.parse(req.cookies[stateCookieName]) : defaultState()
-}
-
-const setAgreementStateCookie = (res, cookie) => {
-  res.cookie(stateCookieName, JSON.stringify(cookie))
-}
-
-const agreementPage = '/prototype-16/review-agreement';
-router.get(agreementPage, (req, res) => {
+const agreementPage2 = '/prototype-16/review-agreement';
+router.get(agreementPage2, (req, res) => {
   const cookie = getAgreementStateCookie(req)
   if (isEqual(cookie, defaultState())) {
   setAgreementStateCookie(res, defaultState())
