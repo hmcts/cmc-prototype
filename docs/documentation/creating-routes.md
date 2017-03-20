@@ -7,8 +7,8 @@ To do this you will need to create 'routes' - rules for the server to respond to
 For example, with a route of `/sample` the URL is:
 
     http://localhost:3000/sample
-    
-All routes for the application are kept in the [routes.js](../app/routes.js) file. They follow this format:
+
+All routes for the application are kept in the 'routes.js' file. They follow this format:
 
     verb(route, callback(request, response) {
         response.render(template, data);
@@ -30,17 +30,17 @@ So as an example, a request for the URL `http://localhost:3000/examples/template
     router.get('/examples/template-data', function(req, res) {
         res.render('examples/template-data', { 'name' : 'Foo' });
     });
-    
+
 We are saying that for a `get` request for the `/template-data` route we should run the code:
 
     res.render('examples/template-data', { 'name' : 'Foo' });
-    
-This is the `render` method of the `res` parameter being run with two parameters: 
+
+This is the `render` method of the `res` parameter being run with two parameters:
 
 - the template called `template-data`
 - the data object `{ 'name' : 'Foo' }`
 
-Template files are found this way: `/views/` + `template` parameter + `.html`. The `sample` template therefore points to the `/views/examples/template-data.html` file. 
+Template files are found this way: `/views/` + `template` parameter + `.html`. The `sample` template therefore points to the `/views/examples/template-data.html` file.
 
 In the same way, the template `/examples/hello_world` would point to the `/examples/hello_world.html` file.
 

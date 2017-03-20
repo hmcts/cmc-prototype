@@ -35,6 +35,13 @@ promoMode = promoMode.toLowerCase()
 // Disable promo mode if docs aren't enabled
 if (!useDocumentation) promoMode = 'false'
 
+// Force HTTPs on production connections. Do this before asking for basicAuth to
+// avoid making users fill in the username/password twice (once for `http`, and
+// once for `https`).
+if (env === 'production' && useHttps === 'true') {
+  app.use(utils.forceHttps)
+}
+
 // Authenticate against the environment-provided credentials, if running
 // the app in production (Heroku, effectively)
 if (env !== 'development' && useAuth === 'true') {
@@ -98,24 +105,14 @@ app.use(session({
   secret: Math.round(Math.random() * 100000).toString()
 }))
 
-// send assetPath to all views
-app.use(function (req, res, next) {
-  res.locals.asset_path = '/public/'
-  next()
-})
 
 // Add variables that are available in all views
-app.use(function (req, res, next) {
-  res.locals.serviceName = config.serviceName
-  res.locals.cookieText = config.cookieText
-  res.locals.releaseVersion = 'v' + releaseVersion
-  next()
-})
-
-// Force HTTPs on production connections
-if (env === 'production' && useHttps === 'true') {
-  app.use(utils.forceHttps)
-}
+// app.locals.analyticsId = analyticsId
+app.locals.asset_path = '/public/'
+app.locals.cookieText = config.cookieText
+app.locals.promoMode = promoMode
+app.locals.releaseVersion = 'v' + releaseVersion
+app.locals.serviceName = config.serviceName
 
 // Disallow search index idexing
 app.use(function (req, res, next) {
@@ -153,6 +150,10 @@ app.get('/prototype-admin/download-latest', function (req, res) {
 })
 
 if (useDocumentation) {
+
+  // Copy app locals to documentation app locals
+  documentationApp.locals = app.locals
+
   // Create separate router for docs
   app.use('/docs', documentationApp)
 
