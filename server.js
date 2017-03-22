@@ -21,6 +21,8 @@ var password = process.env.PASSWORD
 var env = process.env.NODE_ENV || 'development'
 var useAuth = process.env.USE_AUTH || config.useAuth
 var useHttps = process.env.USE_HTTPS || config.useHttps
+var piwikHostname = process.env.PIWIK_HOSTNAME
+var piwikSiteId = process.env.PIWIK_SITEID
 
 env = env.toLowerCase()
 useAuth = useAuth.toLowerCase()
