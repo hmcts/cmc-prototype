@@ -27,6 +27,12 @@ You must protect user privacy at all times, even when using prototypes. Prototyp
 2. [Publishing on the web (Heroku)](https://govuk-prototype-kit.herokuapp.com/docs/publishing-on-heroku)
 3. [Using GOV.UK Verify](https://govuk-prototype-kit.herokuapp.com/docs/using-verify)
 
+## Analytics
+
+- For Piwik setup you must add PIWIK_HOSTNAME and PIWIK_SITEID to the environment variables of your server
+- Install Piwik on your server or use a hosted Piwik service
+- Additional information can be found at [Piwik](https://piwik.org/)
+
 ## Other documentation
 
 - [Prototype kit principles](https://govuk-prototype-kit.herokuapp.com/docs/principles)
