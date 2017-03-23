@@ -115,6 +115,8 @@ app.locals.cookieText = config.cookieText
 app.locals.promoMode = promoMode
 app.locals.releaseVersion = 'v' + releaseVersion
 app.locals.serviceName = config.serviceName
+app.locals.piwikHostname = piwikHostname
+app.locals.piwikSiteId = piwikSiteId
 
 // Disallow search index idexing
 app.use(function (req, res, next) {
