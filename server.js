@@ -117,6 +117,7 @@ app.locals.releaseVersion = 'v' + releaseVersion
 app.locals.serviceName = config.serviceName
 app.locals.piwikHostname = piwikHostname
 app.locals.piwikSiteId = piwikSiteId
+app.locals.defaultHome = config.defaultHome
 
 // Disallow search index idexing
 app.use(function (req, res, next) {
