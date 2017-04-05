@@ -19,6 +19,9 @@ module.exports = {
   useHttps: 'false',
 
   // Cookie warning - update link to service's cookie page.
-  cookieText: 'GOV.UK uses cookies to make the site simpler. <a href="#">Find out more about cookies</a>'
+  cookieText: 'GOV.UK uses cookies to make the site simpler. <a href="#">Find out more about cookies</a>',
+
+  // Set the default home directory
+  defaultHome: "/"
 
 }
