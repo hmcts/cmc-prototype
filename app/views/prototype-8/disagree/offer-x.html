@@ -1,16 +1,10 @@
-{% extends "layout.html" %}
-
-{% block page_title %}
-Money Claims Prototype
-{% endblock %}
-
-{% block content %}
+{% extends "layout.html" %} {% block page_title %} Money Claims Prototype {% endblock %} {% block content %}
 
 
 <main id="content" role="main">
 
   <script>
-    $(document).ready(function () {
+    $(document).ready(function() {
       $('#yourOfferContent').html(formParam('claim-details1'));
     });
   </script>
@@ -36,31 +30,24 @@ Money Claims Prototype
       <h3 class="heading-medium">What do you want to suggest?</h3>
       <!--<p>Select all that apply</p>-->
 
-      <form
-        name="aspnetForm"
-        method="post"
-        onsubmit="multiNavigation('radio-discuss-group', ['Payment', 'Alternative'], ['offer-confirmation', 'offer-confirmation']);return false;"
-        id="aspnetForm"
-        autocomplete="off">
+      <form name="aspnetForm" method="post" onsubmit="multiNavigation('radio-discuss-group', ['Payment', 'Alternative'], ['offer-confirmation', 'offer-confirmation']);return false;" id="aspnetForm" autocomplete="off">
 
         <div class="form-group">
           <fieldset>
 
             <legend class="visually-hidden">You can now make a suggestion to resolve this dispute.</legend>
 
-            <label class="block-label selection-button-radio" for="radio-1" data-target="money-remedy">
+            <div class="multiple-choice">
               <input id="radio-1" name="radio-discuss-group" type="radio" value="Payment">
-              Offer some money
-            </label>
+              <label for="radio-1" data-target="money-remedy">Offer some money</label>
+            </div>
 
             <div class="panel panel-border-narrow js-hidden" id="money-remedy">
               <label class="form-label" for="claim[fee][court_fee]">
                 How much money do you offer?
                 <span class="form-hint"></span>
               </label>
-              <input class="fee pound" maxlength="8" size="8" type="text" value=""
-                     name="claim[fee][court_fee]"
-                     id="claim[fee][court_fee]">
+              <input class="fee pound" maxlength="8" size="8" type="text" value="" name="claim[fee][court_fee]" id="claim[fee][court_fee]">
 
               <!--<fieldset></fieldset>-->
               <!--<div class="form-date">-->
@@ -90,16 +77,16 @@ Money Claims Prototype
               <!--</div>-->
             </div>
 
-            <label class="block-label selection-button-radio" for="radio-2" data-target="alternative-remedy">
+            <div class="multiple-choice">
               <input id="radio-2" name="radio-discuss-group" type="radio" value="Alternative">
-              Non-monetary remedy - eg complete the work, fix the problem etc.
-            </label>
+              <label for="radio-2" data-target="alternative-remedy">Non-monetary remedy - eg complete the work, fix the problem etc.</label>
+            </div>
 
             <div class="panel panel-border-narrow js-hidden" id="alternative-remedy">
               <label class="form-label" for="radio-2">Your suggestion</label>
               <!--<span class="form-hint">-->
-    <!--For example, complete the work, return the goods etc.-->
-  <!--</span>-->
+              <!--For example, complete the work, return the goods etc.-->
+              <!--</span>-->
               <input class="form-control" name="checkbox-2" type="text" id="alternative-remedy">
             </div>
 
@@ -109,33 +96,32 @@ Money Claims Prototype
         <div id="claim-details"></div>
 
         <div id="addClaimDetailsBtn" class="form-group">
-        <a href="javascript:void(0);">Add conditions (optional)</a>
+          <a href="javascript:void(0);">Add conditions (optional)</a>
         </div>
 
         <script>
-        $(document).ready(function () {
-        var currentBoxId = 5;
+          $(document).ready(function() {
+            var currentBoxId = 5;
 
-        function newClaimDetailsBox(boxId) {
-        return '' +
-        '<div id="describe-wrapper-claim-details-' + boxId + '" class="form-group">' +
-        '  <label class="form-label" for="claim-details-' + boxId + '">' +
-        'Conditions' +
-        '   <a style="float: right;" href="javascript:void(0);" onclick="$(\'#describe-wrapper-claim-details-' + boxId + '\').remove()">Remove</a>' +
-        '</label>' +
-        '  <textarea class="form-control" id="claim-details-' + boxId + '" rows="4" name="claim-details-' + boxId + '" type="text" style="width: 100%">' +
-        'Pay only if the fitting of the curtains is completed.</textarea>' +
-        '</div>';
-        }
+            function newClaimDetailsBox(boxId) {
+              return '' +
+                '<div id="describe-wrapper-claim-details-' + boxId + '" class="form-group">' +
+                '  <label class="form-label" for="claim-details-' + boxId + '">' +
+                'Conditions' +
+                '   <a style="float: right;" href="javascript:void(0);" onclick="$(\'#describe-wrapper-claim-details-' + boxId + '\').remove()">Remove</a>' +
+                '</label>' +
+                '  <textarea class="form-control" id="claim-details-' + boxId + '" rows="4" name="claim-details-' + boxId + '" type="text" style="width: 100%">' +
+                'Pay only if the fitting of the curtains is completed.</textarea>' +
+                '</div>';
+            }
 
-        $('#addClaimDetailsBtn').click(function () {
-        $('#claim-details').append(newClaimDetailsBox(currentBoxId++));
-        });
-        });
+            $('#addClaimDetailsBtn').click(function() {
+              $('#claim-details').append(newClaimDetailsBox(currentBoxId++));
+            });
+          });
         </script>
 
-        <input id="advert-option-next--button" type="submit" value="Continue" class="button"
-               data-ignore-double-submit="true">
+        <input id="advert-option-next--button" type="submit" value="Continue" class="button" data-ignore-double-submit="true">
       </form>
 
     </div>
@@ -144,4 +130,3 @@ Money Claims Prototype
 
 
 {% endblock %}
-
