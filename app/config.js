@@ -12,6 +12,9 @@ module.exports = {
   // Enable or disable password protection on production
   useAuth: 'true',
 
+  // Automatically stores form data, and send to all views
+  useAutoStoreData: 'true',
+
   // Enable or disable built-in docs and examples.
   useDocumentation: 'true',
 
@@ -20,6 +23,9 @@ module.exports = {
 
   // Cookie warning - update link to service's cookie page.
   cookieText: 'GOV.UK uses cookies to make the site simpler. <a href="#">Find out more about cookies</a>',
+
+  // Enable or disable Browser Sync
+  useBrowserSync: 'true',
 
   // Set the default home directory
   defaultHome: "/"
