@@ -1,0 +1,139 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+            <form method="get" action="../../save_and_return/want_to" class="form">
+
+            {{formData | safe}}
+
+
+            <br>
+            <br>
+
+              <p class="lede">Total time to learn:</p>
+
+              <div class="data">
+                <!-- 20-25 -->
+
+                <!-- Time WITH giving medicial information -->
+                {% if data.disability_medical=="yes" or data.mobility_need=="yes" %}
+
+                  <h2 class="bold-xxlarge">5–7 months</h2>
+
+                <!-- Time WITHOUT giving medicial information -->
+                {% else %}
+
+                  <h2 class="bold-xxlarge">4–6 months</h2>
+
+                {% endif %}
+
+                <!-- varies -->
+                <!-- Time WITH eye test -->
+                {% if data.read_from_20_meters=="yes" %}
+
+                  <p class="bold-xsmall">plus an eye test and practising</p>
+
+                <!-- Time WITHOUT eye test -->
+                {% else %}
+
+                  <!-- no eye test needed -->
+
+                {% endif %}
+
+              </div>
+
+              <br>
+
+              <details>
+
+                <summary><span class="summary lede">See time for each task</span></summary>
+
+                <div class="panel panel-border-narrow">
+
+                  <table>
+                    <thead>
+                      <tr>
+                        <th scope="col">Task</th>
+                        <th class="numeric" scope="col">Time</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+
+                      <!-- Time WITH eye test -->
+                      {% if data.read_from_20_meters=="yes" %}
+
+                        <tr>
+                          <td>Get an eye test</td>
+                          <td class="numeric">varies by provider</td>
+                        </tr>
+
+                      {% endif %}
+
+                      <!-- provisional licence with  -->
+                      <!-- Time WITH giving medicial information -->
+                      {% if data.disability_medical=="yes" or data.mobility_need=="yes" %}
+
+                        <tr>
+                          <td>Get provisional licence</td>
+                          <td class="numeric">2 month wait</td>
+                        </tr>
+
+                      <!-- Time WITHOUT giving medicial information -->
+                      {% else %}
+
+                        <tr>
+                          <td>Get provisional licence</td>
+                          <td class="numeric">3 week wait</td>
+                        </tr>
+
+                      {% endif %}
+
+                      <tr>
+                        <td>Practise driving</td>
+                        <td class="numeric">varies by person</td>
+                      </tr>
+
+                      <tr>
+                        <!-- 12 weeks -->
+                       <td>Book theory test</td>
+                        <td class="numeric">4 week wait</td>
+                      </tr>
+
+                      <tr>
+                        <!-- 12 weeks -->
+                       <td>Driving test</td>
+                        <td class="numeric">2-3 month wait</td>
+                      </tr>
+
+                    </tbody>
+                  </table>
+
+                </div>
+
+              </details>
+
+            <input type="hidden" name="check_before_you_start" value="completed">
+
+            <br>
+
+            <div class="form-group">
+              <input type="submit" class="button" value="Continue"/>
+            </div>
+
+      </form>
+
+    </div>
+  </div>
+
+</main>
+{% endblock %}
