@@ -1,4 +1,4 @@
-{% extends "layout.html" %}
+{% extends "layout_task-list.html" %}
 
 {% block page_title %} Task list {% endblock %}
 
@@ -13,6 +13,18 @@
   <div class="grid-row">
 
     <div class="column-two-thirds">
+
+      <!--<header class="page-heading page-heading-with-context page-heading-without-breadcrumb">-->
+
+      <!--<p class="context">Overview</p>-->
+      <!--<h1>Make a money claim</h1>-->
+
+      <!--<br>-->
+      <!--<br>-->
+
+      <!--<p class="lede">You can complete the tasks below in any order:</p>-->
+
+      <!--</header>-->
 
       <br>
 
@@ -29,14 +41,15 @@
             <span class="group-number" id="task-number"></span>
              Check before you start
           </span>
-          <th class="numeric" id="task-status" scope="col" id="col-status"><span type="hidden" class="visually-hidden">task status</span>
+          <th class="numeric" id="task-status" scope="col" id="col-status">
+          <span type="hidden" class="visually-hidden">task status</span>
           </th>
         </tr>
         </thead>
         <tbody>
 
         <!-- Check before you start -->
-        <tr id="check_before_you_start">
+        <tr id="check-before-you-start">
           <td class="task">
             <a href="/prototype-14/task-list/check_before_you_start/reason{{formQuery}}">
                 <span class="task-name">
@@ -45,19 +58,23 @@
             </a>
           </td>
           <td class="numeric" id="task-status" scope="col" id="col-status">
-            {% include "includes/task_status_finished.html" %}
+            {% if data.check_before_you_start=="complete" %}
+              {% include "includes/task_status_finished.html" %}
+            {% endif %}
           </td>
         </tr>
 
         <!-- Check rules -->
-        <tr id="read_rules">
+        <tr id="read-rules">
           <td class="task">
             <a href="/prototype-14/task-list/read-rules{{formQuery}}">
               <span class="task-name"> Read rules</span>
             </a>
           </td>
           <td class="numeric" id="task-status" scope="col" id="col-status">
-            {% include "includes/task_status_finished.html" %}
+            {% if data.read_rules=="complete" %}
+              {% include "includes/task_status_finished.html" %}
+            {% endif %}
           </td>
         </tr>
 
@@ -82,58 +99,68 @@
         </thead>
         <tbody>
 
-        <tr id="your_details">
+        <tr id="completing-your-claim">
           <td class="task">
             <a href="/prototype-14/task-list/completing-your-claim{{formQuery}}">
               <span class="task-name"> Completing your claim</span>
             </a>
           </td>
           <td class="numeric" id="task-status" scope="col" id="col-status">
-            {% include "includes/task_status_finished.html" %}
+            {% if data.completing_your_claim=="complete" %}
+              {% include "includes/task_status_finished.html" %}
+            {% endif %}
           </td>
         </tr>
 
-        <tr id="your_details">
+        <tr id="your-details">
           <td class="task">
             <a href="/prototype-14/task-list/your-details{{formQuery}}">
               <span class="task-name"> Your details</span>
             </a>
           </td>
           <td class="numeric" id="task-status" scope="col" id="col-status">
-            {% include "includes/task_status_finished.html" %}
+            {% if data.your_details=="complete" %}
+              {% include "includes/task_status_finished.html" %}
+            {% endif %}
           </td>
         </tr>
 
-        <tr id="their_details">
+        <tr id="their-details">
           <td class="task">
             <a href="/prototype-14/task-list/their-details{{formQuery}}">
               <span class="task-name"> Their details</span>
             </a>
           </td>
           <td class="numeric" id="task-status" scope="col" id="col-status">
-            {% include "includes/task_status_finished.html" %}
+            {% if data.their_details=="complete" %}
+              {% include "includes/task_status_finished.html" %}
+            {% endif %}
           </td>
         </tr>
 
-        <tr id="claim_amount">
+        <tr id="claim-amount">
           <td class="task">
-            <a href="/prototype-14/task-list/your-details{{formQuery}}">
+            <a href="/prototype-14/task-list/claim-amount{{formQuery}}">
               <span class="task-name"> Claim amount</span>
             </a>
           </td>
           <td class="numeric" id="task-status" scope="col" id="col-status">
-            {% include "includes/task_status_finished.html" %}
+            {% if data.claim_amount=="complete" %}
+              {% include "includes/task_status_finished.html" %}
+            {% endif %}
           </td>
         </tr>
 
-        <tr id="claim_details">
+        <tr id="claim-details">
           <td class="task">
-            <a href="#">
+            <a href="/prototype-14/task-list/claim-details{{formQuery}}">
               <span class="task-name"> Claim details</span>
             </a>
           </td>
           <td class="numeric" id="task-status" scope="col" id="col-status">
-            {% include "includes/task_status_finished.html" %}
+            {% if data.claim_details=="complete" %}
+              {% include "includes/task_status_finished.html" %}
+            {% endif %}
           </td>
         </tr>
 
@@ -157,27 +184,29 @@
         </thead>
         <tbody>
 
-        <tr id="check_and_send">
+        <tr id="check-and-send">
           <td class="task">
-            <a href="/examples/task-list/check-your-answers-page">
+            <a href="/prototype-14/task-list/check-and-send{{formQuery}}">
               <span class="task-name"> Submit and pay</span>
             </a>
           </td>
           <td class="numeric" id="task-status" scope="col" id="col-status">
-            {% include "includes/task_status_finished.html" %}
+            {% if data.paid=="complete" %}
+              {% include "includes/task_status_finished.html" %}
+            {% endif %}
           </td>
         </tr>
 
-        <tr id="wait_for_response">
-          <td class="task">
-            <a href="/examples/task-list/wait-for-response">
-              <span class="task-name"> Wait for a response</span>
-            </a>
-          </td>
-          <td class="numeric" id="task-status" scope="col" id="col-status">
-            {% include "includes/task_status_finished.html" %}
-          </td>
-        </tr>
+        <!--<tr id="wait-for-response">-->
+          <!--<td class="task">-->
+            <!--<<a href="/prototype-14/task-list/wait-for-response{{formQuery}}">-->
+              <!--<span class="task-name"> Wait for a response</span>-->
+            <!--</a>-->
+          <!--</td>-->
+          <!--<td class="numeric" id="task-status" scope="col" id="col-status">-->
+            <!--{% include "includes/task_status_finished.html" %}-->
+          <!--</td>-->
+        <!--</tr>-->
 
         </tbody>
       </table>
