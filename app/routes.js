@@ -235,3 +235,19 @@ function isValidPostcode(postcode) {
 }
 
 module.exports = router
+
+
+// // Check your answers for 'Check eligibility, cost and time'
+// router.get('/prototype-14/task-list/check_before_you_start/reason', function (req, res) {
+//
+//   console.log("check your answers");
+//
+//   var check_before_you_start = req.query.check_before_you_start;
+//
+//   if (check_before_you_start == "complete" ){
+//
+//     res.redirect("/prototype-14/task-list/check_before_you_start/check-your-answers" + res.locals.formQuery);
+//
+//   }
+//
+// });
