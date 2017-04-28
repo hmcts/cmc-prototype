@@ -1,0 +1,109 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+
+{% block home_link %} /prototype-14/index {% endblock %}
+
+{% block content %}
+
+
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+
+  <div class="breadcrumbs">
+    <ol>
+      <li>
+        <a href="/prototype-14/task-list/{{ formQuery | safe }}">Make a money claim</a>
+      </li>
+      <li>
+        Their details
+      </li>
+    </ol>
+  </div>
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+      <form method="post" action="/prototype-14/task-list/their-details/address" class="form">
+
+        {{formData | safe}}
+
+        <!-- Individual -->
+        {% if data['defendant-type']=="individual" %}
+
+        <h1 class="heading-large">
+          Enter details of the {{data['defendant-type']}}
+        </h1>
+
+        <br>
+
+        <fieldset>
+          <legend class="visuallyhidden">
+            Enter details
+          </legend>
+
+          <div class="form-group">
+            <label class="form-label" for="applicant_name">Full name</label>
+            <input class="form-control" id="applicant_name" name="applicant_name" type="text">
+          </div>
+
+          <h3 class="heading-medium">
+            Business address
+          </h3>
+
+          <div class="form-group">
+            <label class="form-label" for="applicant_address_building">Building and street</label>
+            <input class="form-control" id="applicant_address_building" name="applicant_address_building" type="text">
+            <br>
+            <br>
+            <input class="form-control"" id="applicant_address_street" name="applicant_address_street" type="text">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="applicant_address_town">Town or city</label>
+            <input class="form-control" id="applicant_address_town" name="applicant_address_town" type="text">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="applicant_address_county">County (optional)</label>
+            <input class="form-control" id="applicant_address_county" name="applicant_address_county" type="text">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="applicant_address_postcode">Postcode</label>
+            <input class="form-control form-control-1-4" id="applicant_address_postcode" name="applicant_address_postcode" type="text">
+          </div>
+
+          <br>
+          <br>
+
+        </fieldset>
+
+        {% endif %}
+
+        <br>
+
+        <details>
+
+          <summary>
+            <span class="summary">Specific assistance if needed (hide if not relevant)</span>
+          </summary>
+
+          <div class="panel panel-border-narrow">
+            <p>Contextual guidance goes here...</p>
+          </div>
+
+        </details>
+
+        <br>
+
+        <div class="form-group">
+          <input type="submit" class="button" value="Save and continue" />
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+
+</main>
+{% endblock %}
