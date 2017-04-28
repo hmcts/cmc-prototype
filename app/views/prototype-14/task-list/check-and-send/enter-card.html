@@ -3,12 +3,13 @@
 {% from '../includes/addressInput.html' import addressInput %}
 
 {% block page_title %}
-GOV.UK prototype kit
+Money Claims Prototype
 {% endblock %}
 
 {% block home_link %} /prototype-14/index {% endblock %}
 
 {% block content %}
+
 
 <main id="content" role="main">
   {% include "includes/phase_banner_beta.html" %}
@@ -18,14 +19,13 @@ GOV.UK prototype kit
 
       <a href="#" class="link-back">Back</a>
 
-      <header class="main-header" role="banner">
-        <div class="page-trail">
-          <!--<span class="page-number">Page 13 of 15</span>-->
-          <span class="page-title">Enter card details</span>
-        </div>
-      </header>
+      <form method="post" action="/prototype-14/task-list/check-and-send/confirm-card-payment" class="form">
 
-      <form class="form" method="POST" action="confirm-card-payment" autocomplete="off">
+        {{formData | safe}}
+
+        <h1 class="heading-large">
+          Enter card details
+        </h1>
 
         <div class="form-group cards-group">
           <label class="form-label-bold" for="card-number">
@@ -82,25 +82,6 @@ GOV.UK prototype kit
             <p>This is the address associated with the card</p>
           </div>
           <fieldset>
-            <!--<div class="form-group">-->
-              <!--<label class="form-label-bold" for="building-and-street">-->
-                <!--Building name and/or number and street-->
-              <!--</label>-->
-              <!--<input class="form-control" id="building-and-street" name="building-and-street" type="text">-->
-              <!--<input class="form-control" id="building-and-street" name="building-and-street" type="text">-->
-            <!--</div>-->
-            <!--<div class="form-group">-->
-              <!--<label class="form-label-bold" for="town-or-city">-->
-                <!--Town or city-->
-              <!--</label>-->
-              <!--<input class="form-control medium-width" id="town-or-city" name="town-or-city" type="text">-->
-            <!--</div>-->
-            <!--<div class="form-group">-->
-              <!--<label class="form-label-bold" for="postcode">-->
-                <!--Postcode-->
-              <!--</label>-->
-              <!--<input class="form-control" id="postcode" name="postcode" type="text">-->
-            <!--</div>-->
 
             {{ addressInput() }}
 
@@ -141,3 +122,4 @@ GOV.UK prototype kit
 
 
 {% endblock %}
+
