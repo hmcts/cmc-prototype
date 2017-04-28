@@ -234,23 +234,23 @@ function isValidPostcode(postcode) {
   return postcodeLength > 5 && postcodeLength < 9
 }
 
+
+// Check your answers for 'Check eligibility, cost and time'
+router.get('/prototype-14/task-list/check_before_you_start/reason', function (req, res, next) {
+
+  console.log("check your answers");
+
+  let check_before_you_start = req.session.data.check_before_you_start;
+  if (check_before_you_start === "complete" ){
+    res.redirect("/prototype-14/task-list/check_before_you_start/check-your-answers");
+  } else {
+    next()
+  }
+
+});
+
 module.exports = router
 
-
-// // Check your answers for 'Check eligibility, cost and time'
-// router.get('/prototype-14/task-list/check_before_you_start/reason', function (req, res) {
-//
-//   console.log("check your answers");
-//
-//   var check_before_you_start = req.query.check_before_you_start;
-//
-//   if (check_before_you_start == "complete" ){
-//
-//     res.redirect("/prototype-14/task-list/check_before_you_start/check-your-answers" + res.locals.formQuery);
-//
-//   }
-//
-// });
 
 // // check your answers for 'Read rules' section
 // router.get('/prototype-14/task-list/read-rules', function (req, res) {
