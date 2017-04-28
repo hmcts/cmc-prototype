@@ -255,12 +255,11 @@ module.exports = router
 // // check your answers for 'Read rules' section
 // router.get('/prototype-14/task-list/read-rules', function (req, res) {
 //
-//   console.log("check_your_answers");
+//   console.log("check your answers");
 //
-//   // get the answer from the query string (eg. ?over18="yes")
 //   var read_rules = req.query.read_rules;
 //
-//   if (read_rules == "yes" ){
+//   if (read_rules == "complete" ){
 //
 //     // if user HAS done this section
 //     res.redirect("/prototype-14/task-list/read-rules/check-your-answers" + res.locals.formQuery);
