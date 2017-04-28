@@ -45,72 +45,70 @@ Money Claims Prototype
         <!--<a href="" style="float: left" data-alert="This feature is not available in this demo">More about what you can claim</a>-->
         <br>
 
-        <form class="form">
-          <table class="table-form">
-            <caption class="visuallyhidden">Your claim amount</caption>
-            <thead>
-            <tr>
-              <th scope="col">Reason for this amount <span class="form-hint">Explain what this amount is for</span></th>
-              <th class="numeric last" scope="col">Amount <span
-                class="form-hint">You can give a single amount here</span></th>
-            </tr>
-            </thead>
-            <tfoot>
-            <tr>
-              <th scope="col">Total:</th>
-              <td class="numeric last"><span class="bold-medium">£[<span id="totalSum">0.00</span>]</span></td>
+        <table class="table-form">
+          <caption class="visuallyhidden">Your claim amount</caption>
+          <thead>
+          <tr>
+            <th scope="col">Reason for this amount <span class="form-hint">Explain what this amount is for</span></th>
+            <th class="numeric last" scope="col">Amount <span
+              class="form-hint">You can give a single amount here</span></th>
+          </tr>
+          </thead>
+          <tfoot>
+          <tr>
+            <th scope="col">Total:</th>
+            <td class="numeric last"><span class="bold-medium">£<span id="totalSum">0.00</span></span></td>
 
-            </tr>
-            </tfoot>
-            <tbody>
-            <tr>
-              <th scope="row">
-                <input type="text" maxlength="" size="34" type="text" id="item1"
-                       name="claim-item" value="{{data['claim-item']}}">
-              </th>
-              <td class="numeric last">
-                <input class="fee pound" maxlength="10" size="7" type="text" value="{{data['costs-column']}}"
-                       name="costs-column"
-                       id="amount1">
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">
-                <input type="text" maxlength="" size="34" type="text" id="item2"
-                       name="claim-item" value="{{data['claim-item']}}">
-              </th>
-              <td class="numeric last">
-                <input class="fee pound" maxlength="10" size="7" type="text" value="{{data['costs-column']}}"
-                       name="costs-column"
-                       id="amount2">
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">
-                <input type="text" maxlength="" size="34" type="text" id="item3"
-                       name="claim-item" value="{{data['claim-item']}}">
-              </th>
-              <td class="numeric last">
-                <input class="fee pound" maxlength="10" size="7" type="text" value="{{data['costs-column']}}"
-                       name="costs-column"
-                       id="amount3">
-              </td>
-            </tr>
+          </tr>
+          </tfoot>
+          <tbody>
+          <tr>
+            <th scope="row">
+              <input type="text" maxlength="" size="34" type="text" id="item1"
+                     name="claim-item" value="{{data['claim-item']}}">
+            </th>
+            <td class="numeric last">
+              <input class="fee pound" maxlength="10" size="7" type="text" value="{{data['costs-column']}}"
+                     name="costs-column"
+                     id="amount1">
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">
+              <input type="text" maxlength="" size="34" type="text" id="item2"
+                     name="claim-item" value="{{data['claim-item']}}">
+            </th>
+            <td class="numeric last">
+              <input class="fee pound" maxlength="10" size="7" type="text" value="{{data['costs-column']}}"
+                     name="costs-column"
+                     id="amount2">
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">
+              <input type="text" maxlength="" size="34" type="text" id="item3"
+                     name="claim-item" value="{{data['claim-item']}}">
+            </th>
+            <td class="numeric last">
+              <input class="fee pound" maxlength="10" size="7" type="text" value="{{data['costs-column']}}"
+                     name="costs-column"
+                     id="amount3">
+            </td>
+          </tr>
 
-              <th scope="row">
-                <input type="text" maxlength="" size="34" type="text" id="item4"
-                       name="claim-item" value="{{data['claim-item']}}">
-              </th>
-              <td class="numeric last">
-                <input class="fee pound" maxlength="10" size="7" type="text" value="{{data['costs-column']}}"
-                       name="costs-column"
-                       id="amount4">
-              </td>
+          <th scope="row">
+            <input type="text" maxlength="" size="34" type="text" id="item4"
+                   name="claim-item" value="{{data['claim-item']}}">
+          </th>
+          <td class="numeric last">
+            <input class="fee pound" maxlength="10" size="7" type="text" value="{{data['costs-column']}}"
+                   name="costs-column"
+                   id="amount4">
+          </td>
 
-            </tr>
-            </tbody>
-          </table>
-        </form>
+          </tr>
+          </tbody>
+        </table>
 
         <details>
 
@@ -127,7 +125,7 @@ Money Claims Prototype
         <fieldset></fieldset>
 
         <div class="form-group">
-          <input type="submit" class="button" value="Continue">
+          <input type="submit" class="button" value="Save and continue">
         </div>
       </form>
 
@@ -141,31 +139,31 @@ Money Claims Prototype
 {% block extra_js_1 %}
 <script type="text/javascript">
   (function numericInputsSum(targetSpanId, sourceInputsIds) {
-      var targetSpan = $('#' + targetSpanId);
-      var sourceInputs = []
+    var targetSpan = $('#' + targetSpanId);
+    var sourceInputs = []
 
-      function updateSums() {
-          var sum = 0.0
-          for (var i = 0; i < sourceInputs.length; i++) {
-              sum += getNumericValue(sourceInputs[i].val())
-          }
-          targetSpan.text(sum.toFixed(2))
+    function updateSums() {
+      var sum = 0.0
+      for (var i = 0; i < sourceInputs.length; i++) {
+        sum += getNumericValue(sourceInputs[i].val())
       }
+      targetSpan.text(sum.toFixed(2))
+    }
 
-      function getNumericValue(value) {
-          var numeric = parseFloat(value);
-          return isNaN(numeric) ? 0 : numeric;
-      }
+    function getNumericValue(value) {
+      var numeric = parseFloat(value);
+      return isNaN(numeric) ? 0 : numeric;
+    }
 
-      for (var i = 0; i < sourceInputsIds.length; i++) {
-          var input = $('#' + sourceInputsIds[i]);
-          if (input) {
-              sourceInputs.push(input)
-              input.blur(function onNumericInputChanged() {
-                updateSums()
-              })
-          }
+    for (var i = 0; i < sourceInputsIds.length; i++) {
+      var input = $('#' + sourceInputsIds[i]);
+      if (input) {
+        sourceInputs.push(input)
+        input.blur(function onNumericInputChanged() {
+          updateSums()
+        })
       }
+    }
   })('totalSum', ['amount1', 'amount2', 'amount3', 'amount4'])
 </script>
 {% endblock %}

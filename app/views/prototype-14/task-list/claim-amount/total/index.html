@@ -1,0 +1,109 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+
+{% block home_link %} /prototype-14/index {% endblock %}
+
+{% block content %}
+
+
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+
+  <div class="breadcrumbs">
+    <ol>
+      <li>
+        <a href="/prototype-14/task-list/{{ formQuery | safe }}">Make a money claim</a>
+      </li>
+      <li>
+        Claim amount
+      </li>
+    </ol>
+  </div>
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+      <form method="post" action="/prototype-14/task-list" class="form">
+
+        {{formData | safe}}
+
+        <h1 class="heading-large">
+          Total amount you're claiming
+        </h1>
+
+        <fieldset>
+          <legend class="visuallyhidden">
+            Total amount you're claiming
+          </legend>
+
+          <table>
+            <thead>
+            <tr>
+              <th scope="col"></th>
+              <th class="numeric" scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <tr>
+              <td>Claim amount</td>
+              <td class="numeric">£1500</td>
+            </tr>
+
+            <tr>
+              <td>Interest</td>
+              <td class="numeric">£13</td>
+            </tr>
+
+            <tr>
+              <td>Claim fee</td>
+              <td class="numeric">£70</td>
+            </tr>
+
+            <tr>
+              <td><strong class="bold">Total</strong></td>
+              <td class="numeric"><strong class="bold">£1583</td>
+            </tr>
+
+            <!-- using solicitors -->
+            <!--{% if data.using_solicitors=="yes" %}-->
+            <!--<td>Solicitor's fee</td>-->
+            <!--<td class="numeric">varies by provider</td>-->
+            <!--</tr>-->
+            <!--{% endif %}-->
+
+            </tbody>
+          </table>
+
+          <br>
+
+          <input type="hidden" name="claim_amount" value="complete">
+
+        </fieldset>
+
+        <!--<details>-->
+
+        <!--<summary>-->
+        <!--<span class="summary">Help with...</span>-->
+        <!--</summary>-->
+
+        <!--<div class="panel panel-border-narrow">-->
+        <!--<p>Content goes here...</p>-->
+        <!--</div>-->
+
+        <!--</details>-->
+
+        <div class="form-group">
+          <input type="submit" class="button" value="Save and continue">
+        </div>
+      </form>
+
+    </div>
+  </div>
+</main>
+
+
+{% endblock %}
