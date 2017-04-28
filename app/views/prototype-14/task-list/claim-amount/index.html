@@ -97,16 +97,6 @@ Money Claims Prototype
               </td>
             </tr>
 
-            <th scope="row">
-              <input type="text" maxlength="" size="34" type="text" id="item4"
-                     name="claim-item" value="{{data['claim-item']}}">
-            </th>
-            <td class="numeric last">
-              <input class="fee pound" maxlength="10" size="7" type="text" value="{{data['costs-column']}}"
-                     name="costs-column"
-                     id="amount4">
-            </td>
-
               <th scope="row">
                 <input type="text" maxlength="" size="34" type="text" id="item4"
                        name="claim-item" value="{{data['claim-item']}}">
@@ -148,36 +138,6 @@ Money Claims Prototype
 
 {% endblock %}
 
-
-{% block extra_js_1 %}
-<script type="text/javascript">
-  (function numericInputsSum(targetSpanId, sourceInputsIds) {
-    var targetSpan = $('#' + targetSpanId);
-    var sourceInputs = []
-
-    function updateSums() {
-      var sum = 0.0
-      for (var i = 0; i < sourceInputs.length; i++) {
-        sum += getNumericValue(sourceInputs[i].val())
-      }
-      targetSpan.text(sum.toFixed(2))
-    }
-
-    function getNumericValue(value) {
-      var numeric = parseFloat(value);
-      return isNaN(numeric) ? 0 : numeric;
-    }
-
-    for (var i = 0; i < sourceInputsIds.length; i++) {
-      var input = $('#' + sourceInputsIds[i]);
-      if (input) {
-        sourceInputs.push(input)
-        input.blur(function onNumericInputChanged() {
-          updateSums()
-        })
-      }
-    }
-
 {% block extra_js_1 %}
 <script type="text/javascript">
   (function numericInputsSum(targetSpanId, sourceInputsIds) {
@@ -206,7 +166,6 @@ Money Claims Prototype
               })
           }
       }
-
   })('totalSum', ['amount1', 'amount2', 'amount3', 'amount4'])
 </script>
 {% endblock %}
