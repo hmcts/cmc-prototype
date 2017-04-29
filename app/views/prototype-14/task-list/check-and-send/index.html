@@ -1,4 +1,4 @@
-{% extends "layout.html" %}
+{% extends "layout_task-list.html" %}
 
 {% block page_title %}
 Check your answers
@@ -29,10 +29,10 @@ Check your answers
     <tbody>
     <tr>
       <td>
-        Where are you based:
+        Are you based in the UK:
       </td>
       <td>
-        England
+        Yes
       </td>
       <td class="change-answer">
         <a href="#">
@@ -84,33 +84,7 @@ Check your answers
         What is your claim amount:
       </td>
       <td>
-        £1500
-      </td>
-      <td class="change-answer">
-        <a href="#">
-          Change <span class="visuallyhidden">Name</span>
-        </a>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        Are you claiming interest:
-      </td>
-      <td>
-        Yes
-      </td>
-      <td class="change-answer">
-        <a href="#">
-          Change <span class="visuallyhidden">Name</span>
-        </a>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        How much interest are you claiming:
-      </td>
-      <td>
-        £13
+        £{{data['amount']}}
       </td>
       <td class="change-answer">
         <a href="#">
@@ -127,7 +101,7 @@ Check your answers
     <tr>
       <th colspan="2">
         <h2 class="heading-medium">
-          Read and understood rules:
+          Read rules:
         </h2>
       </th>
       <th>
@@ -229,7 +203,7 @@ Check your answers
         Date of birth:
       </td>
       <td>
-        3 12 1984
+        3 12 1971
       </td>
       <td class="change-answer">
         <a href="#">
@@ -238,25 +212,25 @@ Check your answers
       </td>
     </tr>
     <tr>
-    <tr>
-      <td>
-        Email:
-      </td>
-      <td>
-        oliver65@gmail.com
-      </td>
-      <td class="change-answer">
-        <a href="#">
-          Change <span class="visuallyhidden">Name</span>
-        </a>
-      </td>
-    </tr>
+      <!--<tr>-->
+      <!--<td>-->
+      <!--Email:-->
+      <!--</td>-->
+      <!--<td>-->
+      <!--youremail@gmail.com-->
+      <!--</td>-->
+      <!--<td class="change-answer">-->
+      <!--<a href="#">-->
+      <!--Change <span class="visuallyhidden">Name</span>-->
+      <!--</a>-->
+      <!--</td>-->
+      <!--</tr>-->
     <tr>
       <td>
         Phone:
       </td>
       <td>
-        07717796390
+        {{data['claimant-phone']}}
       </td>
       <td class="change-answer">
         <a href="#">
@@ -369,18 +343,169 @@ Check your answers
     </tbody>
   </table>
 
+  <table class="check-your-answers">
 
+    <thead>
+    <tr>
+      <th colspan="2">
+        <h2 class="heading-medium">
+          Claim amount
+        </h2>
+      </th>
+      <th>
+      </th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr>
+      <td>
+        Claim amount:
+      </td>
+      <td>
+        £1500
+      </td>
+      <td class="change-answer">
+        <a href="#">
+          Change <span class="visuallyhidden">Name</span>
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Interest rate:
+      </td>
+      <td>
+        8% (standard rate)
+      </td>
+      <td class="change-answer">
+        <a href="#">
+          Change <span class="visuallyhidden">Name</span>
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Interest:
+      </td>
+      <td>
+        £13
+      </td>
+      <td class="change-answer">
+        <a href="#">
+          <span class="visuallyhidden">Name</span>
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Claim fee:
+      </td>
+      <td>
+        £70
+      </td>
+      <td class="change-answer">
+        <a href="#">
+          <span class="visuallyhidden">Name</span>
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Total amount you're claiming:
+      </td>
+      <td>
+        £1583
+      </td>
+      <td class="change-answer">
+        <a href="#">
+          <span class="visuallyhidden">Name</span>
+        </a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <table class="check-your-answers">
+
+    <thead>
+    <tr>
+      <th colspan="2">
+        <h2 class="heading-medium">
+          Claim details
+        </h2>
+      </th>
+      <th>
+      </th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr>
+      <td>
+        Explain what happened:
+      </td>
+      <td>
+        {{data['date-1']}} {{data['timeline-1']}}<br>
+        {{data['date-2']}} {{data['timeline-2']}}<br>
+        {{data['date-3']}} {{data['timeline-3']}}<br>
+        {{data['date-4']}} {{data['timeline-4']}}<br>
+        {{data['date-5']}} {{data['timeline-5']}}<br>
+        {{data['date-6']}} {{data['timeline-6']}}<br>
+        {{data['date-7']}} {{data['timeline-7']}}<br>
+        {{data['date-8']}} {{data['timeline-8']}}
+      </td>
+      <td class="change-answer">
+        <a href="#">
+          Change <span class="visuallyhidden">Explain what happened</span>
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Why you're owed the money:
+      </td>
+      <td>
+        {{data['claim-reason']}}
+      </td>
+      <td class="change-answer">
+        <a href="#">
+          Change <span class="visuallyhidden">Why you're owed the money</span>
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        How this dispute has affected you:<br>(optional)
+      </td>
+      <td>
+        {{data['claim-affect']}}
+      </td>
+      <td class="change-answer">
+        <a href="#">
+          Change <span class="visuallyhidden">How this dispute has affected you (optional)</span>
+        </a>
+      </td>
+    </tr>
+    <tr>
+    </tr>
+    </tbody>
+  </table>
+
+  <fieldset></fieldset>
 
   <h2 class="heading-medium">Statement of truth:</h2>
 
   <p class="text">
-    By submitting this claim you're confirming that, to the best of your knowledge, the details you have provided are correct.
+    By submitting this claim you're confirming that, to the best of your knowledge, the details you have provided are
+    correct.
   </p>
 
   <p>It's an offence to deliberately give false information.</p>
 
   <div class="form-group">
-    <a href="/prototype-14/task-list/check-and-send/payment-methods" class="button">Submit and continue to payment (£70.00)</a>
+    <a href="/prototype-14/task-list/check-and-send/payment-methods" class="button">Submit and continue to payment
+      (£70.00)</a>
   </div>
 
 </main>
