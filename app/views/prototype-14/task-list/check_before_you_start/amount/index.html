@@ -121,3 +121,36 @@ Money Claims Prototype
 
 </main>
 {% endblock %}
+
+{% block extra_js_1 %}
+<script type="text/javascript">
+  (function numericInputsSum(targetSpanId, sourceInputsIds) {
+    var targetSpan = $('#' + targetSpanId);
+    var sourceInputs = []
+
+    function updateSums() {
+      var sum = 0.0
+      for (var i = 0; i < sourceInputs.length; i++) {
+        sum += getNumericValue(sourceInputs[i].val())
+      }
+      targetSpan.text(sum.toFixed(2))
+    }
+
+    function getNumericValue(value) {
+      var numeric = parseFloat(value);
+      return isNaN(numeric) ? 0 : numeric;
+    }
+
+    for (var i = 0; i < sourceInputsIds.length; i++) {
+      var input = $('#' + sourceInputsIds[i]);
+      if (input) {
+        sourceInputs.push(input)
+        input.blur(function onNumericInputChanged() {
+          updateSums()
+        })
+      }
+    }
+  })('totalSum', ['amount1', 'amount2', 'amount3', 'amount4'])
+</script>
+{% endblock %}
+
