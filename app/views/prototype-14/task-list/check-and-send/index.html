@@ -517,8 +517,10 @@ Check your answers
   <p>It's an offence to deliberately give false information.</p>
 
   <div class="form-group">
-    <a href="/prototype-14/task-list/check-and-send/payment-methods" class="button">Submit and continue to payment
-      (£70.00)</a>
+    <form method="get" action="/prototype-14/task-list/check-and-send/payment-methods">
+      {% set completed = true if data.check_before_you_start == "complete" and data.read_rules == "complete" and data.completing_your_claim == "complete" and data.your_details == "complete" and data.their_details == "complete" and data.claim_amount == "complete" and data.claim_details == "complete" %}
+      <input type="submit" value="Submit and continue to payment (£70.00)" class="button" {{ "disabled" if not completed }}></input>
+    </form>
   </div>
 
   <p class="bold">You can only submit your claim after completing all sections.</p>
