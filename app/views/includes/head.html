@@ -1,4 +1,8 @@
+<!--[if lte IE 8]><link href="/public/stylesheets/application-ie8.css" rel="stylesheet" type="text/css" /><![endif]-->
+<!--[if gt IE 8]><!-->
 <link href="/public/stylesheets/application.css" media="screen" rel="stylesheet" type="text/css" />
+<!--<![endif]-->
+
 <script src="/public/javascripts/jquery-1.11.3.js"></script>
 
 <!-- Piwik -->
@@ -8,11 +12,21 @@
   _paq.push(['trackPageView']);
   _paq.push(['enableLinkTracking']);
   (function() {
-    var u="{{piwikHostname}}";
-    _paq.push(['setTrackerUrl', u+'piwik.php']);
-    _paq.push(['setSiteId', {{piwikSiteId}}]);
-    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+    var u = "{{piwikHostname}}";
+    _paq.push(['setTrackerUrl', u + 'piwik.php']);
+    _paq.push(['setSiteId', {
+      {
+        piwikSiteId
+      }
+    }]);
+    var d = document,
+      g = d.createElement('script'),
+      s = d.getElementsByTagName('script')[0];
+    g.type = 'text/javascript';
+    g.async = true;
+    g.defer = true;
+    g.src = u + 'piwik.js';
+    s.parentNode.insertBefore(g, s);
   })();
 </script>
 <!-- End Piwik Code -->
