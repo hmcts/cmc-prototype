@@ -1,0 +1,98 @@
+{% extends "layout_task-list.html" %}
+
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+
+{% block home_link %} /prototype-14/index {% endblock %}
+
+{% block content %}
+
+
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+
+  <div class="breadcrumbs">
+    <ol>
+      <li>
+        <a href="/prototype-14/task-list/{{ formQuery | safe }}">Make a money claim</a>
+      </li>
+      <li>
+        Your details
+      </li>
+    </ol>
+  </div>
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+      <form method="post" action="/prototype-14/task-list/your-details/address" class="form">
+
+        {{formData | safe}}
+
+        <h1 class="heading-large">
+          Your date of birth
+        </h1>
+
+        <p>We use this to make sure legal proceedings are issued against the right person. For example, if there are 2 people at the same address with the same name.</p>
+
+        <!-- Date of birth -->
+        <div class="form-group">
+          <fieldset>
+            <!--<div class="form-label-bold">Date of birth</div>-->
+
+            <p style="color: #6F777B">For example, 31 3 1980</p>
+
+            <div class="form-date">
+
+              <div class="form-group form-group-day">
+                <label for="dob-day">Day</label>
+                <input class="form-control" id="dob-day" type="number" pattern="[0-9]*" min="0" max="31">
+              </div>
+
+              <div class="form-group form-group-month">
+                <label for="dob-month">Month</label>
+                <input class="form-control" id="dob-month" type="number" pattern="[0-9]*" min="0" max="12">
+              </div>
+
+              <div class="form-group form-group-year">
+                <label for="dob-year">Year</label>
+                <input class="form-control" id="dob-year" type="number" pattern="[0-9]*" min="0" max="2014">
+              </div>
+            </div>
+
+            <fieldset></fieldset>
+
+            <!--<p>For example, 31 3 1980</p>-->
+
+            <br>
+
+            <details>
+
+              <summary>
+                <span class="summary">Help with date of birth</span>
+              </summary>
+
+              <div class="panel panel-border-narrow">
+                <p>If you don’t know your exact date of birth, use the one you put on official documents (for example,
+                  your passport or driving licence).</p>
+              </div>
+
+            </details>
+
+            <fieldset></fieldset>
+
+            <div class="form-group">
+              <input type="submit" class="button" value="Save and continue"/>
+            </div>
+
+          </fieldset>
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+
+</main>
+{% endblock %}

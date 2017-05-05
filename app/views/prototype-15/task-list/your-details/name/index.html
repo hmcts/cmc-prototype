@@ -1,0 +1,84 @@
+{% extends "layout_task-list.html" %}
+
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+
+{% block home_link %} /prototype-14/index {% endblock %}
+
+{% block content %}
+
+
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+
+  <div class="breadcrumbs">
+    <ol>
+      <li>
+        <a href="/prototype-14/task-list/{{ formQuery | safe }}">Make a money claim</a>
+      </li>
+      <li>
+        Your details
+      </li>
+    </ol>
+  </div>
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+      <form method="post" action="/prototype-14/task-list/your-details/date-of-birth" class="form">
+
+        {{formData | safe}}
+
+        <h1 class="heading-large">
+          Your full name
+        </h1>
+
+        <p>Enter all your names in full - don't use initials.</p>
+
+        <div class="form-group">
+          <label class="form-label" for="claimant_firstname">First name</label>
+          <input type="text" class="form-control" id="claimant_firstname"
+                 name="claimant-firstname" value="{{data['claimant-firstname']}}">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="claimant_middlename">Middle names (if any)</label>
+          <input type="text" class="form-control" id="claimant_middlename"
+                 name="claimant-middlename" value="{{data['claimant-middlename']}}">
+        </div>
+
+
+        <div class="form-group">
+          <label class="form-label" for="claimant_lastname">Last name</label>
+          <input type="text" class="form-control" id="claimant_lastname"
+                 name="claimant-lastname" value="{{data['claimant-lastname']}}">
+        </div>
+
+        <br>
+
+        <!--<details>-->
+
+        <!--<summary>-->
+        <!--<span class="summary">Specific assistance if needed (hide if not relevant)</span>-->
+        <!--</summary>-->
+
+        <!--<div class="panel panel-border-narrow">-->
+        <!--<p>Contextual guidance goes here...</p>-->
+        <!--</div>-->
+
+        <!--</details>-->
+
+        <br>
+
+        <div class="form-group">
+          <input type="submit" class="button" value="Save and continue" />
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+
+</main>
+{% endblock %}

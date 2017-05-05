@@ -1,0 +1,179 @@
+{% extends "layout_task-list.html" %}
+
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+
+{% block home_link %} /prototype-14/index {% endblock %}
+
+{% block content %}
+
+
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+
+  <div class="breadcrumbs">
+    <ol>
+      <li>
+        <a href="/prototype-14/task-list/{{ formQuery | safe }}">Make a money claim</a>
+      </li>
+      <li>
+        Claim details
+      </li>
+    </ol>
+  </div>
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+      <form method="post" action="/prototype-14/task-list/claim-details/reason" class="form">
+
+        {{formData | safe}}
+
+        <h1 class="heading-large">
+          Explain what happened
+        </h1>
+
+        <!--         <p>Explain what happened and when.</p>
+         -->
+
+        <p> This information will help the respondent understand why you're making this claim. It will also be
+          considered by a judge if you go to a hearing.</p>
+
+        <p class="bold-small">Example timeline</p>
+
+        <ul class="list list-bullet">
+          <li>12 January 2017 - John Smith gave me a quote to replace the roof.</li>
+          <li>14 January 2017 - We agreed and signed a contract for the work.</li>
+          <li>21 March 2017 - I noticed a leak on the landing and told Mr Smith about this.</li>
+        </ul>
+
+        <br>
+
+        <fieldset>
+
+          <legend class="visuallyhidden">
+            Explain what happened
+          </legend>
+
+          <p>Include dates if you know them.</p>
+
+          <div id="timeline" class="timeline">
+            <div class="timeline-headings">
+              <div id="timeline-heading-1" class="timeline-column-1">
+                <label class="form-label-bold" for="date-form-control">
+                  Date
+                </label>
+                <span class="form-hint">For example, 1 May 2017 </span>
+              </div>
+              <div id="timeline-heading-2" class="timeline-column-2">
+                <label class="form-label-bold" for="event-form-control">
+                  What happened
+                </label>
+                <span class="form-hint">For example, you might have signed a contract</span>
+              </div>
+            </div>
+            <div class="timeline-rows">
+              <div class="timeline-row">
+                <input class="form-control timeline-column-1" type="text" id="date-form-control" name="date-1"
+                       value="{{data['date-1']}}">
+                <input class="form-control timeline-column-2" type="text" id="event-form-control" name="timeline-1"
+                       value="{{data['timeline-1']}}">
+              </div>
+              <div class="timeline-row">
+                <input class="form-control timeline-column-1" type="text" id="date-form-control" name="date-2"
+                       value="{{data['date-2']}}">
+                <input class="form-control timeline-column-2" type="text" id="event-form-control" name="timeline-2"
+                       value="{{data['timeline-1']}}">
+              </div>
+              <div class="timeline-row">
+                <input class="form-control timeline-column-1" type="text" id="date-form-control" name="date-3"
+                       value="{{data['date-3']}}">
+                <input class="form-control timeline-column-2" type="text" id="event-form-control" name="timeline-3"
+                       value="{{data['timeline-3']}}">
+              </div>
+              <div class="timeline-row">
+                <input class="form-control timeline-column-1" type="text" id="date-form-control" name="date-4"
+                       value="{{data['date-4']}}">
+                <input class="form-control timeline-column-2" type="text" id="event-form-control" name="timeline-4"
+                       value="{{data['timeline-4']}}">
+              </div>
+              <div class="timeline-row">
+                <input class="form-control timeline-column-1" type="text" id="date-form-control" name="date-5"
+                       value="{{data['date-5']}}">
+                <input class="form-control timeline-column-2" type="text" id="event-form-control" name="timeline-5"
+                       value="{{data['timeline-5']}}">
+              </div>
+              <div class="timeline-row">
+                <input class="form-control timeline-column-1" type="text" id="date-form-control" name="date-6"
+                       value="{{data['date-6']}}">
+                <input class="form-control timeline-column-2" type="text" id="event-form-control" name="timeline-6"
+                       value="{{data['timeline-6']}}">
+              </div>
+              <div class="timeline-row">
+                <input class="form-control timeline-column-1" type="text" id="date-form-control" name="date-7"
+                       value="{{data['date-7']}}">
+                <input class="form-control timeline-column-2" type="text" id="event-form-control" name="timeline-7"
+                       value="{{data['timeline-7']}}">
+              </div>
+              <div class="timeline-row">
+                <input class="form-control timeline-column-1" type="text" id="date-form-control" name="date-8"
+                       value="{{data['date-8']}}">
+                <input class="form-control timeline-column-2" type="text" id="event-form-control" name="timeline-8"
+                       value="{{data['timeline-8']}}">
+              </div>
+            </div>
+
+          </div>
+          <div id="add-event-container">
+            <a class="secondary-button" id="add-another-event-button" href="#">Add another event</a>
+          </div>
+
+          <br>
+          <br>
+          <div class="panel panel-border-wide">
+            <p class="bold-small">Evidence</p>
+            You don't need to provide evidence unless this claim is defended - we'll let you know if that happens and
+            what evidence you need. You can, however, mention any evidence that you do have at this stage.
+            </p>
+          </div>
+
+          <script>
+            $(document).ready(function () {
+              $('#add-another-event-button').click(function (event) {
+                event.preventDefault();
+                $('#timeline').append(
+                  '<div class="timeline-row">' +
+                  '<input class="form-control timeline-column-1" style="margin-right: 1px; margin-top: 10px" type="text">' +
+                  '<input class="form-control timeline-column-2" style="margin-left: 3px" type="text">' +
+                  '</div>'
+                );
+              });
+            });
+          </script>
+
+        </fieldset>
+
+        <!--<details>-->
+
+        <!--<summary>-->
+        <!--<span class="summary">Specific assistance if needed (hide if not relevant)</span>-->
+        <!--</summary>-->
+
+        <!--<div class="panel panel-border-narrow">-->
+        <!--<p>Contextual guidance goes here...</p>-->
+        <!--</div>-->
+
+        <!--</details>-->
+
+        <div class="form-group">
+          <input type="submit" class="button" value="Save and continue"/>
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+
+</main>
+{% endblock %}

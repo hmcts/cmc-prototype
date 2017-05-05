@@ -1,0 +1,80 @@
+{% extends "layout_task-list.html" %}
+
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+
+{% block home_link %} /prototype-14/index {% endblock %}
+
+{% block content %}
+
+
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+
+  <div class="breadcrumbs">
+    <ol>
+      <li>
+        <a href="/prototype-14/task-list/{{ formQuery | safe }}">Make a money claim</a>
+      </li>
+      <li>
+        Their details
+      </li>
+    </ol>
+  </div>
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+      <form method="post" action="/prototype-14/task-list" class="form">
+
+        {{formData | safe}}
+
+        <h1 class="heading-large">
+          Their email address (optional)
+        </h1>
+
+        <p>We'll use this to tell them you've made a claim, as well as<br> notifying them by post.</p>
+
+        <fieldset>
+          <legend class="visuallyhidden">
+            Email
+          </legend>
+
+          <div class="form-group">
+            <input class="form-control form-control" id="defendant-email" name="defendant-email" type="text"
+                   value="{{data['defendant-email']}}">
+          </div>
+
+          <br>
+          <br>
+
+          <fieldset></fieldset>
+
+          <!-- <details>
+
+            <summary>
+              <span class="summary">Help with email address</span>
+            </summary>
+
+            <div class="panel panel-border-narrow">
+              <p>Which email to use?...</p>
+            </div>
+
+          </details> -->
+
+          <input type="hidden" name="their_details" value="complete">
+
+        </fieldset>
+
+        <div class="form-group">
+          <input type="submit" class="button" value="Save and continue"/>
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+
+</main>
+{% endblock %}
