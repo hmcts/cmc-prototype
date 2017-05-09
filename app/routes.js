@@ -236,13 +236,13 @@ function isValidPostcode(postcode) {
 
 
 // Check your answers for 'Check eligibility, cost and time'
-router.get('/prototype-14/task-list/check_before_you_start/reason', function (req, res, next) {
+router.get('/prototype-15/task-list/check_before_you_start/reason', function (req, res, next) {
 
   console.log("check your answers");
 
   let check_before_you_start = req.session.data.check_before_you_start;
   if (check_before_you_start === "complete" ){
-    res.redirect("/prototype-14/task-list/check_before_you_start/check-your-answers");
+    res.redirect("check_before_you_start/check-your-answers");
   } else {
     next()
   }
@@ -252,13 +252,13 @@ router.get('/prototype-14/task-list/check_before_you_start/reason', function (re
 module.exports = router
 
 // Check your answers for 'Read rules'
-router.get('/prototype-14/task-list/read-rules', function (req, res, next) {
+router.get('/prototype-15/task-list/read-rules', function (req, res, next) {
 
   console.log("check your answers");
 
   let read_rules = req.session.data.read_rules;
   if (read_rules === "complete" ){
-    res.redirect("/prototype-14/task-list/read-rules/check-your-answers");
+    res.redirect("read-rules/check-your-answers");
   } else {
     next()
   }
@@ -268,13 +268,13 @@ router.get('/prototype-14/task-list/read-rules', function (req, res, next) {
 module.exports = router
 
 // Check your answers for 'Completing your claim'
-router.get('/prototype-14/task-list/completing-your-claim', function (req, res, next) {
+router.get('/prototype-15/task-list/completing-your-claim', function (req, res, next) {
 
   console.log("check your answers");
 
   let completing_your_claim = req.session.data.completing_your_claim;
   if (completing_your_claim === "complete" ){
-    res.redirect("/prototype-14/task-list/completing-your-claim/check-your-answers");
+    res.redirect("completing-your-claim/check-your-answers");
   } else {
     next()
   }
@@ -282,13 +282,13 @@ router.get('/prototype-14/task-list/completing-your-claim', function (req, res, 
 });
 
 // Check your answers for 'Your details'
-router.get('/prototype-14/task-list/your-details', function (req, res, next) {
+router.get('/prototype-15/task-list/your-details', function (req, res, next) {
 
   console.log("check your answers");
 
   let your_details = req.session.data.your_details;
   if (your_details === "complete" ){
-    res.redirect("/prototype-14/task-list/your-details/check-your-answers");
+    res.redirect("your-details/check-your-answers");
   } else {
     next()
   }
@@ -298,13 +298,13 @@ router.get('/prototype-14/task-list/your-details', function (req, res, next) {
 module.exports = router
 
 // Check your answers for 'Their details'
-router.get('/prototype-14/task-list/their-details', function (req, res, next) {
+router.get('/prototype-15/task-list/their-details', function (req, res, next) {
 
   console.log("check your answers");
 
   let their_details = req.session.data.their_details;
   if (their_details === "complete" ){
-    res.redirect("/prototype-14/task-list/their-details/check-your-answers");
+    res.redirect("their-details/check-your-answers");
   } else {
     next()
   }
@@ -314,13 +314,13 @@ router.get('/prototype-14/task-list/their-details', function (req, res, next) {
 module.exports = router
 
 // Check your answers for 'Claim amount'
-router.get('/prototype-14/task-list/claim-amount', function (req, res, next) {
+router.get('/prototype-15/task-list/claim-amount', function (req, res, next) {
 
   console.log("check your answers");
 
   let claim_amount = req.session.data.claim_amount;
   if (claim_amount === "complete" ){
-    res.redirect("/prototype-14/task-list/claim-amount/check-your-answers");
+    res.redirect("claim-amount/check-your-answers");
   } else {
     next()
   }
@@ -330,13 +330,13 @@ router.get('/prototype-14/task-list/claim-amount', function (req, res, next) {
 module.exports = router
 
 // Check your answers for 'Claim details'
-router.get('/prototype-14/task-list/claim-details', function (req, res, next) {
+router.get('/prototype-15/task-list/claim-details', function (req, res, next) {
 
   console.log("check your answers");
 
   let claim_details = req.session.data.claim_details;
   if (claim_details === "complete" ){
-    res.redirect("/prototype-14/task-list/claim-details/check-your-answers");
+    res.redirect("claim-details/check-your-answers");
   } else {
     next()
   }
