@@ -242,7 +242,7 @@ router.get('/prototype-15/task-list/check_before_you_start/reason', function (re
 
   let check_before_you_start = req.session.data.check_before_you_start;
   if (check_before_you_start === "complete" ){
-    res.redirect("check_before_you_start/check-your-answers");
+    res.redirect("../check_before_you_start/check-your-answers");
   } else {
     next()
   }
