@@ -1,0 +1,130 @@
+{% extends "layout_task-list.html" %}
+
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+
+{% block home_link %} ../../task-list {% endblock %}
+
+{% block content %}
+
+
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+
+  <div class="breadcrumbs">
+    <ol>
+      <li>
+        <a href="../../task-list{{ formQuery | safe }}">Make a money claim</a>
+      </li>
+      <li>
+        Your details
+      </li>
+    </ol>
+  </div>
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+      <form method="post" action="phone" class="form">
+
+        {{formData | safe}}
+
+        <h1 class="heading-large">
+          Your residential address
+        </h1>
+
+        <p>This must be the address where you live. You'll get the option to add another address for correspondence, if you want to, later.</p>
+
+        <fieldset>
+          <legend class="visuallyhidden">
+            Postcode
+          </legend>
+
+          <!--<div class="form-group">-->
+          <!--<input class="form-control" id="claimant_address" name="claimant-address" type="text" value="{{data['claimant-address']}}">-->
+          <!--</div>-->
+
+          <br>
+
+
+
+            <div id="addressManualWrapper">
+              <div id="address-details" class="address-manual-input disabled">
+                <div class="form-group-compound address-item form-group"><a name="address_addressline1"></a><label
+                  class="form-label" for="Address_AddressLine1">Address line 1</label><input
+                  autocorrect="off" class="form-control" data-val="true"
+                  data-val-length="First line of address must not be more than {0} characters"
+                  data-val-length-max="50"
+                  data-val-regex="First line of address contains some invalid characters"
+                  data-val-regex-pattern="^[a-zA-Z0-9\u0080-\uFFA7?$@#()&quot;&#39;!,+\-=_:;.&amp;€£*%\s\/\[\]]+$"
+                  data-val-required="Enter your first line of address" id="Address_AddressLine1"
+                  name="Address.AddressLine1" type="text" value=""><span
+                  class="field-validation-valid" data-valmsg-for="Address.AddressLine1"
+                  data-valmsg-replace="true" aria-live="polite"></span></div>
+
+                <div class="form-group-compound address-item form-group"><a name="address_addressline2"></a><label
+                  class="form-label" for="Address_AddressLine2">Address line 2
+                  (optional)</label><input autocorrect="off" class="form-control" data-val="true"
+                                           data-val-length="Second line of address must not be more than {0} characters"
+                                           data-val-length-max="50"
+                                           data-val-regex="Second line of address contains some invalid characters"
+                                           data-val-regex-pattern="^[a-zA-Z0-9\u0080-\uFFA7?$@#()&quot;&#39;!,+\-=_:;.&amp;€£*%\s\/\[\]]+$"
+                                           id="Address_AddressLine2" name="Address.AddressLine2"
+                                           type="text" value=""><span class="field-validation-valid"
+                                                                      data-valmsg-for="Address.AddressLine2"
+                                                                      data-valmsg-replace="true"
+                                                                      aria-live="polite"></span></div>
+
+                <div class="form-group-compound address-item form-group"><a name="address_addressline3"></a><label
+                  class="form-label" for="Address_AddressLine3">Town or city
+                  </label><input autocorrect="off" class="form-control" data-val="true"
+                                           data-val-length="Third line of address must not be more than {0} characters"
+                                           data-val-length-max="50"
+                                           data-val-regex="Third line of address contains some invalid characters"
+                                           data-val-regex-pattern="^[a-zA-Z0-9\u0080-\uFFA7?$@#()&quot;&#39;!,+\-=_:;.&amp;€£*%\s\/\[\]]+$"
+                                           id="Address_AddressLine3" name="Address.AddressLine3"
+                                           type="text" value=""><span class="field-validation-valid"
+                                                                      data-valmsg-for="Address.AddressLine3"
+                                                                      data-valmsg-replace="true"
+                                                                      aria-live="polite"></span></div>
+
+
+
+                <div class="address-item form-group"><a name="address_postcode"></a><label
+                  class="form-label" for="Address_Postcode">Postcode</label><input
+                  autocapitalize="characters" autocorrect="off"
+                  class="form-control form-control-large form-control-1-8" data-val="true"
+                  data-val-length="Postcode must not be more than 8 characters"
+                  data-val-length-max="8" data-val-regex="&#39;Postcode&#39;  is not a valid format"
+                  data-val-regex-pattern="^(([gG][iI][rR] {0,}0[aA]{2})|((([a-pr-uwyzA-PR-UWYZ][a-hk-yA-HK-Y]?[0-9][0-9]?)|(([a-pr-uwyzA-PR-UWYZ][0-9][a-hjkstuwA-HJKSTUW])|([a-pr-uwyzA-PR-UWYZ][a-hk-yA-HK-Y][0-9][abehmnprv-yABEHMNPRV-Y]))) {0,}[0-9][abd-hjlnp-uw-zABD-HJLNP-UW-Z]{2}))$"
+                  data-val-required="Enter your postcode" id="Address_Postcode"
+                  name="Address.Postcode" type="text" value=""><span class="field-validation-valid"
+                                                                     data-valmsg-for="Address.Postcode"
+                                                                     data-valmsg-replace="true"
+                                                                     aria-live="polite"></span></div>
+                <input id="Address_Uprn" name="Address.Uprn" type="hidden" value="">
+                <input data-val="true" data-val-number="The field Latitude must be a number."
+                       id="Address_GeoPoint_Latitude" name="Address.GeoPoint.Latitude" type="hidden"
+                       value="">
+                <input data-val="true" data-val-number="The field Longitude must be a number."
+                       id="Address_GeoPoint_Longitude" name="Address.GeoPoint.Longitude" type="hidden"
+                       value="">
+              </div>
+            </div>
+
+            <fieldset></fieldset>
+
+            <div class="form-group">
+              <input type="submit" class="button" value="Save and continue"/>
+            </div>
+
+        </fieldset>
+
+      </form>
+
+    </div>
+  </div>
+
+</main>
+{% endblock %}
