@@ -42,92 +42,89 @@ Money Claims Prototype
           <p>Don't include your claim fee - we'll add this for you.</p>
         </div>
 
-        <details>
 
-          <summary>
-            <span class="summary">What you can claim for</span>
-          </summary>
-
-          <div class="panel panel-border-narrow">
-<!--             <p>Content goes here...</p>
- -->          </div>
-
-        </details>
 
         <br>
 
         <!--<a href="" style="float: left" data-alert="This feature is not available in this demo">More about what you can claim</a>-->
 
-        <table class="table-form">
-          <caption class="visuallyhidden">Your claim amount</caption>
-          <thead>
-          <tr>
-            <th scope="col">What you're claiming for <span class="form-hint">Explain why you're claiming for this</span></th>
-            <th class="numeric last" scope="col">Amount <span
-              class="form-hint">You can give a single amount here</span></th>
-          </tr>
-          </thead>
-          <tfoot>
-          <tr>
-            <th scope="col">Total:</th>
-            <td class="numeric last"><span class="bold-medium">£<span id="totalSum">0.00</span></span></td>
+        <div id="timeline" class="timeline">
+          <div class="timeline-headings">
+            <div id="timeline-heading-1" class="timeline-column-3">
+              <label class="form-label-bold" for="event-form-control">
+                What you're claiming for
+              </label>
+              <span class="form-hint">Explain why you're claiming for this</span>
+            </div>
+            <div id="timeline-heading-2" class="timeline-column-4 ">
 
-          </tr>
-          </tfoot>
-          <tbody>
-          <tr>
-            <th scope="row">
-              <input type="text" maxlength="" size="48" type="text" id="item1"
-                     name="claim-item" value="{{data['claim-item'][0]}}">
-            </th>
-            <td class="numeric last">
-              <input class="fee pound" maxlength="10" size="7" type="text" value="{{data['costs-column'][0]}}"
-                     name="costs-column"
-                     id="amount1">
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">
-              <input type="text" maxlength="" size="48" type="text" id="item2"
-                     name="claim-item" value="{{data['claim-item'][1]}}">
-            </th>
-            <td class="numeric last">
-              <input class="fee pound" maxlength="10" size="7" type="text" value="{{data['costs-column'][1]}}"
-                     name="costs-column"
-                     id="amount2">
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">
-              <input type="text" maxlength="" size="48" type="text" id="item3"
-                     name="claim-item" value="{{data['claim-item'][2]}}">
-            </th>
-            <td class="numeric last">
-              <input class="fee pound" maxlength="10" size="7" type="text" value="{{data['costs-column'][2]}}"
-                     name="costs-column"
-                     id="amount3">
-            </td>
-          </tr>
+              <label class="form-label-bold" for="date-form-control">
+                Amount
+              </label>
+              <span class="form-hint"> </span>
+            </div>
+          </div>
+          <div class="timeline-rows">
+            <div class="timeline-row">
+              <input class="form-control timeline-column-3" type="text" id="event-form-control" name="timeline-1"
+              value="{{data['timeline-1']}}">
+              <input class="form-control timeline-column-4 fee pound" type="text" id="date-form-control" name="date-1"
+              value="{{data['date-1']}}">
 
-          <th scope="row">
-            <input type="text" maxlength="" size="48" type="text" id="item4"
-                   name="claim-item" value="{{data['claim-item'][3]}}">
-          </th>
-          <td class="numeric last">
-            <input class="fee pound" maxlength="10" size="7" type="text" value="{{data['costs-column'][3]}}"
-                   name="costs-column"
-                   id="amount4">
-          </td>
+            </div>
+            <div class="timeline-row">
 
-          </tr>
-          </tbody>
-        </table>
+              <input class="form-control timeline-column-3" type="text" id="event-form-control" name="timeline-2"
+              value="{{data['timeline-1']}}">
+              <input class="form-control timeline-column-4 fee pound" type="text" id="date-form-control" name="date-2"
+              value="{{data['date-2']}}">
+            </div>
+            <div class="timeline-row">
 
-        <fieldset></fieldset>
+              <input class="form-control timeline-column-3" type="text" id="event-form-control" name="timeline-3"
+              value="{{data['timeline-3']}}">
+              <input class="form-control timeline-column-4 fee pound" type="text" id="date-form-control" name="date-3"
+              value="{{data['date-3']}}">
+            </div>
+            <div class="timeline-row">
+
+              <input class="form-control timeline-column-3" type="text" id="event-form-control" name="timeline-4"
+              value="{{data['timeline-4']}}">
+              <input class="form-control timeline-column-4 fee pound" type="text" id="date-form-control" name="date-4"
+              value="{{data['date-4']}}">
+            </div>
+
+          </div>
+
+          <div class="timeline-row">
+          <div id="add-event-container">
+            <a class="secondary-button" id="add-another-event-button" href="#">Add another row</a>
+          </div>
+          <a class="" id="calculate" href="#">Calculate total</a>
+        </div>
+        <div class="timeline-row total">
+          <span class="bold-medium">£0.00</span>
+        </div>
+
+        <script>
+          $(document).ready(function () {
+            $('#add-another-event-button').click(function (event) {
+              event.preventDefault();
+              $('.timeline-rows').append(
+                '<div class="timeline-row">' +
+                '<input class="form-control timeline-column-3" style="margin-right: 1px; margin-right: 10px;" type="text">' +
+                '<input class="form-control timeline-column-4 fee pound" style="margin-left: 3px" type="text">' +
+                '</div>'
+                );
+            });
+          });
+        </script>
 
         <div class="form-group">
-          <input type="submit" class="button" value="Save and continue">
+          <input type="submit" class="button" value="Continue">
         </div>
+        </div>
+
       </form>
 
     </div>
