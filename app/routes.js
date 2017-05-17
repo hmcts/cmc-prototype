@@ -236,7 +236,7 @@ function isValidPostcode(postcode) {
 
 
 // Check your answers for 'Check eligibility, cost and time'
-router.get('/prototype-15/task-list/check_before_you_start/reason', function (req, res, next) {
+router.get('*/task-list/check_before_you_start/reason', function (req, res, next) {
 
   console.log("check your answers");
 
@@ -252,7 +252,7 @@ router.get('/prototype-15/task-list/check_before_you_start/reason', function (re
 module.exports = router
 
 // Check your answers for 'Read rules'
-router.get('/prototype-15/task-list/read-rules', function (req, res, next) {
+router.get('*/task-list/read-rules', function (req, res, next) {
 
   console.log("check your answers");
 
@@ -268,7 +268,7 @@ router.get('/prototype-15/task-list/read-rules', function (req, res, next) {
 module.exports = router
 
 // Check your answers for 'Completing your claim'
-router.get('/prototype-15/task-list/completing-your-claim', function (req, res, next) {
+router.get('*/task-list/completing-your-claim', function (req, res, next) {
 
   console.log("check your answers");
 
@@ -282,7 +282,7 @@ router.get('/prototype-15/task-list/completing-your-claim', function (req, res, 
 });
 
 // Check your answers for 'Your details'
-router.get('/prototype-15/task-list/your-details', function (req, res, next) {
+router.get('*/task-list/your-details', function (req, res, next) {
 
   console.log("check your answers");
 
@@ -298,7 +298,7 @@ router.get('/prototype-15/task-list/your-details', function (req, res, next) {
 module.exports = router
 
 // Check your answers for 'Their details'
-router.get('/prototype-15/task-list/their-details', function (req, res, next) {
+router.get('*/task-list/their-details', function (req, res, next) {
 
   console.log("check your answers");
 
@@ -314,7 +314,7 @@ router.get('/prototype-15/task-list/their-details', function (req, res, next) {
 module.exports = router
 
 // Check your answers for 'Claim amount'
-router.get('/prototype-15/task-list/claim-amount', function (req, res, next) {
+router.get('*/task-list/claim-amount', function (req, res, next) {
 
   console.log("check your answers");
 
@@ -330,7 +330,7 @@ router.get('/prototype-15/task-list/claim-amount', function (req, res, next) {
 module.exports = router
 
 // Check your answers for 'Claim details'
-router.get('/prototype-15/task-list/claim-details', function (req, res, next) {
+router.get('*/task-list/claim-details', function (req, res, next) {
 
   console.log("check your answers");
 

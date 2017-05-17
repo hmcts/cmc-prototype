@@ -4,7 +4,7 @@
 Money Claims Prototype
 {% endblock %}
 
-{% block home_link %} ../task-list {% endblock %}
+{% block home_link %} ../../task-list {% endblock %}
 
 {% block content %}
 
@@ -15,7 +15,7 @@ Money Claims Prototype
   <div class="breadcrumbs">
     <ol>
       <li>
-        <a href="../task-list{{ formQuery | safe }}">Make a money claim</a>
+        <a href="../../task-list{{ formQuery | safe }}">Make a money claim</a>
       </li>
       <li>
         Their details
@@ -26,74 +26,117 @@ Money Claims Prototype
   <div class="grid-row">
     <div class="column-two-thirds">
 
-      <form method="post" action="their-details/enter-details" class="form">
+      <form method="post" action="their-details/address" class="form">
 
         {{formData | safe}}
 
+        <!-- Individual -->
+        {% if data['defendant-type']=="individual" %}
+
         <h1 class="heading-large">
-          About them
+          Their full name
+
+
         </h1>
 
-        <p>We need to know if you're claiming against the respondent as an individual, or if the dispute relates to their work or buisness. </p>
 
-<!--         <p>It's against the rules to claim against someone in relation to their business if your dispute is only with the individual. </p>
- -->
-        <p class="bold-medium">Who are you making the claim against?</p>
+        <p>Give their full name if you can.</p>
+
 
         <fieldset>
-         <!--  <legend class="visuallyhidden">
-            Who are you making the claim against?
-          </legend> -->
+          <legend class="visuallyhidden">
+            Enter details
+          </legend>
 
-          <div class="multiple-choice">
-            <input id="radio-1" type="radio" name="defendant-type" value="individual" {{ checked("defendant-type", "Individual") }}>
-            <label for="radio-1">
-              <strong class="bold-small">Individual</strong><br>
-            For example, someone you lent money
-            </label>
+          <div class="form-group">
+            <label class="form-label" for="defendant_firstname">Their first name</label>
+            <input class="form-control" id="defendant_firstname" name="defendant-firstname" type="text"
+                   value="{{data['defendant-firstname']}}">
           </div>
-          <div class="multiple-choice">
-            <input id="radio-2" type="radio" name="defendant-type" value="sole trader" {{ checked("defendant-type", "Sole trader") }}>
-            <label for="radio-2">
-              <strong class="bold-small">Sole trader</strong><br>
-              For example, a tradesperson who did work for you
-            </label>
+          <div class="form-group">
+            <label class="form-label" for="defendant_middlename">Their middle names (if any)</label>
+            <input class="form-control" id="defendant_middlename" name="defendant-middlename" type="text"
+                   value="{{data['defendant-middlename']}}">
           </div>
-          <div class="multiple-choice">
-            <input id="radio-3" type="radio" name="defendant-type" value="company" {{ checked("defendant-type", "Company") }}>
-            <label for="radio-3">
-              <strong class="bold-small">Company</strong><br>
-              For example, a company that sold you goods or services
-            </label>
-          </div>
-          <div class="multiple-choice">
-            <input id="radio-4" type="radio" name="defendant-type" value="organisation" {{ checked("defendant-type", "Organisation") }}>
-            <label for="radio-4">
-              <strong class="bold-small">Another type of organisation</strong><br>
-              For example, a partnership, trust, club or association
-            </label>
+          <div class="form-group">
+            <label class="form-label" for="defendant_lastname">Their last name</label>
+            <input class="form-control" id="defendant_lastname" name="defendant-lastname" type="text"
+                   value="{{data['defendant-lastname']}}">
           </div>
 
         </fieldset>
 
+        <!-- <details>
+
+          <summary>
+            <span class="summary">Help with finding and naming the defendant</span>
+          </summary>
+
+          <div class="panel panel-border-narrow">
+            <p>Content goes here...</p>
+          </div>
+
+        </details> -->
+
+        {% endif %}
+
+        <!-- Company -->
+
+        <h1 class="heading-large">
+          Their details
+        </h1>
+
         <br>
+
+        <fieldset>
+          <legend class="visuallyhidden">
+            Enter details
+          </legend>
+
+ <div class="form-group">
+          <label class="form-label" for="claimant_firstname">First name</label>
+          <input type="text" class="form-control" id="claimant_firstname"
+                 name="claimant-firstname" value="{{data['claimant-firstname']}}">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="claimant_middlename">Middle names (if any)</label>
+          <input type="text" class="form-control" id="claimant_middlename"
+                 name="claimant-middlename" value="{{data['claimant-middlename']}}">
+        </div>
+
+
+        <div class="form-group">
+          <label class="form-label" for="claimant_lastname">Last name</label>
+          <input type="text" class="form-control" id="claimant_lastname"
+                 name="claimant-lastname" value="{{data['claimant-lastname']}}">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="claimant_lastname">Company name (if relevant)</label>
+          <input type="text" class="form-control" id="claimant_lastname"
+                 name="claimant-lastname" value="{{data['claimant-lastname']}}">
+        </div>
+
+        </fieldset>
 
         <details>
 
           <summary>
-            <span class="summary">I don't know the type of company</span>
+            <span class="summary">Check the details of a company</span>
           </summary>
 
           <div class="panel panel-border-narrow">
-            <p>Contextual guidance goes here...</p>
-          </div>
+            <p>You might be able to <a
+        href="https://www.gov.uk/get-information-about-a-company">check the details of a company</a> on GOV.UK.</div></a>
 
         </details>
+
 
         <br>
 
         <div class="form-group">
-          <input type="submit" class="button" value="Save and continue" />
+          <input type="submit" class="button" value="Save and continue"/>
         </div>
 
       </form>
