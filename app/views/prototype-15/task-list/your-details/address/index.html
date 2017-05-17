@@ -29,13 +29,32 @@ Money Claims Prototype
       <form method="post" action="phone" class="form">
 
         {{formData | safe}}
+        {% if data['claimant-type']=="Company" %}
+        <h1 class="heading-large">
+          Company address
+        </h1>
+
+        <p>You can also add add another address for correspondence if necessary.</p>
+
+        {% endif %}
+        
+        {% if data['claimant-type']=="Sole trader" %}
+
+        <h1 class="heading-large">
+          Your address
+        </h1>
+        
+        <p>This must be the address where you live or trade. You can also add add another address for correspondence if necessary.</p>
+        {% endif %}
+
+        {% if data['claimant-type']=="Individual" %}
 
         <h1 class="heading-large">
           Your residential address
         </h1>
 
         <p>This must be the address where you live. You can also add add another address for correspondence if necessary.</p>
-
+        {% endif %}
         <fieldset>
           <legend class="visuallyhidden">
             Postcode
@@ -137,7 +156,7 @@ Money Claims Prototype
                     <a href="#" class="toggle">Add a correspondence address</a>
                     <fieldset></fieldset>
                     <div class="correspondence" style="display:none">
-                 
+
                       <h1 class="heading-large">
                         Add a correspondence address (optional)
                       </h1>
@@ -228,7 +247,7 @@ Money Claims Prototype
                                     id="Address_GeoPoint_Longitude" name="Address.GeoPoint.Longitude" type="hidden"
                                     value="">
                                   </div>
-                                                      <a href="#" class="toggle2">Remove correspondence address</a>
+                                  <a href="#" class="toggle2">Remove correspondence address</a>
 
                                 </div>
 
@@ -236,7 +255,7 @@ Money Claims Prototype
                               <br>
 
                             </div>
-                     
+
 
                             <div class="form-group">
                               <input type="submit" class="button" value="Save and continue"/>
@@ -252,20 +271,20 @@ Money Claims Prototype
                   </main>
                   <script type="text/javascript">
 
-                      $( document ).ready(function() {
-                       $('.toggle').click(function(e){
-                        e.preventDefault();
-                        $('.correspondence').show();
-                        $('.toggle').hide();
-                         });
-                       $('.toggle2').click(function(e){
-                        $('.correspondence').hide();
-                        $('.toggle').show();
-                         });
+                    $( document ).ready(function() {
+                     $('.toggle').click(function(e){
+                      e.preventDefault();
+                      $('.correspondence').show();
+                      $('.toggle').hide();
+                    });
+                     $('.toggle2').click(function(e){
+                      $('.correspondence').hide();
+                      $('.toggle').show();
+                    });
 
-                     });
-                  </script>
-                  {% endblock %}
+                   });
+                 </script>
+                 {% endblock %}
 
 
-</script>
+               </script>
