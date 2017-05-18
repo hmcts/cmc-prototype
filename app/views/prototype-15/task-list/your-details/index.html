@@ -8,6 +8,7 @@ Money Claims Prototype
 
 {% block content %}
 
+{% set completed = true if data.read_rules == "complete" and data.your_details == "complete" and data.their_details == "complete" and data.claim_amount == "complete" and data.claim_details == "complete" %}
 
 <main id="content" role="main">
   {% include "includes/phase_banner_beta.html" %}
@@ -25,8 +26,13 @@ Money Claims Prototype
 
   <div class="grid-row">
     <div class="column-two-thirds">
-
+  {% if data.paid=="complete" %}
       <form method="post" action="your-details/name" class="form">
+    {% endif %}
+  {% if data.paid!="complete" %}
+      <form method="post" action="your-details/name" class="form">
+
+    {% endif %}
 
         {{formData | safe}}
 
