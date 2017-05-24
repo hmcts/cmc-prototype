@@ -174,7 +174,7 @@ const extraDays = req.body['radio-aos-group'];
 if (defendNow === 'true') {
   res.redirect(`/prototype-16/owe-nothing/defence?extra-days=${extraDays}`)
 } else {
-  res.redirect(`/prototype-16/owe-nothing/offer?extra-days=${extraDays}`)
+  res.redirect(`/prototype-16/owe-nothing/defence?extra-days=${extraDays}`)
 }
 })
 
