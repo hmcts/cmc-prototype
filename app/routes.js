@@ -267,6 +267,23 @@ router.get('*/task-list/read-rules', function (req, res, next) {
 
 module.exports = router
 
+// Check your answers for 'Read rules'
+router.get('*/task-list/resolve-dispute', function (req, res, next) {
+
+  console.log("check your answers");
+
+  let read_rules = req.session.data.read_rules;
+  if (read_rules === "complete" ){
+    res.redirect("resolve-dispute/check-your-answers");
+  } else {
+    next()
+  }
+
+});
+
+
+module.exports = router
+
 // Check your answers for 'Completing your claim'
 router.get('*/task-list/completing-your-claim', function (req, res, next) {
 
