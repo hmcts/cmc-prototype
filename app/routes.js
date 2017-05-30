@@ -138,9 +138,9 @@ router.post('/prototype-18/agreement/breached', (req, res) => {
 res.redirect(agreementPage)
 })
 
-router.post('/prototype-18/resolve-early', (req, res) => {
-  res.redirect(`/prototype-18/owe-nothing/aos?defend-now=${req.body['radio-contact-group'] == 'true'}`)
-})
+/*router.post('/prototype-18/resolve-early', (req, res) => {
+  res.redirect(`/prototype-18/owe-nothing/index == 'true'}`)
+})*/
 
 router.post('/owe-nothing/aos', (req, res) => {
   const defendNow = req.query['defend-now'];
