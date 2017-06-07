@@ -344,6 +344,7 @@ router.get('*/task-list/claim-amount', function (req, res, next) {
 
 });
 
+
 module.exports = router
 
 // Check your answers for 'Claim details'
@@ -361,3 +362,101 @@ router.get('*/task-list/claim-details', function (req, res, next) {
 });
 
 module.exports = router
+
+// Check your answers for 'Claim amount'
+router.get('*/task-list/your-details', function (req, res, next) {
+
+  console.log("check your answers");
+
+  let confirm_details = req.session.data.confirm_details;
+  if (confirm_details === "complete" ){
+    res.redirect("your-details/check-your-answers");
+  } else {
+    next()
+  }
+
+});
+module.exports = router
+
+
+// Check your answers for 'Claim amount'
+router.get('*/task-list/more-time-to-respond', function (req, res, next) {
+
+  console.log("check your answers");
+
+  let more_time_to_respond = req.session.data.more_time_to_respond;
+  if (more_time_to_respond === "complete" ){
+    res.redirect("more-time-to-respond/check-your-answers");
+  } else {
+    next()
+  }
+
+});
+
+
+
+module.exports = router
+
+// Check your answers for 'Claim amount'
+router.get('*/task-list/do-you-owe-money', function (req, res, next) {
+
+  console.log("check your answers");
+
+  let do_you_owe_money = req.session.data.do_you_owe_money;
+  if (do_you_owe_money === "complete" ){
+    res.redirect("do-you-owe-money/check-your-answers");
+  } else {
+    next()
+  }
+
+});
+module.exports = router
+
+
+// Check your answers for 'Claim amount'
+router.get('*/task-list/defence-options', function (req, res, next) {
+
+  console.log("check your answers");
+
+  let defence_options = req.session.data.defence_options;
+  if (defence_options === "complete" ){
+    res.redirect("defence-options/check-your-answers");
+  } else {
+    next()
+  }
+
+});
+module.exports = router
+
+// Check your answers for 'Claim amount'
+router.get('*/task-list/mediation', function (req, res, next) {
+
+  console.log("check your answers");
+
+  let mediation = req.session.data.mediation;
+  if (mediation === "complete" ){
+    res.redirect("mediation/check-your-answers");
+  } else {
+    next()
+  }
+
+});
+module.exports = router
+
+
+// Check your answers for 'Claim amount'
+router.get('*/task-list/your-defence', function (req, res, next) {
+
+  console.log("check your answers");
+
+  let your_defence = req.session.data.your_defence;
+  if (your_defence === "complete" ){
+    res.redirect("your-defence/check-your-answers");
+  } else {
+    next()
+  }
+
+});
+module.exports = router
+
+
