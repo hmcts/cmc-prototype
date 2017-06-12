@@ -26,7 +26,19 @@ Money Claims Prototype
   <div class="grid-row">
     <div class="column-two-thirds">
 
+     {% if data.claim_details_edit=="true" %}
+      <form method="post" action="claim-details/check-your-answers" class="form">
+        <input type="hidden" name="claim_details" value="complete">
+
+      {% endif %}
+     {% if data.claim_details_edit!="true" %}
       <form method="post" action="../task-list" class="form">
+          <input type="hidden" name="claim_details" value="complete">
+
+      {% endif %}
+
+
+
 
         {{formData | safe}}
 
@@ -55,22 +67,13 @@ Money Claims Prototype
 
         <br>
 
-        <!--<details>-->
-
-        <!--<summary>-->
-        <!--<span class="summary">Specific assistance if needed (hide if not relevant)</span>-->
-        <!--</summary>-->
-
-        <!--<div class="panel panel-border-narrow">-->
-        <!--<p>Contextual guidance goes here...</p>-->
-        <!--</div>-->
-
-        <!--</details>-->
-          <input type="hidden" name="claim_details" value="complete">
+    
 
         <div class="form-group">
           <input type="submit" class="button" value="Save and continue"/>
         </div>
+
+       
 
       </form>
 
