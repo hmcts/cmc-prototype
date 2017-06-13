@@ -5,6 +5,12 @@ const isEqual = require('lodash.isequal')
 
 let router = express.Router()
 
+
+router.all('/*', (req, res, next) => {
+  console.log(`${req.method} ${req.url} ${JSON.stringify(req.session.data)}`)
+  next()
+})
+
 // Route index page
 router.get('/', function (req, res) {
   res.render('index')
@@ -238,7 +244,7 @@ function isValidPostcode(postcode) {
 // Check your answers for 'Check eligibility, cost and time'
 router.get('*/task-list/check_before_you_start/reason', function (req, res, next) {
 
-  console.log("check your answers");
+
 
   let check_before_you_start = req.session.data.check_before_you_start;
   if (check_before_you_start === "complete" ){
@@ -254,7 +260,7 @@ module.exports = router
 // Check your answers for 'Read rules'
 router.get('*/task-list/read-rules', function (req, res, next) {
 
-  console.log("check your answers");
+
 
   let read_rules = req.session.data.read_rules;
   if (read_rules === "complete" ){
@@ -270,7 +276,7 @@ module.exports = router
 // Check your answers for 'Read rules'
 router.get('*/task-list/resolve-dispute', function (req, res, next) {
 
-  console.log("check your answers");
+
 
   let read_rules = req.session.data.read_rules;
   if (read_rules === "complete" ){
@@ -287,8 +293,6 @@ module.exports = router
 // Check your answers for 'Completing your claim'
 router.get('*/task-list/completing-your-claim', function (req, res, next) {
 
-  console.log("check your answers");
-
   let completing_your_claim = req.session.data.completing_your_claim;
   if (completing_your_claim === "complete" ){
     res.redirect("completing-your-claim/check-your-answers");
@@ -300,8 +304,6 @@ router.get('*/task-list/completing-your-claim', function (req, res, next) {
 
 // Check your answers for 'Your details'
 router.get('*/task-list/your-details', function (req, res, next) {
-
-  console.log("check your answers");
 
   let your_details = req.session.data.your_details;
   if (your_details === "complete" ){
@@ -317,8 +319,6 @@ module.exports = router
 // Check your answers for 'Their details'
 router.get('*/task-list/their-details', function (req, res, next) {
 
-  console.log("check your answers");
-
   let their_details = req.session.data.their_details;
   if (their_details === "complete" ){
     res.redirect("their-details/check-your-answers");
@@ -332,8 +332,6 @@ module.exports = router
 
 // Check your answers for 'Claim amount'
 router.get('*/task-list/claim-amount', function (req, res, next) {
-
-  console.log("check your answers");
 
   let claim_amount = req.session.data.claim_amount;
   if (claim_amount === "complete" ){
@@ -349,8 +347,6 @@ module.exports = router
 
 // Check your answers for 'Claim details'
 router.get('*/task-list/claim-details', function (req, res, next) {
-
-  console.log("check your answers");
 
   let claim_details = req.session.data.claim_details;
   if (claim_details === "complete-" ){
@@ -371,8 +367,6 @@ module.exports = router
 // Check your answers for 'Claim amount'
 router.get('*/task-list/your-details', function (req, res, next) {
 
-  console.log("check your answers");
-
   let confirm_details = req.session.data.confirm_details;
   if (confirm_details === "complete" ){
     res.redirect("your-details");
@@ -386,8 +380,6 @@ module.exports = router
 
 // Check your answers for 'Claim amount'
 router.get('*/task-list/more-time-to-respond', function (req, res, next) {
-
-  console.log("check your answers");
 
   let more_time_to_respond = req.session.data.more_time_to_respond;
   if (more_time_to_respond === "complete-" ){
@@ -405,8 +397,6 @@ module.exports = router
 // Check your answers for 'Claim amount'
 router.get('*/task-list/do-you-owe-money', function (req, res, next) {
 
-  console.log("check your answers");
-
   let do_you_owe_money = req.session.data.do_you_owe_money;
   if (do_you_owe_money === "complete-" ){
     res.redirect("do-you-owe-money");
@@ -421,8 +411,6 @@ module.exports = router
 // Check your answers for 'Claim amount'
 router.get('*/task-list/defence-options', function (req, res, next) {
 
-  console.log("check your answers");
-
   let defence_options = req.session.data.defence_options;
   if (defence_options === "complete-" ){
     res.redirect("defence-options");
@@ -435,8 +423,6 @@ module.exports = router
 
 // Check your answers for 'Claim amount'
 router.get('*/task-list/mediation', function (req, res, next) {
-
-  console.log("check your answers");
 
   let mediation = req.session.data.mediation;
   if (mediation === "complete-" ){
@@ -452,7 +438,6 @@ module.exports = router
 // Check your answers for 'Claim amount'
 router.get('*/task-list/your-defence', function (req, res, next) {
 
-  console.log("check your answers");
 
   let your_defence = req.session.data.your_defence;
   if (your_defence === "complete-" ){
@@ -467,7 +452,6 @@ module.exports = router
 // Check your answers for 'Claim details'
 router.get('*/task-list/claim-details', function (req, res, next) {
 
- console.log("check your answers");
 
   let claim_details = req.session.data.claim_details;
   if (claim_details === "complete" ){
