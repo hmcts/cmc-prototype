@@ -377,8 +377,8 @@ module.exports = router
 router.get('*/task-list/more-time-to-respond', function (req, res, next) {
 
   let more_time_to_respond = req.session.data.more_time_to_respond;
-  if (more_time_to_respond === "complete-" ){
-    res.redirect("more-time-to-respond");
+  if (more_time_to_respond === "complete" ){
+    res.redirect("more-time-to-respond/check-your-answers");
   } else {
     next()
   }
@@ -393,8 +393,8 @@ module.exports = router
 router.get('*/task-list/do-you-owe-money', function (req, res, next) {
 
   let do_you_owe_money = req.session.data.do_you_owe_money;
-  if (do_you_owe_money === "complete-" ){
-    res.redirect("do-you-owe-money");
+  if (do_you_owe_money === "complete" ){
+    res.redirect("do-you-owe-money/check-your-answers");
   } else {
     next()
   }
@@ -407,7 +407,7 @@ module.exports = router
 router.get('*/task-list/defence-options', function (req, res, next) {
 
   let defence_options = req.session.data.defence_options;
-  if (defence_options === "complete-" ){
+  if (defence_options === "complete" ){
     res.redirect("defence-options");
   } else {
     next()
@@ -420,7 +420,7 @@ module.exports = router
 router.get('*/task-list/mediation', function (req, res, next) {
 
   let mediation = req.session.data.mediation;
-  if (mediation === "complete-" ){
+  if (mediation === "complete" ){
     res.redirect("mediation");
   } else {
     next()
@@ -435,8 +435,8 @@ router.get('*/task-list/your-defence', function (req, res, next) {
 
 
   let your_defence = req.session.data.your_defence;
-  if (your_defence === "complete-" ){
-    res.redirect("your-defence");
+  if (your_defence === "complete" ){
+    res.redirect("your-defence/check-your-answers");
   } else {
     next()
   }
