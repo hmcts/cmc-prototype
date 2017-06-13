@@ -357,11 +357,6 @@ router.get('*/task-list/claim-details', function (req, res, next) {
 
 });
 
-router.post('*/claim-details/check-your-answers', function (req, res, next) {
-  req.session.data.claim_details = null;
-    res.redirect("../claim-details");
-});
-
 module.exports = router
 
 // Check your answers for 'Claim amount'
@@ -448,21 +443,3 @@ router.get('*/task-list/your-defence', function (req, res, next) {
 
 });
 module.exports = router
-
-// Check your answers for 'Claim details'
-router.get('*/task-list/claim-details', function (req, res, next) {
-
-
-  let claim_details = req.session.data.claim_details;
-  if (claim_details === "complete" ){
-    res.redirect("claim-details/check-your-answers");
-  } else {
-    next()
-  }
-
-});
-
-router.post('*/claim-details/check-your-answers', function (req, res, next) {
-  req.session.data.claim_details = null;
-    res.redirect("../claim-details");
-});

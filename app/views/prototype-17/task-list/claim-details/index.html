@@ -26,19 +26,8 @@ Money Claims Prototype
   <div class="grid-row">
     <div class="column-two-thirds">
 
-     {% if data.claim_details_edit=="true" %}
-      <form method="post" action="claim-details/check-your-answers" class="form">
+      <form method="post" action="{{ data.return_page if data.return_page | length > 0 else '../task-list' }}" class="form">
         <input type="hidden" name="claim_details" value="complete">
-
-      {% endif %}
-     {% if data.claim_details_edit!="true" %}
-      <form method="post" action="../task-list" class="form">
-          <input type="hidden" name="claim_details" value="complete">
-
-      {% endif %}
-
-
-
 
         {{formData | safe}}
 
@@ -46,7 +35,13 @@ Money Claims Prototype
           Why you're owed the money
         </h1>
 
-        <p>Explain why you are owed the money based on the information you've given.</p> 
+        {% if data.return_page.endsWith('check-and-send') %}
+        <h1>Coming back to check and send</h1>
+        {% elseif data.return_page.endsWith('check-your-answers') %}
+        <h1>Coming back to check your answers</h1>
+        {% endif %}
+
+        <p>Explain why you are owed the money based on the information you've given.</p>
         <p>You can also include any other information that supports your claim.</p>
 
         <fieldset>
@@ -67,13 +62,13 @@ Money Claims Prototype
 
         <br>
 
-    
+
 
         <div class="form-group">
           <input type="submit" class="button" value="Save and continue"/>
         </div>
 
-       
+
 
       </form>
 
