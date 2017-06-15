@@ -35,11 +35,6 @@ Money Claims Prototype
           Why you're owed the money
         </h1>
 
-        {% if data.return_page and data.return_page.endsWith('check-and-send') %}
-        <h1>Coming back to check and send</h1>
-        {% elseif data.return_page and data.return_page.endsWith('check-your-answers') %}
-        <h1>Coming back to check your answers</h1>
-        {% endif %}
 
         <p>Explain why you are owed the money based on the information you've given.</p>
         <p>You can also include any other information that supports your claim.</p>
@@ -51,25 +46,32 @@ Money Claims Prototype
           </legend>
 
           <textarea class="form-control form-control-3-4 form-control-large"
-                    id="claim-details-1"
+                    id="claim-reason"
                     rows="3"
-                    name="claim-details1"
+                    name="claim-reason"
                     type="text"
                     style="width: 100%"
-                    value="{{data['claim-reason']}}"></textarea>
+                    value="">{{data['claim-reason']}}</textarea>
 
         </fieldset>
 
         <br>
 
 
+      {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}
+        <div class="form-group">
+          <input type="submit" class="button" value="Save changes"/>
+        </div>
+        
 
+        <a href="{{ data.return_page if data.return_page | length > 0 else '../task-list' }}">Cancel</a>
+
+      {% else %}
         <div class="form-group">
           <input type="submit" class="button" value="Save and continue"/>
         </div>
 
-
-
+      {% endif %}
       </form>
 
     </div>

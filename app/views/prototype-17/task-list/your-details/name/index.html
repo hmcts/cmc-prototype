@@ -30,8 +30,17 @@ Money Claims Prototype
 
         {{formData | safe}}
 
-      {% if data['claimant-type']=="Individual" %}
-         <form method="post" action="date-of-birth" class="form">
+
+      {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}        
+       <form method="post" action="{{ data.return_page if data.return_page | length > 0 else '../task-list' }}" class="form">
+
+
+        {% else %}
+         <form method="post" action="your-details/date-of-birth" class="form">
+
+        {% endif %}
+
+         
         <h1 class="heading-large">
           Your full name
         </h1>
@@ -56,20 +65,16 @@ Money Claims Prototype
           <input type="text" class="form-control" id="claimant_lastname"
                  name="claimant-lastname" value="{{data['claimant-lastname']}}">
         </div>
-      {% endif %}
-       
-      {% if data['claimant-type']=="Sole trader" %}
+        
+            {% if data['claimant-type']=="Sole trader" %}
+ 
  <h1 class="heading-large">
-    <form method="post" action="date-of-birth" class="form">
+    <form method="post" action="your-details/date-of-birth" class="form">
           Your details
         </h1>
 
         <p>Enter all your names in full - don't use initials.</p>
-        <div class="form-group">
-          <label class="form-label" for="claimant_lastname">Trading as</label>
-          <input type="text" class="form-control" id="claimant_lastname"
-                 name="claimant-lastname" value="{{data['claimant-lastname']}}">
-        </div>
+
         <div class="form-group">
           <label class="form-label" for="claimant_firstname">First name</label>
           <input type="text" class="form-control" id="claimant_firstname"
@@ -89,9 +94,13 @@ Money Claims Prototype
                  name="claimant-lastname" value="{{data['claimant-lastname']}}">
         </div>
 
+        <div class="form-group">
+          <label class="form-label" for="claimant_lastname">Company name (if relevant)</label>
+          <input type="text" class="form-control" id="claimant_lastname"
+                 name="claimant-lastname" value="{{data['claimant-lastname']}}">
+        </div>
+  {% endif %}
 
-
-      {% endif %}
       {% if data['claimant-type']=="Company" %}
          <form method="post" action="address" class="form">
         <h1 class="heading-large">
@@ -141,9 +150,20 @@ Money Claims Prototype
 
         <br>
 
+      {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}
         <div class="form-group">
-          <input type="submit" class="button" value="Save and continue" />
+          <input type="submit" class="button" value="Save changes"/>
         </div>
+        
+
+        <a href="{{ data.return_page if data.return_page | length > 0 else '../task-list' }}">Cancel</a>
+
+      {% else %}
+        <div class="form-group">
+          <input type="submit" class="button" value="Save and continue"/>
+        </div>
+
+      {% endif %}
 
       </form>
 

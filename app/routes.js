@@ -270,6 +270,21 @@ router.get('*/task-list/read-rules', function (req, res, next) {
   }
 
 });
+module.exports = router
+
+// Check your answers for 'Read rules'
+router.get('*/task-list/resolve-dispute', function (req, res, next) {
+
+
+
+  let resolve_dispute = req.session.data.resolve_dispute;
+  if (resolve_dispute === "complete" ){
+    res.redirect("resolve-dispute/check-your-answers");
+  } else {
+    next()
+  }
+
+});
 
 module.exports = router
 
@@ -349,7 +364,7 @@ module.exports = router
 router.get('*/task-list/claim-details', function (req, res, next) {
 
   let claim_details = req.session.data.claim_details;
-  if (claim_details === "complete-" ){
+  if (claim_details === "complete" ){
     res.redirect("claim-details/check-your-answers");
   } else {
     next()
@@ -427,9 +442,8 @@ router.get('*/task-list/mediation', function (req, res, next) {
   }
 
 });
+
 module.exports = router
-
-
 // Check your answers for 'Claim amount'
 router.get('*/task-list/your-defence', function (req, res, next) {
 

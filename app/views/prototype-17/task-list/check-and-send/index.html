@@ -94,7 +94,7 @@ Check your answers
     <thead>
     <tr>
       <th colspan="2">
-        <h2 class="heading-medium">
+        <h2 class="heading-medium" id="name">
           Your details
         </h2>
       </th>
@@ -118,16 +118,15 @@ Check your answers
       </td>
     </tr> -->
     <tr>
-      <td>
+      <td >
         Name:
       </td>
       <td>
-        {{data['claimant-firstname']}} {{data['claimant-lastname']}}
+        {{data['claimant-firstname']}} {{data['claimant-middlename']}} {{data['claimant-lastname']}}
       </td>
       <td class="change-answer">
-        <a href="#">
-          Change <span class="visuallyhidden">Name</span>
-        </a>
+        <a href="../task-list/your-details/name?return_page={{ '../../task-list/check-and-send#name' | urlencode }}">
+          Change <span class="visuallyhidden">Why you're owed the money</span></a>
       </td>
     </tr>
     <tr>
@@ -135,28 +134,15 @@ Check your answers
         Date of birth:
       </td>
       <td>
-        3 12 1971
+       {{data['day']}} {{data['month']}} {{data['year']}}
       </td>
       <td class="change-answer">
-        <a href="#">
-          Change <span class="visuallyhidden">Name</span>
-        </a>
+        <a href="../task-list/your-details/date-of-birth?return_page={{ '../../task-list/check-and-send#name' | urlencode }}">
+          Change <span class="visuallyhidden">Date of birth</span></a>
       </td>
     </tr>
     <tr>
-      <!--<tr>-->
-      <!--<td>-->
-      <!--Email:-->
-      <!--</td>-->
-      <!--<td>-->
-      <!--youremail@gmail.com-->
-      <!--</td>-->
-      <!--<td class="change-answer">-->
-      <!--<a href="#">-->
-      <!--Change <span class="visuallyhidden">Name</span>-->
-      <!--</a>-->
-      <!--</td>-->
-      <!--</tr>-->
+
     <tr>
       <td>
         Phone:
@@ -165,26 +151,38 @@ Check your answers
         {{data['claimant-phone']}}
       </td>
       <td class="change-answer">
-        <a href="#">
-          Change <span class="visuallyhidden">Name</span>
-        </a>
+        <a href="../task-list/your-details/phone?return_page={{ '../../task-list/check-and-send#name' | urlencode }}">
+          Change <span class="visuallyhidden">Phone</span></a>
       </td>
     </tr>
-    <td>
+    <td class="no-border">
       Address:
     </td>
-    <td>
-      First line of address<br>
-      Second line of address<br>
-      Town or city<br>
-      Postcode
+    <td class="no-border">
+      {{data['addressLine1']}}<br>
+     {{data['addressLine2']}}<br>
+      {{data['addressLine3']}}<br>
+      {{data['addressPostcode']}}
     </td>
-    <td class="change-answer">
-      <a href="#">
-        Change <span class="visuallyhidden">Contact details</span>
-      </a>
+    <td class="change-answer no-border">
+        <a href="../task-list/your-details/address?return_page={{ '../../task-list/check-and-send#name' | urlencode }}">
+          Change <span class="visuallyhidden">Address</span></a>
     </td>
     </tr>
+    <tr>
+    <td>
+      Correspondence address:
+    </td>
+    <td>
+      {{data['c-addressLine1']}}<br>
+     {{data['c-addressLine2']}}<br>
+      {{data['c-addressLine3']}}<br>
+      {{data['c-addressPostcode']}}
+    </td>
+    <td class="change-answer">
+
+    </td>
+    </tr>    
 <!--     <tr>
       <td>
         Updates:
@@ -206,7 +204,7 @@ Check your answers
     <thead>
     <tr>
       <th colspan="2">
-        <h2 class="heading-medium">
+        <h2 class="heading-medium" id="their-detail">
           Their details
         </h2>
       </th>
@@ -237,9 +235,8 @@ Check your answers
         {{data['defendant-firstname']}} {{data['defendant-lastname']}}
       </td>
       <td class="change-answer">
-        <a href="#">
-          Change <span class="visuallyhidden">Name</span>
-        </a>
+        <a href="../task-list/their-details/index?return_page={{ '../../task-list/check-and-send#their-detail' | urlencode }}">
+          Change <span class="visuallyhidden">Their</span></a>
       </td>
     </tr>
     <tr>
@@ -247,16 +244,14 @@ Check your answers
         Their address:
       </td>
       <td>
-        First line of address<br>
-        Second line of address<br>
-        Town or city<br>
-        County<br>
-        Postcode
+      {{data['d-addressLine1']}}<br>
+     {{data['d-addressLine2']}}<br>
+      {{data['d-addressLine3']}}<br>
+      {{data['d-addressPostcode']}}
       </td>
       <td class="change-answer">
-        <a href="#">
-          Change <span class="visuallyhidden">Their address</span>
-        </a>
+        <a href="../task-list/their-details/address?return_page={{ '../../task-list/check-and-send#their-detail' | urlencode }}">
+          Change <span class="visuallyhidden">Their</span></a>
       </td>
     </tr>
     <tr>
@@ -267,110 +262,215 @@ Check your answers
         {{data['defendant-email']}}
       </td>
       <td class="change-answer">
-        <a href="#">
-          Change <span class="visuallyhidden">Name</span>
-        </a>
+        <a href="../task-list/their-details/email?return_page={{ '../../task-list/check-and-send#their-detail' | urlencode }}">
+          Change <span class="visuallyhidden">Their</span></a>
       </td>
     </tr>
     </tbody>
   </table>
 
-  <table class="check-your-answers">
+<table class="check-your-answers">
 
     <thead>
-    <tr>
-      <th colspan="2">
-        <h2 class="heading-medium">
-          Claim amount
-        </h2>
-      </th>
-      <th>
-      </th>
-    </tr>
+      <tr>
+        <th colspan="2">
+          <h2 class="heading-medium" id="claim-amount">
+            Claim amount
+          </h2>
+        </th>
+        <th>
+        </th>
+      </tr>
     </thead>
 
     <tbody>
-    <tr>
-      <td class="no-border">
-        Claim amount:
-      </td>
-      <td class="no-border">
-        £1500
-      </td>
-      <td class="change-answer no-border">
-        <a href="#">
-          Change <span class="visuallyhidden">Name</span>
+      <tr>
+        <td class="no-border">
+          Claim amount:
+        </td>
+        <td class="no-border">
+
+         £{{data['totalSum']}}
+
+       </td>
+       <td class="change-answer no-border">
+        <a href="../task-list/claim-amount/index?return_page={{ '../../task-list/check-and-send#claim-amount' | urlencode }}">
+          Change <span class="visuallyhidden">Why you're owed the money</span>
         </a>
       </td>
     </tr>
+
+
+    {% if data['interest-rate']=="No interest" %}
+
     <tr>
-      <td class="no-border">
+      <td >
         Interest rate:
       </td>
-      <td class="no-border">
-        8% (standard rate)
-      </td>
-      <td class="change-answer no-border">
+      <td >
+        I don't want to claim interest
 
-      </td>
-    </tr>
-    <tr>
-      <td class="">
-        Date interest is claimed from:
-      </td>
-      <td class="">
-        From the date I submit the claim
       </td>
       <td class="change-answer ">
 
       </td>
     </tr>
+    {% endif %}    
+
+
+    {% if data['interest-rate']=="Different rate" %}
     <tr>
-      <td>
-        Interest:
+      <td class="no-border">
+        Interest rate:
       </td>
-      <td>
-        £13
-      </td>
-      <td class="change-answer">
+      <td class="no-border">
+
+
+        {{data['rate']}}%
+
+
 
       </td>
-    </tr>
+      <td class="change-answer no-border">
+
+      </td>
+    </tr> 
     <tr>
-      <td>
-        Claim fee:
+      <td class="no-border">
+        Why you’re entitled to this rate:
       </td>
-      <td>
-        £70
-      </td>
-      <td class="change-answer">
-        <a href="#">
-          <span class="visuallyhidden">Name</span>
-        </a>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        Total amount you're claiming:
-      </td>
-      <td>
-        £1583
-      </td>
-      <td class="change-answer">
-        <a href="#">
-          <span class="visuallyhidden">Name</span>
-        </a>
-      </td>
-    </tr>
-    </tbody>
-  </table>
+      <td class="no-border">
+
+
+       {{data['rate-why']}}
+
+
+     </td>
+     <td class="change-answer no-border">
+
+     </td>
+   </tr>         
+   {% endif %}
+
+
+
+   {% if data['interest-rate']=="8 percent" %}
+   <tr>
+    <td class="no-border">
+      Interest rate:
+    </td>
+    <td class="no-border">
+
+
+     8%
+
+    </td>
+    <td class="change-answer no-border">
+
+    </td>
+  </tr>     
+  {% endif %} 
+
+
+  {% if data['interest-rate']!="No interest" %}
+
+  {% if data['interest-date']=="Issue date" %}
+  <tr>
+    <td>
+      Date interest applied from:
+    </td>
+    <td>
+      From the date I submit the claim
+    </td>
+    <td class="change-answer">
+
+    </td>
+  </tr>
+  {% endif %} 
+
+  {% if data['interest-date']=="Particular date" %}
+  <tr>
+    <td class="no-border">
+      Date interest applied from:
+    </td>
+    <td class="no-border">
+     {{ data['interest-day'] }} {{ data['interest-month'] }} {{ data['interest-year'] }}
+   </td>
+   <td class="change-answer no-border">
+
+   </td>
+ </tr>
+ <tr>
+  <td>
+    Explain why you're claiming from this date:
+  </td>
+  <td>
+    {{data['date-why']}}
+  </td>
+  <td class="change-answer">
+
+  </td>
+</tr>
+
+
+{% endif %} 
+{% endif %} 
+
+
+
+{% if data['interest-date']=="Particular date" %}
+
+<tr>
+  <td>
+    Interest to date:
+  </td>
+  <td>
+    £13
+  </td>
+  <td class="change-answer">
+    <a href="#">
+      <span class="visuallyhidden">Interest</span>
+    </a>
+  </td>
+</tr>
+
+
+{% endif %}
+<tr>
+  <td>
+    Claim fee:
+  </td>
+  <td>
+    £70
+  </td>
+  <td class="change-answer">
+    <a href="#">
+      <span class="visuallyhidden">Claim fee</span>
+    </a>
+  </td>
+</tr>
+<tr>
+  <td>
+   <span class="bold"> Total:</span>
+ </td>
+ <td >
+  <span class="bold">{{data['totalClaimAmount']}}</span>
+</td>
+<td class="change-answer">
+  <a href="#">
+    <span class="visuallyhidden">Total </span>
+  </a>
+</td>
+</tr>
+</tbody>
+</table>
 
   <table class="check-your-answers">
 
     <thead>
     <tr>
       <th colspan="2">
-        <h2 class="heading-medium">
+        <h2 id='cd' class="heading-medium">
           Claim details
         </h2>
       </th>
@@ -421,7 +521,7 @@ Check your answers
         {{data['claim-reason']}}
       </td>
       <td class="change-answer">
-        <a href="../task-list/claim-details?return_page=../task-list/check-and-send">
+        <a href="../task-list/claim-details/index?return_page={{ '../../task-list/check-and-send#cd' | urlencode }}">
           Change <span class="visuallyhidden">Why you're owed the money</span>
         </a>
       </td>

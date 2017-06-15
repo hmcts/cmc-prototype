@@ -26,7 +26,16 @@ Money Claims Prototype
   <div class="grid-row">
     <div class="column-two-thirds">
 
+
+      {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}        
+       <form method="post" action="{{ data.return_page if data.return_page | length > 0 else '../task-list' }}" class="form">
+
+
+        {% else %}
       <form method="post" action="address" class="form">
+
+        {% endif %}
+
 
         {{formData | safe}}
 
@@ -46,18 +55,18 @@ Money Claims Prototype
             <div class="form-date">
 
               <div class="form-group form-group-day">
-                <label for="dob-day">Day</label>
-                <input class="form-control" id="dob-day" type="number" pattern="[0-9]*" min="0" max="31">
+                <label for="day">Day</label>
+                <input  class="form-control" name="day" id="day" type="number" pattern="[0-9]*" min="0" max="31" value="{{data['day']}}">
               </div>
 
               <div class="form-group form-group-month">
-                <label for="dob-month">Month</label>
-                <input class="form-control" id="dob-month" type="number" pattern="[0-9]*" min="0" max="12">
+                <label for="month">Month</label>
+                <input class="form-control" name="month" id="month" type="number" pattern="[0-9]*" min="0" max="12" value="{{data['month']}}">
               </div>
 
               <div class="form-group form-group-year">
-                <label for="dob-year">Year</label>
-                <input class="form-control" id="dob-year" type="number" pattern="[0-9]*" min="0" max="2014">
+                <label for="year">Year</label>
+                <input class="form-control" name="year" id="year" type="number" pattern="[0-9]*" min="0" max="2014" value="{{data['year']}}">
               </div>
             </div>
 
@@ -70,9 +79,20 @@ Money Claims Prototype
 
 
 
-            <div class="form-group">
-              <input type="submit" class="button" value="Save and continue"/>
-            </div>
+      {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}
+        <div class="form-group">
+          <input type="submit" class="button" value="Save changes"/>
+        </div>
+        
+
+        <a href="{{ data.return_page if data.return_page | length > 0 else '../task-list' }}">Cancel</a>
+
+      {% else %}
+        <div class="form-group">
+          <input type="submit" class="button" value="Save and continue"/>
+        </div>
+
+      {% endif %}
 
           </fieldset>
         </div>

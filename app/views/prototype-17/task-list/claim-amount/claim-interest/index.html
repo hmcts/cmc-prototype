@@ -26,7 +26,14 @@ Money Claims Prototype
   <div class="grid-row">
     <div class="column-two-thirds">
 
-      <form method="post" action="interest-date" class="form">
+
+
+       <form
+       name="aspnetForm"
+       method="post"      
+       onsubmit="multiNavigation('interest-rate', ['8 percent','Different rate','No interest'], ['interest-date', 'interest-date','cost']);return false;"
+       id="aspnetForm"
+       autocomplete="off">
 
         {{formData | safe}}
 
@@ -90,29 +97,27 @@ Money Claims Prototype
 
         <fieldset></fieldset>
 
+      {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}
         <div class="form-group">
-          <a href="#" class="button test" value=""> Save and continue</a>
+          <input type="submit" class="button" value="Save and continue"/>
         </div>
+        
+
+        <a href="{{ data.return_page if data.return_page | length > 0 else '../task-list' }}">Cancel</a>
+
+      {% else %}
+        <div class="form-group">
+          <input type="submit" class="button" value="Save and continue"/>
+        </div>
+
+      {% endif %}
       </form>
 
     </div>
 
 
   </div>
-<script type="text/javascript">
-  $(document).ready(function () {
-  $('.test').click(function (e) {
-    e.preventDefault();
-    if ($('#radio-1, #radio-2').is(':checked')) {
-      window.location.replace("interest-date");
-    }
-    else if ($('#radio-3').is(':checked')) {
-      window.location.replace("cost");
-    }
-    
-  });
-})
-</script>
+
 
 </main>
 
