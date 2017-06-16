@@ -12,21 +12,32 @@ Money Claims Prototype
 <main id="content" role="main">
   {% include "includes/phase_banner_beta.html" %}
 
+  {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}        
+  {% else %}
   <div class="breadcrumbs">
     <ol>
       <li>
         <a href="../../task-list{{ formQuery | safe }}">Make a money claim</a>
       </li>
       <li>
-        Claim details
+        Their details
       </li>
     </ol>
   </div>
+  {% endif %}
 
   <div class="grid-row">
     <div class="column-two-thirds">
 
+
+      {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}        
+       <form method="post" action="{{ data.return_page if data.return_page | length > 0 else '../task-list' }}" class="form">
+
+
+        {% else %}
       <form method="post" action="evidence" class="form">
+
+        {% endif %}
 
         {{formData | safe}}
 
@@ -79,25 +90,25 @@ Money Claims Prototype
                        value="{{data['date-1']}}">
 <!--                 <input class="form-control timeline-column-2" type="text" id="event-form-control" name="timeline-1"
                        value="{{data['timeline-1']}}"> -->
-                  <textarea class="timeline-column-text" id="textarea-a" rows="2"></textarea>
+                  <textarea class="timeline-column-text" name="timeline-1" id="timeline-1" value="{{data['timeline-1']}}"  rows="2">{{data['timeline-1']}}</textarea>
 
               </div>
               <div class="timeline-row">
                 <input class="form-control timeline-column-1" type="text" id="date-form-control" name="date-2"
                        value="{{data['date-2']}}">
-                                <textarea class="timeline-column-text" id="textarea-a" rows="2"></textarea>
+                 <textarea class="timeline-column-text" name="timeline-2"  value="{{data['timeline-2']}}" rows="2"{{data['timeline-2']}}></textarea>
 
               </div>
               <div class="timeline-row">
                 <input class="form-control timeline-column-1" type="text" id="date-form-control" name="date-3"
                        value="{{data['date-3']}}">
-                                  <textarea class="timeline-column-text" id="textarea-a" rows="2"></textarea>
+                 <textarea class="timeline-column-text" name="timeline-3" value="{{data['timeline-3']}}"  rows="2">{{data['timeline-3']}}</textarea>
 
               </div>
               <div class="timeline-row">
                 <input class="form-control timeline-column-1" type="text" id="date-form-control" name="date-4"
                        value="{{data['date-4']}}">
-                                  <textarea class="timeline-column-text" id="textarea-a" rows="2"></textarea>
+                   <textarea class="timeline-column-text" name="timeline-4" value="{{data['timeline-4']}}" rows="2">{{data['timeline-4']}}</textarea>
 
               </div>
         
@@ -145,9 +156,20 @@ Money Claims Prototype
 
         <!--</details>-->
 
+      {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}
+        <div class="form-group">
+          <input type="submit" class="button" value="Save changes"/>
+        </div>
+        
+
+        <a href="{{ data.return_page if data.return_page | length > 0 else '../task-list' }}">Cancel</a>
+
+      {% else %}
         <div class="form-group">
           <input type="submit" class="button" value="Save and continue"/>
         </div>
+
+      {% endif %}
 
       </form>
 

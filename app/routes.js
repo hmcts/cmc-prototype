@@ -242,13 +242,13 @@ function isValidPostcode(postcode) {
 
 
 // Check your answers for 'Check eligibility, cost and time'
-router.get('*/task-list/check_before_you_start/reason', function (req, res, next) {
+router.get('*/task-list/eligibility/reason', function (req, res, next) {
 
 
 
-  let check_before_you_start = req.session.data.check_before_you_start;
-  if (check_before_you_start === "complete" ){
-    res.redirect("../check_before_you_start/check-your-answers");
+  let eligibility = req.session.data.eligibility;
+  if (eligibility === "complete" ){
+    res.redirect("../eligibility/check-your-answers");
   } else {
     next()
   }

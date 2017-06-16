@@ -12,6 +12,8 @@ Money Claims Prototype
 <main id="content" role="main">
   {% include "includes/phase_banner_beta.html" %}
 
+  {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}        
+  {% else %}
   <div class="breadcrumbs">
     <ol>
       <li>
@@ -22,16 +24,23 @@ Money Claims Prototype
       </li>
     </ol>
   </div>
+  {% endif %}
 
   <div class="grid-row">
     <div class="column-two-thirds">
 
+      {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}        
+       <form method="post" action="{{ data.return_page if data.return_page | length > 0 else '../task-list' }}" class="form">
+
+
+        {% else %}
       <form method="post" action="address" class="form">
+
+        {% endif %}
 
         {{formData | safe}}
 
         <!-- Individual -->
-        {% if data['defendant-type']=="individual" %}
 
         <h1 class="heading-large">
           Their full name
@@ -78,7 +87,6 @@ Money Claims Prototype
 
         </details> -->
 
-        {% endif %}
 
         <!-- Company -->
         {% if data['defendant-type']=="company" %}
@@ -130,9 +138,20 @@ Money Claims Prototype
 
         <br>
 
+      {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}
+        <div class="form-group">
+          <input type="submit" class="button" value="Save changes"/>
+        </div>
+        
+
+        <a href="{{ data.return_page if data.return_page | length > 0 else '../task-list' }}">Cancel</a>
+
+      {% else %}
         <div class="form-group">
           <input type="submit" class="button" value="Save and continue"/>
         </div>
+
+      {% endif %}
 
       </form>
 

@@ -12,21 +12,32 @@ Money Claims Prototype
 <main id="content" role="main">
   {% include "includes/phase_banner_beta.html" %}
 
+  {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}        
+  {% else %}
   <div class="breadcrumbs">
     <ol>
       <li>
         <a href="../../task-list{{ formQuery | safe }}">Make a money claim</a>
       </li>
       <li>
-        Claim details
+        Their details
       </li>
     </ol>
   </div>
+  {% endif %}
 
   <div class="grid-row">
     <div class="column-two-thirds">
 
+      {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}        
+       <form method="post" action="{{ data.return_page if data.return_page | length > 0 else '../task-list' }}" class="form">
+
+
+        {% else %}
       <form method="post" action="timeline" class="form">
+
+        {% endif %}
+
 
         {{formData | safe}}
 
@@ -34,7 +45,8 @@ Money Claims Prototype
           Why you're owed the money
         </h1>
 
-        <p>Explain why you are owed the money based on the information you've given.</p> 
+
+        <p>Explain why you are owed the money based on the information you've given.</p>
         <p>You can also include any other information that supports your claim.</p>
 
         <fieldset>
@@ -44,33 +56,32 @@ Money Claims Prototype
           </legend>
 
           <textarea class="form-control form-control-3-4 form-control-large"
-                    id="claim-details-1"
+                    id="claim-reason"
                     rows="3"
-                    name="claim-details1"
+                    name="claim-reason"
                     type="text"
                     style="width: 100%"
-                    value="{{data['claim-reason']}}"></textarea>
+                    value="">{{data['claim-reason']}}</textarea>
 
         </fieldset>
 
         <br>
 
-        <!--<details>-->
 
-        <!--<summary>-->
-        <!--<span class="summary">Specific assistance if needed (hide if not relevant)</span>-->
-        <!--</summary>-->
+      {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}
+        <div class="form-group">
+          <input type="submit" class="button" value="Save changes"/>
+        </div>
+        
 
-        <!--<div class="panel panel-border-narrow">-->
-        <!--<p>Contextual guidance goes here...</p>-->
-        <!--</div>-->
+        <a href="{{ data.return_page if data.return_page | length > 0 else '../task-list' }}">Cancel</a>
 
-        <!--</details>-->
-
+      {% else %}
         <div class="form-group">
           <input type="submit" class="button" value="Save and continue"/>
         </div>
 
+      {% endif %}
       </form>
 
     </div>

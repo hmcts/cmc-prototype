@@ -26,7 +26,14 @@ Money Claims Prototype
   <div class="grid-row">
     <div class="column-two-thirds">
 
-      <form method="post" action="interest-date" class="form">
+
+
+       <form
+       name="aspnetForm"
+       method="post"      
+       onsubmit="multiNavigation('interest-rate', ['8 percent','Different rate','No interest'], ['interest-date', 'interest-date','cost']);return false;"
+       id="aspnetForm"
+       autocomplete="off">
 
         {{formData | safe}}
 
@@ -81,7 +88,7 @@ Money Claims Prototype
           </summary>
 
           <div class="panel panel-border-narrow">
-             <p>As standard you can claim 8% interest on money owed to you. You might be able to claim a different rate - for example, if a loan has not been repaid, or if you had a contract which entitles you to a particular rate.</p>
+             <p>As standard you can claim 8% interest on money owed to you. You might be able to claim a different rate. For example, if a loan has not been repaid, or if you had a contract which entitles you to a particular rate.</p>
 
             <p>The court will decide if you're entitled to some or all of the interest claimed. You might be asked to give reasons for why you should get interest.</p>
           </div>
@@ -90,13 +97,28 @@ Money Claims Prototype
 
         <fieldset></fieldset>
 
+      {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}
         <div class="form-group">
-          <input type="submit" class="button" value="Save and continue">
+          <input type="submit" class="button" value="Save and continue"/>
         </div>
+        
+
+        <a href="{{ data.return_page if data.return_page | length > 0 else '../task-list' }}">Cancel</a>
+
+      {% else %}
+        <div class="form-group">
+          <input type="submit" class="button" value="Save and continue"/>
+        </div>
+
+      {% endif %}
       </form>
 
     </div>
+
+
   </div>
+
+
 </main>
 
 
