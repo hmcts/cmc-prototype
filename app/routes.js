@@ -456,4 +456,15 @@ router.get('*/task-list/your-defence', function (req, res, next) {
   }
 
 });
+
+function clearReturnPageHandler (req, res, next) {
+  delete req.session.data.return_page
+  next()
+}
+
+router.post('*/check-your-answers', clearReturnPageHandler)
+router.get('*/check-your-answers', clearReturnPageHandler)
+router.post('*/check-check-and-send', clearReturnPageHandler)
+router.get('*/check-your-answers', clearReturnPageHandler)
+
 module.exports = router
