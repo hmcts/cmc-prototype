@@ -123,7 +123,7 @@ Check your answers
         </thead>
 
         <tbody>
-          {% if data.your_defence=="complete" %}
+          {% if data.radio_select_group2=="defend_now"%}
           <tr>
             <td class="">
               Do you owe the money claimed
@@ -172,14 +172,14 @@ Check your answers
               </td>
             </tr>
             <tr>    
-
-              {% elseif data.radio_select_group=="paid"%}
+         
+              {% elseif data.radio_select_group2=="defend_now"%}
           <tr>
             <td class="">
               Do you owe the money claimed
             </td>
             <td class="">
-              I've already paid
+              I reject the money claim
             </td>
             <td class=" change-answer">
               <a href="#">
@@ -187,6 +187,74 @@ Check your answers
               </a>
             </td>
           </tr>
+
+          <tr>
+
+            <tr>
+              <td>
+                Your defence
+              </td>
+              <td>
+                Mary Richards and I signed a contract for building works on our roof. The work on the roof was completed but there was a problem with one section. I asked Mary Richards to get the problem fixed, but hadn't had a reply.
+
+                I'll have to get another builder to rectify the problem which will cost me £1,500.
+
+                Therefore, I'm making a money claim for £1,500 to compensate for the extra money I am going to need to spend.
+              </td>
+              <td class="change-answer">
+                <a href="#">
+                  Change <span class="visuallyhidden">Name</span>
+                </a>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                Free mediation
+              </td>
+              <td>
+                No
+              </td>
+              <td class="change-answer">
+                <a href="#">
+                  Change <span class="visuallyhidden">Name</span>
+                </a>
+              </td>
+            </tr>
+            <tr> 
+
+
+
+              {% elseif data.radio_select_group2=="suggest_resolution"%}
+          <tr>
+            <td class="">
+              Do you owe the money claimed
+            </td>
+            <td class="">
+              I reject the money claim
+            </td>
+            <td class=" change-answer">
+              <a href="#">
+                Change <span class="visuallyhidden">Name</span>
+              </a>
+            </td>
+          </tr>
+
+          <tr>
+
+            <tr>
+              <td>
+                Your defence
+              </td>
+              <td>
+                Defend now and make a counter claim
+              </td>
+              <td class="change-answer">
+                <a href="#">
+                  Change <span class="visuallyhidden">Name</span>
+                </a>
+              </td>
+            </tr>
 
                 {% elseif data.radio_select_group=="all"%}
           <tr>
@@ -260,8 +328,12 @@ Check your answers
 
     <span class="field-validation-valid" data-valmsg-for="HasAcceptedTermsAndConditions" data-valmsg-replace="true" aria-live="polite"></span></div>
 
-    {% if data.radio_select_group=="reject" %}
+    {% if data.radio_select_group2=="defend_now" %}
     <form method="post" action="../confirmation-page" class="form">
+
+      {% elseif data.radio_select_group2=="suggest_resolution"%}
+            <form method="post" action="../confirmation-page-counter-claim" class="form">
+
 
       {% elseif data.radio_select_group=="paid"%}
       <form method="post" action="../confirmation-page-already-paid" class="form">
