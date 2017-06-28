@@ -408,7 +408,7 @@ module.exports = router
 router.get('*/task-list/do-you-owe-money', function (req, res, next) {
 
   let do_you_owe_money = req.session.data.do_you_owe_money;
-  if (do_you_owe_money === "complete" ){
+  if (do_you_owe_money === "-complete" ){
     res.redirect("do-you-owe-money/check-your-answers");
   } else {
     next()
@@ -423,7 +423,7 @@ router.get('*/task-list/defence-options', function (req, res, next) {
 
   let defence_options = req.session.data.defence_options;
   if (defence_options === "complete" ){
-    res.redirect("defence-options");
+    res.redirect("-defence-options");
   } else {
     next()
   }
@@ -449,7 +449,7 @@ router.get('*/task-list/your-defence', function (req, res, next) {
 
 
   let your_defence = req.session.data.your_defence;
-  if (your_defence === "complete" ){
+  if (your_defence === "-complete" ){
     res.redirect("your-defence/check-your-answers");
   } else {
     next()
