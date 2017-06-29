@@ -26,14 +26,19 @@ Money Claims Prototype
   <div class="grid-row">
     <div class="column-two-thirds">
 
-
-
-       <form
+      {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}        
+      <form
        name="aspnetForm"
        method="post"      
-       onsubmit="multiNavigation('interest-rate', ['8 percent','Different rate','No interest'], ['interest-date', 'interest-date','cost']);return false;"
+       onsubmit="multiNavigation('interest-rate', ['8 percent','Different rate','No interest'], ['interest-date', 'interest-date','../claim-amount/check-your-answers']);return false;"
        id="aspnetForm"
        autocomplete="off">
+
+      {% else %}
+        <form method="post" action="../../task-list" class="form">
+          {% endif %}
+
+ 
 
         {{formData | safe}}
 
