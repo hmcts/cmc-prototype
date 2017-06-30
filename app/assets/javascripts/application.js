@@ -263,12 +263,17 @@ var monthNames = [ "January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December" ];
 
 var newDate = new Date();
-newDate.setDate(newDate.getDate()+ 19) ;
+newDate.setDate(newDate.getDate()+ 14) ;
 
 var newDate2 = new Date();
 newDate2.setDate(newDate2.getDate()) ;
 
-$('#Date').html(" " + newDate.getDate() + ' ' + monthNames[newDate.getMonth()] + ' ' + newDate.getFullYear());
+var newDate3 = new Date();
+newDate3.setDate(newDate3.getDate()+ 28) ;
+
+/*$('#Date').html(" " + newDate.getDate() + ' ' + monthNames[newDate.getMonth()] + ' ' + newDate.getFullYear());
+*/$('#Date').html(" " + newDate.getDate() + ' ' + monthNames[newDate.getMonth()] + ' ' + newDate.getFullYear());
 $('#Date2').html(" " + newDate2.getDate() + ' ' + monthNames[newDate2.getMonth()] + ' ' + newDate2.getFullYear());
+$('#Date3').html(" " + newDate3.getDate() + ' ' + monthNames[newDate3.getMonth()] + ' ' + newDate3.getFullYear());
 
 });
