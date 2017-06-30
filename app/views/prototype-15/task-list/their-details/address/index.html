@@ -39,13 +39,33 @@ Money Claims Prototype
 
           {{formData | safe}}
 
-          <h1 class="heading-large">
-            Their address
-          </h1>
+          
 
+          {% if data['defendant-type']=="Company"  %}
+            <h1 class="heading-large">
+               Company's address
+            </h1>
+            {% elseif data['defendant-type']=="Organisation" %}
+
+             <h1 class="heading-large"> Organisation's address</h1>
+            {% elseif data['defendant-type']=="Sole trader" %}
+            <h1 class="heading-large">
+              Their address
+            </h1>
+          <p>Enter their current or last known residential or trading  address.</p>
+
+            {% elseif data['defendant-type']=="Individual" %}
+
+
+            <h1 class="heading-large">
+              Their residential address
+            </h1>
           <p>Enter their current or last known address.</p>
-
           <p>You must not give someone's work address unless you're claiming against them in relation to their job or work.</p>
+                
+    
+            {% endif %}
+
 
 
           <fieldset>

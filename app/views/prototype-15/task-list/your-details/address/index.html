@@ -33,24 +33,32 @@ Money Claims Prototype
             {% endif %}
 
             {{formData | safe}}
+
+
             {% if data['claimant-type']=="Company" %}
             <h1 class="heading-large">
               Company address
             </h1>
             <p>You can also add add another address for correspondence if necessary.</p>
-            {% endif %}
-            {% if data['claimant-type']=="Sole trader" %}
+            {% elseif data['claimant-type']=="Sole trader" %}
             <h1 class="heading-large">
               Your address
             </h1>
             <p>This must be the address where you live or trade.</p>
             <p>You can also add add another address for correspondence if necessary.</p>
-            {% endif %}
+            {% elseif data['claimant-type']=="Individual" %}
 
             <h1 class="heading-large">
               Your residential address
             </h1>
             <p>This must be the address where you live.</p>
+            
+            {% else %}
+            <h1 class="heading-large">
+              Your residential address
+            </h1>
+            <p>This must be the address where you live.</p>
+            {% endif %}
 
 
 <div class="form-group">
