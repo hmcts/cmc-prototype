@@ -1,11 +1,13 @@
 {% extends "layout_task-list.html" %}
 
 {% block page_title %}
-Check your answers
+Money Claims Prototype
 {% endblock %}
-{% block home_link %} ../task-list {% endblock %}
+
+{% block home_link %} ../../task-list {% endblock %}
 
 {% block content %}
+
 
 <main id="content" role="main">
   {% include "includes/phase_banner_beta.html" %}
@@ -13,92 +15,61 @@ Check your answers
   <div class="breadcrumbs">
     <ol>
       <li>
-        <a href="../task-list{{ formQuery | safe }}">Respond to a money claim</a>
+        <a href="../../task-list{{ formQuery | safe }}">Respond to a money claim</a>
       </li>
+   
       <li>
-
-        Your details
+        Your name
       </li>
     </ol>
   </div>
 
-  <h1 class="heading-large">
+  <div class="grid-row">
+    <div class="column-two-thirds">
 
-    Confirm your details are correct 
-  </h1>
+   
+
+        {{formData | safe}}
+
+         <form method="post" action="your-details/address" class="form">
+        <h1 class="heading-large">
+          Confirm your name
+        </h1>
+
+        <p>Enter all your names in full - don't use initials.</p>
+
+        <div class="form-group">
+          <label class="form-label" for="claimant_firstname">First name</label>
+          <input type="text" value="Mary" class="form-control" id="claimant_firstname"
+                 name="claimant-firstname" value="{{data['claimant-firstname']}}">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="claimant_middlename">Middle names (if any)</label>
+          <input type="text" class="form-control" id="claimant_middlename"
+                 name="claimant-middlename" value="{{data['claimant-middlename']}}">
+        </div>
 
 
-  <form
-  name="aspnetForm"
-  action="your-details/date-of-birth"
-  method="get"
-  id="aspnetForm"
-  autocomplete="off">
-
-
-  <table class="check-your-answers">
-
-    <thead>
-      <tr>
-        <th colspan="2">
-          <h2 class="heading-medium">
-            Your details
-          </h2>
-        </th>
-        <th>
-        </th>
-      </tr>
-    </thead>
-
-    <tbody>
-
-      <tr>
-        <td>
-          Name:
-        </td>
-        <td>
-         Mary Richards
-       </td>
-       <td class="change-answer">
-        <a href="your-details/name">
-          Change <span class="visuallyhidden">Name</span>
-        </a>
-      </td>
-    </tr>
+        <div class="form-group">
+          <label class="form-label" for="claimant_lastname">Last name</label>
+          <input type="text" value="Richards" class="form-control" id="claimant_lastname"
+                 name="claimant-lastname" value="{{data['claimant-lastname']}}">
+        </div>
     
-    <tr>
+        <br>
 
-      <tr>
-        <td>
-          Address:
-        </td>
-        <td>
-          101 Regents road<br>
-          Shiplake<br>
-          Henley on Thames<br>
-          RG9 4BW 
-        </td>
-        <td class="change-answer">
-          <a href="your-details/address">
-            Change <span class="visuallyhidden">Name</span>
-          </a>
-        </td>
-      </tr>
 
-      <tr>
+        <br>
 
-      </tbody>
-    </table>
-    <p class="actions">
-              <input type="hidden" name="confirm_details" value="complete">
+        <div class="form-group">
+          <input type="submit" class="button" value="Save and continue" />
+        </div>
 
-      <input id="advert-option-next--button" type="submit" value="Continue" class="button"
-      data-ignore-double-submit="true">
-      <!--<a href="aos">I need more time to respond</a>-->
-    </p>
-  </form>
+      </form>
 
+    </div>
+  </div>
 
 </main>
-
 {% endblock %}

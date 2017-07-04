@@ -379,7 +379,7 @@ router.get('*/task-list/your-details', function (req, res, next) {
 
   let confirm_details = req.session.data.confirm_details;
   if (confirm_details === "complete" ){
-    res.redirect("your-details");
+    res.redirect("your-details/check-your-answers");
   } else {
     next()
   }
