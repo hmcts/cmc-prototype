@@ -5,9 +5,9 @@
 if (
   window.sessionStorage && window.sessionStorage.getItem('prototypeWarning') !== 'false' &&
   window.console && window.console.info
-) {
+  ) {
   window.console.info('GOV.UK Prototype Kit - do not use for production')
-  window.sessionStorage.setItem('prototypeWarning', true)
+window.sessionStorage.setItem('prototypeWarning', true)
 }
 
 $(document).ready(function () {
@@ -222,7 +222,7 @@ function insertFields(element) {
     '</fieldset>' +
     '</div>' +
     '</div>'
-  );
+    );
 }
 
 function sortFields() {
@@ -259,17 +259,17 @@ function sortFields() {
 
 $(document).ready(function() {
 
-var monthNames = [ "January", "February", "March", "April", "May", "June",
-    "July", "August", "September", "October", "November", "December" ];
+  var monthNames = [ "January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December" ];
 
-var newDate = new Date();
-newDate.setDate(newDate.getDate()+ 14) ;
+  var newDate = new Date();
+  newDate.setDate(newDate.getDate()+ 14) ;
 
-var newDate2 = new Date();
-newDate2.setDate(newDate2.getDate()) ;
+  var newDate2 = new Date();
+  newDate2.setDate(newDate2.getDate()) ;
 
-var newDate3 = new Date();
-newDate3.setDate(newDate3.getDate()+ 28) ;
+  var newDate3 = new Date();
+  newDate3.setDate(newDate3.getDate()+ 28) ;
 
 /*$('#Date').html(" " + newDate.getDate() + ' ' + monthNames[newDate.getMonth()] + ' ' + newDate.getFullYear());
 */$('#Date').html(" " + newDate.getDate() + ' ' + monthNames[newDate.getMonth()] + ' ' + newDate.getFullYear());
@@ -277,3 +277,16 @@ $('#Date2').html(" " + newDate2.getDate() + ' ' + monthNames[newDate2.getMonth()
 $('#Date3').html(" " + newDate3.getDate() + ' ' + monthNames[newDate3.getMonth()] + ' ' + newDate3.getFullYear());
 
 });
+
+
+
+
+$( document ).ready(function() {
+  $( ".toggle" ).click(function(e) {
+         e.preventDefault();
+
+    $( ".show-more" ).toggle();
+    $( ".toggle" ).toggle();
+  });
+});
+
