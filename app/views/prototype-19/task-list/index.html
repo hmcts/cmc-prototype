@@ -54,10 +54,11 @@
                   {% endif %}
                 </td>
               </tr>
+   
               <tr id="read-rules">
                 <td class="task">
                   <a href="task-list/more-time-to-respond{{formQuery}}">
-                    <span class="task-name">Choose time needed to respond</span>
+                    <span class="task-name">Do you want more time to respond?</span>
                   </a>
                 </td>
                 <td class="numeric" id="task-status" scope="col" id="col-status">
@@ -65,8 +66,7 @@
                   {% include "includes/task_status_finished.html" %}
                   {% endif %}
                 </td>
-              </tr>     
-
+              </tr> 
 
             </tbody>
           </table>
@@ -88,7 +88,7 @@
               </tr>
             </thead>
             <tbody>
-
+ 
 
              <tr id="completing-your-claim">
               <td class="task">
@@ -205,25 +205,56 @@
             </tr>
           </thead>
           <tbody>
-            {% set completed = true if data.confirm_details!="complete"   %}
+      
 
             <tr id="check-and-send">
 
 
-          {% if completed==true %}
+          {% if data.confirm_details=="complete" and data.more_time_to_respond=="complete" and data.do_you_owe_money=="complete" and data.your_defence=="complete" %}
+
           <td class="task">
             <a href="task-list/check-and-send{{formQuery}}">
               <span class="task-name"> Check and submit your response</span>
             </a>
           </td>
-          {% else %}
+          {% elseif data.confirm_details=="complete" and data.more_time_to_respond=="complete" and data.do_you_owe_money=="complete" and data.your_suggestion=="complete" %}
+          <td class="task">
+            <a href="task-list/check-and-send{{formQuery}}">
+              <span class="task-name"> Check and submit your response</span>
+            </a>
+          </td>
+
+
+
+
+           {% elseif data.confirm_details=="complete" and data.more_time_to_respond=="complete" and data.do_you_owe_money=="complete" and data.owe_all=="complete" %}
+          <td class="task">
+            <a href="task-list/check-and-send{{formQuery}}">
+              <span class="task-name"> Check and submit your response</span>
+            </a>
+          </td>
+
+
+
+           {% elseif data.confirm_details=="complete" and data.more_time_to_respond=="complete" and data.do_you_owe_money=="complete" and data.owe_some=="complete" %}
+                   <td class="task">
+            <a href="task-list/check-and-send{{formQuery}}">
+              <span class="task-name"> Check and submit your response</span>
+            </a>
+          </td>
+
+
+        {% else %}
           <td >
 
             <span class="task-disabled"> Check and submit your response</span>
           </td>
+
+
+
           {% endif %}
 
-
+ 
 
 
 
@@ -235,16 +266,6 @@
               </td>
             </tr>
 
-            <!--<tr id="wait-for-response">-->
-            <!--<td class="task">-->
-            <!--<<a href="/prototype-14/task-list/wait-for-response{{formQuery}}">-->
-            <!--<span class="task-name"> Wait for a response</span>-->
-            <!--</a>-->
-            <!--</td>-->
-            <!--<td class="numeric" id="task-status" scope="col" id="col-status">-->
-            <!--{% include "includes/task_status_finished.html" %}-->
-            <!--</td>-->
-            <!--</tr>-->
 
           </tbody>
         </table>
@@ -253,11 +274,7 @@
       <div class="column-one-third">
 
         <ul class="actions">
-        <!-- <li class="bold"><a href="/prototype-14/task_list#" data-alert="This feature is not available in this demo">Print this
-        list</a></li> -->
-        <!--
-        <li class="bold"><a href="/prototype-14/save_and_return/email">Save link</a></li>
-      -->
+
     </ul>
 
     <br>
