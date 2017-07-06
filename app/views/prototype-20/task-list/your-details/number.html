@@ -1,0 +1,67 @@
+{% extends "layout_task-list.html" %}
+
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+
+{% block home_link %} ../../task-list {% endblock %}
+
+{% block content %}
+
+
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+
+  <div class="breadcrumbs">
+    <ol>
+      <li>
+        <a href="../task-list{{ formQuery | safe }}">Respond to a money claim</a>
+      </li>
+      <li>
+        Your details
+      </li>
+    </ol>
+  </div>
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+      <form method="post" action="../../task-list" class="form">
+
+        {{formData | safe}}
+
+        <h1 class="heading-large">
+
+              Add a phone number (optional)
+        
+        </h1>
+
+        <p>We might need to contact you about this claim. We'll only call on weekdays between 9:30am and 5pm.</p>
+
+        <fieldset>
+          <legend class="visuallyhidden">
+            Phone 
+          </legend>
+
+          <div class="form-group">
+            <input class="form-control form-control" id="claimant_phone" name="claimant-phone" type="text" value="{{data['claimant-phone']}}">
+          </div>
+
+          <br>
+          <br>
+
+        </fieldset>
+          <input type="hidden" name="confirm_details" value="complete">
+
+        <div class="form-group">
+          <input type="submit" class="button" value="Save and continue" />
+        </div>
+<!--           <a  href="../../task-list">No thank you and continue</a>
+ -->
+      </form>
+
+    </div>
+  </div>
+
+</main>
+{% endblock %}
