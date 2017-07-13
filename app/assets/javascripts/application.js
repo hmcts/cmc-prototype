@@ -283,67 +283,67 @@ $('#Date3').html(" " + newDate3.getDate() + ' ' + monthNames[newDate3.getMonth()
 
 $( document ).ready(function() {
   $( ".toggle" ).click(function(e) {
-         e.preventDefault();
+   e.preventDefault();
 
-    $( ".show-more" ).toggle();
-    $( ".toggle" ).toggle();
-  });
+   $( ".show-more" ).toggle();
+   $( ".toggle" ).toggle();
+ });
 });
 
 
 
-            $(document).ready(function () {
-              $('#add-another-event-button').click(function (event) {
-                event.preventDefault();
-                $('#timeline').append(
-                  '<div class="timeline-row" style="margin-top: 15px;">' +
-                  ' <select class="form-control-select" name="legal-status" id="legal-status"> <option>-- Please make a selection --</option> <option value="1">Contracts and agreements</option> <option value="2">Letters, emails and other correspondence</option> <option value="2">Photo evidence</option> <option value="3">Receipts</option><option value="4">Statements of account</option> <option value="5">Other</option> </select>' +
-                  '</div>'
-                  );
-              });
+$(document).ready(function () {
+  $('#add-another-event-button2').click(function (event) {
+    event.preventDefault();
+    $('#timeline').append(
+      '<div class="timeline-row" style="margin-top: 15px;">' +
+      ' <select class="form-control-select" name="legal-status" id="legal-status"> <option>-- Please make a selection --</option> <option value="1">Contracts and agreements</option> <option value="2">Letters, emails and other correspondence</option> <option value="2">Photo evidence</option> <option value="3">Receipts</option><option value="4">Statements of account</option> <option value="5">Other</option> </select>' +
+      '</div>'
+      );
+  });
 
-              if ($('#legal-status1').val() > 1 || $('#legal-status1').val() == 'other') {
-                $(".other").show()
-              }
+  if ($('#legal-status1').val() > 1 || $('#legal-status1').val() == 'other') {
+    $(".other").show()
+  }
 
-              $('.otherType').on('change',function(){
-                if( $(this).val()==="1"){
-                  $(".other").hide()
-                }
-                else{
-                  $(".other").show()
-                }
-              });  
-
-
-              $('.otherType1').on('change',function(){
-          if( $(this).val()==="1"){
-                  $(".other1").hide()
-                }
-                else{
-                  $(".other1").show()
-                }
-              }); 
-
-              $('.otherType2').on('change',function(){
-            if( $(this).val()==="1"){
-                  $(".other2").hide()
-                }
-                else{
-                  $(".other2").show()
-                }
-              }); 
-              $('.otherType3').on('change',function(){
-          if( $(this).val()==="1"){
-                  $(".other3").hide()
-                }
-                else{
-                  $(".other3").show()
-                }
-              }); 
+  $('.otherType').on('change',function(){
+    if( $(this).val()==="1"){
+      $(".other").hide()
+    }
+    else{
+      $(".other").show()
+    }
+  });  
 
 
+  $('.otherType1').on('change',function(){
+    if( $(this).val()==="1"){
+      $(".other1").hide()
+    }
+    else{
+      $(".other1").show()
+    }
+  }); 
 
-            });
-     
+  $('.otherType2').on('change',function(){
+    if( $(this).val()==="1"){
+      $(".other2").hide()
+    }
+    else{
+      $(".other2").show()
+    }
+  }); 
+  $('.otherType3').on('change',function(){
+    if( $(this).val()==="1"){
+      $(".other3").hide()
+    }
+    else{
+      $(".other3").show()
+    }
+  }); 
+
+
+
+});
+
 
