@@ -1,0 +1,202 @@
+{% extends "layout_task-list.html" %}
+
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block home_link %} ../../task-list {% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+        <!-- service not available in these countries -->
+        {% if
+          data.over16=="no" or
+          data.over17=="no"
+        %}
+
+            <h1 class="heading-large">
+              You're not old enough to learn to drive on UK roads
+            </h1>
+
+            <br>
+
+            <!-- 16 or over -->
+            {% if data.over16=="no" %}
+              <p class="lede">You must be 16 or older to learn to drive on UK roads.</p>
+            {% endif %}
+
+            <!-- 17 or over -->
+            {% if data.over17=="no" %}
+              <p class="lede">You must be 17 or older to learn to drive on UK roads.</p>
+            {% endif %}
+
+        {% elif
+          data.read_from_20_meters=="no"
+        %}
+
+          <h1 class="heading-large">
+            You're not eligible to learn to drive on UK roads
+          </h1>
+
+          <br>
+
+          <p class="lede">You must be able to read a car number plate from 20 metres to learn to drive on UK roads.</p>
+
+        {% elif
+          data.over16=="yes" or
+          data.over17=="yes"
+        %}
+
+            <form method="post" action="/moneyclaims/task_list" class="form">
+
+            {{formData | safe}}
+
+            <h1 class="heading-large">
+              You can learn to drive on UK roads
+            </h1>
+
+            <br>
+
+            <!-- COST variables -->
+
+            <!-- 1// Cost WITH eye test WITH insurance WITH driving lessons -->
+            {% if
+              data.needs_glasses_or_contacts=="yes" and
+              data.practing_in_own_car=="yes" and
+              data.driving_lessons=="yes"
+            %}
+
+              <p>The cost of learning is <span class="bold">£119</span> plus an eye test, insurance and driving lessons. The cost of an eye test, insurance and driving lessons depends on the providers you choose.</p>
+
+            {% endif %}
+
+            <!-- 2// Cost WITH eye test WITH insurance WITHOUT driving lessons -->
+            {% if
+              data.needs_glasses_or_contacts=="yes" and
+              data.practing_in_own_car=="yes" and
+              data.driving_lessons=="no"
+            %}
+
+              <p>The cost of learning is <span class="bold">£119</span> plus an eye test and insurance. The cost of an eye test and insurance depends on the providers you choose.</p>
+
+            {% endif %}
+
+            <!-- 3// Cost WITH eye test WITHOUT insurance WITH driving lessons -->
+            {% if
+              data.needs_glasses_or_contacts=="yes" and
+              data.practing_in_own_car=="no" and
+              data.driving_lessons=="yes"
+            %}
+
+              <p>The cost of learning is <span class="bold">£119</span> plus an eye test and driving lessons. The cost of an eye test and driving lessons depends on the providers you choose.</p>
+
+            {% endif %}
+
+            <!-- 4// Cost WITHOUT eye test WITH insurance WITH driving lessons -->
+            {% if
+              data.needs_glasses_or_contacts=="no" and
+              data.practing_in_own_car=="yes" and
+              data.driving_lessons=="yes"
+            %}
+
+              <p>The cost of learning is <span class="bold">£119</span> plus insurance and driving lessons. The cost of insurance and driving lessons depends on the providers you choose.</p>
+
+            {% endif %}
+
+            <!-- 5// Cost WITHOUT eye test WITHOUT insurance WITH driving lessons -->
+            {% if
+              data.needs_glasses_or_contacts=="no" and
+              data.practing_in_own_car=="no" and
+              data.driving_lessons=="yes"
+            %}
+
+              <p>The cost of learning is <span class="bold">£119</span> plus driving lessons. The cost of driving lessons depends on the providers you choose.</p>
+
+            {% endif %}
+
+            <!-- 6// Cost WITH eye test WITHOUT insurance WITHOUT driving lessons -->
+            {% if
+              data.needs_glasses_or_contacts=="yes" and
+              data.practing_in_own_car=="no" and
+              data.driving_lessons=="no"
+            %}
+
+              <p>The cost of learning is <span class="bold">£119</span> plus an eye test. The cost of an eye test depends on the providers you choose.</p>
+
+            {% endif %}
+
+            <!-- 7// Cost WITHOUT eye test WITHOUT insurance WITHOUT driving lessons -->
+            {% if
+              data.needs_glasses_or_contacts=="no" and
+              data.practing_in_own_car=="no" and
+              data.driving_lessons=="no"
+            %}
+
+              <p>The cost of learning is <span class="bold">£119</span>.</p>
+
+            {% endif %}
+
+
+            <!-- TIME variables -->
+
+            <!-- Time WITH eye test -->
+            {% if data.read_from_20_meters=="no" %}
+
+              <p>The time to learn to drive is <span class="bold">18-24 weeks</span> plus the getting an eyes and driving practice. The time to get an eyes will depend on who does it. The time to practice varies from person to person.</p>
+
+            {% endif %}
+
+            <!-- Time WITHOUT eye test -->
+            {% if data.read_from_20_meters=="yes" %}
+
+              <p>The time to learn to drive is <span class="bold">18-24 weeks</span> plus the time to practice. The time to practice varies from person to person.</p>
+
+            {% endif %}
+
+
+            <div class="panel panel-border-wide">
+              <p>
+                The cost and time to learn to drive will go up if you need to retake your theory (£23) and practical (£62) tests.
+              </p>
+            </div>
+
+            {% if start_page=="yes" %}
+
+              <p class="">Check what <a href="/moneyclaims/task_list{{ formQuery | safe }}">tasks</a> are involved to learn to drive.</p>
+
+              <br>
+
+              <input type="hidden" name="check_before_you_start" value="complete">
+
+              <div class="form-group">
+                <input type="submit" class="button button-start" value="Start now"/>
+              </div>
+
+            {% else %}
+
+              <br>
+
+              <div class="form-group">
+                <input type="submit" class="button" value="Task complete" />
+              </div>
+
+            {% endif %}
+
+        {% endif %}
+
+
+
+
+
+      </form>
+
+    </div>
+  </div>
+
+</main>
+{% endblock %}
