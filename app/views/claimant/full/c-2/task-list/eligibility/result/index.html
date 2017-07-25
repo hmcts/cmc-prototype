@@ -1,0 +1,65 @@
+{% extends "layout_task-list.html" %}
+
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block home_link %} ../../task-list {% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+          <a href="#" class="link-back">Back</a>
+
+      <h1 class="heading-large">
+        You can't use this service
+      </h1>
+      <!-- service not available in these countries -->
+      {% if data.radio_group=="above_total" %}
+
+
+      <p class="lede">Claims including any interest must be under £10,000</p>
+
+
+      {% elif data.radio_group2=="claimant_non_uk" %}
+
+      <p class="lede">You must live in the UK to issue a money claim</p>
+
+      {% elif data.radio_group=="defendant_non_uk" %}
+
+      <p class="lede">You can only make a claim against an person or organisation with an in England or Wales.</p>
+
+      {% elif data.radio_group2=="under_18" %}
+
+      <p class="lede">You must be 18 or over to use the service.</p>
+      
+      {% elif data.radio_group=="crown" %}
+
+      <p class="lede">You can't make a claim against a government department - eg HM Revenue and Customs.</p>
+
+
+        {% else %}
+
+        <br>
+
+        <div class="form-group">
+          <input type="submit" class="button" value="Task complete" />
+        </div>
+
+        {% endif %}
+
+
+
+
+
+
+      </form>
+
+    </div>
+  </div>
+
+</main>
+{% endblock %}
