@@ -1,0 +1,120 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  <div class="phase-banner-alpha">
+    <p>
+      <strong class="phase-tag">BETA</strong>
+      <span>This is a new service – your <a href="#">feedback</a> will help us to improve it.</span>
+    </p>
+  </div>
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <a href="#" class="link-back">Back</a>
+      {% if data.radio_select_group=="Some"%}
+
+      <h1 class="heading-large">How much money do you believe you owe? </h1>
+       {% elseif data.radio_select_group2=="paid"%}
+
+      <h1 class="heading-large">How much and when did you pay? </h1>
+      
+  {% endif %}
+        <form
+        name="aspnetForm"
+        action="defence-2"
+        method="get"
+        id="aspnetForm"
+        autocomplete="off">
+        <div class="form-group">
+          <fieldset>
+            <legend class="visually-hidden">Defence</legend>
+            <div id="claim-details">
+              <div id="describe-wrapper-claim-details-1" class="form-group">
+                <label class="form-label" for="offer">
+                  {% if data.radio_select_group2=="defend_now" %}
+                  <h3 class="heading-medium">  Briefly explain why you disagree with the claim </h3>
+                  <div class=""><p> If you disagree with only some of the claim, say what you believe is wrong and what you believe is correct.</p>  </div>
+                  {% endif %}
+                </label>
+                {% if data.radio_select_group=="Some"%}
+                <h3 class="heading-small">How much money do you believe you owe? </h3>
+                <div class="form-group">
+                  <!-- <label class="form-label-bold" for="claim[fee][court_fee]">
+                    How much money do you believe you owe?
+                    <span class="form-hint"></span>
+                  </label> -->
+                  <input class="fee pound" maxlength="8" size="8" type="text" value=""
+                  name="claim[fee][court_fee]"
+                  id="claim[fee][court_fee]">
+                </div>
+                <div class="form-group">
+                  <label class="form-label-bold" for="offer">
+                    Explain why this is what you owe, rather than the full amount. 
+                  </label>
+                  {% elseif data.radio_select_group2=="paid"%}
+                  <h3 class="heading-small">How much have you paid the claimant? </h3>
+                  <div class="form-group">
+                   <!--  <label class="form-label-bold" for="claim[fee][court_fee]">
+                      How much have you paid the claimant?
+                      <span class="form-hint"></span>
+                    </label> -->
+                    <input class="fee pound" maxlength="8" size="8" type="text" value=""
+                    name="claim[fee][court_fee]"
+                    id="claim[fee][court_fee]">
+                  </div>
+                  <div class="form-group">
+                    <fieldset>
+                      <p class="form-label-bold">When did you pay this amount?</p>
+                      <div class="form-date">
+                        <p class="form-hint">For example, 12 12 2017</p>
+                        <div class="form-group form-group-day">
+                          <label for="dob-day">Day</label>
+                          <input class="form-control" id="dob-day" type="number" pattern="[0-9]*" min="0"
+                          max="31">
+                        </div>
+                        <div class="form-group form-group-month">
+                          <label for="dob-month">Month</label>
+                          <input class="form-control" id="dob-month" type="number" pattern="[0-9]*"
+                          min="0" max="12">
+                        </div>
+                        <div class="form-group form-group-year">
+                          <label for="dob-year">Year</label>
+                          <input class="form-control" id="dob-year" type="number" pattern="[0-9]*" min="0"
+                          max="2014">
+                        </div>
+                      </div>
+                    </fieldset>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label-bold" for="offer">
+                      Any additional comments (optional). 
+                    </label>
+                    {% endif %}
+                    <textarea class="form-control form-control-3-4 form-control-large"
+                    id="offer"
+                    rows="4"
+                    name="offer"
+                    cols="40"
+                    type="text"
+                    style="width: 95%"
+                    ></textarea>
+                  </div>
+                </div>
+              </div>
+            </fieldset>
+            <div class="panel panel-border-wide">
+            <p>Your response will be sent to the claimant Jan Clark. A judge will not consider your response unless your case goes to a hearing.</p>
+            </div>
+            <div class="form-group">
+              <input id="advert-option-next--button" type="submit" value="Save and continue" class="button"
+              data-ignore-double-submit="true">
+            </div>
+            <p><a href="#">Save response</a></p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+  {% endblock %}
