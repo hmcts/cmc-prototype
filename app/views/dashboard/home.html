@@ -26,7 +26,8 @@
       <div class="panel-cta tablet-and-up" style="">
         <p class="heading-small panel-body flush--top">Make a new money claim</p>
         <p class="panel-button flush--bottom">
-          <a id="create-new-lpa" class="button" href="../../claimant/full/c-2/task-list" role="button">Start now</a>
+        <a id="create-new-lpa" class="button cta" href="../../claimant/full/c-2/task-list" role="button">Start now</a>
+        <a id="create-new-lpa" style="display: none" class="button cta-draft" href="../../claimant/full/c-2/task-list" role="button">Continue with new claim</a>
         </p>
 <!--         <p>or <a href="enter-claim-reference.html">View a money claim made against you</a></p>
 -->      </div>
@@ -34,13 +35,13 @@
 </div>
 </div>
 
-<div class="grid-row ">
+<div class="grid-row">
   <div class="column-full">   
-    <h2 class="heading-medium type-heading">
+    <h2 class="heading-medium type-heading claims">
      Claims you've made or in progress
    </h2>
 
-   <table class="claim-dashboard">
+   <table class="claim-dashboard claims ">
     <thead>
       <tr>
         <th scope="col">Claim number</th>
@@ -51,21 +52,21 @@
       </tr>
     </thead>
     <tbody>
-      <tr >
+      <tr class="draft" style="display: none">
         <td><a href="../../claimant/full/c-2/task-list">Draft</a></td>
         <td>- </td>
 
         <td>- </td>
         <td>In progress </td>
       </tr> 
-      <tr class="claims">
-        <td><a href="claimant">391-BK65</a></td>
+      <tr class="claims default" style="display: none">
+        <td><a href="default">391-BK65</a></td>
         <td>John Smith </td>
 
         <td>£2000 </td>
         <td>You can request a judgement by default </td>
       </tr> 
-        <tr class="">
+      <tr class="claims complete">
         <td><a href="claimant2">234-BK23</a></td>
         <td>Paul Jones </td>
 
@@ -75,11 +76,11 @@
     </tbody>
   </table>
 
-  <h2 class="heading-medium type-heading ">
+  <h2 class="heading-medium type-heading response" style="display: none" >
    Claims made against you
  </h2>
 
- <table class="claim-dashboard ">
+ <table class="claim-dashboard response" style="display: none" >
   <thead>
     <tr>
       <th scope="col">Claim number</th>
@@ -89,13 +90,13 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
+    <tr class="">
       <td><a href="../../defendant/full/d-2/task-list">434-MD73</a></td>
       <td>Abalan construction  </td>
       <td>£1302.23 </td>
       <td>Respond to claim <br><span class="font-xsmall">(14 days remaining)</span> </td>
     </tr>    
-    <tr class="claims">
+    <tr class="">
       <td><a href="defendant">352MC733</a></td>
       <td>Jessica Revilla  </td>
       <td>£8000 </td>
@@ -108,8 +109,13 @@
 </div>
 </main>
 <select id="control-box" name="select-box" style="position: absolute;">
+  <option value="">Choose state</option>
   <option value="0">Show all</option>
-  <option value="1">Hide claims</option>
+  <option value="1">Show claimant</option>
+  <option value="2">Show defendant</option>
+  <option value="3">Show default judgement</option>
+  <option value="4">Show draft</option>
+
 </select>
 
 
@@ -122,12 +128,44 @@
 
    $('#control-box').on('change', function () {
 
-    if (this.value == '1') {
-      console.log(this.value)
-      $(".claims").toggle();
-    } else {
-      $(".claims").toggle();
+    if (this.value == '0') {
+      $(".claims").show();
+      $(".response").show();
+      $(".default").show();
+      $(".draft").show();
+      $(".cta").show();
+      $(".cta-draft").hide();
+    } else if (this.value == '1') {
+      $(".response").hide();
+      $(".claims").show();
+      $(".draft").hide();
+      $(".default").hide();
+      $(".cta").show();
+      $(".cta-draft").hide();
+    }else if (this.value == '2') {
+      $(".response").show();
+      $(".claims").hide();
+      $(".cta").show();
+      $(".cta-draft").hide();
+    } else if (this.value == '3') {
+      $(".response").hide();
+      $(".claims").show();
+      $(".complete").hide();
+      $(".draft").hide();
+      $(".default").show();
+      $(".cta").show();
+      $(".cta-draft").hide();
+
     }
+    else if (this.value == '4') {
+      $(".response").hide();
+      $(".claims").show();
+      $(".draft").show();
+      $(".default").hide();
+      $(".cta").hide();
+      $(".cta-draft").show();
+
+    }   
 
   });
 
