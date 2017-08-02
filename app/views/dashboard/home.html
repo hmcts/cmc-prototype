@@ -30,7 +30,8 @@
     </div>
     <div class="column-one-third">
       <div class="panel-cta tablet-and-up" style="">
-        <p class="heading-small panel-body flush--top">Make a money claim</p>
+        <p class="heading-small panel-body flush--top cta">Make a money claim</p>
+        <p class="heading-small panel-body flush--top cta-draft" style="display: none">Manage money claim</p>
         <p class="panel-button flush--bottom">
         <a id="create-new-lpa" class="button cta" href="../../claimant/full/c-2/task-list" role="button">Start now</a>
         <a id="create-new-lpa" style="display: none" class="button cta-draft" href="../../claimant/full/c-2/task-list" role="button">Continue with new claim</a>
@@ -43,11 +44,11 @@
 
 <div class="grid-row">
   <div class="column-full">   
-    <h2 class="heading-medium type-heading claims">
-     Claims you've made or in progress
+    <h2 class="heading-medium type-heading claims" style="display: none">
+     Claims you've made or are in progress
    </h2>
 
-   <table class="claim-dashboard claims ">
+   <table class="claim-dashboard claims " style="display: none">
     <thead>
       <tr>
         <th scope="col">Claim number</th>
@@ -115,7 +116,10 @@
 </div>
 </main>
 <select id="control-box" name="select-box" style="position: absolute;">
-  <option selected="selected" value="1">Show claimant</option>
+ 
+  <option selected="selected" value="5">Hide all</option>
+
+  <option  value="1">Show claimant</option>
   <option value="2">Show defendant</option>
   <option value="3">Show default judgment</option>
   <option value="4">Show draft</option>
@@ -171,7 +175,14 @@
       $(".cta-draft").show();
 
     }   
+    else if (this.value == '5') {
+      $(".response").hide();
+      $(".claims").hide();
+      $(".draft").hide();
+      $(".default").hide();
 
+
+    }  
   });
 
 
