@@ -122,13 +122,50 @@ Check your answers
         Name:
       </td>
       <td>
-      {{data['claimant_name']}}
+        {{data['claimant_name']}}
       </td>
       <td class="change-answer">
         <a href="../task-list/your-details/your-details?return_page={{ '../../task-list/check-and-send#name' | urlencode }}">
           Change <span class="visuallyhidden">Why you're owed the money</span></a>
         </td>
       </tr>
+
+    {% if data['claimant-type']=="Sole trader" %}
+
+
+    <tr>
+      <td>
+        Business name:
+      </td>
+      <td>
+        {{data['claimant-business-name']}}
+      </td>
+      <td class="change-answer">
+        <a href="../task-list/your-details/your-details?return_page={{ '../../task-list/check-and-send#name' | urlencode }}">
+          Change <span class="visuallyhidden">Why you're owed the money</span></a>
+        </td>
+      </tr>
+
+
+
+
+      {% elseif data['claimant-type']=="Company" or data['claimant-type']=="Organisation" %}
+
+      <tr>
+        <td>
+          Contact name:
+        </td>
+        <td>
+          {{data['claimant-contact-name']}}
+        </td>
+      <td class="change-answer">
+        <a href="../task-list/your-details/your-details?return_page={{ '../../task-list/check-and-send#name' | urlencode }}">
+          Change <span class="visuallyhidden">Why you're owed the money</span></a>
+        </td>
+        </tr>
+
+        {% endif %}
+
 
       <tr>
         <td class="no-border">
@@ -241,244 +278,283 @@ Check your answers
       Their name:
     </td>
     <td>
-      {{data['defendant-firstname']}} {{data['defendant-lastname']}}
+      {{data['defendant_name']}}
     </td>
     <td class="change-answer">
       <a href="../task-list/their-details/enter-details?return_page={{ '../../task-list/check-and-send#their-detail' | urlencode }}">
         Change <span class="visuallyhidden">Their</span></a>
       </td>
     </tr>
+
+
+    {% if data['defendant-type']=="Sole trader" %}
+
+
     <tr>
       <td>
-        Their address:
+        Business name:
       </td>
       <td>
-        {{data['d-addressLine1']}}<br>
-        {{data['d-addressLine2']}}<br>
-        {{data['d-addressLine3']}}<br>
-        {{data['d-addressPostcode']}}
+        {{data['defendant_business_name']}}
       </td>
       <td class="change-answer">
-        <a href="../task-list/their-details/address?return_page={{ '../../task-list/check-and-send#their-detail' | urlencode }}">
+        <a href="../task-list/their-details/enter-details?return_page={{ '../../task-list/check-and-send#their-detail' | urlencode }}">
           Change <span class="visuallyhidden">Their</span></a>
         </td>
       </tr>
+
+
+
+
+      {% elseif data['defendant-type']=="Company" or data['defendant-type']=="Organisation" %}
+
       <tr>
         <td>
-          Their email:
+          Contact name:
         </td>
         <td>
-
-          {% if data['defendant-email']!="" %}
-          {{data['defendant-email']}}
-
-          {% else %} 
-          None
-          {% endif %}    
-
-
+          {{data['defendant-contact-name']}}
         </td>
         <td class="change-answer">
-          <a href="../task-list/their-details/email?return_page={{ '../../task-list/check-and-send#their-detail' | urlencode }}">
+          <a href="../task-list/their-details/enter-details?return_page={{ '../../task-list/check-and-send#their-detail' | urlencode }}">
             Change <span class="visuallyhidden">Their</span></a>
           </td>
         </tr>
-      </tbody>
-    </table>
 
-    <table class="check-your-answers">
+        {% endif %}
 
-      <thead>
+
         <tr>
-          <th colspan="2">
-            <h2 class="heading-medium" id="claim-amount">
-              Claim amount
-            </h2>
-          </th>
-          <th>
-          </th>
-        </tr>
-      </thead>
+          <td>
+            Their address:
+          </td>
+          <td>
+            {{data['d-addressLine1']}}<br>
+            {{data['d-addressLine2']}}<br>
+            {{data['d-addressLine3']}}<br>
+            {{data['d-addressPostcode']}}
+          </td>
+          <td class="change-answer">
+            <a href="../task-list/their-details/enter-details?return_page={{ '../../task-list/check-and-send#their-detail' | urlencode }}">
+              Change <span class="visuallyhidden">Their</span></a>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Their email:
+            </td>
+            <td>
 
-      <tbody>
-        <tr>
+              {% if data['defendant-email']!="" %}
+              {{data['defendant-email']}}
+
+              {% else %} 
+              None
+              {% endif %}    
+
+
+            </td>
+            <td class="change-answer">
+              <a href="../task-list/their-details/email?return_page={{ '../../task-list/check-and-send#their-detail' | urlencode }}">
+                Change <span class="visuallyhidden">Their</span></a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <table class="check-your-answers">
+
+          <thead>
+            <tr>
+              <th colspan="2">
+                <h2 class="heading-medium" id="claim-amount">
+                  Claim amount
+                </h2>
+              </th>
+              <th>
+              </th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <td class="no-border">
+                Claim amount:
+              </td>
+              <td class="no-border">
+
+               £{{data['totalSum']}}
+
+             </td>
+             <td class="change-answer no-border">
+              <a href="../task-list/claim-amount/index?return_page={{ '../../task-list/check-and-send#claim-amount' | urlencode }}">
+                Change <span class="visuallyhidden">Why you're owed the money</span>
+              </a>
+            </td>
+          </tr>
+
+
+          {% if data['interest-rate']=="No interest" %}
+
+          <tr>
+            <td >
+              Interest rate:
+            </td>
+            <td >
+              I don't want to claim interest
+
+            </td>
+            <td class="change-answer ">
+
+            </td>
+          </tr>
+          {% endif %}    
+
+
+          {% if data['interest-rate']=="Different rate" %}
+          <tr>
+            <td class="no-border">
+              Interest rate:
+            </td>
+            <td class="no-border">
+
+
+              {{data['rate']}}%
+
+
+
+            </td>
+            <td class="change-answer no-border">
+
+            </td>
+          </tr> 
+          <tr>
+            <td class="no-border">
+              Why you’re entitled to this rate:
+            </td>
+            <td class="no-border">
+
+
+             {{data['rate-why']}}
+
+
+           </td>
+           <td class="change-answer no-border">
+
+           </td>
+         </tr>         
+         {% endif %}
+
+
+
+         {% if data['interest-rate']=="8 percent" %}
+         <tr>
           <td class="no-border">
-            Claim amount:
+            Interest rate:
           </td>
           <td class="no-border">
 
-           £{{data['totalSum']}}
+
+           8%
 
          </td>
          <td class="change-answer no-border">
-          <a href="../task-list/claim-amount/index?return_page={{ '../../task-list/check-and-send#claim-amount' | urlencode }}">
-            Change <span class="visuallyhidden">Why you're owed the money</span>
-          </a>
+
+         </td>
+       </tr>     
+       {% endif %} 
+
+
+       {% if data['interest-rate']!="No interest" %}
+
+       {% if data['interest-date']=="Issue date" %}
+       <tr>
+        <td>
+          Date interest applied from:
+        </td>
+        <td>
+          From the date I submit the claim
+        </td>
+        <td class="change-answer">
+
         </td>
       </tr>
+      {% endif %} 
 
-
-      {% if data['interest-rate']=="No interest" %}
-
-      <tr>
-        <td >
-          Interest rate:
-        </td>
-        <td >
-          I don't want to claim interest
-
-        </td>
-        <td class="change-answer ">
-
-        </td>
-      </tr>
-      {% endif %}    
-
-
-      {% if data['interest-rate']=="Different rate" %}
+      {% if data['interest-date']=="Particular date" %}
       <tr>
         <td class="no-border">
-          Interest rate:
+          Date interest applied from:
         </td>
         <td class="no-border">
-
-
-          {{data['rate']}}%
-
-
-
-        </td>
-        <td class="change-answer no-border">
-
-        </td>
-      </tr> 
-      <tr>
-        <td class="no-border">
-          Why you’re entitled to this rate:
-        </td>
-        <td class="no-border">
-
-
-         {{data['rate-why']}}
-
-
+         {{ data['interest-day'] }} {{ data['interest-month'] }} {{ data['interest-year'] }}
        </td>
        <td class="change-answer no-border">
 
        </td>
-     </tr>         
-     {% endif %}
-
-
-
-     {% if data['interest-rate']=="8 percent" %}
+     </tr>
      <tr>
-      <td class="no-border">
-        Interest rate:
+      <td>
+        Explain why you're claiming from this date:
       </td>
-      <td class="no-border">
+      <td>
+        {{data['date-why']}}
+      </td>
+      <td class="change-answer">
+
+      </td>
+    </tr>
 
 
-       8%
+    {% endif %} 
+    {% endif %} 
 
+
+
+    {% if data['interest-date']=="Particular date" %}
+
+    <tr>
+      <td>
+        Interest to date:
+      </td>
+      <td>
+        £13
+      </td>
+      <td class="change-answer">
+        <a href="#">
+          <span class="visuallyhidden">Interest</span>
+        </a>
+      </td>
+    </tr>
+
+
+    {% endif %}
+    <tr>
+      <td>
+        Claim fee:
+      </td>
+      <td>
+        £70
+      </td>
+      <td class="change-answer">
+        <a href="#">
+          <span class="visuallyhidden">Claim fee</span>
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+       <span class="bold"> Total:</span>
      </td>
-     <td class="change-answer no-border">
-
-     </td>
-   </tr>     
-   {% endif %} 
-
-
-   {% if data['interest-rate']!="No interest" %}
-
-   {% if data['interest-date']=="Issue date" %}
-   <tr>
-    <td>
-      Date interest applied from:
-    </td>
-    <td>
-      From the date I submit the claim
+     <td >
+      <span class="bold">{{data['totalClaimAmount']}}</span>
     </td>
     <td class="change-answer">
-
+      <a href="#">
+        <span class="visuallyhidden">Total </span>
+      </a>
     </td>
   </tr>
-  {% endif %} 
-
-  {% if data['interest-date']=="Particular date" %}
-  <tr>
-    <td class="no-border">
-      Date interest applied from:
-    </td>
-    <td class="no-border">
-     {{ data['interest-day'] }} {{ data['interest-month'] }} {{ data['interest-year'] }}
-   </td>
-   <td class="change-answer no-border">
-
-   </td>
- </tr>
- <tr>
-  <td>
-    Explain why you're claiming from this date:
-  </td>
-  <td>
-    {{data['date-why']}}
-  </td>
-  <td class="change-answer">
-
-  </td>
-</tr>
-
-
-{% endif %} 
-{% endif %} 
-
-
-
-{% if data['interest-date']=="Particular date" %}
-
-<tr>
-  <td>
-    Interest to date:
-  </td>
-  <td>
-    £13
-  </td>
-  <td class="change-answer">
-    <a href="#">
-      <span class="visuallyhidden">Interest</span>
-    </a>
-  </td>
-</tr>
-
-
-{% endif %}
-<tr>
-  <td>
-    Claim fee:
-  </td>
-  <td>
-    £70
-  </td>
-  <td class="change-answer">
-    <a href="#">
-      <span class="visuallyhidden">Claim fee</span>
-    </a>
-  </td>
-</tr>
-<tr>
-  <td>
-   <span class="bold"> Total:</span>
- </td>
- <td >
-  <span class="bold">{{data['totalClaimAmount']}}</span>
-</td>
-<td class="change-answer">
-  <a href="#">
-    <span class="visuallyhidden">Total </span>
-  </a>
-</td>
-</tr>
 </tbody>
 </table>
 
