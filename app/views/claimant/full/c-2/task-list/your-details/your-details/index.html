@@ -37,7 +37,7 @@ Money Claims Prototype
           <div class="form-group">
             <label class="form-label" for="claimant_name">Your full name</label>
             <input class="form-control " id="claimant_name" name="claimant_name" type="text"
-            value="{{data['claimantname']}}">
+            value="{{data['claimant_name']}}">
           </div>
 
 
@@ -113,9 +113,18 @@ Money Claims Prototype
 
 
       {% else %}
-      <h1 class="heading-medium">
+
+          <h1 class="heading-large">Your details</h1>
+
+          <div class="form-group">
+            <label class="form-label" for="claimant_name">Your full name</label>
+            <input class="form-control " id="claimant_name" name="claimant_name" type="text"
+            value="{{data['claimantname']}}">
+          </div>
+
+      <h2 class="heading-medium">
         Your residential address
-      </h1>
+      </h2>
       <p>This must be the address where you live.</p>
       
       {% endif %}
@@ -176,7 +185,26 @@ Money Claims Prototype
         </div>
         <div class="panel panel-border-narrow js-hidden" id="contact-by-phone">
           <div id="addressManualWrapper">
-            <p>All correspondence will be sent here, instead of to your residential address. This is sometimes known as an 'address for service'.</p>
+                   <p>All correspondence will be sent here, instead of your 
+    
+          {% if data['claimant-type']=="Individual" %}
+          residential address
+
+          {% elseif data['claimant-type']=="Sole trader" %}
+          residential address or business address
+
+           {% elseif data['claimant-type']=="Company" %}
+           company address
+           {% elseif data['claimant-type']=="Organisation" %}
+            organisation address
+
+            {% else %}
+            residential address
+
+           {% endif %}
+            . This is sometimes known as an 'address for service'.</p>
+
+
             <br>
             <div id="address-details" class="address-manual-input disabled">
 
