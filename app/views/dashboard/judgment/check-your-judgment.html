@@ -40,7 +40,7 @@ Money Claims Prototype
 
       </td>
     </tr>
-    <tr>
+    <tr class="individual">
       <td>
         Name
       </td>
@@ -52,12 +52,37 @@ Money Claims Prototype
 
       </td>
     </tr>
-    <tr>
+    
+    <tr class="business" style="display: none;">
+      <td>
+        Name
+      </td>
+      <td>
+        Smith LTD <br>
+ 
+      </td>
+      <td class="change-answer">
+
+      </td>
+    </tr>
+    <tr class="business" style="display: none;">
+      <td>
+        Contact person 
+      </td>
+      <td>
+        Jane Smith<br>
+ 
+      </td>
+      <td class="change-answer">
+
+      </td>
+    </tr>
+    <tr class="sole" style="display: none">
       <td>
         Business name
       </td>
       <td>
-        Smith LTD<br>
+        Richards Interior Design LLP<br>
  
       </td>
       <td class="change-answer">
@@ -186,12 +211,10 @@ Money Claims Prototype
 </main>
 <select id="control-box" name="select-box" style="position: absolute;">
  
-  <option selected="selected" value=""></option>
 
   <option  value="1">Individual</option>
   <option value="2">Sole trader</option>
-  <option value="3">Company</option>
-  <option value="4">Organisation</option>
+  <option value="3">Company or Organisation</option>
 </select>
 
 
@@ -204,31 +227,33 @@ Money Claims Prototype
 
    $('#control-box').on('change', function () {
 
-    if (this.value == '0') {
-      $(".claims").show();
-      $(".response").show();
-      $(".default").show();
-      $(".draft").show();
-      $(".cta").show();
-      $(".cta-draft").hide();
-    } else if (this.value == '1') {
-      $(".response").hide();
-      $(".claims").show();
-      $(".draft").hide();
-      $(".default").hide();
-      $(".cta").show();
-      $(".cta-draft").hide();
-    }else if (this.value == '2') {
-      $(".response").show();
-      $(".claims").hide();
-      $(".cta").show();
-      $(".cta-draft").hide();
+    if (this.value == '1') {
+      $(".individual").show();
+      $(".business").hide();
+      $(".sole").hide();
+            $(".dob").show();
+
+
+    } else if (this.value == '2') {
+      $(".individual").show();
+      $(".business").hide();
+      $(".sole").show();
+            $(".dob").hide();
+
+
+    }else if (this.value == '3') {
+      $(".individual").hide();
+      $(".business").show();
+      $(".sole").hide();
+      $(".dob").hide();
+
+
     }  
   });
 
 
 
- });  
+ }); 
 </script>
 
 {% endblock %}
