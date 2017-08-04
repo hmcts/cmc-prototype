@@ -24,39 +24,84 @@ Money Claims Prototype
 
   <table class="check-your-answers">
 
-    <thead>
-    <tr>
-      <th colspan="2">
-        <h2 class="heading-medium">
-          Your request for judgment
-        </h2>
-      </th>
-      <th>
-      </th>
-    </tr>
-    </thead>
-
+    
     <tbody>
+    <tr>
+      <td >
+        <h2 class="heading-small">
+          Their details
+        </h2>      
+        </td>
+      <td>
+      
+ 
+      </td>
+      <td class="change-answer">
 
+      </td>
+    </tr>
     <tr>
       <td>
-        Defendant's details
+        Name
       </td>
       <td>
         Mary Richards<br>
-        101 Regent Road<br>
-        Shiplake<br>
-        RG9 4BW<br>
-        Tel: 01234 567 890<br>
-        Email: maryrichards@hotmail.com
+ 
       </td>
       <td class="change-answer">
-        <a href="details-defendant">
-          Change <span class="visuallyhidden">Defendant details</span>
-        </a>
+
       </td>
     </tr>
     <tr>
+      <td>
+        Business name
+      </td>
+      <td>
+        Smith LTD<br>
+ 
+      </td>
+      <td class="change-answer">
+
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        Address
+      </td>
+      <td>
+        101 Regent Road<br>
+        Shiplake<br>
+        RG9 4BW
+      </td>
+      <td class="change-answer">
+
+      </td>
+    </tr>
+    <tr>
+      <td>
+       Telephone
+      </td>
+      <td>
+        01234 567 890
+      </td>
+      <td class="change-answer">
+
+      </td>
+    </tr>
+     <tr>
+      <td>
+        Email
+      </td>
+      <td>
+        maryrichards@hotmail.com
+ 
+      </td>
+      <td class="change-answer">
+
+      </td>
+    </tr>       
+    <tr class="dob">
       <td>
         Defendant's date of birth
       <td>
@@ -66,6 +111,20 @@ Money Claims Prototype
         <a href="defendant-DOB">
           Change <span class="visuallyhidden">Defendant's date of birth</span>
         </a>
+      </td>
+    </tr>
+        <tr>
+      <td >
+        <h2 class="heading-small">
+          Payment
+        </h2>      
+        </td>
+      <td>
+      
+ 
+      </td>
+      <td class="change-answer">
+
       </td>
     </tr>
     <tr>
@@ -82,9 +141,20 @@ Money Claims Prototype
     </tr>
     <tr>
       <td>
-        Judgement details
+        The defendant will pay:
       <td>
-        Pay full amount by 12 December 2017
+        {% if data['radio-pay-group']=="Immediately" %}
+             Immediately
+
+        {% elseif data['radio-pay-group']=="Instalments" %}
+        By instalments:
+        £300 each month.<br> First payment on 23 September 2017  
+
+        {% elseif data['radio-pay-group']=="Set-date" %}
+ 
+            The full amount by 12 December 2017
+          {% endif %}
+      
       </td>
       <td class="change-answer">
         <a href="payment-options">
@@ -114,7 +184,52 @@ Money Claims Prototype
 
 
 </main>
+<select id="control-box" name="select-box" style="position: absolute;">
+ 
+  <option selected="selected" value=""></option>
 
+  <option  value="1">Individual</option>
+  <option value="2">Sole trader</option>
+  <option value="3">Company</option>
+  <option value="4">Organisation</option>
+</select>
+
+
+<script type="text/javascript">
+
+
+
+
+  $( document ).ready(function() {
+
+   $('#control-box').on('change', function () {
+
+    if (this.value == '0') {
+      $(".claims").show();
+      $(".response").show();
+      $(".default").show();
+      $(".draft").show();
+      $(".cta").show();
+      $(".cta-draft").hide();
+    } else if (this.value == '1') {
+      $(".response").hide();
+      $(".claims").show();
+      $(".draft").hide();
+      $(".default").hide();
+      $(".cta").show();
+      $(".cta-draft").hide();
+    }else if (this.value == '2') {
+      $(".response").show();
+      $(".claims").hide();
+      $(".cta").show();
+      $(".cta-draft").hide();
+    }  
+  });
+
+
+
+ });  
+</script>
 
 {% endblock %}
 
