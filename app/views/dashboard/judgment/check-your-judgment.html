@@ -1,5 +1,4 @@
 {% extends "layout.html" %}
-
 {% block page_title %}
 Money Claims Prototype
 {% endblock %}
@@ -7,254 +6,223 @@ Money Claims Prototype
 {% include "includes/propositional_navigation.html" %}
 {% endblock %}
 {% block content %}
-
-
 <main id="content" role="main">
-
   {% include "includes/phase_banner_beta.html" %}
-
-
   <a href="#" class="link-back">Back</a>
-
   <h1 class="heading-large">
-                    <span class="heading-secondary">Judgment by default </span>
-
+    <span class="heading-secondary">Judgment by default </span>
     Check your answers
   </h1>
-
   <table class="check-your-answers">
-
-    
     <tbody>
-    <tr>
-      <td >
-        <h2 class="heading-small">
-          Their details
-        </h2>      
+      <tr>
+        <td >
+          <h2 class="heading-small">
+            Their details
+          </h2>      
         </td>
-      <td>
-      
- 
-      </td>
-      <td class="change-answer">
+        <td>
+        </td>
+        <td class="change-answer">
+        </td>
+      </tr>
+      <tr class="individual">
+        <td>
+          Full name
+        </td>
+        <td>
+          Mary Richards<br>
+        </td>
+        <td class="change-answer">
+        </td>
+      </tr>
+      <tr class="business" style="display: none;">
+        <td>
+          Company name
+        </td>
+        <td>
+          Smith LTD <br>
+        </td>
+        <td class="change-answer">
+        </td>
+      </tr>
+      <tr class="org" style="display: none;">
+        <td>
+          Organisation name
+        </td>
+        <td>
+          Jones Bros <br>
+        </td>
+        <td class="change-answer">
+        </td>
+      </tr>
 
-      </td>
-    </tr>
-    <tr class="individual">
-      <td>
-        Name
-      </td>
-      <td>
-        Mary Richards<br>
- 
-      </td>
-      <td class="change-answer">
+      <tr class="business" style="display: none;">
+        <td>
+          Contact person 
+        </td>
+        <td>
+          Jane Smith<br>
+        </td>
+        <td class="change-answer">
+        </td>
+      </tr>
 
-      </td>
-    </tr>
-    
-    <tr class="business" style="display: none;">
-      <td>
-        Name
-      </td>
-      <td>
-        Smith LTD <br>
- 
-      </td>
-      <td class="change-answer">
 
-      </td>
-    </tr>
-    <tr class="business" style="display: none;">
-      <td>
-        Contact person 
-      </td>
-      <td>
-        Jane Smith<br>
- 
-      </td>
-      <td class="change-answer">
+      <tr class="org" style="display: none;">
+        <td>
+          Contact person 
+        </td>
+        <td>
+          Jane Smith<br>
+        </td>
+        <td class="change-answer">
+        </td>
+      </tr>
+      <tr class="sole" style="display: none">
+        <td>
+          Business name
+        </td>
+        <td>
+          Richards Interior Design LLP<br>
+        </td>
+        <td class="change-answer">
 
-      </td>
-    </tr>
-    <tr class="sole" style="display: none">
-      <td>
-        Business name
-      </td>
-      <td>
-        Richards Interior Design LLP<br>
- 
-      </td>
-      <td class="change-answer">
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Address
+        </td>
+        <td>
+          101 Regent Road<br>
+          Shiplake<br>
+          RG9 4BW
+        </td>
+        <td class="change-answer">
+          <a href="details-defendant">
+            Change <span class="visuallyhidden">Amount defendant is ordered to pay</span>
+          </a>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Email
+        </td>
+        <td>
+          maryrichards@hotmail.com
+        </td>
+        <td class="change-answer">
 
-      </td>
-    </tr>
-
-    <tr>
-      <td>
-        Address
-      </td>
-      <td>
-        101 Regent Road<br>
-        Shiplake<br>
-        RG9 4BW
-      </td>
-      <td class="change-answer">
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-       Telephone
-      </td>
-      <td>
-        01234 567 890
-      </td>
-      <td class="change-answer">
-
-      </td>
-    </tr>
-     <tr>
-      <td>
-        Email
-      </td>
-      <td>
-        maryrichards@hotmail.com
- 
-      </td>
-      <td class="change-answer">
-
-      </td>
-    </tr>       
-    <tr class="dob">
-      <td>
-        Date of birth
-      <td>
-        Not sure<br>
-      </td>
-      <td class="change-answer">
-        <a href="defendant-DOB">
-          Change <span class="visuallyhidden">Date of birth</span>
-        </a>
-      </td>
-    </tr>
+        </td>
+      </tr>       
+      <tr>
+        <td >
+          <h2 class="heading-small">
+            Payment
+          </h2>      
+        </td>
+        <td>
+        </td>
+        <td class="change-answer">
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Amount to be paid by defendant
+          <td>
+            £1643.20<br>
+          </td>
+          <td class="change-answer">
+            <a href="claim-amount">
+              Change <span class="visuallyhidden">Amount defendant is ordered to pay</span>
+            </a>
+          </td>
+        </tr>
         <tr>
-      <td >
-        <h2 class="heading-small">
-          Payment
-        </h2>      
-        </td>
-      <td>
-      
- 
-      </td>
-      <td class="change-answer">
+          <td>
+            When you want the defendant to pay
+            <td>
+              {% if data['radio-pay-group']=="Immediately" %}
+              Immediately
+              {% elseif data['radio-pay-group']=="Instalments" %}
+              By instalments:
+              £300 each month.<br> First payment on 23 September 2017  
+              {% elseif data['radio-pay-group']=="Set-date" %}
+              The full amount by 12 December 2017
+              {% endif %}
+            </td>
+            <td class="change-answer">
+              <a href="payment-options">
+                Change <span class="visuallyhidden">Judgment details</span>
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <h2 class="heading-medium">Declaration</h2>
+      <p class="text">
 
-      </td>
-    </tr>
-    <tr>
-      <td>
-        Amount to be paid by defendant
-      <td>
-        £1643.20<br>
-      </td>
-      <td class="change-answer">
-        <a href="claim-amount">
-          Change <span class="visuallyhidden">Amount to be paid by defendant</span>
-        </a>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        The defendant will pay
-      <td>
-        {% if data['radio-pay-group']=="Immediately" %}
-             Immediately
+        <div class="notice">
+          <i class="icon icon-important">
+            <span class="visually-hidden">Warning</span>
+          </i>
+          <strong class="bold-small">
+            Once you 'Sign and submit', you cannot change your answers
+          </strong>
+        </div>
 
-        {% elseif data['radio-pay-group']=="Instalments" %}
-        By instalments:
-        £300 each month.<br> First payment on 23 September 2017  
+<div class="form-group">
+    <a name="hasacceptedtermsandconditions"></a>
 
-        {% elseif data['radio-pay-group']=="Set-date" %}
- 
-            The full amount by 12 December 2017
-          {% endif %}
-      
-      </td>
-      <td class="change-answer">
-        <a href="payment-options">
-          Change <span class="visuallyhidden">Judgment details</span>
-        </a>
-      </td>
-    </tr>
-    </tbody>
-  </table>
+    <div class="multiple-choice text">
+      <input class="" id="HasAcceptedTermsAndConditions" type="checkbox" value="true">
+      <label for="HasAcceptedTermsAndConditions"> 
 
-  <h2 class="heading-medium">Declaration</h2>
-
-  <p class="text">
-    By signing this you confirm that, to the best of your knowledge, the details you have
-    provided are correct.</p>
-
-  <div class="notice">
-    <i class="icon icon-important">
-      <span class="visually-hidden">Warning</span>
-    </i>
-    <strong class="bold-small">
-      Once you click 'Sign and submit', you cannot change your answers
-    </strong>
-  </div>
-
-  <a href="confirmation-page" class="button">Sign and submit</a>
+I confirm that I believe the details  I have provided are correct.
 
 
-</main>
-<select id="control-box" name="select-box" style="position: absolute;">
- 
-
-  <option  value="1">Individual</option>
-  <option value="2">Sole trader</option>
-  <option value="3">Company or Organisation</option>
-</select>
+      </label>
+    </div>
 
 
-<script type="text/javascript">
+    <span class="field-validation-valid" data-valmsg-for="HasAcceptedTermsAndConditions" data-valmsg-replace="true" aria-live="polite"></span></div>
 
-
-
-
-  $( document ).ready(function() {
-
-   $('#control-box').on('change', function () {
-
-    if (this.value == '1') {
-      $(".individual").show();
-      $(".business").hide();
-      $(".sole").hide();
+        <a href="confirmation-page" class="button">Sign and submit</a>
+      </main>
+      <select id="control-box" name="select-box" style="position: absolute;">
+        <option  value="1">Individual</option>
+        <option value="2">Sole trader</option>
+        <option value="3">Company</option>
+        <option value="4">Organisation</option>
+      </select>
+      <script type="text/javascript">
+        $( document ).ready(function() {
+         $('#control-box').on('change', function () {
+          if (this.value == '1') {
+            $(".individual").show();
+            $(".business").hide();
+            $(".sole").hide();
             $(".dob").show();
-
-
-    } else if (this.value == '2') {
-      $(".individual").show();
-      $(".business").hide();
-      $(".sole").show();
+          } else if (this.value == '2') {
+            $(".individual").show();
+            $(".business").hide();
+            $(".sole").show();
             $(".dob").hide();
-
-
-    }else if (this.value == '3') {
-      $(".individual").hide();
-      $(".business").show();
-      $(".sole").hide();
-      $(".dob").hide();
-
-
-    }  
-  });
-
-
-
- }); 
-</script>
-
-{% endblock %}
-
+          }else if (this.value == '3') {
+            $(".individual").hide();
+            $(".business").show();
+            $(".org").hide();
+            $(".sole").hide();
+            $(".dob").hide();
+          }else if (this.value == '4') {
+            $(".individual").hide();
+            $(".org").show();
+            $(".company").hide();
+            $(".sole").hide();
+            $(".dob").hide();
+          }  
+        });
+       }); 
+     </script>
+     {% endblock %}
