@@ -21,14 +21,24 @@ Money Claims Prototype
       <h1 class="heading-large">
         <span class="heading-secondary">County Court Judgment </span>
 
-        Deduct amount paid by defendant already (optional)
+        Has the defendant paid some of the amount owed?
       </h1>
-      <p>Total amount payable by defendant is £1643.20</p>
+     
+      <form
+        name="aspnetForm"
+        method="post"
+        onsubmit="conditionalNavigation('radio-indent-group', 'Yes', 'claim-amount', 'claim-amount');return false;"
+        id="aspnetForm"
+        autocomplete="off">
 
-
-
-      <div class="form-group">
-
+        <div class="form-group">
+          <fieldset>
+      <div class="multiple-choice" data-target="contact-by-text">
+        <input id="dob-yes" type="radio" name="radio-indent-group" value="Yes">
+        <label for="example-contact-by-text"> <strong class="bold">Yes</strong></label>
+      </div>
+      <div class="panel panel-border-narrow js-hidden" id="contact-by-text">
+           <p>Total amount payable by defendant is £1643.20</p>
 
 
         <div class="form-group-compound address-item form-group">
@@ -36,16 +46,50 @@ Money Claims Prototype
           <input class="fee pound" maxlength="10" size="7" type="text" value="" name="num2" id="num2">
         </div>
 
-        </>
-
       </div>
+            <div class="panel panel-border-narrow js-hidden" id="yes-info">
+              <div class="form-group">
+                <div class="form-date">
 
-      <!--<div class="callout callout-reference"><p>Total amount payable by defendant</p>-->
-      <!--<span class="bold-large number">£195.00</span>-->
-      <!--</div>-->
+                  <p class="form-hint">For example, 29 05 1985</p>
+
+                  <div class="form-group form-group-day">
+                    <label for="dob-day">Day</label>
+                    <input class="form-control" id="dob-day" type="number" pattern="[0-9]*" min="0" max="31">
+                  </div>
+
+                  <div class="form-group form-group-month">
+                    <label for="dob-month">Month</label>
+                    <input class="form-control" id="dob-month" type="number" pattern="[0-9]*" min="0" max="12">
+                  </div>
+
+                  <div class="form-group form-group-year">
+                    <label for="dob-year">Year</label>
+                    <input class="form-control" id="dob-year" type="number" pattern="[0-9]*" min="0" max="2014">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="multiple-choice">
+              <input id="radio-no" type="radio" name="radio-indent-group" value="No">
+              <label for="radio-no" data-target="no-info">
+                <strong class="bold">No</strong><br>
+                </label>
+            </div>
+</div>
 
 
-      <a class="button" href="claim-amount">Continue</a>
+          </fieldset>
+
+          <input id="advert-option-next--button" type="submit" value="Continue" class="button"
+                 data-ignore-double-submit="true">
+      </form>
+
+ 
+
+
+
 
     </div>
   </div>
