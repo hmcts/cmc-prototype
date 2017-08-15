@@ -26,7 +26,9 @@ Money Claims Prototype
         <td class="change-answer">
         </td>
       </tr>
-      <tr class="individual">
+      {% if data['control-box'] == 1 %}
+      <!-- Individual -->
+      <tr >
         <td>
           Full name
         </td>
@@ -36,7 +38,31 @@ Money Claims Prototype
         <td class="change-answer">
         </td>
       </tr>
-      <tr class="business" style="display: none;">
+      {% elseif data['control-box'] == 2 %}
+      <!-- sole trader  -->
+      <tr >
+        <td>
+          Full name
+        </td>
+        <td>
+          Mary Richards<br>
+        </td>
+        <td class="change-answer">
+        </td>
+      </tr>
+      <tr >
+        <td>
+          Business name
+        </td>
+        <td>
+          Richards Interior Design LLP<br>
+        </td>
+        <td class="change-answer">
+        </td>
+      </tr>
+      {% elseif data['control-box'] == 3 %}
+      <!-- company  -->
+      <tr>
         <td>
           Company name
         </td>
@@ -46,7 +72,19 @@ Money Claims Prototype
         <td class="change-answer">
         </td>
       </tr>
-      <tr class="org" style="display: none;">
+      <tr >
+        <td>
+          Contact person 
+        </td>
+        <td>
+          Jane Smith<br>
+        </td>
+        <td class="change-answer">
+        </td>
+      </tr>
+      {% elseif data['control-box'] == 4 %}
+      <!-- org  -->
+      <tr >
         <td>
           Organisation name
         </td>
@@ -56,8 +94,7 @@ Money Claims Prototype
         <td class="change-answer">
         </td>
       </tr>
-
-      <tr class="business" style="display: none;">
+      <tr >
         <td>
           Contact person 
         </td>
@@ -67,29 +104,18 @@ Money Claims Prototype
         <td class="change-answer">
         </td>
       </tr>
-
-
-      <tr class="org" style="display: none;">
+      {% else %}
+      <tr >
         <td>
-          Contact person 
+          Full name
         </td>
         <td>
-          Jane Smith<br>
+          Mary Richards<br>
         </td>
         <td class="change-answer">
         </td>
       </tr>
-      <tr class="sole" style="display: none">
-        <td>
-          Business name
-        </td>
-        <td>
-          Richards Interior Design LLP<br>
-        </td>
-        <td class="change-answer">
-
-        </td>
-      </tr>
+      {% endif %}
       <tr>
         <td>
           Address
@@ -113,7 +139,6 @@ Money Claims Prototype
           maryrichards@hotmail.com
         </td>
         <td class="change-answer">
-
         </td>
       </tr>       
       <tr>
@@ -162,7 +187,6 @@ Money Claims Prototype
       </table>
       <h2 class="heading-medium">Declaration</h2>
       <p class="text">
-
         <div class="notice">
           <i class="icon icon-important">
             <span class="visually-hidden">Warning</span>
@@ -171,58 +195,28 @@ Money Claims Prototype
             Once you 'Sign and submit', you cannot change your answers
           </strong>
         </div>
+        <div class="form-group">
+          <a name="hasacceptedtermsandconditions"></a>
+          <div class="multiple-choice text">
+            <input class="" id="HasAcceptedTermsAndConditions" type="checkbox" value="true">
+            <label for="HasAcceptedTermsAndConditions"> 
+              I confirm that I believe the details  I have provided are correct.
+            </label>
+          </div>
+          <span class="field-validation-valid" data-valmsg-for="HasAcceptedTermsAndConditions" data-valmsg-replace="true" aria-live="polite"></span></div>
+          <a href="confirmation-page" class="button">Sign and submit</a>
+        </main>
 
-<div class="form-group">
-    <a name="hasacceptedtermsandconditions"></a>
+        <form method="post"  action="#" class="form" style="position: absolute;">
+          <select id="control-box" name="control-box" onchange="this.form.submit()">
+            <option  value="0" {% if data['control-box'] == 0 %}selected{% endif %}>Choose</option>
 
-    <div class="multiple-choice text">
-      <input class="" id="HasAcceptedTermsAndConditions" type="checkbox" value="true">
-      <label for="HasAcceptedTermsAndConditions"> 
+            <option  value="1" {% if data['control-box'] == 1 %}selected{% endif %}>Individual</option>
+            <option value="2" {% if data['control-box'] == 2 %}selected{% endif %}>Sole trader</option>
+            <option value="3" {% if data['control-box'] == 3 %}selected{% endif %}>Company</option>
+            <option value="4" {% if data['control-box'] == 4 %}selected{% endif %}>Organisation</option>
+          </select>
 
-I confirm that I believe the details  I have provided are correct.
+        </form>
 
-
-      </label>
-    </div>
-
-
-    <span class="field-validation-valid" data-valmsg-for="HasAcceptedTermsAndConditions" data-valmsg-replace="true" aria-live="polite"></span></div>
-
-        <a href="confirmation-page" class="button">Sign and submit</a>
-      </main>
-      <select id="control-box" name="select-box" style="position: absolute;">
-        <option  value="1">Individual</option>
-        <option value="2">Sole trader</option>
-        <option value="3">Company</option>
-        <option value="4">Organisation</option>
-      </select>
-      <script type="text/javascript">
-        $( document ).ready(function() {
-         $('#control-box').on('change', function () {
-          if (this.value == '1') {
-            $(".individual").show();
-            $(".business").hide();
-            $(".sole").hide();
-            $(".dob").show();
-          } else if (this.value == '2') {
-            $(".individual").show();
-            $(".business").hide();
-            $(".sole").show();
-            $(".dob").hide();
-          }else if (this.value == '3') {
-            $(".individual").hide();
-            $(".business").show();
-            $(".org").hide();
-            $(".sole").hide();
-            $(".dob").hide();
-          }else if (this.value == '4') {
-            $(".individual").hide();
-            $(".org").show();
-            $(".company").hide();
-            $(".sole").hide();
-            $(".dob").hide();
-          }  
-        });
-       }); 
-     </script>
-     {% endblock %}
+        {% endblock %}
