@@ -18,11 +18,44 @@ Money Claims Prototype
       <h1 class='heading-large' id='page-h1'>
         Sign in
       </h1>
-<p  >Not registered yet? <a href="create-account">Register</a></p>
-      <form autocomplete="on" novalidate="novalidate" class="simple_form new_user" id="new_user" action="account-activated"
-            accept-charset="UTF-8" method="get"><input name="utf8" type="hidden" value="&#x2713;"/><input type="hidden"
-                                                                                                           name="authenticity_token"
-                                                                                                           value=""/>
+      <p  >Not registered yet? <a href="create-account">Register</a></p>
+
+       
+
+    {% if data['control-box'] == 1 %}
+    <!-- first time user - make claim -->
+     <form  action="account-activated" method="get">
+          <input type="hidden" name="make_claim" value="true">
+              <input type="hidden" name="respond" value="false">
+
+
+    {% elseif data['control-box'] == 2 %}
+    <!-- returning to a claim -->
+     <form action="/dashboard/home?dashboard=6" method="post">
+
+    {% elseif data['control-box'] == 3 %}
+    <!-- Issue a CCJ -->
+     <form action="/dashboard/home?dashboard=3" method="post">
+  
+    {% elseif data['control-box'] == 4 %}
+    <!-- Respond to a claim first time -->
+     <form  action="account-activated" method="get">
+    <input type="hidden" name="respond" value="true">
+    <input type="hidden" name="make_claim" value="false">
+
+   
+    {% elseif data['control-box'] == 5 %}
+    <!-- return to a response first time -->
+     <form action="/dashboard/home?dashboard=2" method="post">
+    
+
+
+    {% else %}
+          <form action="account-activated" method="get">
+    {% endif %}
+
+
+
         <div class='form-group'>
           <label class="email optional form-label" for="user_email">Email</label>
           <input autofocus="autofocus" class="string email optional form-control" type="email" value=""
@@ -49,7 +82,18 @@ Money Claims Prototype
 
       </div>
 </main>
+<form method="post"  action="#" class="form" style="position: absolute;">
+  <select id="control-box" name="control-box" onchange="this.form.submit()">
+    <option  value="0" {% if data['control-box'] == 0 %}selected{% endif %}>Choose</option>
 
+    <option  value="1" {% if data['control-box'] == 1 %}selected{% endif %}>1 - make-claim-new</option>
+    <option value="2" {% if data['control-box'] == 2 %}selected{% endif %}>2 - make-claim-return</option>
+    <option value="3" {% if data['control-box'] == 3 %}selected{% endif %}>3 - make-claim-CCJ</option>
+    <option value="4" {% if data['control-box'] == 4 %}selected{% endif %}>4 - Respond to claim-new</option>
+    <option value="5" {% if data['control-box'] == 5 %}selected{% endif %}>5 - Respond to claim-return</option>
+  </select>
+
+</form>
 
 {% endblock %}
 
