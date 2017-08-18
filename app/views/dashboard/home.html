@@ -1,6 +1,8 @@
 {% extends "layout_task-list.html" %}
 {% block page_title %} Your money claims account {% endblock %}
 {% block proposition_header %}
+{% set dashboard="1" %}
+
 {% include "includes/propositional_navigation.html" %}
 {% endblock %}
 {% block content %}
@@ -164,10 +166,10 @@
 <form method="post"  action="#" class="form" style="position: absolute;">
   <select id="dashboard" name="dashboard" onchange="this.form.submit()">
     <option  value="0" >Choose</option>
-    <option  value="1" >1. Claimant only</option>
-    <option value="1.2" {% if data['dashboard'] == 1.2 %}selected{% endif %}>1-2. Claimant - processed</option>
+    <option  value="1" {% if data['dashboard'] == 1 %}selected{% endif %}>1. Claimant only</option>
+    <option value="1.2" {% if data['dashboard'] == 1.2 %}selected{% endif %}>1.2. Claimant - processed</option>
     <option value="2" {% if data['dashboard'] == 2 %}selected{% endif %}>2. Defendant - respond to claim</option>
-    <option value="2.1" {% if data['dashboard'] == 2.1 %}selected{% endif %}>2-1. Defendant - processed</option>
+    <option value="2.1" {% if data['dashboard'] == 2.1 %}selected{% endif %}>2.1. Defendant - processed</option>
     <option value="3" {% if data['dashboard'] == 3 %}selected{% endif %}>3. Claimant CCJ - pre judgement</option>
     <option value="4" {% if data['dashboard'] == 4 %}selected{% endif %}>4. Claimant CCJ -post judgement</option>
     <option value="5" {% if data['dashboard'] == 5 %}selected{% endif %}>5.  Defendant CCJ -post judgement</option>
