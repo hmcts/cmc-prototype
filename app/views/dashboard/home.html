@@ -2,7 +2,6 @@
 {% block page_title %} Your money claims account {% endblock %}
 {% block proposition_header %}
 {% set dashboard="1" %}
-
 {% include "includes/propositional_navigation.html" %}
 {% endblock %}
 {% block content %}
@@ -26,14 +25,12 @@
     <div class="column-one-third">
       <div class="panel-cta tablet-and-up" style="">
         {% if data['dashboard'] == 6 %}
-
         <p class="heading-small panel-body flush--top cta-draft">Manage money claim</p>
         <p class="panel-button flush--bottom">
           <a id="create-new-lpa" class="button cta-draft" href="../../claimant/full/c-2/task-list" role="button">Continue with new claim</a>
         </p>
-
         {% else %}
-        <p class="heading-small panel-body flush--top cta">Make a money claim</p>
+        <p class="heading-small panel-body flush--top cta">Make a new money claim</p>
         <p class="panel-button flush--bottom">
           <a id="create-new-lpa" class="button cta" href="../../claimant/full/c-2/task-list" role="button">Start now</a>
         </p>
@@ -49,7 +46,7 @@
   {% endif %}
   <div class="grid-row">
     <div class="column-full">  
-      {% if data['dashboard'] == 1 or data['dashboard'] == 1.2 or data['dashboard'] == 6 or data['dashboard'] == 3 or data['dashboard'] == 7 or data['dashboard'] == 4  or data['dashboard'] == 8%}
+      {% if data['dashboard'] == 1 or data['dashboard'] == 1.2 or data['dashboard'] == 6 or data['dashboard'] == 3 or data['dashboard'] == 7 or data['dashboard'] == 4  or data['dashboard'] == 8 or data['dashboard'] == 9%}
       <h2 class="heading-medium type-heading claims">
        Claims you've made or are in progress
      </h2>
@@ -93,7 +90,17 @@
           <td><a href="claimant3">736MC047</a></td>
           <td>Mary Richards</td>
           <td>£1400 </td>
-          <td>The defendant has responded to your claim </td>
+          <td>The defendant has rejected your money claim but have requested free mediation to help resolve the dispute.
+
+        </td>
+        </tr> 
+        {% endif %}
+        {% if data['dashboard'] == 9 or data['dashboard'] == 1 or data['dashboard'] == 8%}
+        <tr class="mediation" >
+          <td><a href="claimant5">736MC047</a></td>
+          <td>Mary Richards</td>
+          <td>£1400 </td>
+          <td>The defendant has rejected your money claim but have made a suggestion to help resolve the dispute.</td>
         </tr> 
         {% endif %}
         {% if data['dashboard'] == 1.2 or data['dashboard'] == 8%}
@@ -104,13 +111,10 @@
           <td>Your claim is being processed. We will email you to explain what to do next. </td>
         </tr>
         {% endif %}
-        {% if data['dashboard'] == 1 or data['dashboard'] == 1.2 or data['dashboard'] == 6 or data['dashboard'] == 3 or data['dashboard'] == 7 or data['dashboard'] == 4  or data['dashboard'] == 8%}
+        {% if data['dashboard'] == 1 or data['dashboard'] == 1.2 or data['dashboard'] == 6 or data['dashboard'] == 3 or data['dashboard'] == 7 or data['dashboard'] == 4  or data['dashboard'] == 8 or data['dashboard'] == 9 %}
       </tbody>
     </table>
     {% endif %}
-   
-
-
     {% if data['dashboard'] == 2 or data['dashboard'] == 2.1 or data['dashboard'] == 5  or data['dashboard'] == 8%}
     <h2 class="heading-medium type-heading" >
      Claims made against you
@@ -135,7 +139,6 @@
     </tr>  
      {% endif %}  
       {% if data['dashboard'] == 2.1  or data['dashboard'] == 8%}
-
     <tr >
       <td><a href="defendant">352MC733</a></td>
       <td>Jan Clark  </td>
@@ -143,8 +146,6 @@
       <td>Your defence is being processed. We will email you to explain what to do next. </td>
     </tr>
     {% endif %}
-   
-
     {% if data['dashboard'] == 5  or data['dashboard'] == 8%}
     <tr>
       <td><a href="defendant1">736MC047</a></td>
@@ -157,15 +158,14 @@
   </tbody>
 </table>
 {% endif %}
-
-
 </div>
 </div>
 </main>
-
 <form method="post"  action="#" class="form" style="position: absolute;">
   <select id="dashboard" name="dashboard" onchange="this.form.submit()">
     <option  value="0" >Choose</option>
+    <option value="8" {% if data['dashboard'] == 8 %}selected{% endif %}>0. Show all</option>
+
     <option  value="1" {% if data['dashboard'] == 1 %}selected{% endif %}>1. Claimant only</option>
     <option value="1.2" {% if data['dashboard'] == 1.2 %}selected{% endif %}>1.2. Claimant - processed</option>
     <option value="2" {% if data['dashboard'] == 2 %}selected{% endif %}>2. Defendant - respond to claim</option>
@@ -175,8 +175,7 @@
     <option value="5" {% if data['dashboard'] == 5 %}selected{% endif %}>5.  Defendant CCJ -post judgement</option>
     <option value="6" {% if data['dashboard'] == 6 %}selected{% endif %}>6. Draft claim</option>
     <option value="7" {% if data['dashboard'] == 7 %}selected{% endif %}>7. Mediation</option>
-    <option value="8" {% if data['dashboard'] == 8 %}selected{% endif %}>8. Show all</option>
-
+    <option value="9" {% if data['dashboard'] == 9 %}selected{% endif %}>8. Suggestion</option>
   </select>
 </form>
 {% endblock %}
