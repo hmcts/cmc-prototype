@@ -423,7 +423,7 @@ router.get('*/task-list/defence-options', function (req, res, next) {
 
   let defence_options = req.session.data.defence_options;
   if (defence_options === "complete" ){
-    res.redirect("-defence-options");
+    res.redirect("do-you-owe-money/check-your-answers");
   } else {
     next()
   }
@@ -449,8 +449,39 @@ router.get('*/task-list/your-defence', function (req, res, next) {
 
 
   let your_defence = req.session.data.your_defence;
-  if (your_defence === "-complete" ){
+  if (your_defence === "complete" ){
     res.redirect("your-defence/check-your-answers");
+  } else {
+    next()
+  }
+
+});
+
+
+module.exports = router
+// Check your answers for 'Claim amount'
+router.get('*/task-list/owe-all', function (req, res, next) {
+
+
+  let your_defence = req.session.data.owe_some;
+  if (your_defence === "complete" ){
+    res.redirect("owe-all/check-your-answers");
+  } else {
+    next()
+  }
+
+});
+
+
+module.exports = router
+// Check your answers for 'Claim amount'
+router.get('*/task-list/your-defence/partial', function (req, res, next) {
+
+
+  let your_defence = req.session.data.your_defence;
+  if (your_defence === "complete" ){
+    res.redirect("../your-defence/check-your-answers");               
+
   } else {
     next()
   }

@@ -38,10 +38,10 @@ Check your answers
           Name:
         </td>
         <td>
-         Mrs Mary Richards
+         {{data['defendant_title']}} Mary Richards
        </td>
        <td class="change-answer">
-        <a href="../your-details/name">
+        <a href="../your-details/index">
           Change <span class="visuallyhidden">Name</span>
         </a>
       </td>
@@ -70,47 +70,77 @@ Check your answers
           Correspondence address:
         </td>
         <td>
-          Same as address
-        </td>
-        <td class="change-answer">
-               <a href="../your-details/address">
-            Change <span class="visuallyhidden">Name</span>
-          </a>     
-        </td>
-      </tr>      
-      <tr>
-        <td>
-          Date of birth:
-        </td>
-        <td>
-          31/03/1980
-        </td>
-        <td class="change-answer">
-          <a href="../your-details/address">
-            Change <span class="visuallyhidden">Name</span>
-          </a>
-        </td>
-      </tr>
 
-      <tr>
+          {% if data['correspondence-address']=="Yes" %}
+
+          {{data['d-addressLine1']}}<br>
+          {{data['d-addressLine2']}}<br>
+          {{data['d-address-town']}}<br>
+          {{data['d-addressPostcode']}}<br>
+          {% else %} 
+          Same as address<br>
+          {% endif %} 
+
+
+        </td>
+        <td class="change-answer">
+         <a href="../your-details/address">
+          Change <span class="visuallyhidden">Name</span>
+        </a>     
+      </td>
+    </tr>      
+    <tr>
+      <td>
+        Date of birth:
+      </td>
+      <td>
+        {% if data['day']!="" %}
+
+
+        {{data['day']}} {{data['month']}} {{data['year']}}
+
+        {% elseif data['day']=="" %} 
+        31 01 1978
+        {% endif %} 
+
+
+
+      </td>
+      <td class="change-answer">
+        <a href="../your-details/address">
+          Change <span class="visuallyhidden">Name</span>
+        </a>
+      </td>
+    </tr>
+
+    <tr>
       <tr>
         <td>
           Telephone:
         </td>
         <td>
-          None
-        </td>
-        <td class="change-answer">
-          <a href="../your-details/address">
-            Change <span class="visuallyhidden">Name</span>
-          </a>
-        </td>
-      </tr>
 
-      <tr>
+        {% if data['defendant-phone']!="" %}
 
-      </tbody>
-    </table>
+        
+         {{data['defendant-phone']}}
+
+        {% elseif data['defendant-phone']=="" %} 
+       07827999612
+        {% endif %} 
+
+       </td>
+       <td class="change-answer">
+        <a href="../your-details/address">
+          Change <span class="visuallyhidden">Name</span>
+        </a>
+      </td>
+    </tr>
+
+    <tr>
+
+    </tbody>
+  </table>
 
   <br>
   <br>
