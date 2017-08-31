@@ -9,12 +9,8 @@ Money Claims Prototype
 {% endblock %}
 {% block content %}
 <main id="content" role="main">
-  <div class="phase-banner-alpha">
-    <p>
-      <strong class="phase-tag">BETA</strong>
-      <span>This is a new service – your <a href="#">feedback</a> will help us to improve it.</span>
-    </p>
-  </div>
+  {% include "includes/phase_banner_beta.html" %}
+
   <div class="grid-row">
     <div class="column-two-thirds">
       <a href="#" class="link-back">Back</a>
@@ -23,7 +19,15 @@ Money Claims Prototype
       </h1>
 
         <br>
-        <form action="../../task-list" method="get" class="form">
+    {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}        
+     <form method="post" action="{{ data.return_page if data.return_page | length > 0 else '../task-list' }}" class="form">
+
+
+      {% else %}
+       <form action="../../task-list" method="post" class="form">
+
+
+      {% endif %}
           <div class="form-group">
             <fieldset>
               <legend class="visually-hidden">When you'll pay the amount</legend>
@@ -62,10 +66,17 @@ Money Claims Prototype
               </div>
             </div>
           </fieldset>
-          <div class="form-group">
-            <input id="advert-option-next--button" type="submit" value="Save and continue" class="button"
-            data-ignore-double-submit="true">
-          </div>
+     {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('task-list')%}
+       <div class="form-group">
+        <input type="submit" class="button" value="Save and continue"/>
+      </div>
+
+      <a href="#" onclick="goBack()">Cancel</a>
+      {% else %}
+      <div class="form-group">
+        <input type="submit" class="button" value="Save and continue"/>
+      </div>
+      {% endif %}
         </form>
       </div>
     </div>

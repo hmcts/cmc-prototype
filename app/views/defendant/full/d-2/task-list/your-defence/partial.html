@@ -4,53 +4,32 @@ Money Claims Prototype
 {% endblock %}
 {% block proposition_header %}
 {% set my_account="2" %}
-
 {% include "includes/propositional_navigation.html" %}
 {% endblock %}
 {% block content %}
 <main id="content" role="main">
-  <div class="phase-banner-alpha">
-    <p>
-      <strong class="phase-tag">BETA</strong>
-      <span>This is a new service – your <a href="#">feedback</a> will help us to improve it.</span>
-    </p>
-  </div>
+  {% include "includes/phase_banner_beta.html" %}
   <div class="grid-row">
     <div class="column-two-thirds">
       <a href="#" class="link-back">Back</a>
-      
-
-
-
-
       {% if data.radio_select_group2=="Some" %}
-
       <h1 class="heading-large">How much money do you believe you owe? </h1>
-
       <form
       name="aspnetForm"
       action="defence-2"
       method="get"
       id="aspnetForm"
       autocomplete="off">
-      
       {% elseif data.radio_select_group2=="Paid-some" %}
-
-
       <h1 class="heading-large">How much have you paid the claimant? </h1>
-
       <form
       name="aspnetForm"
       action="defence-2"
       method="get"
       id="aspnetForm"
       autocomplete="off">
-
-
       {% elseif data.radio_select_group2=="paid" %}
-
       <h1 class="heading-large">How much and when did you pay? </h1>
-
       <form
       name="aspnetForm"
       action="../../task-list"
@@ -58,11 +37,7 @@ Money Claims Prototype
       id="aspnetForm"
       autocomplete="off">
       <input type="hidden" name="your_defence" value="complete">
-
       {% endif %}
-
-
-
       <div class="form-group">
         <fieldset>
           <legend class="visually-hidden">Defence</legend>
@@ -75,10 +50,7 @@ Money Claims Prototype
                 {% endif %}
               </label>
               {% if data.radio_select_group2=="Some"%}
-
-
               <p class="">The amount being claimed is £1,500</p>
-
               <h3 class="heading-small">How much money do you believe you owe? </h3>
               <div class="form-group">
                   <!-- <label class="form-label-bold" for="claim[fee][court_fee]">
@@ -93,10 +65,8 @@ Money Claims Prototype
                   <label class="form-label-bold" for="offer">
                     Explain why this is what you owe, rather than the full amount. 
                   </label>
-                  
                   {% elseif data.radio_select_group2=="Paid-some" %}
-              <p class="">The amount being claimed is £1,500</p>
-
+                  <p class="">The amount being claimed is £1,500</p>
                   <h3 class="heading-small">How much have you paid the claimant? </h3>
                   <div class="form-group">
                    <!--  <label class="form-label-bold" for="claim[fee][court_fee]">
@@ -117,7 +87,6 @@ Money Claims Prototype
                     name="owe-amount"
                     id="owe-amount">
                   </div> -->
-                  
                   <div class="form-group">
                     <fieldset>
                       <p class="form-label-bold">When did you pay this amount?</p>
@@ -142,7 +111,6 @@ Money Claims Prototype
                     </fieldset>
                   </div>
                   {% elseif data.radio_select_group2=="paid" or data.radio_select_group2=="Paid-some"%}
-                  
                   <h3 class="heading-small">How much have you paid the claimant? </h3>
                   <div class="form-group">
                    <!--  <label class="form-label-bold" for="claim[fee][court_fee]">
@@ -153,7 +121,6 @@ Money Claims Prototype
                     name="amount-paid"
                     id="amount-paid">
                   </div>
-
                   <div class="form-group">
                     <fieldset>
                       <p class="form-label-bold">When did you pay this amount?</p>
@@ -178,28 +145,14 @@ Money Claims Prototype
                     </fieldset>
                   </div>
                   {% endif %}
-
-
                   <div class="form-group">
                     <label class="form-label-bold" for="offer">
-
                      {% if data.radio_select_group2=="paid" %}
-
                      Any additional comments (optional). 
-
                      {% elseif data.radio_select_group2=="Paid-some"%}
-
-                                          Explain why you don't owe the full amount.
-
+                     Explain why you don't owe the full amount.
                      {% endif %}
                    </label>
-
-
-
-
-
-
-
                    <textarea class="form-control form-control-3-4 form-control-large"
                    id="owe-reason"
                    rows="4"

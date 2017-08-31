@@ -317,105 +317,105 @@ $(document).ready(function () {
 
   $('.otherType').on('change',function(){
     if( $(this).val()==="2"){
-        $(".evidence-message").text("For example, a signed contract by the claimant");
+      $(".evidence-message").text("For example, a signed contract by the claimant");
 
 
     }
     else if ( $(this).val()==="3"){
-        $(".evidence-message").text("For example, a surveyor's report.");
+      $(".evidence-message").text("For example, a surveyor's report.");
     }
     else if ( $(this).val()==="4"){
-        $(".evidence-message").text("For example, a letter from the claimant stating what work they expected you to do.");
+      $(".evidence-message").text("For example, a letter from the claimant stating what work they expected you to do.");
     }
-      else if ( $(this).val()==="5"){
-        $(".evidence-message").text("For example, a photo of the work you carried out.");
+    else if ( $(this).val()==="5"){
+      $(".evidence-message").text("For example, a photo of the work you carried out.");
     }  
-      else if ( $(this).val()==="6"){
-        $(".evidence-message").text("For example, a receipt showing you've paid the claimant.");
+    else if ( $(this).val()==="6"){
+      $(".evidence-message").text("For example, a receipt showing you've paid the claimant.");
     } 
-      else if ( $(this).val()==="7"){
-        $(".evidence-message").text("For example, a bank statement showing you've paid the claimant.");
+    else if ( $(this).val()==="7"){
+      $(".evidence-message").text("For example, a bank statement showing you've paid the claimant.");
     }      
-     else if ( $(this).val()==="other"){
-        $(".evidence-message").text("");
+    else if ( $(this).val()==="other"){
+      $(".evidence-message").text("");
     } 
   }); 
 
   $('.otherType1').on('change',function(){
     if( $(this).val()==="2"){
-        $(".evidence-message1").text("For example, a signed contract by the claimant");
+      $(".evidence-message1").text("For example, a signed contract by the claimant");
 
 
     }
     else if ( $(this).val()==="3"){
-        $(".evidence-message1").text("For example, a surveyor's report.");
+      $(".evidence-message1").text("For example, a surveyor's report.");
     }
     else if ( $(this).val()==="4"){
-        $(".evidence-message1").text("For example, a letter from the claimant stating what work they expected you to do.");
+      $(".evidence-message1").text("For example, a letter from the claimant stating what work they expected you to do.");
     }
-      else if ( $(this).val()==="5"){
-        $(".evidence-message1").text("For example, a photo of the work you carried out.");
+    else if ( $(this).val()==="5"){
+      $(".evidence-message1").text("For example, a photo of the work you carried out.");
     }  
-      else if ( $(this).val()==="6"){
-        $(".evidence-message1").text("For example, a receipt showing you've paid the claimant.");
+    else if ( $(this).val()==="6"){
+      $(".evidence-message1").text("For example, a receipt showing you've paid the claimant.");
     } 
-      else if ( $(this).val()==="7"){
-        $(".evidence-message1").text("For example, a bank statement showing you've paid the claimant.");
+    else if ( $(this).val()==="7"){
+      $(".evidence-message1").text("For example, a bank statement showing you've paid the claimant.");
     }      
-     else if ( $(this).val()==="other"){
-        $(".evidence-message1").text("");
+    else if ( $(this).val()==="other"){
+      $(".evidence-message1").text("");
     } 
   }); 
 
   $('.otherType2').on('change',function(){
     if( $(this).val()==="2"){
-        $(".evidence-message2").text("For example, a signed contract by the claimant");
+      $(".evidence-message2").text("For example, a signed contract by the claimant");
 
 
     }
     else if ( $(this).val()==="3"){
-        $(".evidence-message2").text("For example, a surveyor's report.");
+      $(".evidence-message2").text("For example, a surveyor's report.");
     }
     else if ( $(this).val()==="4"){
-        $(".evidence-message2").text("For example, a letter from the claimant stating what work they expected you to do.");
+      $(".evidence-message2").text("For example, a letter from the claimant stating what work they expected you to do.");
     }
-      else if ( $(this).val()==="5"){
-        $(".evidence-message2").text("For example, a photo of the work you carried out.");
+    else if ( $(this).val()==="5"){
+      $(".evidence-message2").text("For example, a photo of the work you carried out.");
     }  
-      else if ( $(this).val()==="6"){
-        $(".evidence-message2").text("For example, a receipt showing you've paid the claimant.");
+    else if ( $(this).val()==="6"){
+      $(".evidence-message2").text("For example, a receipt showing you've paid the claimant.");
     } 
-      else if ( $(this).val()==="7"){
-        $(".evidence-message2").text("For example, a bank statement showing you've paid the claimant.");
+    else if ( $(this).val()==="7"){
+      $(".evidence-message2").text("For example, a bank statement showing you've paid the claimant.");
     }      
-     else if ( $(this).val()==="other"){
-        $(".evidence-message2").text("");
+    else if ( $(this).val()==="other"){
+      $(".evidence-message2").text("");
     } 
   }); 
 
   $('.otherType3').on('change',function(){
     if( $(this).val()==="2"){
-        $(".evidence-message3").text("For example, a signed contract by the claimant");
+      $(".evidence-message3").text("For example, a signed contract by the claimant");
 
 
     }
     else if ( $(this).val()==="3"){
-        $(".evidence-message3").text("For example, a surveyor's report.");
+      $(".evidence-message3").text("For example, a surveyor's report.");
     }
     else if ( $(this).val()==="4"){
-        $(".evidence-message3").text("For example, a letter from the claimant stating what work they expected you to do.");
+      $(".evidence-message3").text("For example, a letter from the claimant stating what work they expected you to do.");
     }
-      else if ( $(this).val()==="5"){
-        $(".evidence-message3").text("For example, a photo of the work you carried out.");
+    else if ( $(this).val()==="5"){
+      $(".evidence-message3").text("For example, a photo of the work you carried out.");
     }  
-      else if ( $(this).val()==="6"){
-        $(".evidence-message3").text("For example, a receipt showing you've paid the claimant.");
+    else if ( $(this).val()==="6"){
+      $(".evidence-message3").text("For example, a receipt showing you've paid the claimant.");
     } 
-      else if ( $(this).val()==="7"){
-        $(".evidence-message3").text("For example, a bank statement showing you've paid the claimant.");
+    else if ( $(this).val()==="7"){
+      $(".evidence-message3").text("For example, a bank statement showing you've paid the claimant.");
     }      
-     else if ( $(this).val()==="other"){
-        $(".evidence-message3").text("");
+    else if ( $(this).val()==="other"){
+      $(".evidence-message3").text("");
     } 
   }); 
 
@@ -450,5 +450,8 @@ $(document).ready(function () {
 
 
 });
-
+function goBack() {
+  event.preventDefault();
+  window.history.back();
+}
 
