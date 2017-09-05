@@ -793,7 +793,7 @@ Check your answers
     <span class="field-validation-valid" data-valmsg-for="HasAcceptedTermsAndConditions" data-valmsg-replace="true" aria-live="polite"></span></div>
 
 
-    {% if data.your_defence=="complete" %}
+<!--     {% if data.your_defence=="complete" %}
     <form method="post" action="../confirmation-page" class="form">
 
       {% elseif data.your_suggestion=="complete"%}
@@ -813,10 +813,27 @@ Check your answers
               {% else %}
               <form method="post" action="../confirmation-page" class="form">
 
-                {% endif %}
+                {% endif %} -->
 
 
+              {% if data.radio_select_group=="all" %}
+          <form method="post" action="../confirmation-page-owe-all-paid" class="form">
 
+              {% elseif data.radio_select_group=="Some" %}
+               <form method="post" action="../confirmation-page" class="form">
+ 
+              {% elseif data.radio_select_group=="reject" and data.radio_select_group2!="paid" %}
+               <form method="post" action="../confirmation-page" class="form">
+
+              {% elseif data.radio_select_group2=="paid"%}
+              <form method="post" action="../confirmation-page-already-paid" class="form">
+
+              {% else %}
+
+               <form method="post" action="../confirmation-page" class="form">
+
+
+              {% endif %} 
 
 
                 <div class="form-group">
