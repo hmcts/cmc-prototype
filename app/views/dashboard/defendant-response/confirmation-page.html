@@ -21,41 +21,77 @@ Money Claims Prototype
 
 
   <div class="grid-row">
-   
+
 
     <div class="govuk-box-highlight">
+
+      {% if data['radio-indent-group'] == "counter" %}
+      <h1 class="bold-large">Your offer has been sent to the defendant</h1>
+
+
+
+      {% elseif data['radio-indent-group'] == "accept-mediation" or data['radio-indent-group2'] == "accept-mediation" %}
       <h1 class="bold-large">You have requested free mediation</h1>
 
-   
-  </div>
-  
+      {% elseif data['radio-indent-group'] == "decline-mediation" or data['radio-indent-group2'] == "decline-mediation" %}
+      <h1 class="bold-large">A judge will review your case</h1>
 
- <div class="column-two-thirds">
+      {% else %}
 
-  <fieldset>
+      <h1 class="bold-large">You have requested free mediation</h1>
 
-    <h2 class="heading-medium">What happens next</h2>
-    <p>A mediator will get in contact with both the defendant and you within the next 14 days to arrange a mediation appointment.</p>
-
-
- 
-  
-    <p> View your claim status on <a href='../claimant4'>your money claims account</a>. </p>    
+      {% endif %}
 
 
 
-    <h2 class="heading-medium">Help and support</h2>
-    <p>Email: moneyclaims@hmcts.gsi.gov.uk<br>
-      Telephone: 0300 123 7050<br>
-      Hours: 9am to 5pm, Monday to Friday</p>
-      <p><a href="https://www.gov.uk/call-charges">Find out about call charges</a></p>
 
-    </fieldset>
-    <br>
-    <a href="http://www.smartsurvey.co.uk/s/CMCMVPT1/" class="button">Finished</a>
-  </div>
-</div>
-</main>
+    </div>
 
 
-{% endblock %}
+    <div class="column-two-thirds">
+
+      <fieldset>
+
+        <h2 class="heading-medium">What happens next</h2>
+
+
+
+        {% if data['radio-indent-group'] == "counter" %}
+          <p>The defendant Mary Richards can accept your counter offer, reject it or suggest an alternative. We will notify you once the defendant responds.
+                  </p>
+
+
+        {% elseif data['radio-indent-group'] == "accept-mediation" or data['radio-indent-group2'] == "accept-mediation" %}
+        <p>A mediator will contact both the defendant and you within the next 14 days to arrange an appointment.</p>
+
+        {% elseif data['radio-indent-group'] == "decline-mediation" or data['radio-indent-group2'] == "decline-mediation" %}
+        <p>If the defendant doesn't want to mediate then the case will be reviewed by a judge and might go to a hearing. We'll contact you if a hearing date is scheduled and explain what you need to do to prepare.</p>
+
+        {% else %}
+
+     <p>The defendant Mary Richards can accept your counter offer, reject it or suggest an alternative. We will notify you once the defendant responds.
+                  </p>
+        {% endif %}
+
+
+
+
+        <p> View your claim status on <a href='../claimant4'>your money claims account</a>. </p>    
+
+
+
+        <h2 class="heading-medium">Help and support</h2>
+        <p>Email: moneyclaims@hmcts.gsi.gov.uk<br>
+          Telephone: 0300 123 7050<br>
+          Hours: 9am to 5pm, Monday to Friday</p>
+          <p><a href="https://www.gov.uk/call-charges">Find out about call charges</a></p>
+
+        </fieldset>
+        <br>
+        <a href="http://www.smartsurvey.co.uk/s/CMCMVPT1/" class="button">Finished</a>
+      </div>
+    </div>
+  </main>
+
+
+  {% endblock %}

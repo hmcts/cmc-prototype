@@ -13,12 +13,8 @@ Money Claims Prototype
 
 <main id="content" role="main">
 
-  <div class="phase-banner-alpha">
-    <p>
-      <strong class="phase-tag">BETA</strong>
-      <span>This is a new service – your <a href="#">feedback</a> will help us to improve it.</span>
-    </p>
-  </div>
+  {% include "includes/phase_banner_beta.html" %}
+
 
   <div class="grid-row">
     <div class="column-two-thirds">
@@ -31,6 +27,16 @@ Money Claims Prototype
 
       <p >You can request an extra 14 days to prepare your case.</p>
 
+      {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}        
+      <form
+      name="aspnetForm"
+      method="post"
+      id="aspnetForm"
+      autocomplete="off" 
+      onsubmit="multiNavigation('radio_select_group_time', ['Yes', 'No'], ['../more-time-to-respond/confirmation', '../task-list']);return false;"
+      >
+
+      {% else %}
       <form
       name="aspnetForm"
       method="post"
@@ -38,6 +44,12 @@ Money Claims Prototype
       autocomplete="off" 
       onsubmit="multiNavigation('radio_select_group_time', ['Yes', 'No'], ['more-time-to-respond/confirmation', '../task-list']);return false;"
       >
+      {% endif %}
+
+
+
+
+      
 
       <div class="form-group">
         <fieldset>
@@ -61,11 +73,20 @@ Money Claims Prototype
           </div>
 
         </fieldset>
+        {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}
         <div class="form-group">
-
-          <input id="advert-option-next--button" type="submit" value="Save and continue" class="button"
-          data-ignore-double-submit="true">
+          <input type="submit" class="button" value="Save changes"/>
         </div>
+
+
+        <a href="{{ data.return_page if data.return_page | length > 0 else '../task-list' }}">Cancel</a>
+
+        {% else %}
+        <div class="form-group">
+          <input type="submit" class="button" value="Save and continue"/>
+        </div>
+
+        {% endif %}
 
       </div>
 

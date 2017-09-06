@@ -17,9 +17,7 @@
         <h1 class="heading-large">
           Respond to a money claim
         </h1>
-        <p>You can return to this claim at any time by using your email address and password to sign in.</p>
-        <br>
-        <table id="table-of-tasks">
+              <table id="table-of-tasks">
           <thead>
             <tr>
               <th scope="col" id="col-task">
@@ -46,6 +44,33 @@
                   {% endif %}
                 </td>
               </tr>
+              <tr id="read-rules">
+                <td class="task">
+                  <a href="task-list/your-response-options{{formQuery}}">
+                    <span class="task-name"> Your response options </span>
+                  </a>
+                </td>
+                <td class="numeric" id="task-status" scope="col" id="col-status">
+                  {% if data.your_defence_options=="complete" %}
+                  {% include "includes/task_status_finished.html" %}
+                  {% endif %}
+                </td>
+              </tr>
+
+              <tr id="read-rules">
+                <td class="task">
+                  <a href="task-list/settle-out-of-court{{formQuery}}">
+                    <span class="task-name"> Settle out of court </span>
+                  </a>
+                </td>
+                <td class="numeric" id="task-status" scope="col" id="col-status">
+                  {% if data.settle_out_of_court=="complete" %}
+                  {% include "includes/task_status_finished.html" %}
+                  {% endif %}
+                </td>
+              </tr>
+
+
               <tr id="read-rules">
                 <td class="task">
                   <a href="task-list/more-time-to-respond{{formQuery}}">
@@ -91,7 +116,7 @@
             <tr id="their-details">
               <td class="task">
                 <a href="task-list/your-defence{{formQuery}}">
-                  <span class="task-name"> Your response to the claim</span>
+                  <span class="task-name"> Why do you disagree with the claim?</span>
                 </a>
               </td>
               <td class="numeric" id="task-status" scope="col" id="col-status">
@@ -100,11 +125,35 @@
                 {% endif %}
               </td>
             </tr>
-            
+         <tr id="their-details">
+              <td class="task">
+                <a href="task-list/settle{{formQuery}}">
+                  <span class="task-name"> Settle out of court</span>
+                </a>
+              </td>
+              <td class="numeric" id="task-status" scope="col" id="col-status">
+                {% if data.settle=="complete" %}
+                {% include "includes/task_status_finished.html" %}
+                {% endif %}
+              </td>
+            </tr>           
             {% elseif data.radio_select_group2=="paid" and data.do_you_owe_money=="complete" and data.radio_select_group!="Some" and data.radio_select_group!="all"%}
             <tr id="their-details">
               <td class="task">
                 <a href="task-list/your-defence/partial{{formQuery}}">
+                  <span class="task-name"> How much and when did you pay?</span>
+                </a>
+              </td>
+              <td class="numeric" id="task-status" scope="col" id="col-status">
+                {% if data.your_defence=="complete" %}
+                {% include "includes/task_status_finished.html" %}
+                {% endif %}
+              </td>
+            </tr>
+          {% elseif data.radio_select_group=="Some" and data.do_you_owe_money=="complete" and data.radio_select_group2=="defend_now" %}
+        <tr id="their-details">
+              <td class="task">
+                <a href="task-list/your-defence{{formQuery}}">
                   <span class="task-name"> Your response to the claim</span>
                 </a>
               </td>
@@ -114,6 +163,7 @@
                 {% endif %}
               </td>
             </tr>
+
 
             {% elseif data.radio_select_group=="all" and data.do_you_owe_money=="complete" %}
             <tr id="their-details">
@@ -141,8 +191,19 @@
                 {% endif %}
               </td>
             </tr>
-
-            {% elseif data.radio_select_group=="Some" and data.do_you_owe_money=="complete" %}
+          <tr id="their-details">
+              <td class="task">
+                <a href="task-list/settle{{formQuery}}">
+                  <span class="task-name"> Settle out of court</span>
+                </a>
+              </td>
+              <td class="numeric" id="task-status" scope="col" id="col-status">
+                {% if data.settle=="complete" %}
+                {% include "includes/task_status_finished.html" %}
+                {% endif %}
+              </td>
+            </tr>
+            {% elseif data.radio_select_group=="Some" and data.do_you_owe_money=="complete" and data.radio_select_group2!="defend_now" %}
          
 
           <tr id="their-details">
@@ -171,7 +232,18 @@
               </td>
             </tr>           
 
-  
+          <tr id="their-details">
+              <td class="task">
+                <a href="task-list/settle{{formQuery}}">
+                  <span class="task-name"> Settle out of court</span>
+                </a>
+              </td>
+              <td class="numeric" id="task-status" scope="col" id="col-status">
+                {% if data.settle=="complete" %}
+                {% include "includes/task_status_finished.html" %}
+                {% endif %}
+              </td>
+            </tr>
 
             
             {% endif %}

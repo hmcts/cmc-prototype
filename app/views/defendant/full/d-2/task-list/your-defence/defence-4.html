@@ -9,12 +9,8 @@ Money Claims Prototype
 {% endblock %}
 {% block content %}
 <main id="content" role="main">
-  <div class="phase-banner-alpha">
-    <p>
-      <strong class="phase-tag">BETA</strong>
-      <span>This is a new service – your <a href="#">feedback</a> will help us to improve it.</span>
-    </p>
-  </div>
+  {% include "includes/phase_banner_beta.html" %}
+
   <div class="grid-row">
     <div class="column-two-thirds">
       <a href="#" class="link-back">Back</a>
@@ -27,7 +23,7 @@ Money Claims Prototype
       <!--<div class="updates-border-thin"></div>-->
       <form
       name="aspnetForm"
-      action="suggest-or-not"
+      action="../../task-list"
       method="get"
       id="aspnetForm"
       autocomplete="off">
@@ -39,19 +35,21 @@ Money Claims Prototype
               <div class="bold-small">How this dispute has affected you? (optional)</div>
             </label>
             <textarea class="form-control form-control-3-4 form-control-large"
-            id="offer4"
+            id="defence-disagree-affect"
             rows="4"
-            name="offer4"
+            name="defence-disagree-affect"
             cols="40"
             type="text"
             style="width: 95%"
-            ></textarea>
+            >{{data['defence-disagree-affect']}}</textarea>
           </div>
         </div>
         <div class="panel panel-border-wide">
          <p> Your response will be sent to the claimant Jan Clark. 
          </p> 
        </div>
+                     <input type="hidden" name="your_defence" value="complete">
+
        <div class="form-group">
         <input id="advert-option-next--button" type="submit" value="Save and continue" class="button"
         data-ignore-double-submit="true">

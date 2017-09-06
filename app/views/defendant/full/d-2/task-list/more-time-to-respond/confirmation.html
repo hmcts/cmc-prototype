@@ -13,12 +13,8 @@ Money Claims Prototype
 
 <main id="content" role="main">
 
-  <div class="phase-banner-alpha">
-    <p>
-      <strong class="phase-tag">BETA</strong>
-      <span>This is a new service – your <a href="#">feedback</a> will help us to improve it.</span>
-    </p>
-  </div>
+  {% include "includes/phase_banner_beta.html" %}
+
 
   <div class="grid-row">
     <div class="column-two-thirds">
@@ -32,27 +28,35 @@ Money Claims Prototype
       <p >Your claim response deadline is now <span id="Date3"></span>. </p>
 
       <p >We'll email both you and Jan Smith confirming the additional response time.  </p>
- <form
-  name="aspnetForm"
-  action="../../task-list"
-  method="get"
-  id="aspnetForm"
-  autocomplete="off">      
+   
 
 
-    <p class="actions">
-              <input type="hidden" name="more_time_to_respond" value="complete">
+      {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}        
+      <form method="post" action="{{ data.return_page if data.return_page | length > 0 else '../task-list' }}" class="form">
 
-      <input id="advert-option-next--button" type="submit" value="Continue" class="button"
-      data-ignore-double-submit="true">
-      <!--<a href="aos">I need more time to respond</a>-->
-    </p>
-  </form>
-    </div>
+      {% else %}
+      <form
+      name="aspnetForm"
+      action="../../task-list"
+      method="get"
+      id="aspnetForm"
+      autocomplete="off">   
+      {% endif %}
 
 
+      <p class="actions">
+        <input type="hidden" name="more_time_to_respond" value="complete">
 
+        <input id="advert-option-next--button" type="submit" value="Continue" class="button"
+        data-ignore-double-submit="true">
+        <!--<a href="aos">I need more time to respond</a>-->
+      </p>
+    </form>
   </div>
+
+
+
+</div>
 </main>
 
 

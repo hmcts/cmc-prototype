@@ -38,10 +38,11 @@ Check your answers
           Name:
         </td>
         <td>
-         Mary Richards
+         {{data['defendant_title']}} Mary Richards
        </td>
        <td class="change-answer">
-        <a href="../your-details/name">
+               <a href="../your-details/index?return_page={{ '../../task-list/your-details/check-your-answers' | urlencode }}">
+
           Change <span class="visuallyhidden">Name</span>
         </a>
       </td>
@@ -50,17 +51,18 @@ Check your answers
     <tr>
 
       <tr>
-        <td>
+      <td class="no-border">
           Address:
         </td>
-        <td>
+        <td class="no-border">
           101 Regents road<br>
           Shiplake<br>
           Henley on Thames<br>
           RG9 4BW 
         </td>
-        <td class="change-answer">
-          <a href="../your-details/address">
+        <td class="no-border change-answer">
+            <a href="../your-details/address?return_page={{ '../../task-list/your-details/check-your-answers' | urlencode }}">
+
             Change <span class="visuallyhidden">Name</span>
           </a>
         </td>
@@ -70,38 +72,67 @@ Check your answers
           Correspondence address:
         </td>
         <td>
-          Same as address
-        </td>
-        <td class="change-answer">
-               <a href="../your-details/address">
-            Change <span class="visuallyhidden">Name</span>
-          </a>     
-        </td>
-      </tr>      
-      <tr>
-        <td>
-          Date of birth:
-        </td>
-        <td>
-          31/03/1980
-        </td>
-        <td class="change-answer">
-          <a href="../your-details/address">
-            Change <span class="visuallyhidden">Name</span>
-          </a>
-        </td>
-      </tr>
 
-      <tr>
-      <tr>
-        <td>
-          Telephone:
-        </td>
-        <td>
-          None
+          {% if data['correspondence-address']=="Yes" %}
+
+          {{data['d-addressLine1']}}<br>
+          {{data['d-addressLine2']}}<br>
+          {{data['d-address-town']}}<br>
+          {{data['d-addressPostcode']}}<br>
+          {% else %} 
+          Same as address<br>
+          {% endif %} 
+
+
         </td>
         <td class="change-answer">
-          <a href="../your-details/address">
+        
+      </td>
+    </tr>      
+    <tr>
+      <td>
+        Date of birth:
+      </td>
+      <td>
+        {% if data['day']!="" %}
+
+
+        {{data['day']}} {{data['month']}} {{data['year']}}
+
+        {% elseif data['day']=="" %} 
+        31 01 1978
+        {% endif %} 
+
+
+
+      </td>
+      <td class="change-answer">
+
+            <a href="../your-details/date-of-birth?return_page={{ '../../task-list/your-details/check-your-answers' | urlencode }}">
+          Change <span class="visuallyhidden">Name</span>
+        </a>
+      </td>
+    </tr>
+
+    <tr>
+      <tr>
+        <td>
+          Telephone (optional):
+        </td>
+        <td>
+
+          {% if data['defendant-phone']!="" %}
+
+
+          {{data['defendant-phone']}}
+
+          {% elseif data['defendant-phone']=="" %} 
+          07827999612
+          {% endif %} 
+
+        </td>
+        <td class="change-answer">
+            <a href="../your-details/number?return_page={{ '../../task-list/your-details/check-your-answers' | urlencode }}">
             Change <span class="visuallyhidden">Name</span>
           </a>
         </td>
@@ -112,11 +143,11 @@ Check your answers
       </tbody>
     </table>
 
-  <br>
-  <br>
+    <br>
+    <br>
 
-  <a href="../../task-list">Return to task list</a>
+    <a href="../../task-list">Return to task list</a>
 
-</main>
+  </main>
 
-{% endblock %}
+  {% endblock %}

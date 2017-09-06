@@ -21,8 +21,14 @@ Money Claims Prototype
 
   <div class="grid-row">
     <div class="column-two-thirds">
+      {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}        
+      <form method="post" action="{{ data.return_page if data.return_page | length > 0 else '../task-list' }}" class="form">
 
+
+        {% else %}
       <form method="post" action="../../task-list" class="form">
+
+          {% endif %}
 
         {{formData | safe}}
 
@@ -40,17 +46,23 @@ Money Claims Prototype
           </legend>
 
           <div class="form-group">
-            <input class="form-control form-control" id="claimant_phone" name="claimant-phone" type="text" value="{{data['claimant-phone']}}">
+            <input class="form-control form-control" id="defendant-phone" name="defendant-phone" type="text" value="{{data['defendant-phone']}}">
           </div>
 
 
 
         </fieldset>
           <input type="hidden" name="confirm_details" value="complete">
-
-        <div class="form-group">
-          <input type="submit" class="button" value="Save and continue" />
-        </div>
+              {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}
+              <div class="form-group">
+                <input type="submit" class="button" value="Save changes"/>
+              </div>
+              <a href="{{ data.return_page if data.return_page | length > 0 else '../task-list' }}">Cancel</a>
+              {% else %}
+              <div class="form-group">
+                <input type="submit" class="button" value="Save and continue"/>
+              </div>
+              {% endif %}
 
       </form>
 

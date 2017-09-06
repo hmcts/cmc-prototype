@@ -12,6 +12,7 @@ Check your answers
 {% block content %}
 
 <main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
 
   <h1 class="heading-large">
     Check your answers <!-- for this task -->
@@ -35,30 +36,44 @@ Check your answers
 
       <tr>
         <td>
-        Additional time to respond 
+          Additional time to respond 
         </td>
+        {% if data['radio_select_group_time']=="Yes" %}
         <td>
-         No 
+         <p>You have an extra 14 days to respond. <br>Your claim response deadline is now <span id="Date3"></span>. </p>
+
+
+ 
        </td>
        <td class="change-answer">
-        <a name="more_time_to_respond" value="" href="../more-time-to-respond">
-          Change <span class="visuallyhidden">Name</span>
-        </a>
-
-
+   
       </td>
-    </tr>
-    
-    
+
+      {% elseif data['radio_select_group_time']=="No" %} 
+      <td>
+       No 
+     </td>
+     <td class="change-answer">
+        <a href="../more-time-to-respond/index?return_page={{ '../../task-list/more-time-to-respond/check-your-answers' | urlencode }}">
+
+        Change <span class="visuallyhidden">Name</span>
+      </a>
+    </td>
+    {% endif %} 
 
 
-      </tbody>
-    </table>
+  </tr>
 
-  <br>
-  <br>
 
-  <a href="../../task-list">Return to task list</a>
+
+
+</tbody>
+</table>
+
+<br>
+<br>
+
+<a href="../../task-list">Return to task list</a>
 
 </main>
 
