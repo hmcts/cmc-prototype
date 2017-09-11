@@ -40,7 +40,7 @@
    </div>
    {% elseif data['claimant'] == 4  %}
    <div class="">
-    <p><span class="bold">15 May 2017</span><br>TThe defendant Mary Richards has rejected your money claim. They have requested free mediation to help resolve the dispute.</p>
+    <p><span class="bold">15 May 2017</span><br>The defendant Mary Richards has rejected your money claim. They have requested free mediation to help resolve the dispute.</p>
     <div class="form-group">
      <p> <a class="button" href="defendant-response/view-claim-def?response=med">View their response  </a></p>
    </div>
@@ -56,12 +56,35 @@
 <div class="">
   <p><span class="bold">15 May 2017</span><br>The defendant has rejected your claim.</p>
   <div class="form-group">
-   <p> <a class="button" href="defendant-response/view-claim-def?response=med_suggestion">View their response </a></p>
+   <p> <a class="button" href="defendant-response/view-claim-def?response=no_med_suggestion">View their response </a></p>
  </div>
 </div>
+
+{% elseif data['claimant'] == 7  %}
+<div class="">
+  <p><span class="bold">15 May 2017</span><br>The defendant Mary Richards can accept your counter offer, reject it or suggest an alternative. We will notify you once the defendant responds.</p>
+</div>
+
+{% elseif data['claimant'] == 8  %}
+<div class="">
+  <p><span class="bold">15 May 2017</span><br>The defendant Mary Richards will be asked if they would like Free mediation. We will notify you once the defendant responds.</p>
+</div>
+
+{% elseif data['claimant'] == 9  %}
+<div class="">
+  <p><span class="bold">15 May 2017</span><br>A mediator will contact both the defendant and you within the next 14 days to arrange an appointment.</p>
+</div>
+
+{% elseif data['claimant'] == 10  %}
+<div class="">
+  <p><span class="bold">15 May 2017</span><br>A mediator will contact both the defendant and you within the next 14 days to arrange an appointment.</p>
+</div>
+
+
+
 {% endif %}
 
-{% if data['claimant'] == 2 or data['claimant'] == 3 or data['claimant'] == 4 or data['claimant'] == 5 or data['claimant'] == 6  %}
+{% if data['claimant'] == 2 or data['claimant'] == 3 or data['claimant'] == 4 or data['claimant'] == 5 or data['claimant'] == 6 or data['claimant'] == 7 or data['claimant'] == 8 or data['claimant'] == 9  %}
 
 <h2 class="heading-medium">Claim history </h2>
 
@@ -93,13 +116,13 @@
 <p>
  You can <a href='#'>cancel your claim.</a> if you no longer want to pursue it.
 </p> 
-{% if data['claimant'] == 4 or data['claimant'] == 6  %}
+{% if data['claimant'] == 4 or data['claimant'] == 6  or data['claimant'] == 9  %}
 <h2 class="heading-small">Make a suggestion to settle the claim</h2>
 <p>
  <a href='#'>Make a offer</a> to settle the claim out of court. This will avoid going to a hearing. 
 </p>
 {% endif %}     
-{% if data['claimant'] == 6  %}
+{% if data['claimant'] == 6  or data['claimant'] == 7 or data['claimant'] == 8 %}
 <h2 class="heading-small">Request mediation</h2>
 <p>
  <a href='#'>Request free telephone mediation</a>. Many people resolve their dispute before a hearing by taking part in a telephone mediation</a>.
@@ -114,7 +137,8 @@
       <li><strong class="bold">Claim details:</strong><br><a href="view-claim">Download claim</a> </li>
       {% if data['claimant'] == 3  %}
       <li><strong class="bold">Judgement details:</strong><br><a href="view-claim">Download judgment details</a> </li>
-      {% elseif data['claimant'] == 4 or data['claimant'] == 5 or data['claimant'] == 6 %}
+     
+      {% elseif data['claimant'] == 4 or data['claimant'] == 5 or data['claimant'] == 7 or data['claimant'] == 6  or data['claimant'] == 8 or data['claimant'] == 9  %}
       <li><strong class="bold">Defendants response:</strong><br><a href="view-claim">Download response </a> </li>
       {% endif %}
     </ul>
@@ -131,6 +155,9 @@
     <option value="4" {% if data['claimant'] == 4 %}selected{% endif %}>4. full defence + mediation  </option>
     <option value="5" {% if data['claimant'] == 5 %}selected{% endif %}>5. full defence - offer and mediation  </option>
     <option value="6" {% if data['claimant'] == 6 %}selected{% endif %}>6. full defence - no offer and  no mediation  </option>
+    <option value="7" {% if data['claimant'] == 7 %}selected{% endif %}>7. Make counter offer  </option>
+    <option value="8" {% if data['claimant'] == 8 %}selected{% endif %}>8. Make mediation offer to defendant  </option>
+    <option value="9" {% if data['claimant'] == 9 %}selected{% endif %}>9. Mediation accepted by defendant  </option>
   </select>
 </form>
 {% endblock %}
