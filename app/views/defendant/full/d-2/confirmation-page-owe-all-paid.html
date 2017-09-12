@@ -22,7 +22,7 @@ Money Claims Prototype
       <a href="../../../public/images/p14/CF91-BK65.pdf" style="color: #FFFFFF" download>Download response as pdf</a>
     </p>
   </div>
-  {% if data['radio-pay-group']=="Immediately" %}
+  {% if data['radio-pay-group']=="Immediately" or data['confirmation']== 1 %}
   <p>We've emailed Jan Clark telling them that you will pay their money claim immediately.</p>
   <p>We've also sent a copy to: <span class="bold">maryrichards@hotmail.com</span></p>
   <fieldset>
@@ -33,14 +33,14 @@ Money Claims Prototype
 
 
 
-    {% elseif data['radio-pay-group']=="Instalments" %} 
+    {% elseif data['radio-pay-group']=="Instalments" or data['confirmation']== 2 %} 
     <p>We've emailed Jan Clark your instalment plan.</p>
     <p>We've also sent a copy to: <span class="bold">maryrichards@hotmail.com</span></p>
     <fieldset>
       <h2 class="heading-medium">What happens next</h2>
       <p>Jan Clark needs to respond to your suggested instalment plan on or before <span id="Date"></span>. We’ll contact you when Jan Clark responds.</p>
 
-      {% elseif data['radio-pay-group']=="Set-date" %} 
+      {% elseif data['radio-pay-group']=="Set-date" or data['confirmation']== 3 %} 
       <p>We've emailed Jan Clark your offer to pay the money claim on <span id="Date"></span> and your explanation of why you can’t pay before then.</p>
       <p>We've also sent a copy to: <span class="bold">maryrichards@hotmail.com</span></p>
       <fieldset>
@@ -72,4 +72,13 @@ Money Claims Prototype
         </div>
       </div>
     </main>
+<form method="post"  action="#" class="form" style="position: absolute;">
+  <select id="confirmation" name="confirmation" onchange="this.form.submit()">
+    <option  value="0" >Choose</option>
+    <option value="1" {% if data['confirmation'] == 1 %}selected{% endif %}>1. Pay Immediately</option>
+    <option  value="2" {% if data['confirmation'] == 2 %}selected{% endif %}>2. Pay instalments</option>
+    <option  value="3" {% if data['confirmation'] == 3 %}selected{% endif %}>3. Pay set date</option>
+  </select>
+</form>
+
     {% endblock %}
