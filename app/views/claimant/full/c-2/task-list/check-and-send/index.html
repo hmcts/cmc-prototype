@@ -134,104 +134,104 @@ Check your answers
         </td>
       </tr>
 
-    {% if data['claimant-type']=="Sole trader" %}
-
-
-    <tr>
-      <td>
-        Business name:
-      </td>
-      <td>
-        {{data['claimant-business-name']}}
-      </td>
-      <td class="change-answer">
-        <a href="../task-list/your-details/your-details?return_page={{ '../../task-list/check-and-send#name' | urlencode }}">
-          Change <span class="visuallyhidden">Why you're owed the money</span></a>
-        </td>
-      </tr>
-
-
-
-
-      {% elseif data['claimant-type']=="Company" or data['claimant-type']=="Organisation" %}
-
-      <tr>
-        <td>
-          Contact name:
-        </td>
-        <td>
-          {{data['claimant-contact-name']}}
-        </td>
-      <td class="change-answer">
-        <a href="../task-list/your-details/your-details?return_page={{ '../../task-list/check-and-send#name' | urlencode }}">
-          Change <span class="visuallyhidden">Why you're owed the money</span></a>
-        </td>
-        </tr>
-
-        {% endif %}
+      {% if data['claimant-type']=="Sole trader" %}
 
 
       <tr>
-        <td class="no-border">
-          Address:
+        <td>
+          Business name:
         </td>
-        <td class="no-border">
-          {{data['addressLine1']}}<br>
-          {{data['addressLine2']}}<br>
-          {{data['addressLine3']}}<br>
-          {{data['addressPostcode']}}
+        <td>
+          {{data['claimant-business-name']}}
         </td>
-
-        <td class="change-answer no-border">
+        <td class="change-answer">
           <a href="../task-list/your-details/your-details?return_page={{ '../../task-list/check-and-send#name' | urlencode }}">
-            Change <span class="visuallyhidden">Address</span></a>
+            Change <span class="visuallyhidden">Why you're owed the money</span></a>
           </td>
         </tr>
+
+
+
+
+        {% elseif data['claimant-type']=="Company" or data['claimant-type']=="Organisation" %}
+
         <tr>
           <td>
-            Correspondence address:
+            Contact name:
           </td>
           <td>
-            {% if data['correspondence-address']=="Yes" %}
-            {{data['c-addressLine1']}}<br>
-            {{data['c-addressLine2']}}<br>
-            {{data['c-addressLine3']}}<br>
-            {{data['c-addressPostcode']}}
-            {% else %} 
-            Same as address<br>
-            {% endif %} 
+            {{data['claimant-contact-name']}}
           </td>
           <td class="change-answer">
+            <a href="../task-list/your-details/your-details?return_page={{ '../../task-list/check-and-send#name' | urlencode }}">
+              Change <span class="visuallyhidden">Why you're owed the money</span></a>
+            </td>
+          </tr>
 
-          </td>
-        </tr>    
+          {% endif %}
 
-        <tr>
-          <td>
-            Date of birth:
-          </td>
-          <td>
-           {{data['day']}} {{data['month']}} {{data['year']}}
-         </td>
-         <td class="change-answer">
-          <a href="../task-list/your-details/date-of-birth?return_page={{ '../../task-list/check-and-send#name' | urlencode }}">
-            Change <span class="visuallyhidden">Date of birth</span></a>
-          </td>
-        </tr>
-        <tr>
 
           <tr>
-            <td>
-              Phone:
+            <td class="no-border">
+              Address:
             </td>
-            <td>
-              {{data['claimant-phone']}}
+            <td class="no-border">
+              {{data['addressLine1']}}<br>
+              {{data['addressLine2']}}<br>
+              {{data['addressLine3']}}<br>
+              {{data['addressPostcode']}}
             </td>
-            <td class="change-answer">
-              <a href="../task-list/your-details/phone?return_page={{ '../../task-list/check-and-send#name' | urlencode }}">
-                Change <span class="visuallyhidden">Phone</span></a>
+
+            <td class="change-answer no-border">
+              <a href="../task-list/your-details/your-details?return_page={{ '../../task-list/check-and-send#name' | urlencode }}">
+                Change <span class="visuallyhidden">Address</span></a>
               </td>
             </tr>
+            <tr>
+              <td>
+                Correspondence address:
+              </td>
+              <td>
+                {% if data['correspondence-address']=="Yes" %}
+                {{data['c-addressLine1']}}<br>
+                {{data['c-addressLine2']}}<br>
+                {{data['c-addressLine3']}}<br>
+                {{data['c-addressPostcode']}}
+                {% else %} 
+                Same as address<br>
+                {% endif %} 
+              </td>
+              <td class="change-answer">
+
+              </td>
+            </tr>    
+
+            <tr>
+              <td>
+                Date of birth:
+              </td>
+              <td>
+               {{data['day']}} {{data['month']}} {{data['year']}}
+             </td>
+             <td class="change-answer">
+              <a href="../task-list/your-details/date-of-birth?return_page={{ '../../task-list/check-and-send#name' | urlencode }}">
+                Change <span class="visuallyhidden">Date of birth</span></a>
+              </td>
+            </tr>
+            <tr>
+
+              <tr>
+                <td>
+                  Phone:
+                </td>
+                <td>
+                  {{data['claimant-phone']}}
+                </td>
+                <td class="change-answer">
+                  <a href="../task-list/your-details/phone?return_page={{ '../../task-list/check-and-send#name' | urlencode }}">
+                    Change <span class="visuallyhidden">Phone</span></a>
+                  </td>
+                </tr>
 
 <!--     <tr>
       <td>
@@ -710,6 +710,45 @@ Check your answers
 <fieldset></fieldset>
 <h2 class="heading-medium">Statement of truth</h2>
 
+{% if data['claimant-type']=="Company" or data['claimant-type']=="Organisation" or data['check']==1%}
+
+<p style="width: 65%">You must hold a senior position in your company to sign the statement of truth.</p>
+<details>
+  <summary>
+    Types of senior position 
+  </summary>
+  <div class="panel">
+    <p>A senior position could be a:</p>
+    <ul class="list-bullet list">
+     <li>director</li>
+     <li>the treasurer, secretary, </li>
+     <li>chief executive, </li>
+     <li>manager or other officer of the company or corporation</li>
+   </ul>
+   <p>If your company isn't registered, a senior position could also be the:</p>
+   <ul class="list-bullet list">
+    <li>mayor</li>
+    <li>chairman</li>
+    <li>president</li>
+    <li>town clerk or other similar officer of the corporation.</li>
+  </ul>
+</ul>
+</div>
+</details>
+
+
+<br>
+<div class="form-group">
+  <label class="form-label" for="claimant_title">Full name</label>
+  <input type="text" class="form-control form-control-1-4" id="claimant_title" name="claimant_title" value="">
+</div>
+
+<div class="form-group">
+  <label class="form-label" for="defendant_firstname">Role</label>
+  <input class="form-control form-control-1-4" id="defendant_name" name="defendant_name" type="text"
+  value="{{data['defendant_name']}}">
+</div>
+{% endif %}
 <div class="notice text">
   <i class="icon icon-important">
     <span class="visually-hidden">Warning</span>
@@ -719,50 +758,29 @@ Check your answers
   </strong>
 </div>
 
-<!--
-  <div class="form-group">
-    <form method="get" action="/prototype-14/task-list/check-and-send/payment-methods">
-      {% set completed = true if data.check_before_you_start == "complete" and data.read_rules == "complete" and data.completing_your_claim == "complete" and data.your_details == "complete" and data.their_details == "complete" and data.claim_amount == "complete" and data.claim_details == "complete" %}
-      <input type="submit" value="Submit and continue to payment (£70.00)" class="button" {{ "disabled" if not completed }}></input>
-    </form>
-  </div>
-
-  <p class="bold">You can only submit your claim after completing all sections.</p> -->
+<div class="multiple-choice text ">
+  <input class="" id="HasAcceptedTermsAndConditions" type="checkbox" value="true">
+  <label for="HasAcceptedTermsAndConditions"> I believe that the facts stated in this claim are true.</label>
+</div>
+<div class="form-group">&nbsp;</div>
 
 
-  <div class="form-group">
-    <a name="hasacceptedtermsandconditions"></a>
+<form method="post" action="check-and-send/enter-card" class="form">
 
-    <div class="multiple-choice text">
-      <input class="" id="HasAcceptedTermsAndConditions" type="checkbox" value="true">
-      <label for="HasAcceptedTermsAndConditions"> I believe that the facts stated in this claim are true.</label>
-    </div>
+  <button id="submit" class="button" >Submit and continue to payment (£70.00)</button>
+</form>
 
 
-    <span class="field-validation-valid" data-valmsg-for="HasAcceptedTermsAndConditions" data-valmsg-replace="true" aria-live="polite"></span></div>
+<!--<div class="back">-->
+<!--<a href="#">Cancel application</a>-->
+<!--</div>-->
 
-    <form method="post" action="check-and-send/enter-card" class="form">
+</main>
+        <form method="post"  action="#" class="form" style="position: absolute;">
+          <select id="check" name="check" onchange="this.form.submit()">
+            <option  value="0" >Choose</option>
 
-      <button id="submit" class="button" disabled>Submit and continue to payment (£70.00)</button>
-    </form>
-    <script>
-      $(document).ready(function () {
-        $("#HasAcceptedTermsAndConditions").click(function() {
-          var checked_status = this.checked;
-          if (checked_status == true) {
-           $("#submit").removeAttr("disabled");
-         } else {
-           $("#submit").attr("disabled", "disabled");
-         }
-       });
-
-      });
-    </script>
-
-    <!--<div class="back">-->
-    <!--<a href="#">Cancel application</a>-->
-    <!--</div>-->
-
-  </main>
-
-  {% endblock %}
+            <option  value="1" {% if data['check'] == 1 %}selected{% endif %}>1. Show business statement of truth</option>
+          </select>
+        </form>
+{% endblock %}
