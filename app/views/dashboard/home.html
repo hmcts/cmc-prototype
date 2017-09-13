@@ -38,17 +38,10 @@
       </div>
     </div>
   </div>
-
   <div class="grid-row">
     <div class="column-full">  
-
-    {% set show_all = true if data['dashboard'] == 8 %}
-
-
+      {% set show_all = true if data['dashboard'] == 8 %}
       {% set claimant_table = true if show_all==true or data['dashboard'] == 1 or data['dashboard'] == 1.2 or data['dashboard'] == 6 or data['dashboard'] == 3 or data['dashboard'] == 7 or data['dashboard'] == 4  or show_all==true or data['dashboard'] == 9 or data['dashboard'] == 10  %}
-
-
-
       {% if claimant_table==true %}
       <h2 class="heading-medium type-heading claims">
        Claims you've made or are in progress
@@ -72,7 +65,6 @@
           <td>In progress </td>
         </tr>
         {% endif %}
-
         {% if show_all==true or data['dashboard'] == 1.2 %}
         <tr class="complete">
           <td><a href="claimant?claimant=1">432MC245</a></td>
@@ -81,7 +73,6 @@
           <td>Your claim is being processed. We will email you to explain what to do next. </td>
         </tr>
         {% endif %}
-
         {% if show_all==true or data['dashboard'] == 3 or data['dashboard'] == 1 %}
         <tr class="default" >
           <td class="pre"><a href="claimant?claimant=2">391MC645</a></td>
@@ -104,7 +95,6 @@
           <td>Mary Richards</td>
           <td>£1400 </td>
           <td>The defendant has rejected your money claim but has requested free mediation to help resolve the dispute.
-
           </td>
         </tr> 
         {% endif %}
@@ -116,7 +106,6 @@
           <td>The defendant has rejected your claim. They have made an offer to settle your claim.</td>
         </tr> 
         {% endif %}
-
         {% if show_all==true or data['dashboard'] == 1 or data['dashboard'] == 10   %}
         <tr class="mediation" >
           <td><a href="claimant?claimant=6">736MC047</a></td>
@@ -125,21 +114,12 @@
           <td>The defendant has rejected your claim.</td>
         </tr> 
         {% endif %}
-       
-
-       
         {% if claimant_table==true %}
       </tbody>
     </table>
     {% endif %}
-
-
     {% set defendant_table = true if show_all==true or data['dashboard'] == 2 or data['dashboard'] == 2.1 or data['dashboard'] == 5   %}
-
-
-
     {% if defendant_table==true %}
-
     <h2 class="heading-medium type-heading" >
      Claims made against you
    </h2>
@@ -188,30 +168,24 @@
 <form method="post"  action="#" class="form" style="; float: left">
   <select id="dashboard" name="dashboard" onchange="this.form.submit()">
     <option  value="0" >Claimant view</option>
-
 <!--     <option  value="1" {% if data['dashboard'] == 1 %}selected{% endif %}>1. Claimant only</option>
- -->    <option value="1.2" {% if data['dashboard'] == 1.2 %}selected{% endif %}>1. Claim being processed</option>
-    <option value="3" {% if data['dashboard'] == 3 %}selected{% endif %}>2. CCJ - request judgement</option>
-    <option value="4" {% if data['dashboard'] == 4 %}selected{% endif %}>3. CCJ - judgement requested</option>
-    <option value="6" {% if data['dashboard'] == 6 %}selected{% endif %}>4. Draft claim</option>
-    <option value="7" {% if data['dashboard'] == 7 %}selected{% endif %}>5. Full defence response - mediation only</option>
-    <option value="9" {% if data['dashboard'] == 9 %}selected{% endif %}>6. Full defence response - offer and Mediation</option>
-    <option value="10" {% if data['dashboard'] == 10 %}selected{% endif %}>7. Full defence response - no offer or Mediation</option>
-        <option value="8" {% if data['dashboard'] == 8 %}selected{% endif %}>Show all</option>
-
-  </select>
+-->    <option value="1.2" {% if data['dashboard'] == 1.2 %}selected{% endif %}>1. Claim being processed</option>
+<option value="3" {% if data['dashboard'] == 3 %}selected{% endif %}>2. CCJ - request judgement</option>
+<option value="4" {% if data['dashboard'] == 4 %}selected{% endif %}>3. CCJ - judgement requested</option>
+<option value="6" {% if data['dashboard'] == 6 %}selected{% endif %}>4. Draft claim</option>
+<option value="7" {% if data['dashboard'] == 7 %}selected{% endif %}>5. Full defence response - mediation only</option>
+<option value="9" {% if data['dashboard'] == 9 %}selected{% endif %}>6. Full defence response - offer and Mediation</option>
+<option value="10" {% if data['dashboard'] == 10 %}selected{% endif %}>7. Full defence response - no offer or Mediation</option>
+<option value="8" {% if data['dashboard'] == 8 %}selected{% endif %}>Show all</option>
+</select>
 </form>
-
-
 <form method="post"  action="#" class="form" style=" float: left;">
   <select id="dashboard" name="dashboard" onchange="this.form.submit()">
     <option  value="0" >Defendant view</option>
     <option value="2" {% if data['dashboard'] == 2 %}selected{% endif %}>1. Respond to claim - draft</option>
     <option value="2.1" {% if data['dashboard'] == 2.1 %}selected{% endif %}>2. Response being processed</option>
     <option value="5" {% if data['dashboard'] == 5 %}selected{% endif %}>3.  CCJ issued against defendant</option>
-        <option value="8" {% if data['dashboard'] == 8 %}selected{% endif %}>Show all</option>
-
-   
+    <option value="8" {% if data['dashboard'] == 8 %}selected{% endif %}>Show all</option>
   </select>
 </form>
 {% endblock %}
