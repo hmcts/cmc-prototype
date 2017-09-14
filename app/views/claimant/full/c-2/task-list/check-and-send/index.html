@@ -1,19 +1,15 @@
 {% extends "layout_task-list.html" %}
-
 {% block page_title %}
 Check your answers
 {% endblock %}
 {% block home_link %} ../task-list {% endblock %}
 {% block proposition_header %}
 {% set my_account="1" %}
-
 {% include "includes/propositional_navigation.html" %}
 {% endblock %}
 {% block content %}
-
 <main id="content" role="main">
   {% include "includes/phase_banner_beta.html" %}
-
   <div class="breadcrumbs">
     <ol>
       <li>
@@ -24,15 +20,10 @@ Check your answers
       </li>
     </ol>
   </div>
-
   <h1 class="heading-large">
     Check your answers before submitting your claim
   </h1>
-
-
-
 <!--   <table class="check-your-answers">
-
     <thead>
     <tr>
       <th colspan="2">
@@ -44,7 +35,6 @@ Check your answers
       </th>
     </tr>
     </thead>
-
     <tbody>
     <tr>
       <td>
@@ -61,9 +51,7 @@ Check your answers
     </tr>
     </tbody>
   </table> -->
-
 <!--   <table class="check-your-answers">
-
     <thead>
     <tr>
       <th colspan="2">
@@ -75,7 +63,6 @@ Check your answers
       </th>
     </tr>
     </thead>
-
     <tbody>
     <tr>
       <td>
@@ -92,9 +79,7 @@ Check your answers
     </tr>
     </tbody>
   </table> -->
-
   <table class="check-your-answers">
-
     <thead>
       <tr>
         <th colspan="2">
@@ -106,7 +91,6 @@ Check your answers
         </th>
       </tr>
     </thead>
-
     <tbody>
       <tr>
         <td>
@@ -133,10 +117,7 @@ Check your answers
           Change <span class="visuallyhidden">Why you're owed the money</span></a>
         </td>
       </tr>
-
       {% if data['claimant-type']=="Sole trader" %}
-
-
       <tr>
         <td>
           Business name:
@@ -149,12 +130,7 @@ Check your answers
             Change <span class="visuallyhidden">Why you're owed the money</span></a>
           </td>
         </tr>
-
-
-
-
         {% elseif data['claimant-type']=="Company" or data['claimant-type']=="Organisation" %}
-
         <tr>
           <td>
             Contact name:
@@ -167,10 +143,7 @@ Check your answers
               Change <span class="visuallyhidden">Why you're owed the money</span></a>
             </td>
           </tr>
-
           {% endif %}
-
-
           <tr>
             <td class="no-border">
               Address:
@@ -181,7 +154,6 @@ Check your answers
               {{data['addressLine3']}}<br>
               {{data['addressPostcode']}}
             </td>
-
             <td class="change-answer no-border">
               <a href="../task-list/your-details/your-details?return_page={{ '../../task-list/check-and-send#name' | urlencode }}">
                 Change <span class="visuallyhidden">Address</span></a>
@@ -202,10 +174,8 @@ Check your answers
                 {% endif %} 
               </td>
               <td class="change-answer">
-
               </td>
             </tr>    
-
             <tr>
               <td>
                 Date of birth:
@@ -219,7 +189,6 @@ Check your answers
               </td>
             </tr>
             <tr>
-
               <tr>
                 <td>
                   Phone:
@@ -232,7 +201,6 @@ Check your answers
                     Change <span class="visuallyhidden">Phone</span></a>
                   </td>
                 </tr>
-
 <!--     <tr>
       <td>
         Updates:
@@ -248,9 +216,7 @@ Check your answers
     </tr> -->
   </tbody>
 </table>
-
 <table class="check-your-answers">
-
   <thead>
     <tr>
       <th colspan="2">
@@ -262,7 +228,6 @@ Check your answers
       </th>
     </tr>
   </thead>
-
   <tbody>
     <tr>
       <td>
@@ -289,11 +254,7 @@ Check your answers
         Change <span class="visuallyhidden">Their</span></a>
       </td>
     </tr>
-
-
     {% if data['defendant-type']=="Sole trader" %}
-
-
     <tr>
       <td>
         Business name:
@@ -306,12 +267,7 @@ Check your answers
           Change <span class="visuallyhidden">Their</span></a>
         </td>
       </tr>
-
-
-
-
       {% elseif data['defendant-type']=="Company" or data['defendant-type']=="Organisation" %}
-
       <tr>
         <td>
           Contact name:
@@ -324,10 +280,7 @@ Check your answers
             Change <span class="visuallyhidden">Their</span></a>
           </td>
         </tr>
-
         {% endif %}
-
-
         <tr>
           <td>
             Their address:
@@ -348,15 +301,11 @@ Check your answers
               Their email:
             </td>
             <td>
-
               {% if data['defendant-email']!="" %}
               {{data['defendant-email']}}
-
               {% else %} 
               None
               {% endif %}    
-
-
             </td>
             <td class="change-answer">
               <a href="../task-list/their-details/email?return_page={{ '../../task-list/check-and-send#their-detail' | urlencode }}">
@@ -365,9 +314,7 @@ Check your answers
             </tr>
           </tbody>
         </table>
-
         <table class="check-your-answers">
-
           <thead>
             <tr>
               <th colspan="2">
@@ -379,16 +326,13 @@ Check your answers
               </th>
             </tr>
           </thead>
-
           <tbody>
             <tr>
               <td class="no-border">
                 Claim amount:
               </td>
               <td class="no-border">
-
                £{{data['totalSum']}}
-
              </td>
              <td class="change-answer no-border">
               <a href="../task-list/claim-amount/index?return_page={{ '../../task-list/check-and-send#claim-amount' | urlencode }}">
@@ -396,40 +340,27 @@ Check your answers
               </a>
             </td>
           </tr>
-
-
           {% if data['interest-rate']=="No interest" %}
-
           <tr>
             <td >
               Interest rate:
             </td>
             <td >
               I don't want to claim interest
-
             </td>
             <td class="change-answer ">
-
             </td>
           </tr>
           {% endif %}    
-
-
           {% if data['interest-rate']=="Different rate" %}
           <tr>
             <td class="no-border">
               Interest rate:
             </td>
             <td class="no-border">
-
-
               {{data['rate']}}%
-
-
-
             </td>
             <td class="change-answer no-border">
-
             </td>
           </tr> 
           <tr>
@@ -437,40 +368,25 @@ Check your answers
               Why you’re entitled to this rate:
             </td>
             <td class="no-border">
-
-
              {{data['rate-why']}}
-
-
            </td>
            <td class="change-answer no-border">
-
            </td>
          </tr>         
          {% endif %}
-
-
-
          {% if data['interest-rate']=="8 percent" %}
          <tr>
           <td class="no-border">
             Interest rate:
           </td>
           <td class="no-border">
-
-
            8%
-
          </td>
          <td class="change-answer no-border">
-
          </td>
        </tr>     
        {% endif %} 
-
-
        {% if data['interest-rate']!="No interest" %}
-
        {% if data['interest-date']=="Issue date" %}
        <tr>
         <td>
@@ -480,11 +396,9 @@ Check your answers
           From the date I submit the claim
         </td>
         <td class="change-answer">
-
         </td>
       </tr>
       {% endif %} 
-
       {% if data['interest-date']=="Particular date" %}
       <tr>
         <td class="no-border">
@@ -494,7 +408,6 @@ Check your answers
          {{ data['interest-day'] }} {{ data['interest-month'] }} {{ data['interest-year'] }}
        </td>
        <td class="change-answer no-border">
-
        </td>
      </tr>
      <tr>
@@ -505,18 +418,11 @@ Check your answers
         {{data['date-why']}}
       </td>
       <td class="change-answer">
-
       </td>
     </tr>
-
-
     {% endif %} 
     {% endif %} 
-
-
-
     {% if data['interest-date']=="Particular date" %}
-
     <tr>
       <td>
         Interest to date:
@@ -530,8 +436,6 @@ Check your answers
         </a>
       </td>
     </tr>
-
-
     {% endif %}
     <tr>
       <td>
@@ -561,9 +465,7 @@ Check your answers
   </tr>
 </tbody>
 </table>
-
 <table class="check-your-answers">
-
   <thead>
     <tr>
       <th colspan="2">
@@ -575,7 +477,6 @@ Check your answers
       </th>
     </tr>
   </thead>
-
   <tbody>
     <tr>
       <td>
@@ -612,7 +513,6 @@ Check your answers
      {% if data['cd-date-1'] !='' %}
      {{data['cd-date-1']}} - {{data['cd-timeline-1']}}<br>
      {% endif %}        
-
      {% if data['cd-date-2'] !='' %}
      {{data['cd-date-2']}} - {{data['cd-timeline-2']}}<br>
      {% endif %}        
@@ -622,7 +522,6 @@ Check your answers
      {% if data['cd-date-4'] !='' %}
      {{data['cd-date-4']}} - {{data['cd-timeline-4']}}<br>
      {% endif %}  
-
    </td>
    <td class="change-answer">
     <a href="../task-list/claim-details/timeline?return_page={{ '../../task-list/check-and-send#cd' | urlencode }}">
@@ -630,7 +529,6 @@ Check your answers
     </a> 
   </td>
 </tr>
-
 <tr>
   <td>
     Provide evidence:
@@ -646,7 +544,6 @@ Check your answers
    {% if data['legal-status1'] == 'other' %}Statements of account - {% endif %}
    {{data['legal-status-description-1'] }}<br>
    {% endif %}        
-
    {% if data['legal-status2'] != true %}
    {% if data['legal-status2'] == 2 %}Contracts and agreements - {% endif %}
    {% if data['legal-status2'] == 3 %}Expert witness - {% endif %}
@@ -657,7 +554,6 @@ Check your answers
    {% if data['legal-status2'] == 'other' %}Statements of account - {% endif %}
    {{data['legal-status-description-2'] }}<br>
    {% endif %}         
-
    {% if data['legal-status3']  != true %}
    {% if data['legal-status3'] == 2 %}Contracts and agreements - {% endif %}
    {% if data['legal-status3'] == 3 %}Expert witness - {% endif %}
@@ -668,8 +564,6 @@ Check your answers
    {% if data['legal-status3'] == 'other' %}Statements of account - {% endif %}
    {{data['legal-status-description-3'] }}<br>
    {% endif %} 
-
-
    {% if data['legal-status4']  != true %}
    {% if data['legal-status4'] == 2 %}Contracts and agreements - {% endif %}
    {% if data['legal-status4'] == 3 %}Expert witness - {% endif %}
@@ -680,7 +574,6 @@ Check your answers
    {% if data['legal-status4'] == 'other' %}Statements of account - {% endif %}
    {{data['legal-status-description-4'] }}<br>
    {% endif %} 
-
  </td>
  <td class="change-answer">
   <a href="../task-list/claim-details/evidence?return_page={{ '../../task-list/check-and-send#cd' | urlencode }}">
@@ -688,8 +581,6 @@ Check your answers
   </a> 
 </td>
 </tr>
-
-
 <tr>
   <td>
     How this dispute has affected you:<br>(optional)
@@ -706,12 +597,9 @@ Check your answers
 </tr>
 </tbody>
 </table>
-
 <fieldset></fieldset>
 <h2 class="heading-medium">Statement of truth</h2>
-
 {% if data['claimant-type']=="Company" or data['claimant-type']=="Organisation" or data['check']==1%}
-
 <p style="width: 65%">You must hold a senior position in your company to sign the statement of truth.</p>
 <details>
   <summary>
@@ -735,22 +623,16 @@ Check your answers
 </ul>
 </div>
 </details>
-
-
-
 <div class="form-group">
   <label class="form-label" for="claimant_title">Full name</label>
   <input type="text" class="form-control form-control-1-4" id="claimant_title" name="claimant_title" value="">
 </div>
-
 <div class="form-group">
   <label class="form-label" for="defendant_firstname">Role</label>
   <input class="form-control form-control-1-4" id="defendant_name" name="defendant_name" type="text"
   value="{{data['defendant_name']}}">
 </div>
 {% endif %}
-<fieldset style="margin: 0">
-
 <div class="notice text">
   <i class="icon icon-important">
     <span class="visually-hidden">Warning</span>
@@ -759,30 +641,23 @@ Check your answers
     You could be fined or go to prison if you deliberately give untrue or misleading information.
   </strong>
 </div>
-</fieldset>
-
-<div class="multiple-choice text ">
-  <input class="" id="HasAcceptedTermsAndConditions" type="checkbox" value="true">
-  <label for="HasAcceptedTermsAndConditions"> I believe that the facts stated in this claim are true.</label>
+<div class="form-group">
+  <div class="multiple-choice text">
+    <input class="" id="HasAcceptedTermsAndConditions" type="checkbox" value="true">
+    <label for="HasAcceptedTermsAndConditions"> I believe that the facts stated in this claim are true.</label>
+  </div>
 </div>
-
-
 <form method="post" action="check-and-send/enter-card" class="form form-group">
-
   <button id="submit" class="button" >Submit and continue to payment (£70.00)</button>
 </form>
-
-
 <!--<div class="back">-->
 <!--<a href="#">Cancel application</a>-->
 <!--</div>-->
-
 </main>
-        <form method="post"  action="#" class="form" style="position: absolute;">
-          <select id="check" name="check" onchange="this.form.submit()">
-            <option  value="0" >Choose</option>
-
-            <option  value="1" {% if data['check'] == 1 %}selected{% endif %}>1. Show business statement of truth</option>
-          </select>
-        </form>
+<form method="post"  action="#" class="form" style="position: absolute;">
+  <select id="check" name="check" onchange="this.form.submit()">
+    <option  value="0" >Choose</option>
+    <option  value="1" {% if data['check'] == 1 %}selected{% endif %}>1. Show business statement of truth</option>
+  </select>
+</form>
 {% endblock %}
