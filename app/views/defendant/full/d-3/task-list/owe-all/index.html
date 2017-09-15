@@ -1,0 +1,83 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="2" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <a href="#" class="link-back">Back</a>
+      <h1 class="heading-large">
+        When will you pay?
+      </h1>
+      {% if data.radio_select_group=="Some" and data.do_you_owe_money=="complete" %}
+      <p> You believe you owe £800. </p>
+      {% else %}
+      <p></p>
+      {% endif %}
+      {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('task-list')%}        
+      <form
+      name="aspnetForm"
+      method="post"
+      onsubmit="multiNavigation('radio-pay-group', ['Immediately', 'Instalments', 'Set-date'], ['../owe-all/check-your-answers', '../owe-all/repayment-plan', '../owe-all/pay-by-set-date']);return false;"
+      id="aspnetForm"
+      autocomplete="off">
+      {% else %}
+      <form
+      name="aspnetForm"
+      method="post"
+      onsubmit="multiNavigation('radio-pay-group', ['Immediately', 'Instalments', 'Set-date'], ['../task-list', 'owe-all/repayment-plan', 'owe-all/pay-by-set-date']);return false;"
+      id="aspnetForm"
+      autocomplete="off">
+      {% endif %}
+      <br>
+      <div class="form-group">
+        <fieldset>
+          <div class="multiple-choice">
+            <input id="radio-yes" type="radio" name="radio-pay-group" value="Immediately">
+            <label for="radio-yes" data-target="yes-info">Immediately</label>
+          </div>
+          <div class="multiple-choice" data-target="instalments">
+            <input id="radio-repayment" type="radio" name="radio-pay-group" value="Instalments">
+            <label for="radio-repayment" data-target="repayment-info">By instalments</label>
+          </div>
+          <div class="panel panel-border-narrow js-hidden" id="instalments">
+            <p>You'll need to answer some financial questions to explain why.</p>
+          </div>
+          <div class="multiple-choice" data-target="set-date">
+            <input id="radio-no" type="radio" name="radio-pay-group" value="Set-date">
+            <label for="radio-no" data-target="no-info">The full amount by a set date</label>
+          </div>
+          <div class="panel panel-border-narrow js-hidden" id="set-date">
+            <p>You'll need to answer some financial questions to explain why.</p>
+          </div>
+        </fieldset>
+      </div>
+
+
+
+
+
+
+
+   <input type="hidden" name="owe_some" value="complete">
+   {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('task-list')%}
+   <div class="form-group">
+    <input type="submit" class="button" value="Save and continue"/>
+  </div>
+  <a href="#" onclick="goBack()">Cancel</a>
+  {% else %}
+  <div class="form-group">
+    <input type="submit" class="button" value="Save and continue"/>
+  </div>
+  {% endif %}
+</form>
+</div>
+</div>
+</main>
+{% endblock %}

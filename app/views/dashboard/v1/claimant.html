@@ -1,0 +1,163 @@
+{% extends "layout_task-list.html" %}
+{% block page_title %} Your money claims account {% endblock %}
+{% block proposition_header %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main" ">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <header class="page-heading page-heading-with-context page-heading-without-breadcrumb">
+       <a href="#" class="link-back">Back</a>
+       <h1 class="heading-large">
+        <span class="heading-secondary">Claim number:</span>
+        391MC645 
+      </h1>
+      <h2 class="heading-medium">Claim status</h2>
+      {% if data['claimant'] == 1  %}
+      <div class="">
+       <p><span class="bold">15 May 2017</span><br>Your claim is currently being processed. We will email you to explain what to do next.</p>
+     </div>
+     {% elseif data['claimant'] == 2  %}
+     <div class=" ">
+       <p><span class="bold">15 May 2017</span><br>The defendant Mary Richards has not responded to your claim. You can request a County Court Judgment (CCJ)</p>
+     </div>
+     <p>You can only ask for a CCJ at this stage if the defendant has not responded to your claim.</p>
+     <p>A CCJ means the court orders the defendant to pay the claim.</p>
+     <div class="form-group">
+       <p> 
+         <form action="judgment/details-defendant">
+          <input type="hidden" name="control-box-value" value="1">
+          <input type="submit" class="button" value="Request a County Court Judgment"/>
+        </form>
+      </p>
+    </div>
+    {% elseif data['claimant'] == 3  %}
+    <div class="">
+     <p><span class="bold">15 May 2017</span><br>The court has entered judgment in your favour, Mary Richards is no longer able to file a response.</p>
+     <p>You can ask the court to <a href='https://www.gov.uk/make-court-claim-for-money/enforce-a-judgment'>enforce the judgment</a> if Mary Richards doesn't pay as ordered by 8 August 2017.</p>
+   </div>
+   {% elseif data['claimant'] == 4  %}
+   <div class="">
+    <p><span class="bold">15 May 2017</span><br>The defendant Mary Richards has rejected your money claim. They have requested free mediation to help resolve the dispute.</p>
+    <div class="form-group">
+     <p> <a class="button" href="defendant-response/view-claim-def?response=med">View their response  </a></p>
+   </div>
+ </div>
+ {% elseif data['claimant'] == 5  %}
+ <div class="">
+  <p><span class="bold">15 May 2017</span><br>The defendant has rejected your claim. They have made an offer to settle your claim. They have also asked for mediation to resolve the claim.</p>
+  <div class="form-group">
+   <p> <a class="button" href="defendant-response/view-claim-def?response=med_suggestion">View their response </a></p>
+ </div>
+</div>
+{% elseif data['claimant'] == 6  %}
+<div class="">
+  <p><span class="bold">15 May 2017</span><br>The defendant has rejected your claim.</p>
+  <div class="form-group">
+   <p> <a class="button" href="defendant-response/view-claim-def?response=no_med_suggestion">View their response </a></p>
+ </div>
+</div>
+
+{% elseif data['claimant'] == 7  %}
+<div class="">
+  <p><span class="bold">15 May 2017</span><br>The defendant Mary Richards can accept your counter offer, reject it or suggest an alternative. We will notify you once the defendant responds.</p>
+</div>
+
+{% elseif data['claimant'] == 8  %}
+<div class="">
+  <p><span class="bold">15 May 2017</span><br>The defendant Mary Richards will be asked if they would like Free mediation. We will notify you once the defendant responds.</p>
+</div>
+
+{% elseif data['claimant'] == 9  %}
+<div class="">
+  <p><span class="bold">15 May 2017</span><br>A mediator will contact both the defendant and you within the next 14 days to arrange an appointment.</p>
+</div>
+
+{% elseif data['claimant'] == 10  %}
+<div class="">
+  <p><span class="bold">15 May 2017</span><br>A mediator will contact both the defendant and you within the next 14 days to arrange an appointment.</p>
+</div>
+
+
+
+{% endif %}
+
+{% if data['claimant'] == 2 or data['claimant'] == 3 or data['claimant'] == 4 or data['claimant'] == 5 or data['claimant'] == 6 or data['claimant'] == 7 or data['claimant'] == 8 or data['claimant'] == 9  %}
+
+<h2 class="heading-medium">Claim history </h2>
+
+
+<details>
+  <summary>You have 2 events in your claim history</summary>
+  <div class="history-timeline">
+    <div class="data">
+      <span class="data-item bold-large">1</span>
+      <span class="data-item bold-xsmall">May 2017</span>
+      <span class="data-item bold-xsmall"></span>
+    </div>
+    <div class="history-statement">The defendant requested an additional 14 days to respond. The deadline for response 15 May 2017. </div>
+  </div>
+  <div class="history-timeline">
+    <div class="data">
+      <span class="data-item bold-large">20</span>
+      <span class="data-item bold-xsmall">April 2017</span>
+      <span class="data-item bold-xsmall"></span>
+    </div>
+    <div class="history-statement">The claim was issued against the defendant. The deadline for response 1 May 2017.</div>
+  </div>
+</details>
+
+{% endif %}
+
+<h2 class="heading-medium">More options </h2>
+<h2 class="heading-small">Cancel your claim</h2>
+<p>
+ You can <a href='#'>cancel your claim.</a> if you no longer want to pursue it.
+</p> 
+{% if data['claimant'] == 4 or data['claimant'] == 6  or data['claimant'] == 9  %}
+<h2 class="heading-small">Make a suggestion to settle the claim</h2>
+<p>
+ <a href='#'>Make a offer</a> to settle the claim out of court. This will avoid going to a hearing. 
+</p>
+{% endif %}     
+{% if data['claimant'] == 6  or data['claimant'] == 7 or data['claimant'] == 8 %}
+<h2 class="heading-small">Request mediation</h2>
+<p>
+ <a href='#'>Request free telephone mediation</a>. Many people resolve their dispute before a hearing by taking part in a telephone mediation</a>.
+</p>  
+{% endif %}     
+</div>
+<div class="column-one-third">
+  <div class="meta-data">
+    <ul role="navigation" class="font-xsmall list" style="padding-top: 100px">
+      <li><strong class="bold">Defendant name:</strong><br> Mary Richards</li>
+      <li><strong class="bold">Claim amount:</strong><br>£1500.00 </li>
+      <li><strong class="bold">Claim details:</strong><br><a href="view-claim">Download claim</a> </li>
+      {% if data['claimant'] == 3  %}
+      <li><strong class="bold">Judgement details:</strong><br><a href="view-claim">Download judgment details</a> </li>
+     
+      {% elseif data['claimant'] == 4 or data['claimant'] == 5 or data['claimant'] == 7 or data['claimant'] == 6  or data['claimant'] == 8 or data['claimant'] == 9  %}
+      <li><strong class="bold">Defendants response:</strong><br><a href="view-claim">Download response </a> </li>
+      {% endif %}
+    </ul>
+  </div>
+</div>
+</div>
+</main>
+<form method="post"  action="#" class="form" style="position: absolute;">
+  <select id="claimant2" name="claimant2" onchange="window.location.href='/dashboard/claimant?claimant='+this.value">
+    <option  value="0" >Choose</option>
+    <option value="1" {% if data['claimant'] == 1 %}selected{% endif %}>1. Claim being processed</option>
+    <option  value="2" {% if data['claimant'] == 2 %}selected{% endif %}>2. Request a CCJ</option>
+    <option value="3" {% if data['claimant'] == 3 %}selected{% endif %}>3. CCJ has been requested </option>
+    <option value="4" {% if data['claimant'] == 4 %}selected{% endif %}>4. full defence + mediation  </option>
+    <option value="5" {% if data['claimant'] == 5 %}selected{% endif %}>5. full defence - offer and mediation  </option>
+    <option value="6" {% if data['claimant'] == 6 %}selected{% endif %}>6. full defence - no offer and  no mediation  </option>
+    <option value="7" {% if data['claimant'] == 7 %}selected{% endif %}>7. Make counter offer  </option>
+    <option value="8" {% if data['claimant'] == 8 %}selected{% endif %}>8. Make mediation offer to defendant  </option>
+    <option value="9" {% if data['claimant'] == 9 %}selected{% endif %}>9. Mediation accepted by defendant  </option>
+  </select>
+</form>
+{% endblock %}
