@@ -12,11 +12,22 @@
        <a href="#" class="link-back">Back</a>
        <h1 class="heading-large">
         <span class="heading-secondary">Claim number:</span>
-        391MC645 
+        {% if data['claimant'] == 1.2  %}
+        Draft
+
+        {% else  %}
+        391MC645
+        {% endif  %}
       </h1>
       <h2 class="heading-medium">Claim status</h2>
-      {% if data['claimant'] == 1  %}
-      <div class="">
+      {% if data['claimant'] == 1.2  %}
+      This claim is has not been submitted. 
+      <div class="form-group">
+       <p> <a class="button" href="../../claimant/full/c-2/task-list">Continue with claim  </a></p>
+     </div>
+
+     {% elseif data['claimant'] == 1  %}
+     <div class="">
        <p><span class="bold">15 May 2017</span><br>Your claim is currently being processed. We will email you to explain what to do next.</p>
      </div>
      {% elseif data['claimant'] == 2  %}
@@ -77,14 +88,14 @@
 
 {% elseif data['claimant'] == 10  %}
 <div class="">
-  <p><span class="bold">15 May 2017</span><br>A mediator will contact both the defendant and you within the next 14 days to arrange an appointment.</p>
+  <p><span class="bold">15 May 2017</span><br>The case will be reviewed by a judge and might go to a hearing. We'll contact you if a hearing date is scheduled and explain what you need to do to prepare.</p>
 </div>
 
 
 
 {% endif %}
 
-{% if data['claimant'] == 2 or data['claimant'] == 3 or data['claimant'] == 4 or data['claimant'] == 5 or data['claimant'] == 6 or data['claimant'] == 7 or data['claimant'] == 8 or data['claimant'] == 9  %}
+{% if data['claimant'] == 2 or data['claimant'] == 3 or data['claimant'] == 4 or data['claimant'] == 5 or data['claimant'] == 6 or data['claimant'] == 7 or data['claimant'] == 8 or data['claimant'] == 9 or data['claimant'] == 10 %}
 
 <h2 class="heading-medium">Claim history </h2>
 
@@ -116,13 +127,13 @@
 <p>
  You can <a href='#'>cancel your claim.</a> if you no longer want to pursue it.
 </p> 
-{% if data['claimant'] == 4 or data['claimant'] == 6  or data['claimant'] == 9  %}
+{% if data['claimant'] == 4 or data['claimant'] == 6  or data['claimant'] == 9 or data['claimant'] == 10 %}
 <h2 class="heading-small">Make a suggestion to settle the claim</h2>
 <p>
  <a href='#'>Make a offer</a> to settle the claim out of court. This will avoid going to a hearing. 
 </p>
 {% endif %}     
-{% if data['claimant'] == 6  or data['claimant'] == 7 or data['claimant'] == 8 %}
+{% if data['claimant'] == 6  or data['claimant'] == 7 or data['claimant'] == 8 or data['claimant'] == 10 %}
 <h2 class="heading-small">Request mediation</h2>
 <p>
  <a href='#'>Request free telephone mediation</a>. Many people resolve their dispute before a hearing by taking part in a telephone mediation</a>.
@@ -130,6 +141,8 @@
 {% endif %}     
 </div>
 <div class="column-one-third">
+  {% if data['claimant'] != 1.2  %}
+
   <div class="meta-data">
     <ul role="navigation" class="font-xsmall list" style="padding-top: 100px">
       <li><strong class="bold">Defendant name:</strong><br> Mary Richards</li>
@@ -137,18 +150,25 @@
       <li><strong class="bold">Claim details:</strong><br><a href="view-claim">Download claim</a> </li>
       {% if data['claimant'] == 3  %}
       <li><strong class="bold">Judgement details:</strong><br><a href="view-claim">Download judgment details</a> </li>
-     
-      {% elseif data['claimant'] == 4 or data['claimant'] == 5 or data['claimant'] == 7 or data['claimant'] == 6  or data['claimant'] == 8 or data['claimant'] == 9  %}
+      {% endif %}
+
+
+      {% if data['claimant'] == 0 or data['claimant'] == 1 or data['claimant'] == 2  or data['claimant'] == 3   %}
+
+       {% else %}
       <li><strong class="bold">Defendants response:</strong><br><a href="view-claim">Download response </a> </li>
       {% endif %}
     </ul>
   </div>
+  {% endif %}
+
 </div>
 </div>
 </main>
 <form method="post"  action="#" class="form" style="position: absolute;">
-  <select id="claimant2" name="claimant2" onchange="window.location.href='/dashboard/claimant?claimant='+this.value">
+  <select id="claimant2" name="claimant2" onchange="window.location.href='?claimant='+this.value">
     <option  value="0" >Choose</option>
+    <option value="1.2" {% if data['claimant'] == 1.2 %}selected{% endif %}>0. Draft claim</option>
     <option value="1" {% if data['claimant'] == 1 %}selected{% endif %}>1. Claim being processed</option>
     <option  value="2" {% if data['claimant'] == 2 %}selected{% endif %}>2. Request a CCJ</option>
     <option value="3" {% if data['claimant'] == 3 %}selected{% endif %}>3. CCJ has been requested </option>
@@ -158,6 +178,7 @@
     <option value="7" {% if data['claimant'] == 7 %}selected{% endif %}>7. Make counter offer  </option>
     <option value="8" {% if data['claimant'] == 8 %}selected{% endif %}>8. Make mediation offer to defendant  </option>
     <option value="9" {% if data['claimant'] == 9 %}selected{% endif %}>9. Mediation accepted by defendant  </option>
+    <option value="10" {% if data['claimant'] == 10 %}selected{% endif %}>10. Sent case to a judge  </option>
   </select>
 </form>
 {% endblock %}
