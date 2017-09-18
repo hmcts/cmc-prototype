@@ -26,30 +26,48 @@ Money Claims Prototype
 
 
       <h1 class="heading-large">
-          <span class="heading-secondary">Defendant's response </span>
+
+        {% if data['defendant'] == "mediation" %}
+        <span class="heading-secondary">Claimant's response </span>
+
+        {% else %}
+        <span class="heading-secondary">Defendant's response </span>
+
+        {% endif %}
+
 
         Free mediation 
       </h1>
 
+
+      {% if data['response'] != "no_med_suggestion" %}
       <p class="">The defendant has asked for mediation to help resolve this dispute.  </p>  
 
-        <p class="">You might feel you need to go to a hearing now. However, many people resolve their dispute before
+      {% endif %}
+
+      {% if data['defendant'] == "mediation"  %}
+      <p class="">The claimant has asked for mediation to help resolve this dispute.  </p>  
+
+      {% endif %}
+
+
+      <p class="">You might feel you need to go to a hearing now. However, many people resolve their dispute before
         a hearing by taking part in telephone mediation.</p>
 
-      <p>A mediator will:</p>
-      <ul class="list list-bullet">
-        <li>listen to each side separately - you won’t talk to directly to the other side</li>
-        <li>ask you to consider what the other side says, but won’t make you compromise</li>
-        <li>help you reach an agreement, if possible</li>
-      </ul>
+        <p>A mediator will:</p>
+        <ul class="list list-bullet">
+          <li>listen to each side separately - you won’t talk to directly to the other side</li>
+          <li>ask you to consider what the other side says, but won’t make you compromise</li>
+          <li>help you reach an agreement, if possible</li>
+        </ul>
 
 
 
-      <h1 class="heading-medium">
-        Will you try mediation?
-      </h1>
+        <h1 class="heading-medium">
+          Will you try mediation?
+        </h1>
 
-      <form
+        <form
         name="aspnetForm"
         method="post"
         onsubmit="conditionalNavigation('radio-indent-group2', 'Yes', 'confirmation-page', 'confirmation-page');return false;"
@@ -65,43 +83,61 @@ Money Claims Prototype
 
             <p>Over 68% of people who use our Mediation Service settle on the day.*</p>
 
+         
+        {% if data['defendant'] == "mediation"  %}
+
+            <div class="multiple-choice">
+              <input id="radio-yes" type="radio" name="radio-indent-group2" value="accept-claimant-mediation">
+              <label for="radio-yes" data-target="yes-info">Yes, I want help to resolve this dispute</label>
+            </div>
+
+
+
+            <div class="multiple-choice">
+              <input id="radio-no" type="radio" name="radio-indent-group2" value="decline-claimant-mediation">
+              <label for="radio-no" data-target="no-info">No, I don't want mediation</label>
+            </div>
+        
+
+        {% else %}
+        
             <div class="multiple-choice">
               <input id="radio-yes" type="radio" name="radio-indent-group2" value="accept-mediation">
               <label for="radio-yes" data-target="yes-info">Yes, I want help to resolve this dispute</label>
             </div>
 
-            <div class="panel panel-border-narrow js-hidden" id="yes-info">
-              <p>If both you and Jan Clark say yes, we'll contact you to set up an appointment and answer
-                any questions you have.</p>
-            </div>
+
 
             <div class="multiple-choice">
               <input id="radio-no" type="radio" name="radio-indent-group2" value="decline-mediation">
               <label for="radio-no" data-target="no-info">No, I want a judge to review this case</label>
             </div>
 
-            <div class="panel panel-border-narrow js-hidden" id="no-info">
-              <p>If you can reach an agreement with Jan Clark you don't need to go to a hearing. You'll need to
-                explain your side and if the court
-                decides you owe the money, you might have to pay more or get a <a
-                  href="https://www.gov.uk/county-court-judgments-ccj-for-debt">County
-                  Court Judgment (CCJ)</a> made against you.</p>
-            </div>
+        {% endif %}
+
+
+
 
           </fieldset>
-                         <input type="hidden" name="mediation" value="complete">
-
           <input id="advert-option-next--button" type="submit" value="Submit response" class="button"
-                 data-ignore-double-submit="true">
+          data-ignore-double-submit="true">
         </div>
+
+
+        <input type="hidden" name="mediation" value="complete">
+
       </form>
+
+
+
+
       <p></p><br>
       <p>*Source: Money Claim Mediation Service statistics, April 2015 to March 2016.
-      <p/>
+        <p/>
 
+      </div>
     </div>
-  </div>
-</main>
+  </main>
 
 
-{% endblock %}
+  {% endblock %}
