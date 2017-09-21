@@ -9,7 +9,7 @@ Money Claims Prototype
 <main id="content" role="main">
   {% include "includes/phase_banner_beta.html" %}
   <div class="grid-row">
-    <!--<div class="column-two-thirds">-->
+    <div class="column-two-thirds">
       <div class="govuk-box-highlight">
         {% set respond = true if  data['confirmation']== 1 or data['confirmation']== 2 or data['confirmation']== 3 or  data['confirmation']== 16 or  data.radio_select_group=="all" or  data.radio_select_group2=="paid" %}
         {% if respond==true %}
@@ -40,12 +40,14 @@ Money Claims Prototype
   <h2 class="heading-medium">What happens next</h2>
   <p>When Jan Clark gets your payment they must tell you and the court you’ve paid their money claim.</p>
   <p> You can view the claim at any time on <a href='../../../dashboard/v2/home?dashboard=2.1'>your money claims account</a>. </p>    
+  
   {% elseif data['radio-pay-group']=="Instalments" or data['confirmation']== 2 %} 
   <p>We've emailed Jan Clark your instalment plan.</p>
   <p>We've also sent a copy to: <span class="bold">maryrichards@hotmail.com</span></p>
   <h2 class="heading-medium">What happens next</h2>
   <p>Jan Clark needs to respond to your suggested instalment plan on or before <span id="Date"></span>. We’ll contact you when Jan Clark responds.</p>
   <p> You can view the claim at any time on <a href='../../../dashboard/v2/home?dashboard=2.1'>your money claims account</a>. </p>    
+  
   {% elseif data['radio-pay-group']=="Set-date" or data['confirmation']== 3 %} 
   <p>We've emailed Jan Clark your offer to pay the money claim on <span id="Date"></span> and your explanation of why you can’t pay before then.</p>
   <p>We've also sent a copy to: <span class="bold">maryrichards@hotmail.com</span></p>
@@ -54,96 +56,124 @@ Money Claims Prototype
     <p>They need to respond to your offer on or before <span id="Date3"></span>.</p> 
     <p>If Jan Clark rejects your offer to pay by a set date then the court will decide how you can pay.</p>
     <p> You can view the claim at any time on <a href='../../../dashboard/v2/home?dashboard=2.1'>your money claims account</a>. </p>    
+    
+
     {% elseif data.radio_select_group2=="Some" or data['confirmation']== 4 %} 
-    <!--The claim amount is too much - pay immediately -->   
+    <!-- amount is too much - pay immediately -->   
     <p>Your defence will be shared with Jan Clark and the court.</p>
     <p>We've also sent a copy to: <span class="bold">maryrichards@hotmail.com</span></p>
-    <p>You state that you owe Jan Clark. Your explanation of why you believe you owe this amount and your timeline of events and how this dispute has affected you  has been sent to Jan Clark.</p>
+    <p>You state that you owe £1500. Your explanation of why you believe you owe this amount has been sent to Jan Clark.</p>
     <h2 class="heading-medium">What happens next</h2>
-    <p>Jan Clark has <span class="date"></span> to respond to your offer to pay £1400 immediately.  If they reject your offer then you can submit evidence - we'll let you know if that happens and what evidence you will need.</p>
-    <p>The case will be reviewed by a judge and might go to a hearing.</p>
-    <p>We'll contact you if a hearing date is scheduled and explain what you need to do to prepare.</p>
-    {% elseif data.radio_select_group2=="Some" or data['confirmation']== 5 %} 
-    <!-- amount too much - pay immediately + offer --> 
-    amount too much - pay immediately + offer 
-    {% elseif data.radio_select_group2=="Some" or data['confirmation']== 6 %} 
-    <!-- amount too much - pay instalments + mediation -->
-    amount too much - pay instalments + mediation
-    {% elseif data.radio_select_group2=="Some" or data['confirmation']== 7 %} 
-    <!-- amount too much - pay instalments + mediation & offer -->
-    amount too much - pay instalments + mediation & offer
-    {% elseif data.radio_select_group2=="Paid-some" or data['confirmation']== 8 %} 
-    <!-- paid what i owe -->
-    <p>Your defence will be shared with Jan Clark and the court.</p>
-    <p>We've also sent a copy to: <span class="bold">maryrichards@hotmail.com</span></p>
-    <p>You state that you paid Jan Clark £1500 on 13 June 2017. Your explanation of why you don’t owe the full amount claimed and your timeline of events if populated and how this dispute has affected you if populated has been sent to Jan Clark.</p>
-    <h2 class="heading-medium">What happens next</h2>
-    <p>Jan Clark has <span class="date"></span> to respond to your defence.  If they reject it then the case will be reviewed by a judge and might go to a hearing.</p>
+    <p>Jan Clark has until the <span class="dates"></span> to respond to your defence.  If they reject it then the case will be reviewed by a judge and might go to a hearing.</p>
     <p>We'll contact you if a hearing date is scheduled and explain what you need to do to prepare.</p>
     <p>If Jan Clark accepts your defence they must tell both you and the court that you have paid the money claim.</p>
-    {% elseif data.radio_select_group2=="Paid-some" or data['confirmation']== 9 %} 
-    <!-- paid what i owe + offer -->
-    paid what i owe + offer
-    {% elseif data.radio_select_group2=="Paid-some" or data['confirmation']== 10 %} 
-    <!-- paid what i owe + mediation -->
-    paid what i owe + mediation
-    {% elseif data.radio_select_group2=="Paid-some" or data['confirmation']== 11 %} 
-    <!-- paid what i owe + mediation & offer -->
-    paid what i owe + mediation & offer
-    {% elseif data.radio_select_group2=="defend_now" or data['confirmation']== 12 %} 
-    <!-- Reject claim -->
-    <p>Your defence will be shared with Jan Clark and the court.</p>
-    <p>We've also sent a copy to: <span class="bold">maryrichards@hotmail.com</span>
-    </p>
-    <h2 class="heading-medium">What happens next</h2>
-    <p>You have chosen not to use the free mediation service to resolve the dispute with Jan Clark. The case will be reviewed by a judge and might go to a hearing. </p>
-    <p>We'll contact you if a hearing date is scheduled and explain what you need to do to prepare.</p>
-    <h2 class="heading-medium">What you can do to settle the claim</h2>
-    <p>Unless you've been asked not to, you can still contact Jan Clark directly. If you can reach an agreement you won't have to go to a hearing.</p>
-    <p> You can view the claim at any time on <a href='../../../dashboard/v2/home?dashboard=2.1'>your money claims account</a>. </p>    
-    {% elseif data['confirmation']== 13 %} 
-    <!-- Reject claim + offer -->
-    <p>Your defence will be shared with Jan Clark and the court.</p>
-    <p>We've also sent a copy to: <span class="bold">maryrichards@hotmail.com</span>
-    </p>
-    <h2 class="heading-medium">What happens next</h2>
-    <p>You have agreed to use the free mediation service to resolve the dispute with Jan Clark. We’ll email you to arrange a mediation appointment.</p>
-    <p>If you can reach an agreement with Jan Clark you won't need to go to a hearing.</p>
-    <p> You can view the claim at any time on <a href='../../../dashboard/v2/home?dashboard=2.1'>your money claims account</a>. </p>    
-    <h2 class="heading-medium">What you can do to settle the claim</h2>
-    <p>Unless you've been asked not to, you can still contact Jan Clark directly. If you can reach an agreement you won't have to go to a hearing.</p>
-    {% elseif data['confirmation']== 14 %} 
-    <!-- Reject claim + mediation -->
-    Reject claim + mediation
-    {% elseif data['confirmation']== 15 %} 
-    <!-- Reject claim + mediation & offer -->
-    Reject claim + mediation & offer
-    {% elseif  data.radio_select_group2=="paid" or data['confirmation']== 16 %} 
-    <p>We've emailed Jan Clark stating that you've paid and also asking them to close this claim.</p>
+
+
+    {% elseif data.radio_select_group2=="Some" or data['confirmation']== 6 %} 
+    <!-- amount too much - pay instalments + mediation -->
+
+
+    {% elseif data.radio_select_group2=="Some" or data['confirmation']== 7 %} 
+    <!-- amount too much - pay set date + mediation -->
+    <p>We've emailed Jan Clark your offer to pay a set amount.</p>
     <p>We've also sent a copy to: <span class="bold">maryrichards@hotmail.com</span></p>
     <h2 class="heading-medium">What happens next</h2>
-    <p>We'll contact you if they don't accept that you have already paid.</p>
-    <h2 class="heading-medium">The claim fee</h2>
-    <p>The claimant paid a fee of £75 to make this claim. They have a right to claim this back from you.</p>
+    <p>Jan Clark needs to respond to your offer on or before <span class="dates"></span>.</p>
+
+    <p>If your offer is accepted we’ll email you to explain how you can pay.</p>
+    <p>If your offer is rejected then the case will be reviewed by a judge and might go to a hearing.</p>
+    <p>We'll contact you if a hearing date is scheduled and explain what you need to do to prepare.</p>
+    <h2 class="heading-medium">Mediation </h2>
+    <p>You have chosen to use the free mediation service to resolve the dispute with Jan Clark. We’ll ask them if they want to mediate.</p>
+    <p>If they agree to mediation then we’ll email you to arrange an appointment.</p>
+    <p>If you can reach an agreement with Jan Clark you won't need to go to a hearing.</p>
+
+
+
+
+
+
+    {% elseif data.radio_select_group2=="Paid-some" or data['confirmation']== 8 %} 
+    <!-- paid what i owe -->
+    <p>We’ve emailed Jan Clark telling them you’ve paid £1500 and your explanation of why you believe you don’t owe any more money. </p>
+    <p>We've also sent a copy to: <span class="bold">maryrichards@hotmail.com</span></p>
+    <h2 class="heading-medium">What happens next</h2>
+    <p>Jan Clark has until the <span class="dates"></span> to respond to your defence.  If they reject it then the case will be reviewed by a judge and might go to a hearing.</p>
+    <p>We'll contact you if a hearing date is scheduled and explain what you need to do to prepare.</p>
+    <p>If Jan Clark accepts your defence they must tell both you and the court that you have paid the money claim.</p>
+
+
+    {% elseif data.radio_select_group2=="Paid-some" or data['confirmation']== 10 %} 
+    <!-- paid what i owe + mediation -->
+    <p>We’ve emailed Jan Clark telling them you’ve paid £1500 and your explanation of why you believe you don’t owe any more money. </p>
+    <p>We've also sent a copy to: <span class="bold">maryrichards@hotmail.com</span></p>
+    <h2 class="heading-medium">What happens next</h2>
+    <p>Jan Clark has until the <span class="dates"></span> to respond to your defence.  If they reject it then the case will be reviewed by a judge and might go to a hearing.</p>
+    <p>We'll contact you if a hearing date is scheduled and explain what you need to do to prepare.</p>
+    <p>If Jan Clark accepts your defence they must tell both you and the court that you have paid the money claim.</p>
+
+
+    <h2 class="heading-medium">Mediation </h2>
+    <p>You have chosen to use the free mediation service to resolve the dispute with Jan Clark. We’ll ask them if they want to mediate.</p>
+    <p>If they agree to mediation then we’ll email you to arrange an appointment.</p>
+    <p>If you can reach an agreement with Jan Clark you won't need to go to a hearing.</p>
+
+
+
+
+
+    {% elseif data.radio_select_group2=="defend_now" or data['confirmation']== 12 %} 
+    <!-- Reject claim -->
+    <p>We’ve emailed Jan Clark your defence, explaining why you disagree with the claim.</p>
+    <p>We've also sent a copy to: <span class="bold">maryrichards@hotmail.com</span>
+    </p>
+    <h2 class="heading-medium">What happens next</h2>
+    <p>Jan Clark has <span class="dates"></span> to respond to your defence. </p>
+    <p>If your defence is accepted Jan clark must tell both you and the court that you have paid the money claim.</p>
+    <p>If your defence is rejected then the case will be reviewed by a judge and might go to a hearing. We'll contact you if a hearing date is scheduled and explain what you need to do to prepare.</p>
+    
+
+    <h2 class="heading-medium">What you can do to settle the claim</h2>
+    <p>Unless you've been asked not to, you can still contact Jan Clark directly. If you can reach an agreement you won't have to go to a hearing.</p>
     <p> You can view the claim at any time on <a href='../../../dashboard/v2/home?dashboard=2.1'>your money claims account</a>. </p>    
-<!--      
-      <p>We've emailed Jan Clark stating that you've paid and also asking them to close this claim.</p>
-      <p>We've also sent a copy to: <span class="bold">maryrichards@hotmail.com</span></p>
-      <h2 class="heading-medium">What happens next</h2>
-      <p>We'll contact you if they don't accept that you have already paid.</p>
-      <h2 class="heading-medium">The claim fee</h2>
-      <p>The claimant paid a fee of £75 to make this claim. They have a right to claim this back from you.</p>
-      <p> You can view the claim at any time on <a href='../../../dashboard/home?dashboard=2.1'>your money claims account</a>. </p>    
-      <p>Your defence will be shared with Jan Clark and the court.</p>
-      <p>We've also sent a copy to: <span class="bold">maryrichards@hotmail.com</span>
-      </p>
-      <h2 class="heading-medium">What happens next</h2>
-      <p>The case will be reviewed by a judge and might go to a hearing. We'll contact you when a hearing date is scheduled
-      and explain what you need to do to prepare.</p>
-      <p> You can view the claim at any time on <a href='../../../dashboard/home?dashboard=2.1'>your money claims account</a>. </p>    
-      <h2 class="heading-medium">What you can do to settle the claim</h2>
-      <p>Unless you've been asked not to, you can still contact Jan Clark directly. If you can reach an agreement you won't have to go to a hearing.</p>
-    -->
+
+    {% elseif data['confirmation']== 14 %} 
+    <!-- Reject claim + mediation -->
+    <p>We’ve emailed Jan Clark your defence, explaining why you disagree with the claim.</p>
+    <p>We've also sent a copy to: <span class="bold">maryrichards@hotmail.com</span>
+    </p>
+    <h2 class="heading-medium">What happens next</h2>
+    <p>Jan Clark has <span class="dates"></span> to respond to your defence. </p>
+    <p>If your defence is accepted Jan clark must tell both you and the court that you have paid the money claim.</p>
+    <p>If your defence is rejected then the case will be reviewed by a judge and might go to a hearing. We'll contact you if a hearing date is scheduled and explain what you need to do to prepare.</p>
+    
+    <h2 class="heading-medium">Mediation </h2>
+    <p>You have chosen to use the free mediation service to resolve the dispute with Jan Clark. We’ll ask them if they want to mediate.</p>
+    <p>If they agree to mediation then we’ll email you to arrange an appointment.</p>
+    <p>If you can reach an agreement with Jan Clark you won't need to go to a hearing.</p>
+
+    <h2 class="heading-medium">What you can do to settle the claim</h2>
+    <p>Unless you've been asked not to, you can still contact Jan Clark directly. If you can reach an agreement you won't have to go to a hearing.</p>
+    <p> 
+    <p> You can view the claim at any time on <a href='../../../dashboard/v2/home?dashboard=2.1'>your money claims account</a>. </p>    
+
+
+
+    {% elseif  data.radio_select_group2=="paid" or data['confirmation']== 16 %} 
+        <!-- Already paid -->
+
+    <p>We’ve emailed Jan Clark telling them you’ve paid £1500 and your explanation of why you believe you don’t owe any more money. .</p>
+    <p>We've also sent a copy to: <span class="bold">maryrichards@hotmail.com</span></p>
+    <h2 class="heading-medium">What happens next</h2>
+    <p>Jan Clark needs to respond to your defence on or before <span class="dates"></span>.</p>
+    
+
+    <p>If Jan Clark accepts your defence they must tell both you and the court that you have paid the money claim.</p>
+    <p>If your defence is rejected then the case will be reviewed by a judge and might go to a hearing. We'll contact you if a hearing date is scheduled and explain what you need to do to prepare.</p>
+
+
+    <p> You can view the claim at any time on <a href='../../../dashboard/v2/home?dashboard=2.1'>your money claims account</a>. </p>    
+
     {% else %} 
     <p>We've emailed Jan Clark your instalment plan.</p>
     <p>We've also sent a copy to: <span class="bold">maryrichards@hotmail.com</span></p>
@@ -163,6 +193,7 @@ Money Claims Prototype
     <a href="http://www.smartsurvey.co.uk/s/3Q3KE/" class="button">Finished</a>
   </div>
 </div>
+</div>
 </main>
 <form method="post"  action="#" class="form" style="position: absolute;">
   <select id="check2" name="check2" onchange="window.location.href='?confirmation='+this.value">
@@ -170,19 +201,13 @@ Money Claims Prototype
     <option value="1" {% if data['confirmation'] == 1 %}selected{% endif %}>1. F/A - pay Immediately</option>
     <option  value="2" {% if data['confirmation'] == 2 %}selected{% endif %}>2. F/A - pay instalments</option>
     <option  value="3" {% if data['confirmation'] == 3 %}selected{% endif %}>3. F/A - Pay set date</option>
-    <option  value="4" {% if data['confirmation'] == 4 %}selected{% endif %}>4. P/A - amount too much - pay immediately </option>
-    <option  value="5" {% if data['confirmation'] == 5 %}selected{% endif %}>5. P/A - amount too much - pay immediately + offer </option>
-    <option  value="6" {% if data['confirmation'] == 6 %}selected{% endif %}>6. P/A - amount too much - pay instalments + mediation </option>
-    <option  value="7" {% if data['confirmation'] == 7 %}selected{% endif %}>7. P/A - amount too much - pay set date + offer & mediation</option>
-    <option  value="8" {% if data['confirmation'] == 8 %}selected{% endif %}>8. P/A - paid what i owe </option>
-    <option  value="9" {% if data['confirmation'] == 9 %}selected{% endif %}>9. P/A - paid what i owe + offer </option>
-    <option  value="10" {% if data['confirmation'] == 10 %}selected{% endif %}>10. P/A - paid what i owe + mediation </option>
-    <option  value="11" {% if data['confirmation'] == 11 %}selected{% endif %}>11. P/A - paid what i owe + offer & mediation </option>
-    <option  value="12" {% if data['confirmation'] == 12 %}selected{% endif %}>12. Reject claim</option>
-    <option  value="13" {% if data['confirmation'] == 13 %}selected{% endif %}>13. Reject claim + offer</option>
-    <option  value="14" {% if data['confirmation'] == 14 %}selected{% endif %}>14. Reject claim + mediation</option>
-    <option  value="15" {% if data['confirmation'] == 15 %}selected{% endif %}>15. Reject claim + offer & mediation</option>
-    <option  value="16" {% if data['confirmation'] == 16 %}selected{% endif %}>16. Already paid</option>
+    <option  value="4" {% if data['confirmation'] == 4 %}selected{% endif %}>3. P/A - amount too much - pay immediately </option>
+    <option  value="7" {% if data['confirmation'] == 7 %}selected{% endif %}>4. P/A - amount too much - pay set date + mediation </option>
+    <option  value="8" {% if data['confirmation'] == 8 %}selected{% endif %}>5. P/A - paid what i owe </option>
+    <option  value="10" {% if data['confirmation'] == 10 %}selected{% endif %}>6. P/A - paid what i owe + mediation </option>
+    <option  value="12" {% if data['confirmation'] == 12 %}selected{% endif %}>7. Reject claim</option>
+    <option  value="14" {% if data['confirmation'] == 14 %}selected{% endif %}>8. Reject claim + mediation</option>
+    <option  value="16" {% if data['confirmation'] == 16 %}selected{% endif %}>9. Already paid</option>
   </select>
 </form>
 {% endblock %}
