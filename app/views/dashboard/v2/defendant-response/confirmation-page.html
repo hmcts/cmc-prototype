@@ -10,13 +10,17 @@ Money Claims Prototype
 
   {% include "includes/phase_banner_beta.html" %}
   <div class="grid-row">
+    <div class="column-two-thirds">
+
     <div class="govuk-box-highlight">
       {% if data['radio-indent-group'] == "counter" or data['confirmation'] == 1 %}
       <h1 class="bold-large">Your offer has been sent to the defendant</h1>
-      {% elseif data['radio-indent-group'] == "accept-mediation" or data['radio-indent-group2'] == "accept-mediation" or 
+              {% elseif data['radio-indent-group'] == "reject-offer" or data['confirmation'] == 6 %}
+      <h1 class="bold-large">Your have rejected their offer</h1>
 
 
-      data['radio-indent-group2'] == "accept-claimant-mediation" or data['confirmation'] == 2 or data['confirmation'] == 3 or data['confirmation'] == 5 %}
+
+      {% elseif data['radio-indent-group'] == "accept-mediation" or data['radio-indent-group2'] == "accept-mediation" or data['radio-indent-group2'] == "accept-claimant-mediation" or data['confirmation'] == 2 or data['confirmation'] == 3 or data['confirmation'] == 5 %}
       <h1 class="bold-large">You have requested free mediation</h1>
       
 
@@ -33,11 +37,15 @@ Money Claims Prototype
       <h1 class="bold-large">You have requested free mediation</h1>
       {% endif %}
     </div>
-    <div class="column-two-thirds">
       <fieldset>
         <h2 class="heading-medium">What happens next</h2>
         {% if data['radio-indent-group'] == "counter" or data['confirmation'] == 1 %}
         <p>The defendant Mary Richards can accept your counter offer, reject it or suggest an alternative. We will notify you once the defendant responds.
+        </p>
+        <p> View your claim status on <a href='../v2/home?dashboard=11'>your money claims account</a>. </p>    
+
+        {% elseif data['radio-indent-group'] == "reject-offer" or data['confirmation'] == 6 %}
+        <p>You have rejected the defendant Mary Richards offer of settle.
         </p>
         <p> View your claim status on <a href='../v2/home?dashboard=11'>your money claims account</a>. </p>    
 
@@ -51,6 +59,9 @@ Money Claims Prototype
         {% elseif data['radio-indent-group'] == "decline-mediation" or data['radio-indent-group2'] == "decline-mediation" or data['confirmation'] == 4 %}
         <p>The case will be reviewed by a judge and might go to a hearing. We'll contact you if a hearing date is scheduled and explain what you need to do to prepare.</p>
         <p> View your claim status on <a href='../v2/home?dashboard=18'>your money claims account</a>. </p>    
+
+       
+
 
         {% elseif data['radio-indent-group2'] == "accept-claimant-mediation" or data['confirmation'] == 5%}
 
@@ -83,7 +94,7 @@ Money Claims Prototype
         </fieldset>
         <br>
         <a href="http://www.smartsurvey.co.uk/s/CMCMVPT1/" class="button">Finished</a>
-      </div>
+    </div>
     </div>
   </main>
 <form method="post"  action="#" class="form" style=" float: left;">
