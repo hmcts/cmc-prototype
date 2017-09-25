@@ -1,48 +1,62 @@
-{% extends "layout_task-list.html" %}
-
+{% extends "layout.html" %}
 {% block page_title %}
 Money Claims Prototype
 {% endblock %}
-
-{% block home_link %} ../task-list {% endblock %}
 {% block proposition_header %}
-{% set my_account="1" %}
+{% set my_account="2" %}
 {% include "includes/propositional_navigation.html" %}
 {% endblock %}
 {% block content %}
-
-
 <main id="content" role="main">
   {% include "includes/phase_banner_beta.html" %}
-
-      <a href="#" class="link-back">Back</a>
-
-
   <div class="grid-row">
     <div class="column-two-thirds">
+        <a href="#" class="link-back">Back</a>
+      <h1 class="heading-large">
+        Make an offer to settle out of court
+      </h1>
 
-      <form method="post" action="../task-list" class="form">
+<p>You could settle this money claim without going to court if you make an offer and reach an agreement.</p>
 
-        {{formData | safe}}
+<p>If your offer is accepted and you settle the claim, then it’s confidential. This means there won’t be a public record of the claim made against you and you won’t get a County Court Judgment (CCJ). You must do what you’ve agreed or the claimant can ask the court to make a CCJ against you.</p>
 
-        <h1 class="heading-large">
-          Settle out of court
-        </h1>
-
-        <fieldset>
-          <legend class="visuallyhidden">
-            Completing your claim
-          </legend>
+<p>If the claimant rejects your offer they can’t bring it up if you go to a court hearing.</p>
 
 
-      <h3 class="heading-medium">Make a deal</h3>
 
-      <p>You can try to settle the claim by making the claimant an offer. If the claimant rejects your offer you’ll have to go a hearing. The claimant can’t mention that you made them an offer at the hearing.</p>
+      <fieldset></fieldset>
+      <p class="bold-medium">Do you want to make an offer?</p>
+      <form
+        name="aspnetForm"
+        method="post"
+        onsubmit="conditionalNavigation('radio-suggestion-group', 'Yes', 'settle-out-of-court/offer', '../task-list');return false;"
+        id="aspnetForm"
+        autocomplete="off">
+        <div class="form-group">
+          <fieldset>
+            <legend class="visually-hidden">Do you want to make an offer?</legend>
+            <div class="multiple-choice">
+              <input id="radio-yes" type="radio" name="radio-suggestion-group" value="Yes">
+              <label for="radio-yes" data-target="yes-info">Yes</label>
+            </div>
+            <div class="multiple-choice">
+              <input id="radio-no" type="radio" name="radio-suggestion-group" value="No">
+              <label for="radio-no" data-target="no-info">No</label>
+            </div>
+          </fieldset>
+             <p class="panel">You still need to submit your response to this claim by <span class="dates"></span>.</p>
 
-      <h3 class="heading-medium">Mediate</h3>
+         <div class="form-group">
+        <input id="advert-option-next--button" type="submit" value="Save and continue" class="button"
+        data-ignore-double-submit="true">
+        </div>
 
-      <p>You can ask for mediation to settle the claim. If the claimant agrees to use the mediation service, you could settle the claim without going to court.</p>
+        </div>
+                <input type="hidden" name="settle_out_of_court" value="complete">
+
+      </form>
+
+    </div>
   </div>
-
 </main>
 {% endblock %}

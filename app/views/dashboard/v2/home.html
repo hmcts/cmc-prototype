@@ -8,54 +8,19 @@
 <main id="content" role="main" ">
   {% include "includes/phase_banner_beta.html" %}
 
-<!--   <div class="grid-row">
-    <div class="column-two-thirds">
-      <div class="text">
-        <p class="lede">Use this service to:</p>
-        <ul class="list list-bullet">
-          <li>make a money claim</li>
-          <li>view a money claim made against you </li>
-          <li>manage a money claim </li>
-        </ul>    
-      </div>
-    </div>
-    <div class="column-one-third">
-      <div class="panel-cta tablet-and-up" style="">
-        {% if data['dashboard'] == 6 %}
-        <p class="heading-small panel-body flush--top cta-draft">Manage money claim</p>
-        <p class="panel-button flush--bottom">
-          <a id="create-new-lpa" class="button cta-draft" href="../../claimant/full/c-2/task-list" role="button">Continue with new claim</a>
-        </p>
-        {% else %}
-        <p class="heading-small panel-body flush--top cta">Make a new money claim</p>
-        <p class="panel-button flush--bottom">
-          <a id="create-new-lpa" class="button cta" href="../../claimant/full/c-2/task-list" role="button">Start now</a>
-        </p>
-        {% endif %}
-      </div>
-    </div>
-  </div> -->
-
-  {% if data['dashboard'] != 6 %}
-
-  <div id="control-bar">
-    <a href="../../claimant/full/c-2/task-list" class="">Make a new money claim</a>
-  </div>
-  {% endif %}
-
   <div class="grid-row">
-
     <div class="column-full">
-
       <h1 class="heading-large">
         Your money claims account 
       </h1>
-
-
+  {% if data['dashboard'] != 6 %}
+    <a class="newclaim" href="../../claimant/full/c-2/task-list" class="">Make a new money claim</a>
+  {% endif %}
       {% set show_all = true if data['dashboard'] == 8 %}
-      {% set claimant_table = true if show_all==true or data['dashboard'] == 1 or data['dashboard'] == 1.2 or data['dashboard'] == 6 or data['dashboard'] == 3 or data['dashboard'] == 7 or data['dashboard'] == 4  or show_all==true or data['dashboard'] == 9 or data['dashboard'] == 10 or data['dashboard'] == 11 or data['dashboard'] == 12 or data['dashboard'] == 13 or data['dashboard'] == 18%}
-      
-      {% set defendant_table = true if show_all==true or data['dashboard'] == 2 or data['dashboard'] == 2.1 or data['dashboard'] == 5  or data['dashboard'] == 14 or data['dashboard'] == 15 or  data['dashboard'] == 16  or  data['dashboard'] == 17 or  data['dashboard'] == 19%}
+     
+      {% set claimant_table = true if show_all==true or data['dashboard'] == 1 or data['dashboard'] == 1.2 or data['dashboard'] == 6 or data['dashboard'] == 3 or data['dashboard'] == 7 or data['dashboard'] == 4  or show_all==true or data['dashboard'] == 9 or data['dashboard'] == 10 or data['dashboard'] == 11 or data['dashboard'] == 12 or data['dashboard'] == 13 or data['dashboard'] == 18 or data['dashboard'] == 20%}
+     {% set defendant_table = true if show_all==true or data['dashboard'] == 2 or data['dashboard'] == 2.1 or data['dashboard'] == 5  or data['dashboard'] == 14 or data['dashboard'] == 15 or  data['dashboard'] == 16  or  data['dashboard'] == 17 or  data['dashboard'] == 19%}
+
       {% if claimant_table!=true and defendant_table!=true %}
       <h2 class="heading-medium type-heading claims">
        Claims you've made
@@ -95,7 +60,7 @@
         <td><a href="defendant?defendant=1.1">242MC435</a></td>
         <td>Jan Clark  </td>
         <td>£1302.23 </td>
-        <td><a a href="../../defendant/full/d-2/task-list">Respond to claim.</a> <br><span class="font-xsmall">(14 days remaining)</span> </td>
+        <td><a a href="../../defendant/full/d-3/task-list">Respond to claim.</a> <br><span class="font-xsmall">(14 days remaining)</span> </td>
       </tr>  
     </tbody>
   </table>
@@ -120,7 +85,7 @@
       <td><a href="claimant?claimant=1.2">Draft claim</a></td>
       <td>- </td>
       <td>- </td>
-      <td><a href="../../claimant/full/c-2/task-list">Continue with claim </a> </td>
+      <td><a href="../../claimant/full/c-3/task-list">Continue with claim </a> </td>
     </tr>
     {% endif %}
     {% if show_all==true or data['dashboard'] == 1.2 %}
@@ -196,7 +161,6 @@
       <td>You have both agreed to mediation. You'll be contacted in the next 14 days to arrange an appointment.</td>
     </tr> 
     {% endif %}
-
     {% if show_all==true or data['dashboard'] == 1 or data['dashboard'] == 18   %}
     <tr class="mediation" >
       <td><a href="claimant?claimant=10">352MC733</a></td>
@@ -206,13 +170,23 @@
     </tr> 
     {% endif %}
 
+    {% if show_all==true or data['dashboard'] == 1 or data['dashboard'] == 20   %}
+    <tr class="mediation" >
+      <td><a href="claimant?claimant=11">352MC733</a></td>
+      <td>Mary Richards</td>
+      <td>£1500 </td>
+      <td>The defendant has made an offer to <a href='defendant-response/suggestion?defendant=offer'>settle the claim</a>.</td>
+    </tr> 
+    {% endif %}
 
-    
+
 
     {% if claimant_table==true %}
   </tbody>
 </table>
 {% endif %}
+
+ 
 {% if defendant_table==true %}
 <h2 class="heading-medium type-heading" >
  Claims made against you
@@ -233,7 +207,7 @@
     <td><a href="defendant?defendant=1.1">352MC733</a></td>
     <td>Jan Clark  </td>
     <td>£1302.23 </td>
-    <td><a a href="../../defendant/full/d-2/task-list">Respond to claim.</a> <br><span class="font-xsmall">(14 days remaining)</span> </td>
+    <td><a a href="../../defendant/full/d-3/task-list">Respond to claim.</a> <br><span class="font-xsmall">(14 days remaining)</span> </td>
   </tr>  
   {% endif %}  
   {% if show_all==true or data['dashboard'] == 2.1   %}
@@ -268,7 +242,6 @@
     <td>Mary Richards has requested <a href='defendant-response/view-claim-def?response=med'>free mediation</a> to help you come to an agreement.</td>
   </tr> 
   {% endif %}
-
   {% if show_all==true or data['dashboard'] == 16 %}
   <tr>
     <td><a href="defendant?defendant=7">352MC733</a></td>
@@ -277,7 +250,6 @@
     <td>You have rejected the offer of mediation. The case will be reviewed by a judge and might go to a hearing.</td>
   </tr> 
   {% endif %}
-
   {% if show_all==true or data['dashboard'] == 17 %}
   <tr>
     <td><a href="defendant?defendant=8">352MC733</a></td>
@@ -286,24 +258,18 @@
     <td>You have both agreed to mediation. You'll be contacted in the next 14 days to arrange an appointment.</td>
   </tr> 
     {% endif %}
-
   {% if show_all==true or data['dashboard'] == 19 %}
   <tr>
-    <td><a href="defendant?defendant=8">352MC733</a></td>
+    <td><a href="defendant?defendant=9">352MC733</a></td>
     <td>Jan Clark  </td>
     <td>£1302.23 </td>
     <td>The claimant has made a counter offer. <a href="defendant-response/suggestion?defendant=defendant">View offer.</a> </td>
   </tr> 
-
-
-
   {% endif %}
   {% if defendant_table==true %}
 </tbody>
 </table>
 {% endif %}
-
-
 </div>
 </div>
 </main>
@@ -314,13 +280,15 @@
     <option value="3" {% if data['dashboard'] == 3 %}selected{% endif %}>2. CCJ - request judgement</option>
     <option value="4" {% if data['dashboard'] == 4 %}selected{% endif %}>3. CCJ - judgement requested</option>
     <option value="6" {% if data['dashboard'] == 6 %}selected{% endif %}>4. Draft claim</option>
-    <option value="7" {% if data['dashboard'] == 7 %}selected{% endif %}>5. Full defence response - mediation only</option>
-    <option value="9" {% if data['dashboard'] == 9 %}selected{% endif %}>6. Full defence response - offer and Mediation</option>
-    <option value="10" {% if data['dashboard'] == 10 %}selected{% endif %}>7. Full defence response - no offer or Mediation</option>
-    <option value="11" {% if data['dashboard'] == 11 %}selected{% endif %}>8. Makes counter offer - message</option>
-    <option value="12" {% if data['dashboard'] == 12 %}selected{% endif %}>9. Mediation offer to defendant - message</option>
-    <option value="13" {% if data['dashboard'] == 13 %}selected{% endif %}>10. Mediation offer agreed - message</option>
-    <option value="18" {% if data['dashboard'] == 18 %}selected{% endif %}>11. Case sent to judge </option>
+        <option value="20" {% if data['dashboard'] == 20 %}selected{% endif %}>5. Offer to settle</option>
+
+    <option value="7" {% if data['dashboard'] == 7 %}selected{% endif %}>6. Full defence response - mediation only</option>
+    <option value="9" {% if data['dashboard'] == 9 %}selected{% endif %}>7. Full defence response - offer and Mediation</option>
+    <option value="10" {% if data['dashboard'] == 10 %}selected{% endif %}>8. Full defence response - no offer or Mediation</option>
+    <option value="11" {% if data['dashboard'] == 11 %}selected{% endif %}>9. Makes counter offer - message</option>
+    <option value="12" {% if data['dashboard'] == 12 %}selected{% endif %}>10. Mediation offer to defendant - message</option>
+    <option value="13" {% if data['dashboard'] == 13 %}selected{% endif %}>11. Mediation offer agreed - message</option>
+    <option value="18" {% if data['dashboard'] == 18 %}selected{% endif %}>12. Case sent to judge </option>
     <option value="8" {% if data['dashboard'] == 8 %}selected{% endif %}>Show all</option>
   </select>
 </form>
@@ -335,9 +303,6 @@
     <option value="16" {% if data['dashboard'] == 16 %}selected{% endif %}>6.  Mediation request - rejected</option>
     <option value="17" {% if data['dashboard'] == 17 %}selected{% endif %}>7.  Mediation request - accepted</option>
     <option value="19" {% if data['dashboard'] == 19 %}selected{% endif %}>8.  Counter offer from claimant</option>
-
-
-
     <option value="8" {% if data['dashboard'] == 8 %}selected{% endif %}>Show all</option>
   </select>
 </form>

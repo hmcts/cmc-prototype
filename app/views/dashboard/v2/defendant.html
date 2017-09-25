@@ -20,7 +20,7 @@
       <p> You have not responded to this claim. </p> <p>The response deadline  is 30 September 2017 at 4pm (14 days remaining). </p>
 
       <div class="form-group">
-       <p> <a class="button" href="../../defendant/full/d-2/task-list">Respond to claim  </a></p>
+       <p> <a class="button" href="../../defendant/full/d-3/task-list">Respond to claim  </a></p>
      </div>
 
      {% elseif data['defendant'] == 1  %}
@@ -67,6 +67,13 @@
     {% elseif data['defendant'] == 8  %}
     <p><span class="bold">15 May 2017</span><br>You have rejected the claimants offer of mediation. We will notify you once the claimant responds.</p>
 
+    {% elseif data['defendant'] == 9  %}
+    <p><span class="bold">15 May 2017</span><br>The claimant has made a counter offer. </p>
+    <div class="form-group">
+      <p> <a class="button" href="defendant-response/suggestion?defendant=defendant">View offer </a></p>
+    </div>
+
+
     {% else  %}
     <p>Your defence is being processed. We will email you to explain what to do next.</p>
 
@@ -103,12 +110,15 @@
     {% else %}
 
     <h2 class="heading-medium">More options </h2>
+  {% if data['defendant'] == 9 %}
 
+      {% else %}
     <h2 class="heading-small">Make a suggestion to settle the claim</h2>
     <p>
      <a href='#'>Make a offer</a> to settle the claim out of court. This will avoid going to a hearing. 
    </p>
-   {% if data['defendant'] == 1 or data['defendant'] == 3 or data['defendant'] == 4 or data['defendant'] == 5 or data['defendant'] == 8%}
+    {% endif %} 
+   {% if data['defendant'] == 1 or data['defendant'] == 3 or data['defendant'] == 4 or data['defendant'] == 5 or data['defendant'] == 8 or data['defendant'] == 9  %}
 
    <h2 class="heading-small">Request mediation</h2>
    <p>
@@ -149,6 +159,7 @@
     <option  value="6" {% if data['defendant'] == 6 %}selected{% endif %}>6. Mediation request from claimant </option>
     <option  value="7" {% if data['defendant'] == 7 %}selected{% endif %}>7. Mediation accepted </option>
     <option  value="8" {% if data['defendant'] == 8 %}selected{% endif %}>8. Mediation Rejected </option>
+    <option  value="9" {% if data['defendant'] == 9 %}selected{% endif %}>9. Counter offer from claimant </option>
   </option>
 </select>
 </form>
