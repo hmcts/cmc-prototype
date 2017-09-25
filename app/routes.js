@@ -452,7 +452,7 @@ router.get('*/task-list/mediation', function (req, res, next) {
 
   let mediation = req.session.data.mediation;
   if (mediation === "complete" ){
-    res.redirect("mediation");
+    res.redirect("mediation/check-your-answers");
   } else {
     next()
   }

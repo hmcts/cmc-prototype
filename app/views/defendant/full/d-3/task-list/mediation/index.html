@@ -44,12 +44,30 @@ Money Claims Prototype
           Will you try mediation?
         </h1>
 
-        <form
-        name="aspnetForm"
-        method="post"
-        onsubmit="conditionalNavigation('radio-mediation-group', 'Yes', '../task-list', '../task-list');return false;"
-        id="aspnetForm"
-        autocomplete="off">
+
+
+
+      {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}        
+      <form
+      name="aspnetForm"
+      method="post"
+      id="aspnetForm"
+      autocomplete="off" 
+      onsubmit="multiNavigation('radio-mediation-group', ['Yes', 'No'], ['../mediation', '../mediation']);return false;"
+      >
+
+      {% else %}
+      <form
+      name="aspnetForm"
+      method="post"
+      id="aspnetForm"
+      autocomplete="off" 
+      onsubmit="multiNavigation('radio-mediation-group', ['Yes', 'No'], ['../task-list', '../task-list']);return false;"
+      >
+      {% endif %}
+
+
+
 
         <input id="your-offer" name="offer" type="hidden">
 
@@ -87,10 +105,20 @@ Money Claims Prototype
               <input type="hidden" name="mediation" value="complete">
 
 
-              <div class="form-group">
-                <input id="advert-option-next--button" type="submit" value="Save and continue" class="button"
-                data-ignore-double-submit="true">
-              </div>
+        {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}
+        <div class="form-group">
+          <input type="submit" class="button" value="Save changes"/>
+        </div>
+
+
+        <a href="{{ data.return_page if data.return_page | length > 0 else '../task-list' }}">Cancel</a>
+
+        {% else %}
+        <div class="form-group">
+          <input type="submit" class="button" value="Save and continue"/>
+        </div>
+
+        {% endif %}
 
             </div>
           </form>
