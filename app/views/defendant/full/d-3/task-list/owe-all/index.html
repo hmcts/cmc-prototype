@@ -18,9 +18,10 @@ Money Claims Prototype
       {% if data.radio_select_group=="Some" and data.do_you_owe_money=="complete" %}
       <p> You believe you owe £800. </p>
       {% else %}
-      <p></p>
       {% endif %}
       {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('task-list')%}        
+           <p>If you pay within 28 days you could get a County Court Judgment (CCJ) but you can get the CCJ cancelled. </p>
+
       <form
       name="aspnetForm"
       method="post"
@@ -40,8 +41,16 @@ Money Claims Prototype
         <fieldset>
           <div class="multiple-choice">
             <input id="radio-yes" type="radio" name="radio-pay-group" value="Immediately">
-            <label for="radio-yes" data-target="yes-info">Immediately</label>
+            <label for="radio-yes" data-target="yes-info">The full amount within 28 days</label>
           </div>
+          <div class="multiple-choice" data-target="set-date">
+            <input id="radio-no" type="radio" name="radio-pay-group" value="Set-date">
+            <label for="radio-no" data-target="no-info">The full amount after 28 days</label>
+          </div>
+          <div class="panel panel-border-narrow js-hidden" id="set-date">
+            <p>You'll need to answer some financial questions to explain why.</p>
+          </div>
+
           <div class="multiple-choice" data-target="instalments">
             <input id="radio-repayment" type="radio" name="radio-pay-group" value="Instalments">
             <label for="radio-repayment" data-target="repayment-info">By instalments</label>
@@ -49,13 +58,7 @@ Money Claims Prototype
           <div class="panel panel-border-narrow js-hidden" id="instalments">
             <p>You'll need to answer some financial questions to explain why.</p>
           </div>
-          <div class="multiple-choice" data-target="set-date">
-            <input id="radio-no" type="radio" name="radio-pay-group" value="Set-date">
-            <label for="radio-no" data-target="no-info">The full amount by a set date</label>
-          </div>
-          <div class="panel panel-border-narrow js-hidden" id="set-date">
-            <p>You'll need to answer some financial questions to explain why.</p>
-          </div>
+
         </fieldset>
       </div>
 

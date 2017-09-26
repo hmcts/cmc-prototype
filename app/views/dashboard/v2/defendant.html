@@ -20,11 +20,11 @@
       <p> You have not responded to this claim. </p> <p>The response deadline  is 30 September 2017 at 4pm (14 days remaining). </p>
 
       <div class="form-group">
-       <p> <a class="button" href="../../defendant/full/d-3/task-list">Respond to claim  </a></p>
+       <p> <a class="button" href="../../defendant/full/d-3/task-list?hide_offer=false">Respond to claim  </a></p>
      </div>
 
      {% elseif data['defendant'] == 1  %}
-     <p><span class="bold">15 May 2017</span><br>TYour defence is being processed. We will email you to explain what to do next.</p>
+     <p><span class="bold">15 May 2017</span><br>Your defence is being processed. We will email you to explain what to do next.</p>
 
      {% elseif data['defendant'] == 2  %}
      <p><span class="bold">15 May 2017</span><br>The court has issued a County Court Judgment against you. This means that the court has formally decided that you owe the money.</p>
@@ -72,6 +72,14 @@
     <div class="form-group">
       <p> <a class="button" href="defendant-response/suggestion?defendant=defendant">View offer </a></p>
     </div>
+    {% elseif data['defendant'] == 10  %}
+    <span class="bold">15 May 2017</span>
+        <p> You have not responded to this claim. </p> <p>The response deadline  is 30 September 2017 at 4pm (14 days remaining). </p>
+
+      <div class="form-group">
+       <p> <a class="button" href="../../defendant/full/d-3/task-list?hide_offer=false">Respond to claim  </a></p>
+     </div>
+
 
 
     {% else  %}
@@ -85,7 +93,22 @@
 
 
 
-    {% if data['defendant'] == 1 or data['defendant'] == 2 or data['defendant'] == 1.1  %}
+    {% if data['defendant'] == 1 or data['defendant'] == 2 or data['defendant'] == 1.1   %}
+
+
+    {% elseif data['defendant'] == 10  %}
+    <h2 class="heading-medium">Claim history </h2>
+    <details>
+      <summary>You have 1 event in your claim history</summary>
+      <div class="history-timeline">
+        <div class="data">
+          <span class="data-item bold-large">20</span>
+          <span class="data-item bold-xsmall">Sept 2017</span>
+          <span class="data-item bold-xsmall"></span>
+        </div>
+        <div class="history-statement">You sent an offer to the claimant. <a href="#">View offer</a></div>
+      </div>
+    </details>
 
 
     {% else %}
@@ -104,7 +127,7 @@
     </details>
     {% endif %}
 
-    {% if data['defendant'] == 2 or  data['defendant'] == 1.1  %}
+    {% if data['defendant'] == 2 or data['defendant'] == 10%}
 
 
     {% else %}
@@ -114,9 +137,12 @@
 
       {% else %}
     <h2 class="heading-small">Make a suggestion to settle the claim</h2>
+   
     <p>
-     <a href='#'>Make a offer</a> to settle the claim out of court. This will avoid going to a hearing. 
+     <a href='offer'>You can make an offer</a> to settle the claim out of court. This means you won't have to go a hearing and might not get a County Court Judgment against you. 
    </p>
+
+
     {% endif %} 
    {% if data['defendant'] == 1 or data['defendant'] == 3 or data['defendant'] == 4 or data['defendant'] == 5 or data['defendant'] == 8 or data['defendant'] == 9  %}
 
@@ -135,7 +161,7 @@
       <li><strong class="bold">Claim amount:</strong><br>£1302.23 </li>
       <li><strong class="bold">Claim details:</strong><br><a href="view-claim">Download claim details</a> </li>
 
-      {% if data['defendant'] == 1.1 %}
+      {% if data['defendant'] == 1.1 or data['defendant'] == 10%}
 
       {% else %} 
       <li><strong class="bold">Your response:</strong><br><a href="view-claim">Download your response</a> </li>
@@ -160,6 +186,7 @@
     <option  value="7" {% if data['defendant'] == 7 %}selected{% endif %}>7. Mediation accepted </option>
     <option  value="8" {% if data['defendant'] == 8 %}selected{% endif %}>8. Mediation Rejected </option>
     <option  value="9" {% if data['defendant'] == 9 %}selected{% endif %}>9. Counter offer from claimant </option>
+    <option  value="10" {% if data['defendant'] == 10 %}selected{% endif %}>10. Offer sent to claimant </option>
   </option>
 </select>
 </form>
