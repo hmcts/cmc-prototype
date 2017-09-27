@@ -1,3 +1,4 @@
+
 {% extends "layout.html" %}
 {% block page_title %}
 Money Claims Prototype
@@ -13,33 +14,32 @@ Money Claims Prototype
     <div class="column-two-thirds">
       <a href="#" class="link-back">Back</a>
       <h1 class="heading-large">
-        What is your bank balance?  
+        Do you have any savings? 
       </h1>
-
-
-  <span class="form-hint">
-    
-   
-    Put a minus (-) in front of the amount if you're overdrawn. For example -£804.45.
-  </span>
-
-      
+     
       {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}        
-        <form action="residence" method="get" class="form">
+      <form method="post" action="{{ data.return_page if data.return_page | length > 0 else '../task-list' }}" class="form">
         {% else %}
-        <form action="savings" method="get" class="form">
+        <form action="income" method="post" class="form">
           {% endif %}
-         
-         <div id="timeline" class="timeline">
+          <div class="form-group">
+            <fieldset>
+              <div class="multiple-choice" data-target="yes">
+                <input id="radio-repayment" type="radio" name="radio-pay-group" value="Yes">
+                <label for="radio-repayment" data-target="repayment-info">Yes</label>
+              </div>
+              <div class="panel panel-border-narrow js-hidden" id="yes">
+                <!--<a href="" style="float: left" data-alert="This feature is not available in this demo">More about what you can claim</a>-->
+                <div id="timeline" class="timeline">
                   <div class="timeline-headings">
                     <div id="timeline-heading-1" class="timeline-column-3">
                       <label class="form-label-bold" for="event-form-control">
-                      Account
+                      List each saving 
                       </label>
                     </div>
                     <div id="timeline-heading-2" class="timeline-column-4 ">
                       <label class="form-label-bold" for="date-form-control">
-                        Balance
+                        Amount
                       </label>
                       <span class="form-hint"> </span>
                     </div>
@@ -72,22 +72,24 @@ Money Claims Prototype
                   </div>
                 </div>
               </div>
-
-              
-          </fieldset>
-        </div>
-        {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('task-list')%}
-        <div class="form-group">
-          <input type="submit" class="button" value="Save and continue"/>
-        </div>
-        <a href="#" onclick="goBack()">Cancel</a>
-        {% else %}
-        <div class="form-group">
-          <input type="submit" class="button" value="Save and continue"/>
-        </div>
-        {% endif %}
-      </form>
+              <div class="multiple-choice">
+                <input id="radio-no" type="radio" name="radio-pay-group" value="no">
+                <label for="radio-no" data-target="no-info">No</label>
+              </div>
+            </fieldset>
+          </div>
+          {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('task-list')%}
+          <div class="form-group">
+            <input type="submit" class="button" value="Save and continue"/>
+          </div>
+          <a href="#" onclick="goBack()">Cancel</a>
+          {% else %}
+          <div class="form-group">
+            <input type="submit" class="button" value="Save and continue"/>
+          </div>
+          {% endif %}
+        </form>
+      </div>
     </div>
-  </div>
-</main>
-{% endblock %}
+  </main>
+  {% endblock %}
