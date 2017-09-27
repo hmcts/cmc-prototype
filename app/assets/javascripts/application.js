@@ -262,6 +262,12 @@ $(document).ready(function() {
   var monthNames = [ "January", "February", "March", "April", "May", "June",
   "July", "August", "September", "October", "November", "December" ];
 
+
+  var monthNamesCal = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+  "Jul", "Aug", "Sept", "Oct", "Nov", "Dec" ];
+
+
+
   var newDate = new Date();
   newDate.setDate(newDate.getDate()+ 14) ;
 
@@ -269,12 +275,18 @@ $(document).ready(function() {
   newDate2.setDate(newDate2.getDate()) ;
 
   var newDate3 = new Date();
-  newDate3.setDate(newDate3.getDate()+ 28) ;
+  newDate3.setDate(newDate3.getDate()+ 28);
+
+  var newDate4 = new Date();
+  newDate4.setDate(newDate4.getDate()) ;
+
+
 
 /*$('#Date').html(" " + newDate.getDate() + ' ' + monthNames[newDate.getMonth()] + ' ' + newDate.getFullYear());
 */$('#Date, .dates').html(" " + newDate.getDate() + ' ' + monthNames[newDate.getMonth()] + ' ' + newDate.getFullYear());
 $('#Date2, .dates2').html(" " + newDate2.getDate() + ' ' + monthNames[newDate2.getMonth()] + ' ' + newDate2.getFullYear());
 $('#Date3, .dates3').html(" " + newDate3.getDate() + ' ' + monthNames[newDate3.getMonth()] + ' ' + newDate3.getFullYear());
+$('#DateCal, .datesCal').html(" " + newDate4.getDate() + ' ' + monthNamesCal[newDate4.getMonth()] + ' ' + newDate4.getFullYear());
 
 });
 
