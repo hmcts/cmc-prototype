@@ -1,0 +1,212 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="2" %}
+
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <a href="#" class="link-back">Back</a>
+      <h1 class="heading-large">
+        You haven't competed all your tasks
+      </h1>
+
+      <p>You need to complete the following tasks</p>
+
+      <ul class="list list-bullet">
+
+        {% if data.settle_out_of_court!="complete" %}
+
+        <li>Make an offer to settle out of court </li>
+        {% endif %}
+
+        {% if data.confirm_details!="complete" %}
+        <li>Confirm your details </li>
+
+        {% endif %}
+
+        {% if data.more_time_to_respond!="complete" %}
+        <li>Do you want more time to respond? </li>
+
+        {% endif %}
+
+        {% if data.your_defence_options!="complete" %}
+        <li>Response options </li>
+
+        {% endif %}
+
+
+        {% if data.do_you_owe_money!="complete" %}
+        <li>Do you owe the money claimed? </li>
+        {% endif %}
+
+
+
+        {% if data.radio_select_group2=="defend_now" and data.do_you_owe_money=="complete" and data.radio_select_group!="Some" and data.radio_select_group!="all"%}
+
+        {% if data.your_defence!="complete" %}
+        <li>Why do you disagree with the claim? </li>
+        {% endif %}
+
+        {% if data.mediation=!"complete" %}
+        <li>Free mediation</li>
+        {% endif %}
+
+
+        {% elseif data.radio_select_group2=="paid" and data.do_you_owe_money=="complete" and data.radio_select_group!="Some" and data.radio_select_group!="all"%}
+        
+
+   {% if data.your_defence!="complete" %}
+        <li>How much and when did you pay? </li>
+        {% endif %}
+
+ 
+
+
+        {% elseif data.radio_select_group=="Some" and data.do_you_owe_money=="complete" and data.radio_select_group2=="defend_now" %}
+        
+
+   {% if data.your_defence!="complete" %}
+        <li>Your response to the claim </li>
+        {% endif %}
+
+
+     
+
+
+        {% elseif data.radio_select_group=="all" and data.do_you_owe_money=="complete" %}
+        <tr id="their-details">
+          <td class="task">
+            <a href="task-list/owe-all{{formQuery}}">
+              <span class="task-name"> When will you pay?</span>
+            </a>
+          </td>
+          <td class="numeric" id="task-status" scope="col" id="col-status">
+            {% if data.owe_some=="complete" %}
+            {% include "includes/task_status_finished.html" %}
+            {% endif %}
+          </td>
+        </tr>
+        {% elseif data.radio_select_group2=="Paid-some" and data.do_you_owe_money=="complete" %}
+        <tr id="their-details">
+          <td class="task">
+            <a href="task-list/your-defence/partial{{formQuery}}">
+              <span class="task-name"> How much have you paid the claimant?</span>
+            </a>
+          </td>
+          <td class="numeric" id="task-status" scope="col" id="col-status">
+            {% if data.your_defence=="complete" %}
+            {% include "includes/task_status_finished.html" %}
+            {% endif %}
+          </td>
+        </tr>
+        <tr id="their-details">
+          <td class="task">
+            <a href="task-list/mediation{{formQuery}}">
+              <span class="task-name">Free mediation</span>
+            </a>
+          </td>
+          <td class="numeric" id="task-status" scope="col" id="col-status">
+            {% if data.mediation=="complete" %}
+            {% include "includes/task_status_finished.html" %}
+            {% endif %}
+          </td>
+        </tr> 
+        {% elseif data.radio_select_group=="Some" and data.do_you_owe_money=="complete" and data.radio_select_group2!="defend_now" %}
+
+
+        <tr id="their-details">
+          <td class="task">
+            <a href="task-list/your-defence/partial{{formQuery}}">
+              <span class="task-name">How much money do you believe you owe?</span>
+            </a>
+          </td>
+          <td class="numeric" id="task-status" scope="col" id="col-status">
+            {% if data.your_defence=="complete" %}
+            {% include "includes/task_status_finished.html" %}
+            {% endif %}
+          </td>
+        </tr>
+
+        <tr id="their-details">
+          <td class="task">
+            <a href="task-list/owe-all{{formQuery}}">
+              <span class="task-name"> When will you pay?</span>
+            </a>
+          </td>
+          <td class="numeric" id="task-status" scope="col" id="col-status">
+            {% if data.owe_some=="complete" %}
+            {% include "includes/task_status_finished.html" %}
+            {% endif %}
+          </td>
+        </tr>           
+
+        <tr id="their-details">
+          <td class="task">
+            <a href="task-list/mediation{{formQuery}}">
+              <span class="task-name">Free mediation</span>
+            </a>
+          </td>
+          <td class="numeric" id="task-status" scope="col" id="col-status">
+            {% if data.mediation=="complete" %}
+            {% include "includes/task_status_finished.html" %}
+            {% endif %}
+          </td>
+        </tr> 
+
+
+        {% endif %}
+
+
+
+
+
+
+
+
+      </ul>
+      <a href="../../task-list">Back to task list</a>
+<!-- 
+                {% if data.confirm_details=="complete" and data.more_time_to_respond=="complete" and data.do_you_owe_money=="complete" and data.your_defence=="complete" %}
+                <td class="task">
+                  <a href="task-list/check-and-send{{formQuery}}">
+                    <span class="task-name"> Check and submit your response</span>
+                  </a>
+                </td>
+                {% elseif data.confirm_details=="complete" and data.more_time_to_respond=="complete" and data.do_you_owe_money=="complete" and data.your_suggestion=="complete" %}
+                <td class="task">
+                  <a href="task-list/check-and-send{{formQuery}}">
+                    <span class="task-name"> Check and submit your response</span>
+                  </a>
+                </td>
+                {% elseif data.confirm_details=="complete" and data.more_time_to_respond=="complete" and data.do_you_owe_money=="complete" and data.owe_all=="complete" %}
+                <td class="task">
+                  <a href="task-list/check-and-send{{formQuery}}">
+                    <span class="task-name"> Check and submit your response</span>
+                  </a>
+                </td>
+                {% elseif data.confirm_details=="complete" and data.more_time_to_respond=="complete" and data.do_you_owe_money=="complete" and data.owe_some=="complete" %}
+                <td class="task">
+                  <a href="task-list/check-and-send{{formQuery}}">
+                    <span class="task-name"> Check and submit your response</span>
+                  </a>
+                </td>
+                {% else %}
+                <td >
+                 <a href="task-list/check-and-send/incomplete-submission">
+                    <span class="task-name"> Check and submit your response</span>
+                  </a>
+                </td>
+                {% endif %} -->
+
+
+              </div>
+            </main>
+            {% endblock %}
