@@ -22,8 +22,12 @@ Money Claims Prototype
 
      
     {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}        
-     <form method="post" action="{{ data.return_page if data.return_page | length > 0 else '../task-list' }}" class="form">
-
+      <form
+      name="aspnetForm"
+      method="post"
+      onsubmit="multiNavigation('radio-employment-group', ['Employed', 'self-employed', 'unemployed' , 'pensioner'], ['employed', 'self-employed', 'unemployed', 'bank-account']);return false;"
+      id="aspnetForm"
+      autocomplete="off">
 
       {% else %}
      <form
