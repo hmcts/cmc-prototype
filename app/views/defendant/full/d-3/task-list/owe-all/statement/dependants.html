@@ -19,16 +19,17 @@ Money Claims Prototype
 
       </h1>
 
-    {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}        
-       <form action="employment" method="post" class="form">
 
 
-      {% else %}
-       <form action="education-training" method="post" class="form">
+ 
 
 
-      {% endif %}
-       
+      <form
+      name="aspnetForm"
+      method="get"
+      onsubmit="multiNavigation('radio-dept-group', ['Yes', 'No'], ['education-training', 'employment']);return false;"
+      id="aspnetForm"
+      autocomplete="off">
       <!--
         <p>
 
@@ -46,7 +47,7 @@ Money Claims Prototype
         <fieldset>
       
           <div class="multiple-choice" data-target="yes">
-            <input id="radio-repayment" type="radio" name="radio-pay-group" value="Yes">
+            <input id="radio-repayment" type="radio" name="radio-dept-group" value="Yes">
             <label for="radio-repayment" data-target="repayment-info">Yes</label>
           </div>
           <div class="panel panel-border-narrow js-hidden" id="yes">
@@ -56,7 +57,7 @@ Money Claims Prototype
             <label class="form-label" for="input-text-a">
               15 or under 
             </label>
-            <input class="form-control form-control-1-8" id="input-text-a" type="text">
+            <input class="form-control form-control-1-8" id="under_15" name="under_15" type="text"  value="{{data['under_15']}}">
           </div>
 
          
@@ -64,7 +65,7 @@ Money Claims Prototype
             <label class="form-label" for="input-text-a">
               16 to 18
             </label>
-            <input class="form-control form-control-1-8" id="input-text-a" type="text">
+            <input class="form-control form-control-1-8" name="over_16" id="over_16" type="text"  value="{{data['over_16']}}" >
           </div>
 
 
@@ -76,7 +77,7 @@ Money Claims Prototype
 
           </div>
           <div class="multiple-choice">
-            <input id="radio-no" type="radio" name="radio-pay-group" value="no">
+            <input id="radio-no" type="radio" name="radio-dept-group" value="No">
             <label for="radio-no" data-target="no-info">No</label>
           </div>
 
@@ -88,17 +89,10 @@ Money Claims Prototype
 
 
 
-     {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('task-list')%}
-       <div class="form-group">
-        <input type="submit" class="button" value="Save and continue"/>
-      </div>
-
-      <a href="#" onclick="goBack()">Cancel</a>
-      {% else %}
+    
       <div class="form-group">
         <input type="submit" class="button" value="Save and continue"/>
       </div>
-      {% endif %}
         </form>
       </div>
     </div>
