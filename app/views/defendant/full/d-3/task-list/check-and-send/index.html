@@ -482,21 +482,11 @@ Check your answers
       </a>
     </td>
   </tr>
-
   {% endif %} <!-- end of time-line and evidence -->
   <tr>
   </tbody>
 </table>
 {% endif %}
-
-
-
-
-
-
-
-
-
 {% if data.radio_select_group=="all" or data.radio_select_group2=="Some" or data['check']== 1 or data['check']== 2 or data['check']== 3  or data['check']== 4 or data['check']== 5 or data['check']== 6 %}
 <table class="check-your-answers">
   <thead>
@@ -626,15 +616,11 @@ Check your answers
     <td class="change-answer">
     </td>
   </tr>
-
   {% endif %}     
 </tbody>
 </table>
 {% else %}     
-
 {% endif %} <!-- end owe some money -->
-
-
 {% if  data.radio_select_group2=="Some" or data.radio_select_group2=="Paid-some" or  data.radio_select_group2=="defend_now" or data['check']== 4 or data['check']== 5 or data['check']== 6 or data['check']== 7 or data['check']== 9 %}
 <table class="check-your-answers">
   <thead>
@@ -649,7 +635,6 @@ Check your answers
     </tr>
   </thead>
   <tbody>
-
     <tr>
       <td>
         Free mediation
@@ -671,14 +656,8 @@ Check your answers
     </tbody>
   </table>
   {% endif %}
-
-
-
-
   <div class="column-two-thirds">
-
     <h2 class="heading-medium">Statement of truth</h2>
-
     {% if data['claimant-type']=="Company" or data['claimant-type']=="Organisation" or data['check']==10%}
     <p>You must hold a senior position in your company to sign the statement of truth.</p>
     <details>
@@ -694,7 +673,6 @@ Check your answers
          <li>chief executive </li>
          <li>manager or other officer of the company or corporation</li>
        </ul>
-
        <p>If your company isn't registered, a senior position could also be the:</p>
        <ul class="list-bullet list">
         <li>mayor</li>
@@ -702,7 +680,6 @@ Check your answers
         <li>president</li>
         <li>town clerk or other similar officer of the corporation.</li>
       </ul>
-
       <p>If your company is a partnership, a senior position is held by:
         <ul class="list-bullet list">
          <li>any of the partners</li>
@@ -716,7 +693,6 @@ Check your answers
      If some or all of the trustees comprise a single party, one, or all of the trustees can sign the statement of truth.</p>
      <h3 class="heading-small">Authorised person</h3>
    If you can’t read or sign the claim, the statement of truth must be signed by an authorised person. </p>
-
    <p>An authorised person is someone who can administer oaths and take affidavits, such as a solicitor. They must certify that:</p>
    <ul class="list-bullet list">
     <li> document has been read by the claimant</li>
@@ -738,9 +714,6 @@ Check your answers
   value="{{data['defendant_name']}}">
 </div>
 {% endif %}
-
-
-
 <div class="notice text">
   <i class="icon icon-important">
     <span class="visually-hidden">Warning</span>
@@ -749,7 +722,6 @@ Check your answers
     You could be fined or go to prison if you deliberately give untrue or misleading information.
   </strong>
 </div>
-
 <div class="form-group">
   <div class="multiple-choice text">
     <input class="" id="HasAcceptedTermsAndConditions" type="checkbox" value="true">
@@ -757,41 +729,68 @@ Check your answers
   </div>
 </div>
 
-
+<!--       {% if data['radio-pay-group']=="Immediately" or data['check']== 1 or data['check']== 4%}
+        The full amount within 28 days
+        {% elseif data['radio-pay-group']=="Instalments" or data['check']== 2  or data['check']== 5%} 
+        Instalments            
+        {% elseif data['radio-pay-group']=="Set-date" or data['check']== 3 or data['check']== 6%} 
+        The full amount after 28 days
+        {% else %} 
+        Immediately
+        {% endif %}  -->
 
 
 
 <form method="get" action="../confirmation-page?" class="form">
-
-
-  {% if data.radio_select_group=="all" or data['check']== 1 %}
+  {% if data.radio_select_group=="all" and data['radio-pay-group']=="Immediately" or data['check']== 1 %}
+  <!-- FA - pay immediately -->
   <input type="hidden" name="confirmation" value="1">
 
+  {% elseif data.radio_select_group=="all" and data['radio-pay-group']=="Instalments" or data['check']== 2 %}
+  <!-- FA - pay instalments -->
+  <input type="hidden" name="confirmation" value="2">
 
-  {% elseif data.radio_select_group2=="Some" or data['check']== 4 %}
+  {% elseif data.radio_select_group=="all" and data['radio-pay-group']=="Set-date" or data['check']== 3 %}
+  <!--  FA - pay set date -->
+  <input type="hidden" name="confirmation" value="3">
+
+  {% elseif data.radio_select_group2=="Some" and data['radio-pay-group']=="Immediately" or data['check']== 4 %}
+  <!-- Amount is too much & pay immediately -->
   <input type="hidden" name="confirmation" value="4">
 
+  {% elseif data.radio_select_group2=="Some" and data['radio-pay-group']=="Instalments" or data['check']== 5 %}
+  <!-- P/A - Amount is too much & pay instalments -->
+  <input type="hidden" name="confirmation" value="6">
+
+  {% elseif data.radio_select_group2=="Some" and data['radio-pay-group']=="Set-date" or data['check']== 6 %}
+  <!-- P/A - Amount is too much & set date - mediation chosen -->
+  <input type="hidden" name="confirmation" value="7">
 
   {% elseif data.radio_select_group2=="Paid-some" or data['check']== 7 %}
+  <!--  P/A - Paid what I owe & defence -->
   <input type="hidden" name="confirmation" value="8">
 
+  {% elseif data.radio_select_group2=="Paid-some" or data['check']== 11 %}
+  <!-- P/A - Paid what I owe & defence - mediation chosen -->
+  <input type="hidden" name="confirmation" value="10">
+
   {% elseif data.radio_select_group2=="paid" or data['check']== 8%}
-      <input type="hidden" name="confirmation" value="16">
+  <!--  R/C - I've already paid -->
+  <input type="hidden" name="confirmation" value="16">
 
-  
   {% elseif data.radio_select_group2=="defend_now" or data['check']== 9%}
-      <input type="hidden" name="confirmation" value="12">
+  <!--  R/C - I've dispute the claim + defence--> 
+  <input type="hidden" name="confirmation" value="12">
 
-
+  {% elseif data.radio_select_group2=="defend_now" or data['check']== 12%}
+  <!-- R/C - I've dispute the claim + defence - mediation chosen -->
+  <input type="hidden" name="confirmation" value="14">
   {% else %}
-   <input type="hidden" name="confirmation" value="1">
-
-
+  <input type="hidden" name="confirmation" value="1">
   {% endif %} 
   <div class="form-group">
     <button id="submit" class="button" >Submit response</button>
   </div>
-
   <p><a href="../task-list">Cancel</a></p>
 </form>
 </div>
@@ -807,11 +806,13 @@ Check your answers
     <option  value="3" {% if data['check'] == 3 %}selected{% endif %}>3. FA - pay set date</option>
     <option  value="4" {% if data['check'] == 4 %}selected{% endif %}>4. P/A - Amount is too much & pay immediately</option>
     <option  value="5" {% if data['check'] == 5 %}selected{% endif %}>5. P/A - Amount is too much & pay instalments</option>
-    <option  value="6" {% if data['check'] == 6 %}selected{% endif %}>6. P/A - Amount is too much & set date</option>
+    <option  value="6" {% if data['check'] == 6 %}selected{% endif %}>6. P/A - Amount is too much & set date - mediation chosen</option>
     <option  value="7" {% if data['check'] == 7 %}selected{% endif %}>7. P/A - Paid what I owe & defence</option>
-    <option  value="8" {% if data['check'] == 8 %}selected{% endif %}>8. R/C - I've already paid</option>
-    <option  value="9" {% if data['check'] == 9 %}selected{% endif %}>9. R/C - I've dispute the claim + defence</option>
-    <option  value="10" {% if data['check'] == 10 %}selected{% endif %}>10. Show business statement of truth</option>
+    <option  value="11" {% if data['check'] == 11 %}selected{% endif %}>8. P/A - Paid what I owe & defence - mediation chosen</option>
+    <option  value="8" {% if data['check'] == 8 %}selected{% endif %}>9. R/C - I've already paid</option>
+    <option  value="9" {% if data['check'] == 9 %}selected{% endif %}>10. R/C - I've dispute the claim + defence</option>
+    <option  value="12" {% if data['check'] == 12 %}selected{% endif %}>11. R/C - I've dispute the claim + defence - mediation chosen</option>
+    <option  value="10" {% if data['check'] == 10 %}selected{% endif %}>12. Show business statement of truth</option>
   </select>
 </form>
 {% endblock %}
