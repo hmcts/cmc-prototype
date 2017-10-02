@@ -19,11 +19,18 @@ Money Claims Prototype
 
   <div class="grid-row">
     <div class="column-two-thirds">
-        <a href="#" class="link-back">Back</a>
+      <a href="#" class="link-back">Back</a>
+
+
+
+      {% if data['defendant'] == "defendant" %}
+
+
+
 
 
       <h1 class="heading-large">
-              <span class="heading-secondary">Defendant's response </span>
+        <span class="heading-secondary">Claimant's response </span>
 
         Make a counter offer
       </h1>
@@ -31,13 +38,30 @@ Money Claims Prototype
 
       <div class="description-block">
         <h3 class="heading-small">Their offer.</h3>
-        <p> I will fix the roof if you'll give me access and pay for any extra materials.</p>
+        <table class="offer-table">
+          <thead>
+            <tr>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>The offer</td>
+              <td>     I'll pay a maximum of £100 towards any new materials.
+
+              </td>
+            </tr>
+            <tr>
+              <td>By when</td>
+              <td>1 December 2018</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
 
 
 
       <fieldset></fieldset>
-      <form action="confirmation-page?radio-indent-group=counter" method="post" class="form">
+      <form action="confirmation-page" method="post" class="form">
 
         <div class="form-group">
           <fieldset>
@@ -60,6 +84,8 @@ Money Claims Prototype
             <label class="form-label-bold" for="claimant_date_of_birth_day">
               <div class="bold-medium">By when</div>
             </label>
+            <p>When will you pay in full or carry out your offer</p>
+            
             <div class="input form-group "><p
               class="form-hint text">For example, 23 04 2017</p>
               <div class="input form-group know-date-input">
@@ -84,26 +110,131 @@ Money Claims Prototype
                     </div>
                   </div>
 
-   
-        
+                  
+                  
 
                   <p class="panel panel-border-wide">
-                    Mary Richards can accept your suggestion, reject it or suggest an alternative. 
+                    Jan Clark can accept your offer, reject it or suggest an alternative. 
                   </p>
 
                   <div class="form-group">
 
-                    <input type="submit" class="button" value="Submit suggestion">
+                    <input type="submit" class="button" value="Submit offer">
                   </div>
                 </fieldset>
               </div>
             </form>
 
-          </div>
+
+            {% else %}
 
 
-        </div>
-      </main>
+            <h1 class="heading-large">
+              <span class="heading-secondary">Defendant's response </span>
+
+              Make a counter offer
+            </h1>
 
 
-      {% endblock %}
+            <div class="description-block">
+              <h3 class="heading-small">Their offer.</h3>
+              <table class="offer-table">
+                <thead>
+                  <tr>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>The offer</td>
+                    <td>     I will fix the roof if you'll give me access and pay for any extra materials.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>By when</td>
+                    <td>1 December 2018</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+
+
+            <fieldset></fieldset>
+            <form action="confirmation-page?radio-indent-group=counter" method="post" class="form">
+
+              <div class="form-group">
+                <fieldset>
+
+                  <legend class="visually-hidden">Suggest a resolution</legend>
+
+                  <label class="form-label-bold" for="offer">
+                    <div class="bold-medium">Your counter offer</div>
+                    <span class="form-hint">You could offer a set amount, or to pay overdue rent, fix a problem, return goods.</span>
+                  </label>
+                  <textarea class="form-control"
+                  id="offer"
+                  rows="3"
+                  name="offer-me"
+                  type="text"
+                  style="width: 95%"></textarea>
+                  <br>
+                  <br>
+
+                  <label class="form-label-bold" for="claimant_date_of_birth_day">
+                    <div class="bold-medium">By when</div>
+                  </label>
+                  <p>When will you pay in full or carry out your offer</p>
+
+                  <div class="input form-group "><p
+                    class="form-hint text">For example, 23 04 2017</p>
+                    <div class="input form-group know-date-input">
+                      <div class="input form-group tel required claimant_date_of_birth_day"><label
+                        class="tel required form-label"
+                        for="claimant_date_of_birth_day">Day</label><input
+                        class="string tel required form-control" maxlength="2" type="tel"
+                        size="2" name="offerDateDay"
+                        id="claimant_date_of_birth_day"></div>
+                        <div class="input form-group tel required claimant_date_of_birth_month"><label
+                          class="tel required form-label"
+                          for="claimant_date_of_birth_month">Month</label><input
+                          class="string tel required form-control" maxlength="2" type="tel"
+                          size="2" name="offerDateMonth"
+                          id="claimant_date_of_birth_month"></div>
+                          <div class="input form-group tel required claimant_date_of_birth_year"><label
+                            class="tel required form-label"
+                            for="claimant_date_of_birth_year">Year</label><input
+                            class="string tel required form-control" maxlength="4" type="tel"
+                            size="4" name="offerDateYear"
+                            id="claimant_date_of_birth_year"></div>
+                          </div>
+                        </div>
+
+
+
+
+                        <p class="panel panel-border-wide">
+                          Mary Richards can accept your offer, reject it or suggest an alternative. 
+                        </p>
+
+                        <div class="form-group">
+
+                          <input type="submit" class="button" value="Submit offer">
+                        </div>
+                      </fieldset>
+                    </div>
+                  </form>
+
+
+
+                  {% endif %}
+
+
+
+                </div>
+
+
+              </div>
+            </main>
+
+
+            {% endblock %}
