@@ -4,7 +4,6 @@ Money Claims Prototype
 {% endblock %}
 {% block proposition_header %}
 {% set my_account="4" %}
-
 {% include "includes/propositional_navigation.html" %}
 {% endblock %}
 {% block content %}
@@ -188,91 +187,66 @@ Money Claims Prototype
         </tbody>
       </table>
       <h2 class="heading-medium">Declaration</h2>
+      <div class="column-two-thirds">
+        {% if data['control-box'] == 3 or data['control-box'] == 4 %}
+        <p style="width: 65%">You must hold a senior position in your company to sign the declaration.</p>
+        <details>
+          <summary>
+            Types of senior position 
+          </summary>
+          <div class="panel">
+            <p>A senior position could be a:</p>
+            <ul class="list-bullet list">
+             <li>director</li>
+             <li>treasurer </li>
+             <li>chief executive </li>
+             <li>manager or other officer of the company or corporation</li>
+           </ul>
+           <p>If your company isn't registered, a senior position could also be the:</p>
+           <ul class="list-bullet list">
+            <li>mayor</li>
+            <li>chairman</li>
+            <li>president</li>
+            <li>town clerk or other similar officer of the corporation.</li>
+          </ul>
+        </ul>
+      </div>
+    </details>
+    <br>
+    <div class="form-group">
+      <label class="form-label" for="claimant_title">Full name</label>
+      <input type="text" class="form-control form-control-1-4" id="claimant_title" name="claimant_title" value="">
+    </div>
+    <div class="form-group">
+      <label class="form-label" for="defendant_firstname">Role</label>
+      <input class="form-control form-control-1-4" id="defendant_name" name="defendant_name" type="text"
+      value="{{data['defendant_name']}}">
+    </div>
+    {% endif %}
+    <div class="notice text">
+      <i class="icon icon-important">
+        <span class="visually-hidden">Warning</span>
+      </i>
+      <strong class="bold-small">
+        Once you 'Sign and submit', you cannot change your answers.
+      </strong>
+    </div>
+    <div class="form-group">
+      <div class="multiple-choice text">
+        <input class="" id="HasAcceptedTermsAndConditions" type="checkbox" value="true">
+        <label for="HasAcceptedTermsAndConditions"> I declare that the details I have given are true to the best of my knowledge.</label>
+      </div>
+    </div>
 
-
-
-{% if data['control-box'] == 3 or data['control-box'] == 4 %}
-
-<p style="width: 65%">You must hold a senior position in your company to sign the declaration.</p>
-<details>
-  <summary>
-    Types of senior position 
-  </summary>
-  <div class="panel">
-    <p>A senior position could be a:</p>
-    <ul class="list-bullet list">
-     <li>director</li>
-     <li>treasurer </li>
-     <li>chief executive </li>
-     <li>manager or other officer of the company or corporation</li>
-   </ul>
-   <p>If your company isn't registered, a senior position could also be the:</p>
-   <ul class="list-bullet list">
-    <li>mayor</li>
-    <li>chairman</li>
-    <li>president</li>
-    <li>town clerk or other similar officer of the corporation.</li>
-  </ul>
-</ul>
-</div>
-</details>
-
-
-<br>
-<div class="form-group">
-  <label class="form-label" for="claimant_title">Full name</label>
-  <input type="text" class="form-control form-control-1-4" id="claimant_title" name="claimant_title" value="">
-</div>
-
-<div class="form-group">
-  <label class="form-label" for="defendant_firstname">Role</label>
-  <input class="form-control form-control-1-4" id="defendant_name" name="defendant_name" type="text"
-  value="{{data['defendant_name']}}">
-</div>
-{% endif %}
-
-
-
-<div class="notice text">
-  <i class="icon icon-important">
-    <span class="visually-hidden">Warning</span>
-  </i>
-  <strong class="bold-small">
-    Once you 'Sign and submit', you cannot change your answers.
-  </strong>
-</div>
-
-<div class="form-group">
-  <div class="multiple-choice text">
-    <input class="" id="HasAcceptedTermsAndConditions" type="checkbox" value="true">
-    <label for="HasAcceptedTermsAndConditions"> I confirm that I believe the details I have provided are correct.</label>
-  </div>
-</div>
-
-
-
-<!--         <div class="form-group">
-          <a name="hasacceptedtermsandconditions"></a>
-          <div class="multiple-choice text">
-            <input class="" id="HasAcceptedTermsAndConditions" type="checkbox" value="true">
-            <label for="HasAcceptedTermsAndConditions"> 
-              I confirm that I believe the details  I have provided are correct.
-            </label>
-          </div>
-          <span class="field-validation-valid" data-valmsg-for="HasAcceptedTermsAndConditions" data-valmsg-replace="true" aria-live="polite"></span></div>
- -->          <a href="confirmation-page" class="button">Sign and submit</a>
-        </main>
-
-        <form method="post"  action="#" class="form" style="position: absolute;">
-          <select id="control-box" name="control-box" onchange="this.form.submit()">
-            <option  value="0" {% if data['control-box'] == 0 %}selected{% endif %}>Choose</option>
-
-            <option  value="1" {% if data['control-box'] == 1 %}selected{% endif %}>Individual</option>
-            <option value="2" {% if data['control-box'] == 2 %}selected{% endif %}>Sole trader</option>
-            <option value="3" {% if data['control-box'] == 3 %}selected{% endif %}>Company</option>
-            <option value="4" {% if data['control-box'] == 4 %}selected{% endif %}>Organisation</option>
-          </select>
-
-        </form>
-
-        {% endblock %}
+    <a href="confirmation-page" class="button">Sign and submit</a>
+  </main>
+  <form method="post"  action="#" class="form" style="position: absolute;">
+    <select id="control-box" name="control-box" onchange="this.form.submit()">
+      <option  value="0" {% if data['control-box'] == 0 %}selected{% endif %}>Choose</option>
+      <option  value="1" {% if data['control-box'] == 1 %}selected{% endif %}>Individual</option>
+      <option value="2" {% if data['control-box'] == 2 %}selected{% endif %}>Sole trader</option>
+      <option value="3" {% if data['control-box'] == 3 %}selected{% endif %}>Company</option>
+      <option value="4" {% if data['control-box'] == 4 %}selected{% endif %}>Organisation</option>
+    </select>
+  </form>
+  {% endblock %}

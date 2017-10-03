@@ -15,7 +15,13 @@ Money Claims Prototype
       <div class="govuk-box-highlight">
         {% if data['radio-indent-group'] == "counter" or data['confirmation'] == 1 %}
         <h1 class="bold-large">Your offer has been sent to the defendant</h1>
-        {% elseif data['radio-indent-group'] == "reject-offer" or data['confirmation'] == 6 %}
+
+{% elseif data['radio-indent-group'] == "Counter_defendant"  or data['confirmation'] == 6 %}
+        <h1 class="bold-large">Your offer has been sent to the claimant</h1>
+
+
+
+        {% elseif data['radio-indent-group'] == "reject-offer" or data['radio-indent-group'] == "decline_counter" or data['confirmation'] == 6 %}
         <h1 class="bold-large">Your have rejected their offer</h1>
 
 
@@ -44,12 +50,27 @@ Money Claims Prototype
         </p>
         <p> View your claim status on <a href='../v2/home?dashboard=11'>your money claims account</a>. </p>    
 
+            {% elseif data['radio-indent-group'] == "Counter_defendant"  or data['confirmation'] == 6 %}
+        <p>The claimant Jan Clark can accept your counter offer, reject it or suggest an alternative. We will notify you once the defendant responds.
+        </p>
+        <p> View your claim status on <a href='../v2/home?dashboard=11'>your money claims account</a>. </p>    
+
+
+
         {% elseif data['radio-indent-group'] == "reject-offer" or data['confirmation'] == 6 %}
         <p>You have rejected the defendant Mary Richards offer of settle.
         </p>
         <p> View your claim status on <a href='../v2/home?dashboard=11'>your money claims account</a>. </p>    
 
         
+
+        {% elseif data['radio-indent-group'] == "decline_counter" or data['confirmation'] == 6 %}
+        <p>You have rejected the claimant's Jan Clarks offer of settle.
+        </p>
+        <p> View your claim status on <a href='../v2/home?dashboard=11'>your money claims account</a>. </p>    
+
+        
+
 
 
         {% elseif data['radio-indent-group'] == "accept-mediation" or data['radio-indent-group2'] == "accept-mediation" or data['confirmation'] == 3 %}
