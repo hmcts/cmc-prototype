@@ -122,16 +122,27 @@
 </details>
 
 {% endif %}
+ 
+
+ {% if data['claimant'] == 1.2   %}
+
+{% else %}   
 
 <h2 class="heading-medium">More options </h2>
 
-<h2 class="heading-small">Make an offer to settle the claim</h2>
+
+
 {% if data['claimant'] == 7 %}
+<h2 class="heading-small">Make an offer to settle the claim</h2>
+
 <p>
  You made an <a href="">offer to settle</a> the claim on <span class="dates2"></span>.
 </p>
 
+{% elseif data['claimant'] == 1 or data['claimant'] == 2 or data['claimant'] == 3%}
+
 {% else %}     
+<h2 class="heading-small">Make an offer to settle the claim</h2>
 
 <p>
  <a href='offer'>Make a offer</a> to settle the claim out of court. This will avoid going to a hearing. 
@@ -139,22 +150,36 @@
 {% endif %}     
 
 
-<h2 class="heading-small">Request mediation</h2>
-<p>
+
 {% if data['claimant'] == 9 or data['claimant'] == 8 %}
 
-  Mediation has been requested 
- 
-{% else %}   
- <a href='#'>Request free telephone mediation</a>. Many people resolve their dispute before a hearing by taking part in a telephone mediation</a>.
 
-{% endif %}    
+<h2 class="heading-small">Request mediation</h2>
+<p>Mediation has been requested </p>
+ 
+{% elseif data['claimant'] == 1 or data['claimant'] == 2 or data['claimant'] == 3%}
+
+
+{% else %} 
+<h2 class="heading-small">Request mediation</h2>
+
+ <p><a href='#'>Request free telephone mediation</a>. Many people resolve their dispute before a hearing by taking part in a telephone mediation</a>.</p>
+
+{% endif %} 
+
+
+
 </p>
 <h2 class="heading-small">Cancel your claim</h2>
 <p>
  You can <a href='#'>cancel your claim</a> if you no longer want to pursue it.
 </p> 
 </div>
+
+  {% endif %}
+
+
+
 <div class="column-one-third">
   {% if data['claimant'] != 1.2  %}
 
