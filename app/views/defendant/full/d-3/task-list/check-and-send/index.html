@@ -190,7 +190,7 @@ Check your answers
           {% endif %} 
         </tbody>
       </table>
-      {% if  data.radio_select_group2=="Some" or data['check']== 4 or data['check']== 5 or data['check']== 6 or data['check']== 7 or data['check']== 9 or data['check']== 8 or data.radio_select_group2=="paid" or data.radio_select_group2=="Paid-some" or data.radio_select_group2=="defend_now"%}
+      {% if  data.radio_select_group2=="Some" or data['check']== 4 or data['check']== 5 or data['check']== 6 or data['check']== 7 or data['check']== 9 or data['check']== 8 or data.radio_select_group2=="paid" %}
       <table class="check-your-answers">
         <thead>
           <tr>
@@ -656,6 +656,36 @@ Check your answers
     </tbody>
   </table>
   {% endif %}
+<<<<<<< HEAD
+
+
+
+
+<fieldset></fieldset>
+<h2 class="heading-medium">Statement of truth</h2>
+
+{% if data['claimant-type']=="Company" or data['claimant-type']=="Organisation" or data['check']==10%}
+
+<p style="width: 65%">You must hold a senior position in your company to sign the statement of truth.</p>
+<details>
+  <summary>
+    Types of senior position 
+  </summary>
+  <div class="panel">
+    <p>A senior position could be a:</p>
+    <ul class="list-bullet list">
+     <li>director</li>
+     <li>treasurer </li>
+     <li>chief executive </li>
+     <li>manager or other officer of the company or corporation</li>
+   </ul>
+   <p>If your company isn't registered, a senior position could also be the:</p>
+   <ul class="list-bullet list">
+    <li>mayor</li>
+    <li>chairman</li>
+    <li>president</li>
+    <li>town clerk or other similar officer of the corporation.</li>
+=======
   <div class="column-two-thirds">
     <h2 class="heading-medium">Statement of truth</h2>
     {% if data['claimant-type']=="Company" or data['claimant-type']=="Organisation" or data['check']==10%}
@@ -700,17 +730,22 @@ Check your answers
     <li> they read the statement of truth to the claimant</li>
     <li> the claimant understood the statement of truth and the consequences of making a false statement</li>
     <li> the claimant agreed (‘signed or made their mark’) to the statement in their presence</li>
+>>>>>>> d72bc5b9986b59d6bf5a9a9d2f8e35303a00e0b6
   </ul>
 </ul>
 </div>
-</details><fieldset></fieldset>
+</details>
+
+
+<br>
 <div class="form-group">
   <label class="form-label" for="claimant_title">Full name</label>
-  <input type="text" class="form-control form-control-1-2" id="claimant_title" name="claimant_title" value="">
+  <input type="text" class="form-control form-control-1-4" id="claimant_title" name="claimant_title" value="">
 </div>
+
 <div class="form-group">
   <label class="form-label" for="defendant_firstname">Role</label>
-  <input class="form-control form-control-1-2" id="defendant_name" name="defendant_name" type="text"
+  <input class="form-control form-control-1-4" id="defendant_name" name="defendant_name" type="text"
   value="{{data['defendant_name']}}">
 </div>
 {% endif %}
@@ -729,6 +764,45 @@ Check your answers
   </div>
 </div>
 
+<<<<<<< HEAD
+  <!-- {% if data.radio_select_group=="all" %}
+  <form method="post" action="../confirmation-page-owe-all-paid" class="form">
+    {% elseif data.radio_select_group=="Some" %}
+    <form method="post" action="../confirmation-page" class="form">
+      {% elseif data.radio_select_group=="reject" and data.radio_select_group2!="paid" %}
+      <form method="post" action="../confirmation-page" class="form">
+        {% elseif data.radio_select_group2=="paid"%}
+        <form method="post" action="../confirmation-page-already-paid" class="form">
+          {% else %}
+          <form method="post" action="../confirmation-page2" class="form">
+            {% endif %}  -->
+            <div class="form-group">
+              <button id="submit" class="button" >Submit response</button>
+            </div>
+            <p><a href="../task-list">Cancel</a></p>
+          </form>
+
+          <!--<div class="back">-->
+          <!--<a href="#">Cancel application</a>-->
+          <!--</div>-->
+        </main>
+        <form method="post"  action="#" class="form" style="position: absolute;">
+          <select id="check2" name="check2" onchange="window.location.href='check-and-send?check='+this.value">
+            <option  value="0" >Choose</option>
+            <option value="1" {% if data['check'] == 1 %}selected{% endif %}>1. FA - pay immediately </option>
+            <option  value="2" {% if data['check'] == 2 %}selected{% endif %}>2. FA - pay instalments</option>
+            <option  value="3" {% if data['check'] == 3 %}selected{% endif %}>3. FA - pay set date</option>
+            <option  value="4" {% if data['check'] == 4 %}selected{% endif %}>4. P/A - Amount is too much & pay immediately</option>
+            <option  value="5" {% if data['check'] == 5 %}selected{% endif %}>5. P/A - Amount is too much & pay instalments</option>
+            <option  value="6" {% if data['check'] == 6 %}selected{% endif %}>6. P/A - Amount is too much & set date</option>
+            <option  value="7" {% if data['check'] == 7 %}selected{% endif %}>7. P/A - Paid what I owe & defence</option>
+            <option  value="8" {% if data['check'] == 8 %}selected{% endif %}>8. R/C - I've already paid</option>
+            <option  value="9" {% if data['check'] == 9 %}selected{% endif %}>9. R/C - I've dispute the claim + defence</option>
+            <option  value="10" {% if data['check'] == 10 %}selected{% endif %}>10. Show business statement of truth</option>
+          </select>
+        </form>
+        {% endblock %}
+=======
 <!--       {% if data['radio-pay-group']=="Immediately" or data['check']== 1 or data['check']== 4%}
         The full amount within 28 days
         {% elseif data['radio-pay-group']=="Instalments" or data['check']== 2  or data['check']== 5%} 
@@ -816,3 +890,4 @@ Check your answers
   </select>
 </form>
 {% endblock %}
+>>>>>>> d72bc5b9986b59d6bf5a9a9d2f8e35303a00e0b6
