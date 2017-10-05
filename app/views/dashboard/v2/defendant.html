@@ -24,55 +24,51 @@
      </div>
 
      {% elseif data['defendant'] == 1  %}
-     <p><span class="bold">15 May 2017</span><br>Your defence is being processed. We will email you to explain what to do next.</p>
-
+     <p><span class="bold dates2">15 May 2017</span><br>Your response is being processed. We will email you to explain what to do next.</p>
+    <p>   <a href="#">View your response</a></p>
      {% elseif data['defendant'] == 2  %}
      <p><span class="bold">15 May 2017</span><br>You didn't respond to this money claim in time.</p>
-     <p>Jan Clark requested a default County Court Judgment against you on [date]. We will contact you both within 5 days.</p>
+     <p>Jan Clark requested a default County Court Judgment against you on <span class="dates"></span>. We will contact you both within 5 days.</p>
 
      <p>You can no longer respond to the claim. 
 
-     <!--<p><strong class="bold">Judgment details</strong><br><a href='{{ asset_path }}images/Country-court-judgment.pdf' download>Download the County Court Judgment</a>. </p>
-     <p>The judgment explains:</p>
-     <ol class="list list-bullet">
-      <li>how much you owe</li>
-      <li>how to pay (in full or in instalments)</li>
-      <li>the deadline for paying</li>
-      <li>who to pay</li>
-    </ol>-->
+
     <h3 class="heading-medium">How a judgment could affect you</h3>
     <p><a href="https://www.gov.uk/county-court-judgments-ccj-for-debt/ccjs-and-your-credit-rating">Records of judgments</a> are kept for 6 years unless you pay the full amount within 28 days. Having a CCJ on record can make it hard to get credit.</p>
     <p>If you don’t owe the money, you can <a href="https://www.gov.uk/county-court-judgments-ccj-for-debt/if-you-dont-owe-the-money">ask the court to cancel</a>, or ‘set aside’, the judgment.</p>
 
     {% elseif data['defendant'] == 3  %}
-    <p><span class="bold">15 May 2017</span><br>We've emailed Jan Clark telling them that you will pay their money claim immediately.</p>
+    <p><span class="bold dates2">15 May 2017</span><br>We've emailed Jan Clark telling them that you will pay their money claim immediately.</p>
+     <p>   <a href="#">View your response</a></p>
     <h2 class="heading-small">What happens next</h2>
     <p>When Jan Clark gets your payment they must tell you and the court you’ve paid their money claim.</p>
 
     {% elseif data['defendant'] == 4  %}
-    <p><span class="bold">15 May 2017</span><br>We've emailed Jan Clark your instalment plan.</p>
+    <p><span class="bold dates2">15 May 2017</span><br>We've emailed Jan Clark your instalment plan.</p>
+     <p>   <a href="#">View your response</a></p>
     <h2 class="heading-small">What happens next</h2>
     <p>Jan Clark needs to respond to your suggested instalment plan on or before <span id="Date"></span>. We’ll contact you when Jan Clark responds.</p>
 
     {% elseif data['defendant'] == 5  %}
-    <p><span class="bold">15 May 2017</span><br>We've emailed Jan Clark your offer to pay the money claim on <span id="Date"></span> and your explanation of why you can’t pay before then.</p>
+    <p><span class="bold dates2">15 May 2017</span><br>We've emailed Jan Clark your offer to pay the money claim on <span id="Date"></span> and your explanation of why you can’t pay before then.</p>
+     <p>   <a href="#">View your response</a></p>
     <h2 class="heading-small">What happens next</h2>
     <p>They need to respond to your offer on or before <span id="Date3"></span>.</p> 
     <p>If Jan Clark rejects your offer to pay by a set date then the court will decide how you can pay.</p>
 
     {% elseif data['defendant'] == 6  %}
-    <p><span class="bold">15 May 2017</span><br>The claimant has requested mediation to help settle this dispute.</p>
+    <p><span class="bold dates2">15 May 2017</span><br>The claimant has requested mediation to help settle this dispute.</p>
     <div class="form-group">
       <p> <a class="button" href="defendant-response/mediation?defendant=mediation">Respond to mediation request </a></p>
     </div>
     {% elseif data['defendant'] == 7  %}
-    <p><span class="bold">15 May 2017</span><br>A mediator will contact both the claimant and you within the next 14 days to arrange an appointment.</p>
+    <p><span class="bold dates2">15 May 2017</span><br>A mediator will contact both the claimant and you within the next 14 days to arrange an appointment.</p>
 
     {% elseif data['defendant'] == 8  %}
-    <p><span class="bold">15 May 2017</span><br>You have rejected the claimants offer of mediation. We will notify you once the claimant responds.</p>
+    <p><span class="bold dates2">15 May 2017</span><br>You have rejected the claimants offer of mediation. We will notify you once the claimant responds.</p>
 
     {% elseif data['defendant'] == 9  %}
-    <p><span class="bold">15 May 2017</span><br>The claimant has made a counter offer. </p>
+    <p><span class="bold dates2">15 May 2017</span><br>The claimant has made a counter offer. </p>
     <div class="form-group">
       <p> <a class="button" href="defendant-response/suggestion?defendant=defendant">View offer </a></p>
     </div>
@@ -82,6 +78,10 @@
       <div class="form-group">
        <p> <a class="button" href="../../defendant/full/d-3/task-list?hide_offer=false">Respond to claim  </a></p>
      </div>
+    {% elseif data['defendant'] == 11  %}
+      <p><div class="bold dates2" id="">15 May 2017</div> You sent an offer to the claimant. <a href="#">View your offer</a> </p>
+
+  
 
 
 
@@ -96,7 +96,7 @@
 
 
 
-    {% if data['defendant'] == 1 or data['defendant'] == 2 or data['defendant'] == 1.1   %}
+    {% if data['defendant'] == 1 or data['defendant'] == 2 or data['defendant'] == 1.1 or data['defendant'] == 3 or data['defendant'] == 4 or data['defendant'] == 5   %}
 
 
     {% elseif data['defendant'] == 10  %}
@@ -108,15 +108,26 @@
           <span class="data-item bold-xsmall">Sept 2017</span>
           <span class="data-item bold-xsmall"></span>
         </div>
-        <div class="history-statement">You sent an offer to the claimant. <a href="#">View offer</a></div>
+        <div class="history-statement">You  <a href="offer/view-offer">sent an offer</a> to the claimant.</div>
       </div>
 
-
-    {% else %}
+    {% elseif data['defendant'] == 9  %}
 
     <h2 class="heading-medium">Claim history </h2>
     <details>
-      <summary>You have 1 event in your claim history</summary>
+      <summary>You have 2 events in your claim history</summary>
+     
+      <div class="history-timeline">
+        <div class="data">
+          <span class="data-item bold-large">27</span>
+          <span class="data-item bold-xsmall">Sept 2017</span>
+          <span class="data-item bold-xsmall"></span>
+        </div>
+        <div class="history-statement">You  <a href="offer/view-offer">sent an offer</a> to the claimant.</div>
+      </div>
+
+
+
       <div class="history-timeline">
         <div class="data">
           <span class="data-item bold-large">20</span>
@@ -126,9 +137,38 @@
         <div class="history-statement">You responded to the claim.</div>
       </div>
     </details>
+
+
+    {% elseif data['defendant'] == 10  %}
+    <h2 class="heading-medium">Claim history </h2>
+   
+      <div class="history-timeline">
+        <div class="data">
+          <span class="data-item bold-large">27</span>
+          <span class="data-item bold-xsmall">Sept 2017</span>
+          <span class="data-item bold-xsmall"></span>
+        </div>
+        <div class="history-statement">You  <a href="offer/view-offer">sent an offer</a> to the claimant.</div>
+      </div>
+
+
+
+
+    {% else %}
+
+    <h2 class="heading-medium">Claim history </h2>
+   
+      <div class="history-timeline">
+        <div class="data">
+          <span class="data-item bold-large">1</span>
+          <span class="data-item bold-xsmall">Oct 2017</span>
+          <span class="data-item bold-xsmall"></span>
+        </div>
+        <div class="history-statement">You responded to the claim. <br><a href='#'>View your response</a></div>
+      </div>
     {% endif %}
 
-    {% if data['defendant'] == 2 or data['defendant'] == 10%}
+    {% if data['defendant'] == 2 or data['defendant'] == 100%}
 
 
 
@@ -140,7 +180,15 @@
           {% endif %}
 
 
-      {% if data['defendant'] == 9 %}
+      {% if data['defendant'] == 10 %}
+    <h2 class="heading-small">Make an offer to settle the claim</h2>
+   
+    <p>
+     You made an offer to Claimant on <span class="dates"></span> 
+   </p>
+      {% elseif data['defendant'] == 1.1 %}
+
+
 
       {% else %}
     <h2 class="heading-small">Make an offer to settle the claim</h2>
@@ -151,7 +199,7 @@
 
 
     {% endif %} 
-   {% if data['defendant'] == 1 or data['defendant'] == 3 or data['defendant'] == 4 or data['defendant'] == 5 or data['defendant'] == 8 or data['defendant'] == 9  %}
+   {% if data['defendant'] == 1 or data['defendant'] == 3 or data['defendant'] == 4 or data['defendant'] == 5 or data['defendant'] == 8 or data['defendant'] == 9 or data['defendant'] == 11   %}
 
    <h2 class="heading-small">Request mediation</h2>
    <p>
@@ -171,7 +219,6 @@
       {% if data['defendant'] == 1.1 or data['defendant'] == 10%}
 
       {% else %} 
-      <li><strong class="bold">Your response:</strong><br><a href="view-claim">Download your response</a> </li>
 
       {% endif %} 
 
@@ -194,6 +241,7 @@
     <option  value="8" {% if data['defendant'] == 8 %}selected{% endif %}>8. Mediation Rejected </option>
     <option  value="9" {% if data['defendant'] == 9 %}selected{% endif %}>9. Counter offer from claimant </option>
     <option  value="10" {% if data['defendant'] == 10 %}selected{% endif %}>10. Offer sent to claimant </option>
+    <option  value="11" {% if data['defendant'] == 11 %}selected{% endif %}>11. Offer sent to claimant 2 </option>
   </option>
 </select>
 </form>
