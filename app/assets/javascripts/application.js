@@ -278,7 +278,7 @@ $(document).ready(function() {
   newDate3.setDate(newDate3.getDate()+ 28);
 
   var newDate4 = new Date();
-  newDate4.setDate(newDate4.getDate())+ 100 ;
+  newDate4.setDate(newDate4.getDate()) ;
 
 
 
