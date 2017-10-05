@@ -17,105 +17,106 @@ Money Claims Prototype
       <h1 class="heading-large">
         Do you owe the money claimed?
       </h1>
-<!--       <p>You can make a counterclaim against the claimant after you submit your response.  </p>
- -->
-
-      {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('task-list')%}        
-      <form
-      name="aspnetForm"
-      method="post"
-      onsubmit="multiNavigation('radio_select_group', ['all', 'Some', 'reject'], ['../do-you-owe-money/check-your-answers', '../do-you-owe-money/partial-defence-options', '../do-you-owe-money/defence-options']);return false;"
-      id="aspnetForm"
-      autocomplete="off">
-
-      {% else %}
-      <form
-      name="aspnetForm"
-      method="post"
-      onsubmit="multiNavigation('radio_select_group', ['all', 'Some', 'reject'], ['../task-list', 'do-you-owe-money/partial-defence-options', 'do-you-owe-money/defence-options']);return false;"
-      id="aspnetForm"
-      autocomplete="off">
-      {% endif %}
 
 
+{% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('task-list')%}
+<form
+name="aspnetForm"
+method="post"
+onsubmit="multiNavigation('radio_select_group', ['all', 'Some', 'reject'], ['../do-you-owe-money/check-your-answers', '../do-you-owe-money/partial-defence-options', '../do-you-owe-money/defence-options']);return false;"
+id="aspnetForm"
+autocomplete="off">
+
+{% else %}
+
+
+<form
+name="aspnetForm"
+method="post"
+onsubmit="multiNavigation('radio_select_group', ['all', 'Some', 'reject'], ['../task-list', 'do-you-owe-money/partial-defence-options', 'do-you-owe-money/defence-options']);return false;"
+id="aspnetForm"
+autocomplete="off">
+{% endif %}
 
 
 
-      <div class="form-group">
-        <fieldset>
-          <legend class="visually-hidden">Your response</legend>
-          <div class="multiple-choice">
-            <input id="radio-yes" type="radio" name="radio_select_group" value="all" {{ checked("radio_select_group", "all") }}>
-            <label for="radio-yes" data-target="yes-info">
-              <strong class="bold-small">I admit all of the claim </strong><br>
-              <p>You can either pay the claim  amount in full or by instalments</p>
-            </label>
-          </div>
-          <div class="multiple-choice">
-            <input id="radio-some" type="radio" name="radio_select_group" value="Some" {{ checked("radio_select_group", "Some") }}>
-            <label for="radio-some" data-target="some-info">
-              <strong class="bold-small">I admit part of the claim  </strong><br>
-              <p>You have either paid what you you believe you owe or feel the claim amount is too much</p>
-            </label>
-          </div>
 
 
-          <div class="multiple-choice">
-            <input id="radio-no" type="radio" name="radio_select_group" value="reject" {{ checked("radio_select_group", "reject") }}>
-            <label for="radio-no" data-target="no-info  "> <strong class="bold-small">I reject all of the claim</strong><br>
-             <p>You have either paid the claim in full or you reject the claim
-             </label>
-           </div>
+<div class="form-group">
+  <fieldset>
+    <legend class="visually-hidden">Your response</legend>
+    <div class="multiple-choice">
+      <input id="radio-yes" type="radio" name="radio_select_group" value="all" {{ checked("radio_select_group", "all") }}>
+      <label for="radio-yes" data-target="yes-info">
+        <strong class="bold-small">I admit all of the claim </strong><br>
+        <p>You can either pay the claim  amount in full or by instalments</p>
+      </label>
+    </div>
+    <div class="multiple-choice">
+      <input id="radio-some" type="radio" name="radio_select_group" value="Some" {{ checked("radio_select_group", "Some") }}>
+      <label for="radio-some" data-target="some-info">
+        <strong class="bold-small">I admit part of the claim  </strong><br>
+        <p>You have either paid what you you believe you owe or feel the claim amount is too much</p>
+      </label>
+    </div>
 
-           <input type="hidden" name="do_you_owe_money" value="complete">
-            <details>
 
-  <summary><span class="summary">When you might get a County Court Judgment</span></summary>
+    <div class="multiple-choice">
+      <input id="radio-no" type="radio" name="radio_select_group" value="reject" {{ checked("radio_select_group", "reject") }}>
+      <label for="radio-no" data-target="no-info  "> <strong class="bold-small">I reject all of the claim</strong><br>
+       <p>You have either paid the claim in full or you reject the claim
+       </label>
+     </div>
 
-  <div class="panel panel-border-narrow">
+     <input type="hidden" name="do_you_owe_money" value="complete">
+     <details>
 
-     
+      <summary><span class="summary">When you might get a County Court Judgment (CCJ)</span></summary>
+
+      <div class="panel panel-border-narrow">
+
+
 
           <p>The claimant can ask for a County Court Judgment (CCJ) to be made against you if you admit or part admit the claim. This is a ‘judgment by admission’ and means the court orders you to pay the claim.</p>
 
-          <p>Details of the CCJ will be entered on the Register of Judgments, Orders and Fines. Your name could stay on this Register for 6 years unless you pay the total amount you owe.</p>
+        <p>Details of the CCJ will be entered on the Register of Judgments, Orders and Fines. Your name could stay on this Register for 6 years unless you pay the total amount you owe.</p>
 
          <h3 class="heading-medium"> If you pay within 28 days</h3>
 
-          <p>You can apply for a certificate of cancellation to get your name removed from the Register of Judgments, Orders and Fines using <a href="https://hmctsformfinder.justice.gov.uk/HMCTS/GetForm.do?court_forms_id=1157" target="blank">form N443</a> (opens in new window). This application costs £15.</p>
+        <p>You can apply for a certificate of cancellation to get your name removed from the Register of Judgments, Orders and Fines using <a href="https://hmctsformfinder.justice.gov.uk/HMCTS/GetForm.do?court_forms_id=1157" target="blank">form N443</a> (opens in new window). This application costs £15.</p>
 
            <h3 class="heading-medium"> If you pay after 28 days</h3>
                 <p>You can apply for a certificate of satisfaction to get your debt marked as ‘satisfied’ in the Register of Judgments, Orders and Fines using <a href="https://hmctsformfinder.justice.gov.uk/HMCTS/GetForm.do?court_forms_id=1157" target="blank">form N443</a> (opens in new window)</a>. This application costs £15.</p>
 
-                <p>Your name will stay on the Register of Judgments, Orders and Fines for 6 years but people searching it will see that you’ve paid.</p>
+        <p>Your name will stay on the Register of Judgments, Orders and Fines for 6 years but people searching it will see that you’ve paid.</p>
 
         <h3 class="heading-medium">Reject the claim</h3>
-                <p>If you reject the claim and lose your case, then you’ll get a CCJ ordering you to pay the full claim amount and any costs. Details of the CCJ will be entered on the Register of Judgments, Orders and Fines for 6 years.</p>
+        <p>If you reject the claim and lose your case, then you’ll get a CCJ ordering you to pay the full claim amount and any costs. Details of the CCJ will be entered on the Register of Judgments, Orders and Fines for 6 years.</p>
 
-  </div>
-
-</details>
-         </fieldset>
-
-
-       </div>
-
-
-
-
-       {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('task-list')%}
-       <div class="form-group">
-        <input type="submit" class="button" value="Save and continue"/>
       </div>
 
-      <a href="#" onclick="goBack()">Cancel</a>
-      {% else %}
-      <div class="form-group">
-        <input type="submit" class="button" value="Save and continue"/>
-      </div>
-      {% endif %}
-    </form>
+    </details>
+  </fieldset>
 
-  </div>
+
+</div>
+
+
+
+
+{% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('task-list')%}
+<div class="form-group">
+  <input type="submit" class="button" value="Save and continue"/>
+</div>
+
+<a href="#" onclick="goBack()">Cancel</a>
+{% else %}
+<div class="form-group">
+  <input type="submit" class="button" value="Save and continue"/>
+</div>
+{% endif %}
+</form>
+
+</div>
 </main>
 {% endblock %}
