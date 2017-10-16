@@ -12,8 +12,15 @@ Money Claims Prototype
     <div class="column-two-thirds">
       <a href="#" class="link-back">Back</a>
       <h1 class="heading-large">Your agreement</h1>
-      <p >This agreement is a draft until you both sign. What you agree here is legally
-      binding.</P>
+     
+
+{% if data['defendant'] == "claimant_signed" %}
+<p >You need to sign the agreement.</p>
+{% else %}
+      <p >You and {% if data['defendant'] == "defendant" or data['defendant'] == "defendant_signed" %}Jan Clark{% else %}Mary Richards {% endif %} need to sign the agreement.</P>
+
+{% endif %}
+
       <br>
       <table class="offer-table">
         <thead>
@@ -26,7 +33,7 @@ Money Claims Prototype
 
 
             {% if data['defendant'] == "defendant" %}
-            <td>Jan Clark: I'll pay a maximum of £100 towards any new materials. 
+            <td>Jan Clark: I'll pay a maximum of £100 towards any new materials.
 
             {% else %}
             <td>
@@ -35,7 +42,7 @@ Money Claims Prototype
             </td>
           </tr>
           <tr>
-            <td>By when</td>
+            <td>Completion date</td>
             <td>1 December 2018</td>
           </tr>
         </tbody>
@@ -47,6 +54,7 @@ Money Claims Prototype
           <label for="HasAcceptedTermsAndConditions"> By signing this you confirm that you accept the terms of the agreement.</label>
         </div>
       </div>
+
       <a href="confirmation-page" class="button">Sign and submit</a>
       <fieldset></fieldset>
     </div>
