@@ -18,7 +18,7 @@
       {% endif %}
       {% set show_all = true if data['dashboard'] == 8 %}
 
-      {% set claimant_table = true if show_all==true or data['dashboard'] == 1 or data['dashboard'] == 1.2 or data['dashboard'] == 6 or data['dashboard'] == 3 or data['dashboard'] == 7 or data['dashboard'] == 4  or show_all==true or data['dashboard'] == 9 or data['dashboard'] == 10 or data['dashboard'] == 11 or data['dashboard'] == 12 or data['dashboard'] == 13 or data['dashboard'] == 18 or data['dashboard'] == 20 or data['dashboard'] == 23  or  data['dashboard'] == 24 or data['dashboard'] == 25 %}
+      {% set claimant_table = true if show_all==true or data['dashboard'] == 1 or data['dashboard'] == 1.2 or data['dashboard'] == 6 or data['dashboard'] == 3 or data['dashboard'] == 7 or data['dashboard'] == 4  or show_all==true or data['dashboard'] == 9 or data['dashboard'] == 10 or data['dashboard'] == 11 or data['dashboard'] == 12 or data['dashboard'] == 13 or data['dashboard'] == 18 or data['dashboard'] == 20 or data['dashboard'] == 23  or  data['dashboard'] == 24 or data['dashboard'] == 25 or data['dashboard'] == 26%}
       {% set defendant_table = true if show_all==true or data['dashboard'] == 2 or data['dashboard'] == 2.1 or data['dashboard'] == 5  or data['dashboard'] == 14 or data['dashboard'] == 15 or  data['dashboard'] == 16  or  data['dashboard'] == 17 or  data['dashboard'] == 19 or  data['dashboard'] == 21 or  data['dashboard'] == 22 %}
 
       {% if claimant_table!=true and defendant_table!=true %}
@@ -188,6 +188,19 @@
     </tr>
     <tr>
       <td  class="mobile-table-status" colspan="3">Status: Mary Richards has paid £1000 and believes they don’t owe any more money. <a href='defendant-response/view-claim-def?response=no_med_suggestion'>View their response</a>. </td>
+    </tr>
+    {% endif %}
+
+
+    {% if show_all==true or data['dashboard'] == 1 or data['dashboard'] == 26   %}
+    <tr class="mobile-table" >
+      <td ><a href="#">352MC733</a></td>
+      <td >Mary Richards</td>
+      <td >£1500 </td>
+      <td class="mobile-hide">Mary Richards admits all of the claim	and will pay the money by installments. <a href='defendant-response/view-claim-admit-all?response=instalments'>View their response</a>.</td>
+    </tr>
+    <tr>
+      <td  class="mobile-table-status" colspan="3">Status: Mary Richards admits all of the claim	and will pay the money by installments . <a href='defendant-response/view-claim-def?response=no_med_suggestion'>View their response</a>. </td>
     </tr>
     {% endif %}
 
@@ -419,11 +432,12 @@
     <option value="10" {% if data['dashboard'] == 10 %}selected{% endif %}>8. Full defence response - reject only</option>
     <option value="24" {% if data['dashboard'] == 24 %}selected{% endif %}>9. The claim amount is too much + mediation only</option>
     <option value="25" {% if data['dashboard'] == 25 %}selected{% endif %}>10. I've paid what i owe + mediation only</option>
-    <option value="11" {% if data['dashboard'] == 11 %}selected{% endif %}>11. Makes counter offer - message</option>
-    <option value="12" {% if data['dashboard'] == 12 %}selected{% endif %}>12. Mediation offer to defendant - message</option>
-    <option value="13" {% if data['dashboard'] == 13 %}selected{% endif %}>13. Mediation offer agreed - message</option>
-    <option value="18" {% if data['dashboard'] == 18 %}selected{% endif %}>14. Case sent to judge </option>
-    <option value="23" {% if data['dashboard'] == 23 %}selected{% endif %}>15. Claimant counter sign agreement </option>
+    <option value="26" {% if data['dashboard'] == 26 %}selected{% endif %}>11. I admit all the money - instalments</option>
+    <option value="11" {% if data['dashboard'] == 11 %}selected{% endif %}>12. Makes counter offer - message</option>
+    <option value="12" {% if data['dashboard'] == 12 %}selected{% endif %}>13. Mediation offer to defendant - message</option>
+    <option value="13" {% if data['dashboard'] == 13 %}selected{% endif %}>14. Mediation offer agreed - message</option>
+    <option value="18" {% if data['dashboard'] == 18 %}selected{% endif %}>15. Case sent to judge </option>
+    <option value="23" {% if data['dashboard'] == 23 %}selected{% endif %}>16. Claimant counter sign agreement </option>
     <option value="8" {% if data['dashboard'] == 8 %}selected{% endif %}>Show all</option>
   </select>
 </form>
