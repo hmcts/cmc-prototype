@@ -1,10 +1,64 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "layout_task-list.html" %}
 
-</body>
-</html>
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+
+{% block home_link %} ../task-list {% endblock %}
+{% block proposition_header %}
+{% set my_account="1" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+
+
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+
+  <a href="#" class="link-back">Back</a>
+
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+      <form method="post" action="../task-list" class="form">
+
+        {{formData | safe}}
+
+        <h1 class="heading-large">
+          You've paid the claim
+        </h1>
+
+        <fieldset>
+          <legend class="visuallyhidden">
+            Completing your claim
+          </legend>
+
+
+            <p>Make sure you can prove you’ve paid. Send a cheque or postal order by post, or make a bank transfer. Don’t send
+              cash through the post.</p>
+
+
+          <p>If you paid the claim amount on or before 1 October 2017 you can apply have the <a href="judgment/satisfy">judgment
+            cancelled</a>. If approved the CCJ will be removed from the register. </p>
+          <p>If you paid the claim amount on or after 2 October 2017 you can apply have the <a href="judgment/satisfy">judgment
+            satisfied </a>. If approved the CCJ will remain on the register for 6 years but be marked as satisfied. This will
+            make it easier to apply for credit. </p>
+
+          You'll have to pay a court fee of £15.
+
+
+            </fieldset>
+            <input type="hidden" name="your_defence_options" value="complete">
+
+            <div class="form-group">
+              <input type="submit" class="button" value="I confirm I've read this"/>
+            </div>
+
+          </form>
+
+        </div>
+      </div>
+
+    </main>
+    {% endblock %}
