@@ -66,14 +66,15 @@ Money Claims Prototype
     </div>
   </main>
 <script>
-  var end_date    = "{{data['set-day']}}/{{data['set-month']}}/{{data['set-year']}}"
+  $(document).ready(function () {
+    var end_date = "{{data['set-year']}}-{{data['set-month']}}-{{data['set-day']}}"
+    var difference = moment(end_date).diff(moment(), 'days')
 
-
-$("#st").html(new Date())
-$("#ed").html(new Date(end_date))
-if(new Date() > new Date(end_date))
-{
- alert('End date should be greater than Start date');
-}
+    $("#st").html(moment())
+    $("#ed").html(moment(end_date))
+    if(difference > 28) {
+      alert('The date entered is 28 days or more after today');
+    }
+  })
 </script>
   {% endblock %}
