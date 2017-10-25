@@ -17,7 +17,10 @@ Money Claims Prototype
   <div class="grid-row">
     <div class="column-two-thirds">
       <div class="govuk-box-highlight">
-        <h1 class="bold-large">Application to cancel CCJ sent</h1>
+
+        <h1 class="bold-large cancellation">Application to cancel CCJ sent</h1>
+        <h1 class="bold-large satisfaction" style="display:none">Application to satisfy cancel CCJ sent</h1>
+
         <br>
 
       </p>
@@ -27,8 +30,14 @@ Money Claims Prototype
     </div>
     <fieldset>
       <h2 class="heading-medium">What happens next</h2>
+      <div class="cancellation">
       <p>You applied to cancel the CCJ on <span class="dates2"></span>. We'll let you when your application has been reviewed.</p>
       <p>We'll let you know if you need to attend a hearing and what you need to bring with you. </p>
+      </div>
+      <div class="satisfaction" style="display:none">
+        <p>Satisfaction </p>
+      </div>
+
       <p> View your claim status on <a href='#'>your money claims account</a>. </p>
       <h2 class="heading-medium">Help and support</h2>
       <p>Email: moneyclaims@hmcts.gsi.gov.uk<br>
@@ -42,4 +51,20 @@ Money Claims Prototype
 </div>
 
 </main>
+<script>
+  $(document).ready(function () {
+    var end_date = "{{data['set-year']}}-{{data['set-month']}}-{{data['set-day']}}"
+    var difference = moment(end_date).diff(moment(), 'days')
+
+    $("#st").html(moment())
+    $("#ed").html(moment(end_date))
+    if(difference < 28) {
+      $(".cancellation").show();
+    $(".satisfaction").hide();
+    }else if(difference > 28) {
+    $(".cancellation").hide();
+    $(".satisfaction").show();
+    }
+  })
+</script>
 {% endblock %}
