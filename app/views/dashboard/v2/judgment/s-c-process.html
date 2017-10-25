@@ -6,18 +6,14 @@ Money Claims Prototype
 <main id="content" role="main">
   {% include "includes/phase_banner_beta.html" %}
   <div class="grid-row">
-    <div class="column-two-thirds">
+    <div class="column-two-thirds" style="display:none">
       <!--<a href="#" class="link-back">Back</a>-->
 
 
       <form method="post" action="s-c-upload" class="form">
 
 
-        {% if data['radio-s-c-group']=="Yes" %}
 
-      <p>before 28 October 2017</p>
-
-        {% else %}
         <h1 class="heading-large">Apply to show your CCJ as paid</h1>
 
         <p>You didn’t pay the claim within 28 days of it being issued.</p>
@@ -29,7 +25,7 @@ Money Claims Prototype
         <div class="form-group">
           <input type="submit" class="button" value="Apply to show your CCJ as paid" />
         </div>
-        {% endif %}
+
 
 
 
@@ -37,4 +33,18 @@ Money Claims Prototype
     </div>
   </div>
 </main>
+<script>
+  $(document).ready(function () {
+    var end_date = "{{data['set-year']}}-{{data['set-month']}}-{{data['set-day']}}"
+    var difference = moment(end_date).diff(moment(), 'days')
+
+    $("#st").html(moment())
+    $("#ed").html(moment(end_date))
+    if(difference < 28) {
+      window.location.href = "s-c-upload";
+    }else if(difference > 28) {
+    $(".column-two-thirds").show();
+    }
+  })
+</script>
 {% endblock %}
