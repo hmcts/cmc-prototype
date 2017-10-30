@@ -20,16 +20,21 @@ Money Claims Prototype
       <p class="">You believe you owe £800</p>
       <br>
 
+      {% if data['upload'] == 1%}
 
-      {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}
-        <form action="statement/explanation" method="post" class="form">
+      <form action="statement/explanation?upload=show" method="post" class="form">
 
 
-        {% else %}
-        <form action="statement/explanation" method="post" class="form">
+      {% elif data['upload'] == 2%}
+          <form action="statement/explanation?upload=hide" method="post" class="form">
 
+
+          {% else %}
+          <form action="statement/explanation?upload=" method="post" class="form">
 
           {% endif %}
+
+
 
 
 
@@ -118,15 +123,6 @@ Money Claims Prototype
             </div>
           </fieldset>
 
-          {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('task-list')%}
-
-
-          <div class="form-group">
-            <input type="submit" class="button" value="Save and continue"/>
-          </div>
-
-          <a href="#" onclick="goBack()">Cancel</a>
-          {% else %}
           <div class="panel">
           You'll now need to answer some questions about your finances
           </div>
@@ -135,9 +131,15 @@ Money Claims Prototype
           </div>
 
 
-          {% endif %}
         </form>
       </div>
     </div>
   </main>
+<form method="post"  action="#" class="form" style="; float: left">
+  <select id="dashboard2" name="dashboard2" onchange="window.location.href='repayment-plan?upload='+this.value">
+    <option  value="0" >Choose </option>
+    <option value="1" {% if data['upload'] == 1 %}selected{% endif %}>Document upload</option>
+    <option value="2" {% if data['upload'] == 2 %}selected{% endif %}>Statement of means</option>
+  </select>
+</form>
   {% endblock %}
