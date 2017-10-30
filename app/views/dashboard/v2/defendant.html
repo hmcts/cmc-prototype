@@ -1,4 +1,4 @@
-{% extends "layout_task-list.html" %}
+x§x§ {% extends "layout_task-list.html" %}
 {% block page_title %} Your money claims account {% endblock %}
 {% block proposition_header %}
 {% include "includes/propositional_navigation.html" %}
@@ -20,7 +20,7 @@
       <p>The response deadline is <span class="dates"></span> at 4pm (14 days
       remaining). </p>
       <div class="form-group">
-        <p><a class="button" href="../../defendant/full/d-3/task-list?hide_offer=false">Respond to claim </a></p>
+        <p><a  href="../../defendant/full/d-3/task-list?hide_offer=false">Respond to claim </a></p>
       </div>
       {% elseif data['defendant'] == 1 %}
       <h2 class="heading-medium">Your response is being processed.</h2>
@@ -76,7 +76,7 @@
       <p>The claimant has requested mediation to help settle this
         dispute.</p>
       <div class="form-group">
-        <p><a class="button" href="defendant-response/mediation?defendant=mediation">Respond to mediation request </a>
+        <p><a href="defendant-response/mediation?defendant=mediation">Respond to mediation request </a>
         </p>
       </div>
       {% elseif data['defendant'] == 7 %}
@@ -94,7 +94,7 @@
 
       <p>The claimant has made a counter offer. </p>
       <div class="form-group">
-        <p><a class="button" href="defendant-response/suggestion?defendant=defendant">View offer </a></p>
+        <p><a  href="defendant-response/suggestion?defendant=defendant">View offer </a></p>
       </div>
       {% elseif data['defendant'] == 10 %}
       <p>
@@ -103,7 +103,7 @@
       <p>The response deadline is <span class="dates"></span> at 4pm (14 days
       remaining). </p>
       <div class="form-group">
-        <p><a class="button" href="../../defendant/full/d-3/task-list?hide_offer=false">Respond to claim </a></p>
+        <p><a  href="../../defendant/full/d-3/task-list?hide_offer=false">Respond to claim </a></p>
       </div>
       {% elseif data['defendant'] == 11 %}
       <h2 class="heading-medium">Offer sent.</h2>
@@ -243,8 +243,9 @@
         <li><strong class="bold">Claimant name:</strong><br> Jan Clark</li>
         <li><strong class="bold">Claim amount:</strong><br>£1500</li>
         <li><strong class="bold">Claim details:</strong><br><a href="view-claim">View claim</a></li>
+        {% if data['defendant'] == 3%}
         <li><strong class="bold">CCJ details:</strong><br><a href="view-claim">View CCJ</a></li>
-        {% if data['defendant'] == 1.1 or data['defendant'] == 10%}
+
         {% else %}
         {% endif %}
       </ul>
@@ -260,7 +261,7 @@
     <option value="1" {% if data[
     'defendant'] == 1 %}selected{% endif %}>1. Response being processed</option>
     <option value="2" {% if data[
-    'defendant'] == 2 %}selected{% endif %}>2. CCJ issued issued </option>
+    'defendant'] == 2 %}selected{% endif %}>2. CCJ issued requested </option>
     <option value="12" {% if data[
     'defendant'] == 12 %}selected{% endif %}>3. CCJ issued issued </option>
     <option value="3" {% if data[
@@ -277,10 +278,9 @@
     'defendant'] == 8 %}selected{% endif %}>9. Mediation Rejected </option>
     <option value="9" {% if data[
     'defendant'] == 9 %}selected{% endif %}>10. Counter offer from claimant </option>
-    <option value="10" {% if data[
-    'defendant'] == 10 %}selected{% endif %}>11. Offer sent to claimant </option>
+
     <option value="11" {% if data[
-    'defendant'] == 11 %}selected{% endif %}>12. Offer sent to claimant 2 </option>
+    'defendant'] == 11 %}selected{% endif %}>11. Offer sent to claimant </option>
     </option>
   </select>
 </form>
