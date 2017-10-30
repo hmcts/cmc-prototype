@@ -22,26 +22,25 @@ Money Claims Prototype
     <div class="column-two-thirds">
 
 
-        {{formData | safe}}
-        {% if data['upload'] == 'show' or data['upload'] == '1'%}
+      {{formData | safe}}
+      {% if data['upload'] == 'show' or data['upload'] == '1'%}
       <form method="post" action="../statement/upload" class="form">
         {% elif data['upload'] == 'hide'  or data['upload'] == '2' %}
         <form method="post" action="../statement/residence" class="form">
-        {% else %}
-          <form method="post" action="../statement/residence" class="form">
-        {% endif %}
-
-        <h1 class="heading-large">
-          {% if data['upload'] == 'show' or data['upload'] == '1'%}
-           You need to upload the following docs
-          {% elif data['upload'] == 'hide'  or data['upload'] == '2' %}
-            Give details of your finances to Jan Clark
           {% else %}
-          Give details of your finances to Jan Clark
-          {% endif %}
+          <form method="post" action="../statement/what-you-need" class="form">
+            {% endif %}
 
+            <h1 class="heading-large">
+              {% if data['upload'] == 'show' or data['upload'] == '1'%}
+              You need to upload the following docs
+              {% elif data['upload'] == 'hide'  or data['upload'] == '2' %}
+              You need to answer some financial questions
+              {% else %}
+              You need to answer some financial questions
+              {% endif %}
+            </h1>
 
-        </h1>
 
 
 
@@ -58,34 +57,30 @@ Money Claims Prototype
             </ul>
 
             {% elif data['upload'] == 'hide' or data['upload'] == '2' %}
-
             <p>Your answers will be sent to Jan Clark to explain why you can't pay the full amount now. They can choose to accept or reject your payment plan.</p>
 
             <h3 class="heading-medium">What you'll need</h3>
-              <p>You'll need to provide details of:
-              <ul class="list list-bullet">
-                <li>monthly bills and expenses</li>
-                <li>monthly income and benefits</li>
-                <li>bank balances and savings</li>
-                <li>debts or court orders</li>
-              </ul>
+            <p>You'll need to provide details of:
+            <ul class="list list-bullet">
+              <li>monthly bills and expenses</li>
+              <li>monthly income and benefits</li>
+              <li>bank balances and savings</li>
+              <li>debts or court orders</li>
+            </ul>
             {% else %}
-            <p>Next you'll be asked some qestions about your finances.</p>
-            <div class="panel panel-border-wide">
-              <p>Your answers will be sent to Jan Clark to explain why you can't pay the full amount now. They can choose to accept or reject your payment plan.</p>
-            </div>
 
-
-
+            <div class="panel panel-border-wide"
+            <p>Your answers will be sent to Jan Clark to explain why you can't pay the full amount now. They can choose to accept or reject your payment plan.</p>
+    </div>
             {% endif %}
 
-        <input type="hidden" name="your_defence_options" value="complete">
+            <input type="hidden" name="your_defence_options" value="complete">
 
-        <div class="form-group">
-          <input type="submit" class="button" value="Continue"/>
-        </div>
+            <div class="form-group">
+              <input type="submit" class="button" value="Continue"/>
+            </div>
 
-      </form>
+          </form>
 
     </div>
   </div>
