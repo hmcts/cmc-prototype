@@ -133,8 +133,8 @@ Check your answers
               {% if data.radio_select_group=="all" or data['check']== 1 or data['check']== 2 or data['check']== 3%}
               I admit all of the claim
               {% elseif data.radio_select_group=="Some" or data['check']== 4 or data['check']== 5 or data['check']== 6 or data['check']== 7%}
-              I reject part of the claim
-              {% elseif data.radio_select_group=="reject" or data['check']== 8 or data['check']== 9%}
+              I admit part of the claim
+              {% elseif data.radio_select_group=="reject" or data.radio_select_group2=="paid" or data['check']== 8 or data['check']== 9%}
               I reject all of the claim
               {% else %}
               I admit all of the claim
@@ -146,38 +146,19 @@ Check your answers
               </a>
             </td>
           </tr>
-          {% if data.radio_select_group=="Some" or data['check']== 4 or data['check']== 5 or data['check']== 6 or data['check']== 7 %}
-          <tr>
-            <td>
-              Why are you rejecting part of this claim?
-            </td>
-            <td>
-              {% if data.radio_select_group2=="Some" or data['check']== 4 or data['check']== 5 or data['check']== 6%}
-              The claim amount is too much
-              {% elseif data.radio_select_group2=="Paid-some" or data['check']== 7 %}
-              I've paid what I believe I owe
-              {% else %}
-              I've paid what I believe I owe
-              {% endif %}
-            </td>
-            <td class="change-answer">
-              <a href="../task-list/do-you-owe-money/partial-defence-options?return_page={{  '../../task-list' | urlencode }}">
-                Change <span class="visuallyhidden">Name</span>
-              </a>
-            </td>
-          </tr>
-          {% elseif data.radio_select_group=="reject" or data['check']== 8 or data['check']== 9 %}
+
+          {% if data.radio_select_group=="reject" or data.radio_select_group2=="paid" or data['check']== 8 or data['check']== 9 %}
           <tr>
             <td>
               Why do you reject all the claim?
             </td>
             <td>
-              {% if data.radio_select_group2=="Paid" or data['check']== 8 %}
-              I've already paid the claim in full
-              {% elseif data.radio_select_group2=="defend_now" or data['check']== 9 %}
+              {% if data.radio_select_group=="Paid" or data['check']== 8 %}
+              I've paid what I believe I owe
+              {% elseif data.radio_select_group=="defend_now" or data['check']== 9 %}
               I dispute the claim
               {% else %}
-              I've already paid the claim in full
+              I've paid what I believe I owe
               {% endif %}
             </td>
             <td class="change-answer">
@@ -190,7 +171,7 @@ Check your answers
           {% endif %}
         </tbody>
       </table>
-      {% if  data.radio_select_group2=="Some" or data['check']== 4 or data['check']== 5 or data['check']== 6 or data['check']== 7 or data['check']== 9 or data['check']== 8 or data.radio_select_group2=="paid" or data.radio_select_group2=="Paid-some" or data.radio_select_group2=="defend_now"%}
+      {% if  data.radio_select_group=="Some" or data['check']== 4 or data['check']== 5 or data['check']== 6 or data['check']== 7 or data['check']== 9 or data['check']== 8 or data.radio_select_group2=="paid" or data.radio_select_group=="Paid-some" or data.radio_select_group=="defend_now"%}
       <table class="check-your-answers">
         <thead>
           <tr>
@@ -204,7 +185,7 @@ Check your answers
           </tr>
         </thead>
         <tbody>
-          {% if data.radio_select_group2=="Some" or data.radio_select_group2=="Paid-some"  or data['check']== 4 or data['check']== 5 or data['check']== 6  %}<!-- start of partial -->
+          {% if data.radio_select_group=="Some" or data.radio_select_group=="Paid-some"  or data['check']== 4 or data['check']== 5 or data['check']== 6  %}<!-- start of partial -->
           <tr>
             <td class="">
               How much money do you believe you owe
@@ -239,7 +220,7 @@ Check your answers
               </a>
             </td>
           </tr>
-          {% elseif data.radio_select_group2=="Paid-some" or data['check']== 7 %}
+          {% elseif data.radio_select_group=="Paid-some" or data['check']== 7 %}
           <tr>
             <td class="no-border">
               How much have you paid the claimant?
@@ -332,7 +313,7 @@ Check your answers
             </td>
           </tr>
           {% endif %} <!-- end of partial -->
-          {% if data['radio_select_group2']=="defend_now" or data['check']== 9 %} <!-- start of defend -->
+          {% if data['radio_select_group']=="defend_now" or data['check']== 9 %} <!-- start of defend -->
           <tr>
             <td>
               Why you disagree with the claim
@@ -354,7 +335,7 @@ Check your answers
           </tr>
           <tr>
             {% endif %}  <!-- start of defendnow-->
-            {% if data['radio_select_group2']=="defend_now" or data.radio_select_group2=="Some" or data.radio_select_group2=="Paid-some" or data['check']== 4 or data['check']== 5 or data['check']== 6 or data['check']== 7 or data['check']== 9%} <!-- start of time-line and evidence -->
+            {% if data['radio_select_group']=="defend_now" or data.radio_select_group=="Some" or data.amount_paid=="less" or data['check']== 4 or data['check']== 5 or data['check']== 6 or data['check']== 7 or data['check']== 9%} <!-- start of time-line and evidence -->
             <tr>
               <td class="no-border">
                 Your timeline of events (optional)
@@ -487,7 +468,7 @@ Check your answers
   </tbody>
 </table>
 {% endif %}
-{% if data.radio_select_group=="all" or data.radio_select_group2=="Some" or data['check']== 1 or data['check']== 2 or data['check']== 3  or data['check']== 4 or data['check']== 5 or data['check']== 6 %}
+{% if data.radio_select_group=="all" or data.radio_select_group=="Some" or data['check']== 1 or data['check']== 2 or data['check']== 3  or data['check']== 4 or data['check']== 5 or data['check']== 6 %}
 <table class="check-your-answers">
   <thead>
     <tr>
@@ -621,10 +602,9 @@ Check your answers
 </table>
 {% else %}
 {% endif %} <!-- end owe some money -->
-
-  {% if data['radio-pay-group']=="Instalments" or data['check']== 2  or data['check']== 5%}
-  <table class="check-your-answers">
-    <thead>
+{% if data['radio-pay-group']=="Instalments" or data['check']== 2  or data['check']== 5%}
+<table class="check-your-answers">
+  <thead>
     <tr>
       <th colspan="2">
         <h2 class="heading-medium">
@@ -634,17 +614,14 @@ Check your answers
       <th>
       </th>
     </tr>
-    </thead>
-    <tbody>
-
+  </thead>
+  <tbody>
     <tr>
       <td>
         Where are you living?
       </td>
       <td >
-
         Home you own yourself (including if you have a mortgage)
-
       </td>
       <td class="change-answer">
         <a href="#">
@@ -669,7 +646,6 @@ Check your answers
       </td>
       <td class="no-border">Yes</td>
       <td class="change-answer no-border">
-
       </td>
     </tr>
     <tr>
@@ -678,10 +654,8 @@ Check your answers
       </td>
       <td >1</td>
       <td class="change-answer">
-
       </td>
     </tr>
-
     <tr>
       <td>
         Number of children aged 16 to 19 full-time education or training
@@ -693,11 +667,9 @@ Check your answers
         </a>
       </td>
     </tr>
-
     <tr>
       <td class="no-border">
         Maintenance
-
       </td>
       <td class="no-border"></td>
       <td class="change-answer no-border">
@@ -706,34 +678,25 @@ Check your answers
         </a>
       </td>
     </tr>
-
-
     <tr>
       <td class="no-border">
         Do you or your partner pay maintenance for any children?
-
       </td>
       <td class="no-border">Yes</td>
       <td class="change-answer no-border">
-
       </td>
     </tr>
-
     <tr>
       <td>
         Number of children
-
       </td>
       <td >2</td>
       <td class="change-answer">
-
       </td>
     </tr>
-
     <tr>
       <td class="no-border">
         Financial support
-
       </td>
       <td class="no-border"></td>
       <td class="change-answer no-border">
@@ -745,40 +708,30 @@ Check your answers
     <tr>
       <td class="no-border">
         Do you support anyone else financially?
-
       </td>
       <td class="no-border">Yes</td>
       <td class="change-answer no-border">
-
       </td>
     </tr>
-
     <tr>
       <td class="no-border">
         Number of people
-
       </td>
       <td class="no-border">1</td>
       <td class="change-answer no-border">
-
       </td>
     </tr>
     <tr>
       <td class="">
         Give details
-
       </td>
       <td class="">Reason goes here</td>
       <td class="change-answer ">
-
       </td>
     </tr>
-
-
     <tr>
       <td class="no-border">
         Employment
-
       </td>
       <td class="no-border"></td>
       <td class="change-answer no-border">
@@ -790,30 +743,22 @@ Check your answers
     <tr>
       <td class="no-border">
         Are you currently working?
-
       </td>
       <td class="no-border">Yes</td>
       <td class="change-answer no-border">
-
       </td>
     </tr>
-
     <tr>
       <td class="">
         employment status
-
       </td>
       <td class="">Employed and Self-employed</td>
       <td class="change-answer ">
-
       </td>
     </tr>
-
-
     <tr>
       <td class="no-border">
         Who employs you?
-
       </td>
       <td class="no-border"></td>
       <td class="change-answer no-border">
@@ -825,40 +770,30 @@ Check your answers
     <tr>
       <td class="no-border">
         Employer name
-
       </td>
       <td class="no-border">Smith Inc</td>
       <td class="change-answer no-border">
-
       </td>
     </tr>
-
     <tr>
       <td class="no-border">
         Job title
-
       </td>
       <td class="no-border">HR manager</td>
       <td class="change-answer no-border">
-
       </td>
     </tr>
     <tr>
       <td class="">
         List any other paid jobs (optional)
-
       </td>
       <td class=""> </td>
       <td class="change-answer ">
-
       </td>
     </tr>
     <tr>
       <td class="no-border">
         What are you self-employed as?
-
-
-
       </td>
       <td class="no-border"></td>
       <td class="change-answer no-border">
@@ -867,70 +802,49 @@ Check your answers
         </a>
       </td>
     </tr>
-
     <tr>
       <td class="no-border">
         Job title
-
       </td>
       <td class="no-border">Accountant</td>
       <td class="change-answer no-border">
-
       </td>
     </tr>
-
     <tr>
       <td class="no-border">
         Annual turnover
-
-
       </td>
       <td class="no-border">£200,000.00</td>
       <td class="change-answer no-border">
-
       </td>
     </tr>
     <tr>
       <td class="no-border">
         Are you behind on tax payments?
-
-
       </td>
       <td class="no-border"> Yes</td>
       <td class="change-answer no-border">
-
       </td>
     </tr>
     <tr>
       <td class="no-border">
         Amount you owe?
-
-
       </td>
       <td class="no-border"> £30</td>
       <td class="change-answer no-border">
-
       </td>
     </tr>
     <tr>
       <td class="">
         Reason
-
-
       </td>
       <td class=""> Reason goes here</td>
       <td class="change-answer">
-
       </td>
     </tr>
-
-
-
     <tr>
       <td class="no-border">
         Bank and saving accounts
-
-
       </td>
       <td class="no-border"> </td>
       <td class="change-answer no-border">
@@ -942,44 +856,30 @@ Check your answers
     <tr>
       <td class="no-border">
         Type of account
-
-
       </td>
       <td class="no-border">Savings </td>
       <td class="change-answer no-border">
-
       </td>
     </tr>
     <tr>
       <td class="no-border">
         Balance
-
-
       </td>
       <td class="no-border">£100 </td>
       <td class="change-answer no-border">
-
       </td>
     </tr>
     <tr>
       <td class="">
         Joint account
-
-
       </td>
       <td class="">Yes </td>
       <td class="change-answer ">
-
       </td>
     </tr>
-
-
-
     <tr>
       <td class="no-border">
         Monthly income
-
-
       </td>
       <td class="no-border"> </td>
       <td class="change-answer no-border">
@@ -991,38 +891,27 @@ Check your answers
     <tr>
       <td class="no-border">
         Take home pay
-
-
       </td>
       <td class="no-border">£12 </td>
       <td class="change-answer no-border">
-
       </td>
     </tr>
     <tr>
       <td class="no-border">
         Child Benefit
-
-
       </td>
       <td class="no-border">£23 </td>
       <td class="change-answer no-border">
-
       </td>
     </tr>
     <tr>
       <td class="">
         Other income
-
-
       </td>
       <td class="">£43 </td>
       <td class="change-answer ">
-
       </td>
     </tr>
-
-
     <tr>
       <td class="no-border">
         Monthly expenses
@@ -1037,37 +926,27 @@ Check your answers
     <tr>
       <td class="no-border">
         Mortgage
-
-
       </td>
       <td class="no-border">£3443 </td>
       <td class="change-answer no-border">
-
       </td>
     </tr>
     <tr>
       <td class="no-border">
         Council Tax
-
-
       </td>
       <td class="no-border">£120 </td>
       <td class="change-answer no-border">
-
       </td>
     </tr>
     <tr>
       <td class="">
         Gas
-
-
       </td>
       <td class="">£13 </td>
       <td class="change-answer ">
-
       </td>
     </tr>
-
     <tr>
       <td class="no-border">
         Debts
@@ -1085,43 +964,32 @@ Check your answers
       </td>
       <td class="no-border"> Yes</td>
       <td class="change-answer no-border">
-
       </td>
     </tr>
     <tr>
       <td class="no-border">
         Debt
-
-
       </td>
       <td class="no-border">Paying back loan to parent </td>
       <td class="change-answer no-border">
-
       </td>
     </tr>
     <tr>
       <td class="no-border">
         Total owed
-
-
       </td>
       <td class="no-border">£120 </td>
       <td class="change-answer no-border">
-
       </td>
     </tr>
     <tr>
       <td class="">
         Monthly payments
-
-
       </td>
       <td class="">£13 </td>
       <td class="change-answer ">
-
       </td>
     </tr>
-
     <tr>
       <td class="no-border">
         Court orders
@@ -1136,44 +1004,31 @@ Check your answers
     <tr>
       <td class="no-border">
         Has a court ordered you to pay anyone else?
-
       </td>
       <td class="no-border">Yes </td>
       <td class="change-answer no-border">
-
       </td>
     </tr>
     <tr>
       <td class="no-border">
         Claim number
-
-
       </td>
       <td class="no-border">352MC733 </td>
       <td class="change-answer no-border">
-
       </td>
     </tr>
     <tr>
       <td class="">
         Amount you owe
-
-
       </td>
       <td class="">£130 </td>
       <td class="change-answer ">
-
       </td>
     </tr>
-
-
-
-
-    </tbody>
-  </table>
-  {% endif %} <!--end of statement of means-->
-
-  {% if  data.radio_select_group2=="Some" or data.radio_select_group2=="Paid-some" or  data.radio_select_group2=="defend_now" or data['check']== 4 or data['check']== 5 or data['check']== 6 or data['check']== 7 or data['check']== 9 %}
+  </tbody>
+</table>
+{% endif %} <!--end of statement of means-->
+{% if  data.radio_select_group=="Some" or data.amount_paid=="less" or  data.radio_select_group=="defend_now" or data['check']== 4 or data['check']== 5 or data['check']== 6 or data['check']== 7 or data['check']== 9 %}
 <table class="check-your-answers">
   <thead>
     <tr>
@@ -1281,60 +1136,38 @@ Check your answers
   </div>
 </div>
 
-<!--       {% if data['radio-pay-group']=="Immediately" or data['check']== 1 or data['check']== 4%}
-        The full amount within 28 days
-        {% elseif data['radio-pay-group']=="Instalments" or data['check']== 2  or data['check']== 5%}
-        Instalments
-        {% elseif data['radio-pay-group']=="Set-date" or data['check']== 3 or data['check']== 6%}
-        The full amount after 28 days
-        {% else %}
-        Immediately
-        {% endif %}  -->
-
-
-
 <form method="get" action="../confirmation-page?" class="form">
   {% if data.radio_select_group=="all" and data['radio-pay-group']=="Immediately" or data['check']== 1 %}
   <!-- FA - pay immediately -->
   <input type="hidden" name="confirmation" value="1">
-
   {% elseif data.radio_select_group=="all" and data['radio-pay-group']=="Instalments" or data['check']== 2 %}
   <!-- FA - pay instalments -->
   <input type="hidden" name="confirmation" value="2">
-
   {% elseif data.radio_select_group=="all" and data['radio-pay-group']=="Set-date" or data['check']== 3 %}
   <!--  FA - pay set date -->
   <input type="hidden" name="confirmation" value="3">
-
-  {% elseif data.radio_select_group2=="Some" and data['radio-pay-group']=="Immediately" or data['check']== 4 %}
+  {% elseif data.radio_select_group=="Some" and data['radio-pay-group']=="Immediately" or data['check']== 4 %}
   <!-- Amount is too much & pay immediately -->
   <input type="hidden" name="confirmation" value="4">
-
-  {% elseif data.radio_select_group2=="Some" and data['radio-pay-group']=="Instalments" or data['check']== 5 %}
+  {% elseif data.radio_select_group=="Some" and data['radio-pay-group']=="Instalments" or data['check']== 5 %}
   <!-- P/A - Amount is too much & pay instalments -->
   <input type="hidden" name="confirmation" value="6">
-
-  {% elseif data.radio_select_group2=="Some" and data['radio-pay-group']=="Set-date" or data['check']== 6 %}
+  {% elseif data.radio_select_group=="Some" and data['radio-pay-group']=="Set-date" or data['check']== 6 %}
   <!-- P/A - Amount is too much & set date - mediation chosen -->
   <input type="hidden" name="confirmation" value="7">
-
-  {% elseif data.radio_select_group2=="Paid-some" or data['check']== 7 %}
+  {% elseif data.amount_paid=="less" or data['check']== 7 %}
   <!--  P/A - Paid what I owe & defence -->
   <input type="hidden" name="confirmation" value="8">
-
-  {% elseif data.radio_select_group2=="Paid-some" or data['check']== 11 %}
+  {% elseif data.amount_paid=="less"  or data['check']== 11 %}
   <!-- P/A - Paid what I owe & defence - mediation chosen -->
   <input type="hidden" name="confirmation" value="10">
-
-  {% elseif data.radio_select_group2=="paid" or data['check']== 8%}
+  {% elseif data.amount_paid=="less" or data['check']== 8%}
   <!--  R/C - I've already paid -->
   <input type="hidden" name="confirmation" value="16">
-
-  {% elseif data.radio_select_group2=="defend_now" or data['check']== 9%}
+  {% elseif data.radio_select_group=="defend_now" or data['check']== 9%}
   <!--  R/C - I've dispute the claim + defence-->
   <input type="hidden" name="confirmation" value="12">
-
-  {% elseif data.radio_select_group2=="defend_now" or data['check']== 12%}
+  {% elseif data.radio_select_group=="defend_now" or data['check']== 12%}
   <!-- R/C - I've dispute the claim + defence - mediation chosen -->
   <input type="hidden" name="confirmation" value="14">
   {% else %}
@@ -1346,9 +1179,6 @@ Check your answers
   <p><a href="../task-list">Cancel</a></p>
 </form>
 </div>
-<!--<div class="back">-->
-  <!--<a href="#">Cancel application</a>-->
-  <!--</div>-->
 </main>
 <form method="post"  action="#" class="form" style="position: absolute;">
   <select id="check2" name="check2" onchange="window.location.href='check-and-send?check='+this.value">
@@ -1360,8 +1190,8 @@ Check your answers
     <option  value="5" {% if data['check'] == 5 %}selected{% endif %}>5. P/A - Amount is too much & pay instalments</option>
     <option  value="6" {% if data['check'] == 6 %}selected{% endif %}>6. P/A - Amount is too much & set date - mediation chosen</option>
     <option  value="7" {% if data['check'] == 7 %}selected{% endif %}>7. P/A - Paid what I owe & defence</option>
-    <option  value="11" {% if data['check'] == 11 %}selected{% endif %}>8. P/A - Paid what I owe & defence - mediation chosen</option>
-    <option  value="8" {% if data['check'] == 8 %}selected{% endif %}>9. R/C - I've already paid</option>
+    <option  value="8" {% if data['check'] == 8 %}selected{% endif %}>8. R/C - I've already paid</option>
+    <option  value="11" {% if data['check'] == 11 %}selected{% endif %}>9. R/C - Paid what I believe I owe & defence - mediation chosen</option>
     <option  value="9" {% if data['check'] == 9 %}selected{% endif %}>10. R/C - I've dispute the claim + defence</option>
     <option  value="12" {% if data['check'] == 12 %}selected{% endif %}>11. R/C - I've dispute the claim + defence - mediation chosen</option>
     <option  value="10" {% if data['check'] == 10 %}selected{% endif %}>12. Show business statement of truth</option>
