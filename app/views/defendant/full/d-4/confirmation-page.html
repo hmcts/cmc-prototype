@@ -66,7 +66,7 @@ Money Claims Prototype
           <!-- amount is too much - pay immediately -->
     {% elseif data.radio_select_group2=="Some" and data['radio-pay-group']=="Immediately" or data['confirmation']== 4 %}
     <p>You believe you owe £1,000. We've emailed Jan Clark telling them you're prepared to pay this amount within 28 days.</p>
-    <p>Your explanation of why you believe you owe this amount has been sent to Jan Clark.</p>
+    <p>Your explanation of why you believe you don't owe the amount claimed has been sent to Jan Clark.</p>
     <p>View the <a href='../../../dashboard/v2/defendant?defendant=3'>claim against you and your response</a>.</p>
     <h2 class="heading-medium">What happens next</h2>
     <p>Jan Clark needs to respond to your defence on or before <span class="dates"></span>. If they reject it then the case will be reviewed and might go to a hearing.</p>
@@ -94,7 +94,7 @@ Money Claims Prototype
     <!-- amount too much - pay instalments  -->
     {% elseif data.radio_select_group2=="Some" and data['radio-pay-group']=="Instalments" or data['confirmation']== 6 %}
     <p>You believe you owe £1,000. We've emailed Jan Clark your offer to pay this amount by instalments.</p>
-    <p>Your explanation of why you believe you owe this amount has been sent to Jan Clark.</p>
+    <p>Your explanation of why you believe you don't owe the amount claimed has been sent to Jan Clark.</p>
       <p>View the <a href='../../../dashboard/v2/defendant?defendant=3'>claim against you and your response</a>.</p>
     <h2 class="heading-medium">What happens next</h2>
     <p>Jan Clark needs to respond to your offer on or before <span class="dates"></span>.</p>
@@ -122,7 +122,7 @@ Money Claims Prototype
     <!-- amount too much - pay set date + mediation -->
     {% elseif data.radio_select_group2=="Some" and data['radio-pay-group']=="Set-date" or data['confirmation']== 7 %}
     <p>You believe you owe £1,000. We've emailed Jan Clark your offer to pay this amount by <span class="dates"></span>.</p>
-    <p>Your explanation of why you believe you owe this amount has been sent to Jan Clark.</p>
+    <p>Your explanation of why you believe you don't owe the amount claimed has been sent to Jan Clark.</p>
       <p>View the <a href='../../../dashboard/v2/defendant?defendant=3'>claim against you and your response</a>.</p>
     <h2 class="heading-medium">What happens next</h2>
     <p>Jan Clark needs to respond to your offer on or before <span class="dates"></span>.</p>
@@ -159,7 +159,7 @@ Money Claims Prototype
     {% endif %}
     <!-- paid what i owe -->
     {% elseif data.radio_select_group2=="Paid-some" or data['confirmation']== 8 %}
-    <p>You state that you owe £1500. Your explanation of why you believe you owe this amount has been sent to Jan Clark. </p>
+    <p>You state that you paid £1500. Your explanation of why you don't owe any more money has been sent to Jan Clark. </p>
       <p>View the <a href='../../../dashboard/v2/defendant?defendant=3'>claim against you and your response</a>.</p>
     <h2 class="heading-medium">What happens next</h2>
     <p>Jan Clark needs to respond to your offer on or before <span class="dates"></span>.  If they reject it then the case will be reviewed and might go to a hearing.</p>
@@ -185,7 +185,7 @@ Money Claims Prototype
     {% endif %}
     <!-- paid what i owe + mediation -->
     {% elseif data.radio_select_group2=="Paid-some" or data['confirmation']== 10 %}
-    <p>You state that you owe £1500. Your explanation of why you believe you owe this amount has been sent to Jan Clark. </p>
+    <p>You state that you paid £1500. Your explanation of why you don't owe any more money has been sent to Jan Clark. </p>
       <p>View the <a href='../../../dashboard/v2/defendant?defendant=3'>claim against you and your response</a>.</p>
     <h2 class="heading-medium">What happens next</h2>
     <p>Jan Clark needs to respond to your offer on or before <span class="dates"></span>.  If they reject it then the case will be reviewed and might go to a hearing.</p>
@@ -293,18 +293,17 @@ Money Claims Prototype
 <form method="post"  action="#" class="form" style="position: absolute;">
   <select id="check2" name="check2" onchange="window.location.href='?confirmation='+this.value">
     <option  value="0" >Choose</option>
-    <option value="1" {% if data['confirmation'] == 1 %}selected{% endif %}>1. F/A - pay Immediately</option>
-    <option  value="2" {% if data['confirmation'] == 2 %}selected{% endif %}>2. F/A - pay instalments</option>
-    <option  value="3" {% if data['confirmation'] == 3 %}selected{% endif %}>3. F/A - Pay set date</option>
-    <option  value="4" {% if data['confirmation'] == 4 %}selected{% endif %}>4. P/A - I admit part of the claim - pay immediately </option>
-    <option  value="6" {% if data['confirmation'] == 6 %}selected{% endif %}>5. P/A - I admit part of the claim - by instalments </option>
-    <option  value="7" {% if data['confirmation'] == 7 %}selected{% endif %}>6. P/A - I admit part of the claim - pay set date + mediation </option>
 
-    <option  value="12" {% if data['confirmation'] == 12 %}selected{% endif %}>7. R/C - I dispute the claim</option>
-    <option  value="14" {% if data['confirmation'] == 14 %}selected{% endif %}>8. R/C - I dispute the claim + mediation</option>
-    <option  value="16" {% if data['confirmation'] == 16 %}selected{% endif %}>9. R/C - Paid full claim</option>
-    <option  value="8" {% if data['confirmation'] == 8 %}selected{% endif %}>10. R/C - Paid less </option>
-    <option  value="10" {% if data['confirmation'] == 10 %}selected{% endif %}>11. R/C - Paid less + mediation </option>
+    <option  value="2" {% if data['confirmation'] == 2 %}selected{% endif %}>1. F/A - pay instalments</option>
+    <option  value="3" {% if data['confirmation'] == 3 %}selected{% endif %}>2. F/A - Pay set date</option>
+    <option  value="6" {% if data['confirmation'] == 6 %}selected{% endif %}>3. P/A - I admit part of the claim - by instalments </option>
+    <option  value="7" {% if data['confirmation'] == 7 %}selected{% endif %}>4. P/A - I admit part of the claim - pay set date + mediation </option>
+
+    <option  value="12" {% if data['confirmation'] == 12 %}selected{% endif %}>5. R/C - I dispute the claim</option>
+    <option  value="14" {% if data['confirmation'] == 14 %}selected{% endif %}>6. R/C - I dispute the claim + mediation</option>
+    <option  value="16" {% if data['confirmation'] == 16 %}selected{% endif %}>7. R/C - Paid full claim</option>
+    <option  value="8" {% if data['confirmation'] == 8 %}selected{% endif %}>8. R/C - Paid less </option>
+    <option  value="10" {% if data['confirmation'] == 10 %}selected{% endif %}>9. R/C - Paid less + mediation </option>
 
   </select>
 </form>
