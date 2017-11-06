@@ -1,0 +1,100 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="4" %}
+
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <a href="#" class="link-back">Back</a>
+      <h1 class="heading-large">
+        <span class="heading-secondary">County Court Judgment </span>
+        Amount to be paid by defendant
+      </h1>
+
+      <p >
+        Amount payable by defendant is calculated based on the amount you're claiming and any other costs
+        minus any amount paid by defendant.
+      </p>
+      <form class="form">
+        <table class="table-form">
+          <caption class="visuallyhidden">Amount payable by defendant</caption>
+          <thead>
+            <tr>
+              <th scope="col"></th>
+              <th class="numeric last" scope="col">Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Claim amount</th>
+              <td class="numeric last">
+                <label class="visuallyhidden" for="amount">Claim amount</label>
+                <span class="font-small">£1500.00</span>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">
+                <details>
+                  <summary>
+                    Interest to date of judgment
+                  </summary>
+                  <div class="panel text-small">
+                    Interest calculated at 8% for 23 days <br> <span class="font-xsmall">(20 November 2016 to 23 January 2017)</span>
+                  </div>
+                </details>
+              </th>
+              <td class="numeric last">
+                <label class="visuallyhidden" for="amount">Interest</label>
+                <span class="font-small">£68.20</span>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">Claim fee</th>
+              <td class="numeric last">
+                <label class="visuallyhidden" for="amount">Claim fee</label>
+                <span class="font-small">£75.00</span>
+              </td>
+            </td>
+          </tr>
+          {% if data['radio-indent-group2']=="Yes" %}
+          <tr> 
+            <th scope="col" class="bold-small">Sub total</th>
+            <td class="numeric last bold-small">£<span name="subt" id="subt" >1643.20</span></td>
+            <input type="text" hidden="" value="1643.20" name="num1" id="num1" />
+          </tr>
+          <tr>
+            <th scope="col">Minus amount already paid</th>
+            <td class="numeric last">£200.00</td>
+          </tr>          
+          <tr>
+            <th scope="col" class="bold-medium">Total</th>
+            <td class="numeric last bold-medium">£<span name="subt" id="subt" >1643.20</span></td>
+            <input type="text" hidden="" value="1643.20" name="num1" id="num1" />
+          </tr>
+          {% else  %}
+          <tr>
+            <th scope="col" class="bold-medium">Total</th>
+            <td class="numeric last bold-medium">£<span name="subt" id="subt" >1643.20</span></td>
+            <input type="text" hidden="" value="1643.20" name="num1" id="num1" />
+          </tr>
+          {% endif %}
+        </tbody>
+      </table>
+    </form>
+    <a class="button" href="payment-options">Continue</a>
+  </div>
+</div>
+</div>
+</main>
+</div>
+</div>
+</div>
+</main>
+{% endblock %}

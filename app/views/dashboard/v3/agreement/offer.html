@@ -1,0 +1,63 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <a href="#" class="link-back">Back</a>
+      <h1 class="heading-large">Your agreement</h1>
+     
+
+{% if data['defendant'] == "claimant_signed" %}
+<p >You need to sign the agreement.</p>
+{% else %}
+      <p >You and {% if data['defendant'] == "defendant" or data['defendant'] == "defendant_signed" %}Jan Clark{% else %}Mary Richards {% endif %} need to sign the agreement.</P>
+
+{% endif %}
+
+      <br>
+      <table class="offer-table">
+        <thead>
+          <tr>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>The offer</td>
+
+
+            {% if data['defendant'] == "defendant" %}
+            <td>Jan Clark: I'll pay a maximum of £100 towards any new materials.
+
+            {% else %}
+            <td>
+              Mary Richards: I will fix the roof if you'll give me access and pay for any extra materials.
+            {% endif %}
+            </td>
+          </tr>
+          <tr>
+            <td>Completion date</td>
+            <td>1 December 2018</td>
+          </tr>
+        </tbody>
+      </table>
+      <h2 class="heading-medium">Declaration</h2>
+      <div class="form-group">
+        <div class="multiple-choice text">
+          <input class="" id="HasAcceptedTermsAndConditions" type="checkbox" value="true">
+          <label for="HasAcceptedTermsAndConditions"> By signing this you confirm that you accept the terms of the agreement.</label>
+        </div>
+      </div>
+
+      <a href="confirmation-page" class="button">Sign and submit</a>
+      <fieldset></fieldset>
+    </div>
+  </div>
+</main>
+{% endblock %}
