@@ -61,7 +61,7 @@
               </div>
               {% elseif data['claimant'] == 4  %}
               <h2 class="heading-medium">The defendant's response </h2>
-              <p>The defendant Mary Richards admits they owe all the money. They will pay the money by instalments.</p>
+              <p>The defendant Mary Richards admits they owe all the money you’ve claimed. They will pay the money by instalments.</p>
               <p> <a href="claimant-response/admit-the-claim/view-response">View their response</a></p>
 
 
@@ -89,7 +89,7 @@
               {% elseif data['claimant'] == 7  %}
               <div class="">
                 <h2 class="heading-medium">The defendant's response </h2>
-                 <p>The defendant Mary Richards responded that they have paid what they believe they owe, £1000.</p>
+                 <p>The defendant Mary Richards says that they have paid what they believe they owe.</p>
                 <div class="form-group">
 
                   <p> <a class="" href="defendant-response/view-claim-def?response=no_med_suggestion">View their response.</a></p>
@@ -106,22 +106,28 @@
               {% elseif data['claimant'] == 9  %}
               <div class="">
                 <h2 class="heading-medium">The defendant's response </h2>
-                 <p>The defendant Mary Richards disputes the claim in full. </p>
+                 <p>The defendant Mary Richards has rejected your the claim. </p>
                 <div class="form-group">
                   <p> <a class="" href="claimant-response/dispute-claim/view-response?mediation=no">View their response </a></p>
 
                 </div>
               </div>
               {% elseif data['claimant'] ==10  %}
-              <div class="">
-                <h2 class="heading-medium">The defendant's response </h2>
-                 <p>The defendant Mary Richards disputes the claim in full. </p>
-                <div class="form-group">
+              {% if data['offer']=="show" %}
+              <h2 class="heading-medium">Offer from claimant</h2>
+              <p>Mary Richards wants to settle out of court.</p><p> <a href="defendant-response/suggestion?defendant=offer">View their offer.</a></p>
+              {% else %}
+                  <h2 class="heading-medium">The defendant's response </h2>
+                 <p>The defendant Mary Richards has rejected your the claim. </p>
                   <p> <a class="" href="claimant-response/dispute-claim/view-response?mediation=no">View their response </a></p>
-                </div>
-              </div>
+
+
              <h2 class="heading-small">Offer from claimant</h2>
               <p>Mary Richards wants to settle out of court.</p><p> <a href="defendant-response/suggestion?defendant=offer">View their offer.</a></p>
+
+              {% endif %}
+
+
 
               {% elseif data['claimant'] == 11  %}
               <div class="">
@@ -166,11 +172,11 @@
               </div>
                 {% endif %}
                 <h2 class="heading-medium">More options </h2>
-                {% if data['claimant'] == 1.2 or data['claimant'] == 1 or data['claimant'] == 2 or data['claimant'] == 3 or data['claimant'] == 4  or data['claimant'] == 11  or data['claimant'] == 12%}
+                {% if data['claimant'] == 1.2 or data['claimant'] == 1 or data['claimant'] == 2 or data['claimant'] == 3 or data['claimant'] == 4  or data['claimant'] == 10 or data['claimant'] == 11  or data['claimant'] == 12%}
                 {% else %}
                 <h2 class="heading-small">Settle out of court</h2>
                 <p>
-                  You can <a href='offer?defendant=claimant'>make an offer</a> to settle the claim out of court. This will avoid going to a hearing.
+                  You can <a href='offer?defendant=claimant'>make an offer</a> to settle the claim out of court. If your offer is accepted you won’t have to a court hearing.
                 </p>
                 {% endif %}
                 {% if data['claimant'] == 1.2 or data['claimant'] == 1 or data['claimant'] == 2 or data['claimant'] == 3 or data['claimant'] == 4  or data['claimant'] == 8 or data['claimant'] == 13 or data['claimant'] == 14%}
@@ -182,7 +188,7 @@
                 {% endif %}
                 <h2 class="heading-small">Cancel your claim</h2>
                 <p>
-                  You can <a href='#'>cancel your claim</a>. For example if you've been paid.
+                  You can <a href='#'>cancel your claim</a>. For example, you’ve been paid or don’t want to continue your case against the defendant.
                 </p>
               </div>
               <div id="tabs-2" class="tab-pane">
