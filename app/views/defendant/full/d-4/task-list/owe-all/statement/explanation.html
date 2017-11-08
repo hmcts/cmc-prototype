@@ -23,34 +23,31 @@ Money Claims Prototype
 
 
       {{formData | safe}}
-      {% if data['upload'] == 'show' or data['upload'] == '1'%}
-      <form method="post" action="../statement/upload" class="form">
-        {% elif data['upload'] == 'hide'  or data['upload'] == '2' %}
-        <form method="post" action="../statement/residence" class="form">
+      {% if data['upload'] == '1'%}
+              <form method="post" action="../statement/residence" class="form">
+
+        {% elif data['upload'] == '2' %}
+                      <form method="post" action="../statement/upload" class="form">
+
           {% else %}
           <form method="post" action="../statement/what-you-need" class="form">
             {% endif %}
 
             <h1 class="heading-large">
-              {% if data['upload'] == 'show' or data['upload'] == '1'%}
               Explain to the claimant why you can't pay now
-              {% elif data['upload'] == 'hide'  or data['upload'] == '2' %}
-              Explain to the claimant why you can't pay now
-              {% else %}
-              Explain to the claimant why you can't pay now
-              {% endif %}
+
             </h1>
 
 
 
 
-            {% if data['upload'] == 'show' or data['upload'] == '1'%}
+            {% if data['upload'] == '2'%}
             <div class="panel panel-border-wide">
-              <p>You need to  upload your companies/organisation most recent statement of accounts. These accounts will will be sent to Jan Clark to explain why you can't pay the full amount now.</p>
+              <p>You need to  upload your companies/organisation most recent statement of accounts.</p> <p>The accounts will will be sent to Jan Clark to explain why you can't pay the full amount now.</p>
             </div>
 
 
-            {% elif data['upload'] == 'hide' or data['upload'] == '2' %}
+            {% elif  data['upload'] == '1' %}
             <p>You need to answer some financial questions. Your answers will be sent to Jan Clark to explain why you can't pay the full amount now.</p>
 
             <h3 class="heading-medium">What you'll need</h3>
@@ -82,9 +79,10 @@ Money Claims Prototype
 </main>
 <form method="post"  action="#" class="form" style="; float: left">
   <select id="dashboard2" name="dashboard2" onchange="window.location.href='explanation?upload='+this.value">
-    <option  value="0" >Choose </option>
-    <option value="1" {% if data['upload'] == 1 %}selected{% endif %}>Document upload</option>
-    <option value="2" {% if data['upload'] == 2 %}selected{% endif %}>Statement of means</option>
+    <option >Choose </option>
+    <option value="1" {% if data['upload'] == 1 %}selected{% endif %}>1 Statement of means</option>
+    <option value="2" {% if data['upload'] == 2 %}selected{% endif %}>2 Document upload</option>
+
   </select>
 </form>
 {% endblock %}
