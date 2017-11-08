@@ -18,9 +18,22 @@ Money Claims Prototype
     <div class="column-two-thirds">
       <div class="govuk-box-highlight">
 
-        <h1 class="bold-large cancellation">Application to cancel CCJ sent</h1>
         <h1 class="bold-large satisfaction" style="display:none">Application to cancel CCJ sent</h1>
+      {% if data['ccj']=="satisfy" %}
+      <!--satisfy judgment goes here-->
 
+						<h1 class="bold-large cancellation">Application to cancel CCJ sent</h1>
+
+        {% elseif  data['ccj']=="cancel" %}
+      <!--cancel judgment goes here-->
+
+						<h1 class="bold-large cancellation">Application to cancel CCJ sent</h1>
+
+        {% else %}
+          <!--vary judgment goes here-->
+        <h1 class="bold-large cancellation">Application to cancel CCJ sent</h1>
+
+        {% endif %}
         <br>
 
       </p>
@@ -30,14 +43,26 @@ Money Claims Prototype
     </div>
     <fieldset>
       <h2 class="heading-medium">What happens next</h2>
-      <div class="cancellation">
+           {% if data['ccj']=="satisfy" %}
+           <!--satisfy judgment goes here-->
+
+          <p>You applied to cancel the CCJ on <span class="dates2"></span>. You may need to go to a hearing.</p>
+        <p>We'll let you when your application has been reviewed.</p>
+        {% elseif  data['ccj']=="cancel" %}
+           <!--cancel judgment goes here-->
+
       <p>Your application has been sent to the court. We'll let you know when it has been reviewed.</p>
 
-      </div>
-      <div class="satisfaction" style="display:none">
-        <p>You applied to cancel the CCJ on <span class="dates2"></span>. You may need to go to a hearing.</p>
-        <p>We'll let you when your application has been reviewed.</p>
-      </div>
+        {% else %}
+           <!--vary judgment goes here-->
+      <p>Your application has been sent to the court. We'll let you know when it has been reviewed.</p>
+
+        {% endif %}
+
+
+
+
+
 
       <p> View your claim status on <a href='#'>your money claims account</a>. </p>
       <h2 class="heading-medium">Help and support</h2>
@@ -52,20 +77,13 @@ Money Claims Prototype
 </div>
 
 </main>
-<script>
-  $(document).ready(function () {
-    var end_date = "{{data['set-year']}}-{{data['set-month']}}-{{data['set-day']}}"
-    var difference = moment(end_date).diff(moment(), 'days')
+<form method="post"  action="#" class="form" style="; float: left">
+  <select id="dashboard2" name="dashboard2" onchange="window.location.href='confirmation-page-ccj?ccj='+this.value">
+    <option  value="0" >Choose </option>
+    <option value="satisfy" {% if data['satisfy'] == 1 %}selected{% endif %}>1 Satisfy</option>
+    <option value="cancel" {% if data['ccj'] == cancel %}selected{% endif %}>2 Cancel</option>
+    <option value="0" {% if data['ccj'] == 0 %}selected{% endif %}>2 Vary</option>
 
-    $("#st").html(moment())
-    $("#ed").html(moment(end_date))
-    if(difference < 28) {
-      $(".cancellation").show();
-    $(".satisfaction").hide();
-    }else if(difference > 28) {
-    $(".cancellation").hide();
-    $(".satisfaction").show();
-    }
-  })
-</script>
+  </select>
+</form>
 {% endblock %}
