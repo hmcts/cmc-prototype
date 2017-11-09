@@ -14,7 +14,7 @@ Money Claims Prototype
      <h1 class="heading-large">
       The defendant's response
     </h1>
-    <p>The defendant Mary Richards believes they owe £1,000. They will pay this amount by instalments.</p>
+    <p>The defendant Mary Richards believes they owe £1,000. <!--They will pay this amount by instalments.--></p>
     <p>However they believe they don't owe the amount claimed.</p>
     <h2 class="heading-medium">Their defence</h2>
     <p class="heading-small">Why they they don't owe the amount claimed</p>
@@ -45,17 +45,10 @@ Money Claims Prototype
     copy of the email.</p>
     <p class="heading-small">How this dispute has affected them</p>
     <p>I'm sorry you have felt stress during this process but would like claim resolved amicably.</p>
-    <h2 class="heading-medium">Their method of payment</h2>
-    <p >Payment by instalments </p>
+    {% if data['part_admission'] != "2" %}
+    <h2 class="heading-medium">How they want to pay</h2>
+    <p >Instalments </p>
     <table class="instalment-table">
-      <thead>
-        <tr>
-          <th colspan="2">
-          </th>
-          <th>
-          </th>
-        </tr>
-      </thead>
       <tbody>
         <tr>
         </tr><tr>
@@ -100,27 +93,28 @@ Money Claims Prototype
         </tr>
       </tbody>
     </table>
-      <h2 class="heading-medium">Accept or reject their response?</h2>
-      <p>You can accept their response and also suggest an alternative payment method.</p>
+    {% endif %}
+    <h2 class="heading-medium">Do you accept or reject the amount owed is £1000?</h2>
+    {% if data['part_admission'] == "1" %}
     <form
     name="aspnetForm"
     method="post"
-    onsubmit="multiNavigation('radio-indent-group', ['reject-response', 'accept_stop_claim'], ['mediation', '../confirmation-page']);return false;"
+    onsubmit="multiNavigation('radio-indent-group', ['reject-response', 'payment', 'accept_stop_claim'], ['mediation', 'payment-options', '../confirmation-page']);return false;"
     id="aspnetForm"
     autocomplete="off">
     <div class="form-group">
       <fieldset>
         <div class="multiple-choice" data-target="accept2">
           <input id="radio-yes" type="radio" name="radio-indent-group" value="accept_stop_claim">
-          <label for="radio-yes" data-target="yes-info">Accept their response</label>
+          <label for="radio-yes" data-target="yes-info">Accept their response - including payment </label>
         </div>
-        <div class="panel panel-border-narrow js-hidden" id="accept-offer">
-          <p>Continue accept method of payment.</p>
+        <div class="multiple-choice" data-target="accept2">
+          <input id="radio-payment" type="radio" name="radio-indent-group" value="payment">
+          <label for="radio-payment" data-target="yes-info">Accept their response - suggest payment method</label>
         </div>
-
         <div class="multiple-choice" data-target="reject-offer">
           <input id="radio-no" type="radio" name="radio-indent-group" value="reject-response">
-          <label for="radio-no" data-target="no-info">Reject their response  </label>
+          <label for="radio-no" data-target="no-info">Reject their response </label>
         </div>
         <div class="panel panel-border-narrow js-hidden" id="reject-offer">
           <p>Continue to consider free mediation to help settle this dispute.</p>
@@ -130,7 +124,40 @@ Money Claims Prototype
       data-ignore-double-submit="true">
     </div>
   </form>
+  {% elseif data['part_admission'] == "2" %}
+  <form
+  name="aspnetForm"
+  method="post"
+  onsubmit="multiNavigation('radio-indent-group', ['reject-response', 'payment'], ['mediation', 'payment']);return false;"
+  id="aspnetForm"
+  autocomplete="off">
+  <div class="form-group">
+    <fieldset>
+      <div class="multiple-choice" data-target="accept2">
+        <input id="radio-yes" type="radio" name="radio-indent-group" value="payment">
+        <label for="radio-yes" data-target="yes-info">I Accept </label>
+      </div>
+      <div class="multiple-choice" data-target="reject-offer">
+        <input id="radio-no" type="radio" name="radio-indent-group" value="reject-response">
+        <label for="radio-no" data-target="no-info">I Reject </label>
+      </div>
+      <div class="panel panel-border-narrow js-hidden" id="reject-offer">
+        <p>Continue to consider free mediation to help settle this dispute.</p>
+      </div>
+    </fieldset>
+    <input id="advert-option-next--button" type="submit" value="Continue" class="button"
+    data-ignore-double-submit="true">
+  </div>
+</form>
+{% endif %}
 </div>
 </div>
 </main>
+<form method="post"  action="#" class="form" style="position: absolute;">
+  <select id="claimant2" name="claimant2" onchange="window.location.href='?part_admission='+this.value">
+    <option  value="0" >Choose</option>
+    <option value="1" {% if data['part_admission'] ==1 %}selected{% endif %}>1. Single question</option>
+    <option value="2" {% if data['part_admission'] == 2 %}selected{% endif %}>2. Multiple question</option>
+  </select>
+</form>
 {% endblock %}
