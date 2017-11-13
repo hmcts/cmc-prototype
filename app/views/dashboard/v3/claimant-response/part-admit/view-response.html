@@ -14,7 +14,7 @@ Money Claims Prototype
      <h1 class="heading-large">
       The defendant's response
     </h1>
-    <p>The defendant Mary Richards believes they owe £1,000. <!--They will pay this amount by instalments.--></p>
+    <p>The defendant Mary Richards believes they owe £1,000. They will pay this amount by instalments.</p>
     <p>However they believe they don't owe the amount claimed.</p>
     <h2 class="heading-medium">Their defence</h2>
     <p class="heading-small">Why they they don't owe the amount claimed</p>
@@ -45,7 +45,6 @@ Money Claims Prototype
     copy of the email.</p>
     <p class="heading-small">How this dispute has affected them</p>
     <p>I'm sorry you have felt stress during this process but would like claim resolved amicably.</p>
-    {% if data['part_admission'] != "2" %}
     <h2 class="heading-medium">How they want to pay</h2>
     <p >Instalments </p>
     <table class="instalment-table">
@@ -93,9 +92,9 @@ Money Claims Prototype
         </tr>
       </tbody>
     </table>
-    {% endif %}
-    <h2 class="heading-medium">Do you accept or reject the amount owed is £1000?</h2>
     {% if data['part_admission'] == "1" %}
+          <h2 class="heading-medium">Do you accept or reject the amount owed is £1000?</h2>
+
     <form
     name="aspnetForm"
     method="post"
@@ -125,6 +124,8 @@ Money Claims Prototype
     </div>
   </form>
   {% elseif data['part_admission'] == "2" %}
+                <h2 class="heading-medium">Do you accept or reject the amount owed is £1000?</h2>
+
   <form
   name="aspnetForm"
   method="post"
@@ -149,6 +150,39 @@ Money Claims Prototype
     data-ignore-double-submit="true">
   </div>
 </form>
+
+{% elseif data['part_admission'] == "3" %}
+          <h2 class="heading-medium">Do you accept or reject their response and payment?</h2>
+
+        <form
+          name="aspnetForm"
+          method="post"
+          onsubmit="multiNavigation('radio-indent-group', ['reject-response', 'accept_stop_claim'], ['payment-options2', '../confirmation-page']);return false;"
+          id="aspnetForm"
+          autocomplete="off">
+  <div class="form-group">
+    <fieldset>
+      <div class="multiple-choice" data-target="accept2">
+        <input id="radio-yes" type="radio" name="radio-indent-group" value="accept_stop_claim">
+        <label for="radio-yes" data-target="yes-info"><span class="bold">I Accept </span></label>
+      </div>
+      <div class="multiple-choice" data-target="reject-offer2">
+        <input id="radio-no" type="radio" name="radio-indent-group" value="reject-response">
+        <label for="radio-no" data-target="no-info"><span class="bold">I Reject </span><br>You can suggest your own method of payment</label>
+      </div>
+      <div class="panel panel-border-narrow js-hidden" id="reject-offer">
+        <p>You can ask .</p>
+      </div>
+    </fieldset>
+    <input id="advert-option-next--button" type="submit" value="Continue" class="button"
+           data-ignore-double-submit="true">
+  </div>
+</form>
+      {% elseif data['part_admission'] == "4" %}
+      <div class="panel panel-border-wide">
+        <p>Continue to accept or reject response. </p>
+      </div>
+      <a href="agree-amount" class="button">Continue</a>
 {% endif %}
 </div>
 </div>
@@ -158,6 +192,8 @@ Money Claims Prototype
     <option  value="0" >Choose</option>
     <option value="1" {% if data['part_admission'] ==1 %}selected{% endif %}>1. Single question</option>
     <option value="2" {% if data['part_admission'] == 2 %}selected{% endif %}>2. Multiple question</option>
+    <option value="3" {% if data['part_admission'] == 3 %}selected{% endif %}>3. Multiple question 2</option>
+    <option value="4" {% if data['part_admission'] == 4 %}selected{% endif %}>4. No options</option>
   </select>
 </form>
 {% endblock %}
