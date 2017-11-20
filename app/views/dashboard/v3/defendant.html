@@ -32,9 +32,10 @@ x§x§ {% extends "layout_task-list.html" %}
           <div class="tab-content">
             <div id="tabs-1" class="tab-pane">
              {% if data['defendant'] == 1 %}
-             <h2 class="heading-medium">You have not responded to this claim</h2>
-             <p>The response deadline is <span class="dates"></span> at 4pm (14 days
+             <h2 class="heading-medium">You've not responded to this claim</h2>
+             <p>You need to respond by <span class="dates"></span> (14 days
              remaining). </p>
+              <p>If you don't respond Jan Clark can ask for a default County Court Judgment (CCJ) against you. A CCJ means the court orders you to pay the money.</p>
              <div class="form-group">
               <p><a href="../../defendant/full/d-3/task-list?hide_offer=false">Respond to claim </a></p>
             </div>
@@ -46,13 +47,14 @@ x§x§ {% extends "layout_task-list.html" %}
             <h2 class="heading-medium">Your response is being processed</h2>
             <p> We will email you to explain what to do next.</p>
             {% elseif data['defendant'] == 3 %}
-            <h2 class="heading-medium"> A CCJ has been issued against you</h2>
-            <p>Jan Clark requested a County Court Judgment (CCJ) against you
+            <h2 class="heading-medium"> The claimant has requested a CCJ against you</h2>
+            <p>You didn't respond to this claim by the deadline of 30 September 2017. </p>
+              <p>Jan Clark requested a default County Court Judgment (CCJ) against you
               on <span class="" dates2">17 October</span>. We will contact you both within 5 days.</p>
               <p>You can no longer respond to the claim.</p>
               {% elseif data['defendant'] == 4 %}
               <h2 class="heading-medium">You have a County Court Judgment (CCJ) against you</h2>
-              <p>You didn't respond to this claim by the deadline of 30 September 2017. A default CCJ was issued on 1 October 2017.</p>
+              <p>You didn't respond to this claim by the deadline of 30 September 2017. A <a href="">default CCJ</a> was issued on 1 October 2017.</p>
               <p>A CCJ means the court orders you to pay the claim.</p>
               <p>You must pay Jan Clark £1,500. Find out <a href="./judgment/one-cancel">how to  pay.</a></p>
               <h3 class="heading-medium">Apply to cancel the CCJ</h3>
@@ -200,8 +202,8 @@ x§x§ {% extends "layout_task-list.html" %}
             <option value="1" {% if data['defendant'] == 1 %}selected{% endif %}>1. Respond to claim</option>
             <option value="2" {% if data['defendant'] == 2 %}selected{% endif %}>2. Response being processed</option>
             <option>------ CCJs -------</option>
-            <option value="3" {% if data['defendant'] == 3 %}selected{% endif %}>3. CCJ issued requested </option>
-            <option value="4" {% if data['defendant'] == 4 %}selected{% endif %}>4. CCJ issued issued </option>
+            <option value="3" {% if data['defendant'] == 3 %}selected{% endif %}>3. Default CCJ requested </option>
+            <option value="4" {% if data['defendant'] == 4 %}selected{% endif %}>4. Default CCJ issued </option>
             <option>------ Responses to claims -------</option>
             <option value="5" {% if data['defendant'] == 5 %}selected{% endif %}>5. I admit all the claim - set date payment</option>
             <option value="6" {% if data['defendant'] == 6 %}selected{% endif %}>6. I part admit the claim - instalment plan payment</option>
