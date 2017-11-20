@@ -13,7 +13,16 @@ Money Claims Prototype
     <div class="column-two-thirds">
       <a href="#" class="link-back">Back</a>
       <h1 class="heading-large">
-        When will you pay the amount you admit?
+          {% if data['radio_select_group']=="all" or data['som'] == 4 %}
+            When will you pay?
+          {% elseif data['radio_select_group']=="Some" or data['som'] == 3%}
+            When will you pay the amount you admit you owe?
+          {% else %}
+            When will you pay?
+          {% endif %}
+
+
+
       </h1>
       {% if data['som'] == 1 %}
       <form
@@ -27,7 +36,18 @@ Money Claims Prototype
         <fieldset>
           <div class="multiple-choice" data-target="set-date">
             <input id="radio-no" type="radio" name="radio-pay-group" value="Set-date">
-            <label for="radio-no" data-target="no-info">On a set date</label>
+            <label for="radio-no" data-target="no-info">
+
+           {% if data['radio_select_group']=="all" or data['som'] == 4 %}
+            Full amount on set date
+          {% elseif data['radio_select_group']=="Some" or data['som'] == 3%}
+             On a set date
+          {% else %}
+            On a set date
+          {% endif %}
+         </label>
+
+
           </div>
           <div class="multiple-choice" data-target="instalments">
             <input id="radio-repayment" type="radio" name="radio-pay-group" value="Instalments">
@@ -55,7 +75,15 @@ Money Claims Prototype
       <fieldset>
         <div class="multiple-choice" data-target="set-date">
           <input id="radio-no" type="radio" name="radio-pay-group" value="Set-date">
-          <label for="radio-no" data-target="no-info">On a set date</label>
+          <label for="radio-no" data-target="no-info">
+           {% if data['radio_select_group']=="all" or data['som'] == 4 %}
+            Full amount on set date
+          {% elseif data['radio_select_group']=="Some" or data['som'] == 3 %}
+             On a set date
+          {% else %}
+            On a set date
+          {% endif %}
+          </label>
         </div>
         <div class="multiple-choice" data-target="instalments">
           <input id="radio-repayment" type="radio" name="radio-pay-group" value="Instalments">
@@ -81,7 +109,20 @@ Money Claims Prototype
         <fieldset>
           <div class="multiple-choice" data-target="set-date">
             <input id="radio-no" type="radio" name="radio-pay-group" value="Set-date">
+<<<<<<< HEAD
             <label for="radio-no" data-target="no-info">On a set date</label>
+=======
+            <label for="radio-no" data-target="no-info">
+               {% if data['radio_select_group']=="all"  or data['som'] == 4%}
+                Full amount on set date
+              {% elseif data['radio_select_group']=="Some" or data['som'] == 3 %}
+                On a set date
+              {% else %}
+                On a set date
+              {% endif %}
+
+            </label>
+>>>>>>> e64f6266a230e1d5044afea3ad34f97f9e78bc40
           </div>
           <div class="multiple-choice" data-target="instalments">
             <input id="radio-repayment" type="radio" name="radio-pay-group" value="Instalments">
@@ -106,6 +147,8 @@ Money Claims Prototype
     <option  value="0" >Choose </option>
     <option value="1" {% if data['som'] == 1 %}selected{% endif %}>1 Individual - calc</option>
     <option value="2" {% if data['som'] == 2 %}selected{% endif %}>2 Company or organisation</option>
+    <option value="3" {% if data['som'] == 3 %}selected{% endif %}>3 Part admit</option>
+    <option value="4" {% if data['som'] == 4 %}selected{% endif %}>4 Admit all</option>
   </select>
 </form>
 {% endblock %}
