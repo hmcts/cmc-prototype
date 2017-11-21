@@ -32,9 +32,10 @@ x§x§ {% extends "layout_task-list.html" %}
           <div class="tab-content">
             <div id="tabs-1" class="tab-pane">
              {% if data['defendant'] == 1 %}
-             <h2 class="heading-medium">You have not responded to this claim</h2>
-             <p>The response deadline is <span class="dates"></span> at 4pm (14 days
+             <h2 class="heading-medium">You've not responded to this claim</h2>
+             <p>You need to respond by <span class="dates"></span> (14 days
              remaining). </p>
+              <p>If you don't respond Jan Clark can ask for a default County Court Judgment (CCJ) against you. A CCJ means the court orders you to pay the money.</p>
              <div class="form-group">
               <p><a href="../../defendant/full/d-3/task-list?hide_offer=false">Respond to claim </a></p>
             </div>
@@ -46,30 +47,28 @@ x§x§ {% extends "layout_task-list.html" %}
             <h2 class="heading-medium">Your response is being processed</h2>
             <p> We will email you to explain what to do next.</p>
             {% elseif data['defendant'] == 3 %}
-            <h2 class="heading-medium"> A CCJ has been issued against you</h2>
-            <p>Jan Clark requested a County Court Judgment (CCJ) against you
+            <h2 class="heading-medium"> The claimant has requested a CCJ against you</h2>
+            <p>You didn't respond to this claim by the deadline of 30 September 2017. </p>
+              <p>Jan Clark requested a default County Court Judgment (CCJ) against you
               on <span class="" dates2">17 October</span>. We will contact you both within 5 days.</p>
               <p>You can no longer respond to the claim.</p>
               {% elseif data['defendant'] == 4 %}
               <h2 class="heading-medium">You have a County Court Judgment (CCJ) against you</h2>
-              <p>You didn't respond to this claim by the deadline of 30 September 2017. A default CCJ was issued on 1 October 2017.</p>
-              <p>A CCJ means the court orders you to pay the claim.</p>
-              <p>You must pay Jan Clark £1,500. Find out <a href="./judgment/one-cancel">how to  pay.</a></p>
+              <p>You didn't respond to this claim by the deadline of 30 September 2017. A <a href="">default CCJ</a> was issued on 1 October 2017.</p>
+              <p>A CCJ means the court orders you to pay the claim. You must pay Jan Clark £1,500. Find out <a href="./judgment/how-to-pay">how to pay a CCJ.</a></p>
+
               <h3 class="heading-medium">Apply to cancel the CCJ</h3>
-              <a href="./judgment/one-cancel-content">I couldn't respond to the claim.</a><br>
-              <a href="./judgment/satisfy-or-cancel2">I paid the claim.</a>
+              You can <a href="./judgment/one-cancel">apply to cancel the CCJ</a> if you paid the claim or didn't respond to it.
               {% elseif data['defendant'] == 5 %}
-              <h2 class="heading-medium">Your response</h2>
-              <p>We've emailed the claimant Jan Clark telling them that you will pay their
-                money claim in full by <span id="Date3"></span>.</p>
-                <p>We’ll contact you when the claimant responds.</p>
+              <h2 class="heading-medium">You admit the claim</h2>
+              <p>You've offered to pay £1,500 on <span id="Date3"></span>.</p>
+
                 <p><a href="#">View your response</a></p>
                 {% elseif data['defendant'] == 6 %}
-                <h2 class="heading-medium">Your response</h2>
-                <p>You believe you owe £1,000. We've emailed Jan Clark your offer to pay this amount by instalments.</p>
-                <p>Your explanation of why you believe you don't owe the amount claimed has been sent to Jan Clark.</p>
-                <p>We’ll contact you when the claimant responds.</p>
-                <p><a href="#">View your response</a></p>
+                <h2 class="heading-medium">You admit part of the claim</h2>
+                <p>You've offered to pay Jan Clark £1,000 in instalments.</p>
+                <p>Jan Clark has until 12 December to respond to your offer.</p>
+                <p><a href="#">View your response.</a></p>
                 {% elseif data['defendant'] == 7 %}
                 <h2 class="heading-medium">Your response</h2>
                 <p>You state that you paid £1500. Your explanation of why you don't owe any more money has been sent to Jan Clark.</p>
@@ -136,8 +135,7 @@ x§x§ {% extends "layout_task-list.html" %}
                 {% else %}
                 <h2 class="heading-small">Request mediation</h2>
                 <p>
-                  <a href='#'>Request free telephone mediation</a>. Many people resolve their dispute before a hearing by taking
-                part in a telephone mediation</a>.
+                  You can <a href='#'>request free telephone mediation</a> to help resolve the claim without going to court.</a>
               </p>
               {% endif %}
             </div>
@@ -200,8 +198,8 @@ x§x§ {% extends "layout_task-list.html" %}
             <option value="1" {% if data['defendant'] == 1 %}selected{% endif %}>1. Respond to claim</option>
             <option value="2" {% if data['defendant'] == 2 %}selected{% endif %}>2. Response being processed</option>
             <option>------ CCJs -------</option>
-            <option value="3" {% if data['defendant'] == 3 %}selected{% endif %}>3. CCJ issued requested </option>
-            <option value="4" {% if data['defendant'] == 4 %}selected{% endif %}>4. CCJ issued issued </option>
+            <option value="3" {% if data['defendant'] == 3 %}selected{% endif %}>3. Default CCJ requested </option>
+            <option value="4" {% if data['defendant'] == 4 %}selected{% endif %}>4. Default CCJ issued </option>
             <option>------ Responses to claims -------</option>
             <option value="5" {% if data['defendant'] == 5 %}selected{% endif %}>5. I admit all the claim - set date payment</option>
             <option value="6" {% if data['defendant'] == 6 %}selected{% endif %}>6. I part admit the claim - instalment plan payment</option>
