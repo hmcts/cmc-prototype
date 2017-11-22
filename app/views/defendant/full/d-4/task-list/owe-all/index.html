@@ -13,16 +13,13 @@ Money Claims Prototype
     <div class="column-two-thirds">
       <a href="#" class="link-back">Back</a>
       <h1 class="heading-large">
-          {% if data['radio_select_group']=="all" or data['som'] == 4 %}
-            When will you pay?
-          {% elseif data['radio_select_group']=="Some" or data['som'] == 3%}
-            When will you pay the amount you admit you owe?
-          {% else %}
-            When will you pay?
-          {% endif %}
-
-
-
+        {% if data['radio_select_group']=="all" or data['som'] == 4 %}
+        When will you pay?
+        {% elseif data['radio_select_group']=="Some" or data['som'] == 3%}
+        When will you pay the amount you admit you owe?
+        {% else %}
+        When will you pay?
+        {% endif %}
       </h1>
       {% if data['som'] == 1 %}
       <form
@@ -37,57 +34,21 @@ Money Claims Prototype
           <div class="multiple-choice" data-target="set-date">
             <input id="radio-no" type="radio" name="radio-pay-group" value="Set-date">
             <label for="radio-no" data-target="no-info">
-
-           {% if data['radio_select_group']=="all" or data['som'] == 4 %}
-            Full amount on set date
-          {% elseif data['radio_select_group']=="Some" or data['som'] == 3%}
+             {% if data['radio_select_group']=="all" or data['som'] == 4 %}
+             Full amount on set date
+             {% elseif data['radio_select_group']=="Some" or data['som'] == 3%}
              On a set date
-          {% else %}
-            On a set date
-          {% endif %}
-         </label>
-
-
-          </div>
-          <div class="multiple-choice" data-target="instalments">
-            <input id="radio-repayment" type="radio" name="radio-pay-group" value="Instalments">
-            <label for="radio-repayment" data-target="repayment-info">By instalments</label>
-          </div>
-          <div class="panel panel-border-narrow js-hidden" id="instalments">
-            <p>You'll need to give details of your finances to Jan Clark to explain why.</p>
-          </div>
-        </fieldset>
-      </div>
-      <input type="hidden" name="owe_some" value="complete">
-      <div class="form-group">
-        <input type="submit" class="button" value="Save and continue"/>
-      </div>
-    </form>
-    {% elif data['som'] == 2 %}
-    <form
-    name="aspnetForm"
-    method="post"
-    onsubmit="multiNavigation('radio-pay-group', ['Instalments', 'Set-date'], ['owe-all/repayment-plan', 'owe-all/pay-by-set-date']);return false;"
-    id="aspnetForm"
-    autocomplete="off">
-    <br>
-    <div class="form-group">
-      <fieldset>
-        <div class="multiple-choice" data-target="set-date">
-          <input id="radio-no" type="radio" name="radio-pay-group" value="Set-date">
-          <label for="radio-no" data-target="no-info">
-           {% if data['radio_select_group']=="all" or data['som'] == 4 %}
-            Full amount on set date
-          {% elseif data['radio_select_group']=="Some" or data['som'] == 3 %}
+             {% else %}
              On a set date
-          {% else %}
-            On a set date
-          {% endif %}
-          </label>
-        </div>
-        <div class="multiple-choice" data-target="instalments">
+             {% endif %}
+           </label>
+         </div>
+         <div class="multiple-choice" data-target="instalments">
           <input id="radio-repayment" type="radio" name="radio-pay-group" value="Instalments">
           <label for="radio-repayment" data-target="repayment-info">By instalments</label>
+        </div>
+        <div class="panel panel-border-narrow js-hidden" id="instalments">
+          <p>You'll need to give details of your finances to Jan Clark to explain why.</p>
         </div>
       </fieldset>
     </div>
@@ -96,47 +57,75 @@ Money Claims Prototype
       <input type="submit" class="button" value="Save and continue"/>
     </div>
   </form>
-  {% else %}
-
-       <form
-         name="aspnetForm"
-         method="post"
-         onsubmit="multiNavigation('radio-pay-group', ['Instalments', 'Set-date'], ['owe-all/statement/explanation', 'owe-all/pay-by-set-date']);return false;"
-         id="aspnetForm"
-         autocomplete="off">
-      <br>
-      <div class="form-group">
-        <fieldset>
-          <div class="multiple-choice" data-target="set-date">
-            <input id="radio-no" type="radio" name="radio-pay-group" value="Set-date">
-
-
-            <label for="radio-no" data-target="no-info">
-               {% if data['radio_select_group']=="all"  or data['som'] == 4%}
-                Full amount on set date
-              {% elseif data['radio_select_group']=="Some" or data['som'] == 3 %}
-                On a set date
-              {% else %}
-                On a set date
-              {% endif %}
-
-            </label>
-
-          </div>
-          <div class="multiple-choice" data-target="instalments">
-            <input id="radio-repayment" type="radio" name="radio-pay-group" value="Instalments">
-            <label for="radio-repayment" data-target="repayment-info">By instalments</label>
-          </div>
-          <div class="panel panel-border-narrow js-hidden" id="instalments">
-            <p>You'll need to give details of your finances to Jan Clark to explain why.</p>
-          </div>
-        </fieldset>
-      </div>
-      <input type="hidden" name="owe_some" value="complete">
-      <div class="form-group">
-        <input type="submit" class="button" value="Save and continue"/>
-      </div>
-    </form>
+  {% elif data['som'] == 2 %}
+  <form
+  name="aspnetForm"
+  method="post"
+  onsubmit="multiNavigation('radio-pay-group', ['Instalments', 'Set-date'], ['owe-all/repayment-plan', 'owe-all/pay-by-set-date']);return false;"
+  id="aspnetForm"
+  autocomplete="off">
+  <br>
+  <div class="form-group">
+    <fieldset>
+      <div class="multiple-choice" data-target="set-date">
+        <input id="radio-no" type="radio" name="radio-pay-group" value="Set-date">
+        <label for="radio-no" data-target="no-info">
+         {% if data['radio_select_group']=="all" or data['som'] == 4 %}
+         Full amount on set date
+         {% elseif data['radio_select_group']=="Some" or data['som'] == 3 %}
+         On a set date
+         {% else %}
+         On a set date
+         {% endif %}
+       </label>
+     </div>
+     <div class="multiple-choice" data-target="instalments">
+      <input id="radio-repayment" type="radio" name="radio-pay-group" value="Instalments">
+      <label for="radio-repayment" data-target="repayment-info">By instalments</label>
+    </div>
+  </fieldset>
+</div>
+<input type="hidden" name="owe_some" value="complete">
+<div class="form-group">
+  <input type="submit" class="button" value="Save and continue"/>
+</div>
+</form>
+{% else %}
+<form
+name="aspnetForm"
+method="post"
+onsubmit="multiNavigation('radio-pay-group', ['Instalments', 'Set-date'], ['owe-all/statement/explanation', 'owe-all/pay-by-set-date']);return false;"
+id="aspnetForm"
+autocomplete="off">
+<br>
+<div class="form-group">
+  <fieldset>
+    <div class="multiple-choice" data-target="set-date">
+      <input id="radio-no" type="radio" name="radio-pay-group" value="Set-date">
+      <label for="radio-no" data-target="no-info">
+       {% if data['radio_select_group']=="all"  or data['som'] == 4%}
+       Full amount on set date
+       {% elseif data['radio_select_group']=="Some" or data['som'] == 3 %}
+       On a set date
+       {% else %}
+       On a set date
+       {% endif %}
+     </label>
+   </div>
+   <div class="multiple-choice" data-target="instalments">
+    <input id="radio-repayment" type="radio" name="radio-pay-group" value="Instalments">
+    <label for="radio-repayment" data-target="repayment-info">By instalments</label>
+  </div>
+  <div class="panel panel-border-narrow js-hidden" id="instalments">
+    <p>You'll need to give details of your finances to Jan Clark to explain why.</p>
+  </div>
+</fieldset>
+</div>
+<input type="hidden" name="owe_some" value="complete">
+<div class="form-group">
+  <input type="submit" class="button" value="Save and continue"/>
+</div>
+</form>
 {% endif %}
 </div>
 </div>
