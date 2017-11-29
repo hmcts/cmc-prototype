@@ -16,8 +16,8 @@
       <a class="newclaim" href="../../claimant/full/c-2/task-list" class="">Make a new money claim</a>
       {% endif %}
       {% set show_all = true if data['dashboard'] == 8 %}
-      {% set claimant_table = true if show_all==true or data['dashboard'] == 1 or data['dashboard'] == 1.1 or data['dashboard'] == 1.2 or data['dashboard'] == 1.3 or data['dashboard'] == 1.4 or data['dashboard'] == 1.5 or data['dashboard'] == 1.6 or data['dashboard'] == 1.7 or data['dashboard'] == 1.8 or data['dashboard'] == 1.9 or data['dashboard'] == 110 or data['dashboard'] == 1.11 or data['dashboard'] == 1.12 or data['dashboard'] == 1.13 or data['dashboard'] == 1.14 or data['dashboard'] == 1.15 or data['dashboard'] == 1.16  or data['dashboard'] == 1.17 or data['dashboard'] == 1.18 %}
-      {% set defendant_table = true if show_all==true or data['dashboard'] == 2 or data['dashboard'] == 2.1 or data['dashboard'] == 2.2  or data['dashboard'] == 2.3 or data['dashboard'] == 2.4 or  data['dashboard'] == 2.5  or  data['dashboard'] == 2.6 or  data['dashboard'] == 2.7 or  data['dashboard'] == 2.8 or  data['dashboard'] == 2.9 or data['dashboard'] == 210 or data['dashboard'] == 2.11 or data['dashboard'] == 2.12 or data['dashboard'] == 2.13 or data['dashboard'] == 2.14 or data['dashboard'] == 2.15 or data['dashboard'] == 2.16 %}
+      {% set claimant_table = true if show_all==true or data['dashboard'] == 1 or data['dashboard'] == 1.1 or data['dashboard'] == 1.2 or data['dashboard'] == 1.3 or data['dashboard'] == 1.4 or data['dashboard'] == 1.5 or data['dashboard'] == 1.6 or data['dashboard'] == 1.7 or data['dashboard'] == 1.8 or data['dashboard'] == 1.9 or data['dashboard'] == 110 or data['dashboard'] == 1.11 or data['dashboard'] == 1.12 or data['dashboard'] == 1.13 or data['dashboard'] == 1.14 or data['dashboard'] == 1.15 or data['dashboard'] == 1.16  or data['dashboard'] == 1.17 or data['dashboard'] == 1.18  or data['dashboard'] == 1.19 or data['dashboard'] == 2.17%}
+      {% set defendant_table = true if show_all==true or data['dashboard'] == 2 or data['dashboard'] == 2.1 or data['dashboard'] == 2.2  or data['dashboard'] == 2.3 or data['dashboard'] == 2.4 or  data['dashboard'] == 2.5  or  data['dashboard'] == 2.6 or  data['dashboard'] == 2.7 or  data['dashboard'] == 2.8 or  data['dashboard'] == 2.9 or data['dashboard'] == 210 or data['dashboard'] == 2.11 or data['dashboard'] == 2.12 or data['dashboard'] == 2.13 or data['dashboard'] == 2.14 or data['dashboard'] == 2.15 or data['dashboard'] == 2.16 or data['dashboard'] == 2.17 or data['dashboard'] == 1.19%}
       {% if claimant_table!=true and defendant_table!=true %}
       <h2 class="heading-medium type-heading claims">
         Claims you've made
@@ -232,11 +232,33 @@
               <td  class="mobile-table-status" colspan="3">Status: You have signed the agreement. The claim is now closed. </td>
             </tr>
             {% endif %}
+             {% if show_all==true or data['dashboard'] == 2.17 %}
+            <tr class="mobile-table">
+              <td><a href="defendant?defendant=16">352MC733</a><div class="font-xsmall">Counter claim</div></td>
+              <td>Jan Clark  </td>
+              <td>£3240.34 </td>
+              <td>Your counterclaim has been sent. Jan Clark has until <span class="dates"></span> to respond. </td>
+            </tr>
+            <tr>
+              <td class="mobile-table-status" colspan="3">Status: Your counterclaim has been sent. Jan Clark has until <span class="dates"></span> to respond. </td>
+            </tr>
+            {% endif %}
 
+              {% if show_all==true or data['dashboard'] == 1.19 %}
+            <tr class="mobile-table">
+              <td><a href="claimant?claimant=19">352MC733</a></td>
+              <td>Mary Richards  </td>
+              <td>£1500 </td>
+             <td class="mobile-hide">Mary Richards has responded to your claim.</td>
+            </tr>
+            <tr>
+              <td  class="mobile-table-status" colspan="3">Status: Mary Richards has responded to your claim.</td>
+            </tr>
+            {% endif %}
             {% if claimant_table==true %}
-          </tbody>
-        </table>
-        {% endif %}
+      </tbody>
+      </table>
+      {% endif %}
       <!---->
       <!---->
       <!---->
@@ -411,6 +433,30 @@
             </tr>
             {% endif %}
 
+            {% if show_all==true or data['dashboard'] == 2.17 %}
+            <tr class="mobile-table">
+              <td><a href="defendant?defendant=16">352MC733</a></td>
+              <td>Jan Clark  </td>
+              <td>£1500 </td>
+              <td>Your response is being processed.</td>
+            </tr>
+            <tr>
+              <td class="mobile-table-status" colspan="3">Status: Your response is being processed. </td>
+            </tr>
+            {% endif %}
+
+           {% if show_all==true or data['dashboard'] == 1.19 %}
+            <tr class="mobile-table">
+              <td><a href="claimant?claimant=18">352MC733</a><div class="font-xsmall">Counter claim</div></td>
+              <td>Mary Richards  </td>
+              <td>£3240.34 </td>
+             <td class="mobile-hide"><a a href="../../defendant/full/d-3/task-list">Respond to claim.</a> <br><span class="font-xsmall">(14 days remaining)</span> </td>
+            </tr>
+            <tr>
+              <td  class="mobile-table-status" colspan="3">Status: <a a href="../../defendant/full/d-3/task-list">Respond to claim.</a> <br><span class="font-xsmall">(14 days remaining)</span> </td>
+            </tr>
+            {% endif %}
+
             {% if defendant_table==true %}
           </tbody>
         </table>
@@ -443,6 +489,9 @@
       <option value="1.14" {% if data['dashboard'] == 1.14 %}selected{% endif %}>16. Mediation offer sent to defendant </option>
       <option value="1.15" {% if data['dashboard'] == 1.15 %}selected{% endif %}>17. Mediation offer agreed by defendant</option>
       <option value="1.16" {% if data['dashboard'] == 1.16 %}selected{% endif %}>18. Case sent to judge </option>
+      <option>------ Counterclaims -------</option>
+      <option value="1.19" {% if data['dashboard'] == 1.19 %}selected{% endif %}>19. Counterclaims </option>
+
     </select>
   </form>
   <form method="post"  action="#" class="form" style=" float: left;">
@@ -469,6 +518,8 @@
       <option value="2.12" {% if data['dashboard'] == 2.12 %}selected{% endif %}>14. Mediation request from claimant </option>
       <option value="2.13" {% if data['dashboard'] == 2.13 %}selected{% endif %}>15. Mediation accepted </option>
       <option value="2.14" {% if data['dashboard'] == 2.14 %}selected{% endif %}>16. Mediation Rejected </option>
+      <option>------ Counterclaims -------</option>
+      <option value="2.17" {% if data['dashboard'] == 2.17 %}selected{% endif %}>17. Counter claim </option>
 
   </select>
 </form>
