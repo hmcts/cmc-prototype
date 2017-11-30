@@ -15,7 +15,7 @@ Money Claims Prototype
     <div class="column-two-thirds">
         <a href="#" class="link-back">Back</a>
 
-     {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}        
+     {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}
      <form method="post" action="{{ data.return_page if data.return_page | length > 0 else '../task-list' }}" class="form">
       {% else %}
       <form method="post" action="affect" class="form">
@@ -24,9 +24,9 @@ Money Claims Prototype
         <h1 class="heading-large">
           List any evidence (optional)
         </h1>
-        <p> You don’t need to provide any evidence unless your claim is defended. We’ll let you know if that happens and what evidence you will need.. </p> 
+        <p> You don’t need to provide any evidence unless your claim is defended. We’ll let you know if that happens and what evidence you will need.. </p>
         <div class="panel panel-border-wide">
-          This information will only be seen by the defendant Mary Richards. A judge will only see this information if your claim goes to a hearing.
+          This information will only be seen by the defendant {% if data.counterclaim=="true" %}Mary Richards{%else%}Jan Clark{% endif %}. A judge will only see this information if your claim goes to a hearing.
         </div>
         <br>
         <fieldset>
@@ -56,7 +56,7 @@ Money Claims Prototype
                 <div class="panel panel-border-narrow other" {% if data['legal-status1'] %} style="display: none;" {% else %}style="display: none; margin-bottom: 0;"{% endif %} >
                   <p>Describe this evidence in more detail (optional). <span class="evidence-message"></span></p>
                   <textarea class="timeline-column-text" name="legal-status-description-1" id="timeline-1" rows="2">{{ data['legal-status-description-1'] }}</textarea>
-                </div>     
+                </div>
               </div>
               <div class="timeline-row ">
                 <select class="form-control-select otherType1" name="legal-status2" id="legal-status">
@@ -71,7 +71,7 @@ Money Claims Prototype
                 </select>
                 <div class="panel panel-border-narrow other1" {% if data['legal-status2'] %} style="display: none" {% else %}style="display: none; margin-bottom: 0;"{% endif %} >
                   <p>Describe this evidence in more detail (optional). <span class="evidence-message1"></span></p>
-                  <textarea class="timeline-column-text" name="legal-status-description-2" id="timeline-1" rows="2">{{ data['legal-status-description-2'] }}</textarea> 
+                  <textarea class="timeline-column-text" name="legal-status-description-2" id="timeline-1" rows="2">{{ data['legal-status-description-2'] }}</textarea>
                 </div>
                 <div class="timeline-row ">
                   <select class="form-control-select otherType2" name="legal-status3" id="legal-status">
@@ -86,7 +86,7 @@ Money Claims Prototype
                   </select>
                   <div class="panel panel-border-narrow other2" {% if data['legal-status3'] %} style="display: none" {% else %}style="display: none; margin-bottom: 0;"{% endif %} >
                     <p>Describe this evidence in more detail (optional). <span class="evidence-message2"></span></p>
-                    <textarea class="timeline-column-text" name="legal-status-description-3" id="timeline-1" rows="2">{{ data['legal-status-description-3'] }}</textarea> 
+                    <textarea class="timeline-column-text" name="legal-status-description-3" id="timeline-1" rows="2">{{ data['legal-status-description-3'] }}</textarea>
                   </div>
                   <div class="timeline-row ">
                     <select class="form-control-select otherType3" name="legal-status4" id="legal-status">
@@ -101,7 +101,7 @@ Money Claims Prototype
                     </select>
                     <div class="panel panel-border-narrow other3" {% if data['legal-status4'] %} style="display: none" {% else %}style="display: none; margin-bottom: 0;"{% endif %} >
                       <p>Describe this evidence in more detail (optional). <span class="evidence-message3"></span></p>
-                      <textarea class="timeline-column-text" name="legal-status-description-4" id="timeline-1" rows="2">{{ data['legal-status-description-4'] }}</textarea> 
+                      <textarea class="timeline-column-text" name="legal-status-description-4" id="timeline-1" rows="2">{{ data['legal-status-description-4'] }}</textarea>
                     </div>
                   </div>
                 </div>
