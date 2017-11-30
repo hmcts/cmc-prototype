@@ -115,15 +115,21 @@ x§x§ {% extends "layout_task-list.html" %}
                 {% elseif data['defendant'] == 16 %}
                 <h2 class="heading-medium">You have signed the agreement</h2>
                 <p>You have signed the agreement. The claim is now closed.</p>
+
+                  {% elseif data['defendant'] == 17 %}
+                <h2 class="heading-medium">Your counterclaim has been sent</h2>
+              <div class="">
+                <p>Jan Clark has until <span class="dates"></span> to respond. They can request an extra 14 days if they need it. We'll let you know if they do.</p>
+              </div>
                 {% else %}
                 <h2 class="heading-medium">Your defence is being processed.</h2>
                 <p> We will email you to explain what to do next.</p>
                 {% endif %}
-                {% if data['defendant'] == 1 or  data['defendant'] == 2 or data['defendant'] == 3 or data['defendant'] == 4  or data['defendant'] == 5 or data['defendant'] == 8 or  data['defendant'] == 12%}
+                {% if data['defendant'] == 1 or  data['defendant'] == 2 or data['defendant'] == 3 or data['defendant'] == 4  or data['defendant'] == 5 or data['defendant'] == 8 or  data['defendant'] == 12 or data['defendant'] == 17%}
                 {% else %}
                 <h2 class="heading-medium">More options </h2>
                 {% endif %}
-                {% if data['defendant'] == 1 or  data['defendant'] == 2 or data['defendant'] == 3 or data['defendant'] == 4 or data['defendant'] == 5  or  data['defendant'] == 10 or data['defendant'] == 11 or data['defendant'] == 12 or data['defendant'] == 13 or data['defendant'] == 14%}
+                {% if data['defendant'] == 1 or  data['defendant'] == 2 or data['defendant'] == 3 or data['defendant'] == 4 or data['defendant'] == 5  or  data['defendant'] == 10 or data['defendant'] == 11 or data['defendant'] == 12 or data['defendant'] == 13 or data['defendant'] == 14 or data['defendant'] == 17%}
                 {% else %}
                 <h2 class="heading-small">Settle out of court</h2>
                 <p>
@@ -131,7 +137,7 @@ x§x§ {% extends "layout_task-list.html" %}
                 </p>
                 {% endif %}
                 {% if data['defendant'] == 1 or data['defendant'] == 2 or data['defendant'] == 3 or data['defendant'] == 4 or data['defendant'] == 4 or data['defendant'] == 5 or
-                data['defendant'] == 8 or data['defendant'] == 9  %}
+                data['defendant'] == 8 or data['defendant'] == 9  or data['defendant'] == 17%}
                 {% else %}
                 <h2 class="heading-small">Request mediation</h2>
                 <p>
@@ -141,31 +147,28 @@ x§x§ {% extends "layout_task-list.html" %}
             </div>
             <div id="tabs-2" class="tab-pane">
               {% if data['defendant'] == 10 or data['defendant'] == 11 or data['defendant'] == 12 or data['defendant'] == 13 or data['defendant'] == 15 or data['defendant'] == 16%}
+
+              {% endif %}
+
               <h2 class="heading-medium">Claim history </h2>
               {% if data['defendant'] == 11 or data['defendant'] == 15 or data['defendant'] == 16%}
               <div class="history-timeline ">
                 <div class="history-statement"> <span > 11 October 2017</span> You made an offer to the claimant. </div>
               </div>
-              {% endif %}
-              {% if data['defendant'] == 10 or data['defendant'] == 11 or data['defendant'] == 15 or data['defendant'] == 16 %}
+              {% elif data['defendant'] == 10 or data['defendant'] == 11 or data['defendant'] == 15 or data['defendant'] == 16 %}
               <div class="history-timeline">
                 <div class="history-statement"> <span > 8 October 2017</span> The claimant rejected you response. The claim has been sent to a hearing.</div>
               </div>
-              {% endif %}
-              {% if data['defendant'] == 13 or data['defendant'] == 14%}
+              {% elif data['defendant'] == 13 or data['defendant'] == 14%}
               <div class="history-timeline">
                 <div class="history-statement"> <span > 8 October 2017</span> The claimant rejected you response but has requested mediation to help settle the dispute.</div>
               </div>
-              {% endif %}
-              <div class="history-timeline">
-                <div class="history-statement"> <span > 3 October 2017</span> You responded to the claim. <a href="#">View your response</a></div>
+              {% elif data['defendant'] == 17 %}
+              <div class="history-timeline last">
+                <div class="history-statement"> <span > 3 October 2017</span>Your <a href="view-claim">counterclaim</a> was sent to Jan Clark.</div>
               </div>
-              <div class="history-timeline ">
-                <div class="history-statement"> <span > 1 October 2017</span>Claim against you sent by Jan Clark. <a href="view-claim">View claim</a>
-                </div>
-              </div>
+
               {% else %}
-              <h2 class="heading-medium">Claim history </h2>
               <div class="history-timeline ">
                 <div class="history-statement"> <span > 1 October 2017</span>Jan Clark requested a default County Court Judgment (CCJ) against you.
                 </div>
@@ -179,17 +182,25 @@ x§x§ {% extends "layout_task-list.html" %}
     </div>
     <div class="column-one-third">
               <div class="meta-data">
-                            <p  class="heading-small" style="padding-top: 100px">About claim</p>
+       <p  class="heading-small" style="padding-top: 100px">About claim</p>
+             {% if data['defendant'] == 17 %}
+                       <ul role="navigation" class="font-xsmall list" >
+                  <li><strong class="bold">Defendant name:</strong><br> Jan Clark</li>
+                  <li><strong class="bold">Claim amount:</strong><br>£3240.34</li>
+                  <li><strong class="bold">Claim details:</strong><br><a href="view-claim">View counterclaim</a></li>
 
+                </ul>
+
+             {% else %}
                 <ul role="navigation" class="font-xsmall list" >
                   <li><strong class="bold">Claimant name:</strong><br> Jan Clark</li>
                   <li><strong class="bold">Claim amount:</strong><br>£1500</li>
                   <li><strong class="bold">Claim details:</strong><br><a href="view-claim">View claim</a></li>
-                  {% if data['defendant'] == 3%}
-                  <li><strong class="bold">CCJ details:</strong><br><a href="view-claim">View CCJ</a></li>
-                  {% else %}
-                  {% endif %}
+
                 </ul>
+             {% endif %}
+
+
               </div>
             </div>
 
@@ -218,6 +229,10 @@ x§x§ {% extends "layout_task-list.html" %}
             <option value="12" {% if data['defendant'] == 12 %}selected{% endif %}>12. Mediation request from claimant </option>
             <option value="13" {% if data['defendant'] == 13 %}selected{% endif %}>13. Mediation accepted </option>
             <option value="14" {% if data['defendant'] == 14 %}selected{% endif %}>14. Mediation Rejected </option>
+            <option>------ counterclaim -------</option>
+           <option value="17" {% if data['defendant'] == 17 %}selected{% endif %}>15. Counterclaim </option>
+
+
           </select>
         </form>
         {% endblock %}
