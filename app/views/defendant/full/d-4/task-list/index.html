@@ -29,6 +29,8 @@
               </tr>
             </thead>
             <tbody>
+              {% if data.counterclaim=="true" %}
+              {%else%}
               <tr id="read-rules">
                 <td class="task">
                   <a href="task-list/your-details{{formQuery}}">
@@ -41,6 +43,7 @@
                   {% endif %}
                 </td>
               </tr>
+              {% endif %}
               <tr id="read-rules">
                 <td class="task">
                   <a href="task-list/more-time-to-respond{{formQuery}}">
@@ -107,7 +110,9 @@
                   {% endif %}
                 </td>
               </tr>
-               <tr id="their-details">
+              {% if data.counterclaim=="true" %}
+              {%else%}
+              <tr id="their-details">
                 <td class="task">
                   <a href="task-list/counterclaim{{formQuery}}">
                     <span class="task-name">Make a counterclaim?</span>
@@ -119,6 +124,7 @@
                   {% endif %}
                 </td>
               </tr>
+              {% endif %}
               {% elseif data.radio_select_group2=="paid" and data.do_you_owe_money=="complete" and data.radio_select_group!="Some" and data.radio_select_group!="all"%}
               <tr id="their-details">
                 <td class="task">
@@ -145,7 +151,9 @@
                   {% endif %}
                 </td>
               </tr>
-               <tr id="their-details">
+              {% if data.counterclaim=="true" %}
+              {%else%}
+              <tr id="their-details">
                 <td class="task">
                   <a href="task-list/counterclaim{{formQuery}}">
                     <span class="task-name">Make a counterclaim?</span>
@@ -157,6 +165,7 @@
                   {% endif %}
                 </td>
               </tr>
+              {% endif %}
               {% endif %}
               {% elseif data.radio_select_group=="Some" and data.do_you_owe_money=="complete" and data.radio_select_group2=="defend_now" %}
               <tr id="their-details">
@@ -209,7 +218,9 @@
                   {% endif %}
                 </td>
               </tr>
-               <tr id="their-details">
+              {% if data.counterclaim=="true" %}
+              {%else%}
+              <tr id="their-details">
                 <td class="task">
                   <a href="task-list/counterclaim{{formQuery}}">
                     <span class="task-name">Make a counterclaim?</span>
@@ -221,6 +232,7 @@
                   {% endif %}
                 </td>
               </tr>
+              {% endif %}
               {% elseif data.radio_select_group=="Some" and data.do_you_owe_money=="complete" and data.radio_select_group2!="defend_now" %}
               <tr id="their-details">
                 <td class="task">
@@ -258,7 +270,9 @@
                   {% endif %}
                 </td>
               </tr>
-               <tr id="their-details">
+              {% if data.counterclaim=="true" %}
+              {%else%}
+              <tr id="their-details">
                 <td class="task">
                   <a href="task-list/counterclaim{{formQuery}}">
                     <span class="task-name">Make a counterclaim?</span>
@@ -271,7 +285,7 @@
                 </td>
               </tr>
               {% endif %}
-
+              {% endif %}
             </tbody>
           </table>
           <br>
@@ -337,81 +351,81 @@
                   {% if data.confirm_details=="complete" and data.more_time_to_respond=="complete" and data.do_you_owe_money=="complete" and data.your_defence=="complete" %}
                   <td class="task">
                     <a href="task-list/check-and-send{{formQuery}}">
+                     {% if data.radio_cc_group=="Yes" %}
+                     <span class="task-name"> Check and submit your response and counterclaim</span>
+                     {% else %}
+                     <span class="task-name"> Check and submit your response</span>
+                     {% endif %}
+                   </a>
+                 </td>
+                 {% elseif data.confirm_details=="complete" and data.more_time_to_respond=="complete" and data.do_you_owe_money=="complete" and data.your_suggestion=="complete" %}
+                 <td class="task">
+                  <a href="task-list/check-and-send{{formQuery}}">
                    {% if data.radio_cc_group=="Yes" %}
-                      <span class="task-name"> Check and submit your response and counterclaim</span>
-                      {% else %}
-                      <span class="task-name"> Check and submit your response</span>
-                      {% endif %}
-                    </a>
-                  </td>
-                  {% elseif data.confirm_details=="complete" and data.more_time_to_respond=="complete" and data.do_you_owe_money=="complete" and data.your_suggestion=="complete" %}
-                  <td class="task">
-                    <a href="task-list/check-and-send{{formQuery}}">
-                       {% if data.radio_cc_group=="Yes" %}
-                      <span class="task-name"> Check and submit your response and counterclaim</span>
-                      {% else %}
-                      <span class="task-name"> Check and submit your response</span>
-                      {% endif %}                    </a>
-                  </td>
-                  {% elseif data.confirm_details=="complete" and data.more_time_to_respond=="complete" and data.do_you_owe_money=="complete" and data.owe_all=="complete" %}
-                  <td class="task">
-                    <a href="task-list/check-and-send{{formQuery}}">
-                      {% if data.radio_cc_group=="Yes" %}
-                      <span class="task-name"> Check and submit your response and counterclaim</span>
-                      {% else %}
-                      <span class="task-name"> Check and submit your response</span>
-                      {% endif %}                    </a>
-                  </td>
-                  {% elseif data.confirm_details=="complete" and data.more_time_to_respond=="complete" and data.do_you_owe_money=="complete" and data.owe_some=="complete" %}
-                  <td class="task">
-                    <a href="task-list/check-and-send{{formQuery}}">
-                      {% if data.radio_cc_group=="Yes" %}
-                      <span class="task-name"> Check and submit your response and counterclaim</span>
-                      {% else %}
-                      <span class="task-name"> Check and submit your response</span>
-                      {% endif %}
-                    </a>
-                  </td>
+                   <span class="task-name"> Check and submit your response and counterclaim</span>
+                   {% else %}
+                   <span class="task-name"> Check and submit your response</span>
+                 {% endif %}                    </a>
+               </td>
+               {% elseif data.confirm_details=="complete" and data.more_time_to_respond=="complete" and data.do_you_owe_money=="complete" and data.owe_all=="complete" %}
+               <td class="task">
+                <a href="task-list/check-and-send{{formQuery}}">
+                  {% if data.radio_cc_group=="Yes" %}
+                  <span class="task-name"> Check and submit your response and counterclaim</span>
                   {% else %}
-                  <td>
-                   <a href="task-list/check-and-send/incomplete-submission">
-                           {% if data.radio_cc_group=="Yes" %}
-                      <span class="task-name"> Check and submit your response and counterclaim</span>
-                      {% else %}
-                      <span class="task-name"> Check and submit your response</span>
-                      {% endif %}
-                  </a>
-                </td>
-                {% endif %}
-                <td class="numeric" id="task-status" scope="col" id="col-status">
-                  {% if data.paid=="complete" %}
-                  {% include "includes/task_status_finished.html" %}
+                  <span class="task-name"> Check and submit your response</span>
+                {% endif %}                    </a>
+              </td>
+              {% elseif data.confirm_details=="complete" and data.more_time_to_respond=="complete" and data.do_you_owe_money=="complete" and data.owe_some=="complete" %}
+              <td class="task">
+                <a href="task-list/check-and-send{{formQuery}}">
+                  {% if data.radio_cc_group=="Yes" %}
+                  <span class="task-name"> Check and submit your response and counterclaim</span>
+                  {% else %}
+                  <span class="task-name"> Check and submit your response</span>
                   {% endif %}
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="column-one-third">
-          <ul class="actions">
-          </ul>
-          <br>
-          <div class="meta-data">
-            <ul role="navigation" class="font-xsmall list">
-              {% if data.more_time_to_respond!="complete" or data.radio_select_group_time=="No"%}
-              <li><strong class="bold">Response deadline:</strong> <br><span id="Date"></span> at 4pm<br> (14 days remaining)</li>
-              {% elseif data.more_time_to_respond=="complete" and data.radio_select_group_time=="Yes" %}
-              <li><strong class="bold">Response deadline:</strong> <br><span id="Date3"></span> at 4pm<br> (28 days remaining)</li>
+                </a>
+              </td>
               {% else %}
-              <li><strong class="bold">Response deadline:</strong> <br><span id="Date"></span> at 4pm<br> (14 days remaining)</li>
+              <td>
+               <a href="task-list/check-and-send/incomplete-submission">
+                 {% if data.radio_cc_group=="Yes" %}
+                 <span class="task-name"> Check and submit your response and counterclaim</span>
+                 {% else %}
+                 <span class="task-name"> Check and submit your response</span>
+                 {% endif %}
+               </a>
+             </td>
+             {% endif %}
+             <td class="numeric" id="task-status" scope="col" id="col-status">
+              {% if data.paid=="complete" %}
+              {% include "includes/task_status_finished.html" %}
               {% endif %}
-              <li><strong class="bold">Claim reference:</strong><br> CF91-BK65</li>
-              <li><strong class="bold">Claim amount:</strong><br> <a href='task-list/claim-amount'>£1500</a> </li>
-            </ul>
-          </div>
-        </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="column-one-third">
+      <ul class="actions">
+      </ul>
+      <br>
+      <div class="meta-data">
+        <ul role="navigation" class="font-xsmall list">
+          {% if data.more_time_to_respond!="complete" or data.radio_select_group_time=="No"%}
+          <li><strong class="bold">Response deadline:</strong> <br><span id="Date"></span> at 4pm<br> (14 days remaining)</li>
+          {% elseif data.more_time_to_respond=="complete" and data.radio_select_group_time=="Yes" %}
+          <li><strong class="bold">Response deadline:</strong> <br><span id="Date3"></span> at 4pm<br> (28 days remaining)</li>
+          {% else %}
+          <li><strong class="bold">Response deadline:</strong> <br><span id="Date"></span> at 4pm<br> (14 days remaining)</li>
+          {% endif %}
+          <li><strong class="bold">Claim reference:</strong><br> CF91-BK65</li>
+          <li><strong class="bold">Claim amount:</strong><br> <a href='task-list/claim-amount'>£1500</a> </li>
+        </ul>
       </div>
-    </main>
-    {% endblock %}
-    {% block extra_js_1 %}<!-- ticky list javascript one -->{% endblock %}
-    {% block extra_js_2 %}<!-- ticky list javascript two -->{% endblock %}
+    </div>
+  </div>
+</main>
+{% endblock %}
+{% block extra_js_1 %}<!-- ticky list javascript one -->{% endblock %}
+{% block extra_js_2 %}<!-- ticky list javascript two -->{% endblock %}
