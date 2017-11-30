@@ -11,17 +11,41 @@ Money Claims Prototype
   <div class="grid-row">
     <div class="column-two-thirds">
       <div class="govuk-box-highlight">
-        <h1 class="bold-large">Response submitted</h1>
+        {% if data.radio_cc_group=="Yes" %}
+
+        <h1 class="bold-large">Response and counterclaim submitted</h1>
+
+        {% else %}
+                <h1 class="bold-large">Response submitted</h1>
+
+        {% endif %}
+
         <br>
         <p>
           <strong class="bold"><span id="Date2"></span></strong>
         </p>
       </p>
       <p>
+                {% if data.radio_cc_group=="Yes" %}
+
+        <a  class="font-medium" href="../../../public/images/p14/CF91-BK65.pdf" style="color: #FFFFFF" download>Download your response and counterclaim as a PDF</a>
+
+        {% else %}
         <a  class="font-medium" href="../../../public/images/p14/CF91-BK65.pdf" style="color: #FFFFFF" download>Download your response as a PDF</a>
+
+        {% endif %}
       </p>
     </div>
+
+       {% if data.radio_cc_group=="Yes" %}
+
+    <h2 class="heading-large">Your response to the claim</h2>
+
+        {% else %}
     <h2 class="heading-large">Your response</h2>
+
+        {% endif %}
+
     <!-- Admit all - pay Immediately -->
     {% if data['radio-pay-group']=="Immediately" and data.radio_select_group=="all" or data['confirmation']== 1  %}
     <p>We've emailed Jan Clark telling them that you will pay their money claim within 28 days.</p>
