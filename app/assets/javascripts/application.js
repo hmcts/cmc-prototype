@@ -626,7 +626,7 @@ function showSelectAddress() {
     $('#find-button').addClass('secondary-button');
     $('#continue-button').removeClass('secondary-button');
     $('#continue-button').addClass('button');
-    $('#enter-manually').hide();
+    $('#enter-manually').show();
   }
 
   function showAbroadAddress() {
@@ -637,6 +637,8 @@ function showSelectAddress() {
     $('#manual-address').addClass( 'abroad' );
     $('#enter-manually').hide();
     $('#postcode-finder').hide();
+    $('#enter-automatic').show();
+    $('#select-address').hide();
 
     $('#continue-button').unbind('click');
     $('#continue-button').removeClass('secondary-button');
@@ -644,8 +646,19 @@ function showSelectAddress() {
     return false
   }
 
+ function showPostcodeLookup() {
+    $('#manual-address').hide();
+    $('#enter-manually').show();
+    $('#postcode-finder').show();
+    $('#enter-automatic').hide();
+
+    return false
+  }
+
+
   function showManaulEntry() {
     $('#manual-address').show();
+
     $("#postcode-full").val( $('#postcode').val() );
 
     $('#continue-button').unbind('click');
