@@ -1,39 +1,34 @@
-{% extends "layout.html" %}
+{% extends "layout_task-list.html" %}
+
 {% block page_title %}
 Money Claims Prototype
 {% endblock %}
+
+{% block home_link %} ../task-list {% endblock %}
 {% block proposition_header %}
+{% set my_account="1" %}
 {% include "includes/propositional_navigation.html" %}
 {% endblock %}
 {% block content %}
+
+
 <main id="content" role="main">
   {% include "includes/phase_banner_beta.html" %}
+
+      <a href="#" class="link-back">Back</a>
+
+
   <div class="grid-row">
     <div class="column-two-thirds">
-      <a href="#" class="link-back">Back</a>
-      <h1 class="heading-large">
-        The defendant's response
+    <h1 class="heading-large">
+        Do you accept the method of payment?
       </h1>
-      <p>
-        The defendant Mary Richards admits they owe all the money you’ve claimed. They will pay you the money by instalments.
-      </p>
-      <h2 class="heading-medium">How they want to pay</h2>
+          <h2 class="heading-medium">How they want to pay</h2>
       <p>This is the maximum instalment amount Mary Richards can pay based on their financial details.</p>
       <table class="instalment-table">
         <tbody>
           <tr>
-          </tr>
-          <tr class="">
-            <td class="">
-               Monthly instalments of
-            </td>
-            <td class="">
-              £200
-            </td>
-            <td class="">
-            </td>
-          </tr>
-          <tr>
+          </tr><tr>
             <td class="">
               The first payment of
             </td>
@@ -41,6 +36,16 @@ Money Claims Prototype
               £100
             </td>
             <td class="change-answer ">
+            </td>
+          </tr>
+          <tr class="">
+            <td class="">
+              Followed by equal monthly instalments of
+            </td>
+            <td class="">
+              £200
+            </td>
+            <td class="">
             </td>
           </tr>
           <tr class="">
@@ -66,7 +71,7 @@ Money Claims Prototype
 
         </tbody>
       </table>
-      <p>Mary Richards will contact you to arrange making these payments into your bank or savings account</p>
+      <p>Mary Richards will need to contact you to make these payments into your band or savings account</p>
             <details>
         <summary class="">Defendant's financial details</summary>
         <div class="panel">
@@ -354,16 +359,18 @@ Money Claims Prototype
           </table>
         </div>
       </details>
+            <p>Mary Richards will need to contact you to make these payments into your bank or savings account</p>
+
       <h2 class="heading-small">Why they can't pay the full amount now</h2>
       <p>I am heavily in debt at the moment and I'm not earning that much money. £100 a month is all i can afford.</p>
 
-      <h2 class="heading-medium">Accept or reject their payment method?</h2>
+       <h2 class="heading-medium">Accept or reject their payment method?</h2>
       <form
-      name="aspnetForm"
-      method="post"
-      onsubmit="multiNavigation('radio-indent-group', ['reject_stop_claim', 'accept_stop_claim'], ['../confirmation-page', '../confirmation-page']);return false;"
-      id="aspnetForm"
-      autocomplete="off">
+        name="aspnetForm"
+        method="post"
+        onsubmit="multiNavigation('radio-indent-group', ['reject_stop_claim', 'accept_stop_claim'], ['../task-list', '../task-list']);return false;"
+        id="aspnetForm"
+        autocomplete="off">
       <div class="form-group">
         <fieldset>
           <div class="multiple-choice" data-target="accept">
@@ -371,7 +378,7 @@ Money Claims Prototype
             <label for="radio-yes" data-target="yes-info">Yes, I agree to the payment method </label>
           </div>
           <div class="panel panel-border-narrow js-hidden" id="accept">
-            <p>If the defendant stops paying, you can ask the court to enforce payment.</p>
+            <p>By agreeing to the payment method you will stop the claim. If the defendant stops paying, you can ask the court to enforce payment.</p>
           </div>
           <div class="multiple-choice" data-target="reject-offer">
             <input id="radio-no" type="radio" name="radio-indent-group" value="reject_stop_claim">
@@ -379,14 +386,20 @@ Money Claims Prototype
 
           </div>
                       <div class="panel panel-border-narrow js-hidden" id="reject-offer">
-            <p>Your claim will go to a hearing and a judge will decide what the defendant can afford to pay. </p>
+            <p>By rejecting their payment this claim will go to a hearing and a judge will determine what the defendant can afford to pay. </p>
           </div>
         </fieldset>
-        <input id="advert-option-next--button" type="submit" value="Continue" class="button"
-        data-ignore-double-submit="true">
+      <input type="hidden" name="payment_method" value="complete">
+
+        <input id="advert-option-next--button" type="submit" value="Save and continue" class="button"
+               data-ignore-double-submit="true">
       </div>
     </form>
+
+
+
+    </div>
   </div>
-</div>
+
 </main>
 {% endblock %}

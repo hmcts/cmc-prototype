@@ -147,7 +147,21 @@
                {% endif %}
                <td >Mary Richards</td>
                <td >£1500 </td>
-               <td class="mobile-hide">Mary Richards has responded to your claim.
+                <td>
+              {% if data['dashboard'] == 1.5 %}
+                The defendant admits they owe all the money. Do you accept or reject their payment method?
+
+               {% elif data['dashboard'] == 1.6 %}
+                The defendant believes they owe you £1,000. Do you accept or reject that this is amount owed?
+               {% elif data['dashboard'] == 1.7 %}
+                The defendant believes that they've paid the claim in full. Do you accept or reject this response?
+               {% elif data['dashboard'] == 1.8 %}
+                The defendant believes that they've paid what they owe, £1000. Do you accept or reject this response?
+               {% elif data['dashboard'] == 1.9 or data['dashboard'] == 110 or data['dashboard'] == 1.11%}
+               The defendant has rejected your claim. Do you accept or reject their response?
+               {% endif %}
+
+
                </td>
              </tr>
              <tr>
@@ -249,12 +263,10 @@
               <td><a href="claimant?claimant=4">352MC733</a></td>
               <td>Mary Richards  </td>
               <td>£1500 </td>
-             <td class="mobile-hide">Mary Richards admits they owe all the money. You need to accept or reject their payment method?
-
- </td>
+             <td class="mobile-hide">Mary Richards admits they owe all the money. You need to accept or reject their payment method?</td>
             </tr>
             <tr>
-              <td  class="mobile-table-status" colspan="3">Status: Mary Richards has responded to your claim.</td>
+              <td  class="mobile-table-status" colspan="3">Status: Mary Richards admits they owe all the money. You need to accept or reject their payment method?</td>
             </tr>
             {% endif %}
             {% if claimant_table==true %}
