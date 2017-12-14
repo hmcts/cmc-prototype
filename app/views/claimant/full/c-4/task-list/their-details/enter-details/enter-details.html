@@ -144,34 +144,69 @@ Money Claims Prototype
               <!--<input class="form-control" id="claimant_address" name="claimant-address" type="text" value="{{data['claimant-address']}}">-->
               <!--</div>-->
 
-            <fieldset>
+ <fieldset class="form-group">
+
+  <div id="postcode-finder">
+    <label class="form-label" for="postcode">Enter a UK postcode</label>
+    <input class="form-control form-control-1-4" id="postcode" name="postcodeFinder" type="text" value="">
+    <a id="find-button" class="button secondary-button">Find address</a>
+  </div>
+
+    <div class="form-group error" id="postcode-seach-error" style="display:none; margin-top: 20px;">
+          <span class="error-message fon">
+            We can't find an address for that postcode. Try again or enter the address manually.
+          </span>
+    </div>
+    <div class="form-group error" id="postcode-seach-ni-error" style="display:none; margin-top: 20px;">
+          <span class="error-message">
+            We can't find Northern Irish addresses by postcode - enter the address manually instead.
+          </span>
+    </div>
+
+    <div id="select-address" class="form-group" style="display: none;">
+      <label class="form-label">
+        Pick an address
+      </label>
+      <select id="addressList" class="form-control" name="addressSelect" onchange="updateAddress(this.value)" title="Pick an address">
+        <option value="">Select an address </option>
+
+      </select>
+
+    </div>
+
+    <div id="manual-address" style="display: none;" class="">
+      <div class="form-group">
+        <label class="form-label" for="street-1" id="street-label">Address</label>
+        <input class="form-control" id="street-1" name="claimant_AddressLine1" type="text" value="">
+        <input class="form-control second-text-input" id="street-2" name="claimant_AddressLine2" type="text" value="" title="Street line 2">
+        <input class="form-control second-text-input" id="street-3" name="claimant_AddressLine3" type="text" value="" title="Street line 3">
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="town" id="town-label">Town or city</label>
+        <input class="form-control" id="town" name="claimant_city" type="text" value="">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="postcode-full" id="postcode-label">Postcode</label>
+        <input class="form-control form-control-1-4" id="postcode-full" name="claimant_Postcode" type="text" value="">
+      </div>
+      <div class="form-group" id="country-group">
+        <label class="form-label" for="country">Country</label>
+        <input class="form-control" id="country" name="claimant_country" type="hidden" value="">
+      </div>
+    </div>
 
 
-              <div class="form-group">
+      <div id="enter-manually">
+        <a class="link" href="#" onclick="return showAbroadAddress();">I need to enter an address outside the UK</a>
+      </div>
+
+      <div id="enter-automatic" style="display:none">
+        <a class="link" href="#" onclick="return showPostcodeLookup();">Find address by a UK postcode</a>
+      </div>
 
 
-
-               <div class="form-group-compound address-item form-group">
-                <label class="form-label" for="addressLine1">Address line 1</label>
-                <input class="form-control" id="addressLine1" name="d-addressLine1" type="text" value="{{data['d-addressLine1']}}" >
-              </div>
-
-              <div class="form-group-compound address-item form-group">
-                <label class="form-label" for="addressLine2">Address line 2 (optional)</label>
-                <input  class="form-control" id="addressLine2" name="d-addressLine2" type="text" value="{{data['d-addressLine2']}}">
-              </div>
-
-              <div class="form-group-compound address-item form-group">
-                <label class="form-label" for="addressLine3">Town or city</label>
-                <input id="addressLine3" name="d-addressLine3" type="text" value="{{data['d-addressLine3']}}">
-
-              </div>
-
-              <div class="address-item form-group">
-                <label class="form-label" for="addressPostcode">Postcode</label>
-                <input class="form-control form-control-large form-control-1-4" id='d-addressPostcode' name="addressPostcode" type="text" value="{{data['d-addressPostcode']}}">
-              </div>
-            </fieldset>
+  </fieldset>
 
               <div class="form-group">
                 <input type="submit" class="button" value="Save and continue"/>
