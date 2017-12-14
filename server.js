@@ -196,6 +196,17 @@ app.get('/prototype-admin/clear-data', function (req, res) {
   res.render('prototype-admin/clear-data')
 })
 
+app.get('/dashboard/v3/idam/sign-in', function (req, res) {
+  req.session.destroy()
+  res.render('dashboard/v3/idam/sign-in')
+})
+
+
+app.get('/dashboard/v4/claimant', function (req, res) {
+  req.session.destroy()
+  res.render('dashboard/v4/claimant')
+})
+
 app.get('/postcode-lookup', postcodeLookup);
 app.get('/country-lookup', countryLookup);
 
