@@ -196,7 +196,7 @@ app.get('/prototype-admin/clear-data', function (req, res) {
   res.render('prototype-admin/clear-data')
 })
 
-app.get('/dashboard/v3/idam/sign-in', function (req, res) {
+app.get('/dashboard/v4/idam/sign-in', function (req, res) {
   req.session.destroy()
   res.render('dashboard/v3/idam/sign-in')
 })
