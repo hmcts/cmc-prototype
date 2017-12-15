@@ -32,11 +32,19 @@ Check your answers
         </td>
         <td>
          {%if data.radio_select_group=="Yes" %}
+<<<<<<< HEAD
          Accept
          {%elif data.radio_select_group=="No" %}
          Reject
          {% else %}
          Reject
+=======
+         I accept their response
+         {%elif data.radio_select_group=="No" %}
+         I reject their response
+         {% else %}
+         I reject their response
+>>>>>>> 554c61883320a1bcf7b0eecd3468331ed032f81a
          {% endif %}
        </td>
        <td class="change-answer">
@@ -48,6 +56,26 @@ Check your answers
     {%if data.radio_select_group=="Yes" %}
 
     {%elif data.radio_select_group=="No" %}
+       <tr>
+      <td>
+        Why do you reject their response
+      </td>
+      <td>
+
+              {% if data['reject_response']!="" %}
+             {{data['reject_response']}}
+            {% else %}
+           Because its not true.
+            {% endif %}
+
+
+      </td>
+      <td class="change-answer">
+        <a href="../task-list/claim-details/reason?return_page={{ '../../task-list/claim-details/check-your-answers' | urlencode }}">
+          Change <span class="visuallyhidden">Why you're owed the money</span>
+        </a>
+      </td>
+    </tr>
     <tr>
       <td>
         Will you try free mediation?
@@ -58,7 +86,7 @@ Check your answers
          {%elif data.radio_indent_group2=="decline-mediation" %}
          No
          {% else %}
-         Noswe
+         No
          {% endif %}
       </td>
       <td class="change-answer">
