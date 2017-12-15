@@ -200,6 +200,10 @@ app.get('/dashboard/v4/idam/sign-in', function (req, res) {
   req.session.destroy()
   res.render('dashboard/v4/idam/sign-in')
 })
+app.get('/dashboard/v4/home', function (req, res) {
+  req.session.destroy()
+  res.render('dashboard/v4/home')
+})
 
 
 
