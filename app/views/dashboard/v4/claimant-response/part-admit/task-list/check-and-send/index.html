@@ -32,11 +32,11 @@ Check your answers
         </td>
         <td>
          {%if data.radio_select_group=="Yes" %}
-         Yes
+         I accept this is amount owed
          {%elif data.radio_select_group=="No" %}
-         No
+         I reject that this is the amount owed
          {% else %}
-         No
+         I reject that this is the amount owed
          {% endif %}
        </td>
        <td class="change-answer">
@@ -52,12 +52,12 @@ Check your answers
       </td>
       <td>
            {%if data['radio-indent-group'] == "accept_stop_claim" %}
-         Yes
+          I accept this payment method
 
          {%elif  data['radio-indent-group'] == "reject_stop_claim"  %}
-         No
+        I reject this payment method
          {% else %}
-         No
+          I reject this payment method
          {% endif %}
       </td>
       <td class="change-answer">
@@ -67,7 +67,25 @@ Check your answers
       </td>
     </tr>
     {%elif data.radio_select_group=="No" %}
-    <tr>
+      <tr>
+      <td>
+        Your reason for rejecting this amount
+      </td>
+      <td>
+       {% if data['reject_response']!="" %}
+        {{data['reject_response']}}
+        {% else %}
+        Because they owe me £1500.
+        {% endif %}
+      </td>
+      <td class="change-answer">
+        <a href="../task-list/claim-details/reason?return_page={{ '../../task-list/claim-details/check-your-answers' | urlencode }}">
+          Change <span class="visuallyhidden">Why you're owed the money</span>
+        </a>
+      </td>
+    </tr>
+
+      <tr>
       <td>
         Will you try free mediation?
       </td>
@@ -77,7 +95,7 @@ Check your answers
          {%elif data.radio_indent_group2=="decline-mediation" %}
          No
          {% else %}
-         Noswe
+         No
          {% endif %}
       </td>
       <td class="change-answer">

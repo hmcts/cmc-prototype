@@ -204,6 +204,10 @@ app.get('/dashboard/v4/home', function (req, res) {
   req.session.destroy()
   res.render('dashboard/v4/home')
 })
+app.get('/dashboard/v4/claimant', function (req, res) {
+  req.session.destroy()
+  res.render('dashboard/v4/claimant')
+})
 
 
 

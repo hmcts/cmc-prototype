@@ -37,7 +37,6 @@ Check your answers
          I reject their response
          {% else %}
          I reject their response
->
          {% endif %}
        </td>
        <td class="change-answer">
@@ -47,21 +46,17 @@ Check your answers
       </td>
     </tr>
     {%if data.radio_select_group=="Yes" %}
-
     {%elif data.radio_select_group=="No" %}
-       <tr>
+    <tr>
       <td>
         Why do you reject their response
       </td>
       <td>
-
-              {% if data['reject_response']!="" %}
-             {{data['reject_response']}}
-            {% else %}
-           Because its not true.
-            {% endif %}
-
-
+        {% if data['reject_response']!="" %}
+        {{data['reject_response']}}
+        {% else %}
+        Because its not true.
+        {% endif %}
       </td>
       <td class="change-answer">
         <a href="../task-list/claim-details/reason?return_page={{ '../../task-list/claim-details/check-your-answers' | urlencode }}">
@@ -74,29 +69,28 @@ Check your answers
         Will you try free mediation?
       </td>
       <td>
-         {%if data.radio_indent_group2=="accept-mediation" %}
-         Yes
-         {%elif data.radio_indent_group2=="decline-mediation" %}
-         No
-         {% else %}
-         No
-         {% endif %}
-      </td>
-      <td class="change-answer">
-        <a href="../task-list/claim-details/reason?return_page={{ '../../task-list/claim-details/check-your-answers' | urlencode }}">
-          Change <span class="visuallyhidden">Why you're owed the money</span>
-        </a>
-      </td>
-    </tr>
-    {% else %}
-    {% endif %}
-  </tbody>
+       {%if data.radio_indent_group2=="accept-mediation" %}
+       Yes
+       {%elif data.radio_indent_group2=="decline-mediation" %}
+       No
+       {% else %}
+       No
+       {% endif %}
+     </td>
+     <td class="change-answer">
+      <a href="../task-list/claim-details/reason?return_page={{ '../../task-list/claim-details/check-your-answers' | urlencode }}">
+        Change <span class="visuallyhidden">Why you're owed the money</span>
+      </a>
+    </td>
+  </tr>
+  {% else %}
+  {% endif %}
+</tbody>
 </table>
-  <form method="get" action="../../confirmation-page?" class="form">
-
-    <div class="form-group">
+<form method="get" action="../../confirmation-page?" class="form">
+  <div class="form-group">
     <button id="submit" class="button" >Submit response</button>
   </div>
+</form>
 </main>
-
 {% endblock %}

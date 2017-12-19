@@ -14,14 +14,12 @@ Money Claims Prototype
   <div class="grid-row">
     <div class="column-two-thirds">
       <h1 class="heading-large">
-        Do you accept the repayment plan?
+        Would you accept a court calculated repayment plan?
       </h1>
-      <h2 class="heading-medium">How they want to pay</h2>
-      {% if data['determination'] == "1" %}
-        <p class="panel">This payment plan is based on what the claimant believes they can afford. It hasn't been reviewed by court staff.</p>
-      {% else %}
-        <p class="panel">This payment plan is calculated using the financial information Mary Richards has entered. It hasn't been reviewed by court staff.</p>
-      {% endif %}
+      <h2 class="heading-medium">Repayment plan</h2>
+
+        <p class="panel">This repayment plan is calculated using a court affordability calculator  based on the financial information Mary Richards has entered. It hasn't been reviewed by court staff.</p>
+
       <table class="instalment-table">
         <tbody>
           <tr>
@@ -30,7 +28,7 @@ Money Claims Prototype
               The first payment of
             </td>
             <td class="">
-              £100
+              £200
             </td>
             <td class="change-answer ">
             </td>
@@ -40,7 +38,7 @@ Money Claims Prototype
               Followed by equal monthly instalments of
             </td>
             <td class="">
-              £200
+              £400
             </td>
             <td class="">
             </td>
@@ -65,57 +63,44 @@ Money Claims Prototype
             <td class=" ">
             </td>
           </tr>
+         <tr>
+            <td class="">
+              Duration of payments
+            </td>
+            <td class="">
+              1 year
+            </td>
+            <td class=" ">
+            </td>
+          </tr>
         </tbody>
       </table>
-      <h2 class="heading-medium">Do you accept the payment plan?</h2>
-          {% if data['determination'] == "1" %}
-            <form
-              name="aspnetForm"
-              method="post"
-
-              onsubmit="multiNavigation('radio-indent-group', ['reject_stop_claim', 'accept_stop_claim'], ['../task-list?determined_figure=reject&', '../task-list?determined_figure=accept&']);return false;"
-
-              id="aspnetForm"
-              autocomplete="off">
-
-           {% else %}
-            <form
-              name="aspnetForm"
-              method="post"
-
-              onsubmit="multiNavigation('radio-indent-group', ['reject_stop_claim', 'accept_stop_claim'], ['../task-list', '../task-list']);return false;"
-
-              id="aspnetForm"
-              autocomplete="off">
-      {% endif %}
-
-
+      <h2 class="heading-medium">Do you accept this repayment plan?</h2>
+      <form
+      name="aspnetForm"
+      method="post"
+      onsubmit="multiNavigation('radio-indent-group2', ['reject_stop_claim', 'accept_stop_claim'], ['../task-list?determined=reject&', '../task-list?determined=accept&']);return false;"
+      id="aspnetForm"
+      autocomplete="off">
       <div class="form-group">
         <fieldset>
           <div class="multiple-choice" data-target="accept">
-            <input id="radio-yes" type="radio" name="radio-indent-group" value="accept_stop_claim">
+            <input id="radio-yes" type="radio" name="radio-indent-group2" value="accept_stop_claim">
             <label for="radio-yes" data-target="yes-info"> I accept this repayment plan</label>
           </div>
           <div class="panel panel-border-narrow js-hidden" id="accept">
             <p>By agreeing to the payment method you will stop the claim. If the defendant stops paying, you can ask the court to enforce payment.</p>
           </div>
           <div class="multiple-choice" data-target="reject-offer">
-            <input id="radio-no" type="radio" name="radio-indent-group" value="reject_stop_claim">
+            <input id="radio-no" type="radio" name="radio-indent-group2" value="reject_stop_claim">
             <label for="radio-no" data-target="no-info"> I reject this repayment plan</label>
           </div>
-      {% if data['determination'] == "1" %}
-      {% else %}
+
           <div class="panel panel-border-narrow js-hidden" id="reject-offer">
-            <p>By rejecting their payment this claim will go to a hearing and a judge will determine what the defendant can afford to pay. </p>
+            <p>By rejecting this repayment this claim will go to a hearing and a judge will determine what the defendant can afford to pay. </p>
           </div>
-      {% endif %}
-
-
-
-
-
         </fieldset>
-        <input type="hidden" name="payment_method" value="complete">
+        <input type="hidden" name="court_payment_method" value="complete">
         <input id="advert-option-next--button" type="submit" value="Save and continue" class="button"
         data-ignore-double-submit="true">
       </div>
