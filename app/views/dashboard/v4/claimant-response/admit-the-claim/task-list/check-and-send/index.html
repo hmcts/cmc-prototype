@@ -45,6 +45,28 @@ Check your answers
         </a>
       </td>
     </tr>
+        {%if data.determined_figure != "reject" %}
+
+    <tr>
+      <td>
+        Your reason for rejecting defendant's repayment plan?
+      </td>
+      <td>
+       {% if data['reject_response']!="" %}
+        {{data['reject_response']}}
+        {% else %}
+        I want all the money now because i know he has the money .
+        {% endif %}
+      </td>
+      <td class="change-answer">
+        <a href="../task-list/claim-details/reason?return_page={{ '../../task-list/claim-details/check-your-answers' | urlencode }}">
+          Change <span class="visuallyhidden">Why you're owed the money</span>
+        </a>
+      </td>
+    </tr>   
+          {% endif %}
+
+
             {%if data.determined_figure == "reject" %}
 
       <tr>
@@ -67,6 +89,24 @@ Check your answers
         </a>
       </td>
     </tr>
+
+    <tr>
+      <td>
+        Your reason for rejecting the court calculated repayment plan
+      </td>
+      <td>
+       {% if data['reject_response']!="" %}
+        {{data['reject_response']}}
+        {% else %}
+        I want all the money now because i know he has the money .
+        {% endif %}
+      </td>
+      <td class="change-answer">
+        <a href="../task-list/claim-details/reason?return_page={{ '../../task-list/claim-details/check-your-answers' | urlencode }}">
+          Change <span class="visuallyhidden">Why you're owed the money</span>
+        </a>
+      </td>
+    </tr>    
    {% else %}
   {% endif %}
   </tbody>

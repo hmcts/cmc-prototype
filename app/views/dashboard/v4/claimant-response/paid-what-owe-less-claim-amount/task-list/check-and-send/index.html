@@ -46,6 +46,23 @@ Check your answers
       </td>
     </tr>
     {% if data.radio_select_group=="Yes" or data.radio_select_group=="No" %}
+        <tr>
+      <td>
+        Your reason for rejecting the court calculated repayment plan
+      </td>
+      <td>
+       {% if data['reject_response']!="" %}
+        {{data['reject_response']}}
+        {% else %}
+        I want all the money now because i know he has the money .
+        {% endif %}
+      </td>
+      <td class="change-answer">
+        <a href="../task-list/claim-details/reason?return_page={{ '../../task-list/claim-details/check-your-answers' | urlencode }}">
+          Change <span class="visuallyhidden">Why you're owed the money</span>
+        </a>
+      </td>
+    </tr>
     <tr>
       <td>
         Has the defendant paid this amount?
@@ -69,6 +86,7 @@ Check your answers
   {% endif %}
 
     {% if data.radio_select_group=="No" or data.radio_select_group2=="No" %}
+
     <tr>
       <td>
         Will you try free mediation?
@@ -79,7 +97,7 @@ Check your answers
          {%elif data.radio_indent_group2=="decline-mediation" %}
          No
          {% else %}
-         Noswe
+         No
          {% endif %}
       </td>
       <td class="change-answer">
