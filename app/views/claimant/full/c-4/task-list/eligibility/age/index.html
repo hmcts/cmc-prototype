@@ -21,30 +21,17 @@ Money Claims Prototype
 
 
 
-      {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('task-list')%}        
-
-         <form
-        name="aspnetForm"
-        method="post"
-        onsubmit="multiNavigation('radio_group2', ['over_18','under_18'], ['check-your-answers', 'result?a=18&']);return false;"
 
 
-        id="aspnetForm"
-        autocomplete="off">
-        
-
-        {% else %}
-        
         <form
         name="aspnetForm"
         method="post"
-        onsubmit="multiNavigation('radio_group2', ['over_18','under_18'], ['hwf', 'result?a=18&']);return false;"
+        onsubmit="multiNavigation('radio_group2', ['over_18','under_18'], ['multiple-claimant', 'result?a=18&']);return false;"
 
 
         id="aspnetForm"
         autocomplete="off">
-        
-        {% endif %}
+
 
 
 
@@ -74,20 +61,11 @@ Money Claims Prototype
           </div>
         </fieldset>
 
-        {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}
-        <div class="form-group">
-          <input type="submit" class="button" value="Save changes"/>
-        </div>
-        
-
-        <a href="{{ data.return_page if data.return_page | length > 0 else '../task-list' }}">Cancel</a>
-
-        {% else %}
         <div class="form-group">
           <input type="submit" class="button" value="Save and continue"/>
         </div>
 
-        {% endif %}
+
       </form>
 
     </div>
