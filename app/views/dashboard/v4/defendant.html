@@ -31,7 +31,6 @@ x§x§ {% extends "layout_task-list.html" %}
              <div class="form-group">
               <p><a href="../../defendant/full/d-3/task-list?hide_offer=false">Respond to claim </a></p>
             </div>
-            <p><a href="#">View your response</a></p>
             {% elseif data['defendant'] == 2 %}
             <h2 class="heading-medium">Your response is being processed</h2>
             <p> We will email you to explain what to do next.</p>
@@ -48,28 +47,28 @@ x§x§ {% extends "layout_task-list.html" %}
               <h3 class="heading-medium">Apply to cancel the CCJ</h3>
               You can <a href="./applications-and-judgments/ccj/satisfy-cancel-set-aside">apply to cancel the CCJ</a> if you paid the claim or didn't respond to it.
               {% elseif data['defendant'] == 5 %}
-              <h2 class="heading-medium">You admit the claim</h2>
-              <p>You've offered to pay £1,500 on <span id="Date3"></span>.</p>
+              <h2 class="heading-medium">Your response to the claim</h2>
+              <p>You offered to pay Jan Clark £1,500 on <span id="Date3"></span>.</p>
+              <p>We’ll contact you when the claimant responds.</p>
               <p><a href="#">View your response</a></p>
               {% elseif data['defendant'] == 6 %}
-              <h2 class="heading-medium">You admit part of the claim</h2>
+              <h2 class="heading-medium">Your response to the claim</h2>
               <p>You've offered to pay Jan Clark £1,000 in instalments.</p>
-              <p>Jan Clark has until 12 December to respond to your offer.</p>
+              <p>We’ll contact you when the claimant responds.</p>
               <p><a href="#">View your response.</a></p>
               {% elseif data['defendant'] == 7 %}
-              <h2 class="heading-medium">Your response</h2>
+              <h2 class="heading-medium">Your response to the claim</h2>
               <p>You state that you paid £1500. Your explanation of why you don't owe any more money has been sent to Jan Clark.</p>
               <p>We’ll contact you when the claimant responds.</p>
               <p><a href="#">View your response</a></p>
               {% elseif data['defendant'] == 8 %}
-              <h2 class="heading-medium">Your response</h2>
+              <h2 class="heading-medium">Your response to the claim</h2>
               <p>We’ve emailed Jan Clark telling them when and how you paid their £1500.</p>
               <p>We’ll contact you when the claimant responds.</p>
               <p><a href="#">View your response</a></p>
               {% elseif data['defendant'] == 9 %}
-              <h2 class="heading-medium">Your response</h2>
+              <h2 class="heading-medium">Your response to the claim</h2>
               <p>We’ve emailed Jan Clark your defence, explaining why you disagree with the claim.</p>
-              <p>You have chosen to use the free mediation service to resolve the dispute with Jan Clark. We’ll ask them if they want to mediate. If they agree to mediation then we’ll email you to arrange an appointment.</p>
               <p>We’ll contact you when the claimant responds.</p>
               <p><a href="#">View your response</a></p>
               {% elseif data['defendant'] == 10 %}
@@ -132,22 +131,43 @@ x§x§ {% extends "layout_task-list.html" %}
                 You can <a href='#'>request free telephone mediation</a> to help resolve the claim without going to court.</a>
               </p>
               {% endif %}
+              {% if data['defendant'] == 17%}
+              <h2 class="heading-small">Cancel your claim</h2>
+              <p>
+                You can <a href='#'>cancel your counterclaim</a>. For example, if you’ve been paid or don’t want to continue your case against the defendant.
+              </p>
             </div>
+            {% else %}
+            {% endif %}
             <div id="tabs-2" class="tab-pane">
-              {% if data['defendant'] == 10 or data['defendant'] == 11 or data['defendant'] == 12 or data['defendant'] == 13 or data['defendant'] == 15 or data['defendant'] == 16%}
-              {% endif %}
               <h2 class="heading-medium">Claim history </h2>
-              {% if data['defendant'] == 11 or data['defendant'] == 15 or data['defendant'] == 16%}
+              {% if data['defendant'] == 10 or data['defendant'] == 11 or data['defendant'] == 12 or data['defendant'] == 13 or data['defendant'] == 14 or data['defendant'] == 15 or data['defendant'] == 16 %}
+              {% if data['defendant'] == 13 or data['defendant'] == 14 %}
+              <div class="history-timeline">
+                <div class="history-statement"> <span > 8 October 2017</span> The claimant rejected your response and has requested mediation to help resolve this dispute. <a href="#">View response</a></div>
+              </div>
+              {%endif%}
+              {% if data['defendant'] == 16 %}
+              <div class="history-timeline ">
+                <div class="history-statement"> <span > 12 October 2017</span> You need to sign a legal agreement to settle out of court. Jan Clark has signed the agreement. </div>
+              </div>
+              {% endif %}
+              {% if data['defendant'] == 11 or data['defendant'] == 15 or data['defendant'] == 16 %}
               <div class="history-timeline ">
                 <div class="history-statement"> <span > 11 October 2017</span> You made an offer to the claimant. </div>
               </div>
-              {% elif data['defendant'] == 10 or data['defendant'] == 11 or data['defendant'] == 15 or data['defendant'] == 16 %}
+              {% endif %}
+              {% if data['defendant'] == 12 or data['defendant'] == 13   %}
+              {% else %}
               <div class="history-timeline">
-                <div class="history-statement"> <span > 8 October 2017</span> The claimant rejected you response. The claim has been sent to a hearing.</div>
+                <div class="history-statement"> <span > 8 October 2017</span> The claimant rejected youR response. <a href="#">View response</a></div>
               </div>
-              {% elif data['defendant'] == 13 or data['defendant'] == 14%}
-              <div class="history-timeline">
-                <div class="history-statement"> <span > 8 October 2017</span> The claimant rejected you response but has requested mediation to help settle the dispute.</div>
+              {%endif%}
+              <div class="history-timeline ">
+                <div class="history-statement "> <span > 1 October 2017</span>You responded to the claim. <a href="#">View response</a> </div>
+              </div>
+              <div class="history-timeline ">
+                <div class="history-statement "> <span > 16 September 2017</span>Claim issued by the claimant Jan Clark.  </div>
               </div>
               {% elif data['defendant'] == 17 %}
               <div class="history-timeline last">
@@ -155,9 +175,7 @@ x§x§ {% extends "layout_task-list.html" %}
               </div>
               {% else %}
               <div class="history-timeline ">
-                <div class="history-statement"> <span > 1 October 2017</span>Jan Clark requested a default County Court Judgment (CCJ) against you.
-                </div>
-                <div class="history-statement"> <span > 16 September 2017</span>Claim sent by Jan Clark. You had until 30 Sept 2017 to respond. <a href="view-claim">View claim.</a></div>
+                <div class="history-statement "> <span > 16 September 2017</span>Claim issued by the claimant Jan Clark.  </div>
               </div>
               {% endif %}
             </div>
