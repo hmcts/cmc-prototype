@@ -143,7 +143,7 @@ Check your answers
             <td class="">
               {% if data.radio_select_group=="all" or data['check']== 1 or data['check']== 2 or data['check']== 3%}
               I admit all of the claim
-              {% elseif data.radio_select_group=="Some" or data['check']== 4 or data['check']== 5 or data['check']== 6 or data['check']== 7%}
+              {% elseif data.radio_select_group=="Some" or data.radio_select_group=="some_cc" or data['check']== 4 or data['check']== 5 or data['check']== 6 or data['check']== 7%}
               I admit part of the claim
               {% elseif data.radio_select_group=="reject" or data.radio_select_group2=="paid" or data['check']== 8 or data['check']== 9%}
               I reject all of the claim
@@ -157,6 +157,29 @@ Check your answers
               </a>
             </td>
           </tr>
+          {% if data.radio_select_group=="some_cc"%}
+
+          <tr>
+            <td>
+              Make a counterclaim
+            </td>
+            <td>
+              {% if data.cc_defend_now=="Yes" %}
+              Yes
+              {% elseif data.cc_defend_now=="No" %}
+             No
+              {% else %}
+                No
+              {% endif %}
+            </td>
+            <td class="change-answer">
+              <a href="../task-list/do-you-owe-money/defence-options?return_page={{  '../../task-list' | urlencode }}">
+                Change <span class="visuallyhidden">Name</span>
+              </a>
+            </td>
+          </tr>
+           {% endif %}
+
           {% if data.radio_select_group=="reject" or data.radio_select_group2=="paid" or data['check']== 8 or data['check']== 9 %}
           <tr>
             <td>
@@ -165,10 +188,29 @@ Check your answers
             <td>
               {% if data.radio_select_group=="Paid" or data['check']== 8 %}
               I've paid what I believe I owe
-              {% elseif data.radio_select_group2=="defend_now" or data['check']== 9 %}
+              {% elseif data.radio_select_group2=="defend_now" or data.radio_select_group2=="defend_now_cc" or data['check']== 9 %}
               I dispute the claim
               {% else %}
               I've paid what I believe I owe
+              {% endif %}
+            </td>
+            <td class="change-answer">
+              <a href="../task-list/do-you-owe-money/defence-options?return_page={{  '../../task-list' | urlencode }}">
+                Change <span class="visuallyhidden">Name</span>
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Make a counterclaim
+            </td>
+            <td>
+              {% if data.cc_defend_now=="Yes" %}
+              Yes
+              {% elseif data.cc_defend_now=="No" %}
+             No
+              {% else %}
+                No
               {% endif %}
             </td>
             <td class="change-answer">
@@ -1233,6 +1275,11 @@ Check your answers
   {% elseif data.radio_select_group2=="defend_now" or data['check']== 12%}
   <!-- R/C - I've dispute the claim + defence - mediation chosen -->
   <input type="hidden" name="confirmation" value="14">
+  {% elseif data.radio_select_group2=="defend_now_cc" or data['check']== 13%}
+  <!-- R/C - I've dispute the claim + defence + counterclaim -->
+  <input type="hidden" name="confirmation" value="15">
+
+
   {% else %}
   <input type="hidden" name="confirmation" value="1">
   {% endif %}
@@ -1252,8 +1299,10 @@ Check your answers
     <option  value="3" {% if data['check'] == 3 %}selected{% endif %}>2. FA - pay set date</option>
     <option  value="5" {% if data['check'] == 5 %}selected{% endif %}>3. P/A - I admit part of the claim & pay instalments</option>
     <option  value="6" {% if data['check'] == 6 %}selected{% endif %}>4. P/A - I admit part of the claim & set date < 28 days - mediation chosen</option>
+    <option  value="14" {% if data['check'] == 14 %}selected{% endif %}>4.1 P/A - I admit part of the claim & counterclaim</option>
     <option  value="9" {% if data['check'] == 9 %}selected{% endif %}>5. R/C - I've dispute the claim + defence</option>
     <option  value="12" {% if data['check'] == 12 %}selected{% endif %}>6. R/C - I've dispute the claim + defence - mediation chosen</option>
+    <option  value="13" {% if data['check'] == 13 %}selected{% endif %}>6. R/C - I've dispute the claim + counterclaim</option>
     <option  value="8" {% if data['check'] == 8 %}selected{% endif %}>7. R/C - Paid what I owe - full amount paid</option>
     <option  value="7" {% if data['check'] == 7 %}selected{% endif %}>8. R/C - Paid what I owe - less than claim amount paid </option>
     <option  value="10" {% if data['check'] == 10 %}selected{% endif %}>9. Show business statement of truth</option>
