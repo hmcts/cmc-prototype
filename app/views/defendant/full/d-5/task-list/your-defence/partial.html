@@ -20,7 +20,6 @@ Money Claims Prototype
       method="get"
       id="aspnetForm"
       autocomplete="off">
-
       {% elseif data.radio_select_group2=="paid" or data['partial'] == 3 %}
       <h1 class="heading-large">How much and when did you pay? </h1>
       <form
@@ -36,7 +35,7 @@ Money Claims Prototype
         <div id="claim-details">
           <div id="describe-wrapper-claim-details-1" class="form-group">
             {% if data.radio_select_group=="Some" or data['partial'] == 1%}
-            <p class="">The amount claimed is £1,500</p>
+            <p class="">The amount claimed is <a href="../claim-amount">£1,500</a></p>
             <h3 class="heading-small">How much money do you admit you owe? </h3>
             <div class="form-group">
               <input class="fee pound" maxlength="8" size="8" type="text" value="{{data['owe-amount']}}"
@@ -44,7 +43,7 @@ Money Claims Prototype
               id="owe-amount">
             </div>
             {% elseif data.radio_select_group2=="paid" or data.radio_select_group2=="Paid-some" or data['partial'] == 3  %}
-            <p class="">The amount claimed is £1,500</p>
+            <p class="">The amount claimed is <a href="../claim-amount">£1,500</a></p>
             <h3 class="heading-small">How much have you paid the claimant? </h3>
             <div class="form-group">
               <div class="multiple-choice" data-target="full_amount_dropdown">
@@ -52,140 +51,126 @@ Money Claims Prototype
                 <label for="amount-paid-full">The amount claimed</label>
               </div>
               <div class="panel panel-border-narrow js-hidden" id="full_amount_dropdown">
-
-              <label class="form-label-bold" for="amount-day">
-                When did you pay the amount?
-              </label>
-              <div class="form-date form-group">
-                <p class="form-hint">For example, 12 12 2017</p>
-                <div class="form-group form-group-day">
-                  <label for="dob-day">Day</label>
-                  <input class="form-control" id="amount-day" type="number" name="amount-day" value="{{data['amount-day']}}" pattern="[0-9]*" min="0"
-                  max="31">
+                <label class="form-label-bold" for="amount-day">
+                  When did you pay the amount?
+                </label>
+                <div class="form-date form-group">
+                  <p class="form-hint">For example, 12 12 2017</p>
+                  <div class="form-group form-group-day">
+                    <label for="dob-day">Day</label>
+                    <input class="form-control" id="amount-day" type="number" name="amount-day" value="{{data['amount-day']}}" pattern="[0-9]*" min="0"
+                    max="31">
+                  </div>
+                  <div class="form-group form-group-month">
+                    <label for="dob-month">Month</label>
+                    <input class="form-control" id="amount-month" name="amount-month" value="{{data['amount-month']}}" type="number" pattern="[0-9]*"
+                    min="0" max="12">
+                  </div>
+                  <div class="form-group form-group-year">
+                    <label for="dob-year">Year</label>
+                    <input class="form-control" id="amount-year" name="amount-year"  value="{{data['amount-year']}}" type="number" pattern="[0-9]*" min="0">
+                  </div>
                 </div>
-                <div class="form-group form-group-month">
-                  <label for="dob-month">Month</label>
-                  <input class="form-control" id="amount-month" name="amount-month" value="{{data['amount-month']}}" type="number" pattern="[0-9]*"
-                  min="0" max="12">
-                </div>
-                <div class="form-group form-group-year">
-                  <label for="dob-year">Year</label>
-                  <input class="form-control" id="amount-year" name="amount-year"  value="{{data['amount-year']}}" type="number" pattern="[0-9]*" min="0"
-                  >
-                </div>
-              </div>
-                                <div class="form-group ">
-
-              <label class="form-label-bold" for="owe-reason">
-                How did you pay the amount claimed?
-
-              </label>
-              <textarea class="form-control form-control-3-4 form-control"
-              id="owe-reason"
-              rows="4"
-              name="owe-reason"
-              cols="40"
-              type="text"
-              style="width: 95%"
-              ></textarea>
-                                </div>
-
-            </div>
-            <div class="multiple-choice" data-target="amount_dropdown">
-              <input type="radio" id="amount-paid-less" name="amount_paid" value="less" {{ checked("amount_paid", "less") }}>
-              <label for="amount-paid-less">Less than the amount claimed</label>
-            </div>
-            <div class="panel panel-border-narrow js-hidden" id="amount_dropdown">
-              <label class="form-label-bold" for="owe-amount">
-                How much have you paid?
-              </label>
-              <div class="form-group">
-                <input class="fee pound" maxlength="8" size="8" type="text" value="{{data['owe-amount']}}"
-                name="owe-amount"
-                id="owe-amount">
-              </div>
-              <label class="form-label-bold" for="amount-day">
-                When did you pay this amount?
-              </label>
-              <div class="form-date form-group">
-                <p class="form-hint">For example, 12 12 2017</p>
-                <div class="form-group form-group-day">
-                  <label for="dob-day">Day</label>
-                  <input class="form-control" id="amount-day" type="number" name="amount-day" value="{{data['amount-day']}}" pattern="[0-9]*" min="0"
-                  max="31">
-                </div>
-                <div class="form-group form-group-month">
-                  <label for="dob-month">Month</label>
-                  <input class="form-control" id="amount-month" name="amount-month" value="{{data['amount-month']}}" type="number" pattern="[0-9]*"
-                  min="0" max="12">
-                </div>
-                <div class="form-group form-group-year">
-                  <label for="dob-year">Year</label>
-                  <input class="form-control" id="amount-year" name="amount-year"  value="{{data['amount-year']}}" type="number" pattern="[0-9]*" min="0"
-                  >
+                <div class="form-group ">
+                  <label class="form-label-bold" for="owe-reason">
+                    How did you pay the amount claimed?
+                  </label>
+                  <textarea class="form-control form-control-3-4 form-control"
+                  id="owe-reason"
+                  rows="4"
+                  name="owe-reason"
+                  cols="40"
+                  type="text"
+                  style="width: 95%"
+                  ></textarea>
                 </div>
               </div>
-                            <div class=" form-group">
-
-              <label class="form-label-bold" for="owe-reason">
-                How did you pay the amount claimed?
-
-              </label>
-              <textarea class="form-control form-control-3-4 "
-                        id="owe-reason"
-                        rows="4"
-                        name="owe-reason"
-                        cols="40"
-                        type="text"
-                        style="width: 95%"
-              ></textarea>
-                            </div>
-                            <div class=" form-group">
-
-              <label class="form-label-bold" for="owe-reason">
-                Explain why you don't owe the amount claimed.
-              </label>
-              <textarea class="form-control form-control-3-4 form-control"
-              id="owe-reason"
-              rows="4"
-              name="owe-reason"
-              cols="40"
-              type="text"
-              style="width: 95%"
-              ></textarea>
-                            </div>
-
+              <div class="multiple-choice" data-target="amount_dropdown">
+                <input type="radio" id="amount-paid-less" name="amount_paid" value="less" {{ checked("amount_paid", "less") }}>
+                <label for="amount-paid-less">Less than the amount claimed</label>
+              </div>
+              <div class="panel panel-border-narrow js-hidden" id="amount_dropdown">
+                <label class="form-label-bold" for="owe-amount">
+                  How much have you paid?
+                </label>
+                <div class="form-group">
+                  <input class="fee pound" maxlength="8" size="8" type="text" value="{{data['owe-amount']}}"
+                  name="owe-amount"
+                  id="owe-amount">
+                </div>
+                <label class="form-label-bold" for="amount-day">
+                  When did you pay this amount?
+                </label>
+                <div class="form-date form-group">
+                  <p class="form-hint">For example, 12 12 2017</p>
+                  <div class="form-group form-group-day">
+                    <label for="dob-day">Day</label>
+                    <input class="form-control" id="amount-day" type="number" name="amount-day" value="{{data['amount-day']}}" pattern="[0-9]*" min="0"
+                    max="31">
+                  </div>
+                  <div class="form-group form-group-month">
+                    <label for="dob-month">Month</label>
+                    <input class="form-control" id="amount-month" name="amount-month" value="{{data['amount-month']}}" type="number" pattern="[0-9]*"
+                    min="0" max="12">
+                  </div>
+                  <div class="form-group form-group-year">
+                    <label for="dob-year">Year</label>
+                    <input class="form-control" id="amount-year" name="amount-year"  value="{{data['amount-year']}}" type="number" pattern="[0-9]*" min="0"
+                    >
+                  </div>
+                </div>
+                <div class=" form-group">
+                  <label class="form-label-bold" for="owe-reason">
+                    How did you pay the amount claimed?
+                  </label>
+                  <textarea class="form-control form-control-3-4 "
+                  id="owe-reason"
+                  rows="4"
+                  name="owe-reason"
+                  cols="40"
+                  type="text"
+                  style="width: 95%"
+                  ></textarea>
+                </div>
+                <div class=" form-group">
+                  <label class="form-label-bold" for="owe-reason">
+                    Explain why you don't owe the amount claimed.
+                  </label>
+                  <textarea class="form-control form-control-3-4 form-control"
+                  id="owe-reason"
+                  rows="4"
+                  name="owe-reason"
+                  cols="40"
+                  type="text"
+                  style="width: 95%"
+                  ></textarea>
+                </div>
+              </div>
             </div>
-
-          </div>
-          {% endif %}
-          {% if data.radio_select_group=="Some" or data['partial'] == 1%}
-          <div class="form-group">
-            <label class="form-label-bold" for="offer">
-             Why are you disputing the full amount?
-           </label>
-           <textarea class="form-control form-control-3-4 form-control-large"
-           id="owe-reason"
-           rows="4"
-           name="owe-reason"
-           cols="40"
-           type="text"
-           style="width: 95%"
-           ></textarea>
-
+            {% endif %}
+            {% if data.radio_select_group=="Some" or data['partial'] == 1%}
+            <div class="form-group">
+              <label class="form-label-bold" for="offer">
+               Why are you disputing the full amount?
+             </label>
+             <textarea class="form-control form-control-3-4 form-control-large"
+             id="owe-reason"
+             rows="4"
+             name="owe-reason"
+             cols="40"
+             type="text"
+             style="width: 95%"
+             ></textarea>
+           </div>
+           {% endif %}
          </div>
-
-         {% endif %}
-
-    </div>
-
-    <div class="form-group">
-      <input id="advert-option-next--button" type="submit" value="Save and continue" class="button"
-      data-ignore-double-submit="true">
-    </div>
+         <div class="form-group">
+          <input id="advert-option-next--button" type="submit" value="Save and continue" class="button"
+          data-ignore-double-submit="true">
+        </div>
+      </div>
+    </form>
   </div>
-</form>
-</div>
 </div>
 </main>
 <form method="post"  action="#" class="form" style="; float: left">

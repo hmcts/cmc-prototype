@@ -143,7 +143,7 @@ Check your answers
             <td class="">
               {% if data.radio_select_group=="all" or data['check']== 1 or data['check']== 2 or data['check']== 3%}
               I admit all of the claim
-              {% elseif data.radio_select_group=="Some" or data.radio_select_group=="some_cc" or data['check']== 4 or data['check']== 5 or data['check']== 6 or data['check']== 7%}
+              {% elseif data.radio_select_group=="Some" or data.radio_select_group=="some_cc" or data['check']== 4 or data['check']== 5 or data['check']== 6 or data['check']== 7 or data['check']== 14%}
               I admit part of the claim
               {% elseif data.radio_select_group=="reject" or data.radio_select_group2=="paid" or data['check']== 8 or data['check']== 9%}
               I reject all of the claim
@@ -157,7 +157,7 @@ Check your answers
               </a>
             </td>
           </tr>
-          {% if data.radio_select_group=="some_cc"%}
+          {% if data.radio_select_group=="some_cc"  or data['check']== 14 %}
 
           <tr>
             <td>
@@ -1259,6 +1259,10 @@ Check your answers
   {% elseif data.radio_select_group=="Some" and data['radio-pay-group']=="Set-date" or data['check']== 6 %}
   <!-- P/A - Amount is too much & set date - mediation chosen -->
   <input type="hidden" name="confirmation" value="7">
+  {% elseif data.radio_select_group=="some_cc" or data['check']== 15 %}
+  <!-- P/A - Amount is too much & set date - mediation chosen -->
+  <input type="hidden" name="confirmation" value="13">
+
   {% elseif data.amount_paid=="less" or data['check']== 7 %}
   <!--  P/A - Paid what I owe & defence -->
   <input type="hidden" name="confirmation" value="8">
