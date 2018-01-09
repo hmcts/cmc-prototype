@@ -1,0 +1,67 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="2" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <a href="#" class="link-back">Back</a>
+      <h1 class="heading-large">
+        Complete your response on paper
+      </h1>
+      <div class="">
+
+
+        {% if data.radio_select_group=="defend_now"%}
+          <p>When you respond explain why you don't owe any money and also enter a counterclaim.</p>
+        {% elseif data.radio_select_group=="all"%}
+          <p >When you respond explain when you’re going to pay the money.</p>
+          <p>You can suggest a repayment plan or a date when you can pay the money. </p>
+        {% elseif data.radio_select_group=="Some" %}
+          <p>When you respond offer the claimant the amount of money you believe you owe and explain why you don't owe the remaining amount.</p>
+        {% elseif data.radio_select_group=="SomeCC" %}
+          <p>When you respond offer the claimant the amount of money you believe you owe, explain why you don't owe the remaining amount and also enter a counterclaim.</p>
+        {% elseif data.radio_select_group=="amount_less_CC" %}
+          <p>When you respond explain when you paid what you believe you owe, why you don't owe any money and also enter a counterclaim.</p>
+
+        {%else%}
+        {% endif %}
+        <h2 class="heading-medium">Steps</h2>
+         <ul class="list list-number">
+
+        {% if data.radio_select_group=="defend_now"%}
+            <li>Complete the <a target="_blank" href='{{ asset_path }}/images/OCPN9B.pdf'>defence and counterclaim OCPN9B</a> form <span class="font-xsmall">(open in new window)</span>.  </li>
+        {% elseif data.radio_select_group=="all"%}
+            <li>Complete the <a target="_blank" href='{{ asset_path }}/images/OCPN9A.pdf'>admission  OCPN9A</a> form <span class="font-xsmall">(opens in new window)</span>.  </li>
+        {% elseif data.radio_select_group=="Some" or data.radio_select_group=="SomeCC" %}
+            <li>Complete both the <a target="_blank" href='{{ asset_path }}/images/OCPN9A.pdf'>admission  OCPN9A</a>  and a <a target="_blank" href='{{ asset_path }}/images/OCPN9B.pdf'>defence and counterclaim OCPN9B</a> forms <span class="font-xsmall">(forms open in new window)</span>.  </li>
+        {% elseif data.radio_select_group=="amount_less_CC" %}
+            <li>Complete the <a target="_blank" href='{{ asset_path }}/images/OCPN9B.pdf'>defence and counterclaim OCPN9B</a> form <span class="font-xsmall">(opens in new window)</span>.  </li>
+
+        {%else%}
+        {% endif %}
+
+
+           <ul class="list list-bullet">
+              <li>Claim No. 000MC051</li>
+              <li>Claimant Jan Clark</li>
+              <li>Defendant Mary Richards</li>
+            </ul>
+            <li>Attach the completed forms to an email</li>
+            <li>Send the email with the attached forms to <a href='mailto:civil-money-claim@hmcts.gov.uk?Subject=CF91-BK65'>civil-money-claim@hmcts.gov.uk</a></li>
+          </ul>
+
+      </div>
+
+
+
+        </div>
+      </div>
+  </main>
+  {% endblock %}

@@ -12,9 +12,28 @@
       <h1 class="heading-large">
         Your money claims account
       </h1>
-      {% if data['dashboard'] != 6 %}
-      <a class="newclaim" href="../../claimant/full/c-2/task-list" class="">Make a new money claim</a>
+
+      {% if data['dashboard'] == 6 %}
+      {%else%}
+       <a class="newclaim" href="../../claimant/full/c-2/task-list" class="">Make a new money claim</a>
       {% endif %}
+
+      {% if data['dashboard'] == 1.11 or data['dashboard'] == 1.19%}
+        <div class="panel panel-border-wide alert-default">
+          <ul>
+            <li class="bold">My tasks</li>
+            {% if data['dashboard'] == 1.11 %}
+            <li>Mary Richards has rejected your claim.   <a class="openTab"  href="claimant?claimant=10#tabs-1">Do you accept or reject their response?</a></li>
+            <li>Mary Richards has made an offer to <a class="openTab"  href="claimant?claimant=10#tabs-3">settle out of court.</a></li>
+            {% elif data['dashboard'] == 1.19 %}
+             <li>Mary Richards has rejected your claim.   <a class="openTab"  href="claimant?claimant=8#tabs-1">Do you accept or reject their response?</a></li>
+            <li>Mary Richards has made a counterclaim against you.   <a class="openTab"  href="claimant?claimant=18">Respond to counterclaim.</a></li>
+            {% endif %}
+          </ul>
+        </div>
+      {% endif %}
+
+
       {% set show_all = true if data['dashboard'] == 8 %}
       {% set claimant_table = true if show_all==true or data['dashboard'] == 1 or data['dashboard'] == 1.1 or data['dashboard'] == 1.2 or data['dashboard'] == 1.3 or data['dashboard'] == 1.4 or data['dashboard'] == 1.5 or data['dashboard'] == 1.6 or data['dashboard'] == 1.7 or data['dashboard'] == 1.8 or data['dashboard'] == 1.9 or data['dashboard'] == 110 or data['dashboard'] == 1.11 or data['dashboard'] == 1.12 or data['dashboard'] == 1.13 or data['dashboard'] == 1.14 or data['dashboard'] == 1.15 or data['dashboard'] == 1.16  or data['dashboard'] == 1.17 or data['dashboard'] == 1.18  or data['dashboard'] == 1.19 or data['dashboard'] == 2.17%}
       {% set defendant_table = true if show_all==true or data['dashboard'] == 2 or data['dashboard'] == 2.1 or data['dashboard'] == 2.2  or data['dashboard'] == 2.3 or data['dashboard'] == 2.4 or  data['dashboard'] == 2.5  or  data['dashboard'] == 2.6 or  data['dashboard'] == 2.7 or  data['dashboard'] == 2.8 or  data['dashboard'] == 2.9 or data['dashboard'] == 210 or data['dashboard'] == 2.11 or data['dashboard'] == 2.12 or data['dashboard'] == 2.13 or data['dashboard'] == 2.14 or data['dashboard'] == 2.15 or data['dashboard'] == 2.16 or data['dashboard'] == 2.17 or data['dashboard'] == 1.19%}
@@ -156,8 +175,11 @@
                 The defendant believes that they've paid the claim in full. Do you accept or reject this response?
                 {% elif data['dashboard'] == 1.8 %}
                 The defendant believes that they've paid what they owe, £1000. Do you accept or reject this response?
-                {% elif data['dashboard'] == 1.9 or data['dashboard'] == 110 or data['dashboard'] == 1.11%}
-                The defendant has rejected your claim. Do you accept or reject their response?
+                {% elif data['dashboard'] == 1.9 or data['dashboard'] == 110 %}
+                 The defendant has rejected your claim. Do you accept or reject their response?
+                {% elif data['dashboard'] == 1.11%}
+                 <p>The defendant has rejected your claim. Do you accept or reject their response?</p>
+                 The defendant has made an offer to settle out of court.
                 {% endif %}
               </td>
             </tr>
