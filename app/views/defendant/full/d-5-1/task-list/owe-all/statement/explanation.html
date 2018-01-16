@@ -1,0 +1,60 @@
+gi{% extends "layout_task-list.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block home_link %} ../task-list {% endblock %}
+{% block proposition_header %}
+{% set my_account="1" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <a href="#" class="link-back">Back</a>
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      {{formData | safe}}
+      {% if data['upload'] == '1'%}
+      <form method="post" action="../statement/residence" class="form">
+        {% elif data['upload'] == '2' %}
+        <form method="post" action="../statement/upload" class="form">
+          {% else %}
+          <form method="post" action="../statement/what-you-need" class="form">
+            {% endif %}
+            <h1 class="heading-large">
+              Explain to the claimant why you can't pay now
+            </h1>
+            {% if data['upload'] == '2'%}
+            <div class="panel panel-border-wide">
+              <p>You need to  upload your company or organisation's most recent statement of accounts.</p> <p>The accounts will will be sent to Jan Clark to explain why you can't pay the full amount now.</p>
+            </div>
+            {% elif  data['upload'] == '1' %}
+            <p>You need to answer some financial questions. Your answers will be sent to {% if data.counterclaim=="true" %}Mary Richards{%else%}Jan Smith{% endif %} to explain why you can't pay the full amount now.</p>
+            <h3 class="heading-medium">What you'll need</h3>
+            <p>You'll need to provide details of:
+              <ul class="list list-bullet">
+                <li>monthly bills and expenses</li>
+                <li>monthly income and benefits</li>
+                <li>bank balances and savings</li>
+                <li>debts or court orders</li>
+              </ul>
+              {% else %}
+       <p>You need to answer some financial questions. Your answers will be sent to {% if data.counterclaim=="true" %}Mary Richards{%else%}Jan Clark{% endif %} to explain why you can't pay the full amount now.</p>
+
+              {% endif %}
+              <input type="hidden" name="your_defence_options" value="complete">
+              <div class="form-group">
+                <input type="submit" class="button" value="Continue"/>
+              </div>
+            </form>
+          </div>
+        </div>
+      </main>
+      <form method="post"  action="#" class="form" style="; float: left">
+        <select id="dashboard2" name="dashboard2" onchange="window.location.href='explanation?upload='+this.value">
+          <option >Choose </option>
+          <option value="1" {% if data['upload'] == 1 %}selected{% endif %}>1 Statement of means</option>
+          <option value="2" {% if data['upload'] == 2 %}selected{% endif %}>2 Document upload</option>
+        </select>
+      </form>
+      {% endblock %}
