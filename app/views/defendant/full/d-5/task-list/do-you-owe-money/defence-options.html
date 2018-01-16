@@ -26,7 +26,7 @@ Money Claims Prototype
      <form
       name="aspnetForm"
       method="get"
-      onsubmit="multiNavigation('radio_select_group2', ['paid','defend_now'], ['../../task-list', '../../task-list']);return false;"
+      onsubmit="multiNavigation('radio_select_group2', ['paid','defend_now','defend_now_cc'], ['paid', '../../task-list', 'forms?radio_select_group=defend_now_cc&']);return false;"
       id="aspnetForm"
       autocomplete="off">
 
@@ -45,7 +45,14 @@ Money Claims Prototype
           <input id="radio-no" type="radio" name="radio_select_group2" value="defend_now" {{ checked("radio_select_group2", "defend_now") }}>
           <label for="radio-no" data-target="yes-info">I dispute the claim</label>
         </div>
+              <div class="multiple-choice">
+          <input id="radio-cc" type="radio" name="radio_select_group2" value="defend_now_cc" {{ checked("radio_select_group2", "defend_now_cc") }}>
+          <label for="radio-cc" data-target="yes-info">I dispute the claim and make a counterclaim</label>
+        </div>
       </div>
+
+
+
       <input type="hidden" name="do_you_owe_money" value="complete">
 
        {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('task-list')%}

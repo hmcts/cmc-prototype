@@ -1,0 +1,87 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="2" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds" style="display:none">
+      <a href="#" class="link-back">Back</a>
+      <h1 class="heading-large">
+        Explain why you can't pay now
+      </h1>
+      <br>
+
+        {% if data['som'] == 1 %}
+         <form action="statement/explanation?upload=hide" method="post" class="form">
+
+      {% elif data['som'] == 2 %}
+                 <form action="../../task-list" method="post" class="form">
+
+          {% else %}
+      <form action="statement/explanation?upload=hide" method="post" class="form">
+
+      {% endif %}
+
+        <fieldset>
+          <legend class="visually-hidden">Use the box to explain</legend>
+          <div id="claim-details">
+            <div id="describe-wrapper-claim-details-1" class="form-group">
+              <label class="form-label-bold" for="offer">
+                Enter your reasons
+                <span class="form-hint"><!-- For example you might blar blar blar ... --></span>
+              </label>
+              <textarea class="form-control"
+              id="non-payment-reason"
+              rows="3"
+              name="non-payment-reason"
+              type="text"
+              style="width: 90%">{{data['non-payment-reason']}}</textarea>
+            </div>
+          </div>
+        </fieldset>
+      {% if data['som'] == 1 %}
+        <div class="panel">
+          You'll also need to answer some questions about your finances
+        </div>
+      {% elif data['som'] == 2 %}
+          {% else %}
+      <div class="panel">
+          You'll also need to answer some questions about your finances
+        </div>
+      {% endif %}
+
+
+        <div class="form-group">
+          <input type="submit" class="button" value="Save and continue"/>
+        </div>
+      </form>
+    </div>
+  </div>
+</main>
+<script>
+  $(document).ready(function () {
+    var end_date = "{{data['set-year']}}-{{data['set-month']}}-{{data['set-day']}}"
+    var difference = moment(end_date).diff(moment(), 'days')
+    $("#st").html(moment())
+    $("#ed").html(moment(end_date))
+    if(difference < 28) {
+      window.location.href = "../../task-list";
+    }else if(difference > 28) {
+      $(".column-two-thirds").show();
+    }
+  })
+</script>
+<form method="post"  action="#" class="form" style="; float: left">
+  <select id="dashboard2" name="dashboard2" onchange="window.location.href='pay-by-set-date-after28?upload='+this.value">
+    <option  value="0" >Choose </option>
+    <option value="1" {% if data['upload'] == 1 %}selected{% endif %}>Document upload</option>
+    <option value="2" {% if data['upload'] == 2 %}selected{% endif %}>Statement of means</option>
+  </select>
+</form>
+{% endblock %}
