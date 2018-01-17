@@ -361,17 +361,7 @@ router.get('*/task-list/claim-amount', function (req, res, next) {
 
 module.exports = router
 
-// Check your answers for 'Claim details'
-router.get('*/task-list/claim-details', function (req, res, next) {
 
-  let claim_details = req.session.data.claim_details;
-  if (claim_details === "complete" ){
-    res.redirect("claim-details/check-your-answers");
-  } else {
-    next()
-  }
-
-});
 
 module.exports = router
 
