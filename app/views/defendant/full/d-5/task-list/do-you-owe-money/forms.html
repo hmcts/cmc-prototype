@@ -5,80 +5,154 @@ Money Claims Prototype
 {% block content %}
 <main id="content" role="main">
   {% include "includes/phase_banner_beta.html" %}
-
   <div class="grid-row">
     <div class="column-two-thirds">
       <a href="#" class="link-back">Back</a>
-
-
-      {% if data.radio_select_group=="defend_now_cc"%}
-      <h1 class="heading-large">
-        Defend now and also make a counterclaim
-      </h1>
-      <div class="panel-indent">
-        <div class="panel panel-border-wide">
-          <p >When you submit your response you'll be asked to complete a <a target="_blank" href='{{ asset_path }}/images/OCPN9A.pdf'>defence and counterclaim OCPN9B</a> form <span class="font-xsmall">(opens in a new window)</span> and email it to the Civil Money Courts </p>
-
-       </div>
-        <p >On the form you'll be asked to pay a court fee as part of your counterclaim.<br> Find out more about <a href='https://www.gov.uk/make-court-claim-for-money/court-fees'>court fees</a>. </p>
-      </div>
-
-      {% elseif data.radio_select_group=="all"%}
-      <h1 class="heading-large">
-        I admit all of the claim
-      </h1>
-      <div class="panel-indent">
-        <div class="panel panel-border-wide">
-          <p >When respond you'll be asked to complete an <a target="_blank"  href='{{ asset_path }}/images/OCPN9A.pdf'>admission OCPN9A</a> form <span class="font-xsmall">(opens in a new window)</span> and email to the Civil Money Courts </p>
-        </div>
-        <p >On the form you'll need to state when you’re going to pay the money.<br> You can suggest a repayment plan or a date when you can pay the money. </p>
-      </div>
-      {% elseif data.radio_select_group=="amount_less_claimed"%}
-      <h1 class="heading-large">
-        Less than the amount claimed
-      </h1>
-      <div class="panel-indent">
-        <div class="panel panel-border-wide">
-          <p >When you submit your response you'll be asked to complete both the <a target="_blank" href='{{ asset_path }}/images/OCPN9A.pdf'>admission  OCPN9A</a>  and a <a target="_blank" href='{{ asset_path }}/images/OCPN9A.pdf'>defence and counterclaim OCPN9B</a> forms <span class="font-xsmall">(forms open in a new window)</span> and email them to the Civil Money Courts </p>
-
-
-        </div>
-        <p >On the form your can offer the claimant the amount of money you believe you owe and explain why you don't owe the remaining amount.</p>
-      </div>
-      {% elseif data.radio_select_group=="Some"%}
-      <h1 class="heading-large">
-        I admit part of the claim
-      </h1>
-      <div class="panel-indent">
-        <div class="panel panel-border-wide">
-          <p >When you submit your response you'll be asked to complete both the <a target="_blank" href='{{ asset_path }}/images/OCPN9A.pdf'>admission  OCPN9A</a>  and a <a target="_blank" href='{{ asset_path }}/images/OCPN9A.pdf'>defence and counterclaim OCPN9B</a> forms <span class="font-xsmall">(forms open in a new window)</span> and email them to the Civil Money Courts </p>
-
-
-        </div>
-        <p >On the form your can offer the claimant the amount of money you believe you owe and explain why you don't owe the remaining amount.</p>
-      </div>
-
-
-      {% else %}
-
-      <h1 class="heading-large">
-        I owe all the money
-      </h1>
-      <div class="panel-indent">
-        <div class="panel panel-border-wide">
-          <p >When you submit your response you'll be asked to complete and email an <a target="_blank" href='{{ asset_path }}/images/OCPN9A.pdf'>admission OCPN9A</a> form <span class="font-xsmall">(draft version)</span> to the Civil Money Courts </p>
-        </div>
-        <p >On the form you'll need to state when you’re going to pay the money.<br> You can suggest a repayment plan or a date when you can pay the money. </p>
-      </div>
-      {% endif %}
-
-      <form method="post" action="../../task-list" class="form">
-        <div class="form-group">
-          <input type="submit" class="button" value="Continue"/>
-        </div>
-
-      </form>
+      <h1 class="heading-large">Complete your response on paper</h1>
+      {% if data.radio_select_group=="all" or data['dashboard'] == 1 %}
+      <p class="panel panel-border-wide">Complete and email the admission form N9A form by <strong class="bold">{% if data.radio_select_group_time=="No"%} <span id="Date"></span>{% elseif data.radio_select_group_time=="Yes" %}<span id="Date3"></span>{% else %} <span id="Date"></span>{% endif %} at 4pm</strong></p>
+      <p>You’ll need to state when you’re going to pay the money. You can suggest a repayment plan or a date when you can pay the money.</p>
+      <ul class="list list-number">
+        <li>
+         Complete <a target="_blank" href='{{ asset_path }}/images/OCON9A.pdf'>admission form N9A</a> <span class="font-xsmall">(opens in a new window)</span> entering these details:
+         <ul class="list list-bullet">
+          <li>000MC023</li>
+          <li>Claimant Jan Clark</li>
+          <li>Defendant Mary Richards</li>
+        </ul>
+      </li>
+      <li>Download and attach the completed form to an email</li>
+      <li>Send the email with the attached form to cmc-developer-notifications@hmcts.net</li>
+    </ul>
+    <p>You need <a target="_blank" href="https://get.adobe.com/uk/reader/">Acrobat Reader</a> to complete these forms.</p>
+    {% elseif data.radio_select_group=="amount_less_claimed" or data.radio_select_group=="Some" or data['dashboard'] == 2 or data['dashboard'] == 3%}
+    <p class="panel panel-border-wide">Complete and email the admission and defence forms by <strong class="bold">{% if data.radio_select_group_time=="No"%} <span id="Date"></span> {% elseif data.radio_select_group_time=="Yes" %}<span id="Date3"></span> {% else %} <span id="Date"></span>{% endif %} at 4pm
+    </strong>.</p>
+    <p>Use these to offer the claimant the amount of money you believe you owe and explain why you don't owe the remaining amount.</p>
+    <ul class="list list-number">
+      <li>
+       Complete both <a target="_blank" href='{{ asset_path }}/images/OCON9A.pdf'>admission form N9A</a> and <a target="_blank" href='{{ asset_path }}/images/OCON9B.pdf'>defence and counterclaim N9B</a> forms <span class="font-xsmall">(forms open in  new window)</span> entering these details:
+       <ul class="list list-bullet">
+        <li>000MC023</li>
+        <li>Claimant Jan Clark</li>
+        <li>Defendant Mary Richards</li>
+      </ul>
+    </li>
+    <li>Download and attach the completed form to an email</li>
+    <li>Send the email with the attached form to cmc-developer-notifications@hmcts.net</li>
+  </ul>
+  <p>You need <a target="_blank" href="https://get.adobe.com/uk/reader/">Acrobat Reader</a> to complete these forms.</p>
+  {% elseif data.radio_select_group=="defend_now_cc" or data['dashboard'] == 4%}
+  <p class="panel panel-border-wide">Complete and email the defence and counterclaim form by <strong class="bold">{% if data.radio_select_group_time=="No"%} <span id="Date"></span>{% elseif data.radio_select_group_time=="Yes" %}<span id="Date3"></span>{% else %} <span id="Date"></span>{% endif %} at 4pm
+  </strong></p>
+  <p>You'll need to pay a court fee if you make a counterclaim.</p>
+  <details role="group">
+    <summary role="button" aria-controls="details-content-0" aria-expanded="false">View claim fees</summary>
+    <div class="panel" id="details-content-0" aria-hidden="true">
+      <p>The fee is based on the amount you're claiming, including interest.
+      </p><table class="expandable-demo">
+        <thead>
+          <tr>
+            <th scope="col">Claim amount</th>
+            <th scope="col">Fee</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <ul class="list">
+                <li>£0.01 to £300</li>
+              </ul>
+            </td>
+            <td>£25</td>
+          </tr>
+          <tr>
+            <td>
+              <ul class="list">
+                <li>£300.01 to £500</li>
+              </ul>
+            </td>
+            <td>£35</td>
+          </tr>
+          <tr>
+            <td>
+              <ul class="list">
+                <li>£500.01 to £1,000</li>
+              </ul>
+            </td>
+            <td>£60</td>
+          </tr>
+          <tr>
+            <td>
+              <ul class="list">
+                <li>£1,000.01 to £1,500</li>
+              </ul>
+            </td>
+            <td>£70</td>
+          </tr>
+          <tr>
+            <td>
+              <ul class="list">
+                <li>£1,500.01 to £3,000</li>
+              </ul>
+            </td>
+            <td>£105</td>
+          </tr>
+          <tr>
+            <td>
+              <ul class="list">
+                <li>£3,000.01 to £5,000</li>
+              </ul>
+            </td>
+            <td>£185</td>
+          </tr>
+          <tr>
+            <td>
+              <ul class="list">
+                <li>£5,000.01 to £10,000</li>
+              </ul>
+            </td>
+            <td>£410</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
+  </details>
+  <br>
+  <ul class="list list-number">
+    <li>
+     Complete <a target="_blank" href='{{ asset_path }}/images/OCON9B.pdf'>defence and counterclaim N9B</a> forms <span class="font-xsmall">(opens in  new window)</span> entering these details:
+     <ul class="list list-bullet">
+      <li>000MC023</li>
+      <li>Claimant Jan Clark</li>
+      <li>Defendant Mary Richards</li>
+    </ul>
+  </li>
+  <li>Download and attach the completed form to an email</li>
+  <li>Send the email with the attached form to cmc-developer-notifications@hmcts.net</li>
+</ul>
+<p>You need <a target="_blank" href="https://get.adobe.com/uk/reader/">Acrobat Reader</a> to complete these forms.</p>
+{% else %}
+<h1 class="heading-large">
+  I owe all the money
+</h1>
+<div class="panel-indent">
+  <div class="panel panel-border-wide">
+    <p >When you submit your response you'll be asked to complete and email an <a target="_blank" href='{{ asset_path }}/images/OCPN9A.pdf'>admission OCPN9A</a> form <span class="font-xsmall">(draft version)</span> to the Civil Money Courts </p>
   </div>
+  <p >On the form you'll need to state when you’re going to pay the money.<br> You can suggest a repayment plan or a date when you can pay the money. </p>
+</div>
+{% endif %}
+</div>
+</div>
 </main>
+<form method="post"  action="#" class="for4" style=" float: left;">
+  <select id="dashboard2" name="dashboard2" onchange="window.location.href='forms?dashboard='+this.value">
+    <option  value="0" >Views</option>
+    <option value="1" {% if data['dashboard'] == 1 %}selected{% endif %}>1. I admit all</option>
+    <option value="2" {% if data['dashboard'] == 2 %}selected{% endif %}>2.I admit part of the claim </option>
+    <option value="3" {% if data['dashboard'] == 3 %}selected{% endif %}>3. I owe less than the amount claimed </option>
+    <option value="4" {% if data['dashboard'] == 4 %}selected{% endif %}>4.I dispute and counterclaim </option>
+  </select>
+</form>
 {% endblock %}
