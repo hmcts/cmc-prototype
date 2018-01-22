@@ -25,13 +25,13 @@
             <ul class="tabs-nav">
               <li><a href="#tabs-1">Claim status <span class="alert-icon stat"></span></a></li>
               <li><a href="#tabs-2">Claim history</a></li>
-              {% if data['claimant'] == 10 or data['claimant'] == 11 or data['claimant'] == 12 or data['claimant'] == 16 %}
+              {% if data['claimant'] == 10 or data['claimant'] == 11 or data['claimant'] == 12 or data['claimant'] == 16  %}
               <li><a  href="#tabs-3">Settle out of court <span class="alert-icon settle"></span></a></li>
               {%else%}
               {% endif  %}
             </ul>
           </div>
-          {% if data['claimant'] == 1 or data['claimant'] == 3 or data['claimant'] == 17 or data['claimant'] == 11 or data['claimant'] == 12 or data['claimant'] == 13 or data['claimant'] == 14 or data['claimant'] == 15 or  data['claimant'] == 16%}
+          {% if data['claimant'] == 1 or data['claimant'] == 3 or data['claimant'] == 17 or data['claimant'] == 11 or data['claimant'] == 12 or data['claimant'] == 13 or data['claimant'] == 14 or data['claimant'] == 15 or  data['claimant'] == 16 %}
               <style> .alert-icon.stat{ display:none}</style>
             {% if  data['claimant'] == 12  %}
                 <style> .alert-icon.settle{ display:none}</style>
@@ -115,9 +115,16 @@
               <p>Mary Richards has rejected your claim. You need to accept or reject this response. </p>
               <p> <a class="" href="claimant-response/dispute-claim/task-list">Do you accept or reject their response </a></p>
               {% endif %}
-              {% elseif data['claimant'] == 11 or data['claimant'] == 12 or data['claimant'] == 16 or data['claimant'] == 17  %}
+              {% elseif data['claimant'] == 11 or data['claimant'] == 12 or data['claimant'] == 16 %}
                <h2 class="heading-medium">The case will be reviewed by a judge</h2>
                 <p>You have rejected the defendant's response and asked for the claim to be reviewed by a judge. We'll contact you if a hearing date is scheduled and explain what you need to do to prepare. </p>
+
+              {% elseif data['claimant'] == 17  %}
+               <h2 class="heading-medium">You’ve signed the agreement</h2>
+                <p>You've both signed a legal agreement which replaces the claim. </p>
+
+
+
 
               {% elseif data['claimant'] == 12  %}
               <div class="">
@@ -250,24 +257,30 @@
               </div>
               {% endif %}
             </div>
-            {% if data['claimant'] == 10 or data['claimant'] == 11 or data['claimant'] == 12 or data['claimant'] == 16  %}
+            {% if data['claimant'] == 10 or data['claimant'] == 11 or data['claimant'] == 12 or data['claimant'] == 16   %}
             <div id="tabs-3" class="tab-pane">
                        {% if data['claimant'] == 10 or  data['claimant'] == 11%}
 
               <h2 class="heading-medium">Settle out of court </h2>
-              <p>Mary Richards wants to settle out of court.  </p>
-              <p>If you accept their offer. The court claim is then closed and you wont need to go to a hearing.</p>
-              <a href="offer-agreement/view-offer?defendant=offer">View their offer.</a>
+              <p>The defendant wants to settle out of court.  </p>
+              <p>Mary Richards has made an offer to settle out of court. You can accept, reject or make a counter offer.</p>
+              <a href="offer-agreement/view-offer?defendant=offer">View and respond to offer.</a>
 
                 {% elseif data['claimant'] == 12   %}
-                <h2 class="heading-medium">You made a counter offer to settle out of court </h2>
-                <p>The defendant Mary Richards can accept, reject or make another counter offer. We'll email you when they respond.</p>
-                <p><a href='#'>View your counter offer.</a></p>
+                <h2 class="heading-medium">Your offer has been sent to the defendant </h2>
+                <p>Mary Richards can accept, reject or make a counter offer. We'll email you when they respond.</p>
+              <p>If you settle out of court you’ll sign an agreement that replaces the claim. Until then the claim continues and might go to a court hearing.</p>
                 {% elseif data['claimant'] == 16  %}
-              <h2 class="heading-medium">You need to counter sign the agreement</h2>
+              <h2 class="heading-medium">Sign a legal agreement to settle out of court</h2>
               <div class="">
-                <p>   The defendant has agreed to your offer. You need to counter sign.</p>
-                <p><a href='offer-agreement/agreement'>Counter sign offer </a></p>
+                <p>   The defendant has accepted your offer. You need to sign a legal agreement to settle out of court. Mary Richards has signed the agreement.</p>
+                <p><a href='offer-agreement/agreement'>View and sign the agreement. </a></p>
+              </div>
+              {% elseif data['claimant'] == 17  %}
+              <h2 class="heading-medium">Sign a legal agreement to settle out of court</h2>
+              <div class="">
+                <p>   The defendant has accepted your offer. You need to sign a legal agreement to settle out of court. Mary Richards has signed the agreement.</p>
+                <p><a href='offer-agreement/agreement'>View and sign the agreement. </a></p>
               </div>
 
 
@@ -322,7 +335,7 @@
         <option value="10" {% if data['claimant'] == 10 %}selected{% endif %}>9. Dispute claim + offer made  </option>
         <option>------- Offer and agreements  ----------</option>
         <option value="11" {% if data['claimant'] == 11 %}selected{% endif %}>11. Offer from defendant  </option>
-        <option value="12" {% if data['claimant'] == 12 %}selected{% endif %}>12. Make counter offer  </option>
+        <option value="12" {% if data['claimant'] == 12 %}selected{% endif %}>12. Made counter offer  </option>
         <option value="16" {% if data['claimant'] == 16 %}selected{% endif %}>13. Counter sign agreement - message  </option>
         <option value="17" {% if data['claimant'] == 17 %}selected{% endif %}>14. Agreement signed - message  </option>
         <option>------- Mediation  ----------</option>
