@@ -19,6 +19,10 @@
             <ul class="tabs-nav">
               <li><a href="#tabs-1">Claim status</a></li>
               <li><a href="#tabs-2">Claim history</a></li>
+           {% if data['defendant'] == 10 or data['defendant'] == 11 or data['defendant'] == 15  %}
+              <li><a  href="#tabs-3">Settle out of court <span class="alert-icon settle"></span></a></li>
+              {%else%}
+              {% endif  %}
             </ul>
           </div>
           <div class="tab-content">
@@ -70,15 +74,12 @@
               <p>We’ve emailed Jan Clark your defence, explaining why you disagree with the claim.</p>
               <p>We’ll contact you when the claimant responds.</p>
               <p><a href="#">View your response</a></p>
-              {% elseif data['defendant'] == 10 %}
-              <h2 class="heading-medium">You've made an offer to settle out of court</h2>
-              <p>Jan Clark can accept, reject or make a counter offer.</p>
-              <p>We’ll email you when they respond.</p>
-              <p><a href="#">View your offer.</a> </p>
-              {% elseif data['defendant'] == 11 %}
-              <h2 class="heading-medium">Counter offer to settle out of court</h2>
-              <p>The claimant has made a counter offer to settle out of court.</p>
-              <p><a  href="offer-agreement/view-offer?defendant=defendant">View and respond to offer.</a></p>
+
+               {% elseif data['defendant'] == 10 or data['defendant'] == 11 or data['defendant'] == 15 %}
+
+                <h2 class="heading-medium">The case will be reviewed by a judge</h2>
+                <p>The claimant has rejected your response and asked for the claim to be reviewed by a judge. We'll contact you if a hearing date is scheduled and explain what you need to do to prepare.</p>
+
               {% elseif data['defendant'] == 12 %}
               <h2 class="heading-medium">The claimant has rejected your response </h2>
               <p>The claimant has requested mediation to help settle this
@@ -94,10 +95,7 @@
               {% elseif data['defendant'] == 14 %}
               <h2 class="heading-medium">You've rejected mediation</h2>
               <p>You have rejected the mediation request from the claimant. We'll contact you when a hearing date is scheduled and explain what you need to do to prepare.</p>
-              {% elseif data['defendant'] == 15 %}
-              <h2 class="heading-medium">Sign a legal agreement to settle out of court</h2>
-              <p>The claimant has accepted your offer. You need to sign a legal agreement to settle out of court. Jan Clark has signed the agreement.</p>
-              <p><a href="offer-agreement/agreement">Sign the agreement.</a> </p>
+
               {% elseif data['defendant'] == 16 %}
               <h2 class="heading-medium">You settled out of court</h2>
               <p>You have both signed a legal agreement which replaces the claim.</p>
@@ -115,7 +113,7 @@
               {% else %}
               <h2 class="heading-medium">More options </h2>
               {% endif %}
-              {% if data['defendant'] == 1 or  data['defendant'] == 2 or data['defendant'] == 3 or data['defendant'] == 4 or data['defendant'] == 5  or  data['defendant'] == 10 or data['defendant'] == 11 or data['defendant'] == 17%}
+              {% if data['defendant'] == 1 or  data['defendant'] == 2 or data['defendant'] == 3 or data['defendant'] == 4 or data['defendant'] == 5  or  data['defendant'] == 10 or data['defendant'] == 11 or data['defendant'] == 15 or data['defendant'] == 16 or data['defendant'] == 17%}
               {% else %}
               <h2 class="heading-small">Settle out of court</h2>
               <p>
@@ -138,47 +136,65 @@
               {% else %}
               {% endif %}
             </div>
-              <div id="tabs-2" class="tab-pane">
-                <h2 class="heading-medium">Claim history </h2>
-                {% if data['defendant'] == 10 or data['defendant'] == 11 or data['defendant'] == 12 or data['defendant'] == 13 or data['defendant'] == 14 or data['defendant'] == 15 or data['defendant'] == 16 %}
-                {% if data['defendant'] == 13 or data['defendant'] == 14 %}
-                <div class="history-timeline">
-                  <div class="history-statement"> <span > 8 October 2017</span> The claimant rejected your response and has requested mediation to help resolve this dispute. <a href="#">View response</a></div>
-                </div>
-                {%endif%}
-                {% if data['defendant'] == 16 %}
-                <div class="history-timeline ">
-                  <div class="history-statement"> <span > 12 October 2017</span> You need to sign a legal agreement to settle out of court. Jan Clark has signed the agreement. </div>
-                </div>
-                {% endif %}
-                {% if data['defendant'] == 11 or data['defendant'] == 15 or data['defendant'] == 16 %}
-                <div class="history-timeline ">
-                  <div class="history-statement"> <span > 11 October 2017</span> You made an offer to the claimant. </div>
-                </div>
-                {% endif %}
-                {% if data['defendant'] == 12 or data['defendant'] == 13   %}
-                {% else %}
-                <div class="history-timeline">
-                  <div class="history-statement"> <span > 8 October 2017</span> The claimant rejected youR response. <a href="#">View response</a></div>
-                </div>
-                {%endif%}
-                <div class="history-timeline ">
-                  <div class="history-statement "> <span > 1 October 2017</span>You responded to the claim. <a href="#">View response</a> </div>
-                </div>
-                <div class="history-timeline ">
-                  <div class="history-statement "> <span > 16 September 2017</span>Claim issued by the claimant Jan Clark.  </div>
-                </div>
-                {% elif data['defendant'] == 17 %}
-                <div class="history-timeline last">
-                  <div class="history-statement"> <span > 3 October 2017</span>Your <a href="view-claim">counterclaim</a> was sent to Jan Clark.</div>
-                </div>
-                {% else %}
-                <div class="history-timeline ">
-                  <div class="history-statement "> <span > 16 September 2017</span>Claim issued by the claimant Jan Clark.  </div>
-                </div>
-                {% endif %}
+            <div id="tabs-2" class="tab-pane">
+              <h2 class="heading-medium">Claim history </h2>
+              {% if data['defendant'] == 10 or data['defendant'] == 11 or data['defendant'] == 12 or data['defendant'] == 13 or data['defendant'] == 14 or data['defendant'] == 15 or data['defendant'] == 16 %}
+              {% if data['defendant'] == 13 or data['defendant'] == 14 %}
+              <div class="history-timeline">
+                <div class="history-statement"> <span > 8 October 2017</span> The claimant rejected your response and has requested mediation to help resolve this dispute. <a href="#">View response</a></div>
               </div>
+              {%endif%}
+              {% if data['defendant'] == 16 %}
+              <div class="history-timeline ">
+                <div class="history-statement"> <span > 12 October 2017</span> You need to sign a legal agreement to settle out of court. Jan Clark has signed the agreement. </div>
+              </div>
+              {% endif %}
+              {% if data['defendant'] == 11 or data['defendant'] == 15 or data['defendant'] == 16 %}
+              <div class="history-timeline ">
+                <div class="history-statement"> <span > 11 October 2017</span> You made an offer to the claimant. </div>
+              </div>
+              {% endif %}
+              {% if data['defendant'] == 12 or data['defendant'] == 13   %}
+              {% else %}
+              <div class="history-timeline">
+                <div class="history-statement"> <span > 8 October 2017</span> The claimant rejected your response. <a href="#">View response</a></div>
+              </div>
+              {%endif%}
+              <div class="history-timeline ">
+                <div class="history-statement "> <span > 1 October 2017</span>You responded to the claim. <a href="#">View response</a> </div>
+              </div>
+              <div class="history-timeline ">
+                <div class="history-statement "> <span > 16 September 2017</span>Claim issued by the claimant Jan Clark.  </div>
+              </div>
+              {% elif data['defendant'] == 17 %}
+              <div class="history-timeline last">
+                <div class="history-statement"> <span > 3 October 2017</span>Your <a href="view-claim">counterclaim</a> was sent to Jan Clark.</div>
+              </div>
+              {% else %}
+              <div class="history-timeline ">
+                <div class="history-statement "> <span > 16 September 2017</span>Claim issued by the claimant Jan Clark.  </div>
+              </div>
+              {% endif %}
             </div>
+            {% if data['defendant'] == 10 or data['defendant'] == 11 or data['defendant'] == 15  %}
+            <div id="tabs-3" class="tab-pane">
+             {% if data['defendant'] == 10 %}
+              <h2 class="heading-medium">You've made an offer to settle out of court</h2>
+              <p>Jan Clark can accept, reject or make a counter offer.</p>
+              <p>We’ll email you when they respond.</p>
+             {% elseif data['defendant'] == 11   %}
+              <h2 class="heading-medium">Counter offer to settle out of court</h2>
+              <p>The claimant has made a counter offer to settle out of court.</p>
+              <p><a  href="offer-agreement/view-offer?defendant=defendant">View and respond to offer.</a></p>
+             {% elseif data['defendant'] == 15  %}
+              <h2 class="heading-medium">Sign a legal agreement to settle out of court</h2>
+              <p>The claimant has accepted your offer. You need to sign a legal agreement to settle out of court. Jan Clark has signed the agreement.</p>
+              <p><a href="offer-agreement/agreement">Sign the agreement.</a> </p>
+
+            {% endif %}
+          </div>
+          {% endif %}
+          </div>
         </div>
       </div>
       <div class="column-one-third">
