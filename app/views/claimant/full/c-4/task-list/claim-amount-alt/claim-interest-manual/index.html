@@ -1,0 +1,70 @@
+{% extends "layout_task-list.html" %}
+
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+
+{% block home_link %} ../../task-list {% endblock %}
+{% block proposition_header %}
+{% set my_account="1" %}
+
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+
+
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+
+      <a href="#" class="link-back">Back</a>
+
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+
+
+        <form method="post" action="interest-date" class="form">
+
+
+        {{formData | safe}}
+
+        <h1 class="heading-large">
+          Calculate your interest
+        </h1>
+
+        <p>How to calculate goes here. <a href="">Link to gov's guidance </a> </p>
+<fieldset>
+             <label class="form-label" for="rate">Interest amount</label>
+            <input class="form-control form-control-1-8" name="rate-why" type="text" id="rate-why" value="{{data['rate-why']}}">
+</fieldset>
+
+
+
+
+      {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}
+        <div class="form-group">
+          <input type="submit" class="button" value="Save and continue"/>
+        </div>
+
+
+        <a href="{{ data.return_page if data.return_page | length > 0 else '../task-list' }}">Cancel</a>
+
+      {% else %}
+        <div class="form-group">
+          <input type="submit" class="button" value="Save and continue"/>
+        </div>
+
+      {% endif %}
+      </form>
+
+    </div>
+
+
+  </div>
+
+
+</main>
+
+
+{% endblock %}
