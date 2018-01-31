@@ -16,19 +16,15 @@ Money Claims Prototype
   {% endif %}
   <div class="grid-row">
     <div class="column-two-thirds">
-      {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}
+
       {% if data['claimant-type']=="Sole trader" or data['claimant-type']=="Individual" %}
       <form method="post" action="date-of-birth" class="form">
-        {% else %}
+        {% elseif data['claimant-type']=="Company" or data['claimant-type']=="Organisation"  %}
         <form method="post" action="phone" class="form">
-          {% endif %}
-          {% else %}
-          {% if data['defendant-type']=="Sole trader" or data['defendant-type']=="Individual" %}
-          <form method="post" action="date-of-birth" class="form">
-            {% else %}
-            <form method="post" action="phone" class="form">
+
               {% endif %}
-              {% endif %}
+
+
               {{formData | safe}}
               {% if data['claimant-type']=="Individual" %}
               <h1 class="heading-large">Your details</h1>
