@@ -247,7 +247,7 @@ router.get('*/task-list/eligibility/reason', function (req, res, next) {
 
 
   let eligibility = req.session.data.eligibility;
-  if (eligibility === "complete" ){
+  if (eligibility === "-complete" ){
     res.redirect("../eligibility/check-your-answers");
   } else {
     next()
@@ -263,7 +263,7 @@ router.get('*/task-list/read-rules', function (req, res, next) {
 
 
   let read_rules = req.session.data.read_rules;
-  if (read_rules === "complete" ){
+  if (read_rules === "-complete" ){
     res.redirect("read-rules/check-your-answers");
   } else {
     next()
@@ -278,7 +278,7 @@ router.get('*/task-list/resolve-dispute', function (req, res, next) {
 
 
   let resolve_dispute = req.session.data.resolve_dispute;
-  if (resolve_dispute === "complete" ){
+  if (resolve_dispute === "c-omplete" ){
     res.redirect("resolve-dispute/check-your-answers");
   } else {
     next()
@@ -294,7 +294,7 @@ router.get('*/task-list/resolve-dispute', function (req, res, next) {
 
 
   let read_rules = req.session.data.read_rules;
-  if (read_rules === "complete" ){
+  if (read_rules === "-complete" ){
     res.redirect("resolve-dispute/check-your-answers");
   } else {
     next()
@@ -309,7 +309,7 @@ module.exports = router
 router.get('*/task-list/completing-your-claim', function (req, res, next) {
 
   let completing_your_claim = req.session.data.completing_your_claim;
-  if (completing_your_claim === "complete" ){
+  if (completing_your_claim === "-complete" ){
     res.redirect("completing-your-claim/check-your-answers");
   } else {
     next()
@@ -322,7 +322,7 @@ module.exports = router
 router.get('*/task-list/your-details', function (req, res, next) {
 
   let your_details = req.session.data.your_details;
-  if (your_details === "complete" ){
+  if (your_details === "-complete" ){
     res.redirect("your-details/check-your-answers");
   } else {
     next()
@@ -336,7 +336,7 @@ module.exports = router
 router.get('*/task-list/their-details', function (req, res, next) {
 
   let their_details = req.session.data.their_details;
-  if (their_details === "complete" ){
+  if (their_details === "-complete" ){
     res.redirect("their-details/check-your-answers");
   } else {
     next()
@@ -350,7 +350,7 @@ module.exports = router
 router.get('*/task-list/claim-amount', function (req, res, next) {
 
   let claim_amount = req.session.data.claim_amount;
-  if (claim_amount === "complete" ){
+  if (claim_amount === "-complete" ){
     res.redirect("claim-amount/check-your-answers");
   } else {
     next()
@@ -369,7 +369,7 @@ module.exports = router
 router.get('*/task-list/your-details', function (req, res, next) {
 
   let confirm_details = req.session.data.confirm_details;
-  if (confirm_details === "complete" ){
+  if (confirm_details === "-complete" ){
     res.redirect("your-details/check-your-answers");
   } else {
     next()
@@ -385,7 +385,7 @@ module.exports = router
 router.get('*/task-list/settle-out-of-court', function (req, res, next) {
 
   let settle_out_of_court = req.session.data.settle_out_of_court;
-  if (settle_out_of_court === "complete" ){
+  if (settle_out_of_court === "-complete" ){
     res.redirect("settle-out-of-court/check-your-answers");
   } else {
     next()
@@ -398,7 +398,7 @@ router.get('*/task-list/settle-out-of-court', function (req, res, next) {
 router.get('*/task-list/more-time-to-respond', function (req, res, next) {
 
   let more_time_to_respond = req.session.data.more_time_to_respond;
-  if (more_time_to_respond === "complete" ){
+  if (more_time_to_respond === "-complete" ){
     res.redirect("more-time-to-respond/check-your-answers");
   } else {
     next()
@@ -441,7 +441,7 @@ module.exports = router*/
 router.get('*/task-list/mediation', function (req, res, next) {
 
   let mediation = req.session.data.mediation;
-  if (mediation === "complete" ){
+  if (mediation === "-complete" ){
     res.redirect("mediation/check-your-answers");
   } else {
     next()
