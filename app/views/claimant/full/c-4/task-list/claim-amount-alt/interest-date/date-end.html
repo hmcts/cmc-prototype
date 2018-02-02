@@ -22,29 +22,30 @@ Money Claims Prototype
   <div class="grid-row">
     <div class="column-two-thirds">
 
-      <form method="post" action="../cost" class="form">
 
         {{formData | safe}}
 
         <h1 class="heading-large">
-          Until what date
+          Interest end date
         </h1>
+       <form
+         name="aspnetForm"
+         method="post"
+         onsubmit="multiNavigation('interest-date', ['submitted','submitted','continue'], ['../cost', '../cost','amount']);return false;"
+         id="aspnetForm"
+         autocomplete="off">
 
         <fieldset>
          <div class="multiple-choice">
-            <input id="radio-1" type="radio" name="interest-date" value="Issue date" {{ checked("interest-date", "Issue date") }}>
-            <label for="radio-1"><strong class="bold">Until the date the claim is submitted </strong>
+            <input id="radio-1" type="radio" name="interest-date" value="submitted" {{ checked("interest-date", "Issue date") }}>
+            <label for="radio-1">When this claim is submitted
             </label>
           </div>
-           <div class="multiple-choice">
-            <input id="radio-2" type="radio" name="interest-date" value="Issue date" {{ checked("interest-date", "Issue date") }}>
-            <label for="radio-2"><strong class="bold">Continue claiming after the claim is submitted </strong>
-            </label>
-          </div>
-          <div class="multiple-choice" data-target="particular">
-             <input id="radio-3" name="interest-date" type="radio" value="Particular date" {{ checked("interest-date", "Particular date") }}>
-            <label for="radio-3"><strong class="bold">Specific date before the claim in submitted  </strong></label>
-          </div>
+
+<!--          <div class="multiple-choice" data-target="particular">
+             <input id="radio-3" name="interest-date" type="radio" value="submitted" {{ checked("interest-date", "Particular date") }}>
+            <label for="radio-3">A date before this claim in submitted </label>
+          </div>-->
           <div class="panel panel-border-narrow js-hidden" id="particular">
 
             <div class="form-date">
@@ -69,7 +70,11 @@ Money Claims Prototype
 
 
           </div>
-
+           <div class="multiple-choice">
+            <input id="radio-2" type="radio" name="interest-date" value="continue" {{ checked("interest-date", "Issue date") }}>
+            <label for="radio-2">Continue claiming interest after the claim is submitted
+            </label>
+          </div>
         </fieldset>
 
 
