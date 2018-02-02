@@ -22,8 +22,13 @@ Money Claims Prototype
   <div class="grid-row">
     <div class="column-two-thirds">
 
-      <form method="post" action="cost" class="form">
 
+       <form
+         name="aspnetForm"
+         method="post"
+         onsubmit="multiNavigation('interest-rate', ['issue-date','particular-date'], ['cost', 'interest-date/date']);return false;"
+         id="aspnetForm"
+         autocomplete="off">
         {{formData | safe}}
 
         <h1 class="heading-large">
@@ -34,44 +39,18 @@ Money Claims Prototype
           <legend class="visuallyhidden">
             When are you claiming interest from
           </legend>
-
-          <div class="multiple-choice" data-target="particular">
-             <input id="radio-1" name="interest-date" type="radio" value="Particular date" {{ checked("interest-date", "Particular date") }}>
-            <label for="radio-1"><strong class="bold">From a particular date</strong><br>
-              For example, the date an invoice was overdue or that you told someone they owed you the money.</label>
-          </div>
-          <div class="panel panel-border-narrow js-hidden" id="particular">
-
-            <div class="form-date">
-
-              <p style="color: #6F777B">For example, 31 03 2016</p>
-
-              <div class="form-group form-group-day">
-                <label for="interest-day">Day</label>
-                <input class="form-control" id="dob-day" name="interest-day" type="number" pattern="[0-9]*" min="0" max="31" value="{{ data['interest-day'] }}">
-              </div>
-
-              <div class="form-group form-group-month">
-                <label for="dob-month">Month</label>
-                <input class="form-control" id="interest-month" name="interest-month" type="number" pattern="[0-9]*" min="0" max="12" value="{{ data['interest-month'] }}">
-              </div>
-
-              <div class="form-group form-group-year">
-                <label for="dob-year">Year</label>
-                <input class="form-control" id="interest-year" name="interest-year" type="number" pattern="[0-9]*" min="0" max="2017" value="{{ data['interest-year'] }}">
-              </div>
-            </div>
-
-            <fieldset></fieldset>
-            <label class="form-label" for="date-why">Explain why you're claiming from this date</label>
-            <input class="form-control" name="date-why" type="text" id="date-why" value="{{data['date-why']}}">
-          </div>
-
           <div class="multiple-choice">
-            <input id="radio-2" type="radio" name="interest-date" value="Issue date" {{ checked("interest-date", "Issue date") }}>
+            <input id="radio-2" type="radio" name="interest-rate" value="issue-date" {{ checked("interest-date", "Issue date") }}>
             <label for="radio-2"><strong class="bold">From the date the claim is submitted</strong>
             </label>
           </div>
+          <div class="multiple-choice" data-target="particular">
+             <input id="radio-1" name="interest-rate" type="radio" value="particular-date" {{ checked("interest-date", "Particular date") }}>
+            <label for="radio-1"><strong class="bold">From a particular date  </strong><br>
+              For example, the date an invoice was overdue or that you told someone they owed you the money.</label>
+          </div>
+
+
 
         </fieldset>
 
