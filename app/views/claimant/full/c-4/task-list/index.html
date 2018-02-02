@@ -30,6 +30,8 @@
             </thead>
             <tbody>
               <!-- Check before you start -->
+            {% if eligibility=="hide" %}
+
               <tr id="check-before-you-start">
                 <td class="task">
                   <a href="task-list/eligibility/reason{{formQuery}}">
@@ -44,6 +46,8 @@
                   {% endif %}
                 </td>
               </tr>
+                                {% endif %}
+
               <!-- Check rules -->
               <tr id="read-rules">
                 <td class="task">
@@ -151,7 +155,7 @@
             </tr>
           </thead>
           <tbody>
-            {% set completed = true if data.resolve_dispute == "complete" and data.completing_your_claim == "complete" and data.your_details == "complete" and data.their_details == "complete" and data.claim_amount == "complete" and data.claim_details == "complete" and data.eligibility == "complete"%}
+            {% set completed = true if data.resolve_dispute == "complete" and data.completing_your_claim == "complete" and data.your_details == "complete" and data.their_details == "complete" and data.claim_amount == "complete" and data.claim_details == "complete"%}
             <tr id="check-and-send">
               {% if completed==true %}
               <td class="task">
