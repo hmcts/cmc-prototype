@@ -7,9 +7,31 @@ Money Claims Prototype
 	<div class="grid-row">
 		<div class="column-two-thirds">
 			<a href="#" class="link-back">Back</a>
-			<h1 class="heading-large">
+			<h1 class="heading-xlarge">
 				Cookies
 			</h1>
+                <div id="nav-links">
+<ol class="nav-list">
+  <li><a href="#overview">Overview</a></li>
+           {% if data['type'] == "service_specific"  %}
+  <li ><a href="#cmc">Civil money claims</a></li>
+
+
+          {% elif data['type'] == "generic"%}
+
+  <li ><a href="#cmc">Civil money claims</a></li>
+  <li><a href="#divorce">Divorce</a></li>
+  <li><a href="#probate">Probate</a></li>
+  <li><a href="#sscs">Social Security and Child Support Tribunal</a></li>
+
+
+          {% endif %}
+
+
+</ol>
+</div>
+<hr>
+      <h2 class="heading-large" id="overview">Overview</h2>
 			<p>A cookie is a small piece of data that’s stored on your computer, tablet, or phone when you visit a website. Most websites need cookies to work properly.</p>
 			<p>This service uses them to:</p>
 			<ul class="list list-bullet">
@@ -139,7 +161,150 @@ Money Claims Prototype
 					</tr>
 				</tbody>
 			</table>
-		</div>
+           {% if data['type'] == "service_specific"  %}
+   <h2 class="heading-large" id="cmc">Civil money claim cookies</h2>
+			<h3 class="heading-small">To make the service more secure</h3>
+			<p>We set cookies which prevent attackers from modifying the contents of the other cookies we set. This makes the service more secure and protects your personal information.</p>
+			<table>
+				<thead>
+					<tr>
+						<th >Name</th>
+						<th>Purpose</th>
+						<th >Expires</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th >TSxxxxxxxx</th>
+						<td>Protects your session from tampering</td>
+						<td >When you close your browser</td>
+					</tr>
+					<tr>
+						<th >__state</th>
+						<td>Identifies you to the service and secures your authentication</td>
+						<td >When you close your browser</td>
+					</tr>
+				</tbody>
+			</table>
+
+          {% elif data['type'] == "generic"%}
+
+ <h2 class="heading-large" id="cmc">Civil money claim cookies</h2>
+      			<h3 class="heading-small">To make the service more secure</h3>
+			<p>We set cookies which prevent attackers from modifying the contents of the other cookies we set. This makes the service more secure and protects your personal information.</p>
+			<table>
+				<thead>
+					<tr>
+						<th >Name</th>
+						<th>Purpose</th>
+						<th >Expires</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th >TSxxxxxxxx</th>
+						<td>Protects your session from tampering</td>
+						<td >When you close your browser</td>
+					</tr>
+					<tr>
+						<th >__state</th>
+						<td>Identifies you to the service and secures your authentication</td>
+						<td >When you close your browser</td>
+					</tr>
+				</tbody>
+			</table>
+          <h2 class="heading-large" id="divorce">Divorce cookies</h2>
+      			<h3 class="heading-small">To make the service more secure</h3>
+			<p>We set cookies which prevent attackers from modifying the contents of the other cookies we set. This makes the service more secure and protects your personal information.</p>
+			<table>
+				<thead>
+					<tr>
+						<th >Name</th>
+						<th>Purpose</th>
+						<th >Expires</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th >TSxxxxxxxx</th>
+						<td>Protects your session from tampering</td>
+						<td >When you close your browser</td>
+					</tr>
+					<tr>
+						<th >__state</th>
+						<td>Identifies you to the service and secures your authentication</td>
+						<td >When you close your browser</td>
+					</tr>
+				</tbody>
+			</table>
+          <h2 class="heading-large" id="probate">Probate cookies</h2>
+      			<h3 class="heading-small">To make the service more secure</h3>
+			<p>We set cookies which prevent attackers from modifying the contents of the other cookies we set. This makes the service more secure and protects your personal information.</p>
+			<table>
+				<thead>
+					<tr>
+						<th >Name</th>
+						<th>Purpose</th>
+						<th >Expires</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th >TSxxxxxxxx</th>
+						<td>Protects your session from tampering</td>
+						<td >When you close your browser</td>
+					</tr>
+					<tr>
+						<th >__state</th>
+						<td>Identifies you to the service and secures your authentication</td>
+						<td >When you close your browser</td>
+					</tr>
+				</tbody>
+			</table>
+          <h2 class="heading-large" id="sscs">Social Security and Child Support Tribunal </h2>
+      			<h3 class="heading-small">To make the service more secure</h3>
+			<p>We set cookies which prevent attackers from modifying the contents of the other cookies we set. This makes the service more secure and protects your personal information.</p>
+			<table>
+				<thead>
+					<tr>
+						<th >Name</th>
+						<th>Purpose</th>
+						<th >Expires</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th >TSxxxxxxxx</th>
+						<td>Protects your session from tampering</td>
+						<td >When you close your browser</td>
+					</tr>
+					<tr>
+						<th >__state</th>
+						<td>Identifies you to the service and secures your authentication</td>
+						<td >When you close your browser</td>
+					</tr>
+				</tbody>
+			</table>
+
+
+          {% endif %}
+
+
+
+    </div>
 	</div>
 </main>
+
+<form method="post"  action="#" class="form" style="float: left;">
+
+  <select id="control-box2" name="control-box2" onchange="window.location.href='?type='+this.value">
+    <option  value="0" {% if data['type'] == 0 %}selected{% endif %}></option>
+    <option value="generic" {% if data['type'] == "generic" %}selected{% endif %}>1 - Generic</option>
+    <option value="service_specific" {% if data['type'] == "service_specific" %}selected{% endif %}>2 -Service specific</option>
+
+
+  </select>
+
+
+</form>
 {% endblock %}
