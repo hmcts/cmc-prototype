@@ -13,17 +13,15 @@ Money Claims Prototype
 <main id="content" role="main">
 
   <div class="grid-row">
-    <div class="column-two-thirds">
 
-      <h1 class='heading-large' id='page-h1'>
+
+
+              <div class="column-half col1">
+                  <h1 class='heading-large' id='page-h1'>
         Sign in
       </h1>
-      <p>Sign in or <a href="create-account">create an account</a>.</p>
-
-
-
-    {% if data['control-box'] == 1 %}
-    <!-- first time user - make claim -->
+               {% if data['control-box'] == 1 %}
+               <!-- first time user - make claim -->
      <form  action="/claimant/full/c-4/task-list/eligibility/reason" method="get">
           <input type="hidden" name="eligibility_show" value="show">
 
@@ -81,16 +79,16 @@ Money Claims Prototype
 
 
       {% elseif data['control-box'] == 8 %}
-    <!-- CCJ issued -->
+      <!-- CCJ issued -->
      <form action="/dashboard/v4/home?dashboard=2.4" method="post">
 
       {% elseif data['control-box'] == 9 %}
-    <!-- counter offer from claimant -->
+      <!-- counter offer from claimant -->
         <form action="/dashboard/v4/home?dashboard=2.11" method="post">
 
 
       {% elseif data['control-box'] == 10 %}
-    <!-- CCJ issued -->
+      <!-- CCJ issued -->
         <form action="/dashboard/v4/home?dashboard=23" method="post">
 
           {% elseif data['control-box'] == 11 %}
@@ -101,7 +99,7 @@ Money Claims Prototype
           <!--    Dispute the claim plus offer  -->
           <form action="/dashboard/v4/home?dashboard=1.6" method="post">
             {% elseif data['control-box'] == 14 %}
-          <!--    Dispute the claim plus offer  -->
+            <!--    Dispute the claim plus offer  -->
           <form action="/dashboard/v4/home?dashboard=1.19" method="post">
 
           {% elseif data['control-box'] == 15 %}
@@ -118,26 +116,45 @@ Money Claims Prototype
 
         <div class='form-group'>
           <label class=" form-label" for="user_email">Email address</label>
-          <input class="optional form-control" type="email" />
+          <input class="optional form-control form-control-3-4" type="email" />
         </div>
         <div class='form-group'>
           <label class="password optional form-label" for="user_password">Password</label>
-          <input autocomplete="off" class="password optional form-control" type="password"/>
+          <input autocomplete="off" class="password optional form-control form-control-3-4" type="password"/>
         </div>
             <p><a href="forgotten-password-enter-email">Forgotten password?</a></p>
 
         <div class='form-group'>
           <input type="submit" name="commit" value="Sign in" class="btn button"/>
         </div>
-        <div>
-          <br>
-        </div>
 
       </form>
+              </div>
+              <div class="column-half col2">
+                <p class="form-title heading-medium">Not got an account? </p>
 
-      <div class='grid-row contactus-link'>
+                <p>Something about creating account goes here. If not needed then remove</p>
+                <a href="create-account" role="button">Create an account</a>
 
-      </div>
+                <p></p>
+              </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <div>
+
 </main>
 <form method="post"  action="#" class="form" style="float: left;">
   <select id="control-box2" name="control-box2" onchange="window.location.href='sign-in?control-box='+this.value">
@@ -183,6 +200,10 @@ Money Claims Prototype
 
 
 </form>
-
+<style>
+  .column-half {
+    margin-top:5%
+  }
+</style>
 {% endblock %}
 
