@@ -26,7 +26,7 @@ Money Claims Prototype
 
        <form
        name="aspnetForm"
-       method="post"      
+       method="post"
        onsubmit="multiNavigation('interest-rate', ['8 percent','Different rate','No interest'], ['interest-date', 'interest-date','cost']);return false;"
        id="aspnetForm"
        autocomplete="off">
@@ -47,31 +47,28 @@ Money Claims Prototype
           </legend>
 
           <fieldset></fieldset>
-          <p class="bold-medium">What annual rate of interest are you claiming?</p>
+          <p class="bold-medium">How do you want to claim interest?</p>
 
           <div class="multiple-choice">
             <input id="radio-1" type="radio" name="interest-rate" value="8 percent" {{ checked('interest-rate', '8 percent') }}>
-            <label for="radio-1">up to 8% 
+            <label for="radio-1">Same rate for the whole period
             </label>
           </div>
 
-          <div class="multiple-choice" data-target="different">
-            <input id="radio-2" name="interest-rate" type="radio" value="Different rate" {{ checked("interest-rate", "Different rate") }}>
-            <label for="radio-2">a different rate</label>
+          <div class="multiple-choice">
+            <input id="radio-1" type="radio" name="interest-rate" value="8 percent" {{ checked('interest-rate', '8 percent') }}>
+            <label for="radio-1">I want to break down interest by time period or item
+            </label>
           </div>
-          <div class="panel panel-border-narrow js-hidden" id="different">
-            <label class="form-label" for="rate">Rate you're claiming</label>
-            <input class="form-control form-control-1-8" name="rate" type="text" id="rate" value="{{data['rate']}}"> %
-            <fieldset></fieldset>
-            <label class="form-label" for="rate">Why you’re entitled to this rate</label>
-            <input class="form-control" name="rate-why" type="text" id="rate-why" value="{{data['rate-why']}}">
-          </div>
+
 
           <div class="multiple-choice">
             <input id="radio-3" type="radio" name="interest-rate" value="No interest" {{ checked("interest-rate", "No interest") }}>
             <label for="radio-3">I don't want to claim interest
             </label>
           </div>
+
+
 
         </fieldset>
 
@@ -97,7 +94,7 @@ Money Claims Prototype
         <div class="form-group">
           <input type="submit" class="button" value="Save and continue"/>
         </div>
-        
+
 
         <a href="{{ data.return_page if data.return_page | length > 0 else '../task-list' }}">Cancel</a>
 
