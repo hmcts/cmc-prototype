@@ -29,13 +29,12 @@ Money Claims Prototype
         {{formData | safe}}
 
         <h1 class="heading-large">
-          What annual rate of interest do you want to claim?
+          What rate of interest do you want to claim?
 
 
         </h1>
 
 
-        <p>You can claim 8% per year unless you know that a different rate applies.</p>
 
         <fieldset>
           <legend class="visuallyhidden">
@@ -46,20 +45,18 @@ Money Claims Prototype
 
           <div class="multiple-choice">
             <input id="radio-1" type="radio" name="interest-rate" value="8 percent" {{ checked('interest-rate', '8 percent') }}>
-            <label for="radio-1">8%
+            <label for="radio-1">8% per year
             </label>
           </div>
 
           <div class="multiple-choice" data-target="different">
             <input id="radio-2" name="interest-rate" type="radio" value="Different rate" {{ checked("interest-rate", "Different rate") }}>
-            <label for="radio-2">A different rate</label>
+            <label for="radio-2">Daily interest amount</label>
           </div>
           <div class="panel panel-border-narrow js-hidden" id="different">
-            <label class="form-label" for="rate">Annual rate you're claiming</label>
-            <input class="form-control form-control-1-8" name="rate" type="text" id="rate" value="{{data['rate']}}"> %
-            <fieldset></fieldset>
-            <label class="form-label" for="rate">Why you’re claiming this rate</label>
-            <input class="form-control" name="rate-why" type="text" id="rate-why" value="{{data['rate-why']}}">
+            <label class="form-label" for="rate">Daily interest amount</label>
+            <input class="form-control form-control-1-4 fee pound" name="rate" type="text" id="rate">
+
           </div>
 
 
@@ -67,20 +64,7 @@ Money Claims Prototype
         </fieldset>
 
 
-        <details>
 
-          <summary>
-            <span class="summary">Help with interest rates</span>
-          </summary>
-
-          <div class="panel panel-border-narrow">
-            <p>You can claim 8% interest on money owed to you. If you know that a different rate applies you can use that. For example if you have a contract with a specific rate.</p>
-            <p>The court will decide if you're entitled to some or all of the interest claimed. You might be asked to give reasons why you should get interest.</p>
-          </div>
-
-        </details>
-
-        <fieldset></fieldset>
 
       {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}
         <div class="form-group">
