@@ -53,29 +53,37 @@ Money Claims Prototype
             <input id="radio-yes" type="radio" name="radio_select_group" value="all" {{ checked("radio_select_group", "all") }}>
             <label for="radio-yes" data-target="yes-info">
               <strong class="bold-small">I admit all of the claim </strong><br>
-              <p>You can either pay the claim  amount in full or by instalments</p>
+              You can either pay the claim  amount in full or by instalments
             </label>
           </div>
           <div class="multiple-choice">
             <input id="radio-some" type="radio" name="radio_select_group" value="Some" {{ checked("radio_select_group", "Some") }}>
             <label for="radio-some" data-target="some-info">
               <strong class="bold-small">I admit part of the claim  </strong><br>
-              <p>You agree you owe some money but not the amount claimed </p>
+             You agree you owe some money but not the amount claimed
             </label>
           </div>
           <div class="multiple-choice">
             <input id="radio-no" type="radio" name="radio_select_group" value="reject" {{ checked("radio_select_group", "reject") }}>
             <label for="radio-no" data-target="no-info  "> <strong class="bold-small">I reject all of the claim</strong><br>
-              <p>You have either paid what you believe you owe or you reject the claim
+              You have either paid what you believe you owe or you reject the claim
               </label>
             </div>
             <input type="hidden" name="do_you_owe_money" value="complete">
-            <p></p>
-
+        </fieldset>
             <div class="form-group">
               <input type="submit" class="button" value="Save and continue"/>
             </div>
           </form>
         </div>
       </main>
+    <form method="post"  action="#" class="for4" style=" float: left;">
+      <select id="dashboard2" name="dashboard2" onchange="window.location.href='?version='+this.value">
+        <option  value="0" > </option>
+                <option value="testing" {% if data['version'] == 'testing' %}selected{% endif %}>Test</option>
+
+        <option  value="no-testing"  {% if data['version'] == 'no-testing' %}selected{% endif %}>Non-test</option>
+
+      </select>
+    </form>
 {% endblock %}
