@@ -23,7 +23,7 @@
        <input type="hidden" name="control-box" value="2">
                <input type="hidden" name="service_name" value="new money claims service">
 
-       {% elseif data['mcol'] == 2%}
+       {% elseif data['mcol'] == 2 or data['mcol'] == 5%}
        <form method="get" name="registration" action="interstitial" id="registration">
           <input type="hidden" name="service_name" value="money Claim Online (MCOL) service">
 
@@ -31,7 +31,7 @@
         {% elseif data['mcol'] == 3%}
         <!--respond to claim BETA-->
         <form method="get" name="registration" action="../../enter-access-code" id="registration">
-          {% elseif data['mcol'] == 4%}
+          {% elseif data['mcol'] == 4 %}
           <!--return to your claim defendant BETA-->
           <form method="get" name="registration" action="../../create-account" id="registration">
            <input type="hidden" name="control-box" value="8">
@@ -41,7 +41,7 @@
             {% endif %}
             <input type="submit" class="button " value="Continue"/>
           </form><fieldset></fieldset>
-            {% if data['mcol'] == 3 %}
+            {% if data['mcol'] == 3 or data['mcol'] == 2 %}
                         {% else %}
 
             <p><a href="other-id">Don't have a claim number?</a>  </p>
@@ -56,7 +56,8 @@
         <option value="1" {% if data['mcol'] == 1 %}selected{% endif %}>1 - Return to make claim (claimant) BETA</option>
         <option value="3" {% if data['mcol'] == 3 %}selected{% endif %}>2 - Respond money claims 1st time (defendant) BETA</option>
         <option value="4" {% if data['mcol'] == 4 %}selected{% endif %}>3 - Return  money claim (defendant) BETA</option>
-        <option value="2" {% if data['mcol'] == 2 %}selected{% endif %}>4 - MCOL (claimant & defendant)</option>
+        <option value="2" {% if data['mcol'] == 2 %}selected{% endif %}>4 - MCOL (make new claim or respond first time)</option>
+        <option value="5" {% if data['mcol'] == 5 %}selected{% endif %}>5 - MCOL (return to claim)</option>
       </select>
     </form>
     {% endblock %}
