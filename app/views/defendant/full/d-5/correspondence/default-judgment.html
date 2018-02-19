@@ -266,234 +266,7 @@ font-size:19px;
 
 
     <div class="page-break">&nbsp;</div>
-          <p class="page-title"> <span>Page 2 of 2</span></p>
-                <table class="check-your-answers">
-                <thead>
-                  <tr>
-                    <th colspan="2">
-                      <h2 class="heading-medium" id="claim-amount">
-                        Claim amount details
-                      </h2>
-                    </th>
-
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td class="no-border">
-                      Claim amount breakdown
-                    </td>
-                    <td class="no-border">
-                    </td>
-
-                  </tr>
-                  <tr class="subsection single-cell">
-                    {% if data['timeline-2'] !='' %}<td class="no-border single-cell">{% else %}<td class="single-cell ">{% endif %}
-                     {% if data['check'] =='2' or data['check'] =='3' %}Repair to the roof{% else %}{{data['amount-timeline-1']}}{% endif %}
-                   </td>
-                   {% if data['timeline-2'] !='' %}<td class="no-border single-cell">{% else %}<td class="single-cell ">{% endif %}
-                    {% if data['check'] =='2'  or data['check'] =='3' %}&pound400{% else %}£{{data['amount-value-1']}}{% endif %}
-                  </td>
-
-                </tr>
-                {% if data['amount-timeline-2'] !='' or data['check'] =='2'  or data['check'] =='3' %}
-                <tr class="subsection">
-                  <td class="single-cell">
-                   {% if data['check'] =='2'  or data['check'] =='3' %}Cost of call out repair{% else %}{{data['amount-timeline-2']}}{% endif %}
-                 </td>
-                 <td class="">
-                  {% if data['check'] =='2'  or data['check'] =='3' %}&pound233{% else %}{{data['amount-value-2']}}{% endif %}
-                </td>
-
-              </tr>
-              {% endif %}
-              <tr>
-                <td class="no-border">
-                  Claim interest
-                </td>
-                <td class="no-border">
-                  {% if data['radio_group2']=="interest_no" %}
-                  No
-                  {% elif data['radio_group2']=="interest_yes" or  data['check'] =='2' or data['check'] =='3' %}
-                  Yes
-                  {% else %}
-                  No
-                  {% endif %}
-                </td>
-     <tr>
-        <td class="">
-          Explanation
-        </td>
-        <td class="">
- The claimant reserves the right to claim interest under Section 69 of the County Courts Act 1984
-
-        </td>
-
-      </tr>
-              </tr>
-              {% if data['radio_group2']=="interest_yes" or  data['check'] =='2' or data['check'] =='3' %}
-              <tr>
-                <td class="no-border">
-                  How do you want to claim interest?
-                </td>
-                <td class="no-border">
-                  {% if data['radio_group1']=="interest_fixed"  or data['check'] =='2'%}
-                  Same rate for the whole period
-                  {% elif data['radio_group1']=="interest_variable"  or data['check'] =='3'%}
-                  Break down interest for different time periods or items
-                  {% else %}
-                  Same rate for the whole period
-                  {% endif %}
-                </td>
-
-            </tr>
-            {% if data['radio_group1']=="interest_variable"  or data['check'] =='3'%}
-            <tr>
-              <td class="no-border">
-                Total interest amount
-              </td>
-              <td class="no-border">
-               {% if data['check'] =='3' %}&pound;444.34{% else %}  £{{data['interest-amount-rate']}}{% endif %}
-             </td>
-
-          </tr>
-          <tr>
-            <td class="">
-              Breakdown of interest amount (optional)
-            </td>
-            <td class="">
-             {% if data['check'] =='3' %}This is calculated from the 31/01/17 to 23/09/17 at 8%. <br>Then from 30/09/17 onwards at 10%{% else %}{{data['interest-amount-rate-why']}}{% endif %}
-           </td>
-
-         </tr>
-         <tr>
-          <td class="no-border">
-            Continue to claim interest after you submit your claim?
-          </td>
-          <td class="no-border">
-            {% if data['continue-interest']=="interest_no" %}
-            No
-            {% elif data['continue-interest']=="interest_yes"  or data['check'] =='3' %}
-            Yes
-            {% else %}
-            No
-            {% endif %}
-          </td>
-
-      </tr>
-      {% if data['continue-interest']=="interest_yes"  or data['check'] =='3'%}
-      <tr>
-        <td class="">
-          What rate of interest do you want to claim?
-        </td>
-        <td class="">
-          {% if data['continue-interest-rate']=="8" %}
-          8%
-          {% elif data['continue-interest-rate']=="different" or data['check'] =='3'%}
-          {% if data['check'] =='3' %}&pound;344{% else %}  £{{data['continue-interest-rate-amount']}}{% endif %}, daily interest amount
-          {% endif %}
-        </td>
-
-      </tr>
-
-      {% endif %}
-      {% elif data['radio_group1']=="interest_fixed"  or  data['check'] =='2'%}
-                    <tr>
-        <td class="">
-          Explanation
-        </td>
-        <td class="">
- The claimant reserves the right to claim interest under Section 69 of the County Courts Act 1984
-
-        </td>
-
-      </tr>
-      {% if data['interest_rates']=="8" %}
-      <tr>
-        <td class="">
-          What rate of interest do you want to claim?
-        </td>
-        <td class="">
-          8%
-        </td>
-
-    </tr>
-    {% endif %}
-    {% if data['interest_rates']=="Different"  or  data['check'] =='2'%}
-    <tr>
-      <td class="no-border">
-        What rate of interest do you want to claim?
-      </td>
-      <td class="no-border">
-        {% if data['check'] =='2' %}10%{% else %}{{data['rate']}}%{% endif %}
-      </td>
-
-  </tr>
-  <tr>
-    <td class="">
-      Why you're claiming this rate
-    </td>
-    <td class="">
-     {% if data['check'] =='2' %}This is what im being I'm entitled to{% else %}{{data['rate-why']}}{% endif %}
-   </td>
-
- </tr>
- {% endif %}
- {% if data['interest-rate']!="No interest" %}
- <tr>
-  {% if data['interest-rate2']=="issue-date" %}<td class=""> {% else %} <td class="no-border">  {% endif %}
-    When are you claiming interest from?
-  </td>
-  {% if data['interest-rate2']=="issue-date" %}<td class=""> {% else %} <td class="no-border">  {% endif %}
-    {% if data['interest-rate2']=="issue-date" %}
-    The date you submit the claim
-    {% elif data['interest-rate2']=="particular-date"  or  data['check'] =='2' %}
-    A particular date
-    {% else %}
-    A particular date
-    {% endif %}
-  </td>
-
-</tr>
-{% if data['interest-rate2']=="particular-date"  or  data['check'] =='2'%}
-<tr>
-  <td class="no-border">
-    Date interest applied from
-  </td>
-  <td class="no-border">
-   {% if data['check'] =='2' %}31 March 2017{% else %}{{ data['interest-day'] }} {{ data['interest-month'] }} {{ data['interest-year'] }}{% endif %}
- </td>
-
-</tr>
-<tr>
-  <td>
-    Explain why you're claiming from this date
-  </td>
-  <td>
-    {% if data['check'] =='2' %}This is when the problems started{% else %}{{data['date_why']}}{% endif %}
-  </td>
-
-</tr>
-<tr>
-  <td class="">
-    When do you want to stop claiming interest?
-  </td>
-  <td class="">
-    {% if data['interest-date']=="submitted" %}
-    When you submit the claim
-    {% elif data['interest-date']=="continue" %}
-    Continue until the claim is settled or judgment made
-    {% else %}
-    Continue until the claim is settled or judgment made
-    {% endif %}
-  </td>
-
-</tr>
-{% endif %}
-{% endif %}
-{% endif %}
-</tbody>
-</table>
+          <p class="page-title">Claim number: 000LR095 <span>Page 2 of 2</span></p>
 
 
 
@@ -504,7 +277,7 @@ font-size:19px;
     <tr>
       <th colspan="2">
         <h2 id="cd" class="heading-medium">
-          Claim amount total
+          Claim amount
         </h2>
       </th>
 
@@ -520,12 +293,63 @@ font-size:19px;
       </td>
 
     </tr>
+    {% if  data['check'] =='3'%}
+
     <tr>
       <td>
-        Total interest claimed to the date of submission:
+        Total interest amount before claim issue
       </td>
       <td>
-         &pound;14.00
+       &pound;199.49
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Daily interest amount claimed after claim issue
+      </td>
+      <td>
+       &pound;5
+      </td>
+          </tr>
+
+{% endif %}
+    {% if  data['check'] =='2'%}
+    <tr>
+      <td>
+        Interest rate claimed
+      </td>
+      <td>
+       7%
+      </td>
+          </tr>
+    <tr>
+      <td>
+        Date interest is claimed from:
+      </td>
+      <td>
+       1 October 2017
+      </td>
+          </tr>
+{% endif %}
+
+    <tr>
+      <td>
+        Interest daily amount:
+      </td>
+      <td>
+       &pound;34.49
+      </td>
+
+    </tr>
+
+
+
+    <tr>
+      <td>
+        Total interest
+      </td>
+      <td>
+         &pound;165.84
       </td>
 
     </tr>
@@ -534,31 +358,50 @@ font-size:19px;
         Claim fee
       </td>
       <td>
-         &pound;350.00
+         &pound;105.00
+      </td>
+
+    </tr>
+
+     <tr>
+      <td class="bold-medium">
+        <span class="bold">Amount already paid:</span>
+      </td>
+      <td>
+         &pound;0.00
+      </td>
+
+    </tr>
+     <tr>
+      <td class="bold-medium">
+        <span class="bold">Amount to be paid by defendant:</span>
+      </td>
+      <td>
+      &pound;1,304.49
       </td>
 
     </tr>
     <tr>
       <td class="bold-medium">
-        <span class="bold">Total</span>
+        <span class="bold">When you want the defendant to pay:</span>
       </td>
       <td>
-        <strong> &pound;1364.00</strong>
+        Immediately
       </td>
 
     </tr>
+
   </tbody>
 </table>
 
 
-{% endif %}
 {% if   data['check']== 2 or data['check']== 3 %}
 <table >
   <thead>
     <tr>
       <th colspan="2">
         <h2 class="heading-medium">
-          Statement of Truth
+          Declaration
         </h2>
       </th>
     </tr>
@@ -566,7 +409,7 @@ font-size:19px;
   <tbody>
     <tr>
       <td>
-        Declaration
+
       </td>
       <td>
 I declare that the details I have given are true to the best of my knowledge.
@@ -585,52 +428,12 @@ I declare that the details I have given are true to the best of my knowledge.
   </tbody>
 </table>
 {% endif %}
-  <p>If you don't respond on or before <strong>4pm, <span id="date"></span></strong> , you could get a default County Court Judgment (CCJ) made against you.</p>
 
 </main>
 <form method="post"  action="#" class="form" style="position: absolute;">
   <select id="check2" name="check2" onchange="window.location.href='?check='+this.value">
     <option  value="0" >Choose</option>
-    <option  value="2" {% if data['check'] == 2 %}selected{% endif %}>2. Interest - fixed rate</option>
-    <option  value="3" {% if data['check'] == 3 %}selected{% endif %}>3. Interest - manual rate</option>
+    <option  value="2" {% if data['check'] == 2 %}selected{% endif %}>1. Interest - fixed rate</option>
+    <option  value="3" {% if data['check'] == 3 %}selected{% endif %}>2. Interest - manual rate</option>
   </select>
 </form>
-
-<script src="{{ asset_path }}/javascripts/jquery-1.11.3.js"></script>
-<script>
-  $(document).ready(function() {
-
-  var monthNames = [ "January", "February", "March", "April", "May", "June",
-  "July", "August", "September", "October", "November", "December" ];
-
-
-  var monthNamesCal = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun",
-  "Jul", "Aug", "Sept", "Oct", "Nov", "Dec" ];
-
-
-
-  var newDate = new Date();
-  newDate.setDate(newDate.getDate()+ 14) ;
-
-  var newDate2 = new Date();
-  newDate2.setDate(newDate2.getDate()) ;
-
-  var newDate3 = new Date();
-  newDate3.setDate(newDate3.getDate()+ 28);
-
-  var newDate4 = new Date();
-  newDate4.setDate(newDate4.getDate())+ 100 ;
-
-
-
-/*$('#Date').html(" " + newDate.getDate() + ' ' + monthNames[newDate.getMonth()] + ' ' + newDate.getFullYear());
-*/$('#Date, .dates').html(" " + newDate.getDate() + ' ' + monthNames[newDate.getMonth()] + ' ' + newDate.getFullYear());
-$('#Date2, .dates2').html(" " + newDate2.getDate() + ' ' + monthNames[newDate2.getMonth()] + ' ' + newDate2.getFullYear());
-$('#Date3, .dates3').html(" " + newDate3.getDate() + ' ' + monthNames[newDate3.getMonth()] + ' ' + newDate3.getFullYear());
-$('#DateCal, .datesCal').html(" " + newDate4.getDate() + ' ' + monthNamesCal[newDate4.getMonth()] + ' ' + newDate4.getFullYear());
-
-});
-
-
-
-</script>
