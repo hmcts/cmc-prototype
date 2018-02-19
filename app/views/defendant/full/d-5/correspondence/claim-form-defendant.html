@@ -140,7 +140,15 @@ font-size:19px;
 <tbody>
 <tr>
 <td><img class="crest" src="{{ asset_path }}/images/crest.png"  alt=""/></td>
-<td> <img class="seal"  src="{{ asset_path }}/images/seal.png" alt="" /></td>
+<td>
+
+  {% if  data['check'] =='1' %}
+  {%else%}
+    <img class="seal"  src="{{ asset_path }}/images/seal.png" alt="" />
+
+  {%endif%}
+
+</td>
   <td rowspan="2"><p>In the County Court Business Centre Online Court</p>
     <p class="claim-number">Claim number: 000LR095</p>
     <strong>Claimant name:</strong> Jan Clark<br>
@@ -150,7 +158,6 @@ font-size:19px;
 </tbody>
 </table>
     <h2 class="heading-medium">Defendant's response</h2>
-
 <p>This document sets out the defendant's response to your civil money claim.</p>
   </header>
   {% if data.counterclaim=="true" %}
@@ -428,8 +435,9 @@ If the defendant doesn't want to mediate then the case will be reviewed by a jud
 <form method="post"  action="#" class="form" style="position: absolute; margin-top:80px">
   <select id="check2" name="check2" onchange="window.location.href='?check='+this.value">
     <option  value="0" >Choose</option>
-    <option  value="9" {% if data['check'] == 9 %}selected{% endif %}>1. I've dispute the claim </option>
-    <option  value="8" {% if data['check'] == 8 %}selected{% endif %}>2. Paid what I owe - states paid</option>
+    <option  value="1" {% if data['check'] == 1 %}selected{% endif %}>1. Defendant response - reference only </option>
+    <option  value="9" {% if data['check'] == 9 %}selected{% endif %}>1. Sealed - I've dispute the claim </option>
+    <option  value="8" {% if data['check'] == 8 %}selected{% endif %}>2. Sealed - Paid what I owe - states paid</option>
   </select>
 </form>
 
