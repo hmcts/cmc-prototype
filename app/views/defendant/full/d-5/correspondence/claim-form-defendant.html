@@ -134,8 +134,13 @@ font-size:19px;
 </style>
 <main id="content"  role="main">
   <header>
+ {% if   data['check']== 1  %}
+          <p class="page-title">For reference only <span>Page 1 of 2</span></p>
+
+{% else %}
       <p class="page-title">&nbsp; <span>Page 1 of 2</span></p>
 
+  {% endif %}
   <table class="crestLogo">
 <tbody>
 <tr>
@@ -152,7 +157,15 @@ font-size:19px;
   <td rowspan="2"><p>In the County Court Business Centre Online Court</p>
     <p class="claim-number">Claim number: 000LR095</p>
     <strong>Claimant name:</strong> Jan Clark<br>
-    <strong>Claim issued:</strong> 18 October 2017</td>
+    <strong>Claim issued:</strong> 18 October 2017
+    {% if  data['check'] =='1' %}
+      <br><strong>Defence submitted:</strong> 12 January 2018 at 3:25PM
+
+    {%else%}
+
+  {%endif%}
+  </td>
+
 </tr>
 
 </tbody>
@@ -207,7 +220,7 @@ font-size:19px;
               Telephone
             </td>
             <td>
-             {% if data['check'] =='9' or data['check'] =='8' %}07824999612{% else %}{{data['day']}} {{data['month']}} {{data['defendant-phone']}}{% endif %}
+             {% if  data['check'] =='1' or data['check'] =='9' or data['check'] =='8' %}07824999612{% else %}{{data['day']}} {{data['month']}} {{data['defendant-phone']}}{% endif %}
            </td>
          </tr>
        </tbody>
@@ -233,7 +246,7 @@ font-size:19px;
             {% if data['check']== 8 or data.radio_select_group2=="amount_claimed" %}
               They have paid what they believe i owe
               {% endif %}
-                        {% if data['check']== 9 or data.radio_select_group2=="defend_now" %}
+                        {% if data['check'] =='1' or data['check']== 9 or data.radio_select_group2=="defend_now" %}
 They dispute all of the claim
 
                  {% endif %}
@@ -241,7 +254,7 @@ They dispute all of the claim
           </td>
         </tr>
 
-   {% if  data.radio_select_group=="Some" or data['check']== 4 or data['check']== 5 or data['check']== 6 or data['check']== 7 or data['check']== 9 or data['check']== 8 or data.radio_select_group2=="amount_claimed" or data.radio_select_group=="Paid-some" or data.radio_select_group2=="defend_now"%}
+   {% if  data['check'] =='1' or data.radio_select_group=="Some" or data['check']== 4 or data['check']== 5 or data['check']== 6 or data['check']== 7 or data['check']== 9 or data['check']== 8 or data.radio_select_group2=="amount_claimed" or data.radio_select_group=="Paid-some" or data.radio_select_group2=="defend_now"%}
 
     {% if data.radio_select_group2=="amount_claimed" or data['check']== 8 %}
     <tr class="">
@@ -262,7 +275,7 @@ I sent a cheque to Jan Clark
     </td>
   </tr>
   {% endif %} <!-- end of partial -->
-  {% if data['radio_select_group2']=="defend_now" or data['check']== 9 %} <!-- start of defend -->
+  {% if data['check'] =='1' or data['radio_select_group2']=="defend_now" or data['check']== 9 %} <!-- start of defend -->
   <tr>
     <td class="no-border">
       Why they dispute the claim
@@ -272,7 +285,7 @@ I sent a cheque to Jan Clark
   </tr>
   <tr>
     <td colspan="2" class="single-cell">
-      {% if data['check'] =='9'  or data['check'] =='8' %}
+      {% if data['check'] =='1' or  data['check'] =='9'  or data['check'] =='8' %}
       <p>Mary Richards and I signed a contract for building works on our roof. The work on the roof was completed but there was a problem with one section. I asked Mary Richards to get the problem fixed, but hadn't had a reply.</p>
       <p>I'll have to get another builder to rectify the problem which will cost me &pound;1,500.</p>
       <p>Therefore, I'm making a money claim for &pound;1,500 to compensate for the extra money I am going to need to spend.</p>
@@ -281,7 +294,7 @@ I sent a cheque to Jan Clark
   </tr>
   <tr>
     {% endif %}  <!-- start of defendnow-->
-    {% if data['radio_select_group2']=="defend_now" or data.radio_select_group=="Some" or data.amount_paid=="less" or data['check']== 4 or data['check']== 5 or data['check']== 6 or data['check']== 7 or data['check']== 9%} <!-- start of time-line and evidence -->
+    {% if data['check'] =='1' or data['radio_select_group2']=="defend_now" or data.radio_select_group=="Some" or data.amount_paid=="less" or data['check']== 4 or data['check']== 5 or data['check']== 6 or data['check']== 7 or data['check']== 9%} <!-- start of time-line and evidence -->
     <tr>
       <td class="no-border">
         Defendant's timeline of what happened
@@ -291,19 +304,19 @@ I sent a cheque to Jan Clark
     </tr>
     <tr class="subsection ">
       {% if data['cd-timeline-2'] !='' %}<td class="no-border single-cell">{% else %}<td class="single-cell ">{% endif %}
-       {% if data['check'] =='9' %}1 April 2017{% else %}{{data['cd-date-1']}}{% endif %}
+       {% if data['check'] =='1' or data['check'] =='9' %}1 April 2017{% else %}{{data['cd-date-1']}}{% endif %}
      </td>
      {% if data['cd-timeline-2'] !='' %}<td class="no-border single-cell">{% else %}<td class="single-cell ">{% endif %}
-      {% if data['check'] =='9' %}I contacted Jan Clark to discuss building works on our roof.{% else %}{{data['cd-timeline-1']}}{% endif %}
+      {% if data['check'] =='1' or data['check'] =='9' %}I contacted Jan Clark to discuss building works on our roof.{% else %}{{data['cd-timeline-1']}}{% endif %}
     </td>
   </tr>
-  {% if data['cd-timeline-2'] !='' or data['check'] =='2'  or data['check'] =='3' %}
+  {% if data['cd-timeline-2'] !='' or data['check'] =='1'  or data['check'] =='2'  or data['check'] =='3' %}
   <tr class="subsection">
     <td class="no-border single-cell">
-     {% if data['check'] =='9' %}7 April 2017{% else %}{{data['cd-date-2']}}{% endif %}
+     {% if data['check'] =='1' or data['check'] =='9' %}7 April 2017{% else %}{{data['cd-date-2']}}{% endif %}
    </td>
    <td class="no-border">
-    {% if data['check'] =='9' %}We agreed what work should be done and signed a contract.{% else %}{{data['cd-timeline-2']}}{% endif %}
+    {% if data['check'] =='1' or data['check'] =='9' %}We agreed what work should be done and signed a contract.{% else %}{{data['cd-timeline-2']}}{% endif %}
   </td>
 </tr>
 {% endif %}
@@ -312,7 +325,7 @@ I sent a cheque to Jan Clark
    Defendant's Comments about claimant's timeline
  </td>
  <td>
-   {% if data['check'] =='9' %}They are exaggerating the what happened. My side of the story is this....{% else %} {{data['defence-disagree-timeline']}}{% endif %}
+   {% if data['check'] =='1' or data['check'] =='9' %}They are exaggerating the what happened. My side of the story is this....{% else %} {{data['defence-disagree-timeline']}}{% endif %}
  </td>
 </tr>
 <tr>
@@ -324,7 +337,7 @@ I sent a cheque to Jan Clark
 </tr>
 <tr class="subsection">
   <td class="no-border single-cell">
-   {% if data['check'] =='9' %}Contracts and agreements{% else %}
+   {% if data['check'] =='1' or data['check'] =='9' %}Contracts and agreements{% else %}
    {% if data['legal-status1'] == 2 %}Contracts and agreements - {% endif %}
    {% if data['legal-status1'] == 3 %}Expert witness - {% endif %}
    {% if data['legal-status1'] == 4 %}Letters, emails and other correspondence - {% endif %}
@@ -335,10 +348,10 @@ I sent a cheque to Jan Clark
    {% endif %}
  </td>
  <td class="no-border ">
-  {% if data['check'] =='9'  %}I have a signed contract showing that you broke the contract agreement.{% else %}{{data['legal-status-description-1'] }}{% endif %}
+  {% if data['check'] =='1' or  data['check'] =='9'  %}I have a signed contract showing that you broke the contract agreement.{% else %}{{data['legal-status-description-1'] }}{% endif %}
 </td>
 </tr>
-{% if data['legal-status2'] !='' or data['check'] =='9'  %}
+{% if data['legal-status2'] !='' or data['check'] =='1' or data['check'] =='9'  %}
 <tr class="subsection">
   <td class="no-border single-cell">
    {% if data['check'] =='9' %}Photos {% else %}
@@ -352,7 +365,7 @@ I sent a cheque to Jan Clark
    {% endif %}
  </td>
  <td class="no-border">
-  {% if data['check'] =='9'  %}The photos I've taken show the poor workmanship of the roof repair.{% else %}{{data['legal-status-description-2'] }}{% endif %}
+  {% if data['check'] =='1' or data['check'] =='9'  %}The photos I've taken show the poor workmanship of the roof repair.{% else %}{{data['legal-status-description-2'] }}{% endif %}
 </td>
 {% endif %}
 </tr>
@@ -361,7 +374,7 @@ I sent a cheque to Jan Clark
     Defendant's comments about the claimant's evidence
   </td>
   <td>
-   {% if data['check'] =='9' %}I never received any of these emails. Also the photos arent a fair refection of my work.{% else %} {{data['defence-disagree-evidence']}}{% endif %}
+   {% if data['check'] =='1' or data['check'] =='9' %}I never received any of these emails. Also the photos arent a fair refection of my work.{% else %} {{data['defence-disagree-evidence']}}{% endif %}
  </td>
 </tr>
 {% endif %} <!-- end of time-line and evidence -->
@@ -369,9 +382,16 @@ I sent a cheque to Jan Clark
 </table>
 {% endif %}
     <div class="page-break">&nbsp;</div>
-          <p class="page-title">Claim number: 000LR095 <span>Page 2 of 2</span></p>
+   {% if   data['check']== 1  %}
+          <p class="page-title">For reference only. Claim number: 000LR095<span>Page 2 of 2</span></p>
 
-{% if   data['check']== 8 or data['check']== 9 %}
+{% else %}
+      <p class="page-title">Claim number: 000LR095 <span>Page 2 of 2</span></p>
+
+  {% endif %}
+
+
+{% if   data['check'] =='1' or data['check']== 8 or data['check']== 9 %}
 <table >
   <thead>
     <tr>
@@ -395,7 +415,7 @@ I Mary Richards, believe that the facts stated in this defence are true.
   </tbody>
 </table>
 {% endif %}
-      {% if data['check']== 9 %}
+      {% if data['check'] =='1' or data['check']== 9 %}
 
 <table >
   <thead>
