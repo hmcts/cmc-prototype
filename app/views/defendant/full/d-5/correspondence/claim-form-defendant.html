@@ -22,7 +22,9 @@ html {
 #content{
   background:#fff;
   padding:70px;
+  padding-bottom: 10px;
  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
 }
 body {
   counter-reset: section;
@@ -33,6 +35,7 @@ body {
   line-height: 1.25;
   -webkit-font-smoothing: antialiased;
 }
+
 .section {
   margin-bottom: 25px;
 }
@@ -63,9 +66,7 @@ table th {
  text-align:left;
  border-bottom: 1px solid #999;
 }
-table tr:last-child td {
-  border-bottom: none
-}
+
 table td:first-child {
   width: 280px;
   vertical-align: top;
@@ -104,6 +105,7 @@ font-size:19px;
       }
     .crestLogo  tr td:nth-child(2) {
         width: 30%;
+        text-align:center
       }
     .crestLogo tr td:nth-child(3) {
         width: 60%;
@@ -116,6 +118,8 @@ font-size:19px;
 }
 .page-title {
     text-align:center;
+    padding-top:20px;
+    font-size:10px
 }
 .page-title span{
     float:right
@@ -125,39 +129,39 @@ font-size:19px;
 
 }
 .page-break{
+
     background: #d9d9d9;
-    margin-left: -72px;
-    margin-right: -72px;
-    margin-top: 40px;
-    margin-bottom: 40px;
+    margin-left: -70px;
+    margin-right: -70px;
+    margin-top: 20px;
+}
+.claim-details{
+text-align:right
+}
+
+.footer td{
+  font-size:10px;
+  padding-top:40px;
+   border-bottom: none;
+}
+.footer td:nth-child(3){
+text-align:right
 }
 </style>
 <main id="content"  role="main">
   <header>
- {% if   data['check']== 1  %}
-          <p class="page-title"> <span>Page 1 of 2</span></p>
 
-{% else %}
-      <p class="page-title">&nbsp; <span>Page 1 of 2</span></p>
-
-  {% endif %}
   <table class="crestLogo">
 <tbody>
 <tr>
 <td><img class="crest" src="{{ asset_path }}/images/crest.png"  alt=""/></td>
 <td>
 
-  {% if  data['check'] =='1' %}
-  {%else%}
-
-
-  {%endif%}
 
 </td>
-  <td rowspan="2"><p>In the County Court Business Centre Online Court</p>
+  <td rowspan="2" class="claim-details"><p>In the County Court Business Centre Online Court</p>
     <p class="claim-number">Claim number: 000LR095</p>
-    <strong>Claimant name:</strong> Jan Clark<br>
-    <strong>Claim issued:</strong> 18 October 2017
+    <strong>Issued:</strong> 18 October 2017
     {% if  data['check'] =='1' %}
       <br><strong>Defence submitted:</strong> 12 January 2018 at 3:25PM
 
@@ -191,7 +195,8 @@ font-size:19px;
           Name
         </td>
         <td>
-          Mrs Mary Richards
+            {% if data['check'] =='1' %}Smith Limited{% else %}Mrs Mary Richards{% endif %}
+
         </td>
       </tr>
       <tr>
@@ -205,15 +210,19 @@ font-size:19px;
             SW1 H9A<br>
           </td>
         </tr>
+            {% if data['check'] =='1' %}
+
+            {% else %}
 
         <tr>
           <td>
             Date of birth
           </td>
           <td>
-            {% if data['check'] =='9' %}31 January 1970{% else %}{{data['day']}} {{data['month']}} {{data['year']}}{% endif %}
+            31 January 1970
           </td>
         </tr>
+      {% endif %}
         <tr>
           <tr>
             <td>
@@ -322,7 +331,7 @@ I sent a cheque to Jan Clark
 {% endif %}
 <tr>
   <td>
-   Defendant's Comments about claimant's timeline
+   Comments about claimant's timeline
  </td>
  <td>
    {% if data['check'] =='1' or data['check'] =='9' %}They are exaggerating the what happened. My side of the story is this....{% else %} {{data['defence-disagree-timeline']}}{% endif %}
@@ -371,7 +380,7 @@ I sent a cheque to Jan Clark
 </tr>
 <tr>
   <td>
-    Defendant's comments about the claimant's evidence
+    Comments about the claimant's evidence
   </td>
   <td>
    {% if data['check'] =='1' or data['check'] =='9' %}I never received any of these emails. Also the photos arent a fair refection of my work.{% else %} {{data['defence-disagree-evidence']}}{% endif %}
@@ -381,14 +390,26 @@ I sent a cheque to Jan Clark
 </tbody>
 </table>
 {% endif %}
+   <table class="footer">
+      <tbody>
+    <tr>
+          <tr>
+            <td>
+
+            </td>
+            <td>
+              For further details of the courts www.gov.uk/find-court-tribunal
+            </td>
+                  <td >
+              &copy; Crown copyright Page 1 of 2
+            </td>
+         </tr>
+  </tbody>
+  </table>
+
     <div class="page-break">&nbsp;</div>
-   {% if   data['check']== 1  %}
-          <p class="page-title">For reference only. Claim number: 000LR095<span>Page 2 of 2</span></p>
 
-{% else %}
-      <p class="page-title">Claim number: 000LR095 <span>Page 2 of 2</span></p>
-
-  {% endif %}
+      <p class="page-title"> <span>Claim number: 000LR095</span></p>
 
 
 {% if   data['check'] =='1' or data['check']== 8 or data['check']== 9 %}
@@ -410,14 +431,30 @@ I sent a cheque to Jan Clark
   </thead>
   <tbody>
     <tr>
-      <td>
+      <td class="no-border">
 
       </td>
-      <td>
-I Mary Richards, believe that the facts stated in this defence are true.
+      <td class="no-border">
+I             {% if data['check'] =='1' %}Smith Limited{% else %}Mrs Mary Richards{% endif %}, believe that the facts stated in this defence are true.
 
       </td>
     </tr>
+    </tr>
+    <tr>
+      <td>
+
+      </td>
+        {% if   data['check']== 1  %}
+      <td>
+        <strong>Name:</strong> Roisin Gallop<br>
+        <strong>Role:</strong> Administrator
+      </td>
+
+        {% else %}
+        <td>Mrs Mary Richards</td>
+          {% endif %}
+    </tr>
+
   </tbody>
 </table>
 {% endif %}
@@ -456,12 +493,27 @@ If the defendant doesn't want to mediate then the case will be reviewed by a jud
   </tbody>
 </table>
 {% endif %}
+   <table class="footer">
+      <tbody>
+    <tr>
+          <tr>
+            <td>
 
+            </td>
+            <td>
+              For further details of the courts www.gov.uk/find-court-tribunal
+            </td>
+                  <td >
+              &copy; Crown copyright Page 2 of 2
+            </td>
+         </tr>
+  </tbody>
+  </table>
 </main>
-<form method="post"  action="#" class="form" style="position: absolute; margin-top:80px">
+<form method="post"  action="#" class="form" style="position: absolute;">
   <select id="check2" name="check2" onchange="window.location.href='?check='+this.value">
     <option  value="0" >Choose</option>
-    <option  value="1" {% if data['check'] == 1 %}selected{% endif %}>1. Defendant response - reference only </option>
+    <option  value="1" {% if data['check'] == 1 %}selected{% endif %}>1. Defendant response - reference only (Business) </option>
     <option  value="9" {% if data['check'] == 9 %}selected{% endif %}>1. Sealed - I've dispute the claim </option>
     <option  value="8" {% if data['check'] == 8 %}selected{% endif %}>2. Sealed - Paid what I owe - states paid</option>
   </select>
