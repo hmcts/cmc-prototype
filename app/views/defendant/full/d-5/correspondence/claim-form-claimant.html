@@ -390,7 +390,7 @@ font-size:19px;
                   <tr>
                     <th colspan="2">
                       <h2 class="heading-medium" id="claim-amount">
-                        Claim amount details
+                        Claim amount
                       </h2>
                     </th>
 
@@ -410,7 +410,7 @@ font-size:19px;
                      {% if  data['check']== 1  or data['check'] =='2' or data['check'] =='3' %}Repair to the roof{% else %}{{data['amount-timeline-1']}}{% endif %}
                    </td>
                    {% if data['timeline-2'] !='' %}<td class="no-border single-cell">{% else %}<td class="single-cell ">{% endif %}
-                    {% if data['check']== 1  or data['check'] =='2'  or data['check'] =='3' %}&pound400{% else %}£{{data['amount-value-1']}}{% endif %}
+                    {% if data['check']== 1  or data['check'] =='2'  or data['check'] =='3' %}&pound500{% else %}£{{data['amount-value-1']}}{% endif %}
                   </td>
 
                 </tr>
@@ -420,12 +420,12 @@ font-size:19px;
                    {% if data['check']== 1  or data['check'] =='2'  or data['check'] =='3' %}Cost of call out repair{% else %}{{data['amount-timeline-2']}}{% endif %}
                  </td>
                  <td class="">
-                  {% if data['check']== 1  or data['check'] =='2'  or data['check'] =='3' %}&pound233{% else %}{{data['amount-value-2']}}{% endif %}
+                  {% if data['check']== 1  or data['check'] =='2'  or data['check'] =='3' %}&pound500{% else %}{{data['amount-value-2']}}{% endif %}
                 </td>
 
               </tr>
               {% endif %}
-              <tr>
+  <!--            <tr>
                 <td class="no-border">
                   Claim interest
                 </td>
@@ -438,19 +438,10 @@ font-size:19px;
                   No
                   {% endif %}
                 </td>
-     <tr>
-        <td class="">
-          Explanation
-        </td>
-        <td class="">
- The claimant reserves the right to claim interest under Section 69 of the County Courts Act 1984
+     <tr>-->
 
-        </td>
-
-      </tr>
-              </tr>
               {% if data['radio_group2']=="interest_yes" or data['check']== 1  or  data['check'] =='2' or data['check'] =='3' %}
-              <tr>
+              <!--<tr>
                 <td class="no-border">
                   How do you want to claim interest?
                 </td>
@@ -464,27 +455,27 @@ font-size:19px;
                   {% endif %}
                 </td>
 
-            </tr>
+            </tr>-->
             {% if data['radio_group1']=="interest_variable"  or data['check'] =='3'%}
             <tr>
               <td class="no-border">
                 Total interest amount
               </td>
               <td class="no-border">
-               {% if data['check'] =='3' %}&pound;444.34{% else %}  £{{data['interest-amount-rate']}}{% endif %}
+               {% if data['check'] =='3' %}&pound;44.34{% else %}  £{{data['interest-amount-rate']}}{% endif %}
              </td>
 
           </tr>
           <tr>
             <td class="">
-              Breakdown of interest amount (optional)
+              Breakdown of interest amount
             </td>
             <td class="">
              {% if data['check'] =='3' %}This is calculated from the 31/01/17 to 23/09/17 at 8%. <br>Then from 30/09/17 onwards at 10%{% else %}{{data['interest-amount-rate-why']}}{% endif %}
            </td>
 
          </tr>
-         <tr>
+<!--         <tr>
           <td class="no-border">
             Continue to claim interest after you submit your claim?
           </td>
@@ -498,17 +489,17 @@ font-size:19px;
             {% endif %}
           </td>
 
-      </tr>
+      </tr>-->
       {% if data['continue-interest']=="interest_yes"  or data['check'] =='3'%}
       <tr>
         <td class="">
-          What rate of interest do you want to claim?
+          Interest end date
         </td>
         <td class="">
           {% if data['continue-interest-rate']=="8" %}
           8%
           {% elif data['continue-interest-rate']=="different" or data['check'] =='3'%}
-          {% if data['check'] =='3' %}&pound;344{% else %}  £{{data['continue-interest-rate-amount']}}{% endif %}, daily interest amount
+          {% if data['check'] =='3' %} &pound;12 per day until the claim is settled or judgment made.{% else %}  £{{data['continue-interest-rate-amount']}}{% endif %}
           {% endif %}
         </td>
 
@@ -516,18 +507,9 @@ font-size:19px;
 
       {% endif %}
       {% elif data['radio_group1']=="interest_fixed"  or data['check']== 1  or  data['check'] =='2'%}
-                    <tr>
-        <td class="">
-          Explanation
-        </td>
-        <td class="">
- The claimant reserves the right to claim interest under Section 69 of the County Courts Act 1984
 
-        </td>
-
-      </tr>
       {% if data['interest_rates']=="8" %}
-      <tr>
+<!--      <tr>
         <td class="">
           What rate of interest do you want to claim?
         </td>
@@ -535,21 +517,21 @@ font-size:19px;
           8%
         </td>
 
-    </tr>
+    </tr>-->
     {% endif %}
     {% if data['interest_rates']=="Different"  or data['check']== 1  or  data['check'] =='2'%}
     <tr>
       <td class="no-border">
-        What rate of interest do you want to claim?
+        Interest rate claimed:
       </td>
       <td class="no-border">
-        {% if data['check'] =='2' %}10%{% else %}{{data['rate']}}%{% endif %}
+        {% if data['check'] =='2' or data['check'] =='1' %}10%{% else %}{{data['rate']}}%{% endif %}
       </td>
 
   </tr>
   <tr>
     <td class="">
-      Why you're claiming this rate
+      Explanation
     </td>
     <td class="">
      {% if  data['check']== 1  or data['check'] =='2' %}This is what im being I'm entitled to{% else %}{{data['rate-why']}}{% endif %}
@@ -558,34 +540,20 @@ font-size:19px;
  </tr>
  {% endif %}
  {% if data['interest-rate']!="No interest" %}
- <tr>
-  {% if data['interest-rate2']=="issue-date" %}<td class=""> {% else %} <td class="no-border">  {% endif %}
-    When are you claiming interest from?
-  </td>
-  {% if data['interest-rate2']=="issue-date" %}<td class=""> {% else %} <td class="no-border">  {% endif %}
-    {% if data['interest-rate2']=="issue-date" %}
-    The date you submit the claim
-    {% elif data['interest-rate2']=="particular-date"  or data['check']== 1  or  data['check'] =='2' %}
-    A particular date
-    {% else %}
-    A particular date
-    {% endif %}
-  </td>
 
-</tr>
 {% if data['interest-rate2']=="particular-date"  or data['check']== 1  or  data['check'] =='2'%}
 <tr>
   <td class="no-border">
-    Date interest applied from
+    Date interest is claimed from:
   </td>
   <td class="no-border">
-   {% if data['check'] =='2' %}31 March 2017{% else %}{{ data['interest-day'] }} {{ data['interest-month'] }} {{ data['interest-year'] }}{% endif %}
+   {% if data['check'] =='2' or data['check'] =='1' %}31 March 2017{% else %}{{ data['interest-day'] }} {{ data['interest-month'] }} {{ data['interest-year'] }}{% endif %}
  </td>
 
 </tr>
 <tr>
   <td>
-    Explain why you're claiming from this date
+    Explanation
   </td>
   <td>
     {% if data['check']== 1  or data['check'] =='2' %}This is when the problems started{% else %}{{data['date_why']}}{% endif %}
@@ -594,15 +562,15 @@ font-size:19px;
 </tr>
 <tr>
   <td class="">
-    When do you want to stop claiming interest?
+    Interest end date
   </td>
   <td class="">
     {% if data['interest-date']=="submitted" %}
-    When you submit the claim
+    18 October 2017
     {% elif data['interest-date']=="continue" %}
-    Continue until the claim is settled or judgment made
+    Ongoing until the claim is settled or judgment made
     {% else %}
-    Continue until the claim is settled or judgment made
+    Ongoing until the claim is settled or judgment made
     {% endif %}
   </td>
 
@@ -685,7 +653,7 @@ font-size:19px;
   <tbody>
     <tr>
       <td>
-        Declaration
+
       </td>
       <td>
 I Jan Clark believe that the facts stated in this claim form are true.
@@ -703,9 +671,8 @@ Jan Clark
 </table>
 {% endif %}
   {% if   data['check']== 1  %}
-<p>This is a summary of the information you have provided that will be shared with the defendant.</p>
 {% else %}
-    <p>If you don't respond on or before <strong>4pm, <span id="date"></span></strong> , you could get a default County Court Judgment (CCJ) made against you.</p>
+    <p>If you don't respond before <strong>4pm on <span id="date"></span></strong>, you could get a default County Court Judgment (CCJ) made against you.</p>
 
   {% endif %}
 
