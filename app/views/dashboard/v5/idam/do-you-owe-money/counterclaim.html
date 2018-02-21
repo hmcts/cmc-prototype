@@ -1,0 +1,146 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="2" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <a href="#" class="link-back">Back</a>
+      <h1 class="heading-large">
+        Does the claimant owe you money?
+      </h1>
+      <p >You can make a counterclaim if you believe the claimant Jan Clark owes you money.</p>
+      <div class="">
+
+      </div>
+      <h2 class="heading-small">How much it costs</h2>
+      <p>You need to pay a court fee to make a counterclaim.</p>
+            <details role="group">
+        <summary role="button" aria-controls="details-content-0" aria-expanded="false">View claim fees</summary>
+        <div class="panel" id="details-content-0" aria-hidden="true">
+          <p>The fee is based on the amount you're claiming, including interest.
+          </p><table class="expandable-demo">
+            <thead>
+              <tr>
+                <th scope="col">Claim amount</th>
+                <th scope="col">Fee</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <ul class="list">
+                    <li>£0.01 to £300</li>
+                  </ul>
+                </td>
+                <td>£25</td>
+              </tr>
+              <tr>
+                <td>
+                  <ul class="list">
+                    <li>£300.01 to £500</li>
+                  </ul>
+                </td>
+                <td>£35</td>
+              </tr>
+              <tr>
+                <td>
+                  <ul class="list">
+                    <li>£500.01 to £1,000</li>
+                  </ul>
+                </td>
+                <td>£60</td>
+              </tr>
+              <tr>
+                <td>
+                  <ul class="list">
+                    <li>£1,000.01 to £1,500</li>
+                  </ul>
+                </td>
+                <td>£70</td>
+              </tr>
+              <tr>
+                <td>
+                  <ul class="list">
+                    <li>£1,500.01 to £3,000</li>
+                  </ul>
+                </td>
+                <td>£105</td>
+              </tr>
+              <tr>
+                <td>
+                  <ul class="list">
+                    <li>£3,000.01 to £5,000</li>
+                  </ul>
+                </td>
+                <td>£185</td>
+              </tr>
+              <tr>
+                <td>
+                  <ul class="list">
+                    <li>£5,000.01 to £10,000</li>
+                  </ul>
+                </td>
+                <td>£410</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
+
+      <h1 class="heading-medium">
+        Do you want to make a counterclaim?
+      </h1>
+      {% if data.radio_select_group=="defend_now"%}
+           <form
+             name="aspnetForm"
+             method="get"
+             onsubmit="multiNavigation('cc', ['Yes','No'], ['forms?radio_select_group=defend_now&', '../create-account?control-box=4&']);return false;"
+             id="aspnetForm"
+             autocomplete="off">
+
+     {% elseif data.radio_select_group=="Some" %}
+           <form
+             name="aspnetForm"
+             method="get"
+             onsubmit="multiNavigation('cc', ['Yes','No'], ['forms?radio_select_group=SomeCC&', 'forms?radio_select_group=Some&']);return false;"
+             id="aspnetForm"
+             autocomplete="off">
+     {% elseif data.radio_select_group=="amount_less_claimed" %}
+           <form
+             name="aspnetForm"
+             method="get"
+             onsubmit="multiNavigation('cc', ['Yes','No'], ['forms?radio_select_group=amount_less_CC&', '../create-account?control-box=4&']);return false;"
+             id="aspnetForm"
+             autocomplete="off">
+      {%else%}
+      {% endif %}
+            <input id="your-offer" name="offer" type="hidden">
+            <div class="form-group">
+              <fieldset>
+                <div class="multiple-choice" data-target="yes-info">
+                  <input id="radio-yes" type="radio" name="cc" value="Yes" aria-controls="yes-info" aria-expanded="false">
+                  <label for="radio-yes" data-target="yes-info">Yes</label>
+                </div>
+                <div class="multiple-choice">
+                  <input id="radio-no" type="radio" name="cc" value="No">
+                  <label for="radio-no" data-target="no-info">No</label>
+                </div>
+              </fieldset>
+              <input type="hidden" name="counterclaim" value="complete">
+              <div class="form-group">
+                <input type="submit" class="button" value="Save and continue">
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </main>
+  {% endblock %}
