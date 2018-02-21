@@ -44,7 +44,7 @@ Check your answers
         Name
       </td>
       <td>
-        {% if data['check'] =='2'  or data['check'] =='3' %}Mrs Jan Clark{% else %}{{data['claimant_name']}}{% endif %}
+        {% if data['check'] =='1' or data['check'] =='2'  or data['check'] =='3' %}Mrs Jan Clark{% else %}{{data['claimant_name']}}{% endif %}
       </td>
       <td class="change-answer">
         <a href="../task-list/your-details/your-details?return_page={{ '../../task-list/check-and-send#name' | urlencode }}">
@@ -83,7 +83,7 @@ Check your answers
               Address
             </td>
             <td class="no-border">
-              {% if data['check'] =='2'  or data['check'] =='3' %}
+              {% if data['check'] =='1' or data['check'] =='2'  or data['check'] =='3' %}
               <ul class="list">
                 <li>15 King drive</li>
                 <li>London</li>
@@ -125,7 +125,7 @@ Check your answers
                 Date of birth
               </td>
               <td>
-               {% if data['check'] =='2'  or data['check'] =='3' %}31 January 1970{% else %}{{data['day']}} {{data['month']}} {{data['year']}}{% endif %}
+               {% if data['check'] =='1' or data['check'] =='2'  or data['check'] =='3' %}31 January 1970{% else %}{{data['day']}} {{data['month']}} {{data['year']}}{% endif %}
              </td>
              <td class="change-answer">
               <a href="../task-list/your-details/date-of-birth?return_page={{ '../../task-list/check-and-send#name' | urlencode }}">
@@ -138,7 +138,7 @@ Check your answers
                   Phone (optional)
                 </td>
                 <td>
-                 {% if data['check'] =='2'  or data['check'] =='3' %}07827999615{% else %}{{data['claimant-phone']}}{% endif %}
+                 {% if data['check'] =='1' or data['check'] =='2'  or data['check'] =='3' %}07827999615{% else %}{{data['claimant-phone']}}{% endif %}
                </td>
                <td class="change-answer">
                 <a href="../task-list/your-details/phone?return_page={{ '../../task-list/check-and-send#name' | urlencode }}">
@@ -178,7 +178,7 @@ Check your answers
                 Their name
               </td>
               <td>
-               {% if data['check'] =='2'  or data['check'] =='3' %}Mrs Mary Richards{% else %}{{data['defendant_name']}}{% endif %}
+               {% if data['check'] =='1' or data['check'] =='2'  or data['check'] =='3' %}Mrs Mary Richards{% else %}{{data['defendant_name']}}{% endif %}
              </td>
              <td class="change-answer">
               <a href="../task-list/their-details/enter-details?return_page={{ '../../task-list/check-and-send#their-detail' | urlencode }}">
@@ -217,7 +217,7 @@ Check your answers
                     Their address
                   </td>
                   <td>
-                    {% if data['check'] =='2'  or data['check'] =='3' %}
+                    {% if data['check'] =='1' or data['check'] =='2'  or data['check'] =='3' %}
                     <ul class="list">
                       <li>24 Acacia drive</li>
                       <li>London</li>
@@ -242,7 +242,7 @@ Check your answers
                       Their email (optional)
                     </td>
                     <td>
-                     {% if data['check'] =='2'  or data['check'] =='3' %}maryrichards@gmail.com{% else %} {{data['defendant-email']}}{% endif %}
+                     {% if data['check'] =='1' or  data['check'] =='2'  or data['check'] =='3' %}maryrichards@gmail.com{% else %} {{data['defendant-email']}}{% endif %}
                    </td>
                    <td class="change-answer">
                     <a href="../task-list/their-details/email?return_page={{ '../../task-list/check-and-send#their-detail' | urlencode }}">
@@ -256,7 +256,7 @@ Check your answers
                   <tr>
                     <th colspan="2">
                       <h2 class="heading-medium" id="claim-amount">
-                        Claim amount details
+                        Claim amount
                       </h2>
                     </th>
                     <th>
@@ -266,7 +266,7 @@ Check your answers
                 <tbody>
                   <tr>
                     <td class="no-border">
-                      What you are claiming for
+                      Claim amount breakdown
                     </td>
                     <td class="no-border">
                     </td>
@@ -278,25 +278,34 @@ Check your answers
                   </tr>
                   <tr class="subsection">
                     {% if data['timeline-2'] !='' %}<td class="no-border">{% else %}<td class=" ">{% endif %}
-                     {% if data['check'] =='2' or data['check'] =='3' %}Repair to the roof{% else %}{{data['amount-timeline-1']}}{% endif %}
+                     {% if data['check'] =='1' or data['check'] =='2' or data['check'] =='3' %}Repair to the roof{% else %}{{data['amount-timeline-1']}}{% endif %}
                    </td>
                    {% if data['timeline-2'] !='' %}<td class="no-border">{% else %}<td class=" ">{% endif %}
-                    {% if data['check'] =='2'  or data['check'] =='3' %}£400{% else %}£{{data['amount-value-1']}}{% endif %}
+                    {% if data['check'] =='1' or data['check'] =='2'  or data['check'] =='3' %}£500.00{% else %}£{{data['amount-value-1']}}{% endif %}
                   </td>
                   {% if data['timeline-2'] !='' %}<td class="change-answer no-border">{% else %}<td class="change-answer ">{% endif %}
                   </td>
                 </tr>
-                {% if data['amount-timeline-2'] !='' or data['check'] =='2'  or data['check'] =='3' %}
+                {% if data['check'] =='1' or data['amount-timeline-2'] !='' or data['check'] =='2'  or data['check'] =='3' %}
                 <tr class="subsection">
-                  <td class="">
-                   {% if data['check'] =='2'  or data['check'] =='3' %}Cost of call out repair{% else %}{{data['amount-timeline-2']}}{% endif %}
+                  <td class="no-border">
+                   {% if data['check'] =='1' or data['check'] =='2'  or data['check'] =='3' %}Cost of call out repair{% else %}{{data['amount-timeline-2']}}{% endif %}
                  </td>
-                 <td class="">
-                  {% if data['check'] =='2'  or data['check'] =='3' %}£233{% else %}{{data['amount-value-2']}}{% endif %}
+                 <td class="no-border">
+                  {% if data['check'] =='1' or data['check'] =='2'  or data['check'] =='3' %}£500.00{% else %}{{data['amount-value-2']}}{% endif %}
                 </td>
-                <td class="change-answer ">
+                <td class="change-answer no-border">
                 </td>
               </tr>
+                                       <tr>
+      <td>
+        Total
+      </td>
+      <td>
+       &pound;1000.00
+      </td>
+<td></td>
+    </tr>
               {% endif %}
               <tr>
                 <td >
@@ -511,7 +520,7 @@ Check your answers
     <tr>
       <th colspan="2">
         <h2 id="cd" class="heading-medium">
-          Claim amount total
+          Total amount
         </h2>
       </th>
       <th>
@@ -524,27 +533,36 @@ Check your answers
         Claim amount
       </td>
       <td>
-        £{{data['totalSum']}}
+      {% if data['check'] =='1' or data['check'] =='2' or data['check'] =='3' %}£1000.00{% else %}  £{{data['totalSum']}}{% endif %}
+
       </td>
       <td class="change-answer">
       </td>
     </tr>
-    <tr>
+          {% if data['check'] =='1' %}
+
+          {% else %}
+
+       <tr>
       <td>
         Interest to date
       </td>
       <td>
-        £14
+        £14.00
       </td>
       <td class="change-answer">
       </td>
     </tr>
+
+          {% endif %}
+
+
     <tr>
       <td>
         Claim fee
       </td>
       <td>
-        £70
+        £70.00
       </td>
       <td class="change-answer" id="interestValue">
       </td>
@@ -554,7 +572,17 @@ Check your answers
         <span class="bold"> Total</span>
       </td>
       <td>
-        <span id="totalAmountDisplay" class="bold">£1583.00</span>
+        {% if data['check'] =='1'%}<span class="bold">£1070.00</span>
+        {% elseif data['check'] =='2' or data['check'] =='3' %}<span class="bold">£1084.00</span>
+
+        {% else %}
+
+                      <span id="totalAmountDisplay" class="bold">£1583.00</span>
+
+
+              {% endif %}
+
+
       </td>
       <td class="change-answer" id="interestValue">
       </td>
