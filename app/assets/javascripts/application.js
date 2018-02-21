@@ -269,13 +269,13 @@ $(document).ready(function() {
 
 
   var newDate = new Date();
-  newDate.setDate(newDate.getDate()+ 14) ;
+  newDate.setDate(newDate.getDate()+ 19) ;
 
   var newDate2 = new Date();
   newDate2.setDate(newDate2.getDate()) ;
 
   var newDate3 = new Date();
-  newDate3.setDate(newDate3.getDate()+ 28);
+  newDate3.setDate(newDate3.getDate()+ 33);
 
   var newDate4 = new Date();
   newDate4.setDate(newDate4.getDate())+ 100 ;
