@@ -38,7 +38,7 @@ Money Claims Prototype
       <p>They can use a CCJ to get the money from you, for example, by asking the court to send bailiffs to your home or business.</p>
       <p>A CCJ may make it harder to get credit, such as a mobile phone contract, credit card or mortgage.</p>
       <div class="clearfix">
-{% if data['mcol2'] == 1 %}
+       {% if data['mcol2'] == 1 %}
        <form method="get" name="registration" action="enter-claim-number?mcol=1" id="registration">
         <input type="hidden" name="control-box" value="4">
         <input type="hidden" name="mcol" value="3">
@@ -49,57 +49,47 @@ Money Claims Prototype
           <input type="hidden" name="mcol" value="2">
           {% else %}
           <form method="get" name="registration" action="enter-claim-number?mcol=1" id="registration">
-        <input type="hidden" name="mcol" value="3">
+            <input type="hidden" name="mcol" value="1">
             <input type="hidden" name="respond" value="true">
             <input type="hidden" name="make_claim" value="false">
             {% endif %}
-                <input type="submit" class="button button-start" value="Respond to a money claim"/>
-
-
-
-              </form>
+            <input type="submit" class="button button-start" value="Start now"/>
+          </form>
         </div>
-        <h2 class="heading-medium">Return to an existing claim</h2>
-        <p>Sign in to your account to check updates and manage a claim.</p>
-          {% if data['mcol2'] == 1 %}
-          <!--beta-->
-            <a  href="enter-claim-number?control-box=5&mcol=4" role="button">Return to an existing claim.</a>
-            {% elseif data['mcol2'] == 2%}
-          <!--mcol-->
-            <a  href="enter-claim-number?control-box=3&mcol=5" role="button">Return to an existing claim.</a>
-            {% else %}
-            <a  href="enter-claim-number?control-box=5&mcol=4" role="button">Return to an existing claim.</a>
-            {% endif %}
+        <h2 class="heading-medium">Already responded a claim</h2>
+        <p>To view the progress and manage your claims</p>
+        {% if data['mcol2'] == 1 %}
+        <a class="secondary-button" href="enter-claim-number?control-box=5&mcol=4" role="button">Return to a claim</a>
+        {% elseif data['mcol2'] == 2%}
+        <a class="secondary-button" href="enter-claim-number?control-box=3&mcol=2" role="button">Return to a claim</a>
+        {% else %}
+        <a class="secondary-button" href="enter-claim-number?control-box=5&mcol=3" role="button">Return to a claim</a>
+        {% endif %}
         <!--<p>This service is also available in <a href="#">Welsh (Cymraeg)</a>.</p>-->
         <h2 class="heading-medium">Help to use this service</h2>
         <p>Telephone: 0300 123 7050<br>
           <a href="https://www.gov.uk/call-charges">Find out about call charges</a></p>
         </div>
         <div class="column-third">
-<aside class="govuk-related-items" data-module="track-click" role="complementary">
-          <h2 data-track-count="sidebarRelatedItemSection">
-            Business debt and bankruptcy
-          </h2>
-
-
-
-          <nav role="navigation">
-            <ul>
-              <li>
-                <a data-track-category="relatedLinkClicked" data-track-action="1.1" data-track-label="/make-court-claim-for-money" data-track-options="{&quot;dimension28&quot;:&quot;2&quot;,&quot;dimension29&quot;:&quot;Make a court claim for money&quot;}" href="overview">Make a court claim for money</a>
-              </li>
-              <li class="related-items-more">
-                <a data-track-category="relatedLinkClicked" data-track-action="1.2" data-track-label="/browse/business/funding-debt" data-track-options="{&quot;dimension28&quot;:&quot;2&quot;,&quot;dimension29&quot;:&quot;More&quot;}" href="/browse/business/funding-debt">
-                  More
-                  <span class="visuallyhidden">
-                    in
-                    Business debt and bankruptcy
-                  </span>
-                </a>
-                 </li>
-              </ul>
-            </nav>
-          </aside>         </div>
+          <aside class="govuk-related-items" role="complementary">
+            <h2 class="heading-medium" id="subsection-title">Support</h2>
+            <nav role="navigation" aria-labelledby="subsection-title">
+              <ul class="font-xsmall">
+                <li><a href="#">Make a court claim for money</a>
+                </li>
+                <br>
+                <li><a href="https://www.gov.uk/make-court-claim-for-money/court-fees">Money claim fees</a></li>
+                <br>
+                <li><a href="other-options">Other options</a></li>
+                <br>
+                <li><a class="external" rel="external"
+                 href="https://courttribunalfinder.service.gov.uk/courts/county-court-money-claims-centre-ccmcc"
+                 target="_blank">Contact us</a></li>
+                 <!--<li><a href="#" class="bold-xsmall">More <span class="visuallyhidden">in Subsection</span></a></li>-->
+               </ul>
+             </nav>
+           </aside>
+         </div>
        </div>
      </main>
      <form method="post"  action="#" class="form" style="float: left;">
@@ -109,4 +99,4 @@ Money Claims Prototype
         <option value="2" {% if data['mcol2'] == 2 %}selected{% endif %}>2 - MCOL</option>
       </select>
     </form>
-{% endblock %}
+    {% endblock %}
