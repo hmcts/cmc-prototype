@@ -57,6 +57,8 @@ table td {
   line-height: 1.25;
   padding: 0.63158em 1.05263em 0.67368em 0;
   font-size: 18px;
+    vertical-align:top;
+
 }
 p{
   font-size: 18px;
@@ -104,7 +106,7 @@ font-size:19px;
         width: 30%;
       }
     .crestLogo  tr td:nth-child(2) {
-        width: 30%;
+
         text-align:center
       }
     .crestLogo tr td:nth-child(3) {
@@ -114,12 +116,13 @@ font-size:19px;
   width:90%
 }
 .seal{
-  width:50%
+      width: 12%;
+    float: right;
 }
 .page-title {
     text-align:center;
     padding-top:20px;
-    font-size:10px
+    font-size:14px
 }
 .page-title span{
     float:right
@@ -159,23 +162,24 @@ text-align:right
 <tr>
 <td><img class="crest" src="{{ asset_path }}/images/court-logos/shield.png"  alt=""/></td>
 <td>
-    {% if   data['check']== 1  %}
-{% else %}
-  <img class="seal"  src="{{ asset_path }}/images/court-logos/seal.png" alt="" />
-
-  {% endif %}
 
 </td>
   <td rowspan="2" class="claim-details"><p>In the County Court Business Centre Online Court</p>
     <p class="claim-number">Claim number: 000LR095</p>
-    <strong>Submitted:</strong> 17 October 2017 at 5:28PM<br>
+    <strong>Submitted:</strong> 17 October 2017<br>
       <strong>Issued:</strong> 18 October 2017</td>
 
 </tr>
 
 </tbody>
 </table>
-<br>
+
+        {% if   data['check']== 1  %}
+{% else %}
+  <img class="seal"  src="{{ asset_path }}/images/court-logos/seal.png" alt="" />
+
+  {% endif %}
+
   </header>
   {% if data.counterclaim=="true" %}
   {%else%}
@@ -396,7 +400,7 @@ text-align:right
     <tr>
           <tr>
             <td>
-              OCCN1 (PD 51R)  {% if   data['check']== 1  %} - Reference only  {% endif %}
+              OCON1 (PD 51R)  {% if   data['check']== 1  %} - Reference only  {% endif %}
             </td>
             <td>
               For further details of the courts www.gov.uk/find-court-tribunal
@@ -605,9 +609,11 @@ under Section 69 of the County Courts Act 1984
     {% if data['interest-date']=="submitted" %}
     18 October 2017
     {% elif data['interest-date']=="continue" %}
-    Ongoing until the claim is settled or judgment made
+    Interest will accrue at the daily rate of &pound;0.02 up to
+the date of judgment.
     {% else %}
-    Ongoing until the claim is settled or judgment made
+    Interest will accrue at the daily rate of &pound;0.02 up to
+the date of judgment.
     {% endif %}
   </td>
 
@@ -699,7 +705,7 @@ under Section 69 of the County Courts Act 1984
 
       </td>
       <td class="no-border">
-        I {% if data['check'] =='3' %}Smith Limited{% else %}Mrs Jan Clark{% endif %}, believe that the facts stated in this claim form are true.
+        I believe that the facts stated in this claim form are true.
       </td>
     </tr>
       <tr>
@@ -709,13 +715,16 @@ under Section 69 of the County Courts Act 1984
         {% if   data['check']== 3  %}
       <td>
         <strong>Name:</strong> Roisin Gallop<br>
-        <strong>Role:</strong> Administrator
+        <strong>Role:</strong> Administrator<br>
+        <span class="dates2"></span>
       </td>
 
         {% else %}
-        <td>Jan Clark</td>
+        <td>Jan Clark <br> <span class="dates2"></span></td>
           {% endif %}
     </tr>
+
+
   </tbody>
 </table>
 {% endif %}
@@ -729,7 +738,7 @@ under Section 69 of the County Courts Act 1984
     <tr>
           <tr>
             <td>
-              OCCN1 (PD 51R)  {% if   data['check']== 1  %} - Reference only  {% endif %}
+              OCON1 (PD 51R)  {% if   data['check']== 1  %} - Reference only  {% endif %}
             </td>
             <td>
               For further details of the courts www.gov.uk/find-court-tribunal
