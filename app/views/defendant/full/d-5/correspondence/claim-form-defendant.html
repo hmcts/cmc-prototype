@@ -113,7 +113,7 @@ font-size:19px;
         width: 60%;
       }
 .crest{
-  width:90%
+  width:80%
 }
 .seal{
       width: 12%;
@@ -174,7 +174,6 @@ text-align:right
 
 </tbody>
 </table>
-    <h2 class="heading-medium">Defendant's response</h2>
   </header>
   {% if data.counterclaim=="true" %}
   {%else%}
@@ -191,13 +190,26 @@ text-align:right
     <tbody>
       <tr>
         <td>
-          Name
+                      {% if data['check'] =='1' %}Company name{% else %}Name{% endif %}
+
         </td>
         <td>
             {% if data['check'] =='1' %}Smith Limited{% else %}Mrs Mary Richards{% endif %}
 
         </td>
       </tr>
+                              {% if   data['check']== 1  %}
+
+        <tr>
+          <td>
+            Contact person
+          </td>
+          <td>
+           Jane Smith
+          </td>
+        </tr>
+        <tr>
+                        {% endif  %}
       <tr>
         <tr>
           <td class="">
@@ -394,7 +406,7 @@ I sent a cheque to Jan Clark
     <tr>
           <tr>
             <td>
-OCON9A
+OCON9B
             </td>
             <td>
               For further details of the courts www.gov.uk/find-court-tribunal
@@ -439,20 +451,58 @@ I believe that the facts stated in this defence are true.
       </td>
     </tr>
     </tr>
-    <tr>
-      <td>
+    {% if   data['check']== 1  %}
+
+          <tr>
+      <td class="no-border">
 
       </td>
-        {% if   data['check']== 1  %}
-      <td>
-        <strong>Name:</strong> Roisin Gallop<br>
-        <strong>Role:</strong> Administrator<br><span class="dates2"></span>
+      <td class="no-border">
+        <strong>Company:</strong> Smith Limited
       </td>
-
-        {% else %}
-        <td>Mrs Mary Richards<br> <span class="dates2"></span></td>
-          {% endif %}
     </tr>
+            <tr>
+      <td class="no-border">
+
+
+      </td>
+
+      <td class="no-border">
+        <strong>Name:</strong> Teresa Jones
+      </td>
+    </tr>
+
+    <tr>
+      <td class="no-border">
+
+
+      </td>
+      <td class="no-border">
+        <strong>Role:</strong> Owner/Director
+      </td>
+    </tr>
+
+            {% else %}
+ <tr>
+      <td class="no-border">
+
+      </td>
+      <td class="no-border">
+        Jan Clark
+      </td>
+    </tr>
+            {% endif %}
+
+
+          <tr>
+      <td class="no-border">
+
+      </td>
+      <td class="no-border">
+        <span class="dates2"></span>
+      </td>
+    </tr>
+
 
   </tbody>
 </table>
@@ -475,7 +525,7 @@ I believe that the facts stated in this defence are true.
         Settle the claim
       </td>
       <td>
-I Unless you've been asked not to, you can still contact Mary Richards directly. If you can reach an agreement you may not have to go to a hearing.
+I Unless you've been asked not to, you can still contact the defendant directly. If you can reach an agreement you may not have to go to a hearing.
 
       </td>
     </tr>
@@ -497,7 +547,7 @@ If the defendant doesn't want to mediate then the case will be reviewed by a jud
     <tr>
           <tr>
             <td>
-OCON9A
+OCON9B
             </td>
             <td>
               For further details of the courts www.gov.uk/find-court-tribunal
