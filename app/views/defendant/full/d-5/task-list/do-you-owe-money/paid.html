@@ -18,7 +18,9 @@ Money Claims Prototype
        How much have you paid the claimant?
 
       </h1>
-     <p >The amount claimed is <a href="../view-claim">£1,500.00</a></p>
+
+     <p class="before">The amount claimed is <a href="../view-claim">£1,500.00</a></p>
+     <p class="after" style="display:none">The amount claimed is <a href="../view-claim">£1,800.00</a></p>
 
 
 
@@ -61,4 +63,21 @@ Money Claims Prototype
     </div>
   </div>
 </main>
+<script>
+  $(document).ready(function () {
+    var end_date = "{{data['set-year']}}-{{data['set-month']}}-{{data['set-day']}}"
+    var difference = moment(end_date).diff(moment("2018-2-20"), 'days')
+    $("#st").html(moment())
+    $("#ed").html(moment(end_date))
+    if(difference < 1) {
+     $(".before").show();
+
+    }else if(difference > 1) {
+     $(".after").show();
+     $(".before").hide();
+
+
+    }
+  })
+</script>
 {% endblock %}
