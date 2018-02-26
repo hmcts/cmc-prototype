@@ -57,6 +57,8 @@ table td {
   line-height: 1.25;
   padding: 0.63158em 1.05263em 0.67368em 0;
   font-size: 18px;
+    vertical-align:top;
+
 }
 p{
   font-size: 18px;
@@ -104,22 +106,23 @@ font-size:19px;
         width: 30%;
       }
     .crestLogo  tr td:nth-child(2) {
-        width: 30%;
+
         text-align:center
       }
     .crestLogo tr td:nth-child(3) {
         width: 60%;
       }
 .crest{
-  width:70%
+  width:80%
 }
 .seal{
-  width:50%
+      width: 12%;
+    float: right;
 }
 .page-title {
     text-align:center;
     padding-top:20px;
-    font-size:10px
+    font-size:14px
 }
 .page-title span{
     float:right
@@ -157,25 +160,26 @@ text-align:right
   <table class="crestLogo">
 <tbody>
 <tr>
-<td><img class="crest" src="{{ asset_path }}/images/crest.png"  alt=""/></td>
+<td><img class="crest" src="{{ asset_path }}/images/court-logos/shield.png"  alt=""/></td>
 <td>
-    {% if   data['check']== 1  %}
-{% else %}
-  <img class="seal"  src="{{ asset_path }}/images/seal.png" alt="" />
-
-  {% endif %}
 
 </td>
   <td rowspan="2" class="claim-details"><p>In the County Court Business Centre Online Court</p>
     <p class="claim-number">Claim number: 000LR095</p>
-    <strong>Submitted:</strong> 17 October 2017 at 5:28PM<br>
+    <strong>Submitted:</strong> 17 October 2017<br>
       <strong>Issued:</strong> 18 October 2017</td>
 
 </tr>
 
 </tbody>
 </table>
-<br>
+
+        {% if   data['check']== 1  %}
+{% else %}
+  <img class="seal"  src="{{ asset_path }}/images/court-logos/seal.png" alt="" />
+
+  {% endif %}
+
   </header>
   {% if data.counterclaim=="true" %}
   {%else%}
@@ -190,18 +194,28 @@ text-align:right
       </tr>
     </thead>
     <tbody>
+
       <tr>
         <td>
-          Name
+           {% if   data['check']== 3  %}Company name{%else%}Name{%endif%}
+
         </td>
         <td>
-                  {% if   data['check']== 3  %}
-          Smith Limited
-              {%else%}
-                    Mrs Jan Clark
-            {%endif%}
+            {% if   data['check']== 3  %}Clark Limited{%else%}Mrs Jan Clark{%endif%}
         </td>
       </tr>
+                        {% if   data['check']== 3  %}
+
+        <tr>
+          <td>
+            Contact person
+          </td>
+          <td>
+           Jane Smith
+          </td>
+        </tr>
+        <tr>
+                        {% endif  %}
       <tr>
         <tr>
           <td class="">
@@ -396,7 +410,7 @@ text-align:right
     <tr>
           <tr>
             <td>
-              OCCN1 (PD 51S)  {% if   data['check']== 1  %} - Reference only  {% endif %}
+              OCON1 (PD 51R)  {% if   data['check']== 1  %} - Reference only  {% endif %}
             </td>
             <td>
               For further details of the courts www.gov.uk/find-court-tribunal
@@ -605,9 +619,11 @@ under Section 69 of the County Courts Act 1984
     {% if data['interest-date']=="submitted" %}
     18 October 2017
     {% elif data['interest-date']=="continue" %}
-    Ongoing until the claim is settled or judgment made
+    Interest will accrue at the daily rate of &pound;0.02 up to
+the date of judgment.
     {% else %}
-    Ongoing until the claim is settled or judgment made
+    Interest will accrue at the daily rate of &pound;0.02 up to
+the date of judgment.
     {% endif %}
   </td>
 
@@ -699,23 +715,64 @@ under Section 69 of the County Courts Act 1984
 
       </td>
       <td class="no-border">
-        I {% if data['check'] =='3' %}Smith Limited{% else %}Mrs Jan Clark{% endif %}, believe that the facts stated in this claim form are true.
+        I believe that the facts stated in this claim form are true.
       </td>
     </tr>
-      <tr>
-      <td>
+
+
+
+          {% if   data['check']== 3  %}
+
+          <tr>
+      <td class="no-border">
 
       </td>
-        {% if   data['check']== 3  %}
-      <td>
-        <strong>Name:</strong> Roisin Gallop<br>
-        <strong>Role:</strong> Administrator
+      <td class="no-border">
+        <strong>Company:</strong> Clark Limited
       </td>
-
-        {% else %}
-        <td>Jan Clark</td>
-          {% endif %}
     </tr>
+            <tr>
+      <td class="no-border">
+
+
+      </td>
+
+      <td class="no-border">
+        <strong>Name:</strong> Teresa Jones
+      </td>
+    </tr>
+
+    <tr>
+      <td class="no-border">
+
+
+      </td>
+      <td class="no-border">
+        <strong>Role:</strong> Owner/Director
+      </td>
+    </tr>
+
+            {% else %}
+ <tr>
+      <td class="no-border">
+
+      </td>
+      <td class="no-border">
+        Jan Clark
+      </td>
+    </tr>
+            {% endif %}
+
+
+          <tr>
+      <td class="no-border">
+
+      </td>
+      <td class="no-border">
+        <span class="dates2"></span>
+      </td>
+    </tr>
+
   </tbody>
 </table>
 {% endif %}
@@ -729,7 +786,7 @@ under Section 69 of the County Courts Act 1984
     <tr>
           <tr>
             <td>
-              OCCN1 (PD 51S)  {% if   data['check']== 1  %} - Reference only  {% endif %}
+              OCON1 (PD 51R)  {% if   data['check']== 1  %} - Reference only  {% endif %}
             </td>
             <td>
               For further details of the courts www.gov.uk/find-court-tribunal
@@ -741,7 +798,7 @@ under Section 69 of the County Courts Act 1984
   </tbody>
   </table>
 </main>
-<form method="post"  action="#" class="form" style="position: absolute; padding-top:50px">
+<form method="post"  action="#" class="form" style="position: absolute">
   <select id="check2" name="check2" onchange="window.location.href='?check='+this.value">
     <option  value="0" >Choose</option>
     <option  value="1" {% if data['check'] == 1 %}selected{% endif %}>1. Non-sealed version </option>

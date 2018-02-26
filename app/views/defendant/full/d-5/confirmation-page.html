@@ -18,7 +18,6 @@ Money Claims Prototype
         {% else %}
         <h1 class="bold-large">You've submitted your response</h1>
         {% endif %}
-        <br>
         <p>
           <strong class="bold"><span id="Date2"></span></strong>
         </p>
@@ -226,7 +225,7 @@ Money Claims Prototype
         <!-- Reject claim -->
         {% elseif data.radio_select_group2=="defend_now" or data['confirmation']== 12 %}
         <p>We’ve emailed {% if data.counterclaim=="true" %}Mary Richards{%else%}Jan Clark{% endif %} your defence, explaining why you reject the claim.</p>
-        <p>View the <a href='../../../dashboard/v3/defendant?defendant=7'>claim against you and your response</a>.</p>
+        <p>View the <a href='/dashboard/v4/home?dashboard=2.7'>claim against you and your response</a>.</p>
         <h2 class="heading-medium">What happens next</h2>
 
       <p>If {% if data.counterclaim=="true" %}Mary Richards{%else%}Jan Clark{% endif %} accepts your defence the claim will be cancelled.</p>
@@ -240,11 +239,13 @@ Money Claims Prototype
         <p>If they agree to mediation we’ll email you to arrange an appointment.</p>
         <p>If you can reach an agreement with {% if data.counterclaim=="true" %}Mary Richards{%else%}Jan Clark{% endif %} you won't need to go to a hearing.</p>
         {% else %}
+              {% include "includes/survey.html" %}
+          <p><a class="button" href='/dashboard/v4/home?dashboard=2.7'>Finished</a></p>
+
         {% endif %}
         <!-- Reject claim + mediation -->
         {% elseif data.radio_select_group2=="defend_now" or data['confirmation']== 14 %}
         <p>We’ve emailed {% if data.counterclaim=="true" %}Mary Richards{%else%}Jan Clark{% endif %} your defence, explaining why you disagree with the claim.</p>
-        <p>View the <a href='../../../dashboard/v3/defendant?defendant=7'>claim against you and your response</a>.</p>
         <h2 class="heading-medium">What happens next</h2>
 
       <p>You've suggested using free mediation to resolve the dispute. Jan Clark has until <strong class="bold"> 6 March</strong> to accept your offer of mediation.</p>
@@ -259,7 +260,14 @@ Money Claims Prototype
           <h3 class="heading-medium">Settle out of court</h3>
           <p>You can still <a href='/dashboard/v4/offer-agreement/make-offer?defendant=defendant'>settle the claim out of court</a>. For example, you could offer to fix faulty goods you sold the claimant or suggest a payment.</p>
           <p>You can avoid getting a County Court Judgment if the claimant accepts your offer.</p>
+                 {% include "includes/survey.html" %}
+          <p><a class="button" href='/dashboard/v4/home?dashboard=2.8'>Finished</a></p>
+
+
           {% else %}
+              {% include "includes/survey.html" %}
+          <p><a class="button" href='/dashboard/v4/home?dashboard=2.6'>Finished</a></p>
+
           {% endif %}
           {% elseif data.radio_select_group2=="defend_now_cc" or data['confirmation']== 15 %}
           <div class="panel panel-border-wide">
@@ -274,14 +282,12 @@ Money Claims Prototype
           <!-- Already paid -->
           {% elseif  data.radio_select_group2=="paid" or data['confirmation']== 16 %}
           <p>We’ve emailed {% if data.counterclaim=="true" %}Mary Richards{%else%}Jan Clark{% endif %} telling them when and how you paid the claim of £1500.</p>
-          <p>View the <a href='../../../dashboard/v3/defendant?defendant=7'>claim against you and your response</a>.</p>
           <h2 class="heading-medium">What happens next</h2>
 
       <p>If {% if data.counterclaim=="true" %}Mary Richards{%else%}Jan Clark{% endif %} accepts your defence the claim will be cancelled.</p>
       <p>If they reject your defence the case will be reviewed and might go to a hearing.</p>
           {% else %}
           <p>You admit you owe part of the claim. We've emailed {% if data.counterclaim=="true" %}Mary Richards{%else%}Jan Clark{% endif %} your response.</p>
-          <p>View the <a href='../../../dashboard/v3/defendant?defendant=7'>claim against you and your response</a>.</p>
           <h2 class="heading-medium">What happens next</h2>
           <p>If {% if data.counterclaim=="true" %}Mary Richards{%else%}Jan Clark{% endif %} accepts your response we'll email you explaining how to pay them.</p>
           <p>If they reject it the claim will be reviewed by a judge and might go to a hearing.</p>
@@ -289,6 +295,7 @@ Money Claims Prototype
           <p>You can still <a href='/dashboard/v4/offer-agreement/make-offer?defendant=defendant'>settle the claim out of court</a>. For example, you could offer to fix faulty goods you sold the claimant or suggest a payment.</p>
           <p>You can avoid getting a County Court Judgment if the claimant accepts your offer.</p>
           {% endif %}
+
           {% if data.radio_cc_group=="Yes" %}
           <br>
           <h2 class="heading-large">Your counterclaim</h2>
@@ -313,17 +320,9 @@ Money Claims Prototype
             claim by discussing what's gone wrong. If you can make an agreement you won't need to go to a hearing.</p>
             {% else %}
             {% endif %}
-            <h2 class="heading-medium">Help and support</h2>
-			<p>Civil Money Claims</p>
-			<ul>
-				<li>Email: moneyclaims@hmcts.gsi.gov.uk</li>
-				<li> Telephone: 0300 123 1057</li>
-				<li>Hours: 9am to 5pm, Monday to Friday</li>
-				<li><a href="https://www.gov.uk/call-charges">Find out about call charges</a></li>
-			</ul>
+  {% include "includes/contact.html" %}
+
           </fieldset>
-          <br>
-          <a href="#" class="button">Finished</a>
         </div>
       </div>
     </div>
@@ -331,17 +330,10 @@ Money Claims Prototype
   <form method="post"  action="#" class="form" style="position: absolute;">
     <select id="check2" name="check2" onchange="window.location.href='?confirmation='+this.value">
       <option  value="0" >Choose</option>
-      <option  value="2" {% if data['confirmation'] == 2 %}selected{% endif %}>1. F/A - pay instalments</option>
-      <option  value="3" {% if data['confirmation'] == 3 %}selected{% endif %}>2. F/A - Pay set date</option>
-      <option  value="6" {% if data['confirmation'] == 6 %}selected{% endif %}>3. P/A - I admit part of the claim - by instalments </option>
-      <option  value="7" {% if data['confirmation'] == 7 %}selected{% endif %}>4. P/A - I admit part of the claim - pay set date + mediation </option>
-      <option  value="13" {% if data['confirmation'] == 13 %}selected{% endif %}>4.1 P/A - I admit part of the claim + counterclaim </option>
       <option  value="12" {% if data['confirmation'] == 12 %}selected{% endif %}>5. R/C - I dispute the claim</option>
       <option  value="14" {% if data['confirmation'] == 14 %}selected{% endif %}>6. R/C - I dispute the claim + mediation</option>
-      <option  value="15" {% if data['confirmation'] == 15 %}selected{% endif %}>6.1 R/C - I dispute the claim + counterclaim</option>
       <option  value="16" {% if data['confirmation'] == 16 %}selected{% endif %}>7. R/C - Paid full claim</option>
-      <option  value="8" {% if data['confirmation'] == 8 %}selected{% endif %}>8. R/C - Paid less </option>
-      <option  value="10" {% if data['confirmation'] == 10 %}selected{% endif %}>9. R/C - Paid less + mediation </option>
+
     </select>
   </form>
   {% endblock %}

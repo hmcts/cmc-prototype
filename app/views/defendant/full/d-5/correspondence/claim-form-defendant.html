@@ -57,6 +57,8 @@ table td {
   line-height: 1.25;
   padding: 0.63158em 1.05263em 0.67368em 0;
   font-size: 18px;
+    vertical-align:top;
+
 }
 p{
   font-size: 18px;
@@ -104,22 +106,23 @@ font-size:19px;
         width: 30%;
       }
     .crestLogo  tr td:nth-child(2) {
-        width: 30%;
+
         text-align:center
       }
     .crestLogo tr td:nth-child(3) {
         width: 60%;
       }
 .crest{
-  width:70%
+  width:80%
 }
 .seal{
-  width:50%
+      width: 12%;
+    float: right;
 }
 .page-title {
     text-align:center;
     padding-top:20px;
-    font-size:10px
+    font-size:14px
 }
 .page-title span{
     float:right
@@ -154,28 +157,23 @@ text-align:right
   <table class="crestLogo">
 <tbody>
 <tr>
-<td><img class="crest" src="{{ asset_path }}/images/crest.png"  alt=""/></td>
+<td><img class="crest" src="{{ asset_path }}/images/court-logos/shield.png"  alt=""/></td>
 <td>
 
 
 </td>
   <td rowspan="2" class="claim-details"><p>In the County Court Business Centre Online Court</p>
     <p class="claim-number">Claim number: 000LR095</p>
-    <strong>Issued:</strong> 18 October 2017
-    {% if  data['check'] =='1' %}
-      <br><strong>Defence submitted:</strong> 12 January 2018 at 3:25PM
+    <strong>Issued:</strong> 18 October 2017<br>
+          <strong>Defence submitted:</strong> 12 January 2018
 
-    {%else%}
 
-  {%endif%}
   </td>
 
 </tr>
 
 </tbody>
 </table>
-    <h2 class="heading-medium">Defendant's response</h2>
-<p>This document sets out the defendant's response to your civil money claim.</p>
   </header>
   {% if data.counterclaim=="true" %}
   {%else%}
@@ -192,13 +190,26 @@ text-align:right
     <tbody>
       <tr>
         <td>
-          Name
+                      {% if data['check'] =='1' %}Company name{% else %}Name{% endif %}
+
         </td>
         <td>
             {% if data['check'] =='1' %}Smith Limited{% else %}Mrs Mary Richards{% endif %}
 
         </td>
       </tr>
+                              {% if   data['check']== 1  %}
+
+        <tr>
+          <td>
+            Contact person
+          </td>
+          <td>
+           Jane Smith
+          </td>
+        </tr>
+        <tr>
+                        {% endif  %}
       <tr>
         <tr>
           <td class="">
@@ -395,7 +406,7 @@ I sent a cheque to Jan Clark
     <tr>
           <tr>
             <td>
-
+OCON9B
             </td>
             <td>
               For further details of the courts www.gov.uk/find-court-tribunal
@@ -435,25 +446,63 @@ I sent a cheque to Jan Clark
 
       </td>
       <td class="no-border">
-I             {% if data['check'] =='1' %}Smith Limited{% else %}Mrs Mary Richards{% endif %}, believe that the facts stated in this defence are true.
+I believe that the facts stated in this defence are true.
 
       </td>
     </tr>
     </tr>
+    {% if   data['check']== 1  %}
+
+          <tr>
+      <td class="no-border">
+
+      </td>
+      <td class="no-border">
+        <strong>Company:</strong> Smith Limited
+      </td>
+    </tr>
+            <tr>
+      <td class="no-border">
+
+
+      </td>
+
+      <td class="no-border">
+        <strong>Name:</strong> Teresa Jones
+      </td>
+    </tr>
+
     <tr>
-      <td>
+      <td class="no-border">
+
 
       </td>
-        {% if   data['check']== 1  %}
-      <td>
-        <strong>Name:</strong> Roisin Gallop<br>
-        <strong>Role:</strong> Administrator
+      <td class="no-border">
+        <strong>Role:</strong> Owner/Director
       </td>
-
-        {% else %}
-        <td>Mrs Mary Richards</td>
-          {% endif %}
     </tr>
+
+            {% else %}
+ <tr>
+      <td class="no-border">
+
+      </td>
+      <td class="no-border">
+        Jan Clark
+      </td>
+    </tr>
+            {% endif %}
+
+
+          <tr>
+      <td class="no-border">
+
+      </td>
+      <td class="no-border">
+        <span class="dates2"></span>
+      </td>
+    </tr>
+
 
   </tbody>
 </table>
@@ -476,7 +525,7 @@ I             {% if data['check'] =='1' %}Smith Limited{% else %}Mrs Mary Richar
         Settle the claim
       </td>
       <td>
-I Unless you've been asked not to, you can still contact Mary Richards directly. If you can reach an agreement you may not have to go to a hearing.
+I Unless you've been asked not to, you can still contact the defendant directly. If you can reach an agreement you may not have to go to a hearing.
 
       </td>
     </tr>
@@ -498,7 +547,7 @@ If the defendant doesn't want to mediate then the case will be reviewed by a jud
     <tr>
           <tr>
             <td>
-
+OCON9B
             </td>
             <td>
               For further details of the courts www.gov.uk/find-court-tribunal
@@ -520,3 +569,41 @@ If the defendant doesn't want to mediate then the case will be reviewed by a jud
 </form>
 
 
+<script src="{{ asset_path }}/javascripts/jquery-1.11.3.js"></script>
+<script>
+  $(document).ready(function() {
+
+  var monthNames = [ "January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December" ];
+
+
+  var monthNamesCal = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+  "Jul", "Aug", "Sept", "Oct", "Nov", "Dec" ];
+
+
+
+  var newDate = new Date();
+  newDate.setDate(newDate.getDate()+ 14) ;
+
+  var newDate2 = new Date();
+  newDate2.setDate(newDate2.getDate()) ;
+
+  var newDate3 = new Date();
+  newDate3.setDate(newDate3.getDate()+ 28);
+
+  var newDate4 = new Date();
+  newDate4.setDate(newDate4.getDate())+ 100 ;
+
+
+
+/*$('#Date').html(" " + newDate.getDate() + ' ' + monthNames[newDate.getMonth()] + ' ' + newDate.getFullYear());
+*/$('#Date, .dates').html(" " + newDate.getDate() + ' ' + monthNames[newDate.getMonth()] + ' ' + newDate.getFullYear());
+$('#Date2, .dates2').html(" " + newDate2.getDate() + ' ' + monthNames[newDate2.getMonth()] + ' ' + newDate2.getFullYear());
+$('#Date3, .dates3').html(" " + newDate3.getDate() + ' ' + monthNames[newDate3.getMonth()] + ' ' + newDate3.getFullYear());
+$('#DateCal, .datesCal').html(" " + newDate4.getDate() + ' ' + monthNamesCal[newDate4.getMonth()] + ' ' + newDate4.getFullYear());
+
+});
+
+
+
+</script>
