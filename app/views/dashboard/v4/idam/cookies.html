@@ -12,21 +12,27 @@ Money Claims Prototype
 			</h1>
 			<div id="tabs">
 				<div id="nav-links">
+
+     {% if data['type'] == "generic"  %}
+
 					<ol class="nav-list">
 						<li><a href="#tabs-1">Overview</a></li>
-						{% if data['type'] == "service_specific"  %}
-						<li ><a href="#tabs-2">Money claims</a></li>
-						{% elif data['type'] == "generic"%}
 						<li><a href="#tabs-3">Divorce</a></li>
 						<li ><a href="#tabs-2">Money claims</a></li>
 						<li><a href="#tabs-4">Probate</a></li>
 						<li><a href="#tabs-5">Social Security and Child Support Tribunal</a></li>
-						{% endif %}
 					</ol>
 					<hr>
+          {% elif data['type'] == "service_specific"%}
+          <ol class="nav-list"></ol>
+         {% endif %}
+
+
 					<div id="tabs-1">
-						<h2 class="heading-large" id="overview">Overview</h2>
-						<p>A cookie is a small piece of data that’s stored on your computer, tablet, or phone when you visit a website. Most websites need cookies to work properly.</p>
+            {% if data['type'] == "generic"  %}
+                <h2 class="heading-large" id="overview">Overview</h2>
+            {% endif %}
+            <p>A cookie is a small piece of data that’s stored on your computer, tablet, or phone when you visit a website. Most websites need cookies to work properly.</p>
 						<p>This service uses them to:</p>
 						<ul class="list list-bullet">
 							<li>measure how you use the service so it can be improved</li>
