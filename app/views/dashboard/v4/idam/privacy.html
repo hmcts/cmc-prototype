@@ -12,20 +12,24 @@ Money Claims Prototype
 			</h1>
 			<div id="tabs">
 				<div id="nav-links">
+         {% if data['type'] == "generic"  %}
+
 					<ol class="nav-list">
 						<li><a href="#tabs-1">Overview</a></li>
-						{% if data['type'] == "service_specific"  %}
-						<li ><a href="#tabs-2">Money claims</a></li>
-						{% elif data['type'] == "generic"%}
 						<li><a href="#tabs-3">Divorce</a></li>
 						<li ><a href="#tabs-2">Money claims</a></li>
 						<li><a href="#tabs-4">Probate</a></li>
 						<li><a href="#tabs-5">Social Security and Child Support Tribunal</a></li>
-						{% endif %}
 					</ol>
 					<hr>
+          {% elif data['type'] == "service_specific"%}
+          <ol class="nav-list"></ol>
+         {% endif %}
+
 					<div id="tabs-1">
-						<h2 class="heading-large" id="overview">Overview</h2>
+            {% if data['type'] == "generic"  %}
+                <h2 class="heading-large" id="overview">Overview</h2>
+            {% endif %}
 						<p>This privacy policy explains why we collect your personal data, what we do with it, and your rights. More information about using this service is in the <a href='/dashboard/v4/idam/terms-and-conditions'>terms and conditions</a>.</p>
 						<h2 class="heading-medium">Who manages this service</h2>
 						<p>This service is managed by Her Majesty’s Courts and Tribunals Service (HMCTS) and we’re responsible for protecting the personal data you provide.</p>
@@ -67,13 +71,15 @@ Money Claims Prototype
 						<h2 class="heading-medium">How the Track my appeal service stores your data</h2>
 						<p>Your data will be shared with the government department that made the decision you are appealing against. For example, the Department for Work and Pensions or HM Revenue and Customs. This is so that department can respond to your appeal. Your personal data will be stored for 2 years. It will be deleted after that.</p>
 						<p>If you have asked for your named representative to receive updates on your appeal, then we will share your data with them. If you want your representative to stop receiving notifications then <a href='/dashboard/v4/idam/contact-us'>contact us.</a></p>
-					</div>
-					{% if data['type'] == "service_specific"  %}
-					<div id="tabs-2">
-						<h2 class="heading-large" id="cmc">Money claims service</h2>
+						{% if data['type'] == "service_specific"  %}
+
+						<h2 class="heading-medium" id="cmc">Money claims service</h2>
 						<p>Add content here to explain how long we keep your data and who we sharing your data with.</p>
-					</div>
-					{% elif data['type'] == "generic"%}
+            					{% endif %}
+
+          </div>
+
+					{% if data['type'] == "generic"%}
 					<div id="tabs-3">
 						<h2 class="heading-large" id="divorce">Apply for divorce service</h2>
 						<p>When a divorce is finalised the case is stored for 18 years. After this time, some data (from the decree nisi and the decree absolute) is deleted. </p>
