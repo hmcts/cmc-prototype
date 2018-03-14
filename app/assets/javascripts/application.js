@@ -278,7 +278,10 @@ $(document).ready(function() {
   newDate3.setDate(newDate3.getDate()+ 33);
 
   var newDate4 = new Date();
-  newDate4.setDate(newDate4.getDate())+ 100 ;
+  newDate4.setDate(newDate4.getDate()+ 7);
+
+  var newDate5 = new Date();
+  newDate5.setDate(newDate5.getDate()+ 7);
 
 
 
@@ -286,7 +289,8 @@ $(document).ready(function() {
 */$('#Date, .dates').html(" " + newDate.getDate() + ' ' + monthNames[newDate.getMonth()] + ' ' + newDate.getFullYear());
 $('#Date2, .dates2').html(" " + newDate2.getDate() + ' ' + monthNames[newDate2.getMonth()] + ' ' + newDate2.getFullYear());
 $('#Date3, .dates3').html(" " + newDate3.getDate() + ' ' + monthNames[newDate3.getMonth()] + ' ' + newDate3.getFullYear());
-$('#DateCal, .datesCal').html(" " + newDate4.getDate() + ' ' + monthNamesCal[newDate4.getMonth()] + ' ' + newDate4.getFullYear());
+$('#Date4, .dates4').html(" " + newDate4.getDate() + ' ' + monthNamesCal[newDate4.getMonth()] + ' ' + newDate4.getFullYear());
+$('#Date5, .dates5').html(" " + newDate5.getDate() + ' ' + monthNamesCal[newDate5.getMonth()] + ' ' + newDate5.getFullYear());
 
 });
 
