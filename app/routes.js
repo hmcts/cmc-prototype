@@ -71,6 +71,10 @@ router.get(agreementPage, (req, res) => {
   res.render('prototype-13/review-agreement', cookie)
 })
 
+router.get('*/prototype-admin/view-data', function(req, res){
+    res.render('prototype-admin/view-data', { data: JSON.stringify( req.session, null, 2) } )
+});
+
 router.post('/prototype-13/agreement/details-defendant', (req, res) => {
   setAgreementStateToDone(req, res, 'claim')
 
@@ -494,6 +498,10 @@ router.get('*/task-list/your-defence/partial', function (req, res, next) {
   }
 
 });
+
+
+
+
 
 function clearReturnPageHandler (req, res, next) {
   delete req.session.data.return_page
