@@ -45,11 +45,11 @@ Check your answers
         </a>
       </td>
     </tr>
-        {%if data.determined_figure != "reject" %}
+        {%if data['radio-indent-group'] != "accept_stop_claim" %}
 
     <tr>
       <td>
-        Your reason for rejecting defendant's repayment plan?
+        Your reason for rejecting the defendant's repayment plan?
       </td>
       <td>
        {% if data['reject_response']!="" %}
@@ -67,7 +67,7 @@ Check your answers
           {% endif %}
 
 
-            {%if data.determined_figure == "reject" %}
+            {%if data['radio-indent-group'] == "reject_stop_claim" %}
 
       <tr>
         <td>
@@ -90,13 +90,14 @@ Check your answers
       </td>
     </tr>
 
+    {%if data['radio-indent-group2'] == "reject_stop_claim" %}
     <tr>
       <td>
         Your reason for rejecting the court calculated repayment plan
       </td>
       <td>
-       {% if data['reject_response']!="" %}
-        {{data['reject_response']}}
+       {% if data['reject_response2']!="" %}
+        {{data['reject_response2']}}
         {% else %}
         I want all the money now because i know he has the money .
         {% endif %}
@@ -107,6 +108,8 @@ Check your answers
         </a>
       </td>
     </tr>    
+  {% endif %}
+  
    {% else %}
   {% endif %}
   </tbody>
