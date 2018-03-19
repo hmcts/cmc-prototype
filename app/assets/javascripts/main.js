@@ -78,6 +78,7 @@ function serializeFormArray(formName) {
 }
 
 function redirectTo(nextUrl, params) {
+  
   var newUrl,
     $forms = $('form[name="aspnetForm"]'),
     parts = location.pathname.split('/');
@@ -251,6 +252,7 @@ function conditionalNavigation(input, value, nextUrl, alternativeUrl) {
 }
 
 function multiNavigation(input, values, urls) {
+
     var form = serializeFormArray();
     form.forEach(function (item) {
         if (item.name === input) {
