@@ -18,24 +18,11 @@ Money Claims Prototype
       </h1>
       <h2 class="heading-medium">How they want to pay</h2>
 
-              <p class="panel">This payment plan is calculated using the financial information Mary Richards has entered. It hasn't been reviewed by court staff.</p>
-
       <table class="instalment-table">
         <tbody>
-          <tr>
-          </tr><tr>
-            <td class="">
-              The first payment of
-            </td>
-            <td class="">
-              £100
-            </td>
-            <td class="change-answer ">
-            </td>
-          </tr>
           <tr class="">
             <td class="">
-              Followed by equal monthly instalments of
+              Monthly instalments of
             </td>
             <td class="">
               £200
@@ -48,7 +35,7 @@ Money Claims Prototype
               Make the first payment on
             </td>
             <td >
-              1 December 2017
+              1 {{ now |  date("add", 1, "month") | date( "MMMM YYYY" ) }}
             </td>
             <td>
             </td>
@@ -58,7 +45,7 @@ Money Claims Prototype
               Last payment on
             </td>
             <td class="">
-              1 October 2019
+              1 {{ now |  date("add", 13, "month") | date( "MMMM YYYY" ) }}
             </td>
             <td class=" ">
             </td>
@@ -95,7 +82,7 @@ Money Claims Prototype
             <label for="radio-yes" data-target="yes-info"> I accept this repayment plan</label>
           </div>
           <div class="panel panel-border-narrow js-hidden" id="accept">
-            <p>By agreeing to the payment method you will stop the claim. If the defendant stops paying, you can ask the court to enforce payment.</p>
+            <p>The claim will be put on hold. If the defendant stops paying, you can ask the court to enforce payment.</p>
           </div>
           <div class="multiple-choice" data-target="reject-offer">
             <input id="radio-no" type="radio" name="radio-indent-group" value="reject_stop_claim">
@@ -104,7 +91,7 @@ Money Claims Prototype
       {% if data['determination'] == "1" %}
       {% else %}
           <div class="panel panel-border-narrow js-hidden" id="reject-offer">
-            <p>By rejecting their payment offer this claim be sent to the court to determine what the defendant can afford to pay. </p>
+            <p>The court will propose an alternative repayment plan based on the defendant's income and spending. </p>
           </div>
       {% endif %}
 
