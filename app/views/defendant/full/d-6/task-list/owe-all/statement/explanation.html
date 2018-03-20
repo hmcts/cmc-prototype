@@ -19,18 +19,18 @@ Money Claims Prototype
         {% elif data['upload'] == '2' %}
         <form method="post" action="../statement/upload" class="form">
           {% else %}
-          <form method="post" action="../statement/what-you-need" class="form">
+          <form method="post" action="../statement/repayment-plan" class="form">
             {% endif %}
             <h1 class="heading-large">
-              Explain to the claimant why you can't pay now
+              You'll need to explain why you can't pay immediately
             </h1>
             {% if data['upload'] == '2'%}
             <div class="panel panel-border-wide">
-              <p>You need to  upload your company or organisation's most recent statement of accounts.</p> <p>The accounts will will be sent to Jan Clark to explain why you can't pay the full amount now.</p>
+              <p>You need to  upload your company or organisation's most recent statement of accounts.</p>
+              <p>{% if data.counterclaim=="true" %}Mary Richards{%else%}Jan Clark{% endif %} will review these and can reject your payment plan if they feel you can pay more or sooner.</p>
+              <p>If they reject your repayment plan, the court will use these details to determine what you are able to pay.</p>
             </div>
-            {% elif  data['upload'] == '1' %}
-            <p>You need to answer some financial questions. Your answers will be sent to {% if data.counterclaim=="true" %}Mary Richards{%else%}Jan Smith{% endif %} to explain why you can't pay the full amount now.</p>
-            <h3 class="heading-medium">What you'll need</h3>
+            {% else %}
             <p>You'll need to provide details of:
               <ul class="list list-bullet">
                 <li>monthly bills and expenses</li>
@@ -38,8 +38,8 @@ Money Claims Prototype
                 <li>bank balances and savings</li>
                 <li>debts or court orders</li>
               </ul>
-              {% else %}
-       <p>You need to answer some financial questions. Your answers will be sent to {% if data.counterclaim=="true" %}Mary Richards{%else%}Jan Clark{% endif %} to explain why you can't pay the full amount now.</p>
+              <p>{% if data.counterclaim=="true" %}Mary Richards{%else%}Jan Clark{% endif %} will review these and can reject your payment plan if they feel you can pay more or sooner.</p>
+              <p>If they reject your repayment plan, the court will use these details to determine what you are able to pay.</p>
 
               {% endif %}
               <input type="hidden" name="your_defence_options" value="complete">
