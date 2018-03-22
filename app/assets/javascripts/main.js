@@ -257,6 +257,8 @@ function multiNavigation(input, values, urls) {
     form.forEach(function (item) {
         if (item.name === input) {
             for(var i = 0; i < values.length; i++) {
+  console.log( item.value );
+  console.log( values[i] );
               if (item.value == values[i]) {
                 return redirectTo(urls[i], form);
               }

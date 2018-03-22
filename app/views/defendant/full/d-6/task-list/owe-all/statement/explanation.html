@@ -19,7 +19,7 @@ Money Claims Prototype
         {% elif data['upload'] == '2' %}
         <form method="post" action="../statement/upload" class="form">
           {% else %}
-          <form method="post" action="../statement/repayment-plan" class="form">
+          <form method="post" action="../statement/{% if data['radio-pay-group'] == 'Instalments' %}repayment-plan{% else %}residence{% endif %}" class="form">
             {% endif %}
             <h1 class="heading-large">
               You'll need to explain why you can't pay immediately
@@ -27,8 +27,12 @@ Money Claims Prototype
             {% if data['upload'] == '2'%}
             <div class="panel panel-border-wide">
               <p>You need to  upload your company or organisation's most recent statement of accounts.</p>
-              <p>{% if data.counterclaim=="true" %}Mary Richards{%else%}Jan Clark{% endif %} will review these and can reject your payment plan if they feel you can pay more or sooner.</p>
-              <p>If they reject your repayment plan, the court will use these details to determine what you are able to pay.</p>
+              {% if data['radio-pay-group'] == 'Instalments' %}
+              <p>{% if data.counterclaim=="true" %}Mary Richards{%else%}Jan Clark{% endif %} will review these and can reject your repayment plan if they feel you can pay more or sooner.</p>
+              {% else %}
+              <p>{% if data.counterclaim=="true" %}Mary Richards{%else%}Jan Clark{% endif %} will review these and can reject your payment date if they feel you can pay sooner.</p>
+              {% endif %}
+              <p>If they reject your repayment plan, the court will use these details to determine a repayment plan.</p>
             </div>
             {% else %}
             <p>You'll need to provide details of:
@@ -38,8 +42,12 @@ Money Claims Prototype
                 <li>bank balances and savings</li>
                 <li>debts or court orders</li>
               </ul>
-              <p>{% if data.counterclaim=="true" %}Mary Richards{%else%}Jan Clark{% endif %} will review these and can reject your payment plan if they feel you can pay more or sooner.</p>
-              <p>If they reject your repayment plan, the court will use these details to determine what you are able to pay.</p>
+              {% if data['radio-pay-group'] == 'Instalments' %}
+              <p>{% if data.counterclaim=="true" %}Mary Richards{%else%}Jan Clark{% endif %} will review these and can reject your repayment plan if they feel you can pay more or sooner.</p>
+              {% else %}
+              <p>{% if data.counterclaim=="true" %}Mary Richards{%else%}Jan Clark{% endif %} will review these and can reject your payment date if they feel you can pay sooner.</p>
+              {% endif %}
+              <p>If they reject your repayment plan, the court will use these details to determine a repayment plan.</p>
 
               {% endif %}
               <input type="hidden" name="your_defence_options" value="complete">
