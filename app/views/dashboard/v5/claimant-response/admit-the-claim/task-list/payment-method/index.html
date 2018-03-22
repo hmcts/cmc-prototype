@@ -18,6 +18,9 @@ Money Claims Prototype
       </h1>
       <h2 class="heading-medium">How they want to pay</h2>
 
+      {% if data['payment'] == 'full' %}
+      <p>Mary Richards has offered to pay you in full by {{ now | date( 'add', 3, 'months') | date }}.</p>
+      {% else %}
       <table class="instalment-table">
         <tbody>
           <tr class="">
@@ -52,6 +55,9 @@ Money Claims Prototype
           </tr>
         </tbody>
       </table>
+
+      {% endif %}
+
       <h2 class="heading-medium">Do you accept the payment plan?</h2>
           {% if data['determination'] == "1" %}
             <form
@@ -82,7 +88,7 @@ Money Claims Prototype
             <label for="radio-yes" data-target="yes-info"> I accept this repayment plan</label>
           </div>
           <div class="panel panel-border-narrow js-hidden" id="accept">
-            <p>The claim will be put on hold. If the defendant stops paying, you can ask the court to enforce payment.</p>
+            <p>The claim will be put on hold. If the defendant {% if data['payment'] == 'full' %}doesn't pay{% else %}stops paying{% endif %}, you can ask the court to enforce payment.</p>
           </div>
           <div class="multiple-choice" data-target="reject-offer">
             <input id="radio-no" type="radio" name="radio-indent-group" value="reject_stop_claim">
