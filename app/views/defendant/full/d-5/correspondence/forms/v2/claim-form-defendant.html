@@ -501,7 +501,12 @@ h1 {
           Settle the claim
         </td>
         <td>
-          Unless you've been asked not to, you can still contact the defendant directly. If you can reach an agreement you may not have to go to a hearing.
+
+        {% if data['check'] =='1' %}Unless you've been asked not to, you can still contact the claimant directly. If you can reach an agreement you may not have to go to a hearing.
+
+      {% else %}
+        Unless you've been asked not to, you can still contact the defendant directly. If you can reach an agreement you may not have to go to a hearing.      {% endif %}
+
         </td>
       </tr>
       <tr>
@@ -509,8 +514,13 @@ h1 {
           Mediation
         </td>
         <td>
-          <p>If the defendant has asked for mediation then we'll contact you to ask if you want to mediate.</p>
-          If the defendant doesn't want to mediate then the case will be reviewed by a judge and might go to a hearing. We'll contact you if a hearing date is scheduled and explain what you need to do to prepare.
+
+
+      {% if data['check'] =='1' %}You have chosen not to use the free mediation service. The case will be reviewed by a judge and might go to a hearing. We'll contact you if a hearing date is scheduled and explain what you need to do to prepare.
+      {% else %}
+     <p> If the defendant has asked for mediation then we'll contact you to ask if you want to mediate. </p> <p> If the defendant doesn't want to mediate then the case will be reviewed by a judge and might go to a hearing. We'll contact you if a hearing date is scheduled and explain what you need to do to prepare.</p>
+      {% endif %}
+
         </td>
       </tr>
     </tbody>

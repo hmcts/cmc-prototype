@@ -13,11 +13,14 @@ Money Claims Prototype
     <div class="column-two-thirds">
 
       <div class="govuk-box-highlight">
-        {% if data['radio-indent-group'] == "reject_hearing" or data['radio-indent-group'] == "decline-mediation" or data['confirmation'] == 1 %}
+        {% if data['radio-indent-group'] == "reject_hearing" or data['radio-indent-group'] == "decline-mediation" %}
         <h1 class="bold-large">The claim will be reviewed</h1>
 
-        {% elseif data['radio-indent-group'] == "accept_stop_claim" or data['radio-indent-group2'] == "accept_stop_claim" or data['radio-indent-group'] == "accept_stop_claim_claim_amount"  or data['confirmation'] == 6 %}
-        <h1 class="bold-large">You have accepted their response</h1>
+        {% elseif data['radio-indent-group'] == "accept_stop_claim" or data['radio-indent-group'] == "accept_stop_claim_claim_amount"  or data['confirmation'] == 6 %}
+        <h1 class="bold-large">You have accepted the defendant's repayment plan</h1>
+
+        {% elseif data['radio-indent-group2'] == "accept_stop_claim" or data['radio-indent-group2'] == "accept_stop_claim_claim_amount" %}
+        <h1 class="bold-large">You have accepted the court's repayment plan</h1>
 
         {% elseif data['radio-indent-group'] == "payment_instalments" or data['radio-indent-group'] == "set_date"%}
         <h1 class="bold-large">Payment request sent to court</h1>
@@ -26,7 +29,7 @@ Money Claims Prototype
         <h1 class="bold-large">You have requested free mediation</h1>
 
         {% elseif data['radio-indent-group'] == "mediation-reject" or data['radio-indent-group'] == "reject_stop_claim"%}
-        <h1 class="bold-large">You have rejected their response</h1>
+        <h1 class="bold-large">You have rejected the repayment plan</h1>
 
 
 
@@ -42,9 +45,17 @@ Money Claims Prototype
 
 
 
+        {% if data['radio-indent-group'] == "accept_stop_claim" %}
+        <p>We'll email the defendant Mary Richards telling them that you agree to their repayment plan.</p>
 
-        {% if data['radio-indent-group'] == "accept_stop_claim"  or data['confirmation'] == 6 or data['radio-indent-group2'] == "accept_stop_claim"  %}
-        <p>We'll email the defendant Mary Richards telling them that you agree to the instalment plan.</p>
+      <h2 class="heading-medium">If you don't get paid</h2>
+       <p>If Mary Richards stops paying the instalments, you can ask the court to enforce payment.<p>
+      </p>
+           <p><a href="../claimant?claimant=10.1" class="">Back to your account</a></p>
+
+
+        {% elseif data['radio-indent-group2'] == "accept_stop_claim"  %}
+        <p>We'll email the defendant Mary Richards telling them that you agree to the court's repayment plan.</p>
 
       <h2 class="heading-medium">If you don't get paid</h2>
        <p>If Mary Richards stops paying the instalments, you can ask the court to enforce payment.<p>
