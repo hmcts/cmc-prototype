@@ -17,7 +17,13 @@ Money Claims Prototype
        <h1 class="heading-large">
         The defendant's response
       </h1>
-      Mary Richards admits they owe all the money you’ve claimed. They have offered to pay you in instalments.
+      <p>Mary Richards admits they owe all the money you’ve claimed.
+
+      {% if data['payment'] == 'full' %}
+      </p><p>They have offered to pay you in full by {{ now | date( 'add', 3, 'months') | date }}.</p>
+      {% else %}
+      They have offered to pay you in instalments.</p>
+      
       <h2 class="heading-medium">How they want to pay</h2>
 
       <table class="instalment-table">
@@ -66,6 +72,8 @@ Money Claims Prototype
           </tr>
       </tbody>
     </table>
+    {% endif %}
+
     <details>
       <summary class="">Defendant's financial details</summary>
       <div class="panel">
@@ -354,7 +362,7 @@ Money Claims Prototype
       </div>
     </details>
     <h2 class="heading-small">Why they can't pay the full amount now</h2>
-    <p>I am heavily in debt at the moment and I'm not earning that much money. £200 a month is all i can afford.</p>
+    <p>I am heavily in debt at the moment and I'm not earning that much money. {% if data['payment'] == 'full' %}i can pay when i've cleared my debts.{% else %}£200 a month is all i can afford.{% endif %}</p>
     <input type="hidden" name="their_response" value="complete">
     <div class="form-group">
       <input type="submit" class="button" value="Continue"/>
