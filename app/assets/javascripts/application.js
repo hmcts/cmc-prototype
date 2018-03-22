@@ -319,10 +319,13 @@ $(document).ready(function () {
   });
 
   if ($('#legal-status1').val() > 1 || $('#legal-status1').val() == 'other') {
+console.log( 'here3' );
+
     $(".other").show()
   }
 
   $('.otherType').on('change',function(){
+console.log( 'here' );
     if( $(this).val()==="1"){
       $(".other").hide()
     }
@@ -332,12 +335,15 @@ $(document).ready(function () {
   });
 
   $('.otherType').on('change',function(){
+console.log( 'here2', $(this).val() );
+
     if( $(this).val()==="2"){
-      $(".evidence-message").text("For example, a signed contract by the claimant");
-
-
+      $(".evidence-message").text("For example, a signed contract by the claimant.");
     }
     else if ( $(this).val()==="3"){
+console.log( 'here4' );
+console.log( $(".evidence-message") );
+$(".evidence-message").show();
       $(".evidence-message").text("For example, a surveyor's report.");
     }
     else if ( $(this).val()==="4"){
@@ -359,7 +365,7 @@ $(document).ready(function () {
 
   $('.otherType1').on('change',function(){
     if( $(this).val()==="2"){
-      $(".evidence-message1").text("For example, a signed contract by the claimant");
+      $(".evidence-message1").text("For example, a signed contract by the claimant.");
 
 
     }
@@ -385,7 +391,7 @@ $(document).ready(function () {
 
   $('.otherType2').on('change',function(){
     if( $(this).val()==="2"){
-      $(".evidence-message2").text("For example, a signed contract by the claimant");
+      $(".evidence-message2").text("For example, a signed contract by the claimant.");
 
 
     }
@@ -411,7 +417,7 @@ $(document).ready(function () {
 
   $('.otherType3').on('change',function(){
     if( $(this).val()==="2"){
-      $(".evidence-message3").text("For example, a signed contract by the claimant");
+      $(".evidence-message3").text("For example, a signed contract by the claimant.");
 
 
     }
@@ -475,18 +481,7 @@ function goBack() {
 
 
 $( document ).ready(function() {
-	$('.otherType').on('change',function(){
-		if( $(this).val()==="4"){
-			$(".other").show()
-		}
-		else if ( $(this).val()==="7"){
-			$(".other").show()
-		}
-		else{
-			$(".other").hide()
 
-		}
-	});
 
 
 	$(".summary-link").click(function(){
@@ -503,19 +498,6 @@ $( document ).ready(function() {
 
 
 
-	$('.otherType').on('change',function(){
-		if( $(this).val()==="4"){
-			$(".evidence-message").text("Please specify");
-
-
-		}
-		else if ( $(this).val()==="7"){
-			$(".evidence-message").text("Please specify");
-		}
-		else{
-			$(".evidence-message").text("");
-		}
-	});
 
 	if ($('form.postcode')) {
 
