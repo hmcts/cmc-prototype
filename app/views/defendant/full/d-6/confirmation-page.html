@@ -49,7 +49,7 @@ Money Claims Prototype
     <!-- Admit all - pay Immediately -->
     {% if data['radio-pay-group']=="Immediately" and data.radio_select_group=="all" or data['confirmation']== 1  %}
     <p>We've emailed {% if data.counterclaim=="true" %}Mary Richards{%else%}Jan Clark{% endif %} telling them that you will pay their money claim within 5 days.</p>
-    <p>View the <a href='../../../dashboard/v3/defendant?defendant=7'>claim against you and your response</a>.</p>
+    <p>View the <a href='../../../dashboard/v5/defendant?defendant=5.02'>claim against you and your response</a>.</p>
     <h2 class="heading-medium">What happens next</h2>
     <p>When {% if data.counterclaim=="true" %}Mary Richards{%else%}Jan Clark{% endif %} gets your payment they must tell you and the court you’ve paid their money claim.</p>
       <h2 class="heading-medium">County Court Judgment (CCJ)</h2>
@@ -62,7 +62,7 @@ Money Claims Prototype
     <!-- Admit all - pay instalments -->
     {% elseif data['radio-pay-group']=="Instalments" and data.radio_select_group=="all" or data['confirmation']== 2 %}
     <p>We've emailed {% if data.counterclaim=="true" %}Mary Richards{%else%}Jan Clark{% endif %} telling them that you will pay their money by instalments.</p>
-    <p>View the <a href='../../../dashboard/v3/defendant?defendant=7'>claim against you and your response</a>.</p>
+    <p>View the <a href='../../../dashboard/v5/defendant?defendant=6'>claim against you and your response</a>.</p>
     <h2 class="heading-medium">What happens next</h2>
 
     <p>You should set up your repayment plan to begin as stated. We will let you know if {% if data.counterclaim=="true" %}Mary Richards{%else%}Jan Clark{% endif %} rejects your repayment plan. If they do not respond within 6 months, the case will be put on hold.</p>
@@ -75,8 +75,8 @@ Money Claims Prototype
       <p>If you pay the debt after 28 days you can <a href="https://hmctsformfinder.justice.gov.uk/HMCTS/GetForm.do?court_forms_id=1157">apply for a certificate of satisfaction</a> to remove your name from the register (opens in a new window). This application costs £15.</p>
     <!-- Admit all - pay by set date -->
     {% elseif data['radio-pay-group']=="Set-date"  and data.radio_select_group=="all" or data['confirmation']== 3 %}
-    <p>We've emailed {% if data.counterclaim=="true" %}Mary Richards{%else%}Jan Clark{% endif %} your offer to pay the money claim on <span id="Date"></span> and your explanation of why you can’t pay before then.</p>
-    <p>View the <a href='../../../dashboard/v3/defendant?defendant=7'>claim against you and your response</a>.</p>
+    <p>We've emailed {% if data.counterclaim=="true" %}Mary Richards{%else%}Jan Clark{% endif %} your offer to pay the money claim on {{ ( data['set-month'] + ' ' + data['set-day'] + ' ' + data['set-year']) | date('D MMMM YYYY') }} and your explanation of why you can’t pay before then.</p>
+    <p>View the <a href='../../../dashboard/v5/defendant?defendant=5'>claim against you and your response</a>.</p>
     <h2 class="heading-medium">What happens next</h2>
     <p>If {% if data.counterclaim=="true" %}Mary Richards{%else%}Jan Clark{% endif %} rejects your offer to pay by a set date then the court will decide how you can pay.</p>
     <p>If {% if data.counterclaim=="true" %}Mary Richards{%else%}Jan Clark{% endif %} does not respond within 6 months, the case will be put on hold.</p>
@@ -93,7 +93,7 @@ Money Claims Prototype
     {% elseif data.radio_select_group2=="Some" and data['radio-pay-group']=="Immediately" or data['confirmation']== 4 %}
     <p>You believe you owe £1,000. We've emailed {% if data.counterclaim=="true" %}Mary Richards{%else%}Jan Clark{% endif %} telling them you're prepared to pay this amount within 28 days.</p>
     <p>Your explanation of why you believe you don't owe the amount claimed has been sent to {% if data.counterclaim=="true" %}Mary Richards{%else%}Jan Clark{% endif %}.</p>
-    <p>View the <a href='../../../dashboard/v3/defendant?defendant=7'>claim against you and your response</a>.</p>
+    <p>View the <a href='../../../dashboard/v5/defendant?defendant=7'>claim against you and your response</a>.</p>
     <h2 class="heading-medium">What happens next</h2>
     <p>{% if data.counterclaim=="true" %}Mary Richards{%else%}Jan Clark{% endif %} needs to respond to your defence on or before <span class="dates"></span>. If they reject it then the case will be reviewed and might go to a hearing.</p>
     <p>We'll contact you if a hearing date is scheduled and explain what you need to do to prepare.</p>
@@ -121,7 +121,7 @@ Money Claims Prototype
     {% elseif data.radio_select_group2=="Some" and data['radio-pay-group']=="Instalments" or data['confirmation']== 6 %}
     <p>You believe you owe £1,000. We've emailed {% if data.counterclaim=="true" %}Mary Richards{%else%}Jan Clark{% endif %} your offer to pay this amount by instalments.</p>
     <p>Your explanation of why you believe you don't owe the amount claimed has been sent to {% if data.counterclaim=="true" %}Mary Richards{%else%}Jan Clark{% endif %}.</p>
-      <p>View the <a href='../../../dashboard/v3/defendant?defendant=7'>claim against you and your response</a>.</p>
+      <p>View the <a href='../../../dashboard/v5/defendant?defendant=7'>claim against you and your response</a>.</p>
     <h2 class="heading-medium">What happens next</h2>
     <p>{% if data.counterclaim=="true" %}Mary Richards{%else%}Jan Clark{% endif %} needs to respond to your offer on or before 4pm, <span class="dates"></span>.</p>
     <p>If your offer is accepted we’ll email you to explain how you can pay.</p>
@@ -149,7 +149,7 @@ Money Claims Prototype
     {% elseif data.radio_select_group2=="Some" and data['radio-pay-group']=="Set-date" or data['confirmation']== 7 %}
     <p>You believe you owe £1,000. We've emailed {% if data.counterclaim=="true" %}Mary Richards{%else%}Jan Clark{% endif %} your offer to pay this amount by <span class="dates"></span>.</p>
     <p>Your explanation of why you believe you don't owe the amount claimed has been sent to {% if data.counterclaim=="true" %}Mary Richards{%else%}Jan Clark{% endif %}.</p>
-      <p>View the <a href='../../../dashboard/v3/defendant?defendant=7'>claim against you and your response</a>.</p>
+      <p>View the <a href='../../../dashboard/v5/defendant?defendant=7'>claim against you and your response</a>.</p>
     <h2 class="heading-medium">What happens next</h2>
     <p>{% if data.counterclaim=="true" %}Mary Richards{%else%}Jan Clark{% endif %} needs to respond to your offer on or before <span class="dates"></span>.</p>
     <p>If your offer is accepted we’ll email you to explain how you can pay.</p>
@@ -186,7 +186,7 @@ Money Claims Prototype
     <!-- paid what i owe -->
     {% elseif data.radio_select_group2=="Paid-some" or data['confirmation']== 8 %}
     <p>You state that you paid £1500. Your explanation of why you don't owe any more money has been sent to {% if data.counterclaim=="true" %}Mary Richards{%else%}Jan Clark{% endif %}. </p>
-      <p>View the <a href='../../../dashboard/v3/defendant?defendant=7'>claim against you and your response</a>.</p>
+      <p>View the <a href='../../../dashboard/v5/defendant?defendant=7'>claim against you and your response</a>.</p>
     <h2 class="heading-medium">What happens next</h2>
     <p>{% if data.counterclaim=="true" %}Mary Richards{%else%}Jan Clark{% endif %} needs to respond to your offer on or before 4pm, <span class="dates"></span>.  If they reject it then the case will be reviewed and might go to a hearing.</p>
     <p>We'll contact you if a hearing date is scheduled and explain what you need to do to prepare.</p>
@@ -238,7 +238,7 @@ Money Claims Prototype
     {% elseif data.radio_select_group2=="defend_now" or data['confirmation']== 12 %}
 
     <p>We’ve emailed {% if data.counterclaim=="true" %}Mary Richards{%else%}Jan Clark{% endif %} your defence explaining why you reject the claim.</p>
-      <p>View the <a href='../../../dashboard/v3/defendant?defendant=7'>claim against you and your response</a>.</p>
+      <p>View the <a href='../../../dashboard/v5/defendant?defendant=7'>claim against you and your response</a>.</p>
     <h2 class="heading-medium">What happens next</h2>
       <p>{% if data.counterclaim=="true" %}Mary Richards{%else%}Jan Clark{% endif %} needs to respond by <span class="dates"></span>.</p>
     <p>If {% if data.counterclaim=="true" %}Mary Richards{%else%}Jan Clark{% endif %} accepts you defence the claim will be cancelled. If they reject your defence the case will be reviewed and might go to a hearing.</p>
@@ -261,7 +261,7 @@ Money Claims Prototype
     <!-- Reject claim + mediation -->
     {% elseif data.radio_select_group2=="defend_now" or data['confirmation']== 14 %}
     <p>We’ve emailed {% if data.counterclaim=="true" %}Mary Richards{%else%}Jan Clark{% endif %} your defence, explaining why you disagree with the claim.</p>
-      <p>View the <a href='../../../dashboard/v3/defendant?defendant=7'>claim against you and your response</a>.</p>
+      <p>View the <a href='../../../dashboard/v5/defendant?defendant=7'>claim against you and your response</a>.</p>
     <h2 class="heading-medium">What happens next</h2>
       <p>{% if data.counterclaim=="true" %}Mary Richards{%else%}Jan Clark{% endif %} needs to respond to your offer on or before 4pm, <span class="dates"></span>.</p>
     <p>If your defence is accepted {% if data.counterclaim=="true" %}Mary Richards{%else%}Jan Clark{% endif %} must tell both you and the court that you have paid the money claim.</p>
@@ -283,7 +283,7 @@ Money Claims Prototype
     <!-- Already paid -->
     {% elseif  data.radio_select_group2=="paid" or data['confirmation']== 16 %}
     <p>We’ve emailed {% if data.counterclaim=="true" %}Mary Richards{%else%}Jan Clark{% endif %} telling them when and how you paid the claim of £1500.</p>
-      <p>View the <a href='../../../dashboard/v3/defendant?defendant=7'>claim against you and your response</a>.</p>
+      <p>View the <a href='../../../dashboard/v5/defendant?defendant=7'>claim against you and your response</a>.</p>
     <h2 class="heading-medium">What happens next</h2>
     <p>{% if data.counterclaim=="true" %}Mary Richards{%else%}Jan Clark{% endif %} needs to respond by <span class="dates"></span>.</p>
       <p>If {% if data.counterclaim=="true" %}Mary Richards{%else%}Jan Clark{% endif %} accepts you defence the claim will be cancelled. If they reject your defence the case will be reviewed and might go to a hearing.</p>
@@ -295,7 +295,7 @@ Money Claims Prototype
 
 
     <p>You admit you owe part of the claim. We've emailed {% if data.counterclaim=="true" %}Mary Richards{%else%}Jan Clark{% endif %} your response. They can accept or reject it.</p>
-    <p>View the <a href='../../../dashboard/v3/defendant?defendant=7'>claim against you and your response</a>.</p>
+    <p>View the <a href='../../../dashboard/v5/defendant?defendant=7'>claim against you and your response</a>.</p>
     <h2 class="heading-medium">What happens next</h2>
     <p>If {% if data.counterclaim=="true" %}Mary Richards{%else%}Jan Clark{% endif %} accepts your response we'll email you explaining how to pay them.</p>
       <p>If they reject it the claim will be reviewed by a judge and might go to a hearing.</p>
@@ -317,7 +317,7 @@ Money Claims Prototype
       <p>Tell the defendant when you’ve received their payment.</p>
       <p>You must also tell the court what date you were paid or accepted an offer. Do this by emailing moneyclaims@hmcts.gsi.gov.uk</p>
       <h3 class="heading-medium">Your money claims account</h3>
-      <p> You can view the counterclaim at any time on <a href='../../../dashboard/v3/defendant?defendant=17'>your money claims account</a>. </p>
+      <p> You can view the counterclaim at any time on <a href='../../../dashboard/v5/defendant?defendant=17'>your money claims account</a>. </p>
 <!--
       <h2 class="heading-medium"> If you disagree with the response</h2>
         You might have to go to a court hearing if:
