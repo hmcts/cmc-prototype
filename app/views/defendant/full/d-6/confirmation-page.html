@@ -49,7 +49,8 @@ Money Claims Prototype
     <!-- Admit all - pay Immediately -->
     {% if data['radio-pay-group']=="Immediately" and data.radio_select_group=="all" or data['confirmation']== 1  %}
     <p>We've emailed {% if data.counterclaim=="true" %}Mary Richards{%else%}Jan Clark{% endif %} telling them that you will pay them immediately.</p>
-    <p>You must make sure they receive the money within 5 days. Any cheques or transfers must be clear in their account.</p>
+    <p>You must make sure they receive the money by {{ now | date('add', 5, 'days' ) | date }}. Any cheques or transfers must be clear in their account.</p>
+    <p>Make sure you get a receipt for any payments.</p>
     <p>View the <a href='../../../dashboard/v5/defendant?defendant=5.02'>claim against you and your response</a>.</p>
     <h2 class="heading-medium">What happens next</h2>
     <p>When {% if data.counterclaim=="true" %}Mary Richards{%else%}Jan Clark{% endif %} gets your payment they must tell you and the court you’ve paid their money claim.</p>
@@ -63,6 +64,7 @@ Money Claims Prototype
     <!-- Admit all - pay instalments -->
     {% elseif data['radio-pay-group']=="Instalments" and data.radio_select_group=="all" or data['confirmation']== 2 %}
     <p>We've emailed {% if data.counterclaim=="true" %}Mary Richards{%else%}Jan Clark{% endif %} telling them that you will pay their money by instalments.</p>
+    <p>Make sure you get a receipt for any payments.</p>
     <p>View the <a href='../../../dashboard/v5/defendant?defendant=6'>claim against you and your response</a>.</p>
     <h2 class="heading-medium">What happens next</h2>
 
@@ -77,6 +79,7 @@ Money Claims Prototype
     <!-- Admit all - pay by set date -->
     {% elseif data['radio-pay-group']=="Set-date"  and data.radio_select_group=="all" or data['confirmation']== 3 %}
     <p>We've emailed {% if data.counterclaim=="true" %}Mary Richards{%else%}Jan Clark{% endif %} your offer to pay the money claim on {{ ( data['set-month'] + ' ' + data['set-day'] + ' ' + data['set-year']) | date('D MMMM YYYY') }} and your explanation of why you can’t pay before then.</p>
+    <p>Make sure you get a receipt for any payments.</p>
     <p>View the <a href='../../../dashboard/v5/defendant?defendant=5'>claim against you and your response</a>.</p>
     <h2 class="heading-medium">What happens next</h2>
     <p>If {% if data.counterclaim=="true" %}Mary Richards{%else%}Jan Clark{% endif %} rejects your offer to pay by a set date then the court will decide how you can pay.</p>
