@@ -504,17 +504,22 @@ Check your answers
       </td>
       <td>
         {% if data['radio-pay-group']=="Immediately" or data['check']== 1 or data['check']== 4%}
-        The full amount by <span class="dates2"></span>
+        The full amount by {{ now | date( 'add', 5, 'days') | date }}
         {% elseif data['radio-pay-group']=="Instalments" or data['check']== 2  or data['check']== 5%}
         By instalments
         {% elseif data['radio-pay-group']=="Set-date" or data['check']== 3 or data['check']== 6%}
-        The full amount by <span class="dates2"></span>
+        The full amount by 
+          {% if data['set-day']!="" %}
+          {{ ( data['set-month'] + ' ' + data['set-day'] + ' ' + data['set-year']) | date('D MMMM YYYY') }}
+          {% else %}
+          31 January 2018
+          {% endif %}
         {% else %}
         The full amount by <span class="dates2"></span>
         {% endif %}
       </td>
       <td class="change-answer">
-       <a href="../task-list/owe-all/index?return_page={{ '../../task-list' | urlencode }}">
+       <a href="../task-list/owe-all?return_page={{ '../../task-list' | urlencode }}">
         Change <span class="visuallyhidden">Name</span>
       </a>
     </td>
@@ -579,23 +584,6 @@ Check your answers
   {% endif %}
   {% if data['radio-pay-group']=="Set-date" or data['check']== 3 or data['check']== 6%}
   <tr>
-    <td class="no-border">
-      When you'll pay the amount
-    </td>
-    <td  class="no-border">
-      {% if data['set-day']!="" %}
-      {{data['set-day']}} {{data['set-month']}} {{data['set-year']}}
-      {% else %}
-      31 January 2018
-      {% endif %}
-    </td>
-    <td class="change-answer no-border">
-      <a href="../task-list/owe-all/pay-by-set-date?return_page={{ '../../task-list' | urlencode }}">
-        Change <span class="visuallyhidden">Name</span>
-      </a>
-    </td>
-  </tr>
-  <tr>
     <td>
       Explain why you can't pay within the 28 days
     </td>
@@ -607,6 +595,9 @@ Check your answers
       {% endif %}
     </td>
     <td class="change-answer">
+        <a href="#">
+          Change <span class="visuallyhidden">Name</span>
+        </a>
     </td>
   </tr>
   {% endif %}
@@ -614,7 +605,7 @@ Check your answers
 </table>
 {% else %}
 {% endif %} <!-- end owe some money -->
-{% if data['radio-pay-group']=="Instalments" or data['check']== 2  or data['check']== 5%}
+{% if data['radio-pay-group']=="Instalments" or data['radio-pay-group']=="Set-date" or data['check']== 2  or data['check']== 5%}
 <table class="check-your-answers">
   <thead>
     <tr>
@@ -1129,7 +1120,7 @@ Check your answers
       <a class="button" href="check-and-send/counterclaim-answers">Continue</a>
   {% else %}
 
-    <div class="column-two-thirds">
+    <div>
     <h2 class="heading-medium">Statement of truth</h2>
 
   <p>  The information on this page forms your response. You can see it on the
