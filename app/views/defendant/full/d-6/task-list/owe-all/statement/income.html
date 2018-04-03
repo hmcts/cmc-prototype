@@ -98,6 +98,8 @@ Money Claims Prototype
           <input class="form-control form-control-1-4  fee pound" id="input-text-a" type="text">
         </div>
       </div>
+      
+      <p id="total" class="heading-small"></p>
 
       <div class="form-group" id="end-bit">
         <div id="add-event-container">
@@ -118,6 +120,17 @@ Money Claims Prototype
             }
 
           });
+
+          $('input[type=text]').keyup( function() {
+
+              intTotal = 0;
+
+              $('input[type=text]').each( function() {
+                intTotal = intTotal + $(this).val() * 1;
+              });
+              $('#total').text("Total income: £" +intTotal);
+          });
+
         });
       </script>
       <div class="form-group">
