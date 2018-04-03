@@ -107,6 +107,8 @@ Money Claims Prototype
         </div>
       </div>
 
+      <p id="total" class="heading-small"></p>
+
       <div class="form-group" id="end-bit">
         <div id="add-event-container">
           <a class="secondary-button" id="add-another-event-button" href="#">Add another expense</a>
@@ -126,6 +128,17 @@ Money Claims Prototype
             }
 
           });
+
+          $('input[type=text]').keyup( function() {
+
+              intTotal = 0;
+
+              $('input[type=text]').each( function() {
+                intTotal = intTotal + $(this).val() * 1;
+              });
+              $('#total').text("Total income: £" +intTotal);
+          });
+          
         });
       </script>
           </fieldset>
