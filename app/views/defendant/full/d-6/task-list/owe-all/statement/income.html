@@ -21,9 +21,9 @@ Money Claims Prototype
       </div>
       <div class="form-group">
         <label class="form-label" for="input-text-a">
-          Salary (take home pay)
+          Take home pay
         </label>
-        <p class="form-hint">Include overtime, commission, bonuses</p>
+        <p class="form-hint">Include wages, overtime, commission, bonuses</p>
         <input class="form-control form-control-1-4  fee pound" id="input-text-a" type="text">
       </div>
       <div class="form-group">
@@ -74,13 +74,32 @@ Money Claims Prototype
         </label>
         <input class="form-control form-control-1-4  fee pound" id="input-text-a" type="text">
       </div>
+
       <div class="form-group">
         <label class="form-label" for="input-text-a">
           Pension (paid to you)
         </label>
         <input class="form-control form-control-1-4  fee pound" id="input-text-a" type="text">
       </div>
-      <div class="form-group">
+
+      <div id="add-another" class="js-hidden">
+        <p class="heading-small">Add another income</p>
+        <div class="form-group" style="margin-bottom: 15px;">
+          <label class="form-label" for="input-text-a">
+            Type of income
+          </label>
+          <input class="form-control" id="input-text" type="text">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="input-text-a">
+            Amount received
+          </label>
+          <input class="form-control form-control-1-4  fee pound" id="input-text-a" type="text">
+        </div>
+      </div>
+
+      <div class="form-group" id="end-bit">
         <div id="add-event-container">
           <a class="secondary-button" id="add-another-event-button" href="#">Add another income</a>
         </div>
@@ -90,11 +109,14 @@ Money Claims Prototype
           $('#add-another-event-button').click(function (event) {
             event.preventDefault();
 
-            strInput = '<div class="form-group"><label class="form-label" for="input-text-a">Other income</label>' +
-                       '<input class="form-control form-control-1-4  fee pound" id="input-text-a" type="text">'
+            if ( $('#add-another').is(":visible") ) {
+              objNewRow = $('#add-another').clone();
+              objNewRow.find( 'input').val('');
+              objNewRow.insertBefore( '#end-bit');
+            } else {
+              $('#add-another').removeClass( 'js-hidden' );
+            }
 
-            $( strInput ).insertBefore( $('#add-event-container').parent() );
-            
           });
         });
       </script>
