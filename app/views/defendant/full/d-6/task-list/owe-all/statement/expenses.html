@@ -90,25 +90,44 @@ Money Claims Prototype
           <input class="form-control form-control-1-4  fee pound" id="input-text-a" type="text">
         </div>
 
-        <span class="form-hint">Don't include debt repayments.</span>
-        <div class="form-group">
-          <div id="add-event-container">
-            <a class="secondary-button" id="add-another-event-button" href="#">Add another expense</a>
-          </div>
+      <div id="add-another" class="js-hidden">
+        <p class="heading-small">Add another expense</p>
+        <div class="form-group" style="margin-bottom: 15px;">
+          <label class="form-label" for="input-text-a">
+            Type of expense
+          </label>
+          <input class="form-control" id="input-text" type="text">
         </div>
-            <script>
-              $(document).ready(function () {
-                $('#add-another-event-button').click(function (event) {
-                  event.preventDefault();
 
-                  strInput = '<div class="form-group"><label class="form-label" for="input-text-a">Other expense</label>' +
-                             '<input class="form-control form-control-1-4  fee pound" id="input-text-a" type="text">'
+        <div class="form-group">
+          <label class="form-label" for="input-text-a">
+            Amount paid
+          </label>
+          <input class="form-control form-control-1-4  fee pound" id="input-text-a" type="text">
+        </div>
+      </div>
 
-                  $( strInput ).insertBefore( $('span.form-hint') );
-                  
-                });
-              });
-            </script>
+      <div class="form-group" id="end-bit">
+        <div id="add-event-container">
+          <a class="secondary-button" id="add-another-event-button" href="#">Add another expense</a>
+        </div>
+      </div>
+      <script>
+        $(document).ready(function () {
+          $('#add-another-event-button').click(function (event) {
+            event.preventDefault();
+
+            if ( $('#add-another').is(":visible") ) {
+              objNewRow = $('#add-another').clone();
+              objNewRow.find( 'input').val('');
+              objNewRow.insertBefore( '#end-bit');
+            } else {
+              $('#add-another').removeClass( 'js-hidden' );
+            }
+
+          });
+        });
+      </script>
           </fieldset>
           <div class="form-group">
             <input type="submit" class="button" value="Save and continue"/>
