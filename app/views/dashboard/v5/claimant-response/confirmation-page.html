@@ -20,7 +20,7 @@ Money Claims Prototype
         <h1 class="bold-large">You have accepted the defendant's repayment plan</h1>
 
         {% elseif data['radio-indent-group2'] == "accept_stop_claim" or data['radio-indent-group2'] == "accept_stop_claim_claim_amount" %}
-        <h1 class="bold-large">You have accepted the court's repayment plan</h1>
+        <h1 class="bold-large">You have proposed an alternative repayment plan</h1>
 
         {% elseif data['radio-indent-group'] == "payment_instalments" or data['radio-indent-group'] == "set_date"%}
         <h1 class="bold-large">Payment request sent to court</h1>
@@ -28,8 +28,11 @@ Money Claims Prototype
         {% elseif data['radio-indent-group'] == "mediation-opt" or data['radio-indent-group'] == "mediation-accept" or data['radio-indent-group'] == "set_date"%}
         <h1 class="bold-large">You have requested free mediation</h1>
 
+        {% elseif ( data['radio-pay-group'] == "Set-date" or data['radio-pay-group'] == "Immediately" ) and data['radio-indent-group'] == "reject_stop_claim"%}
+        <h1 class="bold-large">You have proposed an alternative repayment plan</h1>
+
         {% elseif data['radio-indent-group'] == "mediation-reject" or data['radio-indent-group'] == "reject_stop_claim"%}
-        <h1 class="bold-large">You have rejected the repayment plan</h1>
+        <h1 class="bold-large">You have rejected the defendant's repayment plan</h1>
 
 
 
@@ -55,7 +58,7 @@ Money Claims Prototype
 
 
         {% elseif data['radio-indent-group2'] == "accept_stop_claim"  %}
-        <p>We'll email the defendant Mary Richards telling them that you agree to the court's repayment plan. If they do not agree with this plan, they can request a judge determines a suitable plan.</p>
+        <p>We'll email the defendant Mary Richards with details of the repayment plan. If they do not agree with this plan, they can request a judge determines a suitable plan.</p>
 
       <h2 class="heading-medium">If you don't get paid</h2>
        <p>If Mary Richards agrees to the repayment plan but doesn't pay you as agreed, you can ask the court to enforce payment.</p>
@@ -77,6 +80,17 @@ Money Claims Prototype
            <p>The court will review your payment request.</p>
            <p>We'll email you when a decision has been made.</p>
            <p><a href="#" class="">Back to your account</a></p>
+
+
+            {% elseif ( data['radio-pay-group'] == "Set-date" or data['radio-pay-group'] == "Immediately" ) and data['radio-indent-group'] == "reject_stop_claim"%}
+            <p>We have emailed {% if data.counterclaim=="true" %}Jan Clark{%else%}Mary Richards{% endif %} your proposed payment plan.</p>
+           <p>We'll email you when the defendant responds.</p>
+
+
+           <p><a href="../claimant?claimant=10.61" class="">Back to your account</a></p>
+
+
+
            {% elseif data['radio-indent-group'] == "reject_stop_claim"%}
             <p>A judge will determine what the defendant can afford to pay based on their financial details.</p>
             <p >We'll contact both you and {% if data.counterclaim=="true" %}Jan Clark{%else%}Mary Richards{% endif %} confirming the details of the repayment plan in the next 10 days.</p>
