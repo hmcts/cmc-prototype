@@ -1,4 +1,4 @@
-{% extends "layout.html" %}
+  {% extends "layout.html" %}
 {% block page_title %}
 Money Claims Prototype
 {% endblock %}
@@ -10,7 +10,7 @@ Money Claims Prototype
 <main id="content" role="main">
   {% include "includes/phase_banner_beta.html" %}
   <div class="grid-row">
-    <div class="column-two-thirds" style="display:none">
+    <div class="column-two-thirds">
       <a href="#" class="link-back">Back</a>
       <h1 class="heading-large">
         Explain why you can't pay now
@@ -64,19 +64,6 @@ Money Claims Prototype
     </div>
   </div>
 </main>
-<script>
-  $(document).ready(function () {
-    var end_date = "{{data['set-year']}}-{{data['set-month']}}-{{data['set-day']}}"
-    var difference = moment(end_date).diff(moment(), 'days')
-    $("#st").html(moment())
-    $("#ed").html(moment(end_date))
-    if(difference < 28) {
-      window.location.href = "../../task-list";
-    }else if(difference > 28) {
-      $(".column-two-thirds").show();
-    }
-  })
-</script>
 <form method="post"  action="#" class="form" style="; float: left">
   <select id="dashboard2" name="dashboard2" onchange="window.location.href='pay-by-set-date-after28?upload='+this.value">
     <option  value="0" >Choose </option>

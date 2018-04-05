@@ -81,8 +81,9 @@
               <p>We’ll contact you when the claimant responds.</p>
               <p><a href="#">View your response</a></p>
               {% elseif data['defendant'] == 5.2 %}
-              <h2 class="heading-medium">The claimant has accepted your repayment plan</h2>
-              <p>Jan Clark has accepted your offer to repay them £200 per month starting {{ now | date('add', 1, 'months') | date( 'D MMMM YYYY' ) }}.</p>
+              <h2 class="heading-medium">A settlement agreement has been made</h2>
+              <p>Jan Clark has signed the settlement agreement, agreeing you can repay them £200 per month starting {{ now | date('add', 1, 'months') | date( 'D MMMM YYYY' ) }}.</p>
+              <p><a href="#">View settlement agreement</a></p>
               <p>Contact Jan Clark if you need their payment details.</p>
               <p>Make sure you get receipts for any payments.</p>
               <p><a href="#">View your response</a></p>
@@ -90,7 +91,7 @@
               {% elseif data['defendant'] == 5.3 %}
               <h2 class="heading-medium">The claimant's response to your offer</h2>
               <p>Jan Clark has rejected your offer to repay them £200 per month starting {{ now | date('add', 1, 'months') | date( 'D MMMM YYYY' ) }}.</p>
-              <p>They have proposed the following repayment plan:</p>
+              <p>They have proposed the following repayment plan and signed a settlement agreement.</p>
 
               <table class="instalment-table">
                 <tbody>
@@ -137,6 +138,71 @@
                 </tbody>
               </table>
 
+              <p>
+                <a href="">Sign the settlement agreement</a><br />
+                This will put the claim on hold and the claimant will not be able to request a County Court Judgement against you.</p>
+              </p>
+
+              <p>Based on the financial details you provided, the court affordability calculator believes this plan is affordable. If you do not feel it is, you can <a href="../../defendant/full/d-6/task-list/redetermination">request a judge determines a new repayment plan</a>.</p>
+
+              <p><a href="#">View your response</a></p>
+              <p><a href="#">View the claimant's response</a></p>
+
+              {% elseif data['defendant'] == 5.31 %}
+              <h2 class="heading-medium">The claimant's response to your offer</h2>
+              <p>Jan Clark has rejected your offer to repay them £200 per month starting {{ now | date('add', 1, 'months') | date( 'D MMMM YYYY' ) }}.</p>
+              <p>The court has proposed the following repayment plan which the claimant accepted and signed a settlement agreement.</p>
+
+              <table class="instalment-table">
+                <tbody>
+                  <tr class="">
+                    <td class="">
+                      Monthly instalments of
+                    </td>
+                    <td class="">
+                      £250
+                    </td>
+                    <td class="">
+                    </td>
+                  </tr>
+                  <tr class="">
+                    <td class="">
+                      Make the first payment on
+                    </td>
+                    <td >
+                      1 {{ now |  date("add", 1, "month") | date( "MMMM YYYY" ) }}
+                    </td>
+                    <td>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="">
+                      Last payment on
+                    </td>
+                    <td class="">
+                      1 {{ now |  date("add", 13, "month") | date( "MMMM YYYY" ) }}
+                    </td>
+                    <td class=" ">
+                    </td>
+                  </tr>
+                 <tr>
+                    <td class="">
+                      Duration of payments
+                    </td>
+                    <td class="">
+                      1 year
+                    </td>
+                    <td class=" ">
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <p>
+                <a href="">Sign the settlement agreement</a><br />
+                This will put the claim on hold and the claimant will not be able to request a County Court Judgement against you.</p>
+              </p>
+
               <p>Based on the financial details you provided, the court affordability calculator believes this plan is affordable. If you do not feel it is, you can <a href="../../defendant/full/d-6/task-list/redetermination">request a judge determines a new repayment plan</a>.</p>
 
               <p><a href="#">View your response</a></p>
@@ -144,6 +210,7 @@
               {% elseif data['defendant'] == 5.4 %}
               <h2 class="heading-medium">Awaiting judge's repayment plan</h2>
               <p>Jan Clark has rejected your offer to repay them £200 per month starting {{ now | date('add', 1, 'months') | date( 'D MMMM YYYY' ) }}.</p>
+              <p>They also rejected your the court's proposal for you to repay them £250 per month starting {{ now | date('add', 1, 'months') | date( 'D MMMM YYYY' ) }}.</p>
               <p>A judge will determine a suitable repayment plan within the next 10 days. We'll contact you when it's available.</p>
               {% elseif data['defendant'] == 5.5 %}
               <h2 class="heading-medium">Awaiting judge's repayment plan</h2>
@@ -323,11 +390,12 @@
     <option value="4" {% if data['defendant'] == 4 %}selected{% endif %}>4. Default CCJ issued </option>
     <option>------ Responses to claims -------</option>
     <option value="5" {% if data['defendant'] == 5 %}selected{% endif %}>5. I admit all the claim - set date payment</option>
-    <option value="5.01" {% if data['defendant'] == 5.01 %}selected{% endif %}>5.01. I admit all the claim - set date payment - accepted</option>
-    <option value="5.02" {% if data['defendant'] == 5.02 %}selected{% endif %}>5.02. I admit all the claim - pay immediately</option>
+    <option value="5.01" {% if data['defendant'] == 5.01 %}selected{% endif %}>X5.01. I admit all the claim - set date payment - accepted</option>
+    <option value="5.02" {% if data['defendant'] == 5.02 %}selected{% endif %}>X5.02. I admit all the claim - pay immediately</option>
     <option value="5.1" {% if data['defendant'] == 5.1 %}selected{% endif %}>5.1. I admit all the claim - instalment plan payment</option>
     <option value="5.2" {% if data['defendant'] == 5.2 %}selected{% endif %}>5.2. I admit all the claim - instalment plan payment accepted</option>
-    <option value="5.3" {% if data['defendant'] == 5.3 %}selected{% endif %}>5.3. I admit all the claim - instalment plan payment counter-offer</option>
+    <option value="5.3" {% if data['defendant'] == 5.3 %}selected{% endif %}>5.3. I admit all the claim - instalment plan payment - counter-offer</option>
+    <option value="5.31" {% if data['defendant'] == 5.31 %}selected{% endif %}>5.31. I admit all the claim - instalment plan payment - court offer</option>
     <option value="5.4" {% if data['defendant'] == 5.4 %}selected{% endif %}>5.4. I admit all the claim - instalment plan payment rejected - redetermination</option>
     <option value="5.5" {% if data['defendant'] == 5.5 %}selected{% endif %}>5.5. I admit all the claim - instalment plan payment rejected by defendant - redetermination</option>
     <option value="6" {% if data['defendant'] == 6 %}selected{% endif %}>6. I part admit the claim - instalment plan payment</option>

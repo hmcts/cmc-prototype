@@ -62,11 +62,13 @@
               </div>
               {% elseif data['claimant'] == 4  %}
               <h2 class="heading-medium">The defendant's response </h2>
-              <p>Mary Richards admits they owe all the money. They have offered to pay you in instalments. You need to accept or reject their payment proposal.</p>
+              <p>Mary Richards admits they owe all the money. They have offered to pay you in instalments and have signed a settlement agreement.</p>
+              <p>You need to accept or reject their payment proposal and settlement agreement.</p>
               <p> <a href="claimant-response/admit-the-claim/task-list">Respond to the defendant</a></p>
               {% elseif data['claimant'] == 4.1  %}
               <h2 class="heading-medium">The defendant's response </h2>
-              <p>Mary Richards admits they owe all the money. They have offered to pay you in full on {{ now | date( 'add', 3, 'months') | date }}. You need to accept or reject their payment proposal.</p>
+              <p>Mary Richards admits they owe all the money. They have offered to pay you in full on {{ now | date( 'add', 3, 'months') | date }} and have signed a settlement agreement.</p>
+              <p>You need to accept or reject their payment proposal and settlement agreement.</p>
               <p> <a href="claimant-response/admit-the-claim/task-list?payment=full">Respond to the defendant</a></p>
               {% elseif data['claimant'] == 4.2  %}
               <h2 class="heading-medium">The defendant's response </h2>
@@ -125,8 +127,9 @@
               <p> <a class="" href="claimant-response/dispute-claim/task-list">Do you accept or reject their response </a></p>
               {% endif %}
               {% elseif data['claimant'] == 10.1 %}
-              <h2 class="heading-medium">Repayment plan accepted</h2>
-              <p>You have agreed the defendant can pay you in instalments of £250 per month, starting 1 {{ now |  date("add", 1, "month") | date( "MMMM YYYY" ) }}.</p>
+              <h2 class="heading-medium">A settlement agreement has been made</h2>
+              <p>You have signed a settlement agreement saying the defendant can pay you in instalments of £250 per month, starting 1 {{ now |  date("add", 1, "month") | date( "MMMM YYYY" ) }}.</p>
+              <p><a href="#">View settlement agreement</a></p>
               <p>When you have been paid in full, you need to <a href="idam/contact-us?type=service_specific">contact the court</a> to let them know.</p>
               {% elseif data['claimant'] == 10.2 %}
               <h2 class="heading-medium">Repayment plan proposed</h2>
@@ -151,9 +154,10 @@
               <p>A judge will determine a suitable repayment plan within the next 10 days. We'll contact you when it's available.</p>
            
               {% elseif data['claimant'] == 10.61 %}
-              <h2 class="heading-medium">You've proposed a repayment plan</h2>
-              <p>You have rejected the defendant's proposed repayment plan and we have send them your proposed plan.</p>
-              <p>We'll contact you when they have responded to your proposal.</p>
+              <h2 class="heading-medium">You've signed a settlement agreement</h2>
+              <p>You have signed a settlement agreement saying the defendant can pay you in instalments of £250 per month, starting 1 May 2018.</p>
+              <p>We've emailed Mary Richards the repayment plan and the settlement agreement for them to sign. We'll contact you when they have responded.</p></p>
+              <p><a href="">View the settlement agreement</a></p>
               {% elseif data['claimant'] == 10.8 %}
               <h2 class="heading-medium">Awaiting judge's repayment plan</h2>
               <p>The defendant feels your proposed repayment plan is unaffordable.</p>
@@ -212,6 +216,15 @@
               {% else %}
               <h2 class="heading-medium">More options </h2>
               {% endif %}
+
+              {% if data['claimant'] == 10.61 %}
+              <h2 class="heading-small">Request a judge determines a repayment plan</h2>
+              <p>
+                If you have reason to believe the defendant could afford to pay more or sooner than the existing repayment plan, you can <a href="claimant-response/admit-the-claim/task-list/redetermination">request a judge determines a suitable payment plan</a>. 
+              </p>
+
+              {% endif %}
+
               {% if data['claimant'] == 1.2 or data['claimant'] == 1 or data['claimant'] == 2 or data['claimant'] == 3 or data['claimant'] == 4  or data['claimant'] == 10 or data['claimant'] == 11  or data['claimant'] == 12 or data['claimant'] == 17%}
               {% endif %}
               {% if data['claimant'] == 1.2 or data['claimant'] == 1 or data['claimant'] == 2 or data['claimant'] == 3 or data['claimant'] == 4  or data['claimant'] == 10 or data['claimant'] == 10.1 or data['claimant'] == 10.2 or data['claimant'] == 10.11 or data['claimant'] == 10.3 or data['claimant'] == 10.4 or data['claimant'] == 10.5 or data['claimant'] == 11  or data['claimant'] == 12 or data['claimant'] == 16 or data['claimant'] == 17 or data['claimant'] == 18%}
@@ -229,16 +242,14 @@
               </p>
               {% endif %}
               {% if data['claimant'] == 10.1 or data['claimant'] == 10.2 or data['claimant'] == 10.3 or data['claimant'] == 10.4 %}
-              <h2 class="heading-small">Request enforcement</h2>
+              <h2 class="heading-small">Request County Court Judgment and enforcement</h2>
+              
               <p>
-                If the defendant does not pay you as agreed, you can <a href='#'>request enforcement</a> from the court. Mary Richards will be issued a County Court Judgment and the court will collect payment from them.
+                If the defendant does not pay you as agreed and breaks the settlement agreement, you can <a href='/dashboard/v4/applications-and-judgments/default-judgment'>request a County Court Judgment</a> against Mary Richards and <a href='#'>ask the court to enforce payment</a>.
               </p>
-              <h2 class="heading-small">Request County Court Judgment</h2>
-              <p>
-                You can also <a href='/dashboard/v4/applications-and-judgments/default-judgment'>request a County Court Judgment</a> against Mary Richards, although this will not lead to collection of payment unless you request a enforcement.
-              </p>
+
               {% endif %}
-              {% if data['claimant'] == 18 or data['claimant'] == 17%}
+              {% if data['claimant'] == 18 or data['claimant'] == 17 or data['claimant'] == 10.1 %}
               {% else %}
               <h2 class="heading-small">Cancel your claim</h2>
               <p>
@@ -376,12 +387,12 @@
 <!--    <option value="10.2" {% if data['claimant'] == 10.2 %}selected{% endif %}>10.2. Accepted court repayment plan</option>  -->
 <!--    <option value="10.11" {% if data['claimant'] == 10.11 %}selected{% endif %}>10.11. Accepted repayment plan - not due</option>  -->
 <!--    <option value="10.3" {% if data['claimant'] == 10.3 %}selected{% endif %}>10.3. Repayment plan determined</option> -->
-    <option value="10.4" {% if data['claimant'] == 10.4 %}selected{% endif %}>10.4. Accepted full payment</option>
-    <option value="10.5" {% if data['claimant'] == 10.5 %}selected{% endif %}>10.5. Accepted immediate payment</option>
+    <option value="10.4" {% if data['claimant'] == 10.4 %}selected{% endif %}>X10.4. Accepted full payment</option>
+    <option value="10.5" {% if data['claimant'] == 10.5 %}selected{% endif %}>X10.5. Accepted immediate payment</option>
     <option value="10.6" {% if data['claimant'] == 10.6 %}selected{% endif %}>10.6. Repayment plans rejected - redetermination</option>
     <option value="10.61" {% if data['claimant'] == 10.61 %}selected{% endif %}>10.61. Repayment plans rejected - countered</option>
-    <option value="10.7" {% if data['claimant'] == 10.7 %}selected{% endif %}>10.XXXX Repayment plans rejected - countered - accepted - TODO?</option>
-    <option value="10.8" {% if data['claimant'] == 10.8 %}selected{% endif %}>10.8. Repayment plans rejected - countered - rejected</option>
+    <option value="10.7" {% if data['claimant'] == 10.7 %}selected{% endif %}>X10.X Repayment plans rejected - countered - accepted - TODO?</option>
+    <option value="10.8" {% if data['claimant'] == 10.8 %}selected{% endif %}>X10.8. Repayment plans rejected - countered - rejected</option>
     <option>------- Offer and agreements  ----------</option>
     <option value="11" {% if data['claimant'] == 11 %}selected{% endif %}>11. Offer from defendant  </option>
     <option value="12" {% if data['claimant'] == 12 %}selected{% endif %}>12. Made counter offer  </option>
