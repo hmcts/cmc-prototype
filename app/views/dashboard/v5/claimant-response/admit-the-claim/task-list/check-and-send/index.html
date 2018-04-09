@@ -173,7 +173,7 @@ Check your answers
   </tbody>
 </table>
 
-    {% if data['settlement'] == 'complete' %}
+    {% if data['settlement'] == 'complete' and data['radio-proceed'] == 'settlement' %}
       <table class="check-your-answers">
         <thead>
           <tr>
@@ -193,9 +193,8 @@ Check your answers
             </td>
             <td>
 
-
               Mary Richards: {% if data['radio-pay-group']=="Immediately" %}
-              I will pay the full immediately. You will receive the money no later than {{ now | date( 'add', 5, 'days') | date }}. Any cheques or transfers must be clear in your account by this date.
+              I will pay the full amount immediately. You will receive the money no later than {{ now | date( 'add', 5, 'days') | date }}. Any cheques or transfers must be clear in your account by this date.
               {% elseif data['radio-pay-group']=="Instalments"  %}
               I will pay instalments of 
                 {% if data['instalment-first-payment'] %}
@@ -260,6 +259,77 @@ Check your answers
         </tr>
       </tbody>
       </table>
+
+    {% elseif data['judgment'] == 'complete' and data['radio-proceed'] == 'judgment' %}
+
+
+
+        <table class="check-your-answers">
+          <thead>
+      <tr>
+        <th colspan="2">
+          <h2 class="heading-medium" id="name">
+            Judgment request
+          </h2>
+        </th>
+        <th>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+
+    <tbody>
+
+
+            <tr>
+        <td class="no-border">
+          Has the defendant paid some of the amount owed?
+          <td class="no-border">
+                          {% if data['radio-indent-group2']=="Yes" or data['control-box'] == 1  or data['control-box'] == 2  or data['control-box'] == 3 or data['control-box'] == 4 %}Yes{% elif data['radio-indent-group2']=="No"  or data['control-box'] == 5 or data['control-box'] == 6  %}No{% else %}Yes{% endif %}
+
+          </td>
+          <td class="change-answer no-border">
+            <a href="claim-amount-deduct">
+              Change <span class="visuallyhidden">Amount defendant is ordered to pay</span>
+            </a>
+          </td>
+        </tr>
+       {% if data['radio-indent-group2']=="No" or data['control-box'] == 5 or data['control-box'] == 5  %}
+              {% elseif data['control-box'] == 1  or data['control-box'] == 2  or data['control-box'] == 3 or data['control-box'] == 4 or data['radio-pay-group']=="Immediately" or data['radio-pay-group']=="Set-date" or data['radio-pay-group']=="Instalments"%}
+
+       <tr>
+        <td>
+          Amount already paid
+          <td>
+            £100.00<br>
+          </td>
+          <td class="change-answer">
+
+          </td>
+        </tr>
+
+       {% endif %}
+
+                  <tr>
+        <td>
+          Total to be paid by defendant
+          <td>
+            £1643.20<br>
+          </td>
+          <td class="change-answer">
+
+          </td>
+        </tr>
+
+
+        </tbody>
+      </table>
+
+
+
+
+
+
     {% endif %}
 
 <br />
