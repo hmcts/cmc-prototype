@@ -19,7 +19,8 @@ Money Claims Prototype
       </h1>
       <p class="">Total claim amount is £1643.20.</p>
       <br>
-      <form action="payment-methods" method="get" class="form">
+
+      <form action="{% if data['radio-proceed'] == "judgment" %}../../../v5/claimant-response/admit-the-claim/task-list{% else %}payment-methods{% endif %}" method="get" class="form">
 
 
 
@@ -92,7 +93,8 @@ Money Claims Prototype
             </fieldset>
           </div>
           <div class="form-group">
-            <a class="button" href="check-your-judgment">Save and continue</a>
+            
+              <input type="submit" value="Save and continue" class="button">
 
             </div>
           </fieldset>
@@ -144,8 +146,6 @@ Money Claims Prototype
         }
       $('#duration').text( strDuration );
   
-
-
       }
     })
   });

@@ -17,7 +17,9 @@ Money Claims Prototype
         Judgment amount
       </h1>
       <p>Judgment will be entered against the defendant for this amount.</p>
-      <form class="form">
+      <form class="form" action="{% if data['radio-proceed'] == "judgment" %}../../../v5/claimant-response/admit-the-claim/task-list{% else %}payment-option{% endif %}" method="post">
+
+
         <table class="table-form">
           <caption class="visuallyhidden">Amount payable by defendant</caption>
           <thead>
@@ -82,8 +84,14 @@ Money Claims Prototype
           {% endif %}
         </tbody>
       </table>
+
+
+
+        <input type="hidden" name="judgment" value="complete">
+        <input type="submit" value="Save and continue" class="button">
+
     </form>
-    <a class="button" href="payment-options">Continue</a>
+
   </div>
 </div>
 </div>
