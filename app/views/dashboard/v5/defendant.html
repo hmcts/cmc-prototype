@@ -80,9 +80,9 @@
               <p>You offered to repay Jan Clark £200 per month starting {{ now | date('add', 1, 'months') | date( 'D MMMM YYYY' ) }}.</p>
               <p>We’ll contact you when the claimant responds.</p>
               <p><a href="#">View your response</a></p>
-              {% elseif data['defendant'] == 5.2 %}
+              {% elseif data['defendant'] == 5.2 or data['defendant'] == 5.32 %}
               <h2 class="heading-medium">A settlement agreement has been made</h2>
-              <p>Jan Clark has signed the settlement agreement, agreeing you can repay them £200 per month starting {{ now | date('add', 1, 'months') | date( 'D MMMM YYYY' ) }}.</p>
+              <p>{% if data['defendant'] == 5.2 %}Jan Clark has signed the{% else %}You and Jan Clark have both signed a{% endif %} settlement agreement, agreeing you can repay them {% if data['defendant'] == 5.2 %}£200{% else %}£250{% endif %} per month starting {{ now | date('add', 1, 'months') | date( 'D MMMM YYYY' ) }}.</p>
               <p><a href="#">View settlement agreement</a></p>
               <p>Contact Jan Clark if you need their payment details.</p>
               <p>Make sure you get receipts for any payments.</p>
@@ -139,7 +139,7 @@
               </table>
 
               <p>
-                <a href="" class="button secondary-button">Sign the settlement agreement</a>
+                <a href="/defendant/full/d-6/task-list/settlement/sign?counter=yes" class="button secondary-button">Sign the settlement agreement</a>
               </p>
               <p>This will put the claim on hold and the claimant will not be able to request a County Court Judgement against you.</p>
 
@@ -199,7 +199,7 @@
               </table>
 
               <p>
-                <a href="" class="button secondary-button">Sign the settlement agreement</a>
+                <a href="/defendant/full/d-6/task-list/settlement/sign?counter=yes" class="button secondary-button">Sign the settlement agreement</a>
               </p>
               <p>This will put the claim on hold and the claimant will not be able to request a County Court Judgement against you.</p>
 
@@ -396,6 +396,7 @@
     <option value="5.2" {% if data['defendant'] == 5.2 %}selected{% endif %}>5.2. I admit all the claim - instalment plan payment accepted</option>
     <option value="5.3" {% if data['defendant'] == 5.3 %}selected{% endif %}>5.3. I admit all the claim - instalment plan payment - counter-offer</option>
     <option value="5.31" {% if data['defendant'] == 5.31 %}selected{% endif %}>5.31. I admit all the claim - instalment plan payment - court offer</option>
+    <option value="5.32" {% if data['defendant'] == 5.32 %}selected{% endif %}>5.32. I admit all the claim - instalment plan payment - offer accepted</option>
     <option value="5.4" {% if data['defendant'] == 5.4 %}selected{% endif %}>5.4. I admit all the claim - instalment plan payment rejected - redetermination</option>
     <option value="5.5" {% if data['defendant'] == 5.5 %}selected{% endif %}>5.5. I admit all the claim - instalment plan payment rejected by defendant - redetermination</option>
     <option value="6" {% if data['defendant'] == 6 %}selected{% endif %}>6. I part admit the claim - instalment plan payment</option>
