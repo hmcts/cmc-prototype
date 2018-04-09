@@ -14,7 +14,10 @@ Money Claims Prototype
       <h1 class="heading-large">Sign a settlement agreement</h1>
 
 
-      <form action="../../task-list" method="get" class="form">
+      <form action="{% if data['counter'] == 'yes' %}/dashboard/v5/defendant{% else %}../../task-list{% endif %}" method="get" class="form">
+        {% if data['counter'] == 'yes' %}
+        <input type="hidden" name="defendant" value="5.32">
+        {% endif %}
 
       <br>
       <table class="offer-table">
@@ -28,7 +31,7 @@ Money Claims Prototype
 
             <td>
 
-              {% if data['radio-pay-group']=="Immediately" %}
+              Mary Richards: {% if data['radio-pay-group']=="Immediately" %}
               I will pay the full amount immediately. You will receive the money no later than {{ now | date( 'add', 5, 'days') | date }}. Any cheques or transfers must be clear in your account by this date.
               {% elseif data['radio-pay-group']=="Instalments"  %}
               I will pay instalments of 
