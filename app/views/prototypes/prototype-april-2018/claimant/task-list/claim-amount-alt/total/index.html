@@ -1,0 +1,259 @@
+{% extends "layout_task-list.html" %}
+
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+
+{% block home_link %} ../../task-list {% endblock %}
+{% block proposition_header %}
+{% set my_account="1" %}
+
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+
+
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+
+      <a href="#" class="link-back">Back</a>
+
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}
+      <form method="post" action="{{ data.return_page if data.return_page | length > 0 else '../task-list' }}" class="form">
+        {% else %}
+        <form method="post" action="../../task-list" class="form">
+          {% endif %}
+
+          {{formData | safe}}
+
+          <h1 class="heading-large">
+            Total amount you're claiming
+          </h1>
+
+          <fieldset>
+            <legend class="visuallyhidden">
+              Total amount you're claiming
+            </legend>
+
+            <table class="table-form">
+              <caption class="visuallyhidden"></caption>
+              <thead>
+                <tr>
+                  <th scope="col"></th>
+                  <th class="numeric last" scope="col">Amount</th>
+                </tr>
+              </thead>
+              <tfoot>
+                <tr>
+                  <th scope="col"></th>
+                  <td class="numeric last"><span id="totalAmountDisplay" class="bold-medium">£1583.00</span></td>
+                </tr>
+              </tfoot>
+              <tbody>
+                <tr>
+                  <th scope="row">Claim amount:</th>
+                  <td class="numeric last">
+                    <label class="visuallyhidden" for="amount">Claim amount</label>
+                    <span class="font-small">  £{{data['totalSum']}}</span>
+                  </td>
+                </tr>
+                {% if data['radio_group2']=="interest_yes" %}
+
+                <tr>
+                  <th scope="row">Interest to date:</th>
+                  <td class="numeric last">
+                    <label class="visuallyhidden" for="amount">:  </label>
+
+                    <span id="interestValue" class="font-small">£14</span>
+
+                  </td>
+                </tr>
+                {% endif %}
+                <tr>
+                  <th scope="row">Claim fee:</th>
+                  <td class="numeric last">
+                    <label class="visuallyhidden" for="amount">Claim fee</label>
+
+
+                    <span id="interestValue" class="font-small">£70</span>
+
+                  </td>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+
+
+                    <details>
+          <summary>How these fees are calculated</summary>
+
+          <div class="panel">
+
+
+            <table class="expandable-demo">
+              <p>The fee is based on the amount you're claiming, including any interest.
+              </p>
+              <thead>
+              <tr>
+                <th scope="col">Claim amount</th>
+                <th scope="col">Claim fee</th>
+                <!--<th scope="col">Paper form fee</th>-->
+                <th scope="col">Hearing fee</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <td>
+                  <ul class="list">
+                    <li>£0.01 to £300</li>
+                  </ul>
+                </td>
+                <td>£25</td>
+                <!--<td>£35</td>-->
+                <td>£25</td>
+              </tr>
+              <tr>
+                <td>
+                  <ul class="list">
+                    <li>£300.01 to £500</li>
+                  </ul>
+                </td>
+                <td>£35</td>
+                <!--<td>£50</td>-->
+                <td>£55</td>
+              </tr>
+              <tr>
+                <td>
+                  <ul class="list">
+                    <li>£500.01 to £1,000</li>
+                  </ul>
+                </td>
+                <td>£60</td>
+                <!--<td>£70</td>-->
+                <td>£80</td>
+              </tr>
+              <tr>
+                <td>
+                  <ul class="list">
+                    <li>£1,000.01 to £1,500</li>
+                  </ul>
+                </td>
+                <td>£70</td>
+                <!--<td>£80</td>-->
+                <td>£115</td>
+              </tr>
+              <tr>
+                <td>
+                  <ul class="list">
+                    <li>£1,500.01 to £3,000</li>
+                  </ul>
+                </td>
+                <td>£105</td>
+                <!--<td>£115</td>-->
+                <td>£170</td>
+              </tr>
+              <tr>
+                <td>
+                  <ul class="list">
+                    <li>£3,000.01 to £5,000</li>
+                  </ul>
+                </td>
+                <td>£185</td>
+                <!--<td>£205</td>-->
+                <td>£335</td>
+              </tr>
+              <tr>
+                <td>
+                  <ul class="list">
+                    <li>£5,000.01 to £10,000</li>
+                  </ul>
+                </td>
+                <td>£410</td>
+                <!--<td>£455</td>-->
+                <td>£335</td>
+              </tr>
+              <tr>
+                <td>
+                  <ul class="list">
+                    <li>£10,000.01 to £25,000 </li>
+                  </ul>
+                </td>
+                <td>  4.5% of the claim</td>
+                <!--<td>£455</td>-->
+                <td>£545</td>
+              </tr>
+              <tr>
+                <td>
+                  <ul class="list">
+                    <li>£25,000.01 to £100,000 </li>
+                  </ul>
+                </td>
+                <td>  4.5% of the claim</td>
+                <!--<td>£455</td>-->
+                <td>£1090</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </details>
+
+          <input type="hidden" name="claim_amount" value="complete">
+          <input type="hidden" id="totalClaimAmount" name="totalClaimAmount">
+
+        </fieldset>
+
+        <!--<details>-->
+
+        <!--<summary>-->
+        <!--<span class="summary">Help with...</span>-->
+        <!--</summary>-->
+
+        <!--<div class="panel panel-border-narrow">-->
+        <!--<p>Content goes here...</p>-->
+        <!--</div>-->
+
+        <!--</details>-->
+
+        {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}
+        <div class="form-group">
+          <input type="submit" class="button" value="Save and continue"/>
+        </div>
+
+
+        <a href="{{ data.return_page if data.return_page | length > 0 else '../task-list' }}">Cancel</a>
+
+        {% else %}
+        <div class="form-group">
+          <input type="submit" class="button" value="Continue"/>
+        </div>
+
+        {% endif %}
+      </form>
+
+    </div>
+  </div>
+</main>
+
+<script type="text/javascript">
+  (function numericInputsSum(targetSpanId, claimAmount, interestValue) {
+
+    claimAmount = parseInt(claimAmount.replace(',', '')) + interestValue;
+
+    var x = '£' + parseFloat(claimAmount, 10).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString();
+
+    if (x.endsWith('.00')) {
+      x = x.replace('.00', '');
+    }
+
+    $('#' + targetSpanId).text(x);
+    $('#totalClaimAmount').val(x)
+
+
+  })('totalAmountDisplay', "{{data['totalSum']}}", {{data['radio_group2']=="interest_no"}} || {{data['radio_group2']!="interest_yes"}} ? 70 : 84)
+</script>
+
+{% endblock %}

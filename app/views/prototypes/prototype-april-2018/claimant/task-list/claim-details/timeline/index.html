@@ -1,0 +1,124 @@
+{% extends "layout_task-list.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block home_link %} ../../task-list {% endblock %}
+{% block proposition_header %}
+{% set my_account="1" %}
+
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <a href="#" class="link-back">Back</a>
+      {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}
+       <form method="post" action="{{ data.return_page if data.return_page | length > 0 else '../task-list' }}" class="form">
+        {% else %}
+      <form method="post" action="evidence" class="form">
+        {% endif %}
+        {{formData | safe}}
+        <h1 class="heading-large">
+          Timeline of events
+        </h1>
+
+        <p class="bold-small">Example timeline</p>
+        <ul class="list list-bullet">
+          <li>12 January 2017 - John Smith gave me a quote to replace the roof.</li>
+          <li>14 January 2017 - We agreed and signed a contract for the work.</li>
+          <li>21 March 2017 - I noticed a leak on the landing and told Mr Smith about this.</li>
+        </ul>
+
+        <br>
+        <fieldset>
+          <legend class="visuallyhidden">
+            Explain what happened
+          </legend>
+          <div id="timeline" class="timeline">
+            <div class="timeline-headings">
+              <div id="timeline-heading-1" class="timeline-column-1">
+                <label class="form-label-bold" for="date-form-control">
+                  Date
+                </label>
+                <span class="form-hint">For example, 1 May 2017 </span>
+              </div>
+              <div id="timeline-heading-2" class="timeline-column-2">
+                <label class="form-label-bold" for="event-form-control">
+                  What happened
+                </label>
+                <span class="form-hint">For example, you might have signed a contract</span>
+              </div>
+            </div>
+            <div class="timeline-rows">
+              <div class="timeline-row">
+                <input class="form-control timeline-column-1" type="text" id="date-form-control" name="cd-date-1"
+                       value="{{data['cd-date-1']}}">
+<!--                 <input class="form-control timeline-column-2" type="text" id="event-form-control" name="timeline-1"
+                       value="{{data['timeline-1']}}"> -->
+                  <textarea class="timeline-column-text" name="cd-timeline-1" id="timeline-1" value="{{data['cd-timeline-1']}}"  rows="2">{{data['cd-timeline-1']}}</textarea>
+              </div>
+              <div class="timeline-row">
+                <input class="form-control timeline-column-1" type="text" id="date-form-control" name="cd-date-2"
+                       value="{{data['cd-date-2']}}">
+                 <textarea class="timeline-column-text" name="cd-timeline-2"  value="{{data['cd-timeline-2']}}" rows="2"> {{data['cd-timeline-2']}}</textarea>
+              </div>
+              <div class="timeline-row">
+                <input class="form-control timeline-column-1" type="text" id="date-form-control" name="cd-date-3"
+                       value="{{data['cd-date-3']}}">
+                 <textarea class="timeline-column-text" name="cd-timeline-3" value="{{data['cd-timeline-3']}}"  rows="2">{{data['cd-timeline-3']}}</textarea>
+              </div>
+              <div class="timeline-row">
+                <input class="form-control timeline-column-1" type="text" id="date-form-control" name="cd-date-4"
+                       value="{{data['cd-date-4']}}">
+                   <textarea class="timeline-column-text" name="cd-timeline-4" value="{{data['cd-timeline-4']}}" rows="2">{{data['cd-timeline-4']}}</textarea>
+              </div>
+            </div>
+          </div>
+          <div id="add-event-container">
+            <a class="secondary-button" id="add-another-event-button" href="#">Add another event</a>
+          </div>
+<!--           <div class="panel panel-border-wide">
+            <p class="bold-small">Evidence</p>
+            You don't need to provide evidence unless this claim is defended - we'll let you know if that happens and
+            what evidence you need. You can, however, mention any evidence that you do have at this stage.
+            </p>
+          </div> -->
+          <script>
+            $(document).ready(function () {
+              $('#add-another-event-button').click(function (event) {
+                event.preventDefault();
+                $('#timeline').append(
+                  '<div class="timeline-row">' +
+                  '<input class="form-control timeline-column-1" style="margin-right: 1px; margin-top: 10px; margin-right:10px" type="text">' +
+                  '<textarea class="timeline-column-text" id="textarea-a" rows="2" style="margin-top: 10px; margin-left: 3px;"></textarea>' +
+                  '</div>'
+                );
+              });
+            });
+          </script>
+        </fieldset>
+        <!--<details>-->
+        <!--<summary>-->
+        <!--<span class="summary">Specific assistance if needed (hide if not relevant)</span>-->
+        <!--</summary>-->
+        <!--<div class="panel panel-border-narrow">-->
+        <!--<p>Contextual guidance goes here...</p>-->
+        <!--</div>-->
+        <!--</details>-->
+      {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}
+        <div class="form-group">
+          <input type="submit" class="button" value="Save changes"/>
+        </div>
+        <a href="{{ data.return_page if data.return_page | length > 0 else '../task-list' }}">Cancel</a>
+      {% else %}
+        <div class="form-group">
+          <input type="submit" class="button" value="Save and continue"/>
+        </div>
+      {% endif %}
+      </form>
+    </div>
+  </div>
+</main>
+{% endblock %}

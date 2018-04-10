@@ -1,0 +1,140 @@
+{% extends "layout_task-list.html" %}
+{% block page_title %} Task list {% endblock %}
+{% block proposition_header %}
+{% set my_account="1" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="/public/stylesheets/dm_list.css"/>{% endblock %}
+{% block content %}
+<main id="content" role="main" >
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <header class="page-heading page-heading-with-context page-heading-without-breadcrumb">
+        <h1 class="heading-large">
+          Your response
+        </h1>
+        <table id="table-of-tasks">
+          <thead>
+            <tr>
+              <th scope="col" id="col-task">
+                <span class="task-group">
+                  <span class="group-number" id="task-number"></span>
+                  Before you start
+                </span>
+                <th class="numeric" id="task-status" scope="col" id="col-status">
+                  <span type="hidden" class="visually-hidden">task status</span>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Check before you start -->
+              <tr id="check-before-you-start">
+                <td class="task">
+                  <a href="task-list/their-response{{formQuery}}">
+                    <span class="task-name">
+                      View the defendant's response
+                    </span>
+                  </a>
+                </td>
+                <td class="numeric" id="task-status" scope="col" id="col-status">
+                  {% if data.their_response=="complete" %}
+                  {% include "includes/task_status_finished.html" %}
+                  {% endif %}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <br>
+          <br>
+          <table id="table-of-tasks">
+            <thead>
+              <tr>
+                <th scope="col" id="col-task">
+                  <span class="task-group">
+                    <span class="group-number" id="task-number"></span>
+                    How do you want to respond?
+                  </span>
+                </th>
+                <th class="numeric" id="task-status" scope="col" id="col-status"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr id="your-details">
+                <td class="task">
+                  <a href="task-list/payment-method{{formQuery}}">
+                    <span class="task-name"> Do you accept the repayment plan?</span>
+                  </a>
+                </td>
+                <td class="numeric" id="task-status" scope="col" id="col-status">
+                  {% if data.payment_method=="complete" %}
+                  {% include "includes/task_status_finished.html" %}
+                  {% endif %}
+                </td>
+              </tr>
+
+        {%if data.determined_figure == "reject" %}
+             <tr id="your-details">
+                <td class="task">
+                  <a href="task-list/court-payment-method{{formQuery}}">
+                    <span class="task-name">Would you accept a court calculated repayment plan?</span>
+                  </a>
+                </td>
+                <td class="numeric" id="task-status" scope="col" id="col-status">
+                  {% if data.court_payment_method=="complete" %}
+                  {% include "includes/task_status_finished.html" %}
+                  {% endif %}
+                </td>
+              </tr>
+         {% else %}
+
+         {% endif %}
+
+            </tbody>
+          </table>
+          <br>
+          <br>
+          <table id="table-of-tasks">
+            <thead>
+              <tr>
+                <th scope="col" id="col-task">
+                  <span class="task-group">
+                    <span class="group-number" id="task-number"></span>
+                    Submit
+                  </span>
+                </th>
+                <th class="numeric" id="task-status" scope="col" id="col-status"></th>
+              </tr>
+            </thead>
+            <tbody>
+
+                <td >
+                  <a href="task-list/check-and-send{{formQuery}}">
+                    <span class="task-name"> Check and submit your response</span>
+                  </a>
+                </td>
+                <td class="numeric" id="task-status" scope="col" id="col-status">
+                  {% if data.paid=="complete" %}
+                  {% include "includes/task_status_finished.html" %}
+                  {% endif %}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="column-one-third">
+        </div>
+      </div>
+
+
+    </main>
+<form method="post"  action="#" class="form" style="position: absolute;">
+    <select id="claimant2" name="claimant2" onchange="window.location.href='?determination='+this.value">
+      <option value="0" }>1. Determined figure</option>
+      <option value="1" {% if data['determination'] == 1 %}selected{% endif %}>2. Non-determined figure</option>
+    </select>
+</form>
+    {% endblock %}
+    {% block extra_js_1 %}<!-- ticky list javascript one -->{% endblock %}
+    {% block extra_js_2 %}<!-- ticky list javascript two -->{% endblock %}
