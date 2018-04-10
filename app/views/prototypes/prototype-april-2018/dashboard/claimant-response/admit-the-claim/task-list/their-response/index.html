@@ -17,10 +17,14 @@ Money Claims Prototype
        <h1 class="heading-large">
         The defendant's response
       </h1>
-      Mary Richards admits they owe all the money you’ve claimed. They will pay you the money by instalments.
-      <h2 class="heading-medium">How they want to pay</h2>
+      <p>Mary Richards admits they owe all the money you’ve claimed.
 
-        <p class="panel">This payment plan is calculated using the financial information Mary Richards has entered. It hasn't been reviewed by court staff.</p>
+      {% if data['payment'] == 'full' %}
+      </p><p>They have offered to pay you in full by {{ now | date( 'add', 3, 'months') | date }}.</p>
+      {% else %}
+      They have offered to pay you in instalments.</p>
+      
+      <h2 class="heading-medium">How they want to pay</h2>
 
       <table class="instalment-table">
         <tbody>
@@ -36,22 +40,12 @@ Money Claims Prototype
           <td class="">
           </td>
         </tr>
-        <tr>
-          <td class="">
-            The first payment of
-          </td>
-          <td class="">
-            £100
-          </td>
-          <td class="change-answer ">
-          </td>
-        </tr>
         <tr class="">
           <td class="">
             Make the first payment on
           </td>
           <td >
-            1 December 2017
+              1 {{ now |  date("add", 1, "month") | date( "MMMM YYYY" ) }}
           </td>
           <td>
           </td>
@@ -61,7 +55,7 @@ Money Claims Prototype
             Last payment on
           </td>
           <td class="">
-            1 October 2019
+              1 {{ now |  date("add", 13, "month") | date( "MMMM YYYY" ) }}
           </td>
           <td class=" ">
           </td>
@@ -71,13 +65,15 @@ Money Claims Prototype
               Duration of payments
             </td>
             <td class="">
-              1 year and 10 months
+              1 year
             </td>
             <td class=" ">
             </td>
           </tr>
       </tbody>
     </table>
+    {% endif %}
+
     <details>
       <summary class="bold">Defendant's financial details</summary>
       <div class="panel">
@@ -361,12 +357,30 @@ Money Claims Prototype
               </td>
               <td class="">£130 </td>
             </tr>
+            <tr>
+              <td class="no-border bold">
+                Total income and expense
+              </td>
+              <td class="no-border"> </td>
+            </tr>
+            <tr>
+              <td class="no-border">
+                Total income
+              </td>
+              <td class="no-border">£1,414 </td>
+            </tr>
+            <tr>
+              <td class="no-border">
+               Total expenses
+              </td>
+              <td class="no-border">£1,258 </td>
+            </tr>
           </tbody>
         </table>
       </div>
     </details>
     <h2 class="heading-small">Why they can't pay the full amount now</h2>
-    <p>I am heavily in debt at the moment and I'm not earning that much money. £100 a month is all i can afford.</p>
+    <p>I am heavily in debt at the moment and I'm not earning that much money. {% if data['payment'] == 'full' %}i can pay when i've cleared my debts.{% else %}£200 a month is all i can afford.{% endif %}</p>
     <input type="hidden" name="their_response" value="complete">
     <div class="form-group">
       <input type="submit" class="button" value="Continue"/>
