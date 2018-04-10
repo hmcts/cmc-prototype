@@ -1,0 +1,62 @@
+{% extends "layout_task-list.html" %}
+
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+
+{% block home_link %} ../task-list {% endblock %}
+{% block proposition_header %}
+{% set my_account="1" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+
+
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+
+      <a href="#" class="link-back">Back</a>
+
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+  <h1 class="heading-large">
+        Has the defendant paid the £1,000?
+      </h1>
+
+
+      <p>Mary Richards says they paid this amount on the 1 October 2017.</p>
+      <form
+        name="aspnetForm"
+        method="post"
+        onsubmit="multiNavigation('radio_select_group2', ['Yes', 'No'], ['../task-list', '../task-list?radio-indent-group=mediation-reject&']);return false;"
+        id="aspnetForm"
+        autocomplete="off">
+      <div class="form-group">
+        <fieldset>
+          <div class="multiple-choice" data-target="accept-offer">
+            <input id="radio-no" type="radio" name="radio_select_group2" value="Yes">
+            <label for="radio-no" data-target="no-info">Yes, I have received this payment</label>
+          </div>
+
+          <div class="multiple-choice" data-target="reject-offer">
+            <input id="radio-repayment" type="radio" name="radio_select_group2" value="No">
+            <label for="radio-repayment" data-target="repayment-info">No, I have not received this payment</label>
+          </div>
+
+        </fieldset>
+      </div>
+                  <input type="hidden" name="amount_paid" value="complete">
+
+      <input id="advert-option-next--button" type="submit" value="Save and continue" class="button"
+             data-ignore-double-submit="true">
+    </form>
+
+
+
+
+    </div>
+  </div>
+
+</main>
+{% endblock %}
