@@ -89,10 +89,17 @@
               <h2 class="heading-medium">A settlement agreement has been made</h2>
               <p>{% if data['defendant'] == 5.2 %}Jan Clark has signed the{% else %}You and Jan Clark have both signed a{% endif %} settlement agreement, agreeing you can repay them {% if data['defendant'] == 5.2 %}£200{% else %}£250{% endif %} per month starting {{ now | date('add', 1, 'months') | date( 'D MMMM YYYY' ) }}.</p>
               <p><a href="#">View settlement agreement</a></p>
-              <p>Contact Jan Clark if you need their payment details.</p>
-              <p>Make sure you get receipts for any payments.</p>
+              <p>Contact Jan Clark if you need their payment details. Make sure you get receipts for any payments.</p>
               <p><a href="#">View your response</a></p>
               <p><a href="#">View the claimant's response</a></p>
+              {% elseif data['defendant'] == 5.21 %}
+              <h2 class="heading-medium">You have been issued a County Court Judgment</h2>
+              <p>Jan Clark has accepted your repayment plan.</p>
+              <p>Contact Jan Clark if you need their payment details. Make sure you get receipts for any payments.</p>
+              <p><a href="#">View the claimant's response</a></p>
+              <p>You have also been issued with a County Court Judgment (CCJ).</p>
+              <p><a href="#">View judgment</a> (PDF, 123KB)</p>
+              <p>If you repay the debt within 28 days you can <a href="https://hmctsformfinder.justice.gov.uk/HMCTS/GetForm.do?court_forms_id=1157">apply for a certificate of cancellation</a> to cancel the CCJ. This application costs £15.</p>
               {% elseif data['defendant'] == 5.3 %}
               <h2 class="heading-medium">The claimant's response to your offer</h2>
               <p>Jan Clark has rejected your offer to repay them £200 per month starting {{ now | date('add', 1, 'months') | date( 'D MMMM YYYY' ) }}.</p>
@@ -278,18 +285,18 @@
               <h2 class="heading-medium">Your defence is being processed.</h2>
               <p> We will email you to explain what to do next.</p>
               {% endif %}
-              {% if data['defendant'] == 1 or  data['defendant'] == 2 or data['defendant'] == 3 or data['defendant'] == 4  or data['defendant'] == 5 or data['defendant'] == 5.1 or data['defendant'] == 5.01 or data['defendant'] == 5.02 or data['defendant'] == 5.2 or data['defendant'] == 8  %}
+              {% if data['defendant'] == 1 or  data['defendant'] == 2 or data['defendant'] == 3 or data['defendant'] == 4  or data['defendant'] == 5 or data['defendant'] == 5.1 or data['defendant'] == 5.01 or data['defendant'] == 5.02 or data['defendant'] == 5.2  or data['defendant'] == 5.21 or data['defendant'] == 8  %}
               {% else %}
               <h2 class="heading-medium">More options </h2>
               {% endif %}
-              {% if data['defendant'] == 1 or  data['defendant'] == 2 or data['defendant'] == 3 or data['defendant'] == 4 or data['defendant'] == 5 or data['defendant'] == 5.1 or data['defendant'] == 5.01 or data['defendant'] == 5.02 or data['defendant'] == 5.2 or data['defendant'] == 10 or data['defendant'] == 11 or data['defendant'] == 15 or data['defendant'] == 16 or data['defendant'] == 17%}
+              {% if data['defendant'] == 1 or  data['defendant'] == 2 or data['defendant'] == 3 or data['defendant'] == 4 or data['defendant'] == 5 or data['defendant'] == 5.1 or data['defendant'] == 5.01 or data['defendant'] == 5.02 or data['defendant'] == 5.2 or data['defendant'] == 5.21 or data['defendant'] == 10 or data['defendant'] == 11 or data['defendant'] == 15 or data['defendant'] == 16 or data['defendant'] == 17%}
               {% else %}
               <h2 class="heading-small">Settle out of court</h2>
               <p>
                 You can still <a href='offer-agreement/make-offer?defendant=defendant'>make an offer</a> to settle the claim out of court. If your offer is accepted you won’t have to a court hearing.
               </p>
               {% endif %}
-              {% if data['defendant'] == 1 or data['defendant'] == 2 or data['defendant'] == 3 or data['defendant'] == 4 or data['defendant'] == 4 or data['defendant'] == 5 or data['defendant'] == 5.1 or data['defendant'] == 5.01 or data['defendant'] == 5.02 or data['defendant'] == 5.2 or data['defendant'] == 8 or data['defendant'] == 9 or data['defendant'] == 12 or data['defendant'] == 13 or data['defendant'] == 14 or data['defendant'] == 17%}
+              {% if data['defendant'] == 1 or data['defendant'] == 2 or data['defendant'] == 3 or data['defendant'] == 4 or data['defendant'] == 4 or data['defendant'] == 5 or data['defendant'] == 5.1 or data['defendant'] == 5.01 or data['defendant'] == 5.02 or data['defendant'] == 5.2 or data['defendant'] == 5.21 or data['defendant'] == 8 or data['defendant'] == 9 or data['defendant'] == 12 or data['defendant'] == 13 or data['defendant'] == 14 or data['defendant'] == 17%}
               {% else %}
               <h2 class="heading-small">Request mediation</h2>
               <p>
@@ -398,7 +405,8 @@
     <option value="5.01" {% if data['defendant'] == 5.01 %}selected{% endif %}>5.01. I admit all the claim - set date payment - accepted</option>
     <option value="5.02" {% if data['defendant'] == 5.02 %}selected{% endif %}>5.02. I admit all the claim - pay immediately</option>
     <option value="5.1" {% if data['defendant'] == 5.1 %}selected{% endif %}>5.1. I admit all the claim - instalment plan payment</option>
-    <option value="5.2" {% if data['defendant'] == 5.2 %}selected{% endif %}>5.2. I admit all the claim - instalment plan payment accepted</option>
+    <option value="5.2" {% if data['defendant'] == 5.2 %}selected{% endif %}>5.2. I admit all the claim - instalment plan payment accepted - settlement</option>
+    <option value="5.21" {% if data['defendant'] == 5.21 %}selected{% endif %}>5.21. I admit all the claim - instalment plan payment accepted - judgment</option>
     <option value="5.3" {% if data['defendant'] == 5.3 %}selected{% endif %}>5.3. I admit all the claim - instalment plan payment - counter-offer</option>
     <option value="5.31" {% if data['defendant'] == 5.31 %}selected{% endif %}>5.31. I admit all the claim - instalment plan payment - court offer</option>
     <option value="5.32" {% if data['defendant'] == 5.32 %}selected{% endif %}>5.32. I admit all the claim - instalment plan payment - offer accepted</option>
