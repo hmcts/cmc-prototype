@@ -72,15 +72,34 @@
              <p>Mary Richards can no longer respond to the claim using this service - they may have responded by post.</p>
 
             </div>
-            {% elseif data['claimant'] == 4  %}
+            {% elseif data['claimant'] == 3.1  %}
             <h2 class="heading-small">The defendant has requested more time to respond </h2>
             <p>Mary Richards has requested an extra 14 days to respond. They need to respond by <span class="dates"></span> .</p>
-
-            {% elseif data['claimant'] == 5  %}
-            <h2 class="heading-small">The defendant's response</h2>
-            <p>Mary Richards admits they owe all the money. They have offered to pay you in instalments and have signed a settlement agreement.</p>
-            <p>You need to accept or reject their payment proposal and settlement agreement.</p>
+              {% elseif data['claimant'] == 4  %}
+              <h2 class="heading-medium">The defendant's response </h2>
+              <p>Mary Richards admits they owe all the money. They have offered to pay you in instalments and have signed a settlement agreement.</p>
+              <p>You need to accept or reject their payment proposal and settlement agreement.</p>
+              <p> <a href="claimant-response/admit-the-claim/task-list" class="button secondary-button">Respond to the defendant</a></p>
+              {% elseif data['claimant'] == 4.1  %}
+              <h2 class="heading-medium">The defendant's response </h2>
+              <p>Mary Richards admits they owe all the money. They have offered to pay you in full on {{ now | date( 'add', 3, 'months') | date }} and have signed a settlement agreement.</p>
+              <p>You need to accept or reject their payment proposal and settlement agreement.</p>
               <p> <a href="claimant-response/admit-the-claim/task-list?payment=full" class="button secondary-button">Respond to the defendant</a></p>
+              {% elseif data['claimant'] == 4.2  %}
+              <h2 class="heading-medium">The defendant's response </h2>
+              <p>Mary Richards admits they owe all the money. They have offered to pay you in full immediately. They have until {{ now | date( 'add', 5, 'days') | date }} to pay.</p>
+              <p>When you have been paid in full, you need to <a href="idam/contact-us?type=service_specific">contact the court</a> to let them know.</p>
+              <h3 class="heading-medium">What to do if they don't pay</h3>
+              <p>If you have not been paid by {{ now | date('add', 5, 'days') | date }}, you will then be able to request a County Court Judgment and enforcement.</p>
+
+              {% elseif data['claimant'] == 5  %}
+              <div class="">
+                <h2 class="heading-medium">The defendant's response </h2>
+                <p>Mary Richards believes they owe you £1,000. They've offered to pay you in instalments. You need to accept or reject that this is amount owed.</p>
+                <div class="form-group">
+                  <p> <a href="claimant-response/part-admit/task-list" class="button secondary-button">Respond to the defendant</a></p>
+                </div>
+              </div>
 
             {% elseif data['claimant'] == 5.1  %}
             <h2 class="heading-small">The defendant's response</h2>
@@ -309,10 +328,14 @@
     <option  value="0" >Choose</option>
     <option value="1.2" {% if data['claimant'] == 1.2 %}selected{% endif %}>0. Draft claim</option>
     <option value="1" {% if data['claimant'] == 1 %}selected{% endif %}>1. Claim being processed</option>
-    <option value="4" {% if data['claimant'] == 4 %}selected{% endif %}>2. More time requested by defendant</option>
+    <option value="3.1" {% if data['claimant'] == 3.1 %}selected{% endif %}>2. More time requested by defendant</option>
     <option  value="2" {% if data['claimant'] == 2 %}selected{% endif %}>3. Request a CCJ</option>
-    <option value="3" {% if data['claimant'] == 3 %}selected{% endif %}>4. CCJ has been requested </option>
+    <option value="3" {% if data['claimant'] == 3 %}selected{% endif %}>3.1. CCJ has been requested </option>
     <option>------- Defendant responses  ----------</option>
+        <option value="4" {% if data['claimant'] == 4 %}selected{% endif %}>4.0. Admit all the claim  - pay in instalments</option>
+    <option value="4.1" {% if data['claimant'] == 4.1 %}selected{% endif %}>4.1 Admit all the claim  - pay in full on set date</option>
+    <option value="4.2" {% if data['claimant'] == 4.2 %}selected{% endif %}>4.2 Admit all the claim  - pay in full immediately</option>
+    <option value="5" {% if data['claimant'] == 5 %}selected{% endif %}>5. Part admit the claim  </option>
     <option value="6" {% if data['claimant'] == 6 %}selected{% endif %}>6. Paid what I believe i owe - claim amount  </option>
     <option value="8" {% if data['claimant'] == 8 %}selected{% endif %}>8. Dispute claim   </option>
     <option value="9" {% if data['claimant'] == 9 %}selected{% endif %}>9. Dispute claim + mediation   </option>
