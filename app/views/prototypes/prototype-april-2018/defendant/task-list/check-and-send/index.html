@@ -88,7 +88,11 @@ Check your answers
             Date of birth
           </td>
           <td>
-            {% if data['check'] =='9' %}31 January 1970{% else %}{{data['day']}} {{data['month']}} {{data['year']}}{% endif %}
+          {% if data['day']!="" %}
+          {{ ( data['month'] + ' ' + data['day'] + ' ' + data['year']) | date('D MMMM YYYY') }}
+          {% elseif data['day']=="" %}
+          31 January 1970
+          {% endif %}
           </td>
           <td class="change-answer">
             <a href="../task-list/your-details/date-of-birth?return_page={{ '../../task-list' | urlencode }}">
@@ -208,9 +212,9 @@ Check your answers
         </td>
         <td class="no-border">
           {% if data['amount-day']!="" %}
-          {{data['amount-day']}} {{data['amount-month']}} {{data['amount-year']}}
+          {{ ( data['amount-month'] + ' ' + data['amount-day'] + ' ' + data['amount-year']) | date('D MMMM YYYY') }}
           {% else %}
-          31 01 2018
+          31 January 2018
           {% endif %}
         </td>
         <td class="no-border">

@@ -137,7 +137,7 @@
                   {% endif %}
                 </td>
               </tr>
-            {% elseif data.radio_select_group=="all" and data.do_you_owe_money=="complete" %}
+            {% elseif data.radio_select_group=="all" and data.do_you_owe_money=="complete" and data['radio-pay-group'] != 'Immediately' %}
               <tr id="their-details">
                 <td class="task">
                   <a href="task-list/owe-all{{formQuery}}">
@@ -256,11 +256,11 @@
       <div class="meta-data">
         <ul role="navigation" class="font-xsmall list">
           {% if data.more_time_to_respond!="complete" or data.radio_select_group_time=="No"%}
-          <li><strong class="bold">Response deadline:</strong> <br><span id="Date"></span> before 4pm<br> (19 days remaining)</li>
+          <li><strong class="bold">Response deadline:</strong> <br>{{ date | date('add', 19, 'days') | date }} before 4pm<br> (19 days remaining)</li>
           {% elseif data.more_time_to_respond=="complete" and data.radio_select_group_time=="Yes" %}
-          <li><strong class="bold">Response deadline:</strong> <br><span id="Date3"></span> before 4pm<br> (33 days remaining)</li>
+          <li><strong class="bold">Response deadline:</strong> <br>{{ date | date('add', 33, 'days') | date }} before 4pm<br> (33 days remaining)</li>
           {% else %}
-          <li><strong class="bold">Response deadline:</strong> <br><span id="Date"></span> before 4pm<br> (19 days remaining)</li>
+          <li><strong class="bold">Response deadline:</strong> <br>{{ date | date('add', 19, 'days') | date }} before 4pm<br> (19 days remaining)</li>
           {% endif %}
           <li><strong class="bold">Claim reference:</strong><br> 352MC733</li>
           <li>
