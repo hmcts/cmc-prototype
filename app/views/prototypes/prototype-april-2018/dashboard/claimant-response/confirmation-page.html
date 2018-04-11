@@ -16,6 +16,9 @@ Money Claims Prototype
         {% if data['radio-indent-group'] == "reject_hearing" or data['radio-indent-group'] == "decline-mediation" %}
         <h1 class="bold-large">The claim will be reviewed</h1>
 
+        {% elseif ( data['radio-proceed'] == "judgment" ) %}
+        <h1 class="bold-large">County Court Judgment issued</h1>
+
         {% elseif data['radio-indent-group'] == "accept_stop_claim" or data['radio-indent-group'] == "accept_stop_claim_claim_amount"  or data['confirmation'] == 6 %}
         <h1 class="bold-large">A settlement agreement has been made</h1>
 
@@ -34,10 +37,6 @@ Money Claims Prototype
         {% elseif ( data['radio-pay-group'] == "Set-date" or data['radio-pay-group'] == "Immediately" ) and data['radio-indent-group'] == "reject_stop_claim"%}
         <h1 class="bold-large">You have proposed an alternative repayment plan</h1>
 
-        {% elseif ( data['radio-proceed'] == "judgment" ) %}
-        <h1 class="bold-large">County Court Judgment issued</h1>
-
-
         {% else %}
         <h1 class="bold-large">You have requested free mediation </h1>
         {% endif %}
@@ -47,7 +46,14 @@ Money Claims Prototype
 
 
 
-        {% if data['radio-indent-group'] == "accept_stop_claim" %}
+           {% if ( data['radio-proceed'] == "judgment" ) %}
+           <p>You have accepted the defendant's repayment plan and a County Court Judgment has been issued against them.</p>
+           <p><a href="#">View judgment</a> (PDF, 123KB)</p>
+
+           <p><a href="../claimant?claimant=10.11" class="">Back to your account</a></p>
+
+
+        {% elseif data['radio-indent-group'] == "accept_stop_claim" %}
         <p>We'll email Mary Richards telling them that you agree to their repayment plan and have signed the settlement agreement.</p>
         <p>Now both parties have signed the agreement, this claim has been put on hold.</p>
 
@@ -108,13 +114,6 @@ Money Claims Prototype
 
            <p>We'll email you when the defendant responds.</p>
            <p><a href="#" class="">Back to your account</a></p>
-
-
-           {% elseif ( data['radio-proceed'] == "judgment" ) %}
-           <p>You have accepted the defendant's repayment plan and a County Court Judgment has been issued against them.</p>
-           <p><a href="#">View judgment</a> (PDF, 123KB)</p>
-
-           <p><a href="../claimant?claimant=10.11" class="">Back to your account</a></p>
 
            {% else %}
            <p>The defendant Mary Richards can accept your counter offer, reject it or suggest an alternative.</p>
