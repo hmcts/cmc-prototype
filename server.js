@@ -71,6 +71,7 @@ var nunjucksAppEnv = nunjucks.configure(appViews, {
   watch: true
 })
 
+
 // Nunjucks filters
 utils.addNunjucksFilters(nunjucksAppEnv)
 
@@ -246,6 +247,9 @@ if (typeof (routes) !== 'function') {
 } else {
   app.use('/', routes)
 }
+
+//custom routes for sprint folders
+require('./app/views/prototypes/prototype-april-2018/routes/routes.js')(app);
 
 // Returns a url to the zip of the latest release on github
 app.get('/prototype-admin/download-latest', function (req, res) {

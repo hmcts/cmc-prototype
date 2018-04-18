@@ -20,9 +20,16 @@ Money Claims Prototype
           {% endif %}
           {{formData | safe}}
           <h1 class="heading-large">
+            {% if data['defendants'].length > 0 %}
+              <span class="form-hint">Defendant {{ data['defendants'].length + 1 }}</span>
+            {% endif %}
             Who are you making the claim against?
           </h1>
-          
+          {% if not data['defendants'] %}
+          <p>You'll have a chance to add more defendants later.</p>
+          {% endif %}
+
+
           <fieldset>
             <div class="multiple-choice">
               <input id="radio-1" type="radio" name="defendant-type" value="Individual" {{ checked("defendant-type", "Individual") }}>
