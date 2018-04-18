@@ -57,7 +57,7 @@ Check your answers
           Business name
         </td>
         <td>
-          {{data['claimant-business-name']}}
+          {{defendant['defendantNameBusiness']}}
         </td>
         <td class="change-answer">
           <a href="../task-list/your-details/your-details?return_page={{ '../../task-list/check-and-send#name' | urlencode }}">
@@ -70,7 +70,7 @@ Check your answers
             Contact name
           </td>
           <td>
-            {{data['claimant-contact-name']}}
+            {{defendant['defendantNameContact']}}
           </td>
           <td class="change-answer">
             <a href="../task-list/your-details/your-details?return_page={{ '../../task-list/check-and-send#name' | urlencode }}">
@@ -150,22 +150,28 @@ Check your answers
           <table class="check-your-answers">
             <thead>
               <tr>
-                <th colspan="2">
+                <th colspan="3" {% if data['defendants'].length > 1 %}class="no-border"{% endif %}>
                   <h2 class="heading-medium" id="their-detail">
                     Their details (defendant)
                   </h2>
                 </th>
-                <th>
-                </th>
               </tr>
             </thead>
             <tbody>
+              {% for defendant in data['defendants'] %}
+              {% if data['defendants'].length > 1 %}
+              <tr>
+                <td colspan="3">
+                  <h1 class="heading-small">Defendant {{defendant['defendantNo']}}</h1>
+                </td>
+              </tr>
+              {% endif %}
               <tr>
                 <td>
                   About them
                 </td>
                 <td>
-                  {% if data['check'] =='2'  or data['check'] =='3' %}Sole trader{% else %}{{data['defendant-type']}}{% endif %}
+                  {% if data['check'] =='2'  or data['check'] =='3' %}Sole trader{% else %}{{defendant['defendantType']}}{% endif %}
                 </td>
                 <td class="change-answer">
                  <a href="../task-list/their-details/index?return_page={{ '../../task-list/check-and-send#their-detail' | urlencode }}">
@@ -178,33 +184,33 @@ Check your answers
                 Their name
               </td>
               <td>
-               {% if data['check'] =='1' or data['check'] =='2'  or data['check'] =='3' %}Mrs Mary Richards{% else %}{{data['defendant_name']}}{% endif %}
+               {% if data['check'] =='1' or data['check'] =='2'  or data['check'] =='3' %}Mrs Mary Richards{% else %}{{defendant['defendantName']}}{% endif %}
              </td>
              <td class="change-answer">
               <a href="../task-list/their-details/enter-details?return_page={{ '../../task-list/check-and-send#their-detail' | urlencode }}">
                 Change <span class="visuallyhidden">Their</span></a>
               </td>
             </tr>
-            {% if data['defendant-type']=="Sole trader" %}
+            {% if defendant['defendantType']=="Sole trader" %}
             <tr>
               <td>
                 Business name
               </td>
               <td>
-                {{data['defendant_business_name']}}
+                {{ data['defendant_business_name'] }}
               </td>
               <td class="change-answer">
                 <a href="../task-list/their-details/enter-details?return_page={{ '../../task-list/check-and-send#their-detail' | urlencode }}">
                   Change <span class="visuallyhidden">Their</span></a>
                 </td>
               </tr>
-              {% elseif data['defendant-type']=="Company" or data['defendant-type']=="Organisation" %}
+              {% elseif defendant['defendantType'] =="Company" or defendant['defendantType']=="Organisation" %}
               <tr>
                 <td>
                   Contact name
                 </td>
                 <td>
-                  {{data['defendant-contact-name']}}
+                  {{defendant['defendantContact']}}
                 </td>
                 <td class="change-answer">
                   <a href="../task-list/their-details/enter-details?return_page={{ '../../task-list/check-and-send#their-detail' | urlencode }}">
@@ -224,12 +230,7 @@ Check your answers
                       <li>SW1 H9A</li>
                     </ul>
                     {% else %}
-                    <ul class="list">
-                      <li>{{data['d-addressLine1']}}</li>>
-                      <li>{{data['d-addressLine2']}}</li>
-                      <li>{{data['d-addressLine3']}}</li>
-                      <li>{{data['d-addressPostcode']}}</li>
-                    </ul>
+                    {{defendant['defendantAddress']}}
                     {% endif %}
                   </td>
                   <td class="change-answer">
@@ -242,14 +243,16 @@ Check your answers
                       Their email (optional)
                     </td>
                     <td>
-                     {% if data['check'] =='1' or  data['check'] =='2'  or data['check'] =='3' %}maryrichards@gmail.com{% else %} {{data['defendant-email']}}{% endif %}
+                     {% if data['check'] =='1' or  data['check'] =='2'  or data['check'] =='3' %}maryrichards@gmail.com{% else %} {{defendant['defendantEmail']}}{% endif %}
                    </td>
                    <td class="change-answer">
                     <a href="../task-list/their-details/email?return_page={{ '../../task-list/check-and-send#their-detail' | urlencode }}">
                       Change <span class="visuallyhidden">Their</span></a>
                     </td>
                   </tr>
+                  {% endfor %}
                 </tbody>
+
               </table>
               <table class="check-your-answers">
                 <thead>

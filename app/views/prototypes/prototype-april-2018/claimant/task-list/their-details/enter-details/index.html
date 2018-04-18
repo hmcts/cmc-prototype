@@ -26,6 +26,9 @@ Money Claims Prototype
           {% if data['defendant-type']=="Individual" %}
 
           <h1 class="heading-large">
+            {% if data['defendants'].length > 0 %}
+              <span class="form-hint">Defendant {{ data['defendants'].length + 1 }}</span>
+            {% endif %}
             Their details
           </h1>
           <fieldset>
@@ -64,7 +67,7 @@ Money Claims Prototype
             </h1>
             <fieldset>
               <div class="form-group">
-                <label class="form-label" for="company_name">Company name</label>
+                <label class="form-label" for="defendant_name">Company name</label>
                 <input class="form-control " id="defendant_name" name="defendant_name" type="text"
                 value="{{data['defendant_name']}}">
               </div>
@@ -85,9 +88,9 @@ Money Claims Prototype
             </h1>
             <fieldset>
               <div class="form-group">
-                <label class="form-label" for="company_name">Organisation name</label>
-                <input class="form-control" id="company_name" name="company-name" type="text"
-                value="{{data['company-name']}}">
+                <label class="form-label" for="defendant_name">Organisation name</label>
+                <input class="form-control" id="defendant_name" name="defendant_name" type="text"
+                value="{{data['defendant_name']}}">
               </div>
               <div class="form-group">
                 <label class="form-label" for="defendant-contact-name">Contact person (optional)</label>
@@ -111,7 +114,7 @@ Money Claims Prototype
               Postcode
             </legend>
             <!--<div class="form-group">-->
-              <!--<input class="form-control" id="claimant_address" name="claimant-address" type="text" value="{{data['claimant-address']}}">-->
+              <!--<input class="form-control" id="defendant_address" name="claimant-address" type="text" value="{{data['claimant-address']}}">-->
               <!--</div>-->
               <fieldset class="form-group">
                 <div id="postcode-finder">
@@ -140,21 +143,21 @@ Money Claims Prototype
                 <div id="manual-address" style="display: none;" class="">
                   <div class="form-group">
                     <label class="form-label" for="street-1" id="street-label">Address</label>
-                    <input class="form-control" id="street-1" name="claimant_AddressLine1" type="text" value="">
-                    <input class="form-control second-text-input" id="street-2" name="claimant_AddressLine2" type="text" value="" title="Street line 2">
-                    <input class="form-control second-text-input" id="street-3" name="claimant_AddressLine3" type="text" value="" title="Street line 3">
+                    <input class="form-control" id="street-1" name="defendant_AddressLine1" type="text" value="">
+                    <input class="form-control second-text-input" id="street-2" name="defendant_AddressLine2" type="text" value="" title="Street line 2">
+                    <input class="form-control second-text-input" id="street-3" name="defendant_AddressLine3" type="text" value="" title="Street line 3">
                   </div>
                   <div class="form-group">
                     <label class="form-label" for="town" id="town-label">Town or city</label>
-                    <input class="form-control" id="town" name="claimant_city" type="text" value="">
+                    <input class="form-control" id="town" name="defendant_city" type="text" value="">
                   </div>
                   <div class="form-group">
                     <label class="form-label" for="postcode-full" id="postcode-label">Postcode</label>
-                    <input class="form-control form-control-1-4" id="postcode-full" name="claimant_Postcode" type="text" value="">
+                    <input class="form-control form-control-1-4" id="postcode-full" name="defendant_Postcode" type="text" value="">
                   </div>
                   <div class="form-group" id="country-group">
                     <label class="form-label" for="country">Country</label>
-                    <input class="form-control" id="country" name="claimant_country" type="hidden" value="">
+                    <input class="form-control" id="country" name="defendant_country" type="hidden" value="">
                   </div>
                 </div>
 <!--      <div id="enter-manually">
