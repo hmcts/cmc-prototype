@@ -4,7 +4,7 @@
 {% include "includes/propositional_navigation.html" %}
 {% endblock %}
 {% block content %}
-<main id="content" role="main" ">
+<main id="content" role="main">
 {% include "includes/phase_banner_beta.html" %}
   <div class="grid-row">
     <div class="column-two-thirds">
@@ -14,6 +14,7 @@
           <span class="heading-secondary">Claim number:</span>
           352MC733
         </h1>
+
         <div id="tabs">
           <div class="nav-tabs">
             <ul class="tabs-nav">
@@ -76,14 +77,14 @@
               {% if data['set-month'] %}
                 {{ ( data['set-month'] + ' ' + data['set-day'] + ' ' + data['set-year']) | date('D MMMM YYYY') }}{% else %}{{ now | date('add', 3, 'months') | date('D MMMM YYYY') }}{% endif %}.</p>
               <p><a href="#">View settlement agreement</a></p>
-              <p>Contact Jan Clark if you need their payment details.</p>
+              <p><a href="party-details/claimant">Contact Jan Clark</a> if you need their payment details.</p>
               <p>Make sure you get receipts for any payments.</p>
               <p><a href="#">View your response</a></p>
               <p><a href="#">View the claimant's response</a></p>
               {% elseif data['defendant'] == 5.02 %}
               <h2 class="heading-small">Your response to the claim</h2>
-              <p>You have said you will pay Jan Clark £1,500 by {{ now | date('add', 5, 'days') | date }}.</p>
-              <p>Contact Jan Clark if you need their payment details.</p>
+              <p>You have said you will pay Jan Clark £1,500 by {{ now | date('add', 5, 'days') | date }}. If they don't received the money by then, they can issue you with a CCJ.</p>
+              <p><a href="party-details/claimant">Contact Jan Clark</a> if you need their payment details.</p>
               <p>Make sure you get receipts for any payments.</p>
               <p><a href="#">View your response</a></p>
               {% elseif data['defendant'] == 5.1 %}
@@ -95,13 +96,13 @@
               <h2 class="heading-small">A settlement agreement has been made</h2>
               <p>{% if data['defendant'] == 5.2 %}Jan Clark has signed the{% else %}You and Jan Clark have both signed a{% endif %} settlement agreement, agreeing you can repay them {% if data['defendant'] == 5.2 %}£200{% else %}£250{% endif %} per month starting {{ now | date('add', 1, 'months') | date( 'D MMMM YYYY' ) }}.</p>
               <p><a href="#">View settlement agreement</a></p>
-              <p>Contact Jan Clark if you need their payment details. Make sure you get receipts for any payments.</p>
+              <p><a href="party-details/claimant">Contact Jan Clark</a> if you need their payment details. Make sure you get receipts for any payments.</p>
               <p><a href="#">View your response</a></p>
               <p><a href="#">View the claimant's response</a></p>
               {% elseif data['defendant'] == 5.21 %}
               <h2 class="heading-small">You have been issued a County Court Judgment</h2>
               <p>Jan Clark has accepted your repayment plan.</p>
-              <p>Contact Jan Clark if you need their payment details. Make sure you get receipts for any payments.</p>
+              <p><a href="party-details/claimant">Contact Jan Clark</a> if you need their payment details. Make sure you get receipts for any payments.</p>
               <p><a href="#">View the claimant's response</a></p>
               <p>You have also been issued with a County Court Judgment (CCJ).</p>
               <p><a href="#">View judgment</a> (PDF, 123KB)</p>
@@ -423,14 +424,14 @@
        <p class="heading-small" style="padding-top: 100px">About claim</p>
        {% if data['defendant'] == 17 %}
        <ul role="navigation" class="font-xsmall list">
-        <li><strong class="bold">Defendant name:</strong><br> Jan Clark</li>
+        <li><strong class="bold">Claimant name:</strong><br> <a href="party-details/claimant">Jan Clark</a></li>
         <li><strong class="bold">Claim amount:</strong><br>£3240.34</li>
         <li><strong class="bold">Claim details:</strong><br><a
           href="/defendant/full/d-5/correspondence/forms/v2/claim-form-claimant?check=1">View counterclaim</a></li>
       </ul>
       {% else %}
       <ul role="navigation" class="font-xsmall list">
-        <li><strong class="bold">Claimant name:</strong><br> Jan Clark</li>
+        <li><strong class="bold">Claimant name:</strong><br> <a href="party-details/claimant">Jan Clark</a></li>
         <li><strong class="bold">Claim amount:</strong><br>£1500</li>
         <li><strong class="bold">Claim details:</strong><br><a
           href="/defendant/full/d-5/correspondence/forms/v2/claim-form-claimant?check=1">Download claim</a></li>
