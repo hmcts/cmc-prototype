@@ -6,11 +6,8 @@ Money Claims Prototype
 {% block content %}
 <main id="content" role="main">
   <div class="grid-row">
-    <h1 class="heading-large">Sign in or create an account</h1>
-    <div class="column-half col1">
-      <h1 class='heading-medium' id='page-h1'>
-        Sign in
-      </h1>
+    <div class="column-two-thirds">
+      <h1 class="heading-large">Access civil and family court services</h1>
       {% if data['control-box'] == 1 %}
       <!-- first time user - make claim -->
       <form  action="../../claimant/task-list" method="get">
@@ -76,27 +73,112 @@ Money Claims Prototype
                                     {% else %}
                                     <form  action="../../claimant/task-list/eligibility/reason" method="get">
                                       {% endif %}
-                                      <div class='form-group'>
-                                        <label class=" form-label" for="user_email">Email address</label>
-                                        <input class="optional form-control form-control-3-4" type="email" />
-                                      </div>
-                                      <div class='form-group'>
-                                        <label class="password optional form-label" for="user_password">Password</label>
-                                        <input autocomplete="off" class="password optional form-control form-control-3-4" type="password"/>
-                                      </div>
-                                      <p><a href="forgotten-password-enter-email">Forgotten password?</a></p>
-                                      <div class='form-group'>
-                                        <input type="submit" name="commit" value="Sign in" class="btn button"/>
-                                      </div>
-                                    </form>
-                                  </div>
-                                  <div class="column-half col2">
-                                    <p class="form-title heading-medium">Create an account</p>
-                                    <p>You need to <a href="create-account" role="button">create an account</a> to use this service.</p>
-                                    <p></p>
-                                  </div>
-                                  <div>
-                                  </main>
+
+
+
+                                                  <div class='form-group'>
+                                                      <p class="form-title heading-medium">Have you registered for civil and family court services?</p>
+
+                                                      <fieldset class="inline">
+                                                          <div class="multiple-choice" data-target="sign-in-now">
+                                                              <input id="radio-inline-1" type="radio" name="radio-online-group" value="Yes">
+                                                              <label for="radio-inline-1">Yes</label>
+                                                          </div>
+
+                                                          <div class="multiple-choice" data-target="show-register-screen">
+                                                              <input id="radio-inline-1" type="radio" name="radio-online-group" value="No">
+                                                              <label for="radio-inline-1">No</label>
+                                                          </div>
+
+                                                      </fieldset>
+
+                                                      <div class="reg-screen js-hidden" id="show-register-screen">
+                                                          <form action="verify-email" method="post">
+                                                              <p> </p>
+                                                              <p>Registering will allow you to:</p>
+                                                              <ul class="list list-bullet">
+                                                                  <li>make a money claim</li>
+                                                                  <li>file for divorce</li>
+                                                                  <li>apply for probate</li>
+                                                              </ul>
+                                                              <h1 class="heading-medium">
+                                                                  Register for civil and family court services
+                                                              </h1>
+
+                                                              <form method="get" name="registration" action="verify-email" id="registration">
+
+                                                                  <div class="form-group ">
+                                                                      <label class="form-label" for="email">
+                                                                          First name
+                                                                      </label>
+                                                                      <input name="email" id="email" class="form-control form-control-3-4">
+                                                                  </div>
+                                                                  <legend class="visuallyhidden">Your full name.</legend>
+                                                                  <div class="form-group ">
+                                                                      <label class="form-label" for="email">
+                                                                          Last name
+                                                                      </label>
+                                                                      <input name="email" id="email" class="form-control form-control-3-4">
+                                                                  </div>
+                                                                  <div class="form-group ">
+                                                                      <label class="form-label bold" for="email">
+                                                                          Email address
+                                                                      </label>
+                                                                      <input name="idam_email_address" id="idam_email_address" class="form-control form-control-3-4" value="">
+                                                                  </div>
+                                                                  <p>Read our
+                                                                      <a href="privacy">privacy policy</a> and
+                                                                      <a href="/terms-and-conditions">terms and conditions</a>.</p>
+                                                                  <fieldset>
+                                                                      <div class="form-group">
+                                                                          <input type="submit" class="button" value="Continue" />
+                                                                      </div>
+                                                                  </fieldset>
+                                                              </form>
+
+                                                      </div><!-- hidden registration form -->
+
+                                                      <div class="signin-screen js-hidden" id="sign-in-now">
+                                                          <form action="exit-page" method="post">
+                                                              <p> </p>
+                                                              <h1 class="heading-medium">
+                                                                  Sign in to civil and family court services
+                                                              </h1>
+                                                              <div class='form-group'>
+                                                                  <label class=" form-label" for="user_email">Email address</label>
+                                                                  <input class="optional form-control form-control-3-4" name="emailaddy" type="email" />
+                                                              </div>
+                                                              <div class='form-group'>
+                                                                  <label class="password optional form-label" for="user_password">Password</label>
+                                                                  <input autocomplete="off" class="password optional form-control form-control-3-4" name="pword" type="password" />
+                                                              </div>
+                                                              <p>
+                                                                  <a href="forgotten-password-enter-email">Forgotten password?</a>
+                                                              </p>
+                                                              <div class='form-group'>
+                                                                  <input type="submit" name="commit" value="Sign in" class="btn button" />
+                                                              </div>
+                                                      </div><!-- hidden sign-in form -->
+
+                                                      </form>
+                                                  </div><!-- class="column-two-thirds col1" -->
+
+
+                                                  <div class="grid-row">
+                                                      <div class="column-two-thirds col3">
+                                                          <p class="report-a-problem-toggle">
+                                                              If you are unable to sign in to this service, please<br />
+                                                              <a href="contact-us">contact Her Majesty's Courts and Tribunal Service</a>.
+                                                          </p>
+                                                      </div>
+                                                  </div>
+
+
+
+                                                  </div>
+                                                </div>
+                                              </main>
+
                                   <form method="post"  action="#" class="form" style="float: left;">
                                     <select id="control-box2" name="control-box2" onchange="window.location.href='sign-in?control-box='+this.value">
                                       <option  value="0" {% if data['control-box'] == 0 %}selected{% endif %}>Claimant</option>
@@ -130,4 +212,27 @@ Money Claims Prototype
                                       <option value="15" {% if data['control-box'] == 15 %}selected{% endif %}>5 - Counterclaim made by defendant</option>
                                     </select>
                                   </form>
+
+
+        <style type="text/css">
+            .report-a-problem-toggle a {
+                color: #6f777b !important;
+                text-decoration: underline !important;
+                border: none;
+                margin: 0;
+                padding: 0;
+                font-size: 16px;
+                line-height: 1.25;
+            }
+
+            .report-a-problem-toggle {
+                color: #6f777b !important;
+                border: none;
+                margin: 0;
+                padding: 0;
+                font-size: 16px;
+                line-height: 1.25;
+            }
+        </style>
+
                                   {% endblock %}
