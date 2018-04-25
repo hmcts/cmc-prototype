@@ -52,42 +52,50 @@ Money Claims Prototype
 
         <h2 class="heading-medium">If you don't get paid</h2>
          <p>If Mary Richards {% if data['payment'] == 'full' %}doesn't pay you{% else %}stops paying the instalments{% endif %} and breaks the settlement agreement, you can request a County Court Judgment (CCJ) by signing in to your account. After you've requested a CCJ you can ask the court to enforce payment.</p>
-         <p><a href="../claimant?claimant=10.{% if data['payment'] == 'full' %}4{% else %}1{% endif %}" class="">Back to your account</a></p>
+						{% include "includes/survey.html" %}
+
+      <p><a class="button" href='../claimant?claimant=10.{% if data['payment'] == 'full' %}4{% else %}1{% endif %}'>Finished</a></p>
 
 
        {% elseif ( data['radio-proceed'] == "judgment" or data['confirmation'] == 2 ) %}
        <p>You've accepted the defendant's repayment plan and a County Court Judgment has been issued against them.</p>
        <p><a href="#">View judgment</a> (PDF, 123KB)</p>
+			{% include "includes/survey.html" %}
 
-       <p><a href="../claimant?claimant=10.11" class="">Back to your account</a></p>
+			<p><a class="button" href='../claimant?claimant=10.11'>Finished</a></p>
 
 
         {% elseif ( data['radio-pay-group'] == "Set-date" or data['radio-pay-group'] == "Immediately" ) and data['radio-indent-group'] == "reject_stop_claim"  or data['confirmation'] == 3  %}
         <p>We've emailed {% if data.counterclaim=="true" %}Jan Clark{%else%}Mary Richards{% endif %} your proposed repayment plan and settlement agreement.</p>
        <p>We'll email you when the defendant responds.</p>
 
+			{% include "includes/survey.html" %}
 
-       <p><a href="../claimant?claimant=10.61" class="">Back to your account</a></p>
+			<p><a class="button" href='../claimant?claimant=10.61'>Finished</a></p>
 
 
 
         {% elseif ( data['radio-indent-group2'] == "accept_stop_claim" or data['radio-indent-group'] == "reject_stop_claim" ) and data['radio-indent-group2'] != "reject_stop_claim"  or data['confirmation'] == 4 %}
         <p>We'll email Mary Richards the repayment plan and the settlement agreement for them to sign.</p>
         <p>If they do not feel the plan is affordable, they can request a judge determines a suitable plan.</p>
+			{% include "includes/survey.html" %}
 
-       <p><a href="../claimant?claimant=10.61" class="">Back to your account</a></p>
+			<p><a class="button" href='../claimant?claimant=10.61'>Finished</a></p>
 
 
        {% elseif data['radio-indent-group2'] == "reject_stop_claim" or data['confirmation'] == 5 %}
         <p>A judge will decide what the defendant can afford to pay based on their financial details.</p>
         <p >We'll contact both you and {% if data.counterclaim=="true" %}Jan Clark{%else%}Mary Richards{% endif %} confirming the details of the repayment plan in the next 10 days.</p>
 
+			{% include "includes/survey.html" %}
 
-       <p><a href="../claimant?claimant=10.6" class="">Back to your account</a></p>
+			<p><a class="button" href='../claimant?claimant=10.6'>Finished</a></p>
 
         {% elif data['radio-indent-group'] == "mediation-accept" or data['confirmation'] == 6 %}
         <p>A mediator will contact you and the defendant in the next 14 days to arrange an appointment.</p>
-           <p><a href="../home" class="">Back to your account</a></p>
+						{% include "includes/survey.html" %}
+
+      <p><a class="button" href='../home'>Finished</a></p>
 
 
          {% elseif data['radio-indent-group'] == "mediation-opt" or data['confirmation'] == 7 %}
@@ -96,23 +104,25 @@ Money Claims Prototype
          <p>If they reject or don't respond within 7 days the case will be reviewed and might go to a hearing. We'll email you if a hearing date is scheduled and explain what you need to do to prepare. </p>
 
          <p>We'll email you when the defendant responds.</p>
-         <p><a href="#" class="">Back to your account</a></p>
+					{% include "includes/survey.html" %}
+
+				<p><a class="button" href='../home'>Finished</a></p>
 
 
       {% elif data['radio-indent-group'] == "accept_stop_claim_claim_amount"  %}
         <p>We'll email the defendant Mary Richards telling them that you accepted their response and that the claim is now closed.</p>
-           <p><a href="../home" class="">Back to your account</a></p>
+						{% include "includes/survey.html" %}
+
+      <p><a class="button" href='../home'>Finished</a></p>
 
            {% elseif data['radio-indent-group'] == "mediation-reject"%}
            <p>The case will be reviewed and might go to a hearing. We'll email you if a hearing date is scheduled and explain what you need to do to prepare.</p>
-           <p><a href="../home" class="">Back to your account</a></p>
+						{% include "includes/survey.html" %}
+
+      <p><a class="button" href='../home'>Finished</a></p>
 
            {% endif %}
-           <h2 class="heading-medium">Help and support</h2>
-           <p>Email: moneyclaims@hmcts.gsi.gov.uk<br>
-              Telephone: 0300 123 7050<br>
-          Hours: 9am to 5pm, Monday to Friday</p>
-          <p><a href="https://www.gov.uk/call-charges">Find out about call charges</a></p>
+			{% include "includes/contact.html" %}
       </fieldset>
 
   </div>
