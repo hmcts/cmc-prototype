@@ -48,7 +48,7 @@ Check your answers
     {%if data.radio_select_group=="Yes" %}
     <tr>
       <td>
-        Do you accept the method of payment?
+        Do you accept the defendant's repayment plan?
       </td>
       <td>
            {%if data['radio-indent-group'] == "accept_stop_claim" %}
@@ -127,6 +127,164 @@ Check your answers
         </a>
       </td>
     </tr>
+    {% endif %}
+ {% if data['settlement'] == 'complete' and data['radio-proceed'] == 'settlement' %}
+      <table class="check-your-answers">
+        <thead>
+          <tr>
+            <th colspan="2">
+              <h2 id='cd' class="heading-medium">
+                Settlement agreement
+              </h2>
+            </th>
+            <th>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              The offer
+            </td>
+            <td>
+
+              Mary Richards: {% if data['radio-pay-group']=="Immediately" %}
+              I will pay the full amount immediately. You will receive the money no later than {{ now | date( 'add', 5, 'days') | date }}. Any cheques or transfers must be clear in your account by this date.
+              {% elseif data['radio-pay-group']=="Instalments"  %}
+              I will pay instalments of
+                {% if data['instalment-first-payment'] %}
+                £{{data['instalment-first-payment']}}
+                {% else %}
+                £200
+                {% endif %}
+
+                {% if data['radio-payment-frequency'] %}
+                {{ data['radio-payment-frequency'] | lower  }}{% else %}
+                every month{% endif %}.
+              I will pay the first instalment by
+                {% if data['instalment-day'] %}
+                {{ ( data['instalment-month'] + ' ' + data['instalment-day'] + ' ' + data['instalment-year']) | date('D MMMM YYYY') }}{% else %}
+                31 March 2018{% endif %}.
+
+
+              {% elseif data['radio-pay-group']=="Set-date" %}
+              I will pay the full amount, no later than
+                {% if data['set-day']!="" %}
+                {{ ( data['set-month'] + ' ' + data['set-day'] + ' ' + data['set-year']) | date('D MMMM YYYY') }}
+                {% else %}
+                {{ date | date('add', 1, 'year') | date('D MMMM YYYY') }}
+                {% endif %}
+              {% else %}
+              I will pay the full amount, no later than {{ date | date('add', 1, 'year') | date('D MMMM YYYY') }}.
+              {% endif %}
+
+           </td>
+           <td class="change-answer">
+            <a href="../task-list/claim-details/reason?return_page={{ '../../task-list/claim-details/check-your-answers' | urlencode }}">
+              Change <span class="visuallyhidden">Why you're owed the money</span>
+            </a>
+          </td>
+        </tr>
+          <tr>
+            <td>
+              Completion date
+            </td>
+            <td>
+
+              {% if data['radio-pay-group']=="Immediately" %}
+              {{ now | date( 'add', 5, 'days') | date }}
+              {% elseif data['radio-pay-group']=="Instalments" and data['instalment-month'] %}
+              {{ ( data['instalment-month'] + ' ' + data['instalment-day'] + ' ' + data['instalment-year']) | date('add', 1, 'year') | date('D MMMM YYYY') }}
+              {% elseif data['radio-pay-group']=="Set-date" %}
+                {% if data['set-day']!="" %}
+                {{ ( data['set-month'] + ' ' + data['set-day'] + ' ' + data['set-year']) | date('D MMMM YYYY') }}
+                {% else %}
+                {{ date | date('add', 1, 'year') | date('D MMMM YYYY') }}
+                {% endif %}
+              {% else %}
+              {{ date | date('add', 1, 'year') | date('D MMMM YYYY') }}
+              {% endif %}
+
+           </td>
+           <td class="change-answer">
+            <a href="../task-list/claim-details/reason?return_page={{ '../../task-list/claim-details/check-your-answers' | urlencode }}">
+              Change <span class="visuallyhidden">Why you're owed the money</span>
+            </a>
+          </td>
+        </tr>
+      </tbody>
+      </table>
+
+    {% elseif data['judgment'] == 'complete' and data['radio-proceed'] == 'judgment' %}
+
+
+
+        <table class="check-your-answers">
+          <thead>
+      <tr>
+        <th colspan="2">
+          <h2 class="heading-medium" id="name">
+            Judgment request
+          </h2>
+        </th>
+        <th>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+
+    <tbody>
+
+
+            <tr>
+        <td class="no-border">
+          Has the defendant paid some of the amount owed?
+          <td class="no-border">
+                          {% if data['radio-indent-group2']=="Yes" or data['control-box'] == 1  or data['control-box'] == 2  or data['control-box'] == 3 or data['control-box'] == 4 %}Yes{% elif data['radio-indent-group2']=="No"  or data['control-box'] == 5 or data['control-box'] == 6  %}No{% else %}Yes{% endif %}
+
+          </td>
+          <td class="change-answer no-border">
+            <a href="claim-amount-deduct">
+              Change <span class="visuallyhidden">Amount defendant is ordered to pay</span>
+            </a>
+          </td>
+        </tr>
+       {% if data['radio-indent-group2']=="No" or data['control-box'] == 5 or data['control-box'] == 5  %}
+              {% elseif data['control-box'] == 1  or data['control-box'] == 2  or data['control-box'] == 3 or data['control-box'] == 4 or data['radio-pay-group']=="Immediately" or data['radio-pay-group']=="Set-date" or data['radio-pay-group']=="Instalments"%}
+
+       <tr>
+        <td>
+          Amount already paid
+          <td>
+            £100.00<br>
+          </td>
+          <td class="change-answer">
+
+          </td>
+        </tr>
+
+       {% endif %}
+
+                  <tr>
+        <td>
+          Total to be paid by defendant
+          <td>
+            £1643.20<br>
+          </td>
+          <td class="change-answer">
+
+          </td>
+        </tr>
+
+
+        </tbody>
+      </table>
+
+
+
+
+
+
     {% endif %}
 
   </tbody>
