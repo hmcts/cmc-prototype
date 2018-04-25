@@ -28,14 +28,15 @@ Money Claims Prototype
         {% elseif data['radio-indent-group2'] == "reject_stop_claim" or data['confirmation'] == 5 %}
         <h1 class="bold-large">You've asked for a judge to determine a repayment plan</h1>
 
+        {% elseif data['radio-indent-group'] == "mediation-opt" or data['radio-indent-group'] == "mediation-accept" or data['radio-indent-group'] == "set_date"  or data['confirmation'] == 6 or data['confirmation'] == 7 %}
+        <h1 class="bold-large">You have requested free mediation</h1>
+
+
         {% elseif data['radio-indent-group'] == "reject_hearing" or data['radio-indent-group'] == "decline-mediation" %}
         <h1 class="bold-large">The claim will be reviewed</h1>
 
         {% elseif data['radio-indent-group'] == "payment_instalments" or data['radio-indent-group'] == "set_date"%}
         <h1 class="bold-large">Payment request sent to court</h1>
-
-        {% elseif data['radio-indent-group'] == "mediation-opt" or data['radio-indent-group'] == "mediation-accept" or data['radio-indent-group'] == "set_date"%}
-        <h1 class="bold-large">You have requested free mediation</h1>
 
         {% else %}
         <h1 class="bold-large">You have requested free mediation </h1>
@@ -84,27 +85,27 @@ Money Claims Prototype
 
        <p><a href="../claimant?claimant=10.6" class="">Back to your account</a></p>
 
+        {% elif data['radio-indent-group'] == "mediation-accept" or data['confirmation'] == 6 %}
+        <p>A mediator will contact you and the defendant in the next 14 days to arrange an appointment.</p>
+           <p><a href="../home" class="">Back to your account</a></p>
+
+
+         {% elseif data['radio-indent-group'] == "mediation-opt" or data['confirmation'] == 7 %}
+         <p>We'll ask the defendant Mary Richards if they would like free mediation. </p>
+         <p>If they accept, a mediator will contact you and the defendant within 14 days to arrange an appointment. </p>
+         <p>If they reject or don't respond within 7 days the case will be reviewed and might go to a hearing. We'll email you if a hearing date is scheduled and explain what you need to do to prepare. </p>
+
+         <p>We'll email you when the defendant responds.</p>
+         <p><a href="#" class="">Back to your account</a></p>
+
 
       {% elif data['radio-indent-group'] == "accept_stop_claim_claim_amount"  %}
         <p>We'll email the defendant Mary Richards telling them that you accepted their response and that the claim is now closed.</p>
            <p><a href="../home" class="">Back to your account</a></p>
 
-        {% elif data['radio-indent-group'] == "mediation-accept"   %}
-        <p>A mediator will contact you and the defendant in the next 14 days to arrange an appointment.</p>
-           <p><a href="../home" class="">Back to your account</a></p>
-
-
            {% elseif data['radio-indent-group'] == "mediation-reject"%}
            <p>The case will be reviewed and might go to a hearing. We'll email you if a hearing date is scheduled and explain what you need to do to prepare.</p>
            <p><a href="../home" class="">Back to your account</a></p>
-
-           {% elseif data['radio-indent-group'] == "mediation-opt"%}
-           <p>We'll ask the defendant Mary Richards if they would like free mediation. </p>
-           <p>If they accept, a mediator will contact you and the defendant within 14 days to arrange an appointment. </p>
-           <p>If they reject or don't respond within 7 days the case will be reviewed and might go to a hearing. We'll email you if a hearing date is scheduled and explain what you need to do to prepare. </p>
-
-           <p>We'll email you when the defendant responds.</p>
-           <p><a href="#" class="">Back to your account</a></p>
 
            {% endif %}
            <h2 class="heading-medium">Help and support</h2>
@@ -125,6 +126,8 @@ Money Claims Prototype
           <option value="3"  {% if data['confirmation'] == '3' %}selected{% endif %}>Counter offer made</option>
           <option value="4"  {% if data['confirmation'] == '4' %}selected{% endif %}>Court offer accepted</option>
           <option value="5"  {% if data['confirmation'] == '5' %}selected{% endif %}>Redetermination</option>
+          <option value="6"  {% if data['confirmation'] == '6' %}selected{% endif %}>Mediation accepted</option>
+          <option value="7"  {% if data['confirmation'] == '7' %}selected{% endif %}>Mediation proposed</option>
       </select>
     </form>
 
