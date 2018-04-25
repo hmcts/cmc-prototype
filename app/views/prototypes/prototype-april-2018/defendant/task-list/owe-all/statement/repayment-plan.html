@@ -15,15 +15,23 @@ Money Claims Prototype
       <h1 class="heading-large">
         Your repayment plan
       </h1>
-      <br>
+
+
+                  {% if data.radio_select_group=="Some"%}
+
+      <p>You admit your owe £{{data['owe-amount']}}.00</p>
+            {% else %}
+      <p>Total claim amount £1,500,00 (includes court fees and interest)</p>
+            {% endif %}
+
       <form action="residence" method="post" class="form">
         <div class="form-group">
           <fieldset>
             <legend class="visually-hidden">Followed by equal payments of</legend>
             <label class="form-label-bold" for="instalment-first-payment">
-              Regular payments of 
+              Regular payments of
             </label>
-            <p class="form-hint">For example, £200</p>
+            <p class="form-hint">For example, £50</p>
             <input class="fee pound" maxlength="8" size="8" type="text" value="{{data['instalment-first-payment']}}" name="instalment-first-payment" id="instalment-first-payment">
           </fieldset>
         </div>
@@ -143,7 +151,7 @@ Money Claims Prototype
           }
         }
       $('#duration').text( strDuration );
-  
+
 
 
       }

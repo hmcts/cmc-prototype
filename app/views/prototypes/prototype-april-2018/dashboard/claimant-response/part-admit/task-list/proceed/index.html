@@ -1,0 +1,64 @@
+{% extends "layout_task-list.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block home_link %} ../task-list {% endblock %}
+{% block proposition_header %}
+{% set my_account="1" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <a href="#" class="link-back">Back</a>
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <h1 class="heading-large">
+        Choose how to proceed
+      </h1>
+
+
+      <form
+      name="aspnetForm"
+      method="post"
+      onsubmit="multiNavigation('radio-proceed', ['settlement', 'judgment'], ['../task-list', '../../../../dashboard/applications-and-judgments/default-judgment']);return false;"
+      id="aspnetForm"
+      autocomplete="off">
+
+
+      <div class="form-group">
+        <fieldset>
+
+          <legend class="visually-hidden">Choose how to proceed</legend>
+          <p>There are two ways to formalise the repayment plan:</p>
+
+          <div class="multiple-choice">
+            <input id="radio-settlement" type="radio" name="radio-proceed" value="settlement">
+            <label for="radio-settlement">
+              <strong class="bold">Sign a settlement agreement</strong>
+              <p>This is a legal agreement between you and the defendant agreeing to the repayment plan. If they break it, you can issue a County Court Judgment and ask the court to collect payment in full. This can be done online instantly.</p>
+            </label>
+          </div>
+
+          <div class="multiple-choice">
+            <input id="radio-judgment" type="radio" name="radio-proceed" value="judgment">
+            <label for="radio-judgment">
+              <strong class="bold">Issue a County Court Judgment (CCJ)</strong>
+              <p>This is a formal order binding the defendant to the repayment plan. <br />If they break it, you can ask the court to collect payment in full. It also places the defendant on the CCJ register, making it more difficult for them to borrow money to repay you. </p>
+            </label>
+          </div>
+
+        </fieldset>
+
+        <div class="form-group">
+          <input type="hidden" name="proceed" value="complete">
+          <input type="submit" class="button" value="Save and continue"/>
+        </div>
+
+      </div>
+
+
+    </div>
+  </div>
+</main>
+{% endblock %}
