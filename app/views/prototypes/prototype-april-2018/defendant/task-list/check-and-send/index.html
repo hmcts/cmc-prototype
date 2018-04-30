@@ -193,11 +193,9 @@ Check your answers
         <tr>
           <th colspan="2">
             <h2 class="heading-medium">
-             {% if data.radio_select_group2=="defend_now" or data['check']== 9 or data['check']== 12%}
+
              Response details
-             {% else %}
-             Response details
-             {% endif %}
+
            </h2>
          </th>
          <th>
@@ -255,6 +253,40 @@ Check your answers
     </tr>
     <tr>
       {% endif %}  <!-- start of defendnow-->
+
+{% if data['radio_select_group2']=="some" or data['check']== 5 or data['check']== 6%} <!-- start of defend -->
+    <tr >
+      <td class="no-border">
+        How much money do you admit you owe?
+      </td>
+      <td class="no-border">
+        {% if data['check'] =='5'  or data['check'] =='6'   %}
+        £300.00
+        {% else %} £{{data['owe-amount']}}{% endif %}
+      </td>
+      <td class="change-answer no-border">
+        <a href="#">
+          Change <span class="visuallyhidden">Name</span>
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Why are you disputing the full amount?
+      </td>
+      <td>
+        {% if data['check'] =='5'  or data['check'] =='6'   %}
+        Because i don't owe them that much money.
+        {% else %} {{data['owe_amount_why']}}{% endif %}
+      </td>
+      <td class="change-answer">
+
+      </td>
+    </tr>
+
+      {% endif %}  <!-- start of part admit-->
+
+
       {% if data['radio_select_group2']=="defend_now" or data.radio_select_group=="Some" or data.amount_paid=="less" or data['check']== 4 or data['check']== 5 or data['check']== 6 or data['check']== 7 or data['check']== 9 or data['check']== 12%} <!-- start of time-line and evidence -->
       <tr>
         <td class="no-border">
@@ -1129,10 +1161,7 @@ Check your answers
       value="{{data['defendant_name']}}">
     </div>
     {% endif %}
-    <div class="notice text">
-      <i class="icon icon-important">
-        <span class="visually-hidden">Warning</span>
-      </i>
+
   <!--
   <strong class="bold-small">
     You could be fined or go to prison if you deliberately give untrue or misleading information.
@@ -1191,7 +1220,6 @@ Check your answers
   <div class="form-group">
     <button id="submit" class="button" >Submit response</button>
   </div>
-  <p><a href="../task-list">Cancel</a></p>
 </form>
 </div>
 {% endif %}
