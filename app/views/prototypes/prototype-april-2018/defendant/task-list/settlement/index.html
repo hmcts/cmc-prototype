@@ -15,10 +15,11 @@ Money Claims Prototype
 
       <p>You can offer a settlement agreement - a legal agreement you sign which describes how you'll pay the money back.</p>
 
-      <p>We'll send it to the claimant and they can choose to sign it or issue a County Court Judgment (CCJ) against you.</p>
+      <p>We'll send it to the claimant and {% if data.radio_select_group=="Some" or data['settle'] == 1   %}<span class="bold">if they accept your admission of £500</span> {% endif %} they can choose to sign it or issue a County Court Judgment (CCJ) against you.</p>
 
       <p>Even if they accept your repayment plan they can still refuse to sign a settlement agreement. They can issue a CCJ against you instead.</p>
 
+      {% if data.radio_select_group=="Some" or data['settle'] == 1  %}<p class="bold">If they reject your admission of £500 they can go a hearing and claim the total amount claimed of £1,500. </p>{% endif %}
       <p>If they sign, the claim is put on hold and they can't issue a CCJ against you unless you break the terms of the agreement.</p>
 
      <h2 class="heading-medium">Do you want to offer a settlement agreement?</h2>
@@ -50,4 +51,11 @@ Money Claims Prototype
 
   </div>
 </main>
+<form method="post"  action="#" class="form" style="; float: left">
+  <select id="dashboard2" name="dashboard2" onchange="window.location.href='?settle='+this.value">
+    <option  value="0" ></option>
+    <option value="2" {% if data['settle'] == 2 %}selected{% endif %}>1. Full admission?</option>
+    <option value="1" {% if data['settle'] == 1 %}selected{% endif %}>2. Part admission</option>
+  </select>
+</form>
 {% endblock %}
