@@ -27,8 +27,11 @@ Money Claims Prototype
       <h1 class="heading-large">
         Free mediation
       </h1>
-
-      <p class="">Many people resolve their dispute without a hearing by taking part in telephone mediation.</p>
+      {% if data.radio_select_group=="Some" or data['settle'] == 1  %}
+        <p class="">If Jan Clark doesn't accept your admission of £600 you can try and resolve this dispute without a hearing by taking part in telephone mediation.</p>
+      {% else %}
+            <p class="">Many people resolve their dispute without a hearing by taking part in telephone mediation.</p>
+        {% endif %}
 
         <p>A mediator will:</p>
         <ul class="list list-bullet">
@@ -46,16 +49,7 @@ Money Claims Prototype
 
 
 
-      {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}
-      <form
-      name="aspnetForm"
-      method="post"
-      id="aspnetForm"
-      autocomplete="off"
-      onsubmit="multiNavigation('radio-mediation-group', ['Yes', 'No'], ['../mediation', '../mediation']);return false;"
-      >
 
-      {% else %}
       <form
       name="aspnetForm"
       method="post"
@@ -63,7 +57,6 @@ Money Claims Prototype
       autocomplete="off"
       onsubmit="multiNavigation('radio-mediation-group', ['Yes', 'No'], ['../task-list', '../task-list']);return false;"
       >
-      {% endif %}
 
 
 
@@ -101,20 +94,11 @@ Money Claims Prototype
               <input type="hidden" name="mediation" value="complete">
 
 
-        {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}
-        <div class="form-group">
-          <input type="submit" class="button" value="Save changes"/>
-        </div>
-
-
-        <a href="{{ data.return_page if data.return_page | length > 0 else '../task-list' }}">Cancel</a>
-
-        {% else %}
         <div class="form-group">
           <input type="submit" class="button" value="Save and continue"/>
         </div>
 
-        {% endif %}
+
 
             </div>
           </form>
