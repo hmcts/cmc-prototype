@@ -141,7 +141,7 @@
               <tr id="their-details">
                 <td class="task">
                   <a href="task-list/owe-all{{formQuery}}">
-                    <span class="task-name"> When will you pay this amount?</span>
+                    <span class="task-name"> When will you pay?</span>
                   </a>
                 </td>
                 <td class="numeric" id="task-status" scope="col" id="col-status">
@@ -192,10 +192,11 @@
                   {% endif %}
                 </td>
               </tr>
+              {% if data.your_defence=="complete" %}
               <tr id="their-details">
                 <td class="task">
                   <a href="task-list/owe-all{{formQuery}}">
-                    <span class="task-name"> When will you pay this amount?</span>
+                    <span class="task-name"> When will you pay the £{{data['owe-amount']}}?</span>
                   </a>
                 </td>
                 <td class="numeric" id="task-status" scope="col" id="col-status">
@@ -204,6 +205,7 @@
                   {% endif %}
                 </td>
               </tr>
+                {% endif %}
                {% if data.show_settlement=="true"%}
               <tr id="their-details">
               <td class="task">
@@ -218,6 +220,8 @@
               </td>
             </tr>
              {% endif %}
+
+             {% if data.owe_some=="complete"%}
               <tr id="their-details">
                 <td class="task">
                   <a href="task-list/mediation{{formQuery}}">
@@ -230,6 +234,7 @@
                   {% endif %}
                 </td>
               </tr>
+             {% endif %} <!--end of mediation-->
 
               {% endif %}
             </tbody>

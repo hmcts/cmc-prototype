@@ -83,7 +83,7 @@
             <tr id="your-details">
               <td class="task">
                 <a href="task-list/payment-method{{formQuery}}">
-                  <span class="task-name">Do you accept their payment method?</span>
+                  <span class="task-name">Accept or reject the repayment plan</span>
                 </a>
               </td>
               <td class="numeric" id="task-status" scope="col" id="col-status">
@@ -96,7 +96,7 @@
             <tr id="their-details">
               <td class="task">
                 <a href="task-list/request-mediation{{formQuery}}">
-                  <span class="task-name">Do you want free mediation?</span>
+                  <span class="task-name">Free mediation?</span>
                 </a>
               </td>
               <td class="numeric" id="task-status" scope="col" id="col-status">
@@ -108,6 +108,64 @@
              {% else %}
              {% endif %}
 
+    {%if data['radio-indent-group'] == "reject_stop_claim" %}
+             <tr id="your-details">
+                <td class="task">
+                  <a href="task-list/counter-offer{{formQuery}}">
+                    <span class="task-name">Propose an alternative repayment plan</span>
+                  </a>
+                </td>
+                <td class="numeric" id="task-status" scope="col" id="col-status">
+                  {% if data.court_payment_method=="complete" %}
+                  {% include "includes/task_status_finished.html" %}
+                  {% endif %}
+                </td>
+              </tr>
+         {% endif %}
+
+
+        {%if data['radio-indent-group2'] != "reject_stop_claim" and data['payment_method'] == "complete" %}
+           <tr id="your-details">
+              <td class="task">
+                <a href="task-list/proceed{{formQuery}}">
+                  <span class="task-name">Choose how to proceed</span>
+                </a>
+              </td>
+              <td class="numeric" id="task-status" scope="col" id="col-status">
+                {% if data.proceed=="complete" %}
+                {% include "includes/task_status_finished.html" %}
+                {% endif %}
+              </td>
+            </tr>
+         {% endif %}
+
+         {% if data['radio-proceed'] == 'settlement' %}
+             <tr id="your-details">
+                <td class="task">
+                  <a href="task-list/{% if data['radio-indent-group'] == 'accept_stop_claim' %}settlement/sign{% else %}settlement{% endif %}{{formQuery}}">
+                    <span class="task-name">Sign a settlement agreement</span>
+                  </a>
+                </td>
+                <td class="numeric" id="task-status" scope="col" id="col-status">
+                  {% if data.settlement=="complete" %}
+                  {% include "includes/task_status_finished.html" %}
+                  {% endif %}
+                </td>
+              </tr>
+         {% elseif data['radio-proceed'] == 'judgment' %}
+             <tr id="your-details">
+                <td class="task">
+                  <a href="../../../applications-and-judgments/default-judgment{{formQuery}}">
+                    <span class="task-name">Request a County Court Judgment</span>
+                  </a>
+                </td>
+                <td class="numeric" id="task-status" scope="col" id="col-status">
+                  {% if data.judgment=="complete" %}
+                  {% include "includes/task_status_finished.html" %}
+                  {% endif %}
+                </td>
+              </tr>
+         {% endif %}
 
           </tbody>
         </table>

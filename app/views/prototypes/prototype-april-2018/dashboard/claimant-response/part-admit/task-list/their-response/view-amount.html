@@ -1,23 +1,75 @@
-{% extends "layout.html" %}
+{% extends "layout_task-list.html" %}
 {% block page_title %}
 Money Claims Prototype
 {% endblock %}
+{% block home_link %} ../task-list {% endblock %}
 {% block proposition_header %}
-{% set my_account="4" %}
-
+{% set my_account="1" %}
 {% include "includes/propositional_navigation.html" %}
 {% endblock %}
 {% block content %}
 <main id="content" role="main">
   {% include "includes/phase_banner_beta.html" %}
+  <a href="#" class="link-back">Back</a>
   <div class="grid-row">
     <div class="column-two-thirds">
-      <a href="#" class="link-back">Back</a>
-      <h1 class="heading-large">
-
-        Suggest instalments for the defendant
+      <form method="post" action="../../task-list" class="form">
+       <h1 class="heading-large">
+        How they want to pay
       </h1>
-      <p class="">Total claim amount is £1643.20.</p>
+
+        <h2 class="heading-medium">How they want to pay</h2>
+
+      <table class="instalment-table">
+        <tbody>
+          <tr>
+          </tr>
+          <tr class="">
+            <td class="">
+             Monthly instalment amount
+           </td>
+           <td class="">
+            £200
+          </td>
+          <td class="">
+          </td>
+        </tr>
+        <tr class="">
+          <td class="">
+             First payment date
+          </td>
+          <td >
+              1 {{ now |  date("add", 1, "month") | date( "MMMM YYYY" ) }}
+          </td>
+          <td>
+          </td>
+        </tr>
+        <tr>
+          <td class="">
+            Final payment date
+          </td>
+          <td class="">
+              1 {{ now |  date("add", 13, "month") | date( "MMMM YYYY" ) }}
+          </td>
+          <td class=" ">
+          </td>
+        </tr>
+         <tr>
+            <td class="">
+              Length of repayment plan
+            </td>
+            <td class="">
+              1 year
+            </td>
+            <td class=" ">
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <h2 class="heading-small">Why they can't pay the full amount now</h2>
+    <p>"I am heavily in debt at the moment and I'm not earning that much money. {% if data['payment'] == 'full' %}i can pay when i've cleared my debts.{% else %}£200 a month is all i can afford.{% endif %}"</p>
 
     <h2 class="heading-small">Their finances</h2>
 
@@ -25,7 +77,7 @@ Money Claims Prototype
     Their total total expenses are £1,258</p>
 
       <details class="form-group">
-        <summary>See their financial details</summary>
+        <summary>View full financial details</summary>
         <div class="panel">
           <table class="instalment-table">
             <tbody>
@@ -51,13 +103,13 @@ Money Claims Prototype
               </tr>
               <tr>
                 <td>
-                  How many are aged 16 to 19?
+                  16 to 19
                 </td>
                 <td >1</td>
               </tr>
               <tr>
                 <td>
-                How many aged 16 to 19 are in full-time education or training?
+                  Number of children aged 16 to 19 full-time education or training
                 </td>
                 <td >1</td>
               </tr>
@@ -105,23 +157,26 @@ Money Claims Prototype
               </tr>
               <tr>
                 <td class="no-border bold">
-                  Employment details
+                  Employment
                 </td>
                 <td class="no-border"></td>
               </tr>
               <tr>
                 <td class="no-border">
-                  Do they have a job?
+                  Are they currently working?
                 </td>
                 <td class="no-border">Yes</td>
               </tr>
               <tr>
                 <td class="">
-                  Type of job
+                  employment status
                 </td>
                 <td class="">Employed and Self-employed</td>
               </tr>
               <tr>
+                <td class="no-border bold">
+                  Who employs them?
+                </td>
                 <td class="no-border"></td>
               </tr>
               <tr>
@@ -144,7 +199,7 @@ Money Claims Prototype
               </tr>
               <tr>
                 <td class="no-border bold">
-                  Self-employment details
+                  What are they self-employed as?
                 </td>
                 <td class="no-border"></td>
               </tr>
@@ -180,7 +235,7 @@ Money Claims Prototype
               </tr>
               <tr>
                 <td class="no-border bold">
-                  Bank and savings accounts
+                  Bank and saving accounts
                 </td>
                 <td class="no-border"> </td>
               </tr>
@@ -216,7 +271,7 @@ Money Claims Prototype
               </tr>
               <tr>
                 <td class="no-border">
-                  Child benefit
+                  Child Benefit
                 </td>
                 <td class="no-border">£23 </td>
               </tr>
@@ -304,141 +359,23 @@ Money Claims Prototype
                 </td>
                 <td class="">£130 </td>
               </tr>
+              <tr>
+                <td class="no-border bold">
+                  Total income and expense
+                </td>
+                <td class="no-border"> </td>
+              </tr>
             </tbody>
           </table>
         </div>
       </details>
 
-      <form action="court-offer" method="get" class="form">
-
-
-
-        <div class="form-group">
-          <fieldset>
-            <legend class="visually-hidden">Regular payments of</legend>
-            <label class="form-label-bold" for="instalment-first-payment">
-               Regular payments of
-            </label>
-                    <p class="form-hint">For example, £10.00</p>
-
-              <input class="fee pound" maxlength="8" size="8" type="text" value=""
-              name="instalment-first-payment"
-              id="instalment-first-payment">
-            </fieldset>
-
-        </div>
-
-
-
-
-        <div class="heading-small">How often you want to receive the payments</div>
-        <div class="form-group">
-          <fieldset>
-            <legend class="visually-hidden">How often you want to receive the payments</legend>
-            <div class="multiple-choice">
-              <input id="radio-01" type="radio" name="radio-payment-frequency" value="Each week" {{ checked("radio-payment-frequency", "Each week") }}>
-              <label for="radio-01" data-target="info-01">Every week</label>
-            </div>
-            <div class="multiple-choice">
-              <input id="radio-02" type="radio" name="radio-payment-frequency" value="Every 2 weeks" {{ checked("radio-payment-frequency", "Every 2 weeks") }}>
-              <label for="radio-02" data-target="info-02">Every 2 weeks</label>
-            </div>
-            <div class="multiple-choice">
-              <input id="radio-03" type="radio" name="radio-payment-frequency" value="Every month" {{ checked("radio-payment-frequency", "Each month") }}>
-              <label for="radio-03" data-target="info-03">Every month</label>
-            </div>
-          </fieldset>
-        </div>
-
-
-        <div class="form-group">
-          <p class="heading-small">Length of repayment plan</p>
-          <p id="duration">-</p>
-        </div>
-
-
-          <div class="form-group">
-            <fieldset>
-              <legend class="visually-hidden">Date for first instalment</legend>
-              <p class="form-label-bold">Date for first instalment</p>
-              <div class="form-date">
-                <p class="form-hint">For example, {{ date | date('add', 1, 'month' ) | date('D M YYYY') }}</p>
-                <div class="form-group form-group-day">
-                  <label for="instalment-day">Day</label>
-                  <input class="form-control" id="instalment-day" type="number" pattern="[0-9]*" min="0"
-                  max="31">
-                </div>
-                <div class="form-group form-group-month">
-                  <label for="instalment-month">Month</label>
-                  <input class="form-control" id="instalment-month" type="number" pattern="[0-9]*"
-                  min="0" max="12">
-                </div>
-                <div class="form-group form-group-year">
-                  <label for="instalment-year">Year</label>
-                  <input class="form-control" id="instalment-year" type="number" pattern="[0-9]*" min="0"
-                  max="2024">
-                </div>
-              </div>
-            </fieldset>
-          </div>
-          <div class="form-group">
-            <input id="advert-option-next--button" type="submit" value="Save and continue" class="button">
-          </div>
-          </fieldset>
-        </div>
-      </form>
+    <input type="hidden" name="their_response" value="complete">
+    <div class="form-group">
+      <input type="submit" class="button" value="Continue"/>
     </div>
-  </div>
+  </form>
+</div>
+</div>
 </main>
-
-<script>
-  $(document).ready(function () {
-    $('#instalment-first-payment, input[name=radio-payment-frequency]').change( function() {
-
-      if ( $('#instalment-first-payment').val() && $("input[name=radio-payment-frequency]:checked").length ) {
-
-        var intAmount = 1500;
-        var strDuration = '';
-
-        intRepayment = $('#instalment-first-payment').val();
-
-        intInstalments = Math.ceil( intAmount / intRepayment);
-
-        if ($('#radio-01').prop("checked")) {
-          intDaysAway = 7;
-        } else if ($('#radio-02').prop("checked")) {
-          intDaysAway = 14;
-        } else if ($('#radio-03').prop("checked")) {
-          intDaysAway = 30;
-        }
-
-        intRepaymentDays = intDaysAway * intInstalments;
-        objDatePaid = moment().add(intRepaymentDays, 'days')
-        intYears = objDatePaid.diff( moment(), 'years' );
-
-        if (intYears > 0 ) {
-          strDuration = intYears + ' year';
-          if (intYears > 1 ) {
-            strDuration += 's';
-          }
-          strDuration += ' ';
-          objDatePaid.subtract(intYears, 'years');
-        }
-        intMonths = objDatePaid.diff( moment(), 'months' );
-
-        if (intMonths) {
-          strDuration =  strDuration + intMonths + ' month';
-          if (intMonths > 1 ) {
-            strDuration += 's';
-          }
-        }
-      $('#duration').text( strDuration );
-
-
-
-      }
-    })
-  });
-</script>
-
 {% endblock %}
