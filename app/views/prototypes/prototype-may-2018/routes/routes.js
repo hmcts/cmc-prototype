@@ -1,4 +1,4 @@
-var strPath = 'prototypes/prototype-april-2018/';
+var strPath = 'prototypes/prototype-may-2018/';
 
 module.exports = function(app){
 
