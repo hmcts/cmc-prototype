@@ -1,0 +1,74 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="2" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <a href="#" class="link-back">Back</a>
+      <h1 class="heading-large">
+            {% if data.radio_select_group=="Some"%}
+
+        How do you want to pay the £{{data['owe-amount']}}?
+            {% else %}
+        How do you want to pay?
+            {% endif %}
+
+
+      </h1>
+
+<form
+name="aspnetForm"
+method="post"
+onsubmit="multiNavigation('radio-pay-group', ['Immediately', 'Instalments', 'Set-date'], ['../task-list?do_you_owe_money=complete&show_settlement=false&', 'owe-all/statement/explanation?show_settlement=true&', 'owe-all/statement/explanation?show_settlement=true&']);return false;"
+id="aspnetForm"
+autocomplete="off">
+
+
+<p>If you choose not to pay immediately, the claimant can request a County Court Judgment (CCJ) against you.</p>
+
+
+
+
+<div class="form-group">
+  <fieldset>
+    <div class="multiple-choice" data-target="immediately">
+      <input id="radio-immediately" type="radio" name="radio-pay-group" value="Immediately">
+      <label for="radio-immediately">Immediately</label>
+    </div>
+    <div class="panel panel-border-narrow js-hidden" id="immediately">
+      <p>You must make sure they receive the money within 5 days. Any cheques or transfers must be clear in their account.</p>
+    </div>
+      <div class="multiple-choice" data-target="set-date">
+        <input id="radio-no" type="radio" name="radio-pay-group" value="Set-date">
+        <label for="radio-no">By a set date</label>
+     </div>
+    <div class="panel panel-border-narrow js-hidden" id="set-date">
+    <p>You'll need to give details of your finances to Jan Clark to explain why.</p>
+    </div>
+   <div class="multiple-choice" data-target="instalments">
+    <input id="radio-repayment" type="radio" name="radio-pay-group" value="Instalments">
+    <label for="radio-repayment" data-target="repayment-info">I'll suggest a repayment plan</label>
+  </div>
+  <div class="panel panel-border-narrow js-hidden" id="instalments">
+    <p>You'll need to give details of your finances to {% if data.counterclaim=="true" %}Mary Richards{%else%}Jan Clark{% endif %} to explain why.</p>
+  </div>
+</fieldset>
+</div>
+<input type="hidden" name="owe_some" value="complete">
+<div class="form-group">
+  <input type="submit" class="button" value="Save and continue"/>
+</div>
+</form>
+
+</div>
+</div>
+</main>
+
+{% endblock %}

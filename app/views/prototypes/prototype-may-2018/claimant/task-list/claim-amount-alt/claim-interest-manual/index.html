@@ -1,0 +1,69 @@
+{% extends "layout_task-list.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block home_link %} ../../task-list {% endblock %}
+{% block proposition_header %}
+{% set my_account="1" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <a href="#" class="link-back">Back</a>
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <form method="post" action="claim-interest-manual/claim-interest" class="form">
+        {{formData | safe}}
+        <h1 class="heading-large">
+          What is the total interest for your claim?
+        </h1>
+        <p>You need to calculate interest for the different time periods or items and let us know the total. We'll add it to your claim amount.</p>
+        <details>
+          <summary><span class="summary">Help calculating interest</span></summary>
+          <div class="panel panel-border-narrow">
+            <div class="govuk-govspeak direction-ltr rich-govspeak disable-youtube">
+              <p>For most types of debt the rate is usually 8%.</p>
+              <p>To calculate this, use the steps below.</p>
+              <ol class="list list-number">
+                <li>
+                  <p>Work out the yearly interest: take the amount you’re claiming and multiply it by 0.08 (which is 8%).</p>
+                </li>
+                <li>
+                  <p>Work out the daily interest: divide your yearly interest from step 1 by 365 (the number of days in a year).</p>
+                </li>
+                <li>
+                  <p>Work out the total amount of interest: multiply the daily interest from step 2 by the number of days the debt has been overdue.</p>
+                </li>
+              </ol>
+              <div class="example">
+                <p><strong>Example</strong></p>
+                <p>If you were owed £1,000:</p>
+                <ul>
+                  <li>the annual interest would be £80 (1000 x 0.08 = 80)</li>
+                  <li>you’d divide £80 by 365 to get the daily interest: about 22p a day (80 / 365 = 0.22)</li>
+                  <li>after 50 days this would be £11 (50 x 0.22 = 11)</li>
+                </ul>
+              </div>
+            </div>
+
+          </div>
+        </details>
+        <br>
+        <fieldset>
+         <label class="form-label" for="rate">Total interest amount</label>
+         <input class="form-control form-control-1-4 fee pound " name="interest-amount-rate" type="text" id="interest-amount-rate" value="{{data['interest-amount-rate']}}">
+       </fieldset>
+
+                <fieldset>
+                  <label class="form-label" for="rate">Show how you calculated the amount </label>
+                  <textarea class="form-control form-control-3-4" id="interest-amount-rate-why" rows="3" name="interest-amount-rate-why" type="text" value="{{data['interest-amount-rate-why']}}">{{data['interest-amount-rate-why']}}</textarea>
+                </fieldset>
+                <div class="form-group">
+                  <input type="submit" class="button" value="Save and continue"/>
+                </div>
+              </form>
+            </div>
+          </div>
+        </main>
+        {% endblock %}
