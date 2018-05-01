@@ -1,0 +1,101 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="2" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <a href="#" class="link-back">Back</a>
+      <h1 class="heading-large">
+        What's your employment status.
+      </h1>
+      <form action="bank-account" method="post" class="form">
+        <p> You can select more than one option.</p>
+        <div class="form-group">
+          <div class="multiple-choice" data-target="employed">
+            <input id="radio-employed" type="checkbox" name="radio-employment-group" value="Employed">
+            <label for="radio-employed" data-target="repayment-info">Employed</label>
+          </div>
+          <div class="panel panel-border-narrow js-hidden" id="employed">
+            <p >What is your job?</p>
+            <div class="form-group">
+              <label class="form-label" for="input-text-a">
+                Job title
+              </label>
+              <input class="form-control " id="input-text-a" type="text">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="input-text-a">
+                Employer name
+              </label>
+              <input class="form-control " id="input-text-a" type="text">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="input-text-a">
+                List any other paid jobs (optional)
+              </label>
+              <textarea class="form-control"></textarea>
+            </div>
+          </div>
+          <div class="multiple-choice" data-target="self-employed">
+            <input id="radio-self-employed" type="checkbox" name="radio-employment-group" value="self-employed">
+            <label for="radio-self-employed" data-target="no-info">Self-employed</label>
+          </div>
+          <div class="panel panel-border-narrow js-hidden" id="self-employed">
+            <p >What are you self-employed as?</p>
+            <div class="form-group">
+              <label class="form-label" for="input-text-a">
+                Job title
+              </label>
+              <input class="form-control " id="input-text-a" type="text">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="input-text-a">
+                Annual turnover
+              </label>
+              <input class="form-control " id="input-text-a" type="text">
+            </div>
+            <h2 class="heading-medium">Are you behind on tax payments?</h2>
+            <p>For example National Insurance contributions, Income Tax or VAT.</p>
+            <div class="form-group">
+              <fieldset>
+                <div class="multiple-choice" data-target="yes">
+                  <input id="radio-arrears" type="radio" name="radio-employment-group" value="Yes">
+                  <label for="radio-arrears" data-target="repayment-info">Yes</label>
+                </div>
+                <div class="panel panel-border-narrow js-hidden" id="yes">
+                  <div class="form-group">
+                    <label class="form-label" for="input-text-a">
+                      Amount you owe
+                    </label>
+                    <input class="form-control fee pound form-control-1-4 " id="input-text-a" type="text">
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="input-text-a">
+                      Reason
+                    </label>
+                    <textarea class="form-control form-control-2-3"  ></textarea>
+                  </div>
+                </div>
+                <div class="multiple-choice">
+                  <input id="radio-arrears-no" type="radio" name="radio-employment-group" value="No">
+                  <label for="radio-arrears-no" data-target="no-info">No</label>
+                </div>
+              </fieldset>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <input type="submit" class="button" value="Save and continue"/>
+        </div>
+      </form>
+    </div>
+  </div>
+</main>
+{% endblock %}
