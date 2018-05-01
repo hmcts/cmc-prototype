@@ -80,7 +80,7 @@ Money Claims Prototype
 		<p><a class="button" href='#'>Finished</a></p>
 		<!-- amount too much - pay instalments  -->
 		{% elseif data.radio_select_group2=="Some" and data['radio-pay-group']=="Instalments" or data['confirmation']== 6 %}
-		<p>You believe you owe £1,000. We've emailed Jan Clark your offer to pay this amount by instalments.</p>
+		<p>You believe you owe {% if data['owe-amount'] =='' %}£300{% else %}£{{data['owe-amount']}}{% endif %}. We've emailed Jan Clark your offer to pay this amount by instalments.</p>
 		<p>Your explanation of why you believe you don't owe the amount claimed has been sent to Jan Clark.</p>
 		<h2 class="heading-medium">What happens next</h2>
 		<p>Jan Clark needs to respond to your offer on or before 4pm, <span class="dates"></span>.</p>
@@ -96,7 +96,7 @@ Money Claims Prototype
 		<p><a class="button" href='#'>Finished</a></p>
 		<!-- amount too much - pay set date + mediation -->
 		{% elseif data.radio_select_group2=="Some" and data['radio-pay-group']=="Set-date" or data['confirmation']== 7 %}
-		<p>You believe you owe £1,000. We've emailed Jan Clark your offer to pay this amount by <span class="dates"></span>.</p>
+		<p>You believe you owe {% if data['owe-amount'] =='' %}£300{% else %}£{{data['owe-amount']}}{% endif %}. We've emailed Jan Clark your offer to pay this amount by <span class="dates"></span>.</p>
 		<p>Your explanation of why you believe you don't owe the amount claimed has been sent to Jan Clark.</p>
 		<p>View the <a href='../dashboard/defendant?defendant=7'>claim against you and your response</a>.</p>
 		<h2 class="heading-medium">What happens next</h2>
@@ -113,7 +113,7 @@ Money Claims Prototype
 		<p><a class="button" href='#'>Finished</a></p>
 		<!-- paid what i owe -->
 		{% elseif data.radio_select_group2=="Paid-some" or data['confirmation']== 8 %}
-		<p>You state that you paid £1500. Your explanation of why you don't owe any more money has been sent to Jan Clark. </p>
+		<p>You state that you paid {% if data['owe-amount'] =='' %}£300{% else %}£{{data['owe-amount']}}{% endif %}. Your explanation of why you don't owe any more money has been sent to Jan Clark. </p>
 		<p>View the <a href='../dashboard/defendant?defendant=7'>claim against you and your response</a>.</p>
 		<h2 class="heading-medium">What happens next</h2>
 		<p>Jan Clark needs to respond to your offer on or before 4pm, <span class="dates"></span>.  If they reject it then the case will be reviewed and might go to a hearing.</p>
