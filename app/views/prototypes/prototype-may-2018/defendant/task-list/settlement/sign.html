@@ -47,8 +47,15 @@ Money Claims Prototype
                 31 March 2018{% endif %}.
 
 
-              {% elseif data['radio-pay-group']=="Set-date" %}
-              I will pay the full amount, no later than
+              {% elseif data['radio-pay-group']=="Set-date"  or data['settle'] == 1%}
+
+
+               {% if data.radio_select_group=="Some" or data['settle'] == 1   %}
+                  I will pay the {% if data['owe-amount'] =='' %}£300{% else %}£{{data['owe-amount']}}{% endif %}, no later than
+                  {% else %}
+                  I will pay the full amount, no later than
+                {% endif %}
+
                 {% if data['set-day']!="" %}
                 {{ ( data['set-month'] + ' ' + data['set-day'] + ' ' + data['set-year']) | date('D MMMM YYYY') }}
                 {% else %}
@@ -85,8 +92,14 @@ Money Claims Prototype
       <div>
         <h3 class="heading-medium"></h3>
 
-        <p>This agreement settles the claim made by Jan Clark against Mary Richards. This includes all money owed in the claim, for example court fees, expenses or interest.</p>
+       {% if data.radio_select_group=="Some" or data['settle'] == 1   %}
+               <p>This agreement settles the claim made by Jan Clark against Mary Richards. Something about the admission???.</p>
+
+
+        {%else%}
         <p>This agreement puts the claim on hold. Neither party can make any further claims relating to this case, other than to enforce it.</p>
+        {%endif%}
+
         <p>Either party can view and download this agreement from their money claims account. Both parties should keep a copy of this agreement.</p>
 
 
