@@ -1,4 +1,9 @@
-<style>
+<!DOCTYPE html>
+<!--[if lt IE 9]><html class="lte-ie8" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--><html lang="en"><!--<![endif]-->
+  <head>
+    <meta charset="utf-8" />
+    <style>
 #content {
   margin-top:3em
 }
@@ -143,6 +148,7 @@ h1 {
   text-align:right
 }
 </style>
+</head>
 <main id="content"  role="main">
   <header>
 
@@ -236,7 +242,7 @@ h1 {
             Telephone:
           </td>
           <td>
-           {% if  data['check'] =='1' or data['check'] =='9' or data['check'] =='8' %}07824999612{% else %}{{data['day']}} {{data['month']}} {{data['defendant-phone']}}{% endif %}
+           {% if data['day'] %}{{ data['day'] }} {{data['month']}} {{data['defendant-phone']}}{% else %}07824999612{% endif %}
          </td>
        </tr>
            <tr>
@@ -268,14 +274,17 @@ h1 {
           Defendant's response:
         </td>
         <td class="">
-          {% if data['check']== 8 or data.radio_select_group2=="amount_claimed" %}
+          {% if data['check'] == 2 or data['check'] == 3 or data['check'] == 4 %}
+          I admit all of the claim
+          {% elseif data['check']== 8 or data.radio_select_group2=="amount_claimed" %}
           I have paid what I believe I owe
-          {% endif %}
-          {% if data['check'] =='1' or data['check']== 9 or data.radio_select_group2=="defend_now" %}
+          {% elseif data['check'] =='1' or data['check']== 9 or data.radio_select_group2=="defend_now" %}
           I dispute all of the claim
           {% endif %}
         </td>
       </tr>
+
+
       {% if  data['check'] =='1' or data.radio_select_group=="Some" or data['check']== 4 or data['check']== 5 or data['check']== 6 or data['check']== 7 or data['check']== 9 or data['check']== 8 or data.radio_select_group2=="amount_claimed" or data.radio_select_group=="Paid-some" or data.radio_select_group2=="defend_now"%}
       {% if data.radio_select_group2=="amount_claimed" or data['check']== 8 %}
       <tr class="">
@@ -295,7 +304,9 @@ h1 {
     </td>
   </tr>
   {% endif %} <!-- end of partial -->
-  {% if data['check'] =='1' or data['radio_select_group2']=="defend_now" or data['check']== 9 %} <!-- start of defend -->
+
+  <!-- start of defend -->
+  {% if data['check'] =='1' or data['radio_select_group2']=="defend_now" or data['check']== 9 %}
   <tr>
     <td class="no-border">
       Why they dispute the claim:
@@ -313,8 +324,10 @@ h1 {
     </td>
   </tr>
   <tr>
-    {% endif %}  <!-- start of defendnow-->
-    {% if data['check'] =='1' or data['radio_select_group2']=="defend_now" or data.radio_select_group=="Some" or data.amount_paid=="less" or data['check']== 4 or data['check']== 5 or data['check']== 6 or data['check']== 7 or data['check']== 9%} <!-- start of time-line and evidence -->
+    {% endif %}
+
+    <!-- start of defendnow-->
+    {% if data['check'] =='1' or data['check']== 9%} <!-- start of time-line and evidence -->
     <tr>
       <td class="no-border">
         Defendant's timeline of what happened:
@@ -397,10 +410,98 @@ h1 {
    {% if data['check'] =='1' or data['check'] =='9' %}I never received any of these emails. Also the photos arent a fair refection of my work.{% else %} {{data['defence-disagree-evidence']}}{% endif %}
  </td>
 </tr>
-{% endif %} <!-- end of time-line and evidence -->
+{% endif %}
+<!-- end of time-line and evidence -->
+
+
+
+
 </tbody>
 </table>
 {% endif %}
+
+
+{% if data['check'] == 2 or data['check'] == 3 or data['check'] == 4 %}
+
+   <table>
+    <thead>
+      <tr>
+        <th colspan="2">
+          <h2 class="heading-medium" id="money-owed">
+            3. When the defendant will pay
+          </h2>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          When will they pay
+        </td>
+        <td>
+          {% if data['check'] == 2%}
+          The full amount, no later than {{ now | date( 'add', 5, 'days') | date }}
+          {% elseif data['check']== 3 %}
+          The full amount, no later than
+            {% if data['set-day'] %}
+            {{ ( data['set-month'] + ' ' + data['set-day'] + ' ' + data['set-year']) | date('D MMMM YYYY') }}
+            {% else %}
+            {{ now | date( 'add', 5, 'months') | date }}
+            {% endif %}
+          {% elseif data['check']== 4 %}
+          By instalments
+          {% endif %}
+        </td>
+      </tr>
+
+
+      {% if data['check']== 4 %}
+      <tr>
+        <td>
+          Regular payments of
+        </td>
+        <td>
+          {{ data['instalment-first-payment'] or '£200' }}
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Frequency of payments
+        </td>
+        <td>
+          {{ data['radio-payment-frequency'] or 'Monthly' }}
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Make the first payment on
+        </td>
+        <td >
+          {% if data['instalment-day'] %}
+          {{ ( data['instalment-month'] + ' ' + data['instalment-day'] + ' ' + data['instalment-year']) | date('D MMMM YYYY') }}
+          {% else %}
+          1 {{ now | date( 'add', 1, 'months') | date('MMM YYYY') }}
+          {% endif %}
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Explain why you can't pay the full amount now
+        </td>
+        <td>
+          I am heavily in debt at the moment and I'm not earning that much money. £200 a month is all i can afford.
+        </td>
+      </tr>
+
+      {% endif %}
+
+    </tbody>
+  </table>
+
+{% endif %}
+
+
+
 <table class="footer">
   <tbody>
     <tr>
@@ -412,24 +513,414 @@ h1 {
           For further details of the courts www.gov.uk/find-court-tribunal
         </td>
         <td >
-          &copy; Crown copyright Page 1 of 2
+          &copy; Crown copyright Page 1 of {% if data['check'] == 2 %}1{% elseif data['check'] == 4 %}3{% else %}2{% endif %}
         </td>
       </tr>
     </tbody>
   </table>
+
+
+{% if data['check'] == 3 or data['check'] == 4 %}
   <div class="page-break">&nbsp;</div>
   <p class="page-title"> <span>Claim number: 000LR095</span></p>
-  {% if   data['check'] =='1' or data['check']== 8 or data['check']== 9 %}
-  {% if   data['check'] =='8'%}
-  <table style="padding-bottom:900px">
+
+
+
+ <table>
+  <thead>
+    <tr>
+      <th colspan="2">
+        <h2 class="heading-medium" id="money-owed">
+          4. The defendant's financial details
+        </h2>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td>
+          Where are you living?
+        </td>
+        <td >
+          Home you own yourself (including if you have a mortgage)
+        </td>
+      </tr>
+      <tr>
+        <td class="no-border">
+          Children
+        </td>
+        <td class="no-border"></td>
+      </tr>
+      <tr>
+        <td class="no-border">
+          Do any children live with you?
+        </td>
+        <td class="no-border">Yes</td>
+      </tr>
+      <tr>
+        <td class="no-border">
+          16 to 19
+        </td>
+        <td class="no-border" >1</td>
+      </tr>
+      <tr>
+        <td>
+          Number of children aged 16 to 19 full-time education or training
+        </td>
+        <td >1</td>
+      </tr>
+      <tr>
+        <td class="no-border">
+          Maintenance
+        </td>
+        <td class="no-border"></td>
+      </tr>
+      <tr>
+        <td class="no-border">
+          Do you or your partner pay maintenance for any children?
+        </td>
+        <td class="no-border">Yes</td>
+      </tr>
+      <tr>
+        <td>
+          Number of children
+        </td>
+        <td >2</td>
+      </tr>
+      <tr>
+        <td class="no-border">
+          Financial support
+        </td>
+        <td class="no-border"></td>
+      </tr>
+      <tr>
+        <td class="no-border">
+          Do you support anyone else financially?
+        </td>
+        <td class="no-border">Yes</td>
+      </tr>
+      <tr>
+        <td class="no-border">
+          Number of people
+        </td>
+        <td class="no-border">1</td>
+      </tr>
+      <tr>
+        <td class="">
+          Give details
+        </td>
+        <td class="">Reason goes here</td>
+        
+      </tr>
+      <tr>
+        <td class="no-border">
+          Employment details
+        </td>
+        <td class="no-border"></td>
+      </tr>
+      <tr>
+        <td class="no-border">
+          Are you currently working?
+        </td>
+        <td class="no-border">Yes</td>
+      </tr>
+      <tr>
+        <td class="">
+          Type of job
+        </td>
+        <td class="">Employed and self-employed</td>
+        
+      </tr>
+      <tr>
+        <td class="no-border">
+          Who employs you?
+        </td>
+        <td class="no-border"></td>
+      </tr>
+      <tr>
+        <td class="no-border">
+          Employer name
+        </td>
+        <td class="no-border">Smith Inc</td>
+      </tr>
+      <tr>
+        <td>
+          Job title
+        </td>
+        <td>HR manager</td>
+      </tr>
+      <tr>
+        <td class="no-border">
+          Self-employment details
+        </td>
+        <td class="no-border"></td>
+      </tr>
+      <tr>
+        <td class="no-border">
+          Job title
+        </td>
+        <td class="no-border">Accountant</td>
+      </tr>
+      <tr>
+        <td class="no-border">
+          Annual turnover
+        </td>
+        <td class="no-border">£200,000.00</td>
+      </tr>
+      <tr>
+        <td class="no-border">
+          Are you behind on tax payments?
+        </td>
+        <td class="no-border"> Yes</td>
+      </tr>
+      <tr>
+        <td class="no-border">
+          Amount you owe?
+        </td>
+        <td class="no-border"> £30</td>
+      </tr>
+      <tr>
+        <td class="">
+          Reason
+        </td>
+        <td class=""> Reason goes here</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+<table class="footer">
+  <tbody>
+    <tr>
+      <tr>
+        <td>
+          OCON9B
+        </td>
+        <td>
+          For further details of the courts www.gov.uk/find-court-tribunal
+        </td>
+        <td >
+          &copy; Crown copyright Page 1 of {% if data['check'] == 2 %}1{% elseif data['check'] == 4 %}3{% else %}2{% endif %}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+
+
+  <div class="page-break">&nbsp;</div>
+  <p class="page-title"> <span>Claim number: 000LR095</span></p>
+
+ <table>
+  <tbody>
+      <tr>
+        <td class="no-border">
+          Bank and savings accounts
+        </td>
+        <td class="no-border"> </td>
+      </tr>
+      <tr>
+        <td class="no-border">
+         1. Type of account
+        </td>
+        <td class="no-border">Savings </td>
+      </tr>
+      <tr>
+        <td class="no-border">
+          Balance
+        </td>
+        <td class="no-border">£100 </td>
+      </tr>
+      <tr>
+        <td class="no-border">
+          Joint account
+        </td>
+        <td class="no-border">Yes </td>
+        <td class="change-answer no-border ">
+        </td>
+      </tr>
+      <tr>
+        <td class="no-border">
+         2. Type of account
+        </td>
+        <td class="no-border">Bank </td>
+      </tr>
+      <tr>
+        <td class="no-border">
+          Balance
+        </td>
+        <td class="no-border">£1000 </td>
+      </tr>
+      <tr>
+        <td class="">
+          Joint account
+        </td>
+        <td class="">Yes </td>
+        
+      </tr>
+      <tr>
+        <td class="no-border">
+          Monthly income
+        </td>
+        <td class="no-border"> </td>
+      </tr>
+      <tr>
+        <td class="no-border">
+          Take home pay
+        </td>
+        <td class="no-border">£12 </td>
+      </tr>
+      <tr>
+        <td class="no-border">
+          Child Benefit
+        </td>
+        <td class="no-border">£23 </td>
+      </tr>
+      <tr>
+        <td class="">
+          Other income
+        </td>
+        <td class="">£43 </td>
+        
+      </tr>
+      <tr>
+        <td class="no-border">
+          Monthly expenses
+        </td>
+        <td class="no-border"> </td>
+      </tr>
+      <tr>
+        <td class="no-border">
+          Mortgage
+        </td>
+        <td class="no-border">£3443 </td>
+      </tr>
+      <tr>
+        <td class="no-border">
+          Council Tax
+        </td>
+        <td class="no-border">£120 </td>
+      </tr>
+      <tr>
+        <td class="">
+          Gas
+        </td>
+        <td class="">£13 </td>
+        
+      </tr>
+      <tr>
+        <td class="no-border">
+          Debts
+        </td>
+        <td class="no-border"> </td>
+      </tr>
+      <tr>
+        <td class="no-border">
+          Do you have any debts?
+        </td>
+        <td class="no-border"> Yes</td>
+      </tr>
+      <tr>
+        <td class="no-border">
+          1. Debt
+        </td>
+        <td class="no-border">Paying back loan to parent </td>
+      </tr>
+      <tr>
+        <td class="no-border">
+          Total owed
+        </td>
+        <td class="no-border">£120 </td>
+      </tr>
+      <tr>
+        <td class="no-border">
+          Monthly payments
+        </td>
+        <td class="no-border">£13 </td>
+      </tr>
+        <tr>
+        <td class="no-border">
+          2. Debt
+        </td>
+        <td class="no-border">Another debt </td>
+      </tr>
+      <tr>
+        <td class="no-border">
+          Total owed
+        </td>
+        <td class="no-border">£1220 </td>
+      </tr>
+      <tr>
+        <td class="">
+          Monthly payments
+        </td>
+        <td class="">£130 </td>
+        
+      </tr>
+
+      <tr>
+        <td class="no-border">
+          Court orders
+        </td>
+        <td class="no-border"> </td>
+      </tr>
+      <tr>
+        <td class="no-border">
+          Has a court ordered you to pay anyone else?
+        </td>
+        <td class="no-border">Yes </td>
+      </tr>
+      <tr>
+        <td class="no-border">
+          Details about court orders
+        </td>
+        <td class="no-border">Details go here </td>
+      </tr>
+      <tr>
+        <td class="">
+          Amount you owe
+        </td>
+        <td class="">£130 </td>
+        
+      </tr>
+    </tbody>
+</table>
+
+
+  <table class="footer">
+    <tbody>
+      <tr>
+        <tr>
+          <td>
+            OCON9B
+          </td>
+          <td>
+            For further details of the courts www.gov.uk/find-court-tribunal
+          </td>
+          <td >
+            &copy; Crown copyright Page 2 of 3
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+
+{% endif %}
+
+<!-- END OF PAGE 1 -->
+  <div class="page-break">&nbsp;</div>
+  <p class="page-title"> <span>Claim number: 000LR095</span></p>
+  {% if data['check'] == '1' or data['check'] == '2' or data['check'] == '3' or data['check'] == '4' or data['check']== 8 or data['check']== 9 %}
+    {% if data['check'] == '8' or data['check'] == '2' or data['check'] == '3' or data['check'] == '4' %}
+    <table style="padding-bottom:900px">
     {% else %}
     <table >
-      {% endif %}
+    {% endif %}
       <thead>
         <tr>
           <th colspan="2">
             <h2 class="heading-medium">
-              3. Statement of truth
+              {% if data['check'] == '2'%}4{% elseif data['check'] == 3 or data['check'] == '4' %}5{% else %}3{% endif %}. Statement of truth
             </h2>
           </th>
         </tr>
@@ -439,11 +930,11 @@ h1 {
           <td class="no-border">
           </td>
           <td class="no-border">
-            I believe that the facts stated in this defence are true.
+            I believe that the facts stated in this {% if data['check'] == '2' or data['check'] == '3' or data['check'] == '4' or data['check'] == '5' %}admission{% else %}defence{% endif %} are true.
           </td>
         </tr>
       </tr>
-      {% if   data['check']== 1  %}
+      {% if data['check']== 1  %}
       <tr>
         <td class="no-border">
         </td>
@@ -542,6 +1033,8 @@ h1 {
         </tr>
       </tbody>
     </table>
+
+
   </main>
   <form method="post"  action="#" class="form" style="position: absolute;">
     <select id="check2" name="check2" onchange="window.location.href='?check='+this.value">
@@ -552,7 +1045,7 @@ h1 {
       <option  value="2" {% if data['check'] == 2 %}selected{% endif %}>Response - Admission - Full - Pay immediately</option>
       <option  value="3" {% if data['check'] == 3 %}selected{% endif %}>Response - Admission - Full - Pay later</option>
       <option  value="4" {% if data['check'] == 4 %}selected{% endif %}>Response - Admission - Full - Pay by instalments</option>
-      <option  value="5" {% if data['check'] == 5 %}selected{% endif %}>Response - Admission - Partial</option>
+      <option  value="5" {% if data['check'] == 5 %}selected{% endif %}>Response - Admission - Partial (TODO)</option>
     </select>
   </form>
   <script src="{{ asset_path }}/javascripts/jquery-1.11.3.js"></script>
