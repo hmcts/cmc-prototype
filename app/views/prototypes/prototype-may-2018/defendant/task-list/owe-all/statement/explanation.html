@@ -18,7 +18,7 @@ Money Claims Prototype
 
           <form method="post" action="../statement/{% if data['radio-pay-group'] == 'Instalments' %}repayment-plan{% else %}../pay-by-set-date{% endif %}" class="form">
             <h1 class="heading-large">
-              You need to explain why you can't pay immediately
+              Explain why you can't pay immediately
             </h1>
             {% if data['upload'] == '2'%}
             <div class="panel panel-border-wide">
@@ -31,19 +31,17 @@ Money Claims Prototype
               <p>If they reject your plan, the court will use the details you gave to create a new plan.</p>
             </div>
             {% else %}
-            <p>You need to provide {% if data.counterclaim=="true" %}Mary Richards{%else%}Jan Clark{% endif %} with details of:
-              <ul class="list list-bullet">
-                <li>monthly bills and expenses</li>
-                <li>monthly income and benefits</li>
-                <li>bank balances and savings</li>
-                <li>debts or court orders</li>
-              </ul>
+            <p>You need to give {% if data.counterclaim=="true" %}Mary Richards{%else%}Jan Clark{% endif %} details of your finances.</p>
+
               {% if data['radio-pay-group'] == 'Instalments' %}
-              <p>They will review these and can reject your repayment plan if they feel you can pay more or sooner.</p>
+              <p>We'll ask you for the details then we'll send them to {% if data.counterclaim=="true" %}Mary Richards{%else%}Jan Clark{% endif %} to review.
+
+              <p>They can reject your plan if they believe you can pay more or sooner.</p>
               {% else %}
-              <p>{% if data.counterclaim=="true" %}Mary Richards{%else%}Jan Clark{% endif %} will review these and can reject your repayment plan if they feel you can pay sooner.</p>
+              <p>We'll ask you for the details then we'll send them to {% if data.counterclaim=="true" %}Mary Richards{%else%}Jan Clark{% endif %} to review.
+                <p>They can reject your plan if they believe you can pay more.</p>
               {% endif %}
-              <p>If they reject your repayment plan, the court will use these details to calculate a repayment plan.</p>
+              <p>If they reject your plan, the court will make a new plan using your financial details.</p>
 
               {% endif %}
               <input type="hidden" name="your_defence_options" value="complete">
