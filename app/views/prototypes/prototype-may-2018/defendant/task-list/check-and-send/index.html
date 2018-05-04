@@ -138,7 +138,7 @@ Check your answers
             <td class="">
               {% if data.radio_select_group=="all" or data['check']== 1 or data['check']== 2 or data['check']== 3%}
               I admit all of the claim
-              {% elseif data.radio_select_group=="Some" or data.radio_select_group=="some_cc" or data['check']== 4 or data['check']== 5 or data['check']== 6 or data['check']== 7 or data['check']== 14%}
+              {% elseif data.radio_select_group=="Some" or data.radio_select_group=="Some_paid" or  data.radio_select_group=="some_cc" or data['check']== 4 or data['check']== 5 or data['check']== 6 or data['check']== 7 or data['check']== 14%}
               I admit part of the claim
               {% elseif data.radio_select_group=="reject" or data.radio_select_group2=="paid" or data.radio_select_group2=="amount_claimed" or data['check']== 8 or data['check']== 9 or data['check']== 12%}
               I reject all of the claim
@@ -152,6 +152,8 @@ Check your answers
               </a>
             </td>
           </tr>
+
+
           {% if data.radio_select_group=="reject" or data.radio_select_group2=="paid" or data.radio_select_group2=="amount_claimed" or data['check']== 8 or data['check']== 9 or data['check']== 12%}
           <tr>
             <td>Why do you reject all the claim?</td>
@@ -187,7 +189,7 @@ Check your answers
         {% endif %}
       </tbody>
     </table>
-    {% if  data.radio_select_group=="Some" or data['check']== 4 or data['check']== 5 or data['check']== 6 or data['check']== 7 or data['check']== 9 or data['check']== 12 or data['check']== 8 or data.radio_select_group2=="amount_claimed" or data.radio_select_group=="Paid-some" or data.radio_select_group2=="defend_now"%}
+    {% if  data.radio_select_group=="Some" or data['check']== 4 or data['check']== 5 or data['check']== 6 or data['check']== 7 or data['check']== 9 or data['check']== 12 or data['check']== 8 or data.radio_select_group2=="amount_claimed" or data.radio_select_group=="Some_paid" or data.radio_select_group2=="defend_now"%}
     <table class="check-your-answers">
       <thead>
         <tr>
@@ -280,7 +282,52 @@ Check your answers
         </td>
       </tr>
       {% endif %}  <!-- start of part admit-->
-      {% if data['radio_select_group2']=="defend_now" or data.radio_select_group=="Some" or data.amount_paid=="less" or data['check']== 4 or data['check']== 5 or data['check']== 6 or data['check']== 7 or data['check']== 9 or data['check']== 12%} <!-- start of time-line and evidence -->
+
+      {% if data['radio_select_group']=="Some_paid" %} <!-- start of defend -->
+      <tr >
+        <td class="no-border">
+          How much money have you paid?
+        </td>
+        <td class="no-border">
+
+          £300.00
+
+        </td>
+        <td class="change-answer no-border">
+          <a href="#">
+            Change <span class="visuallyhidden">Name</span>
+          </a>
+        </td>
+      </tr>
+ <tr>
+        <td class="no-border">
+         How did you pay the amount claimed?
+       </td>
+       <td class="no-border">
+        {% if data['owe-reason']!="" %}
+        {{data['owe-reason']}}
+        {% else %}
+        I've already paid a large amount
+        {% endif %} <!-- end of partial -->
+      </td>
+      <td class="change-answer no-border ">
+      </td>
+    </tr>
+      <tr>
+        <td>
+          Why are you disputing the full amount?
+        </td>
+        <td>
+          Because i don't owe them that much money.
+        </td>
+        <td class="change-answer">
+        </td>
+      </tr>
+      {% endif %}  <!-- start of part admit-->
+
+
+
+      {% if data['radio_select_group2']=="defend_now" or data.radio_select_group=="Some" or  data.radio_select_group=="Some_paid" or data['check']== 4 or data['check']== 5 or data['check']== 6 or data['check']== 7 or data['check']== 9 or data['check']== 12%} <!-- start of time-line and evidence -->
       <tr>
         <td class="no-border">
           Your timeline of what happened (optional)
@@ -1064,7 +1111,7 @@ Check your answers
   </tbody>
 </table>
 {% endif %} <!--end of settlement agreement-->
-{% if  data.radio_select_group=="Some" or data.amount_paid=="less" or  data.radio_select_group2=="defend_now" or data['check']== 4 or data['check']== 5 or data['check']== 6 or data['check']== 7 or data['check']== 9 or data['check']== 12%}
+{% if  data.radio_select_group=="Some" or data.radio_select_group=="Some_paid" or data.amount_paid=="less" or  data.radio_select_group2=="defend_now" or data['check']== 4 or data['check']== 5 or data['check']== 6 or data['check']== 7 or data['check']== 9 or data['check']== 12%}
 <table class="check-your-answers">
   <thead>
     <tr>
@@ -1182,7 +1229,7 @@ Check your answers
   {% elseif data.radio_select_group=="some_cc" or data['check']== 15 %}
   <!-- P/A - Amount is too much & set date - mediation chosen -->
   <input type="hidden" name="confirmation" value="13">
-  {% elseif data.amount_paid=="less" or data['check']== 7 %}
+  {% elseif data.radio_select_group=="Some_paid" or data['check']== 7 %}
   <!--  P/A - Paid what I owe & defence -->
   <input type="hidden" name="confirmation" value="8">
   {% elseif data.amount_paid=="less"  or data['check']== 11 %}

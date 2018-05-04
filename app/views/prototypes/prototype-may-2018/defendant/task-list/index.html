@@ -127,7 +127,7 @@
                   {% endif %}
                 </td>
               </tr>
-            {% if data.radio_select_group2=="less_amount_claimed" %}
+            {% if data.radio_select_group=="Some_paid" %}
               <tr id="their-details">
                 <td class="task">
                   <a href="task-list/your-defence/paid-less{{formQuery}}">
@@ -143,6 +143,19 @@
 
                 {% endif %}
 
+         {% elseif data.radio_select_group=="Some_paid" and data.do_you_owe_money=="complete" and data.radio_select_group2!="defend_now" %}
+         <tr id="their-details">
+                <td class="task">
+                  <a href="task-list/your-defence/paid-less{{formQuery}}">
+                    <span class="task-name"> How much have you paid?</span>
+                  </a>
+                </td>
+                <td class="numeric" id="task-status" scope="col" id="col-status">
+                  {% if data.your_defence=="complete" %}
+                  {% include "includes/task_status_finished.html" %}
+                  {% endif %}
+                </td>
+              </tr>
          {% elseif data.radio_select_group=="Some" and data.do_you_owe_money=="complete" and data.radio_select_group2!="defend_now" %}
               <tr id="their-details">
                 <td class="task">
