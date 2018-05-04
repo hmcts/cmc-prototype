@@ -62,10 +62,10 @@ Money Claims Prototype
 		<p>If they do not respond within 6 months, the case will be put on hold.</p>
 		{% include "includes/survey.html" %}
 		<p><a class="button" href='#'>Finished</a></p>
-		<!-- I admit the claim - pay immediately -->
+		<!-- I part admit the claim - pay immediately -->
 		{% elseif data.radio_select_group2=="Some" and data['radio-pay-group']=="Immediately" or data['confirmation']== 4 %}
-		<p>You believe you owe £1,000. We've emailed Jan Clark telling them you're prepared to pay this amount within 28 days.</p>
-		<p>Your explanation of why you believe you don't owe the amount claimed has been sent to Jan Clark.</p>
+		<p>You believe you owe {% if data['owe-amount'] =='' %}£300{% else %}£{{data['owe-amount']}}{% endif %}. We've emailed Jan Clark your offer to pay this amount immediately .</p>
+		<p>Your explanation of why you believe you don't owe the total amount claimed has been sent to Jan Clark.</p>
 		<h2 class="heading-medium">What happens next</h2>
 		<p>Jan Clark needs to respond to your defence on or before <span class="dates"></span>. If they reject it then the case will be reviewed and might go to a hearing.</p>
 		<p>We'll contact you if a hearing date is scheduled and explain what you need to do to prepare.</p>
@@ -83,7 +83,7 @@ Money Claims Prototype
 		<!-- amount too much - pay instalments  -->
 		{% elseif data.radio_select_group2=="Some" and data['radio-pay-group']=="Instalments" or data['confirmation']== 6 %}
 		<p>You believe you owe {% if data['owe-amount'] =='' %}£300{% else %}£{{data['owe-amount']}}{% endif %}. We've emailed Jan Clark your offer to pay this amount by instalments.</p>
-		<p>Your explanation of why you believe you don't owe the amount claimed has been sent to Jan Clark.</p>
+		<p>Your explanation of why you believe you don't owe the total amount claimed has been sent to Jan Clark.</p>
 		<h2 class="heading-medium">What happens next</h2>
 		<p>Jan Clark needs to respond to your offer on or before 4pm, <span class="dates"></span>.</p>
 		<p>If your offer is accepted we’ll email you to explain how you can pay.</p>
@@ -102,8 +102,7 @@ Money Claims Prototype
 		<!-- amount too much - pay set date + mediation -->
 		{% elseif data.radio_select_group2=="Some" and data['radio-pay-group']=="Set-date" or data['confirmation']== 7 %}
 		<p>You believe you owe {% if data['owe-amount'] =='' %}£300{% else %}£{{data['owe-amount']}}{% endif %}. We've emailed Jan Clark your offer to pay this amount by <span class="dates"></span>.</p>
-		<p>Your explanation of why you believe you don't owe the amount claimed has been sent to Jan Clark.</p>
-		<p>View the <a href='../dashboard/defendant?defendant=7'>claim against you and your response</a>.</p>
+		<p>Your explanation of why you believe you don't owe the total amount claimed has been sent to Jan Clark.</p>
 		<h2 class="heading-medium">What happens next</h2>
 		<p>Jan Clark needs to respond to your offer on or before <span class="dates"></span>.</p>
 		<p>If your offer is accepted we’ll email you to explain how you can pay.</p>
@@ -120,9 +119,10 @@ Money Claims Prototype
 		<p><a class="button" href='#'>Finished</a></p>
 		<!-- paid what i owe -->
 		{% elseif data.radio_select_group2=="Paid-some" or data['confirmation']== 8 %}
-		<p>You state that you paid {% if data['owe-amount'] =='' %}£300{% else %}£{{data['owe-amount']}}{% endif %}. Your explanation of why you don't owe any more money has been sent to Jan Clark. </p>
-		<p>View the <a href='../dashboard/defendant?defendant=7'>claim against you and your response</a>.</p>
-		<h2 class="heading-medium">What happens next</h2>
+		<p>You believe you owe {% if data['owe-amount'] =='' %}£300{% else %}£{{data['owe-amount']}}{% endif %}. Which you've stated that you have paid.</p>
+		<p>Your explanation of why you believe you don't owe the total amount claimed has been sent to Jan Clark.</p>
+
+      <h2 class="heading-medium">What happens next</h2>
 		<p>Jan Clark needs to respond to your offer on or before 4pm, <span class="dates"></span>.  If they reject it then the case will be reviewed and might go to a hearing.</p>
 		<p>We'll contact you if a hearing date is scheduled and explain what you need to do to prepare.</p>
 		<p>If Jan Clark accepts your defence they must tell both you and the court that you have paid the money claim.</p>
