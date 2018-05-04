@@ -975,8 +975,33 @@ h1 {
   <p class="page-title"> <span>Claim number: 000LR095</span></p>
   {% endif %}
 
+  {% if data['check'] == 5 or data['check'] == 6 or data['check'] == 7 %}
+    <table >
+      <thead>
+        <tr>
+          <th colspan="2">
+            <h2 class="heading-medium">
+              {% if data['check'] == 6 or data['check'] == 7 %}5{% else %}4{% endif %}. Mediation
+            </h2>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="no-border">
+            Is the defendant willing to try mediation? 
+          </td>
+          <td class="no-border">
+            {{ data['radio-mediation-group'] or 'Yes' }}
+          </td>
+        </tr>
+      </tobdy>
+    </table>
+  {% endif %}
+
+
   {% if data['check'] == '1' or data['check'] == '2' or data['check'] == '3' or data['check'] == '4' or data['check']== 8 or data['check']== 9 or data['check'] == '5'  or data['check'] == '6' or data['check'] == 7  %}
-    {% if data['check'] == '8' or data['check'] == '2' or data['check'] == '3' or data['check'] == '4'  or data['check'] == '6' or data['check'] == 7 %}
+    {% if data['check'] == '8' or data['check'] == '2' or data['check'] == '3' or data['check'] == '4'  or data['check'] == '6' or data['check'] == 7  or data['check'] == 9 %}
     <table style="padding-bottom:900px">
     {% else %}
     <table >
@@ -985,7 +1010,7 @@ h1 {
         <tr>
           <th colspan="2">
             <h2 class="heading-medium">
-              {% if data['check'] == '2' or data['check'] == '5' %}4{% elseif data['check'] == 3 or data['check'] == '4' or data['check'] == '6' or data['check'] == 7 %}5{% else %}3{% endif %}. Statement of truth
+              {% if data['check'] == '2' %}4{% elseif data['check'] == 3 or data['check'] == '4' or data['check'] == '5' %}5{% elseif data['check'] == '6' or data['check'] == 7 %}6{% else %}3{% endif %}. Statement of truth
             </h2>
           </th>
         </tr>
@@ -1040,48 +1065,8 @@ h1 {
     </tbody>
   </table>
   {% endif %}
-  {% if data['check'] =='1' or data['check']== 9 %}
-  <table  style="padding-bottom:600px">
-    <thead>
-      <tr>
-        <th colspan="2">
-          <h2 class="heading-medium">
-            What happens next
-          </h2>
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>
-          Settle the claim
-        </td>
-        <td>
-
-        {% if data['check'] =='1' %}Unless you've been asked not to, you can still contact the claimant directly. If you can reach an agreement you may not have to go to a hearing.
-
-      {% else %}
-        Unless you've been asked not to, you can still contact the defendant directly. If you can reach an agreement you may not have to go to a hearing.      {% endif %}
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          Mediation
-        </td>
-        <td>
 
 
-      {% if data['check'] =='1' %}You have chosen not to use the free mediation service. The case will be reviewed by a judge and might go to a hearing. We'll contact you if a hearing date is scheduled and explain what you need to do to prepare.
-      {% else %}
-     <p> If the defendant has asked for mediation then we'll contact you to ask if you want to mediate. </p> <p> If the defendant doesn't want to mediate then the case will be reviewed by a judge and might go to a hearing. We'll contact you if a hearing date is scheduled and explain what you need to do to prepare.</p>
-      {% endif %}
-
-        </td>
-      </tr>
-    </tbody>
-  </table>
-  {% endif %}
   <table class="footer">
     <tbody>
       <tr>
