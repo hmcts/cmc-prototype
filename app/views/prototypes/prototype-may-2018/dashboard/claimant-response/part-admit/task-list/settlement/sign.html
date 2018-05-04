@@ -32,19 +32,19 @@ Money Claims Prototype
             <td>
               Mary Richards:
               {% if data['radio-pay-group']=="Immediately" %}
-              I will pay the full immediately. You will receive the money no later than {{ now | date( 'add', 5, 'days') | date }}. Any cheques or transfers must be clear in your account by this date.
+              I will pay the {% if data['owe-amount'] =='' %}£300{% else %}£{{data['owe-amount']}}{% endif %} immediately. You will receive the money no later than {{ now | date( 'add', 5, 'days') | date }}. Any cheques or transfers must be clear in your account by this date.
               {% elseif data['radio-pay-group']=="Instalments"  %}
-              I will pay instalments of 
+              I will pay instalments of
                 {% if data['instalment-first-payment'] %}
                 £{{data['instalment-first-payment']}}
                 {% else %}
-                £200
+                £50
                 {% endif %}
 
                 {% if data['radio-payment-frequency'] %}
                 {{ data['radio-payment-frequency'] | lower  }}{% else %}
                 every month{% endif %}.
-              I will pay the first instalment by 
+              I will pay the first instalment by
                 {% if data['instalment-day'] %}
                 {{ ( data['instalment-month'] + ' ' + data['instalment-day'] + ' ' + data['instalment-year']) | date('D MMMM YYYY') }}{% else %}
                 31 March 2018{% endif %}.
@@ -88,7 +88,7 @@ Money Claims Prototype
       <div>
         <h3 class="heading-medium"></h3>
 
-        <p>This agreement settles the claim made by Jan Clark against Mary Richards. This includes all money owed in the claim, for example court fees, expenses or interest.</p>
+        <p>This agreement settles the claim made by Jan Clark against Mary Richards. This includes all money owed in the claim, for example court fees, expenses or interest.??????</p>
         <p>This agreement puts the claim on hold. Neither party can make any further claims relating to this case, other than to enforce it.</p>
         <p>Either party can view and download this agreement from their money claims account. Both parties should keep a copy of this agreement.</p>
 
@@ -96,6 +96,12 @@ Money Claims Prototype
         <h3 class="heading-medium">If the agreement is broken</h3>
         <p>You can request a judgment for any money still owed from this agreement and ask the court to collect payment from the defendant.</p>
         <p>This can be done online, with the judgment and enforcement orders issued instantly.</p>
+        <ul class="list list-bullet">
+          <li>request a judgment for any money still owed from this agreement</li>
+          <li>resume the original claim or counterclaim for the full amount of the claim</li>
+          <li>ask the court to enforce any of the steps to be taken<p></p>
+        </li>
+        </ul>
       </div>
 
 
