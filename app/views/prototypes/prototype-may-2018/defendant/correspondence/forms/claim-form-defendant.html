@@ -276,6 +276,8 @@ h1 {
         <td class="">
           {% if data['check'] == 2 or data['check'] == 3 or data['check'] == 4 %}
           I admit all of the claim
+          {% elseif data['check'] == 5 or data['check'] == 6 or data['check'] == 7 %}
+          I admit part of the claim
           {% elseif data['check']== 8 or data.radio_select_group2=="amount_claimed" %}
           I have paid what I believe I owe
           {% elseif data['check'] =='1' or data['check']== 9 or data.radio_select_group2=="defend_now" %}
@@ -285,7 +287,7 @@ h1 {
       </tr>
 
 
-      {% if  data['check'] =='1' or data.radio_select_group=="Some" or data['check']== 4 or data['check']== 5 or data['check']== 6 or data['check']== 7 or data['check']== 9 or data['check']== 8 or data.radio_select_group2=="amount_claimed" or data.radio_select_group=="Paid-some" or data.radio_select_group2=="defend_now"%}
+      {% if  data['check'] =='1' or data.radio_select_group=="Some" or data['check']== 4 or data['check'] == 5 or data['check'] == 6 or data['check'] == 7 or data['check']== 9 or data['check']== 8 or data.radio_select_group2=="amount_claimed" or data.radio_select_group=="Paid-some" or data.radio_select_group2=="defend_now"%}
       {% if data.radio_select_group2=="amount_claimed" or data['check']== 8 %}
       <tr class="">
         <td class="">
@@ -304,6 +306,60 @@ h1 {
     </td>
   </tr>
   {% endif %} <!-- end of partial -->
+
+
+<!-- PART ADMIT -->
+{% if data['radio_select_group2']=="Some" or data['check']== 5 or data['check'] == 6 or data['check'] == 7 %} 
+    <tr>
+      <td>
+        How much money do they admit they owe?
+      </td>
+      <td>
+        {% if data['check'] =='5' or data['check'] =='6' or data['check'] == 7 %}
+        £300.00
+        {% else %} £{{data['owe-amount']}}{% endif %}
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Why are they disputing the full amount?
+      </td>
+      <td>
+        {% if data['check'] =='5' or data['check'] =='6' or data['check'] == 7 %}
+        Because i don't owe them that much money.
+        {% else %} {{data['owe_amount_why']}}{% endif %}
+      </td>
+    </tr>
+  </tbody>
+  </table>
+
+
+  <table class="footer">
+    <tbody>
+      <tr>
+        <tr>
+          <td>
+            OCON9B
+          </td>
+          <td>
+            For further details of the courts www.gov.uk/find-court-tribunal
+          </td>
+          <td >
+            &copy; Crown copyright Page 1 of {% if data['check'] == 2 %}1{% elseif data['check'] == 4 %}3{% else %}2{% endif %}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="page-break">&nbsp;</div>
+    <p class="page-title"> <span>Claim number: 000LR095</span></p>
+    <table>
+      <tbody>
+
+
+      {% endif %}  <!-- start of part admit-->
+
+
 
   <!-- start of defend -->
   {% if data['check'] =='1' or data['radio_select_group2']=="defend_now" or data['check']== 9 %}
@@ -327,7 +383,7 @@ h1 {
     {% endif %}
 
     <!-- start of defendnow-->
-    {% if data['check'] =='1' or data['check']== 9%} <!-- start of time-line and evidence -->
+    {% if data['check'] =='1' or data['check']== 9 or data['radio_select_group2']=="Some" or data['check']== 5 or data['check']== 6 or data['check'] == 7 %} <!-- start of time-line and evidence -->
     <tr>
       <td class="no-border">
         Defendant's timeline of what happened:
@@ -337,19 +393,19 @@ h1 {
     </tr>
     <tr class="subsection ">
       {% if data['cd-timeline-2'] !='' %}<td class="no-border single-cell">{% else %}<td class="single-cell ">{% endif %}
-       {% if data['check'] =='1' or data['check'] =='9' %}1 April 2017{% else %}{{data['cd-date-1']}}{% endif %}
+       {% if data['check'] =='1' or data['check'] =='9' or data['check']== 5 or data['check']== 6 or data['check'] == 7 %}1 April 2017{% else %}{{data['cd-date-1']}}{% endif %}
      </td>
      {% if data['cd-timeline-2'] !='' %}<td class="no-border single-cell">{% else %}<td class="single-cell ">{% endif %}
-      {% if data['check'] =='1' or data['check'] =='9' %}I contacted Jan Clark to discuss building works on our roof.{% else %}{{data['cd-timeline-1']}}{% endif %}
+      {% if data['check'] =='1' or data['check'] =='9' or data['check']== 5 or data['check']== 6 or data['check'] == 7 %}I contacted Jan Clark to discuss building works on our roof.{% else %}{{data['cd-timeline-1']}}{% endif %}
     </td>
   </tr>
-  {% if data['cd-timeline-2'] !='' or data['check'] =='1'  or data['check'] =='2'  or data['check'] =='3' %}
+  {% if data['cd-timeline-2'] !='' or data['check'] =='1'  or data['check'] =='2' or data['check'] =='3' or data['check']== 5 or data['check']== 6 or data['check'] == 7  %}
   <tr class="subsection no-border">
     <td class=" single-cell no-border">
-     {% if data['check'] =='1' or data['check'] =='9' %}7 April 2017{% else %}{{data['cd-date-2']}}{% endif %}
+     {% if data['check'] =='1' or data['check'] =='9' or data['check']== 5 or data['check']== 6 or data['check'] == 7 %}7 April 2017{% else %}{{data['cd-date-2']}}{% endif %}
    </td>
    <td class="no-border">
-    {% if data['check'] =='1' or data['check'] =='9' %}We agreed what work should be done and signed a contract.{% else %}{{data['cd-timeline-2']}}{% endif %}
+    {% if data['check'] =='1' or data['check'] =='9' or data['check']== 5 or data['check']== 6 or data['check'] == 7 %}We agreed what work should be done and signed a contract.{% else %}{{data['cd-timeline-2']}}{% endif %}
   </td>
 </tr>
 {% endif %}
@@ -358,7 +414,7 @@ h1 {
    Comments about claimant's timeline
  </td>
  <td>
-   {% if data['check'] =='1' or data['check'] =='9' %}They are exaggerating the what happened. My side of the story is this....{% else %} {{data['defence-disagree-timeline']}}{% endif %}
+   {% if data['check'] =='1' or data['check'] =='9' or data['check']== 5 or data['check']== 6 or data['check'] == 7 %}They are exaggerating the what happened. My side of the story is this....{% else %} {{data['defence-disagree-timeline']}}{% endif %}
  </td>
 </tr>
 <tr>
@@ -370,7 +426,7 @@ h1 {
 </tr>
 <tr class="subsection">
   <td class="no-border single-cell">
-   {% if data['check'] =='1' or data['check'] =='9' %}Contracts and agreements{% else %}
+   {% if data['check'] =='1' or data['check'] =='9' or data['check']== 5 or data['check']== 6 or data['check'] == 7 %}Contracts and agreements{% else %}
    {% if data['legal-status1'] == 2 %}Contracts and agreements - {% endif %}
    {% if data['legal-status1'] == 3 %}Expert witness - {% endif %}
    {% if data['legal-status1'] == 4 %}Letters, emails and other correspondence - {% endif %}
@@ -381,13 +437,13 @@ h1 {
    {% endif %}
  </td>
  <td class="no-border ">
-  {% if data['check'] =='1' or  data['check'] =='9'  %}I have a signed contract showing that you broke the contract agreement.{% else %}{{data['legal-status-description-1'] }}{% endif %}
+  {% if data['check'] =='1' or  data['check'] =='9'  or data['check']== 5 or data['check']== 6 or data['check'] == 7 %}I have a signed contract showing that you broke the contract agreement.{% else %}{{data['legal-status-description-1'] }}{% endif %}
 </td>
 </tr>
-{% if data['legal-status2'] !='' or data['check'] =='1' or data['check'] =='9'  %}
+{% if data['legal-status2'] !='' or data['check'] =='1' or data['check'] =='9' or data['check']== 5 or data['check']== 6 or data['check'] == 7 %}
 <tr class="subsection">
   <td class="no-border single-cell">
-   {% if data['check'] =='9' %}Photos {% else %}
+   {% if data['check'] =='9' or data['check']== 5 or data['check']== 6 or data['check'] == 7 %}Photos {% else %}
    {% if data['legal-status2'] == 2 %}Contracts and agreements - {% endif %}
    {% if data['legal-status2'] == 3 %}Expert witness - {% endif %}
    {% if data['legal-status2'] == 4 %}Letters, emails and other correspondence - {% endif %}
@@ -398,7 +454,7 @@ h1 {
    {% endif %}
  </td>
  <td class="no-border">
-  {% if data['check'] =='1' or data['check'] =='9'  %}The photos I've taken show the poor workmanship of the roof repair.{% else %}{{data['legal-status-description-2'] }}{% endif %}
+  {% if data['check'] =='1' or data['check'] =='9'  or data['check']== 5 or data['check']== 6 or data['check'] == 7 %}The photos I've taken show the poor workmanship of the roof repair.{% else %}{{data['legal-status-description-2'] }}{% endif %}
 </td>
 {% endif %}
 </tr>
@@ -407,7 +463,7 @@ h1 {
     Comments about the claimant's evidence
   </td>
   <td>
-   {% if data['check'] =='1' or data['check'] =='9' %}I never received any of these emails. Also the photos arent a fair refection of my work.{% else %} {{data['defence-disagree-evidence']}}{% endif %}
+   {% if data['check'] =='1' or data['check'] =='9' or data['check']== 5 or data['check']== 6 or data['check'] == 7 %}I never received any of these emails. Also the photos arent a fair refection of my work.{% else %} {{data['defence-disagree-evidence']}}{% endif %}
  </td>
 </tr>
 {% endif %}
@@ -421,14 +477,14 @@ h1 {
 {% endif %}
 
 
-{% if data['check'] == 2 or data['check'] == 3 or data['check'] == 4 %}
+{% if data['check'] == 2 or data['check'] == 3 or data['check'] == 4 or data['check'] == 5 or data['check'] == 6 or data['check'] == 7 %}
 
    <table>
     <thead>
       <tr>
         <th colspan="2">
           <h2 class="heading-medium" id="money-owed">
-            3. When the defendant will pay
+            3. When the defendant will pay {% if data['check'] == 5 or data['check'] == 6 or data['check'] == 7 %}the £{{ data['owe-amount'] or '300' }}{% endif %}
           </h2>
         </th>
       </tr>
@@ -448,14 +504,18 @@ h1 {
             {% else %}
             {{ now | date( 'add', 5, 'months') | date }}
             {% endif %}
-          {% elseif data['check']== 4 %}
+          {% elseif data['check']== 4 or data['check'] == 6 %}
           By instalments
+          {% elseif data['check']== 5 %}
+          £{{ data['owe-amount'] or '300' }}, no later than {{ now | date( 'add', 5, 'days') | date }}
+          {% elseif data['check']== 7 %}
+          £{{ data['owe-amount'] or '300' }}, no later than {{ now | date( 'add', 5, 'months') | date }}
           {% endif %}
         </td>
       </tr>
 
 
-      {% if data['check']== 4 %}
+      {% if data['check']== 4 or data['check'] == 6 %}
       <tr>
         <td>
           Regular payments of
@@ -501,6 +561,7 @@ h1 {
 {% endif %}
 
 
+  {% if data['check'] != '5' %}
 
 <table class="footer">
   <tbody>
@@ -519,8 +580,9 @@ h1 {
     </tbody>
   </table>
 
+  {% endif %}
 
-{% if data['check'] == 3 or data['check'] == 4 %}
+{% if data['check'] == 3 or data['check'] == 4 or data['check'] == 6  or data['check'] == 7 %}
   <div class="page-break">&nbsp;</div>
   <p class="page-title"> <span>Claim number: 000LR095</span></p>
 
@@ -539,10 +601,10 @@ h1 {
   <tbody>
       <tr>
         <td>
-          Where are you living?
+          Where are they living?
         </td>
         <td >
-          Home you own yourself (including if you have a mortgage)
+          Home they own themselves
         </td>
       </tr>
       <tr>
@@ -553,7 +615,7 @@ h1 {
       </tr>
       <tr>
         <td class="no-border">
-          Do any children live with you?
+          Do any children live with them?
         </td>
         <td class="no-border">Yes</td>
       </tr>
@@ -577,7 +639,7 @@ h1 {
       </tr>
       <tr>
         <td class="no-border">
-          Do you or your partner pay maintenance for any children?
+          Do they or their partner pay maintenance for any children?
         </td>
         <td class="no-border">Yes</td>
       </tr>
@@ -595,7 +657,7 @@ h1 {
       </tr>
       <tr>
         <td class="no-border">
-          Do you support anyone else financially?
+          Do they support anyone else financially?
         </td>
         <td class="no-border">Yes</td>
       </tr>
@@ -620,7 +682,7 @@ h1 {
       </tr>
       <tr>
         <td class="no-border">
-          Are you currently working?
+          Are they currently working?
         </td>
         <td class="no-border">Yes</td>
       </tr>
@@ -633,7 +695,7 @@ h1 {
       </tr>
       <tr>
         <td class="no-border">
-          Who employs you?
+          Who employs them?
         </td>
         <td class="no-border"></td>
       </tr>
@@ -669,13 +731,13 @@ h1 {
       </tr>
       <tr>
         <td class="no-border">
-          Are you behind on tax payments?
+          Are they behind on tax payments?
         </td>
         <td class="no-border"> Yes</td>
       </tr>
       <tr>
         <td class="no-border">
-          Amount you owe?
+          Amount they owe?
         </td>
         <td class="no-border"> £30</td>
       </tr>
@@ -816,7 +878,7 @@ h1 {
       </tr>
       <tr>
         <td class="no-border">
-          Do you have any debts?
+          Do they have any debts?
         </td>
         <td class="no-border"> Yes</td>
       </tr>
@@ -866,7 +928,7 @@ h1 {
       </tr>
       <tr>
         <td class="no-border">
-          Has a court ordered you to pay anyone else?
+          Has a court ordered them to pay anyone else?
         </td>
         <td class="no-border">Yes </td>
       </tr>
@@ -878,7 +940,7 @@ h1 {
       </tr>
       <tr>
         <td class="">
-          Amount you owe
+          Amount they owe
         </td>
         <td class="">£130 </td>
         
@@ -908,10 +970,38 @@ h1 {
 {% endif %}
 
 <!-- END OF PAGE 1 -->
+  {% if data['check'] != '5' %}
   <div class="page-break">&nbsp;</div>
   <p class="page-title"> <span>Claim number: 000LR095</span></p>
-  {% if data['check'] == '1' or data['check'] == '2' or data['check'] == '3' or data['check'] == '4' or data['check']== 8 or data['check']== 9 %}
-    {% if data['check'] == '8' or data['check'] == '2' or data['check'] == '3' or data['check'] == '4' %}
+  {% endif %}
+
+  {% if data['check'] == 5 or data['check'] == 6 or data['check'] == 7 %}
+    <table >
+      <thead>
+        <tr>
+          <th colspan="2">
+            <h2 class="heading-medium">
+              {% if data['check'] == 6 or data['check'] == 7 %}5{% else %}4{% endif %}. Mediation
+            </h2>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="no-border">
+            Is the defendant willing to try mediation? 
+          </td>
+          <td class="no-border">
+            {{ data['radio-mediation-group'] or 'Yes' }}
+          </td>
+        </tr>
+      </tobdy>
+    </table>
+  {% endif %}
+
+
+  {% if data['check'] == '1' or data['check'] == '2' or data['check'] == '3' or data['check'] == '4' or data['check']== 8 or data['check']== 9 or data['check'] == '5'  or data['check'] == '6' or data['check'] == 7  %}
+    {% if data['check'] == '8' or data['check'] == '2' or data['check'] == '3' or data['check'] == '4'  or data['check'] == '6' or data['check'] == 7  or data['check'] == 9 %}
     <table style="padding-bottom:900px">
     {% else %}
     <table >
@@ -920,7 +1010,7 @@ h1 {
         <tr>
           <th colspan="2">
             <h2 class="heading-medium">
-              {% if data['check'] == '2'%}4{% elseif data['check'] == 3 or data['check'] == '4' %}5{% else %}3{% endif %}. Statement of truth
+              {% if data['check'] == '2' %}4{% elseif data['check'] == 3 or data['check'] == '4' or data['check'] == '5' %}5{% elseif data['check'] == '6' or data['check'] == 7 %}6{% else %}3{% endif %}. Statement of truth
             </h2>
           </th>
         </tr>
@@ -930,7 +1020,7 @@ h1 {
           <td class="no-border">
           </td>
           <td class="no-border">
-            I believe that the facts stated in this {% if data['check'] == '2' or data['check'] == '3' or data['check'] == '4' or data['check'] == '5' %}admission{% else %}defence{% endif %} are true.
+            I believe that the facts stated in this {% if data['check'] == '2' or data['check'] == '3' or data['check'] == '4' or data['check'] == '5' or data['check'] == '6' or data['check'] == 7 %}admission{% else %}defence{% endif %} are true.
           </td>
         </tr>
       </tr>
@@ -975,48 +1065,8 @@ h1 {
     </tbody>
   </table>
   {% endif %}
-  {% if data['check'] =='1' or data['check']== 9 %}
-  <table  style="padding-bottom:600px">
-    <thead>
-      <tr>
-        <th colspan="2">
-          <h2 class="heading-medium">
-            What happens next
-          </h2>
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>
-          Settle the claim
-        </td>
-        <td>
-
-        {% if data['check'] =='1' %}Unless you've been asked not to, you can still contact the claimant directly. If you can reach an agreement you may not have to go to a hearing.
-
-      {% else %}
-        Unless you've been asked not to, you can still contact the defendant directly. If you can reach an agreement you may not have to go to a hearing.      {% endif %}
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          Mediation
-        </td>
-        <td>
 
 
-      {% if data['check'] =='1' %}You have chosen not to use the free mediation service. The case will be reviewed by a judge and might go to a hearing. We'll contact you if a hearing date is scheduled and explain what you need to do to prepare.
-      {% else %}
-     <p> If the defendant has asked for mediation then we'll contact you to ask if you want to mediate. </p> <p> If the defendant doesn't want to mediate then the case will be reviewed by a judge and might go to a hearing. We'll contact you if a hearing date is scheduled and explain what you need to do to prepare.</p>
-      {% endif %}
-
-        </td>
-      </tr>
-    </tbody>
-  </table>
-  {% endif %}
   <table class="footer">
     <tbody>
       <tr>
@@ -1045,7 +1095,9 @@ h1 {
       <option  value="2" {% if data['check'] == 2 %}selected{% endif %}>Response - Admission - Full - Pay immediately</option>
       <option  value="3" {% if data['check'] == 3 %}selected{% endif %}>Response - Admission - Full - Pay later</option>
       <option  value="4" {% if data['check'] == 4 %}selected{% endif %}>Response - Admission - Full - Pay by instalments</option>
-      <option  value="5" {% if data['check'] == 5 %}selected{% endif %}>Response - Admission - Partial (TODO)</option>
+      <option  value="5" {% if data['check'] == 5 %}selected{% endif %}>Response - Admission - Partial - Pay immediately</option>  
+      <option  value="7" {% if data['check'] == 7 %}selected{% endif %}>Response - Admission - Partial - Pay later</option>  
+      <option  value="6" {% if data['check'] == 6 %}selected{% endif %}>Response - Admission - Partial - Pay by instalments</option>  
     </select>
   </form>
   <script src="{{ asset_path }}/javascripts/jquery-1.11.3.js"></script>
