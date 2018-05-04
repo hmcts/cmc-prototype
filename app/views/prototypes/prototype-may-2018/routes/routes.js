@@ -63,6 +63,18 @@ module.exports = function(app){
   })
 
 
+  app.post( '/' + strPath + 'dashboard/claimant-response/admit-the-claim/task-list/counter-offer/repayment-plan', (req, res) => {
+
+    if (req.session.data['instalment-first-payment  '] > 250 ) {
+      res.redirect('/' + strPath + 'dashboard/claimant-response/admit-the-claim/task-list/counter-offer/court-offer');
+    } else {
+      res.redirect('/' + strPath + 'dashboard/claimant-response/admit-the-claim/task-list/counter-offer/approved');
+    }
+
+  })
+
+
+
   app.post( '/' + strPath + 'claimant/task-list/their-details/defendant-add', (req, res) => {
 
     if (req.body.addDefendant === undefined) {
