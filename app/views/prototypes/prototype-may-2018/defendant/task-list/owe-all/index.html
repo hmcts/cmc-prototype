@@ -19,12 +19,23 @@ Money Claims Prototype
         How do you want to pay?
         {% endif %}
       </h1>
-      <form
-        name="aspnetForm"
-        method="post"
-        onsubmit="multiNavigation('radio-pay-group', ['Immediately', 'Instalments', 'Set-date'], ['../task-list?settlement=false&', '../task-list?settlement=false&', 'owe-all/pay-by-set-date']);return false;"
-        id="aspnetForm"
-        autocomplete="off">
+
+		{% if data.radio_select_group=="Some"%}
+   <form
+     name="aspnetForm"
+     method="post"
+     onsubmit="multiNavigation('radio-pay-group', ['Immediately', 'Instalments', 'Set-date'], ['../task-list?settlement_mediation=true&settlement=true&', '../task-list?settlement_mediation=false&settlement=false&', 'owe-all/pay-by-set-date?settlement_mediation=false&settlement=true&']);return false;"
+     id="aspnetForm"
+     autocomplete="off">
+			{% else %}
+   <form
+     name="aspnetForm"
+     method="post"
+     onsubmit="multiNavigation('radio-pay-group', ['Immediately', 'Instalments', 'Set-date'], ['../task-list?settlement=false&', '../task-list?settlement=false&', 'owe-all/pay-by-set-date?settlement=true&']);return false;"
+     id="aspnetForm"
+     autocomplete="off">
+			{% endif %}
+
 
       <p>If you choose not to pay immediately, the claimant can request a County Court Judgment (CCJ) against you.</p>
       <div class="form-group">
