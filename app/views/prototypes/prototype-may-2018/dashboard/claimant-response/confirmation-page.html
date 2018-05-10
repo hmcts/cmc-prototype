@@ -32,7 +32,7 @@ Money Claims Prototype
         <h1 class="bold-large">You have requested free mediation</h1>
 
 
-        {% elseif data['radio-indent-group'] == "reject_hearing" or data['radio-indent-group'] == "mediation-reject" or data['radio-indent-group'] == "decline-mediation" %}
+        {% elseif data['radio-indent-group'] == "reject_hearing" or data['radio-indent-group'] == "mediation-reject" or data['radio-indent-group'] == "decline-mediation"  or data['confirmation'] == 8 %}
         <h1 class="bold-large">The claim will be reviewed</h1>
 
         {% elseif data['radio-indent-group'] == "payment_instalments" or data['radio-indent-group'] == "set_date"%}
@@ -121,7 +121,7 @@ Money Claims Prototype
 
       <p><a class="button" href='../home'>Finished</a></p>
 
-           {% elseif data['radio-indent-group'] == "mediation-reject"%}
+           {% elseif data['radio-indent-group'] == "mediation-reject" or   data['confirmation'] == 8%}
            <p>The case will be reviewed and might go to a hearing. We'll email you if a hearing date is scheduled and explain what you need to do to prepare.</p>
 						{% include "includes/survey.html" %}
 
@@ -144,6 +144,7 @@ Money Claims Prototype
           <option value="5"  {% if data['confirmation'] == '5' %}selected{% endif %}>Redetermination</option>
           <option value="6"  {% if data['confirmation'] == '6' %}selected{% endif %}>Mediation accepted</option>
           <option value="7"  {% if data['confirmation'] == '7' %}selected{% endif %}>Mediation proposed</option>
+          <option value="8"  {% if data['confirmation'] == '8' %}selected{% endif %}>Claim proceeding</option>
       </select>
     </form>
 
