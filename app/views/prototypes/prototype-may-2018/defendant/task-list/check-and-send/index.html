@@ -762,7 +762,7 @@ Check your answers
       <td class="no-border">
         Job title
       </td>
-      <td class="no-border">Accountant</td>
+      <td class="no-border">Window Cleaner</td>
       <td class="change-answer no-border">
       </td>
     </tr>
@@ -770,7 +770,7 @@ Check your answers
       <td class="no-border">
         Annual turnover
       </td>
-      <td class="no-border">£200,000.00</td>
+      <td class="no-border">£14,500</td>
       <td class="change-answer no-border">
       </td>
     </tr>
@@ -786,7 +786,7 @@ Check your answers
       <td class="no-border">
         Amount you owe?
       </td>
-      <td class="no-border"> £30</td>
+      <td class="no-border"> £300</td>
       <td class="change-answer no-border">
       </td>
     </tr>
@@ -845,7 +845,7 @@ Check your answers
       <td class="no-border">
         Balance
       </td>
-      <td class="no-border">£1000 </td>
+      <td class="no-border">£350</td>
       <td class="change-answer no-border">
       </td>
     </tr>
@@ -872,7 +872,7 @@ Check your answers
       <td class="no-border">
         Take home pay
       </td>
-      <td class="no-border">£12 </td>
+      <td class="no-border">£800</td>
       <td class="change-answer no-border">
       </td>
     </tr>
@@ -880,7 +880,7 @@ Check your answers
       <td class="no-border">
         Child Benefit
       </td>
-      <td class="no-border">£23 </td>
+      <td class="no-border">£124</td>
       <td class="change-answer no-border">
       </td>
     </tr>
@@ -888,7 +888,7 @@ Check your answers
       <td class="">
         Other income
       </td>
-      <td class="">£43 </td>
+      <td class="">£40</td>
       <td class="change-answer ">
       </td>
     </tr>
@@ -907,7 +907,7 @@ Check your answers
       <td class="no-border">
         Mortgage
       </td>
-      <td class="no-border">£3443 </td>
+      <td class="no-border">£743 </td>
       <td class="change-answer no-border">
       </td>
     </tr>
@@ -923,7 +923,7 @@ Check your answers
       <td class="">
         Gas
       </td>
-      <td class="">£13 </td>
+      <td class="">£83</td>
       <td class="change-answer ">
       </td>
     </tr>
@@ -958,7 +958,7 @@ Check your answers
       <td class="no-border">
         Total owed
       </td>
-      <td class="no-border">£120 </td>
+      <td class="no-border">£1200</td>
       <td class="change-answer no-border">
       </td>
     </tr>
@@ -966,7 +966,7 @@ Check your answers
       <td class="no-border">
         Monthly payments
       </td>
-      <td class="no-border">£13 </td>
+      <td class="no-border">£100</td>
       <td class="change-answer no-border">
       </td>
     </tr>
@@ -1052,32 +1052,36 @@ Check your answers
         The offer
       </td>
       <td >
-        {% if data['radio-pay-group']=="Immediately" %}
-        I will pay the full amount immediately. You will receive the money no later than {{ now | date( 'add', 5, 'days') | date }}. Any cheques or transfers will be clear in your account by this date.
-        {% elseif data['radio-pay-group']=="Instalments"  %}
-        I will pay instalments of
-        {% if data['instalment-first-payment'] %}
-        £{{data['instalment-first-payment']}}
-        {% else %}
-        £200
-        {% endif %}
-        {% if data['radio-payment-frequency'] %}
-        {{ data['radio-payment-frequency'] | lower  }}{% else %}
-        every month{% endif %}.
-        I will pay the first instalment by
-        {% if data['instalment-day'] %}
-        {{ ( data['instalment-month'] + ' ' + data['instalment-day'] + ' ' + data['instalment-year']) | date('D MMMM YYYY') }}{% else %}
-        31 March 2018{% endif %}.
-        {% elseif data['radio-pay-group']=="Set-date" %}
-        I will pay the full amount, no later than
-        {% if data['set-day']!="" %}
-        {{ ( data['set-month'] + ' ' + data['set-day'] + ' ' + data['set-year']) | date('D MMMM YYYY') }}
-        {% else %}
-        {{ date | date('add', 1, 'year') | date('D MMMM YYYY') }}
-        {% endif %}
-        {% else %}
-        I will pay the full amount, no later than {{ date | date('add', 1, 'year') | date('D MMMM YYYY') }}.
-        {% endif %}
+              Mary Richards 
+              {% if data['radio-pay-group']=="Immediately" %}
+              will pay the full amount immediately. Jan Clark will receive the money no later than {{ now | date( 'add', 5, 'days') | date }}. Any cheques or transfers will be clear in Jan Clark's account by this date.
+              {% elseif data['radio-pay-group']=="Instalments"  %}
+              will pay instalments of
+                {% if data['instalment-first-payment'] %}
+                £{{data['instalment-first-payment']}}
+                {% else %}
+                £200
+                {% endif %}
+
+                {% if data['radio-payment-frequency'] %}
+                {{ data['radio-payment-frequency'] | lower  }}{% else %}
+                every month{% endif %}.
+              <br />The first instalment will be paid by
+                {% if data['instalment-day'] %}
+                {{ ( data['instalment-month'] + ' ' + data['instalment-day'] + ' ' + data['instalment-year']) | date('D MMMM YYYY') }}{% else %}
+                31 March 2018{% endif %}.
+
+
+              {% elseif data['radio-pay-group']=="Set-date" %}
+              will pay the full amount, no later than
+                {% if data['set-day']!="" %}
+                {{ ( data['set-month'] + ' ' + data['set-day'] + ' ' + data['set-year']) | date('D MMMM YYYY') }}
+                {% else %}
+                {{ date | date('add', 1, 'year') | date('D MMMM YYYY') }}
+                {% endif %}
+              {% else %}
+              will pay the full amount, no later than {{ date | date('add', 1, 'year') | date('D MMMM YYYY') }}.
+              {% endif %}
       </td>
       <td class="change-answer">
         <a href="#">
