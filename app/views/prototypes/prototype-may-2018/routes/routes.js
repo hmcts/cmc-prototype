@@ -65,7 +65,7 @@ module.exports = function(app){
 
   app.post( '/' + strPath + 'dashboard/claimant-response/admit-the-claim/task-list/counter-offer/repayment-plan', (req, res) => {
 
-    if (req.session.data['instalment-first-payment  '] > 250 ) {
+    if (req.session.data['instalment-first-payment'] > 250 ) {
       res.redirect('/' + strPath + 'dashboard/claimant-response/admit-the-claim/task-list/counter-offer/court-offer');
     } else {
       res.redirect('/' + strPath + 'dashboard/claimant-response/admit-the-claim/task-list/counter-offer/approved');
