@@ -19,7 +19,12 @@ Money Claims Prototype
         <summary>Find out what each response means</summary>
         <div class="panel panel-border-narrow">
           <h3 class="heading-medium">Admit all of the claim</h3>
-          <p>You have until 4pm on{% if data.radio_select_group_time=="No"%} <span class="Dates"></span>{% elseif data.radio_select_group_time=="Yes" %}<span id="Dates3"></span>{% else %} <span id="Date"></span>{% endif %} to admit the claim.</p>
+          <p>You have until 4pm on 
+            {% if data.radio_select_group_time=="Yes" %}
+              {{ now | date('add', 28, 'days' ) | date }}
+            {% else %}
+              {{ now | date('add', 14, 'days' ) | date }}
+            {% endif %} to admit the claim.</p>
           <p><h4 class="heading-small">Pay immediately</h4></p>
           <p>If you admit all of the claim and want to pay it in full, including interest and claim fee, contact the claimant to arrange payment.
             <p>If you pay at the same time as admitting the claim, you won't get a County Court Judgment (CCJ).<p>
@@ -29,7 +34,12 @@ Money Claims Prototype
                 <p>If the claimant accepts your offer, they can ask the court to enter a CCJ against you and you’ll be sent an order to pay.</p>
                 <p>If the claimant rejects your offer, they can ask the court to enter a CCJ against you. The court will then decide the repayment plan.</p>
                 <h3 class="heading-medium">Admit part of the claim</h3>
-                <p>You have until 4pm on{% if data.radio_select_group_time=="No"%} <span class="Dates"></span>{% elseif data.radio_select_group_time=="Yes" %}<span id="Dates3"></span>{% else %} <span id="Date"></span>{% endif %} to partly admit the claim.</p>
+                <p>You have until 4pm on
+                  {% if data.radio_select_group_time=="Yes" %}
+                    {{ now | date('add', 28, 'days' ) | date }}
+                  {% else %}
+                    {{ now | date('add', 14, 'days' ) | date }}
+                  {% endif %}  to partly admit the claim.</p>
                 <p><h4 class="heading-small">Pay immediately</h4></p>
                 <p>To admit part of the claim, contact the claimant and pay the amount you believe you owe then send the court your part admission.</p>
                 <p>They can accept the amount you've paid and settle the claim, or ask the court to transfer the claim to a County Court hearing centre.</p>
@@ -38,7 +48,12 @@ Money Claims Prototype
                  <p>If the claimant agrees, they can ask court to enter a CCJ against you and you'll be sent an order to pay.</p>
                  <p>If they reject your offer, the court will decide a repayment plan.</p>
                  <h3 class="heading-medium">Reject all of the claim</h3>
-                 <p>You have until 4pm on{% if data.radio_select_group_time=="No"%} <span class="Dates"></span>{% elseif data.radio_select_group_time=="Yes" %}<span id="Dates3"></span>{% else %} <span id="Date"></span>{% endif %} to reject all of the claim.</p>
+                 <p>You have until 4pm on
+                  {% if data.radio_select_group_time=="Yes" %}
+                    {{ now | date('add', 28, 'days' ) | date }}
+                  {% else %}
+                    {{ now | date('add', 14, 'days' ) | date }}
+                  {% endif %}  to reject all of the claim.</p>
                  <p>If you reject all of the claim, the claim may be transferred to a County Court hearing centre.</p>
                  <p>If you reject because you believe you’ve paid the money, the claimant has 28 days to tell you and the court whether they're proceeding with the claim. If they proceed, the claim may be transferred to a County Court hearing centre. </p>
                  <h4 class="heading-medium">Hearing centre location</h4>
