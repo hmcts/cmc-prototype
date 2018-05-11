@@ -302,11 +302,9 @@ Check your answers
 
 
 
-    {% elseif data['judgment'] == 'complete' and data['radio-proceed'] == 'judgment' %}
+    {% elseif data['judgment'] == 'complete' and data['radio-proceed'] == 'judgment-pa' %}
 
-
-
-        <table class="check-your-answers">
+    <table class="check-your-answers">
           <thead>
       <tr>
         <th colspan="2">
@@ -354,12 +352,17 @@ Check your answers
         <td>
           Total to be paid by defendant
           <td>
-            £1643.20<br>
+            {% if data['radio-proceed']=="judgment-pa" %}£300{%else%}£1643.20{%endif%}<br>
           </td>
           <td class="change-answer">
 
           </td>
         </tr>
+
+
+        </tbody>
+      </table>
+
 {% endif %}
    {%elif data.radio_select_group_owed=="No" %}
             <tr>

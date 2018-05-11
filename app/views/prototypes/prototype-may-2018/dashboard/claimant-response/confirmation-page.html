@@ -13,7 +13,7 @@ Money Claims Prototype
     <div class="column-two-thirds">
 
       <div class="govuk-box-highlight">
-        {% if ( data['radio-proceed'] == "judgment" or data['confirmation'] == 2 or data['confirmation'] == 2.1 ) %}
+        {% if ( data['radio-proceed'] == "judgment" or data['radio-proceed'] == "judgment-pa" or data['confirmation'] == 2 or data['confirmation'] == 2.1 ) %}
         <h1 class="bold-large">County Court Judgment issued</h1>
 
         {% elseif data['radio-indent-group'] == "accept_stop_claim" or data['radio-indent-group'] == "accept_stop_claim_claim_amount" or data['confirmation'] == 1 %}
@@ -47,11 +47,15 @@ Money Claims Prototype
         		<p>
 					<strong class="bold"><span id="Date2"></span></strong>
 				</p>
+                {% if ( data['radio-proceed'] == "judgment" or data['radio-proceed'] == "judgment-pa" or data['confirmation'] == 2 or data['confirmation'] == 2.1 ) %}
+
+        <a class="font-medium" target="_blank" href='correspondence/claim-form-claimant?check=1' style="color: #FFFFFF" >Download judgment as a PDF</a>
+{% endif %}
     </div>
     <fieldset>
         <h2 class="heading-medium">What happens next</h2>
 
-       {% if ( data['radio-proceed'] == "judgment" or data['confirmation'] == 2  or  data['confirmation'] == 2.1) %}
+       {% if ( data['radio-proceed'] == "judgment" or data['radio-proceed'] == "judgment-pa" or data['confirmation'] == 2  or  data['confirmation'] == 2.1) %}
 
         {% if data['confirmation'] == 2.1 %}
        <p>A County Court Judgment has been issued against the defendant.</p>
@@ -59,7 +63,6 @@ Money Claims Prototype
        <p>You've rejected the defendant's repayment plan and a County Court Judgment has been issued against them.</p>
        {% endif %}
 
-       <p><a href="#">View judgment</a> (PDF, 123KB)</p>
       {% include "includes/survey.html" %}
 
       <p><a class="button" href='../claimant?claimant=10.11'>Finished</a></p>

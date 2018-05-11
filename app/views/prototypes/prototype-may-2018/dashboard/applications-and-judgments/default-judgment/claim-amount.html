@@ -32,9 +32,13 @@ Money Claims Prototype
               <th scope="row">Claim amount</th>
               <td class="numeric last">
                 <label class="visuallyhidden" for="amount">Claim amount</label>
-                <span class="font-small">£1500.00</span>
+                <span class="font-small"> {% if data['radio-proceed']=="judgment-pa" %}£300{%else%}£1643.20{%endif%}
+</span>
               </td>
             </tr>
+            {% if data['radio-proceed']=="judgment-pa" %}
+            {% else %}
+
             <tr>
               <th scope="row">
                 <details>
@@ -51,6 +55,7 @@ Money Claims Prototype
                 <span class="font-small">£68.20</span>
               </td>
             </tr>
+
             <tr>
               <th scope="row">Claim fee</th>
               <td class="numeric last">
@@ -59,6 +64,8 @@ Money Claims Prototype
               </td>
             </td>
           </tr>
+
+ {% endif %}
           {% if data['radio-indent-group2']=="Yes" %}
           <tr>
             <th scope="col" class="bold-small">Sub total</th>
@@ -74,13 +81,16 @@ Money Claims Prototype
             <td class="numeric last bold-medium">£<span name="subt" id="subt" >1643.20</span></td>
             <input type="text" hidden="" value="1643.20" name="num1" id="num1" />
           </tr>
+
           {% else  %}
           <tr>
             <th scope="col" class="bold-medium">Total</th>
-            <td class="numeric last bold-medium">£<span name="subt" id="subt" >1643.20</span></td>
+            <td class="numeric last bold-medium">£<span name="subt" id="subt" >{% if data['radio-proceed']=="judgment-pa" %}300{%else%}1643.20{%endif%}</span></td>
             <input type="text" hidden="" value="1643.20" name="num1" id="num1" />
           </tr>
           {% endif %}
+
+
         </tbody>
       </table>
 
