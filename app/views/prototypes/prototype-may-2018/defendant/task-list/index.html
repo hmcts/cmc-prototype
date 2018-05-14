@@ -120,16 +120,30 @@
                   </a>
                 </td>
                 <td class="numeric" id="task-status" scope="col" id="col-status">
+                  {% if data.owe_dates=="complete" %}
+                  {% include "includes/task_status_finished.html" %}
+                  {% endif %}
+                </td>
+              </tr>
+              {% if data.owe_dates=="complete" %}
+              <tr id="their-details">
+                <td class="task">
+                  <a href="task-list/your-defence/paid-less{{formQuery}}">
+                    <span class="task-name">How much have you paid?</span>
+                  </a>
+                </td>
+                <td class="numeric" id="task-status" scope="col" id="col-status">
                   {% if data.your_defence=="complete" %}
                   {% include "includes/task_status_finished.html" %}
                   {% endif %}
                 </td>
               </tr>
+            {% endif %}
               {% if data.radio_select_group2=="Some_paid" %}
                 <tr id="their-details">
                   <td class="task">
-                    <a href="task-list/your-defence/paid-less{{formQuery}}">
-                      <span class="task-name">Why don't you owe the full amount?</span>
+                    <a href="task-list/your-defence/defence-pa{{formQuery}}">
+                      <span class="task-name">Why do you disagree with the amount claimed?</span>
                     </a>
                   </td>
                   <td class="numeric" id="task-status" scope="col" id="col-status">
@@ -141,7 +155,7 @@
 
               {% endif %}
 
-           {% elseif data.radio_select_group=="Some_paid" and data.do_you_owe_money=="complete" and data.radio_select_group2!="defend_now" %}
+             {% elseif data.radio_select_group=="Some_paid" and data.do_you_owe_money=="complete" and data.radio_select_group2!="defend_now" %}
            <tr id="their-details">
                   <td class="task">
                     <a href="task-list/your-defence/paid-less{{formQuery}}">
