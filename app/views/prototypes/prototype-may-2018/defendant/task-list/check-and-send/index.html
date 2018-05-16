@@ -140,7 +140,7 @@ Check your answers
               I admit all of the claim
               {% elseif data.radio_select_group=="Some" or data.radio_select_group=="Some_paid" or  data.radio_select_group=="some_cc" or data['check']== 4 or data['check']== 5 or data['check']== 6 or data['check']== 7 or data['check']== 14%}
               I admit part of the claim
-              {% elseif data.radio_select_group=="reject" or data.radio_select_group2=="paid" or data.radio_select_group2=="amount_claimed" or data['check']== 8 or data['check']== 9 or data['check']== 12%}
+              {% elseif data.radio_select_group=="reject" or data.radio_select_group2=="paid" or data.radio_select_group2=="Some_paid" or data.radio_select_group2=="amount_claimed" or data['check']== 8 or data['check']== 9 or data['check']== 12%}
               I reject all of the claim
               {% else %}
               I admit all of the claim
@@ -153,8 +153,21 @@ Check your answers
             </td>
           </tr>
 
+          {% if  data.radio_select_group=="Some" or data.radio_select_group=="Some_paid"%}
+          <tr>
+            <td>Have you paid the claimant the amount you admit you owe?</td>
+            <td>
+               {{ data['part'] or 'No' }}
+            </td>
+            <td class="change-answer">
+              <a href="../task-list/do-you-owe-money/defence-options?return_page={{  '../../task-list' | urlencode }}">
+                Change <span class="visuallyhidden">Name</span>
+              </a>
+            </td>
+          </tr>
+          {% endif %}
 
-          {% if data.radio_select_group=="reject" or data.radio_select_group2=="paid" or data.radio_select_group2=="amount_claimed" or data['check']== 8 or data['check']== 9 or data['check']== 12%}
+          {% if data.radio_select_group=="reject" or data.radio_select_group2=="paid" or data.radio_select_group2=="Some_paid" or data.radio_select_group2=="amount_claimed" or data['check']== 8 or data['check']== 9 or data['check']== 12%}
           <tr>
             <td>Why do you reject all the claim?</td>
             <td>
@@ -172,24 +185,12 @@ Check your answers
               </a>
             </td>
           </tr>
-          {% if data.radio_select_group2=="amount_claimed" or data['check']== 8 %}
-          <tr>
-            <td>How much have you paid the claimant?</td>
-            <td>
-             The amount claimed
-           </td>
-           <td class="change-answer">
-            <a href="../task-list/do-you-owe-money/defence-options?return_page={{  '../../task-list' | urlencode }}">
-              Change <span class="visuallyhidden">Name</span>
-            </a>
-          </td>
-        </tr>
-        {% endif %}
+
         {% else %}
         {% endif %}
       </tbody>
     </table>
-    {% if  data.radio_select_group=="Some" or data['check']== 4 or data['check']== 5 or data['check']== 6 or data['check']== 7 or data['check']== 9 or data['check']== 12 or data['check']== 8 or data.radio_select_group2=="amount_claimed" or data.radio_select_group=="Some_paid" or data.radio_select_group2=="defend_now"%}
+    {% if  data.radio_select_group=="Some" or data.radio_select_group2=="Some_paid" or data['check']== 4 or data['check']== 5 or data['check']== 6 or data['check']== 7 or data['check']== 9 or data['check']== 12 or data['check']== 8 or data.radio_select_group2=="amount_claimed" or data.radio_select_group=="Some_paid" or data.radio_select_group2=="defend_now"%}
     <table class="check-your-answers">
       <thead>
         <tr>
@@ -203,21 +204,80 @@ Check your answers
        </tr>
      </thead>
      <tbody>
-      {% if data.radio_select_group2=="amount_claimed" or data['check']== 8 %}
+      {% if data.radio_select_group2=="amount_claimed" or data['check']== 8  %}
       <tr class="">
-        <td class="no-border">
+        <td class="">
           When did you pay this amount?
         </td>
-        <td class="no-border">
+        <td class="">
           {% if data['amount-day']!="" %}
           {{ ( data['amount-month'] + ' ' + data['amount-day'] + ' ' + data['amount-year']) | date('D MMMM YYYY') }}
           {% else %}
           31 January 2018
           {% endif %}
         </td>
-        <td class="no-border">
+        <td class="change-answer">
+               <a href="../task-list/do-you-owe-money/defence-options?return_page={{  '../../task-list' | urlencode }}">
+              Change <span class="visuallyhidden">Name</span>
+            </a>
         </td>
       </tr>
+            <tr>
+            <td class="no-border">How much have you paid the claimant?</td>
+            <td class="no-border">
+             £{{ data['owe-amount'] or '1500' }}
+           </td>
+           <td class="change-answer no-border">
+            <a href="../task-list/do-you-owe-money/defence-options?return_page={{  '../../task-list' | urlencode }}">
+              Change <span class="visuallyhidden">Name</span>
+            </a>
+          </td>
+        </tr>
+
+
+      <tr>
+        <td class="">
+         How did you pay the amount claimed?
+       </td>
+       <td class="">
+
+         {{ data['owe-reason'] or 'I paid this by cheque to Mary Richards in person' }}
+      </td>
+      <td class="change-answer ">
+      </td>
+    </tr>
+    {% endif %} <!-- end of partial -->
+
+
+      {% if  data.radio_select_group2=="Some_paid"%}
+      <tr class="">
+        <td class="">
+          When did you pay this amount?
+        </td>
+        <td class="">
+          {% if data['amount-day']!="" %}
+          {{ ( data['amount-month'] + ' ' + data['amount-day'] + ' ' + data['amount-year']) | date('D MMMM YYYY') }}
+          {% else %}
+          31 January 2018
+          {% endif %}
+        </td>
+        <td class="change-answer">
+          <a href="../task-list/do-you-owe-money/defence-options?return_page={{  '../../task-list' | urlencode }}">
+              Change <span class="visuallyhidden">Name</span>
+            </a>
+        </td>
+      </tr>
+      <tr>
+            <td class="no-border">How much have you paid the claimant?</td>
+            <td class="no-border">
+             The amount claimed
+           </td>
+           <td class="change-answer no-border">
+            <a href="../task-list/do-you-owe-money/defence-options?return_page={{  '../../task-list' | urlencode }}">
+              Change <span class="visuallyhidden">Name</span>
+            </a>
+          </td>
+        </tr>
       <tr>
         <td class="">
          How did you pay the amount claimed?
@@ -232,7 +292,20 @@ Check your answers
       <td class="change-answer ">
       </td>
     </tr>
+          <tr>
+        <td>
+          Why are you disputing the full amount?
+        </td>
+        <td>
+          Because i don't owe them that much money.
+        </td>
+        <td class="change-answer">
+        </td>
+      </tr>
+
     {% endif %} <!-- end of partial -->
+
+
     {% if data['radio_select_group2']=="defend_now" or data['check']== 9 or data['check']== 12%} <!-- start of defend -->
     <tr>
       <td>
@@ -329,7 +402,7 @@ Check your answers
 
 
 
-      {% if data['radio_select_group2']=="defend_now" or data.radio_select_group=="Some" or  data.radio_select_group=="Some_paid" or data['check']== 4 or data['check']== 5 or data['check']== 6 or data['check']== 7 or data['check']== 9 or data['check']== 12%} <!-- start of time-line and evidence -->
+      {% if data['radio_select_group2']=="defend_now" or data.radio_select_group=="Some" or  data.radio_select_group=="Some_paid" or data.radio_select_group2=="Some_paid" or data['check']== 4 or data['check']== 5 or data['check']== 6 or data['check']== 7 or data['check']== 9 or data['check']== 12%} <!-- start of time-line and evidence -->
       <tr>
         <td class="no-border">
           Your timeline of what happened (optional)
@@ -342,28 +415,8 @@ Check your answers
           </a>
         </td>
       </tr>
-      <tr class="subsection">
-        {% if data['cd-timeline-2'] !='' %}<td class="no-border">{% else %}<td class=" ">{% endif %}
-         {% if data['check'] =='9' %}1 April 2017{% else %}{{data['cd-date-1']}}{% endif %}
-       </td>
-       {% if data['cd-timeline-2'] !='' %}<td class="no-border">{% else %}<td class=" ">{% endif %}
-        {% if data['check'] =='9' %}I contacted Jan Clark to discuss building works on our roof.{% else %}{{data['cd-timeline-1']}}{% endif %}
-      </td>
-      {% if data['cd-timeline-2'] !='' %}<td class="change-answer no-border">{% else %}<td class="change-answer ">{% endif %}
-      </td>
-    </tr>
-    {% if data['cd-timeline-2'] !='' or data['check'] =='2'  or data['check'] =='3' %}
-    <tr class="subsection">
-      <td class="no-border">
-       {% if data['check'] =='9' %}7 April 2017{% else %}{{data['cd-date-2']}}{% endif %}
-     </td>
-     <td class="no-border">
-      {% if data['check'] =='9' %}We agreed what work should be done and signed a contract.{% else %}{{data['cd-timeline-2']}}{% endif %}
-    </td>
-    <td class="change-answer no-border ">
-    </td>
-  </tr>
-  {% endif %}
+
+
   <tr>
     <td>
      Comments about their timeline (optional):
@@ -1235,7 +1288,7 @@ Check your answers
   {% elseif data.radio_select_group=="some_cc" or data['check']== 15 %}
   <!-- P/A - Amount is too much & set date - mediation chosen -->
   <input type="hidden" name="confirmation" value="13">
-  {% elseif data.radio_select_group=="Some_paid" or data['check']== 7 %}
+  {% elseif data.radio_select_group=="Some_paid" or  data.radio_select_group2=="Some_paid" or data['check']== 7 %}
   <!--  P/A - Paid what I owe & defence -->
   <input type="hidden" name="confirmation" value="8">
   {% elseif data.amount_paid=="less"  or data['check']== 11 %}
