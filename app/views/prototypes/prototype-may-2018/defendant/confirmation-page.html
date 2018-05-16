@@ -17,7 +17,7 @@ Money Claims Prototype
 					Your claim reference: <br><strong class="bold-large">352MC733</strong>
 				</p>
 				<p>
-					<strong class="bold"><span id="Date2"></span></strong>
+					<strong class="bold">{{ now | date }}</strong>
 				</p>
 			</p>
 			<p>
@@ -56,7 +56,6 @@ Money Claims Prototype
 		{% elseif data['radio-pay-group']=="Instalments" and data.radio_select_group=="all" or data['confirmation']== 2 %}
 		<p>We've emailed Jan Clark to tell them you've suggested paying by instalments.</p>
 
-		<p>We've sent them the settlement agreement and they'll decide whether to sign it or not.</p>
 		<h2 class="heading-medium">What happens next</h2>
 
 		<p><p>You should:</p>
@@ -76,7 +75,6 @@ Money Claims Prototype
 		<!-- Admit all - pay by set date -->
 		{% elseif data['radio-pay-group']=="Set-date"  and data.radio_select_group=="all" or data['confirmation']== 3 %}
 		<p>We've emailed Jan Clark your offer to pay by {% if data['set-day'] %}{{ ( data['set-month'] + ' ' + data['set-day'] + ' ' + data['set-year']) | date('D MMMM YYYY') }}{% else %}{{ date | date('add', 15, 'days') | date }}{% endif %} and your explanation of why you can’t pay before then.</p>
-		<p>We've sent them the settlement agreement and they'll decide whether to sign it or not.</p>
 		<h2 class="heading-medium">What happens next</h2>
 		<p>If Jan Clark accepts your offer to pay, you need to contact them for payment details and to arrange payment.</p>
 		<p>If they reject your offer to pay by a set date then the court will decide how you must pay.</p>
