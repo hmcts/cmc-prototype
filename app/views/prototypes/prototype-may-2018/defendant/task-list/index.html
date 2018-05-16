@@ -261,9 +261,10 @@
           </table>
 
           <br>
-         {% if data.settlement!="true"     %}
 
-         {% else %}
+
+         {% if data.owe_some_pa=="complete" %}
+
 
           <table id="table-of-tasks">
             <thead>
@@ -278,22 +279,6 @@
               </tr>
             </thead>
             <tbody>
-         {% if data.settlement_mediation=="true"  %}
-         {% elif data.owe_some_fa=="complete" or data.owe_some_pa=="complete"  %}
-            <tr id="their-details">
-              <td class="task">
-                <a href="task-list/settlement{{formQuery}}">
-                  <span class="task-name">Suggest an agreement</span>
-                </a>
-              </td>
-              <td class="numeric" id="task-status" scope="col" id="col-status">
-                {% if data.agreement=="complete" %}
-                {% include "includes/task_status_finished.html" %}
-                {% endif %}
-              </td>
-            </tr>
-          {% endif %}
-         {% if data.owe_some_pa=="complete" or   data.your_defence=="complete"   %}
 
               <tr id="their-details">
                 <td class="task">
@@ -307,7 +292,6 @@
                   {% endif %}
                 </td>
               </tr>
-{% endif %}
                   </tbody>
             </table><!--end of resolving the claim-->
    {% endif %}
