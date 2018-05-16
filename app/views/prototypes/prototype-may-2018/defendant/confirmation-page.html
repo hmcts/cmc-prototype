@@ -124,7 +124,7 @@ Money Claims Prototype
 		<p><a class="button" href='../dashboard/home?dashboard=2.1'>Go to your account</a></p>
 		<!-- amount too much - pay set date + mediation -->
 		{% elseif data.radio_select_group2=="Some" and data['radio-pay-group']=="Set-date" or data['confirmation']== 7 %}
-		<p>You believe you owe {% if data['owe-amount'] =='' %}£300{% else %}£{{data['owe-amount']}}{% endif %}. We've emailed Jan Clark your offer to pay this amount by <span class="dates"></span>.</p>
+		<p>You believe you owe £{{ data['owe-amount'] or '1,200' }}. We've emailed Jan Clark your offer to pay this amount by <span class="dates"></span>.</p>
 		<p>We've also sent them your explanation of what you believe you owe.</p>
 		<h2 class="heading-medium">What happens next</h2>
 		<p>Jan Clark needs to respond to your offer before 4pm on <span class="dates"></span>.</p>
@@ -142,7 +142,7 @@ Money Claims Prototype
 		<p><a class="button" href='../dashboard/home?dashboard=2.1'>Go to your account</a></p>
 		<!-- paid what i owe -->
 		{% elseif data.radio_select_group2=="Paid-some" or data['confirmation']== 8 %}
-		<p>You believe you owe {% if data['owe-amount'] =='' %}£300{% else %}£{{data['owe-amount']}}{% endif %} and that you've paid it.</p>
+		<p>You believe you owe £{{ data['owe-amount'] or '1,200' }} and that you've paid it.</p>
 		<p>We've sent Jan Clark your explanation of what you believe you owe.</p>
 
       <h2 class="heading-medium">What happens next</h2>
@@ -161,7 +161,7 @@ Money Claims Prototype
 		{% endif %}
 		<!-- paid what i owe + mediation -->
 		{% elseif data.radio_select_group2=="Paid-some" or data['confirmation']== 10 %}
-		<p>You said that you paid £1500. We've sent Jan Clark your explanation of why you don't owe any more money.
+		<p>You said that you paid £{{ data['owe-amount'] or '1,200' }}. We've sent Jan Clark your explanation of why you don't owe any more money.
 			<h2 class="heading-medium">What happens next</h2>
 			<p>Jan Clark needs to respond before 4pm on <span class="dates"></span>.</p>
 				<p>If they reject your explanation, the court will review the case. You might have to go to a hearing.</p>
