@@ -23,7 +23,8 @@ Money Claims Prototype
 
       <input type="hidden" name="your_defence" value="complete">
       <h1 class="heading-large">How much have you paid? </h1>
-      <p class="">The total amount claimed is £1,500. This includes the claim fee and any interest. </p>
+      <p class="after">The total amount claimed is £1,500. This includes the claim fee. </p>
+      <p class="before" style="display:none">The total amount claimed is £1,000. This doesn't includes the claim fee as you paid before the claim was issued. </p>
       <div class="form-group">
        <label class="form-label-bold" for="offer">
          How much have you paid?
@@ -32,6 +33,31 @@ Money Claims Prototype
        name="owe-amount"
        id="owe-amount">
      </div>
+        {% if data['dates']=="true" %}
+        {% else %}
+          <div class="form-group">
+               <label class="form-label-bold" for="offer">
+         When did you pay this amount?
+       </label>
+                  <fieldset>
+                    <div class="form-date">
+                      <p class="form-hint">For example, {{ date | date('add', 19, 'days') | date }}</p>
+                      <div class="form-group form-group-day">
+                        <label for="dob-day">Day</label>
+                        <input class="form-control" id="set-day" name="set-day" type="number" pattern="[0-9]*" min="0" max="31" value="{{data['set-day']}}" >
+                      </div>
+                      <div class="form-group form-group-month">
+                        <label for="dob-month">Month</label>
+                        <input class="form-control" id="set-month" name="set-month" type="number" pattern="[0-9]*" min="0" max="12" value="{{data['set-month']}}">
+                      </div>
+                      <div class="form-group form-group-year">
+                        <label for="dob-year">Year</label>
+                        <input class="form-control" id="set-year" name="set-year" type="number" pattern="[0-9]*" min="0" max="2024" value="{{data['set-year']}}">
+                      </div>
+                    </div>
+                  </fieldset>
+                </div>
+         {% endif %}
      <div class="form-group">
        <label class="form-label-bold" for="offer">
          How did you pay this amount?
@@ -49,6 +75,7 @@ Money Claims Prototype
         {% if data['partial']=="2" %}
         <input type="hidden" name="radio_select_group2" value="Some_paid">
         <input type="hidden" name="settlement" value="true">
+        <input type="hidden" name="amount_paid" value="less">
 
         {% else %}
         <input type="hidden" name="settlement" value="false">
@@ -68,4 +95,19 @@ Money Claims Prototype
     <option value="2" {% if data['partial'] == 2 %}selected{% endif %}>2. Less than claim amount</option>
   </select>
 </form>
+<script>
+  $(document).ready(function () {
+    var end_date = "{{data['set-year']}}-{{data['set-month']}}-{{data['set-day']}}"
+    var difference = moment(end_date).diff(moment("2018-5-14"), 'days')
+    $("#st").html(moment())
+    $("#ed").html(moment(end_date))
+    if(difference < 1) {
+     $(".before").show();
+     $(".after").hide();
+   }else if(difference > 1) {
+     $(".after").show();
+     $(".before").hide();
+   }
+ })
+</script>
 {% endblock %}
