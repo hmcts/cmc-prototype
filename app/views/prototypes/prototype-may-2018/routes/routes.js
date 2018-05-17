@@ -74,6 +74,16 @@ module.exports = function(app){
   })
 
 
+  app.post( '/' + strPath + 'defendant/task-list/your-defence/paid-less', (req, res) => {
+
+    if (req.session.data['owe-amount'] < 1500 ) {
+      res.redirect('/' + strPath + 'defendant/task-list?radio_select_group2=Some_paid');
+    } else {
+      res.redirect('/' + strPath + 'defendant/task-list?radio_select_group2=amount_claimed');
+    }
+
+  })
+
 
   app.post( '/' + strPath + 'claimant/task-list/their-details/defendant-add', (req, res) => {
 
@@ -94,7 +104,7 @@ module.exports = function(app){
       defendants.push({'defendantNo': defendantNo, 'defendantName': defendantName, 'defendantNameBusiness': defendantNameBusiness, 'defendantNameContact': defendantNameContact, 'defendantAddress': defendantAddress, 'defendantType': defendantType, 'defendantEmail': defendantEmail })
       req.session.data.defendants = defendants
       res.render(strPath + 'claimant/task-list/their-details/defendant-add' );
-    
+
     } else if (req.body.addDefendant && req.body.addDefendant.toString() === 'yes') {
       req.session.data['defendant_name'] = req.session.data['defendant_business_name'] = req.session.data['defendant-contact-name'] = req.session.data['defendant_AddressLine1'] = req.session.data['defendant_AddressLine2'] = req.session.data['defendant_AddressLine3']  = req.session.data['addressSelect'] = req.session.data['defendant_city'] = req.session.data['defendant_Postcode'] = req.session.data['postcode'] = req.session.data['postcodeFinder'] = req.session.data['defendant_country'] = req.session.data['defendant-email'] = req.session.data['defendant-type'] = undefined;
       res.redirect('../their-details');
