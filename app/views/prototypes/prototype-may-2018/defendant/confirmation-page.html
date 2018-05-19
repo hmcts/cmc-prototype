@@ -23,109 +23,154 @@ Money Claims Prototype
 			<p>
 				{% if data['radio-pay-group'] == "Instalments" or data['confirmation']== 2 %}
 				<a  class="font-medium" href="correspondence/forms/claim-form-defendant?check=4" target="new" style="color: #FFFFFF" >
-					{% elseif data['radio-pay-group'] == "Set-date" or data['confirmation']== 3 %}
-					<a  class="font-medium" href="correspondence/forms/claim-form-defendant?check=3" target="new" style="color: #FFFFFF" >
-						{% else %}
-						<a  class="font-medium" href="correspondence/forms/claim-form-defendant?check=2" target="new" style="color: #FFFFFF" >
-							{% endif %}
-							Download your response (PDF, 123KB)
-						</a>
-					</p>
-				</div>
-				<h2 class="heading-large">Your response</h2>
-				<!-- Admit all - pay Immediately -->
-				{% if data['radio-pay-group']=="Immediately" and data.radio_select_group=="all" or data['confirmation']== 1  %}
-				<p>We've emailed Jan Clark to tell them you'll pay immediately.</p>
-				<p>You need to make sure that:</p>
-				<ul class="list list-bullet">
-					<li>they get the money before 4pm on {{ now | date('add', 5, 'days' ) | date }} - they can request a County Court Judgment against you if not</li>
-					<li>any cheques or bank transfers are clear in their account by the deadline</li>
-					<li>you get a receipt for any payments</li>
-				</ul>
-				<a href="../dashboard/party-details/claimant">Contact Jan Clark</a> if you need their payment details.
-				<h2 class="heading-medium">What happens next</h2>
-				<p>When Jan Clark gets your payment they must tell you and the court you’ve paid.</p>
-				{% include "includes/survey.html" %}
-				<p><a class="button" href='../dashboard/home?dashboard=2.1'>Go to your account</a></p>
-				<!-- Admit all - pay instalments -->
-				{% elseif data['radio-pay-group']=="Instalments" and data.radio_select_group=="all" or data['confirmation']== 2 %}
-				<p>We've emailed Jan Clark to tell them you've suggested paying by instalments.</p>
-				<h2 class="heading-medium">What happens next</h2>
-				<p><p>You should:</p>
-				<ul class="list list-bullet">
-					<li>set up your repayment plan to begin when you said it would</li>
-					<li>{% if data.counterclaim=="true" %}<a href="party-details/defendant">contact Mary Richards</a>{%else%}<a href="party-details/claimant">contact Jan Clark</a>{% endif %} if you need their payment details</li>
-					<li>make sure you get a receipt for any payments</li>
-				</ul>
+				{% elseif data['radio-pay-group'] == "Set-date" or data['confirmation']== 3 %}
+				<a  class="font-medium" href="correspondence/forms/claim-form-defendant?check=3" target="new" style="color: #FFFFFF" >
+				{% else %}
+				<a  class="font-medium" href="correspondence/forms/claim-form-defendant?check=2" target="new" style="color: #FFFFFF" >
+				{% endif %}
+					Download your response (PDF, 123KB)
+				</a>
 			</p>
-			<p>If they reject your offer to pay in instalments then the court will decide how you can pay.</p>
-			<p>If they do not respond within 6 months, the court will put the claim on hold.</p>
-			{% include "includes/survey.html" %}
-			<p><a class="button" href='../dashboard/home?dashboard=2.1'>Go to your account</a></p>
-			<!-- Admit all - pay by set date -->
-			{% elseif data['radio-pay-group']=="Set-date"  and data.radio_select_group=="all" or data['confirmation']== 3 %}
-			<p>We've emailed Jan Clark your offer to pay by {% if data['set-day'] %}{{ ( data['set-month'] + ' ' + data['set-day'] + ' ' + data['set-year']) | date('D MMMM YYYY') }}{% else %}{{ date | date('add', 15, 'days') | date }}{% endif %} and your explanation of why you can’t pay before then.</p>
+		</div>
+		<h2 class="heading-large">Your response</h2>
+		<!-- Admit all - pay Immediately -->
+		{% if data['radio-pay-group']=="Immediately" and data.radio_select_group=="all" or data['confirmation']== 1  %}
+
+		<p>We've emailed Jan Clark to tell them you'll pay immediately.</p>
+
+    <p>You need to make sure that:</p>
+
+		<ul class="list list-bullet">
+  <li>they get the money before 4pm on {{ now | date('add', 5, 'days' ) | date }} - they can request a County Court Judgment against you if not</li>
+  <li>any cheques or bank transfers are clear in their account by the deadline</li>
+	<li>you get a receipt for any payments</li>
+</ul>
+
+    <a href="../dashboard/party-details/claimant">Contact Jan Clark</a> if you need their payment details.
+
+		<h2 class="heading-medium">What happens next</h2>
+		<p>When Jan Clark gets your payment they must tell you and the court you’ve paid.</p>
+		{% include "includes/survey.html" %}
+		<p><a class="button" href='../dashboard/home?dashboard=2.1'>Go to your account</a></p>
+		<!-- Admit all - pay instalments -->
+		{% elseif data['radio-pay-group']=="Instalments" and data.radio_select_group=="all" or data['confirmation']== 2 %}
+		<p>We've emailed Jan Clark to tell them you've suggested paying by instalments.</p>
+
+		<h2 class="heading-medium">What happens next</h2>
+
+		<p><p>You should:</p>
+
+		<ul class="list list-bullet">
+		  <li>set up your repayment plan to begin when you said it would</li>
+		  <li>{% if data.counterclaim=="true" %}<a href="party-details/defendant">contact Mary Richards</a>{%else%}<a href="party-details/claimant">contact Jan Clark</a>{% endif %} if you need their payment details</li>
+		  <li>make sure you get a receipt for any payments</li>
+		</ul>
+
+	</p>
+
+		<p>If they reject your offer to pay in instalments then the court will decide how you can pay.</p>
+		<p>If they do not respond within 6 months, the court will put the claim on hold.</p>
+		{% include "includes/survey.html" %}
+		<p><a class="button" href='../dashboard/home?dashboard=2.1'>Go to your account</a></p>
+		<!-- Admit all - pay by set date -->
+		{% elseif data['radio-pay-group']=="Set-date"  and data.radio_select_group=="all" or data['confirmation']== 3 %}
+		<p>We've emailed Jan Clark your offer to pay by {% if data['set-day'] %}{{ ( data['set-month'] + ' ' + data['set-day'] + ' ' + data['set-year']) | date('D MMMM YYYY') }}{% else %}{{ date | date('add', 15, 'days') | date }}{% endif %} and your explanation of why you can’t pay before then.</p>
+		<h2 class="heading-medium">What happens next</h2>
+		<p>If Jan Clark accepts your offer to pay, you need to contact them for payment details and to arrange payment.</p>
+		<p>If they reject your offer to pay by a set date then the court will decide how you must pay.</p>
+		<p>If they do not respond within 6 months, the court will put the claim on hold.</p>
+		{% include "includes/survey.html" %}
+		<p><a class="button" href='../dashboard/home?dashboard=2.1'>Go to your account</a></p>
+		<!-- I part admit the claim - pay immediately -->
+		{% elseif data.radio_select_group2=="Some" and data['radio-pay-group']=="Immediately" or data['confirmation']== 4 %}
+		<p>You believe you owe {% if data['owe-amount'] =='' %}£300{% else %}£{{data['owe-amount']}}{% endif %}. We've emailed Jan Clark your offer to pay this amount immediately.</p>
+		<p>We've also sent them your explanation of why you believe you don't owe the total amount.</p>
+		<h2 class="heading-medium">What happens next</h2>
+		<p>Jan Clark needs to respond to your defence before 4pm on <span class="dates"></span>.</p>
+
+			<p> If they reject it then the court will review the case.</p>
+
+		<p> You might have to go to a hearing.</p>
+		<p>We'll contact you if we set a hearing date to tell you how to prepare.</p>
+		<p>If Jan Clark accepts your defence they must tell both you and the court that you've paid.</p>
+		{% if data['radio-settlement'] == 'yes' %}
+		{% else %}
+		{% include "includes/settle.html" %}
+		{% endif %}
+		{% if data['radio-mediation-group']=="Yes" %}
+		{% include "includes/mediation.html" %}
+		{% else %}
+		{% endif %}
+		{% include "includes/survey.html" %}
+		<p><a class="button" href='../dashboard/home?dashboard=2.1'>Go to your account</a></p>
+		<!-- amount too much - pay instalments  -->
+		{% elseif data.radio_select_group2=="Some" and data['radio-pay-group']=="Instalments" or data['confirmation']== 6 %}
+		<p>You believe you owe {% if data['owe-amount'] =='' %}£300{% else %}£{{data['owe-amount']}}{% endif %}. We've emailed Jan Clark your offer to pay this amount by instalments.</p>
+		<p>We've also sent them your explanation of what you believe you owe.</p>
+		<h2 class="heading-medium">What happens next</h2>
+		<p>Jan Clark needs to respond to your offer before 4pm on <span class="dates"></span>.</p>
+		<p>If they accept your offer we’ll email you to explain how you can pay.</p>
+		<p>If they reject your offer the court will review the case. You might have to go to a hearing.</p>
+		<p>We'll contact you if we set a hearing date to tell you how to prepare.</p>
+		{% if data['radio-settlement'] == 'yes' %}
+		{% else %}
+		{% include "includes/settle.html" %}
+		{% endif %}
+		{% if data['radio-mediation-group']=="Yes"  %}
+		{% include "includes/mediation.html" %}
+		{% else %}
+		{% endif %}
+		{% include "includes/survey.html" %}
+		<p><a class="button" href='../dashboard/home?dashboard=2.1'>Go to your account</a></p>
+		<!-- amount too much - pay set date + mediation -->
+		{% elseif data.radio_select_group2=="Some" and data['radio-pay-group']=="Set-date" or data['confirmation']== 7 %}
+		<p>You believe you owe £{{ data['owe-amount'] or '1,200' }}. We've emailed Jan Clark your offer to pay this amount by <span class="dates"></span>.</p>
+		<p>We've also sent them your explanation of what you believe you owe.</p>
+		<h2 class="heading-medium">What happens next</h2>
+		<p>Jan Clark needs to respond to your offer before 4pm on <span class="dates"></span>.</p>
+		<p>If they accept we’ll email you to explain how you can pay.</p>
+		<p>If they reject, the court will review the case. You might have to go to a hearing.</p>
+		<p>We'll contact you if we set a hearing date to tell you how to prepare.</p>
+		{% if data['radio-settlement'] == 'yes' %}
+		{% else %}
+		{% include "includes/settle.html" %}
+		{% endif %}			{% if data['radio-mediation-group']=="Yes" %}
+		{% include "includes/mediation.html" %}
+		{% else %}
+		{% endif %}
+		{% include "includes/survey.html" %}
+		<p><a class="button" href='../dashboard/home?dashboard=2.1'>Go to your account</a></p>
+		<!-- paid what i owe -->
+		{% elseif data.radio_select_group2=="Paid-some" or data['confirmation']== 8 %}
+		<p>You believe you owe £{{ data['owe-amount'] or '1,200' }} and that you've paid it.</p>
+		<p>We've sent Jan Clark your explanation of what you believe you owe.</p>
+
+      <h2 class="heading-medium">What happens next</h2>
+		<p>Jan Clark needs to respond before 4pm on <span class="dates"></span>.</p>
+
+			<p> If they reject your explanation then the court will review the case. You might have to go to a hearing.</p>
+		<p>We'll contact you if we set a hearing date to tell you how to prepare.</p>
+		<p>If Jan Clark accepts your explanation, they must tell you and the court that you've paid.</p>
+		{% if data['radio-settlement'] == 'yes' %}
+		{% else %}
+		{% include "includes/settle.html" %}
+		{% endif %}
+		{% if data['radio-mediation-group']=="Yes" %}
+		{% include "includes/mediation.html" %}
+		{% else %}
+		{% endif %}
+		<!-- paid what i owe + mediation -->
+		{% elseif data.radio_select_group2=="Paid-some" or data['confirmation']== 10 %}
+		<p>You said that you paid £{{ data['owe-amount'] or '1,200' }}. We've sent Jan Clark your explanation of why you don't owe any more money.
 			<h2 class="heading-medium">What happens next</h2>
-			<p>If Jan Clark accepts your offer to pay, you need to contact them for payment details and to arrange payment.</p>
-			<p>If they reject your offer to pay by a set date then the court will decide how you must pay.</p>
-			<p>If they do not respond within 6 months, the court will put the claim on hold.</p>
-			{% include "includes/survey.html" %}
-			<p><a class="button" href='../dashboard/home?dashboard=2.1'>Go to your account</a></p>
-			<!-- I part admit the claim - pay immediately -->
-			{% elseif data.radio_select_group2=="Some" and data['radio-pay-group']=="Immediately" or data['confirmation']== 4 %}
-			<p>You believe you owe £{{ data['owe-amount'] or '1,200' }}. We've emailed Jan Clark your offer to pay this amount immediately.</p>
-			<p>We've also sent them your explanation of why you believe you don't owe the total amount.</p>
-			<h2 class="heading-medium">What happens next</h2>
-			<p>If Jan Clark accepts your admission of £{{ data['owe-amount'] or '1,200' }} and your your offer to pay the claim will be settled.</p>
-			{% if data['radio-mediation-group']=="Yes" %}
-			<p>If they reject your admission they'll be offered mediation to help resolve the dispute. If they accept we will contact you with an appointment.</p>
-			<p> If they reject mediation the claim will proceed for the full amount of £1,500 and may go to a hearing.</p>
+			<p>Jan Clark needs to respond before 4pm on <span class="dates"></span>.</p>
+				<p>If they reject your explanation, the court will review the case. You might have to go to a hearing.</p>
+			<p>We'll contact you if we set a hearing date to tell you how to prepare.</p>
+			<p>If Jan Clark accepts your explanation they must tell both you and the court that you've paid.</p>
+			<p>You can still contact Jan Clark to make a <a href='../dashboard/offer-agreement/make-offer?defendant=defendant'>settlement out of court</a>. If you agree a settlement then the claim is closed and you won't have to go to a hearing.</p>
+			{% if data['radio-settlement'] == 'yes' %}
 			{% else %}
-			<p> If they reject it, the claim will proceed for the full amount of £1,500 and may go to a hearing.</p>
-			{% endif %}
-			<p>If they do not respond within 6 months, the court will put the claim on hold.</p>
-			{% include "includes/survey.html" %}
-			<p><a class="button" href='../dashboard/home?dashboard=2.1'>Go to your account</a></p>
-			<!-- amount too much - pay instalments  -->
-			{% elseif data.radio_select_group2=="Some" and data['radio-pay-group']=="Instalments" or data['confirmation']== 6 %}
-			<p>You believe you owe £{{ data['owe-amount'] or '1,200' }}. We've emailed Jan Clark your offer to pay this amount by instalments.</p>
-			<p>We've also sent them your explanation of why you believe you don't owe the total amount.</p>
-			<h2 class="heading-medium">What happens next</h2>
-			<p>If Jan Clark accepts your admission of £{{ data['owe-amount'] or '1,200' }} and your your offer to pay the claim will be settled.</p>
-			{% if data['radio-mediation-group']=="Yes" %}
-			<p>If they reject your admission they'll be offered mediation to help resolve the dispute. If they accept we will contact you with an appointment.</p>
-			<p> If they reject mediation the claim will proceed for the full amount of £1,500 and may go to a hearing.</p>
-			{% else %}
-			<p> If they reject it, the claim will proceed for the full amount of £1,500 and may go to a hearing.</p>
-			{% endif %}
-			<p>If they do not respond within 6 months, the court will put the claim on hold.</p>
-			{% include "includes/survey.html" %}
-			<p><a class="button" href='../dashboard/home?dashboard=2.1'>Go to your account</a></p>
-			<!-- amount too much - pay set date + mediation -->
-			{% elseif data.radio_select_group2=="Some" and data['radio-pay-group']=="Set-date" or data['confirmation']== 7 %}
-			<p>You believe you owe £{{ data['owe-amount'] or '1,200' }}. We've emailed Jan Clark your offer to pay this amount by <span class="dates"></span>.</p>
-			<p>We've also sent them your explanation of why you believe you don't owe the total amount.</p>
-			<h2 class="heading-medium">What happens next</h2>
-			<p>If Jan Clark accepts your admission of £{{ data['owe-amount'] or '1,200' }} and your your offer to pay the claim will be settled.</p>
-			{% if data['radio-mediation-group']=="Yes" %}
-			<p>If they reject your admission they'll be offered mediation to help resolve the dispute. If they accept we will contact you with an appointment.</p>
-			<p> If they reject mediation the claim will proceed for the full amount of £1,500 and may go to a hearing.</p>
-			{% else %}
-			<p> If they reject it, the claim will proceed for the full amount of £1,500 and may go to a hearing.</p>
-			{% endif %}
-			<p>If they do not respond within 6 months, the court will put the claim on hold.</p>
-			{% include "includes/survey.html" %}
-			<p><a class="button" href='../dashboard/home?dashboard=2.1'>Go to your account</a></p>
-			<!-- paid what i owe -->
-			{% elseif data.radio_select_group2=="Paid-some" or data['confirmation']== 8 %}
-			<p>We have emailed Jan Clark that your have paid what you believe you owe £{{ data['owe-amount'] or '1,200' }}.</p>
-			<h2 class="heading-medium">What happens next</h2>
-			<p> If they accept your response then the claim will be marked as paid.</p>
-			{% if data['radio-mediation-group']=="Yes" %}
-			<p>If they reject your response they'll be offered mediation to help resolve the dispute. If they accept we will contact you with an appointment.</p>
-			<p> If they reject mediation the claim will proceed and may go to a hearing.</p>
-			{% else %}
-			<p> If they reject your response the claim will proceed and may go to a hearing.</p>
+			{% include "includes/settle.html" %}
 			{% endif %}
 			<!-- Reject claim -->
 			{% elseif data.radio_select_group2=="defend_now" or data['confirmation']== 12 %}
