@@ -55,7 +55,7 @@ Money Claims Prototype
 				</p>
                 {% if ( data['radio-proceed'] == "judgment" or data['radio-proceed'] == "judgment-pa" or data['confirmation'] == 2 or data['confirmation'] == 2.1 ) %}
 
-        <a class="font-medium" target="_blank" href='correspondence/claim-form-claimant?check=1' style="color: #FFFFFF" >Download judgment as a PDF</a>
+        <p><a class="font-medium" target="_blank" href='../../defendant/correspondence/forms/judgment-order?check={% if data['radio-pay-group'] == "Instalments" %}3{% elseif data['radio-pay-group'] == 'Set-date' %}2{% else %}1{% endif %}' style="color: #FFFFFF" >Download judgment</a> (PDF, 123KB)</p>
 {% endif %}
     </div>
     <fieldset>
@@ -71,7 +71,7 @@ Money Claims Prototype
 
       {% include "includes/survey.html" %}
 
-      <p><a class="button" href='../claimant?claimant=10.11'>Finished</a></p>
+      <p><a class="button" href='../dashboard/home?dashboard=1.4'>Go to your account</a></p>
 
 
         {% elseif data['radio-indent-group'] == "accept_stop_claim"  or data['confirmation'] == 1 %}
@@ -84,7 +84,8 @@ Money Claims Prototype
            <p>After you've requested a CCJ you can ask the court to enforce payment.</p>
 						{% include "includes/survey.html" %}
 
-      <p><a class="button" href='../claimant?claimant=10.{% if data['payment'] == 'full' %}4{% else %}1{% endif %}'>Finished</a></p>
+          <p><a class="button" href='../claimant?claimant=10.{% if data['payment'] == 'full' %}4{% else %}1{% endif %}'>Go to your account</a></p>
+
 
 
 
@@ -94,7 +95,7 @@ Money Claims Prototype
 
 			{% include "includes/survey.html" %}
 
-			<p><a class="button" href='../claimant?claimant=10.61'>Finished</a></p>
+			<p><a class="button" href='../claimant?claimant=10.61'>Go to your account</a></p>
 
 
 
@@ -103,7 +104,7 @@ Money Claims Prototype
         <p>If they do not think they can afford the plan, they can ask for a judge to make a different plan.</p>
 			{% include "includes/survey.html" %}
 
-			<p><a class="button" href='../claimant?claimant=10.61'>Finished</a></p>
+			<p><a class="button" href='../claimant?claimant=10.61'>Go to your account</a></p>
 
 
        {% elseif data['radio-indent-group2'] == "reject_stop_claim" or data['confirmation'] == 5 %}
@@ -112,14 +113,14 @@ Money Claims Prototype
 
 			{% include "includes/survey.html" %}
 
-			<p><a class="button" href='../claimant?claimant=10.6'>Finished</a></p>
+			<p><a class="button" href='../claimant?claimant=10.6'>Go to your account</a></p>
 
         {% elif data['radio-indent-group'] == "mediation-accept" or data['confirmation'] == 6 %}
         <p>You've agreed to try to resolve the claim using mediation.</p>
         <p>A mediator will contact you and the defendant in the next 14 days to arrange an appointment.</p>
 						{% include "includes/survey.html" %}
 
-      <p><a class="button" href='../home'>Finished</a></p>
+      <p><a class="button" href='../home'>Go to your account</a></p>
 
 
          {% elseif data['radio-indent-group'] == "mediation-opt" or data['confirmation'] == 7 %}
@@ -130,14 +131,14 @@ Money Claims Prototype
          <p>We'll email you when the defendant responds.</p>
 					{% include "includes/survey.html" %}
 
-				<p><a class="button" href='../home'>Finished</a></p>
+				<p><a class="button" href='../home'>Go to your account</a></p>
 
 
       {% elif data['radio-indent-group'] == "accept_stop_claim_claim_amount" or data['radio-indent-group'] == "accept_stop_claim_settled" %}
         <p>The claim is now settled. We'll email the defendant Mary Richards to tell them.</p>
 						{% include "includes/survey.html" %}
 
-      <p><a class="button" href='../home'>Finished</a></p>
+      <p><a class="button" href='../home'>Go to your account</a></p>
 
            {% elseif data['radio-indent-group'] == "mediation-reject" or   data['confirmation'] == 8%}
            <p>The court will review the case. You might have to go to a hearing.</p> 
@@ -145,7 +146,7 @@ Money Claims Prototype
              <p>We'll contact you if we set a hearing date to tell you how to prepare.</p>
 						{% include "includes/survey.html" %}
 
-      <p><a class="button" href='../home'>Finished</a></p>
+      <p><a class="button" href='../home'>Go to your account</a></p>
 
            {% endif %}
 			{% include "includes/contact.html" %}
