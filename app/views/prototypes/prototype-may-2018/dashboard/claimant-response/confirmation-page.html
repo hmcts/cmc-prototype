@@ -21,7 +21,7 @@ Money Claims Prototype
 
         {% elseif data['radio-indent-group'] == "accept_stop_claim_settled" %}
 
-        <h1 class="bold-large">The claim is now settled</h1>
+        <h1 class="bold-large">You've accepted their response</h1>
 
 
         {% elseif ( data['radio-pay-group'] == "Set-date" or data['radio-pay-group'] == "Immediately" ) and data['radio-indent-group'] == "reject_stop_claim" or data['confirmation'] == 3 %}
@@ -35,11 +35,11 @@ Money Claims Prototype
         <h1 class="bold-large">You've asked for a judge to determine a repayment plan</h1>
 
         {% elseif data['radio-indent-group'] == "mediation-opt" or data['radio-indent-group'] == "mediation-accept" or data['radio-indent-group'] == "set_date"  or data['confirmation'] == 6 or data['confirmation'] == 7 %}
-        <h1 class="bold-large">You have requested free mediation</h1>
+        <h1 class="bold-large">You've rejected their response</h1>
 
 
         {% elseif data['radio-indent-group'] == "reject_hearing" or data['radio-indent-group'] == "mediation-reject" or data['radio-indent-group'] == "decline-mediation"  or data['confirmation'] == 8 %}
-        <h1 class="bold-large">The claim will be reviewed</h1>
+        <h1 class="bold-large">You've rejected their response</h1>
 
         {% elseif data['radio-indent-group'] == "payment_instalments" or data['radio-indent-group'] == "set_date"%}
         <h1 class="bold-large">Payment request sent to court</h1>
@@ -115,6 +115,7 @@ Money Claims Prototype
 			<p><a class="button" href='../claimant?claimant=10.6'>Finished</a></p>
 
         {% elif data['radio-indent-group'] == "mediation-accept" or data['confirmation'] == 6 %}
+        <p>You've accepted the defendant's offer to try to resolve the claim using mediation.</p>
         <p>A mediator will contact you and the defendant in the next 14 days to arrange an appointment.</p>
 						{% include "includes/survey.html" %}
 
@@ -133,13 +134,13 @@ Money Claims Prototype
 
 
       {% elif data['radio-indent-group'] == "accept_stop_claim_claim_amount" or data['radio-indent-group'] == "accept_stop_claim_settled" %}
-        <p>We'll email the defendant Mary Richards telling them that you accepted their response and that the claim is now settled.</p>
+        <p>The claim is now settled. We'll email the defendant Mary Richards to tell them.</p>
 						{% include "includes/survey.html" %}
 
       <p><a class="button" href='../home'>Finished</a></p>
 
            {% elseif data['radio-indent-group'] == "mediation-reject" or   data['confirmation'] == 8%}
-           <p>The case will be reviewed and might go to a hearing. We'll email you if a hearing date is scheduled and explain what you need to do to prepare.</p>
+           <p>The court will review the case. You might have to go to a hearing. We'll contact you if we set a hearing date to tell you how to prepare.</p>
 						{% include "includes/survey.html" %}
 
       <p><a class="button" href='../home'>Finished</a></p>
