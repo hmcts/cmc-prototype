@@ -116,6 +116,19 @@
               <p> <a href="claimant-response/paid-what-owe-claim-amount/task-list" class="button secondary-button">Respond</a></p>
             </div>
 
+            {% elseif data['claimant'] == 7  %}
+            <div class="status-block single">
+             <h2 class="heading-small">The defendant's response</h2>
+
+              <p> Mary Richards says says they paid you  £{{ data['owe-amount'] or '1,200' }} on the  {{ now | date('add' , 3 , 'days') | date( 'subtract', 1, 'months') | date }} - they said they don't owe the full amount you claimed.<p>
+
+
+                <p> You need to accept or reject the response</p>
+                          <p>You have until 4pm on {{ now | date( 'add', 33, 'days') | date }} to respond or the claim will be marked as paid.</p>
+
+              <p> <a href="claimant-response/paid-what-owe-less-claim-amount/task-list" class="button secondary-button">Respond to defendant</a></p>
+            </div>
+
             {% elseif data['claimant'] == 8  %}
             <div class="status-block single">
              <h2 class="heading-small">The defendant's response</h2>
@@ -376,7 +389,8 @@
     <option value="4.2" {% if data['claimant'] == 4.2 %}selected{% endif %}>4.2 Admit all the claim  - pay in full immediately</option>
     <option value="4.3" {% if data['claimant'] == 4.3 %}selected{% endif %}>4.3 Admit all the claim  - pay in full immediately - not paid</option>
     <option value="5" {% if data['claimant'] == 5 %}selected{% endif %}>5. Part admit the claim  </option>
-    <option value="6" {% if data['claimant'] == 6 %}selected{% endif %}>6. Paid what I believe i owe - claim amount  </option>
+    <option value="6" {% if data['claimant'] == 6 %}selected{% endif %}>6. Paid what I believe i owe - claim amount (states paid)  </option>
+    <option value="7" {% if data['claimant'] == 7 %}selected{% endif %}>7. Paid what I believe i owe - less than the claim amount  </option>
     <option value="8" {% if data['claimant'] == 8 %}selected{% endif %}>8. Dispute claim   </option>
     <option value="9" {% if data['claimant'] == 9 %}selected{% endif %}>9. Dispute claim + mediation   </option>
     <option>------- Claimant responses  ----------</option>
