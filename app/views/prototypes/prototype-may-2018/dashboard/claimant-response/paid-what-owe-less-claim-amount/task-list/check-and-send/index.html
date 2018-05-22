@@ -26,6 +26,25 @@ Check your answers
       </tr>
     </thead>
     <tbody>
+        <tr>
+      <td>
+        Has the defendant paid this amount?
+      </td>
+      <td>
+           {%if data.radio_select_group=="Yes" %}
+         Yes, I have received this payment
+         {%elif  data.radio_select_group=="No"  %}
+         No, I have not received this payment
+         {% else %}
+         No, I have not received this payment
+         {% endif %}
+      </td>
+      <td class="change-answer">
+        <a href="../task-list/claim-details/reason?return_page={{ '../../task-list/claim-details/check-your-answers' | urlencode }}">
+          Change <span class="visuallyhidden">Why you're owed the money</span>
+        </a>
+      </td>
+    </tr>
       <tr>
         <td>
             Is this the amount owed £1,000?
@@ -45,7 +64,7 @@ Check your answers
         </a>
       </td>
     </tr>
-    {% if data.radio_select_group=="Yes" or data.radio_select_group=="No" %}
+    {% if data.radio_select_group=="No" %}
         <tr>
       <td>
         Your reason for rejecting the court calculated repayment plan
@@ -63,25 +82,7 @@ Check your answers
         </a>
       </td>
     </tr>
-    <tr>
-      <td>
-        Has the defendant paid this amount?
-      </td>
-      <td>
-           {%if data.radio_select_group=="Yes" %}
-         Yes, I have received this payment
-         {%elif  data.radio_select_group=="No"  %}
-         No, I have not received this payment
-         {% else %}
-         No, I have not received this payment
-         {% endif %}
-      </td>
-      <td class="change-answer">
-        <a href="../task-list/claim-details/reason?return_page={{ '../../task-list/claim-details/check-your-answers' | urlencode }}">
-          Change <span class="visuallyhidden">Why you're owed the money</span>
-        </a>
-      </td>
-    </tr>
+
   {% endif %}
 
     {% if data.radio_select_group=="No" or data.radio_select_group2=="No" %}
