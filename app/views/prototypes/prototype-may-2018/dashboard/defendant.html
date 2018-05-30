@@ -108,6 +108,7 @@
               <p>Make sure you get receipts for any payments.</p>
               <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=2">Download your response</a> (PDF, 123KB)</p>
 
+
               {% elseif data['defendant'] == 5.1 %}
               <h2 class="heading-small">Your response to the claim</h2>
               <p>You offered to repay Jan Clark £200 per month starting {{ now | date('add', 1, 'months') | date( 'D MMMM YYYY' ) }}.</p>
@@ -222,7 +223,7 @@
 
                 <p>We'll contact you to tell you the date of the hearing and how to prepare.</p>
 
-                <p>You need to <a href="forms/dq-form">complete a directions questionnaire</a>  to tell us more about the claim.</p>
+                <p>You need to <a href="forms/dq-form">complete a directions questionnaire</a> form to tell us more about the claim.</p>
 <!--
 -->
                 <p>Your defence won't proceed if you don't complete and return the form before 4pm on <span class="dates5"></span>.</p>
@@ -305,6 +306,35 @@
               <p><a
                 href="../defendant/correspondence/forms/agreement?check=2">Download the agreement</a>  (PDF, 123KB)</p>
             </div>
+
+
+            {% elseif data['defendant'] == 17.1 %}
+            <h2 class="heading-small">Your response to the claim</h2>
+            <p>Jan Clark has confirmed you paid £1,500 on {{ now | date('subtract', 2, 'days') | date }}.</p>
+            <p>This claim is now settled.</p>
+
+
+            {% elseif data['defendant'] == 17.2 %}
+            <h2 class="heading-small">Your response to the claim</h2>
+            <p>Jan Clark has confirmed you paid £1,500 on {{ now | date('subtract', 2, 'days') | date }}.</p>
+            <p>This claim is now settled.</p>
+            <p>Your CCJ will be removed from the register of judgments within 2 days, though it may take longer for credit agencies to update their records.</p>
+            <p>If you need more immediate proof the CCJ is cancelled you can request a certificate of cancellation. There is a £15 fee for this.</p>
+
+            <p><a href="paid-in-full/certificate?certificate-type=cancellation" class="button secondary-button">Request a certificate of cancellation</a></p>
+
+
+            {% elseif data['defendant'] == 17.3 %}
+            <h2 class="heading-small">Your response to the claim</h2>
+            <p>Jan Clark has confirmed you paid £1,500 on {{ now | date('subtract', 2, 'days') | date }}.</p>
+            <p>This claim is now settled.</p>
+            <p>Your CCJ will be remain on the register of judgments but it will be marked as paid. This will happen within 2 days, though it may take longer for credit agencies to update their records.</p>
+            <p>If you need more immediate proof the CCJ is paid you can request a certificate of satisfaction. There is a £15 fee for this.</p>
+
+            <p><a href="paid-in-full/certificate?certificate-type=satisfaction" class="button secondary-button">Request a certificate of satisfaction</a></p>
+
+
+
 
 
 
@@ -444,6 +474,12 @@
     <option value="15" {% if data['defendant'] == 15 %}selected{% endif %}>11. Counter sign offer </option>
     <option value="16" {% if
             data['defendant'] == 16 %}selected{% endif %}>11. Agreement signed by both parties </option>
+
+
+    <option>------ paid -------</option>
+    <option value="17.1" {% if data['defendant'] == 17.1 %}selected{% endif %}>17.1. Pay immediately / set date with settlement - claimant says paid</option>
+    <option value="17.2" {% if data['defendant'] == 17.2 %}selected{% endif %}>17.2. Set date payment - judgment - claimant says paid within a month</option>
+    <option value="17.3" {% if data['defendant'] == 17.3 %}selected{% endif %}>17.3. Set date payment - judgment - claimant says paid after a month</option>
   </select>
 </form>
 {% endblock %}
