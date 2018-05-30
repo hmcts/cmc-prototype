@@ -22,14 +22,17 @@ Money Claims Prototype
 <script>
   $(document).ready(function () {
     var end_date = "{{data['set-year']}}-{{data['set-month']}}-{{data['set-day']}}"
-    var difference = moment(end_date).diff(moment("2018-06-1"), 'days')
-    $("#st").html(moment())
-    $("#ed").html(moment(end_date))
+    var difference = moment(end_date).isBefore(moment().add(3, 'days'))
+
     if(difference < 28) {
       window.location.href = "s-c-upload?ccj=cancel";
     }else if(difference > 28) {
       $(".column-two-thirds").show();
     }
   })
+
+
+
+
 </script>
 {% endblock %}
