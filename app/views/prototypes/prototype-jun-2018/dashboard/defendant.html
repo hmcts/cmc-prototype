@@ -309,13 +309,11 @@
 
 
             {% elseif data['defendant'] == 17.1 %}
-            <h2 class="heading-small">Your response to the claim</h2>
             <p>Jan Clark has confirmed you paid £1,500 on {{ now | date('subtract', 2, 'days') | date }}.</p>
             <p>This claim is now settled.</p>
 
 
             {% elseif data['defendant'] == 17.2 %}
-            <h2 class="heading-small">Your response to the claim</h2>
             <p>Jan Clark has confirmed you paid £1,500 on {{ now | date('subtract', 2, 'days') | date }}.</p>
             <p>This claim is now settled.</p>
             <p>Your CCJ will be removed from the register of judgments within 2 days, though it may take longer for credit agencies to update their records.</p>
@@ -325,7 +323,6 @@
 
 
             {% elseif data['defendant'] == 17.3 %}
-            <h2 class="heading-small">Your response to the claim</h2>
             <p>Jan Clark has confirmed you paid £1,500 on {{ now | date('subtract', 2, 'days') | date }}.</p>
             <p>This claim is now settled.</p>
             <p>Your CCJ will be remain on the register of judgments but it will be marked as paid. This will happen within 2 days, though it may take longer for credit agencies to update their records.</p>
@@ -333,6 +330,14 @@
 
             <p><a href="paid-in-full/certificate?certificate-type=satisfaction" class="button secondary-button">Request a certificate of satisfaction</a></p>
 
+
+
+            {% elseif data['defendant'] == 17.4 %}
+            <p>Jan Clark has confirmed you paid £1,500 on {{ now | date('subtract', 2, 'days') | date }}.</p>
+            <p>This claim is now settled.</p>
+            <p>Your CCJ will be remain on the register of judgments but it will be marked as paid. This will happen within 2 days, though it may take longer for credit agencies to update their records.</p>
+
+            <p><a href="../defendant/correspondence/forms/certificate?certificate-type=satisfaction">Download certificate of satisfaction</a> (PDF, 123KB)</p>
 
 
 
@@ -477,9 +482,10 @@
 
 
     <option>------ paid -------</option>
-    <option value="17.1" {% if data['defendant'] == 17.1 %}selected{% endif %}>17.1. Pay immediately / set date with settlement - claimant says paid</option>
-    <option value="17.2" {% if data['defendant'] == 17.2 %}selected{% endif %}>17.2. Set date payment - judgment - claimant says paid within a month</option>
-    <option value="17.3" {% if data['defendant'] == 17.3 %}selected{% endif %}>17.3. Set date payment - judgment - claimant says paid after a month</option>
+    <option value="17.1" {% if data['defendant'] == 17.1 %}selected{% endif %}>17.1. No judgment - claimant says paid</option>
+    <option value="17.2" {% if data['defendant'] == 17.2 %}selected{% endif %}>17.2. Judgment issued - claimant says paid within a month</option>
+    <option value="17.3" {% if data['defendant'] == 17.3 %}selected{% endif %}>17.3. Judgment issued - claimant says paid after a month</option>
+    <option value="17.4" {% if data['defendant'] == 17.4 %}selected{% endif %}>17.4. Certificate issued</option>
   </select>
 </form>
 {% endblock %}
