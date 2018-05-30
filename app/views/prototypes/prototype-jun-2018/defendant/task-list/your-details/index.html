@@ -1,0 +1,135 @@
+{% extends "layout_task-list.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block home_link %} ../../task-list {% endblock %}
+{% block proposition_header %}
+{% set my_account="2" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <a href="#" class="link-back">Back</a>
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('task-list')%}
+      <form method="post" action="{{ data.return_page if data.return_page | length > 0 else '../task-list' }}" class="form">
+        {% else %}
+        <form method="post" action="your-details/date-of-birth" class="form">
+          {% endif %}
+          {{formData | safe}}
+          <h1 class="heading-large">
+            Confirm your details
+          </h1>
+          <p>The claimant provided these details. You can correct your address.</p>
+          <fieldset>
+            <div class="form-group">
+              <div class="form-group-compound address-item form-group">
+                <a name="address_addressline1"></a><label
+                class="form-label" for="Address_AddressLine1">Full name (include title)</label>
+                <input class="form-control" value="Mary Richards" >
+              </div>
+              <h2 class="heading-medium">Your address</h2>
+              <div id="addressManualWrapper">
+                <div id="address-details" class="address-manual-input disabled">
+                  <div class="form-group-compound address-item form-group"><a name="address_addressline1"></a><label
+                    class="form-label" for="Address_AddressLine1">Address line 1</label><input class="form-control" value="101 Regents road" ></span></div>
+                    <div class="form-group-compound address-item form-group"><a name="address_addressline2"></a><label
+                      class="form-label" for="Address_AddressLine2">Address line 2
+                    (optional)</label><input class="form-control" value="Shiplake" ></span></div>
+                    <div class="form-group-compound address-item form-group"><a name="address_addressline3"></a><label
+                      class="form-label" for="Address_AddressLine3">Town or city
+                    </label><input autocorrect="off" class="form-control" value="Henley on Thames" ></span></div>
+                    <div class="address-item form-group"><a name="address_postcode"></a><label
+                      class="form-label" for="Address_Postcode">Postcode</label><input class="form-control form-control-1-4" value="RG9 4BW" ></span></div>
+                    </div>
+                  </div>
+                  <h3 class="heading-medium">Correspondence address</h3>
+                  <p>
+                    Would you like correspondence sent to a different address?
+                  </p>
+                  <div class="form-group">
+                    <fieldset>
+                     <div class="multiple-choice" data-target="correspondence-address">
+                      <input type="radio" id="no-correspondence" name="correspondence-address" value="No" checked="" {{ checked("correspondence-address", "No") }} >
+                      <label for="no-correspondence">No</label>
+                    </div>
+                    <div class="multiple-choice" data-target="contact-by-phone">
+                      <input type="radio" id="add-correspondence" name="correspondence-address" value="Yes" {{ checked("correspondence-address", "Yes") }}>
+                      <label for="add-correspondence">Yes, add a correspondence address</label>
+                    </div>
+                    <div class="panel panel-border-narrow js-hidden" id="contact-by-phone">
+                      <div id="addressManualWrapper">
+                        <p>All correspondence will be sent here, instead of to your residential address. This is known as an 'address for service'.</p>
+                        <fieldset class="form-group">
+                          <div id="postcode-finder">
+                            <label class="form-label" for="postcode">Enter a UK postcode</label>
+                            <input class="form-control form-control-1-4" id="postcode" name="postcodeFinder" type="text" value="">
+                            <a id="find-button" class="button secondary-button">Find address</a>
+                          </div>
+                          <div class="form-group error" id="postcode-seach-error" style="display:none; margin-top: 20px;">
+                            <span class="error-message fon">
+                              We can't find an address for that postcode. Try again or enter the address manually.
+                            </span>
+                          </div>
+                          <div class="form-group error" id="postcode-seach-ni-error" style="display:none; margin-top: 20px;">
+                            <span class="error-message">
+                              We can't find Northern Irish addresses by postcode - enter the address manually instead.
+                            </span>
+                          </div>
+                          <div id="select-address" class="form-group" style="display: none;">
+                            <label class="form-label">
+                              Pick an address
+                            </label>
+                            <select id="addressList" class="form-control" name="addressSelect" onchange="updateAddress(this.value)" title="Pick an address">
+                              <option value="">Select an address </option>
+                            </select>
+                          </div>
+                          <div id="manual-address" style="display: none;" class="">
+                            <div class="form-group">
+                              <label class="form-label" for="street-1" id="street-label">Address</label>
+                              <input class="form-control" id="street-1" name="claimant_AddressLine1" type="text" value="">
+                              <input class="form-control second-text-input" id="street-2" name="claimant_AddressLine2" type="text" value="" title="Street line 2">
+                              <input class="form-control second-text-input" id="street-3" name="claimant_AddressLine3" type="text" value="" title="Street line 3">
+                            </div>
+                            <div class="form-group">
+                              <label class="form-label" for="town" id="town-label">Town or city</label>
+                              <input class="form-control" id="town" name="claimant_city" type="text" value="">
+                            </div>
+                            <div class="form-group">
+                              <label class="form-label" for="postcode-full" id="postcode-label">Postcode</label>
+                              <input class="form-control form-control-1-4" id="postcode-full" name="claimant_Postcode" type="text" value="">
+                            </div>
+                            <div class="form-group" id="country-group">
+                              <label class="form-label" for="country">Country</label>
+                              <input class="form-control" id="country" name="claimant_country" type="hidden" value="">
+                            </div>
+                          </div>
+                          <div id="enter-manually">
+                            <a class="link" href="#" onclick="return showAbroadAddress();">I need to enter an address outside the UK</a>
+                          </div>
+                          <div id="enter-automatic" style="display:none">
+                            <a class="link" href="#" onclick="return showPostcodeLookup();">Find address by a UK postcode</a>
+                          </div>
+                        </fieldset>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('task-list')%}
+                <div class="form-group">
+                  <input type="submit" class="button" value="Save changes"/>
+                </div>
+                <a href="{{ data.return_page if data.return_page | length > 0 else '../task-list' }}">Cancel</a>
+                {% else %}
+                <div class="form-group">
+                  <input type="submit" class="button" value="Save and continue"/>
+                </div>
+                {% endif %}
+              </div>
+            </form>
+          </div>
+        </div>
+      </main>
+      {% endblock %}
