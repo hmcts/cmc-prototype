@@ -312,6 +312,13 @@
             <p>Mary Richards paid you £1500 on {{ now | date( 'subtract', 5, 'days' ) | date }}.</p>
           </div>
 
+
+          {% elseif data['claimant'] == 21  %}
+          <div class="">
+            <h2 class="heading-small">This case has been settled</h2>
+            <p>You ended the case on {{ now | date( 'subtract', 5, 'days' ) | date }}.</p>
+          </div>
+
           {% endif %}
 
         </div>
@@ -356,6 +363,12 @@
 
               </p>
         {% endif %}
+
+      {% if data['claimant'] < 20 %} 
+     <h2 class="heading-small">If you want to end the claim</h2>
+      <p>If you've already been paid, have settled out of court, or don't want to take the claim any further, you can <a href="discontinue">end the claim</a>.</p>
+      {% endif %}
+
     </div>
   </div>
 </div>
@@ -426,6 +439,7 @@
 
     <option>------- Settled  ----------</option>
     <option value="20" {% if data['claimant'] == 20 %}selected{% endif %}>20. Settled - paid</option>
+    <option value="21" {% if data['claimant'] == 21 %}selected{% endif %}>21. Settled - discontinued</option>
 
   </select>
 </form>
