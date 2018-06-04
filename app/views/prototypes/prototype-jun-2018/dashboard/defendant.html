@@ -355,6 +355,12 @@
             <p><a href="../defendant/correspondence/forms/certificate?certificate-type=satisfaction">Download certificate of satisfaction</a> (PDF, 123KB)</p>
 
 
+            {% elseif data['defendant'] == 18 %}
+            <p>Jan Clark disconinued her claim against you on {{ now | date('subtract', 2, 'days') | date }}. This claim is now settled.</p>
+
+            <p><a href="../claimant/correspondence/discontinuation">Download notice of discontinuance</a> (PDF, 123KB)</p>
+
+
 
 
 
@@ -496,11 +502,12 @@
             data['defendant'] == 16 %}selected{% endif %}>11. Agreement signed by both parties </option>
 
 
-    <option>------ paid -------</option>
+    <option>------ Settled -------</option>
     <option value="17.1" {% if data['defendant'] == 17.1 %}selected{% endif %}>17.1. No judgment - claimant says paid</option>
     <option value="17.2" {% if data['defendant'] == 17.2 %}selected{% endif %}>17.2. Judgment issued - claimant says paid within a month</option>
     <option value="17.3" {% if data['defendant'] == 17.3 %}selected{% endif %}>17.3. Judgment issued - claimant says paid after a month</option>
     <option value="17.4" {% if data['defendant'] == 17.4 %}selected{% endif %}>17.4. Certificate issued</option>
+    <option value="18" {% if data['defendant'] == 18 %}selected{% endif %}>18. Discontinued</option>
   </select>
 </form>
 {% endblock %}
