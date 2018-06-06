@@ -313,10 +313,25 @@
           </div>
 
 
+          {% elseif data['claimant'] == 20.1  %}
+          <div class="">
+            <h2 class="heading-small">This claim is settled</h2>
+            <p>Mary Richards paid you £1500 on {{ now | date( 'subtract', 5, 'days' ) | date }}.</p>
+            <p>The defendant's County Court Judgment has been cancelled.</p>
+          </div>
+
+          {% elseif data['claimant'] == 20.2  %}
+          <div class="">
+            <h2 class="heading-small">This claim is settled</h2>
+            <p>Mary Richards paid you £1500 on {{ now | date( 'subtract', 5, 'days' ) | date }}.</p>
+            <p>The defendant's County Court Judgment has been marked as paid.</p>
+          </div>
+
+
           {% elseif data['claimant'] == 21  %}
           <div class="">
             <h2 class="heading-small">This claim has been discontinued</h2>
-            <p>You ended the case on {{ now | date( 'subtract', 5, 'days' ) | date }}.</p>
+            <p>You ended the claim on {{ now | date( 'subtract', 5, 'days' ) | date }}.</p>
             <p><a href="../claimant/correspondence/discontinuation">Download notice of discontinuance</a> (PDF, 123KB)</p>
           </div>
 
@@ -440,7 +455,9 @@
     <option value="17" {% if data['claimant'] == 17 %}selected{% endif %}>14. Agreement signed by both parties  </option>
 
     <option>------- Settled  ----------</option>
-    <option value="20" {% if data['claimant'] == 20 %}selected{% endif %}>20. Settled - paid</option>
+    <option value="20" {% if data['claimant'] == 20 %}selected{% endif %}>20. Settled - marked paid</option>
+    <option value="20.1" {% if data['claimant'] == 20.1 %}selected{% endif %}>20.1 Settled - paid in full - cancelled</option>
+    <option value="20.2" {% if data['claimant'] == 20.2 %}selected{% endif %}>20.2 Settled - paid in full - satisfied</option>
     <option value="21" {% if data['claimant'] == 21 %}selected{% endif %}>21. Settled - discontinued</option>
 
   </select>
