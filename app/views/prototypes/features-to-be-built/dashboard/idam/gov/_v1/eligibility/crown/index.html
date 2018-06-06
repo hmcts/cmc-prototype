@@ -1,0 +1,62 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('task-list')%}
+      <form
+      name="aspnetForm"
+      method="post"
+      onsubmit="multiNavigation('radio_group4', ['crown','no'], ['result?a=crown&', 'check-your-answers']);return false;"
+      id="aspnetForm"
+      autocomplete="off">
+      {% else %}
+      <form
+      name="aspnetForm"
+      method="post"
+      onsubmit="multiNavigation('radio_group4', ['crown','no'], ['result?a=crown&', 'hwf']);return false;"
+      id="aspnetForm"
+      autocomplete="off">
+      {% endif %}
+      {{formData | safe}}
+      <a href="#" class="link-back">Back</a>
+      <h1 class="heading-large">
+        Are you claiming against a government department?
+      </h1>
+      <p><a href="https://www.gov.uk/government/organisations">See a list of government departments</a>.</p>
+      <fieldset>
+        <legend class="visuallyhidden">
+          Are you making a claim against a government department?
+        </legend>
+        <div class="multiple-choice">
+          <input id="radio-1" type="radio" name="radio_group4" value="crown">
+          <label for="radio-1">Yes</label>
+        </div>
+        <div class="multiple-choice">
+          <input id="radio-2" type="radio" name="radio_group4" value="no">
+          <label for="radio-2">No</label>
+        </div>
+      </fieldset>
+
+      <br>
+      {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}
+      <div class="form-group">
+        <input type="submit" class="button" value="Save changes"/>
+      </div>
+      <a href="{{ data.return_page if data.return_page | length > 0 else '../task-list' }}">Cancel</a>
+      {% else %}
+      <div class="form-group">
+        <input type="submit" class="button" value="Save and continue"/>
+      </div>
+      {% endif %}
+    </form>
+  </div>
+</div>
+</main>
+{% endblock %}
