@@ -98,6 +98,19 @@
                 </td>
               </tr>
 
+              <tr id="their-details">
+                <td class="task">
+                  <a href="task-list/mediation{{formQuery}}">
+                    <span class="task-name">Free mediation</span>
+                  </a>
+                </td>
+                <td class="numeric" id="task-status" scope="col" id="col-status">
+                  {% if data.mediation=="complete" %}
+                  {% include "includes/task_status_finished.html" %}
+                  {% endif %}
+                </td>
+              </tr>
+
             {% elseif data.radio_select_group=="all" and data.do_you_owe_money=="complete" %}
               <tr id="their-details">
                 <td class="task">
@@ -113,8 +126,6 @@
               </tr>
 
             {% elseif data.radio_select_group=="paid" and data.do_you_owe_money=="complete" %}
-              --------------------------------------------------------------------------------------------------------------------------------------------
-<!--todo Get this block working -> Reject -> paid owe -> less then claimed-->
               <tr id="their-details">
                 <td class="task">
                   <a href="task-list/your-defence/paid-less{{formQuery}}">
@@ -127,7 +138,7 @@
                   {% endif %}
                 </td>
               </tr>
---------------------------------------------------------------------------------------------------------------------------------------------
+
               {% if data.radio_select_group2=="Some_paid" %}
                 <tr id="their-details">
                   <td class="task">
@@ -277,41 +288,6 @@
             </tbody>
           </table>
 
-          <br>
-
-
-         {% if data.show_mediation=="true"  %}
-
-
-          <table id="table-of-tasks">
-            <thead>
-              <tr>
-                <th scope="col" id="col-task">
-                  <span class="task-group">
-                    <span class="group-number" id="task-number"></span>
-                    Resolving the claim
-                  </span>
-                </th>
-                <th class="numeric" id="task-status" scope="col" id="col-status"></th>
-              </tr>
-            </thead>
-            <tbody>
-
-              <tr id="their-details">
-                <td class="task">
-                  <a href="task-list/mediation{{formQuery}}">
-                    <span class="task-name">Consider free mediation</span>
-                  </a>
-                </td>
-                <td class="numeric" id="task-status" scope="col" id="col-status">
-                  {% if data.mediation=="complete" %}
-                  {% include "includes/task_status_finished.html" %}
-                  {% endif %}
-                </td>
-              </tr>
-                  </tbody>
-            </table><!--end of resolving the claim-->
-   {% endif %}
             <br>
             <table id="table-of-tasks">
               <thead>
@@ -337,9 +313,25 @@
       </table>
 
 
-
-
+</header>
     </div>
+
+    <!--{% if data.show_mediation=="true"  %}-->
+    <!--<tr id="their-details">-->
+    <!--<td class="task">-->
+    <!--<a href="task-list/mediation{{formQuery}}">-->
+    <!--<span class="task-name">Free mediation</span>-->
+    <!--</a>-->
+    <!--</td>-->
+    <!--<td class="numeric" id="task-status" scope="col" id="col-status">-->
+    <!--{% if data.mediation=="complete" %}-->
+    <!--{% include "includes/task_status_finished.html" %}-->
+    <!--{% endif %}-->
+    <!--</td>-->
+    <!--</tr>-->
+    <!--{% endif %}-->
+
+
     <div class="column-one-third">
       <ul class="actions">
       </ul>
