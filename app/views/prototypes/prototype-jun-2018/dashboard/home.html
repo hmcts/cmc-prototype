@@ -307,7 +307,8 @@
                 <td ><a href="defendant?defendant=5">352MC733</a></td>
                 <td>Jan Clark  </td>
                 <td >£1500 </td>
-                <td>You've admitted all of the claim and offered to pay the full amount by... </td>
+                <td>You've admitted all of the claim and offered to pay the full amount by {% if data['set-month'] %}
+                  {{ ( data['set-month'] + ' ' + data['set-day'] + ' ' + data['set-year']) | date('D MMMM YYYY') }}{% else %}{{ now | date('add', 3, 'months') | date('D MMMM YYYY') }}{% endif %}. </td>
               </tr>
               {% endif %}
               {% if show_all==true or data['dashboard'] == 2.33 %}
