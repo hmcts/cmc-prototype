@@ -1,0 +1,122 @@
+{% extends "layout_task-list.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block home_link %} ../../task-list {% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <form method="post" action="claim-interest" class="form">
+        {{formData | safe}}
+        <a href="#" class="link-back">Back</a>
+        <h1 class="heading-large">
+          Claim amount
+        </h1>
+        <p>Your claim could be for a single amount or might be made up of multiple items.</p>
+        <div class="panel panel-border-wide">
+          <p>Don't include interest - we'll ask you about this next.</p>
+          <p>Don't include your claim fee - we'll add this for you.</p>
+        </div>
+        <br>
+        <!--<a href="" style="float: left" data-alert="This feature is not available in this demo">More about what you can claim</a>-->
+        <div id="timeline" class="timeline">
+          <div class="timeline-headings">
+            <div id="timeline-heading-1" class="timeline-column-3">
+              <label class="form-label-bold" for="event-form-control">
+                What you're claiming for
+              </label>
+              <span class="form-hint">Explain why you're claiming for this</span>
+            </div>
+            <div id="timeline-heading-2" class="timeline-column-4 ">
+              <label class="form-label-bold" for="date-form-control">
+                Amount
+              </label>
+              <span class="form-hint">You can give a single amount here </span>
+            </div>
+          </div>
+          <div class="timeline-rows">
+            <div class="timeline-row">
+              <input class="form-control timeline-column-3" type="text" id="event-form-control" name="timeline-1"
+              value="{{data['timeline-1']}}">
+              <input class="form-control timeline-column-4 fee pound" type="text" id="date-form-control" name="date-1"
+              value="{{data['date-1']}}">
+            </div>
+            <div class="timeline-row">
+              <input class="form-control timeline-column-3" type="text" id="event-form-control" name="timeline-2"
+              value="{{data['timeline-1']}}">
+              <input class="form-control timeline-column-4 fee pound" type="text" id="date-form-control" name="date-2"
+              value="{{data['date-2']}}">
+            </div>
+            <div class="timeline-row">
+              <input class="form-control timeline-column-3" type="text" id="event-form-control" name="timeline-3"
+              value="{{data['timeline-3']}}">
+              <input class="form-control timeline-column-4 fee pound" type="text" id="date-form-control" name="date-3"
+              value="{{data['date-3']}}">
+            </div>
+            <div class="timeline-row">
+              <input class="form-control timeline-column-3" type="text" id="event-form-control" name="timeline-4"
+              value="{{data['timeline-4']}}">
+              <input class="form-control timeline-column-4 fee pound" type="text" id="date-form-control" name="date-4"
+              value="{{data['date-4']}}">
+            </div>
+          </div>
+          <div class="timeline-row">
+            <div id="add-event-container">
+              <a class="secondary-button" id="add-another-event-button" href="#">Add another row</a>
+            </div>
+            <a class="" id="calculate" href="#">Calculate total</a>
+          </div>
+          <div class="timeline-row total">
+            <span class="bold-medium">£0.00</span>
+          </div>
+          <div class="form-group">
+            <input type="submit" class="button" value="Continue">
+          </div></div>
+        </form>
+      </div>
+    </div>
+  </main>
+  {% endblock %}
+  <script>
+    $(document).ready(function () {
+      $('#add-another-event-button').click(function (event) {
+        event.preventDefault();
+        $('#timeline').append(
+          '<div class="timeline-row">' +
+          '<input class="form-control timeline-column-3" style="margin-right: 1px; margin-top: 10px" type="text">' +
+          '<input class="form-control timeline-column-4" style="margin-left: 3px" type="text">' +
+          '</div>'
+          );
+      });
+    });
+  </script>
+  {% block extra_js_1 %}
+  <script type="text/javascript">
+    (function numericInputsSum(targetSpanId, sourceInputsIds) {
+      var targetSpan = $('#' + targetSpanId);
+      var sourceInputs = []
+      function updateSums() {
+        var sum = 0.0
+        for (var i = 0; i < sourceInputs.length; i++) {
+          sum += getNumericValue(sourceInputs[i].val())
+        }
+        targetSpan.text(sum.toFixed(2))
+      }
+      function getNumericValue(value) {
+        var numeric = parseFloat(value);
+        return isNaN(numeric) ? 0 : numeric;
+      }
+      for (var i = 0; i < sourceInputsIds.length; i++) {
+        var input = $('#' + sourceInputsIds[i]);
+        if (input) {
+          sourceInputs.push(input)
+          input.blur(function onNumericInputChanged() {
+            updateSums()
+          })
+        }
+      }
+    })('totalSum', ['amount1', 'amount2', 'amount3', 'amount4'])
+  </script>
+  {% endblock %}
