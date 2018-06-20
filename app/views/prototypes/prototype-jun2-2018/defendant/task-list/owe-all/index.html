@@ -13,8 +13,10 @@ Money Claims Prototype
     <div class="column-two-thirds">
       <a href="#" class="link-back">Back</a>
       <h1 class="heading-large">
-        {% if data.radio_select_group=="Some"%}
-        When do you want to pay the {% if data['owe-amount'] =='' %}£1,200{% else %}£{{data['owe-amount']}}{% endif %}?
+        {% if data['counter-amount'] %}
+        When do you want to pay the £{% if data['counter-amount'] %}{{ 1500 - data['counter-amount']}}{% else %}1,000{% endif %} you owe?
+        {% elseif data.radio_select_group=="Some" %}
+        When do you want to pay the £{{ data['owe-amount'] or '1,200' }}?
         {% else %}
         When do you want to pay?
         {% endif %}
@@ -52,14 +54,14 @@ Money Claims Prototype
             <label for="radio-no">By a set date</label>
           </div>
           <div class="panel panel-border-narrow js-hidden" id="set-date">
-            <p>You'll need to give details of your finances to Jan Clark to explain why you can't pay immediately.</p>
+            <p>You'll need to give details of your finances to {% if data.counterclaim=="true" %}Jan Clark{%else%}Mary RichardsMary Richards{% endif %} to explain why you can't pay immediately.</p>
           </div>
           <div class="multiple-choice" data-target="instalments">
             <input id="radio-repayment" type="radio" name="radio-pay-group" value="Instalments">
             <label for="radio-repayment" data-target="repayment-info">I'll suggest a repayment plan</label>
           </div>
           <div class="panel panel-border-narrow js-hidden" id="instalments">
-            <p>You'll need to give details of your finances to {% if data.counterclaim=="true" %}Mary Richards{%else%}Jan Clark{% endif %} to explain why you can't pay immediately.</p>
+            <p>You'll need to give details of your finances to {% if data.counterclaim=="true" %}Jan Clark{%else%}Mary Richards{% endif %} to explain why you can't pay immediately.</p>
           </div>
         </fieldset>
       </div>

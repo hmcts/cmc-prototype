@@ -21,7 +21,11 @@ Money Claims Prototype
 
   <div class="grid-row">
     <div class="column-two-thirds">
-      {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}
+      {% if data['radio_select_group'] == "counter" %}
+      <form method="post" action="../../../defendant/task-list/counter-claim/owe-them" class="form">
+
+      {% elseif data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}
+
       <form method="post" action="{{ data.return_page if data.return_page | length > 0 else '../task-list' }}" class="form">
         {% else %}
         <form method="post" action="../../task-list" class="form">
@@ -57,7 +61,7 @@ Money Claims Prototype
                   <th scope="row">Claim amount:</th>
                   <td class="numeric last">
                     <label class="visuallyhidden" for="amount">Claim amount</label>
-                    <span class="font-small">  £{{data['totalSum']}}</span>
+                    <span class="font-small">  £{{data['totalSum'] or data['counter-amount'] }}</span>
                   </td>
                 </tr>
                 {% if data['radio_group2']=="interest_yes" %}
@@ -72,6 +76,8 @@ Money Claims Prototype
                   </td>
                 </tr>
                 {% endif %}
+
+                {% if data['counter-amount'] > 1500 or data['counter-admit'] == 'no' %}
                 <tr>
                   <th scope="row">Claim fee:</th>
                   <td class="numeric last">
@@ -81,11 +87,16 @@ Money Claims Prototype
                     <span id="interestValue" class="font-small">£70</span>
 
                   </td>
-                </td>
-              </tr>
+                </tr>
+                {% endif %}
+
             </tbody>
           </table>
-<table>
+
+
+
+        {% if data['counter-amount'] > 1500 or data['counter-admit'] == 'no' %}
+        <table>
           <thead>
           <tr>
             <th scope="col">Other fees</th>
@@ -219,6 +230,8 @@ Money Claims Prototype
             </table>
           </div>
         </details>
+        
+        {% endif %}
 
           <input type="hidden" name="claim_amount" value="complete">
           <input type="hidden" id="totalClaimAmount" name="totalClaimAmount">
@@ -272,7 +285,7 @@ Money Claims Prototype
     $('#totalClaimAmount').val(x)
 
 
-  })('totalAmountDisplay', "{{data['totalSum']}}", {{data['radio_group2']=="interest_no"}} || {{data['radio_group2']!="interest_yes"}} ? 70 : 84)
+  })('totalAmountDisplay', "{{data['totalSum'] or data['counter-amount']}}", {{data['radio_group2']=="interest_no"}} || {{data['radio_group2']!="interest_yes"}} ? {% if data['radio_select_group'] == "counter" %} 0 : 14 {% else %} 70 : 84{% endif %})
 </script>
 
 {% endblock %}

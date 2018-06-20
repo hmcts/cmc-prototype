@@ -142,6 +142,8 @@ Check your answers
 								I admit part of the claim
 								{% elseif data.radio_select_group=="reject" or data.radio_select_group2=="paid" or data.radio_select_group2=="Some_paid" or data.radio_select_group2=="amount_claimed" or data['check']== 8 or data['check']== 9 or data['check']== 12%}
 								I reject all of the claim
+								{% elseif data['counterclaim'] or data['check'] == 11 %}
+								I believe the claimant owes me money
 								{% else %}
 								I admit all of the claim
 								{% endif %}
@@ -152,6 +154,23 @@ Check your answers
 								</a>
 							</td>
 						</tr>
+						{% if data['counterclaim'] or data['check'] == 11 %}
+
+						<tr>
+							<td class="">
+								How much do you owe them?
+							</td>
+							<td class="">
+								£1,500
+							</td>
+							<td class=" change-answer">
+								<a href="../task-list/do-you-owe-money/index?return_page={{  '../../task-list' | urlencode }}">
+									Change <span class="visuallyhidden">Name</span>
+								</a>
+							</td>
+						</tr>
+						{% endif %}
+
 						{% if  data.radio_select_group=="Some" or data.radio_select_group=="Some_paid"%}
 						<tr>
 							<td>Have you paid the claimant the amount you admit you owe?</td>
@@ -166,6 +185,7 @@ Check your answers
 						</tr>
 						{% endif %}
 						{% if data.radio_select_group=="reject" or data.radio_select_group2=="paid" or data.radio_select_group2=="Some_paid" or data.radio_select_group2=="amount_claimed" or data['check']== 8 or data['check']== 9 or data['check']== 12%}
+
 						<tr>
 							<td>Why do you reject all the claim?</td>
 							<td>
@@ -187,7 +207,172 @@ Check your answers
 						{% endif %}
 					</tbody>
 				</table>
-				{% if  data.radio_select_group=="Some" or data.radio_select_group2=="Some_paid" or data['check']== 4 or data['check']== 5 or data['check']== 6 or data['check']== 7 or data['check']== 9 or data['check']== 12 or data['check']== 8 or data.radio_select_group2=="amount_claimed" or data.radio_select_group=="Some_paid" or data.radio_select_group2=="defend_now"%}
+
+				{% if data['counterclaim'] or data['check'] == 11 %}
+				<table class="check-your-answers">
+					<thead>
+						<tr>
+							<th colspan="2">
+								<h2 class="heading-medium">
+									Counterclaim details
+								</h2>
+							</th>
+							<th>
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>
+								Claim amount
+							</td>
+							<td>
+								£500
+							</td>
+							<td class="change-answer">
+								<a href="#">Change <span class="visuallyhidden">Name</span></a>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								Claim interest
+							</td>
+							<td>
+								No
+							</td>
+							<td class="change-answer">
+								<a href="#">Change <span class="visuallyhidden">Name</span></a>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								Why you disagree with the claim
+							</td>
+							<td>
+								I do owe her the money, but she never showed up when I came to repair the roof, so I lost 2 day's wages (£500).
+							</td>
+							<td class="change-answer">
+								<a href="#">Change <span class="visuallyhidden">Name</span></a>
+							</td>
+						</tr>
+
+
+				        <tr>
+				          <tr>
+				            <td class="no-border">
+				              Your timeline of events (optional)
+				            </td>
+				            <td class="no-border">
+				             {% if data['cd-date-1'] !='' %}
+				             {{data['cd-date-1']}} - {{data['cd-timeline-1']}}<br>
+				             {% if data['cd-date-2'] !='' %}
+				             {{data['cd-date-2']}} - {{data['cd-timeline-2']}}<br>
+				             {% endif %}
+				             {% if data['cd-date-3'] !='' %}
+				             {{data['cd-date-3']}} - {{data['cd-timeline-3']}}<br>
+				             {% endif %}
+				             {% if data['cd-date-4'] !='' %}
+				             {{data['cd-date-4']}} - {{data['cd-timeline-4']}}<br>
+				             {% endif %}
+				             {% else %}
+				             -
+				             {% endif %}
+				           </td>
+				           <td class="change-answer no-border">
+				            <a href="#">
+				              Change <span class="visuallyhidden">Name</span>
+				            </a>
+				          </td>
+				        </tr>
+				        <tr>
+				          <td>
+				           Comments about their timeline (optional)
+				         </td>
+				         <td>
+				           {% if data['defence-disagree-timeline']!="" %}
+				           {{data['defence-disagree-timeline']}}
+				           {% else %}
+				           -
+				           {% endif %}
+				         </td>
+				         <td class="change-answer">
+				         </td>
+				       </tr>
+				       <tr>
+				        <td class="no-border">
+				          Your evidence  (optional)
+				        </td>
+				        <td class="no-border">
+				         {% if data['legal-status1'] != true %}
+				         {% if data['legal-status1'] != true %}
+				         {% if data['legal-status1'] == 2 %}Contracts and agreements - {% endif %}
+				         {% if data['legal-status1'] == 3 %}Expert witness - {% endif %}
+				         {% if data['legal-status1'] == 4 %}Letters, emails and other correspondence - {% endif %}
+				         {% if data['legal-status1'] == 5 %}Photo evidence - {% endif %}
+				         {% if data['legal-status1'] == 6 %}Receipts - {% endif %}
+				         {% if data['legal-status1'] == 7 %}Contracts and agreements - {% endif %}
+				         {% if data['legal-status1'] == 'other' %}Statements of account - {% endif %}
+				         {{data['legal-status-description-1'] }}<br>
+				         {% endif %}
+				         {% if data['legal-status2'] != true %}
+				         {% if data['legal-status2'] == 2 %}Contracts and agreements - {% endif %}
+				         {% if data['legal-status2'] == 3 %}Expert witness - {% endif %}
+				         {% if data['legal-status2'] == 4 %}Letters, emails and other correspondence - {% endif %}
+				         {% if data['legal-status2'] == 5 %}Photo evidence - {% endif %}
+				         {% if data['legal-status2'] == 6 %}Receipts - {% endif %}
+				         {% if data['legal-status2'] == 7 %}Contracts and agreements - {% endif %}
+				         {% if data['legal-status2'] == 'other' %}Statements of account - {% endif %}
+				         {{data['legal-status-description-2'] }}<br>
+				         {% endif %}
+				         {% if data['legal-status3']  != true %}
+				         {% if data['legal-status3'] == 2 %}Contracts and agreements - {% endif %}
+				         {% if data['legal-status3'] == 3 %}Expert witness - {% endif %}
+				         {% if data['legal-status3'] == 4 %}Letters, emails and other correspondence - {% endif %}
+				         {% if data['legal-status3'] == 5 %}Photo evidence - {% endif %}
+				         {% if data['legal-status3'] == 6 %}Receipts - {% endif %}
+				         {% if data['legal-status3'] == 7 %}Contracts and agreements - {% endif %}
+				         {% if data['legal-status3'] == 'other' %}Statements of account - {% endif %}
+				         {{data['legal-status-description-3'] }}<br>
+				         {% endif %}
+				         {% if data['legal-status4']  != true %}
+				         {% if data['legal-status4'] == 2 %}Contracts and agreements - {% endif %}
+				         {% if data['legal-status4'] == 3 %}Expert witness - {% endif %}
+				         {% if data['legal-status4'] == 4 %}Letters, emails and other correspondence - {% endif %}
+				         {% if data['legal-status4'] == 5 %}Photo evidence - {% endif %}
+				         {% if data['legal-status4'] == 6 %}Receipts - {% endif %}
+				         {% if data['legal-status4'] == 7 %}Contracts and agreements - {% endif %}
+				         {% if data['legal-status4'] == 'other' %}Statements of account - {% endif %}
+				         {{data['legal-status-description-4'] }}<br>
+				         {% endif %}
+				         {% else %}
+				         -
+				         {% endif %}
+				       </td>
+				       <td class="change-answer no-border">
+				        <a href="#">
+				          Change <span class="visuallyhidden">Name</span>
+				        </a>
+				      </td>
+				    </tr>
+				    <tr>
+				      <td>
+				        Comments about their evidence  (optional)
+				      </td>
+				      <td>
+				       {% if data['defence-disagree-evidence']!="" %}
+				       {{data['defence-disagree-evidence']}}
+				       {% else %}
+				       -
+				       {% endif %}
+				     </td>
+				     <td class="change-answer">
+				     </td>
+				   </tr>
+					</tbody>
+				</table>
+				{% endif %}
+
+				{% if  data.radio_select_group=="Some" or data.radio_select_group2=="Some_paid" or data['check']== 4 or data['check']== 5 or data['check']== 6 or data['check']== 7 or data['check']== 9 or data['check']== 12 or data['check']== 8 or data.radio_select_group2=="amount_claimed" or data.radio_select_group=="Some_paid" or data.radio_select_group2=="defend_now" %}
 				<table class="check-your-answers">
 					<thead>
 						<tr>
@@ -204,7 +389,7 @@ Check your answers
 
 
 
-							{% if data['radio_select_group2']=="defend_now" or data['check']== 9 or data['check']== 12%} <!-- start of defend -->
+							{% if data['radio_select_group2']=="defend_now" or data['check']== 9 or data['check']== 12 or data['counterclaim'] %} <!-- start of defend -->
 							<tr>
 								<td>
 									Why you disagree with the claim
@@ -214,6 +399,7 @@ Check your answers
 									<p>Mary Richards and I signed a contract for building works on our roof. The work on the roof was completed but there was a problem with one section. I asked Mary Richards to get the problem fixed, but hadn't had a reply.</p>
 									<p>I'll have to get another builder to rectify the problem which will cost me £1,430.</p>
 									<p>Therefore, I'm making a money claim for £1,500 to compensate for the extra money I am going to need to spend.</p>
+
 									{% else %} {{data['defence-disagree-claim']}}{% endif %}
 								</td>
 								<td class="change-answer">
@@ -1316,6 +1502,7 @@ Check your answers
 		<option  value="8" {% if data['check'] == 8 %}selected{% endif %}>7. R/C - Paid what I owe - full amount paid</option>
 		<option  value="7" {% if data['check'] == 7 %}selected{% endif %}>8. R/C - Paid what I owe - less than claim amount paid </option>
 		<option  value="10" {% if data['check'] == 10 %}selected{% endif %}>9. Show business statement of truth</option>
+		<option  value="11" {% if data['check'] == 11 %}selected{% endif %}>11. Counterclaim - Set off</option>
 	</select>
 </form>
 {% endblock %}
