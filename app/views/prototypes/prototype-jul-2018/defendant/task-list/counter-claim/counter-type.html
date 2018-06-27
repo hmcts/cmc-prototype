@@ -1,0 +1,87 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="2" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <a href="#" class="link-back">Back</a>
+      <h1 class="heading-large">
+        How do you want to proceed?
+      </h1>
+
+<!--
+      <form
+      name="aspnetForm"
+      method="post"
+      onsubmit="multiNavigation('radio_select_group', ['all', 'Some', 'reject'], ['../task-list', 'do-you-owe-money/partial-defence-options', 'do-you-owe-money/defence-options']);return false;"
+      id="aspnetForm"
+      autocomplete="off">
+-->
+
+      <form action="../../../claimant/task-list/claim-details/reason" class="form" method="post">
+
+      <p>
+        The claimant has said you owe them £1,500.</br>
+        You have said they owe you £{% if data['counter-amount'] < 1500 %}500{% else %}2,000{% endif %}.
+      </p>
+
+      <p>
+        Do you:
+      </p>
+
+      <div class="form-group">
+        <fieldset>
+
+      {% if data['counter-amount'] < 1500 %}
+
+          <div class="multiple-choice">
+            <input id="admit-yes" type="radio" name="counter-admit" value="yes" {{ checked("counter-admit", "yes") }}>
+            <label for="admit-yes">
+              <strong class="bold-small">admit that you owe £1,500, but want to deduct £500 from this</strong>
+              <span class="form-hint">This would result in you paying £1,000, if the claimant agrees.</span>
+            </label>
+          </div>
+          <div class="multiple-choice">
+            <input id="admit-no" type="radio" name="counter-admit" value="no" {{ checked("counter-admit", "no") }}>
+            <label for="admit-no">
+              <strong class="bold-small">deny that you owe £1,500 and want £500 from the claimant</strong>
+              <span class="form-hint">You would need to defend the original claim and could lead to you going to a hearing.</span>
+            </label>
+          </div>
+
+      {% else %}
+
+          <div class="multiple-choice">
+            <input id="admit-yes" type="radio" name="counter-admit" value="yes" {{ checked("counter-admit", "yes") }}>
+            <label for="admit-yes">
+              <strong class="bold-small">admit that you owe £1,500, but want to deduct this from the £2,000 you are owed</strong>
+              <span class="form-hint">This would result in you being paid £500, if the claimant agrees.</span>
+            </label>
+          </div>
+          <div class="multiple-choice">
+            <input id="admit-no" type="radio" name="counter-admit" value="no" {{ checked("counter-admit", "no") }}>
+            <label for="admit-no">
+              <strong class="bold-small">deny that you owe £1,500 and want the full £2000 from the claimant</strong>
+              <span class="form-hint">You would need to defend the claimants claim and could lead to you going to a hearing.</span>
+            </label>
+          </div>
+
+        {% endif %}
+
+
+        </fieldset>
+        <div class="form-group">
+          <input type="hidden" name="counterclaim" value="true" />
+          <input type="submit" class="button" value="Save and continue"/>
+        </div>
+      </form>
+    </div>
+  </main>
+  {% endblock %}
