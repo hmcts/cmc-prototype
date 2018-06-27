@@ -1,0 +1,76 @@
+{% extends "layout_task-list.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block home_link %} ../task-list {% endblock %}
+{% block proposition_header %}
+{% set my_account="1" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <a href="#" class="link-back">Back</a>
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      {{formData | safe}}
+      {% if data['upload'] == 'show' or data['upload'] == '1'%}
+      <form method="post" action="../statement/upload" class="form">
+        {% elif data['upload'] == 'hide'  or data['upload'] == '2' %}
+        <form method="post" action="../statement/residence" class="form">
+          {% else %}
+          <form method="post" action="../statement/residence" class="form">
+            {% endif %}
+            <h1 class="heading-large">
+              {% if data['upload'] == 'show' or data['upload'] == '1'%}
+              You need to upload the following docs
+              {% elif data['upload'] == 'hide'  or data['upload'] == '2' %}
+              You need to answer some financial questions
+              {% else %}
+              What you'll need
+              {% endif %}
+            </h1>
+            {% if data['upload'] == 'show' or data['upload'] == '1'%}
+            <p>Your upload will be sent to {% if data.counterclaim=="true" %}Mary Richards{%else%}Jan Clark{% endif %}.</p>
+            <h3 class="heading-medium">What you'll need</h3>
+            <p>You'll upload:
+              <ul class="list list-bullet">
+                <li>Statement of account</li>
+                <li>another doc</li>
+                <li>another doc</li>
+              </ul>
+              {% elif data['upload'] == 'hide' or data['upload'] == '2' %}
+              <p>Your answers will be sent to {% if data.counterclaim=="true" %}Mary Richards{%else%}Jan Clark{% endif %} to explain why you can't pay the full amount now. They can choose to accept or reject your repayment plan.</p>
+              <h3 class="heading-medium">What you'll need</h3>
+              <p>You'll need to provide details of:
+                <ul class="list list-bullet">
+                  <li>monthly bills and expenses</li>
+                  <li>monthly income and benefits</li>
+                  <li>bank balances and savings</li>
+                  <li>debts or court orders</li>
+                </ul>
+                {% else %}
+                <p>You'll need to give details of:
+                  <ul class="list list-bullet">
+                    <li>monthly bills and expenses</li>
+                    <li>monthly income and benefits</li>
+                    <li>bank balances and savings</li>
+                    <li>debts or court orders</li>
+                  </ul>
+                  {% endif %}
+                  <input type="hidden" name="your_defence_options" value="complete">
+                  <div class="form-group">
+                    <input type="submit" class="button" value="Continue"/>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </main>
+          <form method="post"  action="#" class="form" style="; float: left">
+            <select id="dashboard2" name="dashboard2" onchange="window.location.href='explanation?upload='+this.value">
+              <option  value="0" >Choose </option>
+              <option value="1" {% if data['upload'] == 1 %}selected{% endif %}>Document upload</option>
+              <option value="2" {% if data['upload'] == 2 %}selected{% endif %}>Statement of means</option>
+            </select>
+          </form>
+          {% endblock %}
