@@ -14,7 +14,7 @@ Money Claims Prototype
 				<h1 class="bold-large">You've submitted your response</h1>
 				<br>
 				<p class="">
-					Your claim reference: <br><strong class="bold-large">352MC733</strong>
+					Claim reference: <br><strong class="bold-large">352MC733</strong>
 				</p>
 				<p>
 					<strong class="bold">{{ now | date }}</strong>
@@ -28,11 +28,13 @@ Money Claims Prototype
 				{% else %}
 				<a  class="font-medium" href="correspondence/forms/claim-form-defendant?check=2" target="new" style="color: #FFFFFF" >
 				{% endif %}
-					Download your response (PDF, 123KB)
+					Download your response</a> (PDF, 123KB)
 				</a>
 			</p>
 		</div>
-		<h2 class="heading-large">Your response</h2>
+<!--		<h2 class="heading-large">Your response</h2>  -->
+
+
 		<!-- Admit all - pay Immediately -->
 		{% if data['radio-pay-group']=="Immediately" and data.radio_select_group=="all" or data['confirmation']== 1  %}
 
@@ -51,7 +53,10 @@ Money Claims Prototype
 		<h2 class="heading-medium">What happens next</h2>
 		<p>When Jan Clark gets your payment they must tell you and the court you’ve paid.</p>
 		{% include "includes/survey.html" %}
-		<p><a class="button" href='../dashboard/home?dashboard=2.1'>Go to your account</a></p>
+		<p><a class="button" href='../dashboard/home?dashboard=2.31'>Go to your account</a></p>
+
+
+
 		<!-- Admit all - pay instalments -->
 		{% elseif data['radio-pay-group']=="Instalments" and data.radio_select_group=="all" or data['confirmation']== 2 %}
 		<p>We've emailed Jan Clark to tell them you've suggested paying by instalments.</p>
@@ -71,7 +76,11 @@ Money Claims Prototype
 		<p>If they reject your offer to pay in instalments then the court will decide how you can pay.</p>
 		<p>If they do not respond within 6 months, the court will put the claim on hold.</p>
 		{% include "includes/survey.html" %}
-		<p><a class="button" href='../dashboard/home?dashboard=2.1'>Go to your account</a></p>
+		<p><a class="button" href='../dashboard/home?dashboard=2.33'>Go to your account</a></p>
+
+
+
+
 		<!-- Admit all - pay by set date -->
 		{% elseif data['radio-pay-group']=="Set-date"  and data.radio_select_group=="all" or data['confirmation']== 3 %}
 		<p>We've emailed Jan Clark your offer to pay by {% if data['set-day'] %}{{ ( data['set-month'] + ' ' + data['set-day'] + ' ' + data['set-year']) | date('D MMMM YYYY') }}{% else %}{{ date | date('add', 15, 'days') | date }}{% endif %} and your explanation of why you can’t pay before then.</p>
@@ -80,7 +89,10 @@ Money Claims Prototype
 		<p>If they reject your offer to pay by a set date then the court will decide how you must pay.</p>
 		<p>If they do not respond within 6 months, the court will put the claim on hold.</p>
 		{% include "includes/survey.html" %}
-		<p><a class="button" href='../dashboard/home?dashboard=2.1'>Go to your account</a></p>
+		<p><a class="button" href='../dashboard/home?dashboard=2.32'>Go to your account</a></p>
+
+
+
 
     <!-- I part admit the claim - pay immediately -->
 		{% elseif data.radio_select_group2=="Some" and data['radio-pay-group']=="Immediately" or data['confirmation']== 4 %}
@@ -163,6 +175,8 @@ Money Claims Prototype
     {% endif %}
 
 
+		{% include "includes/survey.html" %}
+		<p><a class="button" href='../dashboard/home?dashboard=2.6'>Go to your account</a></p>
 			<!-- Reject claim -->
 			{% elseif data.radio_select_group2=="defend_now" or data['confirmation']== 12 %}
 			<p>We’ve emailed Jan Clark your response, explaining why you reject the claim.</p>
