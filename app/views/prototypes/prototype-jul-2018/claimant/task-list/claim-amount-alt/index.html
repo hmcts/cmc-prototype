@@ -99,6 +99,10 @@ Money Claims Prototype
  £<span id="totalSumDisplay">{{data['totalSum']}}</span>
 </div>
 <input  type="hidden" name="totalSum" id="totalSum" value={{data['totalSum']}}>
+{% if data['radio_select_group'] == "counter" %}
+<input type="hidden" name="counter-amount" id="counter-amount" value={{ data['counter-amount'].replace(',', '') }}>
+{% endif %}
+
 <script>
   $(document).ready(function () {
     $('#add-another-event-button').click(function (event) {
@@ -146,10 +150,8 @@ Money Claims Prototype
 
       targetSpan.text(x)
 
-
-
-      $('#totalSum').val(x)
-
+      $('#totalSum').val(x);
+      $('#counter-amount').val(x.replace(',', '') );
 
     }
     function getNumericValue(value) {
