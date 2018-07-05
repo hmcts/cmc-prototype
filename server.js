@@ -249,6 +249,7 @@ if (typeof (routes) !== 'function') {
 }
 
 //custom routes for sprint folders
+require('./app/views/prototypes/features-to-be-built/routes/routes.js')(app);
 require('./app/views/prototypes/prototype-april-2018/routes/routes.js')(app);
 require('./app/views/prototypes/prototype-may-2018/routes/routes.js')(app);
 require('./app/views/prototypes/prototype-jun-2018/routes/routes.js')(app);
