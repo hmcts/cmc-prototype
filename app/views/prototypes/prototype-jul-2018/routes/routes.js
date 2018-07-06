@@ -63,6 +63,116 @@ module.exports = function(app){
   })
 
 
+
+
+  app.post( '/' + strPath + 'defendant/task-list/do-you-owe-money/are-you-owed', (req, res) => {
+
+    if ( req.session.data['response-owed'] && req.session.data['amount-owed'] >= 1500 ) {
+      req.session.data['radio_select_group'] = 'all';
+      req.session.data['do_you_owe_money'] = 'complete';
+      req.session.data['response'] = 'FULL-ADMIT';
+
+    } else if ( req.session.data['response-owed'] && req.session.data['amount-owed'] > 0) {
+      req.session.data['do_you_owe_money'] = 'complete';
+      req.session.data['amount_pa'] = 'complete';
+      req.session.data['radio_select_group'] = 'Some';
+      req.session.data['show_mediation'] = 'true';
+
+      req.session.data['response'] = 'PART-ADMIT';
+      
+
+    } else if ( req.session.data['response-owed'] && req.session.data['amount-owed'] == 0) {
+      req.session.data['do_you_owe_money'] = 'complete';
+      req.session.data['show_mediation'] = 'true';
+
+    }
+
+
+    if ( req.session.data['response-owed'] && req.session.data['response-owed'] == 'yes' ) {
+      res.redirect('/' + strPath + 'defendant/task-list/do-you-owe-money/amount-owed');
+
+    } else if ( req.session.data['response-owed'] ) {
+      res.redirect('/' + strPath + 'defendant/task-list');
+      
+    } else {
+      res.render( strPath + 'defendant/task-list/do-you-owe-money/are-you-owed' );
+    }
+
+  })
+
+
+
+  app.post( '/' + strPath + 'defendant/task-list/counter-claim/evidence', (req, res) => {
+
+    if ( req.session.data['counter'] == 'SET-OFF-COUNTER' ) {
+      res.redirect('/' + strPath + 'defendant/task-list');
+    } else {
+      res.redirect('/' + strPath + 'defendant/task-list/owe-all');
+    }
+
+  })
+
+
+
+
+
+
+  app.post( '/' + strPath + 'defendant/task-list/do-you-owe-money/defence-options', (req, res) => {
+
+    if ( req.session.data['radio_select_group2'] && req.session.data['radio_select_group2'] == 'paid' ) {
+      req.session.data['radio_select_group'] = 'paid';
+      req.session.data['do_you_owe_money'] = 'complete';
+      req.session.data['show_mediation'] = 'true';
+      req.session.data['response'] = 'STATES-PAID';
+
+      res.redirect('/' + strPath + 'defendant/task-list');
+
+    } else if ( req.session.data['radio_select_group2'] && req.session.data['radio_select_group2'] == 'defend_now' ) {
+      req.session.data['response'] = 'DEFENCE';
+
+      res.redirect('/' + strPath + 'defendant/task-list/do-you-owe-money/are-you-owed');
+
+    } else if ( req.session.data['radio_select_group2'] && req.session.data['radio_select_group2'] == 'counter' ) {
+
+      res.redirect('/' + strPath + 'defendant/task-list/do-you-owe-money/amount-owed');
+      req.session.data['response'] = 'COUNTER';
+
+
+    } else {
+      res.render( strPath + 'defendant/task-list/do-you-owe-money/defence-options' );
+
+    }
+
+  })
+
+
+
+  app.post( '/' + strPath + 'defendant/task-list/counter-claim/counter-type', (req, res) => {
+
+
+      if ( req.session.data['response-owe'] != 'owe-none' && (req.session.data['counter-amount']*1 >= req.session.data['amount-owed']*1 ) ) {
+          req.session.data['counter'] = 'SET-OFF-COUNTER';
+          // set off and counter
+
+          // this includes full and partial admission - may need seperate routes for both
+
+      } else if ( (req.session.data['counter-amount'] > 0) && ( req.session.data['amount-owed']*1 == 0 ) ) {
+          req.session.data['counter'] = 'FULL-COUNTER';
+        // full counterclaim
+
+
+      } else {
+        // set off
+        req.session.data['counter'] = 'SET-OFF';
+
+      }
+    
+    req.session.data['do_you_owe_money'] = 'complete';
+    res.redirect( 'claim-details' );
+  })
+
+
+
   app.post( '/' + strPath + 'dashboard/claimant-response/admit-the-claim/task-list/counter-offer/repayment-plan', (req, res) => {
 
     if (req.session.data['instalment-first-payment'] > 250 ) {
