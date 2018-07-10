@@ -102,18 +102,6 @@ module.exports = function(app){
 
 
 
-  app.post( '/' + strPath + 'defendant/task-list/counter-claim/evidence', (req, res) => {
-
-    if ( req.session.data['counter'] == 'SET-OFF-COUNTER' ) {
-      res.redirect('/' + strPath + 'defendant/task-list');
-    } else {
-      res.redirect('/' + strPath + 'defendant/task-list/owe-all');
-    }
-
-  })
-
-
-
 
 
 
@@ -149,7 +137,6 @@ module.exports = function(app){
 
   app.post( '/' + strPath + 'defendant/task-list/counter-claim/counter-type', (req, res) => {
 
-
       if ( req.session.data['response-owe'] != 'owe-none' && (req.session.data['counter-amount']*1 >= req.session.data['amount-owed']*1 ) ) {
           req.session.data['counter'] = 'SET-OFF-COUNTER';
           // set off and counter
@@ -168,7 +155,7 @@ module.exports = function(app){
       }
     
     req.session.data['do_you_owe_money'] = 'complete';
-    res.redirect( 'claim-details' );
+    res.redirect( '../../task-list' );
   })
 
 
