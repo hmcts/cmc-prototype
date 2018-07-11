@@ -116,7 +116,7 @@
               </tr>
 
 
-              {% if data['response-owed'] == 'yes' %}
+              {% if data['response-owed'] == 'yes' or data['counter'] == 'FULL-COUNTER' %}
               <tr id="their-details">
                 <td class="task">
                   <a href="task-list/counter-claim/claim-details{{formQuery}}">
@@ -129,11 +129,7 @@
                   {% endif %}
                 </td>
               </tr>
-              {% endif %}
-
-
-
-              {% if data.response == 'STATES-PAID' and data.radio_select_group2 == "Some_paid" %}
+              {% elseif ( data.response == 'STATES-PAID' and data.radio_select_group2 == "Some_paid" ) or data.response == 'DEFENCE' %}
               <tr id="their-details">
                 <td class="task">
                   <a href="task-list/your-defence/defence-1{{formQuery}}">
