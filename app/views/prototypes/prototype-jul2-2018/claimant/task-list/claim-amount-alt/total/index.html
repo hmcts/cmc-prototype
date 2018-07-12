@@ -93,18 +93,13 @@ Money Claims Prototype
           </table>
 
 
-
-          {% if ( data['amount-owed'] and data['totalSum'] ) and (data['counter-amount']*1 <= data['amount-owed']*1 ) %}
-          <p>There is no fee to counterclaim for £{{ data['counter-amount']|numeral }} because this amount would be offset from the £{{ data['amount-owed']|numeral }} you owe.</p>
-
-          {% elseif (data['counter-amount'] > 0) and ( data['amount-owed']*1 == 0 ) %}
+          {% if (data['counter-amount'] > 0) and ( data['amount-owed']*1 == 0 ) %}
           <h2 class="heading-medium">Your claim fee</h2>
           <p>You will need to pay a £70 claim fee to make a counterclaim for £{{ data['counter-amount']|numeral }}.</p>
 
           {% elseif ( data['amount-owed'] and data['totalSum'] ) and (data['counter-amount']*1 > data['amount-owed']*1 ) %}
           <h2 class="heading-medium">Your claim fee</h2>
           <p>The first £{{ data['amount-owed']|numeral }} of your counterclaim would be offset from the original claim amount. The £70 claim fee covers the additional £{{ (data['counter-amount'] - data['amount-owed'])|numeral }} you are claiming for.</p>
-
 
           {% endif %}
 
