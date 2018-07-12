@@ -1,0 +1,114 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="2" %}
+
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+
+
+<main id="content" role="main">
+
+
+
+  {% include "includes/phase_banner_beta.html" %}
+
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+      <a href="#" class="link-back">Back</a>
+
+
+      <h1 class="heading-large">
+        Free telephone mediation
+      </h1>
+      {% if data.radio_select_group=="Some" or data['settle'] == 1  %}
+        <p class="">You can talk to an impartial mediator about the claim against you before you have to go to court.</p>
+      {% elif data.radio_select_group=="Some_paid" or data.radio_select_group2=="Some_paid" or data.radio_select_group2=="amount_claimed" or data['settle'] == 2  %}
+        <p class="">You can talk to an impartial mediator about the claim against you before you have to go to court.</p>
+
+      {% else %}
+            <p class="">You can talk to an impartial mediator about the claim against you before you have to go to court.</p>
+        {% endif %}
+<p>The free service can help you:</p>
+        <ul class="list list-bullet">
+          <li>avoid a long wait for a judge to hear your claim</li>
+          <li>save on court fees</li>
+        </ul>
+<p>The mediator will talk to you and the claimant on the phone separately. You will both need to compromise and make concessions.</p>
+
+
+        <h1 class="heading-medium">
+          Will you try mediation?
+        </h1>
+
+
+
+
+
+      <form
+      name="aspnetForm"
+      method="post"
+      id="aspnetForm"
+      autocomplete="off"
+      onsubmit="multiNavigation('radio-mediation-group', ['Yes', 'No'], ['../task-list', '../task-list']);return false;"
+      >
+
+
+
+
+        <input id="your-offer" name="offer" type="hidden">
+
+        <div class="form-group">
+          <fieldset class="inline">
+
+            <legend class="visually-hidden">Will you try telephone mediation?</legend>
+
+
+
+            <div class="multiple-choice">
+              <input id="radio-yes" type="radio" name="radio-mediation-group" value="Yes">
+              <label for="radio-yes" data-target="yes-info">Yes</label>
+            </div>
+
+
+
+              <div class="multiple-choice">
+                <input id="radio-no" type="radio" name="radio-mediation-group" value="No">
+                <label for="radio-no" data-target="no-info">No</label>
+              </div>
+
+              <div class="panel panel-border-narrow js-hidden" id="no-info">
+                <p>If you can reach an agreement with Jan Clark you don't need to go to a hearing. You'll need to
+                  explain your side and if the court
+                  decides you owe the money, you might have to pay more or get a <a
+                  href="https://www.gov.uk/county-court-judgments-ccj-for-debt">County
+                  Court Judgment (CCJ)</a> made against you.</p>
+                </div>
+
+              </fieldset>
+              <input type="hidden" name="mediation" value="complete">
+
+
+        <div class="form-group">
+          <input type="submit" class="button" value="Save and continue"/>
+        </div>
+
+
+
+            </div>
+          </form>
+          <p></p><br>
+
+
+          </div>
+        </div>
+      </main>
+
+
+      {% endblock %}
