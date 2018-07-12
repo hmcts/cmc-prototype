@@ -91,7 +91,6 @@ Money Claims Prototype
 	</p>
 
 		<p>If they reject your offer to pay in instalments then the court will decide how you can pay.</p>
-		<p>If they do not respond within 6 months, the court will put the claim on hold.</p>
 	    {% if data['confirmation'] == 9 or data['counter'] %}
 		{% include "prototypes/prototype-jul-2018/includes/counter.html" %}
 	    {% endif %}
@@ -114,7 +113,6 @@ Money Claims Prototype
 		<p>If Jan Clark accepts your offer to pay, <a href="../dashboard/party-details/claimant">contact them for payment details</a> and to arrange payment.</p>
 		<p>If they reject your offer then the court will decide how you must pay.</p>
 		<p>We'll email you to tell you their response.</p>
-		<p>If they do not respond within 6 months, the court will put the claim on hold.</p>
 	    {% if data['confirmation'] == 9 or data['counter'] %}
 		{% include "prototypes/prototype-jul-2018/includes/counter.html" %}
 	    {% endif %}
@@ -126,7 +124,16 @@ Money Claims Prototype
 
     <!-- I part admit the claim - pay immediately -->
 		{% elseif ( data.radio_select_group2=="Some" or data['counter'] )  and data['radio-pay-group']=="Immediately" or data['confirmation']== 4 %}
-		<p>You believe you owe £{{ data['owe-amount'] or '1,200' }}. We've emailed Jan Clark your offer to pay this amount immediately.</p>
+		<p>You believe you owe £{{ data['owe-amount'] or '1,200' }}. We've emailed Jan Clark your offer to pay immediately.
+
+			<p>You need to make sure that:</p>
+
+			<ul class="list list-bullet">
+	  <li>they get the money before 4pm on {{ now | date('add', 5, 'days') | date }} - they can request a County Court Judgment against you if not</li>
+	  <li>any cheques or bank transfers are clear in their account by the deadline</li>
+		<li>you get a receipt for any payments</li>
+	</ul>
+
 		<p>We've also sent them your explanation of why you do not believe you owe the amount claimed.</p>
 	    {% if data['confirmation'] == 9 or data['counter'] %}
 	    <p>We've also sent your counterclaim to Jan Clark</p>
@@ -146,7 +153,6 @@ Money Claims Prototype
     <p> If they reject it the court will review the case for the full amount of £1,500. You might have to go to a hearing.</p>
 		<p>We'll contact you if we set a hearing date to tell you how to prepare.</p>
     {% endif %}
-		<p>If they do not respond within 6 months, the court will put the claim on hold.</p>
 
 
 
@@ -179,7 +185,6 @@ Money Claims Prototype
     <p> If they reject it the court will review the case for the full amount of £1,500. You might have to go to a hearing.</p>
 		<p>We'll contact you if we set a hearing date to tell you how to prepare.</p>
     {% endif %}
-		<p>If they do not respond within 6 months, the court will put the claim on hold.</p>
 
 	    {% if data['confirmation'] == 9 or data['counter'] %}
 		{% include "prototypes/prototype-jul-2018/includes/counter.html" %}
@@ -211,7 +216,6 @@ Money Claims Prototype
     <p> If they reject it the court will review the case for the full amount of £1,500. You might have to go to a hearing.</p>
 		<p>We'll contact you if we set a hearing date to tell you how to prepare.</p>
     {% endif %}
-		<p>If they do not respond within 6 months, the court will put the claim on hold.</p>
 
 	    {% if data['confirmation'] == 9 or data['counter'] %}
 		{% include "prototypes/prototype-jul-2018/includes/counter.html" %}
