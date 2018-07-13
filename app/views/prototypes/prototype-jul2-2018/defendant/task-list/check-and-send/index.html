@@ -231,7 +231,7 @@ Check your answers
 								Claim amount
 							</td>
 							<td>
-								£500
+								£{{ data['totalSum'] }}
 							</td>
 							<td class="change-answer">
 								<a href="#">Change <span class="visuallyhidden">Name</span></a>
@@ -554,7 +554,7 @@ Check your answers
 										</a>
 									</td>
 								</tr>
-              <tr class="">
+              				<tr class="">
 								<td class="no-border">
 									When did you pay this amount?
 								</td>
@@ -1450,7 +1450,15 @@ Check your answers
 		<label for="HasAcceptedTermsAndConditions"> I believe that the facts stated in this admission are true.</label>
 	</div>
 </div>
-<form method="get" action="../confirmation-page?" class="form">
+
+
+	{% if data['counter'] == 'SET-OFF-COUNTER' or data['counter'] == 'FULL-COUNTER' %}
+	<form method="get" action="check-and-send/enter-card" class="form">
+
+	{% else %}
+	<form method="get" action="../confirmation-page?" class="form">
+	{% endif %}
+
 	{% if data.radio_select_group=="all" and data['radio-pay-group']=="Immediately" or data['check']== 1 %}
 	<!-- FA - pay immediately -->
 	<input type="hidden" name="confirmation" value="1">
@@ -1494,7 +1502,12 @@ Check your answers
 	<input type="hidden" name="confirmation" value="1">
 	{% endif %}
 	<div class="form-group">
+
+		{% if data['counter'] == 'SET-OFF-COUNTER' or data['counter'] == 'FULL-COUNTER'%}
+		<button id="submit" class="button" >Submit and continue to payment (£70)</button>
+		{% else %}
 		<button id="submit" class="button" >Submit response</button>
+		{% endif %}
 	</div>
 </form>
 </div>
