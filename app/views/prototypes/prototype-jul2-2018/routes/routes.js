@@ -158,7 +158,7 @@ module.exports = function(app){
     res.redirect( '../../task-list' );
   })
 
-
+  
 
   app.post( '/' + strPath + 'dashboard/claimant-response/admit-the-claim/task-list/counter-offer/repayment-plan', (req, res) => {
 
@@ -166,6 +166,17 @@ module.exports = function(app){
       res.redirect('/' + strPath + 'dashboard/claimant-response/admit-the-claim/task-list/counter-offer/court-offer');
     } else {
       res.redirect('/' + strPath + 'dashboard/claimant-response/admit-the-claim/task-list/counter-offer/approved');
+    }
+
+  })
+
+
+  app.post( '/' + strPath + 'dashboard/claimant-response/admit-the-claim/task-list/counter-offer/pay-by-set-date', (req, res) => {
+
+    if (req.session.data['set-year'] > 2018 ) {
+      res.redirect('/' + strPath + 'dashboard/claimant-response/admit-the-claim/task-list/counter-offer/approved');
+    } else {
+      res.redirect('/' + strPath + 'dashboard/claimant-response/admit-the-claim/task-list/counter-offer/court-date');
     }
 
   })
