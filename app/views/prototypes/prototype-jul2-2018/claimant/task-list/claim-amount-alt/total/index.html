@@ -34,8 +34,22 @@ Money Claims Prototype
           {{formData | safe}}
 
           <h1 class="heading-large">
-            {% if data['amount-owed'] %}Total counterclaim amount{% else %}Total amount you're claiming{% endif %}
+            {% if data['amount-owed'] %}Total claim amount{% else %}Total amount you're claiming{% endif %}
           </h1>
+
+          {% if (data['counter-amount'] > 0) and ( data['amount-owed']*1 == 0 ) %}
+
+          <p>Claiming money from someone who claims against you is a 'counterclaim'.</p> 
+
+          <p>You need to pay a £70 claim fee to make a counterclaim for £{{ data['counter-amount']|numeral }}.</p>
+
+          {% elseif ( data['amount-owed'] and data['totalSum'] ) and (data['counter-amount']*1 > data['amount-owed']*1 ) %}
+          <h2 class="heading-medium">Your claim fee</h2>
+          <p>The first £1,500 of your counterclaim would be offset from the original claim amount. The £70 claim fee covers the additional £{{ ( data['counter-amount'] - 1500 )|numeral }} you are claiming for.</p>
+
+          {% endif %}
+
+          <p>
 
           <fieldset>
             <legend class="visuallyhidden">
@@ -91,17 +105,6 @@ Money Claims Prototype
 
             </tbody>
           </table>
-
-
-          {% if (data['counter-amount'] > 0) and ( data['amount-owed']*1 == 0 ) %}
-          <h2 class="heading-medium">Your claim fee</h2>
-          <p>You will need to pay a £70 claim fee to make a counterclaim for £{{ data['counter-amount']|numeral }}.</p>
-
-          {% elseif ( data['amount-owed'] and data['totalSum'] ) and (data['counter-amount']*1 > data['amount-owed']*1 ) %}
-          <h2 class="heading-medium">Your claim fee</h2>
-          <p>The first £1,500 of your counterclaim would be offset from the original claim amount. The £70 claim fee covers the additional £{{ ( data['counter-amount'] - 1500 )|numeral }} you are claiming for.</p>
-
-          {% endif %}
 
 
         {% if ( not data['amount-owed'] ) %}
