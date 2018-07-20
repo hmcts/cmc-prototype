@@ -63,9 +63,31 @@
 
               {% elseif data['defendant'] == 3.9 %}
               <h2 class="heading-small">Your response to the claim</h2>
-              <p>You've said you owe £1,000 and offered to pay Jan Clark £200 per month starting {{ now | date('add', 1, 'months') | date( 'D MMMM YYYY' ) }}.</p>
+              <p>You've said you owe £1,200 and offered to pay Jan Clark £200 per month starting {{ now | date('add', 1, 'months') | date( 'D MMMM YYYY' ) }}.</p>
               <p>We’ll contact you when they respond.</p>
               <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=5">Download your response</a> (PDF, 123KB)</p>
+
+              {% elseif data['defendant'] == 3.901 %}
+              <h2 class="heading-small">Your response to the claim</h2>
+              <p>You've said you owe £1,200 and offered to pay Jan Clark by {{ now | date('add', 3, 'months') | date( 'D MMMM YYYY' ) }}.</p>
+              <p>We’ll contact you when they respond.</p>
+              <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=5">Download your response</a> (PDF, 123KB)</p>
+
+              {% elseif data['defendant'] == 3.902 %}
+              <h2 class="heading-small">Your response to the claim</h2>
+              <p>You've said you owe £1,200 and offered to pay Jan Clark immediately.</p>
+              <p>We’ll contact you when they respond.</p>
+              <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=5">Download your response</a> (PDF, 123KB)</p>
+
+              {% elseif data['defendant'] == 3.903 %}
+              <h2 class="heading-small">Your response to the claim</h2>
+              <p>Jan Clark has accepted your offer to pay £1,200 immediately.</p>
+              <p>You must pay Jan Clark before 4pm on {{ now | date('add', 5, 'days') | date }}.</p>
+              <p>If you pay by cheque or transfer the money must be clear in their account.</p>
+              <p> If they don't receive the money by then, they can request a County Court Judgment against you.</p>
+              <p><a href="party-details/claimant">Contact Jan Clark</a> if you need their payment details.</p>
+              <p>Make sure you get receipts for any payments.</p>
+              <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=2">Download your response</a> (PDF, 123KB)</p>
 
               {% elseif data['defendant'] == 3.91 %}
               <h2 class="heading-small">The claimant has rejected your admission of £1,200</h2>
@@ -489,7 +511,10 @@
     <option>------ CCJs -------</option>
     <option value="3" {% if data['defendant'] == 3 %}selected{% endif %}>3. Default CCJ issued </option>
     <option>------ Responses to claims -------</option>
-    <option value="3.9" {% if data['defendant'] == 3.9 %}selected{% endif %}>3.9 I admit part of the claim</option>
+    <option value="3.9" {% if data['defendant'] == 3.9 %}selected{% endif %}>3.9 I admit part of the claim - instalments</option>
+    <option value="3.901" {% if data['defendant'] == 3.901 %}selected{% endif %}>3.901 I admit part of the claim - set date</option>
+    <option value="3.902" {% if data['defendant'] == 3.902 %}selected{% endif %}>3.902 I admit part of the claim - immediately</option>
+    <option value="3.903" {% if data['defendant'] == 3.903 %}selected{% endif %}>3.903 I admit part of the claim - accepted</option>
     <option value="3.91" {% if data['defendant'] == 3.91 %}selected{% endif %}>3.91 I admit part of the claim - rejected</option>
     <option value="8" {% if data['defendant'] == 8 %}selected{% endif %}>4. States paid </option>
 

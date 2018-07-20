@@ -105,6 +105,23 @@ module.exports = function(app){
 
 
 
+
+  app.post( '/' + strPath + 'dashboard/claimant-response/admit-the-claim/task-list/counter-offers', (req, res) => {
+
+    if ( req.session.data['radio-pay-group'] ) {
+      res.redirect('/' + strPath + 'defendant/task-list/do-you-owe-money/are-you-owed');
+
+    } else {
+      res.render( strPath + 'dashboard/claimant-response/admit-the-claim/task-list/counter-offer' );
+
+    }
+
+  })
+
+
+
+
+
   app.post( '/' + strPath + 'defendant/task-list/do-you-owe-money/defence-options', (req, res) => {
 
     if ( req.session.data['radio_select_group2'] && req.session.data['radio_select_group2'] == 'paid' ) {
@@ -177,6 +194,28 @@ module.exports = function(app){
       res.redirect('/' + strPath + 'dashboard/claimant-response/admit-the-claim/task-list/counter-offer/approved');
     } else {
       res.redirect('/' + strPath + 'dashboard/claimant-response/admit-the-claim/task-list/counter-offer/court-date');
+    }
+
+  })
+
+
+  app.post( '/' + strPath + 'dashboard/claimant-response/part-admit/task-list/counter-offer/repayment-plan', (req, res) => {
+
+    if (req.session.data['instalment-first-payment'] > 250 ) {
+      res.redirect('/' + strPath + 'dashboard/claimant-response/part-admit/task-list/counter-offer/court-offer');
+    } else {
+      res.redirect('/' + strPath + 'dashboard/claimant-response/part-admit/task-list/counter-offer/approved');
+    }
+
+  })
+
+
+  app.post( '/' + strPath + 'dashboard/claimant-response/part-admit/task-list/counter-offer/pay-by-set-date', (req, res) => {
+
+    if (req.session.data['set-year'] > 2018 ) {
+      res.redirect('/' + strPath + 'dashboard/claimant-response/part-admit/task-list/counter-offer/approved');
+    } else {
+      res.redirect('/' + strPath + 'dashboard/claimant-response/part-admit/task-list/counter-offer/court-date');
     }
 
   })
