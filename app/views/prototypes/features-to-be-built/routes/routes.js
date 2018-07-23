@@ -74,6 +74,16 @@ module.exports = function(app){
   })
 
 
+  app.post( '/' + strPath + 'defendant/task-list/your-defence/paid-less', (req, res) => {
+
+    if (req.session.data['owe-amount'] < 1500 ) {
+      res.redirect('/' + strPath + 'defendant/task-list/your-defence/defence-message?radio_select_group2=Some_paid');
+    } else {
+      res.redirect('/' + strPath + 'defendant/task-list?radio_select_group2=amount_claimed&show_mediation=true');
+    }
+
+  })
+
   app.post( '/' + strPath + 'claimant/task-list/their-details/defendant-add', (req, res) => {
 
     if (req.body.addDefendant === undefined) {
