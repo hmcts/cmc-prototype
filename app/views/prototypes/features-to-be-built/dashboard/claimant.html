@@ -149,7 +149,7 @@
               <h2 class="heading-small">You've signed a settlement agreement</h2>
               <p>We'll email Mary Richards the repayment plan and the settlement agreement for them to sign.</p>
               <p>If they do not think they can afford the plan, they can ask for a judge to make a different plan.</p>
-              <p>We'll email you when they respond.</p>
+              <p>We will email you when they respond.</p>
 
 
               {% elseif data['claimant'] ==  10.01 %}
@@ -161,7 +161,7 @@
 
               {% elseif data['claimant'] == 10.11 %}
               <h2 class="heading-small">A County Court Judgment has been issued</h2>
-              <p>You've accepted the defendant's repayment plan and a County Court Judgment has been issued.</p>
+              <p>You have accepted the defendant's repayment plan and a County Court Judgment has been issued.</p>
               <p><a href="../defendant/correspondence/forms/judgment-order?check=3">View judgment</a> (PDF, 123KB)</p>
               <p>When you've been paid in full, you need to let us know.</p>
               <p> <a href="paid-in-full/claimant" class="button secondary-button" style="margin-bottom: 20px">Tell us you've been paid</a></p>
@@ -183,12 +183,8 @@
 
               <p>The defendant said they'll pay you immediately. They must make sure you have the money by 4pm on {{ now | date('add', 5, 'days') | date }}.</p>
 
-              <p>You need to tell us if you've settled the claim because the defendant has paid you.</p>
-
-              <p>You can settle for less than the full claim amount.</p>
-
-
-              <p> <a href="paid-in-full/claimant" class="button secondary-button" style="margin-bottom: 20px">Tell us you've settled</a></p>
+              <p>When you've been paid in full, you need to let us know.</p>
+              <p> <a href="paid-in-full/claimant" class="button secondary-button" style="margin-bottom: 20px">Tell us you've been paid</a></p>
 
               <h3 class="heading-small">What to do if they don't pay</h3>
               <p>If the defendant has not paid you by {{ now | date('add', 5, 'days') | date }}, you can request a County Court Judgment.</p>
@@ -197,11 +193,8 @@
               <h2 class="heading-small">The defendant will pay you immediately</h2>
               <p>The defendant said they would pay you before 4pm on {{ now | date('subtract', 1, 'days') | date }}. Any cheques or transfers should be clear in your account.</p>
 
-              <p>You need to tell us if you've settled the claim because the defendant has paid you.</p>
-
-              <p>You can settle for less than the full claim amount.</p>
-
-              <p> <a href="paid-in-full/claimant" class="button secondary-button" style="margin-bottom: 20px">Tell us you've settled</a></p>
+              <p>When you've been paid in full, you need to let us know.</p>
+              <p> <a href="paid-in-full/claimant" class="button secondary-button" style="margin-bottom: 20px">Tell us you've been paid</a></p>
               <h3 class="heading-small">What to do if they haven't paid</h3>
               <p>If the defendant doesn't pay you, you can <a href="applications-and-judgments/default-judgment?radio-proceed=none">request a County Court Judgment</a>.</p>
 
@@ -320,26 +313,10 @@
           </div>
 
 
-          {% elseif data['claimant'] == 20.1  %}
-          <div class="">
-            <h2 class="heading-small">This claim is settled</h2>
-            <p>Mary Richards paid you £1500 on {{ now | date( 'subtract', 5, 'days' ) | date }}.</p>
-            <p>The defendant's County Court Judgment has been cancelled.</p>
-          </div>
-
-          {% elseif data['claimant'] == 20.2  %}
-          <div class="">
-            <h2 class="heading-small">This claim is settled</h2>
-            <p>Mary Richards paid you £1500 on {{ now | date( 'subtract', 5, 'days' ) | date }}.</p>
-            <p>The defendant's County Court Judgment has been marked as paid.</p>
-          </div>
-
-
           {% elseif data['claimant'] == 21  %}
           <div class="">
-            <h2 class="heading-small">This claim has been discontinued</h2>
-            <p>You ended the claim on {{ now | date( 'subtract', 5, 'days' ) | date }}.</p>
-            <p><a href="../claimant/correspondence/discontinuation">Download notice of discontinuance</a> (PDF, 123KB)</p>
+            <h2 class="heading-small">This claim is settled</h2>
+            <p>You ended the case on {{ now | date( 'subtract', 5, 'days' ) | date }}.</p>
           </div>
 
           {% endif %}
@@ -390,7 +367,7 @@
       {% if data['claimant'] < 20 and data['claimant'] != 10.11 and data['claimant'] != 10.01 and data['claimant'] != 10.4 and data['claimant'] != 16 and data['claimant'] != 17 %}
       <hr />
      <h2 class="heading-small">End the claim</h2>
-      <p>If you've already been paid, have settled out of court, or don't want to take the claim any further, you can <a href="discontinue">end the claim</a>.</p>
+      <p>You can <a href="discontinue">end the claim</a> anytime you want, for example if the defendant has paid you or you've settled out of court.</p>
       {% endif %}
 
     </div>
@@ -411,7 +388,7 @@
     <p  class="heading-small" style="padding-top: 100px">About claim</p>
     <ul role="navigation" class="font-xsmall list">
       <li><strong class="bold">Defendant name:</strong><br> <a href="party-details/defendant">Mary Richards</a></li>
-      <li><strong class="bold">Claim amount:</strong><br>£1500</li>
+      <li><strong class="bold">Claim amount:</strong><br>£1500.00 </li>
       <li><strong class="bold">Claim details:</strong><br><a href="../claimant/correspondence/claim-form-claimant?check=1">Download claim</a> </li>
       {% if data['claimant'] == 16 or  data['claimant'] == 17%}
       <li><strong class="bold">Defendant's response:</strong><br><a href="../defendant/correspondence/forms/claim-form-defendant?check=9">Download response</a> </li>
@@ -462,9 +439,7 @@
     <option value="17" {% if data['claimant'] == 17 %}selected{% endif %}>14. Agreement signed by both parties  </option>
 
     <option>------- Settled  ----------</option>
-    <option value="20" {% if data['claimant'] == 20 %}selected{% endif %}>20. Settled - marked paid</option>
-    <option value="20.1" {% if data['claimant'] == 20.1 %}selected{% endif %}>20.1 Settled - paid in full - cancelled</option>
-    <option value="20.2" {% if data['claimant'] == 20.2 %}selected{% endif %}>20.2 Settled - paid in full - satisfied</option>
+    <option value="20" {% if data['claimant'] == 20 %}selected{% endif %}>20. Settled - paid</option>
     <option value="21" {% if data['claimant'] == 21 %}selected{% endif %}>21. Settled - discontinued</option>
 
   </select>
