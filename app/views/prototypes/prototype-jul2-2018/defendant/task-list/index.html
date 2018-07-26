@@ -116,7 +116,20 @@
               </tr>
 
 
-              {% if data['response-owed'] == 'yes' or data['counter'] == 'FULL-COUNTER' %}
+              {% if data['response'] == 'FULL-ADMIT' and data['counter'] == 'SET-OFF' %}
+              <tr id="their-details">
+                <td class="task">
+                  <a href="task-list/counter-claim/claim-details{{formQuery}}">
+                    <span class="task-name">Explain why they owe you £{{ data['totalSum'] | numeral or '500' }}</span>
+                  </a>
+                </td>
+                <td class="numeric" id="task-status" scope="col" id="col-status">
+                  {% if data.your_defence=="complete" or data.your_defence_pa == "complete" %}
+                  {% include "includes/task_status_finished.html" %}
+                  {% endif %}
+                </td>
+              </tr>
+              {% elseif data['response-owed'] == 'yes' or data['counter'] == 'FULL-COUNTER' %}
               <tr id="their-details">
                 <td class="task">
                   <a href="task-list/counter-claim/claim-details{{formQuery}}">
