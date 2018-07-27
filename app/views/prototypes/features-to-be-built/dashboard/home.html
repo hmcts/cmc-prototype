@@ -7,8 +7,8 @@
 {% block content %}
 
 {% set show_all = true if data['dashboard'] == 8 %}
-{% set claimant_table = true if show_all==true or ( data['dashboard'] >= 1 and data['dashboard'] < 2 ) or data['dashboard'] == 2.17 or data['dashboard'] == 110 %}
-{% set defendant_table = true if show_all==true or ( data['dashboard'] >= 2 and data['dashboard'] != 110 ) %}
+{% set claimant_table = true if show_all==true or ( data['dashboard'] >= 1 and data['dashboard'] < 2 ) or data['dashboard'] == 2.17 %}
+{% set defendant_table = true if show_all==true or data['dashboard'] >= 2 %}
 
 
 <main id="content" role="main">
@@ -18,77 +18,9 @@
       <h1 class="heading-large">
         Your money claims account
       </h1>
-      {% if data['dashboard'] == 6 %}
-      {%else%}
+
       <a class="newclaim" href="new-claim/eligibility/index" >Make a new money claim</a>
-      {% endif %}
-<!--      {% if data['dashboard'] == 1.11 or data['dashboard'] == 1.19%}
-        <div class="panel panel-border-wide alert-default">
-          <ul>
-            <li class="bold">My tasks</li>
-            {% if data['dashboard'] == 1.11 %}
-            <li>Mary Richards has rejected your claim.   <a class="openTab"  href="claimant?claimant=10#tabs-1">You can accept or reject their response.</a></li>
-            <li>Mary Richards has made an offer to <a class="openTab"  href="claimant?claimant=10#tabs-3">settle out of court.</a></li>
-            {% elif data['dashboard'] == 1.19 %}
-             <li>Mary Richards has rejected your claim.   <a class="openTab"  href="claimant?claimant=8#tabs-1">You can accept or reject their response.</a></li>
-            <li>Mary Richards has made a counterclaim against you.   <a class="openTab"  href="claimant?claimant=18">Respond to counterclaim.</a></li>
-            {% endif %}
-          </ul>
-        </div>
-        {% endif %}-->
-        {% set show_all = true if data['dashboard'] == 8 %}
-        {% set claimant_table = true if show_all==true or data['dashboard'] == 1 or data['dashboard'] == 1.1 or data['dashboard'] == 1.2 or data['dashboard'] == 1.3 or data['dashboard'] == 1.4 or data['dashboard'] == 1.5 or data['dashboard'] == 1.6 or data['dashboard'] == 1.7 or data['dashboard'] == 1.8 or data['dashboard'] == 1.9 or data['dashboard'] == 110 or data['dashboard'] == 1.11 or data['dashboard'] == 1.12 or data['dashboard'] == 1.13 or data['dashboard'] == 1.14 or data['dashboard'] == 1.15 or data['dashboard'] == 1.16  or data['dashboard'] == 1.17 or data['dashboard'] == 1.18  or data['dashboard'] == 1.19 or data['dashboard'] == 2.17%}
-        {% set defendant_table = true if show_all==true or data['dashboard'] == 2 or data['dashboard'] == 2.1 or data['dashboard'] == 2.2  or data['dashboard'] == 2.3 or data['dashboard'] == 2.4 or  data['dashboard'] == 2.5  or  data['dashboard'] == 2.6 or  data['dashboard'] == 2.7 or  data['dashboard'] == 2.8 or  data['dashboard'] == 2.9 or data['dashboard'] == 210 or data['dashboard'] == 2.11 or data['dashboard'] == 2.12 or data['dashboard'] == 2.13 or data['dashboard'] == 2.14 or data['dashboard'] == 2.15 or data['dashboard'] == 2.16 or data['dashboard'] == 2.17 %}
-        {% if claimant_table!=true and defendant_table!=true %}
-        <h2 class="heading-medium type-heading claims">
-          Claims you've made
-        </h2>
-        <table class="claim-dashboard claims ">
-          <thead>
-            <tr>
-              <th scope="col">Claim number</th>
-              <th scope="col"">Defendant name</th>
-              <th scope="col"">Claim amount</th>
-              <th scope="col" class="mobile-hide">Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="draft mobile-table" >
-              <td ><a href="claimant?claimant=1.2">Draft claim</a></td>
-              <td >- </td>
-              <td >- </td>
-              <td class="mobile-hide"><a href="../../claimant/full/c-2/task-list">Continue with claim </a> </td>
-            </tr>
-            <tr>
-              <td  class="mobile-table-status" colspan="3">Status: <a href="../../claimant/full/c-2/task-list">Continue with claim </a> </td>
-            </tr>
-          </tbody>
-        </table>
-        <h2 class="heading-medium type-heading claims">
-          Claims made against you
-        </h2>
-        <table class="claim-dashboard claims ">
-          <thead>
-            <tr>
-              <th scope="col">Claim number</th>
-              <th scope="col"">Defendant name</th>
-              <th scope="col"">Claim amount</th>
-              <th scope="col" class="mobile-hide">Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="mobile-table">
-              <td ><a href="defendant?defendant=1.1">242MC435</a></td>
-              <td >Jan Clark  </td>
-              <td >£1500 </td>
-              <td class="mobile-hide mobile-table"><a a href="../../defendant/full/d-5/task-list">Respond to claim.</a> <br><span class="font-xsmall">(19 days from date of issue remaining)</span> </td>
-            </tr>
-            <tr >
-              <td class="mobile-table-status" colspan="3">Status: <a a href="../../defendant/full/d-5/task-list">Respond to claim.</a> <span class="font-xsmall">(19 days from date of issue remaining)</span> </td>
-            </tr>
-          </tbody>
-        </table>
-        {% endif %}
+
         {% if claimant_table==true %}
         <h2 class="heading-medium type-heading claims">
           Claims you've made
@@ -97,8 +29,8 @@
           <thead>
             <tr>
               <th scope="col">Claim number</th>
-              <th scope="col"">Defendant name</th>
-              <th scope="col"">Claim amount</th>
+              <th scope="col">Defendant name</th>
+              <th scope="col">Claim amount</th>
               <th scope="col" class="mobile-hide">Status</th>
             </tr>
           </thead>
@@ -138,15 +70,15 @@
               <td  class="mobile-table-status" colspan="3">The defendant has not responded to your claim. You can request a County Court Judgment against them. </td>
             </tr>
             {% endif %}
-            {% if  show_all==true or data['dashboard'] == 1.4 %}
+            {% if show_all==true or data['dashboard'] == 1.4 %}
             <tr class="mobile-table" >
               <td ><a href="claimant?claimant=3">352MC733</a></td>
               <td >Mary Richards </td>
               <td >£1500 </td>
-              <td class="mobile-hide">You requested a County Court Judgment on <span class="date">19 October.</td>
+              <td class="mobile-hide">You requested a County Court Judgment on 19 October.</td>
               </tr>
               <tr>
-                <td  class="mobile-table-status" colspan="3">Status: You requested a County Court Judgment on <span class="date">19 October. We'll contact you within 5 days.</td>
+                <td  class="mobile-table-status" colspan="3">Status: You requested a County Court Judgment on 19 October. We'll contact you within 5 days.</td>
                 </tr>
             {% endif %}
             {% if show_all==true or data['dashboard'] == 1.5 or data['dashboard'] == 1.51 or data['dashboard'] == 1.52 or data['dashboard'] == 1.6 or data['dashboard'] == 1.61 or data['dashboard'] == 1.7 or data['dashboard'] == 1.8 or data['dashboard'] == 1.9 or data['dashboard'] == 110 or data['dashboard'] == 1.11 or data['dashboard'] == 1.111 or data['dashboard'] == 1.112 or data['dashboard'] == 1.113 or data['dashboard'] == 1.114 or data['dashboard'] == 1.115 or data['dashboard'] == 1.116 or data['dashboard'] == 1.117 or data['dashboard'] == 1.118 or data['dashboard'] == 1.119 or data['dashboard'] == 1.1191 or data['dashboard'] == 1.1192 %}
@@ -154,6 +86,10 @@
 
                 <tr class="mobile-table" >
                  {% if data['dashboard'] == 1.5 %}
+                 <td ><a href="claimant?claimant=4.2">352MC733</a></td>
+                 {% elif data['dashboard'] == 1.51 %}
+                 <td ><a href="claimant?claimant=4.1">352MC733</a></td>
+                 {% elif data['dashboard'] == 1.52 %}
                  <td ><a href="claimant?claimant=4">352MC733</a></td>
                  {% elif data['dashboard'] == 1.6 %}
                  <td ><a href="claimant?claimant=5">352MC733</a></td>
@@ -169,12 +105,40 @@
                  <td ><a href="claimant?claimant=8">352MC733</a></td>
                  {% elif data['dashboard'] == 1.11 %}
                  <td ><a href="claimant?claimant=10">352MC733</a></td>
+                {% elif data['dashboard'] == 1.111 %}
+                 <td ><a href="claimant?claimant=10.1">352MC733</a></td>
+                {% elif data['dashboard'] == 1.112 %}
+                 <td ><a href="claimant?claimant=10.01">352MC733</a></td>
+                {% elif data['dashboard'] == 1.113 %}
+                 <td ><a href="claimant?claimant=10.11">352MC733</a></td>
+                {% elif data['dashboard'] == 1.114 %}
+                 <td ><a href="claimant?claimant=10.4">352MC733</a></td>
+                {% elif data['dashboard'] == 1.115 %}
+                 <td ><a href="claimant?claimant=10.6">352MC733</a></td>
+                {% elif data['dashboard'] == 1.116 %}
+                 <td ><a href="claimant?claimant=10.61">352MC733</a></td>
+                {% elif data['dashboard'] == 1.117 %}
+                 <td ><a href="claimant?claimant=10.8">352MC733</a></td>
+                {% elif data['dashboard'] == 1.118 %}
+                 <td ><a href="claimant?claimant=20">352MC733</a></td>
+                {% elif data['dashboard'] == 1.119 %}
+                 <td ><a href="claimant?claimant=20.1">352MC733</a></td>
+                {% elif data['dashboard'] == 1.1191 %}
+                 <td ><a href="claimant?claimant=20.2">352MC733</a></td>
+                {% elif data['dashboard'] == 1.1192 %}
+                 <td ><a href="claimant?claimant=21">352MC733</a></td>
+
+
                  {% endif %}
                  <td >Mary Richards</td>
                  <td >£1500 </td>
                  <td>
                   {% if data['dashboard'] == 1.5 %}
-                  The defendant admits they owe all the money. You can accept or reject their repayment plan.
+                  The defendant admits they owe all the money. They've said that they will pay immediately.
+                  {% elif data['dashboard'] == 1.51 %}
+                  The defendant admits they owe all the money. You need to accept or reject their offer.
+                  {% elif data['dashboard'] == 1.52 %}
+                  The defendant admits they owe all the money. You need to accept or reject their offer.
                   {% elif data['dashboard'] == 1.6 %}
                   The defendant believes they owe you £1,000. You can accept or reject that this is the amount owed.
                   {% elif data['dashboard'] == 1.61 %}
@@ -186,9 +150,42 @@
                   {% elif data['dashboard'] == 1.9 or data['dashboard'] == 110 %}
                   The defendant has rejected your claim.
                   {% elif data['dashboard'] == 1.11%}
-                                   <p> The defendant has made an offer to settle out of court.</p>
-
+                  <p> The defendant has made an offer to settle out of court.</p>
                   <p> Mary Richards has rejected your claim. </p>
+
+                  {% elif data['dashboard'] == 1.111 %}
+                  <p>You've signed a settlement agreement.</p>
+
+                  {% elif data['dashboard'] == 1.112 %}
+                  <p>You've both signed a settlement agreement.</p>
+
+                  {% elif data['dashboard'] == 1.113 %}
+                  <p>A County Court Judgment has been issued.</p>
+
+                  {% elif data['dashboard'] == 1.114 %}
+                  <p>You've both signed a settlement agreement.</p>
+
+                  {% elif data['dashboard'] == 1.115 %}
+                  <p>Awaiting judge's repayment plan.</p>
+
+                  {% elif data['dashboard'] == 1.116 %}
+                  <p>You've signed a settlement agreement. The defendant can choose to sign it or not.</p>
+
+                  {% elif data['dashboard'] == 1.117 %}
+                  <p>Awaiting judge's repayment plan.</p>
+
+                  {% elif data['dashboard'] == 1.118 %}
+                  <p>This claim is settled.</p>
+
+                  {% elif data['dashboard'] == 1.119 %}
+                  <p>This claim is settled.</p>
+
+                  {% elif data['dashboard'] == 1.1191 %}
+                  <p>This claim is settled.</p>
+
+                  {% elif data['dashboard'] == 1.1192 %}
+                  <p>This claim has been discontinued.</p>
+
                   {% endif %}
                 </td>
               </tr>
@@ -197,7 +194,7 @@
                 </td>
               </tr>
               {% endif %}
-              {% if show_all==true or data['dashboard'] == 1 or data['dashboard'] == 1.12   %}
+              {% if show_all==true or data['dashboard'] == 1.12   %}
               <tr  class="mobile-table" >
                 <td ><a href="claimant?claimant=11">352MC733</a></td>
                 <td >Mary Richards</td>
@@ -210,7 +207,7 @@
                 <td  class="mobile-table-status" colspan="3">Status: The defendant has made an offer to settle out of court. </td>
               </tr>
               {% endif %}
-              {% if show_all==true or data['dashboard'] == 1 or data['dashboard'] == 1.13   %}
+              {% if show_all==true or data['dashboard'] == 1.13   %}
               <tr class="mobile-table" >
                 <td ><a href="claimant?claimant=12">352MC733</a></td>
                 <td >Mary Richards</td>
@@ -223,7 +220,7 @@
                 <td  class="mobile-table-status" colspan="3">Status: You've rejected an offer to settle out of court. </td>
               </tr>
               {% endif %}
-              {% if show_all==true or data['dashboard'] == 1 or data['dashboard'] == 1.14   %}
+              {% if show_all==true or data['dashboard'] == 1.14   %}
               <tr class="mobile-table" >
                 <td ><a href="claimant?claimant=13">352MC733</a></td>
                 <td >Mary Richards</td>
@@ -234,7 +231,7 @@
                 <td  class="mobile-table-status" colspan="3">Status: You've requested free mediation. We'll notify you once the defendant responds. </td>
               </tr>
               {% endif %}
-              {% if show_all==true or data['dashboard'] == 1 or data['dashboard'] == 1.15   %}
+              {% if show_all==true or data['dashboard'] == 1.15   %}
               <tr class="mobile-table" >
                 <td ><a href="claimant?claimant=4">352MC733</a></td>
                 <td >Mary Richards</td>
@@ -245,7 +242,7 @@
                 <td  class="mobile-table-status" colspan="3">Status: The defendant has requested more time to respond.  </td>
               </tr>
               {% endif %}
-              {% if show_all==true or data['dashboard'] == 1 or data['dashboard'] == 1.16   %}
+              {% if show_all==true or data['dashboard'] == 1.16   %}
               <tr class="mobile-table" >
                 <td ><a href="claimant?claimant=15">352MC733</a></td>
                 <td >Mary Richards</td>
@@ -256,7 +253,7 @@
                 <td  class="mobile-table-status" colspan="3">Status: Mary Richards has rejected your claim.  </td>
               </tr>
               {% endif %}
-              {% if show_all==true or data['dashboard'] == 1 or data['dashboard'] == 1.17   %}
+              {% if show_all==true or data['dashboard'] == 1.17   %}
               <tr  class="mobile-table" >
                 <td ><a href="claimant?claimant=16">352MC733</a></td>
                 <td >Mary Richards</td>
@@ -269,7 +266,7 @@
                 <td  class="mobile-table-status" colspan="3">Status: You've signed the agreement. We've asked Mary Richards to sign the agreement </td>
               </tr>
               {% endif %}
-              {% if show_all==true or data['dashboard'] == 1 or data['dashboard'] == 1.18   %}
+              {% if show_all==true or data['dashboard'] == 1.18   %}
               <tr  class="mobile-table" >
                 <td ><a href="claimant?claimant=17">352MC733</a></td>
                 <td >Mary Richards</td>
@@ -307,6 +304,9 @@
             </tbody>
           </table>
           {% endif %}
+
+
+
           {% if defendant_table==true %}
           <h2 class="heading-medium type-heading" >
             Claims made against you
@@ -315,8 +315,8 @@
             <thead>
               <tr>
                 <th scope="col">Claim number</th>
-                <th scope="col"">Claimant name</th>
-                <th scope="col"">Claim amount</th>
+                <th scope="col">Claimant name</th>
+                <th scope="col">Claim amount</th>
                 <th scope="col" class="mobile-hide">Status</th>
               </tr>
             </thead>
@@ -355,6 +355,34 @@
                 <td  class="mobile-table-status" colspan="3">Status: Jan Clark requested a County Court Judgment against you on <span class="dates2">17 October</span>. </td>
               </tr>
               {% endif %}
+
+              {% if show_all==true or data['dashboard'] == 2.31 %}
+              <tr class="mobile-table">
+                <td ><a href="defendant?defendant=5.02">352MC733</a></td>
+                <td>Jan Clark  </td>
+                <td >£1500 </td>
+                <td>You've admitted all of the claim and said you'll pay the full amount immediately.</td>
+              </tr>
+              {% endif %}
+
+              {% if show_all==true or data['dashboard'] == 2.32 %}
+              <tr class="mobile-table">
+                <td ><a href="defendant?defendant=5">352MC733</a></td>
+                <td>Jan Clark  </td>
+                <td >£1500 </td>
+                <td>You've admitted all of the claim and offered to pay the full amount by {% if data['set-month'] %}
+                  {{ ( data['set-month'] + ' ' + data['set-day'] + ' ' + data['set-year']) | date('D MMMM YYYY') }}{% else %}{{ now | date('add', 3, 'months') | date('D MMMM YYYY') }}{% endif %}. </td>
+              </tr>
+              {% endif %}
+              {% if show_all==true or data['dashboard'] == 2.33 %}
+              <tr class="mobile-table">
+                <td><a href="defendant?defendant=5.1">352MC733</a></td>
+                <td>Jan Clark  </td>
+                <td >£1500 </td>
+                <td>You've admitted all of the claim and offered to pay the full amount in instalments.</td>
+              </tr>
+              {% endif %}
+
               {% if show_all==true or data['dashboard'] == 2.4 %}
               <tr class="mobile-table">
                 <td ><a href="defendant?defendant=4">352MC733</a></td>
@@ -420,7 +448,7 @@
                 <td >£1500 </td>
 
                 <td>
-                <p>Your offer has been sent to the claimant.</p>
+                <p>We've sent your offer to the claimant.</p>
                   <p>You've rejected the claim.</p>
                 </td>
               </tr>
@@ -431,7 +459,7 @@
               </tr>
               {% endif %}
 
-              {% if show_all==true or data['dashboard'] == 210 %}
+              {% if show_all==true or data['dashboard'] == 2.101 %}
               <tr class="mobile-table">
                 <td><a href="defendant?defendant=10">352MC733</a></td>
                 <td >Jan Clark  </td>
@@ -520,7 +548,7 @@
                 <td class="mobile-table-status" colspan="3">Status: You have both signed a legal agreement. The claim is now settled.</td>
               </tr>
               {% endif %}
-              {% if show_all==true or data['dashboard'] == 2.17 %}
+              {% if show_all==true or data['dashboard'] == 2.171 %}
               <tr class="mobile-table">
                 <td><a href="defendant?defendant=17.1">352MC733</a></td>
                 <td>Jan Clark  </td>
@@ -531,6 +559,8 @@
                 <td class="mobile-table-status" colspan="3">Status: This claim is settled. </td>
               </tr>
               {% endif %}
+
+
 
               {% if show_all==true or data['dashboard'] == 2.34 %}
               <tr class="mobile-table">
@@ -728,9 +758,11 @@
         <option>-------- CCJs --------</option>
         <option value="1.3" {% if data['dashboard'] == 1.3 %}selected{% endif %}>3 CCJ - request judgment</option>
         <option value="1.4" {% if data['dashboard'] == 1.4 %}selected{% endif %}>4. CCJ - judgment requested</option>
-        <option>-------- Responds to defendant --------</option>
+        <option>-------- Defendant responses --------</option>
 
-        <option value="1.5" {% if data['dashboard'] == 1.5 %}selected{% endif %}>5. I admit all the claim</option>
+        <option value="1.5" {% if data['dashboard'] == 1.5 %}selected{% endif %}>5. I admit all the claim - pay immediately</option>
+        <option value="1.51" {% if data['dashboard'] == 1.51 %}selected{% endif %}>5.1. I admit all the claim - pay set date</option>
+        <option value="1.52" {% if data['dashboard'] == 1.52 %}selected{% endif %}>5.2. I admit all the claim - pay by instalments</option>
         <option value="1.6" {% if data['dashboard'] == 1.6 %}selected{% endif %}>6. Part admit the claim</option>
         <option value="1.61" {% if data['dashboard'] == 1.61 %}selected{% endif %}>6.1. Part admit the claim - rejected</option>
 
@@ -739,11 +771,27 @@
         <option value="110" {% if data['dashboard'] == 110 %}selected{% endif %}>10. Dispute claim  </option>
         <option value="1.19" {% if data['dashboard'] == 1.19 %}selected{% endif %}>10.1 Dispute claim + mediation </option>
         <option value="1.11" {% if data['dashboard'] == 1.11 %}selected{% endif %}>11. Dispute claim + offer </option>
-        <option>-------- Offers and agreements --------</option>
+
+        <option>-------- Claimant responses --------</option>
+        <option value="1.111" {% if data['dashboard'] == 1.111 %}selected{% endif %}>11.1 Accepted repayment plan - settlement</option>
+        <option value="1.112" {% if data['dashboard'] == 1.112 %}selected{% endif %}>11.2 Accepted repayment plan - settlement - accepted</option>
+        <option value="1.113" {% if data['dashboard'] == 1.113 %}selected{% endif %}>11.3 Accepted repayment plan - judgment</option>
+        <option value="1.114" {% if data['dashboard'] == 1.114 %}selected{% endif %}>11.4. Accepted full payment on set date</option>
+        <option value="1.115" {% if data['dashboard'] == 1.115 %}selected{% endif %}>11.5. Repayment plans rejected - redetermination</option>
+        <option value="1.116" {% if data['dashboard'] == 1.116 %}selected{% endif %}>11.6. Repayment plans rejected - countered</option>
+        <option value="1.117" {% if data['dashboard'] == 1.117 %}selected{% endif %}>11.7. Repayment plans rejected - countered - rejected</option>
+
+        <option>------ Offers and agreements -------</option>
         <option value="1.12" {% if data['dashboard'] == 1.12 %}selected{% endif %}>12. Offer from defendant</option>
         <option value="1.13" {% if data['dashboard'] == 1.13 %}selected{% endif %}>13. Rejected Offer from defendant</option>
         <option value="1.17" {% if data['dashboard'] == 1.17 %}selected{% endif %}>14. Offer accepted and signed</option>
         <option value="1.18" {% if data['dashboard'] == 1.18 %}selected{% endif %}>15. Agreement signed - message</option>
+
+        <option>-------- Settled --------</option>
+        <option value="1.118" {% if data['dashboard'] == 1.118 %}selected{% endif %}>11.8 Settled - marked paid</option>
+        <option value="1.119" {% if data['dashboard'] == 1.119 %}selected{% endif %}>11.9 Settled - paid in full - cancelled</option>
+        <option value="1.1191" {% if data['dashboard'] == 1.1191 %}selected{% endif %}>11.91 Settled - paid in full - satisfied</option>
+        <option value="1.1192" {% if data['dashboard'] == 1.1192 %}selected{% endif %}>11.92 Settled - discontinued</option>
 
       </select>
     </form>
@@ -759,7 +807,6 @@
         <option value="2.32" {% if data['dashboard'] == 2.32 %}selected{% endif %}>3.2 Admit all - pay set date</option>
         <option value="2.33" {% if data['dashboard'] == 2.33 %}selected{% endif %}>3.3 Admit all - pay instalments</option>
         <option value="2.51" {% if data['dashboard'] == 2.51 %}selected{% endif %}>3.4 Part admit</option>
-        <option>------ Responses -------</option>
         <option value="2.6" {% if data['dashboard'] == 2.6 %}selected{% endif %}>4. States paid </option>
         <option value="2.7" {% if data['dashboard'] == 2.7 %}selected{% endif %}>5. Dispute claim  </option>
         <option value="2.8" {% if data['dashboard'] == 2.8 %}selected{% endif %}>6. Dispute claim + mediation </option>
@@ -782,12 +829,20 @@
         <option value="2.46" {% if data['dashboard'] == 2.46 %}selected{% endif %}>2.46. I admit all the claim - instalment plan payment rejected by defendant - redetermination</option>
 
         <option>------ Offers and agreements -------</option>
-        <option value="210" {% if data['dashboard'] == 210 %}selected{% endif %}>8. Offer sent to claimant </option>
+        <option value="2.101" {% if data['dashboard'] == 2.101 %}selected{% endif %}>8. Offer sent to claimant </option>
         <option value="2.12" {% if data['dashboard'] == 2.12 %}selected{% endif %}>9. Offer rejected by claimant </option>
         <option value="2.11" {% if data['dashboard'] == 2.11 %}selected{% endif %}>10. Counter sign agreement </option>
-
         <option value="2.16" {% if data['dashboard'] == 2.16 %}selected{% endif %}>11. Agreement signed </option>
+
+        <option>-------- Settled --------</option>
+        <option value="2.171" {% if data['dashboard'] == 2.171 %}selected{% endif %}>17.1 Settled - marked paid</option>
+        <option value="2.18" {% if data['dashboard'] == 2.18 %}selected{% endif %}>18 Settled - paid in full - cancelled</option>
+        <option value="2.19" {% if data['dashboard'] == 2.19 %}selected{% endif %}>19 Settled - paid in full - satisfied</option>
+        <option value="2.21" {% if data['dashboard'] == 2.21 %}selected{% endif %}>21 Settled - certificate issued</option>
+        <option value="2.22" {% if data['dashboard'] == 2.22 %}selected{% endif %}>22 Settled - discontinued</option>
+
 
       </select>
     </form>
+
     {% endblock %}
