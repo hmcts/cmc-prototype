@@ -338,7 +338,7 @@ console.log( 'here' );
 console.log( 'here2', $(this).val() );
 
     if( $(this).val()==="2"){
-      $(".evidence-message").text("For example, a signed contract by the claimant.");
+      $(".evidence-message").text("For example, a signed contract.");
     }
     else if ( $(this).val()==="3"){
 console.log( 'here4' );
@@ -365,7 +365,7 @@ $(".evidence-message").show();
 
   $('.otherType1').on('change',function(){
     if( $(this).val()==="2"){
-      $(".evidence-message1").text("For example, a signed contract by the claimant.");
+      $(".evidence-message1").text("For example, a signed contract.");
 
 
     }
@@ -391,7 +391,7 @@ $(".evidence-message").show();
 
   $('.otherType2').on('change',function(){
     if( $(this).val()==="2"){
-      $(".evidence-message2").text("For example, a signed contract by the claimant.");
+      $(".evidence-message2").text("For example, a signed contract.");
 
 
     }
@@ -417,7 +417,7 @@ $(".evidence-message").show();
 
   $('.otherType3').on('change',function(){
     if( $(this).val()==="2"){
-      $(".evidence-message3").text("For example, a signed contract by the claimant.");
+      $(".evidence-message3").text("For example, a signed contract.");
 
 
     }
