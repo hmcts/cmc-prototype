@@ -313,7 +313,7 @@ h1 {
             {% if data['check'] == 1 %}
             Mary Richards: I will fix the roof if Jan Clark will give me access and pay for any extra materials.
 
-            {% elseif data['radio-pay-group']=="Instalments" or data['check'] == 2 %}
+            {% elseif data['claimant-payment-request']=="Instalments" or data['check'] == 2 %}
 
               Mary Richards will pay instalments of
                 {% if data['instalment-first-payment'] %}
@@ -331,7 +331,7 @@ h1 {
                 31 March 2018{% endif %}.
 
 
-            {% elseif data['radio-pay-group']=="Set-date" or data['check'] == 3 or data['check'] == 4 %}
+            {% elseif data['claimant-payment-request']=="Set-date" or data['check'] == 3 or data['check'] == 4 %}
               Mary Richards will pay the full amount, no later than
                 {% if data['set-day'] %}
                 {{ ( data['set-month'] + ' ' + data['set-day'] + ' ' + data['set-year']) | date('D MMMM YYYY') }}
@@ -353,7 +353,7 @@ h1 {
             {% if data['check'] == 1 %}
               {{ date | date('add', 2, 'months') | date('D MMMM YYYY') }}
 
-            {% elseif data['radio-pay-group']=="Instalments" or data['check'] == 2 %}
+            {% elseif data['claimant-payment-request']=="Instalments" or data['check'] == 2 %}
 
               {% if data['instalment-month'] %}
                 {{ ( data['instalment-month'] + ' ' + data['instalment-day'] + ' ' + data['instalment-year']) | date('add', 1, 'year') | date('D MMMM YYYY') }}
@@ -361,7 +361,7 @@ h1 {
                   {{ date | date('add', 1, 'year') | date('D MMMM YYYY') }}
               {% endif %}
 
-            {% elseif data['radio-pay-group']=="Set-date" or data['check'] == 3  or data['check'] == 4 %}
+            {% elseif data['claimant-payment-request']=="Set-date" or data['check'] == 3  or data['check'] == 4 %}
                 {% if data['set-day'] %}
                 {{ ( data['set-month'] + ' ' + data['set-day'] + ' ' + data['set-year']) | date('D MMMM YYYY') }}
                 {% else %}

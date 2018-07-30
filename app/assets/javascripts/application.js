@@ -338,7 +338,7 @@ console.log( 'here' );
 console.log( 'here2', $(this).val() );
 
     if( $(this).val()==="2"){
-      $(".evidence-message").text("For example, a signed contract by the claimant.");
+      $(".evidence-message").text("For example, a signed contract.");
     }
     else if ( $(this).val()==="3"){
 console.log( 'here4' );
@@ -347,7 +347,7 @@ $(".evidence-message").show();
       $(".evidence-message").text("For example, a surveyor's report.");
     }
     else if ( $(this).val()==="4"){
-      $(".evidence-message").text("For example, a letter from the claimant stating what work they expected you to do.");
+      $(".evidence-message").text("For example, a letter from the other party describing the work they expected you to do.");
     }
     else if ( $(this).val()==="5"){
       $(".evidence-message").text("For example, a photo of the work you carried out.");
@@ -365,7 +365,7 @@ $(".evidence-message").show();
 
   $('.otherType1').on('change',function(){
     if( $(this).val()==="2"){
-      $(".evidence-message1").text("For example, a signed contract by the claimant.");
+      $(".evidence-message1").text("For example, a signed contract.");
 
 
     }
@@ -373,7 +373,7 @@ $(".evidence-message").show();
       $(".evidence-message1").text("For example, a surveyor's report.");
     }
     else if ( $(this).val()==="4"){
-      $(".evidence-message1").text("For example, a letter from the claimant stating what work they expected you to do.");
+      $(".evidence-message1").text("For example, a letter from the other party describing the work they expected you to do.");
     }
     else if ( $(this).val()==="5"){
       $(".evidence-message1").text("For example, a photo of the work you carried out.");
@@ -391,7 +391,7 @@ $(".evidence-message").show();
 
   $('.otherType2').on('change',function(){
     if( $(this).val()==="2"){
-      $(".evidence-message2").text("For example, a signed contract by the claimant.");
+      $(".evidence-message2").text("For example, a signed contract.");
 
 
     }
@@ -399,7 +399,7 @@ $(".evidence-message").show();
       $(".evidence-message2").text("For example, a surveyor's report.");
     }
     else if ( $(this).val()==="4"){
-      $(".evidence-message2").text("For example, a letter from the claimant stating what work they expected you to do.");
+      $(".evidence-message2").text("For example, a letter from the other party describing the work they expected you to do.");
     }
     else if ( $(this).val()==="5"){
       $(".evidence-message2").text("For example, a photo of the work you carried out.");
@@ -417,7 +417,7 @@ $(".evidence-message").show();
 
   $('.otherType3').on('change',function(){
     if( $(this).val()==="2"){
-      $(".evidence-message3").text("For example, a signed contract by the claimant.");
+      $(".evidence-message3").text("For example, a signed contract.");
 
 
     }
@@ -425,7 +425,7 @@ $(".evidence-message").show();
       $(".evidence-message3").text("For example, a surveyor's report.");
     }
     else if ( $(this).val()==="4"){
-      $(".evidence-message3").text("For example, a letter from the claimant stating what work they expected you to do.");
+      $(".evidence-message3").text("For example, a letter from the other party.");
     }
     else if ( $(this).val()==="5"){
       $(".evidence-message3").text("For example, a photo of the work you carried out.");
@@ -654,4 +654,3 @@ function showSelectAddress() {
     return false;
 
   }
-

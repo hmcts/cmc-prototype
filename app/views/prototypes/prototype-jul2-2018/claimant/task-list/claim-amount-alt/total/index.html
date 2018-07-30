@@ -37,13 +37,14 @@ Money Claims Prototype
             {% if data['amount-owed'] %}Total claim amount{% else %}Total amount you're claiming{% endif %}
           </h1>
 
-          {% if (data['counter-amount'] > 0) and ( data['amount-owed']*1 == 0 ) %}
+          {% if data['response'] == 'STATES-PAID' and data['owe-amount']*1 > data['counter-amount']*1 %}
+          {% elseif ( data['counter-amount'] > 0) and ( data['amount-owed']*1 == 0 ) %}
 
           <p>Claiming money from someone who claims against you is called a 'counterclaim'.</p>
 
           <p>You need to pay a £70 claim fee to make a counterclaim for £{{ data['counter-amount']|numeral }}.</p>
 
-          {% elseif ( data['amount-owed'] and data['totalSum'] ) and (data['counter-amount']*1 > data['amount-owed']*1 ) %}
+          {% elseif ( data['amount-owed'] > 0 and data['totalSum'] ) and (data['counter-amount']*1 > data['amount-owed']*1 ) %}
           <p>Claiming money from someone who claims against you is called a 'counterclaim'.</p>
           <p>You need to a pay a £70 fee because your counterclaim is for £{{ ( data['counter-amount'] - 1500 )|numeral }} more than the amount that was claimed against you.</p>
 
@@ -91,7 +92,8 @@ Money Claims Prototype
                 </tr>
                 {% endif %}
 
-                {% if ( not ( data['amount-owed'] and data['totalSum'] ) or data['counter-amount']*1 >= data['amount-owed']*1 ) %}
+                {% if data['response'] == 'STATES-PAID' and data['owe-amount']*1 > data['counter-amount']*1 %}
+                {% elseif ( not ( data['amount-owed'] and data['totalSum'] ) or data['counter-amount']*1 >= data['amount-owed']*1 ) %}
                 <tr>
                   <th scope="row">Claim fee:</th>
                   <td class="numeric last">
