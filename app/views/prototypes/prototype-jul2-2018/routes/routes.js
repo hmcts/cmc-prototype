@@ -106,9 +106,10 @@ module.exports = function(app){
 
 
 
-  app.post( '/' + strPath + 'dashboard/claimant-response/admit-the-claim/task-list/counter-offers', (req, res) => {
+  app.post( '/' + strPath + 'dashboard/claimant-response/admit-the-claim/task-list/counter-offer', (req, res) => {
 
-    if ( req.session.data['radio-pay-group'] ) {
+    // need to finish this bit....!
+    if ( req.session.data['claimant-payment-request'] ) {
       res.redirect('/' + strPath + 'defendant/task-list/do-you-owe-money/are-you-owed');
 
     } else {
