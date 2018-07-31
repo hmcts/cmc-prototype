@@ -108,9 +108,27 @@ module.exports = function(app){
 
   app.post( '/' + strPath + 'dashboard/claimant-response/admit-the-claim/task-list/counter-offer', (req, res) => {
 
-    // need to finish this bit....!
+
     if ( req.session.data['claimant-payment-request'] ) {
-      res.redirect('/' + strPath + 'defendant/task-list/do-you-owe-money/are-you-owed');
+
+      if ( req.session.data['radio-pay-group'] == 'Set-date' )  {
+
+          res.redirect( 'court-payment-method/rejection-reason' );
+
+
+      } else if ( req.session.data['radio-pay-group'] == 'Instalments' )  {
+
+        if ( req.session.data['claimant-payment-request'] == 'Immediately' )  {
+          res.redirect( 'counter-offer/court-offer' );
+        
+        } else if ( req.session.data['claimant-payment-request'] == 'Set-date' )  {
+          res.redirect( 'counter-offer/pay-by-set-date' );
+        
+        } else if ( req.session.data['claimant-payment-request'] == 'Instalments' )  {
+          res.redirect( 'counter-offer/repayment-plan' );
+        }
+      
+      }
 
     } else {
       res.render( strPath + 'dashboard/claimant-response/admit-the-claim/task-list/counter-offer' );
@@ -194,7 +212,7 @@ module.exports = function(app){
     if (req.session.data['set-year'] > 2018 ) {
       res.redirect('/' + strPath + 'dashboard/claimant-response/admit-the-claim/task-list/counter-offer/approved');
     } else {
-      res.redirect('/' + strPath + 'dashboard/claimant-response/admit-the-claim/task-list/counter-offer/court-date');
+      res.redirect('/' + strPath + 'dashboard/claimant-response/admit-the-claim/task-list/counter-offer/court-offer');
     }
 
   })
@@ -216,7 +234,7 @@ module.exports = function(app){
     if (req.session.data['set-year'] > 2018 ) {
       res.redirect('/' + strPath + 'dashboard/claimant-response/part-admit/task-list/counter-offer/approved');
     } else {
-      res.redirect('/' + strPath + 'dashboard/claimant-response/part-admit/task-list/counter-offer/court-date');
+      res.redirect('/' + strPath + 'dashboard/claimant-response/part-admit/task-list/counter-offer/court-offer');
     }
 
   })

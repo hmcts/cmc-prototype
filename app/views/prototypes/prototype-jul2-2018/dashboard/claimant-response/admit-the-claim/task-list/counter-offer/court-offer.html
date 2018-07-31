@@ -14,11 +14,17 @@ Money Claims Prototype
   <div class="grid-row">
     <div class="column-two-thirds">
       <h1 class="heading-large">
-        Your instalments are more than the defendant can afford
+        {% if data['claimant-payment-request'] == 'Immediately' %}
+          The defendant can't pay immediately
+        {% elseif data['claimant-payment-request'] == 'Set-date' %}
+          The defendant can't pay by your proposed date
+        {% else %}
+          Your instalments are more than the defendant can afford
+        {% endif %}
       </h1>
 
-      <p>Based on the financial details provided by the defendant, we do not believe they can make these repayments.</p>
-      <p>The court affordability calculator has proposed the below repayment plan as the maximum the defendant can repay.</p>
+      <p>Based on the financial details provided by the defendant, we do not believe they can {% if data['claimant-payment-request'] == 'Immediately' %}pay immediately{% elseif data['claimant-payment-request'] == 'Set-date' %}pay by your proposed date{% else %}make these repayments{% endif %}.</p>
+      <p>The court affordability calculator has proposed the below repayment plan as the {% if data['claimant-payment-request'] == 'Immediately' or data['claimant-payment-request'] == 'Set-date' %}soonest{% else%}maximum{% endif %} the defendant can repay.</p>
 
       <h2 class="heading-medium">The court's proposed repayment plan</h2>
       <table class="instalment-table">

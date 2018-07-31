@@ -18,7 +18,7 @@ Money Claims Prototype
       </h1>
 
 
-      {% if data['payment'] == 'full' %}
+      {% if data['radio-pay-group'] =='Set-date' %}
       <p>Mary Richards has offered to pay you in full by {{ now | date( 'add', 3, 'months') | date }}.</p>
       {% else %}
       <table class="instalment-table">
@@ -97,20 +97,16 @@ Money Claims Prototype
             <input id="radio-yes" type="radio" name="radio-indent-group" value="accept_stop_claim">
             <label for="radio-yes" data-target="yes-info">Yes</label>
           </div>
-          <div class="multiple-choice">
+          <div class="multiple-choice" data-target="reject-offer">
             <input id="radio-no" type="radio" name="radio-indent-group" value="reject_stop_claim">
-            <label for="radio-no" data-target="no-info"> No - I'll suggest my own</label>
+            <label for="radio-no"> 
+              {% if data['radio-pay-group'] =='Set-date' %}
+              No - I want a judge to decide the repayment plan
+              {% else %}
+              No - I'll suggest my own
+              {% endif %}              
+            </label>
           </div>
-<!--
-      {% if data['determination'] == "1" %}
-      {% else %}
-          <div class="panel panel-border-narrow js-hidden" id="reject-offer">
-            <p>The court will propose an alternative repayment plan based on the defendant's income and spending.</p>
-          </div>
-      {% endif %}
--->
-
-
 
 
         </fieldset>
@@ -122,4 +118,14 @@ Money Claims Prototype
   </div>
 </div>
 </main>
+
+
+<form method="post"  action="#" class="for4" style=" float: left;">
+  <select onchange="window.location.href='?radio-pay-group='+this.value">
+      <option value="0">Defendant's proposed payment</option>
+      <option value="Set-date" {% if data['radio-pay-group'] == 'Set-date' %}selected{% endif %}>Set date</option>
+      <option value="Instalments"  {% if data['radio-pay-group'] == 'Instalments' %}selected{% endif %}>Instalments</option>
+  </select>
+</form>
+
 {% endblock %}
