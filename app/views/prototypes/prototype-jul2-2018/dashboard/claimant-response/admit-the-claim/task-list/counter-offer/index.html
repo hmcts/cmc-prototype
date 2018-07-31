@@ -25,12 +25,23 @@ Money Claims Prototype
         How do you want the defendant to pay?
       </h1>
 
-      <form
+      <form method="post" action="counter-offer">
+
+        <!--
+
+
         name="aspnetForm"
         method="post"
         onsubmit="multiNavigation('claimant-payment-request', ['Immediately', 'Instalments', 'Set-date'], ['counter-offer', 'counter-offer/repayment-plan', 'counter-offer/pay-by-set-date']);return false;"
         id="aspnetForm"
-        autocomplete="off">
+        autocomplete="off"
+
+      -->
+
+
+        {% if data['radio-pay-group'] =='Set-date' %}
+          <p>The judge will consider your request, but will decide what is suitable based on the defendant's income and expenses.</p>
+        {% endif %}
 
         <div class="form-group">
           <fieldset>
@@ -51,7 +62,7 @@ Money Claims Prototype
 
             <div class="multiple-choice">
               <input id="radio-repayment" type="radio" name="claimant-payment-request" value="Instalments">
-              <label for="radio-repayment" data-target="repayment-info">I'll suggest a repayment plan</label>
+              <label for="radio-repayment" data-target="repayment-info">{% if data['radio-pay-group'] =='Set-date' %}By instalments{% else %}I'll suggest a repayment plan{% endif %}</label>
             </div>
           </fieldset>
         </div>
@@ -66,5 +77,13 @@ Money Claims Prototype
   </div>
 </main>
 
+
+<form method="post"  action="#" class="for4" style=" float: left;">
+  <select onchange="window.location.href='?radio-pay-group='+this.value">
+      <option value="0">Defendant's proposed payment</option>
+      <option value="Set-date" {% if data['radio-pay-group'] == 'Set-date' %}selected{% endif %}>Set date</option>
+      <option value="Instalments"  {% if data['radio-pay-group'] == 'Instalments' %}selected{% endif %}>Instalments</option>
+  </select>
+</form>
 
 {% endblock %}
