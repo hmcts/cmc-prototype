@@ -88,9 +88,11 @@
 
               {% elseif data['claimant'] == 5  %}
               <div class="">
-                <h2 class="heading-small">The defendant has admitted part of the claim </h2>
-                <p>Mary Richards admits they owe you £{{ data['owe-amount'] or '1200' }} - they said they don't owe the full amount you claimed.</p>
-                <p> You can accept or reject their admission of £{{ data['owe-amount'] or '1200' }}.</p>
+                <h2 class="heading-small">The defendant has admitted they owe £{{ data['owe-amount'] or '1,200' }}</h2>
+                <p>They said they don't owe the full amount you claimed.</p>
+                <p>They've offered to pay the £{{ data['owe-amount'] or '1,200' }} immediately.</p>
+                <p>They must make sure you have the money by {{ now | date( 'add', 5, 'days') | date }}. Any cheques or transfers should be clear in your account.</p>
+                <p>You can accept or reject their admission.</p>
                 <div class="form-group">
                   <p> <a href="claimant-response/part-admit/task-list?payment=full&radio-pay-group=Instalments" class="button secondary-button">View and respond to the offer</a></p>
                 </div>
