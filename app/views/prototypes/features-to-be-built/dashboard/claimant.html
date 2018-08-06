@@ -78,23 +78,23 @@
             <h2 class="heading-small">The defendant has requested more time to respond </h2>
             <p>Mary Richards has requested an extra 14 days to respond. They need to respond before 4pm on <span class="dates"></span> .</p>
               {% elseif data['claimant'] == 4  %}
-              <h2 class="heading-medium">The defendant's response </h2>
-              <p>Mary Richards admits they owe all the money. They've offered to pay you in instalments.</p>
+              <h2 class="heading-small">The defendant has offered to pay in instalments</h2>
               <p>You can accept or reject their offer.</p>
               <p> <a href="claimant-response/admit-the-claim/task-list?radio-pay-group=Instalments" class="button secondary-button">View and respond to the offer</a></p>
               {% elseif data['claimant'] == 4.1  %}
-              <h2 class="heading-medium">The defendant's response </h2>
-              <p>Mary Richards admits they owe all the money. They've offered to pay you in full by {{ now | date( 'add', 3, 'months') | date }}.</p>
+              <h2 class="heading-small">The defendant has offered to pay by {{ now | date( 'add', 3, 'months') | date }}</h2>
               <p>You can accept or reject their offer.</p>
               <p> <a href="claimant-response/admit-the-claim/task-list?payment=full" class="button secondary-button">View and respond to the offer</a></p>
 
               {% elseif data['claimant'] == 5  %}
               <div class="">
-                <h2 class="heading-medium">The defendant's response </h2>
-                <p>Mary Richards admits they owe you £{{ data['owe-amount'] or '1200' }} - they said they don't owe the full amount you claimed.</p>
-                <p> You need to accept or reject the defendant's admission of £{{ data['owe-amount'] or '1200' }}.</p>
+                <h2 class="heading-small">The defendant has admitted they owe £{{ data['owe-amount'] or '1,200' }}</h2>
+                <p>They said they don't owe the full amount you claimed.</p>
+                <p>They've offered to pay the £{{ data['owe-amount'] or '1,200' }} immediately.</p>
+                <p>They must make sure you have the money by {{ now | date( 'add', 5, 'days') | date }}. Any cheques or transfers should be clear in your account.</p>
+                <p>You can accept or reject their admission.</p>
                 <div class="form-group">
-                  <p> <a href="claimant-response/part-admit/task-list?payment=full&radio-pay-group=Instalments" class="button secondary-button">View and respond to the offer</a></p>
+                  <p> <a href="claimant-response/part-admit/task-list?payment=full&radio-pay-group=Instalments" class="button secondary-button">View and respond</a></p>
                 </div>
               </div>
 
@@ -118,14 +118,13 @@
 
             {% elseif data['claimant'] == 7  %}
             <div class="status-block single">
-             <h2 class="heading-small">The defendant's response</h2>
+             <h2 class="heading-small">The defendant says they've paid what they owe</h2>
 
-              <p> Mary Richards said they paid you £{{ data['owe-amount'] or '1,430' }} on  {{ now | date('add' , 3 , 'days') | date( 'subtract', 1, 'months') | date }}. They said this is all they owe, not the amount you claimed.<p>
+              <p> Mary Richards said they paid you £{{ data['owe-amount'] or '1,430' }} on  {{ now | date('add' , 3 , 'days') | date( 'subtract', 1, 'months') | date }}.<p>
 
+                <p>You can accept or reject that this is the amount they owe.</p>
 
-                <p> You need to respond before 4pm on {{ now | date( 'add', 33, 'days') | date }} or your claim won't proceed.</p>
-
-              <p> <a href="claimant-response/paid-what-owe-less-claim-amount/task-list" class="button secondary-button">Respond to defendant</a></p>
+              <p> <a href="claimant-response/paid-what-owe-less-claim-amount/task-list" class="button secondary-button">View and respond</a></p>
             </div>
 
             {% elseif data['claimant'] == 8  %}
@@ -192,15 +191,21 @@
 
               {% elseif data['claimant'] == 4.3 %}
               <h2 class="heading-small">The defendant said they'll pay you immediately</h2>
-              <p>The defendant said they would pay you before 4pm on {{ now | date('subtract', 1, 'days') | date }}. Any cheques or transfers should be clear in your account.</p>
+              <p>The defendant said they would pay you by {{ now | date('subtract', 1, 'days') | date }}. Any cheques or transfers should be clear in your account.</p>
 
-              <p>You need to tell us if you've settled the claim because the defendant has paid you.</p>
+              <p>You need to tell us if you've settled the claim, for example because the defendant has paid you.</p>
 
               <p>You can settle for less than the full claim amount.</p>
 
+<<<<<<< HEAD
               <p> <a href="../dashboard/idam/contact-us?type=service_specific" class="button secondary-button" style="margin-bottom: 20px">Tell us you've settled</a></p>
               <h3 class="heading-small">What to do if they haven't paid</h3>
               <p>If the defendant doesn't pay you, you can <a href="applications-and-judgments/default-judgment?radio-proceed=none">request a County Court Judgment</a>.</p>
+=======
+              <p> <a href="../../dashboard/idam/contact-us?type=service_specific" class="button secondary-button" style="margin-bottom: 20px">Tell us you've settled</a></p>
+              <h3 class="heading-small">If you haven't been paid</h3>
+              <p>If the defendant has not paid you, you can <a href="applications-and-judgments/default-judgment?radio-proceed=none">request a County Court Judgment</a>.</p>
+>>>>>>> 9b42af61642f619477ba7510b3a8061819f43296
 
               {% elseif data['claimant'] == 10.6 %}
               <h2 class="heading-small">Awaiting judge's repayment plan</h2>
