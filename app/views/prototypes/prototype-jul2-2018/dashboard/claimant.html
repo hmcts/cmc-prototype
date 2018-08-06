@@ -88,11 +88,13 @@
 
               {% elseif data['claimant'] == 5  %}
               <div class="">
-                <h2 class="heading-medium">The defendant's response </h2>
-                <p>Mary Richards admits they owe you £{{ data['owe-amount']  or '1,200' }} - they said they don't owe the full amount you claimed.</p>
-                <p> You need to accept or reject the defendant's admission of £{{ data['owe-amount'] or '1,200' }}.</p>
+                <h2 class="heading-small">Mary Richards has admitted they owe £{{ data['owe-amount']  or '1,200' }}</h2>
+                <p>They said they don't owe the full amount you claimed.</p>
+                <p>They've offered to pay the £{{ data['owe-amount'] or '1,200' }} immediately.</p>
+                <p>They must make sure you have the money by {{ now | date( 'add', 5, 'days') | date }}. Any cheques or transfers should be clear in your account.</p>
+                <p>You can accept or reject their admission.</p>
                 <div class="form-group">
-                  <p> <a href="claimant-response/part-admit/task-list?payment=full&radio-pay-group=Instalments" class="button secondary-button">View and respond to the offer</a></p>
+                  <p> <a href="claimant-response/part-admit/task-list?payment=full&radio-pay-group=Instalments" class="button secondary-button">View and respond</a></p>
                 </div>
               </div>
 
@@ -196,14 +198,14 @@
 
               <p> <a href="paid-in-full/claimant" class="button secondary-button" style="margin-bottom: 20px">Tell us you've settled</a></p>
 
-              <h3 class="heading-small">What to do if they don't pay</h3>
+              <h3 class="heading-small">If you haven't been paid</h3>
               <p>If the defendant has not paid you by {{ now | date('add', 5, 'days') | date }}, you can request a County Court Judgment.</p>
 
               {% elseif data['claimant'] == 4.3 %}
               <h2 class="heading-small">The defendant said they'll pay you immediately</h2>
               <p>The defendant said they would pay you by {{ now | date('subtract', 1, 'days') | date }}. Any cheques or transfers should be clear in your account.</p>
 
-              <p>You need to tell us if you've settled the claim because the defendant has paid you.</p>
+              <p>You need to tell us if you've settled the claim, for example because the defendant has paid you.</p>
 
               <p>You can settle for less than the full claim amount.</p>
 
