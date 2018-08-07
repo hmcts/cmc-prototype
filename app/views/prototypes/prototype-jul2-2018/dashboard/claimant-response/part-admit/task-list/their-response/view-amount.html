@@ -18,7 +18,15 @@ Money Claims Prototype
         How they want to pay
       </h1>
 
-        <p>The defendant suggested this repayment plan:</p>
+      {% if data['radio-pay-group'] == 'Set-date' %}
+
+      <p>They've offered to pay you in full by {{ now | date( 'add', 3, 'months') | date }}.</p>
+      
+      {% else %}
+      <p>The defendant suggested this repayment plan:</p>
+
+
+
 
       <table class="instalment-table">
         <tbody>
@@ -67,9 +75,10 @@ Money Claims Prototype
       </tbody>
     </table>
 
+    {% endif %}
 
     <h2 class="heading-small">Why they can't pay the full amount now</h2>
-    <p>"I am heavily in debt at the moment and I'm not earning that much money. {% if data['payment'] == 'full' %}I can pay when i've cleared my debts.{% else %}£200 a month is all i can afford.{% endif %}"</p>
+    <p>"I am heavily in debt at the moment and I'm not earning that much money. {% if data['radio-pay-group'] == 'Set-date' %}I can pay when i've cleared my debts.{% else %}£200 a month is all i can afford.{% endif %}"</p>
 
     <h2 class="heading-small">Their finances</h2>
 

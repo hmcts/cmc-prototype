@@ -27,8 +27,13 @@ Money Claims Prototype
       The defendant's response
     </h1>
 
-        <p>Mary Richards admits they owe you  £{{ data['owe-amount'] or '1200' }}. However they don't believe they owe the full amount claimed.</p>
-     <p>They've offered to pay you this in instalments.</p>
+      <p>Mary Richards admits they owe you  £{{ data['owe-amount'] or '1200' }}. However they don't believe they owe the full amount claimed.</p>
+
+      {% if data['radio-pay-group'] == 'Set-date' %}
+      </p><p>They've offered to pay you by {{ now | date( 'add', 3, 'months') | date }}.</p>
+      {% else %}
+      They've offered to pay you in instalments.</p>
+      {% endif %}
 
     <h2 class="heading-medium">Their defence</h2>
     <p class="heading-small">Why they they don't owe the amount claimed</p>
