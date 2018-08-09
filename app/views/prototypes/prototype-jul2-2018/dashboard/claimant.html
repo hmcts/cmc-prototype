@@ -157,9 +157,19 @@
               {% elseif data['claimant'] ==  10.01 %}
               <h2 class="heading-small">You've both signed a settlement agreement</h2>
               <p>The agreement says the defendant will pay you in instalments of £250 per month, starting 1 {{ now |  date("add", 1, "month") | date( "MMMM YYYY" ) }}.</p>
+              <p>The agreement explains what you can do if the defendant breaks the terms.</p>
               <p><a href="../defendant/correspondence/forms/agreement?check=3">Download the settlement agreement</a> (PDF, 123KB)</p>
               <p>When you've been paid in full, you need to let us know.</p>
               <p> <a href="paid-in-full/claimant" class="button secondary-button" style="margin-bottom: 20px">Tell us you've been paid</a></p>
+
+
+              {% elseif data['claimant'] ==  10.02 %}
+              <h2 class="heading-small">The defendant has not responded to your settlement agreement</h2>
+              <p>You can request a County Court Judgment against them based on the repayment plan they offered.</p>
+              <p>The court will make an order asking them to pay the money. It does not guarantee that they pay it.</p>
+              <p>Mary Richards can still respond to the claim until you request a CCJ.</p>
+              <p> <a href="applications-and-judgments/default-judgment?radio-proceed=none" style="margin-bottom: 20px">Request a County Court Judgment (CCJ)</a></p>
+
 
               {% elseif data['claimant'] == 10.11 %}
               <h2 class="heading-small">A County Court Judgment has been issued</h2>
@@ -417,24 +427,18 @@
         {% endif %}
       </div>
       {% endif %}
+
         {% if data['claimant'] == 10.01 or data['claimant'] == 10.2 or data['claimant'] == 10.3 or data['claimant'] == 10.4  %}
 
      <hr />
      <h2 class="heading-small">Request County Court Judgment</h2>
 
-              <p>
-                If the defendant doesn't pay or breaks the terms of the settlement agreement, you can:</p>
-
-                <ul class="list list-bullet">
-                  <li><a href='applications-and-judgments/default-judgment?radio-proceed=none'>request a County Court Judgment</a></li>
-                  <li><a href='#'>ask the court to enforce payment</a></li>
-                </ul>
-
-
-              </p>
+      <p>
+        If the defendant doesn't pay or breaks the terms of the settlement agreement, you can <a href='applications-and-judgments/default-judgment?radio-proceed=none'>request a County Court Judgment</a>.
+      </p>
         {% endif %}
 
-      {% if data['claimant'] < 20 and data['claimant'] != 10.11 and data['claimant'] != 10.01 and data['claimant'] != 10.4 and data['claimant'] != 10.81 and data['claimant'] != 10.82 and data['claimant'] != 10.83 and data['claimant'] != 16 and data['claimant'] != 17 %}
+      {% if data['claimant'] < 20 and data['claimant'] != 10.11 and data['claimant'] != 10.02 and data['claimant'] != 10.01 and data['claimant'] != 10.4 and data['claimant'] != 10.81 and data['claimant'] != 10.82 and data['claimant'] != 10.83 and data['claimant'] != 16 and data['claimant'] != 17 %}
       <hr />
      <h2 class="heading-small">End the claim</h2>
       <p>If you've already been paid, have settled out of court, or don't want to take the claim any further, you can <a href="discontinue">end the claim</a>.</p>
@@ -497,6 +501,7 @@
 
     <option value="10.1" {% if data['claimant'] == 10.1 %}selected{% endif %}>Accepted repayment plan - settlement</option>
     <option value="10.01" {% if data['claimant'] == 10.01 %}selected{% endif %}>Accepted repayment plan - settlement - accepted</option>
+    <option value="10.02" {% if data['claimant'] == 10.02 %}selected{% endif %}>Accepted repayment plan - settlement - not signed</option>
     <option value="10.11" {% if data['claimant'] == 10.11 %}selected{% endif %}>Accepted repayment plan - judgment</option>
 <!--    <option value="10.2" {% if data['claimant'] == 10.2 %}selected{% endif %}>10.2. Accepted court repayment plan</option>  -->
 <!--    <option value="10.11" {% if data['claimant'] == 10.11 %}selected{% endif %}>10.11. Accepted repayment plan - not due</option>  -->
