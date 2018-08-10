@@ -17,7 +17,7 @@ Money Claims Prototype
         Judgment amount
       </h1>
       <p>Judgment will be entered against the defendant for this amount.</p>
-      <form class="form" action="{% if data['radio-proceed'] == "judgment" %}../../../dashboard/claimant-response/admit-the-claim/task-list{% elseif data['radio-proceed'] == "judgment-pa" %}../../../dashboard/claimant-response/part-admit/task-list {% else %}payment-options{% endif %}" method="post">
+      <form class="form" action="{% if data['radio-proceed'] == "judgment" %}../../../dashboard/claimant-response/admit-the-claim/task-list{% elseif data['radio-proceed'] == "judgment-pa" %}../../../dashboard/claimant-response/part-admit/task-list {% elseif data['radio-proceed'] == 'not-signed' %}check-your-judgment{% else %}payment-options{% endif %}" method="post">
 
         <table class="table-form">
           <caption class="visuallyhidden">Amount payable by defendant</caption>
@@ -32,8 +32,7 @@ Money Claims Prototype
               <th scope="row">Claim amount</th>
               <td class="numeric last">
                 <label class="visuallyhidden" for="amount">Claim amount</label>
-                <span class="font-small"> {% if data['radio-proceed']=="judgment-pa" %}£1200{%else%}£1643.20{%endif%}
-</span>
+                <span class="font-small"> {% if data['radio-proceed']=="judgment-pa" %}£1200{%else%}£1643.20{%endif%}</span>
               </td>
             </tr>
             {% if data['radio-proceed']=="judgment-pa" %}
