@@ -1,0 +1,62 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <a href="#" class="link-back">Back</a>
+      <h1 class="heading-large">Suggest a settlement agreement</h1>
+
+            <p>You can sign an agreement that describes how you'll pay the money back.</p>
+
+
+
+
+      <p>We'll send it to the claimant. They can sign it or request a County Court Judgment (CCJ) against you.</p>
+
+
+      <p>If they sign, the claim is settled and they can't issue a CCJ against you unless you break the agreement's terms.</p>
+
+     <h2 class="heading-medium">Do you want to suggest a settlement agreement?</h2>
+      <form
+      name="aspnetForm"
+      method="get"
+      onsubmit="multiNavigation('radio-settlement', ['yes', 'no'], ['settlement/sign', '../task-list?agreement=complete&']);return false;"
+      id="aspnetForm"
+      autocomplete="off">
+      <div class="form-group">
+        <fieldset>
+          <div class="multiple-choice">
+            <input id="radio-yes" type="radio" name="radio-settlement" value="yes">
+            <label for="radio-yes">Yes</label>
+          </div>
+          <div class="multiple-choice" data-target="no-settlement">
+            <input id="radio-no" type="radio" name="radio-settlement" value="no">
+            <label for="radio-no" data-target="no-info">No</label>
+          </div>
+
+          <div class="panel panel-border-narrow js-hidden" id="no-settlement">
+            <p>The claimant will be able to request a CCJ against you. A CCJ can make it harder to get credit, like mortgages or mobile phone contracts.</p>
+          </div>
+        </fieldset>
+        <input id="advert-option-next--button" type="submit" value="Save and continue" class="button">
+
+      </form>
+    </div>
+
+  </div>
+</main>
+<form method="post"  action="#" class="form" style="; float: left">
+  <select id="dashboard2" name="dashboard2" onchange="window.location.href='?settle='+this.value">
+    <option  value="0" ></option>
+    <option value="2" {% if data['settle'] == 2 %}selected{% endif %}>1. Full admission?</option>
+    <option value="1" {% if data['settle'] == 1 %}selected{% endif %}>2. Part admission</option>
+  </select>
+</form>
+{% endblock %}
