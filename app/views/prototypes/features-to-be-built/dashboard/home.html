@@ -117,6 +117,8 @@
                  <td ><a href="claimant?claimant=10.1">352MC733</a></td>
                 {% elif data['dashboard'] == 1.112 %}
                  <td ><a href="claimant?claimant=10.01">352MC733</a></td>
+                {% elif data['dashboard'] == 1.1121 %}
+                 <td ><a href="claimant?claimant=10.02">352MC733</a></td>
                 {% elif data['dashboard'] == 1.113 %}
                  <td ><a href="claimant?claimant=10.11">352MC733</a></td>
                 {% elif data['dashboard'] == 1.114 %}
@@ -178,6 +180,9 @@
 
                   {% elif data['dashboard'] == 1.112 %}
                   <p>You've both signed a settlement agreement.</p>
+
+                  {% elif data['dashboard'] == 1.1121 %}
+                  <p>The defendant has not responded to your settlement agreement. You can request a County Court Judgment against them.</p>
 
                   {% elif data['dashboard'] == 1.113 %}
                   <p>A County Court Judgment has been issued.</p>
@@ -696,6 +701,15 @@
               </tr>
               {% endif %}
 
+              {% if show_all==true or data['dashboard'] == 2.47 %}
+              <tr class="mobile-table">
+                <td><a href="defendant?defendant=5.6">352MC733</a></td>
+                <td>Jan Clark  </td>
+                <td>£1500 </td>
+                <td>The claimant has rejected your defence.</td>
+              </tr>
+              {% endif %}
+
               {% if show_all==true or data['dashboard'] == 2.51 %}
               <tr class="mobile-table">
                 <td><a href="defendant?defendant=3.9">352MC733</a></td>
@@ -801,6 +815,7 @@
         <option>-------- Claimant responses --------</option>
         <option value="1.111" {% if data['dashboard'] == 1.111 %}selected{% endif %}>Accepted repayment plan - settlement</option>
         <option value="1.112" {% if data['dashboard'] == 1.112 %}selected{% endif %}>Accepted repayment plan - settlement - accepted</option>
+        <option value="1.1121" {% if data['dashboard'] == 1.1121 %}selected{% endif %}>NEW - Accepted repayment plan - settlement - not signed</option>
         <option value="1.113" {% if data['dashboard'] == 1.113 %}selected{% endif %}>Accepted repayment plan - judgment</option>
         <option value="1.114" {% if data['dashboard'] == 1.114 %}selected{% endif %}>Accepted full payment on set date</option>
         <option value="1.115" {% if data['dashboard'] == 1.115 %}selected{% endif %}>Repayment plans rejected - redetermination</option>
@@ -859,6 +874,7 @@
         <option value="2.44" {% if data['dashboard'] == 2.44 %}selected{% endif %}>2.44. I admit all the claim - instalment plan payment - offer accepted</option>
         <option value="2.45" {% if data['dashboard'] == 2.45 %}selected{% endif %}>2.45. I admit all the claim - instalment plan payment rejected - redetermination</option>
         <option value="2.46" {% if data['dashboard'] == 2.46 %}selected{% endif %}>2.46. I admit all the claim - instalment plan payment rejected by defendant - redetermination</option>
+        <option value="2.47" {% if data['dashboard'] == 2.47 %}selected{% endif %}>2.47. Defence - rejected</option>
 
         <option>------ Offers and agreements -------</option>
         <option value="2.101" {% if data['dashboard'] == 2.101 %}selected{% endif %}>8. Offer sent to claimant </option>
