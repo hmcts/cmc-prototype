@@ -57,7 +57,7 @@ Money Claims Prototype
               Total amount you're claiming
             </legend>
 
-            <table class="table-form">
+            <table class="table-form" style="margin-bottom: 20px;">
               <caption class="visuallyhidden"></caption>
               <thead>
                 <tr>
@@ -108,9 +108,11 @@ Money Claims Prototype
             </tbody>
           </table>
 
+        <p style="margin-bottom: 40px">You can't get this fee refunded. If you settle the claim out of court, you should include the claim fee in the settlement amount.</p>
+
 
         {% if ( not data['amount-owed'] ) %}
-        <table>
+        <table style="margin-bottom: 20px">
           <thead>
           <tr>
             <th scope="col">Other fees</th>
@@ -129,13 +131,14 @@ Money Claims Prototype
           </tbody>
         </table>
 
-        <p>You don't have to pay a hearing fee unless the claim goes to a hearing.</p>
+        <p style="margin-bottom: 50px">You don't have to pay a hearing fee unless the claim goes to a hearing.</p>
 
 
         {% endif %} 
 
 
-          {% if (data['counter-amount'] > 0) and ( data['amount-owed']*1 == 0 ) or ( data['amount-owed'] and data['totalSum'] ) and (data['counter-amount']*1 > data['amount-owed']*1 ) %}
+        {% if data['response'] == 'STATES-PAID' and data['owe-amount']*1 > data['counter-amount']*1 %}
+        {% elseif ( not ( data['amount-owed'] and data['totalSum'] ) or data['counter-amount']*1 >= data['amount-owed']*1 ) %}
         
         <details>
           <summary>How these fees are calculated</summary>
