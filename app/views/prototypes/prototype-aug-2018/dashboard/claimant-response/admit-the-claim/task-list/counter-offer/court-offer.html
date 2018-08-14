@@ -24,7 +24,13 @@ Money Claims Prototype
       </h1>
 
       <p>Based on the financial details the defendant provided, we don't believe they can {% if data['claimant-payment-request'] == 'Immediately' %}pay immediately{% elseif data['claimant-payment-request'] == 'Set-date' %}pay by your proposed date{% else %}make the payments you suggested{% endif %}.</p>
+
+
+      {% if data['frequency'] %}
+      <p>The court affordability calculator has proposed a new payment amount and frequency.</p>
+      {% else %}
       <p>The court affordability calculator has proposed the below repayment plan as the {% if data['claimant-payment-request'] == 'Immediately' or data['claimant-payment-request'] == 'Set-date' %}soonest{% else%}maximum{% endif %} the defendant can repay.</p>
+      {% endif %}
 
       <h2 class="heading-medium">The court's proposed repayment plan</h2>
       <table class="instalment-table">
