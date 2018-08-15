@@ -39,7 +39,13 @@ Money Claims Prototype
 
 		<p>We've emailed Jan Clark to tell them you'll pay immediately.</p>
 
-    <p>You need to make sure that:</p>
+		<h2 class="heading-medium">What happens next</h2>
+
+	    {% if data['confirmation'] == 9 or data['counter'] == 'SET-OFF-COUNTER' or data['counter'] == 'FULL-COUNTER' %}
+			<h3 class="heading-small">What you need to do</h3>
+	    {% endif %}
+    
+    	<p>You need to make sure that:</p>
 
 		<ul class="list list-bullet">
   <li>they get the money before 4pm on {{ now | date('add', 5, 'days') | date }} - they can request a County Court Judgment against you if not</li>
@@ -51,13 +57,9 @@ Money Claims Prototype
     <p><a href="../dashboard/party-details/claimant">Contact Jan Clark</a> if you need their payment details.</p>
 
     {% if data['confirmation'] == 9 or data['counter'] == 'SET-OFF-COUNTER' or data['counter'] == 'FULL-COUNTER' %}
-    <p>We've also sent your counterclaim to Jan Clark</p>
+    <p>We've also sent your counterclaim to Jan Clark.</p>
     {% endif %}
 
-		<h2 class="heading-medium">What happens next</h2>
-	    {% if data['confirmation'] == 9 or data['counter'] == 'SET-OFF-COUNTER' or data['counter'] == 'FULL-COUNTER' %}
-
-	    {% endif %}
 	    {% if data['confirmation'] == 9 or data['counter'] == 'SET-OFF-COUNTER' or data['counter'] == 'FULL-COUNTER' %}
 		{% include "prototypes/prototype-aug-2018/includes/counter.html" %}
 	    {% endif %}
