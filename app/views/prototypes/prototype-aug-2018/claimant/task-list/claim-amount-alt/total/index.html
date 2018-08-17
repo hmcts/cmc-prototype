@@ -108,7 +108,10 @@ Money Claims Prototype
             </tbody>
           </table>
 
+        {% if data['response'] == 'STATES-PAID' and data['owe-amount']*1 > data['counter-amount']*1 %}
+        {% elseif ( not ( data['amount-owed'] and data['totalSum'] ) or data['counter-amount']*1 >= data['amount-owed']*1 ) %}
         <p style="margin-bottom: 40px">You can't get this fee refunded. If you settle the claim out of court, you should include the claim fee in the settlement amount.</p>
+        {% endif %}
 
 
         {% if ( not data['amount-owed'] ) %}
