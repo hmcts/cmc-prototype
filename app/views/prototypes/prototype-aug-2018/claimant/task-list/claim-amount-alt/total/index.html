@@ -22,7 +22,7 @@ Money Claims Prototype
   <div class="grid-row">
     <div class="column-two-thirds">
       {% if data['amount-owed'] %}
-      <form method="post" action="../../../defendant/task-list" class="form">
+      <form method="post" action="../../../defendant/task-list/counter-claim/counter-proceed" class="form">
 
       {% elseif data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}
 
@@ -69,7 +69,7 @@ Money Claims Prototype
                   <th scope="row">Claim amount:</th>
                   <td class="numeric last">
                     <label class="visuallyhidden" for="amount">Claim amount</label>
-                    <span class="font-small">  £{{data['totalSum'] or data['counter-amount'] }}</span>
+                    <span class="font-small">  £{{data['totalSum'] or data['counter-amount']|numeral }}</span>
                   </td>
                 </tr>
                 {% if data['radio_group2']=="interest_yes" %}
@@ -262,12 +262,12 @@ Money Claims Prototype
           <fieldset class="inline">
 
             <div class="multiple-choice">
-              <input id="radio-yes" type="radio" name="X" value="Yes">
+              <input id="radio-yes" type="radio" name="counterclaim-proceed" value="yes">
               <label for="radio-yes" data-target="yes-info">Yes</label>
             </div>
 
             <div class="multiple-choice">
-              <input id="radio-no" type="radio" name="X" value="No">
+              <input id="radio-no" type="radio" name="counterclaim-proceed" value="no">
               <label for="radio-no" data-target="no-info">No</label>
             </div>
 
