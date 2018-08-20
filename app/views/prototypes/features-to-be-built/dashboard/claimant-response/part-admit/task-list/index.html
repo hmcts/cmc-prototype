@@ -10,7 +10,7 @@
 {% block extra_css %}
 <link rel="stylesheet" href="/public/stylesheets/dm_list.css"/>{% endblock %}
 {% block content %}
-<main id="content" role="main" ">
+<main id="content" role="main">
   {% include "includes/phase_banner_beta.html" %}
   <div class="grid-row">
     <div class="column-two-thirds">
@@ -69,7 +69,7 @@
              <tr id="completing-your-claim">
               <td class="task">
                 <a href="task-list/amount-owed{{formQuery}}">
-                  <span class="task-name">Accept or reject the £{{ data['owe-amount'] or '1200' }}</span>
+                  <span class="task-name">Accept or reject the £{{ data['owe-amount'] or '1,200' }}</span>
                 </a>
               </td>
               <td class="numeric" id="task-status" scope="col" id="col-status">
@@ -124,7 +124,7 @@
          {% endif %}
 
 
-        {%if data['radio-indent-group2'] != "reject_stop_claim" and data['payment_method'] == "complete" %}
+        {%if data['radio-indent-group2'] != "reject_stop_claim" and data['payment_method'] == "complete" or data['proceed'] == "complete" %}
            <tr id="your-details">
               <td class="task">
                 <a href="task-list/proceed{{formQuery}}">
@@ -142,7 +142,7 @@
          {% if data['radio-proceed'] == 'settlement' %}
              <tr id="your-details">
                 <td class="task">
-                  <a href="task-list/{% if data['radio-indent-group'] == 'accept_stop_claim' %}settlement/sign{% else %}settlement{% endif %}{{formQuery}}">
+                  <a href="task-list/settlement/sign{{formQuery}}">
                     <span class="task-name">Sign a settlement agreement</span>
                   </a>
                 </td>
@@ -155,7 +155,7 @@
          {% elseif data['radio-proceed'] == 'judgment' %}
              <tr id="your-details">
                 <td class="task">
-                  <a href="../../../applications-and-judgments/default-judgment{{formQuery}}">
+                  <a href="../../../applications-and-judgments/default-judgment/claim-amount-deduct{{formQuery}}">
                     <span class="task-name">Request a County Court Judgment</span>
                   </a>
                 </td>
