@@ -113,7 +113,7 @@ Money Claims Prototype
 		<!-- Admit all - pay by set date -->
 		{% elseif data['radio-pay-group']=="Set-date"  and ( data.radio_select_group=="all" or data['counter'] ) or data['confirmation']== 3 %}
 		<p>We've emailed Jan Clark your offer to pay by {% if data['set-day'] %}{{ ( data['set-month'] + ' ' + data['set-day'] + ' ' + data['set-year']) | date('D MMMM YYYY') }}{% else %}{{ date | date('add', 15, 'days') | date }}{% endif %} and your explanation of why you can’t pay before then.</p>
-		<p>We'll email you to tell you their response. If they don't respond within 6 months, the court will put the claim on hold.</p>
+		<p>We'll email you to tell you their response. If they don't respond within 6 months, the claim will be put on hold.</p>
 		
 	    {% if data['confirmation'] == 9 or data['counter'] == 'SET-OFF-COUNTER' or data['counter'] == 'FULL-COUNTER' %}
 	    <p>We've also sent your counterclaim to Jan Clark.</p>
@@ -147,7 +147,7 @@ Money Claims Prototype
 		{% elseif ( data.radio_select_group2=="Some" or data['counter'] )  and data['radio-pay-group']=="Immediately" or data['confirmation']== 4 %}
 		<p>You believe you owe £{{ data['owe-amount'] or '1,200' }}. We've emailed Jan Clark your offer to pay this amount immediately.</p>
 		<p>We've also sent them your explanation of why you do not believe you owe the amount claimed.</p>
-				<p>We'll email you to tell you their response. If they don't respond within 6 months, the court will put the claim on hold.</p>
+				<p>We'll email you to tell you their response. If they don't respond within 6 months, the claim will be put on hold.</p>
 	    {% if data['confirmation'] == 9 or data['counter'] == 'SET-OFF-COUNTER' or data['counter'] == 'FULL-COUNTER' %}
 	    <p>We've also sent your counterclaim to Jan Clark.</p>
 	    {% endif %}
@@ -191,7 +191,7 @@ Money Claims Prototype
 		{% elseif ( data.radio_select_group2=="Some" or data['counter']) and data['radio-pay-group']=="Instalments" or data['confirmation']== 6 %}
 		<p>You believe you owe £{{ data['owe-amount'] or '1,200' }}. We've emailed Jan Clark your offer to pay this amount by instalments.</p>
 		<p>We've also sent them your explanation of why you do not believe you owe the amount claimed.</p>
-		<p>We'll email you to tell you their response. If they don't respond within 6 months, the court will put the claim on hold.</p>
+		<p>We'll email you to tell you their response. If they don't respond within 6 months, the claim will be put on hold.</p>
 
 	    {% if data['confirmation'] == 9 or data['counter'] == 'SET-OFF-COUNTER' or data['counter'] == 'FULL-COUNTER' %}
 	    <p>We've also sent your counterclaim to Jan Clark.</p>
@@ -219,13 +219,12 @@ Money Claims Prototype
       <p>We'll ask if they want to try mediation. If they agree, we'll contact you with an appointment.</p>
       <p>If they don't want to try mediation the court will review the case for the full amount of £1,500.</p>
 			
-			   {% else %}
+			   {% elseif data['radio-mediation-group']=="No" %}
     <p>The court will review the case for the full amount of £1,500. </p>
+    {% endif %}
 
 		<h3 class="heading-small">If Jan Clark rejects your offer to pay in instalments</h3>
 			<p>The court will decide how you must pay.</p>
-
-    {% endif %}
 
 	    {% if data['confirmation'] == 9 or data['counter'] == 'SET-OFF-COUNTER' or data['counter'] == 'FULL-COUNTER' %}
 		{% include "prototypes/prototype-aug-2018/includes/counter.html" %}
@@ -238,7 +237,7 @@ Money Claims Prototype
 		{% elseif ( data.radio_select_group2=="Some" or data['counter']) and data['radio-pay-group']=="Set-date" or data['confirmation']== 7 %}
 		<p>You believe you owe £{{ data['owe-amount'] or '1,200' }}. We've emailed Jan Clark your offer to pay this amount by {% if data['set-day'] %}{{ ( data['set-month'] + ' ' + data['set-day'] + ' ' + data['set-year']) | date('D MMMM YYYY') }}{% else %}{{ date | date('add', 15, 'days') | date }}{% endif %}.</p>
 		<p>We've also sent them your explanation of why you do not believe you owe the amount claimed.</p>
-		<p>We'll email you to tell you their response. If they don't respond within 6 months, the court will put the claim on hold.</p>
+		<p>We'll email you to tell you their response. If they don't respond within 6 months, the claim will be put on hold.</p>
 
 	    {% if data['confirmation'] == 9 or data['counter'] == 'SET-OFF-COUNTER' or data['counter'] == 'FULL-COUNTER' %}
 	    <p>We've also sent your counterclaim to Jan Clark.</p>
