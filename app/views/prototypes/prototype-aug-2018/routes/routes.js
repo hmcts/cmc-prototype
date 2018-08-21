@@ -196,6 +196,17 @@ module.exports = function(app){
 
   
 
+  app.get( '/' + strPath + 'defendant/task-list/counter-claim/counter-proceed', (req, res) => {
+
+    if ( req.session.data['counterclaim-proceed'] == 'no' ) {
+          req.session.data['counter'] = 'NOT-PROCEED';
+    }
+
+    res.redirect( '../../../defendant/task-list' );
+  })
+
+  
+
   app.post( '/' + strPath + 'dashboard/claimant-response/admit-the-claim/task-list/counter-offer/repayment-plan', (req, res) => {
 
     if (req.session.data['instalment-first-payment'] > 250 ) {

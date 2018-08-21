@@ -22,7 +22,7 @@ Money Claims Prototype
   <div class="grid-row">
     <div class="column-two-thirds">
       {% if data['amount-owed'] %}
-      <form method="post" action="../../../defendant/task-list" class="form">
+      <form method="post" action="../../../defendant/task-list/counter-claim/counter-proceed" class="form">
 
       {% elseif data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}
 
@@ -34,13 +34,13 @@ Money Claims Prototype
           {{formData | safe}}
 
           <h1 class="heading-large">
-            {% if  data['counter'] == 'FULL-COUNTER' or data['counter'] == 'SET-OFF-COUNTER' %}Making a counterclaim{% else %}Total amount you're claiming{% endif %}
+            {% if data['counter'] == 'FULL-COUNTER' or data['counter'] == 'SET-OFF-COUNTER' %}Making a counterclaim{% else %}Total amount you're claiming{% endif %}
           </h1>
 
           {% if data['counter'] == 'FULL-COUNTER' %}
 
           <p>Claiming money from someone who claims against you is called a 'counterclaim'.</p>
-          <p>To make a counterclaim for £{{ data['counter-amount']|numeral }}, you will need to pay a £70 claim fee.</p>
+          <p>You will need to pay a £70 claim fee to make a £{{ data['counter-amount']|numeral }} counterclaim.</p>
 
           {% elseif data['counter'] == 'SET-OFF-COUNTER' %}
 
@@ -69,7 +69,7 @@ Money Claims Prototype
                   <th scope="row">Claim amount:</th>
                   <td class="numeric last">
                     <label class="visuallyhidden" for="amount">Claim amount</label>
-                    <span class="font-small">  £{{data['totalSum'] or data['counter-amount'] }}</span>
+                    <span class="font-small">  £{{data['totalSum'] or data['counter-amount']|numeral }}</span>
                   </td>
                 </tr>
                 {% if data['radio_group2']=="interest_yes" %}
@@ -85,7 +85,7 @@ Money Claims Prototype
                 </tr>
                 {% endif %}
 
-                {% if data['counter'] == 'FULL-COUNTER' or data['counter'] == 'SET-OFF-COUNTER' %}
+                {% if data['counter'] == 'FULL-COUNTER' or data['counter'] == 'SET-OFF-COUNTER' or not data['counter']%}
                 <tr>
                   <th scope="row">Claim fee:</th>
                   <td class="numeric last">
@@ -255,19 +255,19 @@ Money Claims Prototype
         {% if data['counter'] == 'FULL-COUNTER' or data['counter'] == 'SET-OFF-COUNTER' %}
 
         <h1 class="heading-medium">
-          Do you want to proceed with the counterclaim?
+          Do you want to make this counterclaim?
         </h1>
 
         <div class="form-group">
           <fieldset class="inline">
 
             <div class="multiple-choice">
-              <input id="radio-yes" type="radio" name="X" value="Yes">
+              <input id="radio-yes" type="radio" name="counterclaim-proceed" value="yes">
               <label for="radio-yes" data-target="yes-info">Yes</label>
             </div>
 
             <div class="multiple-choice">
-              <input id="radio-no" type="radio" name="X" value="No">
+              <input id="radio-no" type="radio" name="counterclaim-proceed" value="no">
               <label for="radio-no" data-target="no-info">No</label>
             </div>
 
