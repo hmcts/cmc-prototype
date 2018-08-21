@@ -34,13 +34,13 @@ Money Claims Prototype
           {{formData | safe}}
 
           <h1 class="heading-large">
-            {% if  data['counter'] == 'FULL-COUNTER' or data['counter'] == 'SET-OFF-COUNTER' %}Making a counterclaim{% else %}Total amount you're claiming{% endif %}
+            {% if data['counter'] == 'FULL-COUNTER' or data['counter'] == 'SET-OFF-COUNTER' %}Making a counterclaim{% else %}Total amount you're claiming{% endif %}
           </h1>
 
           {% if data['counter'] == 'FULL-COUNTER' %}
 
           <p>Claiming money from someone who claims against you is called a 'counterclaim'.</p>
-          <p>To make a counterclaim for £{{ data['counter-amount']|numeral }}, you will need to pay a £70 claim fee.</p>
+          <p>You will need to pay a £70 claim fee to make a £{{ data['counter-amount']|numeral }} counterclaim.</p>
 
           {% elseif data['counter'] == 'SET-OFF-COUNTER' %}
 
@@ -85,7 +85,7 @@ Money Claims Prototype
                 </tr>
                 {% endif %}
 
-                {% if data['counter'] == 'FULL-COUNTER' or data['counter'] == 'SET-OFF-COUNTER' %}
+                {% if data['counter'] == 'FULL-COUNTER' or data['counter'] == 'SET-OFF-COUNTER' or not data['counter']%}
                 <tr>
                   <th scope="row">Claim fee:</th>
                   <td class="numeric last">
@@ -255,7 +255,7 @@ Money Claims Prototype
         {% if data['counter'] == 'FULL-COUNTER' or data['counter'] == 'SET-OFF-COUNTER' %}
 
         <h1 class="heading-medium">
-          Do you want to proceed with the counterclaim?
+          Do you want to make this counterclaim?
         </h1>
 
         <div class="form-group">
