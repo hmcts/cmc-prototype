@@ -44,6 +44,9 @@ Money Claims Prototype
         {% elseif data['radio-indent-group'] == "payment_instalments" or data['radio-indent-group'] == "set_date"%}
         <h1 class="bold-large">Payment request sent to court</h1>
 
+        {% elseif data['radio-pay-group'] == "Immediately" or data['confirmation'] == 0.1 %}
+        <h1 class="bold-large">You've accepted their response</h1>
+
         {% else %}
         <h1 class="bold-large">You have requested free mediation </h1>
         {% endif %}<br>
@@ -151,8 +154,18 @@ Money Claims Prototype
 
       <p><a class="button" href='../../dashboard/home'>Go to your account</a></p>
 
-           {% endif %}
-			{% include "includes/contact.html" %}
+
+        {% elseif data['radio-pay-group'] == "Immediately" or data['confirmation'] == 0.1 %}
+        <p>The defendant said they'll pay you £1,200 immediately</p>
+        <p>They must make sure you have the money by 29 August 2018. Any cheques or transfers should be clear in your account.</p>
+        <p>You need to tell us if you've settled the claim, for example because the defendant has paid you.</p>
+
+        {% include "includes/survey.html" %}
+        <p><a class="button" href='../home?dashboard=1.1171'>Go to your account</a></p>
+        
+        {% endif %}
+			
+      {% include "includes/contact.html" %}
       </fieldset>
 
   </div>
@@ -161,6 +174,8 @@ Money Claims Prototype
 
     <form method="post"  action="#" class="for4" style=" float: left;">
       <select onchange="window.location.href='?confirmation='+this.value">
+          <option value="">Selected</option>
+          <option value="0.1" {% if data['confirmation'] == '0.1' %}selected{% endif %}>Accepted immediate payment</option>
           <option value="1" {% if data['confirmation'] == '1' %}selected{% endif %}>Settlment agreement signed</option>
           <option value="2"  {% if data['confirmation'] == '2' %}selected{% endif %}>Judgment issued</option>
           <option value="2.1"  {% if data['confirmation'] == '2.1' %}selected{% endif %}>Judgment issued - no payment</option>
