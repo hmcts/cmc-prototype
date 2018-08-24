@@ -14,10 +14,10 @@ Money Claims Prototype
   <div class="grid-row">
     <div class="column-two-thirds">
       <h1 class="heading-large">
-        The defendant can't pay by your proposed date
+        The defendant can't pay {% if data['claimant-payment-request'] == 'Immediately' %}immediately{% else %}by your proposed date{% endif %}
       </h1>
 
-      <p>Based on financial details the defendant gave us, we don't believe they can pay by your proposed date.</p>
+      <p>Based on financial details the defendant gave us, we don't believe they can pay {% if data['claimant-payment-request'] == 'Immediately' %}immediately{% else %}by your proposed date{% endif %}.</p>
 
       <p>The court's calculator has proposed 1 {{ now | date('add', 4, 'month' ) | date( 'MMMM YYYY') }} as the date when they can pay you in full.</p>
 
