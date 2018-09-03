@@ -181,7 +181,7 @@ Money Claims Prototype
         <td class="no-border">
           Has the defendant paid some of the amount owed?
           <td class="no-border">
-                          {% if data['radio-indent-group2']=="Yes" or data['control-box'] == 1  or data['control-box'] == 2  or data['control-box'] == 3 or data['control-box'] == 4 %}Yes{% elif data['radio-indent-group2']=="No"  or data['control-box'] == 5 or data['control-box'] == 6  %}No{% else %}Yes{% endif %}
+                          {% if data['radio-indent-group2']=="Yes" or data['control-box'] == 1  or data['control-box'] == 2  or data['control-box'] == 3 or data['control-box'] == 4 %}Yes{% elif data['radio-indent-group2']=="No"  or data['control-box'] == 5 or data['control-box'] == 6  %}No{% else %}No{% endif %}
 
           </td>
           <td class="change-answer no-border">
@@ -244,7 +244,23 @@ Money Claims Prototype
               </a>
             </td>
           </tr>
-        {% if data['radio-pay-group']=="Instalments"  or data['control-box'] == 1 or  data['control-box'] == 2 or  data['control-box'] == 3 or data['control-box'] == 4%}
+
+
+          {% if data['radio-pay-group']=="Set-date" or data['control-box'] == 5 %}
+
+          <tr>
+            <td>
+              When you want them to pay the amount
+            </td>
+            <td>
+             <span class="dates"></span>
+            </td>
+            <td class="change-answer">
+
+            </td>
+          </tr>
+
+        {% else %}
 
         <tr>
           <td class="no-border">
@@ -286,25 +302,7 @@ Money Claims Prototype
           </tr>
 
 
-
-              {% elseif data['radio-pay-group']=="Set-date" or data['control-box'] == 5 %}
-
-                 <tr>
-          <td>
-            When you want them to pay the amount
-
-
-
-
-            <td>
-             <span class="dates"></span>
-            </td>
-            <td class="change-answer">
-
-            </td>
-          </tr>
-        {% endif %}
-
+          {% endif %}
 
         </tbody>
       </table>
@@ -327,18 +325,18 @@ Money Claims Prototype
 
       <div class="panel">
         <p>A senior position could be a:</p>
-          <ul class="list-bullet list">
-            <li>director</li>
-            <li>treasurer</li>
-            <li>chief executive</li>
-            <li>manager or other officer of the company or corporation</li>
-          </ul>
+        <ul class="list-bullet list">
+          <li>director</li>
+          <li>treasurer</li>
+          <li>chief executive</li>
+          <li>manager or other officer of the company or corporation</li>
+        </ul>
         <p>If your corporation isn't registered, a senior position could be:</p>
           <ul class="list-bullet list">
             <li>the chairperson or president</li>
             <li>another officer of the corporation</li>
           </ul>
-</div>
+        </div>
 </details>
 <div class="form-group">
   <label class="form-label" for="claimant_title">Full name</label>
@@ -353,8 +351,6 @@ Money Claims Prototype
 
 
 
-
-
 <div class="form-group">
   <div class="multiple-choice text">
     <input class="" id="HasAcceptedTermsAndConditions" type="checkbox" value="true">
@@ -363,7 +359,7 @@ Money Claims Prototype
 </div>
 
 
-         <a href="{% if data['radio-proceed'] == "none" %}../../claimant-response/confirmation-page?confirmation=2.1{% else %}confirmation-page{% endif %}" class="button">Sign and submit</a>
+         <a href="{% if data['radio-proceed'] == "none" or data['radio-proceed'] == "not-signed"  %}../../claimant-response/confirmation-page?confirmation=2.1{% else %}confirmation-page{% endif %}" class="button">Sign and submit</a>
 
 
  </div>
