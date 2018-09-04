@@ -1,0 +1,50 @@
+gi{% extends "layout_task-list.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block home_link %} ../task-list {% endblock %}
+{% block proposition_header %}
+{% set my_account="1" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+        <div class="column-two-thirds">
+
+      <a href="#" class="link-back">Back</a>
+      {{formData | safe}}
+
+          <form method="post" action="../statement/bank-account" class="form">
+            <h1 class="heading-large">
+              Explain why you can't pay immediately
+            </h1>
+            {% if data['upload'] == '2'%}
+            <div class="panel panel-border-wide">
+              <p>You need to upload your company or organisation's most recent statement of accounts.</p>
+              {% if data['radio-pay-group'] == 'Instalments' %}
+              <p>{% if data.counterclaim=="true" %}Mary Richards{%else%}Jan Clark{% endif %} will review these and can reject your suggested repayment plan if they feel you can pay more or sooner.</p>
+              {% else %}
+              <p>{% if data.counterclaim=="true" %}Mary Richards{%else%}Jan Clark{% endif %} will review these and can reject your suggested repayment plan if they feel you can pay sooner.</p>
+              {% endif %}
+              <p>If they reject your plan, the court will use the details you gave to create a new plan.</p>
+            </div>
+            {% else %}
+            <p>You need to give {% if data.counterclaim=="true" %}Mary Richards{%else%}Jan Clark{% endif %} details of your finances.</p>
+              <p>We'll ask you for the details then we'll send them to {% if data.counterclaim=="true" %}Mary Richards{%else%}Jan Clark{% endif %} to review.
+              {% if data['radio-pay-group'] != 'Instalments' %}
+                <p>They can reject your proposal if they believe you can pay sooner.</p>
+              {% endif %}
+              <p>If they reject your proposal, the court will make a new plan using your financial details.</p>
+
+              {% endif %}
+              <input type="hidden" name="your_defence_options" value="complete">
+              <div class="form-group">
+                <input type="submit" class="button" value="Continue"/>
+              </div>
+            </form>
+          </div>
+        </div>
+      </main>
+      {% endblock %}
