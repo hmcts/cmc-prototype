@@ -73,6 +73,11 @@
               <p>We’ll contact you when they respond.</p>
               <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=5">Download your response</a> (PDF, 123KB)</p>
 
+              {% elseif data['defendant'] == 3.9011 %}
+              <h2 class="heading-small">NEW PAGE</h2>
+              <p>NEW CONTENT REQUIRED</p>
+              <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=5">Download your response</a> (PDF, 123KB)</p>
+
               {% elseif data['defendant'] == 3.902 %}
               <h2 class="heading-small">Your response to the claim</h2>
               <p>You've said you owe £1,200 and offered to pay Jan Clark immediately.</p>
@@ -95,7 +100,23 @@
               <p>The court will review the case. You might have to go to a hearing.</p>
               <p>We'll contact you if we set a hearing date to tell you how to prepare.</p>
 
-            {% elseif data['defendant'] == 5 %}
+              {% elseif data['defendant'] == 3.92 %}
+              <h2 class="heading-small">The claimant has rejected your admission of £1,200</h2>
+              <p>The claimant believes you owe them the full £1,500 claimed.</p>
+              <p>The court will review the case. You might have to go to a hearing.</p>
+              <p>We'll contact you if we set a hearing date to tell you how to prepare.</p>
+
+
+              {% elseif data['defendant'] == 4 %}
+              <p>Jan Clark has rejected your offer to repay them £200 per month starting {{ now | date('add', 1, 'months') | date( 'D MMMM YYYY' ) }}.</p>
+              <p>The court has proposed a repayment plan of £250 per month.</p>
+              <p><a href="counter-offer?offer=court" class="button secondary-button">View the repayment plan</a></p>
+
+              {% elseif data['defendant'] == 4.1 %}
+              <p>NEW CONTENT</p>
+              <p><a href="counter-offer?offer=court" class="button secondary-button">View the repayment plan</a></p>
+
+              {% elseif data['defendant'] == 5 %}
               <p>You've offered to pay Jan Clark £1,500 on
               {% if data['set-month'] %}
                 {{ ( data['set-month'] + ' ' + data['set-day'] + ' ' + data['set-year']) | date('D MMMM YYYY') }}{% else %}{{ now | date('add', 3, 'months') | date('D MMMM YYYY') }}{% endif %}.</p>
@@ -225,7 +246,7 @@
               <p>The court has proposed a repayment plan of £250 per month.</p>
               <p>
 
-                <a href="counter-offer?offer=court" class="button secondary-button">View the court repayment plan</a>
+                <a href="counter-offer?offer=court" class="button secondary-button">View the repayment plan</a>
 
               </p>
 
@@ -519,11 +540,16 @@
     <option>------ CCJs -------</option>
     <option value="3" {% if data['defendant'] == 3 %}selected{% endif %}>3. Default CCJ issued </option>
     <option>------ Responses to claims -------</option>
+    <option value="3.902" {% if data['defendant'] == 3.902 %}selected{% endif %}>3.902 I admit part of the claim - immediately</option>
     <option value="3.9" {% if data['defendant'] == 3.9 %}selected{% endif %}>3.9 I admit part of the claim - instalments</option>
     <option value="3.901" {% if data['defendant'] == 3.901 %}selected{% endif %}>3.901 I admit part of the claim - set date</option>
-    <option value="3.902" {% if data['defendant'] == 3.902 %}selected{% endif %}>3.902 I admit part of the claim - immediately</option>
+    <option value="3.9011" {% if data['defendant'] == 3.9011 %}selected{% endif %}>3.9011 I admit part of the claim - set date (company)</option>
     <option value="3.903" {% if data['defendant'] == 3.903 %}selected{% endif %}>3.903 I admit part of the claim - accepted</option>
-    <option value="3.91" {% if data['defendant'] == 3.91 %}selected{% endif %}>3.91 I admit part of the claim - rejected</option>
+    <option value="3.91" {% if data['defendant'] == 3.91 %}selected{% endif %}>3.91 I admit part of the claim - rejected (mediation)</option>
+    <option value="3.92" {% if data['defendant'] == 3.92 %}selected{% endif %}>3.92 I admit part of the claim - rejected (no mediation)</option>
+
+    <option value="4" {% if data['defendant'] == 4 %}selected{% endif %}>I admit part of the claim - instalments - rejected - court offer (settlement)</option>
+    <option value="4.1" {% if data['defendant'] == 4.1 %}selected{% endif %}>I admit part of the claim - set date - rejected - court offer (settlement)</option>
     <option value="8" {% if data['defendant'] == 8 %}selected{% endif %}>4. States paid </option>
 
     <option value="5" {% if data['defendant'] == 5 %}selected{% endif %}>5. I admit all the claim - set date payment</option>
