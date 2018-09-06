@@ -188,6 +188,14 @@
               <h2 class="heading-small">You've both signed a settlement agreement</h2>
               <p>The agreement says the defendant will pay you in full by {{ now |  date("add", 3, "months") | date( "D MMMM YYYY" ) }}.</p>
               <p><a href="../defendant/correspondence/forms/agreement?check=3">Download the settlement agreement</a> (PDF, 123KB)</p>
+
+              {% elseif data['claimant'] == 10.5 %}
+              <h2 class="heading-small">You've both signed a settlement agreement</h2>
+              <p>The agreement says the defendant will pay you immediately.</p>
+              <p>They must make sure you have the money by 4 June 2018. Any cheques or transfers should be clear in your account.</p>
+              <p><a href="../defendant/correspondence/forms/agreement?check=3">Download the settlement agreement</a> (PDF, 123KB)</p>
+
+
               {% elseif data['claimant'] == 4.2 %}
               <h2 class="heading-small">The defendant said they'll pay you immediately</h2>
 
@@ -201,8 +209,7 @@
 
               {% elseif data['claimant'] == 4.3 %}
               <h2 class="heading-small">The defendant said they'll pay you immediately</h2>
-              <p>The defendant said they would pay you by {{ now | date('subtract', 1, 'days') | date }}. Any cheques or transfers should be clear in your account.</p>
-
+              <p>They must make sure you have the money by {{ now | date('subtract', 1, 'days') | date }}. Any cheques or transfers should be clear in your account.</p>
               <p>You need to tell us if you've settled the claim, for example because the defendant has paid you.</p>
 
               <p> <a href="../../dashboard/idam/contact-us?type=service_specific" class="button secondary-button" style="margin-bottom: 20px">Tell us you've settled</a></p>
@@ -445,7 +452,7 @@
       </div>
       {% endif %}
 
-        {% if data['claimant'] == 10.01 or data['claimant'] == 10.4  %}
+        {% if data['claimant'] == 10.01 or data['claimant'] == 10.4 or data['claimant'] == 10.5 %}
 
      <hr />
      <h2 class="heading-small">Request County Court Judgment</h2>
@@ -525,6 +532,7 @@
 <!--    <option value="10.11" {% if data['claimant'] == 10.11 %}selected{% endif %}>10.11. Accepted repayment plan - not due</option>  -->
 <!--    <option value="10.3" {% if data['claimant'] == 10.3 %}selected{% endif %}>10.3. Repayment plan determined</option> -->
     <option value="10.4" {% if data['claimant'] == 10.4 %}selected{% endif %}>Accepted full payment on set date</option>
+    <option value="10.5" {% if data['claimant'] == 10.5 %}selected{% endif %}>Immediate payment - settlement - signed</option>
     <option value="10.6" {% if data['claimant'] == 10.6 %}selected{% endif %}>Repayment plans rejected - redetermination</option>
     <option value="10.61" {% if data['claimant'] == 10.61 %}selected{% endif %}>Repayment plans rejected - countered</option>
     <option value="10.8" {% if data['claimant'] == 10.8 %}selected{% endif %}>Repayment plans rejected - countered - rejected</option>
