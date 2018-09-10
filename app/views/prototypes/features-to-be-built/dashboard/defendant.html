@@ -98,12 +98,6 @@
               <p><a href="../defendant/correspondence/forms/judgment-order?check=3">View judgment</a> (PDF, 123KB)</p>
               <p>If you repay the debt within 28 days you can apply to cancel the CCJ. This application costs £15.</p>
 
-              <h2 class="heading-small">Jan Clark has accepted your admission of £1,200</h2>
-              <p>You must pay them by {{ now | date('add', 5, 'days') | date }}. Any cheques or transfers must be clear in their account by then.</p>
-              <p>If they don't receive the money by then, they can request a County Court Judgment against you.</p>
-              <p><a href="party-details/claimant">Contact Jan Clark</a> if you need their payment details. Make sure you get receipts for any payments.</p>
-              <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=2">Download your response</a> (PDF, 123KB)</p>
-
               {% elseif data['defendant'] == 3.904 %}
               <h2 class="heading-small">You've both signed a settlement agreement</h2>
               <p>The agreement says you'll repay £1,200 by instalments of {% if data['defendant'] == 5.2 %}£200{% else %}£250{% endif %} per month starting {{ now | date('add', 1, 'months') | date( 'D MMMM YYYY' ) }}.</p>
@@ -210,6 +204,13 @@
               <p><a href="party-details/claimant">Contact Jan Clark</a> if you need their payment details.</p>
               <p>Make sure you get receipts for any payments.</p>
               <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=2">Download your response</a> (PDF, 123KB)</p>
+
+              {% elseif data['defendant'] == 5.021 %}
+              <h2 class="heading-small">A County Court Judgment (CCJ) has been issued against you</h2>
+              <p>You agreed to pay the full £1,500 immediately.</p>
+              <p>Because you didn't pay within 5 days, Jan Clark requested a CCJ against you.</p>
+              <p><a href="../defendant/correspondence/forms/judgment-order?check=3">View judgment</a> (PDF, 123KB)</p>
+              <p>If you repay the debt within 28 days you can apply to cancel the CCJ. This application costs £15.</p>
 
 
               {% elseif data['defendant'] == 5.1 %}
@@ -659,6 +660,7 @@
     <option value="5.013" {% if data['defendant'] == 5.013 %}selected{% endif %}>5.013. Any admit - accepted - settlement not signed - judgment</option>
     <option value="5.01" {% if data['defendant'] == 5.01 %}selected{% endif %}>5.01. I admit all the claim - set date payment - signed</option>
     <option value="5.02" {% if data['defendant'] == 5.02 %}selected{% endif %}>5.02. I admit all the claim - pay immediately</option>
+    <option value="5.021" {% if data['defendant'] == 5.021 %}selected{% endif %}>5.021. I admit all the claim - pay immediately - not paid - CCJ issued</option>
     <option value="5.1" {% if data['defendant'] == 5.1 %}selected{% endif %}>5.1. I admit all the claim - instalment plan payment</option>
     <option value="5.201" {% if data['defendant'] == 5.201 %}selected{% endif %}>5.201. I admit all the claim - instalment plan payment accepted - settlement</option>
     <option value="5.21" {% if data['defendant'] == 5.21 %}selected{% endif %}>5.21. I admit all the claim - instalment plan payment accepted - judgment</option>
