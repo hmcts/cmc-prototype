@@ -91,6 +91,19 @@
               <p><a href="party-details/claimant">Contact Jan Clark</a> if you need their payment details. Make sure you get receipts for any payments.</p>
               <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=2">Download your response</a> (PDF, 123KB)</p>
 
+              {% elseif data['defendant'] == 3.9031 %}
+              <h2 class="heading-small">A County Court Judgment (CCJ) has been issued against you</h2>
+              <p>Jan Clark accepted your offer to pay £1,200 immediately.</p>
+              <p>Because you didn't pay within 5 days, they requested a CCJ against you.</p>
+              <p><a href="../defendant/correspondence/forms/judgment-order?check=3">View judgment</a> (PDF, 123KB)</p>
+              <p>If you repay the debt within 28 days you can apply to cancel the CCJ. This application costs £15.</p>
+
+              <h2 class="heading-small">Jan Clark has accepted your admission of £1,200</h2>
+              <p>You must pay them by {{ now | date('add', 5, 'days') | date }}. Any cheques or transfers must be clear in their account by then.</p>
+              <p>If they don't receive the money by then, they can request a County Court Judgment against you.</p>
+              <p><a href="party-details/claimant">Contact Jan Clark</a> if you need their payment details. Make sure you get receipts for any payments.</p>
+              <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=2">Download your response</a> (PDF, 123KB)</p>
+
               {% elseif data['defendant'] == 3.904 %}
               <h2 class="heading-small">You've both signed a settlement agreement</h2>
               <p>The agreement says you'll repay £1,200 by instalments of {% if data['defendant'] == 5.2 %}£200{% else %}£250{% endif %} per month starting {{ now | date('add', 1, 'months') | date( 'D MMMM YYYY' ) }}.</p>
@@ -620,6 +633,7 @@
     <option value="3.901" {% if data['defendant'] == 3.901 %}selected{% endif %}>3.901 I admit part of the claim - set date</option>
     <option value="3.9011" {% if data['defendant'] == 3.9011 %}selected{% endif %}>3.9011 I admit part of the claim - set date (company)</option>
     <option value="3.903" {% if data['defendant'] == 3.903 %}selected{% endif %}>3.903 I admit part of the claim - pay immediately - accepted</option>
+    <option value="3.9031" {% if data['defendant'] == 3.9031 %}selected{% endif %}>3.9031 I admit part of the claim - pay immediately - accepted - not paid - CCJ</option>
     <option value="3.904" {% if data['defendant'] == 3.904 %}selected{% endif %}>3.904 I admit part the claim - instalment plan payment - accepted</option>
     <option value="3.91" {% if data['defendant'] == 3.91 %}selected{% endif %}>3.91 I admit part of the claim - rejected (mediation)</option>
     <option value="3.92" {% if data['defendant'] == 3.92 %}selected{% endif %}>3.92 I admit part of the claim - rejected (no mediation)</option>
