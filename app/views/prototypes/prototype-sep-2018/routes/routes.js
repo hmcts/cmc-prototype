@@ -351,11 +351,6 @@ module.exports = function(app){
 
   })
 
-
-  app.get('*/prototype-admin/view-data', function(req, res){
-      res.render('prototype-admin/view-data', { data: JSON.stringify( req.session, null, 2) } )
-  });
-
   app.post('/prototype-13/agreement/details-defendant', (req, res) => {
     setAgreementStateToDone(req, res, 'claim')
 
