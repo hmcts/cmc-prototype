@@ -1,0 +1,70 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="4" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <a href="#" class="link-back">Back</a>
+
+      <h1 class="heading-large">
+        Do you believe Mary Richards can pay you in full?
+      </h1>
+
+      <p>
+        Bailiff service will only help if Mary Richards has £1,500 or items that could be sold at auction to raise that amount at this address:
+      </p>
+
+      <p>24 Acacia drive<br>
+        London<br>
+        SW1 H9A</p>
+
+      <form
+        name="aspnetForm"
+        method="post"
+        onsubmit="conditionalNavigation('radio-indent-group', 'Yes', 'warrant-of-control/claim-amount', '');return false;"
+        id="aspnetForm"
+        autocomplete="off">
+        <div class="form-group">
+          <fieldset class="inline">
+            <div class="multiple-choice">
+              <input id="radio-yes" type="radio" name="radio-indent-group" value="Yes">
+              <label for="radio-yes"> Yes</label>
+            </div>
+            <div class="multiple-choice">
+              <input id="radio-no" type="radio" name="radio-indent-group" value="No">
+              <label for="radio-no" data-target="no-info">
+                No<br>
+
+            </div>
+        </div>
+        </fieldset>
+        <input id="advert-option-next--button" type="submit" value="Save and continue" class="button"
+               data-ignore-double-submit="true">
+      </form>
+
+
+    </div>
+  </div>
+</main>
+<form method="post" action="details-defendant" class="form" style="position: absolute;">
+  <select id="control-box" name="control-box" onchange="this.form.submit()">
+    <option value="0" {% if data[
+    'control-box-value'] == 0 %}selected{% endif %}>Choose</option>
+    <option value="1" {% if data[
+    'control-box-value'] == 1 %}selected{% endif %}>Individual</option>
+    <option value="2" {% if data[
+    'control-box-value'] == 2 %}selected{% endif %}>Sole trader</option>
+    <option value="3" {% if data[
+    'control-box-value'] == 3 %}selected{% endif %}>Company</option>
+    <option value="4" {% if data[
+    'control-box-value'] == 4 %}selected{% endif %}>Organisation</option>
+  </select>
+</form>
+{% endblock %}
