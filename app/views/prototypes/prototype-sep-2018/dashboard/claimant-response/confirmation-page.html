@@ -56,10 +56,7 @@ Money Claims Prototype
         		<p>
 					<strong class="bold">{{ now | date }}</strong>
 				</p>
-                {% if ( data['radio-proceed'] == "judgment" or data['radio-proceed'] == "judgment-pa" or data['confirmation'] == 2 or data['confirmation'] == 2.1 ) %}
 
-        <p><a class="font-medium" target="_blank" href='../../defendant/correspondence/forms/judgment-order?check={% if data['claimant-payment-request'] == "Instalments" %}3{% elseif data['claimant-payment-request'] == 'Set-date' %}2{% else %}1{% endif %}' style="color: #FFFFFF" >Download judgment</a> (PDF, 123KB)</p>
-{% endif %}
     </div>
     <fieldset>
         <h2 class="heading-medium">What happens next</h2>
@@ -71,7 +68,10 @@ Money Claims Prototype
         {% else %}
         <p>A County Court Judgment has been issued against the defendant.</p>
         {% endif %}
+        {% if ( data['radio-proceed'] == "judgment" or data['radio-proceed'] == "judgment-pa" or data['confirmation'] == 2 or data['confirmation'] == 2.1 ) %}
 
+<p>We'll send a copy of the judgment to you.</p>
+{% endif %}
       {% include "includes/survey.html" %}
 
       <p><a class="button" href='../../dashboard/home?dashboard=1.113'>Go to your account</a></p>
