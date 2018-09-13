@@ -14,7 +14,7 @@ Money Claims Prototype
 
       <div class="govuk-box-highlight">
         {% if ( data['radio-proceed'] == "judgment" or data['radio-proceed'] == "judgment-pa" or data['confirmation'] == 2 or data['confirmation'] == 2.1 ) %}
-        <h1 class="bold-large">County Court Judgment requested</h1>
+        <h1 class="bold-large">County Court Judgment issued</h1>
 
         {% elseif data['radio-indent-group'] == "accept_stop_claim" or data['radio-indent-group'] == "accept_stop_claim_claim_amount" or data['confirmation'] == 1 %}
         <h1 class="bold-large">You've accepted the repayment plan</h1>
@@ -68,7 +68,10 @@ Money Claims Prototype
         {% else %}
         <p>A County Court Judgment has been issued against the defendant.</p>
         {% endif %}
+        {% if ( data['radio-proceed'] == "judgment" or data['radio-proceed'] == "judgment-pa" or data['confirmation'] == 2 or data['confirmation'] == 2.1 ) %}
 
+<p>We'll send a copy of the judgment to you.</p>
+{% endif %}
       {% include "includes/survey.html" %}
 
       <p><a class="button" href='../../dashboard/home?dashboard=1.113'>Go to your account</a></p>
