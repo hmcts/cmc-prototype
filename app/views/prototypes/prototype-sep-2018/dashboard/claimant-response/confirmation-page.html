@@ -64,13 +64,13 @@ Money Claims Prototype
        {% if ( data['radio-proceed'] == "judgment" or data['radio-proceed'] == "judgment-pa" or data['confirmation'] == 2  or  data['confirmation'] == 2.1) %}
 
         {% if data['radio-indent-group']  == 'reject_stop_claim' %}
-        <p>You've rejected the defendant's repayment plan and a County Court Judgment has been issued against them.</p>
+        <p>A County Court Judgment has been issued against the defendant.</p>
         {% else %}
         <p>A County Court Judgment has been issued against the defendant.</p>
         {% endif %}
         {% if ( data['radio-proceed'] == "judgment" or data['radio-proceed'] == "judgment-pa" or data['confirmation'] == 2 or data['confirmation'] == 2.1 ) %}
 
-<p>We'll send a copy of the judgment to you.</p>
+<p>We'll send a copy of the judgment to you and to Mary Richards.</p>
 {% endif %}
       {% include "includes/survey.html" %}
 
@@ -94,8 +94,8 @@ Money Claims Prototype
 
 
         {% elseif ( data['claimant-payment-request'] == "Set-date" or data['claimant-payment-request'] == "Immediately" ) and data['radio-indent-group'] == "reject_stop_claim" and data['radio-indent-group2'] != "reject_stop_claim" or data['confirmation'] == 3  %}
-        <p>We've emailed {% if data.counterclaim=="true" %}Jan Clark{%else%}Mary Richards{% endif %} your proposed repayment plan and settlement agreement.</p>
-       <p>We'll email you when the defendant responds.</p>
+        <p>We've emailed {% if data.counterclaim=="true" %}Jan Clark{%else%}Mary Richards{% endif %} your proposed repayment plan and settlement agreement for them to sign.</p>
+        <p>They must respond before 4pm on {{ now | date('add', 7, 'days') | date }}. We'll email you when they respond.</p>
 
 			{% include "includes/survey.html" %}
 
@@ -104,7 +104,8 @@ Money Claims Prototype
 
 
         {% elseif ( data['radio-indent-group2'] == "accept_stop_claim" or data['radio-indent-group'] == "reject_stop_claim" ) and data['radio-indent-group2'] != "reject_stop_claim"  or data['confirmation'] == 4 %}
-        <p>We'll email Mary Richards the repayment plan and the settlement agreement for them to sign.</p>
+        <p>We've emailed Mary Richards the repayment plan and the settlement agreement for them to sign.</p>
+        <p>They must respond before 4pm on {{ now | date('add', 7, 'days') | date }}. We'll email you when they respond.</p>
         <p>If they do not think they can afford the plan, they can ask for a judge to make a different plan.</p>
 			{% include "includes/survey.html" %}
 
@@ -113,7 +114,7 @@ Money Claims Prototype
 
        {% elseif data['radio-indent-group2'] == "reject_stop_claim" or data['confirmation'] == 5 %}
         <p>A judge will decide what the defendant can afford to pay based on their financial details.</p>
-        <p >We'll contact both you and {% if data.counterclaim=="true" %}Jan Clark{%else%}Mary Richards{% endif %} confirming the details of the repayment plan in the next 10 days.</p>
+        <p >We'll contact both you and {% if data.counterclaim=="true" %}Jan Clark{%else%}Mary Richards{% endif %} to tell you what to do next.</p>
 
 			{% include "includes/survey.html" %}
 
@@ -130,7 +131,7 @@ Money Claims Prototype
 
 
          {% elseif data['radio-indent-group'] == "mediation-opt" or data['confirmation'] == 7 %}
-         <p>You offered to try to resolve the claim using mediation. We'll ask the defendant Mary Richards if want to try mediation. We'll email you when they respond.</p>
+         <p>You offered to try to resolve the claim using mediation. We'll ask Mary Richards if they want to try mediation. We'll email you when they respond.</p>
          <p>If they agree, a mediator will contact you within 14 days to arrange an appointment. </p>
          <p>If they reject or do not respond within 7 days the court will review the case. You might have to go to a hearing.</p>
           <p>We'll email you if we set a hearing date to tell you how to prepare. </p>
@@ -142,7 +143,7 @@ Money Claims Prototype
 
 
       {% elif data['radio-indent-group'] == "accept_stop_claim_claim_amount" or data['radio-indent-group'] == "accept_stop_claim_settled" %}
-        <p>The claim is now settled. We'll email the defendant Mary Richards to tell them.</p>
+        <p>The claim is now settled. We've emailed the defendant Mary Richards to tell them.</p>
 						{% include "includes/survey.html" %}
 
       <p><a class="button" href='../../dashboard/home?dashboard=11.8'>Go to your account</a></p>
