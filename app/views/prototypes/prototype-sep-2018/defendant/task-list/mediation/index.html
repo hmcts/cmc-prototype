@@ -29,11 +29,21 @@ Money Claims Prototype
 
      {% if data['owe-amount'] < 370.01 %}
 
+      <form method="post" action="../task-list" class="form">
+
 <p>This claim has been automatically registered for free telephone mediation.
 <p>We'll contact you with an appointment. You'll only speak to a mediator about the claim, not to Jan Clark.</p>
-      <p><a href='no-mediation'>I don't want to try mediation</a></p>
+      <p><a href='mediation/no-mediation'>I don't want to try mediation</a></p>
 
      {% elseif data['owe-amount'] > 370.00 %}
+
+     <form
+     name="aspnetForm"
+     method="post"
+     id="aspnetForm"
+     autocomplete="off"
+     onsubmit="multiNavigation('radio-mediation-group', ['Yes', 'No'], ['../task-list', '../task-list']);return false;"
+     >
 
       <p>You can talk to an impartial mediator about Jan Clark's claim against you.</p>
 	  <p>The free service can help you:</p>
@@ -52,13 +62,7 @@ Money Claims Prototype
 
 
 
-        <form
-        name="aspnetForm"
-        method="post"
-        id="aspnetForm"
-        autocomplete="off"
-        onsubmit="multiNavigation('radio-mediation-group', ['Yes', 'No'], ['../task-list', '../task-list']);return false;"
-        >
+
 
 
 
