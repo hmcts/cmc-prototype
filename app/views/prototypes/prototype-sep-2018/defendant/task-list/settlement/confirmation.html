@@ -25,8 +25,12 @@ Money Claims Prototype
         <p style="margin-top: 24px"><a href="../../../defendant/correspondence/forms/agreement?check=3" class="font-medium" style="color: #FFFFFF;">Download settlement agreement</a> (PDF, 123KB)</p>
       </div>
 
-      <p>We'll email Jan Clark telling them that you have signed the settlement agreement.</p>
-      <p>Now both parties have signed the agreement, this claim has been put on hold.</p>
+      <p>The agreement says you'll repay £1,500 by
+      {% if data['set-month'] %}
+        {{ ( data['set-month'] + ' ' + data['set-day'] + ' ' + data['set-year']) | date('D MMMM YYYY') }}{% else %}{{ now | date('add', 3, 'months') | date('D MMMM YYYY') }}{% endif %}.</p>
+
+        <p>The claimant can't request a County Court Judgment against you if you pay by the agreed date.</p>
+        <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=3">Download your response</a> (PDF, 123KB)</p>
 
       <h2 class="heading-medium">What happens next</h2>
 
