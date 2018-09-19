@@ -1,0 +1,60 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+      <div class="govuk-box-highlight">
+
+        <h1 class="bold-large">You've asked for a judge to decide a repayment plan</h1>
+
+        <p class="">
+					Your claim number: <br><strong class="bold-large">352MC733</strong>
+				</p>
+        		<p>
+					<strong class="bold">{{ now | date }}</strong>
+				</p>
+
+    </div>
+    <fieldset>
+        <h2 class="heading-medium">What happens next</h2>
+
+        <p>A judge will decide what the defendant can afford to pay based on their financial details.</p>
+        <p >We'll contact both you and Mary Richards to tell you what to do next.</p>
+
+			{% include "includes/survey.html" %}
+
+			<p><a class="button" href='../../dashboard/home?dashboard=1.115'>Go to your account</a></p>
+
+      {% include "includes/contact.html" %}
+      </fieldset>
+
+  </div>
+</div>
+</main>
+
+    <form method="post"  action="#" class="for4" style=" float: left;">
+      <select onchange="window.location.href='?confirmation='+this.value">
+          <option value="">Selected</option>
+          <option value="0.1" {% if data['confirmation'] == '0.1' %}selected{% endif %}>Accepted immediate payment</option>
+          <option value="1" {% if data['confirmation'] == '1' %}selected{% endif %}>Settlment agreement signed</option>
+          <option value="2"  {% if data['confirmation'] == '2' %}selected{% endif %}>Judgment issued</option>
+          <option value="2.1"  {% if data['confirmation'] == '2.1' %}selected{% endif %}>Judgment issued - no payment</option>
+          <option value="3"  {% if data['confirmation'] == '3' %}selected{% endif %}>Counter offer made</option>
+          <option value="4"  {% if data['confirmation'] == '4' %}selected{% endif %}>Court offer accepted</option>
+          <option value="5"  {% if data['confirmation'] == '5' %}selected{% endif %}>Redetermination</option>
+          <option value="6"  {% if data['confirmation'] == '6' %}selected{% endif %}>Mediation accepted</option>
+          <option value="7"  {% if data['confirmation'] == '7' %}selected{% endif %}>Mediation proposed</option>
+          <option value="8"  {% if data['confirmation'] == '8' %}selected{% endif %}>Claim proceeding</option>
+      </select>
+    </form>
+
+{% endblock %}
