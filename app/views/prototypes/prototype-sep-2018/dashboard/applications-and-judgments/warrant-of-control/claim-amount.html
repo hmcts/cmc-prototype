@@ -16,7 +16,7 @@ Money Claims Prototype
       <h1 class="heading-large">
         How much do you want to enforce?
       </h1>
-      <p>The balance outstanding on the judgment is £1643.20.</p>
+      <p>The balance outstanding on the judgment is <span class="bold">£1643.20</span></p>
 
       <p>Mary Richards was ordered to pay immediately.</p>
 
@@ -87,8 +87,9 @@ Money Claims Prototype
         <tr>
           <th scope="row">Amount to enforce</th>
           <td class="numeric last">
-            <label class="visuallyhidden" for="amount">Amount to enforce</label>
-            <input class="fee pound" maxlength="10" size="7" type="text" value="" name="num3" id="num3">
+            <label class="visuallyhidden" for="enforce-amount">Amount to enforce
+            </label>
+            <input class="fee pound" maxlength="10" size="7" type="text" value="" name="enforce-amount" id="enforce-amount">
           </td>
         </tr>
         {% if data['radio-proceed']=="judgment-pa" %}
@@ -112,52 +113,45 @@ Money Claims Prototype
         <!--</tr>-->
 
         <tr>
-          <th scope="row">Claim fee</th>
+          <th scope="row">Issue fee</th>
           <td class="numeric last">
-            <label class="visuallyhidden" for="amount">Claim fee</label>
+            <label class="visuallyhidden" for="fee">Issue fee</label>
             <span class="font-small">£77</span>
           </td>
           </td>
         </tr>
-        <tr>
-          <th scope="row">Solicitor's costs (if any)</th>
-          <td class="numeric last">
-            <label class="visuallyhidden" for="amount">Solicitor's costs (if any)</label>
-            <input class="fee pound" maxlength="10" size="7" type="text" value="" name="num4" id="num4">
-          </td>
-        </tr>
-        <tr>
-          <th scope="col" class="bold-medium">Total</th>
-          <td class="numeric last bold-medium">£<span name="subt" id="subt">77</span>
-          </td>
-          <input type="text" hidden="" value="" name="num3" id="num3"/>
-        </tr>
+        <!--<tr>-->
+          <!--<th scope="col" class="bold-medium">Total</th>-->
+          <!--<td class="numeric last bold-medium">£<span name="fee" id="fee">77</span>-->
+          <!--</td>-->
+          <!--<input type="text" hidden="" value="" name="num3" id="num3"/>-->
+        <!--</tr>-->
 
-        <!--{% endif %}-->
-        <!--{% if data['radio-indent-group2']=="Yes" %}-->
+        {% endif %}
+        {% if data['radio-indent-group2']=="Yes" %}
         <!--<tr>-->
         <!--<th scope="col" class="bold-small">Sub total</th>-->
-        <!--<td class="numeric last bold-small">£<span name="subt" id="subt">1643.20</span></td>-->
-        <!--<input type="text" hidden="" value="1643.20" name="num1" id="num1"/>-->
+        <!--<td class="numeric last bold-small">£<span name="subt" id="subt">1443.20</span></td>-->
+        <!--<input type="text" hidden="" value="1443.20" name="num1" id="num1"/>-->
         <!--</tr>-->
-        <!--<tr>-->
-        <!--<th scope="col">Minus amount already paid</th>-->
-        <!--<td class="numeric last">£200</td>-->
-        <!--</tr>-->
-        <!--<tr>-->
-        <!--<th scope="col" class="bold-medium">Total</th>-->
-        <!--<td class="numeric last bold-medium">£<span name="subt" id="subt">1643.20</span></td>-->
-        <!--<input type="text" hidden="" value="1643.20" name="num1" id="num1"/>-->
-        <!--</tr>-->
+        <tr>
+        <th scope="col">Minus amount already paid</th>
+        <td class="numeric last">£200</td>
+        </tr>
+        <tr>
+        <th scope="col" class="bold-medium">Total</th>
+        <td class="numeric last bold-medium"><span name="subt" id="subt"></span></td>
+        <input type="text" hidden="" value="" name="num1" id="num1"/>
+        </tr>
 
-        <!--{% else %}-->
-        <!--<tr>-->
-        <!--<th scope="col" class="bold-medium">Total</th>-->
-        <!--<td class="numeric last bold-medium">£<span name="subt" id="subt">{% if data['radio-proceed']=="judgment-pa" %}1200{%else%}1643.20{%endif%}</span>-->
-        <!--</td>-->
-        <!--<input type="text" hidden="" value="1643.20" name="num1" id="num1"/>-->
-        <!--</tr>-->
-        <!--{% endif %}-->
+        {% else %}
+        <tr>
+        <th scope="col" class="bold-medium">Total</th>
+        <td class="numeric last bold-medium">£<span name="subt" id="subt">{% if data['radio-proceed']=="judgment-pa" %}77{%else%}{%endif%}77</span>
+        </td>
+        <input type="text" hidden="" value="" name="num1" id="num1"/>
+        </tr>
+        {% endif %}
 
 
         </tbody>
