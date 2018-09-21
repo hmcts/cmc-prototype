@@ -174,6 +174,7 @@
                 <p><a class="" href="../defendant/correspondence/forms/claim-form-defendant?check=9">Download their
                   response</a> (PDF, 123KB)
               </div>
+
               {% elseif data['claimant'] == 10.1 %}
               <h2 class="heading-small">You've signed a settlement agreement</h2>
               <p>We've emailed Mary Richards the repayment plan and the settlement agreement for them to sign.</p>
@@ -181,6 +182,12 @@
                 respond.</p>
               <p>If they do not think they can afford the plan, they can ask for a judge to make a different plan.</p>
 
+              {% elseif data['claimant'] == 10.001 %}
+              <h2 class="heading-small">You've signed a settlement agreement</h2>
+              <p>We've emailed Mary Richards the repayment plan and the settlement agreement for them to sign.</p>
+              <p>They must respond before 4pm on {{ now | date('add', 7, 'days') | date }}. We'll email you when they
+                respond.</p>
+              <p>If they do not respond you can request a County Court Judgment.</p>
 
               {% elseif data['claimant'] == 10.01 %}
               <h2 class="heading-small">You've both signed a settlement agreement</h2>
@@ -678,16 +685,15 @@
     'claimant'] == 10 %}selected{% endif %}>Dispute claim + offer made  </option>
 
     <option value="10.1" {% if data[
-    'claimant'] == 10.1 %}selected{% endif %}>Accepted repayment plan - settlement</option>
+    'claimant'] == 10.1 %}selected{% endif %}>Accepted repayment plan - settlement (claimant/court plan)</option>
+    <option value="10.001" {% if data[
+    'claimant'] == 10.001 %}selected{% endif %}>Accepted repayment plan - settlement (def's plan)</option>
     <option value="10.01" {% if data[
     'claimant'] == 10.01 %}selected{% endif %}>Accepted repayment plan - settlement - accepted</option>
     <option value="10.02" {% if data[
     'claimant'] == 10.02 %}selected{% endif %}>Accepted repayment plan - settlement - not signed</option>
     <option value="10.11" {% if data[
     'claimant'] == 10.11 %}selected{% endif %}>Accepted repayment plan - judgment</option>
-    <!--    <option value="10.2" {% if data['claimant'] == 10.2 %}selected{% endif %}>10.2. Accepted court repayment plan</option>  -->
-    <!--    <option value="10.11" {% if data['claimant'] == 10.11 %}selected{% endif %}>10.11. Accepted repayment plan - not due</option>  -->
-    <!--    <option value="10.3" {% if data['claimant'] == 10.3 %}selected{% endif %}>10.3. Repayment plan determined</option> -->
     <option value="10.4" {% if data[
     'claimant'] == 10.4 %}selected{% endif %}>Accepted full payment on set date</option>
     <option value="10.5" {% if data[
