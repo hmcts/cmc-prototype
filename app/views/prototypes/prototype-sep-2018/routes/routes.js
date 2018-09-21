@@ -111,33 +111,22 @@ module.exports = function(app){
 
     if ( req.session.data['claimant-payment-request'] ) {
 
-      if ( req.session.data['radio-pay-group'] == 'Set-date' )  {
+      if ( req.session.data['defendant'] == 'org' && req.session.data['claimant-payment-request'] == 'Immediately' ) {
+        res.redirect( '../task-list' );
 
-        if ( req.session.data['claimant-payment-request'] == 'Immediately' )  {
-          res.redirect( 'counter-offer/court-date' );
-        
-        } else if ( req.session.data['claimant-payment-request'] == 'Set-date' )  {
-          res.redirect( 'counter-offer/pay-by-set-date' );
-        
-        } else if ( req.session.data['claimant-payment-request'] == 'Instalments' )  {
-          res.redirect( 'counter-offer/repayment-plan' );
-        }
+      } else if ( req.session.data['radio-pay-group'] == 'Set-date' &&  req.session.data['claimant-payment-request'] == 'Immediately' )  {
+        res.redirect( 'counter-offer/court-date' );
+
+      } else if ( req.session.data['claimant-payment-request'] == 'Immediately' )  {
+        res.redirect( 'counter-offer/court-offer' );
       
-
-
-      } else if ( req.session.data['radio-pay-group'] == 'Instalments' )  {
-
-        if ( req.session.data['claimant-payment-request'] == 'Immediately' )  {
-          res.redirect( 'counter-offer/court-offer' );
-        
-        } else if ( req.session.data['claimant-payment-request'] == 'Set-date' )  {
-          res.redirect( 'counter-offer/pay-by-set-date' );
-        
-        } else if ( req.session.data['claimant-payment-request'] == 'Instalments' )  {
-          res.redirect( 'counter-offer/repayment-plan' );
-        }
+      } else if ( req.session.data['claimant-payment-request'] == 'Set-date' )  {
+        res.redirect( 'counter-offer/pay-by-set-date' );
       
+      } else if ( req.session.data['claimant-payment-request'] == 'Instalments' )  {
+        res.redirect( 'counter-offer/repayment-plan' );
       }
+      
 
     } else {
       res.render( strPath + 'dashboard/claimant-response/admit-the-claim/task-list/counter-offer' );
@@ -154,33 +143,22 @@ module.exports = function(app){
 
     if ( req.session.data['claimant-payment-request'] ) {
 
-      if ( req.session.data['radio-pay-group'] == 'Set-date' )  {
+      if ( req.session.data['defendant'] == 'org' && req.session.data['claimant-payment-request'] == 'Immediately' ) {
+        res.redirect( 'counter-offer/send-accounts' );
 
-        if ( req.session.data['claimant-payment-request'] == 'Immediately' )  {
-          res.redirect( 'counter-offer/court-date' );
-        
-        } else if ( req.session.data['claimant-payment-request'] == 'Set-date' )  {
-          res.redirect( 'counter-offer/pay-by-set-date' );
-        
-        } else if ( req.session.data['claimant-payment-request'] == 'Instalments' )  {
-          res.redirect( 'counter-offer/repayment-plan' );
-        }
+      } else if ( req.session.data['radio-pay-group'] == 'Set-date' &&  req.session.data['claimant-payment-request'] == 'Immediately' )  {
+        res.redirect( 'counter-offer/court-date' );
+
+      } else if ( req.session.data['claimant-payment-request'] == 'Immediately' )  {
+        res.redirect( 'counter-offer/court-offer' );
       
-
-
-      } else if ( req.session.data['radio-pay-group'] == 'Instalments' )  {
-
-        if ( req.session.data['claimant-payment-request'] == 'Immediately' )  {
-          res.redirect( 'counter-offer/court-offer' );
-        
-        } else if ( req.session.data['claimant-payment-request'] == 'Set-date' )  {
-          res.redirect( 'counter-offer/pay-by-set-date' );
-        
-        } else if ( req.session.data['claimant-payment-request'] == 'Instalments' )  {
-          res.redirect( 'counter-offer/repayment-plan' );
-        }
+      } else if ( req.session.data['claimant-payment-request'] == 'Set-date' )  {
+        res.redirect( 'counter-offer/pay-by-set-date' );
       
+      } else if ( req.session.data['claimant-payment-request'] == 'Instalments' )  {
+        res.redirect( 'counter-offer/repayment-plan' );
       }
+      
 
     } else {
       res.render( strPath + 'dashboard/claimant-response/part-admit/task-list/counter-offer' );
@@ -261,7 +239,9 @@ module.exports = function(app){
 
   app.post( '/' + strPath + 'dashboard/claimant-response/admit-the-claim/task-list/counter-offer/repayment-plan', (req, res) => {
 
-    if (req.session.data['instalment-first-payment'] < 251 ) {
+    if (req.session.data['defendant'] == 'org' ) {
+      res.redirect('/' + strPath + 'dashboard/claimant-response/admit-the-claim/task-list/counter-offer/send-accounts');
+    } else if (req.session.data['instalment-first-payment'] < 251 ) {
       res.redirect('/' + strPath + 'dashboard/claimant-response/admit-the-claim/task-list/counter-offer/approved');
     } else if ( req.session.data['radio-pay-group'] == 'Set-date' ) {
       res.redirect('/' + strPath + 'dashboard/claimant-response/admit-the-claim/task-list/counter-offer/court-date');
@@ -274,7 +254,9 @@ module.exports = function(app){
 
   app.post( '/' + strPath + 'dashboard/claimant-response/admit-the-claim/task-list/counter-offer/pay-by-set-date', (req, res) => {
 
-    if (req.session.data['set-year'] > 2018 ) {
+    if (req.session.data['defendant'] == 'org' ) {
+      res.redirect('/' + strPath + 'dashboard/claimant-response/admit-the-claim/task-list/counter-offer/send-accounts');
+    } else if (req.session.data['set-year'] > 2018 ) {
       res.redirect('/' + strPath + 'dashboard/claimant-response/admit-the-claim/task-list/counter-offer/approved');
     } else if ( req.session.data['radio-pay-group'] == 'Set-date' ) {
       res.redirect('/' + strPath + 'dashboard/claimant-response/admit-the-claim/task-list/counter-offer/court-date');
