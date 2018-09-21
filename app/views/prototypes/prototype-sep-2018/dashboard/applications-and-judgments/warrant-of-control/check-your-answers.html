@@ -162,7 +162,7 @@ Money Claims Prototype
     {% endif %}
     <tr>
       <td>
-        Current residential address
+        Address for bailiff to visit
       </td>
       <td>
         24 Acacia drive<br>
@@ -176,6 +176,19 @@ Money Claims Prototype
     {% if data['control-box'] == 1 or data['control-box'] == 2 %}
 
     {% endif %}
+
+    <tr>
+      <td>
+        Phone number
+      </td>
+      <td>
+        {{data['contact-defendant']}}
+      </td>
+      <td class="change-answer">
+        <a href="contact-defendant">Change</a>
+      </td>
+    </tr>
+
     </tbody>
   </table>
   <table class="check-your-answers">
@@ -192,96 +205,67 @@ Money Claims Prototype
     </thead>
     <tbody>
 
-    <tbody>
-
+    {% if data['radio-indent-group2']=="Yes" %}
+    <!-- Defendant has paid some of the amount owed  -->
 
     <tr>
       <td class="no-border">
         Has the defendant paid any of the judgment amount?
       <td class="no-border">
-        {% if data['radio-indent-group2']=="Yes" or data['control-box'] == 1 or data['control-box'] == 2 or
-        data['control-box'] == 3 or data['control-box'] == 4 %}Yes{% elif data['radio-indent-group2']=="No" or
-        data['control-box'] == 5 or data['control-box'] == 6 %}No{% else %}No{% endif %}
-
+        Yes
       </td>
       <td class="change-answer no-border">
-        <a href="claim-amount-deduct">
-          Change <span class="visuallyhidden">Has the defendant paid any of the judgment amount</span>
-        </a>
+        <a href="claim-amount-deduct">Change</a>
       </td>
     </tr>
-    {% if data['radio-indent-group2']=="No" or data['control-box'] == 5 or data['control-box'] == 5 %}
-    {% elseif data['control-box'] == 1 or data['control-box'] == 2 or data['control-box'] == 3 or data['control-box'] ==
-    4 or data['claimant-payment-request']=="Immediately" or data['claimant-payment-request']=="Set-date" or
-    data['claimant-payment-request']=="Instalments"%}
+
+    <tr>
+      <td class="no-border">
+        Amount already paid
+      <td class="no-border">
+        £200
+      </td>
+      <td class="change-answer no-border">
+
+      </td>
+    </tr>
+
+
+    {% else %}
 
     <tr>
       <td>
-        Amount already paid
+        Has the defendant paid any of the judgment amount?
       <td>
-        £100<br>
+        No
       </td>
       <td class="change-answer">
-
+        <a href="claim-amount-deduct">Change</a>
       </td>
     </tr>
 
     {% endif %}
 
-    <!--<tr>-->
-    <!--<td class="no-border">-->
-    <!--Do you believe the defendant can pay you back?-->
-    <!--<td class="no-border">-->
-    <!--Yes-->
-    <!--</td>-->
-    <!--<td class="change-answer no-border">-->
-    <!--<a href="chances-of-success">-->
-    <!--Change <span class="visuallyhidden">Do you believe the defendant can pay you back</span>-->
-    <!--</a>-->
-    <!--</td>-->
-    <!--</tr>-->
-    {% if data['radio-indent-group2']=="No" or data['control-box'] == 5 or data['control-box'] == 5 %}
-    {% elseif data['control-box'] == 1 or data['control-box'] == 2 or data['control-box'] == 3 or data['control-box'] ==
-    4 or data['claimant-payment-request']=="Immediately" or data['claimant-payment-request']=="Set-date" or
-    data['claimant-payment-request']=="Instalments"%}
-
     <tr>
       <td>
-        Amount already paid
+        Balance outstanding on judgment
       <td>
-        £100<br>
+        £1,643.20<br>
       </td>
       <td class="change-answer">
 
       </td>
     </tr>
-
-    {% endif %}
+    <tr>
 
     <tr>
       <td>
         Total amount to enforce
       <td>
-        £1720.20<br>
+        <span style="font-weight: bold">£1,720.20</span> (including fee)<br>
       </td>
       <td class="change-answer">
         <a href="claim-amount">Change</a>
-      </td>
-    </tr>
-    <tr>
-
-    <tr>
-      <td>
-        Additional information
-      </td>
-      <td>
-        {{data['additional-information']}}
-      </td>
-      <td class="change-answer">
-        <a
-          href="additional-information">
-          Change <span class="visuallyhidden">Additional information</span>
-        </a>
       </td>
     </tr>
     <tr>
@@ -373,6 +357,67 @@ Money Claims Prototype
     </tbody>
   </table>
 
+  <table class="check-your-answers">
+    <thead>
+    <tr>
+      <th colspan="2">
+        <h2 class="heading-medium" id="name">
+          Information to assist bailiff's visit
+        </h2>
+      </th>
+      <th>
+      </th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <tr>
+      <td>
+        When the defendant is usually at the address?
+      </td>
+      <td>
+        {{data['additional-information']}}
+      </td>
+      <td class="change-answer">
+        <a href="additional-information">Change</a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Does the defendant have a car or vehicle?
+      </td>
+      <td>
+        No
+      </td>
+      <td class="change-answer">
+        <a href="car-details">Change</a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Risks from defendant
+      </td>
+      <td>
+        No
+      </td>
+      <td class="change-answer">
+        <a href="risk-defendant">Change</a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Risks at the address
+      </td>
+      <td>
+        No
+      </td>
+      <td class="change-answer">
+        <a href="risk-property">Change</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
 
   <div class="column-two-thirds">
 
@@ -419,7 +464,7 @@ Money Claims Prototype
       <div class="multiple-choice text">
         <input class="" id="HasAcceptedTermsAndConditions" type="checkbox" value="true">
         <label for="HasAcceptedTermsAndConditions"> I declare that whole or part of any
-          instalments due under the judgment have not been paid and the balance now due is as shown.</label>
+          instalments due under the judgment have not been paid and the outstanding balance is correct.</label>
       </div>
     </div>
 
