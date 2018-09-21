@@ -16,6 +16,7 @@ Money Claims Prototype
         {% if ( data['radio-proceed'] == "judgment" or data['radio-proceed'] == "judgment-pa" or data['confirmation'] == 2 or data['confirmation'] == 2.1 ) %}
         <h1 class="bold-large">County Court Judgment issued</h1>
 
+
         {% elseif data['radio-indent-group'] == "accept_stop_claim" or data['radio-indent-group'] == "accept_stop_claim_claim_amount" or data['confirmation'] == 1 %}
         <h1 class="bold-large">You've accepted the repayment plan</h1>
 
@@ -24,7 +25,7 @@ Money Claims Prototype
         <h1 class="bold-large">You've accepted their response</h1>
 
 
-        {% elseif ( data['claimant-payment-request'] == "Set-date" or data['claimant-payment-request'] == "Immediately" ) and data['radio-indent-group'] == "reject_stop_claim" and data['radio-indent-group2'] != "reject_stop_claim" or data['confirmation'] == 3 %}
+        {% elseif ( data['claimant-payment-request'] == "Set-date" or data['claimant-payment-request'] == "Immediately" ) and data['radio-indent-group'] == "reject_stop_claim" and data['radio-indent-group2'] != "reject_stop_claim" or data['confirmation'] == 3  or data['confirmation'] == 3.1 or ( data['defendant'] == "org" and data['radio-indent-group'] == "reject_stop_claim" )%}
         <h1 class="bold-large">You've proposed a different repayment plan</h1>
 
         {% elseif data['radio-indent-group2'] == "accept_stop_claim" or data['radio-indent-group2'] == "accept_stop_claim_claim_amount" or data['confirmation'] == 4 %}
@@ -61,7 +62,23 @@ Money Claims Prototype
     <fieldset>
         <h2 class="heading-medium">What happens next</h2>
 
-       {% if ( data['radio-proceed'] == "judgment" or data['radio-proceed'] == "judgment-pa" or data['confirmation'] == 2  or  data['confirmation'] == 2.1) %}
+        {% if ( data['defendant'] == "org" and data['radio-indent-group'] == "reject_stop_claim" ) or data['confirmation'] == 3.1 %}
+      
+        <p>The court needs to review the defendant's accounts to see if they can afford the repayment plan you've proposed.</p>
+
+        <p>The defendant should have sent you a copy of their accounts, you will need to send these to the court at:</p>
+
+        <p>County Court Money Claims Centre<br />
+          PO Box 527<br />
+          Salford<br />
+          M5 0BY
+        </p>
+
+        <p>Make sure you include your claim number, 352MC733.</p>
+
+        <p>If the court believes the defendant can afford your plan, a County Court Judgment (CCJ) will be issued for the requested repayment plan. If not, the court will set its own repayment terms and issue a CCJ.</p>
+
+       {% elseif ( data['radio-proceed'] == "judgment" or data['radio-proceed'] == "judgment-pa" or data['confirmation'] == 2  or  data['confirmation'] == 2.1) %}
 
         {% if data['radio-indent-group']  == 'reject_stop_claim' %}
         <p>A County Court Judgment has been issued against the defendant.</p>
@@ -181,6 +198,7 @@ Money Claims Prototype
           <option value="2"  {% if data['confirmation'] == '2' %}selected{% endif %}>Judgment issued</option>
           <option value="2.1"  {% if data['confirmation'] == '2.1' %}selected{% endif %}>Judgment issued - no payment</option>
           <option value="3"  {% if data['confirmation'] == '3' %}selected{% endif %}>Counter offer made</option>
+          <option value="3.1"  {% if data['confirmation'] == '3.1' %}selected{% endif %}>Counter offer made (to company)</option>
           <option value="4"  {% if data['confirmation'] == '4' %}selected{% endif %}>Court offer accepted</option>
           <option value="5"  {% if data['confirmation'] == '5' %}selected{% endif %}>Redetermination</option>
           <option value="6"  {% if data['confirmation'] == '6' %}selected{% endif %}>Mediation accepted</option>
