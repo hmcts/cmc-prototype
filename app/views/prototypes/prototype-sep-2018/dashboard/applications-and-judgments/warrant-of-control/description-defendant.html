@@ -17,24 +17,34 @@ Money Claims Prototype
       <form method="post" action="{{ data.return_page if data.return_page | length > 0 else '../task-list' }}"
             class="form">
         {% else %}
-        <form method="post" action="additional-information" class="form">
+        <form method="post" action="car-details" class="form">
           {% endif %}
           {{formData | safe}}
           <h1 class="heading-large">
-            Defendant's phone number
+            Describe the defendant
           </h1>
           <div class="">
 
-            <p>The court will try to contact the defendant by phone so that they can ask for payment. You can skip this section if you do not have their phone number.</p>
+            <p>Include their approximate age, height, weight, hair colour, and anything else which will help the bailiff identify them.</p>
+
+            <!--<p>Enter anything you think may help recover your money, such as when the defendant is usually at the-->
+            <!--address or when they're not home.</p>-->
+
+          </div>
+
 
           <fieldset>
             <legend class="visuallyhidden">
 
             </legend>
-            <div class="form-group">
-              <label class="form-label" for="contact-defendant">Enter defendant's phone number</label>
-              <input class="form-control" id="contact-defendant" type="number" name="contact-defendant" value="{{data['contact-defendant']}}">
-            </div>
+            <textarea class="form-control"
+                      id="additional-information"
+                      rows="3"
+                      name="additional-information"
+                      type="text"
+                      style="width: 100%"
+                      value="">{{data['description-defendant']}}</textarea>
+          </fieldset>
           {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and
           data.return_page.includes('check-your-answers')%}
           <div class="form-group">
@@ -46,7 +56,6 @@ Money Claims Prototype
             <input type="submit" class="button" value="Save and continue"/>
           </div>
           {% endif %}
-          </fieldset>
         </form>
     </div>
   </div>
