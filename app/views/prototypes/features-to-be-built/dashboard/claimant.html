@@ -81,10 +81,18 @@
               <h2 class="heading-small">The defendant has offered to pay in instalments </h2>
               <p>You can accept or reject their offer.</p>
               <p> <a href="claimant-response/admit-the-claim/task-list?radio-pay-group=Instalments" class="button secondary-button">View and respond to the offer</a></p>
+              
               {% elseif data['claimant'] == 4.1  %}
               <h2 class="heading-small">The defendant has offered to pay by {{ now | date( 'add', 3, 'months') | date }}</h2>
               <p>You can accept or reject their offer.</p>
               <p> <a href="claimant-response/admit-the-claim/task-list?payment=full&radio-pay-group=Set-date" class="button secondary-button">View and respond to the offer</a></p>
+              
+              {% elseif data['claimant'] == 4.11  %}
+              <h2 class="heading-small">The defendant has offered to pay by {{ now | date( 'add', 3, 'months') | date
+                }}</h2>
+              <p>They'll send you their financial details. You can use these to decide whether to accept or reject their offer.</p>
+              <p><a href="claimant-response/admit-the-claim/task-list?payment=full&radio-pay-group=Set-date&defendant=org"
+                    class="button secondary-button">View and respond to the offer</a></p>
 
               {% elseif data['claimant'] == 5  %}
               <div class="">
@@ -530,6 +538,8 @@
     <option>------- Defendant responses  ----------</option>
     <option value="4" {% if data['claimant'] == 4 %}selected{% endif %}>Full admit - pay in instalments</option>
     <option value="4.1" {% if data['claimant'] == 4.1 %}selected{% endif %}>Full admit - pay in full on set date</option>
+    <option value="4.11" {% if data[
+    'claimant'] == 4.11 %}selected{% endif %}>Full admit - pay in full on set date (organisation)</option>
     <option value="4.2" {% if data['claimant'] == 4.2 %}selected{% endif %}>Full admit - pay in full immediately</option>
     <option value="4.3" {% if data['claimant'] == 4.3 %}selected{% endif %}>Full admit - pay in full immediately - not paid</option>
     <option value="5" {% if data['claimant'] == 5 %}selected{% endif %}>Part admit - pay immediately</option>
