@@ -91,10 +91,17 @@
               <h2 class="heading-small">The defendant has requested more time to respond </h2>
               <p>Mary Richards has requested an extra 14 days to respond. They need to respond before 4pm on <span
                 class="dates"></span> .</p>
+                
               {% elseif data['claimant'] == 4 %}
               <h2 class="heading-small">The defendant has offered to pay in instalments </h2>
               <p>You can accept or reject their offer.</p>
               <p><a href="claimant-response/admit-the-claim/task-list?radio-pay-group=Instalments"
+                    class="button secondary-button">View and respond to the offer</a></p>
+                
+              {% elseif data['claimant'] == 4.01 %}
+              <h2 class="heading-small">The defendant has offered to pay in instalments </h2>
+              <p>They'll send you their financial details. You can use these to decide whether to accept or reject their admission.</p>
+              <p><a href="claimant-response/admit-the-claim/task-list?radio-pay-group=Instalments&defendant=org"
                     class="button secondary-button">View and respond to the offer</a></p>
 
               {% elseif data['claimant'] == 4.1 %}
@@ -132,12 +139,26 @@
               <p><a href="claimant-response/part-admit/task-list?payment=full&radio-pay-group=Instalments"
                     class="button secondary-button">View and respond</a></p>
 
+              {% elseif data['claimant'] == 5.11 %}
+              <h2 class="heading-small">The defendant has admitted they owe £{{ data['owe-amount'] or '1,200' }}</h2>
+              <p>They've offered to pay in instalments.</p>
+              <p>They'll send you their financial details. You can use these to decide whether to accept or reject their admission.</p>
+              <p><a href="claimant-response/part-admit/task-list?payment=full&radio-pay-group=Instalments&defendant=org"
+                    class="button secondary-button">View and respond</a></p>
+
 
               {% elseif data['claimant'] == 5.2 %}
               <h2 class="heading-small">The defendant has admitted they owe £{{ data['owe-amount'] or '1,200' }}</h2>
               <p>They've offered to pay by {{ now | date( 'add', 3, 'months') | date }}.</p>
               <p>You can accept or reject their admission.</p>
               <p><a href="claimant-response/part-admit/task-list?payment=full&radio-pay-group=Set-date"
+                    class="button secondary-button">View and respond</a></p>
+
+
+              {% elseif data['claimant'] == 5.21 %}
+              <h2 class="heading-small">The defendant has admitted they owe £{{ data['owe-amount'] or '1,200' }}</h2>
+              <p>They've offered to pay by {{ now | date( 'add', 3, 'months') | date }}. They'll send you their financial details. You can use these to decide whether to accept or reject their admission.</p>
+              <p><a href="claimant-response/part-admit/task-list?payment=full&radio-pay-group=Set-date&defendant=org"
                     class="button secondary-button">View and respond</a></p>
 
 
@@ -163,12 +184,11 @@
                 and respond</a></p>
 
               {% elseif data['claimant'] == 8 %}
-              <h2 class="heading-small">The defendant's response </h2>
-              <p>Mary Richards said they dispute your claim.</p>
-
-              <p>You need to respond before 4pm on {{ now | date( 'add', 33, 'days') | date }} or your claim won't
-                proceed.</p>
-              <p><a href="claimant-response/dispute-claim/task-list" class="button secondary-button">Respond </a></p>
+            <h2 class="heading-small">The defendant has rejected your claim</h2>
+            <p>They said they dispute your claim.</p>
+            <p>You need to <a href="forms/dq-form">complete a directions questionnaire</a> form to tell us more about the claim.</p>
+            <p>Your claim won't proceed if you don't complete and return the form before 4pm on <span class="dates5"></span>.</p>
+            <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=9">Download their response</a> (PDF, 123KB)</p>
 
               {% elseif data['claimant'] == 9 %}
               <div class="status-block single">
@@ -335,9 +355,11 @@
                 (PDF, 123KB)</p>
 
               {% elseif data['claimant'] == 10.8 %}
+<!-- 
               <h2 class="heading-small">The defendant rejected the repayment plan</h2>
               <p>They said they can't afford it. They chose not to sign the settlement agreement.</p>
               <p>A judge will review the case. We'll contact you to tell you what to do next.</p>
+-->
 
               {% elseif data['claimant'] == 10.801 %}
               <h2 class="heading-small">The defendant rejected the repayment plan</h2>
@@ -668,6 +690,8 @@
     <option>------- Defendant responses ----------</option>
     <option value="4" {% if data[
     'claimant'] == 4 %}selected{% endif %}>Full admit - pay in instalments</option>
+    <option value="4.01" {% if data[
+    'claimant'] == 4.01 %}selected{% endif %}>Full admit - pay in instalments (organisation)</option>
     <option value="4.1" {% if data[
     'claimant'] == 4.1 %}selected{% endif %}>Full admit - pay in full on set date</option>
     <option value="4.11" {% if data[
@@ -680,8 +704,12 @@
     'claimant'] == 5 %}selected{% endif %}>Part admit - pay immediately</option>
     <option value="5.1" {% if data[
     'claimant'] == 5.1 %}selected{% endif %}>Part admit - pay instalments</option>
+    <option value="5.11" {% if data[
+    'claimant'] == 5.11 %}selected{% endif %}>Part admit - pay instalments (organisation)</option>
     <option value="5.2" {% if data[
     'claimant'] == 5.2 %}selected{% endif %}>Part admit - pay by set date</option>
+    <option value="5.21" {% if data[
+    'claimant'] == 5.21 %}selected{% endif %}>Part admit - pay by set date (organisation)</option>
     <option value="6" {% if data[
     'claimant'] == 6 %}selected{% endif %}>Part admit - states paid - claim amount</option>
     <option value="7" {% if data[
@@ -712,8 +740,6 @@
     'claimant'] == 10.6 %}selected{% endif %}>Repayment plans rejected - redetermination</option>
     <option value="10.61" {% if data[
     'claimant'] == 10.61 %}selected{% endif %}>Repayment plans rejected - countered</option>
-    <option value="10.8" {% if data[
-    'claimant'] == 10.8 %}selected{% endif %}>Repayment plans rejected - countered - settlement - rejected</option>
     <option value="10.801" {% if data[
     'claimant'] == 10.801 %}selected{% endif %}>Repayment plans rejected - countered - ccj - rejected</option>
     <option value="10.81" {% if data[
