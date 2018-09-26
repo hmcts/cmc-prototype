@@ -139,6 +139,13 @@
               <p><a href="claimant-response/part-admit/task-list?payment=full&radio-pay-group=Instalments"
                     class="button secondary-button">View and respond</a></p>
 
+              {% elseif data['claimant'] == 5.11 %}
+              <h2 class="heading-small">The defendant has admitted they owe £{{ data['owe-amount'] or '1,200' }}</h2>
+              <p>They've offered to pay in instalments.</p>
+              <p>They'll send you their financial details. You can use these to decide whether to accept or reject their admission.</p>
+              <p><a href="claimant-response/part-admit/task-list?payment=full&radio-pay-group=Instalments&defendant=org"
+                    class="button secondary-button">View and respond</a></p>
+
 
               {% elseif data['claimant'] == 5.2 %}
               <h2 class="heading-small">The defendant has admitted they owe £{{ data['owe-amount'] or '1,200' }}</h2>
@@ -697,6 +704,8 @@
     'claimant'] == 5 %}selected{% endif %}>Part admit - pay immediately</option>
     <option value="5.1" {% if data[
     'claimant'] == 5.1 %}selected{% endif %}>Part admit - pay instalments</option>
+    <option value="5.11" {% if data[
+    'claimant'] == 5.11 %}selected{% endif %}>Part admit - pay instalments (organisation)</option>
     <option value="5.2" {% if data[
     'claimant'] == 5.2 %}selected{% endif %}>Part admit - pay by set date</option>
     <option value="5.21" {% if data[
