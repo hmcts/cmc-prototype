@@ -65,12 +65,52 @@ module.exports = function(app){
 
   app.post( '/' + strPath + 'dashboard/claimant-response/admit-the-claim/task-list/counter-offer/repayment-plan', (req, res) => {
 
-    if (req.session.data['instalment-first-payment'] > 250 ) {
-      res.redirect('/' + strPath + 'dashboard/claimant-response/admit-the-claim/task-list/counter-offer/court-offer');
-    } else {
+    if (req.session.data['defendant'] == 'org' ) {
+        res.redirect( '../../task-list' ); 
+    } else if (req.session.data['instalment-first-payment'] < 251 ) {
       res.redirect('/' + strPath + 'dashboard/claimant-response/admit-the-claim/task-list/counter-offer/approved');
+    } else {
+      res.redirect('/' + strPath + 'dashboard/claimant-response/admit-the-claim/task-list/counter-offer/court-offer');
     }
 
+  })
+
+
+  app.post( '/' + strPath + 'dashboard/claimant-response/admit-the-claim/task-list/counter-offer/pay-by-set-date', (req, res) => {
+
+    if (req.session.data['defendant'] == 'org' ) {
+        res.redirect( '../../task-list' );
+    } else if (req.session.data['set-year'] > 2018 ) {
+      res.redirect('/' + strPath + 'dashboard/claimant-response/admit-the-claim/task-list/counter-offer/approved');
+    } else {
+      res.redirect('/' + strPath + 'dashboard/claimant-response/admit-the-claim/task-list/counter-offer/court-date');
+    }
+
+  })
+
+
+  app.post( '/' + strPath + 'dashboard/claimant-response/part-admit/task-list/counter-offer/repayment-plan', (req, res) => {
+
+    if (req.session.data['defendant'] == 'org' ) {
+        res.redirect( '../../task-list' ); 
+    } else if (req.session.data['instalment-first-payment'] < 251 ) {
+      res.redirect('/' + strPath + 'dashboard/claimant-response/part-admit/task-list/counter-offer/approved');
+    } else {
+      res.redirect('/' + strPath + 'dashboard/claimant-response/part-admit/task-list/counter-offer/court-offer');
+    }
+
+  })
+
+
+  app.post( '/' + strPath + 'dashboard/claimant-response/part-admit/task-list/counter-offer/pay-by-set-date', (req, res) => {
+
+    if (req.session.data['defendant'] == 'org' ) {
+        res.redirect( '../../task-list' );
+    } else if (req.session.data['set-year'] > 2018 ) {
+      res.redirect('/' + strPath + 'dashboard/claimant-response/part-admit/task-list/counter-offer/approved');
+    } else {
+      res.redirect('/' + strPath + 'dashboard/claimant-response/part-admit/task-list/counter-offer/court-date');
+    }
   })
 
 
@@ -83,6 +123,7 @@ module.exports = function(app){
     }
 
   })
+
 
   app.post( '/' + strPath + 'claimant/task-list/their-details/defendant-add', (req, res) => {
 
