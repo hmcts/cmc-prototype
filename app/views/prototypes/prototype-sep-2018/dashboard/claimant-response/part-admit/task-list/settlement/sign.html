@@ -29,14 +29,14 @@ Money Claims Prototype
 
             <td>
               Mary Richards
-              {% if data['claimant-payment-request']=="Immediately" %}
-              will pay the £{{ data['owe-amount'] or '300' }} immediately. Jan Clark will receive the money no later than {{ now | date( 'add', 5, 'days') | date }}. Any cheques or transfers will be clear in Jan Clark's account by this date.
-              {% elseif data['claimant-payment-request']=="Instalments"  %}
+              {% if data['radio-pay-group']=="Immediately" %}
+              will pay the £{{ data['owe-amount'] or '1200' }} immediately. Jan Clark will receive the money no later than {{ now | date( 'add', 5, 'days') | date }}. Any cheques or transfers will be clear in Jan Clark's account by this date.
+              {% elseif data['radio-pay-group']=="Instalments"  %}
               will pay instalments of
                 {% if data['instalment-first-payment'] %}
                 £{{data['instalment-first-payment']}}
                 {% else %}
-                £50
+                £200
                 {% endif %}
 
                 {% if data['radio-payment-frequency'] %}
@@ -49,15 +49,15 @@ Money Claims Prototype
                 31 March 2018{% endif %}.
 
 
-              {% elseif data['claimant-payment-request']=="Set-date" %}
-              will pay the £{{ data['owe-amount'] or '300' }}, no later than
+              {% elseif data['radio-pay-group']=="Set-date" %}
+              will pay the £{{ data['owe-amount'] or '1200' }}, no later than
                 {% if data['set-day'] %}
                 {{ ( data['set-month'] + ' ' + data['set-day'] + ' ' + data['set-year']) | date('D MMMM YYYY') }}
                 {% else %}
                 {{ date | date('add', 1, 'year') | date('D MMMM YYYY') }}
                 {% endif %}
               {% else %}
-              will pay the £{{ data['owe-amount'] or '300' }}, no later than {{ date | date('add', 1, 'year') | date('D MMMM YYYY') }}.
+              will pay the £{{ data['owe-amount'] or '1200' }}, no later than {{ date | date('add', 1, 'year') | date('D MMMM YYYY') }}.
               {% endif %}
             </td>
           </tr>
@@ -65,11 +65,11 @@ Money Claims Prototype
             <td>Completion date</td>
             <td>
 
-              {% if data['claimant-payment-request']=="Immediately" %}
+              {% if data['radio-pay-group']=="Immediately" %}
               {{ now | date( 'add', 5, 'days') | date }}
-              {% elseif data['claimant-payment-request']=="Instalments" and data['instalment-month'] %}
+              {% elseif data['radio-pay-group']=="Instalments" and data['instalment-month'] %}
               {{ ( data['instalment-month'] + ' ' + data['instalment-day'] + ' ' + data['instalment-year']) | date('add', 1, 'year') | date('D MMMM YYYY') }}
-              {% elseif data['claimant-payment-request']=="Set-date" %}
+              {% elseif data['radio-pay-group']=="Set-date" %}
                 {% if data['set-day'] %}
                 {{ ( data['set-month'] + ' ' + data['set-day'] + ' ' + data['set-year']) | date('D MMMM YYYY') }}
                 {% else %}
