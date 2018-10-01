@@ -124,7 +124,7 @@
          {% endif %}
 
 
-        {%if data['radio-indent-group2'] != "reject_stop_claim" and data['payment_method'] == "complete" or data['proceed'] == "complete" %}
+        {%if data['radio-indent-group2'] != "reject_stop_claim" and ( data['payment_method'] == "complete" or data['proceed'] == "complete" ) and ( data['defendant'] != 'org' or data['radio-indent-group'] == "accept_stop_claim" ) %}
            <tr id="your-details">
               <td class="task">
                 <a href="task-list/proceed{{formQuery}}">
@@ -215,6 +215,14 @@
       </div>
     </div>
   </main>
+
+  <form method="post"  action="#" class="for4" style=" float: left;">
+    <select onchange="window.location.href='?defendant='+this.value">
+      <option value="">Defendant type</option>
+      <option value="indi" {% if data['defendant'] == 'indi' %}selected{% endif %}>Individual</option>
+      <option value="org" {% if data['defendant'] == 'org' %}selected{% endif %}>Organisation</option>
+    </select>
+  </form>
 
   {% endblock %}
   {% block extra_js_1 %}<!-- ticky list javascript one -->{% endblock %}
