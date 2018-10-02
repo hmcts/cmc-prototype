@@ -1,0 +1,124 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="2" %}
+
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+
+
+<main id="content" role="main">
+
+
+
+  {% include "includes/phase_banner_beta.html" %}
+
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+      <a href="#" class="link-back">Back</a>
+
+      <h1 class="heading-large">
+        Free telephone mediation
+      </h1>
+
+     {% if data['owe-amount'] < 370.01 %}
+
+      <form method="post" action="../task-list" class="form">
+              <input type="hidden" name="mediation" value="complete">
+
+        <p>This claim has been automatically registered for free telephone mediation.
+        <p>We'll contact you with an appointment, unless Jan Clark chooses to opt out of mediation.</p>
+        <p>You'll only speak to a mediator about the claim, not to Jan Clark.</p>
+      <p><a href='mediation/no-mediation'>I don't want to try mediation</a></p>
+
+     {% elseif data['owe-amount'] > 370.00 %}
+
+     <!-- <form
+     name="aspnetForm"
+     method="post"
+     id="aspnetForm"
+     autocomplete="off"
+     onsubmit="multiNavigation('radio-mediation-group', ['Yes', 'No'], ['../task-list', '../task-list']);return false;"
+     > -->
+
+     <form
+     name="aspnetForm"
+     method="post"
+     id="aspnetForm"
+     autocomplete="off"
+     onsubmit="multiNavigation('radio-mediation-group-0', ['Yes', 'No'], ['mediation/mediation-sub-1', '../task-list']);return false;"
+     >
+
+      <p>You can talk to an impartial mediator about Jan Clark's claim against you.</p>
+	  <p>The free service can help you:</p>
+		<ul class="list list-bullet">
+			<li>avoid having to go to court</li>
+			<li>prevent having to pay the full claim amount, plus any interest</li>
+			<li>avoid a County Court Judgement</li></ul>
+	  <p>You'll only speak to a mediator about the claim, not to Jan Clark.</p>
+
+
+        <h1 class="heading-medium">
+          Will you try mediation?
+        </h1>
+
+
+
+
+
+
+
+
+
+        <input id="your-offer" name="offer" type="hidden">
+
+        <div class="form-group">
+          <fieldset class="inline">
+
+            <legend class="visually-hidden">Will you try mediation?</legend>
+
+
+
+            <div class="multiple-choice">
+              <input id="radio-yes" type="radio" name="radio-mediation-group-0" value="Yes">
+              <label for="radio-yes" data-target="yes-info">Yes</label>
+            </div>
+
+
+
+              <div class="multiple-choice">
+                <input id="radio-no" type="radio" name="radio-mediation-group-0" value="No">
+                <label for="radio-no" data-target="no-info">No</label>
+              </div>
+
+
+
+              </fieldset>
+              <input type="hidden" name="mediation" value="complete">
+
+         {% endif %}
+
+
+        <div class="form-group">
+          <input type="submit" class="button" value="Continue"/>
+        </div>
+
+
+
+            </div>
+          </form>
+          <p></p><br>
+
+
+          </div>
+        </div>
+      </main>
+
+
+      {% endblock %}
