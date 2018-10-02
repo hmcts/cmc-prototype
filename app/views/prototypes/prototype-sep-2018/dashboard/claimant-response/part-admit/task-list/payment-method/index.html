@@ -78,7 +78,6 @@ Money Claims Prototype
 
       {% endif %}
 
-
       <h2 class="heading-medium">Do you accept the repayment plan?</h2>
           {% if data['determination'] == "1" %}
             <form
@@ -108,22 +107,15 @@ Money Claims Prototype
             <input id="radio-yes" type="radio" name="radio-indent-group" value="accept_stop_claim">
             <label for="radio-yes" data-target="yes-info">Yes</label>
           </div>
-          <div class="multiple-choice">
+          <div class="multiple-choice" data-target="reject-offer">
             <input id="radio-no" type="radio" name="radio-indent-group" value="reject_stop_claim">
-            <label for="radio-no" data-target="no-info"> No - I'll suggest my own</label>
+            <label for="radio-no">
+              No - I'll suggest my own
+              {% if data['defendant'] == 'org' %}
+              <p class="panel  panel-border-narrow js-hidden" id="reject-offer">The defendant should have sent you their financial details. You'll need to send them to us. We'll use them to check if they can afford your plan.</p>
+              {% endif %}
+            </label>
           </div>
-<!--
-      {% if data['determination'] == "1" %}
-      {% else %}
-          <div class="panel panel-border-narrow js-hidden" id="reject-offer">
-            <p>The court will propose an alternative repayment plan based on the defendant's income and spending.</p>
-          </div>
-      {% endif %}
--->
-
-
-
-
         </fieldset>
         <input type="hidden" name="payment_method" value="complete">
         <input id="advert-option-next--button" type="submit" value="Save and continue" class="button"
@@ -133,4 +125,5 @@ Money Claims Prototype
   </div>
 </div>
 </main>
+
 {% endblock %}

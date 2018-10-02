@@ -16,65 +16,79 @@ Money Claims Prototype
       <h1 class="heading-large">
         How much do you want to enforce?
       </h1>
-      <p>The balance outstanding on the judgment is £1643.20.</p>
 
-      <p>It was ordered that the defendant must pay by instalments of £250 by the 15th of each month.</p>
+      <p>The balance outstanding on the judgment is <span>{% if data['radio-indent-group2']=="Yes" %}£1,443.2{%else%}£1,643.20{%endif%}</span>
+      </p>
 
-        <details>
-          <summary><span class="summary">See breakdown</span></summary>
-          <div class="panel panel-border-narrow">
+      <p>The defendant was ordered to pay instalments of £250 on the 15th of every month.</p>
 
-            <table class="table-form">
-              <caption class="visuallyhidden"></caption>
-              <!--<thead>-->
-              <!--<tr>-->
-              <!--<th scope="col"></th>-->
-              <!--<th class="numeric last" scope="col">Amount</th>-->
-              <!--</tr>-->
-              <!--</thead>-->
-              <tbody>
-              <tr>
-                <th scope="row">Claim amount</th>
-                <td class="numeric last">
-                  <label class="visuallyhidden" for="amount">Claim amount</label>
-                  <span
-                    class="font-small">£1500</span>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">Interest to date</th>
-                <td class="numeric last">
-                  <label class="visuallyhidden" for="amount">Interest to date</label>
-                  <span
-                    class="font-small">£68.20</span>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">Claim fee</th>
-                <td class="numeric last">
-                  <label class="visuallyhidden" for="amount">Claim fee</label>
-                  <span
-                    class="font-small">£75</span>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row" style="font-weight: bold">Balance outstanding</th>
-                <td class="numeric last">
-                  <label class="visuallyhidden" for="amount">Balance oustanding</label>
-                  <span
-                    class="font-small" style="font-weight: bold">£1643.20</span>
-                </td>
-              </tr>
-              </tbody>
-            </table>
+      <details>
+        <summary><span class="summary">View amount breakdown</span></summary>
+        <div class="panel panel-border-narrow">
 
-          </div>
-        </details>
+          <table class="table-form">
+            <caption class="visuallyhidden"></caption>
+            <thead>
+            <tr>
+              <th scope="col">Amount breakdown</th>
+              <th class="numeric last" scope="col">Amount</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <th scope="row">Claim amount</th>
+              <td class="numeric last">
+                <label class="visuallyhidden" for="amount">Claim amount</label>
+                <span
+                  class="font-small">£1,500</span>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">Interest to date</th>
+              <td class="numeric last">
+                <label class="visuallyhidden" for="amount">Interest to date</label>
+                <span
+                  class="font-small">£68.20</span>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">Claim fee</th>
+              <td class="numeric last">
+                <label class="visuallyhidden" for="amount">Claim fee</label>
+                <span
+                  class="font-small">£75</span>
+              </td>
+            </tr>
+
+            {% if data['radio-indent-group2']=="Yes" %}
+            <tr>
+              <th scope="row">Minus amount already paid</th>
+              <td class="numeric last">
+                <label class="visuallyhidden" for="amount">Minus amount already paid</label>
+                <span
+                  class="font-small">£200</span>
+              </td>
+            </tr>
+            {%endif%}
+
+            <tr>
+              <th scope="row" style="font-weight: bold">Balance outstanding</th>
+              <td class="numeric last">
+                <label class="visuallyhidden" for="amount">Balance oustanding</label>
+                <span
+                  class="font-small" style="font-weight: bold">{% if data['radio-indent-group2']=="Yes" %}£1,443.2{%else%}£1,643.20{%endif%}</span>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+
+        </div>
+      </details>
 
       <form class="form" action="{% if data['radio-proceed'] == " judgment
       " %}../../../dashboard/claimant-response/admit-the-claim/task-list{% elseif data['radio-proceed'] == "judgment-pa"
       %}../../../dashboard/claimant-response/part-admit/task-list {% elseif data['radio-proceed'] == 'not-signed'
-      %}check-your-judgment{% else %}payment-options{% endif %}" method="post">
+      %}check-your-anwsers{% else %}claimant-address{% endif %}" method="post">
       <table class="table-form">
         <caption class="visuallyhidden"></caption>
         <thead>
@@ -87,12 +101,13 @@ Money Claims Prototype
         <tr>
           <th scope="row">Amount to enforce</th>
           <td class="numeric last">
-            <label class="visuallyhidden" for="amount">Amount to enforce</label>
-            <input class="fee pound" maxlength="10" size="7" type="text" value="" name="num3" id="num3">
+            <label class="visuallyhidden" for="amount-value-1">Amount to enforce
+            </label>
+            <input class="fee pound" maxlength="10" size="7" type="text" id="amount-value-1" name="amount-value-1" value="">
           </td>
         </tr>
-        {% if data['radio-proceed']=="judgment-pa" %}
-        {% else %}
+        <!--{% if data['radio-proceed']=="judgment-pa" %}-->
+        <!--{% else %}-->
 
         <!--<tr>-->
         <!--<th scope="row">-->
@@ -112,33 +127,34 @@ Money Claims Prototype
         <!--</tr>-->
 
         <tr>
-          <th scope="row">Claim fee</th>
+          <th scope="row">Issue fee</th>
           <td class="numeric last">
-            <label class="visuallyhidden" for="amount">Claim fee</label>
+            <label class="visuallyhidden" for="fee">Issue fee</label>
             <span class="font-small">£77</span>
           </td>
-          </td>
+          <input type="text" hidden="" name="amount-value-2" id="amount-value-2" value="77"/>
         </tr>
-        <tr>
-          <th scope="row">Solicitor's costs (if any)</th>
-          <td class="numeric last">
-            <label class="visuallyhidden" for="amount">Solicitor's costs (if any)</label>
-            <input class="fee pound" maxlength="10" size="7" type="text" value="" name="num4" id="num4">
-          </td>
-        </tr>
-        <tr>
+
+        <tr style="border-top: 3px solid #bfc1c3;">
           <th scope="col" class="bold-medium">Total</th>
-          <td class="numeric last bold-medium">£<span name="subt" id="subt">77</span>
+          <td class="numeric last bold-medium">£<span id="totalSumDisplay"></span>
           </td>
-          <input type="text" hidden="" value="" name="num3" id="num3"/>
+          <input type="text" hidden="" value="" name="totalSum" id="totalSum" value=""/>
         </tr>
+
+        <!--<tr>-->
+        <!--<th scope="col" class="bold-medium">Total</th>-->
+        <!--<td class="numeric last bold-medium">£<span name="fee" id="fee">77</span>-->
+        <!--</td>-->
+        <!--<input type="text" hidden="" value="" name="num3" id="num3"/>-->
+        <!--</tr>-->
 
         <!--{% endif %}-->
         <!--{% if data['radio-indent-group2']=="Yes" %}-->
         <!--<tr>-->
         <!--<th scope="col" class="bold-small">Sub total</th>-->
-        <!--<td class="numeric last bold-small">£<span name="subt" id="subt">1643.20</span></td>-->
-        <!--<input type="text" hidden="" value="1643.20" name="num1" id="num1"/>-->
+        <!--<td class="numeric last bold-small">£<span name="subt" id="subt">1443.20</span></td>-->
+        <!--<input type="text" hidden="" value="1443.20" name="num1" id="num1"/>-->
         <!--</tr>-->
         <!--<tr>-->
         <!--<th scope="col">Minus amount already paid</th>-->
@@ -146,16 +162,17 @@ Money Claims Prototype
         <!--</tr>-->
         <!--<tr>-->
         <!--<th scope="col" class="bold-medium">Total</th>-->
-        <!--<td class="numeric last bold-medium">£<span name="subt" id="subt">1643.20</span></td>-->
-        <!--<input type="text" hidden="" value="1643.20" name="num1" id="num1"/>-->
+        <!--<td class="numeric last bold-medium"><span name="subt" id="subt"></span></td>-->
+        <!--<input type="text" hidden="" value="" name="num1" id="num1"/>-->
         <!--</tr>-->
 
         <!--{% else %}-->
+
         <!--<tr>-->
         <!--<th scope="col" class="bold-medium">Total</th>-->
-        <!--<td class="numeric last bold-medium">£<span name="subt" id="subt">{% if data['radio-proceed']=="judgment-pa" %}1200{%else%}1643.20{%endif%}</span>-->
+        <!--<td class="numeric last bold-medium">£<span name="subt" id="subt">77</span>-->
         <!--</td>-->
-        <!--<input type="text" hidden="" value="1643.20" name="num1" id="num1"/>-->
+        <!--<input type="text" hidden="" value="" name="num1" id="num1"/>-->
         <!--</tr>-->
         <!--{% endif %}-->
 
@@ -164,15 +181,54 @@ Money Claims Prototype
       </table>
 
       <input type="hidden" name="judgment" value="complete">
-      <input type="submit" value="Save and continue" class="button">
+      <input type="submit" value="Save and continue" class="button" onclick="return updateSums()">
       </form>
 
     </div>
   </div>
-  </div>
 </main>
-</div>
-</div>
-</div>
-</main>
+
+<script type="text/javascript">
+  (function numericInputsSum (targetSpanId, sourceInputsIds) {
+    var targetSpan = $('#' + targetSpanId)
+    var sourceInputs = []
+
+    function updateSums () {
+      var sum = 0.0
+      for (var i = 0; i < sourceInputs.length; i++) {
+        sum += getNumericValue(sourceInputs[i].val())
+      }
+      var x = parseFloat(sum, 10).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,').toString()
+
+      if (x.endsWith('.00')) {
+        x = x.replace('.00', '')
+      }
+
+      targetSpan.text(x)
+
+      $('#totalSum').val(x)
+      $('#counter-amount').val(x.replace(',', ''))
+      return true
+
+    }
+
+    function getNumericValue (value) {
+      var numeric = parseFloat(value)
+      return isNaN(numeric) ? 0 : numeric
+    }
+
+    for (var i = 0; i < sourceInputsIds.length; i++) {
+      var input = $('#' + sourceInputsIds[i])
+      if (input) {
+        sourceInputs.push(input)
+        input.keyup(function onNumericInputChanged () {
+          updateSums()
+        })
+      }
+    }
+    updateSums()
+  })('totalSumDisplay', ['amount-value-1', 'amount-value-2', 'amount-value-3', 'amount-value-4'])
+
+</script>
+
 {% endblock %}
