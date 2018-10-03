@@ -161,7 +161,7 @@ Check your answers
 								How much do you owe them?
 							</td>
 							<td class="">
-								£1,500
+								£370
 							</td>
 							<td class=" change-answer">
 								<a href="../task-list/do-you-owe-money/index?return_page={{  '../../task-list' | urlencode }}">
@@ -253,7 +253,7 @@ Check your answers
 								Why you disagree with the claim
 							</td>
 							<td>
-								I do owe her the money, but she never showed up when I came to repair the roof, so I lost 2 day's wages (£500).
+								I do owe her the money, but she never showed up when I came to repair the roof, so I lost 2 day's wages (£150).
 							</td>
 							<td class="change-answer">
 								<a href="#">Change <span class="visuallyhidden">Name</span></a>
@@ -450,7 +450,7 @@ Check your answers
 						<tr>
 							<td class="no-border">How much have you paid?</td>
 							<td class="no-border">
-								£{{ data['owe-amount'] or '1500' }}
+								£{{ data['owe-amount'] or '370' }}
 							</td>
 							<td class="change-answer no-border">
 								<a href="../task-list/do-you-owe-money/defence-options?return_page={{  '../../task-list' | urlencode }}">
@@ -491,7 +491,7 @@ Check your answers
 							<tr>
 								<td class="no-border">How much have you paid?</td>
 								<td class="no-border">
-									£{{ data['owe-amount'] or '1200' }}
+									£{{ data['owe-amount'] or '200' }}
 								</td>
 								<td class="change-answer no-border">
 									<a href="../task-list/do-you-owe-money/defence-options?return_page={{  '../../task-list' | urlencode }}">
@@ -1487,24 +1487,60 @@ Check your answers
 										</tr>
 									</thead>
 									<tbody>
-										<tr>
-											<td>
-												Will you try mediation?
-											</td>
-											<td>
-												{% if data['radio-mediation-group-0']=="Yes"  or data['check']== 12 %}
-												Yes
-												{% else %}
-												No
-												{% endif %}
-											</td>
-											<td class="change-answer">
-												<a href="../task-list/mediation?return_page={{ '../../task-list' | urlencode }}">
-													Change <span class="visuallyhidden">Name</span>
-												</a>
-											</td>
-										</tr>
-										<tr>
+										<!--<tr>-->
+											<!--<td>-->
+												<!--Will you try mediation?-->
+											<!--</td>-->
+											<!--<td>-->
+                        <!--{% if data['radio-mediation-group-0']=="Yes"  or data['check']== 12 %}-->
+                        <!--Yes-->
+                        <!--{% else %}-->
+                        <!--No-->
+                        <!--{% endif %}-->
+											<!--</td>-->
+											<!--<td class="change-answer">-->
+												<!--<a href="../task-list/mediation?return_page={{ '../../task-list' | urlencode }}">-->
+													<!--Change <span class="visuallyhidden">Name</span>-->
+												<!--</a>-->
+											<!--</td>-->
+										<!--</tr>-->
+                    <tr>
+                      <td>
+                        Agree to all statements
+                      </td>
+                      <td>
+                        Yes, I agree
+                      </td>
+                      <td class="change-answer">
+                        <a href="../task-list/mediation/statements-all?return_page={{ '../../task-list' | urlencode }}">
+                          Change <span class="visuallyhidden">Name</span>
+                        </a>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Time unavailable
+                      </td>
+                      <td>
+                        {{data['time-unavailable']}}
+                      </td>
+                      <td class="change-answer">
+                        <a href="../task-list/mediation/time-unavailable?return_page={{ '../../task-list' | urlencode }}">
+                          Change <span class="visuallyhidden">Name</span>
+                        </a>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Telephone to call
+                      </td>
+                      <td>
+                        07123456789
+                      </td>
+                      <td class="change-answer">
+                        <a href="../task-list/mediation/previous-phone?return_page={{ '../../task-list' | urlencode }}">
+                          Change <span class="visuallyhidden">Name</span>
+                        </a>
+                      </td>
+                    </tr>
 										</tbody>
 									</table>
 									{% endif %}
@@ -1566,7 +1602,7 @@ Check your answers
 	<form method="get" action="check-and-send/enter-card" class="form">
 
 	{% else %}
-	<form method="get" action="../confirmation-page?" class="form">
+	<form method="get" action="../../confirmation-page?" class="form">
 	{% endif %}
 
 	{% if data.radio_select_group=="all" and data['radio-pay-group']=="Immediately" or data['check']== 1 %}

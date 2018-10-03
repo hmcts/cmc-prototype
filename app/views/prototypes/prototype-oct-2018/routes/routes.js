@@ -79,7 +79,7 @@ module.exports = function(app){
       req.session.data['show_mediation'] = 'true';
 
       req.session.data['response'] = 'PART-ADMIT';
-      
+
 
     } else if ( req.session.data['response-owed'] && req.session.data['amount-owed'] == 0) {
       req.session.data['do_you_owe_money'] = 'complete';
@@ -93,7 +93,7 @@ module.exports = function(app){
 
     } else if ( req.session.data['response-owed'] ) {
       res.redirect('/' + strPath + 'defendant/task-list');
-      
+
     } else {
       res.render( strPath + 'defendant/task-list/do-you-owe-money/are-you-owed' );
     }
@@ -101,6 +101,40 @@ module.exports = function(app){
   })
 
 
+  app.post( '/' + strPath + 'defendant/mediation-pilot/task-list/do-you-owe-money/are-you-owed', (req, res) => {
+
+    if ( req.session.data['response-owed'] && req.session.data['amount-owed'] >= 370 ) {
+      req.session.data['radio_select_group'] = 'all';
+      req.session.data['do_you_owe_money'] = 'complete';
+      req.session.data['response'] = 'FULL-ADMIT';
+
+    } else if ( req.session.data['response-owed'] && req.session.data['amount-owed'] > 0) {
+      req.session.data['do_you_owe_money'] = 'complete';
+      req.session.data['amount_pa'] = 'complete';
+      req.session.data['radio_select_group'] = 'Some';
+      req.session.data['show_mediation'] = 'true';
+
+      req.session.data['response'] = 'PART-ADMIT';
+
+
+    } else if ( req.session.data['response-owed'] && req.session.data['amount-owed'] == 0) {
+      req.session.data['do_you_owe_money'] = 'complete';
+      req.session.data['show_mediation'] = 'true';
+
+    }
+
+
+    if ( req.session.data['response-owed'] && req.session.data['response-owed'] == 'yes' ) {
+      res.redirect('/' + strPath + 'defendant/mediation-pilot/task-list/do-you-owe-money/amount-owed');
+
+    } else if ( req.session.data['response-owed'] ) {
+      res.redirect('/' + strPath + 'defendant/mediation-pilot/task-list');
+
+    } else {
+      res.render( strPath + 'defendant/mediation-pilot/task-list/do-you-owe-money/are-you-owed' );
+    }
+
+  })
 
 
 
@@ -116,14 +150,14 @@ module.exports = function(app){
 
       } else if ( req.session.data['claimant-payment-request'] == 'Immediately' )  {
         res.redirect( 'counter-offer/court-date' );
-      
+
       } else if ( req.session.data['claimant-payment-request'] == 'Set-date' )  {
         res.redirect( 'counter-offer/pay-by-set-date' );
-      
+
       } else if ( req.session.data['claimant-payment-request'] == 'Instalments' )  {
         res.redirect( 'counter-offer/repayment-plan' );
       }
-      
+
 
     } else {
       res.render( strPath + 'dashboard/claimant-response/admit-the-claim/task-list/counter-offer' );
@@ -145,14 +179,14 @@ module.exports = function(app){
 
       } else if ( req.session.data['claimant-payment-request'] == 'Immediately' )  {
         res.redirect( 'counter-offer/court-date' );
-      
+
       } else if ( req.session.data['claimant-payment-request'] == 'Set-date' )  {
         res.redirect( 'counter-offer/pay-by-set-date' );
-      
+
       } else if ( req.session.data['claimant-payment-request'] == 'Instalments' )  {
         res.redirect( 'counter-offer/repayment-plan' );
       }
-      
+
 
     } else {
       res.render( strPath + 'dashboard/claimant-response/part-admit/task-list/counter-offer' );
@@ -192,6 +226,36 @@ module.exports = function(app){
   })
 
 
+  app.post( '/' + strPath + 'defendant/mediation-pilot/task-list/do-you-owe-money/defence-options', (req, res) => {
+
+    if ( req.session.data['radio_select_group2'] && req.session.data['radio_select_group2'] == 'paid' ) {
+      req.session.data['radio_select_group'] = 'paid';
+      req.session.data['do_you_owe_money'] = 'complete';
+      req.session.data['show_mediation'] = 'true';
+      req.session.data['response'] = 'STATES-PAID';
+
+      res.redirect('/' + strPath + 'defendant/mediation-pilot/task-list');
+
+    } else if ( req.session.data['radio_select_group2'] && req.session.data['radio_select_group2'] == 'defend_now' ) {
+      req.session.data['response'] = 'DEFENCE';
+
+      res.redirect('/' + strPath + 'defendant/mediation-pilot/task-list/do-you-owe-money/are-you-owed');
+
+    } else if ( req.session.data['radio_select_group2'] && req.session.data['radio_select_group2'] == 'counter' ) {
+
+      res.redirect('/' + strPath + 'defendant/mediation-pilot/task-list/do-you-owe-money/amount-owed');
+      req.session.data['response'] = 'COUNTER';
+
+
+    } else {
+      res.render( strPath + 'defendant/mediation-pilot/task-list/do-you-owe-money/defence-options' );
+
+    }
+
+  })
+
+
+
 
   app.get( '/' + strPath + 'defendant/task-list/counter-claim/counter-type', (req, res) => {
 
@@ -211,12 +275,12 @@ module.exports = function(app){
         req.session.data['counter'] = 'SET-OFF';
 
       }
-    
+
     req.session.data['do_you_owe_money'] = 'complete';
     res.redirect( '../../../claimant/task-list/claim-amount-alt/total' );
   })
 
-  
+
 
   app.get( '/' + strPath + 'defendant/task-list/counter-claim/counter-proceed', (req, res) => {
 
@@ -227,12 +291,11 @@ module.exports = function(app){
     res.redirect( '../../../defendant/task-list' );
   })
 
-  
 
   app.post( '/' + strPath + 'dashboard/claimant-response/admit-the-claim/task-list/counter-offer/repayment-plan', (req, res) => {
 
     if (req.session.data['defendant'] == 'org' ) {
-        res.redirect( '../../task-list' ); 
+        res.redirect( '../../task-list' );
     } else if (req.session.data['instalment-first-payment'] < 251 ) {
       res.redirect('/' + strPath + 'dashboard/claimant-response/admit-the-claim/task-list/counter-offer/approved');
     } else {
@@ -258,7 +321,7 @@ module.exports = function(app){
   app.post( '/' + strPath + 'dashboard/claimant-response/part-admit/task-list/counter-offer/repayment-plan', (req, res) => {
 
     if (req.session.data['defendant'] == 'org' ) {
-        res.redirect( '../../task-list' ); 
+        res.redirect( '../../task-list' );
     } else if (req.session.data['instalment-first-payment'] < 251 ) {
       res.redirect('/' + strPath + 'dashboard/claimant-response/part-admit/task-list/counter-offer/approved');
     } else {
