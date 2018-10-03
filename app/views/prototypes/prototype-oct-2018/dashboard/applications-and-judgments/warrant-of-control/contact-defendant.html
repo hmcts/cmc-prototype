@@ -12,43 +12,31 @@ Money Claims Prototype
   <div class="grid-row">
     <div class="column-two-thirds">
       <a href="#" class="link-back">Back</a>
-      {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and
-      data.return_page.includes('check-your-answers')%}
-      <form method="post" action="{{ data.return_page if data.return_page | length > 0 else '../task-list' }}"
-            class="form">
-        {% else %}
-        <form method="post" action="description-defendant" class="form">
-          {% endif %}
-          {{formData | safe}}
-          <h1 class="heading-large">
-            Defendant's phone number (optional)
-          </h1>
-          <div class="">
 
-            <p>The court will try to phone the defendant to ask for payment.</p>
+      <h1 class="heading-large">
+        Defendant's phone number (optional)
+      </h1>
 
-          <fieldset>
-            <legend class="visuallyhidden">
+      <p>The court will try to phone the defendant to ask for payment.</p>
 
-            </legend>
-            <div class="form-group">
-              <label class="form-label" for="contact-defendant">Enter defendant's phone number</label>
-              <input class="form-control" id="contact-defendant" type="number" name="contact-defendant" value="{{data['contact-defendant']}}">
-            </div>
-          {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and
-          data.return_page.includes('check-your-answers')%}
-          <div class="form-group">
-            <input type="submit" class="button" value="Save changes"/>
+      <div class="form-group">
+        <fieldset>
+          <div class="multiple-choice" data-target="contact-defendant">
+            <input type="radio" id="no-change" name="contact-defendant" value="No" {{ checked("contact-defendant",
+            "No") }} >
+            <label for="no-change">Yes</label>
           </div>
-          <a href="{{ data.return_page if data.return_page | length > 0 else '../task-list' }}">Cancel</a>
-          {% else %}
-          <div class="form-group">
-            <input type="submit" class="button" value="Save and continue"/>
+          <div class="multiple-choice" data-target="contact-defendant">
+            <input type="radio" id="add-contact" name="contact-defendant" value="Yes" {{ checked("contact-defendant",
+            "Yes") }}>
+            <label for="add-contact">No, use a different home telephone or mobile</label>
           </div>
-          {% endif %}
-          </fieldset>
-        </form>
+          <div class="panel panel-border-narrow js-hidden" id="contact-by-phone">
+
+
+          </div>
+      </div>
+
     </div>
-  </div>
 </main>
 {% endblock %}
