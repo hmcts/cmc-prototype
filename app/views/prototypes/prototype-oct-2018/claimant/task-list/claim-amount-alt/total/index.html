@@ -40,11 +40,13 @@ Money Claims Prototype
           {% if data['counter'] == 'FULL-COUNTER' %}
 
           <p>Claiming money from someone who claims against you is called a 'counterclaim'.</p>
+          <h2 class="heading-medium">Counterclaim fee</h2>
           <p>You will need to pay a £70 claim fee to make a £{{ data['counter-amount']|numeral }} counterclaim.</p>
 
           {% elseif data['counter'] == 'SET-OFF-COUNTER' %}
 
           <p>Claiming money from someone who claims against you is called a 'counterclaim'.</p>
+          <h2 class="heading-medium">Counterclaim fee</h2>
           <p>To make a counterclaim you will need to a pay a £70 fee because your counterclaim is for £{{ ( data['counter-amount'] - 1500 )|numeral }} more than the amount that was claimed against you.</p>
 
           {% endif %}
@@ -56,7 +58,7 @@ Money Claims Prototype
               Total amount you're claiming
             </legend>
 
-            <table class="table-form" style="margin-bottom: 20px;">
+            <table class="table-form" style="margin-bottom: 20px;"{% if data['counter'] == 'FULL-COUNTER' or data['counter'] == 'SET-OFF-COUNTER' %} id="counter-table"{% endif %}>
               <caption class="visuallyhidden"></caption>
               <tfoot>
                 <tr>
@@ -86,7 +88,7 @@ Money Claims Prototype
                 {% endif %}
 
                 {% if data['counter'] == 'FULL-COUNTER' or data['counter'] == 'SET-OFF-COUNTER' or not data['counter'] %}
-                <tr>
+                <tr id="claim-fee">
                   <th scope="row">Claim fee:</th>
                   <td class="numeric last">
                     <label class="visuallyhidden" for="amount">Claim fee</label>
@@ -100,9 +102,9 @@ Money Claims Prototype
             </tbody>
           </table>
 
-
+        {% if data['counter'] == 'FULL-COUNTER' or data['counter'] == 'SET-OFF-COUNTER' or not data['counter'] %}
         <p>You can't get the claim fee refunded. If you settle the claim out of court, you should include the fee in the settlement amount.</p>
-
+        {% endif %}
 
         {% if ( not data['counter'] ) %}
         <table style="margin-top: 40px; margin-bottom: 20px">
@@ -329,4 +331,17 @@ Money Claims Prototype
   })('totalAmountDisplay', "{{data['totalSum'] or data['counter-amount']}}", {{data['radio_group2']=="interest_no"}} || {{data['radio_group2']!="interest_yes"}} ? {% if data['amount-owed'] %} 0 : 14 {% else %} 70 : 84{% endif %})
 </script>
 
+<style>
+#counter-table th {
+  font-weight: 400;
+}
+
+#counter-table #totalAmountDisplay {
+  font-weight: 400;
+}
+
+#counter-table #claim-fee th, #counter-table #claim-fee td span {
+  font-weight: 600;
+}
+</style>
 {% endblock %}
