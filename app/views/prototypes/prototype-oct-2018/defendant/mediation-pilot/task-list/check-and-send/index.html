@@ -1509,7 +1509,11 @@ Check your answers
                         Agree to all statements
                       </td>
                       <td>
+                        {% if data['resolve_dispute']=="complete" %}
                         Yes, I agree
+                        {% else %}
+                        No, I don't agree
+                        {% endif %}
                       </td>
                       <td class="change-answer">
                         <a href="../task-list/mediation/statements-all?return_page={{ '../../task-list' | urlencode }}">
@@ -1518,13 +1522,13 @@ Check your answers
                       </td>
                     </tr>
                     <tr>
-                      <td>Time unavailable
+                      <td>Time availability
                       </td>
                       <td>
-                        {{data['time-unavailable']}}
+                        {{data['time-availability']}}
                       </td>
                       <td class="change-answer">
-                        <a href="../task-list/mediation/time-unavailable?return_page={{ '../../task-list' | urlencode }}">
+                        <a href="../task-list/mediation/time-availability?return_page={{ '../../task-list' | urlencode }}">
                           Change <span class="visuallyhidden">Name</span>
                         </a>
                       </td>
@@ -1602,7 +1606,7 @@ Check your answers
 	<form method="get" action="check-and-send/enter-card" class="form">
 
 	{% else %}
-	<form method="get" action="../../confirmation-page?" class="form">
+	<form method="get" action="../../confirmation-page-mediation-pilot?" class="form">
 	{% endif %}
 
 	{% if data.radio_select_group=="all" and data['radio-pay-group']=="Immediately" or data['check']== 1 %}
