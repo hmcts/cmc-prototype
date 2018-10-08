@@ -622,19 +622,6 @@ module.exports = function(app){
 
   module.exports = app
 
-  // Check your answers for 'Completing your claim'
-  app.get('*/task-list/completing-your-claim', function (req, res, next) {
-
-    let completing_your_claim = req.session.data.completing_your_claim;
-    if (completing_your_claim === "-complete" ){
-      res.redirect("completing-your-claim/check-your-answers");
-    } else {
-      next()
-    }
-
-  });
-  module.exports = app
-
   // Check your answers for 'Your details'
   app.get('*/task-list/your-details', function (req, res, next) {
 
