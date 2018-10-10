@@ -302,6 +302,15 @@ h1 {
             </tr>
           </thead>
           <tbody>
+          {% if data['claimant-payment-request']=="Instalments" or data['check'] == 2 %}
+           <tr>
+            <td class="bold-medium">
+              <span class="bold">Amount to be repaid:</span>
+            </td>
+            <td>£1,500</td>
+          </tr>
+          {% endif %}
+
            <tr>
             <td class="bold-medium">
               <span class="bold">The agreement:</span>
@@ -330,7 +339,7 @@ h1 {
 
 
             {% elseif data['claimant-payment-request']=="Set-date" or data['check'] == 3 %}
-              Mary Richards will pay the full amount, no later than
+              Mary Richards will pay £1,500 no later than
                 {% if data['set-day'] %}
                 {{ ( data['set-month'] + ' ' + data['set-day'] + ' ' + data['set-year']) | date('D MMMM YYYY') }}
                 {% else %}
@@ -338,14 +347,14 @@ h1 {
                 {% endif %}
 
             {% elseif data['check'] == 4 %}
-              Mary Richards will pay £1,200, no later than
+              Mary Richards will pay £1,200 no later than
                 {% if data['set-day'] %}
                 {{ ( data['set-month'] + ' ' + data['set-day'] + ' ' + data['set-year']) | date('D MMMM YYYY') }}
                 {% else %}
                 {{ date | date('add', 1, 'year') | date('D MMMM YYYY') }}
                 {% endif %}
             {% else %}
-              Mary Richards will pay the full amount, no later than {{ date | date('add', 1, 'year') | date('D MMMM YYYY') }}.
+              Mary Richards will pay £1,500 no later than {{ date | date('add', 1, 'year') | date('D MMMM YYYY') }}.
             {% endif %}
 
            </td>
