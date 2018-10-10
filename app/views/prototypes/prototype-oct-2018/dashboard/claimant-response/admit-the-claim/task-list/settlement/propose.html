@@ -23,13 +23,20 @@ Money Claims Prototype
           </tr>
         </thead>
         <tbody>
+          {% if data['claimant-payment-request']=="Instalments"  %}
           <tr>
-            <td>The offer</td>
+              <td>Amount to be repaid</td>
+              <td>£1,500</td>
+          </tr>
+          {% endif %}
+          <tr>
+            <td>The agreement</td>
 
             <td>
               Mary Richards
               {% if data['claimant-payment-request']=="Immediately" %}
-              will pay the full amount immediately. Jan Clark will receive the money no later than {{ now | date( 'add', 5, 'days') | date }}. Any cheques or transfers will be clear in Jan Clark's account by this date.
+              will pay £1,500 immediately. Jan Clark will receive the money no later than {{ now | date( 'add', 5, 'days') | date }}. Any cheques or transfers will be clear in Jan Clark's account by this date.
+
               {% elseif data['claimant-payment-request']=="Instalments"  %}
               will pay instalments of
                 {% if data['instalment-first-payment'] %}
@@ -46,16 +53,15 @@ Money Claims Prototype
                 {{ ( data['instalment-month'] + ' ' + data['instalment-day'] + ' ' + data['instalment-year']) | date('D MMMM YYYY') }}{% else %}
                 31 March 2018{% endif %}.
 
-
               {% elseif data['claimant-payment-request']=="Set-date" %}
-              will pay the full amount, no later than
+              will pay £1,500 no later than
                 {% if data['set-day'] %}
                 {{ ( data['set-month'] + ' ' + data['set-day'] + ' ' + data['set-year']) | date('D MMMM YYYY') }}
                 {% else %}
                 {{ date | date('add', 1, 'year') | date('D MMMM YYYY') }}
                 {% endif %}
               {% else %}
-              will pay the full amount, no later than {{ date | date('add', 1, 'year') | date('D MMMM YYYY') }}.
+              will pay £1,500 no later than {{ date | date('add', 1, 'year') | date('D MMMM YYYY') }}.
               {% endif %}
             </td>
           </tr>
