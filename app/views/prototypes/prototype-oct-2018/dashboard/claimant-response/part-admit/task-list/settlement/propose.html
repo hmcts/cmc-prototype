@@ -23,13 +23,19 @@ Money Claims Prototype
           </tr>
         </thead>
         <tbody>
+          {% if data['claimant-payment-request']=="Instalments"  %}
           <tr>
-            <td>The offer</td>
+              <td>Amount to be repaid</td>
+              <td>£1,200</td>
+          </tr>
+          {% endif %}
+          <tr>
+            <td>The agreement</td>
 
             <td>
 
               {% if data['radio-pay-group']=="Immediately" %}
-              You will pay the full amount immediately. I will receive the money no later than {{ now | date( 'add', 5, 'days') | date }}. Any cheques or transfers must be clear in my account by this date.
+              You will pay £1,200 immediately. I will receive the money no later than {{ now | date( 'add', 5, 'days') | date }}. Any cheques or transfers must be clear in my account by this date.
               {% elseif data['radio-pay-group']=="Instalments"  %}
               You will pay instalments of
                 {% if data['instalment-first-payment'] %}
@@ -48,14 +54,14 @@ Money Claims Prototype
 
 
               {% elseif data['radio-pay-group']=="Set-date" %}
-              You will pay the full amount, no later than
+              You will pay £1,200 no later than
                 {% if data['set-day'] %}
                 {{ ( data['set-month'] + ' ' + data['set-day'] + ' ' + data['set-year']) | date('D MMMM YYYY') }}
                 {% else %}
                 {{ date | date('add', 1, 'year') | date('D MMMM YYYY') }}
                 {% endif %}
               {% else %}
-              You will pay the full amount, no later than {{ date | date('add', 1, 'year') | date('D MMMM YYYY') }}.
+              You will pay £1,200 no later than {{ date | date('add', 1, 'year') | date('D MMMM YYYY') }}.
               {% endif %}
             </td>
           </tr>
