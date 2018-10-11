@@ -212,6 +212,22 @@
                   response</a> (PDF, 123KB)
               </div>
 
+              {% elseif data['claimant'] == 9.1 %}
+              <div class="status-block single">
+                <h2 class="heading-small">The defendant's response</h2>
+                <p>Mary Richards has rejected the claim. The claim has been automatically registered for free telephone mediation.</p>
+
+                <p>If you reject their response, we'll contact you with an appointment unless you choose to opt out of mediation.</p>
+
+                <!--<p>You can accept or reject their defence.</p>-->
+                <div class="form-group">
+                  <p><a href="claimant-response/dispute-claim/mediation-pilot/task-list"
+                        class="button secondary-button">View and respond</a></p>
+                </div>
+
+
+              </div>
+
               {% elseif data['claimant'] == 10.1 %}
               <h2 class="heading-small">You've signed a settlement agreement</h2>
               <p>We've emailed Mary Richards the repayment plan and the settlement agreement for them to sign.</p>
@@ -590,6 +606,15 @@
                   they
                   respond.</p>
               </div>
+
+              {% elseif data['claimant'] == 13.1 %}
+              <div class="">
+                <h2 class="heading-small">Free mediation - content goes here </h2>
+                <p>	We'll contact you with a free mediation appointment.</p>
+                <p><a target="_blank" href="https://formfinder.hmctsformfinder.justice.gov.uk/ex730-eng.pdf">Find out how mediation
+                  works</a> <span class="font-xsmall">(opens in a new window)</span></p>
+              </div>
+
               {% elseif data['claimant'] == 14 %}
               <h2 class="heading-small">The defendant wants to try mediation </h2>
               <div class="">
@@ -752,7 +777,11 @@
         <ul role="navigation" class="font-xsmall list">
           <li><strong class="bold">Defendant name:</strong><br> <a href="party-details/defendant">Mary Richards</a>
           </li>
+          {% if data['claimant'] == 9.1 %}
+          <li><strong class="bold">Claim amount:</strong><br>£370</li>
+          {% else %}
           <li><strong class="bold">Claim amount:</strong><br>£1500</li>
+          {% endif %}
           <li><strong class="bold">Claim details:</strong><br><a
             href="../claimant/correspondence/claim-form-claimant?check=1">Download claim</a></li>
           {% if data['claimant'] == 16 or data['claimant'] == 17%}
@@ -812,6 +841,8 @@
     'claimant'] == 8 %}selected{% endif %}>Dispute claim   </option>
     <option value="9" {% if data[
     'claimant'] == 9 %}selected{% endif %}>Dispute claim + mediation   </option>
+    <option value="9.1" {% if data[
+    'claimant'] == 9.1 %}selected{% endif %}>Dispute claim + mediation (pilot)   </option>
     <option>------- Claimant responses ----------</option>
     <option value="10" {% if data[
     'claimant'] == 10 %}selected{% endif %}>Dispute claim + offer made  </option>
