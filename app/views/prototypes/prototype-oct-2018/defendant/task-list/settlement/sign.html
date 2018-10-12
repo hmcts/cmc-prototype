@@ -11,10 +11,10 @@ Money Claims Prototype
   <div class="grid-row">
     <div class="column-two-thirds">
       <a href="#" class="link-back">Back</a>
-      <h1 class="heading-large">Sign a settlement agreement</h1>
+      <h1 class="heading-large">Respond to the settlement agreement</h1>
 
 
-      <form action="{% if data['counter'] == 'yes' %}confirmation{% else %}../../task-list{% endif %}" method="get" class="form">
+      <form action="{% if data['counter'] == 'yes' %}confirmation{% else %}../../task-list{% endif %}" method="post" class="form">
 
       <br>
       <table class="offer-table">
@@ -89,8 +89,7 @@ Money Claims Prototype
           </tr>
         </tbody>
       </table>
-      <div>
-        <h3 class="heading-medium"></h3>
+      <div> 
 
        {% if data.radio_select_group=="Some" or data['settle'] == 1   %}
                <p>This agreement settles the claim made by Jan Clark against Mary Richards, including the part that Mary Richards admitted.</p>
@@ -105,7 +104,7 @@ Money Claims Prototype
         <p>Either party can view and download this agreement from their Money Claims account. Both parties should keep a copy of this agreement.</p>
 
 
-        <h3 class="heading-medium">If the agreement is broken</h3>
+        <h3 class="heading-small">If the agreement is broken</h3>
         {% if data.radio_select_group=="Some" or data['settle'] == 1  %}
         <p>The claimant can:</p>
         <ul class="list list-bullet">
@@ -118,15 +117,34 @@ Money Claims Prototype
         <p>The claimant can request a County Court Judgment (CCJ) for any money still owed from this agreement.</p>
         {% endif %}
       </div>
-      <h2 class="heading-medium">Sign the agreement</h2>
 
+
+      <h2 class="heading-medium">Do you want to sign the settlement agreement?</h2>
+      <p>You can choose not to sign the settlement agreement, for example if you think you can't afford it.</p>
       <p>Make sure this agreement includes everything you've agreed with Jan Clark before signing. You won't be able to change this later.</p>
+
       <div class="form-group">
-        <div class="multiple-choice text">
-          <input class="" id="HasAcceptedTermsAndConditions" type="checkbox" value="true">
-          <label for="HasAcceptedTermsAndConditions">I confirm I've read and accept the terms of the agreement.</label>
-        </div>
+        <fieldset>
+
+          <div class="multiple-choice" data-target="yes-info">
+            <input id="radio-yes" type="radio" name="accept-settlement" value="Yes">
+            <label for="radio-yes">
+              <strong class="bold">Yes</strong> - I confirm I've read and accept the terms of the agreement.
+            </label>
+          </div>
+          <div class="panel panel-border-narrow js-hidden" id="yes-info">The claim will be put on hold and the claimant can't request a CCJ against you.</div>
+
+          <div class="multiple-choice" data-target="no-info">
+            <input id="radio-no" type="radio" name="accept-settlement" value="No">
+            <label for="radio-no">
+              <strong class="bold">No</strong>
+            </label>
+          </div>
+          <div class="panel panel-border-narrow js-hidden" id="no-info">The claimant will be able to request a CCJ against you for the repayment plan shown. You'll be able to ask a judge to consider changing the plan, based on your financial details. The court has already reviewed the plan and believes you can afford it, so a judge may not change it.</div>
+
+        </fieldset>
       </div>
+
 
         <input type="hidden" name="agreement" value="complete">
 
