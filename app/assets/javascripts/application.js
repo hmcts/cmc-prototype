@@ -685,3 +685,77 @@ function tabGroup(tableObj, which) {
     document.getElementById("tabThreeContent").style.display = "block";
   }
 }
+
+/* LISTS - EXPANDABLE ROW PATTERN */
+row1status = true;
+row2status = true;
+row3status = true;
+row4status = true;
+row5status = true;
+function tableRow(n) {
+  /* Row 1 */
+  if ((n == 1) || (n == 2)) {
+    if (row1status) {
+      //alert(rowOpenCloseStatus);
+      document.getElementById("row1closed").style = "display: none";
+      document.getElementById("row1opened").style = "display: inline-row";
+    } else {
+      //alert(rowOpenCloseStatus);
+      document.getElementById("row1closed").style = "display: inline-row";
+      document.getElementById("row1opened").style = "display: none";
+    }
+    row1status = !row1status;
+  }
+  /* Row 2 */
+  if ((n == 3) || (n == 4)) {
+    if (row2status) {
+      //alert(rowOpenCloseStatus);
+      document.getElementById("row2closed").style = "display: none";
+      document.getElementById("row2opened").style = "display: inline-row";
+    } else {
+      //alert(rowOpenCloseStatus);
+      document.getElementById("row2closed").style = "display: inline-row";
+      document.getElementById("row2opened").style = "display: none";
+    }
+    row2status = !row2status;
+  }
+  /* Row 3 */
+  if ((n == 5) || (n == 6)) {
+    if (row3status) {
+      //alert(rowOpenCloseStatus);
+      document.getElementById("row3closed").style = "display: none";
+      document.getElementById("row3opened").style = "display: inline-row";
+    } else {
+      //alert(rowOpenCloseStatus);
+      document.getElementById("row3closed").style = "display: inline-row";
+      document.getElementById("row3opened").style = "display: none";
+    }
+    row3status = !row3status;
+  }
+  /* Row 4 */
+  if ((n == 7) || (n == 8)) {
+    if (row4status) {
+      //alert(rowOpenCloseStatus);
+      document.getElementById("row4closed").style = "display: none";
+      document.getElementById("row4opened").style = "display: inline-row";
+    } else {
+      //alert(rowOpenCloseStatus);
+      document.getElementById("row4closed").style = "display: inline-row";
+      document.getElementById("row4opened").style = "display: none";
+    }
+    row4status = !row4status;
+  }
+  /* Row 5 */
+  if ((n == 9) || (n == 10)) {
+    if (row5status) {
+      //alert(rowOpenCloseStatus);
+      document.getElementById("row5closed").style = "display: none";
+      document.getElementById("row5opened").style = "display: inline-row";
+    } else {
+      //alert(rowOpenCloseStatus);
+      document.getElementById("row5closed").style = "display: inline-row";
+      document.getElementById("row5opened").style = "display: none";
+    }
+    row5status = !row5status;
+  }
+}
