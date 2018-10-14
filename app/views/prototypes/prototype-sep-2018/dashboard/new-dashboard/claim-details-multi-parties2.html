@@ -15,40 +15,80 @@ Money Claims Prototype
 
   {% include "includes/phase_banner_beta.html" %}
 
-  <a href="#" class="link-back">Back</a>
+  <div class="breadcrumbs">
+    <ol>
+      <li><a href="#" onclick="history.go(-1)">Home</a></li>
+
+      <li aria-current="page">Claim details</li>
+
+    </ol>
+  </div>
 
   <div class="grid-row">
-    <!--<div class="breadcrumbs">-->
-      <!--<ol>-->
-        <!--<li><a href="/">Home</a></li>-->
+    <div class="column-full">
 
-        <!--<li aria-current="page">Claim details</li>-->
+      <div class="application" style="margin-top: -20px">
+
+        <div class="application-content">
+          <div class="grid-row">
+            <div class="column-two-thirds">
+              <h3 class="heading-medium name customer"><span class="bold">Michael Jones</span>
+                v
+                <span class="bold">Goddard Pluming</span><span class="font-small"> + 2 others</span>
+              </h3>
+              <br>
+              <div class="metadata">
+                <dl>
+                  <dt>Reference</dt>
+                  <dd></dd>PW1241/KU</dd>
+
+                  <dt>Claim amount</dt>
+                  <dd>£8,000</dd>
+
+                  <dt>Date issued</dt>
+                  <dd>5 March 2018</dd>
+
+                </dl>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--<div class="grid-row">-->
+      <!--<div class="breadcrumbs">-->
+      <!--<ol>-->
+      <!--<li><a href="/">Home</a></li>-->
+
+      <!--<li aria-current="page">Claim details</li>-->
 
       <!--</ol>-->
-    <!--</div>-->
+      <!--</div>-->
+      <!--&lt;!&ndash;<a href="#" class="link-back">Back</a>&ndash;&gt;-->
 
-    <div class="peristant-info-banner">
-      <div class="peristant-info-banner-content">PW1241/KU
-        <span class="bold"
-              style="margin-left:10px">Michael Jones</span>
-        v
-        <span class="bold">Goddard Pluming</span> + 2 others
-      </div>
-    </div>
+      <!--<div class="peristant-info-banner">-->
+      <!--<div class="peristant-info-banner-content">PW1241/KU-->
+      <!--<span class="bold"-->
+      <!--style="margin-left:10px">Michael Jones</span>-->
+      <!--v-->
+      <!--<span class="bold">Goddard Pluming</span> + 2 others-->
+      <!--</div>-->
+      <!--</div>-->
 
-    <div class="column-two-thirds">
+      <!--<div class="column-two-thirds">-->
 
-      <!--<h1 class="heading-large">-->
-      <!--<span class="heading-secondary">PW1241/KU</span>-->
-      <!--Claimant v Defendant-->
-      <!--</h1>-->
+      <!--&lt;!&ndash;<h1 class="heading-large">&ndash;&gt;-->
+      <!--&lt;!&ndash;<span class="heading-secondary">PW1241/KU</span>&ndash;&gt;-->
+      <!--&lt;!&ndash;Claimant v Defendant&ndash;&gt;-->
+      <!--&lt;!&ndash;</h1>&ndash;&gt;-->
 
-      <fieldset></fieldset>
+      <!--<fieldset></fieldset>-->
 
       <div class="tabGroup" style="margin-top: 40px">
         <a id="tabA" class="tab-on" onclick="tabGroup(tabContent, 'TAB-ONE')" href="javascript: void(0)">Claim status</a>
-        <a id="tabB" class="tab" onclick="tabGroup(tabContent, 'TAB-TWO')" href="javascript: void(0)">About claim</a>
-        <a id="tabC" class="tab" onclick="tabGroup(tabContent, 'TAB-THREE')" href="javascript: void(0)">Actions you can
+        <a id="tabB" class="tab" onclick="tabGroup(tabContent, 'TAB-TWO')" href="javascript: void(0)">Parties</a>
+        <a id="tabC" class="tab" onclick="tabGroup(tabContent, 'TAB-THREE')" href="javascript: void(0)">Documents</a>
+        <a id="tabD" class="tab" onclick="tabGroup(tabContent, 'TAB-FOUR')" href="javascript: void(0)">Actions you can
           take</a>
         <hr>
       </div>
@@ -97,25 +137,6 @@ Money Claims Prototype
         </div>
 
         <div id="tabTwoContent">
-          <!-- Claim summary -->
-          <h3 class="heading-medium">About claim</h3>
-          <table>
-            <caption class="heading-small">Claim summary</caption>
-            <tbody >
-            <tr>
-              <td>Claim number</td>
-              <td>PW1241/KU</td>
-            </tr>
-            <tr>
-              <td>Total claim amount</td>
-              <td>£8,000</td>
-            </tr>
-            <tr>
-              <td>Date issued</td>
-              <td>5 March 2018</td>
-            </tr>
-            </tbody>
-          </table>
 
           <!-- Your details (claimant) -->
           <h3 class="heading-medium">Your details (claimant)</h3>
@@ -136,7 +157,8 @@ Money Claims Prototype
             </tr>
             <tr id="row4opened" class="rowOpen" onclick="tableRow(8)" style="display:none">
               <td>
-                <p><img src="/../../public/images/sorting-icon-down.png" class="" alt="right arrow icon"><a href="#">Michael Jones</a></p>
+                <p><img src="/../../public/images/sorting-icon-down.png" class="" alt="right arrow icon"><a href="#">Michael
+                  Jones</a></p>
               </td>
               <td>
                 <p>Mr Michael Jones</p>
@@ -159,6 +181,7 @@ Money Claims Prototype
             </tr>
             </tbody>
           </table>
+
 
           <!-- Defendant details -->
           <h3 class="heading-medium">Defendant details</h3>
@@ -275,6 +298,61 @@ Money Claims Prototype
         </div>
 
         <div id="tabThreeContent">
+
+          <div class="jui-cf__window">
+            <div class="jui-cf__window-container">
+              <div class="jui-cf__files" id="files">
+                <!--<h2 class="govuk-visually-hidden" id="all-items">All documents</h2>-->
+
+                <ul class="jui-tree" aria-labelledby="all-items" role="tree">
+                  <li class="jui-tree__item jui-tree__item--open" role="treeitem" aria-expanded="true"
+                      tabindex="0">
+                    <span class="jui-tree__folder">From the court</span>
+                    <ul class="jui-tree__folder-group">
+                      <li class="jui-tree__doc">
+                        <a class="jui-tree__doc-link"
+                           href=""
+                           aria-current="true" role="treeitem" tabindex="-1">
+                          <span class="jui-tree__doc-name">Claim form</span>
+                          <span class="jui-tree__doc-meta">Added 5 Mar 2018 at 10:00pm</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </li>
+
+                  <li class="jui-tree__item" role="treeitem" aria-expanded="false" tabindex="-1">
+                    <span class="jui-tree__folder">Evidence uploaded</span>
+                    <ul class="jui-tree__folder-group">
+                      <li class="jui-tree__doc">
+                        <a class="jui-tree__doc-link"
+                           href=""
+                           role="treeitem" tabindex="-1">
+                          <span class="jui-tree__doc-name">Form D81 application document</span>
+                          <span class="jui-tree__doc-meta">Added 27 Jan 2018 at 2:15pm</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="jui-cf__document-pages">
+                <div class="jui-cf__document-page">
+                  <img
+                  src="/../../public/images/documents/page1.jpg"
+                  alt="Claim form page 1"></div>
+                <div class="jui-cf__document-page"><img
+                  src="/../../public/images/documents/page2.jpg"
+                  alt="Claim form page 2"></div>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <div id="tabFourContent">
           <div class="status-block">
             <h3 class="heading-medium">Tell us you've settled</h3>
             <p>If the defendant has paid you, you <a href="">need to tell us</a>.</p>
@@ -287,23 +365,23 @@ Money Claims Prototype
         </div>
 
       </div>
-
     </div>
 
-    <div class="column-one-third">
-      <div class="right-column-nav">
-        <hr class="light-hr " style="margin-top: 83px">
-        <h3 class="heading-small">Related documents</h3>
-        <!-- Thumbnail - small icon -->
-        <div class="download-file top_15 bottom_30">
-          <img src="/../../public/images/Thumbnail icon - small.png">
-          <div class="download-file-text">
-            <span id="nonActiveLink" class="font-xsmall" style="font-weight: bold">Claim form</span>
-            <span class="font-xsmall">123KB, PDF</span>
-          </div>
-        </div>
-      </div>
-    </div>
+
+    <!--<div class="column-one-third">-->
+    <!--<div class="right-column-nav">-->
+    <!--<hr class="light-hr " style="margin-top: 83px">-->
+    <!--<h3 class="heading-small">Related documents</h3>-->
+    <!--&lt;!&ndash; Thumbnail - small icon &ndash;&gt;-->
+    <!--<div class="download-file top_15 bottom_30">-->
+    <!--<img src="/../../public/images/Thumbnail icon - small.png">-->
+    <!--<div class="download-file-text">-->
+    <!--<span id="nonActiveLink" class="font-xsmall" style="font-weight: bold">Claim form</span>-->
+    <!--<span class="font-xsmall">123KB, PDF</span>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
 
   </div>
 </main>
