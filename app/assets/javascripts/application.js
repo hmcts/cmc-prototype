@@ -598,6 +598,36 @@ function tabGroup (tableObj, which) {
   }
 }
 
+/* TABS PATTERN */
+function tabGroup2 (tableObj, which) {
+  tabE = 'TAB-ONE'
+  tabF = 'TAB-TWO'
+  tabG = 'TAB-THREE'
+
+  if (which == tabE) {
+    document.getElementById('tabE').className = 'tab-on'
+    document.getElementById('tabF').className = 'tab'
+    document.getElementById('tabG').className = 'tab'
+    document.getElementById('tabOneContent').style.display = 'block'
+    document.getElementById('tabTwoContent').style.display = 'none'
+    document.getElementById('tabThreeContent').style.display = 'none'
+  } else if (which == tabF) {
+    document.getElementById('tabE').className = 'tab'
+    document.getElementById('tabF').className = 'tab-on'
+    document.getElementById('tabG').className = 'tab'
+    document.getElementById('tabOneContent').style.display = 'none'
+    document.getElementById('tabTwoContent').style.display = 'block'
+    document.getElementById('tabThreeContent').style.display = 'none'
+  } else if (which == tabG) {
+    document.getElementById('tabE').className = 'tab'
+    document.getElementById('tabF').className = 'tab'
+    document.getElementById('tabG').className = 'tab-on'
+    document.getElementById('tabOneContent').style.display = 'none'
+    document.getElementById('tabTwoContent').style.display = 'none'
+    document.getElementById('tabThreeContent').style.display = 'block'
+  }
+}
+
 
 
 /* LISTS - EXPANDABLE ROW PATTERN */
@@ -720,30 +750,55 @@ Casefile.prototype.onButtonCommentsClick = function (e) {
 }
 
 
-//Select entire table row
-$(".table-clickable tbody tr").click(function (e) {
-  if (e.target.type == "checkbox") {
-    // stop the bubbling to prevent firing the rows click event
-    e.stopPropagation()
-  } else {
-    // Click the
-    if ($(this).hasClass("checked")) {
-      $(this).find("input").click()
-      $(this).removeClass("checked")
-    } else {
-      $(this).find("input").click()
-      $(this).addClass("checked")
-    }
-  }
-})
+// //Select entire table row
+// $(".table-clickable tbody tr").click(function (e) {
+//   if (e.target.type == "checkbox") {
+//     // stop the bubbling to prevent firing the rows click event
+//     e.stopPropagation()
+//   } else {
+//     // Click the
+//     if ($(this).hasClass("checked")) {
+//       $(this).find("input").click()
+//       $(this).removeClass("checked")
+//     } else {
+//       $(this).find("input").click()
+//       $(this).addClass("checked")
+//     }
+//   }
+// })
+
+// // table row click-able
+// $(document).ready(function() {
+//
+//   $('#clickable-link tr').click(function() {
+//     var href = $(this).find("a").attr("href");
+//     if(href) {
+//       window.location = href;
+//     }
+//   });
+//
+// });
 
 // // table row click-able
 // $(".table-clickable-row tbody tr").click(function(){
-//   window.location = $(that).parent().data("href");
+//   window.location = $(that).parent().data('href');
 // });
 
+$("#claim-details-single").click(function(){
+  window.location = "claim-details";
+});
 
-$("tr").click(function(){
+$("#claim-details-multi").click(function(){
   window.location = "claim-details-multi-parties2";
 });
 
+
+/* tab navigation and content show/hide */
+//Check the href of each link in the sidebar
+ $('.navbar__list-items a').click(function (e) {
+     e.preventDefault();
+     var target = $(this);
+     target.parents('.navbar').find('.active').removeClass('active');
+     target.parents('li').addClass('active');
+     target.parents().find('h1:first').text($(this).text());
+ });
