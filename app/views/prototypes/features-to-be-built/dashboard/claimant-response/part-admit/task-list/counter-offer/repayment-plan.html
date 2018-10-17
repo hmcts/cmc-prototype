@@ -19,6 +19,8 @@ Money Claims Prototype
       </h1>
       <p class="">Total claim amount is £1643.20.</p>
 
+
+    {% if data['defendant'] != 'org' %}
       <details class="form-group">
         <summary>View full financial details</summary>
         <div class="panel">
@@ -326,7 +328,8 @@ Money Claims Prototype
 
 
 
-        <div class="heading-small">How often you want to receive the payments</div>
+        <div class="heading-small">How often you want to receive the payments?</div>
+        <p class="form-hint">The payment frequency is set by the defendant, but if the plan is set by a judge they will consider your preferred frequency.</p>
         <div class="form-group">
           <fieldset>
             <legend class="visually-hidden">How often you want to receive the payments</legend>
@@ -357,7 +360,7 @@ Money Claims Prototype
               <legend class="visually-hidden">Date for first instalment</legend>
               <p class="form-label-bold">Date for first instalment</p>
               <div class="form-date">
-                <p class="form-hint">For example, {{ date | date('add', 1, 'month' ) | date('D M YYYY') }}</p>
+                <p class="form-hint">This must be no sooner than {{ date | date('add', 1, 'month' ) | date('D M YYYY') }}</p>
                 <div class="form-group form-group-day">
                   <label for="instalment-day">Day</label>
                   <input class="form-control" id="instalment-day" type="number" pattern="[0-9]*" min="0"
