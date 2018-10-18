@@ -199,12 +199,27 @@
               <p>When you've been paid in full, you need to let us know.</p>
               <p> <a href="../dashboard/idam/contact-us?type=service_specific" class="button secondary-button" style="margin-bottom: 20px">Tell us you've been paid</a></p>
 
-              {% elseif data['claimant'] ==  10.02 %}
-              <h2 class="heading-small">The defendant has not responded to your settlement agreement</h2>
-              <p>You can request a County Court Judgment (CCJ) against them based on the repayment plan they offered.</p>
-              <p>The court will make an order requiring them to pay the money. It does not guarantee that they pay it.</p>
+              {% elseif data['claimant'] == 10.02 %}
+              <h2 class="heading-small">The defendant has rejected your settlement agreement</h2>
+              <p>You can request a County Court Judgment (CCJ) against them based on the repayment plan shown in the agreement.</p>
+              <p>The court will make an order requiring them to pay the money. It does not guarantee that they pay
+                it.</p>
               <p>Mary Richards can still sign the settlement agreement until you request a CCJ.</p>
-              <p> <a href="applications-and-judgments/default-judgment/claim-amount-deduct?radio-indent-group=No&radio-proceed=not-signed" class="button secondary-button" style="margin-bottom: 20px">Request a County Court Judgment (CCJ)</a></p>
+              <p><a
+                href="applications-and-judgments/default-judgment/claim-amount-deduct?radio-indent-group=No&radio-proceed=not-signed"
+                class="button secondary-button" style="margin-bottom: 20px">Request a County Court Judgment (CCJ)</a>
+              </p>
+
+              {% elseif data['claimant'] == 10.03 %}
+              <h2 class="heading-small">The defendant has not signed your settlement agreement</h2>
+              <p>You can request a County Court Judgment (CCJ) against them based on the repayment plan shown in the agreement.</p>
+              <p>The court will make an order requiring them to pay the money. It does not guarantee that they pay
+                it.</p>
+              <p>Mary Richards can still sign the settlement agreement until you request a CCJ.</p>
+              <p><a
+                href="applications-and-judgments/default-judgment/claim-amount-deduct?radio-indent-group=No&radio-proceed=not-signed"
+                class="button secondary-button" style="margin-bottom: 20px">Request a County Court Judgment (CCJ)</a>
+              </p>
 
 
               {% elseif data['claimant'] == 10.11 %}
@@ -618,12 +633,15 @@
     <option value="9" {% if data['claimant'] == 9 %}selected{% endif %}>Dispute claim + mediation   </option>
     <option>------- Claimant responses  ----------</option>
     <option value="10" {% if data['claimant'] == 10 %}selected{% endif %}>Dispute claim + offer made  </option>
-
-    <option value="10.1" {% if data['claimant'] == 10.1 %}selected{% endif %}>Accepted repayment plan - settlement</option>
+    <option value="10.1" {% if data[
+    'claimant'] == 10.1 %}selected{% endif %}>Accepted repayment plan - settlement (claimant/court plan)</option>
     <option value="10.001" {% if data[
     'claimant'] == 10.001 %}selected{% endif %}>Accepted repayment plan - settlement (def's plan)</option>
     <option value="10.01" {% if data['claimant'] == 10.01 %}selected{% endif %}>Accepted repayment plan - settlement - accepted</option>
-    <option value="10.02" {% if data['claimant'] == 10.02 %}selected{% endif %}>Accepted repayment plan - settlement - not signed</option>
+    <option value="10.02" {% if data[
+    'claimant'] == 10.02 %}selected{% endif %}>Accepted repayment plan - settlement - rejected</option>
+    <option value="10.03" {% if data[
+    'claimant'] == 10.03 %}selected{% endif %}>Accepted repayment plan - settlement - not signed</option>
     <option value="10.11" {% if data['claimant'] == 10.11 %}selected{% endif %}>Accepted repayment plan - judgment</option>
 
     <option value="10.4" {% if data['claimant'] == 10.4 %}selected{% endif %}>Accepted full payment on set date</option>
