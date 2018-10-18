@@ -145,6 +145,8 @@
           <td><a href="claimant?claimant=10.001">352MC733</a></td>
                 {% elif data['dashboard'] == 1.1121 %}
                  <td ><a href="claimant?claimant=10.02">352MC733</a></td>
+          	{% elif data['dashboard'] == 1.1122 %}
+          	<td><a href="claimant?claimant=10.03">352MC733</a></td>
                 {% elif data['dashboard'] == 1.113 %}
                  <td ><a href="claimant?claimant=10.11">352MC733</a></td>
                 {% elif data['dashboard'] == 1.114 %}
@@ -229,6 +231,9 @@
             <p>You've both signed a settlement agreement.</p>
 
                   {% elif data['dashboard'] == 1.1121 %}
+                  <p>The defendant has rejected your settlement agreement. You can request a County Court Judgment against them.</p>
+
+            	  {% elif data['dashboard'] == 1.1122 %}
                   <p>The defendant has not responded to your settlement agreement. You can request a County Court Judgment against them.</p>
 
                   {% elif data['dashboard'] == 1.113 %}
@@ -276,6 +281,8 @@
                   {% elif data['dashboard'] == 1.1192 %}
                   <p>This claim has been discontinued.</p>
 
+            	{% elif data['dashboard'] == 1.117 %}
+            	<p>You've rejected Mary Richards' defence.</p>
                   {% endif %}
                 </td>
               </tr>
@@ -321,6 +328,17 @@
                 <td  class="mobile-table-status" colspan="3">Status: You've requested free mediation. We'll notify you once the defendant responds. </td>
               </tr>
               {% endif %}
+        {% if show_all==true or data['dashboard'] == 1.117 %}
+        <tr class="mobile-table">
+          <td><a href="claimant?claimant=13.1">352MC733</a></td>
+          <td>Mary Richards</td>
+          <td>£370</td>
+          <td class="mobile-hide">We'll contact you with a free mediation appointment.</td>
+        </tr>
+        <tr>
+          <td  class="mobile-table-status" colspan="3">Status: </td>
+        </tr>
+        {% endif %}
               {% if show_all==true or data['dashboard'] == 1.15   %}
               <tr class="mobile-table" >
                 <td ><a href="claimant?claimant=3.1">352MC733</a></td>
@@ -1182,7 +1200,8 @@
         <option value="1.111" {% if data['dashboard'] == 1.111 %}selected{% endif %}>Accepted repayment plan - settlement (claimant/court plan)</option>
         <option value="1.1101" {% if data['dashboard'] == 1.1101 %}selected{% endif %}>Accepted repayment plan - settlement (def plan)</option>
         <option value="1.112" {% if data['dashboard'] == 1.112 %}selected{% endif %}>Accepted repayment plan - settlement - accepted</option>
-        <option value="1.1121" {% if data['dashboard'] == 1.1121 %}selected{% endif %}>Accepted repayment plan - settlement - not signed</option>
+        <option value="1.1121" {% if data['dashboard'] == 1.1121 %}selected{% endif %}>Accepted repayment plan - settlement - rejected</option>
+        <option value="1.1122" {% if data['dashboard'] == 1.1122 %}selected{% endif %}>Accepted repayment plan - settlement - not signed</option>
         <option value="1.113" {% if data['dashboard'] == 1.113 %}selected{% endif %}>Accepted repayment plan - judgment</option>
         <option value="1.114" {% if data['dashboard'] == 1.114 %}selected{% endif %}>Accepted full payment on set date</option>
         <option value="1.1141" {% if data['dashboard'] == 1.1141 %}selected{% endif %}>Immediate payment - settlement - signed</option>
