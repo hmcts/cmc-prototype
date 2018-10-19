@@ -12,11 +12,11 @@ gulp.task('copy-toolkit', function () {
   .pipe(gulp.dest(config.paths.govukModules + '/govuk_frontend_toolkit/'))
 })
 
-gulp.task('copy-template', function () {
-  return gulp.src(['node_modules/govuk_template_jinja/views/layouts/**'])
-  .pipe(gulp.dest(config.paths.govukModules + '/govuk_template/layouts/'))
-  .pipe(gulp.dest(config.paths.lib))
-})
+// gulp.task('copy-template', function () {
+//   return gulp.src(['node_modules/govuk_template_jinja/views/layouts/**'])
+//   .pipe(gulp.dest(config.paths.govukModules + '/govuk_template/layouts/'))
+//   .pipe(gulp.dest(config.paths.lib))
+// })
 
 gulp.task('copy-template-assets', function () {
   return gulp.src(['node_modules/govuk_template_jinja/assets/**'])
