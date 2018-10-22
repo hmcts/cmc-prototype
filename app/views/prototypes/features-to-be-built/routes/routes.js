@@ -63,6 +63,61 @@ module.exports = function(app){
   })
 
 
+  app.post( '/' + strPath + 'dashboard/claimant-response/admit-the-claim/task-list/counter-offer', (req, res) => {
+
+
+    if ( req.session.data['claimant-payment-request'] ) {
+
+      if ( req.session.data['defendant'] == 'org' && req.session.data['claimant-payment-request'] == 'Immediately' ) {
+        res.redirect( '../task-list' );
+
+      } else if ( req.session.data['claimant-payment-request'] == 'Immediately' )  {
+        res.redirect( 'counter-offer/court-date' );
+
+      } else if ( req.session.data['claimant-payment-request'] == 'Set-date' )  {
+        res.redirect( 'counter-offer/pay-by-set-date' );
+
+      } else if ( req.session.data['claimant-payment-request'] == 'Instalments' )  {
+        res.redirect( 'counter-offer/repayment-plan' );
+      }
+
+
+    } else {
+      res.render( strPath + 'dashboard/claimant-response/admit-the-claim/task-list/counter-offer/index' );
+
+    }
+
+  })
+
+
+
+
+  app.post( '/' + strPath + 'dashboard/claimant-response/part-admit/task-list/counter-offer', (req, res) => {
+
+
+    if ( req.session.data['radio-pay-group'] ) {
+
+      if ( req.session.data['defendant'] == 'org' && req.session.data['radio-pay-group'] == 'Immediately' ) {
+        res.redirect( '../task-list' );
+
+      } else if ( req.session.data['radio-pay-group'] == 'Immediately' )  {
+        res.redirect( 'counter-offer/court-date' );
+
+      } else if ( req.session.data['radio-pay-group'] == 'Set-date' )  {
+        res.redirect( 'counter-offer/pay-by-set-date' );
+
+      } else if ( req.session.data['radio-pay-group'] == 'Instalments' )  {
+        res.redirect( 'counter-offer/repayment-plan' );
+      }
+
+
+    } else {
+      res.render( strPath + 'dashboard/claimant-response/part-admit/task-list/counter-offer/index' );
+
+    }
+
+  })
+
   app.post( '/' + strPath + 'dashboard/claimant-response/admit-the-claim/task-list/counter-offer/repayment-plan', (req, res) => {
 
     if (req.session.data['defendant'] == 'org' ) {
