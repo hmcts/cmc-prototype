@@ -2572,37 +2572,46 @@ details {
 /* ==========================================================================
    #HEADER BANNER
    ========================================================================== */
-.application {
-  margin-bottom: 30px;
-  background-color: #dee0e2;
+header:not([role=banner]) {
   margin: 0px -9999rem;
   padding: 30px 9999rem;
+  background-color: #dee0e2;
 }
 
-.application .application-content .heading-medium, .application .application-content .heading-small {
+header:not([role=banner]).application {
+  margin-bottom: 30px;
+}
+
+header:not([role=banner]).application .application-content h1.name {
+  font-weight: 300;
+  margin: 0 0 30px;
+  content: '';
+}
+
+header:not([role=banner]).application .application-content .heading-medium, header:not([role=banner]).application .application-content .heading-small {
   margin: 0;
   font-weight: 300;
 }
 
-.application .application-content .heading-tertiary {
+header:not([role=banner]).application .application-content .heading-tertiary {
   font-weight: 700;
 }
 
-.metadata {
+header:not([role=banner]) .metadata {
   font-size: 16px !important;
   letter-spacing: 0.005em !important;
   font-variant-numeric: proportional-nums !important;
 }
 
-.metadata a {
+header:not([role=banner]) .metadata a {
   text-decoration: underline;
 }
 
-.metadata dl {
+header:not([role=banner]) .metadata dl {
   clear: both;
 }
 
-.metadata dt {
+header:not([role=banner]) .metadata dt {
   white-space: nowrap;
   display: table-cell;
   padding-right: 10px;
@@ -2612,14 +2621,64 @@ details {
   min-width: 20%;
 }
 
-.metadata dd {
+header:not([role=banner]) .metadata dd {
   display: table-cell;
   max-width: 80%;
 }
 
-.metadata dd:last-child {
+header:not([role=banner]) .metadata dd:last-child {
   padding-bottom: 7px;
 }
+
+
+//.application {
+//  margin-bottom: 30px;
+//  background-color: #dee0e2;
+//  margin: 0px -9999rem;
+//  padding: 30px 9999rem;
+//}
+//
+//.application .application-content .heading-medium, .application .application-content .heading-small {
+//  margin: 0;
+//  font-weight: 300;
+//}
+//
+//.application .application-content .heading-tertiary {
+//  font-weight: 700;
+//}
+//
+//.metadata {
+//  font-size: 16px !important;
+//  letter-spacing: 0.005em !important;
+//  font-variant-numeric: proportional-nums !important;
+//}
+//
+//.metadata a {
+//  text-decoration: underline;
+//}
+//
+//.metadata dl {
+//  clear: both;
+//}
+//
+//.metadata dt {
+//  white-space: nowrap;
+//  display: table-cell;
+//  padding-right: 10px;
+//  float: left;
+//  clear: left;
+//  width: 130px;
+//  min-width: 20%;
+//}
+//
+//.metadata dd {
+//  display: table-cell;
+//  max-width: 80%;
+//}
+//
+//.metadata dd:last-child {
+//  padding-bottom: 7px;
+//}
 
 
 /* ==========================================================================
@@ -3226,5 +3285,43 @@ table.clickable tr:hover {
       -moz-box-shadow: inset 0px -5px 0px 0px $govuk-blue;
       box-shadow: inset 0px -5px 0px 0px $govuk-blue;
     }
+  }
+}
+
+
+/* ==========================================================================
+   #LABELS
+   ========================================================================== */
+.label ($label-background: $panel-colour, $label-border: $secondary-text-colour, $label-text: $text-colour) {
+  background: $label-background;
+  color: $white;
+  display: inline-block;
+  line-height: 1;
+  padding: 4px $space-sm 3px $space-sm;
+  margin: 0 calc(2 * #{$space-sm}) $space-sm $space-sm;
+  text-align: left;
+  text-decoration: none;
+  font-size: 1.5rem;
+  font-weight: normal;
+}
+.label {
+  @include label($secondary-text-colour, $text-colour)
+}
+.label--white {
+  @include label($page-colour)
+  color: $text-colour;
+  border: 1px solid $border-colour;
+}
+.label--blue {
+  @include label($link-colour, $link-colour)
+}
+
+.label--red {
+  @include label(#B10E1E, #B10E1E)
+}
+
+@media (max-width: 641px) {
+  .label, .label--white, .label--blue, .label--red {
+    font-size: 1.3rem;
   }
 }
