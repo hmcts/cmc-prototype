@@ -60,7 +60,7 @@ Check your answers
       </td>
       <td class="change-answer">
         <a
-          href="../task-list/claim-details/reason?return_page={{ '../../task-list/claim-details/check-your-answers' | urlencode }}">
+          href="../task-list/request-mediation?return_page={{ '../../task-list' | urlencode }}">
           Change <span class="visuallyhidden">Why you believe you're owed the money</span>
         </a>
       </td>
@@ -91,20 +91,17 @@ Check your answers
       </td>
       <td class="change-answer">
         <a
-          href="../task-list/claim-details/reason?return_page={{ '../../task-list/claim-details/check-your-answers' | urlencode }}">
+          href="../task-list/request-mediation?return_page={{ '../../task-list' | urlencode }}">
           Change <span class="visuallyhidden">Why you believe you're owed the money</span>
         </a>
       </td>
+      {% if data['resolve_dispute']=="complete" %}
       <tr>
         <td>
           Agree to all statements
         </td>
         <td>
-          {% if data['resolve_dispute']=="complete" %}
           Yes, I agree
-          {% else %}
-          No, I don't agree
-          {% endif %}
         </td>
         <td class="change-answer">
           <a href="../task-list/request-mediation/statements-all?return_page={{ '../../task-list' | urlencode }}">
@@ -136,6 +133,8 @@ Check your answers
           </a>
         </td>
       </tr>
+      {% else %}
+      {% endif %}
       </tbody>
     </table>
     </tr>
@@ -149,5 +148,6 @@ Check your answers
       <button id="submit" class="button">Submit response</button>
     </div>
   </form>
+{% include 'prototypes/prototype-oct-2018/includes/contact.html' %}
 </main>
 {% endblock %}

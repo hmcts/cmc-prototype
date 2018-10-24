@@ -1504,6 +1504,7 @@ Check your answers
 												</a>
 											</td>
 										</tr>
+                    {% if data['resolve_dispute']=="complete" %}
                     <tr>
                       <td>
                         Agree to all statements
@@ -1545,6 +1546,8 @@ Check your answers
                         </a>
                       </td>
                     </tr>
+                    {% else %}
+                    {% endif %}
 										</tbody>
 									</table>
 									{% endif %}
@@ -1641,15 +1644,18 @@ Check your answers
 	<input type="hidden" name="confirmation" value="16">
 	{% elseif data.radio_select_group=="paid" or data['check']== 9%}
 	<!--  R/C - I've dispute the claim + defence-->
-	<input type="hidden" name="confirmation" value="16">
-	{% elseif data.radio_select_group2=="defend_now" or data['check']== 12%}
-	<!-- R/C - I've dispute the claim + defence - mediation chosen -->
-	<input type="hidden" name="confirmation" value="14">
-	{% elseif data.radio_select_group2=="defend_now_cc" or data['check']== 13%}
-	<!-- R/C - I've dispute the claim + defence + counterclaim -->
-	<input type="hidden" name="confirmation" value="15">
-	{% else %}
-	<input type="hidden" name="confirmation" value="1">
+  <input type="hidden" name="confirmation" value="16">
+  {% elseif data.radio_select_group2=="defend_now" or data['check']== 12%}
+  <!-- R/C - I've dispute the claim + defence - mediation chosen -->
+  <input type="hidden" name="confirmation" value="14">
+  {% elseif data.radio_select_group2=="defend_now_cc" or data['check']== 13%}
+  <!-- R/C - I've dispute the claim + defence + counterclaim -->
+  <input type="hidden" name="confirmation" value="15">
+  <!--{% elseif data.radio_select_group2=="defend_now" and data.radio-indent-group=="No" %}-->
+  <!--&lt;!&ndash; R/C - I've dispute the claim + defence - opted out of mediation &ndash;&gt;-->
+  <!--<input type="hidden" name="confirmation" value="17">-->
+  {% else %}
+  <input type="hidden" name="confirmation" value="1">
 	{% endif %}
 	<div class="form-group">
 
@@ -1671,7 +1677,8 @@ Check your answers
 		<option  value="5" {% if data['check'] == 5 %}selected{% endif %}>3. P/A - I admit part of the claim & pay instalments</option>
 		<option  value="6" {% if data['check'] == 6 %}selected{% endif %}>4. P/A - I admit part of the claim & set date < 28 days - mediation chosen</option>
 		<option  value="9" {% if data['check'] == 9 %}selected{% endif %}>5. R/C - I've dispute the claim + defence</option>
-		<option  value="12" {% if data['check'] == 12 %}selected{% endif %}>6. R/C - I've dispute the claim + defence - mediation chosen</option>
+		<option  value="12" {% if data['check'] == 12 %}selected{% endif %}>6.1 R/C - I've dispute the claim + defence - mediation chosen</option>
+    <option  value="17" {% if data['check'] == 17 %}selected{% endif %}>6.2 R/C - I've dispute the claim + defence - mediation pilot (opted out)</option>
 		<option  value="8" {% if data['check'] == 8 %}selected{% endif %}>7. R/C - Paid what I owe - full amount paid</option>
 		<option  value="7" {% if data['check'] == 7 %}selected{% endif %}>8. R/C - Paid what I owe - less than claim amount paid </option>
 		<option  value="10" {% if data['check'] == 10 %}selected{% endif %}>9. Show business statement of truth</option>

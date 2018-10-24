@@ -255,6 +255,17 @@
 
 
               {% elseif data['claimant'] == 10.02 %}
+              <h2 class="heading-small">The defendant has rejected your settlement agreement</h2>
+              <p>You can request a County Court Judgment (CCJ) against them based on the repayment plan shown in the agreement.</p>
+              <p>The court will make an order requiring them to pay the money. It does not guarantee that they pay
+                it.</p>
+              <p>Mary Richards can still sign the settlement agreement until you request a CCJ.</p>
+              <p><a
+                href="applications-and-judgments/default-judgment/claim-amount-deduct?radio-indent-group=No&radio-proceed=not-signed"
+                class="button secondary-button" style="margin-bottom: 20px">Request a County Court Judgment (CCJ)</a>
+              </p>
+
+              {% elseif data['claimant'] == 10.03 %}
               <h2 class="heading-small">The defendant has not signed your settlement agreement</h2>
               <p>You can request a County Court Judgment (CCJ) against them based on the repayment plan shown in the agreement.</p>
               <p>The court will make an order requiring them to pay the money. It does not guarantee that they pay
@@ -609,9 +620,19 @@
               {% elseif data['claimant'] == 13.1 %}
               <div class="">
                 <h2 class="heading-small">Free mediation - content goes here </h2>
-                <p>	We'll contact you with a free mediation appointment.</p>
-                <p><a target="_blank" href="https://formfinder.hmctsformfinder.justice.gov.uk/ex730-eng.pdf">Find out how mediation
-                  works</a> <span class="font-xsmall">(opens in a new window)</span></p>
+                <p>	We'll contact you in the next 14 days to arrange a free mediation appointment.</p>
+                <a href="#">How mediation works</a>
+              </div>
+
+              {% elseif data['claimant'] == 13.2 %}
+              <div class="status-block single">
+                <h2 class="heading-small">Content - opted out of mediation</h2>
+                <p>You need to <a href="forms/dq-form">complete a directions questionnaire</a> form to tell us more
+                  about the claim.</p>
+                <p>Your claim won't proceed if you don't complete and return the form before 4pm on <span
+                  class="dates5"></span>.</p>
+                <p><a class="" href="../defendant/correspondence/forms/claim-form-defendant?check=9">Download their
+                  response</a> (PDF, 123KB)</p>
               </div>
 
               {% elseif data['claimant'] == 14 %}
@@ -735,7 +756,7 @@
 
             {% if data['claimant'] < 20 and data['claimant'] != 1.2 and data['claimant'] != 10.11 and data['claimant']
             != 10.111 and data['claimant']
-            != 10.12 and data['claimant'] != 10.121 and data['claimant'] != 10.02 and data['claimant'] != 10.01 and
+            != 10.12 and data['claimant'] != 10.121 and data['claimant'] != 10.01 and
             data['claimant'] != 10.4 and
             data['claimant'] != 10.5 and data['claimant'] != 10.81 and data['claimant'] != 10.82 and data['claimant']
             !=
@@ -776,8 +797,8 @@
         <ul role="navigation" class="font-xsmall list">
           <li><strong class="bold">Defendant name:</strong><br> <a href="party-details/defendant">Mary Richards</a>
           </li>
-          {% if data['claimant'] == 9.1 or data['claimant'] == 13.1 %}
-          <li><strong class="bold">Claim amount:</strong><br>£370</li>
+          {% if data['claimant'] == 9.1 or data['claimant'] == 13.1 or data['claimant'] == 13.2 %}
+          <li><strong class="bold">Claim amount:</strong><br>£300</li>
           {% else %}
           <li><strong class="bold">Claim amount:</strong><br>£1500</li>
           {% endif %}
@@ -793,6 +814,7 @@
       {% endif %}
     </div>
   </div>
+{% include 'prototypes/prototype-oct-2018/includes/contact.html' %}
 </main>
 <form method="post" action="#" class="form" style="position: absolute;">
   <select id="claimant2" name="claimant2" onchange="window.location.href='?claimant='+this.value">
@@ -853,7 +875,9 @@
     <option value="10.01" {% if data[
     'claimant'] == 10.01 %}selected{% endif %}>Accepted repayment plan - settlement - accepted</option>
     <option value="10.02" {% if data[
-    'claimant'] == 10.02 %}selected{% endif %}>Accepted repayment plan - settlement - not signed</option>
+    'claimant'] == 10.02 %}selected{% endif %}>Accepted repayment plan - settlement - rejected</option>
+    <option value="10.03" {% if data[
+    'claimant'] == 10.03 %}selected{% endif %}>Accepted repayment plan - settlement - not signed</option>
     <option value="10.11" {% if data[
     'claimant'] == 10.11 %}selected{% endif %}>Accepted repayment plan - judgment</option>
     <option value="10.4" {% if data[

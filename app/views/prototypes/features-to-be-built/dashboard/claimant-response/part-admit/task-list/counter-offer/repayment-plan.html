@@ -14,15 +14,17 @@ Money Claims Prototype
     <div class="column-two-thirds">
       <a href="#" class="link-back">Back</a>
       <h1 class="heading-large">
-
         Suggest instalments for the defendant
       </h1>
-      <p class="">Total claim amount is £1643.20.</p>
+
+    <p class="panel">The court will review your suggestion and may reject it if it's more than the defendant can afford.</p>
+    
+    <p class="">Total claim amount is £1643.20.</p>
 
 
     {% if data['defendant'] != 'org' %}
       <details class="form-group">
-        <summary>View full financial details</summary>
+        <summary>See their financial details</summary>
         <div class="panel">
           <table class="instalment-table">
             <tbody>
@@ -305,6 +307,7 @@ Money Claims Prototype
           </table>
         </div>
       </details>
+      {% endif %}
 
       <form action="court-offer" method="get" class="form">
 
@@ -328,11 +331,11 @@ Money Claims Prototype
 
 
 
-        <div class="heading-small">How often you want to receive the payments?</div>
+        <div class="heading-small">How often do you want to receive payments?</div>
         <p class="form-hint">The payment frequency is set by the defendant, but if the plan is set by a judge they will consider your preferred frequency.</p>
         <div class="form-group">
           <fieldset>
-            <legend class="visually-hidden">How often you want to receive the payments</legend>
+            <legend class="visually-hidden">How often do you want to receive payments?</legend>
             <div class="multiple-choice">
               <input id="radio-01" type="radio" name="radio-payment-frequency" value="Each week" {{ checked("radio-payment-frequency", "Each week") }}>
               <label for="radio-01" data-target="info-01">Every week</label>
@@ -388,20 +391,16 @@ Money Claims Prototype
     </div>
   </div>
 </main>
+{% include 'prototypes/prototype-oct-2018/includes/contact.html' %}
 
 <script>
   $(document).ready(function () {
     $('#instalment-first-payment, input[name=radio-payment-frequency]').change( function() {
-
       if ( $('#instalment-first-payment').val() && $("input[name=radio-payment-frequency]:checked").length ) {
-
         var intAmount = 1500;
         var strDuration = '';
-
         intRepayment = $('#instalment-first-payment').val();
-
         intInstalments = Math.ceil( intAmount / intRepayment);
-
         if ($('#radio-01').prop("checked")) {
           intDaysAway = 7;
         } else if ($('#radio-02').prop("checked")) {
@@ -411,29 +410,18 @@ Money Claims Prototype
         }
 
         intRepaymentDays = intDaysAway * intInstalments;
-        objDatePaid = moment().add(intRepaymentDays, 'days')
-        intYears = objDatePaid.diff( moment(), 'years' );
+        strFrequency = $('input[name=radio-payment-frequency]:checked').val();
 
-        if (intYears > 0 ) {
-          strDuration = intYears + ' year';
-          if (intYears > 1 ) {
-            strDuration += 's';
-          }
-          strDuration += ' ';
-          objDatePaid.subtract(intYears, 'years');
+        strDuration = intInstalments;
+        if (strFrequency == 'Each week' ) {
+          strDuration +=  ' weeks';
+        } else if (strFrequency == 'Every 2 weeks' ) {
+          strDuration =  intInstalments*2 + ' weeks';
+        } else {
+          strDuration +=  ' months';
         }
-        intMonths = objDatePaid.diff( moment(), 'months' );
 
-        if (intMonths) {
-          strDuration =  strDuration + intMonths + ' month';
-          if (intMonths > 1 ) {
-            strDuration += 's';
-          }
-        }
-      $('#duration').text( strDuration );
-  
-
-
+        $('#duration').text( strDuration );
       }
     })
   });
