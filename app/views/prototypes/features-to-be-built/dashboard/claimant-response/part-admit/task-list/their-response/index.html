@@ -30,9 +30,11 @@ Money Claims Prototype
       <p>Mary Richards admits they owe you  £{{ data['owe-amount'] or '1200' }}. They don't believe they owe the full amount claimed.</p>
 
       {% if data['radio-pay-group'] == 'Set-date' %}
-      </p><p>They've offered to pay you by {{ now | date( 'add', 3, 'months') | date }}.</p>
+      <p>They've offered to pay you by {{ now | date( 'add', 3, 'months') | date }}.</p>
+      {% elseif data['radio-pay-group'] == 'Immediately' %}
+      <p>They've offered to pay you immediately.</p>
       {% else %}
-      They've offered to pay you in instalments.</p>
+      <p>They've offered to pay you in instalments.</p>
       {% endif %}
 
     <h2 class="heading-medium">Their defence</h2>
