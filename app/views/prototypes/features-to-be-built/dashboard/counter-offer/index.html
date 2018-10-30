@@ -12,9 +12,15 @@ Money Claims Prototype
     <div class="column-two-thirds">
       <a href="#" class="link-back">Back</a>
 
-
         <h2 class="heading-large">The {% if data['offer'] == 'court' %}court's{% else %}claimant's{% endif %} repayment plan</h2>
 
+        {% if data['plan'] == 'immediate' %}
+        <p>{% if data['offer'] == 'court' %}The court has{% else %}They've{% endif %} suggested you pay immediately.</p>
+
+        {% elseif data['plan'] == 'set-date' %}
+        <p>{% if data['offer'] == 'court' %}The court has{% else %}They've{% endif %} suggested you pay in full by {{ now |  date("add", 13, "month") | date( "D MMMM YYYY" ) }}.</p>
+
+        {% else %}
         <p>{% if data['offer'] == 'court' %}The court has{% else %}They've{% endif %} suggested this repayment plan based on the financial details you gave:</p>
 
         <table class="instalment-table">
@@ -71,17 +77,24 @@ Money Claims Prototype
             </tr>
           </tbody>
         </table>
+
+        {% endif %}
+
         {% if data['admission'] == 'determination' %}
 
         <p>If you think you can't afford the repayment plan, you can <a href="../defendant/task-list/redetermination">ask a judge to make a new repayment plan</a>.</p>
 
         {% else %}
 
-
         {% if data['offer'] == 'court' %}
-        <p>The claimant has agreed to the court's plan and signed a settlement agreement based on the plan. </p>
+        <p>The claimant has agreed to the court's plan and signed a settlement agreement based on the plan. You can choose to sign the agreement or not.</p>
         {% else %}
-        <p>The claimant has signed a settlement agreement based on this plan. </p>
+        <p>The claimant signed a settlement agreement based on their plan. You can choose to sign the agreement or not.</p>
+        {% endif %}
+
+
+        {% if data['plan'] == 'immediate' %}
+        <p>If you sign you must pay within 5 days.</p>
         {% endif %}
 
         <p><a href="../defendant/task-list/settlement/sign?counter=yes&radio-pay-group=Instalments" class="button">Respond to settlement agreement</a></p>
@@ -90,9 +103,16 @@ Money Claims Prototype
         {% endif %}
 
 
-
     </div>
   </div>
-{% include 'prototypes/features-to-be-built/includes/contact.html' %}
+{% include 'prototypes/prototype-oct-2018/includes/contact.html' %}
 </main>
+<form method="post" action="#" class="form" style="position: absolute;">
+  <select  onchange="window.location.href='?plan='+this.value">
+    <option value="0">Plan type</option>
+    <option value="immediate" {% if data['plan'] == 'immediate' %}selected{% endif %}>Immediate payment</option>
+    <option value="set-date" {% if data['plan'] == 'set-date' %}selected{% endif %}>Pay by set date</option>
+    <option value="instalments" {% if data['plan'] == 'instalments' %}selected{% endif %}>Pay by instalments</option>
+  </select>
+</form>
 {% endblock %}
