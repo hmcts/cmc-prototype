@@ -14,15 +14,13 @@ Money Claims Prototype
     <div class="column-two-thirds">
       <a href="#" class="link-back">Back</a>
       <h1 class="heading-large">
-        How much do you want to enforce?
+        Recover judgment debt
       </h1>
 
-      <p>The balance outstanding on the judgment is <span>{% if data['radio-indent-group2']=="Yes" %}£1,443.2{%else%}£1,643.20{%endif%}</span>. The defendant was ordered to pay instalments of £120 every week.</p>
-
-      <ul class="list list-bullet">
-        <li>The minimum amount you can enforce is £480.</li>
-        <li>The maximum you can enforce is <span>{% if data['radio-indent-group2']=="Yes" %}£1,443.2{%else%}£1,643.20{%endif%}</span>, plus any costs awarded to you or fees you've previously paid to recover your money.</li>
-      </ul>
+      <div class="panel panel-border-wide">
+        <p>The balance outstanding on the judgment is £1,643.20. The defendant was ordered to pay instalments of £120
+          every week.</p>
+      </div>
 
       <details>
         <summary><span class="summary">View amount breakdown</span></summary>
@@ -87,151 +85,54 @@ Money Claims Prototype
         </div>
       </details>
 
-      <form class="form" action="{% if data['radio-proceed'] == " judgment
-      " %}../../../dashboard/claimant-response/admit-the-claim/task-list{% elseif data['radio-proceed'] == "judgment-pa"
-      %}../../../dashboard/claimant-response/part-admit/task-list {% elseif data['radio-proceed'] == 'not-signed'
-      %}check-your-anwsers{% else %}claimant-address{% endif %}" method="post">
-      <table class="table-form">
-        <caption class="visuallyhidden"></caption>
-        <thead>
-        <tr>
-          <th scope="col"></th>
-          <th class="numeric last" scope="col">Amount</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-          <th scope="row">Amount to enforce</th>
-          <td class="numeric last">
-            <label class="visuallyhidden" for="amount-value-1">Amount to enforce
-            </label>
-            <input class="fee pound" maxlength="10" size="7" type="text" id="amount-value-1" name="amount-value-1" value="">
-          </td>
-        </tr>
-        <!--{% if data['radio-proceed']=="judgment-pa" %}-->
-        <!--{% else %}-->
+      <h2 class="heading-medium">
+        How much do you want to enforce (Chris to revisit the word enforce)?
+      </h2>
 
-        <!--<tr>-->
-        <!--<th scope="row">-->
-        <!--<details>-->
-        <!--<summary>-->
-        <!--Interest to date-->
-        <!--</summary>-->
-        <!--<div class="panel text-small">-->
-        <!--Interest calculated at 8% since judgment is issued <br> <span class="font-xsmall">({{ now | date('subtract', 5, 'days' ) | date }} to {{ now | date }})</span>-->
-        <!--</div>-->
-        <!--</details>-->
-        <!--</th>-->
-        <!--<td class="numeric last">-->
-        <!--<label class="visuallyhidden" for="amount">Interest</label>-->
-        <!--<span class="font-small">£XX.XX</span>-->
-        <!--</td>-->
-        <!--</tr>-->
+      <form
+        name="aspnetForm"
+        method="post"
+        onsubmit="multiNavigation('enforce-amount', ['owe-all', 'owe-none', 'owe-some' ], [ 'claimant-address', 'claimant-address', 'claimant-address' ]);return false;"
+        id="aspnetForm"
+        autocomplete="off">
 
-        <tr>
-          <th scope="row">Issue fee</th>
-          <td class="numeric last">
-            <label class="visuallyhidden" for="fee">Issue fee</label>
-            <span class="font-small">£77</span>
-          </td>
-          <input type="text" hidden="" name="amount-value-2" id="amount-value-2" value="77"/>
-        </tr>
+        <div class="form-group">
+          <fieldset>
+            <div class="multiple-choice">
+              <input id="radio-owe-all" type="radio" name="enforce-amount" value="owe-all" onclick="$('#amount-owed').val(1643.20)" >
+              <label for="radio-owe-all">Full amount - £1,643.20</label>
+            </div>
 
-        <tr style="border-top: 3px solid #bfc1c3;">
-          <th scope="col" class="bold-medium">Total</th>
-          <td class="numeric last bold-medium">£<span id="totalSumDisplay"></span>
-          </td>
-          <input type="text" hidden="" value="" name="totalSum" id="totalSum" value=""/>
-        </tr>
+            <div class="multiple-choice">
+              <input id="radio-owe-none" type="radio" name="enforce-amount" value="owe-none" onclick="$('#amount-owed').val(480)" >
+              <label for="radio-owe-none">Minimum amount - £480</label>
+            </div>
 
-        <!--<tr>-->
-        <!--<th scope="col" class="bold-medium">Total</th>-->
-        <!--<td class="numeric last bold-medium">£<span name="fee" id="fee">77</span>-->
-        <!--</td>-->
-        <!--<input type="text" hidden="" value="" name="num3" id="num3"/>-->
-        <!--</tr>-->
+            <div class="multiple-choice" data-target="set-date">
+              <input id="radio-owe-some" type="radio" name="enforce-amount" value="owe-some" onclick="$('#amount-owed').val( $('owe-amount').val() | 150 )" >
+              <label for="radio-owe-some">Specify an amount</label>
+            </div>
+            <div class="panel panel-border-narrow js-hidden" id="set-date">
+              <label class="form-label" for="rate">How much?</label>
+              <input class="form-control timeline-column-4 fee pound" type="text" id="owe-amount" name="owe-amount" value="{{ data['owe-amount'] }}" onkeyup="$('#amount-owed').val(this.value)" >
+            </div>
+          </fieldset>
+        </div>
 
-        <!--{% endif %}-->
-        <!--{% if data['radio-indent-group2']=="Yes" %}-->
-        <!--<tr>-->
-        <!--<th scope="col" class="bold-small">Sub total</th>-->
-        <!--<td class="numeric last bold-small">£<span name="subt" id="subt">1443.20</span></td>-->
-        <!--<input type="text" hidden="" value="1443.20" name="num1" id="num1"/>-->
-        <!--</tr>-->
-        <!--<tr>-->
-        <!--<th scope="col">Minus amount already paid</th>-->
-        <!--<td class="numeric last">£200</td>-->
-        <!--</tr>-->
-        <!--<tr>-->
-        <!--<th scope="col" class="bold-medium">Total</th>-->
-        <!--<td class="numeric last bold-medium"><span name="subt" id="subt"></span></td>-->
-        <!--<input type="text" hidden="" value="" name="num1" id="num1"/>-->
-        <!--</tr>-->
+        <input type="hidden" name="amount-owed" id= "amount-owed" />
+        <input type="hidden" name="enforce-amount" value="complete" />
 
-        <!--{% else %}-->
+        <p>The fee to apply for a warrant of control is £77.</p>
 
-        <!--<tr>-->
-        <!--<th scope="col" class="bold-medium">Total</th>-->
-        <!--<td class="numeric last bold-medium">£<span name="subt" id="subt">77</span>-->
-        <!--</td>-->
-        <!--<input type="text" hidden="" value="" name="num1" id="num1"/>-->
-        <!--</tr>-->
-        <!--{% endif %}-->
+        <div class="form-group">
+          <input type="submit" class="button" value="Save and continue"/>
+        </div>
 
-
-        </tbody>
-      </table>
-
-      <input type="hidden" name="judgment" value="complete">
-      <input type="submit" value="Save and continue" class="button" onclick="return updateSums()">
       </form>
 
     </div>
-  </div>
-{% include 'prototypes/prototype-oct-2018/includes/contact.html' %}
+    <br>
+    <fieldset></fieldset>
+    {% include 'prototypes/prototype-oct-2018/includes/contact.html' %}
 </main>
-
-<script type="text/javascript">
-  (function numericInputsSum (targetSpanId, sourceInputsIds) {
-    var targetSpan = $('#' + targetSpanId)
-    var sourceInputs = []
-
-    function updateSums () {
-      var sum = 0.0
-      for (var i = 0; i < sourceInputs.length; i++) {
-        sum += getNumericValue(sourceInputs[i].val())
-      }
-      var x = parseFloat(sum, 10).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,').toString()
-
-      if (x.endsWith('.00')) {
-        x = x.replace('.00', '')
-      }
-
-      targetSpan.text(x)
-
-      $('#totalSum').val(x)
-      $('#counter-amount').val(x.replace(',', ''))
-      return true
-
-    }
-
-    function getNumericValue (value) {
-      var numeric = parseFloat(value)
-      return isNaN(numeric) ? 0 : numeric
-    }
-
-    for (var i = 0; i < sourceInputsIds.length; i++) {
-      var input = $('#' + sourceInputsIds[i])
-      if (input) {
-        sourceInputs.push(input)
-        input.keyup(function onNumericInputChanged () {
-          updateSums()
-        })
-      }
-    }
-    updateSums()
-  })('totalSumDisplay', ['amount-value-1', 'amount-value-2', 'amount-value-3', 'amount-value-4'])
-
-</script>
-
 {% endblock %}
