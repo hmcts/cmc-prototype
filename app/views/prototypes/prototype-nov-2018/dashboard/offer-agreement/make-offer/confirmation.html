@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="2" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+	{% include "includes/phase_banner_beta.html" %}
+	<div class="grid-row">
+		<div class="column-two-thirds">
+			<div class="govuk-box-highlight">
+				<h1 class="bold-large">We've sent your offer to {% if data['defendant'] == "defendant" %}Jan Clark {% elseif data['defendant'] == "claimant" %}Mary Richards {% else %}Jan Clark{% endif %} </h1>
+
+     <p>
+          <strong class="bold"><span id="Date2"></span></strong>
+        </p>
+				</div>
+			<fieldset>
+				<h2 class="heading-medium">What happens next</h2>
+				<p >{% if data['defendant'] == "defendant" %}Jan Clark {% elseif data['defendant'] == "claimant" %}Mary Richards {% else %}Jan Clark{% endif %} can accept or reject your offer. We'll email you when they respond.</p>
+  {% include "includes/survey.html" %}
+
+          <p><a class="button" href='../../home?dashboard=2.1'>Go to your account</a></p>
+
+  {% include "includes/contact.html" %}
+
+			</fieldset>
+
+		</div>
+	</div>
+{% include 'prototypes/prototype-nov-2018/includes/contact.html' %}
+</main>
+{% endblock %}
