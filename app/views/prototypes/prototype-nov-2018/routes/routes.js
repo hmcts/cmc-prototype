@@ -277,6 +277,7 @@ module.exports = function(app){
       }
 
     req.session.data['do_you_owe_money'] = 'complete';
+
     res.redirect( '../../../claimant/task-list/claim-amount-alt/total' );
   })
 
@@ -286,9 +287,14 @@ module.exports = function(app){
 
     if ( req.session.data['counterclaim-proceed'] == 'no' ) {
           req.session.data['counter'] = 'NOT-PROCEED';
-    }
+    } 
 
-    res.redirect( '../../../defendant/task-list' );
+    if (req.session.data['counter-amount'] > ( (req.session.data['amount-owed']*1) + 10000 ) && req.session.data['counterclaim-proceed'] == 'yes'  ) {
+      res.redirect('/' + strPath + 'defendant/task-list/do-you-owe-money/counter-amount-handoff');
+    } else {
+      res.redirect('/' + strPath + 'defendant/task-list' );
+    }
+    
   })
 
 
