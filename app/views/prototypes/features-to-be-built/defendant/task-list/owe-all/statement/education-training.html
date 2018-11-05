@@ -26,9 +26,9 @@ Money Claims Prototype
           <label class="form-label" for="number-of-children">Enter number</label>
           <input class="form-control form-control-1-8" type="text" name="number-of-children">
         </div>
-        <form action="child-disabled" method="post" class="form">
+        <form action="{%if ( data['radio-disabled'] == 'Yes' and data['radio-partner-disabled'] == 'Yes' ) or data['radio-disabled-severe'] == 'Yes' %}adult-dependants{% else %}child-disabled{% endif %}" method="post" class="form">
           {% else %}
-          <script>window.location.href = "child-disabled";</script>
+          <script>window.location.href = "{%if ( data['radio-disabled'] == 'Yes' and data['radio-partner-disabled'] == 'Yes' ) or data['radio-disabled-severe'] == 'Yes' %}adult-dependants{% else %}child-disabled{% endif %}";</script>
           {% endif %}
           <div class="form-group">
             <input type="submit" class="button" value="Save and continue"/>
