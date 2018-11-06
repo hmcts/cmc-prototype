@@ -12,7 +12,7 @@ Money Claims Prototype
       <form
       name="aspnetForm"
       method="GET"
-      onsubmit="multiNavigation('radio_group4', ['hwf_yes','hwf_no'], ['result?a=hwf&', 'multiple-defendant']);return false;"
+      onsubmit="multiNavigation('radio_group4', ['hwf_yes','hwf_no'], ['counter-hwf-handoff', '../../task-list']);return false;"
       id="aspnetForm"
       autocomplete="off">
       {{formData | safe}}
@@ -20,16 +20,10 @@ Money Claims Prototype
 
       {% include "prototypes/prototype-nov-2018/includes/hwf.html" %}
 
-      {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}
       <div class="form-group">
         <input type="submit" class="button" value="Save and continue"/>
       </div>
-      <a href="{{ data.return_page if data.return_page | length > 0 else '../task-list' }}">Cancel</a>
-      {% else %}
-      <div class="form-group">
-        <input type="submit" class="button" value="Save and continue"/>
-      </div>
-      {% endif %}
+
     </form>
   </div>
 </div>
