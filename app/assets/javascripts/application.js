@@ -628,7 +628,23 @@ function tabGroup2 (tableObj, which) {
   }
 }
 
+/* TABS PATTERN */
+function tabGroup3 (tableObj, which) {
+  tabH = 'TAB-ONE'
+  tabI = 'TAB-TWO'
 
+  if (which == tabH) {
+    document.getElementById('tabH').className = 'tab-on'
+    document.getElementById('tabI').className = 'tab'
+    document.getElementById('tabOneContent').style.display = 'block'
+    document.getElementById('tabTwoContent').style.display = 'none'
+  } else if (which == tabI) {
+    document.getElementById('tabH').className = 'tab'
+    document.getElementById('tabI').className = 'tab-on'
+    document.getElementById('tabOneContent').style.display = 'none'
+    document.getElementById('tabTwoContent').style.display = 'block'
+  }
+}
 
 /* LISTS - EXPANDABLE ROW PATTERN */
 row1status = true
@@ -785,11 +801,11 @@ Casefile.prototype.onButtonCommentsClick = function (e) {
 // });
 
 $("#claim-details-single").click(function(){
-  window.location = "claim-details";
+  window.location = "claim-details-timeline";
 });
 
 $("#claim-details-multi").click(function(){
-  window.location = "claim-details-multi-parties2";
+  window.location = "claim-details-multi-parties";
 });
 
 
@@ -802,3 +818,35 @@ $("#claim-details-multi").click(function(){
      target.parents('li').addClass('active');
      target.parents().find('h1:first').text($(this).text());
  });
+
+/* updates toggle */
+function ShowHideUpdates () {
+  var self = this;
+
+  self.toggleUpdates = function() {
+    var $updatesContainer = $('.updates-container');
+    var $i = $('.updates-toggle i');
+    $i.on('click', function() {
+      var $this = $(this);
+      if ($this.hasClass('fa-caret-right')) {
+        $this.removeClass('fa-caret-right');
+        $this.addClass('fa-caret-down');
+        $this.find('span').text('Hide previous updates');
+        $updatesContainer.css('display', 'block');
+      } else {
+        $this.removeClass('fa-caret-down');
+        $this.addClass('fa-caret-right');
+        $this.find('span').text('View previous updates');
+        $updatesContainer.css('display', 'none');
+      }
+    })
+  }
+}
+
+$(document).ready(function () {
+  var showHideUpdates =  new ShowHideUpdates();
+  showHideUpdates.toggleUpdates();
+  tabs();
+});
+
+
