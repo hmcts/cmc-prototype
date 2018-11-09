@@ -503,14 +503,14 @@ $( document ).ready(function() {
 
 	    $('#continue-button').removeClass('button');
 	    $('#continue-button').addClass('secondary-button');
-	    $('#find-button').click(function(e){
+	    $('.find-button').click(function(e){
 	      e.preventDefault();
 	      showSelectAddress();
 	    });
 	      $('#continue-button').click(function(e){
 	        e.preventDefault();
-	        $('#select-address').addClass('error');
-	        $('#select-address .error-message').show();
+	        $('.select-address').addClass('error');
+	        $('.select-address .error-message').show();
 	      });
 	    $('#postcode-seach-error').hide();
 	}
@@ -519,23 +519,23 @@ $( document ).ready(function() {
 
 });
 
-function showSelectAddress() {
+function showSelectAddress( strPrefix ) {
 
-    $('#address-select-container').removeClass('error');
-    $('#address-select-container .error-message').hide();
-    $('#enter-manually').show();
+    $('#' + strPrefix + '_address-select-container').removeClass('error');
+    $('#' + strPrefix + '_address-select-container .error-message').hide();
+    $('#' + strPrefix + '_enter-manually').show();
 
-  if ( $('#postcode').val().toUpperCase().indexOf('BT') === 0 ) {
+  if ( $('#' + strPrefix + '_postcode').val().toUpperCase().indexOf('BT') === 0 ) {
 
-    $('#country').val( 'Northern Ireland' );
-    $('#postcode-seach-ni-error').show();
-    $('#select-address').hide();
-    showManaulEntry();
+    $('#' + strPrefix + '_country').val( 'Northern Ireland' );
+    $('#' + strPrefix + '_postcode-seach-ni-error').show();
+    $('#' + strPrefix + '_select-address').hide();
+    showManaulEntry( strPrefix );
 
   } else {
 
       $.ajax({
-        url: "/postcode-lookup?postcode=" + encodeURIComponent($('#postcode').val()),
+        url: "/postcode-lookup?postcode=" + encodeURIComponent($('#' + strPrefix + '_postcode').val()),
         method: "GET",
         success: function(data, status, xhr){
           if(status === "success" && data.length){
@@ -552,26 +552,26 @@ function showSelectAddress() {
               html += '<option value="' + formatted_address.join(', ').trim() + '">' + formatted_address.join(', ').trim() + '</option>';
             });
 
-            $('#addressList').html(html);
+            $('#' + strPrefix + '_addressList').html(html);
 
-            $('.postcode-as-text p').html($('#postcode').val());
-            $('#enter-postcode').hide();
-            $('#select-address').show();
-            $('#selected-address').hide();
-            $('#manual-address').hide();
-            $('#postcode-seach-error').hide();
-            $('#postcode-seach-ni-error').hide();
-            $('#continue-button').unbind('click').click(function(e){
+            $('.postcode-as-text p').html($('#' + strPrefix + '_postcode').val());
+            $('#' + strPrefix + '_enter-postcode').hide();
+            $('#' + strPrefix + '_select-address').show();
+            $('#' + strPrefix + '_selected-address').hide();
+            $('#' + strPrefix + '_manual-address').hide();
+            $('#' + strPrefix + '_postcode-seach-error').hide();
+            $('#' + strPrefix + '_postcode-seach-ni-error').hide();
+            $('#' + strPrefix + '_continue-button').unbind('click').click(function(e){
               e.preventDefault();
-              $('#address-select-container').addClass('error');
-              $('#address-select-container .error-message').show();
+              $('#' + strPrefix + '_address-select-container').addClass('error');
+              $('#' + strPrefix + '_address-select-container .error-message').show();
             });
 
           } else {
 
-            $('#postcode-seach-error').show();
-            $('#postcode-seach-ni-error').hide();
-            showManaulEntry();
+            $('#' + strPrefix + '_postcode-seach-error').show();
+            $('#' + strPrefix + '_postcode-seach-ni-error').hide();
+            showManaulEntry( strPrefix );
 
           }
 
@@ -580,11 +580,11 @@ function showSelectAddress() {
       });
 
       $.ajax({
-        url: "/country-lookup?postcode=" + encodeURIComponent($('#postcode').val()),
+        url: "/country-lookup?postcode=" + encodeURIComponent($('#' + strPrefix + '_postcode').val()),
         method: "GET",
         success: function(data, status, xhr){
 
-            $('#country').val( data.country.name );
+            $('#' + strPrefix + '_country').val( data.country.name );
       },
         dataType: 'JSON'
 
@@ -592,65 +592,64 @@ function showSelectAddress() {
     }
   }
 
- function showSelectedAddress() {
-    $('#address-select-container').removeClass('error');
-    $('#address-select-container .error-message').hide();
-    $('#enter-postcode').hide();
-    $('#select-address').show();
-    $('#selected-address').hide();
-    $('#manual-address').show();
+ function showSelectedAddress( strPrefix ) {
+    $('#' + strPrefix + '_address-select-container').removeClass('error');
+    $('#' + strPrefix + '_address-select-container .error-message').hide();
+    $('#' + strPrefix + '_enter-postcode').hide();
+    $('#' + strPrefix + '_select-address').show();
+    $('#' + strPrefix + '_selected-address').hide();
+    $('#' + strPrefix + '_manual-address').show();
   }
 
-  function updateAddress(address) {
-    showSelectedAddress();
-    var addresses = $('#addressList').val().split(', ');
-    $("#street-1").val(addresses[0]);
-    $("#street-2").val(addresses[1]);
-    $("#town").val(addresses[2]);
-    $("#postcode-full, #postcode-full-auto").val(addresses[3]);
-    $('#continue-button').unbind('click');
-    $('#find-button').addClass('secondary-button');
-    $('#continue-button').removeClass('secondary-button');
-    $('#continue-button').addClass('button');
-    $('#enter-manually').show();
+  function updateAddress( address, strPrefix ) {
+    showSelectedAddress( strPrefix );
+    var addresses = $('#' + strPrefix + '_addressList').val().split(', ');
+    $('#' + strPrefix  + "_street-1").val(addresses[0]);
+    $('#' + strPrefix  + "_street-2").val(addresses[1]);
+    $('#' + strPrefix  + "_town").val(addresses[2]);
+    $('#' + strPrefix  + "_postcode-full, #" + strPrefix  + "_postcode-full-auto").val(addresses[3]);
+    $('#' + strPrefix + '_continue-button').unbind('click');
+    $('#' + strPrefix + '_find-button').addClass('secondary-button');
+    $('#' + strPrefix + '_continue-button').removeClass('secondary-button');
+    $('#' + strPrefix + '_continue-button').addClass('button');
+    $('#' + strPrefix + '_enter-manually').show();
   }
 
-  function showAbroadAddress() {
-    $('#street-label').html('Address');
-    $('#postcode-label').html('Postal/ZIP code');
-    $('#manual-address').show();
-    $('#country').attr('type', 'text');
-    $('#manual-address').addClass( 'abroad' );
-    $('#enter-manually').hide();
-    $('#postcode-finder').hide();
-    $('#enter-automatic').show();
-    $('#select-address').hide();
+  function showAbroadAddress( strPrefix ) {
+    $('#' + strPrefix + '_street-label').html('Address');
+    $('#' + strPrefix + '_postcode-label').html('Postal/ZIP code');
+    $('#' + strPrefix + '_manual-address').show();
+    $('#' + strPrefix + '_country').attr('type', 'text');
+    $('#' + strPrefix + '_manual-address').addClass( 'abroad' );
+    $('#' + strPrefix + '_enter-manually').hide();
+    $('#' + strPrefix + '_postcode-finder').hide();
+    $('#' + strPrefix + '_enter-automatic').show();
+    $('#' + strPrefix + '_select-address').hide();
 
-    $('#continue-button').unbind('click');
-    $('#continue-button').removeClass('secondary-button');
-    $('#continue-button').addClass('button');
+    $('#' + strPrefix + '_continue-button').unbind('click');
+    $('#' + strPrefix + '_continue-button').removeClass('secondary-button');
+    $('#' + strPrefix + '_continue-button').addClass('button');
     return false
   }
 
- function showPostcodeLookup() {
-    $('#manual-address').hide();
-    $('#enter-manually').show();
-    $('#postcode-finder').show();
-    $('#enter-automatic').hide();
+ function showPostcodeLookup( strPrefix ) {
+    $('#' + strPrefix + '_manual-address').hide();
+    $('#' + strPrefix + '_enter-manually').show();
+    $('#' + strPrefix + '_postcode-finder').show();
+    $('#' + strPrefix + '_enter-automatic').hide();
 
     return false
   }
 
 
-  function showManaulEntry() {
-    $('#manual-address').show();
-
-    $("#postcode-full").val( $('#postcode').val() );
-
-    $('#continue-button').unbind('click');
-    $('#find-button').addClass('secondary-button');
-    $('#continue-button').removeClass('secondary-button');
-    $('#continue-button').addClass('button');
+  function showManaulEntry( strPrefix ) {
+    console.log(strPrefix);
+    $('#' + strPrefix + '_manual-address').show();
+    $('#' + strPrefix  + "_postcode-full").val( $('#' + strPrefix + '_postcode').val() );
+    $('#' + strPrefix + '_continue-button').unbind('click');
+    $('#' + strPrefix + '_find-button').addClass('secondary-button');
+    $('#' + strPrefix + '_continue-button').removeClass('secondary-button');
+    $('#' + strPrefix + '_continue-button').addClass('button');
     return false;
 
   }
