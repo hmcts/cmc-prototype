@@ -612,7 +612,7 @@ function showSelectAddress( strPrefix ) {
     $('#' + strPrefix + '_find-button').addClass('secondary-button');
     $('#' + strPrefix + '_continue-button').removeClass('secondary-button');
     $('#' + strPrefix + '_continue-button').addClass('button');
-    $('#' + strPrefix + '_enter-manually').show();
+    $('#' + strPrefix + '_enter-manually').hide();
   }
 
   function showAbroadAddress( strPrefix ) {
