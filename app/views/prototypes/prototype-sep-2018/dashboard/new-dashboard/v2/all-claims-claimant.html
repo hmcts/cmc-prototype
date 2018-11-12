@@ -43,12 +43,12 @@ Money Claims Prototype
             <div class="form-group">
               <fieldset class="inline">
                 <legend class="visuallyhidden">
-                  Search for a claim using claim number or name
+                  Search for a claim using defendant name or claim number
                 </legend>
                 <label class="heading-medium" for="search">
                   Search
                   <span class="form-hint">
-for example claim number or name
+for example defendant's name or claim number
 </span>
                 </label>
                 <input type="text" class="form-control" id="search" name="search"
@@ -125,14 +125,11 @@ Claims you've made
 </span>
                 <span class="claim-count">
 Showing
-X claims of X
+1 claims of 3
 </span>
               </caption>
               <thead>
               <tr>
-                <th scope="col">
-                  <a tabindex="0" href="#listanchor" style="font-size: medium">Claim number</a>
-                </th>
                 <th scope="col">
                   <span style="font-size: medium">Defendant</span>
                 </th>
@@ -140,17 +137,12 @@ X claims of X
                   <a tabindex="0"
                      href="#listanchor" style="font-size: medium">Claim amount</a>
                 </th>
-                <!--<th class="numeric" scope="col">-->
-                  <!--<a class="current asc" tabindex="0"-->
-                     <!--href="#listanchor">Date-->
-                    <!--issued ▼</a>-->
-                <!--</th>-->
-                <th scope="col">
-                  <a class="current asc" tabindex="0"
-                     href="#listanchor" style="font-size: medium">Last updated ▲</a>
-                </th>
                 <th scope="col">
                   <a tabindex="0" href="#listanchor" style="font-size: medium">Action required</a>
+                </th>
+                <th scope="col">
+                  <a class="current asc" tabindex="0"
+                     href="#listanchor" style="font-size: medium">Deadline ▲</a>
                 </th>
                 <th scope="col">
                   <a tabindex="0" href="#listanchor"></a>
@@ -161,28 +153,24 @@ X claims of X
               <tr class="mobile-sort">
                 <td colspan="10">
                   Sort by:
-                  <a tabindex="0" href="#listanchor">Claim number</a>
                   <a tabindex="0" href="#listanchor">Defendant</a>
                   <a tabindex="0" href="#listanchor">Claim amount</a>
-                  <a class="current asc" tabindex="0" href="#listanchor">Last updated ▲</a>
                   <a tabindex="0" href="#listanchor">Action required</a>
+                  <a class="current asc" tabindex="0" href="#listanchor">Deadline ▲</a>
                   <!--<a tabindex="0" href="#listanchor"></a>-->
               </tr>
               <!--claim 01-->
               <tr class="draft" id="claim_01">
-                <td aria-label="Case number">
-                  -
-                </td>
                 <td aria-label="Defendants">
                   Michael Jones
                 </td>
                 <td aria-label="Claimed" class="numeric claimed-amount">
                   £2,000
                 </td>
-                <td aria-label="Date submitted">
-                  20 Mar 2018
-                </td>
                 <td aria-label="Action required">
+                  -
+                </td>
+                <td aria-label="Deadline">
                   -
                 </td>
                 <!--<td aria-label="Status" scope="row">-->
@@ -196,22 +184,19 @@ X claims of X
               </tr>
               <!--claim 02-->
               <tr class="submitted" id="claim_02">
-                <td aria-label="Case number">
-                  <!--<a class="js-test-case-number-link" href="">000LR095</a>-->
-                  352MC733
-                </td>
                 <td aria-label="Defendants">
-                  Mary Richards
+                  Mary Richards<br>
+                  <span class="font-xsmall">352MC733</span>
                 </td>
                 <td aria-label="Claimed" class="numeric claimed-amount">
                   £1,500
                 </td>
-                <td aria-label="Date submitted">
-                  5 Mar 2018
-                </td>
                 <td aria-label="Action required">
-                  Respond to defendant<br>
-                  <!--<span class="font-xsmall"></span>-->
+                  Complete directions questionnaire
+                </td>
+                <td aria-label="Deadline">
+                  {{ now | date('add', -2, 'days') | date }}<br>
+                  <span class="font-xsmall" style="color: #B10E1E; font-weight: bold">2 days left</span>
                 </td>
                 <!--<td aria-label="Status" scope="row">-->
                   <!--<span class="state state-submitted">-->
@@ -224,13 +209,9 @@ X claims of X
               </tr>
               <!--claim 03-->
               <tr class="submitted" id="claim_03">
-                <td aria-label="Case number">
-                  <!--<a class="js-test-case-number-link" href="">000LR095</a>-->
-                  000LR023
-                </td>
                 <td aria-label="Defendants">
-                  Goddard Plumbing<br>
-                  <span class="font-xsmall">+ 2 others</span>
+                  Goddard Plumbing <span class="font-xsmall">+2 others</span><br>
+                  <span class="font-xsmall">000LR023</span>
                 </td>
                 <td aria-label="Claimed" class="numeric claimed-amount">
                   £8,000
@@ -239,8 +220,8 @@ X claims of X
                   3 Mar 2018
                 </td>
                 <td aria-label="Action required">
-                  Respond to defendant<br>
-                  <!--<span class="font-xsmall">5 days left</span>-->
+                  Complete directions <br>questionnaire form<br>
+                  <span class="font-xsmall" style="color: #B10E1E; font-weight: bold">2 days left</span>
                 </td>
                 <!--<td aria-label="Status" scope="row">-->
                   <!--<span class="state state-submitted">-->
@@ -253,13 +234,9 @@ X claims of X
               </tr>
               <!--claim 04-->
               <tr class="submitted" id="claim_04">
-                <td aria-label="Case number">
-                  <!--<a class="js-test-case-number-link" href="">000LR095</a>-->
-                  000LR011
-                </td>
                 <td aria-label="Defendants">
-                  Kingsley Building Ltd<br>
-                  <span class="font-xsmall">+ 1 other</span>
+                  Kingsley Building Ltd <span class="font-xsmall">+1 other</span><br>
+                  <span class="font-xsmall">000LR011</span>
                 </td>
                 <td aria-label="Claimed" class="numeric claimed-amount">
                   £5,000

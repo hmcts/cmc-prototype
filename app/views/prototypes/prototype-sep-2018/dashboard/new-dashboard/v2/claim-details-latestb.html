@@ -56,9 +56,11 @@ Money Claims Prototype
 
     <div class="column-two-thirds">
 
-      <div class="tabGroup3" style="margin-top: 40px">
-        <a id="tabH" class="tab-on" onclick="tabGroup3(tabContent, 'TAB-ONE')" href="javascript: void(0)">Next steps</a>
-        <a id="tabI" class="tab" onclick="tabGroup3(tabContent, 'TAB-TWO')" href="javascript: void(0)">About claim</a>
+      <div class="tabGroup2" style="margin-top: 40px">
+        <a id="tabE" class="tab-on" onclick="tabGroup2(tabContent, 'TAB-ONE')" href="javascript: void(0)">Next steps</a>
+        <a id="tabF" class="tab" onclick="tabGroup2(tabContent, 'TAB-TWO')" href="javascript: void(0)">About claim</a>
+        <a id="tabG" class="tab" onclick="tabGroup2(tabContent, 'TAB-THREE')" href="javascript: void(0)">Claim
+          history</a>
         <hr style="margin-top: -2px">
       </div>
 
@@ -67,9 +69,9 @@ Money Claims Prototype
         <div id="tabOneContent">
           <div class="description">
             <!--Action one-->
-              <h4 class=" heading-small">Settling out of court</h4>
-              <p>Mary Richards made an offer to settle out of court. If you accept the offer, you can make a legal agreement between you and Mary Richards and resolve your dispute before a hearing.</p>
-              <p><a href="http://hmcts-cmc-prototype.herokuapp.com/prototypes/prototype-nov-2018/dashboard/offer-agreement/view-offer?defendant=offer">View their offer</a></p>
+            <h4 class=" heading-small">Settling out of court</h4>
+            <p>Mary Richards made an offer to settle out of court. If you accept the offer, you can make a legal agreement between you and Mary Richards and resolve your dispute before a hearing.</p>
+            <p><a href="http://hmcts-cmc-prototype.herokuapp.com/prototypes/prototype-nov-2018/dashboard/offer-agreement/view-offer?defendant=offer">View their offer</a></p>
 
           </div>
 
@@ -90,64 +92,6 @@ Money Claims Prototype
             </details>
           </div>
 
-          <div class="divider" style="margin-top: -40px"></div>
-
-          <div class="description" style="background-color: #fff">
-            <h4 class="bold-small">Latest update</h4>
-            <time style="color: grey">{{ now | date('add', 0, 'days') | date }}</time>
-            <p>Mary Richards made an offer to settle out of court.</p>
-
-            <fieldset></fieldset>
-
-            <!-- Previous updates -->
-            <div class="updates-toggle" style="margin-top: -20px">
-              <i class="fa fa-caret-right" aria-hidden="true"><span>View previous updates</span></i>
-            </div>
-
-            <div class="updates-container">
-              <div class="update">
-                <h4 class="bold-small">Your response was sent</h4>
-                <time style="color: grey">{{ now | date('add', -13, 'days') | date }}</time>
-                <p>You rejected the defendant's defence and opt out of mediation.</p>
-                <!--<p>You need to complete a directions questionnaire form to tell us more about the claim.</p>-->
-                <!--<p>Your claim won't proceed if you don't complete and return the form before 4pm on 13 Nov 2018.</p>-->
-              </div>
-
-              <div class="update">
-                <h4 class="bold-small">The defendant responded</h4>
-                <time style="color: grey">{{ now | date('add', -16, 'days') | date }}</time>
-                <p>Mary Richards rejected your claim. The claim has been automatically registered for free telephone
-                  mediation.</p>
-                <p>If you reject their response, we'll contact you with an appointment unless you choose to opt out of
-                  mediation.</p>
-
-                <!--<ul class="hmcts-timeline__documents">-->
-                <!--<li class="hmcts-timeline__document-item"><a class="hmcts-timeline__document-link" href="#1">Defendant’s response</a></li>-->
-                <!--</ul>-->
-                <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=9">Download their response</a>
-                  (PDF, 123KB)</p>
-              </div>
-              <div class="update">
-                <h4 class="bold-small">The defendant requested more time to respond</h4>
-                <time style="color: grey">{{ now | date('add', -27, 'days') | date }}</time>
-                <p>Mary Richards requested an extra 14 days to respond. They need to respond by {{ now | date('add',
-                  -13, 'days') | date }}</p>
-              </div>
-              <div class="update">
-                <h4 class="bold-small">Your claim was sent</h4>
-                <time style="color: grey">{{ now | date('add', -30, 'days') | date }}</time>
-                <p>Mary Richards has until before 4pm on 31 March 2018 to respond. They can request an extra 14 days if
-                  they need it.</p>
-
-                <!--<ul class="hmcts-timeline__documents">-->
-                <!--<li class="hmcts-timeline__document-item"><a class="hmcts-timeline__document-link" href="#1">Claim form</a></li>-->
-                <!--</ul>-->
-                <p><a href="#">Download claim form</a>
-                  (PDF, 123KB)</p>
-              </div>
-            </div>
-            <!-- End previous updates -->
-          </div>
         </div>
 
         <div id="tabTwoContent">
@@ -220,9 +164,82 @@ Money Claims Prototype
 
         </div>
 
+        <div id="tabThreeContent">
+          <!--<h3 class="heading-medium">Claim history</h3><br>-->
+          <div class="hmcts-timeline" style="margin-top: 50px">
+            <div class="hmcts-timeline__item">
+              <div class="hmcts-timeline__header">
+                <h2 class="hmcts-timeline__title">The defendant made an offer</h2>
+                <!--<p class="hmcts-timeline__by">by Mary Richards (defendant)</p>-->
+              </div>
+              <p class="hmcts-timeline__date">
+                <time style="color: grey">{{ now | date('add', 0, 'days') | date }}</time>
+              <p>Mary Richards made an offer to settle out of court.</p>
+            </div>
+            <div class="hmcts-timeline__item">
+              <div class="hmcts-timeline__header">
+                <h2 class="hmcts-timeline__title">Your response was sent</h2>
+                <!--<p class="hmcts-timeline__by">by Mary Richards (defendant)</p>-->
+              </div>
+              <!--Agreed to mediation-->
+              <!--<p class="hmcts-timeline__date">-->
+              <!--<time style="color: grey">{{ now | date('add', -13, 'days') | date }}</time>-->
+              <!--<p>You've rejected Mary Richard's response.</p>-->
+              <!--<p>You've agreed to try mediation. We'll contact you in the next 14 days to arrange a free mediation appointment.</p>-->
+              <!--<p><a href="" style="margin-bottom: 10px">How mediation works</a></p>-->
+              <!--</p>-->
+              <!--DQ stage-->
+              <p class="hmcts-timeline__date">
+                <time style="color: grey">{{ now | date('add', -13, 'days') | date }}</time>
+              <p>You rejected the defendant's defence and opt out of mediation.</p>
+              <!--<p>You need to complete a directions questionnaire form to tell us more-->
+              <!--about the claim.</p>-->
+              <!--<p>Your claim won't proceed if you don't complete and return the form before 4pm on <span-->
+              <!--class="dates5"></span>.</p>-->
+            </div>
+            <div class="hmcts-timeline__item">
+              <div class="hmcts-timeline__header">
+                <h2 class="hmcts-timeline__title">The defendant responded</h2>
+                <!--<p class="hmcts-timeline__by">by Mary Richards (defendant)</p>-->
+              </div>
+              <p class="hmcts-timeline__date">
+                <time style="color: grey">{{ now | date('add', -16, 'days') | date }}</time>
+              <p>Mary Richards rejected your claim. The claim has been automatically registered for free telephone
+                mediation.</p>
+              <p>If you reject their response, we'll contact you with an appointment unless you choose to opt out of
+                mediation.</p>
+              <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=9">Download their response</a>
+                (PDF, 123KB)</p>
+            </div>
+            <div class="hmcts-timeline__item">
+              <div class="hmcts-timeline__header">
+                <h2 class="hmcts-timeline__title">The defendant requested more time to respond</h2>
+                <!--<p class="hmcts-timeline__by">by Mary Richards (defendant)</p>-->
+              </div>
+              <p class="hmcts-timeline__date">
+                <time style="color: grey">{{ now | date('add', -27, 'days') | date }}</time>
+              <p>Mary Richards requested an extra 14 days to respond. They need to respond by {{ now | date('add',
+                -13, 'days') | date }}</p>
+              </p>
+            </div>
+            <div class="hmcts-timeline__item">
+              <div class="hmcts-timeline__header">
+                <h2 class="hmcts-timeline__title">Your claim was sent</h2>
+                <!--<p class="hmcts-timeline__by">by you (claimant)</p>-->
+              </div>
+              <p class="hmcts-timeline__date">
+                <time style="color: grey">{{ now | date('add', -30, 'days') | date }}</time>
+              </p>
+              <p>Mary Richards has until before 4pm on 31 March 2018 to respond. They can request an extra 14 days if
+                they need it.</p>
+              <p><a href="#">Download claim form</a>
+                (PDF, 123KB)</p>
+            </div>
+          </div>
+        </div>
       </div>
-
     </div>
+
 
     <div class="column-one-third">
       <div class="right-column-nav">
@@ -231,7 +248,6 @@ Money Claims Prototype
         <p></p><a href="">Tell us you've settled</a></p>
         <p></p><a href="">Stopping the claim</a></p>
       </div>
-
     </div>
 </main>
 
