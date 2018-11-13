@@ -9,89 +9,75 @@ Money Claims Prototype
 
 <main id="content" role="main">
 
-  <script>
-    $(document).ready(function () {
-      $('#your-offer').html(formParam('offer'));
-    });
-  </script>
-
-  <div class="phase-banner-alpha">
-    <p>
-      <strong class="phase-tag">BETA</strong>
-      <span>This is a new service – your <a href="#">feedback</a> will help us to improve it.</span>
-    </p>
-  </div>
+  {% include "includes/phase_banner_beta.html" %}
 
   <div class="grid-row">
     <div class="column-two-thirds">
 
-<div class="breadcrumbs">
-    <ol>
-      <li>
-        <a href="../task-list">Respond to a money claim</a>
-      </li>
-      <li>
+      <a href="#" class="link-back">Back</a>
+
+      <h1 class="heading-large">
         Consider free mediation
-      </li>
-    </ol>
-  </div>
+      </h1>
 
-  <h1 class="heading-large">
-    Consider free mediation
-  </h1>
+      <p>If you opt out of mediation, the claim may (?) go to a hearing.</p>
 
-  <p>You can talk to an impartial mediator about Jan Clark's claim against you.</p>
-<p>The free service can help you:</p>
-<ul class="list list-bullet">
-  <li>avoid having to go to court</li>
-  <li>prevent having to pay the full claim amount, plus any interest</li>
-  <li>avoid a County Court Judgement</li></ul>
+      <p>Many people resolve their dispute before a hearing by taking part in telephone mediation. Over 60% of people who use our free Mediation Service settle on the day.*</p>
 
-  <p>You'll only talk to the mediator on the phone, not to Jan Clark.</p>
+      <p>The free service can help you:</p>
+      <ul class="list list-bullet">
+        <li>avoid a long wait for the case to be resolved</li>
+        <li>avoid a court hearing, which can last a whole day</li>
+        <li>avoid a County Court Judgement</li>
+      </ul>
 
-  <h1 class="heading-medium">
-    Will you try mediation?
-  </h1>
+      <!--<p>You'll only talk to the mediator on the phone, not to Jan Clark.</p>-->
 
-  <form
-  name="aspnetForm"
-  method="post"
-  id="aspnetForm"
-  autocomplete="off"
-  onsubmit="multiNavigation('radio-indent-group', ['Yes', 'No'], ['../../task-list', '../../task-list']);return false;"
-  >
+      <h1 class="heading-medium">
+        Will you try mediation?
+      </h1>
 
-    <input id="your-offer" name="offer" type="hidden">
+      <form
+        name="aspnetForm"
+        method="post"
+        id="aspnetForm"
+        autocomplete="off"
+        onsubmit="multiNavigation('radio-indent-group', ['Yes', 'No'], ['../mediation/statements-all', '../../task-list']);return false;"
+      >
 
-    <div class="form-group">
-      <fieldset>
+        <input id="your-offer" name="offer" type="hidden">
 
-        <legend class="visually-hidden">Will you try mediation?</legend>
+        <div class="form-group">
+          <fieldset>
 
-        <div class="multiple-choice" data-target="claimant-confirm">
-          <input id="radio-yes" type="radio" name="radio-indent-group" value="Yes">
-          <label for="radio-yes" data-target="yes-info">Yes</label>
+            <legend class="visually-hidden">Will you try mediation?</legend>
+
+            <div class="multiple-choice" data-target="claimant-confirm">
+              <input id="radio-yes" type="radio" name="radio-indent-group" value="Yes">
+              <label for="radio-yes" data-target="yes-info">Yes</label>
+            </div>
+
+            <div class="panel panel-border-narrow js-hidden" id="claimant-confirm">
+              <label class="form-label" for="rate">We'll ask the claimant if they'll try free mediation. If they say no,
+                the claim will go to a hearing.</label>
+            </div>
+
+            <div class="multiple-choice">
+              <input id="radio-no" type="radio" name="radio-indent-group" value="No">
+              <label for="radio-no" data-target="no-info">No</label>
+            </div>
+
+          </fieldset>
+          <input type="hidden" name="mediation" value="complete">
+
+          <input id="advert-option-next--button" type="submit" value="Save and continue" class="button"
+                 data-ignore-double-submit="true">
         </div>
+        <p class="font-xsmall">*Source: Money Claim Mediation Service statistics, November 2017 to October 2018.<p/>
+      </form>
 
-        <div class="panel panel-border-narrow js-hidden" id="claimant-confirm">
-          <label class="form-label" for="rate">We'll ask the claimant if they'll try free mediation. If they say no, the claim will go to a hearing.</label>
-        </div>
-
-        <div class="multiple-choice">
-          <input id="radio-no" type="radio" name="radio-indent-group" value="No">
-          <label for="radio-no" data-target="no-info">No</label>
-        </div>
-
-      </fieldset>
-                     <input type="hidden" name="mediation" value="complete">
-
-      <input id="advert-option-next--button" type="submit" value="Save and continue" class="button"
-             data-ignore-double-submit="true">
     </div>
-  </form>
-
-    </div>
   </div>
-{% include 'prototypes/prototype-nov-2018/includes/contact.html' %}
+  {% include 'prototypes/prototype-nov-2018/includes/contact.html' %}
 </main>
 {% endblock %}

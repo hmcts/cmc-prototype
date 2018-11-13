@@ -290,14 +290,12 @@ Money Claims Prototype
 		<h3 class="heading-small">If Jan Clark rejects your offer to pay by {% if data['set-day'] %}{{ ( data['set-month'] + ' ' + data['set-day'] + ' ' + data['set-year']) | date('D MMMM YYYY') }}{% else %}{{ date | date('add', 15, 'days') | date }}{% endif %}</h3>
 			<p>The court will decide how you must pay.</p>
 
+        {% elseif data['mediation-opted-in'] == "Continue" or ( data['radio-indent-group'] == "Yes" and data['meditation_ineligible'] != 'complete') or data['radio-indent-group'] == "mediation-accept" or data['radio-mediation-group-0'] == "Yes" or data['confirmation'] == 6 or data['resolve_dispute'] == "complete" %}
 
+        <p>The court will contact you and the defendant within 14 days to arrange a mediation appointment.</p>
+						{% include "includes/survey.html" %}
 
-	    {% if data['confirmation'] == 9 or data['counter'] == 'SET-OFF-COUNTER' or data['counter'] == 'FULL-COUNTER' %}
-		{% include "prototypes/prototype-nov-2018/includes/counter.html" %}
-	    {% endif %}
-		{% include "includes/survey.html" %}
-		<p><a class="button" href='../dashboard/home?dashboard=2.1'>Go to your account</a></p>
-
+      <p><a class="button" href='../../dashboard/home?dashboard=1.117'>Go to your account</a></p>
 
 		<!-- paid what i owe -->
 		{% elseif ( data.radio_select_group2=="Paid-some" or data['counter']) or data['confirmation']== 8 %}
@@ -343,25 +341,12 @@ Money Claims Prototype
 
    <p>If Jan Clark accepts your response the claim will be settled. We'll contact you when they respond.</p>
 
-       {% if data['radio-mediation-group']=="Yes" %}
-      <p>You offered to try mediation. If Jan Clark rejects your response we'll ask them to try mediation. If they agree, we'll contact you to arrange an appointment.</p>
-      <p>If they don't want to try mediation the court will review the case. You might have to go to a hearing.</p>
-			<p>We'll contact you if we set a hearing date to tell you how to prepare.</p>
+           {% elseif data['radio-indent-group'] == "mediation-reject" or  data['radio-indent-group'] == 'reject_claim_claim_amount' or  data['radio-indent-group'] == 'No' or ( data['radio-indent-group'] == 'Yes' and data['meditation_ineligible'] == 'complete' ) or data['confirmation'] == 8%}
+           <p>You need to <a href="../forms/dq-form">complete a directions questionnaire</a> to tell us more about the claim.</p>
+           <p>Your claim won't proceed if you don't complete and return the form before 4pm on <span class="dates5"></span>.</p>
+						{% include "includes/survey.html" %}
 
-
-    {% else %}
-			<p>If they reject your response the court will review the case. You might have to go to a hearing.</p>
-			<p>We'll contact you if we set a hearing date to tell you how to prepare.</p>
-    {% endif %}
-
-		    {% if data['confirmation'] == 9 or data['counter'] == 'SET-OFF-COUNTER' or data['counter'] == 'FULL-COUNTER' %}
-			{% include "prototypes/prototype-nov-2018/includes/counter.html" %}
-		    {% endif %}
-
-			{% include "includes/settle.html" %}
-
-			{% include "includes/survey.html" %}
-			<p><a class="button" href='../dashboard/home?dashboard=2.7'>Go to your account</a></p>
+      <p><a class="button" href='../../dashboard/home?dashboard=1.192'>Go to your account</a></p>
 
 
 			<!-- Already paid -->
@@ -378,14 +363,15 @@ Money Claims Prototype
 			<p>If Jan Clark accepts your response the claim will be settled. We'll contact you when they respond.</p>
 
 
-    {% if data['radio-mediation-group']=="Yes" %}
-      <p>You offered to resolve the claim using mediation. If Jan Clark rejects your response we'll ask them to try mediation. If they agree, we'll contact you to arrange an appointment.</p>
-      <p> If they reject mediation the court will review the case. You might have to go to a hearing.</p>
-			<p>We'll contact you if we set a hearing date to tell you how to prepare.</p>
-    {% else %}
-        <p>If they reject your response the court will review the case. You might have to go to a hearing.</p>
-			<p>We'll contact you if we set a hearing date to tell you how to prepare.</p>
-    {% endif %}
+            {% if data['radio-indent-group']=="Yes" or data['resolve_dispute']== "complete" %}
+            <p>If Jan Clark rejects your response we'll ask them to try mediation. If
+              they agree, we'll contact you to arrange an appointment.</p>
+            <p>If they reject mediation the court will review the case. You might have to go to a hearing.</p>
+            <p>We'll contact you if we set a hearing date to tell you how to prepare.</p>
+            {% else %}
+            <p>If they reject your response the court will review the case. You might have to go to a hearing.</p>
+            <p>We'll contact you if we set a hearing date to tell you how to prepare.</p>
+            {% endif %}
 
 		    {% if data['confirmation'] == 9 or data['counter'] == 'SET-OFF-COUNTER' or data['counter'] == 'FULL-COUNTER' %}
 			{% include "prototypes/prototype-nov-2018/includes/counter.html" %}
