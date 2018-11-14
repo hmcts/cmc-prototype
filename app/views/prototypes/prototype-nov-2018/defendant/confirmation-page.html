@@ -290,12 +290,14 @@ Money Claims Prototype
 		<h3 class="heading-small">If Jan Clark rejects your offer to pay by {% if data['set-day'] %}{{ ( data['set-month'] + ' ' + data['set-day'] + ' ' + data['set-year']) | date('D MMMM YYYY') }}{% else %}{{ date | date('add', 15, 'days') | date }}{% endif %}</h3>
 			<p>The court will decide how you must pay.</p>
 
-        {% elseif data['mediation-opted-in'] == "Continue" or ( data['radio-indent-group'] == "Yes" and data['meditation_ineligible'] != 'complete') or data['radio-indent-group'] == "mediation-accept" or data['radio-mediation-group-0'] == "Yes" or data['confirmation'] == 6 or data['resolve_dispute'] == "complete" %}
 
-        <p>The court will contact you and the defendant within 14 days to arrange a mediation appointment.</p>
-						{% include "includes/survey.html" %}
 
-      <p><a class="button" href='../../dashboard/home?dashboard=1.117'>Go to your account</a></p>
+	    {% if data['confirmation'] == 9 or data['counter'] == 'SET-OFF-COUNTER' or data['counter'] == 'FULL-COUNTER' %}
+		{% include "prototypes/prototype-nov-2018/includes/counter.html" %}
+	    {% endif %}
+		{% include "includes/survey.html" %}
+		<p><a class="button" href='../dashboard/home?dashboard=2.1'>Go to your account</a></p>
+
 
 		<!-- paid what i owe -->
 		{% elseif ( data.radio_select_group2=="Paid-some" or data['counter']) or data['confirmation']== 8 %}
@@ -425,7 +427,7 @@ Money Claims Prototype
 		<option  value="6&defendant=org" {% if data['confirmation'] == '6' and 'defendant' == 'org' %}selected{% endif %}>4. P/A - I admit part of the claim - by instalments (organisation)</option>
 		<option  value="7&defendant=" {% if data['confirmation'] == '7' and 'defendant' != 'org' %}selected{% endif %}>5. P/A - I admit part of the claim - pay set date  </option>
 		<option  value="7&defendant=org" {% if data['confirmation'] == '7' and 'defendant' == 'org' %}selected{% endif %}>5. P/A - I admit part of the claim - pay set date (organisation)</option>
-    <option  value="12" {% if data['confirmation'] == 12 %}selected{% endif %}>6. R/C - I dispute the claim</option>
+		<option  value="12" {% if data['confirmation'] == 12 %}selected{% endif %}>6. R/C - I dispute the claim</option>
 		<option  value="16" {% if data['confirmation'] == 16 %}selected{% endif %}>8. R/C - Paid full claim</option>
 		<option  value="8" {% if data['confirmation'] == 8 %}selected{% endif %}>9. R/C - Paid less </option>
 		<option  value="9" {% if data['confirmation'] == 9 %}selected{% endif %}>9. Counterclaim - set off</option>
