@@ -7,6 +7,8 @@ Money Claims Prototype
 {% set my_account="1" %}
 {% include "includes/propositional_navigation.html" %}
 {% endblock %}
+{% import 'prototypes/prototype-nov-2018/includes/address.html' as address %}
+
 {% block content %}
 <main id="content" role="main">
   {% include "includes/phase_banner_beta.html" %}
@@ -41,7 +43,7 @@ Money Claims Prototype
               name="defendant_business_name" value="{{data['defendant_business_name']}}">
             </div>
             <h2 class="heading-medium">
-              Their postal addressss
+              Their postal address
             </h2>
             <p>You can enter the defendant’s residential or trade address. The address must be in England or Wales.</p>
             {% elseif data['defendant-type']=="Company" %}
@@ -115,57 +117,9 @@ Money Claims Prototype
             <!--<div class="form-group">-->
               <!--<input class="form-control" id="defendant_address" name="claimant-address" type="text" value="{{data['claimant-address']}}">-->
               <!--</div>-->
-              <fieldset class="form-group">
-                <div id="postcode-finder">
-                  <label class="form-label" for="postcode">Enter a postcode</label>
-                  <input class="form-control form-control-1-4" id="postcode" name="postcodeFinder" type="text" value="">
-                  <a id="find-button" class="button secondary-button">Find address</a>
-                </div>
-                <div class="form-group error" id="postcode-seach-error" style="display:none; margin-top: 20px;">
-                  <span class="error-message fon">
-                    We can't find an address for that postcode. Try again or enter the address manually.
-                  </span>
-                </div>
-                <div class="form-group error" id="postcode-seach-ni-error" style="display:none; margin-top: 20px;">
-                  <span class="error-message">
-                    We can't find Northern Irish addresses by postcode - enter the address manually instead.
-                  </span>
-                </div>
-                <div id="select-address" class="form-group" style="display: none;">
-                  <label class="form-label">
-                    Pick an address
-                  </label>
-                  <select id="addressList" class="form-control" name="addressSelect" onchange="updateAddress(this.value)" title="Pick an address">
-                    <option value="">Select an address </option>
-                  </select>
-                </div>
-                <div id="manual-address" style="display: none;" class="">
-                  <div class="form-group">
-                    <label class="form-label" for="street-1" id="street-label">Address</label>
-                    <input class="form-control" id="street-1" name="defendant_AddressLine1" type="text" value="">
-                    <input class="form-control second-text-input" id="street-2" name="defendant_AddressLine2" type="text" value="" title="Street line 2">
-                    <input class="form-control second-text-input" id="street-3" name="defendant_AddressLine3" type="text" value="" title="Street line 3">
-                  </div>
-                  <div class="form-group">
-                    <label class="form-label" for="town" id="town-label">Town or city</label>
-                    <input class="form-control" id="town" name="defendant_city" type="text" value="">
-                  </div>
-                  <div class="form-group">
-                    <label class="form-label" for="postcode-full" id="postcode-label">Postcode</label>
-                    <input class="form-control form-control-1-4" id="postcode-full" name="defendant_Postcode" type="text" value="">
-                  </div>
-                  <div class="form-group" id="country-group">
-                    <label class="form-label" for="country">Country</label>
-                    <input class="form-control" id="country" name="defendant_country" type="hidden" value="">
-                  </div>
-                </div>
-<!--      <div id="enter-manually">
-        <a class="link" href="#" onclick="return showAbroadAddress();">I need to enter an address outside the UK</a>
-      </div>-->
-      <div id="enter-automatic" style="display:none">
-        <a class="link" href="#" onclick="return showPostcodeLookup();">Find address by a UK postcode</a>
-      </div>
-    </fieldset>
+
+         {{ address.lookup('defendant') }}
+<br />
     {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}
     <div class="form-group">
       <input type="submit" class="button" value="Save changes"/>
