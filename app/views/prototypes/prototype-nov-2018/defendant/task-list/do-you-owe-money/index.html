@@ -16,7 +16,11 @@ Money Claims Prototype
         Do you owe Jan Clark any money?
       </h1>
 
-      <p>Jan Clark says you owe £1,500.</p>
+      <p>Jan Clark says you owe {% if data['mediation-pilot']=="on" %}
+        £300
+        {%else%}
+        £1,500
+        {% endif %}.</p>
       <p>Don't deduct any money you believe they owe you. We'll ask about this later.</p>
 
       <form
@@ -30,7 +34,11 @@ Money Claims Prototype
           <fieldset>
             <div class="multiple-choice">
               <input id="radio-owe-all" type="radio" name="response-owe" value="owe-all" onclick="$('#amount-owed').val(1500)" >
-              <label for="radio-owe-all">Yes, £1,500</label>
+              <label for="radio-owe-all">Yes, {% if data['mediation-pilot']=="on" %}
+                £300
+                {%else%}
+                £1,500
+                {% endif %}</label>
             </div>
             <div class="multiple-choice" data-target="set-date">
               <input id="radio-owe-some" type="radio" name="response-owe" value="owe-some" onclick="$('#amount-owed').val( $('owe-amount').val() | 500 )" >
