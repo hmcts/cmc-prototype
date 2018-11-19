@@ -24,23 +24,74 @@ Money Claims Prototype
         Free telephone mediation
       </h1>
 
+      {% if data['mediation-pilot']=="on" %}
       <form method="post" action="mediation/how-does-mediation-work" class="form">
         <input type="hidden" name="mediation" value="complete">
 
         <p>All claims for £300 or less are automatically registered for free telephone mediation.</p>
 
         <p>We'll tell you how mediation works - you can decide to take part or not.</p>
-        <!--<p>We'll contact you with an appointment, unless you or Jan Clark chooses to opt out of mediation.</p>-->
-
-        <!--<p>You'll only speak to a mediator about the claim, not to Jan Clark.</p>-->
 
         <div class="form-group">
           <input type="submit" class="button" value="How mediation works"/>
         </div>
-
-        <!--<p style="margin-bottom: 35px"><a href='mediation/no-mediation'>I don't want to try mediation</a></p>-->
-
       </form>
+
+      {%else%}
+      <form
+        name="aspnetForm"
+        method="post"
+        id="aspnetForm"
+        autocomplete="off"
+        onsubmit="multiNavigation('radio-mediation-group', ['Yes', 'No'], ['mediation/statements-all', '../task-list']);return false;">
+
+        <p>You can talk to an impartial mediator about Jan Clark's claim against you.</p>
+        <p>The free service can help you:</p>
+        <ul class="list list-bullet">
+          <li>avoid having to go to court</li>
+          <li>prevent having to pay the full claim amount, plus any interest</li>
+          <li>avoid a County Court Judgement</li>
+        </ul>
+        <p>You'll only speak to a mediator about the claim, not to Jan Clark.</p>
+
+
+        <h1 class="heading-medium">
+          Will you try mediation?
+        </h1>
+
+        <input id="your-offer" name="offer" type="hidden">
+
+        <div class="form-group">
+          <fieldset class="inline">
+
+            <legend class="visually-hidden">Will you try mediation?</legend>
+
+
+            <div class="multiple-choice">
+              <input id="radio-yes" type="radio" name="radio-mediation-group" value="Yes">
+              <label for="radio-yes" data-target="yes-info">Yes</label>
+            </div>
+
+
+            <div class="multiple-choice">
+              <input id="radio-no" type="radio" name="radio-mediation-group" value="No">
+              <label for="radio-no" data-target="no-info">No</label>
+            </div>
+
+
+          </fieldset>
+          <input type="hidden" name="mediation" value="complete">
+
+
+          <div class="form-group">
+            <input type="submit" class="button" value="Save and continue"/>
+          </div>
+
+
+        </div>
+      </form>
+
+      {% endif %}
 
     </div>
   </div>
