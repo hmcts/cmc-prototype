@@ -7,7 +7,7 @@
 {% block extra_css %}
 <link rel="stylesheet" href="/public/stylesheets/dm_list.css"/>{% endblock %}
 {% block content %}
-<main id="content" role="main" ">
+<main id="content" role="main">
   {% include "includes/phase_banner_beta.html" %}
   <div class="grid-row">
     <div class="column-two-thirds">
@@ -15,6 +15,7 @@
         <h1 class="heading-large">
           Your response
         </h1>
+
         <table id="table-of-tasks">
           <thead>
             <tr>
@@ -46,8 +47,9 @@
               </tr>
             </tbody>
           </table>
-          <br>
-          <br>
+          
+          <br/>
+          <br/>
           <table id="table-of-tasks">
             <thead>
               <tr>
@@ -73,8 +75,8 @@
                 {% endif %}
               </td>
             </tr>
-            {%if data.radio_select_group=="Yes" %}
-            {%elseif data.radio_select_group=="No" %}
+
+            {% if data.radio_select_group=="No" %}
             <tr id="their-details">
               <td class="task">
                 <a href="task-list/request-mediation{{formQuery}}">
@@ -87,12 +89,48 @@
                 {% endif %}
               </td>
             </tr>
-            {% else %}
-            {% endif %}
+          {% endif %}
           </tbody>
         </table>
         <br>
         <br>
+
+
+
+            {% if data.radio_select_group=="No" %}
+
+            <table id="table-of-tasks">
+              <thead>
+                <tr>
+                  <th scope="col" id="col-task">
+                    <span class="task-group">
+                      <span class="group-number" id="task-number"></span>
+                      Tell us more about the claim
+                    </span>
+                  </th>
+                  <th class="numeric" id="task-status" scope="col" id="col-status"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                   <a href="../../../defendant/task-list/hearing?party=claimant">
+                     <span class="task-name">Give us details in case there's a hearing</span>
+                   </a>
+                 </td>
+                <td>
+                  {% if data.hearing=="complete" %}
+                  {% include "includes/task_status_finished.html" %}
+                  {% endif %}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <br />
+          <br />
+          {% endif %}
+
+
         <table id="table-of-tasks">
           <thead>
             <tr>
