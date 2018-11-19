@@ -87,6 +87,7 @@ Money Claims Prototype
 
 <script>
   $(document).ready(function () {
+    i =0;
     $('#add-another-witness').click(function (event) {
       event.preventDefault();
 
@@ -96,6 +97,12 @@ Money Claims Prototype
       objItem = $('#add-another').clone();
       objItem.find( 'input[type=text]' ).val('');
       objItem.find( '.multiple-choice input' ).prop( "checked", false );
+      objItem.find( '.multiple-choice input:eq(0)' ).prop( "id", 'radio-evidence-yes-' + i );
+      objItem.find( '.multiple-choice input:eq(1)' ).prop( "id", 'radio-evidence-no-' + i );
+      objItem.find( '.multiple-choice input' ).prop( "name", 'evidence-' + i );
+      objItem.find( '.multiple-choice label:eq(0)' ).prop( "for", 'radio-evidence-yes-' + i );
+      objItem.find( '.multiple-choice label:eq(1)' ).prop( "for", 'radio-evidence-no-' + i );
+      i++;
       objItem.insertBefore( '#add-bit');
 
     });
