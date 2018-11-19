@@ -35,36 +35,44 @@ Money Claims Prototype
         <div id="witnesses" class="js-hidden">
 
           <h2 class="heading-medium">Expert witness details</h2>
-          <div class="form-group">
-            <label class="form-label" for="witness-name">Their name</label>
-            <input class="form-control " id="witness-name" name="witness-name" type="text" value="">
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="witness-area">Their area of expertise</label>
-            <input class="form-control " id="witness-area" name="witness-area" type="text" value="">
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="witness-cost">Expected cost</label>
-            <input class="form-control timeline-column-4 fee pound" id="witness-cost" name="witness-cost" type="text" value="">
+
+          <div id="add-another">
+
+
+            <div class="form-group">
+              <label class="form-label" for="witness-name">Their name</label>
+              <input class="form-control " id="witness-name" name="witness-name" type="text" value="">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="witness-area">Their area of expertise</label>
+              <input class="form-control " id="witness-area" name="witness-area" type="text" value="">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="witness-cost">Expected cost</label>
+              <input class="form-control timeline-column-4 fee pound" id="witness-cost" name="witness-cost" type="text" value="">
+            </div>
+
+            <p>How will they give evidence?</p>
+
+            <div class="form-group">
+              <fieldset>
+                <div class="multiple-choice">
+                  <input id="radio-evidence-yes" type="radio" name="evidence" value="written">
+                  <label for="radio-evidence-yes">In writing</label>
+                </div>
+                <div class="multiple-choice">
+                  <input id="radio-evidence-no" type="radio" name="evidence" value="orally">
+                  <label for="radio-evidence-no">Orally, in person</label>
+                </div>
+              </fieldset>
+            </div>
+
           </div>
 
-          <p>How will they give evidence?</p>
-
-          <div class="form-group">
-            <fieldset>
-              <div class="multiple-choice">
-                <input id="radio-evidence-yes" type="radio" name="evidence" value="written">
-                <label for="radio-evidence-yes">In writing</label>
-              </div>
-              <div class="multiple-choice">
-                <input id="radio-evidence-no" type="radio" name="evidence" value="orally">
-                <label for="radio-evidence-no">Orally, in person</label>
-              </div>
-            </fieldset>
+          <div class="form-group" style="clear: left" id="add-bit">
+          <p><a href="" class="button secondary-button" id="add-another-witness">Add another expert witness</a></p>
           </div>
 
-          <p><a href="" class="button secondary-button">Add another expert witness</a></p>
-        
         </div>
 
           <div class="form-group">
@@ -76,4 +84,23 @@ Money Claims Prototype
     </div>
   {% include 'prototypes/prototype-nov-2018/includes/contact.html' %}
 </main>
+
+<script>
+  $(document).ready(function () {
+    $('#add-another-witness').click(function (event) {
+      event.preventDefault();
+
+      objSeperator = $('<p style="margin-top:20px;"><a href="">Remove this witness</a></p><hr>');
+      objSeperator.insertBefore( '#add-bit');
+
+      objItem = $('#add-another').clone();
+      objItem.find( 'input[type=text]' ).val('');
+      objItem.find( '.multiple-choice input' ).prop( "checked", false );
+      objItem.insertBefore( '#add-bit');
+
+    });
+
+  });
+</script>
+
 {% endblock %}
