@@ -47,6 +47,10 @@ Money Claims Prototype
         {% elseif data['resolve_dispute'] == "complete" %}
         <h1 class="bold-large">You've agreed to mediation</h1>
 
+        {% elseif data['radio_select_group'] == "No"  or data['confirmation'] == 9 %}
+        <h1 class="bold-large">You've rejected their response</h1>
+
+
         {% else %}
         <h1 class="bold-large">You've rejected their response</h1>
 
@@ -211,6 +215,14 @@ Money Claims Prototype
         {% include "includes/survey.html" %}
         <p><a class="button" href='../home?dashboard=1.1171'>Go to your account</a></p>
 
+
+        {% elseif data['radio_select_group'] == "No"  or data['confirmation'] == 9 %}
+        <p>We will review the case and contact you when a hearing is arranged.</p>
+
+        {% include "includes/survey.html" %}
+        <p><a class="button" href='../home?dashboard=XXX'>Go to your account</a></p>
+
+
         {% endif %}
 
       {% include "includes/contact.html" %}
@@ -233,7 +245,8 @@ Money Claims Prototype
           <option value="5"  {% if data['confirmation'] == '5' %}selected{% endif %}>Redetermination</option>
           <option value="6"  {% if data['confirmation'] == '6' %}selected{% endif %}>Mediation accepted</option>
           <option value="7"  {% if data['confirmation'] == '7' %}selected{% endif %}>Mediation proposed</option>
-          <option value="8"  {% if data['confirmation'] == '8' %}selected{% endif %}>Claim proceeding</option>
+          <option value="8"  {% if data['confirmation'] == '8' %}selected{% endif %}>Claim settled</option>
+          <option value="9"  {% if data['confirmation'] == '9' %}selected{% endif %}>Claim proceeding</option>
       </select>
     </form>
 
