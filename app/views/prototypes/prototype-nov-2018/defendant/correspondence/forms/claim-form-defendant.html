@@ -164,6 +164,7 @@ h1 {
 
 
   </header>
+  {% set inc = 0 %}
   {% if data.counterclaim=="true" %}
   {%else%}
   <table >
@@ -171,7 +172,7 @@ h1 {
       <tr>
         <th colspan="2">
           <h2 class="heading-medium" id="name">
-            1. Defendant's details
+            {% set inc = inc+1 %}{{ inc }}. Defendant's details 
           </h2>
         </th>
       </tr>
@@ -255,7 +256,7 @@ h1 {
       <tr>
         <th colspan="2">
           <h2 class="heading-medium" id="money-owed">
-            2. Defendant's response to the claim
+            {% set inc = inc+1 %}{{ inc }}. Defendant's response to the claim
           </h2>
         </th>
       </tr>
@@ -278,15 +279,15 @@ h1 {
         </td>
       </tr>
 
+      {% if  data['check'] =='1' or data.radio_select_group=="Some" or data['check']== 4 or data['check']== 5 or data['check'] == 6 or data['check'] == 7 or data['check']== 9 or data['check']== 8 or data['check']== 8.1 or data.radio_select_group2=="amount_claimed" or data.radio_select_group=="Paid-some" or data.radio_select_group2=="defend_now"%}
 
-      {% if  data['check'] =='1' or data.radio_select_group=="Some" or data['check']== 4 or data['check'] == 5 or data['check'] == 6 or data['check'] == 7 or data['check']== 9 or data['check']== 8 or data.radio_select_group2=="amount_claimed" or data.radio_select_group=="Paid-some" or data.radio_select_group2=="defend_now"%}
       {% if data.radio_select_group2=="amount_claimed" or data['check']== 8 or data['check']== 8.1 %}
       <tr class="">
         <td class="">
           Amount they have paid
         </td>
         <td class="">
-         £{% if data['check'] == 8.1 %}{{ data['owe-amount'] or '1,000' }}{% else %}{{ data['owe-amount'] or '1,000' }}{% endif %}
+         £{% if data['check'] == 8.1 %}{{ data['owe-amount'] or '1,000' }}{% else %}{{ data['owe-amount'] or '1,500' }}{% endif %}
        </td>
      </tr>
       <tr class="">
@@ -308,8 +309,9 @@ h1 {
   {% endif %} <!-- end of partial -->
 
 
+
 <!-- PART ADMIT -->
-{% if data['radio_select_group2']=="Some" or data['check']== 5 or data['check'] == 6 or data['check'] == 7 or data['check'] == 8.1 %}
+{% if data['radio_select_group2']=="Some" or data['check'] == 5 or data['check'] == 6 or data['check'] == 7 or data['check'] == 8.1 %}
   {% if data['check'] != 8.1 %}
     <tr>
       <td>
@@ -486,7 +488,7 @@ h1 {
       <tr>
         <th colspan="2">
           <h2 class="heading-medium" id="money-owed">
-            3. When the defendant will pay {% if data['check'] == 5 or data['check'] == 6 or data['check'] == 7 %}the £{{ data['owe-amount'] or '300' }}{% endif %}
+            {% set inc = inc+1 %}{{ inc }}. When the defendant will pay {% if data['check'] == 5 or data['check'] == 6 or data['check'] == 7 %}the £{{ data['owe-amount'] or '300' }}{% endif %}
           </h2>
         </th>
       </tr>
@@ -595,7 +597,7 @@ h1 {
     <tr>
       <th colspan="2">
         <h2 class="heading-medium" id="money-owed">
-          4. The defendant's financial details
+          {% set inc = inc+1 %}{{ inc }}. The defendant's financial details
         </h2>
       </th>
     </tr>
@@ -977,13 +979,13 @@ h1 {
   <p class="page-title"> <span>Claim number: 000LR095</span></p>
   {% endif %}
 
-  {% if data['check'] == 5 or data['check'] == 6 or data['check'] == 7 or data['check'] == 8.1 %}
+  {% if data['check'] == 1 or data['check'] == 5 or data['check'] == 6 or data['check'] == 7 or data['check'] == 8 or data['check'] == 8.1 or data['check'] == 9 %}
     <table >
       <thead>
         <tr>
           <th colspan="2">
             <h2 class="heading-medium">
-              {% if data['check'] == 6 or data['check'] == 7 %}5{% elseif data['check'] == 8.1 %}3{% else %}4{% endif %}. Mediation
+              {% set inc = inc+1 %}{{ inc }}. Mediation
             </h2>
           </th>
         </tr>
@@ -1002,15 +1004,15 @@ h1 {
   {% endif %}
 
 
-  {% if data['check'] == '1' or data['check'] == '2' or data['check'] == '3' or data['check'] == '4' or data['check']== 8 or data['check']== 9 or data['check'] == '5'  or data['check'] == '6' or data['check'] == 7 or data['check'] == 8.1  %}
+  {% if data['check'] == '1' or data['check'] == '2' or data['check'] == '3' or data['check'] == '4' or data['check'] == 5 or data['check']== 8 or data['check']== 9 or data['check'] == '5'  or data['check'] == '6' or data['check'] == 7 or data['check'] == 8.1  %}
 
-  {% if data['check'] == '9' or data['check'] == 8.1 %}
+  {% if data['check'] == 1 or data['check'] == 5 or data['check'] == 6 or data['check'] == 7 or data['check'] == '8' or data['check'] == 8.1 or data['check'] == '9' %}
     <table>
       <thead>
         <tr>
           <th colspan="2">
             <h2 class="heading-medium">
-              {% if data['check'] == 8.1 %}4{% else %}3{% endif %}. Tell us more about the claim
+              {% set inc = inc+1 %}{{ inc }}. Tell us more about the claim
             </h2>
           </th>
         </tr>
@@ -1150,7 +1152,7 @@ h1 {
 
     {% endif %}
 
-    {% if data['check'] == '8' or data['check'] == '2' or data['check'] == '3' or data['check'] == '4'  or data['check'] == '6' or data['check'] == 7 %}
+    {% if data['check'] == '2' or data['check'] == '3' or data['check'] == '4' or data['check'] == 7 %}
     <table style="padding-bottom:900px">
     {% else %}
     <table >
@@ -1159,7 +1161,7 @@ h1 {
         <tr>
           <th colspan="2">
             <h2 class="heading-medium">
-              {% if data['check'] == '2' %}4{% elseif data['check'] == 3 or data['check'] == '4' or data['check'] == '5' or data['check'] == 8.1 %}5{% elseif data['check'] == '6' or data['check'] == 7 %}6{% else %}3{% endif %}. Statement of truth
+              {% set inc = inc+1 %}{{ inc }}. Statement of truth
             </h2>
           </th>
         </tr>
