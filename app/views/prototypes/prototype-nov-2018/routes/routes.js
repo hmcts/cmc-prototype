@@ -289,10 +289,11 @@ module.exports = function(app){
           req.session.data['counter'] = 'NOT-PROCEED';
     } 
 
+/*
     if (req.session.data['counter-amount'] > ( (req.session.data['amount-owed']*1) + 10000 ) && req.session.data['counterclaim-proceed'] == 'yes'  ) {
       res.redirect('/' + strPath + 'defendant/task-list/do-you-owe-money/counter-amount-handoff');
 
-    } else if ( req.session.data['counterclaim-proceed'] == 'yes' ) {
+    } else */if ( req.session.data['counterclaim-proceed'] == 'yes' ) {
       res.redirect('/' + strPath + 'defendant/task-list/do-you-owe-money/counter-hwf' );
 
     } else {
