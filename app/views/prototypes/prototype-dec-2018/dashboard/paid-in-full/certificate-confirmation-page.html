@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+    <div class="govuk-box-highlight">
+      <h1 class="bold-large">Certificate of {{ data['certificate-type'] or 'satisfaction' }} issued</h1>
+      <p><a href="../../defendant/correspondence/forms/certificate?certificate-type={{ data['certificate-type'] or 'satisfaction' }}" class="font-medium" style="color: #FFFFFF">Download certificate of {{ data['certificate-type'] or 'satisfaction' }}</a> (PDF, 123KB)</p>
+    </div>
+
+    <p>Sign in to your account at any time to get a copy of your certificate.</p>
+
+    <p><a class="button" href='../home?dashboard=2.21'>Go to your account</a></p>
+
+    {% include "includes/contact.html" %}
+
+  </div>
+</div>
+</main>
+
+<form method="post"  action="#" class="form" style="position: absolute;">
+  <select id="claimant2" name="claimant2" onchange="window.location.href='?certificate-type='+this.value">
+    <option  value="0" >Choose</option>
+    <option value="satisfaction" {% if data['certificate-type'] == 'satisfaction' %}selected{% endif %}>1. Cert of satisfaction</option>
+    <option value="cancellation" {% if data['certificate-type'] == 'cancellation' %}selected{% endif %}>2. Cert of cancellation</option>
+
+  </select>
+</form>
+{% endblock %}
