@@ -646,6 +646,72 @@ function tabGroup3 (tableObj, which) {
   }
 }
 
+/* TABS PATTERN */
+function tabGroup4 (tableObj, which) {
+  tabJ = 'TAB-ONE'
+  tabK = 'TAB-TWO'
+  tabL = 'TAB-THREE'
+  tabM = 'TAB-FOUR'
+  tabN = 'TAB-FIVE'
+
+  if (which == tabJ) {
+    document.getElementById('tabJ').className = 'tab-on'
+    document.getElementById('tabK').className = 'tab'
+    document.getElementById('tabL').className = 'tab'
+    document.getElementById('tabM').className = 'tab'
+    document.getElementById('tabN').className = 'tab'
+    document.getElementById('tabOneContent').style.display = 'block'
+    document.getElementById('tabTwoContent').style.display = 'none'
+    document.getElementById('tabThreeContent').style.display = 'none'
+    document.getElementById('tabFourContent').style.display = 'none'
+    document.getElementById('tabFiveContent').style.display = 'none'
+  } else if (which == tabK) {
+    document.getElementById('tabJ').className = 'tab'
+    document.getElementById('tabK').className = 'tab-on'
+    document.getElementById('tabL').className = 'tab'
+    document.getElementById('tabM').className = 'tab'
+    document.getElementById('tabN').className = 'tab'
+    document.getElementById('tabOneContent').style.display = 'none'
+    document.getElementById('tabTwoContent').style.display = 'block'
+    document.getElementById('tabThreeContent').style.display = 'none'
+    document.getElementById('tabFourContent').style.display = 'none'
+    document.getElementById('tabFiveContent').style.display = 'none'
+  } else if (which == tabL) {
+    document.getElementById('tabJ').className = 'tab'
+    document.getElementById('tabK').className = 'tab'
+    document.getElementById('tabL').className = 'tab-on'
+    document.getElementById('tabM').className = 'tab'
+    document.getElementById('tabN').className = 'tab'
+    document.getElementById('tabOneContent').style.display = 'none'
+    document.getElementById('tabTwoContent').style.display = 'none'
+    document.getElementById('tabThreeContent').style.display = 'block'
+    document.getElementById('tabFourContent').style.display = 'none'
+    document.getElementById('tabFiveContent').style.display = 'none'
+  } else if (which == tabM) {
+    document.getElementById('tabJ').className = 'tab'
+    document.getElementById('tabK').className = 'tab'
+    document.getElementById('tabL').className = 'tab'
+    document.getElementById('tabM').className = 'tab-on'
+    document.getElementById('tabN').className = 'tab'
+    document.getElementById('tabOneContent').style.display = 'none'
+    document.getElementById('tabTwoContent').style.display = 'none'
+    document.getElementById('tabThreeContent').style.display = 'none'
+    document.getElementById('tabFourContent').style.display = 'block'
+    document.getElementById('tabFiveContent').style.display = 'none'
+  } else if (which == tabN) {
+    document.getElementById('tabJ').className = 'tab'
+    document.getElementById('tabK').className = 'tab'
+    document.getElementById('tabL').className = 'tab'
+    document.getElementById('tabM').className = 'tab'
+    document.getElementById('tabN').className = 'tab-on'
+    document.getElementById('tabOneContent').style.display = 'none'
+    document.getElementById('tabTwoContent').style.display = 'none'
+    document.getElementById('tabThreeContent').style.display = 'none'
+    document.getElementById('tabFourContent').style.display = 'none'
+    document.getElementById('tabFiveContent').style.display = 'block'
+  }
+}
+
 /* LISTS - EXPANDABLE ROW PATTERN */
 row1status = true
 row2status = true
