@@ -554,15 +554,29 @@
 
 
 
-              {% elseif data['defendant'] == 9 or data['defendant'] == 9.1 %}
+              {% elseif data['defendant'] == 9 %}
 
               <div class="status-block single">
                 <h2 class="heading-small">You've rejected the claim</h2>
                 <p>You said you don't want to try mediation.</p>
                 <p>You'll have to go to a hearing. We'll contact you to tell you the date of the hearing and how to prepare.</p>
-                <p>You need to <a href="forms/dq-form">complete a directions questionnaire</a> to tell us more about the claim.</p>
-                <p>Your defence won't proceed if you don't complete and return the form before 4pm on {{ now | date( 'add', 19, 'days') | date }}.</p>
+                <p>You need to tell us more about the claim before XX or ZZZ will happen?</p>
+                <p><a href="../defendant/task-list/hearing" class="button">Tell us more about the claim.</a></p>
                 <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=9">Download your response</a> (PDF, 123KB)</p>
+
+                <h2 class="heading-medium">Settle out of court</h2>
+                <p>You can still <a href="offer-agreement/make-offer?defendant=defendant">settle the claim out of court</a>. For example you could offer to fix goods you sold the claimant or suggest a payment.</p>
+                <p>You can avoid getting a County Court Judgment if the claimant accepts your offer.</p>
+              </div>
+
+              {% elseif data['defendant'] == 9.1 %}
+
+              <div class="status-block single">
+                <h2 class="heading-small">You've rejected the claim</h2>
+                <p>You said you don't want to try mediation.</p>
+                <p>You'll have to go to a hearing. We'll contact you to tell you the date of the hearing and how to prepare.</p>
+                <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=9">Download your response</a> (PDF, 123KB)</p>
+                <p><a href="../defendant/correspondence/forms/dqs">Download your hearing requirements</a> (PDF, 13KB)</p>
 
                 <h2 class="heading-medium">Settle out of court</h2>
                 <p>You can still <a href="offer-agreement/make-offer?defendant=defendant">settle the claim out of court</a>. For example you could offer to fix goods you sold the claimant or suggest a payment.</p>
@@ -888,6 +902,7 @@
 
     <option value="5.6" {% if data['defendant'] == 5.6 %}selected{% endif %}>5.6. Defence rejected</option>
     <option value="9" {% if data['defendant'] == 9 %}selected{% endif %}>7. I dispute the claim </option>
+    <option value="9.1" {% if data['defendant'] == 9.1 %}selected{% endif %}>I dispute the claim - DQs filed</option>
     <option value="11" {% if data['defendant'] == 11 %}selected{% endif %}>7. I dispute the claim + mediation </option>
     <option value="12" {% if data['defendant'] == 12 %}selected{% endif %}>8. I dispute the claim + offer made </option>
 
