@@ -1,0 +1,341 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="4" %}
+
+{% include "includes/propositional_navigation_new.html" %}
+{% endblock %}
+{% block content %}
+
+
+<main id="content" role="main">
+
+  {% include "includes/phase_banner_beta.html" %}
+
+  <div class="grid-row">
+    <div class="column-full">
+
+      <h1 class="heading-large" id="page-h1" style="margin-bottom: 40px">
+        All claims
+      </h1>
+
+      <div class="container sub-header">
+        <!--<div class="financial-summary">-->
+        <!--<div class="hgroup" style="float: left">-->
+        <!--<h2>-->
+        <!--Total outstanding:-->
+        <!--<span class="numerical-value">-->
+        <!--£28,049.08-->
+        <!--</span>-->
+        <!--</h2>-->
+        <!--</div>-->
+        <!--</div>-->
+
+        <div class="search-form">
+          <form action="#listanchor" accept-charset="UTF-8"
+                method="get"><input name="utf8" type="hidden" value="✓">
+            <input type="hidden" name="tab" id="tab">
+            <input type="hidden" name="sort" id="sort">
+            <input type="hidden" name="direction" id="direction">
+            <div class="form-group">
+              <fieldset class="inline">
+                <legend class="visuallyhidden">
+                  Search for a claim using claim number or name
+                </legend>
+                <label class="heading-medium" for="search">
+                  Search
+                  <span class="form-hint">
+for example claim number or name
+</span>
+                </label>
+                <input type="text" class="form-control" id="search" name="search"
+                       style="height: 40px; width: 340px; padding: 6px 10px; margin-top: -10px;">
+                <input class="button js-case-search" type="submit" value="Search" style="margin-top: -8px">
+            </div>
+          </form>
+        </div>
+
+        <div class="claims-actions">
+          <a class="button button-start" role="button" href="" style="margin-top: -73px">New claim</a>
+          <!--<div class="claims-importer" id="importer">-->
+          <!--<form class="new_json_document_importer" id="new_json_document_importer" enctype="multipart/form-data"-->
+          <!--action="" accept-charset="UTF-8"-->
+          <!--data-remote="true" method="post"><input name="utf8" type="hidden" value="✓">-->
+          <!--<div class="claim-importer-header">-->
+          <!--<label class="form-hint" for="json_document_importer_json_file" style="margin-top: 15px">Or upload your claims in CSV-->
+          <!--format</label>-->
+          <!--</div>-->
+          <!--<input class="custom-uploader" aria-hidden="true" tabindex="-1" type="file"-->
+          <!--name="json_document_importer[json_file]" id="json_document_importer_json_file">-->
+          <!--<p tabindex="0" class="file-upload-name" aria-hidden="true"><span-->
+          <!--class="visuallyhidden">File name:</span></p>-->
+          <!--<button class="button secondary-button" type="button" style="margin-top: -15px">Choose file</button>-->
+          <!--<input type="submit" name="commit" value="Import claims"-->
+          <!--class="btn-gray external-user-json-export btn-import-file" aria-hidden="true"-->
+          <!--data-disable-with="Import claims" style="display: none;">-->
+          <!--<div class="errors"></div>-->
+          <!--</form>-->
+          <!--</div>-->
+        </div>
+      </div>
+
+      <!--<div class="search-form">-->
+      <!--<form action="#listanchor" accept-charset="UTF-8"-->
+      <!--method="get"><input name="utf8" type="hidden" value="✓">-->
+      <!--<input type="hidden" name="tab" id="tab">-->
+      <!--<input type="hidden" name="sort" id="sort">-->
+      <!--<input type="hidden" name="direction" id="direction">-->
+      <!--<div class="form-group">-->
+      <!--<fieldset class="inline">-->
+      <!--<legend class="visuallyhidden">-->
+      <!--Search for a claim using claim number or defendant name-->
+      <!--</legend>-->
+      <!--<label class="heading-medium" for="search">-->
+      <!--Search-->
+      <!--<span class="form-hint">-->
+      <!--for example claim number or defendant name-->
+      <!--</span>-->
+      <!--</label>-->
+      <!--<input type="text" class="form-control" id="search" name="search"-->
+      <!--style="height: 40px; width: 340px; padding: 6px 10px; margin-top: -10px;">-->
+      <!--<input class="button js-case-search" type="submit" value="Search" style="margin-top: -8px;">-->
+      <!--</div>-->
+      <!--</form>-->
+      <!--</div>-->
+
+      <!--<div class="tabGroup">-->
+        <!--<a id="tabA" class="tab-on" onclick="tabGroup(tabContent, 'TAB-ONE')" href="javascript: void(0)">Claims you've made</a>-->
+        <!--<a id="tabB" class="tab" onclick="tabGroup(tabContent, 'TAB-TWO')" href="javascript: void(0)">Claims made against you</a>-->
+        <!--&lt;!&ndash;<a id="tabC" class="tab" onclick="tabGroup(tabContent, 'TAB-THREE')" href="javascript: void(0)">Archived</a>&ndash;&gt;-->
+        <!--<hr>-->
+      <!--</div>-->
+
+      <!--<div id="tabContent" class="top_30">-->
+
+        <!--<div id="tabOneContent">-->
+
+          <div class="table-container container">
+            <table class="report clickable">
+              <caption>
+<span class="table-caption">
+All claims
+</span>
+                <span class="claim-count">
+Showing
+X claims of X
+</span>
+              </caption>
+              <thead style="border-top: 2px solid #bfc1c3">
+              <tr>
+                <th scope="col">
+                  <a tabindex="0" href="#listanchor" style="font-size: medium">Claim number</a>
+                </th>
+                <th scope="col">
+                  <span style="font-size: medium">Defendant</span>
+                </th>
+                <th class="numeric" scope="col">
+                  <a tabindex="0"
+                     href="#listanchor" style="font-size: medium">Claim amount</a>
+                </th>
+                <!--<th class="numeric" scope="col">-->
+                  <!--<a class="current asc" tabindex="0"-->
+                     <!--href="#listanchor">Date-->
+                    <!--issued ▼</a>-->
+                <!--</th>-->
+
+                <th scope="col">
+                  <a tabindex="0" href="#listanchor" style="font-size: medium">Action required</a>
+                </th>
+                <th scope="col">
+                  <a class="current asc" tabindex="0"
+                     href="#listanchor" style="font-size: medium">Last updated ▲</a>
+                </th>
+                <th scope="col">
+                  <a tabindex="0" href="#listanchor"></a>
+                </th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr class="mobile-sort">
+                <td colspan="10">
+                  Sort by:
+                  <a tabindex="0" href="#listanchor">Claim number</a>
+                  <a tabindex="0" href="#listanchor">Defendant</a>
+                  <a tabindex="0" href="#listanchor">Claim amount</a>
+                  <a tabindex="0" href="#listanchor">Action required</a>
+                  <a class="current asc" tabindex="0" href="#listanchor">Last updated ▲</a>
+                  <!--<a tabindex="0" href="#listanchor"></a>-->
+              </tr>
+              <!--claim 01-->
+              <tr class="draft" id="claim_01">
+                <td aria-label="Claim number">
+                  -
+                </td>
+                <td aria-label="Defendants">
+                  Michael Jones
+                </td>
+                <td aria-label="Claimed" class="numeric claimed-amount">
+                  £2,000
+                </td>
+                <td aria-label="Action required">
+                  -
+                </td>
+                <td aria-label="Date received">
+                  20 Mar 2018
+                </td>
+                <!--<td aria-label="Status" scope="row">-->
+                  <!--<span class="state state-draft">-->
+                    <!--Draft-->
+                  <!--</span>-->
+                <!--</td>-->
+                <td aria-label="Action">
+                  <a class="" href="">Continue draft</a>
+                </td>
+              </tr>
+              <!--claim 02-->
+              <tr class="submitted" id="claim_02">
+                <td aria-label="Claim number">
+                  <!--<a class="js-test-case-number-link" href="">000LR095</a>-->
+                  352MC733
+                </td>
+                <td aria-label="Defendants">
+                  Mary Richards
+                </td>
+                <td aria-label="Claimed" class="numeric claimed-amount">
+                  £1,500
+                </td>
+                <td aria-label="Action required">
+                  Respond to defendant<br>
+                  <!--<span class="font-xsmall"></span>-->
+                </td>
+                <td aria-label="Date received">
+                  5 Mar 2018
+                </td>
+                <!--<td aria-label="Status" scope="row">-->
+                  <!--<span class="state state-submitted">-->
+                    <!--Submitted-->
+                  <!--</span>-->
+                <!--</td>-->
+                <td aria-label="Action">
+                  <a class="" href="claim-details">View</a>
+                </td>
+              </tr>
+              <!--claim 03-->
+              <tr class="submitted" id="claim_03">
+                <td aria-label="Claim number">
+                  <!--<a class="js-test-case-number-link" href="">000LR095</a>-->
+                  000LR023
+                </td>
+                <td aria-label="Defendants">
+                  Goddard Plumbing<br>
+                  <span class="font-xsmall">+ 2 others</span>
+                </td>
+                <td aria-label="Claimed" class="numeric claimed-amount">
+                  £8,000
+                </td>
+                <td aria-label="Action required">
+                  Respond to defendant<br>
+                  <!--<span class="font-xsmall">5 days left</span>-->
+                </td>
+                <td aria-label="Date received">
+                  3 Mar 2018
+                </td>
+                <!--<td aria-label="Status" scope="row">-->
+                  <!--<span class="state state-submitted">-->
+                    <!--Submitted-->
+                  <!--</span>-->
+                <!--</td>-->
+                <td aria-label="Action">
+                  <a class="" href="claim-details-multi-parties2">View</a>
+                </td>
+              </tr>
+              <!--claim 04-->
+              <tr class="submitted" id="claim_04">
+                <td aria-label="Claim number">
+                  <!--<a class="js-test-case-number-link" href="">000LR095</a>-->
+                  000LR011
+                </td>
+                <td aria-label="Defendants">
+                  Kingsley Building Ltd<br>
+                  <span class="font-xsmall">+ 1 other</span>
+                </td>
+                <td aria-label="Claimed" class="numeric claimed-amount">
+                  £5,000
+                </td>
+                <td aria-label="Action required">
+                  Complete directions <br>questionnaire form<br>
+                  <span class="font-xsmall" style="color: #B10E1E; font-weight: bold">2 days left</span>
+                </td>
+                <td aria-label="Date received">
+                  2 Feb 2018
+                </td>
+                <!--<td aria-label="Status" scope="row">-->
+                <!--<span class="state state-submitted">-->
+                <!--Submitted-->
+                <!--</span>-->
+                <!--</td>-->
+                <td aria-label="Action">
+                  <a class="" href="claim-details-multi-parties2">View</a>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!--<div class="grid-row" style="margin-top: -35px">-->
+            <!--<nav class="pagination">-->
+
+<!--<span class="page current">-->
+<!--1-->
+<!--</span>-->
+
+              <!--<span class="page">-->
+<!--<a rel="next" href="?page=2">2</a>-->
+<!--</span>-->
+
+              <!--<span class="page">-->
+<!--<a href="?page=3">3</a>-->
+<!--</span>-->
+
+              <!--<span class="page">-->
+<!--<a href="?page=4">4</a>-->
+<!--</span>-->
+
+              <!--<span class="next">-->
+<!--<a rel="next" href="?page=2">Next</a>-->
+<!--</span>-->
+
+              <!--<span class="last">-->
+<!--<a href="?page=4">Last</a>-->
+<!--</span>-->
+
+            <!--</nav>-->
+          <!--</div>-->
+
+        </div>
+
+
+        <div id="tabTwoContent">
+
+          <h3 class="heading-medium"></h3>
+
+
+        <!--</div>-->
+
+        <!--<div id="tabThreeContent">-->
+          <!---->
+        <!--</div>-->
+
+      </div>
+
+    </div>
+
+
+  </div>
+</main>
+
+
+{% endblock %}
