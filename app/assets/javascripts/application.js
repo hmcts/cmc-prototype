@@ -963,7 +963,7 @@ Casefile.prototype.onButtonCommentsClick = function (e) {
 //
 // });
 
-// // table row click-able
+// table row click-able
 // $(".table-clickable-row tbody tr").click(function(){
 //   window.location = $(that).parent().data('href');
 // });
