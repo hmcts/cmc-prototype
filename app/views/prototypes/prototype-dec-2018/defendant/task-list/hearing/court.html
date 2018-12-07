@@ -15,24 +15,37 @@ Money Claims Prototype
 
         <form method="post" action="expert-witnesses" class="form">
 
-        <h1 class="heading-large">Choose a hearing centre (optional)</h1>
+          <h1 class="heading-large">Choose a court</h1>
 
-        <p>The court will make the final decision - we'll also ask the {% if data['party'] == 'claimant' %}defendant{% else %}claimant{% endif %}.</p>
+          <p>Guildford County Court is your nearest court, but you can choose any.</p>
+          <p>We will make the final decision - we'll also ask the {% if data['party'] == 'claimant' %}defendant{% else %}claimant{% endif %}.</p>
 
-        <p>You can choose any centre - it doesn't have to be near your home.</p>
-
-          <div class="form-group">
-            <input id="county_court" name="county_court" type="text" class="form-control" value="{{ data['county_court'] }}">
-          </div>
+          <h1 class="heading-medium">Would you like the hearing to be at Guildford County Court?</h1>
 
           <div class="form-group">
-              <a target="_blank" href="https://www.gov.uk/find-court-tribunal">Find a hearing centre</a> (this will open in a new window)
+            <fieldset>
+              <div class="multiple-choice">
+                <input id="radio-court-yes" type="radio" name="court" value="yes">
+                <label for="radio-court-yes">Yes</label>
+              </div>
+              <div class="multiple-choice" data-target="court">
+                <input id="radio-court-no" type="radio" name="court" value="no">
+                <label for="radio-court-no">No</label>
+              </div>
+              <div class="panel panel-border-narrow js-hidden" id="court">
+                <div class="form-group">
+                  <label class="form-label" for="county_court">Which court would you prefer?</label>
+                  <input type="text" id="county_court" name="county_court" class="form-control" />
+                </div>
+              </div>
+
+            </fieldset>
           </div>
 
           <div class="form-group">
             <input type="submit" class="button" value="Save and continue">
           </div>
-        </form>
+      </form>
 
 
     </div>
