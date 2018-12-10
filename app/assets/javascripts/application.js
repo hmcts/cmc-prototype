@@ -814,6 +814,73 @@ function tabGroup4 (tableObj, which) {
   }
 }
 
+/* TABS PATTERN */
+function tabGroup5 (tableObj, which) {
+  tabP = 'TAB-SIX'
+  tabQ = 'TAB-SEVEN'
+  tabR = 'TAB-EIGHT'
+  tabS = 'TAB-NINE'
+  tabT = 'TAB-TEN'
+
+  if (which == tabP) {
+    document.getElementById('tabP').className = 'tab-on'
+    document.getElementById('tabQ').className = 'tab'
+    document.getElementById('tabR').className = 'tab'
+    document.getElementById('tabS').className = 'tab'
+    document.getElementById('tabT').className = 'tab'
+    document.getElementById('tabSixContent').style.display = 'block'
+    document.getElementById('tabSevenContent').style.display = 'none'
+    document.getElementById('tabEightContent').style.display = 'none'
+    document.getElementById('tabNineContent').style.display = 'none'
+    document.getElementById('tabTenContent').style.display = 'none'
+  } else if (which == tabQ) {
+    document.getElementById('tabP').className = 'tab'
+    document.getElementById('tabQ').className = 'tab-on'
+    document.getElementById('tabR').className = 'tab'
+    document.getElementById('tabS').className = 'tab'
+    document.getElementById('tabT').className = 'tab'
+    document.getElementById('tabSixContent').style.display = 'none'
+    document.getElementById('tabSevenContent').style.display = 'block'
+    document.getElementById('tabEightContent').style.display = 'none'
+    document.getElementById('tabNineContent').style.display = 'none'
+    document.getElementById('tabTenContent').style.display = 'none'
+  } else if (which == tabR) {
+    document.getElementById('tabP').className = 'tab'
+    document.getElementById('tabQ').className = 'tab'
+    document.getElementById('tabR').className = 'tab-on'
+    document.getElementById('tabS').className = 'tab'
+    document.getElementById('tabT').className = 'tab'
+    document.getElementById('tabSixContent').style.display = 'none'
+    document.getElementById('tabSevenContent').style.display = 'none'
+    document.getElementById('tabEightContent').style.display = 'block'
+    document.getElementById('tabNineContent').style.display = 'none'
+    document.getElementById('tabTenContent').style.display = 'none'
+  } else if (which == tabS) {
+    document.getElementById('tabP').className = 'tab'
+    document.getElementById('tabQ').className = 'tab'
+    document.getElementById('tabR').className = 'tab'
+    document.getElementById('tabS').className = 'tab-on'
+    document.getElementById('tabT').className = 'tab'
+    document.getElementById('tabSixContent').style.display = 'none'
+    document.getElementById('tabSevenContent').style.display = 'none'
+    document.getElementById('tabEightContent').style.display = 'none'
+    document.getElementById('tabNineContent').style.display = 'block'
+    document.getElementById('tabTenContent').style.display = 'none'
+  } else if (which == tabT) {
+    document.getElementById('tabP').className = 'tab'
+    document.getElementById('tabQ').className = 'tab'
+    document.getElementById('tabR').className = 'tab'
+    document.getElementById('tabS').className = 'tab'
+    document.getElementById('tabT').className = 'tab-on'
+    document.getElementById('tabSixContent').style.display = 'none'
+    document.getElementById('tabSevenContent').style.display = 'none'
+    document.getElementById('tabEightContent').style.display = 'none'
+    document.getElementById('tabNineContent').style.display = 'none'
+    document.getElementById('tabTenContent').style.display = 'block'
+  }
+}
+
+
 /* LISTS - EXPANDABLE ROW PATTERN */
 row1status = true
 row2status = true
@@ -968,14 +1035,58 @@ Casefile.prototype.onButtonCommentsClick = function (e) {
 //   window.location = $(that).parent().data('href');
 // });
 
-$("#claim-details-single").click(function(){
-  window.location = "claim-details-timeline";
+
+$("#claim-d2").click(function(){
+  window.location = "claim-details-d2";
 });
 
-$("#claim-details-multi").click(function(){
-  window.location = "claim-details-multi-parties";
+$("#claim-d1").click(function(){
+  window.location = "claim-details-d1";
 });
 
+$("#claim-d3").click(function(){
+  window.location = "claim-details-d3";
+});
+
+$("#claim-d4").click(function(){
+  window.location = "claim-details-d4";
+});
+
+$("#claim-d5").click(function(){
+  window.location = "claim-details-d5";
+});
+
+$("#claim-d6").click(function(){
+  window.location = "claim-details-d6";
+});
+
+$("#claim-d7").click(function(){
+  window.location = "claim-details-d7";
+});
+
+$("#claim-c1").click(function(){
+  window.location = "claim-details-c1";
+});
+
+$("#claim-c2").click(function(){
+  window.location = "claim-details-c2";
+});
+
+$("#claim-c3").click(function(){
+  window.location = "claim-details-c3";
+});
+
+$("#claim-c4").click(function(){
+  window.location = "claim-details-c4";
+});
+
+$("#claim-c5").click(function(){
+  window.location = "claim-details-c5";
+});
+
+$("#claim-c6").click(function(){
+  window.location = "claim-details-c6";
+});
 
 /* tab navigation and content show/hide */
 //Check the href of each link in the sidebar
