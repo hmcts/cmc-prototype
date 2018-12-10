@@ -40,6 +40,8 @@
                 <td class="numeric" id="task-status" scope="col" id="col-status">
                   {% if data.resolve_dispute=="complete" %}
                   {% include "includes/task_status_finished.html" %}
+                  {% else %}
+                  {% include "includes/task_status_incomplete.html" %}
                   {% endif %}
                 </td>
               </tr>
@@ -69,6 +71,8 @@
               <td class="numeric" id="task-status" scope="col" id="col-status">
                 {% if data.your_details=="complete" %}
                 {% include "includes/task_status_finished.html" %}
+                {% else %}
+                {% include "includes/task_status_incomplete.html" %}
                 {% endif %}
               </td>
             </tr>
@@ -81,6 +85,8 @@
               <td class="numeric" id="task-status" scope="col" id="col-status">
                 {% if data.their_details=="complete" %}
                 {% include "includes/task_status_finished.html" %}
+                {% else %}
+                {% include "includes/task_status_incomplete.html" %}
                 {% endif %}
               </td>
             </tr>
@@ -93,6 +99,8 @@
               <td class="numeric" id="task-status" scope="col" id="col-status">
                 {% if data.claim_amount=="complete" %}
                 {% include "includes/task_status_finished.html" %}
+                {% else %}
+                {% include "includes/task_status_incomplete.html" %}
                 {% endif %}
               </td>
             </tr>
@@ -105,14 +113,18 @@
               <td class="numeric" id="task-status" scope="col" id="col-status">
                 {% if data.claim_details=="complete" %}
                 {% include "includes/task_status_finished.html" %}
+                {% else %}
+                {% include "includes/task_status_incomplete.html" %}
                 {% endif %}
               </td>
             </tr>
           </tbody>
         </table>
         <br>
+
+
         <br>
-        <table id="table-of-tasks">
+        <table id="table-of-tasks" class="submit">
           <thead>
             <tr>
               <th scope="col" id="col-task">
@@ -125,29 +137,24 @@
             </tr>
           </thead>
           <tbody>
-            {% set completed = true if data.resolve_dispute == "complete" and data.your_details == "complete" and data.their_details == "complete" and data.claim_amount == "complete" and data.claim_details == "complete"%}
             <tr id="check-and-send">
               {% if completed==true %}
               <td class="task">
                 <a href="task-list/check-and-send{{formQuery}}">
-                  <span class="task-name"> Check and submit your claim</span>
+                 <span class="button"> Check and submit your claim</span>
                 </a>
               </td>
               {% else %}
               <td >
                 <a href="task-list/check-and-send">
-                  <span class="task-name"> Check and submit your claim</span>
+                 <span class="button"> Check and submit your claim</span>
                 </a>
               </td>
               {% endif %}
-              <td class="numeric" id="task-status" scope="col" id="col-status">
-                {% if data.paid=="complete" %}
-                {% include "includes/task_status_finished.html" %}
-                {% endif %}
-              </td>
             </tr>
-          </tbody>
-        </table>
+        </tbody>
+      </table>
+
       </div>
       <div class="column-one-third">
       </div>
@@ -155,5 +162,5 @@
   {% include 'prototypes/prototype-dec-2018/includes/contact.html' %}
 </main>
 {% endblock %}
-  {% block extra_js_1 %}<!-- ticky list javascript one -->{% endblock %}
-  {% block extra_js_2 %}<!-- ticky list javascript two -->{% endblock %}
+{% block extra_js_1 %}<!-- ticky list javascript one -->{% endblock %}
+{% block extra_js_2 %}<!-- ticky list javascript two -->{% endblock %}
