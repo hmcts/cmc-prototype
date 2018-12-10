@@ -1,0 +1,454 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="4" %}
+
+{% include "includes/propositional_navigation_new.html" %}
+{% endblock %}
+{% block content %}
+
+
+<main id="content" role="main">
+
+  {% include "includes/phase_banner_beta.html" %}
+
+  <div class="breadcrumbs" style="margin-bottom: -20px">
+    <ol>
+      <!--<li><a href="#" onclick="history.go(-1)">All claims</a></li>-->
+
+      <li><a href="all-claims-2">All claims</a></li>
+
+      <li aria-current="page">Claim details</li>
+
+    </ol>
+  </div>
+
+  <div class="grid-row">
+
+    <div class="details" style="margin-top: -30px">
+        <span style=""><h2 style="">
+          <h2 class="heading-medium">Jan Clark v Mary Richards</h2>
+          <h2 class="font-xsmall" style="margin-top: -10px">Claim number: <span style="">352MC733</span></h2>
+    </div>
+    <!--<div class="divider"></div>-->
+
+    <div class="column-full-width">
+
+      <div class="tabGroup" style="margin-top: 40px">
+        <a id="tabA" class="tab-on" onclick="tabGroup(tabContent, 'TAB-ONE')" href="javascript: void(0)">Next steps</a>
+        <a id="tabB" class="tab" onclick="tabGroup(tabContent, 'TAB-TWO')" href="javascript: void(0)">Claim
+          history</a>
+        <a id="tabC" class="tab" onclick="tabGroup(tabContent, 'TAB-THREE')" href="javascript: void(0)">About claim</a>
+        <a id="tabD" class="tab" onclick="tabGroup(tabContent, 'TAB-FOUR')" href="javascript: void(0)">Documents</a>
+        <hr style="margin-top: -2px">
+      </div>
+
+      <div id="tabContent" class="top_30">
+
+        <div id="tabOneContent">
+          <div class="column-two-thirds">
+            <div class="description" style="background-color: #fff">
+              <!--Action one-->
+              <h4 class=" heading-small">The defendant has rejected your claim</h4>
+              <p>Mary Richards said they dispute your claim. The claim has been automatically registered for free
+                telephone mediation.</p>
+
+              <p>If you reject their response, we'll contact you with an appointment unless you chose to opt out of
+                mediation.</p>
+
+              <p>The claim won't proceed if you don't respond before 26 January 2019.</p>
+
+              <div class="form-group">
+                <form method="post" action="../../claimant-response/dispute-claim/task-list" class="form">
+                  {{formData | safe}}
+                  <input type="hidden" name="mediation-pilot" value="on">
+                  <input type="submit" class="button" value="View and respond">
+                </form>
+              </div>
+
+              <p><a href="">Download their response</a>
+                (PDF, 123KB)</p>
+
+              <p><a href="../../../defendant/correspondence/forms/dqs">Download their proposed hearing requirements</a>
+                (PDF, 132KB)</p>
+            </div>
+          </div>
+
+          <div class="column-one-third">
+            <div class="right-column-nav" style="margin-top: 20px">
+              <!--<hr class="light-hr" style="margin-top: 5px">-->
+              <h3 class="heading-small">More actions</h3>
+              <p></p><a href="">Tell us you've settled</a></p>
+              <p></p><a href="">Stopping the claim</a></p>
+            </div>
+          </div>
+
+        </div>
+
+        <div id="tabTwoContent">
+          <!--<h3 class="heading-medium">Claim history</h3><br>-->
+          <div class="hmcts-timeline" style="margin-top: 50px">
+            <div class="hmcts-timeline__item">
+              <div class="hmcts-timeline__header">
+                <h2 class="hmcts-timeline__title">You submitted your claim</h2>
+                <!--<p class="hmcts-timeline__by">by you (claimant)</p>-->
+              </div>
+              <p class="hmcts-timeline__date">
+                <time style="color: grey">6 December 2018</time>
+              </p>
+              <p><a href="#">Download claim form</a>
+                (PDF, 123KB)</p>
+            </div>
+          </div>
+        </div>
+
+        <div id="tabThreeContent">
+          <fieldset></fieldset>
+          <h2 class="heading-small">Total claim amount</h2>
+          <table class="govuk-table jui-table  jui-table--fixed  govuk-!-margin-bottom-7">
+            <tbody class="govuk-table__body">
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell--left">Claim amount</td>
+              <td class="govuk-table__cell--right">£275</td>
+            </tr>
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell--left">Claim fee</td>
+              <td class="govuk-table__cell--right">£25</td>
+            </tr>
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell--left">Total</td>
+              <td class="govuk-table__cell-right">£300</td>
+            </tr>
+            </tbody>
+          </table>
+
+          <h2 class="heading-small">Defendant's details</h2>
+          <table class="govuk-table">
+            <tbody class="govuk-table__body">
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell--left">Name</td>
+              <td class="govuk-table__cell--right">Mrs Mary Richards</td>
+            </tr>
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell--left">Address</td>
+              <td class="govuk-table__cell--right">24 Acacia Drive<br>London<br>SW1 H9A</td>
+              </td>
+            </tr>
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell--left">Telephone</td>
+              <td class="govuk-table__cell--right">07824999612</td>
+            </tr>
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell--left">Email</td>
+              <td class="govuk-table__cell--right">mary.richards@gmail.com</td>
+            </tr>
+            </tbody>
+          </table>
+
+          <h2 class="heading-small">Your details (claimant)</h2>
+          <table class="govuk-table">
+            <tbody class="govuk-table__body">
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell--left">Name</td>
+              <td class="govuk-table__cell--right">Mrs Jan Clark</td>
+            </tr>
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell--left">Address</td>
+              <td class="govuk-table__cell--right">101 Regents Road<br>Shiplake<br>Henley on Thames<br>RG9 4BW</td>
+            </tr>
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell--left">Telephone</td>
+              <td class="govuk-table__cell--right">07824999612</td>
+            </tr>
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell--left">Email</td>
+              <td class="govuk-table__cell--right">jan.clark@gmail.com</td>
+            </tr>
+            </tbody>
+          </table>
+
+        </div>
+
+        <div id="tabFourContent">
+
+          <div class="jui-casefile govuk-!-margin-bottom-6">
+
+            <div class="jui-casefile-files">
+              <ul class="jui-casefile-list">
+
+                <li class="jui-casefile-list__item">
+                  <a class="jui-casefile-list__link"
+                     href="https://documents/1-w"
+                     aria-current="true">Claim form</a>
+                </li>
+
+                <li class="jui-casefile-list__item">
+                  <a class="jui-casefile-list__link"
+                     href="https://documents/2-w">Defendant's response</a>
+                </li>
+
+              </ul>
+            </div>
+            <div class="jui-casefile-document-wrapper">
+
+              <div class="jui-casefile-page editable">
+
+
+                <!--<details class="govuk-details" role="group">-->
+                  <!--<summary class="govuk-details__summary" role="button"-->
+                           <!--aria-controls="details-content-097acfb8-eade-4ef6-b904-ef0cba4a9de3"-->
+                           <!--aria-expanded="false">-->
+    <!--<span class="govuk-details__summary-text">-->
+      <!--Comment-->
+    <!--</span>-->
+                  <!--</summary>-->
+                  <!--<div class="govuk-details__text" id="details-content-097acfb8-eade-4ef6-b904-ef0cba4a9de3"-->
+                       <!--aria-hidden="true">-->
+                    <!--This is a comment added when the document was uploaded-->
+                  <!--</div>-->
+                <!--</details>-->
+
+
+                <div class="jui-casefile-page-content" data-page="1">
+
+                  <div class="jui-casefile-page-head">
+                    <img src="/../../public/images/logo-hmcts.svg"
+                         alt="HM Courts &amp; Tribunals Service">
+                  </div>
+
+                  <div class="jui-casefile-page-body">
+
+                    <h2 class="heading-large">Claim form</h2>
+
+                    <table class="govuk-table   govuk-!-margin-bottom-8  jui-table  jui-table--fixed">
+
+                      <caption class="govuk-table__caption govuk-heading-s">Section 1</caption>
+
+
+                      <tbody class="govuk-table__body">
+
+                      <tr class="govuk-table__row">
+
+
+                        <th class="govuk-table__header" scope="row">Appeal Tribunal Reference Number</th>
+
+
+                        <td class="govuk-table__cell">SC242/17/1234</td>
+
+
+                      </tr>
+
+                      <tr class="govuk-table__row">
+
+
+                        <th class="govuk-table__header" scope="row">Personal details</th>
+
+
+                        <td class="govuk-table__cell">Warren Sutton</td>
+
+
+                      </tr>
+
+                      <tr class="govuk-table__row">
+
+
+                        <th class="govuk-table__header" scope="row">Address</th>
+
+
+                        <td class="govuk-table__cell">24 Park Road<br>Lewisham<br>London<br>E11 4PR</td>
+
+
+                      </tr>
+
+                      <tr class="govuk-table__row">
+
+
+                        <th class="govuk-table__header" scope="row">Date of birth</th>
+
+
+                        <td class="govuk-table__cell">20 September 1983 (34 years old)</td>
+
+
+                      </tr>
+
+                      <tr class="govuk-table__row">
+
+
+                        <th class="govuk-table__header" scope="row">National Insurance number</th>
+
+
+                        <td class="govuk-table__cell">JK 02 03 04 extends</td>
+
+
+                      </tr>
+
+                      <tr class="govuk-table__row">
+
+
+                        <th class="govuk-table__header" scope="row">Benefit</th>
+
+
+                        <td class="govuk-table__cell">PIP</td>
+
+
+                      </tr>
+
+                      <tr class="govuk-table__row">
+
+
+                        <th class="govuk-table__header" scope="row">Date of claim</th>
+
+
+                        <td class="govuk-table__cell">16/03/2017</td>
+
+
+                      </tr>
+
+                      <tr class="govuk-table__row">
+
+
+                        <th class="govuk-table__header" scope="row">Decision effective date</th>
+
+
+                        <td class="govuk-table__cell">Warren was previously awarded the lower rate Mobility
+                          and lowest rate Car components of Disability Living Allowance.<br><br>DLA was in
+                          payment until 11/07/2017, the last day of the 28 day period which started on the
+                          first DLA payday after the Personal Independence Payment decision of 13/06/2017.<br><br>
+                          <b>If the Tribunal decide to award benefit, the earliest date for any PIP award
+                            is 12/07/2017.</b><br><br> <b>The specific legislation is the Personal
+                            Independence Payment (Transitional Provisions) Regulations 2013 reg
+                            17(1)(b).</b></td>
+
+
+                      </tr>
+
+                      <tr class="govuk-table__row">
+
+
+                        <th class="govuk-table__header" scope="row">Date of outcome decision</th>
+
+
+                        <td class="govuk-table__cell">13/06/2017</td>
+
+
+                      </tr>
+
+                      <tr class="govuk-table__row">
+
+
+                        <th class="govuk-table__header" scope="row">Date of Reconsideration Decision</th>
+
+
+                        <td class="govuk-table__cell">27/09/2017</td>
+
+
+                      </tr>
+
+                      <tr class="govuk-table__row">
+
+
+                        <th class="govuk-table__header" scope="row">Date of Appeal Request</th>
+
+
+                        <td class="govuk-table__cell">16/11/2017</td>
+
+
+                      </tr>
+
+                      </tbody>
+                    </table>
+
+
+                  </div>
+
+                </div>
+
+                <div class="jui-casefile-page-content" data-page="2">
+
+                  <div class="jui-casefile-page-head">
+                    <img src="/../../public/images/logo-hmcts.svg"
+                         alt="HM Courts &amp; Tribunals Service">
+                  </div>
+
+                  <div class="jui-casefile-page-body">
+
+                    <table class="govuk-table   govuk-!-margin-bottom-8  jui-table  jui-table--fixed">
+
+                      <caption class="govuk-table__caption govuk-heading-s">Section 1 (continued)</caption>
+
+
+                      <tbody class="govuk-table__body">
+
+                      <tr class="govuk-table__row">
+
+
+                        <th class="govuk-table__header" scope="row">Decision Maker's name and address where
+                          documents for the Decision Maker may be sent or delivered
+                        </th>
+
+
+                        <td class="govuk-table__cell">Arron Setton<br>Personal Independence Payment (9)<br>Mall
+                          Handling Site 29<br>Liverpool, WV78 1AA
+                        </td>
+
+
+                      </tr>
+
+                      <tr class="govuk-table__row">
+
+
+                        <th class="govuk-table__header" scope="row">name and addresses of any other
+                          respondents and their representatives.
+                        </th>
+
+
+                        <td class="govuk-table__cell">Joseph Fontainour<br>123 The Way<br>London<br>B4 4FF
+                        </td>
+
+
+                      </tr>
+
+                      <tr class="govuk-table__row">
+
+
+                        <th class="govuk-table__header" scope="row">Name and address of Appoinetee</th>
+
+
+                        <td class="govuk-table__cell">N/A</td>
+
+
+                      </tr>
+
+                      </tbody>
+                    </table>
+
+
+                  </div>
+
+                </div>
+
+
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+
+
+      <!--<div class="column-one-third">-->
+      <!--<div class="right-column-nav">-->
+      <!--<hr class="light-hr " style="margin-top: 83px">-->
+      <!--<h3 class="heading-small">More actions</h3>-->
+      <!--<p></p><a href="">Tell us you've settled</a></p>-->
+      <!--<p></p><a href="">Stopping the claim</a></p>-->
+      <!--</div>-->
+      <!--</div>-->
+</main>
+
+
+{% endblock %}
