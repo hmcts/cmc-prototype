@@ -1,6 +1,7 @@
 <style>
 #content {
-  margin-top:3em
+  margin-top:3em;
+  position: relative;
 }
 @page {
   size: 8.5in 11in;
@@ -97,6 +98,7 @@ h1 {
 .crestLogo tr td:nth-child(1) {
   width: 30%;
 }
+
 .crest{
   width:80%
 }
@@ -133,15 +135,33 @@ h1 {
 .footer td:nth-child(3){
   text-align:right
 }
+
+ol {
+    counter-reset: item;
+    list-style-type: none;
+}
+
+li {
+    margin-bottom: 10px;
+}
+
+li:before {
+  content: "3." counters(item, ".") " ";
+  counter-increment: item;
+  position: absolute;
+  left: 70px;
+  color: #888;
+}
+
+
+
 </style>
 <main id="content"  role="main">
   <header>
-    <table class="crestLogo"
+    <table class="crestLogo">
     <tbody>
       <tr>
         <td><img class="crest" src="{{ asset_path }}/images/court-logos/shield.png"  alt=""/></td>
-        <td>
-        </td>
         <td rowspan="2" class="claim-details">
           <h1>Claim Form {% if   data['check']== 1  %} - Claimant's copy  {% endif %}</h1>
           <p>In the County Court Business Centre Online Civil Money Claims</p>
@@ -194,7 +214,7 @@ h1 {
             Address:
           </td>
           <td class="no-border">
-            101 Regents road<br>
+            101 Regents Road<br>
             Shiplake<br>
             Henley on Thames<br>
             RG9 4BW
@@ -266,7 +286,7 @@ h1 {
             Address:
           </td>
           <td class="">
-            24 Acacia drive<br>
+            24 Acacia Drive<br>
             London<br>
             SW1 H9A<br>
           </td>
@@ -277,7 +297,7 @@ h1 {
               Email:
             </td>
             <td>
-              mary.ricards@gmail.com
+              mary.richards@gmail.com
             </td>
           </tr>
         </tbody>
@@ -306,8 +326,13 @@ h1 {
         <tr>
           <td colspan="2" class="single-cell">
             {% if  data['check']== 1  or data['check'] =='2'  or data['check'] =='3' %}
-            <p>Mrs Richards had 7 physiotherapy appointments. The first appointment was on 16th November 2015 and the last was on 7th December 2016.</p><p> She gave us details of his private medical insurance provider, Aviva, so that we could claim the fees from them. </p>We have been unable to get payment from them and they have told us that
-            <p>Mrs Richards's policy with them was terminated on 14th November 2015. We have contacted Mrs Richards on many occasions requesting payment culminating in an email on 23rd January 2017 warning that we would seek legal advice if we had no payment by 31st January 2017.</p><p> We have have no response to this email and have had no payment.</p>
+            <ol>
+            <li>Mrs Richards had 7 physiotherapy appointments. The first appointment was on 16th November 2015 and the last was on 7th December 2016.</li>
+            <li> She gave us details of his private medical insurance provider, Aviva, so that we could claim the fees from them. </li>
+            <li>We have been unable to get payment from them and they have told us that.</li>
+            <li>Mrs Richards's policy with them was terminated on 14th November 2015. We have contacted Mrs Richards on many occasions requesting payment culminating in an email on 23rd January 2017 warning that we would seek legal advice if we had no payment by 31st January 2017.</li>
+            <li> We have have no response to this email and have had no payment.</li>
+            </ol>
             {% else %} {{data['defence-disagree-claim']}}{% endif %}
           </td>
         </tr>
