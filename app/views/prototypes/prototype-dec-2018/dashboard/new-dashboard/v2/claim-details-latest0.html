@@ -1,0 +1,243 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="4" %}
+
+{% include "includes/propositional_navigation_new.html" %}
+{% endblock %}
+{% block content %}
+
+
+<main id="content" role="main">
+
+  {% include "includes/phase_banner_beta.html" %}
+
+  <div class="breadcrumbs" style="margin-bottom: -20px">
+    <ol>
+      <!--<li><a href="#" onclick="history.go(-1)">All claims</a></li>-->
+
+      <li><a href="all-claims-claimant">All claims</a></li>
+
+      <li aria-current="page">Claim details</li>
+
+    </ol>
+  </div>
+
+  <div class="grid-row">
+
+    <!--<div class="peristant-info-banner" style="margin-top: -10px">-->
+    <!--<div class="peristant-info-banner-content">352MC733-->
+    <!--<span class="bold"-->
+    <!--style="margin-left:10px">Jan Clark</span>-->
+    <!--v-->
+    <!--<span class="bold">Mary Richards</span>-->
+    <!--</div>-->
+    <!--</div>-->
+
+    <!--<div class="hmcts-details-bar">-->
+
+    <!--<div class="hmcts-details-bar__container">-->
+    <!--<div class="hmcts-details-bar__details" style="margin-left: 20px">-->
+    <!--<span class="hmcts-details-bar__reference">352MC733</span>-->
+    <!--<span class="hmcts-details-bar__title"><span style="font-weight: bold">Jan Clark</span> v <span style="font-weight: bold">Mary Richards</span>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+
+    <div class="details" style="margin-top: -30px">
+        <span style=""><h2 style="">
+          <h2 class="heading-medium">Jan Clark v Mary Richards</h2>
+          <h2 class="font-xsmall" style="margin-top: -10px">Claim number: <span style="">352MC733</span></h2>
+    </div>
+    <!--<div class="divider"></div>-->
+
+    <div class="column-two-thirds">
+
+      <div class="tabGroup3" style="margin-top: 40px">
+        <a id="tabH" class="tab-on" onclick="tabGroup3(tabContent, 'TAB-ONE')" href="javascript: void(0)">Next steps</a>
+        <a id="tabI" class="tab" onclick="tabGroup3(tabContent, 'TAB-TWO')" href="javascript: void(0)">About claim</a>
+        <hr style="margin-top: -2px">
+      </div>
+
+      <div id="tabContent" class="top_30">
+
+        <div id="tabOneContent">
+          <div class="description" style="background-color: #fff">
+            <!--Action one-->
+            <h4 class="heading-small">Proceeding with your claim</h4>
+            <p>If you wish to proceed with your claim, you need to <a href="http://hmcts-cmc-prototype.herokuapp.com/prototypes/prototype-nov-2018/dashboard/claimant-response/dispute-claim/task-list">respond to the defendant</a>.</p>
+            <p>Your claim won't proceed if you don't respond before 4pm on <span
+              class="dates5"></span>.</p>
+
+            <!--<details>-->
+              <!--<summary><span class="summary">I've already sent it</span></summary>-->
+              <!--<div class="panel panel-border-narrow">-->
+                <!--<p>-->
+                  <!--Content goes here-->
+                <!--</p>-->
+              <!--</div>-->
+            <!--</details>-->
+          </div>
+
+          <!--<div class="description" style="background-color: #fff; margin-top: -30px">-->
+            <!--<h4 class=" heading-small">Settling out of court</h4>-->
+            <!--<p>If you accept the offer, you can make a legal agreement between you and Mary Richards and resolve your dispute before a hearing.</p>-->
+            <!--<p><a href="http://hmcts-cmc-prototype.herokuapp.com/prototypes/prototype-nov-2018/dashboard/offer-agreement/view-offer?defendant=offer">View their offer</a></p>-->
+          <!--</div>-->
+
+          <div class="divider" style="margin-top: 30px"></div>
+
+          <div class="description" style="background-color: #fff">
+            <h4 class="bold-small">Latest update</h4>
+            <time style="color: grey">{{ now | date('add', 0, 'days') | date }}</time>
+            <p>Mary Richards rejected your claim. The claim has been automatically registered for free telephone
+              mediation.</p>
+            <!--<p>If you reject their response, we'll contact you with an appointment unless you choose to opt out of-->
+              <!--mediation.</p>-->
+            <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=9">Download their response</a>
+              (PDF, 123KB)</p>
+
+            <fieldset></fieldset>
+
+            <!-- Previous updates -->
+            <div class="updates-toggle" style="margin-top: -20px">
+              <i class="fa fa-caret-right" aria-hidden="true"><span>View previous updates</span></i>
+            </div>
+
+            <div class="updates-container">
+              <!--<div class="update">-->
+                <!--<h4 class="bold-small">Your response was sent</h4>-->
+                <!--<time style="color: grey">{{ now | date('add', -13, 'days') | date }}</time>-->
+                <!--<p>You rejected the defendant's defence and opt out of mediation.</p>-->
+                <!--&lt;!&ndash;<p>You need to complete a directions questionnaire form to tell us more about the claim.</p>&ndash;&gt;-->
+                <!--&lt;!&ndash;<p>Your claim won't proceed if you don't complete and return the form before 4pm on 13 Nov 2018.</p>&ndash;&gt;-->
+              <!--</div>-->
+
+              <!--<div class="update">-->
+                <!--<h4 class="bold-small">The defendant responded</h4>-->
+                <!--<time style="color: grey">{{ now | date('add', -16, 'days') | date }}</time>-->
+                <!--<p>Mary Richards rejected your claim. The claim has been automatically registered for free telephone-->
+                  <!--mediation.</p>-->
+                <!--<p>If you reject their response, we'll contact you with an appointment unless you choose to opt out of-->
+                  <!--mediation.</p>-->
+
+                <!--&lt;!&ndash;<ul class="hmcts-timeline__documents">&ndash;&gt;-->
+                <!--&lt;!&ndash;<li class="hmcts-timeline__document-item"><a class="hmcts-timeline__document-link" href="#1">Defendant’s response</a></li>&ndash;&gt;-->
+                <!--&lt;!&ndash;</ul>&ndash;&gt;-->
+                <!--<p><a href="../defendant/correspondence/forms/claim-form-defendant?check=9">Download their response</a>-->
+                  <!--(PDF, 123KB)</p>-->
+              <!--</div>-->
+              <div class="update">
+                <h4 class="bold-small">The defendant requested more time to respond</h4>
+                <time style="color: grey">{{ now | date('add', -27, 'days') | date }}</time>
+                <p>Mary Richards requested an extra 14 days to respond. They need to respond by {{ now | date('add',
+                  -13, 'days') | date }}</p>
+              </div>
+              <div class="update">
+                <h4 class="bold-small">Your claim was sent</h4>
+                <time style="color: grey">{{ now | date('add', -30, 'days') | date }}</time>
+                <p>Mary Richards has until before 4pm on 31 March 2018 to respond. They can request an extra 14 days if
+                  they need it.</p>
+
+                <!--<ul class="hmcts-timeline__documents">-->
+                <!--<li class="hmcts-timeline__document-item"><a class="hmcts-timeline__document-link" href="#1">Claim form</a></li>-->
+                <!--</ul>-->
+                <p><a href="#">Download claim form</a>
+                  (PDF, 123KB)</p>
+              </div>
+            </div>
+            <!-- End previous updates -->
+          </div>
+        </div>
+
+        <div id="tabTwoContent">
+          <h3 class="heading-medium">Total claim amount</h3>
+          <table class="top_10" style="border: none">
+            <tbody>
+            <tr>
+              <th class="bold" style="border: none">Claim amount</th>
+              <td style="border: none">£1,500</td>
+            </tr>
+            <tr>
+              <th class="bold" style="border: none">Claim fee</th>
+              <td style="border: none">£70</td>
+            </tr>
+            <tr>
+              <th class="bold" style="border: none; font-weight: bold">Total</th>
+              <td style="border: none; font-weight: bold">£1,570 &nbsp; &nbsp; &nbsp; &nbsp;
+                &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                &nbsp;&nbsp;
+                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
+              </td>
+            </tr>
+            </tbody>
+          </table>
+
+          <h3 class="heading-medium">Defendant's details</h3>
+          <table class="top_10" style="border: none">
+            <tbody>
+            <tr>
+              <th class="bold" style="border: none">Name</th>
+              <td style="border: none">Mrs Mary Richards</td>
+            </tr>
+            <tr>
+              <th class="bold" style="border: none">Address</th>
+              <td style="border: none">24 Acacia Drive<br>London<br>SW1 H9A</td>
+            </tr>
+            <tr>
+              <th class="bold" style="border: none">Email</th>
+              <td style="border: none">mary.richards@gmail.com</td>
+            </tr>
+            </tbody>
+          </table>
+          <h3 class="heading-medium">Your details (claimant)</h3>
+          <table class="top_10" style="border: none">
+            <tbody>
+            <tr>
+              <th class="bold" style="border: none">Name</th>
+              <td style="border: none">Mrs Jan Clark</td>
+            </tr>
+            <tr>
+              <th class="bold" style="border: none">Address</th>
+              <td style="border: none">101 Regents Road<br>Shiplake<br>Henley on Thames<br>RG9 4BW</td>
+            </tr>
+            <!--<tr>-->
+            <!--<th class="bold" style="border: none">Date of birth</th>-->
+            <!--<td style="border: none">31 January 1970</td>-->
+            <!--</tr>-->
+            <tr>
+              <th class="bold" style="border: none">Telephone</th>
+              <td style="border: none">07824999612</td>
+            </tr>
+            <tr>
+              <th class="bold" style="border: none">Email</th>
+              <td style="border: none">jan.clark@gmail.com &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                &nbsp; &nbsp; &nbsp;
+              </td>
+            </tr>
+            </tbody>
+          </table>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="column-one-third">
+      <div class="right-column-nav">
+        <hr class="light-hr " style="margin-top: 83px">
+        <h3 class="heading-small">More actions</h3>
+        <p></p><a href="">Tell us you've settled</a></p>
+        <p></p><a href="">Stopping the claim</a></p>
+        <!--<p></p><a href="">Settling out of court</a></p>-->
+      </div>
+
+    </div>
+</main>
+
+
+{% endblock %}

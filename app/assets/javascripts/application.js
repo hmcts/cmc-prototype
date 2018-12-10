@@ -653,3 +653,367 @@ function showSelectAddress( strPrefix ) {
     return false;
 
   }
+
+/* TABS PATTERN */
+function tabGroup (tableObj, which) {
+  tabA = 'TAB-ONE'
+  tabB = 'TAB-TWO'
+  tabC = 'TAB-THREE'
+  tabD = 'TAB-FOUR'
+
+  if (which == tabA) {
+    document.getElementById('tabA').className = 'tab-on'
+    document.getElementById('tabB').className = 'tab'
+    document.getElementById('tabC').className = 'tab'
+    document.getElementById('tabD').className = 'tab'
+    document.getElementById('tabOneContent').style.display = 'block'
+    document.getElementById('tabTwoContent').style.display = 'none'
+    document.getElementById('tabThreeContent').style.display = 'none'
+    document.getElementById('tabFourContent').style.display = 'none'
+  } else if (which == tabB) {
+    document.getElementById('tabA').className = 'tab'
+    document.getElementById('tabB').className = 'tab-on'
+    document.getElementById('tabC').className = 'tab'
+    document.getElementById('tabD').className = 'tab'
+    document.getElementById('tabOneContent').style.display = 'none'
+    document.getElementById('tabTwoContent').style.display = 'block'
+    document.getElementById('tabThreeContent').style.display = 'none'
+    document.getElementById('tabFourContent').style.display = 'none'
+  } else if (which == tabC) {
+    document.getElementById('tabA').className = 'tab'
+    document.getElementById('tabB').className = 'tab'
+    document.getElementById('tabC').className = 'tab-on'
+    document.getElementById('tabD').className = 'tab'
+    document.getElementById('tabOneContent').style.display = 'none'
+    document.getElementById('tabTwoContent').style.display = 'none'
+    document.getElementById('tabThreeContent').style.display = 'block'
+    document.getElementById('tabFourContent').style.display = 'none'
+  } else if (which == tabD) {
+    document.getElementById('tabA').className = 'tab'
+    document.getElementById('tabB').className = 'tab'
+    document.getElementById('tabC').className = 'tab'
+    document.getElementById('tabD').className = 'tab-on'
+    document.getElementById('tabOneContent').style.display = 'none'
+    document.getElementById('tabTwoContent').style.display = 'none'
+    document.getElementById('tabThreeContent').style.display = 'none'
+    document.getElementById('tabFourContent').style.display = 'block'
+  }
+}
+
+/* TABS PATTERN */
+function tabGroup2 (tableObj, which) {
+  tabE = 'TAB-ONE'
+  tabF = 'TAB-TWO'
+  tabG = 'TAB-THREE'
+
+  if (which == tabE) {
+    document.getElementById('tabE').className = 'tab-on'
+    document.getElementById('tabF').className = 'tab'
+    document.getElementById('tabG').className = 'tab'
+    document.getElementById('tabOneContent').style.display = 'block'
+    document.getElementById('tabTwoContent').style.display = 'none'
+    document.getElementById('tabThreeContent').style.display = 'none'
+  } else if (which == tabF) {
+    document.getElementById('tabE').className = 'tab'
+    document.getElementById('tabF').className = 'tab-on'
+    document.getElementById('tabG').className = 'tab'
+    document.getElementById('tabOneContent').style.display = 'none'
+    document.getElementById('tabTwoContent').style.display = 'block'
+    document.getElementById('tabThreeContent').style.display = 'none'
+  } else if (which == tabG) {
+    document.getElementById('tabE').className = 'tab'
+    document.getElementById('tabF').className = 'tab'
+    document.getElementById('tabG').className = 'tab-on'
+    document.getElementById('tabOneContent').style.display = 'none'
+    document.getElementById('tabTwoContent').style.display = 'none'
+    document.getElementById('tabThreeContent').style.display = 'block'
+  }
+}
+
+/* TABS PATTERN */
+function tabGroup3 (tableObj, which) {
+  tabH = 'TAB-ONE'
+  tabI = 'TAB-TWO'
+
+  if (which == tabH) {
+    document.getElementById('tabH').className = 'tab-on'
+    document.getElementById('tabI').className = 'tab'
+    document.getElementById('tabOneContent').style.display = 'block'
+    document.getElementById('tabTwoContent').style.display = 'none'
+  } else if (which == tabI) {
+    document.getElementById('tabH').className = 'tab'
+    document.getElementById('tabI').className = 'tab-on'
+    document.getElementById('tabOneContent').style.display = 'none'
+    document.getElementById('tabTwoContent').style.display = 'block'
+  }
+}
+
+/* TABS PATTERN */
+function tabGroup4 (tableObj, which) {
+  tabJ = 'TAB-ONE'
+  tabK = 'TAB-TWO'
+  tabL = 'TAB-THREE'
+  tabM = 'TAB-FOUR'
+  tabN = 'TAB-FIVE'
+
+  if (which == tabJ) {
+    document.getElementById('tabJ').className = 'tab-on'
+    document.getElementById('tabK').className = 'tab'
+    document.getElementById('tabL').className = 'tab'
+    document.getElementById('tabM').className = 'tab'
+    document.getElementById('tabN').className = 'tab'
+    document.getElementById('tabOneContent').style.display = 'block'
+    document.getElementById('tabTwoContent').style.display = 'none'
+    document.getElementById('tabThreeContent').style.display = 'none'
+    document.getElementById('tabFourContent').style.display = 'none'
+    document.getElementById('tabFiveContent').style.display = 'none'
+  } else if (which == tabK) {
+    document.getElementById('tabJ').className = 'tab'
+    document.getElementById('tabK').className = 'tab-on'
+    document.getElementById('tabL').className = 'tab'
+    document.getElementById('tabM').className = 'tab'
+    document.getElementById('tabN').className = 'tab'
+    document.getElementById('tabOneContent').style.display = 'none'
+    document.getElementById('tabTwoContent').style.display = 'block'
+    document.getElementById('tabThreeContent').style.display = 'none'
+    document.getElementById('tabFourContent').style.display = 'none'
+    document.getElementById('tabFiveContent').style.display = 'none'
+  } else if (which == tabL) {
+    document.getElementById('tabJ').className = 'tab'
+    document.getElementById('tabK').className = 'tab'
+    document.getElementById('tabL').className = 'tab-on'
+    document.getElementById('tabM').className = 'tab'
+    document.getElementById('tabN').className = 'tab'
+    document.getElementById('tabOneContent').style.display = 'none'
+    document.getElementById('tabTwoContent').style.display = 'none'
+    document.getElementById('tabThreeContent').style.display = 'block'
+    document.getElementById('tabFourContent').style.display = 'none'
+    document.getElementById('tabFiveContent').style.display = 'none'
+  } else if (which == tabM) {
+    document.getElementById('tabJ').className = 'tab'
+    document.getElementById('tabK').className = 'tab'
+    document.getElementById('tabL').className = 'tab'
+    document.getElementById('tabM').className = 'tab-on'
+    document.getElementById('tabN').className = 'tab'
+    document.getElementById('tabOneContent').style.display = 'none'
+    document.getElementById('tabTwoContent').style.display = 'none'
+    document.getElementById('tabThreeContent').style.display = 'none'
+    document.getElementById('tabFourContent').style.display = 'block'
+    document.getElementById('tabFiveContent').style.display = 'none'
+  } else if (which == tabN) {
+    document.getElementById('tabJ').className = 'tab'
+    document.getElementById('tabK').className = 'tab'
+    document.getElementById('tabL').className = 'tab'
+    document.getElementById('tabM').className = 'tab'
+    document.getElementById('tabN').className = 'tab-on'
+    document.getElementById('tabOneContent').style.display = 'none'
+    document.getElementById('tabTwoContent').style.display = 'none'
+    document.getElementById('tabThreeContent').style.display = 'none'
+    document.getElementById('tabFourContent').style.display = 'none'
+    document.getElementById('tabFiveContent').style.display = 'block'
+  }
+}
+
+/* LISTS - EXPANDABLE ROW PATTERN */
+row1status = true
+row2status = true
+row3status = true
+row4status = true
+row5status = true
+function tableRow (n) {
+  /* Row 1 */
+  if ((n == 1) || (n == 2)) {
+    if (row1status) {
+      // alert(rowOpenCloseStatus);
+      document.getElementById('row1closed').style = 'display: none'
+      document.getElementById('row1opened').style = 'display: inline-row'
+    } else {
+      // alert(rowOpenCloseStatus);
+      document.getElementById('row1closed').style = 'display: inline-row'
+      document.getElementById('row1opened').style = 'display: none'
+    }
+    row1status = !row1status
+  }
+  /* Row 2 */
+  if ((n == 3) || (n == 4)) {
+    if (row2status) {
+      // alert(rowOpenCloseStatus);
+      document.getElementById('row2closed').style = 'display: none'
+      document.getElementById('row2opened').style = 'display: inline-row'
+    } else {
+      // alert(rowOpenCloseStatus);
+      document.getElementById('row2closed').style = 'display: inline-row'
+      document.getElementById('row2opened').style = 'display: none'
+    }
+    row2status = !row2status
+  }
+  /* Row 3 */
+  if ((n == 5) || (n == 6)) {
+    if (row3status) {
+      // alert(rowOpenCloseStatus);
+      document.getElementById('row3closed').style = 'display: none'
+      document.getElementById('row3opened').style = 'display: inline-row'
+    } else {
+      // alert(rowOpenCloseStatus);
+      document.getElementById('row3closed').style = 'display: inline-row'
+      document.getElementById('row3opened').style = 'display: none'
+    }
+    row3status = !row3status
+  }
+  /* Row 4 */
+  if ((n == 7) || (n == 8)) {
+    if (row4status) {
+      // alert(rowOpenCloseStatus);
+      document.getElementById('row4closed').style = 'display: none'
+      document.getElementById('row4opened').style = 'display: inline-row'
+    } else {
+      // alert(rowOpenCloseStatus);
+      document.getElementById('row4closed').style = 'display: inline-row'
+      document.getElementById('row4opened').style = 'display: none'
+    }
+    row4status = !row4status
+  }
+  /* Row 5 */
+  if ((n == 9) || (n == 10)) {
+    if (row5status) {
+      // alert(rowOpenCloseStatus);
+      document.getElementById('row5closed').style = 'display: none'
+      document.getElementById('row5opened').style = 'display: inline-row'
+    } else {
+      // alert(rowOpenCloseStatus);
+      document.getElementById('row5closed').style = 'display: inline-row'
+      document.getElementById('row5opened').style = 'display: none'
+    }
+    row5status = !row5status
+  }
+}
+
+/* CASE FILE */
+var Casefile = function (container) {
+  this.container = container
+  this.items = container.find('.jui-cf__files')
+  this.comments = container.find('.jui-cf__document-comments')
+  this.itemsButton = container.find('.jui-cf__toolbar-button--items')
+  this.commentsButton = container.find('.jui-cf__toolbar-button--comments')
+  this.itemsButton.on('click', $.proxy(this, 'onButtonItemsClick'))
+  this.commentsButton.on('click', $.proxy(this, 'onButtonCommentsClick'))
+  this.showItems()
+  this.hideComments()
+}
+
+Casefile.prototype.hideComments = function () {
+  this.container.removeClass('jui-cf--show-comments')
+  this.comments.hide()
+  this.commentsButton.attr('aria-pressed', 'false')
+}
+
+Casefile.prototype.hideItems = function () {
+  this.items.hide()
+  this.itemsButton.attr('aria-pressed', 'false')
+}
+
+Casefile.prototype.showComments = function () {
+  this.container.addClass('jui-cf--show-comments')
+  this.comments.show()
+  this.commentsButton.attr('aria-pressed', 'true')
+}
+
+Casefile.prototype.showItems = function () {
+  this.items.show()
+  this.itemsButton.attr('aria-pressed', 'true')
+}
+
+Casefile.prototype.onButtonItemsClick = function (e) {
+  this.showItems()
+  this.hideComments()
+}
+
+Casefile.prototype.onButtonCommentsClick = function (e) {
+  this.showComments()
+  this.hideItems()
+}
+
+
+// //Select entire table row
+// $(".table-clickable tbody tr").click(function (e) {
+//   if (e.target.type == "checkbox") {
+//     // stop the bubbling to prevent firing the rows click event
+//     e.stopPropagation()
+//   } else {
+//     // Click the
+//     if ($(this).hasClass("checked")) {
+//       $(this).find("input").click()
+//       $(this).removeClass("checked")
+//     } else {
+//       $(this).find("input").click()
+//       $(this).addClass("checked")
+//     }
+//   }
+// })
+
+// // table row click-able
+// $(document).ready(function() {
+//
+//   $('#clickable-link tr').click(function() {
+//     var href = $(this).find("a").attr("href");
+//     if(href) {
+//       window.location = href;
+//     }
+//   });
+//
+// });
+
+// table row click-able
+// $(".table-clickable-row tbody tr").click(function(){
+//   window.location = $(that).parent().data('href');
+// });
+
+$("#claim-details-single").click(function(){
+  window.location = "claim-details-timeline";
+});
+
+$("#claim-details-multi").click(function(){
+  window.location = "claim-details-multi-parties";
+});
+
+
+/* tab navigation and content show/hide */
+//Check the href of each link in the sidebar
+$('.navbar__list-items a').click(function (e) {
+  e.preventDefault();
+  var target = $(this);
+  target.parents('.navbar').find('.active').removeClass('active');
+  target.parents('li').addClass('active');
+  target.parents().find('h1:first').text($(this).text());
+});
+
+/* updates toggle */
+function ShowHideUpdates () {
+  var self = this;
+
+  self.toggleUpdates = function() {
+    var $updatesContainer = $('.updates-container');
+    var $i = $('.updates-toggle i');
+    $i.on('click', function() {
+      var $this = $(this);
+      if ($this.hasClass('fa-caret-right')) {
+        $this.removeClass('fa-caret-right');
+        $this.addClass('fa-caret-down');
+        $this.find('span').text('Hide previous updates');
+        $updatesContainer.css('display', 'block');
+      } else {
+        $this.removeClass('fa-caret-down');
+        $this.addClass('fa-caret-right');
+        $this.find('span').text('View previous updates');
+        $updatesContainer.css('display', 'none');
+      }
+    })
+  }
+}
+
+$(document).ready(function () {
+  var showHideUpdates =  new ShowHideUpdates();
+  showHideUpdates.toggleUpdates();
+  tabs();
+});
+
