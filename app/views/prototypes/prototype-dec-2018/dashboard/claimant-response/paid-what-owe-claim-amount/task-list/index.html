@@ -61,7 +61,7 @@
                 <th scope="col" id="col-task">
                   <span class="task-group">
                     <span class="group-number" id="task-number"></span>
-How do you want to respond?
+                    How do you want to respond?
                   </span>
                 </th>
                 <th class="numeric" id="task-status" scope="col" id="col-status"></th>
@@ -71,7 +71,7 @@ How do you want to respond?
              <tr id="completing-your-claim">
               <td class="task">
                 <a href="task-list/amount-owed{{formQuery}}">
-                  <span class="task-name"> Accept or reject their response</span>
+                  <span class="task-name">Accept or reject their response</span>
                 </a>
               </td>
               <td class="numeric" id="task-status" scope="col" id="col-status">
@@ -122,13 +122,17 @@ How do you want to respond?
             </tr>
           </thead>
           <tbody>
+            
+            {% set completed = true if data.resolve_dispute == "complete" and data.completing_your_claim == "complete" and data.your_details == "complete" and data.their_details == "complete" and data.claim_amount == "complete" and data.claim_details == "complete" and data.eligibility == "complete"%}
+
             <tr id="check-and-send">
-              <td>
-               <a href="task-list/check-and-send">
-                 <span class="button"> Check and submit your response</span>
-               </a>
-             </td>
-          </tr>
+              <td class="task">
+                <a href="task-list/check-and-send{{formQuery}}">
+                  <span class="button">Check and submit your response</span>
+                </a>
+              </td>
+            </tr>
+
         </tbody>
       </table>
 
@@ -139,7 +143,7 @@ How do you want to respond?
 
       </div>
     </div>
-  {% include 'prototypes/prototype-dec-2018/includes/contact.html' %}
+    
 </main>
 {% endblock %}
   {% block extra_js_1 %}<!-- ticky list javascript one -->{% endblock %}
