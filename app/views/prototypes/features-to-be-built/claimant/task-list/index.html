@@ -76,6 +76,8 @@
               <td class="numeric" id="task-status" scope="col" id="col-status">
                 {% if data.completing_your_claim=="complete" %}
                 {% include "includes/task_status_finished.html" %}
+                {% else %}
+                {% include "includes/task_status_incomplete.html" %}
                 {% endif %}
               </td>
             </tr>
@@ -155,26 +157,15 @@
           </thead>
           <tbody>
             {% set completed = true if data.resolve_dispute == "complete" and data.completing_your_claim == "complete" and data.your_details == "complete" and data.their_details == "complete" and data.claim_amount == "complete" and data.claim_details == "complete"%}
+
             <tr id="check-and-send">
-              {% if completed==true %}
               <td class="task">
                 <a href="task-list/check-and-send{{formQuery}}">
                  <span class="button"> Check and submit your claim</span>
                 </a>
               </td>
-              {% else %}
-              <td >
-                <a href="task-list/check-and-send">
-                 <span class="button"> Check and submit your claim</span>
-                </a>
-              </td>
-              {% endif %}
-              <td class="numeric" id="task-status" scope="col" id="col-status">
-                {% if data.paid=="complete" %}
-                {% include "includes/task_status_finished.html" %}
-                {% endif %}
-              </td>
             </tr>
+
           </tbody>
         </table>
       </div>
