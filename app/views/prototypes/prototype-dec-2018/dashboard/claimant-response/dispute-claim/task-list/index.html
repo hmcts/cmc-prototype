@@ -2,7 +2,7 @@
 {% block page_title %} Task list {% endblock %}
 {% block proposition_header %}
 {% set my_account="1" %}
-{% include "includes/propositional_navigation.html" %}
+{% include "includes/propositional_navigation_new.html" %}
 {% endblock %}
 {% block extra_css %}
 <link rel="stylesheet" href="/public/stylesheets/dm_list.css"/>{% endblock %}
@@ -22,7 +22,7 @@
               <th scope="col" id="col-task">
                 <span class="task-group">
                   <span class="group-number" id="task-number"></span>
-                  Before you start
+                  How they responded
                 </span>
                 <th class="numeric" id="task-status" scope="col" id="col-status">
                   <span type="hidden" class="visually-hidden">task status</span>
@@ -42,12 +42,14 @@
                 <td class="numeric" id="task-status" scope="col" id="col-status">
                   {% if data.their_response=="complete" %}
                   {% include "includes/task_status_finished.html" %}
+                  {% else %}
+                  {% include "includes/task_status_incomplete.html" %}
                   {% endif %}
                 </td>
               </tr>
             </tbody>
           </table>
-          
+
           <br/>
           <br/>
           <table id="table-of-tasks">
@@ -56,7 +58,7 @@
                 <th scope="col" id="col-task">
                   <span class="task-group">
                     <span class="group-number" id="task-number"></span>
-                    How do you want to respond
+                    How do you want to respond?
                   </span>
                 </th>
                 <th class="numeric" id="task-status" scope="col" id="col-status"></th>
@@ -72,6 +74,8 @@
               <td class="numeric" id="task-status" scope="col" id="col-status">
                 {% if data.defence=="complete" %}
                 {% include "includes/task_status_finished.html" %}
+                {% else %}
+                {% include "includes/task_status_incomplete.html" %}
                 {% endif %}
               </td>
             </tr>
@@ -86,6 +90,8 @@
               <td class="numeric" id="task-status" scope="col" id="col-status">
                 {% if data.mediation=="complete" %}
                 {% include "includes/task_status_finished.html" %}
+                {% else %}
+                {% include "includes/task_status_incomplete.html" %}
                 {% endif %}
               </td>
             </tr>
@@ -121,6 +127,8 @@
                   <td class="numeric" id="task-status" scope="col" id="col-status">
                   {% if data.hearing=="complete" %}
                   {% include "includes/task_status_finished.html" %}
+                  {% else %}
+                  {% include "includes/task_status_incomplete.html" %}
                   {% endif %}
                 </td>
               </tr>
@@ -130,48 +138,37 @@
           <br />
           {% endif %}
 
-
-        <table id="table-of-tasks">
-          <thead>
-            <tr>
-              <th scope="col" id="col-task">
-                <span class="task-group">
-                  <span class="group-number" id="task-number"></span>
-                  Submit
-                </span>
-              </th>
-              <th class="numeric" id="task-status" scope="col" id="col-status"></th>
-            </tr>
-          </thead>
-          <tbody>
             {% set completed = true if data.resolve_dispute == "complete" and data.your_details == "complete" and data.their_details == "complete" and data.claim_amount == "complete" and data.claim_details == "complete" and data.eligibility == "complete"%}
-            <tr id="check-and-send">
-              {% if completed==true %}
-              <td class="task">
-                <a href="task-list/check-and-send{{formQuery}}">
-                  <span class="task-name"> Check and submit your response</span>
-                </a>
-              </td>
-              {% else %}
-              <td >
-                <a href="task-list/check-and-send{{formQuery}}">
-                  <span class="task-name"> Check and submit your response</span>
-                </a>
-              </td>
-              {% endif %}
-              <td class="numeric" id="task-status" scope="col" id="col-status">
-                {% if data.paid=="complete" %}
-                {% include "includes/task_status_finished.html" %}
-                {% endif %}
-              </td>
-            </tr>
-          </tbody>
-        </table>
+
+            <table id="table-of-tasks" class="submit">
+              <thead>
+                <tr>
+                  <th scope="col" id="col-task">
+                    <span class="task-group">
+                      <span class="group-number" id="task-number"></span>
+                      Submit
+                    </span>
+                  </th>
+                  <th class="numeric" id="task-status" scope="col" id="col-status"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr id="check-and-send">
+                  <td>
+                   <a href="task-list/check-and-send">
+                     <span class="button"> Check and submit your response</span>
+                   </a>
+                 </td>
+              </tr>
+            </tbody>
+          </table>
+
+
       </div>
       <div class="column-one-third">
       </div>
     </div>
-  {% include 'prototypes/prototype-dec-2018/includes/contact.html' %}
+
 </main>
 {% endblock %}
   {% block extra_js_1 %}<!-- ticky list javascript one -->{% endblock %}

@@ -25,7 +25,7 @@
               <th scope="col" id="col-task">
                 <span class="task-group">
                   <span class="group-number" id="task-number"></span>
-                  Before you start
+                  How they responded
                 </span>
                 <th class="numeric" id="task-status" scope="col" id="col-status">
                   <span type="hidden" class="visually-hidden">task status</span>
@@ -45,6 +45,8 @@
                 <td class="numeric" id="task-status" scope="col" id="col-status">
                   {% if data.their_response=="complete" %}
                   {% include "includes/task_status_finished.html" %}
+                  {% else %}
+                  {% include "includes/task_status_incomplete.html" %}
                   {% endif %}
                 </td>
               </tr>
@@ -75,6 +77,8 @@
               <td class="numeric" id="task-status" scope="col" id="col-status">
                 {% if data.amount_owed=="complete" %}
                 {% include "includes/task_status_finished.html" %}
+                {% else %}
+                {% include "includes/task_status_incomplete.html" %}
                 {% endif %}
               </td>
             </tr>
@@ -89,6 +93,8 @@
               <td class="numeric" id="task-status" scope="col" id="col-status">
                 {% if data.payment_method=="complete" %}
                 {% include "includes/task_status_finished.html" %}
+                {% else %}
+                {% include "includes/task_status_incomplete.html" %}
                 {% endif %}
               </td>
             </tr>
@@ -102,6 +108,8 @@
               <td class="numeric" id="task-status" scope="col" id="col-status">
                 {% if data.mediation=="complete" %}
                 {% include "includes/task_status_finished.html" %}
+                {% else %}
+                {% include "includes/task_status_incomplete.html" %}
                 {% endif %}
               </td>
             </tr>
@@ -118,6 +126,8 @@
                 <td class="numeric" id="task-status" scope="col" id="col-status">
                   {% if data.court_payment_method=="complete" %}
                   {% include "includes/task_status_finished.html" %}
+                  {% else %}
+                  {% include "includes/task_status_incomplete.html" %}
                   {% endif %}
                 </td>
               </tr>
@@ -134,6 +144,8 @@
               <td class="numeric" id="task-status" scope="col" id="col-status">
                 {% if data.proceed=="complete" %}
                 {% include "includes/task_status_finished.html" %}
+                {% else %}
+                {% include "includes/task_status_incomplete.html" %}
                 {% endif %}
               </td>
             </tr>
@@ -149,6 +161,8 @@
                 <td class="numeric" id="task-status" scope="col" id="col-status">
                   {% if data.settlement=="complete" %}
                   {% include "includes/task_status_finished.html" %}
+                  {% else %}
+                  {% include "includes/task_status_incomplete.html" %}
                   {% endif %}
                 </td>
               </tr>
@@ -162,6 +176,8 @@
                 <td class="numeric" id="task-status" scope="col" id="col-status">
                   {% if data.judgment=="complete" %}
                   {% include "includes/task_status_finished.html" %}
+                  {% else %}
+                  {% include "includes/task_status_incomplete.html" %}
                   {% endif %}
                 </td>
               </tr>
@@ -170,8 +186,9 @@
           </tbody>
         </table>
         <br>
+
         <br>
-        <table id="table-of-tasks">
+        <table id="table-of-tasks" class="submit">
           <thead>
             <tr>
               <th scope="col" id="col-task">
@@ -185,24 +202,12 @@
           </thead>
           <tbody>
             {% set completed = true if data.resolve_dispute == "complete" and data.your_details == "complete" and data.their_details == "complete" and data.claim_amount == "complete" and data.claim_details == "complete" and data.eligibility == "complete"%}
+
             <tr id="check-and-send">
-              {% if completed==true %}
-              <td class="task">
+              <td>
                 <a href="task-list/check-and-send{{formQuery}}">
-                  <span class="task-name"> Check and submit your response</span>
+                  <span class="button"> Check and submit your response</span>
                 </a>
-              </td>
-              {% else %}
-              <td >
-                <a href="task-list/check-and-send{{formQuery}}">
-                  <span class="task-name"> Check and submit your response</span>
-                </a>
-              </td>
-              {% endif %}
-              <td class="numeric" id="task-status" scope="col" id="col-status">
-                {% if data.paid=="complete" %}
-                {% include "includes/task_status_finished.html" %}
-                {% endif %}
               </td>
             </tr>
 

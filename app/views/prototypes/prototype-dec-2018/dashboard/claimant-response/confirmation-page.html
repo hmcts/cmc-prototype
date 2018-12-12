@@ -47,7 +47,7 @@ Money Claims Prototype
         {% elseif data['resolve_dispute'] == "complete" %}
         <h1 class="bold-large">You've agreed to mediation</h1>
 
-        {% elseif data['radio_select_group'] == "No"  or data['confirmation'] == 9 %}
+        {% elseif data['radio_select_group'] == "No"  or data['confirmation'] == 9  or data['meditation_ineligible'] == "complete" %}
         <h1 class="bold-large">You've rejected their response</h1>
 
 
@@ -142,8 +142,15 @@ Money Claims Prototype
         {% elseif ( data['claimant-payment-request'] == "Set-date" or data['claimant-payment-request'] == "Immediately" ) and data['radio-indent-group'] == "reject_stop_claim" and data['radio-indent-group2'] != "reject_stop_claim" or data['confirmation'] == 3  %}
         <p>We've emailed {% if data.counterclaim=="true" %}Jan Clark{%else%}Mary Richards{% endif %} your proposed repayment plan and settlement agreement for them to sign.</p>
         <p>They must respond before 4pm on {{ now | date('add', 7, 'days') | date }}. We'll email you when they respond.</p>
+        <p>If they sign the agreement, this claim is put on hold.</p>
+        <p>If they don't sign the agreement or reject it, you can request a CCJ against them which orders them to pay in line with the terms of the repayment plan.</p>
+        <p>If they don't think they can afford the plan, they can ask for a judge to make a different plan.</p>
 
-			{% include "includes/survey.html" %}
+        <h2 class="heading-medium">If you don't get paid</h2>
+         <p>If Mary Richards signs the settlement agreement but breaks the terms, you can request a County Court Judgment (CCJ) by signing in to your account.</p>
+
+           <p>After you've requested a CCJ you can ask the court to enforce payment.</p>
+            {% include "includes/survey.html" %}
 
 			<p><a class="button" href='../../dashboard/home?dashboard=1.116'>Go to your account</a></p>
 
@@ -152,8 +159,15 @@ Money Claims Prototype
         {% elseif ( data['radio-indent-group2'] == "accept_stop_claim" or data['radio-indent-group'] == "reject_stop_claim" ) and data['radio-indent-group2'] != "reject_stop_claim"  or data['confirmation'] == 4 %}
         <p>We've emailed Mary Richards the repayment plan and the settlement agreement for them to sign.</p>
         <p>They must respond before 4pm on {{ now | date('add', 7, 'days') | date }}. We'll email you when they respond.</p>
+        <p>If they sign the agreement, this claim is put on hold.</p>
+        <p>If they don't sign the agreement or reject it, you can request a CCJ against them which orders them to pay in line with the terms of the repayment plan.</p>
         <p>If they don't think they can afford the plan, they can ask for a judge to make a different plan.</p>
-			{% include "includes/survey.html" %}
+
+        <h2 class="heading-medium">If you don't get paid</h2>
+         <p>If Mary Richards signs the settlement agreement but breaks the terms, you can request a County Court Judgment (CCJ) by signing in to your account.</p>
+
+           <p>After you've requested a CCJ you can ask the court to enforce payment.</p>
+            {% include "includes/survey.html" %}
 
 			<p><a class="button" href='../../dashboard/home?dashboard=1.116'>Go to your account</a></p>
 
@@ -227,7 +241,32 @@ Money Claims Prototype
       {% include "includes/contact.html" %}
       </fieldset>
 
-  </div>
+
+      <div id="daysPassing" data-dayspassurl="../new-dashboard/claimant/email2"
+           data-dayspasstimetoprompt="5000" data-dayspassdays="3">
+
+        <div class="spinner-block">
+          <h2 class="govuk-heading-m">Days passing by... <span id="days">3</span></h2>
+          <div class="spinner spinner-1"></div>
+        </div>
+
+      </div>
+
+      <a class="gem-c-pagination__link active" id="triggerDaysPassing">
+  <span class="gem-c-pagination__link-title">
+      <svg class="gem-c-pagination__link-icon" xmlns="http://www.w3.org/2000/svg" height="13" width="17"
+           viewBox="0 0 17 13">
+        <path fill="currentColor"
+              d="m10.107-0.0078125-1.4136 1.414 4.2926 4.293h-12.986v2h12.896l-4.1855 3.9766 1.377 1.4492 6.7441-6.4062-6.7246-6.7266z"></path>
+      </svg>
+      <span class="gem-c-pagination__link-text">
+        Simulate time passing
+      </span>
+  </span>
+      </a>
+
+
+    </div>
 </div>
 </main>
 

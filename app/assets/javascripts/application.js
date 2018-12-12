@@ -814,6 +814,73 @@ function tabGroup4 (tableObj, which) {
   }
 }
 
+/* TABS PATTERN */
+function tabGroup5 (tableObj, which) {
+  tabP = 'TAB-SIX'
+  tabQ = 'TAB-SEVEN'
+  tabR = 'TAB-EIGHT'
+  tabS = 'TAB-NINE'
+  tabT = 'TAB-TEN'
+
+  if (which == tabP) {
+    document.getElementById('tabP').className = 'tab-on'
+    document.getElementById('tabQ').className = 'tab'
+    document.getElementById('tabR').className = 'tab'
+    document.getElementById('tabS').className = 'tab'
+    document.getElementById('tabT').className = 'tab'
+    document.getElementById('tabSixContent').style.display = 'block'
+    document.getElementById('tabSevenContent').style.display = 'none'
+    document.getElementById('tabEightContent').style.display = 'none'
+    document.getElementById('tabNineContent').style.display = 'none'
+    document.getElementById('tabTenContent').style.display = 'none'
+  } else if (which == tabQ) {
+    document.getElementById('tabP').className = 'tab'
+    document.getElementById('tabQ').className = 'tab-on'
+    document.getElementById('tabR').className = 'tab'
+    document.getElementById('tabS').className = 'tab'
+    document.getElementById('tabT').className = 'tab'
+    document.getElementById('tabSixContent').style.display = 'none'
+    document.getElementById('tabSevenContent').style.display = 'block'
+    document.getElementById('tabEightContent').style.display = 'none'
+    document.getElementById('tabNineContent').style.display = 'none'
+    document.getElementById('tabTenContent').style.display = 'none'
+  } else if (which == tabR) {
+    document.getElementById('tabP').className = 'tab'
+    document.getElementById('tabQ').className = 'tab'
+    document.getElementById('tabR').className = 'tab-on'
+    document.getElementById('tabS').className = 'tab'
+    document.getElementById('tabT').className = 'tab'
+    document.getElementById('tabSixContent').style.display = 'none'
+    document.getElementById('tabSevenContent').style.display = 'none'
+    document.getElementById('tabEightContent').style.display = 'block'
+    document.getElementById('tabNineContent').style.display = 'none'
+    document.getElementById('tabTenContent').style.display = 'none'
+  } else if (which == tabS) {
+    document.getElementById('tabP').className = 'tab'
+    document.getElementById('tabQ').className = 'tab'
+    document.getElementById('tabR').className = 'tab'
+    document.getElementById('tabS').className = 'tab-on'
+    document.getElementById('tabT').className = 'tab'
+    document.getElementById('tabSixContent').style.display = 'none'
+    document.getElementById('tabSevenContent').style.display = 'none'
+    document.getElementById('tabEightContent').style.display = 'none'
+    document.getElementById('tabNineContent').style.display = 'block'
+    document.getElementById('tabTenContent').style.display = 'none'
+  } else if (which == tabT) {
+    document.getElementById('tabP').className = 'tab'
+    document.getElementById('tabQ').className = 'tab'
+    document.getElementById('tabR').className = 'tab'
+    document.getElementById('tabS').className = 'tab'
+    document.getElementById('tabT').className = 'tab-on'
+    document.getElementById('tabSixContent').style.display = 'none'
+    document.getElementById('tabSevenContent').style.display = 'none'
+    document.getElementById('tabEightContent').style.display = 'none'
+    document.getElementById('tabNineContent').style.display = 'none'
+    document.getElementById('tabTenContent').style.display = 'block'
+  }
+}
+
+
 /* LISTS - EXPANDABLE ROW PATTERN */
 row1status = true
 row2status = true
@@ -889,50 +956,75 @@ function tableRow (n) {
 }
 
 /* CASE FILE */
-var Casefile = function (container) {
-  this.container = container
-  this.items = container.find('.jui-cf__files')
-  this.comments = container.find('.jui-cf__document-comments')
-  this.itemsButton = container.find('.jui-cf__toolbar-button--items')
-  this.commentsButton = container.find('.jui-cf__toolbar-button--comments')
-  this.itemsButton.on('click', $.proxy(this, 'onButtonItemsClick'))
-  this.commentsButton.on('click', $.proxy(this, 'onButtonCommentsClick'))
-  this.showItems()
-  this.hideComments()
-}
+// var Casefile = function (container) {
+//   this.container = container
+//   this.items = container.find('.jui-cf__files')
+//   this.comments = container.find('.jui-cf__document-comments')
+//   this.itemsButton = container.find('.jui-cf__toolbar-button--items')
+//   this.commentsButton = container.find('.jui-cf__toolbar-button--comments')
+//   this.itemsButton.on('click', $.proxy(this, 'onButtonItemsClick'))
+//   this.commentsButton.on('click', $.proxy(this, 'onButtonCommentsClick'))
+//   this.showItems()
+//   this.hideComments()
+// }
+//
+// Casefile.prototype.hideComments = function () {
+//   this.container.removeClass('jui-cf--show-comments')
+//   this.comments.hide()
+//   this.commentsButton.attr('aria-pressed', 'false')
+// }
+//
+// Casefile.prototype.hideItems = function () {
+//   this.items.hide()
+//   this.itemsButton.attr('aria-pressed', 'false')
+// }
+//
+// Casefile.prototype.showComments = function () {
+//   this.container.addClass('jui-cf--show-comments')
+//   this.comments.show()
+//   this.commentsButton.attr('aria-pressed', 'true')
+// }
+//
+// Casefile.prototype.showItems = function () {
+//   this.items.show()
+//   this.itemsButton.attr('aria-pressed', 'true')
+// }
+//
+// Casefile.prototype.onButtonItemsClick = function (e) {
+//   this.showItems()
+//   this.hideComments()
+// }
+//
+// Casefile.prototype.onButtonCommentsClick = function (e) {
+//   this.showComments()
+//   this.hideItems()
+// }
 
-Casefile.prototype.hideComments = function () {
-  this.container.removeClass('jui-cf--show-comments')
-  this.comments.hide()
-  this.commentsButton.attr('aria-pressed', 'false')
-}
+/* CASE FILE 2*/
+var Casefile = function(container) {
+  this.container = container;
+  this.items = container.find('.jui-cf__files');
+  this.comments = container.find('.jui-cf__document-comments');
+  this.itemsButton = container.find('.jui-cf__toolbar-button--items');
+  this.commentsButton = container.find('.jui-cf__toolbar-button--comments');
+  this.itemsButton.on('click', $.proxy(this, 'onButtonItemsClick'));
+  this.commentsButton.on('click', $.proxy(this, 'onButtonCommentsClick'));
+  this.showItems();
+  this.hideComments();
+};
 
-Casefile.prototype.hideItems = function () {
-  this.items.hide()
-  this.itemsButton.attr('aria-pressed', 'false')
-}
 
-Casefile.prototype.showComments = function () {
-  this.container.addClass('jui-cf--show-comments')
-  this.comments.show()
-  this.commentsButton.attr('aria-pressed', 'true')
-}
+Casefile.prototype.hideComments = function() {
+  this.container.removeClass('jui-cf--show-comments');
+  this.comments.hide();
+  this.commentsButton.attr('aria-pressed', 'false');
+};
 
-Casefile.prototype.showItems = function () {
-  this.items.show()
-  this.itemsButton.attr('aria-pressed', 'true')
-}
 
-Casefile.prototype.onButtonItemsClick = function (e) {
-  this.showItems()
-  this.hideComments()
-}
-
-Casefile.prototype.onButtonCommentsClick = function (e) {
-  this.showComments()
-  this.hideItems()
-}
-
+Casefile.prototype.hideItems = function() {
+  this.items.hide();
+  this.itemsButton.attr('aria-pressed', 'false');
+};
 
 // //Select entire table row
 // $(".table-clickable tbody tr").click(function (e) {
@@ -968,14 +1060,58 @@ Casefile.prototype.onButtonCommentsClick = function (e) {
 //   window.location = $(that).parent().data('href');
 // });
 
-$("#claim-details-single").click(function(){
-  window.location = "claim-details-timeline";
+
+$("#claim-d2").click(function(){
+  window.location = "claim-details-d2";
 });
 
-$("#claim-details-multi").click(function(){
-  window.location = "claim-details-multi-parties";
+$("#claim-d1").click(function(){
+  window.location = "claim-details-d1";
 });
 
+$("#claim-d3").click(function(){
+  window.location = "claim-details-d3";
+});
+
+$("#claim-d4").click(function(){
+  window.location = "claim-details-d4";
+});
+
+$("#claim-d5").click(function(){
+  window.location = "claim-details-d5";
+});
+
+$("#claim-d6").click(function(){
+  window.location = "claim-details-d6";
+});
+
+$("#claim-d7").click(function(){
+  window.location = "claim-details-d7";
+});
+
+$("#claim-c1").click(function(){
+  window.location = "claim-details-c1";
+});
+
+$("#claim-c2").click(function(){
+  window.location = "claim-details-c2";
+});
+
+$("#claim-c3").click(function(){
+  window.location = "claim-details-c3";
+});
+
+$("#claim-c4").click(function(){
+  window.location = "claim-details-c4";
+});
+
+$("#claim-c5").click(function(){
+  window.location = "claim-details-c5";
+});
+
+$("#claim-c6").click(function(){
+  window.location = "claim-details-c6";
+});
 
 /* tab navigation and content show/hide */
 //Check the href of each link in the sidebar
@@ -1017,3 +1153,55 @@ $(document).ready(function () {
   tabs();
 });
 
+function daysPass (page, waitTime, days) {
+  var theWaitTime = waitTime || 3000
+  setTimeout(function () {
+    $('#triggerDaysPassing').addClass('active')
+  }, theWaitTime)
+  $('#triggerDaysPassing').on('click', function () {
+    $('#daysPassing').addClass('active')
+    $('#triggerDaysPassing').removeClass('active')
+    for (var i = 0; i <= days; ++i) {
+      setTimeout((function (x) {
+        return function () {
+          $('#days').html(x)
+        }
+      })(i), i * 1000)
+    }
+    setTimeout(function () { document.location.href = page }, (days * 1000))
+  })
+}
+
+if ($('#daysPassing').length === 1) {
+  var url = ($('#daysPassing').attr('data-dayspassurl'))
+  var timeToPrompt = ($('#daysPassing').attr('data-dayspasstimetoprompt')) || 5000
+  var days = ($('#daysPassing').attr('data-dayspassdays')) || 5
+  daysPass(url, timeToPrompt, days)
+}
+
+if ($('#phoneBackground #phone-mockup').length === 1) {
+  $('#phone-mockup').on('click', function () {
+    $('#phoneBackground').toggleClass('active')
+    $(this).toggleClass('active')
+  })
+}
+
+if ($('#phoneAccessCode #phone-mockup').length === 1) {
+  setTimeout(function () {
+    $('#phone-mockup').toggleClass('active')
+  }, (3000))
+}
+
+$(document).ready(function () {
+  window.GOVUKFrontend.initAll()
+})
+
+
+/* SIDE TABS */
+$('ul.tab__nav li a').click(function(){
+  var target = "#" + $(this).data("target");
+  $("ul.tab__nav li a").removeClass('active');
+  $(this).addClass('active');
+  $('.tab__content').not(target).addClass('js-hidden');
+  $(target).removeClass('js-hidden');
+});
