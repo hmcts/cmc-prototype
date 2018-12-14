@@ -365,6 +365,16 @@ module.exports = function(app){
   })
 
 
+  app.post( '/' + strPath + 'defendant/task-list/your-details/date-of-birth', (req, res) => {
+
+    if (req.session.data['year'] > 2000 ) {
+      res.redirect('/' + strPath + 'defendant/task-list/your-details/under-18');
+    } else {
+      res.redirect('/' + strPath + 'defendant/task-list/your-details/number');
+    }
+
+  })
+
   app.post( '/' + strPath + 'claimant/task-list/their-details/defendant-add', (req, res) => {
 
     if (req.body.addDefendant === undefined) {
