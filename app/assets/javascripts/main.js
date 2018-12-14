@@ -240,15 +240,15 @@ function resetSecurity(nextUrl, forwardParams, formName) {
 
 function conditionalNavigation(input, value, nextUrl, alternativeUrl) {
   var form = serializeFormArray();
+  var strUrl = alternativeUrl;
   form.forEach(function (item) {
     if (item.name === input) {
       if (item.value == value) {
-        return redirectTo(nextUrl, form);
-      } else {
-        return redirectTo(alternativeUrl, form);
+        strUrl = nextUrl;
       }
     }
   });
+  return redirectTo(strUrl, form);
 }
 
 function multiNavigation(input, values, urls) {
