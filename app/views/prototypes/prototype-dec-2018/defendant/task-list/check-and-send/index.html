@@ -683,131 +683,6 @@ Check your answers
 								</tbody>
 							</table>
 							{% endif %}
-							{% if data.radio_select_group=="all" or data.radio_select_group=="Some" or data['check']== 1 or data['check']== 2 or data['check']== 3  or data['check']== 4 or data['check']== 5 or data['check']== 6 or data['counter'] or data['check'] == 11%}
-
-							{% if ( data.radio_select_group == "all" and data['radio-pay-group'] == "Immediately" ) and not data['counter'] %}
-							{% else %}
-							<table class="check-your-answers">
-								<thead>
-									<tr>
-										<th colspan="2">
-											<h2 class="heading-medium">
-												When you'll pay
-											</h2>
-										</th>
-										<th>
-										</th>
-									</tr>
-								</thead>
-								<tbody>
-							{% endif %}
-
-
-									<tr>
-										<td>
-											When will you pay
-										</td>
-										<td>
-											{% if data['radio-pay-group']=="Immediately" or data['check']== 1 or data['check']== 4%}
-											The full amount, no later than {{ now | date( 'add', 5, 'days') | date }}
-											{% elseif data['radio-pay-group']=="Instalments" or data['check']== 2  or data['check']== 5%}
-											By instalments
-											{% elseif data['radio-pay-group']=="Set-date" or data['check']== 3 or data['check']== 6%}
-											The full amount, no later than
-											{% if data['set-day'] %}
-											{{ ( data['set-month'] + ' ' + data['set-day'] + ' ' + data['set-year']) | date('D MMMM YYYY') }}
-											{% else %}
-											{{ now | date( 'add', 5, 'months') | date }}
-											{% endif %}
-											{% else %}
-											The full amount, no later than <span class="dates2"></span>
-											{% endif %}
-										</td>
-										<td class="change-answer">
-											<a href="../task-list/owe-all?return_page={{ '../../task-list' | urlencode }}">
-												Change <span class="visuallyhidden">Name</span>
-											</a>
-										</td>
-									</tr>
-									{% if data['radio-pay-group']=="Instalments" or data['check']== 2 or data['check']== 5%}
-									<tr>
-										<tr>
-											<td class="no-border">
-												Regular payments of
-											</td>
-											<td class="no-border">
-												{% if data['instalment-first-payment'] %}
-												£{{data['instalment-first-payment']}}
-												{% else %}
-												£200
-												{% endif %}
-											</td>
-											<td class="change-answer no-border">
-												<a href="../task-list/owe-all/statement/repayment-plan?return_page={{ '../../task-list' | urlencode }}">
-													Change <span class="visuallyhidden">Name</span>
-												</a>
-											</td>
-										</tr>
-										<tr >
-											<td class="no-border">
-												Frequency of payments
-											</td>
-											<td class="no-border">
-												{% if data['radio-payment-frequency'] %}
-												{{data['radio-payment-frequency']}}
-												{% else %}
-												Monthly
-												{% endif %}
-											</td>
-											<td class="no-border">
-											</td>
-										</tr>
-										<tr>
-											<td class="no-border">
-												Make the first payment on
-											</td>
-											<td class="no-border">
-												{% if data['instalment-day'] %}
-												{{ ( data['instalment-month'] + ' ' + data['instalment-day'] + ' ' + data['instalment-year']) | date('D MMMM YYYY') }}
-												{% else %}
-												1 {{ now | date( 'add', 1, 'months') | date('MMM YYYY') }}
-												{% endif %}
-											</td>
-											<td class="no-border">
-											</td>
-										</tr>
-										<tr >
-											<td>
-												Explain why you can't pay the full amount immediately
-											</td>
-											<td>
-											</td>
-											<td class="change-answer "></td>
-										</tr>
-										{% endif %}
-										{% if data['radio-pay-group']=="Set-date" or data['check']== 3 or data['check']== 6%}
-										<tr>
-											<td>
-												Explain why you can't pay immediately
-											</td>
-											<td>
-												{% if data['non-payment-reason'] %}
-												{{data['non-payment-reason']}}
-												{% else %}
-												I don't earn enough money to pay all at once
-												{% endif %}
-											</td>
-											<td class="change-answer">
-												<a href="#">
-													Change <span class="visuallyhidden">Name</span>
-												</a>
-											</td>
-										</tr>
-										{% endif %}
-									</tbody>
-								</table>
-								{% else %}
-								{% endif %} <!-- end owe some money -->
 
 								{% if ( data['radio-pay-group']=="Instalments" or data['radio-pay-group']=="Set-date" or data['check']== 2  or data['check']== 5 ) and ( not( data['defendant'] ) or data['defendant'] != 'org' ) %}
 								<table class="check-your-answers">
@@ -1392,6 +1267,136 @@ Check your answers
 									</tbody>
 								</table>
 								{% endif %} <!--end of statement of means-->
+
+
+
+							{% if data.radio_select_group=="all" or data.radio_select_group=="Some" or data['check']== 1 or data['check']== 2 or data['check']== 3  or data['check']== 4 or data['check']== 5 or data['check']== 6 or data['counter'] or data['check'] == 11%}
+
+							{% if ( data.radio_select_group == "all" and data['radio-pay-group'] == "Immediately" ) and not data['counter'] %}
+							{% else %}
+							<table class="check-your-answers">
+								<thead>
+									<tr>
+										<th colspan="2">
+											<h2 class="heading-medium">
+												When you'll pay
+											</h2>
+										</th>
+										<th>
+										</th>
+									</tr>
+								</thead>
+								<tbody>
+							{% endif %}
+
+
+									<tr>
+										<td>
+											When will you pay
+										</td>
+										<td>
+											{% if data['radio-pay-group']=="Immediately" or data['check']== 1 or data['check']== 4%}
+											The full amount, no later than {{ now | date( 'add', 5, 'days') | date }}
+											{% elseif data['radio-pay-group']=="Instalments" or data['check']== 2  or data['check']== 5%}
+											By instalments
+											{% elseif data['radio-pay-group']=="Set-date" or data['check']== 3 or data['check']== 6%}
+											The full amount, no later than
+											{% if data['set-day'] %}
+											{{ ( data['set-month'] + ' ' + data['set-day'] + ' ' + data['set-year']) | date('D MMMM YYYY') }}
+											{% else %}
+											{{ now | date( 'add', 5, 'months') | date }}
+											{% endif %}
+											{% else %}
+											The full amount, no later than <span class="dates2"></span>
+											{% endif %}
+										</td>
+										<td class="change-answer">
+											<a href="../task-list/owe-all?return_page={{ '../../task-list' | urlencode }}">
+												Change <span class="visuallyhidden">Name</span>
+											</a>
+										</td>
+									</tr>
+									{% if data['radio-pay-group']=="Instalments" or data['check']== 2 or data['check']== 5%}
+									<tr>
+										<tr>
+											<td class="no-border">
+												Regular payments of
+											</td>
+											<td class="no-border">
+												{% if data['instalment-first-payment'] %}
+												£{{data['instalment-first-payment']}}
+												{% else %}
+												£200
+												{% endif %}
+											</td>
+											<td class="change-answer no-border">
+												<a href="../task-list/owe-all/statement/repayment-plan?return_page={{ '../../task-list' | urlencode }}">
+													Change <span class="visuallyhidden">Name</span>
+												</a>
+											</td>
+										</tr>
+										<tr >
+											<td class="no-border">
+												Frequency of payments
+											</td>
+											<td class="no-border">
+												{% if data['radio-payment-frequency'] %}
+												{{data['radio-payment-frequency']}}
+												{% else %}
+												Monthly
+												{% endif %}
+											</td>
+											<td class="no-border">
+											</td>
+										</tr>
+										<tr>
+											<td class="no-border">
+												Make the first payment on
+											</td>
+											<td class="no-border">
+												{% if data['instalment-day'] %}
+												{{ ( data['instalment-month'] + ' ' + data['instalment-day'] + ' ' + data['instalment-year']) | date('D MMMM YYYY') }}
+												{% else %}
+												1 {{ now | date( 'add', 1, 'months') | date('MMM YYYY') }}
+												{% endif %}
+											</td>
+											<td class="no-border">
+											</td>
+										</tr>
+										<tr >
+											<td>
+												Explain why you can't pay the full amount immediately
+											</td>
+											<td>
+											</td>
+											<td class="change-answer "></td>
+										</tr>
+										{% endif %}
+										{% if data['radio-pay-group']=="Set-date" or data['check']== 3 or data['check']== 6%}
+										<tr>
+											<td>
+												Explain why you can't pay immediately
+											</td>
+											<td>
+												{% if data['non-payment-reason'] %}
+												{{data['non-payment-reason']}}
+												{% else %}
+												I don't earn enough money to pay all at once
+												{% endif %}
+											</td>
+											<td class="change-answer">
+												<a href="#">
+													Change <span class="visuallyhidden">Name</span>
+												</a>
+											</td>
+										</tr>
+										{% endif %}
+									</tbody>
+								</table>
+								{% endif %} <!-- end owe some money -->
+
+
+
 								{% if data.agreement=="complete" and data['radio-settlement'] == 'yes' %}
 								<table class="check-your-answers">
 									<thead>
@@ -1413,7 +1418,7 @@ Check your answers
 											<td >
 												Mary Richards
 												{% if data['radio-pay-group']=="Immediately" %}
-												will £1,500 immediately. Jan Clark will receive the money no later than {{ now | date( 'add', 5, 'days') | date }}. Any cheques or transfers will be clear in Jan Clark's account by this date.
+												will pay £1,500 immediately. Jan Clark will receive the money no later than {{ now | date( 'add', 5, 'days') | date }}. Any cheques or transfers will be clear in Jan Clark's account by this date.
 												{% elseif data['radio-pay-group']=="Instalments"  %}
 												will repay £1,500, in instalments of
 												{% if data['instalment-first-payment'] %}
