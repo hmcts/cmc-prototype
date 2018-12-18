@@ -171,14 +171,48 @@
               <div class="status-block single">
                 <h2 class="heading-small">The defendant's response</h2>
                 <p>Mary Richards has rejected the claim. They’ve suggested mediation to help resolve this dispute.</p>
-                <p><a href="https://formfinder.hmctsformfinder.justice.gov.uk/ex730-eng.pdf">Find out how mediation
-                  works</a> (PDF, 399KB)</p>
+                <p>If you reject their response, we'll contact you with an appointment unless you choose not to try mediation.</p>
+                <div class="form-group">
+                  <form method="post" action="claimant-response/dispute-claim/task-list" class="form">
+                    {{formData | safe}}
+                    <input type="submit" class="button secondary-button" value="View and respond">
+                  </form>
+                </div>
 
-             <p>You need to email moneyclaims@hmcts.gsi.gov.uk before 4pm on <span class="dates5"></span> to tell us if you agree to mediation or not.</p>
-             <p>If you don't send an email before the deadline, the claim will proceed without mediation.</p>
-             <p><a class="" href="../defendant/correspondence/forms/claim-form-defendant?check=9">Download their response</a> (PDF, 123KB)
-           </div>
-            {% elseif data['claimant'] == 10.1 %}
+                <!--<p><a href="https://formfinder.hmctsformfinder.justice.gov.uk/ex730-eng.pdf">Find out how mediation-->
+                  <!--works</a> (PDF, 399KB)</p>-->
+                <!--<p>You need to email moneyclaims@hmcts.gsi.gov.uk before 4pm on <span class="dates5"></span> to tell us-->
+                  <!--if you agree to mediation or not.</p>-->
+                <!--<p>If you don't send an email before the deadline, the claim will proceed without mediation.</p>-->
+                <!--<p><a class="" href="../defendant/correspondence/forms/claim-form-defendant?check=9">Download their-->
+                  <!--response</a> (PDF, 123KB)</p>-->
+              </div>
+
+              {% elseif data['claimant'] == 9.1 %}
+              <div class="status-block single">
+                <h2 class="heading-small">The defendant's response</h2>
+                <p>Mary Richards has rejected the claim. The claim has been automatically registered for free telephone mediation.</p>
+
+                <p>If you reject their response, we'll contact you with an appointment unless you choose to opt out of mediation.</p>
+
+                <!--<p>You can accept or reject their defence.</p>-->
+                <!--<div class="form-group">-->
+                  <!--<p><a href="claimant-response/dispute-claim/task-list"-->
+                        <!--class="button secondary-button">View and respond</a></p>-->
+                <!--</div>-->
+
+                <div class="form-group">
+                <form method="post" action="claimant-response/dispute-claim/task-list" class="form">
+                  {{formData | safe}}
+                  <input type="hidden" name="mediation-pilot" value="on">
+                  <input type="submit" class="button secondary-button" value="View and respond">
+                </form>
+                </div>
+
+
+              </div>
+
+              {% elseif data['claimant'] == 10.1 %}
               <h2 class="heading-small">You've signed a settlement agreement</h2>
               <p>We've emailed Mary Richards the repayment plan and the settlement agreement for them to sign.</p>
               <p>They must respond by {{ now | date('add', 7, 'days') | date }}. We'll email you when they respond.</p>
@@ -462,16 +496,37 @@
             <p> <a class="" href="../defendant/correspondence/forms/agreement?check=2">Download the agreement</a> </p>
           </div>
 
-           {% elseif data['claimant'] == 13  %}
-           <div class="">
-            <h2 class="heading-small">You've requested free mediation  </h2>
-            <p>We'll ask the defendant Mary Richards if they want to take part in mediation. We'll tell you how they respond.</p>
-          </div>
-          {% elseif data['claimant'] == 14  %}
-          <h2 class="heading-small">The defendant wants to try mediation </h2>
-          <div class="">
-            <p>A mediator will contact both you and the defendant within 14 days to arrange an appointment.</p>
-          </div>
+              {% elseif data['claimant'] == 13 %}
+              <div class="">
+                <h2 class="heading-small">You've requested free mediation </h2>
+                <p>We'll ask the defendant Mary Richards if they want to take part in mediation. We'll tell you how
+                  they
+                  respond.</p>
+              </div>
+
+              {% elseif data['claimant'] == 13.1 %}
+              <div class="">
+                <h2 class="heading-small">You've agreed to try mediation</h2>
+                <p>	We'll contact you in the next 14 days to arrange a free mediation appointment.</p>
+                <a href="../dashboard/claimant-response/dispute-claim/task-list/request-mediation/how-mediation-works-deep-link">How mediation works</a>
+              </div>
+
+              {% elseif data['claimant'] == 13.2 %}
+              <div class="status-block single">
+                <h2 class="heading-small">You need to tell us more about the claim</h2>
+                <p>You need to <a href="forms/dq-form">complete a directions questionnaire</a> to tell us more
+                  about your claim.</p>
+                <p>The claim won't proceed if you don't complete and return the form before 4pm on <span
+                  class="dates5"></span>.</p>
+                <p><a class="" href="../defendant/correspondence/forms/claim-form-defendant?check=9">Download their
+                  response</a> (PDF, 123KB)</p>
+              </div>
+
+              {% elseif data['claimant'] == 14 %}
+              <h2 class="heading-small">The defendant wants to try mediation </h2>
+              <div class="">
+                <p>A mediator will contact both you and the defendant within 14 days to arrange an appointment.</p>
+              </div>
 
           {% elseif data['claimant'] == 15  %}
           <h2 class="heading-small">A judge will review the claim</h2>
@@ -580,36 +635,44 @@
 
       {% endif %}
 
+          </div>
+        </div>
+    </div>
+    <div class="column-one-third">
+      {% if data['claimant'] == 1.2 %}
+      {% elseif data['claimant'] == 18 %}
+      <div class="meta-data">
+        <p class="heading-small" style="padding-top: 100px">About counterclaim</p>
+        <ul role="navigation" class="font-xsmall list">
+          <li><strong class="bold">Defendant name:</strong><br> <a href="party-details/defendant">Mary Richards</a>
+          </li>
+          <li><strong class="bold">Claim amount:</strong><br>£3240.34</li>
+        </ul>
+      </div>
+      {% else %}
+      <div class="meta-data">
+        <p class="heading-small" style="padding-top: 100px">About claim</p>
+        <ul role="navigation" class="font-xsmall list">
+          <li><strong class="bold">Defendant name:</strong><br> <a href="party-details/defendant">Mary Richards</a>
+          </li>
+          {% if data['claimant'] == 9.1 or data['claimant'] == 13.1 or data['claimant'] == 13.2 %}
+          <li><strong class="bold">Claim amount:</strong><br>£300</li>
+          {% else %}
+          <li><strong class="bold">Claim amount:</strong><br>£1500</li>
+          {% endif %}
+          <li><strong class="bold">Claim details:</strong><br><a
+            href="../claimant/correspondence/claim-form-claimant?check=1">Download claim</a></li>
+          {% if data['claimant'] == 16 or data['claimant'] == 17%}
+          <li><strong class="bold">Defendant's response:</strong><br><a
+            href="../defendant/correspondence/forms/claim-form-defendant?check=9">Download response</a></li>
+          {% else %}
+          {% endif %}
+        </ul>
+      </div>
+      {% endif %}
     </div>
   </div>
-</div>
-<div class="column-one-third">
-  {% if data['claimant'] == 1.2   %}
-  {% elseif data['claimant'] == 18  %}
-  <div class="meta-data">
-    <p  class="heading-small" style="padding-top: 100px">About counterclaim</p>
-    <ul role="navigation" class="font-xsmall list">
-      <li><strong class="bold">Defendant name:</strong><br> <a href="party-details/defendant">Mary Richards</a></li>
-      <li><strong class="bold">Claim amount:</strong><br>£3240.34 </li>
-    </ul>
-  </div>
-  {% else %}
-  <div class="meta-data">
-    <p  class="heading-small" style="padding-top: 100px">About claim</p>
-    <ul role="navigation" class="font-xsmall list">
-      <li><strong class="bold">Defendant name:</strong><br> <a href="party-details/defendant">Mary Richards</a></li>
-      <li><strong class="bold">Claim amount:</strong><br>£1500</li>
-      <li><strong class="bold">Claim details:</strong><br><a href="../claimant/correspondence/claim-form-claimant?check=1">Download claim</a> </li>
-      {% if data['claimant'] == 16 or  data['claimant'] == 17%}
-      <li><strong class="bold">Defendant's response:</strong><br><a href="../defendant/correspondence/forms/claim-form-defendant?check=9">Download response</a> </li>
-      {% else %}
-      {% endif %}
-    </ul>
-  </div>
-  {% endif %}
-</div>
-</div>
-{% include 'prototypes/features-to-be-built/includes/contact.html' %}
+{% include 'prototypes/prototype-dec-2018/includes/contact.html' %}
 </main>
 <form method="post"  action="#" class="form" style="position: absolute;">
   <select id="claimant2" name="claimant2" onchange="window.location.href='?claimant='+this.value">
@@ -643,7 +706,8 @@
     <option value="7" {% if data['claimant'] == 7 %}selected{% endif %}>Part admit - states paid - less than the claim amount</option>
     <option value="8" {% if data['claimant'] == 8 %}selected{% endif %}>Dispute claim   </option>
     <option value="9" {% if data['claimant'] == 9 %}selected{% endif %}>Dispute claim + mediation   </option>
-    <option>------- Claimant responses  ----------</option>
+    <option value="9.1" {% if data['claimant'] == 9.1 %}selected{% endif %}>Dispute claim + mediation (pilot)   </option>
+    <option>------- Claimant responses ----------</option>
     <option value="10" {% if data['claimant'] == 10 %}selected{% endif %}>Dispute claim + offer made  </option>
     <option value="10.1" {% if data[
     'claimant'] == 10.1 %}selected{% endif %}>Accepted repayment plan - settlement (claimant/court plan)</option>
