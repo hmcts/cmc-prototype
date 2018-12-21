@@ -41,14 +41,14 @@ Check your answers
     </tr>
     <tr>
       <td >
-        Full name
+      Full name
       </td>
       <td>
         {% if data['check'] =='1' or data['check'] =='2'  or data['check'] =='3' %}Mrs Jan Clark{% else %}{{data['claimant_name']}}{% endif %}
       </td>
       <td class="change-answer">
         <a href="../task-list/your-details/your-details?return_page={{ '../../task-list/check-and-send#name' | urlencode }}">
-          Change <span class="visuallyhidden">Why you’re owed the money:</span></a>
+          Change <span class="visuallyhidden">Why you believe you're owed the money</span></a>
         </td>
       </tr>
       {% if data['claimant-type']=="Sole trader" %}
@@ -61,7 +61,7 @@ Check your answers
         </td>
         <td class="change-answer">
           <a href="../task-list/your-details/your-details?return_page={{ '../../task-list/check-and-send#name' | urlencode }}">
-            Change <span class="visuallyhidden">Why you’re owed the money:</span></a>
+            Change <span class="visuallyhidden">Why you believe you're owed the money</span></a>
           </td>
         </tr>
         {% elseif data['claimant-type']=="Company" or data['claimant-type']=="Organisation" %}
@@ -74,18 +74,18 @@ Check your answers
           </td>
           <td class="change-answer">
             <a href="../task-list/your-details/your-details?return_page={{ '../../task-list/check-and-send#name' | urlencode }}">
-              Change <span class="visuallyhidden">Why you’re owed the money:</span></a>
+              Change <span class="visuallyhidden">Why you believe you're owed the money</span></a>
             </td>
           </tr>
           {% endif %}
           <tr>
-            <td class="no-border">
+            <td>
               Address
             </td>
-            <td class="no-border">
+            <td>
               {% if data['check'] =='1' or data['check'] =='2'  or data['check'] =='3' %}
               <ul class="list">
-                <li>15 King drive</li>
+                <li>15 King Drive</li>
                 <li>London</li>
                 <li>W1 3HR</li>
               </ul>
@@ -103,23 +103,22 @@ Check your answers
                 Change <span class="visuallyhidden">Address</span></a>
               </td>
             </tr>
+                {% if data['correspondence-address']=="Yes" %}
             <tr>
               <td>
                 Correspondence address
               </td>
               <td>
-                {% if data['correspondence-address']=="Yes" %}
-                {{data['c-addressLine1']}}<br>
-                {{data['c-addressLine2']}}<br>
-                {{data['c-addressLine3']}}<br>
-                {{data['c-addressPostcode']}}
-                {% else %}
-                Same as address<br>
-                {% endif %}
+                <ul class="list">
+                  <li>112 Queen Drive</li>
+                  <li>London</li>
+                  <li>W1 3HR</li>
+                </ul>
               </td>
               <td class="change-answer">
               </td>
             </tr>
+                {% endif %}
             <tr>
               <td>
                 Date of birth
@@ -135,7 +134,7 @@ Check your answers
             <tr>
               <tr>
                 <td>
-                  Contact number (optional)
+                  Phone number (optional)
                 </td>
                 <td>
                  {% if data['check'] =='1' or data['check'] =='2'  or data['check'] =='3' %}07827999615{% else %}{{data['claimant-phone']}}{% endif %}
@@ -225,7 +224,7 @@ Check your answers
                   <td>
                     {% if data['check'] =='1' or data['check'] =='2'  or data['check'] =='3' %}
                     <ul class="list">
-                      <li>24 Acacia drive</li>
+                      <li>24 Acacia Drive</li>
                       <li>London</li>
                       <li>SW1 H9A</li>
                     </ul>
@@ -238,6 +237,26 @@ Check your answers
                       Change <span class="visuallyhidden">Their</span></a>
                     </td>
                   </tr>
+
+                {% if data['correspondence-address'] %}
+                <tr>
+                  <td>
+                    Their correspondence address
+                  </td>
+                  <td>
+                    <ul class="list">
+                      <li>124 Acorn Drive</li>
+                      <li>London</li>
+                      <li>SW1 H9A</li>
+                    </ul>
+                  </td>
+                  <td class="change-answer">
+                    <a href="../task-list/their-details/enter-details?return_page={{ '../../task-list/check-and-send#their-detail' | urlencode }}">
+                      Change <span class="visuallyhidden">Their</span></a>
+                    </td>
+                  </tr>
+                  {% endif %}
+
                   <tr>
                     <td>
                       Their email (optional)
@@ -275,7 +294,7 @@ Check your answers
                     </td>
                     <td class="change-answer no-border">
                       <a href="../task-list/claim-details/reason?return_page={{ '../../task-list/claim-details/check-your-answers' | urlencode }}">
-                        Change <span class="visuallyhidden">Why you’re owed the money:</span>
+                        Change <span class="visuallyhidden">Why you believe you're owed the money</span>
                       </a>
                     </td>
                   </tr>
@@ -325,7 +344,7 @@ Check your answers
                 </td>
                 <td class="change-answer ">
                   <a href="../task-list/claim-details/reason?return_page={{ '../../task-list/claim-details/check-your-answers' | urlencode }}">
-                    Change <span class="visuallyhidden">Why you’re owed the money:</span>
+                    Change <span class="visuallyhidden">Why you believe you're owed the money</span>
                   </a>
                 </td>
               </tr>
@@ -345,7 +364,7 @@ Check your answers
                 </td>
                 <td class="change-answer no-border">
                  <a href="../task-list/claim-details/reason?return_page={{ '../../task-list/claim-details/check-your-answers' | urlencode }}">
-                  Change <span class="visuallyhidden">Why you’re owed the money:</span>
+                  Change <span class="visuallyhidden">Why you believe you're owed the money</span>
                 </a>
               </td>
             </tr>
@@ -359,7 +378,7 @@ Check your answers
              </td>
              <td class="change-answer no-border">
                <a href="../task-list/claim-details/reason?return_page={{ '../../task-list/claim-details/check-your-answers' | urlencode }}">
-                Change <span class="visuallyhidden">Why you’re owed the money:</span>
+                Change <span class="visuallyhidden">Why you believe you're owed the money</span>
               </a>
             </td>
           </tr>
@@ -388,7 +407,7 @@ Check your answers
           </td>
           <td class="change-answer no-border">
            <a href="../task-list/claim-details/reason?return_page={{ '../../task-list/claim-details/check-your-answers' | urlencode }}">
-            Change <span class="visuallyhidden">Why you’re owed the money:</span>
+            Change <span class="visuallyhidden">Why you believe you're owed the money</span>
           </a>
         </td>
       </tr>
@@ -419,7 +438,7 @@ Check your answers
         </td>
         <td class="change-answer ">
          <a href="../task-list/claim-details/reason?return_page={{ '../../task-list/claim-details/check-your-answers' | urlencode }}">
-          Change <span class="visuallyhidden">Why you’re owed the money:</span>
+          Change <span class="visuallyhidden">Why you believe you're owed the money</span>
         </a>
       </td>
     </tr>
@@ -430,11 +449,11 @@ Check your answers
         What rate of interest do you want to claim?
       </td>
       <td class="no-border">
-        {% if data['check'] =='2' %}8.00%{% else %}{{data['rate']}}%{% endif %}
+        {% if data['check'] =='2' %}10%{% else %}{{data['rate']}}%{% endif %}
       </td>
       <td class="change-answer no-border">
        <a href="../task-list/claim-details/reason?return_page={{ '../../task-list/claim-details/check-your-answers' | urlencode }}">
-        Change <span class="visuallyhidden">Why you’re owed the money:</span>
+        Change <span class="visuallyhidden">Why you believe you're owed the money</span>
       </a>
     </td>
   </tr>
@@ -465,7 +484,7 @@ Check your answers
   </td>
   {% if data['interest-rate2']=="issue-date" %}<td class="change-answer"> {% else %} <td class="change-answer no-border">  {% endif %}
     <a href="../task-list/claim-details/reason?return_page={{ '../../task-list/claim-details/check-your-answers' | urlencode }}">
-      Change <span class="visuallyhidden">Why you’re owed the money:</span>
+      Change <span class="visuallyhidden">Why you believe you're owed the money</span>
     </a>
   </td>
 </tr>
@@ -479,7 +498,7 @@ Check your answers
  </td>
  <td class="change-answer no-border">
   <a href="../task-list/claim-details/reason?return_page={{ '../../task-list/claim-details/check-your-answers' | urlencode }}">
-    Change <span class="visuallyhidden">Why you’re owed the money:</span>
+    Change <span class="visuallyhidden">Why you believe you're owed the money</span>
   </a>
 </td>
 </tr>
@@ -508,7 +527,7 @@ Check your answers
   </td>
   <td class="change-answer ">
     <a href="../task-list/claim-details/reason?return_page={{ '../../task-list/claim-details/check-your-answers' | urlencode }}">
-      Change <span class="visuallyhidden">Why you’re owed the money:</span>
+      Change <span class="visuallyhidden">Why you believe you're owed the money</span>
     </a>
   </td>
 </tr>
@@ -607,14 +626,14 @@ Check your answers
   <tbody>
     <tr>
       <td>
-        Why you’re owed the money:
+        Why you believe you're owed the money
       </td>
       <td>
        {% if data['check'] =='2'  or data['check'] =='3' %}Mary Richards and I signed a contract for building works on our roof. The work on the roof was completed but there was a problem with one section. I asked Mary Richards to get the problem fixed, but hadn't had a reply.{% else %} {{data['claim-reason']}}{% endif %}
      </td>
      <td class="change-answer">
       <a href="../task-list/claim-details/reason?return_page={{ '../../task-list/claim-details/check-your-answers' | urlencode }}">
-        Change <span class="visuallyhidden">Why you’re owed the money:</span>
+        Change <span class="visuallyhidden">Why you believe you're owed the money</span>
       </a>
     </td>
   </tr>
@@ -626,7 +645,7 @@ Check your answers
     </td>
     <td class="change-answer no-border">
       <a href="../task-list/claim-details/reason?return_page={{ '../../task-list/claim-details/check-your-answers' | urlencode }}">
-        Change <span class="visuallyhidden">Why you’re owed the money:</span>
+        Change <span class="visuallyhidden">Why you believe you're owed the money</span>
       </a>
     </td>
   </tr>
@@ -660,7 +679,7 @@ Check your answers
   </td>
   <td class="change-answer no-border">
     <a href="../task-list/claim-details/reason?return_page={{ '../../task-list/claim-details/check-your-answers' | urlencode }}">
-      Change <span class="visuallyhidden">Why you’re owed the money:</span>
+      Change <span class="visuallyhidden">Why you believe you're owed the money</span>
     </a>
   </td>
 </tr>
