@@ -11,7 +11,7 @@ Check your answers
 <main id="content" role="main">
   {% include "includes/phase_banner_beta.html" %}
   <h1 class="heading-large">
-    Check your answers
+    Check your answers before submitting your claim
   </h1>
   <table class="check-your-answers">
     <thead>
@@ -31,7 +31,7 @@ Check your answers
           About you
         </td>
         <td>
-          {% if data['check'] =='2'  or data['check'] =='3' %}Individual{% else %} {{data['claimant-ste']}}{% endif %}
+          {% if data['check'] =='2'  or data['check'] =='3' %}Individual{% else %} {{data['claimant-type']}}{% endif %}
         </td>
         <td class="change-answer">
          <a href="../task-list/your-details/index?return_page={{ '../../task-list/check-and-send#name' | urlencode }}">
@@ -79,10 +79,10 @@ Check your answers
           </tr>
           {% endif %}
           <tr>
-            <td class="no-border">
+            <td>
               Address
             </td>
-            <td class="no-border">
+            <td>
               {% if data['check'] =='1' or data['check'] =='2'  or data['check'] =='3' %}
               <ul class="list">
                 <li>15 King Drive</li>
@@ -103,23 +103,22 @@ Check your answers
                 Change <span class="visuallyhidden">Address</span></a>
               </td>
             </tr>
+                {% if data['correspondence-address']=="Yes" %}
             <tr>
               <td>
                 Correspondence address
               </td>
               <td>
-                {% if data['correspondence-address']=="Yes" %}
-                {{data['c-addressLine1']}}<br>
-                {{data['c-addressLine2']}}<br>
-                {{data['c-addressLine3']}}<br>
-                {{data['c-addressPostcode']}}
-                {% else %}
-                Same as address<br>
-                {% endif %}
+                <ul class="list">
+                  <li>112 Queen Drive</li>
+                  <li>London</li>
+                  <li>W1 3HR</li>
+                </ul>
               </td>
               <td class="change-answer">
               </td>
             </tr>
+                {% endif %}
             <tr>
               <td>
                 Date of birth
@@ -135,7 +134,7 @@ Check your answers
             <tr>
               <tr>
                 <td>
-                  Phone (optional)
+                  Phone number (optional)
                 </td>
                 <td>
                  {% if data['check'] =='1' or data['check'] =='2'  or data['check'] =='3' %}07827999615{% else %}{{data['claimant-phone']}}{% endif %}
@@ -239,13 +238,17 @@ Check your answers
                     </td>
                   </tr>
 
-                {% if data['addressSelect'][1] %}
+                {% if data['correspondence-address'] %}
                 <tr>
                   <td>
-                    Their service address
+                    Their correspondence address
                   </td>
                   <td>
-                    {{ data['addressSelect'][1] }}
+                    <ul class="list">
+                      <li>124 Acorn Drive</li>
+                      <li>London</li>
+                      <li>SW1 H9A</li>
+                    </ul>
                   </td>
                   <td class="change-answer">
                     <a href="../task-list/their-details/enter-details?return_page={{ '../../task-list/check-and-send#their-detail' | urlencode }}">
