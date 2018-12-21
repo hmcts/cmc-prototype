@@ -1,7 +1,5 @@
 {% extends "layout_unbranded.html" %}
-{% block proposition_header %}
-{% include "includes/propositional_navigation_no_login.html" %}
-{% endblock %}
+
 {% block page_title %}
 Money Claims Prototype
 {% endblock %}
@@ -10,27 +8,18 @@ Money Claims Prototype
 <main id="content" role="main">
   <div class="grid-row">
     <div class="column-two-thirds">
-      {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('task-list')%}
       <form
       name="aspnetForm"
       method="post"
-      onsubmit="multiNavigation('radio_group4', ['crown','no'], ['result?a=crown&', 'check-your-answers']);return false;"
+      onsubmit="multiNavigation('radio_group4', ['crown','no'], ['result?a=crown&', 'age-defendant']);return false;"
       id="aspnetForm"
       autocomplete="off">
-      {% else %}
-      <form
-      name="aspnetForm"
-      method="post"
-      onsubmit="multiNavigation('radio_group4', ['crown','no'], ['result?a=crown&', 'landlord']);return false;"
-      id="aspnetForm"
-      autocomplete="off">
-      {% endif %}
       {{formData | safe}}
       <a href="#" class="link-back">Back</a>
       <h1 class="heading-large">
         Are you claiming against a government department?
       </h1>
-      <p><a target="_blank" href="https://www.gov.uk/government/publications/serve-the-treasury-solicitor-with-legal-proceedings">See a list of government departments</a> <span class="font-xsmall">(opens in a new window)</span>.</p>
+      <p><a href="https://www.gov.uk/government/publications/serve-the-treasury-solicitor-with-legal-proceedings">See a list of government departments</a>.</p>
       <fieldset class="inline">
         <legend class="visuallyhidden">
           Are you making a claim against a government department?

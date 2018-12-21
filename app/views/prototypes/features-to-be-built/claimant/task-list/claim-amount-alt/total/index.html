@@ -40,16 +40,10 @@ Money Claims Prototype
 
             <table class="table-form">
               <caption class="visuallyhidden"></caption>
-              <thead>
-                <tr>
-                  <th scope="col"></th>
-                  <th class="numeric last" scope="col">Amount</th>
-                </tr>
-              </thead>
               <tfoot>
                 <tr>
-                  <th scope="col"></th>
-                  <td class="numeric last"><span id="totalAmountDisplay" class="bold-medium">£1583</span></td>
+                  <th scope="col" style="border-bottom: none">Total claim amount</th>
+                  <td class="numeric last" style="border-bottom: none"><span id="totalAmountDisplay" class="bold-medium">£1583</span></td>
                 </tr>
               </tfoot>
               <tbody>
@@ -57,7 +51,7 @@ Money Claims Prototype
                   <th scope="row">Claim amount:</th>
                   <td class="numeric last">
                     <label class="visuallyhidden" for="amount">Claim amount</label>
-                    <span class="font-small">  £{{data['totalSum']}}</span>
+                    <span class="font-small">  £{{data['totalSum'] or data['counter-amount']|numeral }}</span>
                   </td>
                 </tr>
                 {% if data['radio_group2']=="interest_yes" %}
@@ -187,18 +181,6 @@ Money Claims Prototype
 
         </fieldset>
 
-        <!--<details>-->
-
-        <!--<summary>-->
-        <!--<span class="summary">Help with...</span>-->
-        <!--</summary>-->
-
-        <!--<div class="panel panel-border-narrow">-->
-        <!--<p>Content goes here...</p>-->
-        <!--</div>-->
-
-        <!--</details>-->
-
         {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}
         <div class="form-group">
           <input type="submit" class="button" value="Save and continue"/>
@@ -237,5 +219,19 @@ Money Claims Prototype
 
   })('totalAmountDisplay', "{{data['totalSum']}}", {{data['radio_group2']=="interest_no"}} || {{data['radio_group2']!="interest_yes"}} ? 70 : 84)
 </script>
+
+<style>
+#counter-table th {
+  font-weight: 400;
+}
+
+#counter-table #totalAmountDisplay {
+  font-weight: 400;
+}
+
+#counter-table #claim-fee th, #counter-table #claim-fee td span {
+  font-weight: 600;
+}
+</style>
 
 {% endblock %}

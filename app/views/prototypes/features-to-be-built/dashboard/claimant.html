@@ -167,6 +167,17 @@
             <p>Your claim won't proceed if you don't complete and return the form before 4pm on <span class="dates5"></span>.</p>
             <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=9">Download their response</a> (PDF, 123KB)</p>
 
+
+              {% elseif data['claimant'] == 8.1 %}
+              <h2 class="heading-small">The defendant has rejected your claim</h2>
+              <p>They said they dispute your claim.</p>
+              <p>You need to accept or reject their defence before 4pm on {{ now | date('add' , 33, 'days') | date }}.</p>
+              <div class="form-group">
+                <p><a href="claimant-response/dispute-claim/task-list" class="button secondary-button">View and respond</a></p>
+              </div>
+              <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=9">Download their response</a> (PDF, 123KB)</p>
+              <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=9">Download their hearing requirements</a> (PDF, 13KB)</p>
+
               {% elseif data['claimant'] == 9 %}
               <div class="status-block single">
                 <h2 class="heading-small">The defendant's response</h2>
@@ -228,11 +239,14 @@
 
               {% elseif data['claimant'] ==  10.01 %}
               <h2 class="heading-small">You've both signed a settlement agreement</h2>
-              <p>The agreement says the defendant will pay you in instalments of £250 per month, starting 1 {{ now |  date("add", 1, "month") | date( "MMMM YYYY" ) }}.</p>
+              <p>The agreement says Mary Richards will pay you in instalments of £250 per month, starting 1 {{ now |
+                date("add", 1, "month") | date( "MMMM YYYY" ) }}.</p>
               <p>The agreement explains what you can do if the defendant breaks the terms.</p>
               <p><a href="../defendant/correspondence/forms/agreement?check=3">Download the settlement agreement</a> (PDF, 123KB)</p>
               <p>When you've been paid in full, you need to let us know.</p>
-              <p> <a href="../dashboard/idam/contact-us?type=service_specific" class="button secondary-button" style="margin-bottom: 20px">Tell us you've been paid</a></p>
+              <p><a href="paid-in-full/claimant" class="button secondary-button" style="margin-bottom: 20px">Tell us
+                you've been paid</a></p>
+
 
               {% elseif data['claimant'] == 10.02 %}
               <h2 class="heading-small">Mary Richards has rejected your settlement agreement</h2>
@@ -262,13 +276,14 @@
               <p>When we've processed your request, we'll post a copy of the judgment to you and to Mary Richards.</p>
               <p><a href="repayment-plan?who=claimant&plan=instalments">View the repayment plan</a></p>
               <p>When you've been paid in full, you need to let us know.</p>
-              <p> <a href="../dashboard/idam/contact-us?type=service_specific" class="button secondary-button" style="margin-bottom: 20px">Tell us you've been paid</a></p>
+              <p><a href="paid-in-full/claimant" class="button secondary-button" style="margin-bottom: 20px">Tell us
+                you've been paid</a></p>
 
               {% elseif data['claimant'] == 10.111 %}
               <h2 class="heading-small">You requested a County Court Judgment against Mary Richards</h2>
               <p>When we've processed your request, we'll post a copy of the judgment to you and to Mary Richards.</p>
               <p>When you've been paid in full, you need to let us know.</p>
-              <p><a href="../dashboard/idam/contact-us?type=service_specific" class="button secondary-button" style="margin-bottom: 20px">Tell us
+              <p><a href="paid-in-full/claimant" class="button secondary-button" style="margin-bottom: 20px">Tell us
                 you've been paid</a></p>
 
 
@@ -308,7 +323,7 @@
 
               <p>You can settle for less than the full claim amount.</p>
 
-              <p> <a href="../dashboard/idam/contact-us?type=service_specific" class="button secondary-button" style="margin-bottom: 20px">Tell us you've settled</a></p>
+              <p> <a href="paid-in-full/claimant" class="button secondary-button" style="margin-bottom: 20px">Tell us you've settled</a></p>
 
               <h3 class="heading-small">If you haven't been paid</h3>
               <p>If the defendant has not paid you by {{ now | date('add', 5, 'days') | date }}, you can request a County Court Judgment.</p>
@@ -319,7 +334,7 @@
               <p>You need to tell us if you've settled the claim, for example because the defendant has paid you.</p>
               <p>You can settle for less than the full claim amount.</p>
 
-              <p> <a href="../../dashboard/idam/contact-us?type=service_specific" class="button secondary-button" style="margin-bottom: 20px">Tell us you've settled</a></p>
+              <p> <a href="paid-in-full/claimant" class="button secondary-button" style="margin-bottom: 20px">Tell us you've settled</a></p>
               <h3 class="heading-small">If you haven't been paid</h3>
               <p>If the defendant has not paid you, you can <a href="applications-and-judgments/default-judgment/claim-amount-deduct?radio-indent-group=No&radio-proceed=none">request a County Court Judgment</a>.</p>
 
@@ -378,7 +393,7 @@
               <p>They said they'll pay you immediately.</p>
               <p>They must make sure you have the money by {{ now | date( 'add', 5, 'days') | date }}. Any cheques or transfers should be clear in your account.</p>
               <p>You need to tell us if you've settled the claim, for example because the defendant has paid you.</p>
-              <p> <a href="../dashboard/idam/contact-us?type=service_specific" class="button secondary-button" style="margin-bottom: 20px">Tell us you've settled</a></p>
+              <p><a href="paid-in-full/claimant" class="button secondary-button" style="margin-bottom: 20px">Tell us you've settled</a></p>
 
               <h3 class="heading-small">What to do if they don't pay</h3>
               <p>If the defendant has not paid you by {{ now | date('add', 5, 'days') | date }}, you can request a County Court Judgment.</p>
@@ -389,7 +404,7 @@
               <p>They said they'll pay you immediately.</p>
               <p>The defendant said they would pay you by {{ now | date('subtract', 2, 'days') | date }}. Any cheques or transfers should be clear in your account.</p>
               <p>You need to tell us if you've settled the claim, for example because the defendant has paid you.</p>
-              <p><a href="../dashboard/idam/contact-us?type=service_specific" class="button secondary-button" style="margin-bottom: 20px">Tell us you've settled</a></p>
+              <p><a href="paid-in-full/claimant" class="button secondary-button" style="margin-bottom: 20px">Tell us you've settled</a></p>
               <h3 class="heading-small">If you haven't been paid</h3>
               <p>If the defendant has not paid you, you can <a href="applications-and-judgments/default-judgment/claim-amount-deduct?radio-indent-group=No">request a County Court Judgment</a>.</p>
 
@@ -450,7 +465,7 @@
            {% elseif data['claimant'] ==10 or data['claimant'] == 11 %}
            <div class="status-block">
             <h2 class="heading-small">Settle out of court</h2>
-            <p>Mary Richards has made an offer to settle out of court. You must accept or reject before 4pm on  <span class="dates4"></span>.</p>
+            <p>Mary Richards has made an offer to settle out of court.</p>
             <p><a href="offer-agreement/view-offer?defendant=offer">View and respond to the offer</a></p>
           </div>
           <div class="status-block single">
@@ -574,12 +589,12 @@
             <p>The defendant's County Court Judgment will be cancelled.</p>
           </div>
 
-          {% elseif data['claimant'] == 20.2  %}
-          <div class="">
-            <h2 class="heading-small">This claim is settled</h2>
-            <p>Mary Richards paid you £1500 on {{ now | date( 'subtract', 5, 'days' ) | date }}.</p>
-            <p>The defendant's County Court Judgment will be marked as paid.</p>
-          </div>
+              {% elseif data['claimant'] == 20.2 %}
+              <div class="">
+                <h2 class="heading-small">This claim is settled</h2>
+                <p>Mary Richards paid you £1500 on {{ now | date( 'subtract', 5, 'days' ) | date }}.</p>
+                <p>The defendant's County Court Judgment has been marked as paid.</p>
+              </div>
 
 
           {% elseif data['claimant'] == 21  %}
@@ -599,7 +614,7 @@
          <p>Mary Richards has made an offer to settle out of court You can accept, reject or make a counter offer.</p>
          <a href="offer-agreement/view-offer?defendant=offer">View and respond to offer.</a>
          {% elseif data['claimant'] == 12   %}
-         <h2 class="heading-medium">Your offer has been sent to the defendant </h2>
+         <h2 class="heading-medium">We've sent your offer to Mary Richards</h2>
          <p>Mary Richards can accept, reject or make a counter offer. We'll email you when they respond.</p>
          <p>If you settle out of court you’ll sign an agreement that replaces the claim. Until then the claim continues and might go to a court hearing.</p>
          {% elseif data['claimant'] == 16  %}
