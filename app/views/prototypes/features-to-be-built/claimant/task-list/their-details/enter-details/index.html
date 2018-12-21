@@ -7,7 +7,7 @@ Money Claims Prototype
 {% set my_account="1" %}
 {% include "includes/propositional_navigation.html" %}
 {% endblock %}
-{% import 'prototypes/prototype-nov-2018/includes/address.html' as address %}
+{% import 'prototypes/features-to-be-built/includes/address.html' as address %}
 
 {% block content %}
 <main id="content" role="main">
@@ -29,7 +29,7 @@ Money Claims Prototype
 
           <h1 class="heading-large">
             <form method="post" action="your-details/date-of-birth" class="form">
-              Their details
+              Enter the defendant's details
             </h1>
             <p>You'll have to pay an extra fee if you later want to change the name of anyone involved with the claim.</p>
             <div class="form-group">
@@ -43,7 +43,7 @@ Money Claims Prototype
               name="defendant_business_name" value="{{data['defendant_business_name']}}">
             </div>
             <h2 class="heading-medium">
-              Their postal address
+              Their address
             </h2>
             <p>You can enter the defendant’s residential or trade address. The address must be in England or Wales.</p>
             {% elseif data['defendant-type']=="Company" %}
@@ -93,7 +93,7 @@ Money Claims Prototype
               {% if data['defendants'].length > 0 %}
                 <span class="form-hint">Defendant {{ data['defendants'].length + 1 }}</span>
               {% endif %}
-              Their details
+              Enter the defendant's details
             </h1>
             <p>You'll have to pay an extra fee if you later want to change the name of anyone involved with the claim.</p>
             <fieldset>
@@ -104,22 +104,42 @@ Money Claims Prototype
               </div>
             </fieldset>
             <h2 class="heading-medium">
-              Their postal address
+              Their address
             </h2>
-            <p>You must enter the defendant’s postal address to make a claim against them. The address must be in England or Wales.</p>
+            <p>The address must be in England or Wales. Your claim may be invalid if you use the wrong address.</p>
             <p>You must enter their usual or last known home address. You cannot use their work address.</p>
 
 
             {% endif %}
-            <legend class="visuallyhidden">
-              Postcode
-            </legend>
-            <!--<div class="form-group">-->
-              <!--<input class="form-control" id="defendant_address" name="claimant-address" type="text" value="{{data['claimant-address']}}">-->
-              <!--</div>-->
 
          {{ address.lookup('defendant') }}
-<br />
+
+
+
+    <h2 class="heading-small">Has the defendant asked for post about the claim to be sent to a different address?</h2>
+    </p>
+    <div class="form-group">
+      <fieldset>
+       <div class="multiple-choice" data-target="correspondence-address">
+        <input type="radio" id="no-correspondence" name="correspondence-address" checked="" value="No" {{ checked("correspondence-address", "No") }} >
+        <label for="no-correspondence">No</label>
+      </div>
+      <div class="multiple-choice" data-target="contact-by-phone">
+        <input type="radio" id="add-correspondence" name="correspondence-address" value="Yes" {{ checked("correspondence-address", "Yes") }}>
+        <label for="add-correspondence">Yes, use a different address</label>
+      </div>
+      <div class="panel panel-border-narrow js-hidden" id="contact-by-phone">
+        <div id="addressManualWrapper">
+         <p>All correspondence will be sent to this address.
+         This is known as an 'address for service'. It cannot be their work address, or a solicitor's address.</p>
+         {{ address.lookup('service') }}
+
+      </div>
+    </div>
+  </div>
+
+
+
     {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}
     <div class="form-group">
       <input type="submit" class="button" value="Save changes"/>
