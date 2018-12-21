@@ -147,7 +147,7 @@ module.exports = function(app){
   app.post( '/' + strPath + 'dashboard/claimant-response/part-admit/task-list/counter-offer/repayment-plan', (req, res) => {
 
     if (req.session.data['defendant'] == 'org' ) {
-        res.redirect( '../../task-list' ); 
+        res.redirect( '../../task-list' );
     } else if (req.session.data['instalment-first-payment'] < 251 ) {
       res.redirect('/' + strPath + 'dashboard/claimant-response/part-admit/task-list/counter-offer/approved');
     } else {

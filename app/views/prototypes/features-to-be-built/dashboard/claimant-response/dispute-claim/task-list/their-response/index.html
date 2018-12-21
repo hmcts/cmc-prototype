@@ -21,7 +21,12 @@ Money Claims Prototype
       
     <h2 class="heading-medium">Their defence</h2>
       <p class="heading-small">Why they disagree with the claim</p>
-      <p>"I disagree with this claim completely."</p>
+        {% if data['mediation-pilot']=="on" %}
+        <p>"I disagree with this claim as I don’t think my workmanship was poor."</p>
+        {%else%}
+        <p>"She changed her mind on what she wanted and would not pay for the extra work."</p>
+        {% endif %}
+
       <p class="heading-small">Their timeline of events</p>
       <div class="form-fields">
         <table>
@@ -72,10 +77,12 @@ Money Claims Prototype
       </div>
 
       <p class="heading-small">Why they disagree with your evidence</p>
-      <p>"I didn't get an email from Jan about this, so I didn't get a chance to sort it out. It would be good to see a
-      copy of the email."</p>
-      <p class="heading-small">How this dispute has affected them</p>
-      <p>"I'm sorry you have felt stress during this process but would like claim resolved amicably."</p>
+        {% if data['mediation-pilot']=="on" %}
+        <p>"I disagree that my work on the roof was not up to standard."</p>
+        {%else%}
+        <p>"The contract supplied does not mention the materials she later insisted on."</p>
+        {% endif %}
+
       <input type="hidden" name="their_response" value="complete">
       <div class="form-group">
         <input type="submit" class="button" value="Continue"/>
