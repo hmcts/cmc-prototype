@@ -1,0 +1,96 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <a href="#" class="link-back">Back</a>
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+        <form method="post" action="witnesses" class="form">
+
+        <h1 class="heading-large">Propose your experts</h1>
+        <p>If the claim goes to a hearing, the court will review these details and decide if each expert can give evidence.</p>
+
+
+
+
+          <div id="add-another">
+
+
+            <div class="form-group">
+              <label class="form-label" for="witness-name">Their name</label>
+              <input class="form-control " id="witness-name" name="witness-name" type="text" value="">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="witness-area">Their area of expertise</label>
+              <input class="form-control " id="witness-area" name="witness-area" type="text" value="">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="witness-cost">Hiring cost</label>
+              <input class="form-control timeline-column-4 fee pound" id="witness-cost" name="witness-cost" type="text" value="">
+            </div>
+
+              <p>How will they give evidence?</p>
+
+            <div class="form-group">
+              <fieldset>
+                <div class="multiple-choice">
+                  <input id="radio-evidence-yes" type="radio" name="evidence" value="written">
+                  <label for="radio-evidence-yes">In writing</label>
+                </div>
+                <div class="multiple-choice">
+                  <input id="radio-evidence-no" type="radio" name="evidence" value="orally">
+                  <label for="radio-evidence-no">In person</label>
+                </div>
+              </fieldset>
+            </div>
+
+          </div>
+
+          <div class="form-group" style="clear: left" id="add-bit">
+          <p><a href="" class="button secondary-button" id="add-another-witness">Add another expert</a></p>
+          </div>
+
+          <div class="form-group">
+            <input type="submit" class="button" value="Save and continue">
+          </div>
+        </form>
+
+
+    </div>
+  {% include 'prototypes/prototype-jan-2019/includes/contact.html' %}
+</main>
+
+<script>
+  $(document).ready(function () {
+    i =0;
+    $('#add-another-witness').click(function (event) {
+      event.preventDefault();
+
+      objSeperator = $('<p style="margin-top:20px;"><a href="">Remove this witness</a></p><hr>');
+      objSeperator.insertBefore( '#add-bit');
+
+      objItem = $('#add-another').clone();
+      objItem.find( 'input[type=text]' ).val('');
+      objItem.find( '.multiple-choice input' ).prop( "checked", false );
+      objItem.find( '.multiple-choice input:eq(0)' ).prop( "id", 'radio-evidence-yes-' + i );
+      objItem.find( '.multiple-choice input:eq(1)' ).prop( "id", 'radio-evidence-no-' + i );
+      objItem.find( '.multiple-choice input' ).prop( "name", 'evidence-' + i );
+      objItem.find( '.multiple-choice label:eq(0)' ).prop( "for", 'radio-evidence-yes-' + i );
+      objItem.find( '.multiple-choice label:eq(1)' ).prop( "for", 'radio-evidence-no-' + i );
+      i++;
+      objItem.insertBefore( '#add-bit');
+
+    });
+
+  });
+</script>
+
+{% endblock %}

@@ -1,0 +1,69 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <a href="#" class="link-back">Back</a>
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+<!--
+      <form
+        name="aspnetForm"
+        method="post"
+        onsubmit="multiNavigation('expert-witnesses', ['yes','no'], ['expert-details', 'witnesses']);return false;"
+        id="aspnetForm"
+        autocomplete="off">
+-->
+      <form method="post" action="witnesses">
+
+        <h1 class="heading-large">Tell us if you intend to hire experts</h1>
+
+        <p>You don't have to hire an expert, but if the claim goes to a hearing you may want one to give evidence which supports your case.</p>
+
+        <h3 class="heading-medium">Examples of an expert</h3>
+
+        <p>An expert can be anyone with specialist knowledge.</p>
+
+        <p>For example a builder who inspected work on your home or a mechanic who can examine your car.</p>
+
+        <h3 class="heading-medium">Hiring an expert</h3>
+
+        <p>You must arrange and pay for any experts. The court won't do this for you.</p>
+
+          <p>If the judge rules in your favour, they can order the {% if data['party'] == 'claimant' %}defendant{% else %}claimant{% endif %} to pay up to £750 of the amount you paid to hire experts.</p>
+
+          <h1 class="heading-medium">
+            Do you intend to hire experts?
+          </h1>
+
+        <div class="form-group">
+          <fieldset>
+            <div class="multiple-choice" data-target="witnesses">
+              <input id="radio-expert-yes" type="radio" name="expert-witnesses" value="yes">
+              <label for="radio-expert-yes">Yes</label>
+            </div>
+            <div class="multiple-choice">
+              <input id="radio-expert-no" type="radio" name="expert-witnesses" value="no">
+              <label for="radio-expert-no">No</label>
+            </div>
+          </fieldset>
+        </div>
+
+        <div class="form-group">
+          <input type="submit" class="button" value="Save and continue">
+        </div>
+      </form>
+
+
+    </div>
+  {% include 'prototypes/prototype-jan-2019/includes/contact.html' %}
+</main>
+
+{% endblock %}
