@@ -18,7 +18,14 @@ Money Claims Prototype
       {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('task-list')%}
       <form method="post" action="{{ data.return_page if data.return_page | length > 0 else '../task-list' }}" class="form">
         {% else %}
-        <form method="post" action="your-details/date-of-birth" class="form">
+
+        <form
+          name="aspnetForm"
+          method="post"
+          onsubmit="conditionalNavigation('correspondence-address', 'Sol', 'your-details/sol-handoff', 'your-details/date-of-birth');return false;"
+          id="aspnetForm"
+          autocomplete="off">
+
           {% endif %}
           {{formData | safe}}
           <h1 class="heading-large">
@@ -53,6 +60,10 @@ Money Claims Prototype
                      <div class="multiple-choice" data-target="correspondence-address">
                       <input type="radio" id="no-correspondence" name="correspondence-address" value="No" {% if data['addressType'] != 'diff' %} checked{% endif %}>
                       <label for="no-correspondence">Yes</label>
+                    </div>
+                     <div class="multiple-choice">
+                      <input type="radio" id="sol-correspondence" name="correspondence-address" value="Sol">
+                      <label for="sol-correspondence">No, send it to my solictior</label>
                     </div>
                     <div class="multiple-choice" data-target="contact-by-phone">
                       <input type="radio" id="add-correspondence" name="correspondence-address" value="Yes" {% if data['addressType'] == 'diff' %} checked{% endif %}>
