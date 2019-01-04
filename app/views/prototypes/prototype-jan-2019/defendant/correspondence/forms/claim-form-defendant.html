@@ -202,10 +202,10 @@ li:before {
           {% if data['check'] =='1' %}Company name{% else %}Name{% endif %}:
         </td>
         <td>
-          {% if data['check'] =='1' %}Smith Limited{% else %}Mrs Mary Richards{% endif %}
+          {% if data['check'] =='1' %}Smith Limited{% elseif data['check'] == 1.1 %}Mrs Mary Richards trading as Richards Plumbing{% else %}Mrs Mary Richards{% endif %}
         </td>
       </tr>
-      {% if   data['check']== 1  %}
+      {% if data['check']== 1  %}
       <tr>
         <td>
           Contact person:
@@ -262,9 +262,7 @@ li:before {
           Email:
         </td>
         <td>
-                    {% if data['check'] =='1' %}mary.richards@smithlimited.com{% else %}mary.richards@gmail.com{% endif %}
-
-
+          {% if data['check'] =='1' %}mary.richards@smithlimited.com{% else %}mary.richards@gmail.com{% endif %}
         </td>
       </tr>
      </tbody>
@@ -292,13 +290,13 @@ li:before {
           I admit part of the claim
           {% elseif data['check']== 8 or data['check']== 8.1 or data.radio_select_group2=="amount_claimed" %}
           I have paid what I believe I owe
-          {% elseif data['check'] =='1' or data['check']== 9 or data.radio_select_group2=="defend_now" %}
+          {% elseif data['check'] =='1' or data['check'] == 1.1 or data['check']== 9 or data.radio_select_group2=="defend_now" %}
           I dispute all of the claim
           {% endif %}
         </td>
       </tr>
 
-      {% if  data['check'] =='1' or data.radio_select_group=="Some" or data['check']== 4 or data['check']== 5 or data['check'] == 6 or data['check'] == 7 or data['check']== 9 or data['check']== 8 or data['check']== 8.1 or data.radio_select_group2=="amount_claimed" or data.radio_select_group=="Paid-some" or data.radio_select_group2=="defend_now"%}
+      {% if data['check'] =='1' or data['check'] == 1.1 or data.radio_select_group=="Some" or data['check']== 4 or data['check']== 5 or data['check'] == 6 or data['check'] == 7 or data['check']== 9 or data['check']== 8 or data['check']== 8.1 or data.radio_select_group2=="amount_claimed" or data.radio_select_group=="Paid-some" or data.radio_select_group2=="defend_now"%}
 
       {% if data.radio_select_group2=="amount_claimed" or data['check']== 8 or data['check']== 8.1 %}
       <tr class="">
@@ -394,7 +392,7 @@ li:before {
 
 
   <!-- start of defend -->
-  {% if data['check'] =='1' or data['radio_select_group2']=="defend_now" or data['check']== 9 %}
+  {% if data['check'] =='1' or data['check'] == 1.1 or data['radio_select_group2']=="defend_now" or data['check']== 9 %}
   <tr>
     <td class="no-border">
       Why they dispute the claim
@@ -405,7 +403,7 @@ li:before {
   <tr>
     <td colspan="2" class="single-cell">
       <ol style="margin-top: 0">
-      {% if data['check'] =='1' or  data['check'] =='9'  or data['check'] =='8' %}
+      {% if data['check'] =='1' or data['check'] == 1.1 or data['check'] =='9'  or data['check'] =='8' %}
       <li>Mary Richards and I signed a contract for building works on our roof. The work on the roof was completed but there was a problem with one section. I asked Mary Richards to get the problem fixed, but hadn't had a reply.</li>
       <li>I'll have to get another builder to rectify the problem which will cost me &pound;1,500.</li>
       <li>Therefore, I'm making a money claim for &pound;1,500 to compensate for the extra money I am going to need to spend.</li>
@@ -417,7 +415,7 @@ li:before {
     {% endif %}
 
     <!-- start of defendnow-->
-    {% if data['check'] =='1' or data['check']== 9 or data['radio_select_group2']=="Some" or data['check']== 5 or data['check']== 6 or data['check'] == 7 or data['check'] == 8.1 %} <!-- start of time-line and evidence -->
+    {% if data['check'] =='1' or data['check'] == 1.1 or data['check']== 9 or data['radio_select_group2']=="Some" or data['check']== 5 or data['check']== 6 or data['check'] == 7 or data['check'] == 8.1 %} <!-- start of time-line and evidence -->
     <tr>
       <td class="no-border">
         Defendant's timeline of what happened
@@ -427,19 +425,19 @@ li:before {
     </tr>
     <tr class="subsection ">
       {% if data['cd-timeline-2'] !='' %}<td class="no-border single-cell">{% else %}<td class="single-cell ">{% endif %}
-       {% if data['check'] =='1' or data['check'] =='9' or data['check']== 5 or data['check']== 6 or data['check'] == 7 or data['check'] == 8.1 %}1 April 2017{% else %}{{data['cd-date-1']}}{% endif %}
+       {% if data['check'] =='1' or data['check'] == 1.1 or data['check'] =='9' or data['check']== 5 or data['check']== 6 or data['check'] == 7 or data['check'] == 8.1 %}1 April 2017{% else %}{{data['cd-date-1']}}{% endif %}
      </td>
      {% if data['cd-timeline-2'] !='' %}<td class="no-border single-cell">{% else %}<td class="single-cell ">{% endif %}
-      {% if data['check'] =='1' or data['check'] =='9' or data['check']== 5 or data['check']== 6 or data['check'] == 7 or data['check'] == 8.1 %}I contacted Jan Clark to discuss building works on our roof.{% else %}{{data['cd-timeline-1']}}{% endif %}
+      {% if data['check'] =='1' or data['check'] == 1.1 or data['check'] =='9' or data['check']== 5 or data['check']== 6 or data['check'] == 7 or data['check'] == 8.1 %}I contacted Jan Clark to discuss building works on our roof.{% else %}{{data['cd-timeline-1']}}{% endif %}
     </td>
   </tr>
   {% if data['cd-timeline-2'] !='' or data['check'] =='1'  or data['check'] =='2' or data['check'] =='3' or data['check']== 5 or data['check']== 6 or data['check'] == 7 or data['check'] == 8.1 %}
   <tr class="subsection no-border">
     <td class=" single-cell no-border">
-     {% if data['check'] =='1' or data['check'] =='9' or data['check']== 5 or data['check']== 6 or data['check'] == 7 or data['check'] == 8.1 %}7 April 2017{% else %}{{data['cd-date-2']}}{% endif %}
+     {% if data['check'] =='1' or data['check'] == 1.1 or data['check'] =='9' or data['check']== 5 or data['check']== 6 or data['check'] == 7 or data['check'] == 8.1 %}7 April 2017{% else %}{{data['cd-date-2']}}{% endif %}
    </td>
    <td class="no-border">
-    {% if data['check'] =='1' or data['check'] =='9' or data['check']== 5 or data['check']== 6 or data['check'] == 7 or data['check'] == 8.1 %}We agreed what work should be done and signed a contract.{% else %}{{data['cd-timeline-2']}}{% endif %}
+    {% if data['check'] =='1' or data['check'] == 1.1 or data['check'] =='9' or data['check']== 5 or data['check']== 6 or data['check'] == 7 or data['check'] == 8.1 %}We agreed what work should be done and signed a contract.{% else %}{{data['cd-timeline-2']}}{% endif %}
   </td>
 </tr>
 {% endif %}
@@ -448,7 +446,7 @@ li:before {
    Comments about claimant's timeline
  </td>
  <td>
-   {% if data['check'] =='1' or data['check'] =='9' or data['check']== 5 or data['check']== 6 or data['check'] == 7 or data['check'] == 8.1 %}They are exaggerating the what happened. My side of the story is this....{% else %} {{data['defence-disagree-timeline']}}{% endif %}
+   {% if data['check'] =='1' or data['check'] == 1.1 or data['check'] =='9' or data['check']== 5 or data['check']== 6 or data['check'] == 7 or data['check'] == 8.1 %}They are exaggerating the what happened. My side of the story is this....{% else %} {{data['defence-disagree-timeline']}}{% endif %}
  </td>
 </tr>
 <tr>
@@ -460,7 +458,7 @@ li:before {
 </tr>
 <tr class="subsection">
   <td class="no-border single-cell">
-   {% if data['check'] =='1' or data['check'] =='9' or data['check']== 5 or data['check']== 6 or data['check'] == 7 or data['check'] == 8.1 %}Contracts and agreements{% else %}
+   {% if data['check'] =='1' or data['check'] == 1.1 or data['check'] =='9' or data['check']== 5 or data['check']== 6 or data['check'] == 7 or data['check'] == 8.1 %}Contracts and agreements{% else %}
    {% if data['legal-status1'] == 2 %}Contracts and agreements - {% endif %}
    {% if data['legal-status1'] == 3 %}Expert witness - {% endif %}
    {% if data['legal-status1'] == 4 %}Letters, emails and other correspondence - {% endif %}
@@ -471,7 +469,7 @@ li:before {
    {% endif %}
  </td>
  <td class="no-border ">
-  {% if data['check'] =='1' or  data['check'] =='9'  or data['check']== 5 or data['check']== 6 or data['check'] == 7 or data['check'] == 8.1 %}I have a signed contract showing that you broke the contract agreement.{% else %}{{data['legal-status-description-1'] }}{% endif %}
+  {% if data['check'] =='1' or data['check'] == 1.1 or  data['check'] =='9'  or data['check']== 5 or data['check']== 6 or data['check'] == 7 or data['check'] == 8.1 %}I have a signed contract showing that you broke the contract agreement.{% else %}{{data['legal-status-description-1'] }}{% endif %}
 </td>
 </tr>
 {% if data['legal-status2'] !='' or data['check'] =='1' or data['check'] =='9' or data['check']== 5 or data['check']== 6 or data['check'] == 7 or data['check'] == 8.1 %}
@@ -488,7 +486,7 @@ li:before {
    {% endif %}
  </td>
  <td class="no-border">
-  {% if data['check'] =='1' or data['check'] =='9'  or data['check']== 5 or data['check']== 6 or data['check'] == 7 or data['check'] == 8.1 %}The photos I've taken show the poor workmanship of the roof repair.{% else %}{{data['legal-status-description-2'] }}{% endif %}
+  {% if data['check'] =='1' or data['check'] == 1.1 or data['check'] =='9'  or data['check']== 5 or data['check']== 6 or data['check'] == 7 or data['check'] == 8.1 %}The photos I've taken show the poor workmanship of the roof repair.{% else %}{{data['legal-status-description-2'] }}{% endif %}
 </td>
 {% endif %}
 </tr>
@@ -497,7 +495,7 @@ li:before {
     Comments about claimant's evidence
   </td>
   <td>
-   {% if data['check'] =='1' or data['check'] =='9' or data['check']== 5 or data['check']== 6 or data['check'] == 7 or data['check'] == 8.1 %}I never received any of these emails. Also the photos arent a fair refection of my work.{% else %} {{data['defence-disagree-evidence']}}{% endif %}
+   {% if data['check'] =='1' or data['check'] == 1.1 or data['check'] =='9' or data['check']== 5 or data['check']== 6 or data['check'] == 7 or data['check'] == 8.1 %}I never received any of these emails. Also the photos arent a fair refection of my work.{% else %} {{data['defence-disagree-evidence']}}{% endif %}
  </td>
 </tr>
 {% endif %}
@@ -1009,7 +1007,7 @@ li:before {
   <p class="page-title"> <span>Claim number: 000LR095</span></p>
   {% endif %}
 
-  {% if data['check'] == 1 or data['check'] == 5 or data['check'] == 6 or data['check'] == 7 or data['check'] == 8 or data['check'] == 8.1 or data['check'] == 9 %}
+  {% if data['check'] == 1 or data['check'] == 1.1 or data['check'] == 5 or data['check'] == 6 or data['check'] == 7 or data['check'] == 8 or data['check'] == 8.1 or data['check'] == 9 %}
     <table >
       <thead>
         <tr>
@@ -1034,10 +1032,10 @@ li:before {
   {% endif %}
 
 
-  {% if data['check'] == '1' or data['check'] == '2' or data['check'] == '3' or data['check'] == '4' or data['check'] == 5 or data['check']== 8 or data['check']== 9 or data['check'] == '5'  or data['check'] == '6' or data['check'] == 7 or data['check'] == 8.1  %}
+  {% if data['check'] == '1' or data['check'] == 1.1  or data['check'] == '2' or data['check'] == '3' or data['check'] == '4' or data['check'] == 5 or data['check']== 8 or data['check']== 9 or data['check'] == '5'  or data['check'] == '6' or data['check'] == 7 or data['check'] == 8.1  %}
 
 
-{% if data['check'] == 1 or data['check'] == 5 or data['check'] == 6 or data['check'] == 7 or data['check'] == '8' or data['check'] == 8.1 or data['check'] == '9' %}
+{% if data['check'] == 1 or data['check'] == 1.1 or data['check'] == 5 or data['check'] == 6 or data['check'] == 7 or data['check'] == '8' or data['check'] == 8.1 or data['check'] == '9' %}
     <table>
       <thead>
         <tr>
@@ -1204,21 +1202,33 @@ li:before {
           </td>
         </tr>
       </tr>
-      {% if data['check']== 1  %}
+      {% if data['check']== 1 or data['check'] == 1.1  %}
+      
+      {% if data['check']== 1 %}
       <tr>
         <td class="no-border">
         </td>
         <td class="no-border">
-          <strong>Company:</strong> Smith Limited
+          <strong>Company:</strong> Richards Plumbing Limited
         </td>
       </tr>
+      {% endif %}
       <tr>
         <td class="no-border">
         </td>
         <td class="no-border">
-          <strong>Name:</strong> Teresa Jones
+          <strong>Name:</strong> Mary Richards
         </td>
       </tr>
+      {% if data['check']== 1.1 %}
+      <tr>
+        <td class="no-border">
+        </td>
+        <td class="no-border">
+          <strong>Trading as:</strong> Richards Plumbing
+        </td>
+      </tr>
+      {% endif %}
       <tr>
         <td class="no-border">
         </td>
@@ -1272,7 +1282,8 @@ li:before {
       <option  value="9" {% if data['check'] == 9 %}selected{% endif %}>Response - Defence</option>
       <option  value="8" {% if data['check'] == 8 %}selected{% endif %}>Response - Defence - States paid</option>
       <option  value="8.1" {% if data['check'] == 8.1 %}selected{% endif %}>Response - Defence - States paid - less than</option>
-      <option  value="1" {% if data['check'] == 1 %}selected{% endif %}>Response - Defence - Business / sole trader</option>
+      <option  value="1" {% if data['check'] == 1 %}selected{% endif %}>Response - Defence - Business</option>
+      <option  value="1.1" {% if data['check'] == 1.1 %}selected{% endif %}>Response - Defence - Sole trader</option>
       <option  value="2" {% if data['check'] == 2 %}selected{% endif %}>Response - Admission - Full - Pay immediately</option>
       <option  value="3" {% if data['check'] == 3 %}selected{% endif %}>Response - Admission - Full - Pay later</option>
       <option  value="4" {% if data['check'] == 4 %}selected{% endif %}>Response - Admission - Full - Pay by instalments</option>
