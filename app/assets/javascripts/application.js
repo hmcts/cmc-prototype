@@ -955,56 +955,56 @@ function tableRow (n) {
   }
 }
 
-/* CASE FILE */
-var Casefile = function(container) {
-  this.container = container;
-  this.items = container.find('.jui-cf__files');
-  this.comments = container.find('.jui-cf__document-comments');
-  this.itemsButton = container.find('.jui-cf__toolbar-button--items');
-  this.commentsButton = container.find('.jui-cf__toolbar-button--comments');
-  this.itemsButton.on('click', $.proxy(this, 'onButtonItemsClick'));
-  this.commentsButton.on('click', $.proxy(this, 'onButtonCommentsClick'));
-  this.showItems();
-  this.hideComments();
-};
-
-
-Casefile.prototype.hideComments = function() {
-  this.container.removeClass('jui-cf--show-comments');
-  this.comments.hide();
-  this.commentsButton.attr('aria-pressed', 'false');
-};
-
-
-Casefile.prototype.hideItems = function() {
-  this.items.hide();
-  this.itemsButton.attr('aria-pressed', 'false');
-};
-
-
-Casefile.prototype.showComments = function() {
-  this.container.addClass('jui-cf--show-comments');
-  this.comments.show();
-  this.commentsButton.attr('aria-pressed', 'true');
-};
-
-
-Casefile.prototype.showItems = function() {
-  this.items.show();
-  this.itemsButton.attr('aria-pressed', 'true');
-};
-
-
-Casefile.prototype.onButtonItemsClick = function(e) {
-  this.showItems();
-  this.hideComments();
-};
-
-
-Casefile.prototype.onButtonCommentsClick = function(e) {
-  this.showComments();
-  this.hideItems();
-};
+// /* CASE FILE */
+// var Casefile = function(container) {
+//   this.container = container;
+//   this.items = container.find('.jui-cf__files');
+//   this.comments = container.find('.jui-cf__document-comments');
+//   this.itemsButton = container.find('.jui-cf__toolbar-button--items');
+//   this.commentsButton = container.find('.jui-cf__toolbar-button--comments');
+//   this.itemsButton.on('click', $.proxy(this, 'onButtonItemsClick'));
+//   this.commentsButton.on('click', $.proxy(this, 'onButtonCommentsClick'));
+//   this.showItems();
+//   this.hideComments();
+// };
+//
+//
+// Casefile.prototype.hideComments = function() {
+//   this.container.removeClass('jui-cf--show-comments');
+//   this.comments.hide();
+//   this.commentsButton.attr('aria-pressed', 'false');
+// };
+//
+//
+// Casefile.prototype.hideItems = function() {
+//   this.items.hide();
+//   this.itemsButton.attr('aria-pressed', 'false');
+// };
+//
+//
+// Casefile.prototype.showComments = function() {
+//   this.container.addClass('jui-cf--show-comments');
+//   this.comments.show();
+//   this.commentsButton.attr('aria-pressed', 'true');
+// };
+//
+//
+// Casefile.prototype.showItems = function() {
+//   this.items.show();
+//   this.itemsButton.attr('aria-pressed', 'true');
+// };
+//
+//
+// Casefile.prototype.onButtonItemsClick = function(e) {
+//   this.showItems();
+//   this.hideComments();
+// };
+//
+//
+// Casefile.prototype.onButtonCommentsClick = function(e) {
+//   this.showComments();
+//   this.hideItems();
+// };
 
 // /* TREE */
 // var Tree = function(container) {
@@ -1344,12 +1344,20 @@ $(document).ready(function () {
 })
 
 
-/* SIDE TABS */
-$('ul.tab__nav li a').click(function(){
+// /* SIDE TABS */
+// $('ul.tab__nav li a').click(function(){
+//   var target = "#" + $(this).data("target");
+//   $("ul.tab__nav li a").removeClass('active');
+//   $(this).addClass('active');
+//   $('.tab__content').not(target).addClass('js-hidden');
+//   $(target).removeClass('js-hidden');
+// });
+
+/* SIDE TABS 2 */
+$('ul.jui-tree__folder-group li a').click(function(){
   var target = "#" + $(this).data("target");
-  $("ul.tab__nav li a").removeClass('active');
+  $("ul.jui-tree__folder-group li a").removeClass('active');
   $(this).addClass('active');
   $('.tab__content').not(target).addClass('js-hidden');
   $(target).removeClass('js-hidden');
 });
-
