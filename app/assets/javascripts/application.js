@@ -749,6 +749,24 @@ function tabGroup3 (tableObj, which) {
 }
 
 /* TABS PATTERN */
+function tabGroup6 (tableObj, which) {
+  tabU = 'TAB-ELEVEN'
+  tabV = 'TAB-TWELVE'
+
+  if (which == tabU) {
+    document.getElementById('tabU').className = 'tab-on'
+    document.getElementById('tabV').className = 'tab'
+    document.getElementById('tabElevenContent').style.display = 'block'
+    document.getElementById('tabTwelveContent').style.display = 'none'
+  } else if (which == tabV) {
+    document.getElementById('tabU').className = 'tab'
+    document.getElementById('tabV').className = 'tab-on'
+    document.getElementById('tabElevenContent').style.display = 'none'
+    document.getElementById('tabTwelveContent').style.display = 'block'
+  }
+}
+
+/* TABS PATTERN */
 function tabGroup4 (tableObj, which) {
   tabJ = 'TAB-ONE'
   tabK = 'TAB-TWO'
@@ -1208,56 +1226,56 @@ function tableRow (n) {
 // });
 
 
-$("#claim-d2").click(function(){
-  window.location = "claim-details-d2";
+$("#claim-d1").click(function(){
+  window.location = "../defendant/claim-details-d1";
 });
 
-$("#claim-d1").click(function(){
-  window.location = "claim-details-d1";
+$("#claim-d2").click(function(){
+  window.location = "../defendant/claim-details-d2";
 });
 
 $("#claim-d3").click(function(){
-  window.location = "claim-details-d3";
+  window.location = "../defendant/claim-details-d3";
 });
 
 $("#claim-d4").click(function(){
-  window.location = "claim-details-d4";
+  window.location = "../defendant/claim-details-d4";
 });
 
 $("#claim-d5").click(function(){
-  window.location = "claim-details-d5";
+  window.location = "../defendant/claim-details-d5";
 });
 
 $("#claim-d6").click(function(){
-  window.location = "claim-details-d6";
+  window.location = "../defendant/claim-details-d6";
 });
 
 $("#claim-d7").click(function(){
-  window.location = "claim-details-d7";
+  window.location = "../defendant/claim-details-d7";
 });
 
 $("#claim-c1").click(function(){
-  window.location = "claim-details-c1";
+  window.location = "../claimant/claim-details-c1";
 });
 
 $("#claim-c2").click(function(){
-  window.location = "claim-details-c2";
+  window.location = "../claimant/claim-details-c2";
 });
 
 $("#claim-c3").click(function(){
-  window.location = "claim-details-c3";
+  window.location = "../claimant/claim-details-c3";
 });
 
 $("#claim-c4").click(function(){
-  window.location = "claim-details-c4";
+  window.location = "../claimant/claim-details-c4";
 });
 
 $("#claim-c5").click(function(){
-  window.location = "claim-details-c5";
+  window.location = "../claimant/claim-details-c5";
 });
 
 $("#claim-c6").click(function(){
-  window.location = "claim-details-c6";
+  window.location = "../claimant/claim-details-c6";
 });
 
 /* tab navigation and content show/hide */

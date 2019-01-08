@@ -28,24 +28,23 @@ Money Claims Prototype
       <!--Claims you've made-->
       <!--</h2>-->
 
-      <div class="tabGroup">
-        <a id="tabA" class="tab-on" onclick="tabGroup(tabContent, 'TAB-ONE')" href="javascript: void(0)">Claims you've
-          made</a>
-        <a id="tabB" class="tab" onclick="tabGroup(tabContent, 'TAB-TWO')" href="javascript: void(0)">Claims made
-          against you</a>
+      <div class="tabGroup3">
+        <a id="tabH" class="tab-on" onclick="tabGroup3(tabContent, 'TAB-ONE')" href="javascript: void(0)">Claims you've
+          made (2)</a>
+        <a id="tabI" class="tab" onclick="tabGroup3(tabContent, 'TAB-TWO')" href="javascript: void(0)">Claims made
+          against you (10)</a>
         <div class="govuk-form-group" style="float: right; margin-bottom: -10px">
           <label class="font-xsmall" for="sort">
             Sort by
           </label>
           <select class="govuk-select" id="sort" name="sort" style="font-size: 14px">
-            <option value="" selected="">Deadline</option>
-            <option value="">Draft claims</option>
+            <option value="">Earliest deadline</option>
+            <option value="" selected="">Drafts</option>
             <option value="">Claim amount</option>
-            <option value="">Defendant name</option>
+            <option value="">Last name</option>
           </select>
         </div>
-        <!--<a id="tabC" class="tab" onclick="tabGroup(tabContent, 'TAB-THREE')" href="javascript: void(0)">Archived</a>-->
-        <hr>
+        <hr style="margin-top: -1px">
       </div>
 
       <div id="tabContent" class="top_30">
@@ -59,17 +58,6 @@ Money Claims Prototype
               <!--Claims you've made-->
               <!--</span>-->
               <!--</caption>-->
-              <!--<div class="govuk-form-group" style="float: right">
-                <label class="font-small" for="sort">
-                  Sort by
-                </label>
-                <select class="govuk-select" id="sort" name="sort" style="font-size: medium">
-                  <option value="">Deadline</option>
-                  <option value="" selected="">Claim amount</option>
-                  <option value="">Defendant name</option>
-                </select>
-              </div>-->
-
               <thead>
               <tr>
                 <th scope="col">
@@ -93,21 +81,9 @@ Money Claims Prototype
               </tr>
               </thead>
               <tbody>
-              <tr class="mobile-sort">
-                <td colspan="10">
-                  Sort by:
-                  <a tabindex="0" href="#listanchor">Claim number</a>
-                  <a tabindex="0" href="#listanchor">Defendant</a>
-                  <!--<a tabindex="0" href="#listanchor">Claim amount</a>-->
-                  <a tabindex="0" href="#listanchor">Last update</a>
-                  <a tabindex="0" href="#listanchor">Next steps</a>
-                  <a class="current asc" tabindex="0" href="#listanchor">Deadline ▲</a>
-                  <!--<a tabindex="0" href="#listanchor"></a>-->
-                </td>
-              </tr>
 
               <!--claim 01-->
-              <tr class="draft" id="claim_01">
+              <tr class="draft" id="claim-continue-draft">
                 <td aria-label="Claim-number">
                   -
                 </td>
@@ -117,20 +93,12 @@ Money Claims Prototype
                 <td aria-label="Claimed" class="numeric claimed-amount">
                   £1,500
                 </td>
-                <!--<td aria-label="Status" scope="row">-->
-                <!-- - -->
-                <!--</td>-->
                 <td aria-label="Next steps">
                   -
                 </td>
                 <td aria-label="Deadline">
                   -
                 </td>
-                <!--<td aria-label="Status" scope="row">-->
-                <!--<span class="state state-draft">-->
-                <!--Draft-->
-                <!--</span>-->
-                <!--</td>-->
                 <td aria-label="Action">
                   <a class="" href="">Continue draft</a>
                 </td>
@@ -147,22 +115,53 @@ Money Claims Prototype
                 <td aria-label="Claimed" class="numeric claimed-amount">
                   £300
                 </td>
-                <!--<td aria-label="Status" scope="row">-->
-                <!--&lt;!&ndash;<span class="state state-submitted">&ndash;&gt;-->
-                <!--The defendant <br>made an offer-->
-                <!--&lt;!&ndash;</span>&ndash;&gt;-->
-                <!--</td>-->
                 <td aria-label="Next steps">
+                  {% if data["claimant"] == 1 %}
                   Waiting for the defendant<br> to respond
+                  {% endif %}
+
+                  {% if data["claimant"] == 2 %}
+                  Respond to defendant
+                  {% endif %}
+
+                  {% if data["claimant"] == 3 %}
+                  The court will review your case
+                  {% endif %}
+
+                  {% if data["claimant"] == 4 %}
+                  Prepare for the hearing
+                  {% endif %}
+
+                  {% if data["claimant"] == 5 %}
+                  Hearing is booked. <br>Pay the hearing fee
+                  {% endif %}
+
                 </td>
                 <td aria-label="Deadline">
+                  {% if data["claimant"] == 1 %}
                   -
+                  {% endif %}
+
+                  {% if data["claimant"] == 2 %}
+                  26 January 2019<br>
+                  <span class="font-xsmall">19 days left</span>
+                  {% endif %}
+
+                  {% if data["claimant"] == 3 %}
+                  -
+                  {% endif %}
+
+                  {% if data["claimant"] == 4 %}
+                  30 February 2019<br>
+                  <span class="font-xsmall">10 days left</span>
+                  {% endif %}
+
+                  {% if data["claimant"] == 5 %}
+                  20 March 2019<br>
+                  <span class="font-xsmall" style="color: #df3034; font-weight: bold">5 days left</span>
+                  {% endif %}
+
                 </td>
-                <!--<td aria-label="Status" scope="row">-->
-                <!--<span class="state state-submitted">-->
-                <!--Submitted-->
-                <!--</span>-->
-                <!--</td>-->
                 <td aria-label="Action">
                   <a class="" href="claim-details-c1">View</a>
                 </td>
@@ -177,12 +176,277 @@ Money Claims Prototype
 
         <div id="tabTwoContent">
 
+          <div class="table-container container">
+            <table class="clickable">
+              <!--<caption>-->
+              <!--<span class="table-caption">-->
+              <!--Claims made against you-->
+              <!--</span>-->
+              <!--</caption>-->
+              <thead>
+              <tr>
+                <th scope="col">
+                  <span style="font-size: medium">Claim number</span>
+                </th>
+                <th scope="col">
+                  <span style="font-size: medium">Claimant</span>
+                </th>
+                <th class="numeric" scope="col">
+                  <span style="font-size: medium">Claim amount</span>
+                </th>
+                <th scope="col">
+                  <span style="font-size: medium">Next steps</span>
+                </th>
+                <th scope="col">
+                  <span style="font-size: medium">Deadline</span>
+                </th>
+                <th scope="col">
+                  <span style="font-size: medium"></span>
+                </th>
+              </tr>
+              </thead>
+              <tbody>
+
+              <!--claim 01-->
+              <tr class="draft" id="claim-d1">
+                <td aria-label="Claim-number">
+                  352MC733
+                </td>
+                <td aria-label="Claimant">
+                  Jan Clark
+                </td>
+                <td aria-label="Claimed" class="numeric claimed-amount">
+                  £300
+                </td>
+                <td aria-label="Next steps">
+                  Respond to claim
+                </td>
+                <td aria-label="Deadline">
+                  {{ now | date('add', 19, 'days') | date }}<br>
+                  <span class="font-xsmall">19 days left</span>
+                </td>
+                <td aria-label="Action">
+                  <a class="" href="../defendant/claim-details-d2">Continue response</a>
+                </td>
+              </tr>
+
+              <!--claim 02-->
+              <tr class="submitted" id="claim-dx">
+                <td aria-label="Claim-number">
+                  0000LR125
+                </td>
+                <td aria-label="Claimant">
+                  Lowell Portfolio
+                </td>
+                <td aria-label="Claimed" class="numeric claimed-amount">
+                  £500
+                </td>
+                <td aria-label="Next steps">
+                  Pay the judgment debt
+                </td>
+                <td aria-label="Deadline">
+                  {{ now | date('add', -15, 'days') | date }}<br>
+                  <span class="font-xsmall" style="color: #df3034; font-weight: bold">Overdue</span>
+                </td>
+                <td aria-label="Action">
+                  <a class="" href="">View</a>
+                </td>
+              </tr>
+
+              <!--claim 03-->
+              <tr class="submitted" id="claim-dx">
+                <td aria-label="Claim-number">
+                  0000LR089
+                </td>
+                <td aria-label="Claimant">
+                  Lowell Portfolio
+                </td>
+                <td aria-label="Claimed" class="numeric claimed-amount">
+                  £500
+                </td>
+                <td aria-label="Next steps">
+                  Pay the judgment debt
+                </td>
+                <td aria-label="Deadline">
+                  {{ now | date('add', -30, 'days') | date }}<br>
+                  <span class="font-xsmall" style="color: #df3034; font-weight: bold">Overdue</span>
+                </td>
+                <td aria-label="Action">
+                  <a class="" href="">View</a>
+                </td>
+              </tr>
+
+              <!--claim 04-->
+              <tr class="submitted" id="claim-dx">
+                <td aria-label="Claim-number">
+                  0000LR067
+                </td>
+                <td aria-label="Claimant">
+                  Lowell Portfolio
+                </td>
+                <td aria-label="Claimed" class="numeric claimed-amount">
+                  £500
+                </td>
+                <td aria-label="Next steps">
+                  Pay the judgment debt
+                </td>
+                <td aria-label="Deadline">
+                  {{ now | date('add', -45, 'days') | date }}<br>
+                  <span class="font-xsmall" style="color: #df3034; font-weight: bold">Overdue</span>
+                </td>
+                <td aria-label="Action">
+                  <a class="" href="">View</a>
+                </td>
+              </tr>
+
+              <!--claim 05-->
+              <tr class="submitted" id="claim-dx">
+                <td aria-label="Claim-number">
+                  0000LR058
+                </td>
+                <td aria-label="Claimant">
+                  Lowell Portfolio
+                </td>
+                <td aria-label="Claimed" class="numeric claimed-amount">
+                  £500
+                </td>
+                <td aria-label="Next steps">
+                  Pay the judgment debt
+                </td>
+                <td aria-label="Deadline">
+                  {{ now | date('add', -60, 'days') | date }}<br>
+                  <span class="font-xsmall" style="color: #df3034; font-weight: bold">Overdue</span>
+                </td>
+                <td aria-label="Action">
+                  <a class="" href="">View</a>
+                </td>
+              </tr>
+
+              <!--claim 06-->
+              <tr class="submitted" id="claim-dx">
+                <td aria-label="Claim-number">
+                  0000LR043
+                </td>
+                <td aria-label="Claimant">
+                  Lowell Portfolio
+                </td>
+                <td aria-label="Claimed" class="numeric claimed-amount">
+                  £500
+                </td>
+                <td aria-label="Next steps">
+                  Pay the judgment debt
+                </td>
+                <td aria-label="Deadline">
+                  {{ now | date('add', -75, 'days') | date }}<br>
+                  <span class="font-xsmall" style="color: #df3034; font-weight: bold">Overdue</span>
+                </td>
+                <td aria-label="Action">
+                  <a class="" href="">View</a>
+                </td>
+              </tr>
+
+              <!--claim 07-->
+              <tr class="submitted" id="claim-dx">
+                <td aria-label="Claim-number">
+                  0000LR033
+                </td>
+                <td aria-label="Claimant">
+                  Lowell Portfolio
+                </td>
+                <td aria-label="Claimed" class="numeric claimed-amount">
+                  £500
+                </td>
+                <td aria-label="Next steps">
+                  Pay the judgment debt
+                </td>
+                <td aria-label="Deadline">
+                  {{ now | date('add', -90, 'days') | date }}<br>
+                  <span class="font-xsmall" style="color: #df3034; font-weight: bold">Overdue</span>
+                </td>
+                <td aria-label="Action">
+                  <a class="" href="">View</a>
+                </td>
+              </tr>
+
+              <!--claim 08-->
+              <tr class="submitted" id="claim-dx">
+                <td aria-label="Claim-number">
+                  0000LR027
+                </td>
+                <td aria-label="Claimant">
+                  Lowell Portfolio
+                </td>
+                <td aria-label="Claimed" class="numeric claimed-amount">
+                  £500
+                </td>
+                <td aria-label="Next steps">
+                  Pay the judgment debt
+                </td>
+                <td aria-label="Deadline">
+                  {{ now | date('add', -115, 'days') | date }}<br>
+                  <span class="font-xsmall" style="color: #df3034; font-weight: bold">Overdue</span>
+                </td>
+                <td aria-label="Action">
+                  <a class="" href="">View</a>
+                </td>
+              </tr>
+
+              <!--claim 09-->
+              <tr class="submitted" id="claim-dx">
+                <td aria-label="Claim-number">
+                  0000LR011
+                </td>
+                <td aria-label="Claimant">
+                  Lowell Portfolio
+                </td>
+                <td aria-label="Claimed" class="numeric claimed-amount">
+                  £500
+                </td>
+                <td aria-label="Next steps">
+                  Pay the judgment debt
+                </td>
+                <td aria-label="Deadline">
+                  {{ now | date('add', -130, 'days') | date }}<br>
+                  <span class="font-xsmall" style="color: #df3034; font-weight: bold">Overdue</span>
+                </td>
+                <td aria-label="Action">
+                  <a class="" href="">View</a>
+                </td>
+              </tr>
+
+              <!--claim 10-->
+              <tr class="submitted" id="claim-dx">
+                <td aria-label="Claim-number">
+                  0000LR002
+                </td>
+                <td aria-label="Claimant">
+                  Lowell Portfolio
+                </td>
+                <td aria-label="Claimed" class="numeric claimed-amount">
+                  £500
+                </td>
+                <td aria-label="Next steps">
+                  Pay the judgment debt
+                </td>
+                <td aria-label="Deadline">
+                  {{ now | date('add', -145, 'days') | date }}<br>
+                  <span class="font-xsmall" style="color: #df3034; font-weight: bold">Overdue</span>
+                </td>
+                <td aria-label="Action">
+                  <a class="" href="">View</a>
+                </td>
+              </tr>
+
+              </tbody>
+            </table>
+          </div>
 
         </div>
-
       </div>
 
+      {% include 'prototypes/prototype-jan-2019/includes/contact.html' %}
     </div>
+
 </main>
 
 
