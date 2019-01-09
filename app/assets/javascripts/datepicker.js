@@ -72,7 +72,7 @@ var datePicker = {
       daysOfWeekDisabled: '06',
       defaultViewDate: moment().add(1, 'days').format('MM-D-YYYY'),
       startDate: '+1d',
-      endDate: '+26w',
+      endDate: '+39w',
       weekStart: 1,
       maxViewMode: 0,
       templates: {
