@@ -38,11 +38,12 @@ Money Claims Prototype
             Sort by
           </label>
           <select class="govuk-select" id="sort" name="sort" style="font-size: 14px">
-            <option value="" selected="">Earliest deadline</option>
-            <option value="">Drafts</option>
-            <option value="">Latest issue date</option>
+            <option value="">Claim number</option>
+            <option value="">Issue date</option>
+            <option value="">Name</option>
             <option value="">Claim amount</option>
-            <option value="">Last name</option>
+            <option value="" selected="">Deadline</option>
+            <option value="">Drafts</option>
           </select>
         </div>
         <hr style="margin-top: -1px">
@@ -77,11 +78,35 @@ Money Claims Prototype
                   <span style="font-size: medium">Deadline</span>
                 </th>
                 <th scope="col">
-                  <span style="font-size: medium"></span>
+                  <span style="font-size: medium">Actions</span>
                 </th>
               </tr>
               </thead>
               <tbody>
+
+              <!--claim 02-->
+              <tr class="submitted" id="claim-c1">
+                <td aria-label="Claim-number">
+                  352MC733<br>
+                  <span class="font-xsmall">Issued on 5 Dec 2018</span>
+                </td>
+                <td aria-label="Defendants">
+                  Mary Richards<br>
+                </td>
+                <td aria-label="Claimed" class="numeric claimed-amount">
+                  £300
+                </td>
+                <td aria-label="Next steps">
+                  Waiting for the defendant<br> to respond
+                </td>
+                <td aria-label="Deadline">
+                  27 Jan 2019<br>
+                  <span class="font-xsmall">19 days left</span>
+                </td>
+                <td aria-label="Action">
+                  <a class="" href="claim-details-c1">View</a>
+                </td>
+              </tr>
 
               <!--claim 01-->
               <tr class="draft" id="claim-continue-draft">
@@ -95,36 +120,14 @@ Money Claims Prototype
                   £1,500
                 </td>
                 <td aria-label="Next steps">
-                  -
+                  Continue draft claim
                 </td>
                 <td aria-label="Deadline">
                   -
                 </td>
                 <td aria-label="Action">
-                  <a class="" href="">Continue draft</a>
-                </td>
-              </tr>
-
-              <!--claim 02-->
-              <tr class="submitted" id="claim-c1">
-                <td aria-label="Claim-number">
-                  352MC733
-                </td>
-                <td aria-label="Defendants">
-                  Mary Richards<br>
-                </td>
-                <td aria-label="Claimed" class="numeric claimed-amount">
-                  £300
-                </td>
-                <td aria-label="Next steps">
-                  Waiting for the defendant<br> to respond
-                </td>
-                <td aria-label="Deadline">
-                  27 January 2019<br>
-                  <span class="font-xsmall">19 days left</span>
-                </td>
-                <td aria-label="Action">
-                  <a class="" href="claim-details-c1">View</a>
+                  <a class="" href="../../../claimant/task-list">Continue</a> &nbsp;
+                  <a class="" href="../claimant/delete-draft">Delete</a>
                 </td>
               </tr>
 
@@ -162,7 +165,7 @@ Money Claims Prototype
                   <span style="font-size: medium">Deadline</span>
                 </th>
                 <th scope="col">
-                  <span style="font-size: medium"></span>
+                  <span style="font-size: medium">Action</span>
                 </th>
               </tr>
               </thead>
@@ -171,7 +174,8 @@ Money Claims Prototype
               <!--claim 01-->
               <tr class="draft" id="">
                 <td aria-label="Claim-number">
-                  352MC733
+                  352MC733<br>
+                  <span class="font-xsmall">Issued on 11 Jan 2019</span>
                 </td>
                 <td aria-label="Claimant">
                   Jan Clark
@@ -207,7 +211,7 @@ Money Claims Prototype
                 </td>
                 <td aria-label="Deadline">
                   {% if data["defendant"] == 1 %}
-                  {{ now | date('add', 19, 'days') | date }}<br>
+                  30 Jan 2019<br>
                   <span class="font-xsmall">19 days left</span>
                   {% endif %}
 
@@ -224,7 +228,7 @@ Money Claims Prototype
                   {% endif %}
 
                   {% if data["defendant"] == 5 %}
-                  30 February 2019<br>
+                  30 Feb 2019<br>
                   <span class="font-xsmall">10 days left</span>
                   {% endif %}
 
@@ -264,20 +268,21 @@ Money Claims Prototype
               <!--claim 02-->
               <tr class="submitted" id="claim-dx">
                 <td aria-label="Claim-number">
-                  0000LR125
+                  0000LR125<br>
+                  <span class="font-xsmall">Issued on 7 Nov 2018</span>
                 </td>
                 <td aria-label="Claimant">
-                  Lowell Portfolio
+                  Kate Beckinsale
                 </td>
                 <td aria-label="Claimed" class="numeric claimed-amount">
-                  £500
+                  £2,456
                 </td>
                 <td aria-label="Next steps">
                   Pay the judgment debt
                 </td>
                 <td aria-label="Deadline">
-                  {{ now | date('add', -15, 'days') | date }}<br>
-                  <span class="font-xsmall">Overdue</span>
+                  30 Jan 2019<br>
+                  <span class="font-xsmall">19 days left</span>
                 </td>
                 <td aria-label="Action">
                   <a class="" href="">View</a>
@@ -287,7 +292,8 @@ Money Claims Prototype
               <!--claim 03-->
               <tr class="submitted" id="claim-dx">
                 <td aria-label="Claim-number">
-                  0000LR089
+                  0000LR089<br>
+                  <span class="font-xsmall">Issued on 3 Oct 2018</span>
                 </td>
                 <td aria-label="Claimant">
                   Lowell Portfolio
@@ -299,7 +305,7 @@ Money Claims Prototype
                   Pay the judgment debt
                 </td>
                 <td aria-label="Deadline">
-                  {{ now | date('add', -30, 'days') | date }}<br>
+                  15 Jan 2019<br>
                   <span class="font-xsmall">Overdue</span>
                 </td>
                 <td aria-label="Action">
@@ -310,7 +316,8 @@ Money Claims Prototype
               <!--claim 04-->
               <tr class="submitted" id="claim-dx">
                 <td aria-label="Claim-number">
-                  0000LR067
+                  0000LR067<br>
+                  <span class="font-xsmall">Issued on 4 Sep 2018</span>
                 </td>
                 <td aria-label="Claimant">
                   Lowell Portfolio
@@ -322,7 +329,7 @@ Money Claims Prototype
                   Pay the judgment debt
                 </td>
                 <td aria-label="Deadline">
-                  {{ now | date('add', -45, 'days') | date }}<br>
+                  1 Dec 2018<br>
                   <span class="font-xsmall">Overdue</span>
                 </td>
                 <td aria-label="Action">
@@ -333,7 +340,8 @@ Money Claims Prototype
               <!--claim 05-->
               <tr class="submitted" id="claim-dx">
                 <td aria-label="Claim-number">
-                  0000LR058
+                  0000LR058<br>
+                  <span class="font-xsmall">Issued on 5 Aug 2018</span>
                 </td>
                 <td aria-label="Claimant">
                   Lowell Portfolio
@@ -345,7 +353,7 @@ Money Claims Prototype
                   Pay the judgment debt
                 </td>
                 <td aria-label="Deadline">
-                  {{ now | date('add', -60, 'days') | date }}<br>
+                  16 Nov 2018<br>
                   <span class="font-xsmall">Overdue</span>
                 </td>
                 <td aria-label="Action">
@@ -356,7 +364,8 @@ Money Claims Prototype
               <!--claim 06-->
               <tr class="submitted" id="claim-dx">
                 <td aria-label="Claim-number">
-                  0000LR043
+                  0000LR043<br>
+                  <span class="font-xsmall">Issued on 1 Aug 2018</span>
                 </td>
                 <td aria-label="Claimant">
                   Lowell Portfolio
@@ -368,7 +377,7 @@ Money Claims Prototype
                   Pay the judgment debt
                 </td>
                 <td aria-label="Deadline">
-                  {{ now | date('add', -75, 'days') | date }}<br>
+                  1 Nov 2018<br>
                   <span class="font-xsmall">Overdue</span>
                 </td>
                 <td aria-label="Action">
@@ -379,7 +388,8 @@ Money Claims Prototype
               <!--claim 07-->
               <tr class="submitted" id="claim-dx">
                 <td aria-label="Claim-number">
-                  0000LR033
+                  0000LR033<br>
+                  <span class="font-xsmall">Issued on 5 Jul 2018</span>
                 </td>
                 <td aria-label="Claimant">
                   Lowell Portfolio
@@ -391,7 +401,7 @@ Money Claims Prototype
                   Pay the judgment debt
                 </td>
                 <td aria-label="Deadline">
-                  {{ now | date('add', -90, 'days') | date }}<br>
+                  17 Oct 2018<br>
                   <span class="font-xsmall">Overdue</span>
                 </td>
                 <td aria-label="Action">
@@ -402,7 +412,8 @@ Money Claims Prototype
               <!--claim 08-->
               <tr class="submitted" id="claim-dx">
                 <td aria-label="Claim-number">
-                  0000LR027
+                  0000LR027<br>
+                  <span class="font-xsmall">Issued on 2 Jun 2018</span>
                 </td>
                 <td aria-label="Claimant">
                   Lowell Portfolio
@@ -414,53 +425,7 @@ Money Claims Prototype
                   Pay the judgment debt
                 </td>
                 <td aria-label="Deadline">
-                  {{ now | date('add', -115, 'days') | date }}<br>
-                  <span class="font-xsmall">Overdue</span>
-                </td>
-                <td aria-label="Action">
-                  <a class="" href="">View</a>
-                </td>
-              </tr>
-
-              <!--claim 09-->
-              <tr class="submitted" id="claim-dx">
-                <td aria-label="Claim-number">
-                  0000LR011
-                </td>
-                <td aria-label="Claimant">
-                  Lowell Portfolio
-                </td>
-                <td aria-label="Claimed" class="numeric claimed-amount">
-                  £500
-                </td>
-                <td aria-label="Next steps">
-                  Pay the judgment debt
-                </td>
-                <td aria-label="Deadline">
-                  {{ now | date('add', -130, 'days') | date }}<br>
-                  <span class="font-xsmall">Overdue</span>
-                </td>
-                <td aria-label="Action">
-                  <a class="" href="">View</a>
-                </td>
-              </tr>
-
-              <!--claim 10-->
-              <tr class="submitted" id="claim-dx">
-                <td aria-label="Claim-number">
-                  0000LR002
-                </td>
-                <td aria-label="Claimant">
-                  Lowell Portfolio
-                </td>
-                <td aria-label="Claimed" class="numeric claimed-amount">
-                  £500
-                </td>
-                <td aria-label="Next steps">
-                  Pay the judgment debt
-                </td>
-                <td aria-label="Deadline">
-                  {{ now | date('add', -145, 'days') | date }}<br>
+                  22 Sep 2018<br>
                   <span class="font-xsmall">Overdue</span>
                 </td>
                 <td aria-label="Action">
