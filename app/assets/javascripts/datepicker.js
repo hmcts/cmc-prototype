@@ -74,6 +74,7 @@ var datePicker = {
       startDate: '+1d',
       weekStart: 1,
       maxViewMode: 0,
+//      datesDisabled: [moment().add(4, 'days').format('MM-D-YYYY'), moment().add(14, 'days').format('MM-D-YYYY') ],
       templates: {
         leftArrow: datePicker.toggleArrows('prev'),
         rightArrow: datePicker.toggleArrows('next')
