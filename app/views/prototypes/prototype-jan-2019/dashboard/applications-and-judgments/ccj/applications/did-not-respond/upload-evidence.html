@@ -16,14 +16,22 @@ Money Claims Prototype
       </h1>
 
       <form class="form">
-        <p>Setting aside a CCJ is usually only possible if you have a good reason, for example if the original claim
-          from the court was sent to the wrong address.</p>
 
-        <p>You can upload letters, emails and other correspondence to prove that:</p>
+        {% if data["did-not-respond"] == "on" %}
+        <p>You can upload letters, emails and any other correspondence to prove that:</p>
         <ul class="list list-bullet">
-          <li>the claimant should have known that you had moved and did not try to find your current address</li>
-          <li>you gave the creditor your new address before the claim was issued</li>
+          <li>you can't respond to the claim by the deadline, for example you were away</li>
+          <li>content - any other valid reason</li>
         </ul>
+        {% endif %}
+
+        {% if data["did-not-receive"] == "on" %}
+        <p>You can upload letters, emails and any other correspondence to prove that:</p>
+        <ul class="list list-bullet">
+          <li>you gave the claimant your new address before the claim was issued</li>
+          <li>the claimant should have known that you had moved</li>
+        </ul>
+        {% endif %}
 
         <!--<details>-->
           <!--<summary><span class="summary">Help with evidence</span></summary>-->
@@ -90,7 +98,7 @@ Money Claims Prototype
       </form>
 
       <div class="form-group">
-        <form method="post" action="check-and-send" class="form">
+        <form method="post" action="../hearing/dates" class="form">
           {{formData | safe}}
           <input type="hidden" name="" value="on">
           <input type="submit" class="button" value="Save and continue">
