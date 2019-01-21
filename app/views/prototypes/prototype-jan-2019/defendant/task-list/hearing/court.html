@@ -47,8 +47,8 @@ Money Claims Prototype
           {% if ( data['scenario'] != 5 and data['court-search'] != 'postcode' ) or data['accept-court'] == 'no' or data['scenario'] == 6 %}
           {% if data['accept-court'] != 'no' and data['scenario'] != 6 %}
           <p>Tell us your preferred court for a hearing, in case the claim goes to one.</p>
-          <p>Unless the {% if data['scenario'] == 2 %}defendant{% else %}claimant{% endif %} has a valid objection, we will use the court you choose.</p>
-          {% endif %}
+          
+          <p>We'll use the court you choose unless the {% if data['check'] == 2 %}defendant{% else %}claimant{% endif %} has an exceptional reason to object.</p>
 
           {% if data['scenario'] != 5 and data['court-search'] != 'postcode' %}
           <p>You can {% if data['accept-court'] != 'no' and data['scenario'] != 6 %}choose{% else %}request{% endif %} any court - Guildford County Court is nearest to the home address you gave us.</p>
@@ -99,15 +99,13 @@ Money Claims Prototype
 
         {% elseif ( data['scenario'] == 3 or data['scenario'] == 4 ) and data['court-search'] != 'postcode' %}
 
-          <h1 class="heading-large">Hearing location</h1>
+        <h1 class="heading-large">Do you agree to the hearing being held at {% if data['check'] == 4 %}Kingston County Court{% else %}the claimant's chosen court{% endif%}?</h1>
 
-          <p>Your hearing will be held at the {% if data['scenario'] == 3 %}claimant{% else %}defendant{% endif %}'s chosen court, unless a judge believes you have a good reason for it to be held elsewhere.</p>
+        {% if data['check'] == 4 %}
+        <p>This is the defendant's chosen court.</p>
+        {% endif %}
 
-          {% if data['scenario'] == 4 %}
-          <p>The defendant has requested the hearing be held at Kingston County Court.</p>
-          {% endif %}
-
-          <h1 class="heading-medium">Are you happy for the hearing to be held at {% if data['scenario'] == 4 %}Kingston County Court{% else %}the claimant's chosen court{% endif%}?</h1>
+          <p>You can request a different court due to exceptional circumstances. A judge will accept or reject your request.</p>
 
           <div class="form-group">
             <fieldset>
@@ -117,7 +115,7 @@ Money Claims Prototype
               </div>
               <div class="multiple-choice" data-target="reason">
                 <input id="radio-court-no" type="radio" name="accept-court" value="no">
-                <label for="radio-court-no">No, I have a good reason to request another location</label>
+                <label for="radio-court-no">No - I'll request a different court</label>
               </div>
               <div class="panel panel-border-narrow js-hidden" id="reason">
                 <div class="form-group">
