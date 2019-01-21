@@ -13,15 +13,79 @@ Money Claims Prototype
     <div class="column-two-thirds">
       <a href="#" class="link-back">Back</a>
       <h1 class="heading-large">
-        Do you owe Jan Clark the judgment debt?
+        Do you owe Jan Clark the money?
       </h1>
 
       <!--<p>Don't deduct any money you believe they owe you. We'll ask about this later.</p>-->
+      <p>The judgment debt is £1,643.20.</p>
+
+      <details>
+        <summary><span class="summary">View amount breakdown</span></summary>
+        <div class="panel panel-border-narrow">
+
+          <table class="table-form">
+            <caption class="visuallyhidden"></caption>
+            <thead>
+            <tr>
+              <th scope="col">Amount breakdown</th>
+              <th class="numeric last" scope="col">Amount</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <th scope="row">Claim amount</th>
+              <td class="numeric last">
+                <label class="visuallyhidden" for="amount">Claim amount</label>
+                <span
+                  class="font-small">£1,500</span>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">Interest to date</th>
+              <td class="numeric last">
+                <label class="visuallyhidden" for="amount">Interest to date</label>
+                <span
+                  class="font-small">£68.20</span>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">Claim fee</th>
+              <td class="numeric last">
+                <label class="visuallyhidden" for="amount">Claim fee</label>
+                <span
+                  class="font-small">£75</span>
+              </td>
+            </tr>
+
+            {% if data['radio-indent-group2']=="Yes" %}
+            <tr>
+              <th scope="row">Minus amount already paid</th>
+              <td class="numeric last">
+                <label class="visuallyhidden" for="amount">Minus amount already paid</label>
+                <span
+                  class="font-small">£200</span>
+              </td>
+            </tr>
+            {%endif%}
+
+            <tr>
+              <th scope="row" style="font-weight: bold">Balance outstanding</th>
+              <td class="numeric last">
+                <label class="visuallyhidden" for="amount">Balance oustanding</label>
+                <span
+                  class="font-small" style="font-weight: bold">{% if data['radio-indent-group2']=="Yes" %}£1,443.2{%else%}£1,643.20{%endif%}</span>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+
+        </div>
+      </details>
 
       <form
       name="aspnetForm"
       method="post"
-      onsubmit="multiNavigation('response-owe', ['owe-all', 'owe-some', 'owe-none' ], [ '../how-to-pay', '', 'applications/set-aside/apply-to-cancel' ]);return false;"
+      onsubmit="multiNavigation('response-owe', ['owe-all', 'owe-some', 'owe-none' ], [ 'how-to-pay', '', 'applications/set-aside/apply-to-cancel' ]);return false;"
       id="aspnetForm"
       autocomplete="off">
 

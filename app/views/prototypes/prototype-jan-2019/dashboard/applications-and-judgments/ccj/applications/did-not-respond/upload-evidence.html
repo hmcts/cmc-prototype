@@ -1,0 +1,108 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block content %}
+
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <a href="#" onclick="history.go(-1)" class="link-back">Back</a>
+
+      <h1 class="heading-large">
+        Upload supporting evidence (optional)
+      </h1>
+
+      <form class="form">
+        <p>Setting aside a CCJ is usually only possible if you have a good reason, for example if the original claim
+          from the court was sent to the wrong address.</p>
+
+        <p>You can upload letters, emails and other correspondence to prove that:</p>
+        <ul class="list list-bullet">
+          <li>the claimant should have known that you had moved and did not try to find your current address</li>
+          <li>you gave the creditor your new address before the claim was issued</li>
+        </ul>
+
+        <!--<details>-->
+          <!--<summary><span class="summary">Help with evidence</span></summary>-->
+          <!--<div class="panel panel-border-narrow">-->
+            <!--<p>-->
+              <!--Content goes here-->
+            <!--</p>-->
+          <!--</div>-->
+        <!--</details>-->
+
+        <br>
+        <label class="heading-small" for="upload-description">Briefly describe what you’re uploading and why</label>
+        <textarea class="form-control autoExpand form-control-3-4" id="textarea" rows="4" data-min-rows="4"
+                  width="100%"></textarea>
+        <br>
+        <div id="uploadFileButton">
+          <div class="govuk-form-group">
+            <label class="first-button button-secondary" for="file-upload-1">
+              Choose file
+            </label>
+            <input class="govuk-file-upload evidence-upload-js" id="file-upload-1" name="file-upload-1"
+                   type="file"
+                   accept=".jpg, .jpeg, .bmp, .tif, .tiff, .png, .pdf, .txt, .doc, .dot, .docx, .dotx, .xls, .xlt, .xla, .xlsx, .xltx, .xlsb, .ppt, .pot, .pps, .ppa, .pptx, .potx, .ppsx"
+                   style="display: none;">
+          </div>
+        </div>
+        <div id="upload-spinner">
+          <div class="lds-spinner">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+          <div class="govuk-heading-m spinner-text">File uploading</div>
+        </div>
+        <p></p>
+        <p>
+        </p>
+        <table class="govuk-table" id="files-uploaded">
+          <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th class="govuk-table__header" colspan="2">Uploaded files</th>
+          </tr>
+          </thead>
+          <tbody id="evidence-list" class="govuk-table__body">
+          <tr id="row_no_files" class="govuk-table__row">
+            <td class="govuk-table__cell">No files uploaded</td>
+            <td class="govuk-table__cell">&nbsp;</td>
+          </tr>
+          </tbody>
+        </table>
+        <input id="add-file" name="add-file" type="submit" value="Add file"
+               class="govuk-button secondary-button evidence-upload-nojs" style="display: none;">
+        <p></p>
+
+      </form>
+
+      <div class="form-group">
+        <form method="post" action="check-and-send" class="form">
+          {{formData | safe}}
+          <input type="hidden" name="" value="on">
+          <input type="submit" class="button" value="Save and continue">
+        </form>
+      </div>
+
+    </div>
+  </div>
+  {% include 'prototypes/prototype-jan-2019/includes/contact.html' %}
+</main>
+
+<script src="/public/javascripts/evidenceUpload.js"></script>
+<script src="/public/javascripts/newFileUpload.js"></script>
+
+{% endblock %}
