@@ -48,7 +48,8 @@ Money Claims Prototype
           {% if data['accept-court'] != 'no' and data['scenario'] != 6 %}
           <p>Tell us your preferred court for a hearing, in case the claim goes to one.</p>
           
-          <p>We'll use the court you choose unless the {% if data['check'] == 2 %}defendant{% else %}claimant{% endif %} has an exceptional reason to object.</p>
+          <p>We'll use the court you choose unless the {% if data['scenario'] == 2 %}defendant{% else %}claimant{% endif %} has an exceptional reason to object.</p>
+          {% endif %}
 
           {% if data['scenario'] != 5 and data['court-search'] != 'postcode' %}
           <p>You can {% if data['accept-court'] != 'no' and data['scenario'] != 6 %}choose{% else %}request{% endif %} any court - Guildford County Court is nearest to the home address you gave us.</p>
@@ -99,9 +100,9 @@ Money Claims Prototype
 
         {% elseif ( data['scenario'] == 3 or data['scenario'] == 4 ) and data['court-search'] != 'postcode' %}
 
-        <h1 class="heading-large">Do you agree to the hearing being held at {% if data['check'] == 4 %}Kingston County Court{% else %}the claimant's chosen court{% endif%}?</h1>
+        <h1 class="heading-large">Do you agree to the hearing being held at {% if data['scenario'] == 4 %}Kingston County Court{% else %}the claimant's chosen court{% endif%}?</h1>
 
-        {% if data['check'] == 4 %}
+        {% if data['scenario'] == 4 %}
         <p>This is the defendant's chosen court.</p>
         {% endif %}
 
