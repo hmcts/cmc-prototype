@@ -47,7 +47,7 @@ Money Claims Prototype
           {% if ( data['scenario'] != 5 and data['court-search'] != 'postcode' ) or data['accept-court'] == 'no' or data['scenario'] == 6 %}
           {% if data['accept-court'] != 'no' and data['scenario'] != 6 %}
           <p>Tell us your preferred court for a hearing, in case the claim goes to one.</p>
-          
+
           <p>We'll use the court you choose unless the {% if data['scenario'] == 2 %}defendant{% else %}claimant{% endif %} has an exceptional reason to object.</p>
           {% endif %}
 
@@ -100,13 +100,14 @@ Money Claims Prototype
 
         {% elseif ( data['scenario'] == 3 or data['scenario'] == 4 ) and data['court-search'] != 'postcode' %}
 
-        <h1 class="heading-large">Do you agree to the hearing being held at {% if data['scenario'] == 4 %}Kingston County Court{% else %}the claimant's chosen court{% endif%}?</h1>
+        <h1 class="heading-large">Are there exceptional circumstances which mean you need the hearing to be held at a specific location?</h1>
+
+
+        <p> If not, or if a judge rejects your reasons, the hearing will take place at {% if data['scenario'] == 4 %}Kingston County Court{% else %}the claimant's chosen court{% endif%}.
 
         {% if data['scenario'] == 4 %}
-        <p>This is the defendant's chosen court.</p>
+        <p>The defendant chose this location.</p>
         {% endif %}
-
-          <p>You can request a different court due to exceptional circumstances. A judge will accept or reject your request.</p>
 
           <div class="form-group">
             <fieldset>
@@ -116,7 +117,7 @@ Money Claims Prototype
               </div>
               <div class="multiple-choice" data-target="reason">
                 <input id="radio-court-no" type="radio" name="accept-court" value="no">
-                <label for="radio-court-no">No - I'll request a different court</label>
+                <label for="radio-court-no">No</label>
               </div>
               <div class="panel panel-border-narrow js-hidden" id="reason">
                 <div class="form-group">
