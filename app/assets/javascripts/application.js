@@ -1379,3 +1379,24 @@ $('ul.jui-tree__folder-group li a').click(function(){
   $('.tab__content').not(target).addClass('js-hidden');
   $(target).removeClass('js-hidden');
 });
+
+
+function upload( docName ) {
+
+  if ( $( $('#uploads #' + docName + ' input')[0].files.length ) ) {
+    for (i=0; i<$('#uploads #' + docName + ' input')[0].files.length; i++ ) {
+
+      $('#uploads #' + docName + ' ol').append( '<li class="file"><a href="#">' + $('#uploads #' + docName + ' input')[0].files[i].name +'</a> <a href="#" class="remove" onclick="$(this).parent().remove();return false;">Remove</a></li>' );
+    }
+
+    $( $('#uploads #' + docName + ' input')[0] ).val(null);
+
+    $('#uploads #' + docName + ' .uploaded-files').show();
+    if ( $('#uploads #' + docName + ' ol li').length ) {
+      $( '#submit').show();
+    }
+
+  }
+
+  return false;
+}
