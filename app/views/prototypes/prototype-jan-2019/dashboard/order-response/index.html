@@ -25,7 +25,7 @@ Money Claims Prototype
       {% if data['witness'] == 'complete' %}
       <p>The following documents were uploaded on {{ now | date }}:</p>
 
-      <ul>
+      <ul>  
           <li><a href="#">Witness statement - Steve Smith.pdf</a></li>
           <li><a href="#">Witness statement - Ben Clark.docx</a></li>
       </ul>
@@ -62,31 +62,44 @@ Money Claims Prototype
       <hr />
 
       <h2 class="heading-small">Expert appointment</h2>
+
+      {% if data['experts'] == 'complete' %}
+      <p>You proposed the following three experts on {{ now | date }}:</p>
+
+      <ul>
+        <li>John Austin - £450</li>
+        <li>Ronald Davidson - £500</li>
+        <li>Julie Tuffnel - £700</li>
+      </ul>
+
+      {% else %}
       <p>Due by {{ now | date('add', 14, 'days') | date }}</p>
       <p>The court has approved your request to hire a witness. You must not provide the details of three independent experts for the defendant to choose from.</p>
       <div class="form-group">
         <a href="order-response/experts" class="secondary-button">Propose experts</a>
       </div>
+      {% endif %}
 
       <hr />
 
+      {% if data['experts'] == 'complete' and data['evidence'] == 'complete' and data['witness'] == 'complete' %}
       <h2 class="heading-small">Expert reports</h2>
-      {% if data['expert'] == 'complete' %}
+      {% if data['expert-report'] == 'complete' %}
       <p>The following document was uploaded on {{ now | date('subtract', 1, 'days' ) | date }}:</p>
-
       <ul>
           <li><a href="#">Expert report - John Austin.pdf</a></li>
       </ul>
 
       {% else %}
       <p>Due by {{ now | date('add', 21, 'days') | date }}</p>
-      <p>Your appointed expert should have provided you with a written report, which you need to upload to the court.</p>
+      <p>When your appointed expert has provided you with a written report, you need to upload it to the court.</p>
       <div class="form-group">
         <a href="order-response/expert-reports" class="secondary-button">Upload your expert reports</a>
       </div>
       {% endif %}
-
       <hr />
+
+      {% endif %}
 
     </div>
   </form>
@@ -98,11 +111,12 @@ Money Claims Prototype
 <form method="post" action="#" class="form" style="position: absolute;">
   <select onchange="window.location.href='?'+this.value">
     <option>-------- Status --------</option>
-    <option value="evidence=&witness=&expert=" {% if data['claimant'] == 1.2 %}selected{% endif %}>Nothing uploaded</option>
-    <option value="evidence=complete&witness=&expert=" {% if data['claimant'] == 1.2 %}selected{% endif %}>Evidence uploaded</option>
-    <option value="evidence=&witness=complete&expert=" {% if data['claimant'] == 1.2 %}selected{% endif %}>Witness statements uploaded</option>
-    <option value="evidence=&witness=&expert=complete" {% if data['claimant'] == 1.2 %}selected{% endif %}>Expert reports uploaded</option>
-    <option value="evidence=complete&witness=complete&expert=complete" {% if data['claimant'] == 1.2 %}selected{% endif %}>Everything uploaded</option>
+    <option value="evidence=&witness=&experts=">Nothing uploaded</option>
+    <option value="evidence=complete&witness=&experts=">Evidence uploaded</option>
+    <option value="evidence=&witness=complete&experts=">Witness statements uploaded</option>
+    <option value="evidence=&witness=&expert=complete">Experts proposed</option>
+    <option value="evidence=complete&witness=complete&experts=complete">Upload expert's report</option>
+    <option value="evidence=complete&witness=complete&experts=complete&expert-report=complete">Expert's report uploaded</option>
   </select>
 </form>
 {% endblock %}
