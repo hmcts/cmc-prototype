@@ -568,22 +568,67 @@
                   <li>your evidence</li>
                   <li>proposed experts</li>
                 </ul>
-
                 <p><a href="/public/images/order.pdf">Download the order</a> (PDF, 123KB)</a></p>
                 <p>If you do not provide this information, your claim may be cancelled.</p>
-
                 <p><a href="order-response?party=claimant" class="button">Respond to the order</a></p>
-
                 <p>If you do not agree with the instructions of the order, you can <a href="">make an application</a> to request it be changed.</p>
-
               </div>
-
               <hr />
               <h2 class="heading-small">The defendant has provided some information for the hearing</h2>
               <p>The judge also ordered the defendant to provide similar information.</p>
-
               <p><a href="order-response/view?party=claimant" class="button secondary-button">View the defendant's response</a></p>
 
+
+              {% elseif data['claimant'] == 11.2 or data['claimant'] == 11.21 %}
+              <div class="status-block single">
+                <h2 class="heading-small">The court has received your response</h2>
+                <p>We will review your response and will let you know if you need to do anything else.</p>
+
+                {% if data['claimant'] == 11.2 %}
+                <p>The defendant has been sent your proposed experts to choose from. Once they have done so, you'll need to supply us with the questions you want to ask the expert.</p>
+                {% else %}
+                <p>We'll contact you when a hearing is scheduled.</p>
+                {% endif %}
+
+                <p>You can upload additional evidence or witness statements until {{ now | date( 'add', 15, 'days' ) | date }}.</p>
+
+                <p><a href="order-response?party=claimant&evidence=complete&experts=complete&witness=complete" class="button secondary-button">View your response or add more more information</a></p>
+              </div>
+              <hr />
+              <h2 class="heading-small">The defendant has provided some information for the hearing</h2>
+              <p>The judge also ordered the defendant to provide similar information.</p>
+              <p><a href="order-response/view?party=claimant" class="button secondary-button">View the defendant's response</a></p>
+
+
+              {% elseif data['claimant'] == 11.3 %}
+              <div class="status-block single">
+                <h2 class="heading-small">You need to let us know what you want to ask the expert</h2>
+                <p>The defendant has chosen John Austin to be the expert on this claim. They have also provided the questions they want to ask the expert.</p>
+                <p>You need to supply us with the questions you want to ask the expert by {{ now | date( 'add', 15, 'days' ) | date }} or your claim could be cancelled.</p>
+
+                <p><a href="order-response/questions?party=claimant" class="button">Review and add questions to ask the expert</a></p>
+                <p><a href="order-response/view?party=claimant" class="button secondary-button">View the defendant's full response</a></p>
+
+                <p>You can upload additional evidence or witness statements until {{ now | date( 'add', 15, 'days' ) | date }}.</p>
+                <p><a href="order-response?party=claimant&evidence=complete&experts=complete&witness=complete" class="button secondary-button">View your response or add more more information</a></p>
+              </div>
+
+
+              {% elseif data['claimant'] == 11.4 %}
+              <div class="status-block single">
+                <h2 class="heading-small">You need to upload the expert's report</h2>
+                <p>You neeed to send the expert the <a href="">list of questions</a> (PDF, 123KB) you and the defendant created.</p>
+                <p>The chosen expert was John Austin.</p>
+                <p>They have XX days to provide you with a written report, starting from when they receive it. Once you have received it, you need to upload it within XX days, or your claim may be cancelled.</p>
+
+                <p><a href="order-response/expert-reports?party=claimant" class="button">Upload the expert's report</a></p>
+
+                <p>You can upload additional evidence or witness statements until {{ now | date( 'add', 15, 'days' ) | date }}.</p>
+                <p><a href="order-response?party=claimant&evidence=complete&experts=complete&witness=complete" class="button secondary-button">View your response or add more more information</a></p>
+
+                <p><a href="order-response/view?party=claimant" class="button secondary-button">View the defendant's full response</a></p>
+
+              </div>
 
               {% elseif data['claimant'] ==10 or data['claimant'] == 11 %}
               <div class="status-block">
@@ -908,6 +953,11 @@
 
     <option>------- Order response ----------</option>
     <option value="11.1" {% if data['claimant'] == 11.1 %}selected{% endif %}>Respond to order</option>
+    <option value="11.2" {% if data['claimant'] == 11.2 %}selected{% endif %}>Responded to order - with experts</option>
+    <option value="11.21" {% if data['claimant'] == 11.21 %}selected{% endif %}>Responded to order - no experts</option>
+    <option value="11.3" {% if data['claimant'] == 11.3 %}selected{% endif %}>Supply expert questions</option>
+    <option value="11.4" {% if data['claimant'] == 11.4 %}selected{% endif %}>Supply expert report</option>
+    <option value="11.5" {% if data['claimant'] == 11.5 %}selected{% endif %}>Report uploaded</option>
 
 
     <option>------- Offer and agreements ----------</option>
