@@ -16,9 +16,14 @@ Money Claims Prototype
     <form method="post" action="check-and-send" class="form">
 
       <div class="form-group">
-        <h1 class="heading-large">Add questions to ask the expert</h1>
+        <h1 class="heading-large">Add questions to ask the expert{% if data['type'] == 'report' %} about their report{% endif %}</h1>
 
-        <p>The expert will provide a written report based on the questions you and the cliamant ask.</p>
+        {% if data['type'] == 'report' %}
+
+        {% else %}
+        <p>The expert will provide a written report based on the questions you and the {% if data['party'] == 'defendant' %}claimant{% else %}defendant{% endif %} ask.</p>
+
+        {% endif %}
 
       <div class="questions">
 

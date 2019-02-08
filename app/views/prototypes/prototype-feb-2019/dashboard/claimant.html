@@ -630,6 +630,44 @@
 
               </div>
 
+              {% elseif data['claimant'] == 11.5 %}
+              <div class="status-block single">
+                <h2 class="heading-small">Let us know if you have any follow-up questions for the expert</h2>
+                <p>If you have any queries for the expert about their report, you need to let us know. Once you and the defendant have done this, you will need to send the questions to the expert and upload their response.</p>
+
+                <p><a href="order-response/questions/ask?party=claimant&type=report" class="button">Tell us if you have any queries on the report</a></p>
+
+                <p>You can upload additional evidence or witness statements until {{ now | date( 'add', 15, 'days' ) | date }}.</p>
+                <p><a href="order-response?party=claimant&evidence=complete&experts=complete&witness=complete" class="button secondary-button">View your response or add more more information</a></p>
+
+                <p><a href="order-response/view?party=claimant" class="button secondary-button">View the defendant's full response</a></p>
+
+              </div>
+
+
+              {% elseif data['claimant'] == 11.6 %}
+              <div class="status-block single">
+                <h2 class="heading-small">You need to upload the expert's response</h2>
+                <p>You neeed to send the expert the <a href="">list of queries</a> (PDF, 123KB) you and the defendant created about the expert's report.</p>
+                <p>They have XX days to provide you with a written response, starting from when they receive it. Once you have received it, you need to upload it within XX days, or your claim may be cancelled.</p>
+
+                <p><a href="order-response/expert-reports?party=claimant&type=report" class="button">Upload the expert's response</a></p>
+
+                <p>You can upload additional evidence or witness statements until {{ now | date( 'add', 15, 'days' ) | date }}.</p>
+                <p><a href="order-response?party=claimant&evidence=complete&experts=complete&witness=complete" class="button secondary-button">View your response or add more more information</a></p>
+
+                <p><a href="order-response/view?party=claimant" class="button secondary-button">View the defendant's full response</a></p>
+
+              </div>
+
+              {% elseif data['claimant'] == 11.7 %}
+              <div class="status-block single">
+                <h2 class="heading-small">A hearing will be scheduled</h2>
+                <p>The court will review the case. You might have to go to a hearing.</p>
+                <p>We'll contact you if we set a hearing date to tell you how to prepare.</p>
+
+              </div>
+
               {% elseif data['claimant'] ==10 or data['claimant'] == 11 %}
               <div class="status-block">
                 <h2 class="heading-small">Settle out of court</h2>
@@ -957,8 +995,9 @@
     <option value="11.21" {% if data['claimant'] == 11.21 %}selected{% endif %}>Responded to order - no experts</option>
     <option value="11.3" {% if data['claimant'] == 11.3 %}selected{% endif %}>Supply expert questions</option>
     <option value="11.4" {% if data['claimant'] == 11.4 %}selected{% endif %}>Supply expert report</option>
-    <option value="11.5" {% if data['claimant'] == 11.5 %}selected{% endif %}>Report uploaded</option>
-
+    <option value="11.5" {% if data['claimant'] == 11.5 %}selected{% endif %}>Report uploaded, supply queries</option>
+    <option value="11.6" {% if data['claimant'] == 11.6 %}selected{% endif %}>Queries supplies, upload answers</option>
+    <option value="11.7" {% if data['claimant'] == 11.7 %}selected{% endif %}>Everything received</option>
 
     <option>------- Offer and agreements ----------</option>
     <option value="11" {% if data['claimant'] == 11 %}selected{% endif %}>Offer from defendant  </option>
