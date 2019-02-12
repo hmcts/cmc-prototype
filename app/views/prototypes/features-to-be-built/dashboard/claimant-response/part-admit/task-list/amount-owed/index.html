@@ -15,7 +15,11 @@ Money Claims Prototype
 		<div class="column-two-thirds">
 			<h1 class="heading-large">
 
+        {% if data[“mediation-pilot”]==“on” %}
+        Do you want to settle the claim for the £{{ data['owe-amount'] or '200' }} the defendant admitted?
+        {%else%}
         Do you want to settle the claim for the £{{ data['owe-amount'] or '1,200' }} the defendant admitted?
+        {% endif %}
 
 			</h1>
 			<form
@@ -41,7 +45,11 @@ Money Claims Prototype
 					<div class="multiple-choice" data-target="reject-offer">
 						<input id="radio-repayment" type="radio" name="radio_select_group_owed" value="No">
 						<label class="bold" for="radio-repayment" data-target="repayment-info">No
-             <span class="form-hint">The claim will continue for the total amount you claimed: £1,500.</span>
+              {% if data[“mediation-pilot”]==“on” %}
+              <span class="form-hint">The claim will continue for the total amount you claimed: £300.</span>
+              {%else%}
+              <span class="form-hint">The claim will continue for the total amount you claimed: £1,500.</span>
+              {% endif %}
             </label>
 
 					</div>
