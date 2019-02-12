@@ -29,7 +29,11 @@ Check your answers
       <tbody>
       <tr>
         <td>
+          {% if data[“mediation-pilot”]==“on” %}
+          Do you agree the defendant has paid £{{ data['owe-amount'] or '200' }}?
+          {%else%}
           Do you agree the defendant has paid £{{ data['owe-amount'] or '1,430' }}?
+          {% endif %}
         </td>
         <td>
           {%if data.radio_select_group2=="Yes" %}
@@ -72,7 +76,11 @@ Check your answers
       {%if data.radio_select_group2=="Yes" %}
       <tr>
         <td>
+          {% if data[“mediation-pilot”]==“on” %}
+          Do you want to settle the claim for the £{{ data['owe-amount'] or '200' }}?
+          {%else%}
           Do you want to settle the claim for the £{{ data['owe-amount'] or '1,430' }}?
+          {% endif %}
         </td>
         <td>
           {%if data.radio_select_group=="Yes" %}
