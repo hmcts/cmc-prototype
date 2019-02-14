@@ -6,54 +6,50 @@
 {% block content %}
 <main id="content" role="main">
   {% include "includes/phase_banner_beta.html" %}
-  <div class="grid-row">
-      <header class="page-heading page-heading-with-context page-heading-without-breadcrumb">
-        <a href="#" class="link-back">Back</a>
-        <h1 class="heading-large">
-          <span class="heading-secondary">Claim number:</span>
-          {% if data['claimant'] == 1.2 %}
-          Draft
-          {% else %}
-          391MC645
-          {% endif %}
-        </h1>
-        <style>
-          #tabs-3, #tabs-2, .nav-tabs {
-            display: none
-          }
+  <div class="breadcrumbs" style="margin-bottom: -20px">
+    <ol>
+      <li><a href="#">All claims</a></li>
+      <li aria-current="page">Claim details</li>
+    </ol>
+  </div>
 
-          .tab-content .tab-pane {
-            border: none
-          }
-        </style>
-        <div id="tabs">
-          <div class="nav-tabs">
-            <ul class="tabs-nav">
-              <li><a href="#tabs-1">Claim status <span class="alert-icon stat"></span></a></li>
-              <li><a href="#tabs-2">Claim history</a></li>
-              {% if data['claimant'] == 10 or data['claimant'] == 11 or data['claimant'] == 12 or data['claimant'] == 16
-              %}
-              <li><a href="#tabs-3">Settle out of court <span class="alert-icon settle"></span></a></li>
-              {%else%}
-              {% endif %}
-            </ul>
-          </div>
-          {% if data['claimant'] == 1 or data['claimant'] == 3 or data['claimant'] == 17 or data['claimant'] == 11 or
-          data['claimant'] == 12 or data['claimant'] == 13 or data['claimant'] == 14 or data['claimant'] == 15 or
-          data['claimant'] == 16 %}
-          <style> .alert-icon.stat {
-            display: none
-          }</style>
-          {% if data['claimant'] == 12 %}
-          <style> .alert-icon.settle {
-            display: none
-          }</style>
-          {%endif%}
-          {%else%}
-          {% endif %}
-          <div class="tab-content">
-            <h2 class="heading-medium">Claim status</h2>
-            <div id="tabs-1" class="tab-pane">
+  <div class="grid-row">
+
+    <div class="details" style="margin-top: -30px">
+        <span style=""><h2 style="">
+          <h2 class="heading-medium">Jan Clark v Mary Richards</h2>
+          <h2 class="font-xsmall" style="margin-top: -10px">Claim number: <span style="">352MC733</span></h2>
+    </div>
+
+    <div class="column-full-width">
+
+      <div class="tabs" style="margin-top: 30px">
+
+        <div class="tabs-nav">
+          <ul class="tabs-list" role="tablist">
+            <li role="presentation"><a href="#next-steps" role="tab" tabindex="0" aria-controls="next-steps"
+                                       aria-selected="true">Next steps</a>
+            </li>
+            <li role="presentation"><a href="#history" role="tab" tabindex="-1" aria-controls="history">Claim
+              history</a>
+            </li>
+            <!--<li role="presentation"><a href="#settle-out-of-court" role="tab" tabindex="-1"-->
+            <!--aria-controls="settle-out-of-court">Settle out of-->
+            <!--court</a>-->
+            <!--</li>-->
+          </ul>
+        </div>
+
+        <div class="tabs-content">
+
+          <div class="tabs-panel" id="next-steps" role="tabpanel">
+
+            <div class="tabs-panel-inner text" tabindex="0">
+
+              <fieldset></fieldset>
+
+              <!-- Not needed as will go straight to task list from dashboard/allclaims -->
+
 
               {% if data['claimant'] == 1.2 %}
               <h2 class="heading-small">This claim has not been submitted</h2>
@@ -470,10 +466,7 @@
               <h2 class="heading-small">Waiting for the court to review the case</h2>
               <p>You've rejected Mary Richard's response and said you want to take the case to court.</p>
               <p>The court will review the case. We'll email you if we set a hearing date to tell you how to prepare.</p>
-<<<<<<< HEAD
-=======
 
->>>>>>> 4e564f3d3b1f36578cdfdc98fa2fe91d7f6449f6
 
               {% elseif data['claimant'] == 11.1 %}
               <div class="status-block single">
@@ -713,7 +706,7 @@
                 <p>Mary Richards paid you £1,500 on {{ now | date( 'subtract', 5, 'days' ) | date }}.</p>
               </div>
 
-<<<<<<< HEAD
+
                 {% if data['claimant'] == 1 %}
 
                 <div class="hmcts-timeline" style="margin-top: 30px">
@@ -731,7 +724,7 @@
                 </div>
 
                 {% endif %}
-=======
+
 
               {% elseif data['claimant'] == 20.1 %}
               <div class="">
@@ -739,7 +732,6 @@
                 <p>Mary Richards paid you £1500 on {{ now | date( 'subtract', 5, 'days' ) | date }}.</p>
                 <p>The defendant's County Court Judgment will be cancelled.</p>
               </div>
->>>>>>> 4e564f3d3b1f36578cdfdc98fa2fe91d7f6449f6
 
               {% elseif data['claimant'] == 20.2 %}
               <div class="">
@@ -935,7 +927,6 @@
     <option value="11.6" {% if data['claimant'] == 11.6 %}selected{% endif %}>Queries supplied, upload answers</option>
     <option value="11.7" {% if data['claimant'] == 11.7 %}selected{% endif %}>Everything received</option>
 
-<<<<<<< HEAD
     <option value="11.1" {% if data['claimant'] == 11.1 %}selected{% endif %}>Respond to order</option>
     <option value="11.11" {% if data['claimant'] == 11.11 %}selected{% endif %}>Respond to order (offline)</option>
     <option value="11.2" {% if data['claimant'] == 11.2 %}selected{% endif %}>Responded to order - with experts</option>
@@ -947,8 +938,7 @@
     <option value="11.6" {% if data['claimant'] == 11.6 %}selected{% endif %}>Queries supplied, upload answers</option>
     <option value="11.7" {% if data['claimant'] == 11.7 %}selected{% endif %}>Everything received</option>
 
-=======
->>>>>>> 4e564f3d3b1f36578cdfdc98fa2fe91d7f6449f6
+
     <option>------- Offer and agreements ----------</option>
     <option value="11" {% if data['claimant'] == 11 %}selected{% endif %}>Offer from defendant  </option>
     <option value="12" {% if data['claimant'] == 12 %}selected{% endif %}>Reject offer from defendant  </option>
