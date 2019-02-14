@@ -588,9 +588,9 @@
                 (PDF, 123KB)</p>
 
               {% elseif data['claimant'] == 10.91 %}
-              <h2 class="heading-small">You've rejected the defendant's response</h2>
-              <p>The court will review the case. You might have to go to a hearing.</p>
-              <p>We'll contact you if we set a hearing date to tell you how to prepare.</p>
+              <h2 class="heading-small">Waiting for the court to review the case</h2>
+              <p>You've rejected Mary Richard's response and said you want to take the case to court.</p>
+              <p>The court will review the case. We'll email you if we set a hearing date to tell you how to prepare.</p>
 
               {% elseif data['claimant'] == 11.1 %}
               <div class="status-block single">
@@ -1028,8 +1028,23 @@
 
               <div class="tabs-panel-inner text" tabindex="0">
 
-                <fieldset></fieldset>
+                {% if data['claimant'] == 1 %}
 
+                <div class="hmcts-timeline" style="margin-top: 30px">
+                  <div class="hmcts-timeline__item">
+                    <div class="hmcts-timeline__header">
+                      <h2 class="hmcts-timeline__title">You submitted your claim</h2>
+                      <!--<p class="hmcts-timeline__by">by you (claimant)</p>-->
+                      <p><a href="../defendant/correspondence/forms/claim-form-claimant?check=1">Download
+                        claim</a> (PDF, 123KB)</p>
+                    </div>
+                    <p class="hmcts-timeline__date" style="margin-top: -10px">
+                      <time style="color: grey">6 December 2018</time>
+                    </p>
+                  </div>
+                </div>
+
+                {% endif %}
 
               </div>
             </div>
@@ -1118,7 +1133,6 @@
     <option value="9.1" {% if data['claimant'] == 9.1 %}selected{% endif %}>Dispute claim + mediation (pilot)</option>
     <option>------- Claimant responses ----------</option>
     <option value="10" {% if data['claimant'] == 10 %}selected{% endif %}>Dispute claim + offer made  </option>
-
     <option value="10.1" {% if data['claimant'] == 10.1 %}selected{% endif %}>Accepted repayment plan - settlement (claimant/court plan)</option>
     <option value="10.001" {% if data['claimant'] == 10.001 %}selected{% endif %}>Accepted repayment plan - settlement (def's plan)</option>
     <option value="10.01" {% if data['claimant'] == 10.01 %}selected{% endif %}>Accepted repayment plan - settlement - accepted</option>
@@ -1163,6 +1177,7 @@
     <option value="11.51" {% if data['claimant'] == 11.51 %}selected{% endif %}>Report uploaded, defendant has supplied queries</option>
     <option value="11.6" {% if data['claimant'] == 11.6 %}selected{% endif %}>Queries supplied, upload answers</option>
     <option value="11.7" {% if data['claimant'] == 11.7 %}selected{% endif %}>Everything received</option>
+
     <option>------- Offer and agreements ----------</option>
     <option value="11" {% if data['claimant'] == 11 %}selected{% endif %}>Offer from defendant  </option>
     <option value="12" {% if data['claimant'] == 12 %}selected{% endif %}>Reject offer from defendant  </option>
