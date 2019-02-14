@@ -6,386 +6,333 @@
 {% block content %}
 <main id="content" role="main">
   {% include "includes/phase_banner_beta.html" %}
-  <div class="breadcrumbs" style="margin-bottom: -20px">
-    <ol>
-      <li><a href="#">All claims</a></li>
-      <li aria-current="page">Claim details</li>
-    </ol>
-  </div>
-
   <div class="grid-row">
+      <header class="page-heading page-heading-with-context page-heading-without-breadcrumb">
+        <a href="#" class="link-back">Back</a>
+        <h1 class="heading-large">
+          <span class="heading-secondary">Claim number:</span>
+          {% if data['claimant'] == 1.2 %}
+          Draft
+          {% else %}
+          391MC645
+          {% endif %}
+        </h1>
+        <style>
+          #tabs-3, #tabs-2, .nav-tabs {
+            display: none
+          }
 
-    <div class="details" style="margin-top: -30px">
-        <span style=""><h2 style="">
-          <h2 class="heading-medium">Jan Clark v Mary Richards</h2>
-          <h2 class="font-xsmall" style="margin-top: -10px">Claim number: <span style="">352MC733</span></h2>
-    </div>
+          .tab-content .tab-pane {
+            border: none
+          }
+        </style>
+        <div id="tabs">
+          <div class="nav-tabs">
+            <ul class="tabs-nav">
+              <li><a href="#tabs-1">Claim status <span class="alert-icon stat"></span></a></li>
+              <li><a href="#tabs-2">Claim history</a></li>
+              {% if data['claimant'] == 10 or data['claimant'] == 11 or data['claimant'] == 12 or data['claimant'] == 16
+              %}
+              <li><a href="#tabs-3">Settle out of court <span class="alert-icon settle"></span></a></li>
+              {%else%}
+              {% endif %}
+            </ul>
+          </div>
+          {% if data['claimant'] == 1 or data['claimant'] == 3 or data['claimant'] == 17 or data['claimant'] == 11 or
+          data['claimant'] == 12 or data['claimant'] == 13 or data['claimant'] == 14 or data['claimant'] == 15 or
+          data['claimant'] == 16 %}
+          <style> .alert-icon.stat {
+            display: none
+          }</style>
+          {% if data['claimant'] == 12 %}
+          <style> .alert-icon.settle {
+            display: none
+          }</style>
+          {%endif%}
+          {%else%}
+          {% endif %}
+          <div class="tab-content">
+            <h2 class="heading-medium">Claim status</h2>
+            <div id="tabs-1" class="tab-pane">
 
-    <div class="column-full-width">
-
-      <div class="tabs" style="margin-top: 30px">
-
-        <div class="tabs-nav">
-          <ul class="tabs-list" role="tablist">
-            <li role="presentation"><a href="#next-steps" role="tab" tabindex="0" aria-controls="next-steps"
-                                       aria-selected="true">Next steps</a>
-            </li>
-            <li role="presentation"><a href="#history" role="tab" tabindex="-1" aria-controls="history">Claim
-              history</a>
-            </li>
-            <!--<li role="presentation"><a href="#settle-out-of-court" role="tab" tabindex="-1"-->
-            <!--aria-controls="settle-out-of-court">Settle out of-->
-            <!--court</a>-->
-            </li>
-          </ul>
-        </div>
-
-        <div class="tabs-content">
-
-          <div class="tabs-panel" id="next-steps" role="tabpanel">
-
-            <div class="tabs-panel-inner text" tabindex="0">
-
-              <fieldset></fieldset>
-
-              <!-- Not needed as will go straight to task list from dashboard/allclaims -->
               {% if data['claimant'] == 1.2 %}
               <h2 class="heading-small">This claim has not been submitted</h2>
               Your claim is saved as a draft. <a href="/claimant/full/c-4/task-list"> Continue with claim.</a>
 
               {% elseif data['claimant'] == 1 %}
-              <h2 class="heading-small">Your claim has been sent</h2>
+              <h2 class="heading-small">Waiting for the defendant to respond</h2>
+              <p>Mary Richards has until 4pm on 24 December 2018 to respond. They can request an extra 14 days if they need it.</p>
+              <p>You can request a default County Court Judgment against them if they don't respond by the deadline.</p>
 
-              <p>Mary Richards has until before 4pm on<span class="dates"></span> to respond. They can request an
-                extra
-                14 days if they need it.</p>
 
               {% elseif data['claimant'] == 2 %}
               <div class="status-block single">
-                <h2 class="heading-small">You can request a County Court Judgment</h2>
-                <p>Mary Richards has not responded to your claim by the deadline. You can <a
-                  href="applications-and-judgments/default-judgment">request a County Court Judgment</a> (CCJ)
-                  against
-                  them.</p>
-                <p>The court will make an order requiring them to pay the money. It does not guarantee that they
-                  pay
-                  it. </p>
-                <p>Mary Richards can still sign the settlement agreement until you request a CCJ.</p>
+                <h2 class="heading-small">Request a County Court Judgment</h2>
+                <p>Mary Richards has not responded to your claim by the deadline. You can request a County Court Judgment (CCJ) against them.</p>
+                <p>The court will order them to pay the money. It doesn't guarantee that they'll pay it.</p>
+                <p>Mary Richards can still respond to the claim until you request a CCJ.</p>
+                <p><a href="applications-and-judgments/default-judgment" class="button">Request a CCJ</a></p>
               </div>
+
 
               {% elseif data['claimant'] == 3 %}
               <div class="status-block single">
-                <h2 class="heading-small">You've requested a County Court Judgment (CCJ)</h2>
-
+                <h2 class="heading-small">Waiting for the judgment to be confirmed</h2>
                 <p>We'll contact you within 5 days to tell you whether the judgment has been entered.</p>
-
-                <p>Mary Richards can no longer respond to the claim using this service - they may have responded
-                  by
-                  post.</p>
+                <p>Mary Richards can no longer respond to your claim using this service - they may have responded by post.</p>
               </div>
 
+
               {% elseif data['claimant'] == 3.1 %}
-              <h2 class="heading-small">The defendant has requested more time to respond </h2>
-              <p>Mary Richards has requested an extra 14 days to respond. They need to respond before 4pm on <span
-                class="dates"></span> .</p>
+              <h2 class="heading-small">Waiting for the defendant to respond</h2>
+              <p>Mary Richards requested an extra 14 days to respond to your claim. They now have until 4pm on <span class="dates"></span> to respond.</p>
+              <p>You can request a default County Court Judgment (CCJ) against them if they don't respond by the deadline.</p>
+
 
               {% elseif data['claimant'] == 4 %}
-              <h2 class="heading-small">The defendant has offered to pay in instalments </h2>
+              <h2 class="heading-small">Respond to the defendant's offer</h2>
+              <p>The defendant has offered to pay in instalments.</p>
               <p>You can accept or reject their offer.</p>
-              <p><a href="claimant-response/admit-the-claim/task-list?radio-pay-group=Instalments"
-                    class="button secondary-button">View and respond to the offer</a></p>
+              <p><a href="claimant-response/admit-the-claim/task-list?radio-pay-group=Instalments" class="button">Respond to the offer</a></p>
 
               {% elseif data['claimant'] == 4.01 %}
-              <h2 class="heading-small">The defendant has offered to pay in instalments </h2>
-              <p>They'll send you their financial details. You can use these to decide whether to accept or reject
-                what
-                they say they owe.</p>
-              <p><a href="claimant-response/admit-the-claim/task-list?radio-pay-group=Instalments&defendant=org"
-                    class="button secondary-button">View and respond to the offer</a></p>
+              <h2 class="heading-small">Respond to the defendant's offer</h2>
+              <p>The defendant has offered to pay in instalments.</p>
+              <p>They'll send you their financial details. You can use these to decide whether to accept or reject their offer.</p>
+              <p><a href="claimant-response/admit-the-claim/task-list?radio-pay-group=Instalments&defendant=org" class="button">Respond to the offer</a></p>
 
               {% elseif data['claimant'] == 4.1 %}
-              <h2 class="heading-small">The defendant has offered to pay by {{ now | date( 'add', 3, 'months') |
-                date
-                }}</h2>
+              <h2 class="heading-small">Respond to the defendant's offer</h2>
+              <p>The defendant has offered to pay in full by {{ now | date( 'add', 3, 'months') | date }}.</p>
               <p>You can accept or reject their offer.</p>
-              <p><a href="claimant-response/admit-the-claim/task-list?payment=full&radio-pay-group=Set-date"
-                    class="button secondary-button">View and respond to the offer</a></p>
+              <p><a href="claimant-response/admit-the-claim/task-list?payment=full&radio-pay-group=Set-date" class="button">Respond to the offer</a></p>
 
               {% elseif data['claimant'] == 4.11 %}
-              <h2 class="heading-small">The defendant has offered to pay by {{ now | date( 'add', 3, 'months') |
-                date
-                }}</h2>
-              <p>They'll send you their financial details. You can use these to decide whether to accept or reject
-                their
-                offer.</p>
-              <p><a
-                href="claimant-response/admit-the-claim/task-list?payment=full&radio-pay-group=Set-date&defendant=org"
-                class="button secondary-button">View and respond to the offer</a></p>
+              <h2 class="heading-small">Respond to the defendant's offer</h2>
+              <p>The defendant has offered to pay in full by {{ now | date( 'add', 3, 'months') | date }}.</p>
+              <p>They'll send you their financial details. You can use these to decide whether to accept or reject their offer.</p>
+              <p><a href="claimant-response/admit-the-claim/task-list?payment=full&radio-pay-group=Set-date&defendant=org" class="button">Respond to the offer</a></p>
+
+              {% elseif data['claimant'] == 4.2 %}
+              <h2 class="heading-small">Waiting for the defendant to pay you</h2>
+              <p>The defendant said they'll pay you immediately.</p>
+              <p>They must make sure you have the money by {{ now | date('add', 5, 'days') | date }}. Any cheques or transfers should be clear in your account by then.</p>
+              <p>You need to tell us if you've settled the claim, for example because the defendant has paid you.</p>
+              <p>You can settle for less than the full claim amount.</p>
+              <p><a href="paid-in-full/claimant" class="button secondary-button">Tell us you've settled</a></p>
+              <p>If the defendant doesn't pay by the deadline, you can <a href="applications-and-judgments/default-judgment">request a County Court Judgment</a>.</p>
+
+
+              {% elseif data['claimant'] == 4.3 %}
+              <h2 class="heading-small">Waiting for the defendant to pay you</h2>
+              <p>The defendant said they'll pay you immediately.</p>
+              <p>They must make sure you have the money by {{ now | date('add', 5, 'days') | date }}. Any cheques or transfers should be clear in your account by then.</p>
+              <p>You need to tell us if you've settled the claim, for example because the defendant has paid you.</p>
+              <p>You can settle for less than the full claim amount.</p>
+              <p><a href="paid-in-full/claimant" class="button secondary-button">Tell us you've settled</a></p>
+              <p>If the defendant doesn't pay by the deadline, you can <a href="applications-and-judgments/default-judgment">request a County Court Judgment</a>.</p>
 
               {% elseif data['claimant'] == 5 %}
               <div class="">
-                <h2 class="heading-small">The defendant has admitted they owe £{{ data['owe-amount'] or '1,200'
-                  }}</h2>
-                <p>They said they don't owe the full amount you claimed.</p>
-                <p>They've offered to pay the £{{ data['owe-amount'] or '1,200' }} immediately.</p>
-                <p>They must make sure you have the money by {{ now | date( 'add', 5, 'days') | date }}. Any
-                  cheques
-                  or
-                  transfers should be clear in your account.</p>
-                <p>You can accept or reject their admission.</p>
-                <div class="form-group">
-                  <p><a href="claimant-response/part-admit/task-list?payment=full&radio-pay-group=Immediately"
-                        class="button secondary-button">View and respond</a></p>
-                </div>
+                <h2 class="heading-small">Respond to the defendant's offer</h2>
+                <p>The defendant has admitted they owe £{{ data['owe-amount'] or '1,200' }}. They said they don't owe the full amount you claimed.
+                <p>They've offered to pay the £{{ data['owe-amount'] or '1,200' }} immediately.
+                <p>You can accept or reject their offer.
+                <p><a href="claimant-response/part-admit/task-list?payment=full&radio-pay-group=Immediately" class="button">Respond to the offer</a></p>
               </div>
 
               {% elseif data['claimant'] == 5.1 %}
-              <h2 class="heading-small">The defendant has admitted they owe £{{ data['owe-amount'] or '1,200'
-                }}</h2>
+              <h2 class="heading-small">Respond to the defendant's offer</h2>
+              <p>The defendant has admitted they owe £{{ data['owe-amount'] or '1,200' }}. They said they don't owe the full amount you claimed.</p>
               <p>They've offered to pay in instalments.</p>
-              <p>You can accept or reject their admission.</p>
-              <p><a href="claimant-response/part-admit/task-list?payment=full&radio-pay-group=Instalments"
-                    class="button secondary-button">View and respond</a></p>
+              <p>You can accept or reject their offer.</p>
+              <p><a href="claimant-response/part-admit/task-list?payment=full&radio-pay-group=Instalments" class="button">Respond to the offer</a></p>
 
               {% elseif data['claimant'] == 5.11 %}
-              <h2 class="heading-small">The defendant has admitted they owe £{{ data['owe-amount'] or '1,200'
-                }}</h2>
-              <p>They've offered to pay in instalments.</p>
-              <p>They'll send you their financial details. You can use these to decide whether to accept or reject
-                what
-                they say they owe.</p>
-              <p><a
-                href="claimant-response/part-admit/task-list?payment=full&radio-pay-group=Instalments&defendant=org"
-                class="button secondary-button">View and respond</a></p>
+              <h2 class="heading-small">Respond to the defendant's offer</h2>
+              <p>The defendant has admitted they owe £{{ data['owe-amount'] or '1,200' }}. They said they don't owe the full amount you claimed.</p>
+              <p>They've offered to pay in instalments. </p>
+              <p>They'll send you their financial details. You can use these to decide whether to accept or reject their admission.</p>
+              <p><a href="claimant-response/part-admit/task-list?payment=full&radio-pay-group=Instalments&defendant=org" class="button">Respond to the offer</a></p>
+
 
               {% elseif data['claimant'] == 5.2 %}
-              <h2 class="heading-small">The defendant has admitted they owe £{{ data['owe-amount'] or '1,200'
-                }}</h2>
+              <h2 class="heading-small">Respond to the defendant's offer</h2>
+              <p>The defendant has admitted they owe £{{ data['owe-amount'] or '1,200' }}. They said they don't owe the full amount you claimed.</p>
               <p>They've offered to pay by {{ now | date( 'add', 3, 'months') | date }}.</p>
-              <p>You can accept or reject their admission.</p>
-              <p><a href="claimant-response/part-admit/task-list?payment=full&radio-pay-group=Set-date"
-                    class="button secondary-button">View and respond</a></p>
+              <p>You can accept or reject their offer.</p>
+              <p><a href="claimant-response/part-admit/task-list?payment=full&radio-pay-group=Set-date" class="button">Respond to the offer</a></p>
+
 
               {% elseif data['claimant'] == 5.21 %}
-              <h2 class="heading-small">The defendant has admitted they owe £{{ data['owe-amount'] or '1,200'
-                }}</h2>
-              <p>They've offered to pay by {{ now | date( 'add', 3, 'months') | date }}. They'll send you their
-                financial details. You can use these to decide whether to accept or reject what they say they
-                owe.</p>
-              <p><a
-                href="claimant-response/part-admit/task-list?payment=full&radio-pay-group=Set-date&defendant=org"
-                class="button secondary-button">View and respond</a></p>
+              <h2 class="heading-small">Respond to the defendant's offer</h2>
+              <p>The defendant has admitted they owe £{{ data['owe-amount'] or '1,200' }}. They said they don't owe the full amount you claimed.</p>
+              <p>They've offered to pay by {{ now | date( 'add', 3, 'months') | date }}. </p>
+              <p>They'll send you their financial details. You can use these to decide whether to accept or reject their offer.</p>
+              <p><a href="claimant-response/part-admit/task-list?payment=full&radio-pay-group=Set-date&defendant=org" class="button">Respond to the offer</a></p>
+
 
               {% elseif data['claimant'] == 6 %}
               <div class="status-block single">
-                <h2 class="heading-small">The defendant believes that they've paid the claim in full</h2>
-                <p> Mary Richards said they paid you £1,500 on {{ now | date('add' , 3 , 'days') | date(
-                  'subtract',
-                  1,
-                  'months') | date }}.
-                <p>
+                <h2 class="heading-small">Respond to the defendant's claim to have paid in full</h2>
+                <p>Mary Richards said they paid you £1,500 on {{ now | date('add' , 3 , 'days') | date( 'subtract', 1, 'months') | date }}.</p>
                 <p>You can accept or reject this response.</p>
-                <p><a href="claimant-response/paid-what-owe-claim-amount/task-list"
-                      class="button secondary-button">View
-                  and respond</a></p>
+                <p><a href="claimant-response/paid-what-owe-claim-amount/task-list" class="button">View and respond</a></p>
               </div>
 
               {% elseif data['claimant'] == 7 %}
-              <h2 class="heading-small">The defendant said they've paid what they owe</h2>
-              <p> Mary Richards said they paid you £{{ data['owe-amount'] or '1,430' }} on {{ now | date('add' , 3
-                ,
-                'days') | date( 'subtract', 1, 'months') | date }}.</p>
+              <h2 class="heading-small">Respond to the defendant's claim to have paid what they owe</h2>
+              <p>Mary Richards said they paid you £1,430 on {{ now | date('add' , 3 , 'days') | date( 'subtract', 1, 'months') | date }}.</p>
               <p>You can accept or reject this response.</p>
-              <p><a href="claimant-response/paid-what-owe-less-claim-amount/task-list"
-                    class="button secondary-button">View
-                and respond</a></p>
+              <p><a href="claimant-response/paid-what-owe-less-claim-amount/task-list" class="button">View and respond</a></p>
 
               {% elseif data['claimant'] == 8 %}
-              <h2 class="heading-small">The defendant has rejected your claim</h2>
-              <p>They said they dispute your claim.</p>
-              <p>You need to accept or reject their defence before 4pm on {{ now | date('add' , 33, 'days') | date
-                }}.</p>
-              <div class="form-group">
-                <p><a href="claimant-response/dispute-claim/task-list" class="button secondary-button">View and
-                  respond</a></p>
-              </div>
-              <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=9">Download their
-                response</a>
-                (PDF, 123KB)</p>
+              <h2 class="heading-small">Tell us your hearing requirements</h2>
+              <p>The defendant has said they dispute your claim.</p>
+              <p>You might have to go to a court hearing. We'll contact you if we set a hearing date to tell you how to prepare.</p>
+              <p>You need to tell us your requirements for a hearing.</p>
+              <p>Your claim won't proceed if you don't respond before 4pm on <span class="dates5"></span>.</p>
+              <p><a href="dqs" class="button">Tell us your requirements</a></p>
 
               {% elseif data['claimant'] == 9 %}
               <div class="status-block single">
-                <h2 class="heading-small">The defendant's response</h2>
-                <p>Mary Richards has rejected the claim. They’ve suggested mediation to help resolve this
-                  dispute.</p>
-                <p>If you reject their response, we'll contact you with an appointment unless you choose not to
-                  try
-                  mediation.</p>
+                <h2 class="heading-small">Tell us if you'll try mediation</h2>
+                <p>Mary Richards has rejected your claim. They’ve agreed to try mediation to help resolve this dispute.</p>
+                <p><a href="mediation/how-mediation-works">Find out how mediation works</a></p>
                 <div class="form-group">
                   <form method="post" action="claimant-response/dispute-claim/task-list" class="form">
                     {{formData | safe}}
-                    <input type="submit" class="button secondary-button" value="View and respond">
+                    <input type="submit" class="button secondary-button" value="Tell us if you'll try mediation">
                   </form>
                 </div>
+
                 <!--
                 <p><a href="mediation/how-mediation-works">Find out how mediation works</a></p>-->
                 <!--<p>You need to email moneyclaims@justice.gov.uk before 4pm on <span class="dates5"></span> to tell us-->
-                <!--if you agree to mediation or not.</p>-->
+                  <!--if you agree to mediation or not.</p>-->
                 <!--<p>If you don't send an email before the deadline, the claim will proceed without mediation.</p>-->
                 <!--<p><a class="" href="../defendant/correspondence/forms/claim-form-defendant?check=9">Download their-->
-                <!--response</a> (PDF, 123KB)</p>-->
+                  <!--response</a> (PDF, 123KB)</p>-->
               </div>
 
               {% elseif data['claimant'] == 9.1 %}
               <div class="status-block single">
-                <h2 class="heading-small">The defendant's response</h2>
-                <p>Mary Richards has rejected the claim. The claim has been automatically registered for free
-                  telephone mediation.</p>
+                <h2 class="heading-small">We'll contact you with a mediation appointment</h2>
+                <p>Mary Richards has rejected your claim. The claim has been automatically registered for free telephone mediation.</p>
+                <p>We'll contact you with a mediation appointment unless you choose to opt out.</p>
+                <p>The claim won't proceed if you don't respond before 26 January 2019.</p>
 
-                <p>If you reject their response, we'll contact you with an appointment unless you choose to opt
-                  out of
-                  mediation.</p>
                 <!--<p>You can accept or reject their defence.</p>-->
                 <!--<div class="form-group">-->
-                <!--<p><a href="claimant-response/dispute-claim/task-list"-->
-                <!--class="button secondary-button">View and respond</a></p>-->
+                  <!--<p><a href="claimant-response/dispute-claim/task-list"-->
+                        <!--class="button secondary-button">View and respond</a></p>-->
                 <!--</div>-->
+
                 <div class="form-group">
-                  <form method="post" action="claimant-response/dispute-claim/task-list" class="form">
-                    {{formData | safe}}
-                    <input type="hidden" name="mediation-pilot" value="on">
-                    <input type="submit" class="button secondary-button" value="View and respond">
-                  </form>
+                <form method="post" action="claimant-response/dispute-claim/task-list" class="form">
+                  {{formData | safe}}
+                  <input type="hidden" name="mediation-pilot" value="on">
+                  <input type="submit" class="button secondary-button" value="View and respond">
+                </form>
                 </div>
+
+
               </div>
 
-              {% elseif data['claimant'] == 10.1 %}
-              <h2 class="heading-small">You've signed a settlement agreement</h2>
-              <p>We've emailed Mary Richards the repayment plan and the settlement agreement for them to sign.</p>
-              <p>They must respond by {{ now | date('add', 7, 'days') | date }}. We'll email you when they
-                respond.</p>
-              <p>If they don't think they can afford the plan, they can ask for a judge to make a different
-                plan.</p>
 
               {% elseif data['claimant'] == 10.001 %}
-              <h2 class="heading-small">You've signed a settlement agreement</h2>
+              <h2 class="heading-small">Waiting for the defendant to respond</h2>
               <p>We've emailed Mary Richards the repayment plan and the settlement agreement for them to sign.</p>
-              <p>They must respond by {{ now | date('add', 7, 'days') | date }}. We'll email you when they
-                respond.</p>
-              <p>If they don't respond you can request a County Court Judgment.</p>
+              <p>They must respond before 4pm on {{ now | date('add', 7, 'days') | date }}. We'll email you when they respond.</p>
+              <p>If they don't respond, you can
+                <a href="applications-and-judgments/default-judgment/claim-amount-deduct?radio-indent-group=No&radio-proceed=not-signed">request a County Court Judgment</a>.</p>
 
               {% elseif data['claimant'] == 10.01 %}
-              <h2 class="heading-small">You've both signed a settlement agreement</h2>
-              <p>The agreement says Mary Richards will pay you in instalments of £250 per month, starting 1 {{ now
-                |
-                date("add", 1, "month") | date( "MMMM YYYY" ) }}.</p>
-              <p>The agreement explains what you can do if the defendant breaks the terms.</p>
-              <p><a href="../defendant/correspondence/forms/agreement?check=3">Download the settlement
-                agreement</a>
-                (PDF, 123KB)</p>
+              <h2 class="heading-small">Waiting for the defendant to pay you</h2>
+              <p>You've both signed a settlement agreement. The agreement says the defendant will pay you in instalments of £250 per month, starting
+                {{ now | date("add", 1, "month") | date( "MMMM YYYY" ) }}.</p>
               <p>When you've been paid in full, you need to let us know.</p>
-              <p><a href="paid-in-full/claimant" class="button secondary-button" style="margin-bottom: 20px">Tell
-                us you've been paid</a></p>
+              <p><a href="paid-in-full/claimant" class="button secondary-button">Tell us you've been paid</a></p>
+              <p>If the defendant doesn't pay or breaks the terms of the settlement agreement, you can
+                <a href="applications-and-judgments/default-judgment">request a County Court Judgment</a>.</p>
+
 
               {% elseif data['claimant'] == 10.02 %}
-              <h2 class="heading-small">Mary Richards has rejected your settlement agreement</h2>
-              <p>You can request a County Court Judgment (CCJ) against them based on the repayment plan shown in
-                the agreement.</p>
-              <p>The court will make an order requiring them to pay the money. It does not guarantee that they pay
-                it.</p>
+              <h2 class="heading-small">Request a County Court Judgment</h2>
+              <p>The defendant hasn't responded to your settlement agreement.</p>
+              <p>You can request a County Court Judgment (CCJ) against them based on the repayment plan they offered.</p>
+              <p>The court will order them to pay the money. It doesn't guarantee that they'll pay you.</p>
               <p>Mary Richards can still sign the settlement agreement until you request a CCJ.</p>
-              <p><a
-                href="applications-and-judgments/default-judgment/claim-amount-deduct?radio-indent-group=No&radio-proceed=not-signed"
-                class="button secondary-button" style="margin-bottom: 20px">Request a County Court Judgment
-                (CCJ)</a>
-              </p>
+              <p><a href="applications-and-judgments/default-judgment/claim-amount-deduct?radio-indent-group=No&radio-proceed=not-signed" class="button">Request a CCJ</a></p>
 
               {% elseif data['claimant'] == 10.03 %}
               <h2 class="heading-small">The defendant has not signed your settlement agreement</h2>
-              <p>You can request a County Court Judgment (CCJ) against them based on the repayment plan shown in
-                the agreement.</p>
+              <p>You can request a County Court Judgment (CCJ) against them based on the repayment plan shown in the agreement.</p>
               <p>The court will make an order requiring them to pay the money. It does not guarantee that they pay
                 it.</p>
               <p>Mary Richards can still sign the settlement agreement until you request a CCJ.</p>
               <p><a
                 href="applications-and-judgments/default-judgment/claim-amount-deduct?radio-indent-group=No&radio-proceed=not-signed"
-                class="button secondary-button" style="margin-bottom: 20px">Request a County Court Judgment
-                (CCJ)</a>
+                class="button secondary-button" style="margin-bottom: 20px">Request a County Court Judgment (CCJ)</a>
               </p>
 
+              {% elseif data['claimant'] == 10.1 %}
+              <h2 class="heading-small">Waiting for the defendant to respond</h2>
+              <p>We've emailed Mary Richards the repayment plan and the settlement agreement for them to sign.</p>
+              <p>They must respond before 4pm on 22 August 2018. We'll email you when they respond.</p>
+              <p>If they do not think they can afford the plan, they can ask for a judge to make a different plan.</p>
+
+
               {% elseif data['claimant'] == 10.11 %}
-              <h2 class="heading-small">You requested a County Court Judgment against Mary Richards</h2>
-              <p>When we've processed your request, we'll post a copy of the judgment to you and to Mary
-                Richards.</p>
-              <p><a href="repayment-plan?who=claimant&plan=instalments">View the repayment plan</a></p>
+              <h2 class="heading-small">Waiting for the defendant to pay you</h2>
+              <p>A County Court Judgment has been issued.</p>
+              <p>We'll send a copy of the judgment to you and to Mary Richards.</p>
               <p>When you've been paid in full, you need to let us know.</p>
-              <p><a href="paid-in-full/claimant" class="button secondary-button" style="margin-bottom: 20px">Tell
-                us you've been paid</a></p>
+              <p><a href="paid-in-full/claimant" class="button secondary-button">Tell us you've been paid</a></p>
+              <p>If the defendant doesn't pay, you can
+                <a href="https://www.gov.uk/make-court-claim-for-money/enforce-a-judgment">ask the court to recover the debt</a>. There's no guarantee that the court will get your money back.</p>
+
 
               {% elseif data['claimant'] == 10.111 %}
-              <h2 class="heading-small">You requested a County Court Judgment against Mary Richards</h2>
-              <p>When we've processed your request, we'll post a copy of the judgment to you and to Mary
-                Richards.</p>
+              <h2 class="heading-small">Waiting for the defendant to pay you</h2>
+              <p>A County Court Judgment has been issued.</p>
+              <p>We'll send a copy of the judgment to you and to Mary Richards.</p>
               <p>When you've been paid in full, you need to let us know.</p>
-              <p><a href="paid-in-full/claimant" class="button secondary-button" style="margin-bottom: 20px">Tell
-                us you've been paid</a></p>
+              <p><a href="paid-in-full/claimant" class="button secondary-button">Tell us you've been paid</a></p>
+              <p>If the defendant doesn't pay, you can
+                <a href="https://www.gov.uk/make-court-claim-for-money/enforce-a-judgment">ask the court to recover the debt</a>. There's no guarantee that the court will get your money back.</p>
+
 
               {% elseif data['claimant'] == 10.12 %}
               <div class="status-block">
-                <h2 class="heading-small">If Mary Richards doesn't pay</h2>
-                <p>You can ask the court to <a target="_blank"
-                                               href="https://www.gov.uk/make-court-claim-for-money/enforce-a-judgment">recover
-                  the debt for you</a>.</p>
+                <h2 class="heading-small">Ask the court to recover the debt</h2>
+                <p>If Mary Richards hasn't paid, you can <a href="https://www.gov.uk/make-court-claim-for-money/enforce-a-judgment">ask the court to recover the debt for you</a>.</p>
+                <p>You'll need to pay a fee each time you ask the court to recover the debt. The court adds this fee to the total debt owed to you.</p>
+                <p>There's no guarantee that the court will get your money back.</p>
+                <p>If you've been paid in full, you need to let us know.</p>
+                <p><a href="paid-in-full/claimant" class="button secondary-button">Tell us you've been paid</a></p>
+              </div>
 
-                <p>You'll need to pay a fee each time you ask the court to recover the debt. The court adds this
-                  fee to the total debt owed to you.</p>
-                <p>There is no guarantee that the court will get your money back.</p>
-                <p><a href="applications-and-judgments/warrant-of-control/before-you-start"
-                      class="button secondary-button" style="margin-bottom: 20px">See debt recovery options</a>
-                </p>
-              </div>
-              <div class="status-block single">
-                <h2 class="heading-small">If you've been paid</h2>
-                <p>If you want to settle the claim because the defendant has paid you, <a
-                  href="paid-in-full/claimant">you need to tell us</a>.
-              </div>
-              <!--<div class="status-block single">-->
-              <!--<h2 class="heading-small">A County Court Judgment has been issued</h2>-->
-              <!--<p>We'll post a copy of the judgment to you and to Mary Richards.</p>-->
-              <!--<p>When you've been paid in full, you need to let us know.</p>-->
-              <!--<p><a href="paid-in-full/claimant" class="button secondary-button" style="margin-bottom: 20px">Tell us-->
-              <!--you've been paid</a></p>-->
-              <!--</div>-->
 
               {% elseif data['claimant'] == 10.121 %}
               <div class="status-block">
                 <h2 class="heading-small">If Mary Richards doesn't pay</h2>
-                <p>You can ask the court to <a
-                  href="applications-and-judgments/warrant-of-control/mvp/enforcement-selection">recover the debt
-                  for you</a>.</p>
-                <p>You'll need to pay a fee each time you ask the court to recover the debt. The court adds this
-                  fee to the total debt owed to you.</p>
+                <p>You can ask the court to <a href="applications-and-judgments/warrant-of-control/mvp/enforcement-selection">recover the debt for you</a>.</p>
+                <p>You'll need to pay a fee each time you ask the court to recover the debt. The court adds this fee to the total debt owed to you.</p>
                 <p>There is no guarantee that the court will get your money back.</p>
               </div>
+
               <div class="status-block single">
                 <h2 class="heading-small">If you've been paid</h2>
-                <p><a href="paid-in-full/claimant">Tell us if you want to end the claim</a> beacuse the defendant
-                  has paid you.
+                <p><a href="paid-in-full/claimant">Tell us if you want to end the claim</a> beacuse the defendant has paid you.
               </div>
 
-              {% elseif data['claimant'] == 22 %}
-              <div class="status-block single">
-                <h2 class="heading-small">You have paid for a warrant of control</h2>
-                <p>A bailiff will try to recover the debt.</p>
-                <p>We'll post a letter with details of the warrant to you and to Mary Richards.</p>
-                <p><a target="_blank" href="https://hmcts-cet-prototype.herokuapp.com/claimant-guidance/index">See
-                  other debt recovery options</a><span class="font-xsmall"> (opens in a new window)</span></p>
-              </div>
+
 
               {% elseif data['claimant'] == 10.2 %}
               <h2 class="heading-small">Repayment plan proposed</h2>
-              <p>You have proposed a repayment plan of £250 per month, starting 1 {{ now | date("add", 1, "month")
-                | date( "MMMM YYYY" ) }}.</p>
+              <p>You have proposed a repayment plan of £250 per month, starting 1 {{ now | date("add", 1, "month") |
+                date( "MMMM YYYY" ) }}.</p>
               <p>We'll contact you when they've responded to your proposal.</p>
 
               {% elseif data['claimant'] == 10.3 %}
@@ -393,73 +340,30 @@
               <p>The court has determined a repayment plan.</p>
 
               {% elseif data['claimant'] == 10.4 %}
-              <h2 class="heading-small">You've both signed a settlement agreement</h2>
-              <p>The agreement says the defendant will pay you in full by {{ now | date("add", 3, "months") |
-                date( "D
-                MMMM YYYY" ) }}.</p>
-              <p>The agreement explains what you can do if the defendant breaks the terms.</p>
-              <p><a href="../defendant/correspondence/forms/agreement?check=3">Download the settlement
-                agreement</a>
-                (PDF, 123KB)</p>
+              <h2 class="heading-small">Waiting for the defendant to pay you</h2>
+              <p>You've both signed a settlement agreement. The agreement says the defendant will pay you in full by {{ now | date("add", 3, "months") | date( "D MMMM YYYY" ) }}.</p>
               <p>When you've been paid in full, you need to let us know.</p>
-              <p><a href="../dashboard/idam/contact-us?type=service_specific" class="button secondary-button"
-                    style="margin-bottom: 20px">Tell us you've been paid</a></p>
+              <p><a href="paid-in-full/claimant" class="button secondary-button">Tell us you've been paid</a></p>
+              <p>If the defendant doesn't pay or breaks the terms of the settlement agreement, you can <a href="applications-and-judgments/default-judgment">request a County Court Judgment</a>.</p>
 
               {% elseif data['claimant'] == 10.5 %}
-              <h2 class="heading-small">You've both signed a settlement agreement</h2>
-              <p>The agreement says the defendant will pay you immediately.</p>
-              <p>They must make sure you have the money by 4 June 2018. Any cheques or transfers should be clear
-                in your account.</p>
-              <p>The agreement explains what you can do if the defendant breaks the terms.</p>
-              <p><a href="../defendant/correspondence/forms/agreement?check=3">Download the settlement
-                agreement</a>
-                (PDF, 123KB)</p>
+              <h2 class="heading-small">Waiting for the defendant to pay you</h2>
+              <p>You've both signed a settlement agreement. The agreement says the defendant will pay you immediately.</p>
+              <p>They must make sure you have the money by 4 June 2018. Any cheques or transfers should be clear in your account.</p>
               <p>When you've been paid in full, you need to let us know.</p>
-              <p><a href="../dashboard/idam/contact-us?type=service_specific" class="button secondary-button"
-                    style="margin-bottom: 20px">Tell us you've been paid</a></p>
+              <p><a href="paid-in-full/claimant" class="button secondary-button">Tell us you've been paid</a></p>
+              <p>If the defendant doesn't pay or breaks the terms of the settlement agreement, you can <a href="applications-and-judgments/default-judgment">request a County Court Judgment</a>.</p>
 
-              {% elseif data['claimant'] == 4.2 %}
-              <h2 class="heading-small">The defendant said they'll pay you immediately</h2>
-              <p>They must make sure you have the money by {{ now | date('add', 5, 'days') | date }}. Any cheques
-                or transfers should be clear in your account.</p>
-              <p>You need to tell us if you've settled the claim, for example because the defendant has paid
-                you.</p>
-              <p>You can settle for less than the full claim amount.</p>
-              <p><a href="paid-in-full/claimant" class="button secondary-button" style="margin-bottom: 20px">Tell
-                us you've settled</a></p>
-              <h3 class="heading-small">If you haven't been paid</h3>
-              <p>If the defendant has not paid you by {{ now | date('add', 5, 'days') | date }}, you can request a
-                County Court Judgment.</p>
-
-              {% elseif data['claimant'] == 4.3 %}
-              <h2 class="heading-small">The defendant said they'll pay you immediately</h2>
-              <p>They must make sure you have the money by {{ now | date('subtract', 1, 'days') | date }}. Any
-                cheques or transfers should be clear in your account.</p>
-              <p>You need to tell us if you've settled the claim, for example because the defendant has paid
-                you.</p>
-              <p>You can settle for less than the full claim amount.</p>
-              <p><a href="paid-in-full/claimant" class="button secondary-button" style="margin-bottom: 20px">Tell
-                us you've settled</a></p>
-              <h3 class="heading-small">If you haven't been paid</h3>
-              <p>If the defendant has not paid you, you can <a
-                href="applications-and-judgments/default-judgment/claim-amount-deduct?radio-indent-group=No&radio-proceed=none">request
-                a County Court Judgment</a>.</p>
 
               {% elseif data['claimant'] == 10.6 %}
-              <h2 class="heading-small">Awaiting judge's review</h2>
-              <p>You've rejected the defendant's repayment plan and an alternative plan suggested by the
-                court.</p>
-              <p>A County Court Judgment has been issued against the defendant.</p>
-              <p>We'll post a copy of the judgment to you and to Mary Richards.</p>
-              <p>A judge will decide what Mary Richards can afford to pay, based on their financial details.</p>
-              <p>We'll contact you to tell you what to do next.</p>
+              <h2 class="heading-small">Waiting for a judge to review the case</h2>
+              <p>You've rejected the defendant's repayment plan and haven't been able to agree to an alternative plan.</p>
+              <p>A judge will review the case. We'll contact you to tell you what to do next.</p>
 
               {% elseif data['claimant'] == 10.601 %}
               <h2 class="heading-small">You need to send the defendant's financial details to the court</h2>
-
               <p>Make sure you include your claim number: 352MC733.</p>
               <p>The court will review the details to see if the defendant can afford your repayment plan.</p>
-
               <h3 class="heading-small">Use this address</h3>
               <p>The defendant should have sent you the details - send them to:</p>
               <p>
@@ -479,14 +383,10 @@
 
               {% elseif data['claimant'] == 10.61 %}
               <h2 class="heading-small">You've signed a settlement agreement</h2>
-              <p>The agreement proposes the defendant pays you in instalments of £250 per month, starting 1 May
-                2018.</p>
-              <p>The agreement is not binding unless the defendant signs it. We've emailed it to them and we'll
-                contact
-                you when they respond.</p></p>
-              <p><a href="../defendant/correspondence/forms/agreement?check=2">Download the settlement
-                agreement</a>
-                (PDF, 123KB)</p>
+              <p>The agreement proposes the defendant pays you in instalments of £250 per month, starting 1 May 2018.</p>
+              <p>The agreement is not binding unless the defendant signs it. We've emailed it to them and we'll contact you when they respond.</p>
+              <p><a href="../defendant/correspondence/forms/agreement?check=2">Download the agreement</a></p>
+
 
               {% elseif data['claimant'] == 10.8 %}
               <!--
@@ -496,150 +396,105 @@
               -->
 
               {% elseif data['claimant'] == 10.801 %}
-              <h2 class="heading-small">The defendant rejected the repayment plan</h2>
+              <h2 class="heading-small">Waiting for a judge to review the case</h2>
+              <p>The defendant rejected the repayment plan.</p>
               <p>They said they can't afford to pay based on the terms of the County Court Judgment.</p>
               <p>A judge will review the case. We'll contact you to tell you what to do next.</p>
 
               {% elseif data['claimant'] == 10.81 %}
-              <h2 class="heading-small">The defendant has admitted they owe £{{ data['owe-amount'] or '1,200'
-                }}</h2>
-              <p>They said they'll pay you immediately.</p>
-              <p>They must make sure you have the money by {{ now | date( 'add', 5, 'days') | date }}. Any cheques
-                or transfers should be clear in your account.</p>
-              <p>You need to tell us if you've settled the claim, for example because the defendant has paid
-                you.</p>
-              <p><a href="paid-in-full/claimant" class="button secondary-button" style="margin-bottom: 20px">Tell
-                us you've settled</a></p>
+              <h2 class="heading-small">Waiting for the defendant to pay you</h2>
+              <p>The defendant has admitted they owe £{{ data['owe-amount'] or '1,200' }}. They said they'll pay you immediately.</p>
+              <p>They must make sure you have the money by {{ now | date( 'add', 5, 'days') | date }}. Any cheques or transfers should be clear in your account.</p>
+              <p>You need to tell us if you've settled the claim, for example because the defendant has paid you.</p>
+              <p><a href="paid-in-full/claimant" class="button secondary-button">Tell us you've settled</a></p>
+              <p>If the defendant doesn't pay by the deadline, you can <a href="applications-and-judgments/default-judgment">request a County Court Judgment</a>.</p>
 
-              <h3 class="heading-small">What to do if they don't pay</h3>
-              <p>If the defendant has not paid you by {{ now | date('add', 5, 'days') | date }}, you can request a
-                County Court Judgment.</p>
 
               {% elseif data['claimant'] == 10.82 %}
-              <h2 class="heading-small">The defendant has admitted they owe £{{ data['owe-amount'] or '1,200'
-                }}</h2>
-              <p>They said they'll pay you immediately.</p>
-              <p>The defendant said they would pay you by {{ now | date('subtract', 2, 'days') | date }}. Any
-                cheques or
-                transfers should be clear in your account.</p>
-              <p>You need to tell us if you've settled the claim, for example because the defendant has paid
-                you.</p>
-              <p><a href="paid-in-full/claimant" class="button secondary-button" style="margin-bottom: 20px">Tell us
-                you've settled</a></p>
-              <h3 class="heading-small">If you haven't been paid</h3>
-              <p>If the defendant has not paid you, you can <a
-                href="applications-and-judgments/default-judgment/claim-amount-deduct?radio-indent-group=No">request
-                a County Court Judgment</a>.</p>
+              <h2 class="heading-small">Waiting for the defendant to pay you</h2>
+              <p>The defendant has admitted they owe £{{ data['owe-amount'] or '1,200' }}. They said they'll pay you immediately.</p>
+              <p>They must make sure you have the money by {{ now | date('subtract', 2, 'days') | date }}. Any cheques or transfers should be clear in your account.</p>
+              <p>You need to tell us if you've settled the claim, for example because the defendant has paid you.</p>
+              <p><a href="paid-in-full/claimant" class="button secondary-button">Tell us you've settled</a></p>
+              <p>If the defendant hasn't paid you by the deadine, you can <a href="applications-and-judgments/default-judgment">request a County Court Judgment</a>.</p>
+
 
               {% elseif data['claimant'] == 10.83 %}
               <h2 class="heading-small">The claim is settled</h2>
               <p>You've accepted the defendant's part admission</p>
               <p>You agreed they owed £{{ data['owe-amount'] or '1,200' }} and that they've paid it already.</p>
 
+
               {% elseif data['claimant'] == 10.831 %}
-              <h2 class="heading-small">You've rejected the defendant's admission</h2>
-              <p>They said they owe £{{ data['owe-amount'] or '1,200' }}.</p>
-              <p>You've both agreed to try mediation. The Small Claims Mediation Service will contact you and try
-                to arrange an appointment.</p>
+              <h2 class="heading-small">We'll contact you with a mediation appointment</h2>
+              <p>You rejected the defendant's admission of £{{ data['owe-amount'] or '1,200' }}. </p>
+              <p>You've both agreed to try mediation. The Small Claims Mediation Service will contact you to arrange an appointment.</p>
               <p><a href="mediation/how-mediation-works">Find out how mediation works</a></p>
-              <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=9">Download their
-                response</a>
-                (PDF, 123KB)</p>
+
 
               {% elseif data['claimant'] == 10.832 %}
-              <h2 class="heading-small">You've rejected the defendant's admission</h2>
-              <p>They said they owe £{{ data['owe-amount'] or '1,200' }}.</p>
-              <p>You need to <a href="forms/dq-form">complete a directions questionnaire</a> form to tell us more
-                about the claim.</p>
-              <p>Your claim won't proceed if you don't complete and return the form before 4pm on <span
-                class="dates5"></span>.</p>
-              <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=9">Download their
-                response</a>
-                (PDF, 123KB)</p>
+              <h2 class="heading-small">Tell us your hearing requirements</h2>
+              <p>You've rejected the defendant's admission of £{{ data['owe-amount'] or '1,200' }}.</p>
+              <p>You might have to go to a court hearing. We'll contact you if we set a hearing date to tell you how to prepare.</p>
+              <p>You need to tell us your requirements for a hearing.</p>
+              <p>Your claim won't proceed if you don't respond before 4pm on <span class="dates5"></span>.</p>
+              <p><a href="dqs" class="button">Tell us your requirements</a></p>
+
 
               {% elseif data['claimant'] == 10.84 %}
-              <h2 class="heading-small">You've rejected the defendant's admission</h2>
-              <p>They said they owe £{{ data['owe-amount'] or '1,200' }}.</p>
-              <p>You need to <a href="forms/dq-form">complete a directions questionnaire</a> form to tell us more
-                about the claim.</p>
-              <p>Your claim won't proceed if you don't complete and return the form before 4pm on <span
-                class="dates5"></span>.</p>
-              <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=9">Download their
-                response</a>
-                (PDF, 123KB)</p>
+              <h2 class="heading-small">Tell us your hearing requirements</h2>
+              <p>You've rejected the defendant's admission of £{{ data['owe-amount'] or '1,200' }}.</p>
+              <p>You might have to go to a court hearing. We'll contact you if we set a hearing date to tell you how to prepare.</p>
+              <p>You need to tell us your requirements for a hearing.</p>
+              <p>Your claim won't proceed if you don't respond before 4pm on <span class="dates5"></span>.</p>
+              <p><a href="dqs" class="button">Tell us your requirements</a></p>
+
 
               {% elseif data['claimant'] == 10.85 %}
-              <h2 class="heading-small">You've rejected the defendant's admission</h2>
-              <p>They said they owe £1,200.</p>
-              <p>You've both agreed to try mediation. The Small Claims Mediation Service will contact you to
-                arrange an appointment.</p>
+              <h2 class="heading-small">We'll contact you with a mediation appointment</h2>
+              <p>You rejected the defendant's admission of £1,000. </p>
+              <p>You've both agreed to try mediation. We'll contact you to arrange an appointment.</p>
               <p><a href="mediation/how-mediation-works">Find out how mediation works</a></p>
-              <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=9">Download their
-                response</a>
-                (PDF, 123KB)</p>
+
 
               {% elseif data['claimant'] == 10.9 %}
               <h2 class="heading-small">You've rejected the defendant's response</h2>
-              <p>You've both agreed to try mediation. The Small Claims Mediation Service will contact you to
-                arrange an appointment.</p>
+              <p>You've both agreed to try mediation. The Small Claims Mediation Service will contact you to arrange
+                an
+                appointment.</p>
               <p><a href="mediation/how-mediation-works">Find out how mediation works</a></p>
-              <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=9">Download their
-                response</a>
+              <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=9">Download their response</a>
                 (PDF, 123KB)</p>
 
               {% elseif data['claimant'] == 10.91 %}
               <h2 class="heading-small">Waiting for the court to review the case</h2>
               <p>You've rejected Mary Richard's response and said you want to take the case to court.</p>
               <p>The court will review the case. We'll email you if we set a hearing date to tell you how to prepare.</p>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4e564f3d3b1f36578cdfdc98fa2fe91d7f6449f6
 
               {% elseif data['claimant'] == 11.1 %}
               <div class="status-block single">
                 <h2 class="heading-small">You need to give us more information before the hearing</h2>
                 <p>A judge has made an order requesting that before the hearing, you must provide details of:</p>
+
                 <ul class="list list-bullet">
                   <li>witness statements</li>
                   <li>your evidence</li>
                   <li>proposed experts</li>
                 </ul>
-                <p><a href="/public/images/order.pdf">Download the order</a> (PDF, 123KB)</a></p>
+                <p><a href="/public/images/order.pdf">Download the order</a> (PDF, 123KB)</p>
                 <p>If you do not provide this information, your claim may be cancelled.</p>
                 <p><a href="order-response?party=claimant" class="button">Respond to the order</a></p>
-                <p>If you do not agree with the instructions of the order, you can <a href="">make an
-                  application</a>
-                  to request it be changed.</p>
+                <p>If you do not agree with the instructions of the order, you can <a href="">make an application</a> to request it be changed.</p>
               </div>
-              <hr/>
+              <hr />
               <h2 class="heading-small">The defendant has provided some information for the hearing</h2>
               <p>The judge also ordered the defendant to provide similar information.</p>
-              <p><a href="order-response/view?party=claimant" class="button secondary-button">View the defendant's
-                response</a></p>
+              <p><a href="order-response/view?party=claimant" class="button secondary-button">View the defendant's response</a></p>
 
-              {% elseif data['claimant'] == 11.11 %}
-              <div class="status-block single">
-                <h2 class="heading-small">You need to give us more information before the hearing</h2>
-                <p>A judge has made an order requesting that before the hearing, you must provide details of:</p>
-
-                <ul class="list list-bullet">
-                  <li>witness statements</li>
-                  <li>your evidence</li>
-                  <li>proposed experts</li>
-                </ul>
-                <p><a href="/public/images/order.pdf">Download the order</a> (PDF, 123KB)</a></p>
-                <p>If you do not provide this information by the dates in the order, your claim may be cancelled.</p>
-
-                <p>You need to post this information to the claimant, and also to the court at:</p>
-
-                <p>
-                  Civil Money Claims<br/>
-                  St. Katharine's House<br/>
-                  21-27 St. Katharine's Street<br/>
-                  Northampton<br/>
-                  NN1 2LH
-                </p>
-
-                <p>If you do not agree with the instructions of the order, you can <a href="">make an application</a> to
-                  request it be changed.</p>
-              </div>
 
               {% elseif data['claimant'] == 11.2 or data['claimant'] == 11.21 %}
               <div class="status-block single">
@@ -647,45 +502,32 @@
                 <p>We will review your response and will let you know if you need to do anything else.</p>
 
                 {% if data['claimant'] == 11.2 %}
-                <p>The defendant has been sent your proposed experts to choose from. Once they have done so,
-                  you'll
-                  need to supply us with the questions you want to ask the expert.</p>
+                <p>The defendant has been sent your proposed experts to choose from. Once they have done so, you'll need to supply us with the questions you want to ask the expert.</p>
                 {% else %}
                 <p>We'll contact you when a hearing is scheduled.</p>
                 {% endif %}
 
-                <p>You can upload additional evidence or witness statements until {{ now | date( 'add', 15, 'days'
-                  ) |
-                  date }}.</p>
+                <p>You can upload additional evidence or witness statements until {{ now | date( 'add', 15, 'days' ) | date }}.</p>
 
-                <p><a href="order-response?party=claimant&evidence=complete&experts=complete&witness=complete"
-                      class="button secondary-button">View your response or add more more information</a></p>
+                <p><a href="order-response?party=claimant&evidence=complete&experts=complete&witness=complete" class="button secondary-button">View your response or add more more information</a></p>
               </div>
-              <hr/>
+              <hr />
               <h2 class="heading-small">The defendant has provided some information for the hearing</h2>
               <p>The judge also ordered the defendant to provide similar information.</p>
-              <p><a href="order-response/view?party=claimant" class="button secondary-button">View the defendant's
-                response</a></p>
+              <p><a href="order-response/view?party=claimant" class="button secondary-button">View the defendant's response</a></p>
 
 
               {% elseif data['claimant'] == 11.3 %}
               <div class="status-block single">
                 <h2 class="heading-small">Tell us what you want to ask the expert</h2>
-                <p>The defendant chose John Austin to be the expert on this claim. They've provided the questions
-                  they want to ask the expert.</p>
-                <p>You need to send us your questions by {{ now | date( 'add', 15, 'days' ) | date }} or the court
-                  could cancel your claim.</p>
+                <p>The defendant chose John Austin to be the expert on this claim. They've provided the questions they want to ask the expert.</p>
+                <p>You need to send us your questions by {{ now | date( 'add', 15, 'days' ) | date }} or the court could cancel your claim.</p>
 
-                <p><a href="order-response/questions?party=claimant" class="button">Review and add questions to
-                  ask the expert</a></p>
-                <p><a href="order-response/view?party=claimant" class="button secondary-button">View the
-                  defendant's full response</a></p>
+                <p><a href="order-response/questions?party=claimant" class="button">Review and add questions to ask the expert</a></p>
+                <p><a href="order-response/view?party=claimant" class="button secondary-button">View the defendant's full response</a></p>
 
-                <p>You can upload more evidence or witness statements until {{ now | date( 'add', 15, 'days' ) |
-                  date
-                  }}.</p>
-                <p><a href="order-response?party=claimant&evidence=complete&experts=complete&witness=complete"
-                      class="button secondary-button">View your response or add more more information</a></p>
+                <p>You can upload more evidence or witness statements until {{ now | date( 'add', 15, 'days' ) | date }}.</p>
+                <p><a href="order-response?party=claimant&evidence=complete&experts=complete&witness=complete" class="button secondary-button">View your response or add more more information</a></p>
               </div>
 
 
@@ -694,24 +536,20 @@
                 <h2 class="heading-small">Send questions to the expert and upload their report</h2>
                 <p>You need to:</p>
                 <ul class="list list-bullet">
-                  <li>send the expert (John Austin) the <a href="">list of questions</a> (PDF, 123KB) you and the
-                    defendant created
-                  </li>
-                  <li>upload the expert's report within XX days of receiving it</li>
-                </ul>
+                    <li>send the expert (John Austin) the <a href="">list of questions</a> (PDF, 123KB) you and the defendant created</li>
+                    <li>upload the expert's report within XX days of receiving it</li>
+                  </ul>
                 <p></p>
 
                 <p>The expert has XX days after the date they receive your questions to send you the report.</p>
 
-                <p><a href="order-response/expert-reports?party=claimant&type=" class="button">Upload the expert's
-                  report</a></p>
+                <p><a href="order-response/expert-reports?party=claimant&type=" class="button">Upload the expert's report</a></p>
 
-                <p>You can upload more evidence or witness statements until {{ now | date( 'add', 15, 'days' ) |
-                  date }}.</p>
-                <p><a href="order-response?party=claimant&evidence=complete&experts=complete&witness=complete"
-                      class="button secondary-button">View your response or add more more information</a></p>
-                <p><a href="order-response/view?party=claimant" class="button secondary-button">View the
-                  defendant's full response</a></p>
+                <p>You can upload more evidence or witness statements until {{ now | date( 'add', 15, 'days' ) | date }}.</p>
+                <p><a href="order-response?party=claimant&evidence=complete&experts=complete&witness=complete" class="button secondary-button">View your response or add more more information</a></p>
+
+                <p><a href="order-response/view?party=claimant" class="button secondary-button">View the defendant's full response</a></p>
+
               </div>
 
               {% elseif data['claimant'] == 11.5 or data['claimant'] == 11.51 %}
@@ -719,315 +557,163 @@
                 <h2 class="heading-small">Tell us if you have questions about the expert's report</h2>
 
                 {% if data['claimant'] == 11.5 %}
-                <p>After you and the defendant have done this, you need to send the questions to the expert and
-                  upload
-                  their response.</p>
+                <p>After you and the defendant have done this, you need to send the questions to the expert and upload their response.</p>
 
                 {% else %}
                 <p>The defendant has provided the questions they want to ask the expert.</p>
                 {% endif %}
 
-                <p>You need to send us your questions by {{ now | date( 'add', 10, 'days' ) | date }} or the court
-                  could cancel your claim.</p>
+                <p>You need to send us your questions by {{ now | date( 'add', 10, 'days' ) | date }} or the court could cancel your claim.</p>
 
                 {% if data['claimant'] == 11.5 %}
-                <p><a href="order-response/questions/ask?party=claimant&type=report" class="button">Tell us if you
-                  have questions</a></p>
+                <p><a href="order-response/questions/ask?party=claimant&type=report" class="button">Tell us if you have questions</a></p>
                 {% else %}
-                <p><a href="order-response/questions?party=claimant&type=report" class="button">Review and add
-                  questions to ask the expert</a></p>
+                <p><a href="order-response/questions?party=claimant&type=report" class="button">Review and add questions to ask the expert</a></p>
                 {% endif %}
 
-                <p>You can upload more evidence or witness statements until {{ now | date( 'add', 15, 'days' ) |
-                  date
-                  }}.</p>
-                <p><a href="order-response?party=claimant&evidence=complete&experts=complete&witness=complete"
-                      class="button secondary-button">View your response or add more more information</a></p>
+                <p>You can upload more evidence or witness statements until {{ now | date( 'add', 15, 'days' ) | date }}.</p>
+                <p><a href="order-response?party=claimant&evidence=complete&experts=complete&witness=complete" class="button secondary-button">View your response or add more more information</a></p>
 
-                <p><a href="order-response/view?party=claimant" class="button secondary-button">View the
-                  defendant's
-                  full response</a></p>
-
-                {% elseif data['claimant'] == 11.6 %}
-                <div class="status-block single">
-                  <h2 class="heading-small">You need to upload the expert's response</h2>
-                  <p>You neeed to send the expert the <a href="">list of queries</a> (PDF, 123KB) you and the
-                    defendant
-                    created about the expert's report.</p>
-                  <p>They have XX days to provide you with a written response, starting from when they receive it.
-                    Once
-                    you have received it, you need to upload it within XX days, or your claim may be cancelled.</p>
-
-                  <p><a href="order-response/expert-reports?party=claimant&type=report" class="button">Upload the
-                    expert's response</a></p>
-
-                  <p>You can upload additional evidence or witness statements until {{ now | date( 'add', 15, 'days'
-                    ) | date }}.</p>
-                  <p><a href="order-response?party=claimant&evidence=complete&experts=complete&witness=complete"
-                        class="button secondary-button">View your response or add more more information</a></p>
-
-                  <p><a href="order-response/view?party=claimant" class="button secondary-button">View the
-                    defendant's
-                    full response</a></p>
-                </div>
-
-                {% elseif data['claimant'] == 11.7 %}
-                <div class="status-block single">
-                  <h2 class="heading-small">A hearing will be scheduled</h2>
-                  <p>The court will review the case. You might have to go to a hearing.</p>
-                  <p>We'll contact you if we set a hearing date to tell you how to prepare.</p>
-                </div>
-
-                {% elseif data['claimant'] ==10 or data['claimant'] == 11 %}
-                <div class="status-block">
-                  <h2 class="heading-small">Settle out of court</h2>
-                  <p>Mary Richards has made an offer to settle out of court.</p>
-                  <p><a href="offer-agreement/view-offer?defendant=offer">View and respond to the offer</a></p>
-                </div>
-                <div class="status-block single">
-                  <h2 class="heading-small">Mary Richards has rejected your claim.</h2>
-                  <p>You need to <a href="forms/dq-form">complete a directions questionnaire</a> form to tell us
-                    more
-                    about the claim.</p>
-                  <p>Your claim won't proceed if you don't complete and return the form before 4pm on <span
-                    class="dates5"></span>.</p>
-                  <p><a class="" href="../defendant/correspondence/forms/claim-form-defendant?check=9">Download
-                    their
-                    response</a> (PDF, 123KB)</p>
-                </div>
-
-                {% elseif data['claimant'] == 12 %}
-                <div class="status-block">
-                  <h2 class="heading-small">Settle out of court</h2>
-                  <p>You've rejected the defendant's offer to settle out of court. You won't receive any more offers
-                    from the defendant.</p>
-                </div>
-                <div class="status-block single">
-                  <h2 class="heading-small">Mary Richards has rejected your claim</h2>
-                  <p>You need to <a href="forms/dq-form">complete a directions questionnaire</a> form to tell us
-                    more
-                    about the claim.</p>
-                  <p>Your claim won't proceed if you don't complete and return the form before 4pm on <span
-                    class="dates5"></span>.</p>
-                  <p><a class="" href="../defendant/correspondence/forms/claim-form-defendant?check=9">Download
-                    their response</a> (PDF, 123KB)</p>
-                </div>
-
-                {% elseif data['claimant'] == 16 %}
-                <div class="status-block">
-                  <h2 class="heading-small">Settle out of court</h2>
-                  <p>You've agreed to the offer made by Mary Richards and signed an agreement to settle your
-                    claim.</p>
-                  <p>We’ve asked Mary Richards to sign the agreement.</p>
-                </div>
-                <div class="status-block single">
-                  <h2 class="heading-small">Mary Richards has rejected your claim</h2>
-                  <p>You need to <a href="forms/dq-form">complete a directions questionnaire</a> form to tell us
-                    more about the claim.</p>
-                  <p>Your claim won't proceed if you don't complete and return the form before 4pm on <span
-                    class="dates5"></span>.</p>
-                  <p><a class="" href="../defendant/correspondence/forms/claim-form-defendant?check=9">Download
-                    their response</a> (PDF, 123KB)</p>
-                </div>
-                {% elseif data['claimant'] == 17 %}
-                <div class="status-block single">
-                  <h2 class="heading-small">You've both signed a settlement agreement</h2>
-                  <p>The claim is now settled.</p>
-                  <p>The agreement explains what can happen if either party breaks the terms.</p>
-                  <p><a class="" href="../defendant/correspondence/forms/agreement?check=2">Download the
-                    agreement</a>
-                  </p>
-                </div>
-
-                {% elseif data['claimant'] == 13 %}
-                <div class="">
-                  <h2 class="heading-small">You've requested free mediation </h2>
-                  <p>We'll ask the defendant Mary Richards if they want to take part in mediation. We'll tell you
-                    how
-                    they
-                    respond.</p>
-                </div>
-
-                {% elseif data['claimant'] == 13.1 %}
-                <div class="">
-                  <h2 class="heading-small">You've rejected the defendant's response</h2>
-                  <p>You've both agreed to mediation. The Small Claims Mediation Service will contact you to arrange
-                    an appointment.</p>
-                  <p><a href="../dashboard/mediation/how-mediation-works">Find out how mediation works</a></p>
-                  <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=9">Download their
-                    response</a> (PDF, 123KB)</p>
-                </div>
-
-                {% elseif data['claimant'] == 13.2 %}
-                <div class="status-block single">
-                  <h2 class="heading-small">You need to tell us more about the claim</h2>
-                  <p>You need to <a href="forms/dq-form">complete a directions questionnaire</a> to tell us more
-                    about your claim.</p>
-                  <p>The claim won't proceed if you don't complete and return the form before 4pm on <span
-                    class="dates5"></span>.</p>
-                  <p><a class="" href="../defendant/correspondence/forms/claim-form-defendant?check=9">Download
-                    their response</a> (PDF, 123KB)</p>
-                </div>
-
-                {% elseif data['claimant'] == 14 %}
-                <h2 class="heading-small">The defendant wants to try mediation </h2>
-                <div class="">
-                  <p>A mediator will contact both you and the defendant within 14 days to arrange an
-                    appointment.</p>
-                </div>
-
-                {% elseif data['claimant'] == 15 %}
-                <h2 class="heading-small">A judge will review the claim</h2>
-                <div class="">
-                  <p>You've rejected the defendant's response and asked for a judge to review the claim. We'll
-                    contact you
-                    if we set a hearing date to tell you how to prepare.</p>
-                </div>
-
-                {% elseif data['claimant'] == 17 %}
-                <h2 class="heading-small">You settled out of court</h2>
-                <div class="">
-                  <p> You've both signed an agreement to settle out of court. The claim is now settled.</p>
-                  <p><a href="../defendant/correspondence/forms/agreement?check=1">Download the settlement
-                    agreement</a>
-                    (PDF, 123KB)</p>
-                </div>
-
-                {% elseif data['claimant'] == 18 %}
-                <h2 class="heading-small">You need to respond to this counterclaim</h2>
-                <p>You need to respond by <span class="dates"></span> (14 days
-                  remaining). </p>
-                <p><a class="" href="view-claims/view-counterclaim1">View and respond to the counterclaim </a></p>
-                <p>If you don't respond Mary Richards can ask for a default County Court Judgment (CCJ) against you.
-                  A CCJ means the court orders you to pay the money.</p>
-                <div class="form-group">
-                </div>
-
-                {% elseif data['claimant'] == 19 %}
-                <div class="">
-                  <h2 class="heading-small">The defendant's response </h2>
-                  <p>The defendant Mary Richards has rejected your the claim. </p>
-                  <div class="form-group">
-                    <p><a class="" href="claimant-response/dispute-claim/view-response?mediation=no">View full
-                      response </a></p>
-                  </div>
-                </div>
-
-                {% elseif data['claimant'] == 20 %}
-                <div class="">
-                  <h2 class="heading-small">This claim is settled</h2>
-                  <p>Mary Richards paid you £1500 on {{ now | date( 'subtract', 5, 'days' ) | date }}.</p>
-                </div>
-
-                {% elseif data['claimant'] == 20.1 %}
-                <div class="">
-                  <h2 class="heading-small">This claim is settled</h2>
-                  <p>Mary Richards paid you £1500 on {{ now | date( 'subtract', 5, 'days' ) | date }}.</p>
-                  <p>The defendant's County Court Judgment will be cancelled.</p>
-                </div>
-
-                {% elseif data['claimant'] == 20.2 %}
-                <div class="">
-                  <h2 class="heading-small">This claim is settled</h2>
-                  <p>Mary Richards paid you £1500 on {{ now | date( 'subtract', 5, 'days' ) | date }}.</p>
-                  <p>The defendant's County Court Judgment will be marked as paid.</p>
-                </div>
-
-                {% elseif data['claimant'] == 21 %}
-                <div class="">
-                  <h2 class="heading-small">This claim has been discontinued</h2>
-                  <p>You ended the claim on {{ now | date( 'subtract', 5, 'days' ) | date }}.</p>
-                  <p><a href="../claimant/correspondence/discontinuation">Download notice of discontinuance</a>
-                    (PDF,
-                    123KB)</p>
-                </div>
-
-                {% endif %}
-
-                <!--{% if data['claimant'] == 10 or data['claimant'] == 11 or data['claimant'] == 12 or data['claimant'] == 16 %}-->
-                <!--<div id="tabs-3" class="tab-pane">-->
-                <!--{% if data['claimant'] == 10 or data['claimant'] == 11%}-->
-                <!--<h2 class="heading-medium">The defendant wants to settle out of court </h2>-->
-                <!--<p>Mary Richards has made an offer to settle out of court You can accept, reject or make a counter-->
-                <!--offer.</p>-->
-                <!--<a href="offer-agreement/view-offer?defendant=offer">View and respond to offer.</a>-->
-                <!--{% elseif data['claimant'] == 12 %}-->
-                <!--<h2 class="heading-medium">We've sent your offer to Mary Richards</h2>-->
-                <!--<p>Mary Richards can accept, reject or make a counter offer. We'll email you when they respond.</p>-->
-                <!--<p>If you settle out of court you’ll sign an agreement that replaces the claim. Until then the claim-->
-                <!--continues and might go to a court hearing.</p>-->
-                <!--{% elseif data['claimant'] == 16 %}-->
-                <!--<h2 class="heading-medium">Sign a legal agreement to settle out of court</h2>-->
-                <!--<div class="">-->
-                <!--<p> The defendant has accepted your offer. You need to sign a legal agreement to settle out of-->
-                <!--court Mary Richards has signed the agreement.</p>-->
-                <!--<p><a href='offer-agreement/agreement'>View and sign the agreement. </a></p>-->
-                <!--</div>-->
-                <!--{% elseif data['claimant'] == 17 %}-->
-                <!--<h2 class="heading-medium">Sign a legal agreement to settle out of court</h2>-->
-                <!--<div class="">-->
-                <!--<p> The defendant has accepted your offer. You need to sign a legal agreement to settle out of-->
-                <!--court Mary Richards has signed the agreement.</p>-->
-                <!--<p><a href='offer-agreement/agreement'>View and sign the agreement. </a></p>-->
-                <!--</div>-->
-                <!--{% endif %}-->
-                <!--</div>-->
-                <!--{% endif %}-->
-
-
-                {% if data['claimant'] == 10.01 or data['claimant'] == 10.4 or data['claimant'] == 10.5 %}
-
-                <hr/>
-                <h2 class="heading-small">Request County Court Judgment</h2>
-
-                <p>
-                  If the defendant doesn't pay or breaks the terms of the settlement agreement, you can <a
-                  href='applications-and-judgments/default-judgment/claim-amount-deduct?radio-indent-group=No&radio-proceed=not-signed'>request
-                  a County Court Judgment</a>.
-                </p>
-                {% endif %}
-
-                {% if data['claimant'] < 20 and data['claimant'] != 1.2 and data['claimant'] != 10.11 and
-                data['claimant'] != 10.111 and data['claimant'] != 10.12 and data['claimant'] != 10.121 and
-                data['claimant'] != 10.01 and
-                data['claimant'] != 10.4 and data['claimant'] != 10.5 and data['claimant'] != 10.81 and data['claimant']
-                != 10.82 and
-                data['claimant'] != 10.83 and data['claimant'] != 16 and data['claimant'] != 17 and data['claimant'] !=
-                4.2 and
-                data['claimant'] != 4.3 %}
-
-                <hr/>
-
-                <!-- with discontinuance -->
-                <!--
-                <h2 class="heading-small">End the claim</h2>
-                <p>If you've already been paid, have settled out of court, or don't want to take the claim any further, you can <a href="discontinue">end the claim</a>.</p>
-                -->
-
-                <!-- without discontinuance -->
-                <h2 class="heading-small">If you've been paid</h2>
-                <p><a href="paid-in-full/claimant?endClaim=yes">Tell us if you want to end the claim</a> because the
-                  defendant has paid you.</p>
-
-                {% endif %}
-
-
-                <!--<div class="right-column-nav" style="margin-top: 30px">-->
-                <!--&lt;!&ndash;<hr class="light-hr" style="margin-top: 5px">&ndash;&gt;-->
-                <!--<h3 class="heading-small">More actions</h3>-->
-                <!--<p></p><a href="">Tell us you've settled</a></p>-->
-                <!--<p></p><a href="">Stopping the claim</a></p>-->
-                <!--</div>-->
-
+                <p><a href="order-response/view?party=claimant" class="button secondary-button">View the defendant's full response</a></p>
 
               </div>
-            </div>
 
 
-            <div class="tabs-panel" id="history" role="tabpanel" aria-hidden="true">
+              {% elseif data['claimant'] == 11.6 %}
+              <div class="status-block single">
+                <h2 class="heading-small">You need to upload the expert's response</h2>
+                <p>You neeed to send the expert the <a href="">list of queries</a> (PDF, 123KB) you and the defendant created about the expert's report.</p>
+                <p>They have XX days to provide you with a written response, starting from when they receive it.
+                  Once you have received it, you need to upload it within XX days, or your claim may be cancelled.</p>
 
-              <div class="tabs-panel-inner text" tabindex="0">
+                <p><a href="order-response/expert-reports?party=claimant&type=report" class="button">Upload the expert's response</a></p>
 
+                <p>You can upload additional evidence or witness statements until {{ now | date( 'add', 15, 'days' ) | date }}.</p>
+                <p><a href="order-response?party=claimant&evidence=complete&experts=complete&witness=complete" class="button secondary-button">View your response or add more more information</a></p>
+
+                <p><a href="order-response/view?party=claimant" class="button secondary-button">View the defendant's full response</a></p>
+
+              </div>
+
+              {% elseif data['claimant'] == 11.7 %}
+              <div class="status-block single">
+                <h2 class="heading-small">A hearing will be scheduled</h2>
+                <p>The court will review the case. You might have to go to a hearing.</p>
+                <p>We'll contact you if we set a hearing date to tell you how to prepare.</p>
+
+              </div>
+
+              {% elseif data['claimant'] ==10 or data['claimant'] == 11 %}
+              <div class="status-block">
+                <h2 class="heading-small">Respond to the defendant's offer to settle out of court</h2>
+                <p>The defendant has rejected your claim. They have made an offer to settle out of court.</p>
+                <p>You must accept or reject the offer before 4pm on {{ now | date('add', 7, 'days') | date }}.</p>
+                <p><a href="offer-agreement/view-offer?defendant=offer" class="button">Respond to the offer</a></p>
+              </div>
+
+              {% elseif data['claimant'] == 12 %}
+              <div class="status-block">
+                <h2 class="heading-small">Tell us your hearing requirements</h2>
+                <p>You've rejected the defendant's offer to settle out of court. You won't receive any more offers from the defendant.</p>
+                <p>You might have to go to a court hearing. We'll contact you if we set a hearing date to tell you how to prepare.</p>
+                <p>You need to tell us your requirements for a hearing.</p>
+                <p>Your claim won't proceed if you don't respond before 4pm on <span class="dates5"></span>.</p>
+                <p><a href="forms/dq-form" class="button">Tell us your requirements</a></p>
+              </div>
+
+              {% elseif data['claimant'] == 16 %}
+              <div class="status-block">
+                <h2 class="heading-small">Waiting for the defendant to sign the settlement agreement</h2>
+                <p>You've agreed to the defendant's offer to settle out of court. You've signed an agreement to settle the claim.</p>
+                <p>We've asked Mary Richards to sign the agreement. We'll email you when they respond.</p>
+              </div>
+
+
+              {% elseif data['claimant'] == 17 %}
+              <div class="status-block single">
+                <h2 class="heading-small">This claim is settled</h2>
+                <p>You've both signed a settlement agreement.</p>
+                <p>The agreement explains what can happen if either party breaks the terms.</p>
+                <p><a href="../defendant/correspondence/forms/agreement?check=1">Download the agreement</a></p>
+              </div>
+
+              {% elseif data['claimant'] == 13 %}
+              <div class="">
+                <h2 class="heading-small">You've requested free mediation </h2>
+                <p>We'll ask the defendant Mary Richards if they want to take part in mediation. We'll tell you how
+                  they
+                  respond.</p>
+              </div>
+
+              {% elseif data['claimant'] == 13.1 %}
+              <div class="">
+                <h2 class="heading-small">You've rejected the defendant's response</h2>
+                <p>You've both agreed to mediation. The Small Claims Mediation Service will contact you to arrange an appointment.</p>
+                <p><a href="../dashboard/mediation/how-mediation-works">Find out how mediation works</a></p>
+                <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=9">Download their response</a> (PDF, 123KB)</p>
+              </div>
+
+              {% elseif data['claimant'] == 13.2 %}
+              <div class="status-block single">
+                <h2 class="heading-small">You need to tell us more about the claim</h2>
+                <p>You need to <a href="forms/dq-form">complete a directions questionnaire</a> to tell us more
+                  about your claim.</p>
+                <p>The claim won't proceed if you don't complete and return the form before 4pm on <span
+                  class="dates5"></span>.</p>
+                <p><a class="" href="../defendant/correspondence/forms/claim-form-defendant?check=9">Download their
+                  response</a> (PDF, 123KB)</p>
+              </div>
+
+              {% elseif data['claimant'] == 14 %}
+              <h2 class="heading-small">The defendant wants to try mediation </h2>
+              <div class="">
+                <p>A mediator will contact both you and the defendant within 14 days to arrange an appointment.</p>
+              </div>
+
+              {% elseif data['claimant'] == 15 %}
+              <h2 class="heading-small">A judge will review the claim</h2>
+              <div class="">
+                <p>You've rejected the defendant's response and asked for a judge to review the claim. We'll contact
+                  you
+                  if we set a hearing date to tell you how to prepare.</p>
+              </div>
+
+              {% elseif data['claimant'] == 17 %}
+              <h2 class="heading-small">You settled out of court</h2>
+              <div class="">
+                <p> You've both signed an agreement to settle out of court. The claim is now settled.</p>
+                <p><a href="../defendant/correspondence/forms/agreement?check=1">Download the settlement agreement</a>
+                  (PDF, 123KB)</p>
+              </div>
+
+              {% elseif data['claimant'] == 18 %}
+              <h2 class="heading-small">You need to respond to this counterclaim</h2>
+              <p>You need to respond by <span class="dates"></span> (14 days
+                remaining). </p>
+              <p><a class="" href="view-claims/view-counterclaim1">View and respond to the counterclaim </a></p>
+              <p>If you don't respond Mary Richards can ask for a default County Court Judgment (CCJ) against you. A
+                CCJ
+                means the court orders you to pay the money.</p>
+              <div class="form-group">
+              </div>
+
+              {% elseif data['claimant'] == 19 %}
+              <div class="">
+                <h2 class="heading-small">The defendant's response </h2>
+                <p>The defendant Mary Richards has rejected your the claim. </p>
+                <div class="form-group">
+                  <p><a class="" href="claimant-response/dispute-claim/view-response?mediation=no">View full
+                    response </a></p>
+                </div>
+              </div>
+
+              {% elseif data['claimant'] == 20 %}
+              <div class="">
+                <h2 class="heading-small">This claim is settled</h2>
+                <p>Mary Richards paid you £1,500 on {{ now | date( 'subtract', 5, 'days' ) | date }}.</p>
+              </div>
+
+<<<<<<< HEAD
                 {% if data['claimant'] == 1 %}
 
                 <div class="hmcts-timeline" style="margin-top: 30px">
@@ -1045,64 +731,146 @@
                 </div>
 
                 {% endif %}
+=======
 
+              {% elseif data['claimant'] == 20.1 %}
+              <div class="">
+                <h2 class="heading-small">This claim is settled</h2>
+                <p>Mary Richards paid you £1500 on {{ now | date( 'subtract', 5, 'days' ) | date }}.</p>
+                <p>The defendant's County Court Judgment will be cancelled.</p>
               </div>
-            </div>
+>>>>>>> 4e564f3d3b1f36578cdfdc98fa2fe91d7f6449f6
 
-            <div class="tabs-panel" id="settle-out-of-court" role="tabpanel" aria-hidden="true">
-
-              <div class="tabs-panel-inner text" tabindex="0">
-
-                <fieldset></fieldset>
-
-
+              {% elseif data['claimant'] == 20.2 %}
+              <div class="">
+                <h2 class="heading-small">This claim is settled</h2>
+                <p>Mary Richards paid you £1500 on {{ now | date( 'subtract', 5, 'days' ) | date }}.</p>
+                <p>The defendant's County Court Judgment will be marked as paid.</p>
               </div>
+
+
+              {% elseif data['claimant'] == 21 %}
+              <div class="">
+                <h2 class="heading-small">You stopped this claim</h2>
+                <p>You ended the claim on {{ now | date( 'subtract', 5, 'days' ) | date }}.</p>
+              </div>
+
+              {% elseif data['claimant'] == 22 %}
+              <div class="status-block single">
+                <h2 class="heading-small">You have paid for a warrant of control</h2>
+                <p>A bailiff will try to recover the debt.</p>
+                <p>We'll post a letter with details of the warrant to you and to Mary Richards.</p>
+                <p><a target="_blank" href="https://hmcts-cet-prototype.herokuapp.com/claimant-guidance/index">See other debt recovery options</a><span class="font-xsmall">
+                   (opens in a new window)</span></p>
+              </div>
+
+              {% endif %}
+
             </div>
+            {% if data['claimant'] == 10 or data['claimant'] == 11 or data['claimant'] == 12 or data['claimant'] == 16
+            %}
+            <div id="tabs-3" class="tab-pane">
+              {% if data['claimant'] == 10 or data['claimant'] == 11%}
+              <h2 class="heading-medium">The defendant wants to settle out of court </h2>
+              <p>Mary Richards has made an offer to settle out of court You can accept, reject or make a counter
+                offer.</p>
+              <a href="offer-agreement/view-offer?defendant=offer">View and respond to offer.</a>
+              {% elseif data['claimant'] == 12 %}
+              <h2 class="heading-medium">We've sent your offer to Mary Richards</h2>
+              <p>Mary Richards can accept, reject or make a counter offer. We'll email you when they respond.</p>
+              <p>If you settle out of court you’ll sign an agreement that replaces the claim. Until then the claim
+                continues and might go to a court hearing.</p>
+              {% elseif data['claimant'] == 16 %}
+              <h2 class="heading-medium">Sign a legal agreement to settle out of court</h2>
+              <div class="">
+                <p> The defendant has accepted your offer. You need to sign a legal agreement to settle out of court
+                  Mary Richards has signed the agreement.</p>
+                <p><a href='offer-agreement/agreement'>View and sign the agreement. </a></p>
+              </div>
+              {% elseif data['claimant'] == 17 %}
+              <h2 class="heading-medium">Sign a legal agreement to settle out of court</h2>
+              <div class="">
+                <p> The defendant has accepted your offer. You need to sign a legal agreement to settle out of court
+                  Mary Richards has signed the agreement.</p>
+                <p><a href='offer-agreement/agreement'>View and sign the agreement. </a></p>
+              </div>
+              {% endif %}
+            </div>
+            {% endif %}
+
+            {% if data['claimant'] == 10.01 or data['claimant'] == 10.4 or data['claimant'] == 10.5 %}
+
+            <hr/>
+            <h2 class="heading-small">Request County Court Judgment</h2>
+
+            <p>
+              If the defendant doesn't pay or breaks the terms of the settlement agreement, you can <a
+              href='applications-and-judgments/default-judgment/claim-amount-deduct?radio-indent-group=No&radio-proceed=not-signed'>request
+              a County Court Judgment</a>.
+            </p>
+            {% endif %}
+
+            {% if data['claimant'] < 20 and data['claimant'] != 1.2 and data['claimant'] != 10.11 and data['claimant']
+            != 10.111 and data['claimant']
+            != 10.12 and data['claimant'] != 10.121 and data['claimant'] != 10.01 and
+            data['claimant'] != 10.4 and
+            data['claimant'] != 10.5 and data['claimant'] != 10.81 and data['claimant'] != 10.82 and data['claimant']
+            !=
+            10.83 and data['claimant'] != 16 and data['claimant'] != 17 and data['claimant'] != 4.2 and
+            data['claimant']
+            != 4.3 %}
+            <hr/>
+
+            <!-- with discontinuance -->
+            <!--
+            <h2 class="heading-small">End the claim</h2>
+            <p>If you've already been paid, have settled out of court, or don't want to take the claim any further, you can <a href="discontinue">end the claim</a>.</p>
+            -->
+
+            <!-- without discontinuance -->
+            <h2 class="heading-small">If you've been paid</h2>
+            <p><a href="paid-in-full/claimant?endClaim=yes">Tell us if you want to end the claim</a> because the defendant has paid you.</p>
+
+              {% endif %}
 
           </div>
         </div>
-      </div>
     </div>
-
-
-    <!--<div class="column-one-third">-->
-    <!--{% if data['claimant'] == 1.2 %}-->
-    <!--{% elseif data['claimant'] == 18 %}-->
-    <!--<div class="meta-data">-->
-    <!--<p class="heading-small" style="padding-top: 100px">About counterclaim</p>-->
-    <!--<ul role="navigation" class="font-xsmall list">-->
-    <!--<li><strong class="bold">Defendant name:</strong><br> <a href="party-details/defendant">Mary-->
-    <!--Richards</a>-->
-    <!--</li>-->
-    <!--<li><strong class="bold">Claim amount:</strong><br>£3240.34</li>-->
-    <!--</ul>-->
-    <!--</div>-->
-
-    <!--{% else %}-->
-    <!--<div class="meta-data">-->
-    <!--<p class="heading-small" style="padding-top: 100px">About claim</p>-->
-    <!--<ul role="navigation" class="font-xsmall list">-->
-    <!--<li><strong class="bold">Defendant name:</strong><br> <a href="party-details/defendant">Mary Richards</a>-->
-    <!--</li>-->
-    <!--{% if data['claimant'] == 9.1 or data['claimant'] == 13.1 or data['claimant'] == 13.2 %}-->
-    <!--<li><strong class="bold">Claim amount:</strong><br>£300</li>-->
-    <!--{% else %}-->
-    <!--<li><strong class="bold">Claim amount:</strong><br>£1500</li>-->
-    <!--{% endif %}-->
-    <!--<li><strong class="bold">Claim details:</strong><br><a-->
-    <!--href="../claimant/correspondence/claim-form-claimant?check=1">Download claim</a></li>-->
-    <!--{% if data['claimant'] == 16 or data['claimant'] == 17%}-->
-    <!--<li><strong class="bold">Defendant's response:</strong><br><a-->
-    <!--href="../defendant/correspondence/forms/claim-form-defendant?check=9">Download response</a></li>-->
-    <!--{% else %}-->
-    <!--{% endif %}-->
-    <!--</ul>-->
-    <!--</div>-->
-    <!--{% endif %}-->
-    <!--</div>-->
-
-    <fieldset></fieldset>
-    {% include 'prototypes/prototype-feb-2019/includes/contact.html' %}
+    <div class="column-one-third">
+      {% if data['claimant'] == 1.2 %}
+      {% elseif data['claimant'] == 18 %}
+      <div class="meta-data">
+        <p class="heading-small" style="padding-top: 100px">About counterclaim</p>
+        <ul role="navigation" class="font-xsmall list">
+          <li><strong class="bold">Defendant name:</strong><br> <a href="party-details/defendant">Mary Richards</a>
+          </li>
+          <li><strong class="bold">Claim amount:</strong><br>£3240.34</li>
+        </ul>
+      </div>
+      {% else %}
+      <div class="meta-data">
+        <p class="heading-small" style="padding-top: 100px">About claim</p>
+        <ul role="navigation" class="font-xsmall list">
+          <li><strong class="bold">Defendant name:</strong><br> <a href="party-details/defendant">Mary Richards</a>
+          </li>
+          {% if data['claimant'] == 9.1 or data['claimant'] == 13.1 or data['claimant'] == 13.2 %}
+          <li><strong class="bold">Claim amount:</strong><br>£300</li>
+          {% else %}
+          <li><strong class="bold">Claim amount:</strong><br>£1500</li>
+          {% endif %}
+          <li><strong class="bold">Claim details:</strong><br><a
+            href="../claimant/correspondence/claim-form-claimant?check=1">Download claim</a></li>
+          {% if data['claimant'] == 16 or data['claimant'] == 17%}
+          <li><strong class="bold">Defendant's response:</strong><br><a
+            href="../defendant/correspondence/forms/claim-form-defendant?check=9">Download response</a></li>
+          {% else %}
+          {% endif %}
+        </ul>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+{% include 'prototypes/prototype-feb-2019/includes/contact.html' %}
 </main>
 <form method="post" action="#" class="form" style="position: absolute;">
   <select id="claimant2" name="claimant2" onchange="window.location.href='?claimant='+this.value">
@@ -1167,6 +935,7 @@
     <option value="11.6" {% if data['claimant'] == 11.6 %}selected{% endif %}>Queries supplied, upload answers</option>
     <option value="11.7" {% if data['claimant'] == 11.7 %}selected{% endif %}>Everything received</option>
 
+<<<<<<< HEAD
     <option value="11.1" {% if data['claimant'] == 11.1 %}selected{% endif %}>Respond to order</option>
     <option value="11.11" {% if data['claimant'] == 11.11 %}selected{% endif %}>Respond to order (offline)</option>
     <option value="11.2" {% if data['claimant'] == 11.2 %}selected{% endif %}>Responded to order - with experts</option>
@@ -1178,6 +947,8 @@
     <option value="11.6" {% if data['claimant'] == 11.6 %}selected{% endif %}>Queries supplied, upload answers</option>
     <option value="11.7" {% if data['claimant'] == 11.7 %}selected{% endif %}>Everything received</option>
 
+=======
+>>>>>>> 4e564f3d3b1f36578cdfdc98fa2fe91d7f6449f6
     <option>------- Offer and agreements ----------</option>
     <option value="11" {% if data['claimant'] == 11 %}selected{% endif %}>Offer from defendant  </option>
     <option value="12" {% if data['claimant'] == 12 %}selected{% endif %}>Reject offer from defendant  </option>
@@ -1194,7 +965,6 @@
 </form>
 {% endblock %}
 {% block extra_js_1 %}
-<script src="/public/javascripts/jquery.tabs.js"></script>
 <script src="/public/javascripts/jquery-ui.js"></script>
 <script type="text/javascript">
   window.moj.init()
