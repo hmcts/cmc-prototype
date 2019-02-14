@@ -128,11 +128,11 @@
 
 
               {% elseif data['defendant'] == 3.902 %}
-              <h2 class="heading-small">Your response to the claim</h2>
+              <h2 class="heading-small">Waiting for the claimant to respond</h2>
               <p>You've said you owe £1,200 and offered to pay Jan Clark immediately.</p>
               <p>We’ll contact you when they respond.</p>
-              <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=5">Download your response</a>
-                (PDF, 123KB)</p>
+              <!--<p><a href="../defendant/correspondence/forms/claim-form-defendant?check=5">Download your response</a>-->
+                <!--(PDF, 123KB)</p>-->
 
               {% elseif data['defendant'] == 3.903 %}
               <h2 class="heading-small">Jan Clark accepted your admission of £1,200</h2>
@@ -1286,6 +1286,38 @@
                 {% endif %}
 
                 {% if data['defendant'] == 3 %}
+                <div class="hmcts-timeline__item">
+                  <div class="hmcts-timeline__header">
+                    <h2 class="hmcts-timeline__title">The claimant requested a County Court Judgment against you</h2>
+                    <!--<p class="hmcts-timeline__by">by claimant</p>-->
+                  </div>
+                  <p class="hmcts-timeline__date">
+                    <time style="color: grey">{{ now | date( 'add', 5, 'days' ) | date }}</time>
+                  </p>
+                </div>
+                <div class="hmcts-timeline__item">
+                  <div class="hmcts-timeline__header">
+                    <h2 class="hmcts-timeline__title">You requested more time to respond</h2>
+                    <!--<p class="hmcts-timeline__by">by defendant</p>-->
+                  </div>
+                  <p class="hmcts-timeline__date">
+                    <time style="color: grey">{{ now | date( 'add', 5, 'days' ) | date }}</time>
+                  </p>
+                </div>
+                <div class="hmcts-timeline__item">
+                  <div class="hmcts-timeline__header">
+                    <h2 class="hmcts-timeline__title">Claim made against you</h2>
+                    <!--<p class="hmcts-timeline__by">by claimant</p>-->
+                    <p><a href="../claimant/correspondence/claim-form-claimant?check=1">Download claim</a>
+                      (PDF, 123KB)</p>
+                  </div>
+                  <p class="hmcts-timeline__date" style="margin-top: -10px">
+                    <time style="color: grey">{{ now | date( 'add', 0, 'days' ) | date }}</time>
+                  </p>
+                </div>
+                {% endif %}
+
+                {% if data['defendant'] == 3.902 %}
                 <div class="hmcts-timeline__item">
                   <div class="hmcts-timeline__header">
                     <h2 class="hmcts-timeline__title">The claimant requested a County Court Judgment against you</h2>
