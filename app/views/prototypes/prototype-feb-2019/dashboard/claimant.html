@@ -6,56 +6,49 @@
 {% block content %}
 <main id="content" role="main">
   {% include "includes/phase_banner_beta.html" %}
+  <div class="breadcrumbs" style="margin-bottom: -20px">
+    <ol>
+      <li><a href="#">All claims</a></li>
+      <li aria-current="page">Claim details</li>
+    </ol>
+  </div>
+
   <div class="grid-row">
-    <div class="column-two-thirds">
-      <header class="page-heading page-heading-with-context page-heading-without-breadcrumb">
-        <a href="#" class="link-back">Back</a>
-        <h1 class="heading-large">
-          <span class="heading-secondary">Claim number:</span>
-          {% if data['claimant'] == 1.2 %}
-          Draft
-          {% else %}
-          391MC645
-          {% endif %}
-        </h1>
-        <style>
-          #tabs-3, #tabs-2, .nav-tabs {
-            display: none
-          }
 
-          .tab-content .tab-pane {
-            border: none
-          }
-        </style>
-        <div id="tabs">
-          <div class="nav-tabs">
-            <ul class="tabs-nav">
-              <li><a href="#tabs-1">Claim status <span class="alert-icon stat"></span></a></li>
-              <li><a href="#tabs-2">Claim history</a></li>
-              {% if data['claimant'] == 10 or data['claimant'] == 11 or data['claimant'] == 12 or data['claimant'] == 16
-              %}
-              <li><a href="#tabs-3">Settle out of court <span class="alert-icon settle"></span></a></li>
-              {%else%}
-              {% endif %}
-            </ul>
-          </div>
-          {% if data['claimant'] == 1 or data['claimant'] == 3 or data['claimant'] == 17 or data['claimant'] == 11 or
-          data['claimant'] == 12 or data['claimant'] == 13 or data['claimant'] == 14 or data['claimant'] == 15 or
-          data['claimant'] == 16 %}
-          <style> .alert-icon.stat {
-            display: none
-          }</style>
-          {% if data['claimant'] == 12 %}
-          <style> .alert-icon.settle {
-            display: none
-          }</style>
-          {%endif%}
-          {%else%}
-          {% endif %}
-          <div class="tab-content">
-            <h2 class="heading-medium">Claim status</h2>
-            <div id="tabs-1" class="tab-pane">
+    <div class="details" style="margin-top: -30px">
+        <span style=""><h2 style="">
+          <h2 class="heading-medium">Jan Clark v Mary Richards</h2>
+          <h2 class="font-xsmall" style="margin-top: -10px">Claim number: <span style="">352MC733</span></h2>
+    </div>
 
+    <div class="column-full-width">
+
+      <div class="tabs" style="margin-top: 30px">
+
+        <div class="tabs-nav">
+          <ul class="tabs-list" role="tablist">
+            <li role="presentation"><a href="#next-steps" role="tab" tabindex="0" aria-controls="next-steps"
+                                       aria-selected="true">Next steps</a>
+            </li>
+            <li role="presentation"><a href="#history" role="tab" tabindex="-1" aria-controls="history">Claim
+              history</a>
+            </li>
+            <!--<li role="presentation"><a href="#settle-out-of-court" role="tab" tabindex="-1"-->
+            <!--aria-controls="settle-out-of-court">Settle out of-->
+            <!--court</a>-->
+            <!--</li>-->
+          </ul>
+        </div>
+
+        <div class="tabs-content">
+
+          <div class="tabs-panel" id="next-steps" role="tabpanel">
+
+            <div class="tabs-panel-inner text" tabindex="0">
+
+              <fieldset></fieldset>
+
+              <!-- Not needed as will go straight to task list from dashboard/allclaims -->
               {% if data['claimant'] == 1.2 %}
               <h2 class="heading-small">This claim has not been submitted</h2>
               Your claim is saved as a draft. <a href="/claimant/full/c-4/task-list"> Continue with claim.</a>
@@ -325,7 +318,7 @@
 
               <div class="status-block single">
                 <h2 class="heading-small">If you've been paid</h2>
-                <p><a href="paid-in-full/claimant">Tell us if you want to end the claim</a> beacuse the defendant has paid you.
+                <p><a href="paid-in-full/claimant">Tell us if you want to end the claim</a> because the defendant has paid you.
               </div>
 
 
@@ -461,8 +454,7 @@
               {% elseif data['claimant'] == 10.9 %}
               <h2 class="heading-small">You've rejected the defendant's response</h2>
               <p>You've both agreed to try mediation. The Small Claims Mediation Service will contact you to arrange
-                an
-                appointment.</p>
+                an appointment.</p>
               <p><a href="mediation/how-mediation-works">Find out how mediation works</a></p>
               <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=9">Download their response</a>
                 (PDF, 123KB)</p>
@@ -745,59 +737,60 @@
               {% endif %}
 
             </div>
-            {% if data['claimant'] == 10 or data['claimant'] == 11 or data['claimant'] == 12 or data['claimant'] == 16
-            %}
-            <div id="tabs-3" class="tab-pane">
-              {% if data['claimant'] == 10 or data['claimant'] == 11%}
-              <h2 class="heading-medium">The defendant wants to settle out of court </h2>
-              <p>Mary Richards has made an offer to settle out of court You can accept, reject or make a counter
-                offer.</p>
-              <a href="offer-agreement/view-offer?defendant=offer">View and respond to offer.</a>
-              {% elseif data['claimant'] == 12 %}
-              <h2 class="heading-medium">We've sent your offer to Mary Richards</h2>
-              <p>Mary Richards can accept, reject or make a counter offer. We'll email you when they respond.</p>
-              <p>If you settle out of court you’ll sign an agreement that replaces the claim. Until then the claim
-                continues and might go to a court hearing.</p>
-              {% elseif data['claimant'] == 16 %}
-              <h2 class="heading-medium">Sign a legal agreement to settle out of court</h2>
-              <div class="">
-                <p> The defendant has accepted your offer. You need to sign a legal agreement to settle out of court
-                  Mary Richards has signed the agreement.</p>
-                <p><a href='offer-agreement/agreement'>View and sign the agreement. </a></p>
-              </div>
-              {% elseif data['claimant'] == 17 %}
-              <h2 class="heading-medium">Sign a legal agreement to settle out of court</h2>
-              <div class="">
-                <p> The defendant has accepted your offer. You need to sign a legal agreement to settle out of court
-                  Mary Richards has signed the agreement.</p>
-                <p><a href='offer-agreement/agreement'>View and sign the agreement. </a></p>
-              </div>
-              {% endif %}
-            </div>
-            {% endif %}
+
+            <!--{% if data['claimant'] == 10 or data['claimant'] == 11 or data['claimant'] == 12 or data['claimant'] == 16 %}-->
+            <!--<div id="tabs-3" class="tab-pane">-->
+            <!--{% if data['claimant'] == 10 or data['claimant'] == 11%}-->
+            <!--<h2 class="heading-medium">The defendant wants to settle out of court </h2>-->
+            <!--<p>Mary Richards has made an offer to settle out of court You can accept, reject or make a counter-->
+            <!--offer.</p>-->
+            <!--<a href="offer-agreement/view-offer?defendant=offer">View and respond to offer.</a>-->
+            <!--{% elseif data['claimant'] == 12 %}-->
+            <!--<h2 class="heading-medium">We've sent your offer to Mary Richards</h2>-->
+            <!--<p>Mary Richards can accept, reject or make a counter offer. We'll email you when they respond.</p>-->
+            <!--<p>If you settle out of court you’ll sign an agreement that replaces the claim. Until then the claim-->
+            <!--continues and might go to a court hearing.</p>-->
+            <!--{% elseif data['claimant'] == 16 %}-->
+            <!--<h2 class="heading-medium">Sign a legal agreement to settle out of court</h2>-->
+            <!--<div class="">-->
+            <!--<p> The defendant has accepted your offer. You need to sign a legal agreement to settle out of-->
+            <!--court Mary Richards has signed the agreement.</p>-->
+            <!--<p><a href='offer-agreement/agreement'>View and sign the agreement. </a></p>-->
+            <!--</div>-->
+            <!--{% elseif data['claimant'] == 17 %}-->
+            <!--<h2 class="heading-medium">Sign a legal agreement to settle out of court</h2>-->
+            <!--<div class="">-->
+            <!--<p> The defendant has accepted your offer. You need to sign a legal agreement to settle out of-->
+            <!--court Mary Richards has signed the agreement.</p>-->
+            <!--<p><a href='offer-agreement/agreement'>View and sign the agreement. </a></p>-->
+            <!--</div>-->
+            <!--{% endif %}-->
+            <!--</div>-->
+            <!--{% endif %}-->
+
 
             {% if data['claimant'] == 10.01 or data['claimant'] == 10.4 or data['claimant'] == 10.5 %}
 
-            <hr/>
-            <h2 class="heading-small">Request County Court Judgment</h2>
+            <!--<hr/>-->
+            <!--<h2 class="heading-small">Request County Court Judgment</h2>-->
 
-            <p>
-              If the defendant doesn't pay or breaks the terms of the settlement agreement, you can <a
-              href='applications-and-judgments/default-judgment/claim-amount-deduct?radio-indent-group=No&radio-proceed=not-signed'>request
-              a County Court Judgment</a>.
-            </p>
+            <!--<p>-->
+              <!--If the defendant doesn't pay or breaks the terms of the settlement agreement, you can <a-->
+              <!--href='applications-and-judgments/default-judgment/claim-amount-deduct?radio-indent-group=No&radio-proceed=not-signed'>request-->
+              <!--a County Court Judgment</a>.-->
+            <!--</p>-->
             {% endif %}
 
-            {% if data['claimant'] < 20 and data['claimant'] != 1.2 and data['claimant'] != 10.11 and data['claimant']
-            != 10.111 and data['claimant']
-            != 10.12 and data['claimant'] != 10.121 and data['claimant'] != 10.01 and
-            data['claimant'] != 10.4 and
-            data['claimant'] != 10.5 and data['claimant'] != 10.81 and data['claimant'] != 10.82 and data['claimant']
-            !=
-            10.83 and data['claimant'] != 16 and data['claimant'] != 17 and data['claimant'] != 4.2 and
-            data['claimant']
-            != 4.3 %}
-            <hr/>
+            {% if data['claimant'] < 20 and data['claimant'] != 1.2 and data['claimant'] != 10.11 and
+            data['claimant'] != 10.111 and data['claimant'] != 10.12 and data['claimant'] != 10.121 and
+            data['claimant'] != 10.01 and
+            data['claimant'] != 10.4 and data['claimant'] != 10.5 and data['claimant'] != 10.81 and data['claimant']
+            != 10.82 and
+            data['claimant'] != 10.83 and data['claimant'] != 16 and data['claimant'] != 17 and data['claimant'] !=
+            4.2 and
+            data['claimant'] != 4.3 %}
+
+            <!--<hr/>-->
 
             <!-- with discontinuance -->
             <!--
@@ -806,49 +799,104 @@
             -->
 
             <!-- without discontinuance -->
-            <h2 class="heading-small">If you've been paid</h2>
-            <p><a href="paid-in-full/claimant?endClaim=yes">Tell us if you want to end the claim</a> because the defendant has paid you.</p>
+            <!--<h2 class="heading-small">If you've been paid</h2>-->
+            <!--<p><a href="paid-in-full/claimant?endClaim=yes">Tell us if you want to end the claim</a> because the-->
+              <!--defendant has paid you.</p>-->
 
+            {% endif %}
+
+
+            <!--<div class="right-column-nav" style="margin-top: 30px">-->
+            <!--&lt;!&ndash;<hr class="light-hr" style="margin-top: 5px">&ndash;&gt;-->
+            <!--<h3 class="heading-small">More actions</h3>-->
+            <!--<p></p><a href="">Tell us you've settled</a></p>-->
+            <!--<p></p><a href="">Stopping the claim</a></p>-->
+            <!--</div>-->
+
+
+          </div>
+
+
+        <div class="tabs-panel" id="history" role="tabpanel" aria-hidden="true">
+
+          <div class="tabs-panel-inner text" tabindex="0">
+
+            <fieldset></fieldset>
+
+            <div class="hmcts-timeline" style="margin-top: 30px">
+
+              {% if data['claimant'] == 1 %}
+              <div class="hmcts-timeline__item">
+                <div class="hmcts-timeline__header">
+                  <h2 class="hmcts-timeline__title">You submitted your claim</h2>
+                  <!--<p class="hmcts-timeline__by">by claimant</p>-->
+                  <p><a href="../claimant/correspondence/claim-form-claimant?check=1">Download claim</a>
+                    (PDF, 123KB)</p>
+                </div>
+                <p class="hmcts-timeline__date" style="margin-top: -10px">
+                  <time style="color: grey">{{ now | date( 'add', 0, 'days' ) | date }}</time>
+                </p>
+              </div>
               {% endif %}
+
+            </div>
 
           </div>
         </div>
-    </div>
-    <div class="column-one-third">
-      {% if data['claimant'] == 1.2 %}
-      {% elseif data['claimant'] == 18 %}
-      <div class="meta-data">
-        <p class="heading-small" style="padding-top: 100px">About counterclaim</p>
-        <ul role="navigation" class="font-xsmall list">
-          <li><strong class="bold">Defendant name:</strong><br> <a href="party-details/defendant">Mary Richards</a>
-          </li>
-          <li><strong class="bold">Claim amount:</strong><br>£3240.34</li>
-        </ul>
+
+        <div class="tabs-panel" id="settle-out-of-court" role="tabpanel" aria-hidden="true">
+
+          <div class="tabs-panel-inner text" tabindex="0">
+
+            <fieldset></fieldset>
+
+
+          </div>
+        </div>
+
       </div>
-      {% else %}
-      <div class="meta-data">
-        <p class="heading-small" style="padding-top: 100px">About claim</p>
-        <ul role="navigation" class="font-xsmall list">
-          <li><strong class="bold">Defendant name:</strong><br> <a href="party-details/defendant">Mary Richards</a>
-          </li>
-          {% if data['claimant'] == 9.1 or data['claimant'] == 13.1 or data['claimant'] == 13.2 %}
-          <li><strong class="bold">Claim amount:</strong><br>£300</li>
-          {% else %}
-          <li><strong class="bold">Claim amount:</strong><br>£1500</li>
-          {% endif %}
-          <li><strong class="bold">Claim details:</strong><br><a
-            href="../claimant/correspondence/claim-form-claimant?check=1">Download claim</a></li>
-          {% if data['claimant'] == 16 or data['claimant'] == 17%}
-          <li><strong class="bold">Defendant's response:</strong><br><a
-            href="../defendant/correspondence/forms/claim-form-defendant?check=9">Download response</a></li>
-          {% else %}
-          {% endif %}
-        </ul>
-      </div>
-      {% endif %}
     </div>
   </div>
-{% include 'prototypes/prototype-feb-2019/includes/contact.html' %}
+
+
+  <!--<div class="column-one-third">-->
+  <!--{% if data['claimant'] == 1.2 %}-->
+  <!--{% elseif data['claimant'] == 18 %}-->
+  <!--<div class="meta-data">-->
+  <!--<p class="heading-small" style="padding-top: 100px">About counterclaim</p>-->
+  <!--<ul role="navigation" class="font-xsmall list">-->
+  <!--<li><strong class="bold">Defendant name:</strong><br> <a href="party-details/defendant">Mary-->
+  <!--Richards</a>-->
+  <!--</li>-->
+  <!--<li><strong class="bold">Claim amount:</strong><br>£3240.34</li>-->
+  <!--</ul>-->
+  <!--</div>-->
+
+  <!--{% else %}-->
+  <!--<div class="meta-data">-->
+  <!--<p class="heading-small" style="padding-top: 100px">About claim</p>-->
+  <!--<ul role="navigation" class="font-xsmall list">-->
+  <!--<li><strong class="bold">Defendant name:</strong><br> <a href="party-details/defendant">Mary Richards</a>-->
+  <!--</li>-->
+  <!--{% if data['claimant'] == 9.1 or data['claimant'] == 13.1 or data['claimant'] == 13.2 %}-->
+  <!--<li><strong class="bold">Claim amount:</strong><br>£300</li>-->
+  <!--{% else %}-->
+  <!--<li><strong class="bold">Claim amount:</strong><br>£1500</li>-->
+  <!--{% endif %}-->
+  <!--<li><strong class="bold">Claim details:</strong><br><a-->
+  <!--href="../claimant/correspondence/claim-form-claimant?check=1">Download claim</a></li>-->
+  <!--{% if data['claimant'] == 16 or data['claimant'] == 17%}-->
+  <!--<li><strong class="bold">Defendant's response:</strong><br><a-->
+  <!--href="../defendant/correspondence/forms/claim-form-defendant?check=9">Download response</a></li>-->
+  <!--{% else %}-->
+  <!--{% endif %}-->
+  <!--</ul>-->
+  <!--</div>-->
+  <!--{% endif %}-->
+  <!--</div>-->
+
+  <fieldset></fieldset>
+  {% include 'prototypes/prototype-feb-2019/includes/contact.html' %}
 </main>
 <form method="post" action="#" class="form" style="position: absolute;">
   <select id="claimant2" name="claimant2" onchange="window.location.href='?claimant='+this.value">
@@ -879,7 +927,6 @@
     <option value="9.1" {% if data['claimant'] == 9.1 %}selected{% endif %}>Dispute claim + mediation (pilot)</option>
     <option>------- Claimant responses ----------</option>
     <option value="10" {% if data['claimant'] == 10 %}selected{% endif %}>Dispute claim + offer made  </option>
-
     <option value="10.1" {% if data['claimant'] == 10.1 %}selected{% endif %}>Accepted repayment plan - settlement (claimant/court plan)</option>
     <option value="10.001" {% if data['claimant'] == 10.001 %}selected{% endif %}>Accepted repayment plan - settlement (def's plan)</option>
     <option value="10.01" {% if data['claimant'] == 10.01 %}selected{% endif %}>Accepted repayment plan - settlement - accepted</option>
@@ -914,6 +961,17 @@
     <option value="11.6" {% if data['claimant'] == 11.6 %}selected{% endif %}>Queries supplied, upload answers</option>
     <option value="11.7" {% if data['claimant'] == 11.7 %}selected{% endif %}>Everything received</option>
 
+    <option value="11.1" {% if data['claimant'] == 11.1 %}selected{% endif %}>Respond to order</option>
+    <option value="11.11" {% if data['claimant'] == 11.11 %}selected{% endif %}>Respond to order (offline)</option>
+    <option value="11.2" {% if data['claimant'] == 11.2 %}selected{% endif %}>Responded to order - with experts</option>
+    <option value="11.21" {% if data['claimant'] == 11.21 %}selected{% endif %}>Responded to order - no experts</option>
+    <option value="11.3" {% if data['claimant'] == 11.3 %}selected{% endif %}>Supply expert questions</option>
+    <option value="11.4" {% if data['claimant'] == 11.4 %}selected{% endif %}>Supply expert report</option>
+    <option value="11.5" {% if data['claimant'] == 11.5 %}selected{% endif %}>Report uploaded, claimant to supply queries</option>
+    <option value="11.51" {% if data['claimant'] == 11.51 %}selected{% endif %}>Report uploaded, defendant has supplied queries</option>
+    <option value="11.6" {% if data['claimant'] == 11.6 %}selected{% endif %}>Queries supplied, upload answers</option>
+    <option value="11.7" {% if data['claimant'] == 11.7 %}selected{% endif %}>Everything received</option>
+
     <option>------- Offer and agreements ----------</option>
     <option value="11" {% if data['claimant'] == 11 %}selected{% endif %}>Offer from defendant  </option>
     <option value="12" {% if data['claimant'] == 12 %}selected{% endif %}>Reject offer from defendant  </option>
@@ -930,6 +988,7 @@
 </form>
 {% endblock %}
 {% block extra_js_1 %}
+<script src="/public/javascripts/jquery.tabs.js"></script>
 <script src="/public/javascripts/jquery-ui.js"></script>
 <script type="text/javascript">
   window.moj.init()
