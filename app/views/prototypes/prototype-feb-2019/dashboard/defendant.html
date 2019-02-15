@@ -52,225 +52,153 @@
               <div class="status-block single">
                 <h2 class="heading-small">Respond to the claim</h2>
                 <p>You haven't responded to this claim.</p>
-                <p>You need to respond before 4pm on <span class="dates"></span> (19 days remaining). </p>
-                <p><a class="button" href="../defendant/task-list">Respond to claim </a></p>
+                <p>You need to respond before 4pm on <span class="dates"></span> (19 days remaining).</p>
+                <p><a class="button" href="../defendant/task-list">Respond to the claim</a></p>
               </div>
 
               {% elseif data['defendant'] == 2 %}
               <div class="status-block single">
                 <h2 class="heading-small">Respond to the claim</h2>
-                <p>You requested more time to respond.</p>
-                <p> You need to respond before 4pm on <span class="dates3"></span> (33 days remaining).</p>
-                <p><a class="button" href="../defendant/task-list">Respond to claim </a></p>
+                <p>You requested more time to respond. </p>
+                <p>You now need to respond before 4pm on <span class="dates3"></span> (33 days remaining).</p>
+                <p><a class="button" href="../defendant/task-list">Respond to the claim</a></p>
               </div>
 
               {% elseif data['defendant'] == 3 %}
-              <h2 class="heading-small">You have a County Court Judgment (CCJ) against you</h2>
-              <p>You didn't respond to this claim by the deadline of <span class="dates"></span>. A <a href="">default CCJ</a> was
-                issued on <span class="dates3"></span> .</p>
-              <p>A CCJ means the court orders you to pay the claim. You must pay Jan Clark £1,500. Find out <a
-                href="./applications-and-judgments/ccj/how-to-pay">how to pay a CCJ.</a></p>
-              <h3 class="heading-small">Apply to cancel the CCJ</h3>
-              You can <a href="applications-and-judgments/ccj/satisfy-cancel-set-aside">apply to cancel the CCJ</a> if you paid the
-              claim or didn't respond to it.
+              <h2 class="heading-small">Waiting for a County Court Judgment to be confirmed</h2>
+              <p>The claimant has requested a CCJ against you.</p>
+              <p>You didn't respond to this claim by the deadline of <span class="dates"></span>.</p>
+              <p>Jan Clark requested a CCJ against you on <span class="dates3"></span>.
+                We'll contact you within 5 days to tell you whether the request for judgment has been successful.</p>
+              <p>You can no longer respond to the claim.</p>
 
               {% elseif data['defendant'] == 3.9 %}
               <h2 class="heading-small">Waiting for the claimant to respond</h2>
-              <p>You've said you owe Jan Clark £1,200.</p>
-              <p>You've offered to pay £200 per month, starting {{ now | date('add', 1,
-                'months') | date( 'D MMMM YYYY' ) }}.</p>
+              <p>You've said you owe Jan Clark £1,200. </p>
+              <p>You've offered to pay £200 per month, starting {{ now | date('add', 1,'months') | date( 'D MMMM YYYY' ) }}.</p>
               <p>We’ll contact you when they respond.</p>
-              <!--<p><a href="../defendant/correspondence/forms/claim-form-defendant?check=6">Download your response</a>-->
-                <!--(PDF, 123KB)</p>-->
 
               {% elseif data['defendant'] == 3.9001 %}
               <h2 class="heading-small">Waiting for the claimant to respond</h2>
-              <p>You've said you owe Jan Clark £1,200 and offered to pay in instalments.</p>
-              <p>You need to send them your company's financial details if you haven't already.</p>
+              <p>You've said you owe Jan Clark £1,200 and offered to pay in instalments. You need to send them your company's financial details if you haven't already. </p>
               <p><a href="party-details/claimant">Get Jan Clark's contact details</a></p>
               <p>We’ll contact you when they respond.</p>
-              <!--<p><a href="../defendant/correspondence/forms/claim-form-defendant?check=6">Download your response</a>-->
-                <!--(PDF, 123KB)</p>-->
 
               {% elseif data['defendant'] == 3.901 %}
               <h2 class="heading-small">Waiting for the claimant to respond</h2>
-              <p>You've said you owe Jan Clark £1,200 and offered to pay by {{ now | date('add', 3, 'months') | date( 'D
-                MMMM YYYY' ) }}.</p>
+              <p>You've said you owe £1,200 and offered to pay Jan Clark by {{ now | date('add', 3, 'months') | date( 'D MMMM YYYY' ) }}.</p>
               <p>We’ll contact you when they respond.</p>
-              <!--<p><a href="../defendant/correspondence/forms/claim-form-defendant?check=5">Download your response</a>-->
-                <!--(PDF, 123KB)</p>-->
 
               {% elseif data['defendant'] == 3.9011 %}
-              <h2 class="heading-small">You've said you owe £1,200</h2>
-              <p>You've said you owe Jan Clark £1,200 and offered to pay by 15 November 2018.</p>
-              <p>You need to send them your company's financial details if you haven't already.</p>
+              <h2 class="heading-small">Waiting for the claimant to respond</h2>
+              <p>You've said you owe £1,200.</p>
+              <p>You offered to pay Jan Clark by 15 November 2018. You need to send them your company's financial details if you haven't already. </p>
               <p><a href="party-details/claimant">Get Jan Clark's contact details</a></p>
               <p>We’ll contact you when they respond.</p>
-              <!--<p><a href="../defendant/correspondence/forms/claim-form-defendant?check=5">Download your response</a>-->
-                <!--(PDF, 123KB)</p>-->
 
               {% elseif data['defendant'] == 3.9012 %}
-              <h2 class="heading-small">Make the agreed payments</h2>
+              <h2 class="heading-small">Make the agreed repayments</h2>
               <p>You've both signed a settlement agreement.</p>
-              <p>The agreement says you'll repay £1,200 by
-                {% if data['set-month'] %}
-                {{ ( data['set-month'] + ' ' + data['set-day'] + ' ' + data['set-year']) | date('D MMMM YYYY') }}{% else
-                %}{{ now | date('add', 3, 'months') | date('D MMMM YYYY') }}{% endif %}.</p>
-
+              <p>The agreement says you'll repay £1,200 per month starting {% if data['set-month'] %}
+                              {{ ( data['set-month'] + ' ' + data['set-day'] + ' ' + data['set-year']) | date('D MMMM YYYY') }}{% else
+                              %}{{ now | date('add', 3, 'months') | date('D MMMM YYYY') }}{% endif %}.</p>
               <p>The claimant can't request a County Court Judgment against you unless you break the terms.</p>
-              <p><a href="../defendant/correspondence/forms/agreement?check=3">Download the settlement agreement</a>
-                (PDF, 123KB)</p>
-              <p><a href="party-details/claimant">Contact Jan Clark</a> if you need their payment details. Make sure you
-                get receipts for any payments.</p>
-              <!--<p><a href="../defendant/correspondence/forms/claim-form-defendant?check=3">Download your response</a>-->
-                <!--(PDF, 123KB)</p>-->
+              <p><a href="party-details/claimant">Contact Jan Clark</a>
+                if you need their payment details. Make sure you get receipts for any payments.</p>
 
 
               {% elseif data['defendant'] == 3.902 %}
               <h2 class="heading-small">Waiting for the claimant to respond</h2>
               <p>You've said you owe £1,200 and offered to pay Jan Clark immediately.</p>
               <p>We’ll contact you when they respond.</p>
-              <!--<p><a href="../defendant/correspondence/forms/claim-form-defendant?check=5">Download your response</a>-->
-                <!--(PDF, 123KB)</p>-->
 
               {% elseif data['defendant'] == 3.903 %}
               <h2 class="heading-small">Pay the amount agreed</h2>
               <p>Jan Clark accepted your admission of £1,200.</p>
-              <p>You must pay them by {{ now | date('add', 5, 'days') | date }}. Any cheques or transfers must be clear
-                in their account by then.</p>
+              <p>You must pay them by {{ now | date('add', 5, 'days') | date }}. Any cheques or transfers must be clear in their account by then.</p>
               <p>If they don't receive the money by then, they can request a County Court Judgment against you.</p>
-              <p><a href="party-details/claimant">Contact Jan Clark</a> if you need their payment details. Make sure you
-                get receipts for any payments.</p>
-              <!--<p><a href="../defendant/correspondence/forms/claim-form-defendant?check=2">Download your response</a>-->
-                <!--(PDF, 123KB)</p>-->
+              <p><a href="party-details/claimant">Contact Jan Clark</a> if you need their payment details.
+                Make sure you get receipts for any payments.</p>
 
               {% elseif data['defendant'] == 3.9031 %}
               <h2 class="heading-small">Pay the judgment debt</h2>
               <p>A County Court Judgment (CCJ) has been issued against you.</p>
-              <p>Jan Clark accepted your offer to pay £1,200 immediately. Because you didn't pay within 5 days, they requested the CCJ against you.</p>
+              <p>Jan Clark accepted your offer to pay £1,200 immediately. Because you didn't pay within 5 days, they requested a CCJ against you.</p>
               <p>We'll post a copy of the judgment to you and to Jan Clark.</p>
-              <p>If you pay the debt within one month of the date of judgment, the CCJ is removed from the public
-                register. You can pay £15 to <a
-                  href="https://www.gov.uk/government/publications/form-n443-application-for-a-certificate-of-satisfaction-or-cancellation">apply
-                  for a certificate</a> that confirms this.</p>
-              <p><a href="party-details/claimant">Contact Jan Clark</a> if you need their payment details. Make sure you
-                get receipts for any payments.</p>
-              <!--<p><a href="../defendant/correspondence/forms/claim-form-defendant?check=5">Download your response</a>-->
-                <!--(PDF, 123KB)</p>-->
+              <p>If you pay the debt within one month of the date of judgment, the CCJ is removed from the public register. You can pay £15 to <a href="https://www.gov.uk/government/publications/form-n443-application-for-a-certificate-of-satisfaction-or-cancellation">apply for a certificate</a> that confirms this.</p>
+              <p><a href="party-details/claimant">Contact Jan Clark</a> if you need their payment details.
+                Make sure you get receipts for any payments.</p>
 
               {% elseif data['defendant'] == 3.904 %}
-              <h2 class="heading-small">You've both signed a settlement agreement</h2>
-              <p>The agreement says you'll repay £1,200 by instalments of {% if data['defendant'] == 5.2 %}£200{% else
-                %}£250{% endif %} per month starting {{ now | date('add', 1, 'months') | date( 'D MMMM YYYY' ) }}.</p>
-              <p>If you sign the settlement agreement, they can't request a County Court Judgment against you unless you
-                break the terms.</p>
-              <p><a href="../defendant/correspondence/forms/agreement?check=2">Download the settlement agreement</a>
-                (PDF, 123KB)</p>
-              <p><a href="party-details/claimant">Contact Jan Clark</a> if you need their payment details.</p>
-
-              <p>Make sure you get receipts for any payments.</p>
-              <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=4">Download your response</a>
-                (PDF, 123KB)</p>
-
+              <h2 class="heading-small">Make the agreed repayments</h2>
+              <p>You've both signed a settlement agreement.</p>
+              <p>The agreement says you'll repay £1,200 by instalments of £{% if data['defendant'] == 5.2 %}£200{% else %}£250{% endif %} per month starting {{ now | date('add', 1, 'months') | date( 'D MMMM YYYY' ) }}.</p>
+              <p>The claimant can't request a County Court Judgment against you unless you break the terms.</p>
+              <p><a href="party-details/claimant">Contact Jan Clark</a> if you need their payment details.
+                Make sure you get receipts for any payments.</p>
 
               {% elseif data['defendant'] == 3.91 %}
-              <h2 class="heading-small">Jan Clark rejected your admission of £1,200</h2>
-              <p>They believe you owe them the full £1,500 claimed.</p>
-              <p>They have agreed to try mediation. We'll contact you with details of your appointment.</p>
-              <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=5">Download your response</a>
-                (PDF, 123KB)</p>
-              <p><a href="mediation/how-mediation-works">Find out how mediation works</a></p>
+              <h2 class="heading-small">We'll contact you with a mediation appointment</h2>
+              <p>Jan Clark rejected your admission of £1,200. They believe you owe them the full £1,500 claimed.</p>
+              <p>They've agreed to try mediation. We'll contact you with details of your appointment.</p>
 
               {% elseif data['defendant'] == 3.92 %}
-              <h2 class="heading-small">Jan Clark rejected your admission of £1,200</h2>
-              <p>They believe you owe them the full £1,500 claimed.</p>
-              <p>You might have to go to a hearing. We'll contact you if we set a hearing date to tell you how to
-                prepare.</p>
-              <p>You need to <a href="forms/dq-form">complete a directions questionnaire</a> form to tell us more about
-                the claim.</p>
-              <p>Your defence won't proceed if you don't complete and return the form before 4pm on <span
-                class="dates5"></span>.</p>
-              <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=5">Download your response</a>
-                (PDF, 123KB)</p>
+              <h2 class="heading-small">Tell us your hearing requirements</h2>
+              <p>Jan Clark rejected your admission of £1,200. They believe you owe them the full £1,500 claimed.</p>
+              <p>You might have to go to a court hearing. We'll contact you if we set a hearing date to tell you how to prepare.</p>
+              <p>You need to tell us your requirements for a hearing.</p>
+              <p>Your defence won't proceed if you don't respond before 4pm on <span class="dates5"></span>.</p>
+              <p><a href="forms/dq-form">Tell us your requirements</a></p>
 
               {% elseif data['defendant'] == 3.94 %}
-              <h2 class="heading-small">Jan Clark requested a County Court Judgment (CCJ) against you</h2>
-              <p>They accepted your offer to pay £1,200 but rejected your repayment plan.</p>
-              <p>They also rejected a repayment plan determined by the court, based on the financial details you
-                provided.</p>
-              <p>When we've processed the request we'll post a copy of the judgment to you and to Jan Clark.</p>
+              <h2 class="heading-small">Waiting for a judge to make a repayment plan</h2>
+              <p>A County Court Judgment (CCJ) has been issued against you.</p>
+              <p>Jan Clark accepted your offer to pay £1,200. They rejected your repayment plan and requested a CCJ against you.</p>
+              <p>They also rejected a repayment plan determined by the court, based on the financial details you provided.</p>
               <p>A judge will make a repayment plan. We'll contact you to tell you what to do next.</p>
-              <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=5">Download your response</a>
-                (PDF, 123KB)</p>
+              <p>We'll post a copy of the judgment to you and to Jan Clark.</p>
 
               {% elseif data['defendant'] == 4 %}
-              <h2 class="heading-small">Jan Clark rejected your repayment plan</h2>
+              <h2 class="heading-small">Sign a settlement agreement</h2>
               <p>Jan Clark accepted your offer to pay £1,200 but rejected your repayment plan.</p>
-              <p>They accepted a new repayment plan determined by the court, based on the financial details you
-                provided.</p>
-              <p>They asked you to sign a settlement agreement to formalise the plan.</p>
-              <p>If you sign the agreement, the claimant can't request a County Court Judgment against you unless you
-                break the terms.</p>
-              <p>If you don't sign or respond before 4pm on {{ now | date('add', 7, 'days') | date }} they can request a
-                County Court Judgment against you.</p>
-              <p><a href="counter-offer?offer=court&admission=" class="button secondary-button">View the repayment
-                plan</a></p>
-              <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=5">Download your response</a>
-                (PDF, 123KB)</p>
+              <p>They accepted a repayment plan determined by the court, based on the financial details you provided.</p>
+              <p>They've asked you to sign a settlement agreement to formalise the plan.</p>
+              <p>If you don't sign or respond before 4pm on {{ now | date('add', 7, 'days') | date }} they can request a County Court Judgment against you.</p>
+              <p><a href="../defendant/correspondence/forms/agreement?check=2">View and sign the agreement</a></p>
 
               {% elseif data['defendant'] == 4.001 %}
-              <h2 class="heading-small">Jan Clark rejected your repayment plan</h2>
+              <h2 class="heading-small">Sign a settlement agreement</h2>
               <p>Jan Clark accepted your offer to pay £1,200 but rejected your repayment plan.</p>
-              <p>They suggested a new repayment plan. The court believes you can afford the claimant's plan, based on
-                the financial details you provided.</p>
-              <p>They asked you to sign a settlement agreement to formalise the plan.</p>
-              <p>If you sign the agreement, the claimant can't request a County Court Judgment against you unless you
-                break the terms.</p>
-              <p>If you don't sign or respond by {{ now | date('add', 7, 'days') | date }} they can request a County
-                Court Judgment against you.</p>
-              <p><a href="counter-offer?offer=claimant&admission=" class="button secondary-button">View the repayment
-                plan</a></p>
-              <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=5">Download your response</a>
-                (PDF, 123KB)</p>
+              <p>They suggested a new repayment plan. The court believes you can afford the claimant's plan, based on the financial details you provided.</p>
+              <p>They've asked you to sign a settlement agreement to formalise the plan.</p>
+              <p>If you don't sign or respond before 4pm on {{ now | date('add', 7, 'days') | date }} they can request a County Court Judgment against you.</p>
+              <p><a href="../defendant/correspondence/forms/agreement?check=2">View and sign the agreement</a></p>
 
               {% elseif data['defendant'] == 4.01 %}
-              <h2 class="heading-small">Jan Clark requested a County Court Judgment (CCJ) against you</h2>
-              <p>They accepted your offer to pay £1,200 but rejected your repayment plan.</p>
-              <p>They accepted a new repayment plan determined by the court, based on the financial details you
-                provided.</p>
-              <p>They asked you to sign a settlement agreement. Because you didn't sign it, they requested the CCJ.</p>
-              <p><a href="counter-offer?offer=court&admission=determination" class="button secondary-button">View the
-                repayment plan</a></p>
-              <p>When we've processed the request we'll post a copy of the judgment to you and to Jan Clark.</p>
-              <p>If you pay the debt within one month of the date of judgment, the CCJ is removed from the public
-                register. You can pay £15 to <a
-                  href="https://www.gov.uk/government/publications/form-n443-application-for-a-certificate-of-satisfaction-or-cancellation">apply
-                  for a certificate</a> that confirms this.</p>
-              <p><a href="party-details/claimant">Contact Jan Clark</a> if you need their payment details. Make sure you
-                get receipts for any payments.</p>
-              <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=5">Download your response</a>
-                (PDF, 123KB)</p>
+              <h2 class="heading-small">Pay the judgment debt</h2>
+              <p>A County Court Judgment (CCJ) has been issued against you.</p>
+              <p>Jan Clark accepted your offer to pay £1,200 but rejected your repayment plan.</p>
+              <p>They accepted a new repayment plan determined by the court, based on the financial details you provided.</p>
+              <p><a href="counter-offer?offer=court&admission=determination" class="button secondary-button">View the repayment plan</a></p>
+              <p>They asked you to sign a settlement agreement. Because you didn't sign it, they requested a CCJ against you.</p>
+              <p>The judgment sets out the terms of how you must pay.</p>
+              <p>We'll post a copy of the judgment to you and to Jan Clark.</p>
+              <p>If you pay the debt within one month of the date of judgment, the CCJ is removed from the public register. You can pay £15 to <a href="https://www.gov.uk/government/publications/form-n443-application-for-a-certificate-of-satisfaction-or-cancellation">apply for a certificate</a> that confirms this.</p>
+              <p><a href="party-details/claimant">Contact Jan Clark</a> if you need their payment details. Make sure you get receipts for any payments.</p>
 
               {% elseif data['defendant'] == 4.02 %}
-              <h2 class="heading-small">Jan Clark requested a County Court Judgment (CCJ) against you</h2>
-              <p>They accepted your offer to pay £1,200 but rejected your repayment plan.</p>
-              <p>They suggested a new repayment plan. The court believes you can afford the claimant's plan, based on
-                the financial details you provided.</p>
-              <p>They asked you to sign a settlement agreement. Because you didn't sign it, they requested the CCJ.</p>
-              <p><a href="counter-offer?offer=claimant&admission=determination" class="button secondary-button">View the
-                repayment plan</a></p>
-              <p>When we've processed the request we'll post a copy of the judgment to you and to Jan Clark.</p>
-              <p>If you pay the debt within one month of the date of judgment, the CCJ is removed from the public
-                register. You can pay £15 to <a
-                  href="https://www.gov.uk/government/publications/form-n443-application-for-a-certificate-of-satisfaction-or-cancellation">apply
-                  for a certificate</a> that confirms this.</p>
-              <p><a href="party-details/claimant">Contact Jan Clark</a> if you need their payment details. Make sure you
-                get receipts for any payments.</p>
-              <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=5">Download your response</a>
-                (PDF, 123KB)</p>
+              <h2 class="heading-small">Pay the judgment debt</h2>
+              <p>A County Court Judgment (CCJ) has been issued against you.</p>
+              <p>Jan Clark accepted your offer to pay £1,200 but rejected your repayment plan.</p>
+              <p>They suggested a new repayment plan. The court believes you can afford the claimant's plan, based on the financial details you provided.</p>
+              <p><a href="counter-offer?offer=court&admission=determination" class="button secondary-button">View the repayment plan</a></p>
+              <p>They asked you to sign a settlement agreement. Because you didn't sign it, they requested a CCJ against you.</p>
+              <p>The judgment sets out the terms of how you must pay.</p>
+              <p>We'll post a copy of the judgment to you and to Jan Clark.</p>
+              <p>If you pay the debt within one month of the date of judgment, the CCJ is removed from the public register. You can pay £15 to <a href="https://www.gov.uk/government/publications/form-n443-application-for-a-certificate-of-satisfaction-or-cancellation">apply for a certificate</a> that confirms this.</p>
+              <p><a href="party-details/claimant">Contact Jan Clark</a> if you need their payment details. Make sure you get receipts for any payments.</p>
 
               {% elseif data['defendant'] == 4.1 %}
-
               <h2 class="heading-small">Jan Clark requested a County Court Judgment (CCJ) against you</h2>
               <p>They accepted your offer to pay £1,200. They rejected your repayment plan.</p>
               <p>They accepted a new repayment plan determined by the court, based on the financial details you
@@ -288,219 +216,127 @@
                 (PDF, 123KB)</p>
 
               {% elseif data['defendant'] == 4.2 %}
-              <h2 class="heading-small">Jan Clark requested a County Court Judgment (CCJ) against you</h2>
-              <p>They accepted your offer to pay £1,200. They rejected your repayment plan.</p>
-              <p>They suggested a new repayment plan. The court believes you can afford the claimant's plan, based on
-                the financial details you provided.</p>
-              <p><a href="counter-offer?offer=claimant&admission=determination" class="button secondary-button">View the
-                repayment plan</a></p>
-              <p>When we've processed the request we'll post a copy of the judgment to you and to Jan Clark.</p>
-              <p>If you pay the debt within one month of the date of judgment, the CCJ is removed from the public
-                register. You can pay £15 to <a
-                  href="https://www.gov.uk/government/publications/form-n443-application-for-a-certificate-of-satisfaction-or-cancellation">apply
-                  for a certificate</a> that confirms this.</p>
-              <p><a href="party-details/claimant">Contact Jan Clark</a> if you need their payment details. Make sure you
-                get receipts for any payments.</p>
-              <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=5">Download your response</a>
-                (PDF, 123KB)</p>
-
+              <h2 class="heading-small">Pay the judgment debt</h2>
+              <p>A County Court Judgment (CCJ) has been issued against you.</p>
+              <p>Jan Clark accepted your offer to pay £1,200. They rejected your repayment plan and requested a CCJ against you.</p>
+              <p>They suggested a new repayment plan. The court believes you can afford the claimant's plan, based on the financial details you provided.</p>
+              <p><a href="counter-offer?offer=claimant&admission=determination" class="button secondary-button">View the repayment plan</a></p>
+              <p>The judgment sets out the terms of how you must pay.</p>
+              <p>We'll post a copy of the judgment to you and to Jan Clark.</p>
+              <p>If you pay the debt within one month of the date of judgment, the CCJ is removed from the public register. You can pay £15 to <a href="https://www.gov.uk/government/publications/form-n443-application-for-a-certificate-of-satisfaction-or-cancellation">apply for a certificate</a> that confirms this.</p>
+              <p><a href="party-details/claimant">Contact Jan Clark</a> if you need their payment details. Make sure you get receipts for any payments.</p>
 
               {% elseif data['defendant'] == 5 %}
-              <p>You've offered to pay Jan Clark £1,500 on
-                {% if data['set-month'] %}
-                {{ ( data['set-month'] + ' ' + data['set-day'] + ' ' + data['set-year']) | date('D MMMM YYYY') }}{% else
-                %}{{ now | date('add', 3, 'months') | date('D MMMM YYYY') }}{% endif %}.</p>
+              <h2 class="heading-small">Waiting for the claimant to respond</h2>
+              <p>You've offered to pay Jan Clark £1,500 on {% if data['set-month'] %}
+                              {{ ( data['set-month'] + ' ' + data['set-day'] + ' ' + data['set-year']) | date('D MMMM YYYY') }}{% else
+                              %}{{ now | date('add', 3, 'months') | date('D MMMM YYYY') }}{% endif %}.</p>
               <p>We’ll contact you when they respond.</p>
-              <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=3">Download your response</a>
-                (PDF, 123KB)</p>
-
 
               {% elseif data['defendant'] == 5.001 %}
-              <p>You've said you owe £1,500 and offered to pay Jan Clark by
-                {% if data['set-month'] %}
-                {{ ( data['set-month'] + ' ' + data['set-day'] + ' ' + data['set-year']) | date('D MMMM YYYY') }}{% else
-                %}{{ now | date('add', 3, 'months') | date('D MMMM YYYY') }}{% endif %}. You need to send them your
-                company's financial details if you haven't already. </p>
-              <p><a href="party-details/claimant">Get Jan Clark's contact details.</a></p>
+              <h2 class="heading-small">Waiting for the claimant to respond</h2>
+              <p>You've said you owe £1,500 and offered to pay Jan Clark by 15 November 2018. You need to send them your company's financial details if you haven't already. </p>
+              <p><a href="party-details/claimant">Get Jan Clark's contact details</a></p>
               <p>We’ll contact you when they respond.</p>
-              <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=3">Download your response</a>
-                (PDF, 123KB)</p>
-
-              {% elseif data['defendant'] == 5.0111 %}
-              <h2 class="heading-small">Jan Clark requested a County Court Judgment (CCJ) against you</h2>
-              <p>They requested the judgment because you didn't pay on time or didn't pay the correct amount.</p>
-              <p><a href="counter-offer?offer=court&admission=" class="button secondary-button">View the repayment
-                plan</a></p>
-              <p>When we've processed the request we'll post a copy of the judgment to you and to Jan Clark.</p>
-              <p>If you pay the debt within one month of the date of judgment, the CCJ is removed from the public
-                register. You can pay £15 to <a
-                  href="https://www.gov.uk/government/publications/form-n443-application-for-a-certificate-of-satisfaction-or-cancellation">apply
-                  for a certificate</a> that confirms this.</p>
-              <p><a href="party-details/claimant">Contact Jan Clark</a> if you need their payment details. Make sure you
-                get receipts for any payments.</p>
-              <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=5">Download your response</a>
-                (PDF, 123KB)</p>
-
-
-              {% elseif data['defendant'] == 5.011 %}
-              <h2 class="heading-small">Jan Clark asked you to sign a settlement agreement</h2>
-              <p>They accepted your repayment plan and asked you to sign a settlement agreement to formalise it.</p>
-              <p>If you sign the agreement, they can't request a County Court Judgment against you unless you break the
-                terms.</p>
-              <p>If you don't sign or respond by {{ now | date('add', 7, 'days') | date }} they can request a County
-                Court Judgment against you.</p>
-
-              <p><a href="../defendant/task-list/settlement/sign?counter=yes&radio-pay-group=Set-date"
-                    class="button secondary-button">View the repayment plan</a></p>
-              <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=3">Download your response</a>
-                (PDF, 123KB)</p>
-
-              {% elseif data['defendant'] == 5.012 %}
-              <h2 class="heading-small">Jan Clark requested a County Court Judgment (CCJ) against you</h2>
-              <p>They accepted your repayment plan.</p>
-              <p>If a defendant doesn't pay immediately, claimants can request a CCJ even if they accept a repayment
-                plan.</p>
-              <p>When we've processed the request we'll post a copy of the judgment to you and to Jan Clark.</p>
-              <p>If you pay the debt within one month of the date of judgment, the CCJ is removed from the public
-                register. You can pay £15 to <a
-                  href="https://www.gov.uk/government/publications/form-n443-application-for-a-certificate-of-satisfaction-or-cancellation">apply
-                  for a certificate</a> that confirms this.</p>
-              <p><a href="party-details/claimant">Contact Jan Clark</a> if you need their payment details. Make sure you
-                get receipts for any payments.</p>
-              <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=5">Download your response</a>
-                (PDF, 123KB)</p>
-
-              {% elseif data['defendant'] == 5.013 %}
-              <h2 class="heading-small">Jan Clark requested a County Court Judgment (CCJ) against you</h2>
-              <p>They accepted your repayment plan.</p>
-              <p>They asked you to sign a settlement agreement. Because you didn't sign it, they requested the CCJ.</p>
-              <p>When we've processed the request we'll post a copy of the judgment to you and to Jan Clark.</p>
-              <p>If you pay the debt within one month of the date of judgment, the CCJ is removed from the public
-                register. You can pay £15 to <a
-                  href="https://www.gov.uk/government/publications/form-n443-application-for-a-certificate-of-satisfaction-or-cancellation">apply
-                  for a certificate</a> that confirms this.</p>
-              <p><a href="party-details/claimant">Contact Jan Clark</a> if you need their payment details. Make sure you
-                get receipts for any payments.</p>
-              <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=5">Download your response</a>
-                (PDF, 123KB)</p>
-
-              {% elseif data['defendant'] == 5.014 %}
-              <h2 class="heading-small">Jan Clark requested a County Court Judgment (CCJ) against you</h2>
-              <p>They rejected your repayment plan.</p>
-              <p>They suggested a new repayment plan. The court believes you can afford the claimant's plan, based on
-                the financial details you provided.</p>
-              <p>They asked you to sign a settlement agreement. Because you didn't sign it, they requested the CCJ.</p>
-              <p><a href="counter-offer?offer=claimant&admission=determination" class="button secondary-button">View the
-                repayment plan</a></p>
-              <p>When we've processed the request we'll post a copy of the judgment to you and to Jan Clark.</p>
-              <p>If you pay the debt within one month of the date of judgment, the CCJ is removed from the public
-                register. You can pay £15 to <a
-                  href="https://www.gov.uk/government/publications/form-n443-application-for-a-certificate-of-satisfaction-or-cancellation">apply
-                  for a certificate</a> that confirms this.</p>
-              <p><a href="party-details/claimant">Contact Jan Clark</a> if you need their payment details. Make sure you
-                get receipts for any payments.</p>
-              <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=5">Download your response</a>
-                (PDF, 123KB)</p>
 
               {% elseif data['defendant'] == 5.01 %}
-              <h2 class="heading-small">You've both signed a settlement agreement</h2>
-              <p>The agreement says you'll repay £1,500 by
-                {% if data['set-month'] %}
-                {{ ( data['set-month'] + ' ' + data['set-day'] + ' ' + data['set-year']) | date('D MMMM YYYY') }}{% else
-                %}{{ now | date('add', 3, 'months') | date('D MMMM YYYY') }}{% endif %}.</p>
-
+              <h2 class="heading-small">Pay the amount in the agreement</h2>
+              <p>You've both signed a settlement agreement.</p>
+              <p>The agreement says you'll repay £1,500 by {% if data['set-month'] %}
+                              {{ ( data['set-month'] + ' ' + data['set-day'] + ' ' + data['set-year']) | date('D MMMM YYYY') }}{% else
+                              %}{{ now | date('add', 3, 'months') | date('D MMMM YYYY') }}{% endif %}.</p>
               <p>The claimant can't request a County Court Judgment against you unless you break the terms.</p>
-              <p><a href="../defendant/correspondence/forms/agreement?check=3">Download the settlement agreement</a>
-                (PDF, 123KB)</p>
-              <p><a href="party-details/claimant">Contact Jan Clark</a> if you need their payment details. Make sure you
-                get receipts for any payments.</p>
-              <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=3">Download your response</a>
-                (PDF, 123KB)</p>
+              <p><a href="party-details/claimant">Contact Jan Clark</a> if you need their payment details. Make sure you get receipts for any payments.</p>
+
+              {% elseif data['defendant'] == 5.011 %}
+              <h2 class="heading-small">Sign a settlement agreement</h2>
+              <p>Jan Clark accepted your repayment plan and asked you to sign a settlement agreement to formalise it.</p>
+              <p>If you don't sign or respond before 4pm on {{ now | date('add', 7, 'days') | date }} they can request a County Court Judgment against you.</p>
+              <p><a href="../defendant/correspondence/forms/agreement?check=2">View and sign the agreement</a></p>
+
+              {% elseif data['defendant'] == 5.0111 %}
+              <h2 class="heading-small">Pay the judgment debt</h2>
+              <p>A County Court Judgment (CCJ) has been issued against you.</p>
+              <p>Because you didn't pay on time or didn't pay the correct amount, the claimant requested a CCJ against you.</p>
+              <p><a href="counter-offer?offer=court&admission=" class="button secondary-button">View the repayment plan</a></p>
+              <p>The judgment sets out the terms of how you must pay.</p>
+              <p>We'll post a copy of the judgment to you and to Jan Clark.</p>
+              <p>If you pay the debt within one month of the date of judgment, the CCJ is removed from the public register. You can pay £15 to <a href="https://www.gov.uk/government/publications/form-n443-application-for-a-certificate-of-satisfaction-or-cancellation">apply for a certificate</a> that confirms this.</p>
+              <p><a href="party-details/claimant">Contact Jan Clark</a> if you need their payment details. Make sure you get receipts for any payments.</p>
+
+              {% elseif data['defendant'] == 5.012 %}
+              <h2 class="heading-small">Pay the judgment debt</h2>
+              <p>A County Court Judgment (CCJ) has been issued against you.</p>
+              <p>If a defendant doesn't pay immediately, claimants can request a CCJ even if they accept a repayment plan.</p>
+              <p>Jan Clark accepted your repayment plan and requested a CCJ against you.</p>
+              <p><a href="counter-offer?offer=court&admission=" class="button secondary-button">View the repayment plan</a></p>
+              <p>The judgment sets out the terms of how you must pay.</p>
+              <p>We'll post a copy of the judgment to you and to Jan Clark.</p>
+              <p>If you pay the debt within one month of the date of judgment, the CCJ is removed from the public register. You can pay £15 to <a href="https://www.gov.uk/government/publications/form-n443-application-for-a-certificate-of-satisfaction-or-cancellation">apply for a certificate</a> that confirms this.</p>
+              <p><a href="party-details/claimant">Contact Jan Clark</a> if you need their payment details. Make sure you get receipts for any payments.</p>
+
+              {% elseif data['defendant'] == 5.013 %}
+              <h2 class="heading-small">Pay the judgment debt</h2>
+              <p>A County Court Judgment (CCJ) has been issued against you.</p>
+              <p>Jan Clark accepted your repayment plan. </p>
+              <p><a href="counter-offer?offer=court&admission=" class="button secondary-button">View the repayment plan</a></p>
+              <p>They asked you to sign a settlement agreement. Because you didn't sign it, they requested a CCJ against you.</p>
+              <p>The judgment sets out the terms of how you must pay.</p>
+              <p>We'll post a copy of the judgment to you and to Jan Clark.</p>
+              <p>If you pay the debt within one month of the date of judgment, the CCJ is removed from the public register. You can pay £15 to <a href="https://www.gov.uk/government/publications/form-n443-application-for-a-certificate-of-satisfaction-or-cancellation">apply for a certificate</a> that confirms this.</p>
+              <p><a href="party-details/claimant">Contact Jan Clark</a> if you need their payment details. Make sure you get receipts for any payments.</p>
+
+              {% elseif data['defendant'] == 5.014 %}
+              <h2 class="heading-small">Pay the judgment debt</h2>
+              <p>A County Court Judgment (CCJ) has been issued against you.</p>
+              <p>Jan Clark rejected your repayment plan.</p>
+              <p>They suggested a new repayment plan. The court believes you can afford the claimant's plan, based on the financial details you provided.</p>
+              <p><a href="counter-offer?offer=claimant&admission=determination" class="button secondary-button">View the repayment plan</a></p>
+              <p>They asked you to sign a settlement agreement. Because you didn't sign it, they requested a CCJ against you.</p>
+              <p>The judgment sets out the terms of how you must pay.</p>
+              <p>We'll post a copy of the judgment to you and to Jan Clark.</p>
+              <p>If you pay the debt within one month of the date of judgment, the CCJ is removed from the public register. You can pay £15 to <a href="https://www.gov.uk/government/publications/form-n443-application-for-a-certificate-of-satisfaction-or-cancellation">apply for a certificate</a> that confirms this.</p>
+              <p><a href="party-details/claimant">Contact Jan Clark</a> if you need their payment details. Make sure you get receipts for any payments.</p>
 
               {% elseif data['defendant'] == 5.02 %}
-              <h2 class="heading-small">Your response to the claim</h2>
+              <h2 class="heading-small">Pay the claim amount</h2>
               <p>You said you'll pay Jan Clark £1,500 before 4pm on {{ now | date('add', 5, 'days') | date }}.</p>
-              <p>If you pay by cheque or transfer the money must be clear in their account.</p>
-              <p> If they don't receive the money by then, they can request a County Court Judgment against you.</p>
-              <p><a href="party-details/claimant">Contact Jan Clark</a> if you need their payment details. Make sure you
-                get receipts for any payments.</p>
-              <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=2">Download your response</a>
-                (PDF, 123KB)</p>
+              <p>If you pay by cheque or transfer the money must be clear in their account by then.</p>
+              <p>If you don't pay, they can request a County Court Judgment against you.</p>
+              <p><a href="party-details/claimant">Contact Jan Clark</a> if you need their payment details. Make sure you get receipts for any payments.</p>
 
               {% elseif data['defendant'] == 5.021 %}
-              <h2 class="heading-small">Jan Clark requested a County Court Judgment (CCJ) against you</h2>
-              <p>You agreed to pay the full £1,500 immediately.</p>
-              <p>Because you didn't pay within 5 days, they requested the CCJ.</p>
-              <p><a href="counter-offer?offer=claimant" class="button secondary-button">View the repayment plan</a></p>
-              <p>When we've processed the request we'll post a copy of the judgment to you and to Jan Clark.</p>
-              <p>If you pay the debt within one month of the date of judgment, the CCJ is removed from the public
-                register. You can pay £15 to <a
-                  href="https://www.gov.uk/government/publications/form-n443-application-for-a-certificate-of-satisfaction-or-cancellation">apply
-                  for a certificate</a> that confirms this.</p>
-              <p><a href="party-details/claimant">Contact Jan Clark</a> if you need their payment details. Make sure you
-                get receipts for any payments.</p>
-              <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=5">Download your response</a>
-                (PDF, 123KB)</p>
-
+              <h2 class="heading-small">Pay the judgment debt</h2>
+              <p>A County Court Judgment (CCJ) has been issued against you.</p>
+              <p>You agreed to pay the full £1,500 immediately. Because you didn't pay within 5 days, Jan Clark requested a CCJ against you.</p>
+              <p>The judgment sets out the terms of how you must pay.</p>
+              <p>We'll post a copy of the judgment to you and to Jan Clark.</p>
+              <p>If you pay the debt within one month of the date of judgment, the CCJ is removed from the public register. You can pay £15 to <a href="https://www.gov.uk/government/publications/form-n443-application-for-a-certificate-of-satisfaction-or-cancellation">apply for a certificate</a> that confirms this.</p>
+              <p><a href="party-details/claimant">Contact Jan Clark</a> if you need their payment details. Make sure you get receipts for any payments.</p>
 
               {% elseif data['defendant'] == 5.1 %}
-              <h2 class="heading-small">Your response to the claim</h2>
-              <p>You've offered to pay Jan Clark £200 per month starting {{ now | date('add', 1, 'months') | date( 'D
-                MMMM YYYY' ) }}.</p>
+              <h2 class="heading-small">Waiting for the claimant to respond</h2>
+              <p>You've offered to pay Jan Clark £200 per month starting {{ now | date('add', 1, 'months') | date( 'D MMMM YYYY' ) }}.</p>
               <p>We’ll contact you when they respond.</p>
-              <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=4">Download your response</a>
-                (PDF, 123KB)</p>
-
 
               {% elseif data['defendant'] == 5.11 %}
-              <h2 class="heading-small">Your response to the claim</h2>
-              <p>You've said you owe £1,200 and offered to pay Jan Clark in instalments. You need to send them your
-                company's financial details if you haven't already.</p>
-              <p><a href="party-details/claimant">Get Jan Clark's contact details.</a></p>
+              <h2 class="heading-small">Waiting for the claimant to respond</h2>
+              <p>You've said you owe Jan Clark £1,200 and offered to pay in instalments. You need to send them your company's financial details if you haven't already. </p>
+              <p><a href="party-details/claimant">Get Jan Clark's contact details</a></p>
               <p>We’ll contact you when they respond.</p>
-              <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=4">Download your response</a>
-                (PDF, 123KB)</p>
-
-
-              {% elseif data['defendant'] == 5.201 %}
-              <h2 class="heading-small">Jan Clark asked you to sign a settlement agreement</h2>
-              <p>They accepted your repayment plan and asked you to sign a settlement agreement to formalise it.</p>
-              <p>If you sign the settlement agreement, they can't request a County Court Judgment against you unless you
-                break the terms.</p>
-              <p>If you don't sign or respond before 4pm on {{ now | date('add', 7, 'days') | date }} they can request a
-                County Court Judgment against you.</p>
-              <p><a href="../defendant/task-list/settlement/sign?counter=yes&claimant-payment-request=Instalments"
-                    class="button secondary-button">View and sign the settlement agreement</a></p>
-              <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=4">Download your response</a>
-                (PDF, 123KB)</p>
-
 
               {% elseif data['defendant'] == 5.2 or data['defendant'] == 5.32 %}
-              <h2 class="heading-small">You've both signed a settlement agreement</h2>
-              <p>The agreement says you'll repay {% if data['defendant'] == 5.2 %}£200{% else %}£250{% endif %} per
-                month starting {{ now | date('add', 1, 'months') | date( 'D MMMM YYYY' ) }}.</p>
+              <h2 class="heading-small">Make the agreed repayments</h2>
+              <p>You've both signed a settlement agreement.</p>
+              <p>The agreement says you'll repay £{% if data['defendant'] == 5.2 %}£200{% else %}£250{% endif %} per month starting {{ now | date('add', 1, 'months') | date( 'D MMMM YYYY' ) }}.</p>
               <p>The claimant can't request a County Court Judgment against you unless you break the terms.</p>
-              <p><a href="../defendant/correspondence/forms/agreement?check=2">Download the settlement agreement</a>
-                (PDF, 123KB)</p>
-              <p><a href="party-details/claimant">Contact Jan Clark</a> if you need their payment details. Make sure you
-                get receipts for any payments.</p>
-              <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=4">Download your response</a>
-                (PDF, 123KB)</p>
+              <p><a href="party-details/claimant">Contact Jan Clark</a> if you need their payment details. Make sure you get receipts for any payments.</p>
 
-
-              {% elseif data['defendant'] == 5.33 %}
-              <h2 class="heading-small">You've both signed a settlement agreement</h2>
-              <p>The agreement says you'll repay Jan Clark by {{ now | date('add', 5, 'days') | date( 'D MMMM YYYY' )
-                }}. Any cheques or transfers must be clear in their account by then.</p>
-
-              <p>The claimant can't request a County Court Judgment against you unless you break the terms.</p>
-              <p><a href="../defendant/correspondence/forms/agreement?check=2">Download the settlement agreement</a>
-                (PDF, 123KB)</p>
-              <p><a href="party-details/claimant">Contact Jan Clark</a> if you need their payment details. Make sure you
-                get receipts for any payments.</p>
-              <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=4">Download your response</a>
-                (PDF, 123KB)</p>
-
+              {% elseif data['defendant'] == 5.201 %}
+              <h2 class="heading-small">Sign a settlement agreement</h2>
+              <p>Jan Clark accepted your repayment plan and asked you to sign a settlement agreement to formalise it.</p>
+              <p>If you don't sign or respond before 4pm on {{ now | date('add', 7, 'days') | date }} they can request a County Court Judgment against you.</p>
+              <p><a href="../defendant/correspondence/forms/agreement?check=2">View and sign the agreement</a></p>
 
               {% elseif data['defendant'] == 5.21 %}
               <h2 class="heading-small">Jan Clark requested a County Court Judgment (CCJ) against you</h2>
@@ -519,32 +355,24 @@
                 (PDF, 123KB)</p>
 
               {% elseif data['defendant'] == 5.3 %}
-              <h2 class="heading-small">Jan Clark rejected your repayment plan</h2>
-              <p>They accepted a new repayment plan determined by the court, based on the financial details you
-                provided.</p>
-              <p>They asked you to sign a settlement agreement to formalise the plan.</p>
-              <p>If you sign the agreement, the claimant can't request a County Court Judgment against you unless you
-                break the terms.</p>
-              <p>If you don't sign or respond by {{ now | date('add', 7, 'days') | date }} they can request a County
-                Court Judgment against you.</p>
-              <p><a href="counter-offer?offer=court&admission=" class="button secondary-button">View the repayment
-                plan</a></p>
-              <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=5">Download your response</a>
-                (PDF, 123KB)</p>
+              <h2 class="heading-small">Sign a settlement agreement</h2>
+              <p>Jan Clark rejected your repayment plan.</p>
+              <p>They accepted a repayment plan determined by the court, based on the financial details you provided.</p>
+              <p>They've asked you to sign a settlement agreement to formalise the plan.</p>
+              <p>If you don't sign or respond before 4pm on {{ now | date('add', 7, 'days') | date }} they can request a County Court Judgment against you.</p>
+              <p><a href="../defendant/correspondence/forms/agreement?check=2">View and sign the agreement</a></p>
 
               {% elseif data['defendant'] == 5.30001 %}
-              <h2 class="heading-small">Jan Clark rejected your repayment plan</h2>
-              <p>They suggested a new repayment plan. The court believes you can afford the claimant's plan, based on
-                the financial details you provided.</p>
-              <p>They asked you to sign a settlement agreement to formalise the plan.</p>
-              <p>If you sign the agreement, the claimant can't request a County Court Judgment against you unless you
-                break the terms.</p>
-              <p>If you don't sign or respond by {{ now | date('add', 7, 'days') | date }} they can request a County
-                Court Judgment against you.</p>
+              <h2 class="heading-small">Pay the judgment debt</h2>
+              <p>A County Court Judgment (CCJ) has been issued against you.</p>
+              <p>Jan Clark rejected your repayment plan.</p>
+              <p>They accepted a new repayment plan determined by the court, based on the financial details you provided.</p>
               <p><a href="counter-offer?offer=claimant" class="button secondary-button">View the repayment plan</a></p>
-              <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=5">Download your response</a>
-                (PDF, 123KB)</p>
-
+              <p>They asked you to sign a settlement agreement. Because you didn't sign it, they requested a CCJ against you.</p>
+              <p>The judgment sets out the terms of how you must pay.</p>
+              <p>We'll post a copy of the judgment to you and to Jan Clark.</p>
+              <p>If you pay the debt within one month of the date of judgment, the CCJ is removed from the public register. You can pay £15 to <a href="https://www.gov.uk/government/publications/form-n443-application-for-a-certificate-of-satisfaction-or-cancellation">apply for a certificate</a> that confirms this.</p>
+              <p><a href="party-details/claimant">Contact Jan Clark</a> if you need their payment details. Make sure you get receipts for any payments.</p>
 
               {% elseif data['defendant'] == 5.3001 %}
               <h2 class="heading-small">Jan Clark requested a County Court Judgment (CCJ) against you</h2>
@@ -575,24 +403,16 @@
               <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=5">Download your response</a>
                 (PDF, 123KB)</p>
 
-
               {% elseif data['defendant'] == 5.301 %}
-              <h2 class="heading-small">Jan Clark requested a County Court Judgment (CCJ) against you</h2>
-              <p>They rejected your repayment plan.</p>
-              <p>They accepted a new repayment plan determined by the court, based on the financial details you
-                provided.</p>
-              <p><a href="counter-offer?offer=court&admission=determination" class="button secondary-button">View the
-                repayment plan</a></p>
-              <p>When we've processed the request we'll post a copy of the judgment to you and to Jan Clark.</p>
-              <p>If you pay the debt within one month of the date of judgment, the CCJ is removed from the public
-                register. You can pay £15 to <a
-                  href="https://www.gov.uk/government/publications/form-n443-application-for-a-certificate-of-satisfaction-or-cancellation">apply
-                  for a certificate</a> that confirms this.</p>
-              <p><a href="party-details/claimant">Contact Jan Clark</a> if you need their payment details. Make sure you
-                get receipts for any payments.</p>
-              <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=5">Download your response</a>
-                (PDF, 123KB)</p>
-
+              <h2 class="heading-small">Pay the judgment debt</h2>
+              <p>A County Court Judgment (CCJ) has been issued against you.</p>
+              <p>Jan Clark rejected your repayment plan and requested a CCJ against you.</p>
+              <p>They accepted a new repayment plan determined by the court, based on the financial details you provided.</p>
+              <p><a href="counter-offer?offer=court&admission=determination" class="button secondary-button">View the repayment plan</a></p>
+              <p>The judgment sets out the terms of how you must pay.</p>
+              <p>We'll post a copy of the judgment to you and to Jan Clark.</p>
+              <p>If you pay the debt within one month of the date of judgment, the CCJ is removed from the public register. You can pay £15 to <a href="https://www.gov.uk/government/publications/form-n443-application-for-a-certificate-of-satisfaction-or-cancellation">apply for a certificate</a> that confirms this.</p>
+              <p><a href="party-details/claimant">Contact Jan Clark</a> if you need their payment details. Make sure you get receipts for any payments.</p>
 
               {% elseif data['defendant'] == 5.302 %}
               <h2 class="heading-small">Jan Clark requested a County Court Judgment (CCJ) against you</h2>
@@ -613,29 +433,25 @@
 
 
               {% elseif data['defendant'] == 5.31 %}
-              <h2 class="heading-small">Jan Clark rejected your repayment plan</h2>
+              <h2 class="heading-small">Sign a settlement agreement</h2>
               <p>Jan Clark accepted your offer to pay £1,200 but rejected your repayment plan.</p>
-              <p>They accepted a new repayment plan determined by the court, based on the financial details you
-                provided.</p>
-              <p>They asked you to sign a settlement agreement to formalise the plan.</p>
-              <p>If you sign the agreement, the claimant can't request a County Court Judgment against you unless you
-                break the terms.</p>
-              <p>If you don't sign or respond by {{ now | date('add', 7, 'days') | date }} they can request a County
-                Court Judgment against you.</p>
-              <p><a href="counter-offer?offer=ccj" class="button secondary-button">View the repayment plan</a></p>
-              <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=5">Download your response</a>
-                (PDF, 123KB)</p>
+              <p>They accepted a repayment plan determined by the court, based on the financial details you provided.</p>
+              <p>They've asked you to sign a settlement agreement to formalise the plan.</p>
+              <p>If you don't sign or respond before 4pm on {{ now | date('add', 7, 'days') | date }} they can request a County Court Judgment against you.</p>
+              <p><a href="../defendant/correspondence/forms/agreement?check=2">View and sign the agreement</a></p>
+
+              {% elseif data['defendant'] == 5.33 %}
+              <h2 class="heading-small">Pay by the agreed date</h2>
+              <p>You've both signed a settlement agreement.</p>
+              <p>The agreement says you'll repay Jan Clark by {{ now | date('add', 5, 'days') | date( 'D MMMM YYYY' ) }}. Any cheques or transfers must be clear in their account by then.</p>
+              <p>The claimant can't request a County Court Judgment against you unless you break the terms.</p>
+              <p><a href="party-details/claimant">Contact Jan Clark</a> if you need their payment details. Make sure you get receipts for any payments.</p>
 
               {% elseif data['defendant'] == 5.4 %}
-              <h2 class="heading-small">Jan Clark requested a County Court Judgment (CCJ) against you</h2>
-              <p>They rejected your repayment plan.</p>
-              <p>They also rejected a repayment plan determined by the court, based on the financial details you
-                provided.</p>
-              <p>When we've processed the request we'll post a copy of the judgment to you and to Jan Clark.</p>
-              <p>A judge will make a repayment plan. We'll contact you to tell you what to do next.</p>
-              <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=5">Download your response</a>
-                (PDF, 123KB)</p>
-
+              <h2 class="heading-small">Waiting for a judge to review the case</h2>
+              <p>Jan Clark rejected your repayment plan.</p>
+              <p>They also rejected a repayment plan determined by the court, based on the financial details you provided.</p>
+              <p>A judge will review the case. We'll contact you to tell you what to do next.</p>
 
               {% elseif data['defendant'] == 5.5 %}
               <h2 class="heading-small">You've rejected the claimant's repayment plan</h2>
@@ -652,21 +468,17 @@
                -->
 
               {% elseif data['defendant'] == 5.52 %}
-              <h2 class="heading-small">Jan Clark requested a County Court Judgment (CCJ) against you</h2>
-              <p>When we've processed the request we'll post a copy of the judgment to you and to Jan Clark.</p>
-              <p><a href='counter-offer?offer=ccj' class='button secondary-button'>View the repayment plan</a></p>
-              <p>If you pay the debt within one month of the date of judgment, the CCJ is removed from the public
-                register. You can pay £15 to <a
-                  href="https://www.gov.uk/government/publications/form-n443-application-for-a-certificate-of-satisfaction-or-cancellation">apply
-                  for a certificate</a> that confirms this.</p>
-              <p><a href="party-details/claimant">Contact Jan Clark</a> if you need their payment details. Make sure you
-                get receipts for any payments.</p>
-              <h2 class="heading-small">You asked for a judge to make a new repayment plan</h2>
+              <h2 class="heading-small">Make repayments shown in the judgment</h2>
+              <p>A County Court Judgment (CCJ) has been issued against you.</p>
+              <p>You haven't agreed a repayment plan and Jan Clark requested a CCJ against you.</p>
+              <p>You've asked for a judge to make a new repayment plan.</p>
               <p>A judge will review your financial details. We'll contact you to tell you what to do next.</p>
               <p>You should start making repayments based on the terms of the CCJ until you hear from us.</p>
-
-              <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=5">Download your response</a>
-                (PDF, 123KB)</p>
+              <p>We'll post a copy of the judgment to you and to Jan Clark.</p>
+              <p>If you pay the debt within one month of the date of judgment, the CCJ is removed from the public register.
+                You can pay £15 to <a href="https://www.gov.uk/government/publications/form-n443-application-for-a-certificate-of-satisfaction-or-cancellation">apply for a certificate</a> that confirms this.</p>
+              <p><a href="party-details/claimant">Contact Jan Clark</a> if you need their payment details.
+                Make sure you get receipts for any payments.</p>
 
               {% elseif data['defendant'] == 5.6 %}
               <h2 class="heading-small">The claimant has rejected your defence</h2>
@@ -694,86 +506,66 @@
 
               {% elseif data['defendant'] == 8 %}
               <div class="status-block single">
-                <h2 class="heading-small">We’ve sent your response to Jan Clark</h2>
-                <p>We emailed them to tell them you said you've paid what you believe you owe.</p>
+                <h2 class="heading-small">Waiting for the claimant to confirm you've paid</h2>
+                <p>We've emailed Jan Clark to tell them you said you've paid what you believe you owe.</p>
                 <p>We also told them when and how you said you paid the claim.</p>
-                <p>We’ll contact you to tell you how they respond. They can confirm you've paid and decide to settle the
-                  claim for this amount, or they can proceed with it.</p>
-                <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=8">Download your response</a>
-                  (PDF, 123KB)</p>
+                <p>We’ll contact you to tell you how they respond. They can confirm you've paid and decide to settle the claim for this amount, or they can proceed with it.</p>
               </div>
 
               {% elseif data['defendant'] == 8.01 %}
               <div class="status-block single">
-                <h2 class="heading-small">We’ve sent your response to Jan Clark</h2>
-                <p>We emailed them to tell them you said you've paid what you believe you owe.</p>
+                <h2 class="heading-small">Waiting for the claimant to confirm you've paid</h2>
+                <p>We've emailed Jan Clark to tell them you said you've paid what you believe you owe.</p>
                 <p>We also told them when and how you said you paid the claim.</p>
-                <p>We’ll contact you to tell you how they respond. They can confirm you've paid and decide to settle the
-                  claim for this amount, or they can proceed with it.</p>
-                <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=8">Download your response</a>
-                  (PDF, 123KB)</p>
+                <p>We’ll contact you to tell you how they respond. They can confirm you've paid and decide to settle the claim for this amount, or they can proceed with it.</p>
               </div>
 
               {% elseif data['defendant'] == 8.1 %}
               <div class="status-block single">
-                <h2 class="heading-small">Jan Clark rejected your admission of £1,200</h2>
-                <p>They accept that you paid them £1,200, but believe you owe the full £1,500 claimed.</p>
-                <p>You might have to go to a hearing. We'll contact you if we set a hearing date to tell you how to
-                  prepare.</p>
-                <p>You need to <a href="forms/dq-form">complete a directions questionnaire</a> form to tell us more
-                  about the claim.</p>
-                <p>Your defence won't proceed if you don't complete and return the form before 4pm on <span
-                  class="dates5"></span>.</p>
-
-                <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=8">Download your response</a>
-                  (PDF, 123KB)</p>
+                <h2 class="heading-small">Tell us your hearing requirements</h2>
+                <p>Jan Clark rejected your admission of £1,200.</p>
+                <p>They accept that you've paid them £1,200, but believe you owe the full £1,500 claimed.</p>
+                <p>You might have to go to a court hearing. We'll contact you if we set a hearing date to tell you how to prepare.</p>
+                <p>You need to tell us your requirements for a hearing.</p>
+                <p>Your defence won't proceed if you don't respond before 4pm on 22 September 2018.</p>
+                <p><a href="forms/dq-form">Tell us your requirements</a></p>
               </div>
 
               {% elseif data['defendant'] == 8.2 %}
               <div class="status-block single">
-                <h2 class="heading-small">Jan Clark rejected your admission of £1,200</h2>
-                <p>They accept that you paid them £1,200, but believe you owe the full £1,500 claimed.</p>
-                <p>They agreed to try mediation. We'll contact you with details of your appointment.</p>
-                <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=8">Download your response</a>
-                  (PDF, 123KB)</p>
-                <p><a href="mediation/how-mediation-works">Find out how mediation works</a></p>
+                <h2 class="heading-small">We'll contact you with a mediation appointment</h2>
+                <p>Jan Clark rejected your admission of £1,200.</p>
+                <p>They accept that you've paid them £1,200, but believe you owe the full £1,500 claimed.</p>
+                <p>They've agreed to try mediation. We'll contact you with details of your appointment.</p>
               </div>
 
               {% elseif data['defendant'] == 8.3 %}
               <div class="status-block single">
-                <h2 class="heading-small">Jan Clark rejected your admission of £1,200</h2>
+                <h2 class="heading-small">Tell us your hearing requirements</h2>
+                <p>Jan Clark rejected your admission of £1,200.</p>
                 <p>They said you didn't pay them £1,200.</p>
-                <p>You might have to go to a hearing. We'll contact you if we set a hearing date to tell you how to
-                  prepare.</p>
-                <p>You need to <a href="forms/dq-form">complete a directions questionnaire</a> form to tell us more
-                  about the claim.</p>
-                <p>Your defence won't proceed if you don't complete and return the form before 4pm on <span
-                  class="dates5"></span>.</p>
-
-                <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=9">Download your response</a>
-                  (PDF, 123KB)</p>
+                <p>You might have to go to a court hearing. We'll contact you if we set a hearing date to tell you how to prepare.</p>
+                <p>You need to tell us your requirements for a hearing.</p>
+                <p>Your defence won't proceed if you don't respond before 4pm on 22 September 2018.</p>
+                <p><a href="forms/dq-form">Tell us your requirements</a></p>
               </div>
 
               {% elseif data['defendant'] == 8.4 %}
               <div class="status-block single">
-                <h2 class="heading-small">The claimant has rejected your admission of £1,200</h2>
+                <h2 class="heading-small">We'll contact you with a mediation appointment</h2>
+                <p>Jan Clark rejected your admission of £1,200.</p>
                 <p>They said you didn't pay them £1,200.</p>
-                <p>They agreed to try mediation. We'll contact you with details of your appointment.</p>
-                <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=8">Download your response</a>
-                  (PDF, 123KB)</p>
-                <p><a href="mediation/how-mediation-works">Find out how mediation works</a></p>
+                <p>They've agreed to try mediation. We'll contact you with details of your appointment.</p>
               </div>
 
-
               {% elseif data['defendant'] == 9 %}
-
               <div class="status-block ">
-                <h2 class="heading-small">You've rejected the claim</h2>
-                <p>You said you don't want to try mediation.</p>
-                <p>You'll have to go to a hearing. We'll contact you to tell you the date of the hearing and how to
-                  prepare.</p>
-                <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=9">Download your response</a>
-                  (PDF, 123KB)</p>
+                <h2 class="heading-small">Tell us your hearing requirements</h2>
+                <p>You've rejected the claim and said you don't want to try mediation to resolve it.</p>
+                <p>You might have to go to a court hearing. We'll contact you if we set a hearing date to tell you how to prepare.</p>
+                <p>You need to tell us your requirements for a hearing.</p>
+                <p>Your defence won't proceed if you don't respond before 4pm on 22 September 2018.</p>
+                <p><a href="forms/dq-form">Tell us your requirements</a></p>
               </div>
 
               <div class="status-block single">
@@ -804,13 +596,10 @@
 
               {% elseif data['defendant'] == 11 %}
               <div class="status-block">
-                <h2 class="heading-small">Your response to the claim</h2>
-                <p>You've rejected the claim. You’ve suggested mediation.</p>
-                <p> We'll ask Mary Richards if they agree to take part in mediation. </p>
-                <p>If they agree, we'll arrange a date for mediation. If not, we'll contact you and ask for more
-                  information about the claim.</p>
-                <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=9">Download your response</a>
-                  (PDF, 123KB)</p>
+                <h2 class="heading-small">Waiting for the claimant to respond</h2>
+                <p>You've rejected the claim. You’ve agreed to try mediation.</p>
+                <p>We'll ask Jan Clark if they'll try mediation.</p>
+                <p>If they agree, we'll contact you with details of your appointment. If not, we'll contact you and ask for more information about the claim.</p>
               </div>
 
               <div class="status-block single">
@@ -853,7 +642,7 @@
                   <li>your chosen expert</li>
                 </ul>
 
-                <p><a href="order-response?party=defendant" class="button">Send us the details</a></p>
+                <p><a href="order-response?party=defendant" class="button" style="margin-bottom: 15px">Send us the details</a></p>
 
                 <h2 class="heading-small">If you don't send us more details</h2>
 
@@ -925,12 +714,6 @@
 
                 <br>
               </div>
-
-              <h2 class="heading-medium">View the claimant's response</h2>
-
-              <p><a href="order-response/view?party=claimant" class="button secondary-button">View their response</a></p>
-
-                <hr/>
 
               <div class="status-block single">
                 <h2 class="heading-medium">Settle out of court</h2>
@@ -1070,7 +853,7 @@
                 <h2 class="heading-medium">View the expert's report</h2>
                 {% if data['defendant'] == 12.51 %}
                   <p>You can now read the expert's report.</p>
-                  <p>You can also see the questions the claimant asked after reading the report and ask your own questions if you need to.</p>
+                  <p>You can also view the questions the claimant asked after reading the report and ask your own questions if you need to.</p>
                 {% endif %}
                 {% if data['defendant'] == 12.5 %}
                 <p>You can now read the expert's report and ask more questions if you need to.</p>
@@ -1240,8 +1023,6 @@
               {% elseif data['defendant'] == 17.1 %}
               <h2 class="heading-small">This claim is settled</h2>
               <p>Jan Clark confirmed you paid £1,500 on {{ now | date('subtract', 2, 'days') | date }}.</p>
-              <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=5">Download your response</a>
-                (PDF, 123KB)</p>
 
 
               {% elseif data['defendant'] == 17.2 %}
