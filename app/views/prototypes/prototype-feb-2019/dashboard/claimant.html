@@ -569,7 +569,7 @@
 
                 <p><a href="order-response/view?party=claimant" class="button secondary-button">View their response</a></p>
 
-                <br>
+                <hr />
 
 
               {% elseif data['claimant'] == 11.11 %}
@@ -635,6 +635,9 @@
               <h2 class="heading-medium">View the defendant's response</h2>
 
               <p><a href="order-response/view?party=claimant" class="button secondary-button">View their response</a></p>
+              <hr />
+
+              <hr/>
 
 
 
@@ -658,6 +661,9 @@
                     <h2 class="heading-medium">View the defendant's response</h2>
 
                     <p><a href="order-response/view?party=claimant" class="button secondary-button">View their response</a></p>
+                    <hr />
+
+                    <hr/>
 
               </div>
 
@@ -690,17 +696,20 @@
                     <h2 class="heading-medium">View the defendant's response</h2>
 
                     <p><a href="order-response/view?party=claimant" class="button secondary-button">View their response</a></p>
+                    <hr />
               </div>
 
               {% elseif data['claimant'] == 11.5 or data['claimant'] == 11.51 %}
               <div class="status-block single">
                 <h2 class="heading-medium">Tell us if you have questions about the report</h2>
 
-                <p>You need to send us your questions by 25 February 2019 or the court could cancel your claim.</p>
 
-                {% if data['claimant'] == 11.5 %}
+                {% if data['claimant'] == 11.51 %}
+                <p>The defendant has sent us the questions they want to ask the expert.</p>
+                {% endif %}
 
-                <p>Follow these steps:</p>
+
+                <p>You need to follow these steps:</p>
                 <ul class="list list-number">
                     <li>Tell us if you have questions about the expert's report by {{ now | date( 'add', 10, 'days' ) | date }} or the court could cancel your claim</li>
 
@@ -708,24 +717,21 @@
                     <li>Wait for the expert to send you the answers to the questions (they'll have XX days to do this).</li>
                     <li>Upload the expert's response in XX days or the court could cancel your claim</li>
 
-                    {% else %}
-                    <p>The defendant has sent us the questions they want to ask the expert.</p>
-                    {% endif %}
+
 
                   </ul>
                 <p></p>
 
 
                 {% if data['claimant'] == 11.5 %}
-                <p><a href="order-response/questions/ask?party=claimant&type=report" class="button">Tell us if you have questions</a></p>
+                <p><a href="order-response/questions/have-any?party=claimant&type=report" class="button">Tell us if you have questions</a></p>
                 {% else %}
                 <p><a href="order-response/questions?party=claimant&type=report" class="button">View the defendant's questions and ask your own</a></p>
                 {% endif %}
 
                 <h2 class="heading-small">Upload more evidence</h2>
 
-              <p>You can upload more evidence or witness statements until {{ now | date( 'add', 15, 'days' ) | date
-              }}. You can also view your response.</p>
+              <p>You can upload more evidence or witness statements until {{ now | date( 'add', 15, 'days' ) | date }}. You can also view your response.</p>
               <p><a href="order-response?party=claimant&evidence=complete&experts=complete&witness=complete"
                     class="button secondary-button">Upload more or view your response</a></p>
 
@@ -734,6 +740,9 @@
                     <h2 class="heading-medium">View the defendant's response</h2>
 
                     <p><a href="order-response/view?party=claimant" class="button secondary-button">View their response</a></p>
+                    <hr />
+
+                    <hr/>
 
               </div>
 
@@ -743,11 +752,10 @@
                 <h2 class="heading-medium">Send the expert questions and upload their response</h2>
                 <p>Follow these steps:</p>
                 <ul class="list list-number">
-                    <li>Send the <a href="">list of questions</a> (PDF, 123KB) you and the defendant created to the expert.</li>
+                    <li>Send the expert the <a href="">list of questions</a> (PDF, 123KB) which you and the defendant created.</li>
                     <li>Wait for the expert to send you the answers to the questions (they'll have XX days to do this).</li>
                     <li>Upload the expert's response within XX days, or the court could cancel your claim</li>
-
-      </ul>
+                </ul>
 
                 <p><a href="order-response/expert-reports?party=claimant&type=report" class="button">Upload the response</a></p>
 
@@ -763,13 +771,33 @@
                     <h2 class="heading-medium">View the defendant's response</h2>
 
                     <p><a href="order-response/view?party=claimant" class="button secondary-button">View their response</a></p>
+                    <hr />
 
               </div>
+
+
+              {% elseif data['claimant'] == 11.61 %}
+              <div class="status-block single">
+                <h2 class="heading-medium">We'll contact you if we set a hearing date</h2>
+                <p>The defendant did not have any questions about the report either.</p>
+                
+                <h2 class="heading-small">Upload more evidence</h2>
+                <p>You can upload more evidence or witness statements until {{ now | date( 'add', 15, 'days' ) | date
+                }}. You can also view your response.</p>
+                <p><a href="order-response?party=claimant&evidence=complete&experts=complete&witness=complete" class="button secondary-button">Upload more or view your response</a></p>
+
+                <hr/>
+                <h2 class="heading-medium">View the defendant's response</h2>
+                <p><a href="order-response/view?party=claimant" class="button secondary-button">View their response</a></p>
+                <hr />
+              </div>
+
+
 
               {% elseif data['claimant'] == 11.7 %}
               <div class="status-block single">
                 <h2 class="heading-medium">We'll contact you if we set a hearing date</h2>
-                <p>We'll explain you how to prepare.</p>
+                <p>We'll explain how to prepare.</p>
 
               </div>
 
@@ -2144,45 +2172,7 @@
     </div>
   </div>
 
-
-  <!--<div class="column-one-third">-->
-  <!--{% if data['claimant'] == 1.2 %}-->
-  <!--{% elseif data['claimant'] == 18 %}-->
-  <!--<div class="meta-data">-->
-  <!--<p class="heading-small" style="padding-top: 100px">About counterclaim</p>-->
-  <!--<ul role="navigation" class="font-xsmall list">-->
-  <!--<li><strong class="bold">Defendant name:</strong><br> <a href="party-details/defendant">Mary-->
-  <!--Richards</a>-->
-  <!--</li>-->
-  <!--<li><strong class="bold">Claim amount:</strong><br>£3240.34</li>-->
-  <!--</ul>-->
-  <!--</div>-->
-
-  <!--{% else %}-->
-  <!--<div class="meta-data">-->
-  <!--<p class="heading-small" style="padding-top: 100px">About claim</p>-->
-  <!--<ul role="navigation" class="font-xsmall list">-->
-  <!--<li><strong class="bold">Defendant name:</strong><br> <a href="party-details/defendant">Mary Richards</a>-->
-  <!--</li>-->
-  <!--{% if data['claimant'] == 9.1 or data['claimant'] == 13.1 or data['claimant'] == 13.2 %}-->
-  <!--<li><strong class="bold">Claim amount:</strong><br>£300</li>-->
-  <!--{% else %}-->
-  <!--<li><strong class="bold">Claim amount:</strong><br>£1500</li>-->
-  <!--{% endif %}-->
-  <!--<li><strong class="bold">Claim details:</strong><br><a-->
-  <!--href="../claimant/correspondence/claim-form-claimant?check=1">Download claim</a></li>-->
-  <!--{% if data['claimant'] == 16 or data['claimant'] == 17%}-->
-  <!--<li><strong class="bold">Defendant's response:</strong><br><a-->
-  <!--href="../defendant/correspondence/forms/claim-form-defendant?check=9">Download response</a></li>-->
-  <!--{% else %}-->
-  <!--{% endif %}-->
-  <!--</ul>-->
-  <!--</div>-->
-  <!--{% endif %}-->
-  <!--</div>-->
-
-  <fieldset></fieldset>
-  {% include 'prototypes/prototype-feb-2019/includes/contact.html' %}
+{% include 'prototypes/prototype-feb-2019/includes/contact.html' %}
 </main>
 <form method="post" action="#" class="form" style="position: absolute;">
   <select id="claimant2" name="claimant2" onchange="window.location.href='?claimant='+this.value">
@@ -2246,6 +2236,7 @@
     <option value="11.5" {% if data['claimant'] == 11.5 %}selected{% endif %}>Report uploaded, claimant to supply queries</option>
     <option value="11.51" {% if data['claimant'] == 11.51 %}selected{% endif %}>Report uploaded, defendant has supplied queries</option>
     <option value="11.6" {% if data['claimant'] == 11.6 %}selected{% endif %}>Queries supplied, upload answers</option>
+    <option value="11.61" {% if data['claimant'] == 11.61 %}selected{% endif %}>No queries</option>
     <option value="11.7" {% if data['claimant'] == 11.7 %}selected{% endif %}>Everything received</option>
 
 
