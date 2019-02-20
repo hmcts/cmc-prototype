@@ -206,27 +206,16 @@
                 </form>
                 </div>
 
-
               {% elseif data['claimant'] == 9 %}
-                <h2 class="heading-small">Respond to the defendant</h2>
-                <p>Mary Richards has rejected your claim.</p>
-                <p>You need to respond before 4pm on {{ now | date('add', 5, 'days') | date }}. If you don't respond by then, you might have to go to hearing.</p>
-                <div class="form-group">
+              <h2 class="heading-small">Respond to the defendant</h2>
+              <p>Mary Richards has rejected your claim.</p>
+              <p>You need to respond before 4pm on {{ now | date('add', 5, 'days') | date }}. If you don't respond by then, you might have to go to hearing.</p>
+              <div class="form-group">
                 <form method="post" action="claimant-response/dispute-claim/task-list" class="form">
                   {{formData | safe}}
                   <input type="hidden" name="mediation-pilot" value="on">
                   <input type="submit" class="button" value="View and respond">
                 </form>
-                </div>
-
-
-                <!--
-                <p><a href="mediation/how-mediation-works">Find out how mediation works</a></p>-->
-                <!--<p>You need to email moneyclaims@justice.gov.uk before 4pm on <span class="dates5"></span> to tell us-->
-                  <!--if you agree to mediation or not.</p>-->
-                <!--<p>If you don't send an email before the deadline, the claim will proceed without mediation.</p>-->
-                <!--<p><a class="" href="../defendant/correspondence/forms/claim-form-defendant?check=9">Download their-->
-                  <!--response</a> (PDF, 123KB)</p>-->
               </div>
 
               {% elseif data['claimant'] == 9.1 %}
@@ -986,6 +975,7 @@
               <h2 class="heading-small">If you've been paid</h2>
                 <p><a href="paid-in-full/claimant?endClaim=yes">Tell us if you want to end the claim</a> because the
               defendant has paid you.</p>
+              <br>
             </div>
 
             {% endif %}
@@ -1271,7 +1261,7 @@
               </div>
               {% endif %}
 
-              {% if data['claimant'] == 9 %}
+              {% if data['claimant'] == 9.1 or data['claimant'] == 9 %}
               <div class="hmcts-timeline__item">
                 <div class="hmcts-timeline__header">
                   <h2 class="hmcts-timeline__title">The defendant said they'd try mediation</h2>
