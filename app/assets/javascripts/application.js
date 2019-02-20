@@ -577,17 +577,6 @@ function showSelectAddress( strPrefix ) {
         },
         dataType: 'JSON'
       });
-
-      $.ajax({
-        url: "/country-lookup?postcode=" + encodeURIComponent($('#' + strPrefix + '_postcode').val()),
-        method: "GET",
-        success: function(data, status, xhr){
-
-            $('#' + strPrefix + '_country').val( data.country.name );
-      },
-        dataType: 'JSON'
-
-      });
     }
   }
 
