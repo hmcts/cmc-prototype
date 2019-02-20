@@ -538,16 +538,16 @@ function showSelectAddress( strPrefix ) {
         url: "/postcode-lookup?postcode=" + encodeURIComponent($('#' + strPrefix + '_postcode').val()),
         method: "GET",
         success: function(data, status, xhr){
-          if(status === "success" && data.length){
+          if(status === "success" && data.results && data.results.length){
 
-            var html = '<option>' + data.length + ' addresses found </option>';
-
-            jQuery.each( data, function(key, value){
+            var html = '<option>' + data.results.length + ' addresses found </option>';
+            jQuery.each( data.results, function(key, value){
+              var details = value.DPA;
               var formatted_address = [
-                ( value.organisation_name || value.sub_building_name ) + ' ' + ( value.building_number || value.building_name || null),
-                value.thoroughfare_name || value.dependent_locality,
-                value.post_town,
-                value.postcode
+                ( details.ORGANISATION_NAME || details.SUB_BUILDING_NAME || '' ) + ' ' + ( details.BUILDING_NUMBER || details.BUILDING_NAME || ''),
+                details.THOROUGHFARE_NAME || details.DEPENDENT_LOCALITY,
+                details.POST_TOWN,
+                details.POSTCODE
               ];
               html += '<option value="' + formatted_address.join(', ').trim() + '">' + formatted_address.join(', ').trim() + '</option>';
             });
@@ -568,7 +568,6 @@ function showSelectAddress( strPrefix ) {
             });
 
           } else {
-
             $('#' + strPrefix + '_postcode-seach-error').show();
             $('#' + strPrefix + '_postcode-seach-ni-error').hide();
             showManaulEntry( strPrefix );
