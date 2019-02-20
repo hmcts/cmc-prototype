@@ -776,18 +776,18 @@
 
               </div>
 
-
-              {% elseif data['claimant'] == 12 %}
-              <div class="status-block single">
-                <h2 class="heading-small">Respond to the defendant</h2>
-                <p>Mary Richards has rejected your claim.</p>
-                <p>You can accept or reject their response. You need to respond before 4pm on {{ now | date('add', 5, 'days') | date }}. If you don't respond by then, you might have to go to hearing.</p>
-                <div class="form-group">
-                <form method="post" action="claimant-response/dispute-claim/task-list" class="form">
-                  {{formData | safe}}
-                  <input type="hidden" name="mediation-pilot" value="on">
-                  <input type="submit" class="button" value="View and respond">
-                </form>
+                {% elseif data['claimant'] == 12 %}
+                <div class="status-block single">
+                  <h2 class="heading-small">Respond to the defendant</h2>
+                  <p>Mary Richards has rejected your claim.</p>
+                  <p>You can accept or reject their response. You need to respond before 4pm on {{ now | date('add', 5, 'days') | date }}. If you don't respond by then, you might have to go to hearing.</p>
+                  <div class="form-group">
+                    <form method="post" action="claimant-response/dispute-claim/task-list" class="form">
+                      {{formData | safe}}
+                      <input type="hidden" name="mediation-pilot" value="on">
+                      <input type="submit" class="button" value="View and respond">
+                    </form>
+                  </div>
                 </div>
 
 
@@ -1415,49 +1415,6 @@
               <div class="hmcts-timeline__item">
                 <div class="hmcts-timeline__header">
                   <h2 class="hmcts-timeline__title">You accepted the defendant's offer</h2>
-                  <!--<p class="hmcts-timeline__by">by claimant</p>-->
-                </div>
-                <p class="hmcts-timeline__date">
-                  <time style="color: grey">{{ now | date( 'add', 20, 'days' ) | date }}</time>
-                </p>
-              </div>
-              <div class="hmcts-timeline__item">
-                <div class="hmcts-timeline__header">
-                  <h2 class="hmcts-timeline__title">The defendant made an offer</h2>
-                  <!--<p class="hmcts-timeline__by">by defendant</p>-->
-                </div>
-                <p class="hmcts-timeline__date">
-                  <time style="color: grey">{{ now | date( 'add', 15, 'days' ) | date }}</time>
-                </p>
-              </div>
-              <div class="hmcts-timeline__item">
-                <div class="hmcts-timeline__header">
-                  <h2 class="hmcts-timeline__title">The defendant disputed the whole claim <br>(or whatever the defendant did)</h2>
-                  <!--<p class="hmcts-timeline__by">by defendant</p>-->
-                  <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=1">Download their response</a>
-                    (PDF, 123KB)</p>
-                </div>
-                <p class="hmcts-timeline__date" style="margin-top: -10px">
-                  <time style="color: grey">{{ now | date( 'add', 5, 'days' ) | date }}</time>
-                </p>
-              </div>
-              <div class="hmcts-timeline__item">
-                <div class="hmcts-timeline__header">
-                  <h2 class="hmcts-timeline__title">You submitted your claim</h2>
-                  <!--<p class="hmcts-timeline__by">by claimant</p>-->
-                  <p><a href="../claimant/correspondence/claim-form-claimant?check=1">Download claim</a>
-                    (PDF, 123KB)</p>
-                </div>
-                <p class="hmcts-timeline__date" style="margin-top: -10px">
-                  <time style="color: grey">{{ now | date( 'add', 0, 'days' ) | date }}</time>
-                </p>
-              </div>
-              {% endif %}
-
-              {% if data['claimant'] == 12 %}
-              <div class="hmcts-timeline__item">
-                <div class="hmcts-timeline__header">
-                  <h2 class="hmcts-timeline__title">You rejected the defendant's offer</h2>
                   <!--<p class="hmcts-timeline__by">by claimant</p>-->
                 </div>
                 <p class="hmcts-timeline__date">
@@ -2170,6 +2127,49 @@
                 <p class="hmcts-timeline__date">
                 <p class="hmcts-timeline__date">
                   <time style="color: grey">{{ now | date( 'add', 10, 'days' ) | date }}</time>
+                </p>
+              </div>
+              <div class="hmcts-timeline__item">
+                <div class="hmcts-timeline__header">
+                  <h2 class="hmcts-timeline__title">You submitted your claim</h2>
+                  <!--<p class="hmcts-timeline__by">by claimant</p>-->
+                  <p><a href="../claimant/correspondence/claim-form-claimant?check=1">Download claim</a>
+                    (PDF, 123KB)</p>
+                </div>
+                <p class="hmcts-timeline__date" style="margin-top: -10px">
+                  <time style="color: grey">{{ now | date( 'add', 0, 'days' ) | date }}</time>
+                </p>
+              </div>
+              {% endif %}
+
+              {% if data['claimant'] == 12 %}
+              <div class="hmcts-timeline__item">
+                <div class="hmcts-timeline__header">
+                  <h2 class="hmcts-timeline__title">You rejected the defendant's offer</h2>
+                  <!--<p class="hmcts-timeline__by">by claimant</p>-->
+                </div>
+                <p class="hmcts-timeline__date">
+                  <time style="color: grey">{{ now | date( 'add', 20, 'days' ) | date }}</time>
+                </p>
+              </div>
+              <div class="hmcts-timeline__item">
+                <div class="hmcts-timeline__header">
+                  <h2 class="hmcts-timeline__title">The defendant made an offer</h2>
+                  <!--<p class="hmcts-timeline__by">by defendant</p>-->
+                </div>
+                <p class="hmcts-timeline__date">
+                  <time style="color: grey">{{ now | date( 'add', 15, 'days' ) | date }}</time>
+                </p>
+              </div>
+              <div class="hmcts-timeline__item">
+                <div class="hmcts-timeline__header">
+                  <h2 class="hmcts-timeline__title">The defendant disputed the whole claim <br>(or whatever the defendant did)</h2>
+                  <!--<p class="hmcts-timeline__by">by defendant</p>-->
+                  <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=1">Download their response</a>
+                    (PDF, 123KB)</p>
+                </div>
+                <p class="hmcts-timeline__date" style="margin-top: -10px">
+                  <time style="color: grey">{{ now | date( 'add', 5, 'days' ) | date }}</time>
                 </p>
               </div>
               <div class="hmcts-timeline__item">
