@@ -195,24 +195,30 @@
               <p><a href="claimant-response/paid-what-owe-less-claim-amount/task-list" class="button">View and respond</a></p>
 
               {% elseif data['claimant'] == 8 %}
-              <h2 class="heading-small">Tell us your hearing requirements</h2>
-              <p>The defendant has said they dispute your claim.</p>
-              <p>You might have to go to a court hearing. We'll contact you if we set a hearing date to tell you how to prepare.</p>
-              <p>You need to tell us your requirements for a hearing.</p>
-              <p>Your claim won't proceed if you don't respond before 4pm on <span class="dates5"></span>.</p>
-              <p><a href="claimant-response/dispute-claim/task-list" class="button">Tell us your requirements</a></p>
+                <h2 class="heading-small">Respond to the defendant</h2>
+                <p>Mary Richards has rejected your claim.</p>
+                <p>You need to respond before 4pm on {{ now | date('add', 5, 'days') | date }}. If you don't respond by then, you might have to go to hearing.</p>
+                <div class="form-group">
+                <form method="post" action="claimant-response/dispute-claim/task-list" class="form">
+                  {{formData | safe}}
+                  <input type="hidden" name="mediation-pilot" value="on">
+                  <input type="submit" class="button" value="View and respond">
+                </form>
+                </div>
+
 
               {% elseif data['claimant'] == 9 %}
-              <div class="status-block single">
-                <h2 class="heading-small">Tell us if you'll try mediation</h2>
-                <p>Mary Richards has rejected your claim. They’ve agreed to try mediation to help resolve this dispute.</p>
-                <!--<p><a href="mediation/how-mediation-works">Find out how mediation works</a></p>-->
+                <h2 class="heading-small">Respond to the defendant</h2>
+                <p>Mary Richards has rejected your claim.</p>
+                <p>You need to respond before 4pm on {{ now | date('add', 5, 'days') | date }}. If you don't respond by then, you might have to go to hearing.</p>
                 <div class="form-group">
-                  <form method="post" action="claimant-response/dispute-claim/task-list" class="form">
-                    {{formData | safe}}
-                    <input type="submit" class="button" value="Tell us if you'll try mediation">
-                  </form>
+                <form method="post" action="claimant-response/dispute-claim/task-list" class="form">
+                  {{formData | safe}}
+                  <input type="hidden" name="mediation-pilot" value="on">
+                  <input type="submit" class="button" value="View and respond">
+                </form>
                 </div>
+
 
                 <!--
                 <p><a href="mediation/how-mediation-works">Find out how mediation works</a></p>-->
@@ -720,7 +726,7 @@
 
                     <p><a href="order-response/view?party=claimant" class="button secondary-button">View their response</a></p>
                     <hr />
-                    
+
               </div>
 
 
