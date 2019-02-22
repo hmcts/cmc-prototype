@@ -3,12 +3,8 @@ var mockData = require('./postcodeLookupMockData.json');
 
 module.exports = function (req, res) {
 
-
     request({
-      url: "https://postcodeinfo.service.justice.gov.uk/addresses/?postcode=" + req.query.postcode,
-      headers: {
-        'Authorization': 'Token 6183e1a4ba446d60237820faf9a52eb56a5c815d'
-      }
+      url: "https://api.ordnancesurvey.co.uk/places/v1/addresses/postcode?offset=0&key=NhjoVbGqxiHGK5f9SWc7xhaTHQsa6MHG&postcode=" + req.query.postcode
     }, function(err, resp){
     	if (err) {
 		    res.send(mockData);
@@ -16,7 +12,5 @@ module.exports = function (req, res) {
 	      res.send(resp.body);
 	  	}
     });
-
-
 
 }
