@@ -34,7 +34,7 @@ $('[role="tablist"] a').each(function() {
 // Make the first tab selected by default and allow it focus
 
 $('[role="tablist"] li:first-child a').attr({
-    'aria-selected' : 'true',
+    // 'aria-selected' : 'true',
     'tabindex' : '0'
 });
 

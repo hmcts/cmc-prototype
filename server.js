@@ -16,8 +16,6 @@ var utils = require('./lib/utils.js')
 var packageJson = require('./package.json')
 const cookieParser = require('cookie-parser')
 var postcodeLookup = require('./app/assets/javascripts/postcodeLookup.js')
-var countryLookup = require('./app/assets/javascripts/countryLookup.js')
-
 
 // Grab environment variables specified in Procfile or as Heroku config vars
 var releaseVersion = packageJson.version
@@ -207,11 +205,7 @@ app.get('/dashboard/v4/claimant', function (req, res) {
   res.render('dashboard/v4/claimant')
 })
 
-
-
-
 app.get('/postcode-lookup', postcodeLookup);
-app.get('/country-lookup', countryLookup);
 
 
 // Redirect root to /docs when in promo mode.

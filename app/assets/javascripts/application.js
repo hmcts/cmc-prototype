@@ -525,71 +525,48 @@ function showSelectAddress( strPrefix ) {
     $('#' + strPrefix + '_address-select-container .error-message').hide();
     $('#' + strPrefix + '_enter-manually').show();
 
-  if ( $('#' + strPrefix + '_postcode').val().toUpperCase().indexOf('BT') === 0 ) {
 
-    $('#' + strPrefix + '_country').val( 'Northern Ireland' );
-    $('#' + strPrefix + '_postcode-seach-ni-error').show();
-    $('#' + strPrefix + '_select-address').hide();
-    showManaulEntry( strPrefix );
+    $.ajax({
+      url: "/postcode-lookup?postcode=" + encodeURIComponent($('#' + strPrefix + '_postcode').val()),
+      method: "GET",
+      success: function(data, status, xhr){
+        if(status === "success" && data.results && data.results.length){
 
-  } else {
+          var html = '<option>' + data.results.length + ' addresses found </option>';
+          jQuery.each( data.results, function(key, value){
+            var details = value.DPA;
+            var formatted_address = [
+              ( details.ORGANISATION_NAME || details.SUB_BUILDING_NAME || '' ) + ' ' + ( details.BUILDING_NUMBER || details.BUILDING_NAME || ''),
+              details.THOROUGHFARE_NAME || details.DEPENDENT_LOCALITY,
+              details.POST_TOWN,
+              details.POSTCODE
+            ];
+            html += '<option value="' + formatted_address.join(', ').trim() + '">' + formatted_address.join(', ').trim() + '</option>';
+          });
 
-      $.ajax({
-        url: "/postcode-lookup?postcode=" + encodeURIComponent($('#' + strPrefix + '_postcode').val()),
-        method: "GET",
-        success: function(data, status, xhr){
-          if(status === "success" && data.length){
+          $('#' + strPrefix + '_addressList').html(html);
 
-            var html = '<option>' + data.length + ' addresses found </option>';
+          $('.postcode-as-text p').html($('#' + strPrefix + '_postcode').val());
+          $('#' + strPrefix + '_enter-postcode').hide();
+          $('#' + strPrefix + '_select-address').show();
+          $('#' + strPrefix + '_selected-address').hide();
+          $('#' + strPrefix + '_manual-address').hide();
+          $('#' + strPrefix + '_postcode-seach-error').hide();
+          $('#' + strPrefix + '_continue-button').unbind('click').click(function(e){
+            e.preventDefault();
+            $('#' + strPrefix + '_address-select-container').addClass('error');
+            $('#' + strPrefix + '_address-select-container .error-message').show();
+          });
 
-            jQuery.each( data, function(key, value){
-              var formatted_address = [
-                ( value.organisation_name || value.sub_building_name ) + ' ' + ( value.building_number || value.building_name || null),
-                value.thoroughfare_name || value.dependent_locality,
-                value.post_town,
-                value.postcode
-              ];
-              html += '<option value="' + formatted_address.join(', ').trim() + '">' + formatted_address.join(', ').trim() + '</option>';
-            });
+        } else {
+          $('#' + strPrefix + '_postcode-seach-error').show();
+          showManaulEntry( strPrefix );
 
-            $('#' + strPrefix + '_addressList').html(html);
+        }
 
-            $('.postcode-as-text p').html($('#' + strPrefix + '_postcode').val());
-            $('#' + strPrefix + '_enter-postcode').hide();
-            $('#' + strPrefix + '_select-address').show();
-            $('#' + strPrefix + '_selected-address').hide();
-            $('#' + strPrefix + '_manual-address').hide();
-            $('#' + strPrefix + '_postcode-seach-error').hide();
-            $('#' + strPrefix + '_postcode-seach-ni-error').hide();
-            $('#' + strPrefix + '_continue-button').unbind('click').click(function(e){
-              e.preventDefault();
-              $('#' + strPrefix + '_address-select-container').addClass('error');
-              $('#' + strPrefix + '_address-select-container .error-message').show();
-            });
-
-          } else {
-
-            $('#' + strPrefix + '_postcode-seach-error').show();
-            $('#' + strPrefix + '_postcode-seach-ni-error').hide();
-            showManaulEntry( strPrefix );
-
-          }
-
-        },
-        dataType: 'JSON'
-      });
-
-      $.ajax({
-        url: "/country-lookup?postcode=" + encodeURIComponent($('#' + strPrefix + '_postcode').val()),
-        method: "GET",
-        success: function(data, status, xhr){
-
-            $('#' + strPrefix + '_country').val( data.country.name );
       },
-        dataType: 'JSON'
-
-      });
-    }
+      dataType: 'JSON'
+    });
   }
 
  function showSelectedAddress( strPrefix ) {
