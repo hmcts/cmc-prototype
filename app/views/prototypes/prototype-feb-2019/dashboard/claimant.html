@@ -28,7 +28,7 @@
         <div class="tabs-nav">
           <ul class="tabs-list" role="tablist">
 
-            {% if data['claimant'] == 1 or data['claimant'] == 1.2 or data['claimant'] == 3.1 or data['claimant'] == 2 or data['claimant'] == 3 or data['claimant'] == 4
+            {% if data['claimant'] == 1 or data['claimant'] == 3.1 or data['claimant'] == 2 or data['claimant'] == 3 or data['claimant'] == 4
             or data['claimant'] == 4.01 or data['claimant'] == 4.1 or data['claimant'] == 4.11 or data['claimant'] == 4.2 or data['claimant'] == 4.3 or data['claimant'] == 5
             or data['claimant'] == 5.1 or data['claimant'] == 5.11 or data['claimant'] == 5.2 or data['claimant'] == 5.21 or data['claimant'] == 6 or data['claimant'] == 7
             or data['claimant'] == 8 or data['claimant'] == 9 or data['claimant'] == 9.1 or data['claimant'] == 10.1 or data['claimant'] == 10.001 or data['claimant'] == 10.01
@@ -52,7 +52,7 @@
               history</a>
             </li>
             <li role="presentation"><a href="#settle-out-of-court" role="tab" tabindex="0"
-                                       aria-controls="settle-out-of-court" aria-selected="true">Settle out of court</a>
+                                       aria-controls="settle-out-of-court" aria-selected="true" id="settle">Settle out of court</a>
             </li>
             {% endif %}
 
@@ -96,15 +96,7 @@
 
             <div class="tabs-panel-inner text" tabindex="0">
 
-              <fieldset></fieldset>
-
-              <!-- Not needed as will go straight to task list from dashboard/allclaims -->
-              {% if data['claimant'] == 1.2 %}
-              <h2 class="heading-medium">This claim has not been submitted</h2>
-              <p>Your claim is saved as a draft.</p>
-              <p><a class="button" href="../claimant/task-list"> Continue with claim</a></p>
-
-              {% elseif data['claimant'] == 1 %}
+              {% if data['claimant'] == 1 %}
               <h2 class="heading-medium">Waiting for the defendant to respond</h2>
               <p>Mary Richards has until 4pm on 24 December 2018 to respond. They can request an extra 14 days if they need it.</p>
               <p>You can request a default County Court Judgment against them if they don't respond by the deadline.</p>
@@ -176,7 +168,7 @@
 
               {% elseif data['claimant'] == 4.3 %}
               <div class="status-block">
-                <h2 class="heading-mediuml">Waiting for the defendant to pay you</h2>
+                <h2 class="heading-medium">Waiting for the defendant to pay you</h2>
                   <p>The defendant said they'll pay you immediately.</p>
                   <p>They must make sure you have the money by {{ now | date('add', 5, 'days') | date }}. Any cheques or transfers should be clear in your account by then.</p>
                   <p>You need to tell us if you've settled the claim, for example because the defendant has paid you.</p>
@@ -257,9 +249,9 @@
                 </div>
 
               {% elseif data['claimant'] == 9 %}
-              <h2 class="heading-medium">Respond to the defendant</h2>
+              <h2 class="heading-medium">Decide whether to proceed</h2>
               <p>Mary Richards has rejected your claim.</p>
-              <p>You can accept or reject their response. You need to respond before 4pm on {{ now | date('add', 5, 'days') | date }}. If you don't respond by then, you might have to go to hearing.</p>
+              <p>You need to decide whether to proceed with the claim. You need to respond before 4pm on {{ now | date('add', 5, 'days') | date }}. Your claim won't continue if you don't respond by then.</p>
               <div class="form-group">
                 <form method="post" action="claimant-response/dispute-claim/task-list" class="form">
                   {{formData | safe}}
@@ -270,10 +262,10 @@
 
               {% elseif data['claimant'] == 9.1 %}
               <div class="status-block single">
-                <h2 class="heading-medium">Respond to the defendant</h2>
+                <h2 class="heading-medium">Decide whether to proceed</h2>
                 <p>Mary Richards has rejected your claim.</p>
-                <p>You can accept or reject their response. You need to respond before 4pm on 16 Sept 2018. If you don't respond by then, you might have to go to hearing.</p>
-                <p>The claim has been automatically registered for free telephone mediation. We'll contact you with a mediation appointment unless you choose to opt out.</p>
+                <p>You need to decide whether to proceed with the claim. You need to respond before 4pm on 16 Sept 2018. Your claim won't continue if you don't respond by then.</p>
+                <!-- <p>The claim has been automatically registered for free telephone mediation. We'll contact you with a mediation appointment unless you choose to opt out.</p> -->
                 <div class="form-group">
                 <form method="post" action="claimant-response/dispute-claim/task-list" class="form">
                   {{formData | safe}}
@@ -521,21 +513,16 @@
 
 
               {% elseif data['claimant'] == 10.832 %}
-              <h2 class="heading-medium">Tell us your hearing requirements</h2>
-              <p>You've rejected the defendant's admission of £{{ data['owe-amount'] or '1,200' }}.</p>
-              <p>You might have to go to a court hearing. We'll contact you if we set a hearing date to tell you how to prepare.</p>
-              <p>You need to tell us your requirements for a hearing.</p>
-              <p>Your claim won't proceed if you don't respond before 4pm on <span class="dates5"></span>.</p>
-              <p><a href="../defendant/task-list/hearing/court?scenario=4" class="button">Tell us your requirements</a></p>
+              <h2 class="heading-small">Waiting for the court to review the case</h2>
+              <p>You've rejected Mary Richard's response and said you want to take the case to court.</p>
+              <p>The court will review the case. We'll email you if we set a hearing date to tell you how to prepare.</p>
 
 
               {% elseif data['claimant'] == 10.84 %}
-              <h2 class="heading-medium">Tell us your hearing requirements</h2>
-              <p>You've rejected the defendant's admission of £{{ data['owe-amount'] or '1,200' }}.</p>
-              <p>You might have to go to a court hearing. We'll contact you if we set a hearing date to tell you how to prepare.</p>
-              <p>You need to tell us your requirements for a hearing.</p>
-              <p>Your claim won't proceed if you don't respond before 4pm on <span class="dates5"></span>.</p>
-              <p><a href="../defendant/task-list/hearing/court?scenario=4" class="button">Tell us your requirements</a></p>
+              <h2 class="heading-small">Waiting for the court to review the case</h2>
+              <p>You've rejected Mary Richard's response and said you want to take the case to court.</p>
+              <p>The court will review the case. We'll email you if we set a hearing date to tell you how to prepare.</p>
+
 
 
               {% elseif data['claimant'] == 10.85 %}
@@ -560,26 +547,24 @@
               {% elseif data['claimant'] == 11.1 %}
               <div class="status-block single">
                 <h2 class="heading-medium">Send us more details before the hearing</h2>
-                <p>A judge has ordered you to send us these details:</p>
+                <p>The court has ordered you to send us:</p>
 
                 <ul class="list list-bullet">
                   <li>witness statements</li>
                   <li>your evidence</li>
-                  <li>3 proposed experts</li>
+                  <li>your chosen expert</li>
                 </ul>
-                <p><a href="order-response?party=defendant" class="button">Send us the details</a></p>
+
+                <p><a href="order-response?party=claimant" class="button">Send us the details</a></p>
+
+                <h2 class="heading-small">See the full legal document</h2>
+
+                <p><a href="/public/images/order.pdf">Download the court's order</a> (PDF, 123KB)</a> if you want to see the full legal document that sets out these instructions.</p>
+
 
                 <h2 class="heading-small">If you don't send us more details</h2>
 
                 <p>The court can cancel your claim.</p>
-
-                <h2 class="heading-small">See the full legal document</h2>
-
-                <p><a href="/public/images/order.pdf">Download the judge's order</a> (PDF, 123KB)</a> if you want to see the full legal document that sets out these instructions.</p>
-
-                <h2 class="heading-small">If you disagree with the judge's order</h2>
-
-                <p>You can <a href="">apply to change the order</a>.</p>
 
                 <hr/>
 
@@ -593,21 +578,24 @@
               {% elseif data['claimant'] == 11.11 %}
               <div class="status-block">
                 <h2 class="heading-medium">Send us more details before the hearing</h2>
-                <p>A judge has ordered you to send us these details:</p>
 
-                <ul class="list list-bullet">
-                  <li>witness statements</li>
-                  <li>your evidence</li>
-                  <li>proposed experts</li>
-                </ul>
+                <p>The court has ordered you to send us more details.</p>
 
-                <h2 class="heading-small">How to present the details</h2>
-
-                <p><a href="/public/images/order.pdf">Download the judge's order</a> (PDF, 123KB)</a> to find out how you should present the details before you send them.</p>
+                <p><a href="/public/images/order.pdf">Download the court's order</a> (PDF, 123KB)</a> to find out the details you need to send.</p>
 
                 <h2 class="heading-small">Where to post the details</h2>
 
                 <p>You need to post the details to both the defendant and the court.</p>
+
+                <p>The defendant's address is:</p>
+
+                <p>
+                  Mary Richards <br/>
+                  12 Garden View<br />
+                  Bristol<br />
+                  BS4 7FB
+                </p>
+
 
                 <p>The court's address is:</p>
 
@@ -622,10 +610,6 @@
                 <h2 class="heading-small">If you don't send us the details</h2>
 
                 <p>The court can cancel your claim.</p>
-
-                  <h2 class="heading-small">If you disagree with the judge's order</h2>
-
-                  <p>You can <a href="">apply to change the order</a>.</p>
 
               </div>
 
@@ -2259,7 +2243,6 @@
   <select id="claimant2" name="claimant2" onchange="window.location.href='?claimant='+this.value">
     <option value="0">Choose</option>
     <option>-------- Claimant view --------</option>
-    <option value="1.2" {% if data['claimant'] == 1.2 %}selected{% endif %}>Draft claim</option>
     <option value="1" {% if data['claimant'] == 1 %}selected{% endif %}>Claim being processed</option>
     <option value="3.1" {% if data['claimant'] == 3.1 %}selected{% endif %}>More time requested by defendant</option>
     <option>-------- CCJs --------</option>
@@ -2341,8 +2324,8 @@
 <script src="/public/javascripts/jquery-ui.js"></script>
 <script type="text/javascript">
   window.moj.init()
-  $(function () {
-    $('#tabs').tabs()
-  })
+  {% if data['claimant'] == 10 or data['claimant'] == 11 %}
+  $('#settle').click();
+  {% endif %}
 </script>
 {% endblock %}
