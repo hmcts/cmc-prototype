@@ -1,0 +1,79 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="4" %}
+
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+
+
+<main id="content" role="main">
+
+  {% include "includes/phase_banner_beta.html" %}
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+      <a href="#" class="link-back">Back</a>
+
+      <h1 class="heading-large">
+        How do you want to try to recover your money?
+      </h1>
+
+      <form
+        name="aspnetForm"
+        method="post"
+        onsubmit="multiNavigation('enforcement', ['Questioning', 'Warrant', 'Earnings', 'Savings', 'Charging-order'], ['handoff' +
+         '', 'chances-of-success', 'handoff', 'handoff', 'handoff']);return false;"
+        id="aspnetForm"
+        autocomplete="off">
+
+        <div class="form-group">
+          <fieldset>
+
+            <legend class="visually-hidden">How do you want to try to recover your money?</legend>
+
+            <div class="multiple-choice">
+              <input id="radio-questioning" type="radio" name="enforcement" value="Questioning">
+              <label for="radio-questioning" data-target="questioning-info">Ask the court to order the defendant to attend a hearing and find out what they can afford to pay</label>
+            </div>
+
+            <div class="multiple-choice">
+              <input id="radio-yes" type="radio" name="enforcement" value="Warrant">
+              <label for="radio-yes" data-target="yes-info">Send a bailiff to try to collect money from the defendant or seize goods to sell at auction</label>
+            </div>
+
+
+            <div class="multiple-choice">
+              <input id="radio-no" type="radio" name="enforcement" value="Earnings">
+              <label for="radio-no" data-target="no-info">Ask the court to take money from the defendant's wages to pay the debt</label>
+            </div>
+
+
+            <div class="multiple-choice">
+              <input id="radio-repayment" type="radio" name="enforcement" value="Savings">
+              <label for="radio-repayment" data-target="repayment-info">Ask the court to freeze money in the defendant's bank, building society or business account</label>
+            </div>
+
+            <div class="multiple-choice">
+              <input id="radio-charging" type="radio" name="enforcement" value="Charging-order">
+              <label for="radio-charging" data-target="charging-order">Ask the court to charge the defendant's land or property</label>
+            </div>
+          </fieldset>
+        </div>
+
+        <input id="advert-option-next--button" type="submit" value="Save and continue" class="button"
+               data-ignore-double-submit="true">
+
+      </form>
+
+    </div>
+  </div>
+  </div>
+{% include 'prototypes/prototype-mar-2019/includes/contact.html' %}
+</main>
+{% endblock %}

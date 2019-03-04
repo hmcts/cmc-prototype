@@ -1,0 +1,170 @@
+{% extends "layout_task-list.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block home_link %} ../../task-list {% endblock %}
+{% block proposition_header %}
+{% set my_account="1" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  <a href="#" class="link-back">Back</a>
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <form method="post" action="enter-details-warning" class="form">
+        {{formData | safe}}
+        {% if data['defendant-type']=="Individual" %}
+        <h1 class="heading-large">
+          Their details
+        </h1>
+
+        <fieldset>
+          <div class="form-group">
+            <h2 class="heading-medium" style="margin-top: 0.75em">Their name</h2>
+            <p>You'll have to pay an extra fee if you want to change the name of anyone involved with the claim later.</p>
+            <div class="form-group-compound address-item form-group">
+              <label class="form-label" for="name-title">Title</label>
+              <input class="form-control" value="Mrs" id="name-title" style="width: 25%" />
+            </div>
+            <div class="form-group-compound address-item form-group">
+              <label class="form-label" for="name-first">First name</label>
+              <input class="form-control" value="Mary" id="name-first" />
+            </div>
+            <div class="form-group-compound address-item form-group">
+              <label class="form-label" for="name-last">Last name</label>
+              <input class="form-control" value="Richards" id="name-last" />
+            </div>
+          </div>
+        </fieldset>
+
+        <h2 class="heading-medium">
+          Their postal address
+        </h2>
+        <p>You must enter the defendant's postal address to make a claim against them. The address must be in England or Wales.</p>
+        {% elseif data['defendant-type']=="Sole trader" %}
+        <h1 class="heading-large">
+          <form method="post" action="your-details/date-of-birth" class="form">
+            Their details
+          </h1>
+
+          <div class="form-group">
+            <label class="form-label" for="defendant_firstname">Full name (including title)</label>
+            <input class="form-control " id="defendant_name" name="defendant_name" type="text"
+            value="{{data['defendant_name']}}">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="claimant_lastname">Trading as (optional)</label>
+            <input type="text" class="form-control" id="defendant_business_name"
+            name="defendant_business_name" value="{{data['defendant_business_name']}}">
+          </div>
+          <h2 class="heading-medium">
+            Their address
+          </h2>
+          <p>You must enter the defendant’s residential or trade address to make a claim against them. The address must be in England or Wales.</p>
+          {% elseif data['defendant-type']=="Company" %}
+          <h1 class="heading-large">
+            Company details
+          </h1>
+          <fieldset>
+            <div class="form-group">
+              <label class="form-label" for="company_name">Company name</label>
+              <input class="form-control " id="defendant_name" name="defendant_name" type="text"
+              value="{{data['defendant_name']}}">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="contact_name">Contact person </label>
+              <input class="form-control" id="defendant-contact-name" name="defendant-contact-name" type="text"
+              value="{{data['defendant-contact-name']}}">
+            </div>
+          </fieldset>
+          <h2 class="heading-medium">
+            Company address
+          </h2>
+          <p>Enter the company’s registered office or a company address that has a connection with the claim. The address must be in England or Wales.</p>
+          {% elseif data['defendant-type']=="Organisation" %}
+          <h1 class="heading-large">
+            Organisation details
+          </h1>
+          <fieldset>
+            <div class="form-group">
+              <label class="form-label" for="company_name">Organisation name</label>
+              <input class="form-control" id="company_name" name="company-name" type="text"
+              value="{{data['company-name']}}">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="contact_name">Contact person </label>
+              <input class="form-control " id="defendant-contact-name" name="defendant-contact-name" type="text"
+              value="{{data['defendant-contact-name']}}">
+            </div>
+          </fieldset>
+          <h2 class="heading-medium">
+            Organisation address
+          </h2>
+          <p>Enter the organisation's main office or an organisation address that has a connection with the claim. The address must be in England or Wales.</p>
+          {% else %}
+          <h1 class="heading-large">
+            Your residential address
+          </h1>
+          <p>This must be the address where you live.</p>
+          {% endif %}
+          <legend class="visuallyhidden">
+            Postcode
+          </legend>
+          <!--<div class="form-group">-->
+            <!--<input class="form-control" id="claimant_address" name="claimant-address" type="text" value="{{data['claimant-address']}}">-->
+            <!--</div>-->
+            <fieldset class="form-group">
+              <div id="postcode-finder">
+                <label class="form-label" for="postcode">Enter a UK postcode</label>
+                <input class="form-control form-control-1-4" id="postcode" name="postcodeFinder" type="text" value="">
+                <a id="find-button" class="button secondary-button">Find address</a>
+              </div>
+              <div class="form-group error" id="postcode-seach-error" style="display:none; margin-top: 20px;">
+                <span class="error-message fon">
+                  We can't find an address for that postcode. Try again or enter the address manually.
+                </span>
+              <div id="select-address" class="form-group" style="display: none;">
+                <label class="form-label">
+                  Pick an address
+                </label>
+                <select id="addressList" class="form-control" name="addressSelect" onchange="updateAddress(this.value)" title="Pick an address">
+                  <option value="">Select an address </option>
+                </select>
+              </div>
+              <div id="manual-address" style="display: none;" class="">
+                <div class="form-group">
+                  <label class="form-label" for="street-1" id="street-label">Address</label>
+                  <input class="form-control" id="street-1" name="claimant_AddressLine1" type="text" value="">
+                  <input class="form-control second-text-input" id="street-2" name="claimant_AddressLine2" type="text" value="" title="Street line 2">
+                  <input class="form-control second-text-input" id="street-3" name="claimant_AddressLine3" type="text" value="" title="Street line 3">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="town" id="town-label">Town or city</label>
+                  <input class="form-control" id="town" name="claimant_city" type="text" value="">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="postcode-full" id="postcode-label">Postcode</label>
+                  <input class="form-control form-control-1-4" id="postcode-full" name="claimant_Postcode" type="text" value="">
+                </div>
+                <div class="form-group" id="country-group">
+                  <label class="form-label" for="country">Country</label>
+                  <input class="form-control" id="country" name="claimant_country" type="hidden" value="">
+                </div>
+              </div>
+              <div id="enter-manually">
+                <a class="link" href="#" onclick="return showAbroadAddress();">I need to enter an address outside the UK</a>
+              </div>
+              <div id="enter-automatic" style="display:none">
+                <a class="link" href="#" onclick="return showPostcodeLookup();">Find address by a UK postcode</a>
+              </div>
+            </fieldset>
+            <div class="form-group">
+              <input type="submit" class="button" value="Save and continue"/>
+            </div>
+          </form>
+        </div>
+      </div>
+    {% include 'prototypes/prototype-mar-2019/includes/contact.html' %}
+</main>
+{% endblock %}

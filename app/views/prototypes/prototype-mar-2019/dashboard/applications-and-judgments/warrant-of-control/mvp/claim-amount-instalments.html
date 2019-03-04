@@ -1,0 +1,138 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="4" %}
+
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <a href="#" class="link-back">Back</a>
+      <h1 class="heading-large">
+        Recover judgment debt
+      </h1>
+
+      <div class="panel panel-border-wide">
+        <p>The balance outstanding on the judgment is £1,643.20. The defendant was ordered to pay instalments of £120
+          every week.</p>
+      </div>
+
+      <details>
+        <summary><span class="summary">View amount breakdown</span></summary>
+        <div class="panel panel-border-narrow">
+
+          <table class="table-form">
+            <caption class="visuallyhidden"></caption>
+            <thead>
+            <tr>
+              <th scope="col">Amount breakdown</th>
+              <th class="numeric last" scope="col">Amount</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <th scope="row">Claim amount</th>
+              <td class="numeric last">
+                <label class="visuallyhidden" for="amount">Claim amount</label>
+                <span
+                  class="font-small">£1,500</span>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">Interest to date</th>
+              <td class="numeric last">
+                <label class="visuallyhidden" for="amount">Interest to date</label>
+                <span
+                  class="font-small">£68.20</span>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">Original claim fee</th>
+              <td class="numeric last">
+                <label class="visuallyhidden" for="amount">Original claim fee</label>
+                <span
+                  class="font-small">£75</span>
+              </td>
+            </tr>
+
+            {% if data['radio-indent-group2']=="Yes" %}
+            <tr>
+              <th scope="row">Minus amount already paid</th>
+              <td class="numeric last">
+                <label class="visuallyhidden" for="amount">Minus amount already paid</label>
+                <span
+                  class="font-small">£200</span>
+              </td>
+            </tr>
+            {%endif%}
+
+            <tr>
+              <th scope="row" style="font-weight: bold">Balance outstanding</th>
+              <td class="numeric last">
+                <label class="visuallyhidden" for="amount">Balance oustanding</label>
+                <span
+                  class="font-small" style="font-weight: bold">{% if data['radio-indent-group2']=="Yes" %}£1,443.2{%else%}£1,643.20{%endif%}</span>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+
+        </div>
+      </details>
+
+      <h2 class="heading-medium">
+        How much do you want to try to recover?
+      </h2>
+
+      <form
+        name="aspnetForm"
+        method="post"
+        onsubmit="multiNavigation('enforce-amount', ['owe-all', 'owe-none', 'owe-some' ], [ 'claimant-address', 'claimant-address', 'claimant-address' ]);return false;"
+        id="aspnetForm"
+        autocomplete="off">
+
+        <div class="form-group">
+          <fieldset>
+            <div class="multiple-choice">
+              <input id="radio-owe-all" type="radio" name="enforce-amount" value="owe-all" checked="checked" onclick="$('#amount-owed').val(1643.20)" >
+              <label for="radio-owe-all">Full amount - £1,643.20</label>
+            </div>
+
+            <div class="multiple-choice">
+              <input id="radio-owe-none" type="radio" name="enforce-amount" value="owe-none" onclick="$('#amount-owed').val(480)" >
+              <label for="radio-owe-none">Minimum amount - £480</label>
+            </div>
+
+            <div class="multiple-choice" data-target="set-date">
+              <input id="radio-owe-some" type="radio" name="enforce-amount" value="owe-some" onclick="$('#amount-owed').val( $('owe-amount').val() | 150 )" >
+              <label for="radio-owe-some">Another amount</label>
+            </div>
+            <div class="panel panel-border-narrow js-hidden" id="set-date">
+              <label class="form-label" for="rate">How much?</label>
+              <input class="form-control timeline-column-4 fee pound" type="text" id="owe-amount" name="owe-amount" value="{{ data['owe-amount'] }}" onkeyup="$('#amount-owed').val(this.value)" >
+            </div>
+          </fieldset>
+        </div>
+
+        <input type="hidden" name="amount-owed" id= "amount-owed" />
+        <input type="hidden" name="enforce-amount" value="complete" />
+
+        <!--<p>The fee to apply for a warrant of control is £77.</p>-->
+
+        <div class="form-group">
+          <input type="submit" class="button" value="Save and continue"/>
+        </div>
+
+      </form>
+
+    </div>
+    <br>
+    <fieldset></fieldset>
+    {% include 'prototypes/prototype-mar-2019/includes/contact.html' %}
+</main>
+{% endblock %}

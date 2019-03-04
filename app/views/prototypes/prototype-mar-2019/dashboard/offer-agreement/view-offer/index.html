@@ -1,0 +1,162 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <a href="#" class="link-back">Back</a>
+      {% if data['defendant'] == "defendant" %}
+      <h1 class="heading-large">
+        <span class="heading-secondary">Claimant's response </span>
+        Jan Clark's counter offer
+      </h1>
+      <p class=""></p>
+      <table class="offer-table">
+        <thead>
+          <tr>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>The offer</td>
+            <td>I'll pay a maximum of £100 towards any new materials.
+            </td>
+          </tr>
+          <tr>
+            <td>By when</td>
+            <td>1 January 2019</td>
+          </tr>
+        </tbody>
+      </table>
+      <h2 class="heading-medium">Do you accept the offer?</h2>
+      <form
+      name="aspnetForm"
+      method="post"
+      onsubmit="multiNavigation('radio-indent-group', ['Yes', 'Counter_defendant', 'decline_counter'], ['agreement', 'view-offer/counter-suggestion', 'view-offer/confirmation-page']);return false;"
+      id="aspnetForm"
+      autocomplete="off">
+      <div class="form-group">
+        <fieldset>
+          <div class="multiple-choice" data-target="accept">
+            <input id="radio-yes" type="radio" name="radio-indent-group" value="Yes">
+            <label for="radio-yes" data-target="yes-info">Yes</label>
+          </div>
+          <div class="panel panel-border-narrow js-hidden" id="accept">
+            <p>You'll be able to make a legal agreement between you and Jan Clark.</p>
+          </div>
+          <div class="multiple-choice" data-target="decline">
+            <input id="radio-no" type="radio" name="radio-indent-group" value="decline_counter">
+            <label for="radio-no" data-target="no-info">No</label>
+          </div>
+          <div class="multiple-choice" data-target="counter">
+            <input id="radio-counter" type="radio" name="radio-indent-group" value="Counter_defendant">
+            <label for="radio-counter" data-target="no-info">Make a counter offer</label>
+          </div>
+        </fieldset>
+        <input id="advert-option-next--button" type="submit" value="Continue" class="button"
+        data-ignore-double-submit="true">
+      </div>
+      {% else %}
+      <h1 class="heading-large">
+        <span class="heading-secondary">Defendant's response </span>
+        Mary Richard's offer
+      </h1>
+      <p class="">
+      </p>
+      <table class="offer-table">
+        <thead>
+          <tr>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>The offer</td>
+            <td>    I will fix the roof if you'll give me access and pay for any extra materials.
+            </td>
+          </tr>
+          <tr>
+            <td>By when</td>
+            <td>1 January 2019</td>
+          </tr>
+        </tbody>
+      </table>
+      <h2 class="heading-medium">Do you accept the offer?</h2>
+      {% if data['defendant'] == "offer" %}
+      <form
+      name="aspnetForm"
+      method="post"
+      onsubmit="multiNavigation('radio-indent-group', ['Yes', 'Counter', 'reject-offer'], ['agreement', 'view-offer/counter-suggestion', 'view-offer/confirmation-page']);return false;"
+      id="aspnetForm"
+      autocomplete="off">
+      <div class="form-group">
+        <fieldset>
+          <div class="multiple-choice" data-target="accept">
+            <input id="radio-yes" type="radio" name="radio-indent-group" value="Yes">
+            <label for="radio-yes" data-target="yes-info">Yes</label>
+          </div>
+          <div class="panel panel-border-narrow js-hidden" id="accept">
+            <p>You can make a legal agreement between you and Mary Richards.</p>
+          </div>
+          <div class="multiple-choice" data-target="reject-offer">
+            <input id="radio-no" type="radio" name="radio-indent-group" value="reject-offer">
+            <label for="radio-no" data-target="no-info">No</label>
+          </div>
+          <div class="panel panel-border-narrow js-hidden" id="reject-offer">
+            <p>If you reject the offer you can't mention it in court.</p>
+          </div>
+     <!--     <div class="multiple-choice" data-target="counter">
+            <input id="radio-counter" type="radio" name="radio-indent-group" value="Counter">
+            <label for="radio-counter" data-target="no-info">Make a counter offer</label>
+          </div>-->
+        </fieldset>
+        <input id="advert-option-next--button" type="submit" value="Continue" class="button"
+        data-ignore-double-submit="true">
+      </div>
+      {% else %}
+      <form
+      name="aspnetForm"
+      method="post"
+      onsubmit="multiNavigation('radio-indent-group', ['Yes', 'Counter', 'Decline'], ['../agreement', 'counter-suggestion', 'mediation']);return false;"
+      id="aspnetForm"
+      autocomplete="off">
+      <div class="form-group">
+        <fieldset>
+          <div class="multiple-choice" data-target="accept">
+            <input id="radio-yes" type="radio" name="radio-indent-group" value="Yes">
+            <label for="radio-yes" data-target="yes-info">Yes, I accept their offer</label>
+          </div>
+          <div class="panel panel-border-narrow js-hidden" id="accept">
+            <p>Continue to make a settlement agreement between you and the defendant.</p>
+          </div>
+          <div class="multiple-choice" data-target="counter">
+            <input id="radio-counter" type="radio" name="radio-indent-group" value="Counter">
+            <label for="radio-counter" data-target="no-info">No, I want to make a counter offer</label>
+          </div>
+          <div class="panel panel-border-narrow js-hidden" id="counter">
+           <p>Continue to make a counter offer. If the defendant agrees you can make an agreement to settle the claim.</p>
+         </div>
+         <div class="multiple-choice" data-target="decline">
+          <input id="radio-no" type="radio" name="radio-indent-group" value="Decline">
+          <label for="radio-no" data-target="no-info">No, I don't accept their offer</label>
+        </div>
+        <div class="panel panel-border-narrow js-hidden" id="decline">
+         <p>Continue to consider free mediation.</p>
+       </div>
+     </fieldset>
+     <input id="advert-option-next--button" type="submit" value="Continue" class="button"
+     data-ignore-double-submit="true">
+   </div>
+   {% endif %}
+   {% endif %}
+ </form>
+</div>
+</div>
+{% include 'prototypes/prototype-mar-2019/includes/contact.html' %}
+</main>
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="4" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <a href="#" class="link-back">Back</a>
+      {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and
+      data.return_page.includes('check-your-answers')%}
+      <form method="post" action="{{ data.return_page if data.return_page | length > 0 else '../task-list' }}"
+            class="form">
+        {% else %}
+        <form method="post" action="risk-defendant" class="form">
+          {% endif %}
+          {{formData | safe}}
+          <h1 class="heading-large">
+            Describe Mary Richards
+          </h1>
+          <div class="">
+
+            <p>Include their approximate age, height, weight, hair colour, and anything else that could help the bailiff identify them.</p>
+
+            <!--<p>Enter anything you think may help recover your money, such as when the defendant is usually at the-->
+            <!--address or when they're not home.</p>-->
+
+          </div>
+
+
+          <fieldset>
+            <legend class="visuallyhidden">
+
+            </legend>
+            <textarea class="form-control"
+                      id="description-defendant"
+                      rows="3"
+                      name="description-defendant"
+                      type="text"
+                      style="width: 100%"
+                      value="">{{data['description-defendant']}}</textarea>
+          </fieldset>
+          {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and
+          data.return_page.includes('check-your-answers')%}
+          <div class="form-group">
+            <input type="submit" class="button" value="Save changes"/>
+          </div>
+          <a href="{{ data.return_page if data.return_page | length > 0 else '../task-list' }}">Cancel</a>
+          {% else %}
+          <div class="form-group">
+            <input type="submit" class="button" value="Save and continue"/>
+          </div>
+          {% endif %}
+        </form>
+    </div>
+  </div>
+{% include 'prototypes/prototype-mar-2019/includes/contact.html' %}
+</main>
+{% endblock %}

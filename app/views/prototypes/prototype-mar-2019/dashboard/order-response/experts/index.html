@@ -1,0 +1,53 @@
+
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <a href="#" class="link-back">Back</a>
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+        <form method="post" action="experts/propose" class="form">
+
+          <h1 class="heading-large">Propose 3 experts</h1>
+
+          <p>You must propose 3 independent experts - the {% if data['party'] == 'defendant' %}claimant{% else %}defendant{% endif %} will then pick one.</p>
+
+          <p>You must not discuss the case with the experts before they're appointed.</p>
+
+          <h3 class="heading-medium">How to choose your experts</h3>
+
+          <p>Make sure the expert you choose meets these conditions:</p>
+
+          <ul class="list list-bullet">
+            <li>they know what an expert in a money claim does - ideally they've done it before</li>
+            <li>they can write a report about technical details of the case which answers questions from both parties</li>
+            <li>they're not a friend or a relative</li>
+            <li>the cost isn't out of proportion compared to the total value of the claim</p> 
+          </ul>
+
+          <h3 class="heading-medium">How to use the expert</h3>
+          <p>Both you and the {% if data['party'] == 'defendant' %}claimant{% else %}defendant{% endif %} can ask questions. The expert will answer these in a report. The judge can use the report to make a ruling.</p>
+
+          <h3 class="heading-medium">Who pays for the expert</h3>
+          <p>You and the {% if data['party'] == 'defendant' %}claimant{% else %}defendant{% endif %} share the cost of hiring the expert.</p>
+          <p>If you win the case you may be able to recover up to £750 of this cost. A judge will rule on this at the end of the hearing.</p>
+
+          <div class="form-group">
+            <input type="submit" class="button" value="Save and continue">
+          </div>
+        </form>
+
+
+    </div>
+  {% include 'prototypes/prototype-mar-2019/includes/contact.html' %}
+</main>
+
+{% endblock %}
