@@ -1,0 +1,115 @@
+{% extends "layout_task-list.html" %}
+
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+
+{% block home_link %} ../../task-list {% endblock %}
+{% block proposition_header %}
+{% set my_account="1" %}
+
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+
+
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+
+      <a href="#" class="link-back">Back</a>
+
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+
+
+       <form
+       name="aspnetForm"
+       method="post"
+       onsubmit="multiNavigation('interest_rates', ['8','Different'], ['interest-date', 'interest-date']);return false;"
+       id="aspnetForm"
+       autocomplete="off">
+
+        {{formData | safe}}
+
+        <h1 class="heading-large">
+          What annual rate of interest do you want to claim?
+
+
+        </h1>
+
+
+        <p>You can claim 8% per year unless you know that a different rate applies.</p>
+
+        <fieldset>
+          <legend class="visuallyhidden">
+            Interest
+          </legend>
+
+          <fieldset></fieldset>
+
+          <div class="multiple-choice">
+            <input id="radio-1" type="radio" name="interest_rates" value="8" {{ checked('interest-rate', '8 percent') }}>
+            <label for="radio-1">8%
+            </label>
+          </div>
+
+          <div class="multiple-choice" data-target="different">
+            <input id="radio-2" name="interest_rates" type="radio" value="Different" {{ checked("interest-rate", "Different rate") }}>
+            <label for="radio-2">A different rate</label>
+          </div>
+          <div class="panel panel-border-narrow js-hidden" id="different">
+            <label class="form-label" for="rate">Annual rate you're claiming</label>
+            <input class="form-control form-control-1-8" name="rate" type="text" id="rate" value="{{data['rate']}}"> %
+            <fieldset></fieldset>
+            <label class="form-label" for="rate">Why you’re claiming this rate</label>
+            <textarea class="form-control" name="rate-why" type="text" id="rate-why" value="{{data['rate-why']}}"></textarea>
+          </div>
+
+
+
+        </fieldset>
+
+
+        <details>
+
+          <summary>
+            <span class="summary">Help with interest rates</span>
+          </summary>
+
+          <div class="panel panel-border-narrow">
+             <p>You can claim 8% interest on money owed to you. This is the statutory rate. If you know that a different rate applies you can use that. For example if you have a contract with a specific rate.</p>
+
+            <p>The court will decide if you're entitled to some or all of the interest claimed.</p>
+          </div>
+
+        </details>
+
+        <fieldset></fieldset>
+
+      {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}
+        <div class="form-group">
+          <input type="submit" class="button" value="Save and continue"/>
+        </div>
+
+
+        <a href="{{ data.return_page if data.return_page | length > 0 else '../task-list' }}">Cancel</a>
+
+      {% else %}
+        <div class="form-group">
+          <input type="submit" class="button" value="Save and continue"/>
+        </div>
+
+      {% endif %}
+      </form>
+
+    </div>
+
+
+  </div>
+
+
+{% include 'prototypes/prototype-mar-2019/includes/contact.html' %}
+</main>
+{% endblock %}

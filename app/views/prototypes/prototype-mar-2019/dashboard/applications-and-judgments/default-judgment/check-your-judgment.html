@@ -1,0 +1,386 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="4" %}
+
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <a href="#" class="link-back">Back</a>
+  <h1 class="heading-large">
+
+    Check your answers
+  </h1>
+  <table class="check-your-answers">
+        <thead>
+      <tr>
+        <th colspan="2">
+          <h2 class="heading-medium" id="name">
+            Their details (defendant)
+          </h2>
+        </th>
+        <th>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+
+      {% if data['control-box'] == 1 %}
+      <!-- Individual -->
+      <tr >
+        <td>
+          Full name
+        </td>
+        <td>
+          Mary Richards<br>
+        </td>
+        <td class="change-answer">
+        </td>
+      </tr>
+      {% elseif data['control-box'] == 2 %}
+      <!-- sole trader  -->
+      <tr >
+        <td>
+          Full name
+        </td>
+        <td>
+          Mary Richards<br>
+        </td>
+        <td class="change-answer">
+        </td>
+      </tr>
+      <tr >
+        <td>
+          Business name
+        </td>
+        <td>
+          Richards Interior Design LLP<br>
+        </td>
+        <td class="change-answer">
+        </td>
+      </tr>
+      {% elseif data['control-box'] == 3 %}
+      <!-- company  -->
+      <tr>
+        <td>
+          Company name
+        </td>
+        <td>
+          Smith LTD <br>
+        </td>
+        <td class="change-answer">
+        </td>
+      </tr>
+      <tr >
+        <td>
+          Contact person
+        </td>
+        <td>
+          Jane Smith<br>
+        </td>
+        <td class="change-answer">
+        </td>
+      </tr>
+      {% elseif data['control-box'] == 4 %}
+      <!-- org  -->
+      <tr >
+        <td>
+          Organisation name
+        </td>
+        <td>
+          Jones Bros <br>
+        </td>
+        <td class="change-answer">
+        </td>
+      </tr>
+      <tr >
+        <td>
+          Contact person
+        </td>
+        <td>
+          Jane Smith<br>
+        </td>
+        <td class="change-answer">
+        </td>
+      </tr>
+      {% else %}
+      <tr >
+        <td>
+          Full name
+        </td>
+        <td>
+          Mary Richards<br>
+        </td>
+        <td class="change-answer">
+        </td>
+      </tr>
+      {% endif %}
+      <tr>
+        <td>
+          Address
+        </td>
+        <td>
+          101 Regent Road<br>
+          Shiplake<br>
+          RG9 4BW
+        </td>
+        <td class="change-answer">
+
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Email
+        </td>
+        <td>
+          maryrichards@hotmail.com
+        </td>
+        <td class="change-answer">
+        </td>
+      </tr>
+            {% if data['control-box'] == 1 or data['control-box'] == 2 %}
+
+      <tr>
+        <td>
+          Date of birth
+        </td>
+        <td>
+          Not known
+        </td>
+        <td class="change-answer">
+                    <a href="claim-amount">
+              Change <span class="visuallyhidden">Amount defendant is ordered to pay</span>
+            </a>
+        </td>
+      </tr>
+     {% endif %}
+        </tbody>
+      </table>
+        <table class="check-your-answers">
+          <thead>
+      <tr>
+        <th colspan="2">
+          <h2 class="heading-medium" id="name">
+            Payment
+          </h2>
+        </th>
+        <th>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+
+    <tbody>
+
+
+            <tr>
+        <td class="no-border">
+          Has the defendant paid some of the amount owed?
+          <td class="no-border">
+                          {% if data['radio-indent-group2']=="Yes" or data['control-box'] == 1  or data['control-box'] == 2  or data['control-box'] == 3 or data['control-box'] == 4 %}Yes{% elif data['radio-indent-group2']=="No"  or data['control-box'] == 5 or data['control-box'] == 6  %}No{% else %}No{% endif %}
+
+          </td>
+          <td class="change-answer no-border">
+            <a href="claim-amount-deduct">
+              Change <span class="visuallyhidden">Amount defendant is ordered to pay</span>
+            </a>
+          </td>
+        </tr>
+       {% if data['radio-indent-group2']=="No" or data['control-box'] == 5 or data['control-box'] == 5  %}
+              {% elseif data['control-box'] == 1  or data['control-box'] == 2  or data['control-box'] == 3 or data['control-box'] == 4 or data['claimant-payment-request']=="Immediately" or data['claimant-payment-request']=="Set-date" or data['claimant-payment-request']=="Instalments"%}
+
+       <tr>
+        <td>
+          Amount already paid
+          <td>
+            £100<br>
+          </td>
+          <td class="change-answer">
+
+          </td>
+        </tr>
+
+       {% endif %}
+
+                  <tr>
+        <td>
+          Total to be paid by defendant
+          <td>
+            £1643.20<br>
+          </td>
+          <td class="change-answer">
+
+          </td>
+        </tr>
+        <tr>
+
+
+
+           {% if data['claimant-payment-request']=="Immediately" or data['control-box'] == 6 %}<td class="">{% else %} <td class="no-border">{% endif %}
+
+            When you want the defendant to pay
+        </td>
+            {% if data['claimant-payment-request']=="Immediately" or data['control-box'] == 6 %}<td class="">{% else %} <td class="no-border">{% endif %}
+
+              {% if data['claimant-payment-request']=="Immediately" or data['control-box'] == 6 %}
+              Immediately
+              {% elseif data['claimant-payment-request']=="Instalments"  or data['control-box'] == 1  or data['control-box'] == 2  or data['control-box'] == 3 or data['control-box'] == 4%}
+              By instalments
+
+              {% elseif data['claimant-payment-request']=="Set-date" or data['control-box'] == 5 %}
+              By a set date
+              {% else %}
+              By instalments
+              {% endif %}
+            </td>
+            {% if data['claimant-payment-request']=="Immediately" or data['control-box'] == 6 %}<td class="change-answer">{% else %}<td class="change-answer no-border">
+{% endif %}
+
+
+              <a href="payment-options">
+                Change <span class="visuallyhidden">Judgment details</span>
+              </a>
+            </td>
+          </tr>
+
+
+          {% if data['claimant-payment-request']=="Set-date" or data['control-box'] == 5 %}
+
+          <tr>
+            <td>
+              When you want them to pay the amount
+            </td>
+            <td>
+             <span class="dates"></span>
+            </td>
+            <td class="change-answer">
+
+            </td>
+          </tr>
+
+        {% else %}
+
+        <tr>
+          <td class="no-border">
+            Instalments of
+
+            <td class="no-border">
+             £100
+            </td>
+            <td class="change-answer no-border">
+
+            </td>
+          </tr>
+
+             <tr>
+          <td class="no-border">
+            When you want them to make the first payment
+
+
+            <td  class="no-border">
+             23 September 2017
+            </td>
+            <td class="change-answer no-border">
+
+            </td>
+          </tr>
+          <tr>
+          <td>
+            How often you want them to make this payment
+
+
+
+
+            <td>
+             Monthly
+            </td>
+            <td class="change-answer">
+
+            </td>
+          </tr>
+
+
+          {% endif %}
+
+        </tbody>
+      </table>
+
+
+    <div class="column-two-thirds">
+
+
+      <h2 class="heading-medium">Declaration</h2>
+
+
+
+{% if data['control-box'] == 3 or data['control-box'] == 4 %}
+
+    <p>You must hold a senior position in your organisation to sign the declaration.</p>
+    <details class='form-group'>
+      <summary>
+        <span class="summary">Types of senior position</span>
+      </summary>
+
+      <div class="panel">
+        <p>A senior position could be a:</p>
+        <ul class="list-bullet list">
+          <li>director</li>
+          <li>treasurer</li>
+          <li>chief executive</li>
+          <li>manager or other officer of the company or corporation</li>
+        </ul>
+        <p>If your corporation isn't registered, a senior position could be:</p>
+          <ul class="list-bullet list">
+            <li>the chairperson or president</li>
+            <li>another officer of the corporation</li>
+          </ul>
+        </div>
+</details>
+<div class="form-group">
+  <label class="form-label" for="claimant_title">Full name</label>
+  <input type="text" class="form-control form-control-1-2" id="claimant_title" name="claimant_title" value="">
+</div>
+<div class="form-group">
+  <label class="form-label" for="defendant_firstname">Job title</label>
+  <input class="form-control form-control-1-2" id="defendant_name" name="defendant_name" type="text"
+         value="{{data['defendant_name']}}">
+</div>
+{% endif %}
+
+
+
+<div class="form-group">
+  <div class="multiple-choice text">
+    <input class="" id="HasAcceptedTermsAndConditions" type="checkbox" value="true">
+    <label for="HasAcceptedTermsAndConditions"> I declare that the details I have given are true to the best of my knowledge.</label>
+  </div>
+</div>
+
+
+         <a href="{% if data['radio-proceed'] == "none" or data['radio-proceed'] == "not-signed"  %}../../claimant-response/confirmation-page?confirmation=2.1{% else %}confirmation-page{% endif %}" class="button">Sign and submit</a>
+
+
+ </div>
+
+        </main>
+
+
+        <form method="post"  action="#" class="form" style="position: absolute;">
+          <select id="control-box2" name="control-box2" onchange="window.location.href='?control-box='+this.value">
+            <option  value="0" {% if data['control-box'] == 0 %}selected{% endif %}>Choose</option>
+
+            <option  value="1" {% if data['control-box'] == 1 %}selected{% endif %}>Individual</option>
+            <option value="2" {% if data['control-box'] == 2 %}selected{% endif %}>Sole trader</option>
+            <option value="3" {% if data['control-box'] == 3 %}selected{% endif %}>Company</option>
+            <option value="4" {% if data['control-box'] == 4 %}selected{% endif %}>Organisation</option>
+            <option value="5" {% if data['control-box'] == 5 %}selected{% endif %}>Pay by set date</option>
+            <option value="6" {% if data['control-box'] == 6 %}selected{% endif %}>Immediately</option>
+          </select>
+
+        </form>
+
+        {% endblock %}

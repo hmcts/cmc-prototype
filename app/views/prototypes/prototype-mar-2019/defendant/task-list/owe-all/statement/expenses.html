@@ -1,0 +1,479 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="2" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <a href="#" class="link-back">Back</a>
+      <form action="income" method="post" class="form">
+
+          <div class="form-group">
+
+            <h1 class="heading-large">
+              What are your regular expenses?
+            </h1>
+            <span class="body-text">Select all that apply. The information you enter must be truthful and accurate.<br />
+              Do not include any arrears repayments.</span>
+
+            <div class="multiple-choice" data-target="expense-mortgage-details">
+              <input id="expense-mortgage" name="expense" type="checkbox">
+              <label for="expense-mortgage">Mortgage</label>
+            </div>
+            <div class="panel panel-border-narrow js-hidden" id="expense-mortgage-details">
+              <label class="form-label" for="expense-mortgage-amount">Amount paid</label>
+              <p class="form-hint">Include all mortgages</p>
+              <input class="form-control fee pound form-control-1-4" type="text" id="expense-mortgage-amount" name="expense-mortgage-amount">
+
+              <p class="form-label" style="margin-top: 30px;">Paid every:</p>
+              <div class="multiple-choice">
+                <input id="radio-1-mortgage" type="radio" name="radio-group-mortgage" value="4.3333">
+                <label for="radio-1-mortgage">Week</label>
+              </div>
+              <div class="multiple-choice">
+                <input id="radio-2-mortgage" type="radio" name="radio-group-mortgage" value="2.1666">
+                <label for="radio-2-mortgage">2 weeks</label>
+              </div>
+              <div class="multiple-choice">
+                <input id="radio-3-mortgage" type="radio" name="radio-group-mortgage" value="1.0833">
+                <label for="radio-3">4 weeks</label>
+              </div>
+              <div class="multiple-choice">
+                <input id="radio-4-mortgage" type="radio" name="radio-group-mortgage" value="1">
+                <label for="radio-4-mortgage">Month</label>
+              </div>
+            </div>
+
+
+            <div class="multiple-choice" data-target="expense-rent-details">
+              <input id="expense-rent" name="expense" type="checkbox">
+              <label for="expense-rent">Rent</label>
+            </div>
+            <div class="panel panel-border-narrow js-hidden" id="expense-rent-details">
+              <label class="form-label" for="expense-rent-amount">Amount paid</label>
+              <input class="form-control fee pound form-control-1-4" type="text" id="expense-rent-amount" name="expense-rent-amount">
+
+              <p class="form-label" style="margin-top: 30px;">Paid every:</p>
+              <div class="multiple-choice">
+                <input id="radio-1-rent" type="radio" name="radio-group-rent" value="4.3333">
+                <label for="radio-1-rent">Week</label>
+              </div>
+              <div class="multiple-choice">
+                <input id="radio-2-rent" type="radio" name="radio-group-rent" value="2.1666">
+                <label for="radio-2-rent">2 weeks</label>
+              </div>
+              <div class="multiple-choice">
+                <input id="radio-3-rent" type="radio" name="radio-group-rent" value="1.0833">
+                <label for="radio-3">4 weeks</label>
+              </div>
+              <div class="multiple-choice">
+                <input id="radio-4-rent" type="radio" name="radio-group-rent" value="1">
+                <label for="radio-4-rent">Month</label>
+              </div>
+            </div>
+
+
+            <div class="multiple-choice" data-target="expense-council-details">
+              <input id="expense-council" name="expense" type="checkbox">
+              <label for="expense-council">Council Tax</label>
+            </div>
+            <div class="panel panel-border-narrow js-hidden" id="expense-council-details">
+              <label class="form-label" for="expense-council-amount">Amount paid</label>
+              <input class="form-control fee pound form-control-1-4" type="text" id="expense-council-amount" name="expense-council-amount">
+
+              <p class="form-label" style="margin-top: 30px;">Paid every:</p>
+              <div class="multiple-choice">
+                <input id="radio-1-council" type="radio" name="radio-group-council" value="4.3333">
+                <label for="radio-1-council">Week</label>
+              </div>
+              <div class="multiple-choice">
+                <input id="radio-2-council" type="radio" name="radio-group-council" value="2.1666">
+                <label for="radio-2-council">2 weeks</label>
+              </div>
+              <div class="multiple-choice">
+                <input id="radio-3-council" type="radio" name="radio-group-council" value="1.0833">
+                <label for="radio-3">4 weeks</label>
+              </div>
+              <div class="multiple-choice">
+                <input id="radio-4-council" type="radio" name="radio-group-council" value="1">
+                <label for="radio-4-council">Month</label>
+              </div>
+            </div>
+
+
+            <div class="multiple-choice" data-target="expense-gas-details">
+              <input id="expense-gas" name="expense" type="checkbox">
+              <label for="expense-gas">Gas</label>
+            </div>
+            <div class="panel panel-border-narrow js-hidden" id="expense-gas-details">
+              <label class="form-label" for="expense-gas-amount">Amount paid</label>
+              <input class="form-control fee pound form-control-1-4" type="text" id="expense-gas-amount" name="expense-gas-amount">
+
+              <p class="form-label" style="margin-top: 30px;">Paid every:</p>
+              <div class="multiple-choice">
+                <input id="radio-1-gas" type="radio" name="radio-group-gas" value="4.3333">
+                <label for="radio-1-gas">Week</label>
+              </div>
+              <div class="multiple-choice">
+                <input id="radio-2-gas" type="radio" name="radio-group-gas" value="2.1666">
+                <label for="radio-2-gas">2 weeks</label>
+              </div>
+              <div class="multiple-choice">
+                <input id="radio-3-gas" type="radio" name="radio-group-gas" value="1.0833">
+                <label for="radio-3">4 weeks</label>
+              </div>
+              <div class="multiple-choice">
+                <input id="radio-4-gas" type="radio" name="radio-group-gas" value="1">
+                <label for="radio-4-gas">Month</label>
+              </div>
+            </div>
+
+
+            <div class="multiple-choice" data-target="expense-elec-details">
+              <input id="expense-elec" name="expense" type="checkbox">
+              <label for="expense-elec">Electricity</label>
+            </div>
+            <div class="panel panel-border-narrow js-hidden" id="expense-elec-details">
+              <label class="form-label" for="expense-elec-amount">Amount paid</label>
+              <input class="form-control fee pound form-control-1-4" type="text" id="expense-elec-amount" name="expense-elec-amount">
+
+              <p class="form-label" style="margin-top: 30px;">Paid every:</p>
+              <div class="multiple-choice">
+                <input id="radio-1-elec" type="radio" name="radio-group-elec" value="4.3333">
+                <label for="radio-1-elec">Week</label>
+              </div>
+              <div class="multiple-choice">
+                <input id="radio-2-elec" type="radio" name="radio-group-elec" value="2.1666">
+                <label for="radio-2-elec">2 weeks</label>
+              </div>
+              <div class="multiple-choice">
+                <input id="radio-3-elec" type="radio" name="radio-group-elec" value="1.0833">
+                <label for="radio-3">4 weeks</label>
+              </div>
+              <div class="multiple-choice">
+                <input id="radio-4-elec" type="radio" name="radio-group-elec" value="1">
+                <label for="radio-4-elec">Month</label>
+              </div>
+            </div>
+
+
+            <div class="multiple-choice" data-target="expense-water-details">
+              <input id="expense-water" name="expense" type="checkbox">
+              <label for="expense-water">Water</label>
+            </div>
+            <div class="panel panel-border-narrow js-hidden" id="expense-water-details">
+              <label class="form-label" for="expense-water-amount">Amount paid</label>
+              <p class="form-hint">Include sewerage payments</p>
+              <input class="form-control fee pound form-control-1-4" type="text" id="expense-water-amount" name="expense-water-amount">
+
+              <p class="form-label" style="margin-top: 30px;">Paid every:</p>
+              <div class="multiple-choice">
+                <input id="radio-1-water" type="radio" name="radio-group-water" value="4.3333">
+                <label for="radio-1-water">Week</label>
+              </div>
+              <div class="multiple-choice">
+                <input id="radio-2-water" type="radio" name="radio-group-water" value="2.1666">
+                <label for="radio-2-water">2 weeks</label>
+              </div>
+              <div class="multiple-choice">
+                <input id="radio-3-water" type="radio" name="radio-group-water" value="1.0833">
+                <label for="radio-3">4 weeks</label>
+              </div>
+              <div class="multiple-choice">
+                <input id="radio-4-water" type="radio" name="radio-group-water" value="1">
+                <label for="radio-4-water">Month</label>
+              </div>
+            </div>
+
+
+            <div class="multiple-choice" data-target="expense-travel-details">
+              <input id="expense-travel" name="expense" type="checkbox">
+              <label for="expense-travel">Travel (work or school)</label>
+            </div>
+            <div class="panel panel-border-narrow js-hidden" id="expense-travel-details">
+              <label class="form-label" for="expense-travel-amount">Amount paid</label>
+              <input class="form-control fee pound form-control-1-4" type="text" id="expense-travel-amount" name="expense-travel-amount">
+
+              <p class="form-label" style="margin-top: 30px;">Paid every:</p>
+              <div class="multiple-choice">
+                <input id="radio-1-travel" type="radio" name="radio-group-travel" value="4.3333">
+                <label for="radio-1-travel">Week</label>
+              </div>
+              <div class="multiple-choice">
+                <input id="radio-2-travel" type="radio" name="radio-group-travel" value="2.1666">
+                <label for="radio-2-travel">2 weeks</label>
+              </div>
+              <div class="multiple-choice">
+                <input id="radio-3-travel" type="radio" name="radio-group-travel" value="1.0833">
+                <label for="radio-3">4 weeks</label>
+              </div>
+              <div class="multiple-choice">
+                <input id="radio-4-travel" type="radio" name="radio-group-travel" value="1">
+                <label for="radio-4-travel">Month</label>
+              </div>
+            </div>
+
+
+            <div class="multiple-choice" data-target="expense-school-details">
+              <input id="expense-school" name="expense" type="checkbox">
+              <label for="expense-school">School costs (include clothing)</label>
+            </div>
+            <div class="panel panel-border-narrow js-hidden" id="expense-school-details">
+              <label class="form-label" for="expense-school-amount">Amount paid</label>
+              <input class="form-control fee pound form-control-1-4" type="text" id="expense-school-amount" name="expense-school-amount">
+
+              <p class="form-label" style="margin-top: 30px;">Paid every:</p>
+              <div class="multiple-choice">
+                <input id="radio-1-school" type="radio" name="radio-group-school" value="4.3333">
+                <label for="radio-1-school">Week</label>
+              </div>
+              <div class="multiple-choice">
+                <input id="radio-2-school" type="radio" name="radio-group-school" value="2.1666">
+                <label for="radio-2-school">2 weeks</label>
+              </div>
+              <div class="multiple-choice">
+                <input id="radio-3-school" type="radio" name="radio-group-school" value="1.0833">
+                <label for="radio-3">4 weeks</label>
+              </div>
+              <div class="multiple-choice">
+                <input id="radio-4-school" type="radio" name="radio-group-school" value="1">
+                <label for="radio-4-school">Month</label>
+              </div>
+            </div>
+
+
+            <div class="multiple-choice" data-target="expense-food-details">
+              <input id="expense-food" name="expense" type="checkbox">
+              <label for="expense-food">Food and housekeeping</label>
+            </div>
+            <div class="panel panel-border-narrow js-hidden" id="expense-food-details">
+              <label class="form-label" for="expense-food-amount">Amount paid</label>
+              <input class="form-control fee pound form-control-1-4" type="text" id="expense-food-amount" name="expense-food-amount">
+
+              <p class="form-label" style="margin-top: 30px;">Paid every:</p>
+              <div class="multiple-choice">
+                <input id="radio-1-food" type="radio" name="radio-group-food" value="4.3333">
+                <label for="radio-1-food">Week</label>
+              </div>
+              <div class="multiple-choice">
+                <input id="radio-2-food" type="radio" name="radio-group-food" value="2.1666">
+                <label for="radio-2-food">2 weeks</label>
+              </div>
+              <div class="multiple-choice">
+                <input id="radio-3-food" type="radio" name="radio-group-food" value="1.0833">
+                <label for="radio-3">4 weeks</label>
+              </div>
+              <div class="multiple-choice">
+                <input id="radio-4-food" type="radio" name="radio-group-food" value="1">
+                <label for="radio-4-food">Month</label>
+              </div>
+            </div>
+
+
+            <div class="multiple-choice" data-target="expense-tv-details">
+              <input id="expense-tv" name="expense" type="checkbox">
+              <label for="expense-tv">TV and broadband</label>
+            </div>
+            <div class="panel panel-border-narrow js-hidden" id="expense-tv-details">
+              <label class="form-label" for="expense-tv-amount">Amount paid</label>
+              <input class="form-control fee pound form-control-1-4" type="text" id="expense-tv-amount" name="expense-tv-amount">
+
+              <p class="form-label" style="margin-top: 30px;">Paid every:</p>
+              <div class="multiple-choice">
+                <input id="radio-1-tv" type="radio" name="radio-group-tv" value="4.3333">
+                <label for="radio-1-tv">Week</label>
+              </div>
+              <div class="multiple-choice">
+                <input id="radio-2-tv" type="radio" name="radio-group-tv" value="2.1666">
+                <label for="radio-2-tv">2 weeks</label>
+              </div>
+              <div class="multiple-choice">
+                <input id="radio-3-tv" type="radio" name="radio-group-tv" value="1.0833">
+                <label for="radio-3">4 weeks</label>
+              </div>
+              <div class="multiple-choice">
+                <input id="radio-4-tv" type="radio" name="radio-group-tv" value="1">
+                <label for="radio-4-tv">Month</label>
+              </div>
+            </div>
+
+
+            <div class="multiple-choice" data-target="expense-hp-details">
+              <input id="expense-hp" name="expense" type="checkbox">
+              <label for="expense-hp">Hire purchase</label>
+            </div>
+            <div class="panel panel-border-narrow js-hidden" id="expense-hp-details">
+              <label class="form-label" for="expense-hp-amount">Amount paid</label>
+              <input class="form-control fee pound form-control-1-4" type="text" id="expense-hp-amount" name="expense-hp-amount">
+
+              <p class="form-label" style="margin-top: 30px;">Paid every:</p>
+              <div class="multiple-choice">
+                <input id="radio-1-hp" type="radio" name="radio-group-hp" value="4.3333">
+                <label for="radio-1-hp">Week</label>
+              </div>
+              <div class="multiple-choice">
+                <input id="radio-2-hp" type="radio" name="radio-group-hp" value="2.1666">
+                <label for="radio-2-hp">2 weeks</label>
+              </div>
+              <div class="multiple-choice">
+                <input id="radio-3-hp" type="radio" name="radio-group-hp" value="1.0833">
+                <label for="radio-3">4 weeks</label>
+              </div>
+              <div class="multiple-choice">
+                <input id="radio-4-hp" type="radio" name="radio-group-hp" value="1">
+                <label for="radio-4-hp">Month</label>
+              </div>
+            </div>
+
+
+            <div class="multiple-choice" data-target="expense-phone-details">
+              <input id="expense-phone" name="expense" type="checkbox">
+              <label for="expense-phone">Mobile phone</label>
+            </div>
+            <div class="panel panel-border-narrow js-hidden" id="expense-phone-details">
+              <label class="form-label" for="expense-phone-amount">Amount paid</label>
+              <input class="form-control fee pound form-control-1-4" type="text" id="expense-phone-amount" name="expense-phone-amount">
+
+              <p class="form-label" style="margin-top: 30px;">Paid every:</p>
+              <div class="multiple-choice">
+                <input id="radio-1-phone" type="radio" name="radio-group-phone" value="4.3333">
+                <label for="radio-1-phone">Week</label>
+              </div>
+              <div class="multiple-choice">
+                <input id="radio-2-phone" type="radio" name="radio-group-phone" value="2.1666">
+                <label for="radio-2-phone">2 weeks</label>
+              </div>
+              <div class="multiple-choice">
+                <input id="radio-3-phone" type="radio" name="radio-group-phone" value="1.0833">
+                <label for="radio-3">4 weeks</label>
+              </div>
+              <div class="multiple-choice">
+                <input id="radio-4-phone" type="radio" name="radio-group-phone" value="1">
+                <label for="radio-4-phone">Month</label>
+              </div>
+            </div>
+
+
+            <div class="multiple-choice" data-target="expense-maint-details">
+              <input id="expense-maint" name="expense" type="checkbox">
+              <label for="expense-maint">Maintenance payments</label>
+            </div>
+            <div class="panel panel-border-narrow js-hidden" id="expense-maint-details">
+              <label class="form-label" for="expense-maint-amount">Amount paid</label>
+              <input class="form-control fee pound form-control-1-4" type="text" id="expense-maint-amount" name="expense-maint-amount">
+
+              <p class="form-label" style="margin-top: 30px;">Paid every:</p>
+              <div class="multiple-choice">
+                <input id="radio-1-maint" type="radio" name="radio-group-maint" value="4.3333">
+                <label for="radio-1-maint">Week</label>
+              </div>
+              <div class="multiple-choice">
+                <input id="radio-2-maint" type="radio" name="radio-group-maint" value="2.1666">
+                <label for="radio-2-maint">2 weeks</label>
+              </div>
+              <div class="multiple-choice">
+                <input id="radio-3-maint" type="radio" name="radio-group-maint" value="1.0833">
+                <label for="radio-3">4 weeks</label>
+              </div>
+              <div class="multiple-choice">
+                <input id="radio-4-maint" type="radio" name="radio-group-maint" value="1">
+                <label for="radio-4-maint">Month</label>
+              </div>
+            </div>
+
+
+            <div class="multiple-choice" data-target="expense-other-details">
+              <input id="expense-other" name="expense" type="checkbox">
+              <label for="expense-other">Other</label>
+            </div>
+            <div class="panel panel-border-narrow js-hidden" id="expense-other-details">
+
+              <div id="add-another">
+
+                <div class="form-group">
+                  <label class="form-label" for="expense-source">Type of expense</label>
+                  <input class="form-control" type="text" id="expense-source" name="expense-source">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="expense-other-amount">Amount paid</label>
+                  <input class="form-control fee pound form-control-1-4" type="text" id="expense-other-amount" name="expense-other-amount">
+                </div>
+
+                <div class="form-group">
+                  <p class="form-label" style="margin-top: 30px;">Paid every:</p>
+                  <div class="multiple-choice">
+                    <input id="radio-1-other" type="radio" name="radio-group-other" value="4.3333">
+                    <label for="radio-1-other">Week</label>
+                  </div>
+                  <div class="multiple-choice">
+                    <input id="radio-2-other" type="radio" name="radio-group-other" value="2.1666">
+                    <label for="radio-2-other">2 weeks</label>
+                  </div>
+                  <div class="multiple-choice">
+                    <input id="radio-3-other" type="radio" name="radio-group-other" value="1.0833">
+                    <label for="radio-3">4 weeks</label>
+                  </div>
+                  <div class="multiple-choice">
+                    <input id="radio-4-other" type="radio" name="radio-group-other" value="1">
+                    <label for="radio-4-other">Month</label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group" style="clear: left" id="add-bit">
+                <a class="secondary-button" id="add-another-event-button" style="margin: 16px 0;" href="#">Add another expense</a>
+              </div>
+
+            </div>
+          </div>
+
+          <p id="total" class="heading-small">Total monthly expenditure: £0.00</p>
+
+          <script>
+            $(document).ready(function () {
+              $('#add-another-event-button').click(function (event) {
+                event.preventDefault();
+
+                objSeperator = $('<p style="margin-top:20px;"><a href="">Remove this expense</a></p><hr>');
+                objSeperator.insertBefore( '#add-bit');
+
+                objItem = $('#add-another').clone();
+                objItem.find( 'input[type=text]' ).val('');
+                objItem.find( '.multiple-choice input' ).prop( "checked", false );
+                objItem.insertBefore( '#add-bit');
+
+              });
+
+              $('input').change( function() {
+
+                  intTotal = 0;
+
+                  $('input[type=text]').each( function() {
+                    intMonthFactor =  $(this).parent('div').find("input:radio:checked").val();
+
+                    if (intMonthFactor && $(this).is(':visible')) {
+                      console.log(intMonthFactor);
+                      intTotal = intTotal + $(this).val() * intMonthFactor;
+                    }
+                  });
+                  $('#total').text("Total monthly expense: £" +intTotal.toFixed(2));
+              });
+
+            });
+          </script>
+
+          <div class="form-group">
+            <input type="submit" class="button" value="Save and continue"/>
+          </div>
+        </form>
+      </div>
+    </div>
+  {% include 'prototypes/prototype-mar-2019/includes/contact.html' %}
+</main>
+{% endblock %}
