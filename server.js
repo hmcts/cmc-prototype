@@ -257,6 +257,7 @@ require('./app/views/prototypes/prototype-nov-2018/routes/routes.js')(app);
 require('./app/views/prototypes/prototype-dec-2018/routes/routes.js')(app);
 require('./app/views/prototypes/prototype-jan-2019/routes/routes.js')(app);
 require('./app/views/prototypes/prototype-feb-2019/routes/routes.js')(app);
+require('./app/views/prototypes/prototype-mar-2019/routes/routes.js')(app);
 
 // Returns a url to the zip of the latest release on github
 app.get('/prototype-admin/download-latest', function (req, res) {

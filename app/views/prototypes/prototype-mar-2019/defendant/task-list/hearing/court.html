@@ -1,0 +1,168 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <a href="#" class="link-back">Back</a>
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+
+        {% if ( data['scenario'] == 3 or data['scenario'] == 4 )  and data['reject-court'] != 'yes' %}
+        <form
+        name="aspnetForm"
+        method="post"
+        onsubmit="conditionalNavigation('reject-court', 'yes', 'court', 'expert-required');return false;"
+        id="aspnetForm"
+        autocomplete="off">
+
+        {% else %}
+        <form
+        name="aspnetForm"
+        method="post"
+        onsubmit="conditionalNavigation('court-search', 'postcode', 'court', 'expert-required');return false;"
+        id="aspnetForm"
+        autocomplete="off">
+
+        {% endif %}
+
+          {% if data['scenario'] == 1 or data['scenario'] == 2 or data['scenario'] == 5 or data['court-search'] == 'postcode' or data['reject-court'] == 'yes' or data['scenario'] == 6  or data['scenario'] == 8 %}
+
+          {% if data['reject-court'] != 'yes' and data['scenario'] != 6 %}
+          <h1 class="heading-large">Choose a hearing location</h1>
+          {% else %}
+          <h1 class="heading-large">Request a hearing location</h1>
+          {% endif %}
+
+          {% if data['scenario'] == 5 or data['court-search'] == 'postcode' %}
+          <p>The nearest court to N18 2TN is Edmonton County Court.</p>
+          {% endif %}
+
+          {% if ( data['scenario'] != 5 and data['court-search'] != 'postcode' ) or data['reject-court'] == 'no' or data['scenario'] == 6 or data['scenario'] == 8 %}
+          {% if ( data['reject-court'] != 'yes' and data['scenario'] != 6 ) or data['scenario'] == 8 %}
+          <p>Tell us your preferred location for a hearing, in case the claim goes to one.</p>
+
+          <p>We'll use the location you choose unless the {% if data['scenario'] == 2 %}defendant{% else %}claimant{% endif %} has an exceptional reason to object, for example accessibility needs.</p>
+          {% endif %}
+
+          {% if data['scenario'] != 5 and data['court-search'] != 'postcode' and data['scenario'] != 8 and data['scenario'] != 7  %}
+          <p>You can {% if data['reject-court'] != 'yes' and data['scenario'] != 6 %}choose{% else %}request{% endif %} any location - Guildford County Court is nearest to the home address you gave us.</p>
+          {% endif %}
+          {% endif %}
+
+          {% if data['scenario'] != 8 and data['scenario'] != 7 %}
+          <h1 class="heading-medium">Do you want to {% if data['reject-court'] != 'yes' and data['scenario'] != 6 %}choose{% else %}request{% endif %} {% if data['scenario'] == 5 or data['court-search'] == 'postcode' %}Edmonton County Court{% else %}Guildford County Court{% endif %}?</h1>
+
+          <div class="form-group">
+            <fieldset>
+              <div class="multiple-choice">
+                <input id="radio-court-yes" type="radio" name="court" value="yes">
+                <label for="radio-court-yes">Yes</label>
+              </div>
+              <div class="multiple-choice" data-target="courtsearch">
+                <input id="radio-court-no" type="radio" name="court" value="no">
+                <label for="radio-court-no">No</label>
+              </div>
+            </fieldset>
+          </div>
+
+          <div class="form-group js-hidden" id="courtsearch">
+            <h1 class="heading-medium">Choose another court</h1>
+
+            <fieldset>
+              <div class="multiple-choice" data-target="name">
+                <input id="radio-court-name" type="radio" name="court-search" value="name">
+                <label for="radio-court-name">Enter court name</label>
+              </div>
+              <div class="panel panel-border-narrow js-hidden" id="name">
+                <div class="form-group">
+                  <label class="form-label" for="county_court">Court name</label>
+                  <input type="text" id="county_court" name="county_court" class="form-control" style="width: 500px" />
+                </div>
+              </div>
+              <div class="multiple-choice" data-target="postcode">
+                <input id="radio-court-postcode" type="radio" name="court-search" value="postcode">
+                <label for="radio-court-postcode">Search by postcode</label>
+              </div>
+              <div class="panel panel-border-narrow js-hidden" id="postcode">
+                <div class="form-group">
+                  <label class="form-label" for="county_court">Postcode</label>
+                  <input type="text" id="county_court" name="county_court" class="form-control" style="width: 120px" />
+                </div>
+              </div>
+            </fieldset>
+          </div>
+
+        {% else %}
+        <div class="form-group">
+          <h2 class="heading-medium">Court name</h2>
+          <input type="text" id="county_court" name="county_court" class="form-control" style="width: 500px" />
+        </div>
+
+        {% endif %}
+
+        {% elseif ( data['scenario'] == 3 or data['scenario'] == 4 ) and data['court-search'] != 'postcode' %}
+
+        <h1 class="heading-large">The hearing will be held at {% if data['scenario'] == 4 %}Kingston County Court{% else %}the claimant's chosen court{% endif%}</h1>
+
+        {% if data['scenario'] == 4 %}
+        <p>The defendant chose this location.</p>
+        {% endif %}
+
+        <h3 class="heading-medium">Are there exceptional circumstances (like accessibility needs) which mean you want to ask for the hearing to be held at a different location?
+        </h3>
+
+
+
+          <div class="form-group">
+            <fieldset>
+              <div class="multiple-choice" data-target="reason">
+                <input id="radio-court-yes" type="radio" name="reject-court" value="yes">
+                <label for="radio-court-yes">Yes</label>
+              </div>
+              <div class="panel panel-border-narrow js-hidden" id="reason">
+                <div class="form-group">
+                  <label class="form-label" for="court-reason">Briefly explain your reasons</label>
+                  <textarea class="form-control form-control-3-4" rows="3" name="court-reason" type="text" id="court-reason"></textarea>
+                </div>
+              </div>
+              <div class="multiple-choice">
+                <input id="radio-court-no" type="radio" name="reject-court" value="no">
+                <label for="radio-court-no">No</label>
+              </div>
+            </fieldset>
+          </div>
+
+          {% endif %}
+
+          <div class="form-group">
+            <input type="submit" class="button" value="Save and continue">
+          </div>
+      </form>
+
+    </div>
+  {% include 'prototypes/prototype-mar-2019/includes/contact.html' %}
+</main>
+
+<form method="post" action="#" class="for4" style=" float: left;">
+  <select onchange="window.location.href='?scenario='+this.value">
+    <option value=""> -- First choice --</option>
+    <option value="1" {% if data['scenario'] == 1 %}selected{% endif %}>Defendant = Individual, User = Defendant</option>
+    <option value="2" {% if data['scenario'] == 2 %}selected{% endif %}>Defendant = Organisation, User = Claimant</option>
+    <option value="5" {% if data['scenario'] == 5 or data['court-search'] == 'postcode' %}selected{% endif %}>Search result</option>
+    <option value="8" {% if data['scenario'] == 8 %}selected{% endif %}>First choice - fallback</option>
+    <option value=""> -- Second choice --</option>
+    <option value="3" {% if data['scenario'] == 3 %}selected{% endif %}>Defendant = Organisation, User = Defendant</option>
+    <option value="4" {% if data['scenario'] == 4 %}selected{% endif %}>Defendant = Individual, User = Claimant</option>
+    <option value="6" {% if data['scenario'] == 6 or data['reject-court'] == 'no' %}selected{% endif %}>Request other</option>
+    <option value="7" {% if data['scenario'] == 7 or data['reject-court'] == 'no' %}selected{% endif %}>Request other - fallback</option>
+  </select>
+</form>
+
+{% endblock %}

@@ -1,0 +1,75 @@
+{% extends "layout_task-list.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block home_link %} index {% endblock %}
+{% block proposition_header %}
+{% set my_account="3" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <div class="govuk-box-highlight">
+        <h1 class="bold-large">Claim submitted</h1>
+        <br>
+        <p class="">
+          Your claim number: <br><strong class="bold-large">352MC733</strong>
+        </p>
+        <p>
+         <a class="font-medium" target="_blank" href='correspondence/claim-form-claimant?check=1' style="color: #FFFFFF" >Download your claim form</a> (123KB, PDF)
+       </p>
+     </div>
+     <h2 class="heading-medium">What happens next</h2>
+     <p>Mary Richards has until 4pm on <span id="Date"></span> to respond to your claim. They can ask for an extra 14 days if they need it. We'll email you when they respond.</p>
+     <p>You can request a default County Court Judgment (CCJ) against them if they don't respond.</p>
+
+     <!-- {% if data['totalSum'] < 370.01 %}
+    <h3 class="heading-small">Mediation</h3>
+      <p>Your claim has been automatically registered for free telephone mediation.</p>
+      <p>We'll contact you with a mediation appointment unless either:</p>
+        <ul class="list list-bullet">
+          <li>Mary Richards admits all of your claim and pays in full</li>
+          <li>they don't admit the full claim, but they reject mediation</li>
+        </ul>
+      <p>You'll only speak to a mediator about the claim, not to Mary Richards.</p>
+      <p><a href='no-mediation'>I don't want to try mediation</a></p>
+
+         {% endif %} -->
+
+     <h3 class="heading-small">If the defendant pays you</h3>
+     <p>You need to sign in to your account to tell us you've been paid.</p>
+  {% include "includes/survey.html" %}
+           <!--<p> <a class="button" href='../dashboard/home?dashboard=1.2'>Go to your account</a> </p>-->
+      <p> <a class="button" href='../dashboard/new-dashboard/claimant/all-claims?claimant=1'>Go to your account</a> </p>
+  {% include "includes/contact.html" %}
+
+   {% include 'prototypes/prototype-mar-2019/includes/contact.html' %}
+
+      <div id="daysPassing" data-dayspassurl="../dashboard/new-dashboard/claimant/email1"
+           data-dayspasstimetoprompt="5000" data-dayspassdays="5">
+
+        <div class="spinner-block">
+          <h2 class="govuk-heading-m">Days passing by... <span id="days">5</span></h2>
+          <div class="spinner spinner-1"></div>
+        </div>
+
+      </div>
+
+      <a class="gem-c-pagination__link active" id="triggerDaysPassing">
+        <span class="gem-c-pagination__link-title">
+            <svg class="gem-c-pagination__link-icon" xmlns="http://www.w3.org/2000/svg" height="13" width="17"
+                 viewBox="0 0 17 13">
+              <path fill="currentColor"
+                    d="m10.107-0.0078125-1.4136 1.414 4.2926 4.293h-12.986v2h12.896l-4.1855 3.9766 1.377 1.4492 6.7441-6.4062-6.7246-6.7266z"></path>
+            </svg>
+            <span class="gem-c-pagination__link-text">
+              Simulate time passing
+            </span>
+        </span>
+      </a>
+
+</main>
+{% endblock %}

@@ -1,0 +1,85 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+
+{% block content %}
+
+
+<main id="content" role="main">
+
+  {% include "includes/phase_banner_beta.html" %}
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+      <a href="#" class="link-back">Back</a>
+
+      <h1 class="heading-large">
+        You chose not to try free mediation
+      </h1>
+
+      <p>The claim will continue and you might have to go to a hearing.</p>
+
+      <h3 class="heading-medium">Advantages of free mediation</h3>
+
+      <p>More than 60% of people who use our free mediation service settle on the day.*</p>
+
+      <p>Opting out can mean:</p>
+      <ul class="list list-bullet">
+        <li>a long wait for the claim to be resolved</li>
+        <li>a court hearing, which can last a whole day</li>
+        <li>a County Court Judgment against you</li>
+      </ul>
+
+      <!--<p>You'll only talk to the mediator on the phone, not to Jan Clark.</p>-->
+
+      <h1 class="heading-medium">
+      Will you change your decision and try free mediation?
+      </h1>
+
+      <form
+        name="aspnetForm"
+        method="post"
+        id="aspnetForm"
+        autocomplete="off"
+        onsubmit="multiNavigation('radio-indent-group', ['Yes', 'No'], ['../mediation/statements-all', '../../task-list']);return false;"
+      >
+
+        <input id="your-offer" name="offer" type="hidden">
+
+        <div class="form-group">
+          <fieldset>
+
+            <legend class="visually-hidden">Will you try mediation?</legend>
+
+            <div class="multiple-choice" data-target="claimant-confirm">
+              <input id="radio-yes" type="radio" name="radio-indent-group" value="Yes">
+              <label for="radio-yes" data-target="yes-info">Yes</label>
+            </div>
+
+            <div class="panel panel-border-narrow js-hidden" id="claimant-confirm">
+              <label class="form-label" for="rate">We'll ask the claimant if they'll try free mediation. If they say no,
+                the claim will go to a hearing.</label>
+            </div>
+
+            <div class="multiple-choice">
+              <input id="radio-no" type="radio" name="radio-indent-group" value="No">
+              <label for="radio-no" data-target="no-info">No</label>
+            </div>
+
+          </fieldset>
+          <input type="hidden" name="mediation" value="complete">
+
+          <input id="advert-option-next--button" type="submit" value="Save and continue" class="button"
+                 data-ignore-double-submit="true">
+        </div>
+        <p class="font-xsmall">*Source: Small Claims Mediation Service statistics, November 2017 to October 2018.<p/>
+      </form>
+
+    </div>
+  </div>
+  {% include 'prototypes/prototype-mar-2019/includes/contact.html' %}
+</main>
+{% endblock %}

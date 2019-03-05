@@ -32,7 +32,7 @@ Money Claims Prototype
 
         {% endif %}
 
-          {% if data['scenario'] == 1 or data['scenario'] == 2 or data['scenario'] == 5 or data['court-search'] == 'postcode' or data['reject-court'] == 'yes' or data['scenario'] == 6 %}
+          {% if data['scenario'] == 1 or data['scenario'] == 2 or data['scenario'] == 5 or data['court-search'] == 'postcode' or data['reject-court'] == 'yes' or data['scenario'] == 6  or data['scenario'] == 8 %}
 
           {% if data['reject-court'] != 'yes' and data['scenario'] != 6 %}
           <h1 class="heading-large">Choose a hearing location</h1>
@@ -44,18 +44,19 @@ Money Claims Prototype
           <p>The nearest court to N18 2TN is Edmonton County Court.</p>
           {% endif %}
 
-          {% if ( data['scenario'] != 5 and data['court-search'] != 'postcode' ) or data['reject-court'] == 'no' or data['scenario'] == 6 %}
-          {% if data['reject-court'] != 'yes' and data['scenario'] != 6 %}
+          {% if ( data['scenario'] != 5 and data['court-search'] != 'postcode' ) or data['reject-court'] == 'no' or data['scenario'] == 6 or data['scenario'] == 8 %}
+          {% if ( data['reject-court'] != 'yes' and data['scenario'] != 6 ) or data['scenario'] == 8 %}
           <p>Tell us your preferred location for a hearing, in case the claim goes to one.</p>
 
           <p>We'll use the location you choose unless the {% if data['scenario'] == 2 %}defendant{% else %}claimant{% endif %} has an exceptional reason to object, for example accessibility needs.</p>
           {% endif %}
 
-          {% if data['scenario'] != 5 and data['court-search'] != 'postcode' %}
+          {% if data['scenario'] != 5 and data['court-search'] != 'postcode' and data['scenario'] != 8 and data['scenario'] != 7  %}
           <p>You can {% if data['reject-court'] != 'yes' and data['scenario'] != 6 %}choose{% else %}request{% endif %} any location - Guildford County Court is nearest to the home address you gave us.</p>
           {% endif %}
           {% endif %}
 
+          {% if data['scenario'] != 8 and data['scenario'] != 7 %}
           <h1 class="heading-medium">Do you want to {% if data['reject-court'] != 'yes' and data['scenario'] != 6 %}choose{% else %}request{% endif %} {% if data['scenario'] == 5 or data['court-search'] == 'postcode' %}Edmonton County Court{% else %}Guildford County Court{% endif %}?</h1>
 
           <div class="form-group">
@@ -98,6 +99,14 @@ Money Claims Prototype
             </fieldset>
           </div>
 
+        {% else %}
+        <div class="form-group">
+          <h2 class="heading-medium">Court name</h2>
+          <input type="text" id="county_court" name="county_court" class="form-control" style="width: 500px" />
+        </div>
+
+        {% endif %}
+
         {% elseif ( data['scenario'] == 3 or data['scenario'] == 4 ) and data['court-search'] != 'postcode' %}
 
         <h1 class="heading-large">The hearing will be held at {% if data['scenario'] == 4 %}Kingston County Court{% else %}the claimant's chosen court{% endif%}</h1>
@@ -107,7 +116,7 @@ Money Claims Prototype
         {% endif %}
 
         <h3 class="heading-medium">Are there exceptional circumstances (like accessibility needs) which mean you want to ask for the hearing to be held at a different location?
-</h3>
+        </h3>
 
 
 
@@ -147,10 +156,12 @@ Money Claims Prototype
     <option value="1" {% if data['scenario'] == 1 %}selected{% endif %}>Defendant = Individual, User = Defendant</option>
     <option value="2" {% if data['scenario'] == 2 %}selected{% endif %}>Defendant = Organisation, User = Claimant</option>
     <option value="5" {% if data['scenario'] == 5 or data['court-search'] == 'postcode' %}selected{% endif %}>Search result</option>
+    <option value="8" {% if data['scenario'] == 8 %}selected{% endif %}>First choice - fallback</option>
     <option value=""> -- Second choice --</option>
     <option value="3" {% if data['scenario'] == 3 %}selected{% endif %}>Defendant = Organisation, User = Defendant</option>
     <option value="4" {% if data['scenario'] == 4 %}selected{% endif %}>Defendant = Individual, User = Claimant</option>
     <option value="6" {% if data['scenario'] == 6 or data['reject-court'] == 'no' %}selected{% endif %}>Request other</option>
+    <option value="7" {% if data['scenario'] == 7 or data['reject-court'] == 'no' %}selected{% endif %}>Request other - fallback</option>
   </select>
 </form>
 

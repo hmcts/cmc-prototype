@@ -1,0 +1,73 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="2" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <a href="#" class="link-back">Back</a>
+
+      <h1 class="heading-large">
+        The {% if data['party'] == "defendant" %}defendant{% else %}claimant{% endif %}'s response to the order
+      </h1>
+
+      <h2 class="heading-small">Witness statements</h2>
+
+      <p style="margin-bottom: 4px;">Uploaded on {{ now | date('subtract', 5, 'days') | date }}:</p>
+      <ul>
+          <li><a href="#">Witness statement - Tim Howard.pdf</a></li>
+          <li><a href="#">Witness statement - James Watts.docx</a></li>
+      </ul>
+
+      <h2 class="heading-small">Their evidence</h2>
+
+      <p style="margin-bottom: 4px;">Uploaded on {{ now | date('subtract', 2, 'days') | date }}:</p>
+      <ul>
+        <li><a href="#">Emails.pdf</a></li>
+        <li><a href="#">Contract.pdf</a></li>
+      </ul>
+      <p style="margin-bottom: 4px; margin-top: 16px">Uploaded on {{ now | date('subtract', 1, 'days') | date }}:</p>
+      <ul>
+        <li><a href="#">Photo 1.jpg</a></li>
+        <li><a href="#">Photo 2.jpg</a></li>
+      </ul>
+
+      {% if data['party'] == "defendant" %}
+      <h2 class="heading-small">Chosen expert</h2>
+      <p style="margin-bottom: 4px;">Due by {{ now | date('add', 14, 'days') | date }}.</p>
+      <p>The defendant has not yet chosen an expert.</p>
+      {% else %}
+      <h2 class="heading-small">Proposed experts</h2>
+      <p style="margin-bottom: 10px;">Proposed on {{ now | date('add', 14, 'days') | date }}:</p>
+
+      <p>
+        John Austin<br />
+        Cost: £450<br />
+        Area of expertise: Structural engineering
+      </p>
+      <p>
+        Ronald Davidson<br />
+        Cost: £500<br />
+        Area of expertise: Structural engineering
+      </p>
+      <p>
+        Julie Tuffnel<br />
+        Cost: £700<br />
+        Area of expertise: Structural engineering
+      </p>
+      {% endif %}
+
+    </div>
+  </form>
+</div>
+</div>
+{% include 'prototypes/prototype-mar-2019/includes/contact.html' %}
+</main>
+
+{% endblock %}
