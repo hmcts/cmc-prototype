@@ -50,77 +50,65 @@
           </tbody>
         </table>
 
-        <br/>
-        <br/>
-        <table id="table-of-tasks">
-          <thead>
-          <tr>
-            <th scope="col" id="col-task">
+          <br/>
+          <br/>
+          <table id="table-of-tasks">
+            <thead>
+              <tr>
+                <th scope="col" id="col-task">
                   <span class="task-group">
                     <span class="group-number" id="task-number"></span>
-                    Consider free mediation
+                    Do you want the claim to continue?
                   </span>
-            </th>
-            <th class="numeric" id="task-status" scope="col" id="col-status"></th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr id="their-details">
-            <td class="task">
-              <a href="task-list/request-mediation{{formQuery}}">
-                <span class="task-name">Tell us if you want to try mediation</span>
-              </a>
-            </td>
-            <td class="numeric" id="task-status" scope="col" id="col-status">
-              {% if data.mediation=="complete" %}
-              {% include "includes/task_status_finished.html" %}
-              {% else %}
-              {% include "includes/task_status_incomplete.html" %}
-              {% endif %}
-            </td>
-          </tr>
+                </th>
+                <th class="numeric" id="task-status" scope="col" id="col-status"></th>
+              </tr>
+            </thead>
+            <tbody>
+             <tr id="completing-your-claim">
+              <td class="task">
+                <a href="task-list/amount-owed{{formQuery}}">
+                  <span class="task-name">Decide whether to proceed</span>
+                </a>
+              </td>
+              <td class="numeric" id="task-status" scope="col" id="col-status">
+                {% if data.defence=="complete" %}
+                {% include "includes/task_status_finished.html" %}
+                {% else %}
+                {% include "includes/task_status_incomplete.html" %}
+                {% endif %}
+              </td>
+            </tr>
 
-          <!--<tr id="completing-your-claim">-->
-            <!--<td class="task">-->
-              <!--<a href="task-list/amount-owed{{formQuery}}">-->
-                <!--<span class="task-name">Accept or reject their response</span>-->
-              <!--</a>-->
-            <!--</td>-->
-            <!--<td class="numeric" id="task-status" scope="col" id="col-status">-->
-              <!--{% if data.defence=="complete" %}-->
-              <!--{% include "includes/task_status_finished.html" %}-->
-              <!--{% else %}-->
-              <!--{% include "includes/task_status_incomplete.html" %}-->
-              <!--{% endif %}-->
-            <!--</td>-->
-          <!--</tr>-->
-
-          <!--{% if data.radio_select_group=="No" %}-->
-          <!--<tr id="their-details">-->
-            <!--<td class="task">-->
-              <!--<a href="task-list/request-mediation{{formQuery}}">-->
-                <!--<span class="task-name">Free telephone mediation</span>-->
-              <!--</a>-->
-            <!--</td>-->
-            <!--<td class="numeric" id="task-status" scope="col" id="col-status">-->
-              <!--{% if data.mediation=="complete" %}-->
-              <!--{% include "includes/task_status_finished.html" %}-->
-              <!--{% else %}-->
-              <!--{% include "includes/task_status_incomplete.html" %}-->
-              <!--{% endif %}-->
-            <!--</td>-->
-          <!--</tr>-->
-          <!--{% endif %}-->
-
+            {% if data.radio_select_group=="Yes" %}
+            <tr id="their-details">
+              <td class="task">
+                <a href="task-list/request-mediation{{formQuery}}">
+                  <span class="task-name">Free telephone mediation</span>
+                </a>
+              </td>
+              <td class="numeric" id="task-status" scope="col" id="col-status">
+                {% if data.mediation=="complete" %}
+                {% include "includes/task_status_finished.html" %}
+                {% else %}
+                {% include "includes/task_status_incomplete.html" %}
+                {% endif %}
+              </td>
+            </tr>
+          {% endif %}
           </tbody>
         </table>
         <br>
         <br>
 
 
-        {% set completed = true if data.resolve_dispute == "complete" and data.your_details == "complete" and
-        data.their_details == "complete" and data.claim_amount == "complete" and data.claim_details == "complete" and
-        data.eligibility == "complete"%}
+
+          </tbody>
+        </table>
+        <br>
+        <br>
+
+            {% set completed = true if data.resolve_dispute == "complete" and data.your_details == "complete" and data.their_details == "complete" and data.claim_amount == "complete" and data.claim_details == "complete" and data.eligibility == "complete"%}
 
         <table id="table-of-tasks" class="submit">
           <thead>
