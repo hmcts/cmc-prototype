@@ -1,0 +1,164 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="2" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <a href="#" class="link-back">Back</a>
+
+      <h1 class="heading-large">
+        Give us more information for a hearing
+      </h1>
+
+      <p>You need to complete each section on this page or {% if data['party'] == "defendant" %}the court may cancel your defence and give you a County Court Judgment (CCJ){% else %}the claim will not proceed to a hearing{% endif %}.</p>
+
+      <hr />
+
+      <h2 class="heading-small">Complete and upload witness statements</h2>
+      {% if data['witness'] == 'complete' %}
+      <p>You uploaded these documents on {{ now | date }}:</p>
+
+      <ul>
+          <li><a href="#">Witness statement - Steve Smith.pdf</a></li>
+          <li><a href="#">Witness statement - Ben Clark.docx</a></li>
+      </ul>
+
+      <br />
+      <div class="form-group">
+        <a href="order-response/witness-statements" class="secondary-button">Upload more witness statements</a>
+      </div>
+
+      {% else %}
+      <p>Due by {{ now | date('add', 12, 'days') | date }}</p>
+
+      <p>You must complete a witness statement for any witnesses whose evidence you want to use at the hearing, including yourself.</p>
+
+      <p>To make sure your witness statements have all the information the court needs you should either:</p>
+
+        <ul class="list list-bullet">
+          <li><a href="/public/images/Witness%20statement.docx">download the witness statement template</a> (DOCX, 123KB)</li>
+          <li><a href="order-response/witness-statements">follow the witness statement guidance</a></li>
+        </ul>
+
+      <div class="form-group">
+        <a href="order-response/witness-statements" class="secondary-button">Upload witness statements</a>
+      </div>
+      {% endif %}
+
+      <hr />
+
+      <h2 class="heading-small">Upload your evidence</h2>
+
+      {% if data['evidence'] == 'complete' %}
+      <p>You uploaded these documents on {{ now | date }}:</p>
+
+      <ul>
+        <li><a href="#">Emails.pdf</a></li>
+        <li><a href="#">Photo 1.jpg</a></li>
+        <li><a href="#">Photo 2.jpg</a></li>
+        <li><a href="#">Contract.pdf</a></li>
+      </ul>
+
+      <br />
+      <div class="form-group">
+        <a href="order-response/evidence" class="secondary-button">Upload more evidence</a>
+      </div>
+
+      {% else %}
+      <p>Due by {{ now | date('add', 14, 'days') | date }}</p>
+      <p>You must upload copies of any evidence you intend to use at the hearing.</p>
+      <div class="form-group">
+        <a href="order-response/evidence" class="secondary-button">Upload evidence</a>
+      </div>
+      {% endif %}
+      <hr />
+
+<!--
+      {% if data['party'] != 'defendant' %}
+
+      <h2 class="heading-small">Propose 3 experts</h2>
+
+      {% if data['experts'] == 'complete' %}
+      <p>You proposed the following three experts on {{ now | date }}:</p>
+
+      <ul>
+        <li>John Austin - £450</li>
+        <li>Ronald Davidson - £500</li>
+        <li>Julie Tuffnel - £700</li>
+      </ul>
+
+      {% else %}
+      <p>Due by {{ now | date('add', 14, 'days') | date }}</p>
+      <p>The court has approved your request to hire an expert. You must propose 3 independent experts for the {% if data['party'] == 'defendant' %}claimant{% else %}defendant{% endif %} to choose from.</p>
+      <div class="form-group">
+        <a href="order-response/experts" class="secondary-button">Propose experts</a>
+      </div>
+      {% endif %}
+
+
+      {% else %}
+
+      <h2 class="heading-small">Choose an expert</h2>
+
+      {% if data['experts'] == 'complete' %}
+      <p>You selected John Austin on {{ now | date }}.</p>
+
+      {% else %}
+      <p>Due by {{ now | date('add', 3, 'days') | date }}</p>
+      <p>The claimant has made a shortlist of 3 independant experts, you must pick one to appoint and supply the questions you wish to ask them.</p>
+      <div class="form-group">
+        <a href="order-response/choose-expert" class="secondary-button">Select an expert</a>
+      </div>
+      {% endif %}
+
+      {% endif %}
+
+      <hr />
+    -->
+
+      <h2 class="heading-small">Consider mediation</h2>
+      <p>The court has reviewed your case and believes it could be resolved by free mediation.</p>
+       <p><a href="mediation/how-mediation-works?post-response=yes">Find out how free mediation works</a>.  </p>
+
+      <p>To confirm you want a free telephone mediation session, contact the Small Claims Mediation service by {{ now | date('add', 7, 'days') | date }} - you can either:</p>
+      <ul class="list list-bullet">
+  <li>call 01604 795511</li>
+  <li>email <a href="">scmreferrals@hmcts.gsi.gov.uk</a><br>(include the claim number and your telephone number)</li>
+  </ul>
+
+      <hr />
+
+
+
+      <h2 class="heading-medium">Responding by post</h2>
+
+      <p>If you can't upload the required documents, you can <a href="order-response/offline">respond to the order by post</a> instead.</p>
+
+    </div>
+  </form>
+</div>
+</div>
+{% include 'prototypes/features-to-be-built/includes/contact.html' %}
+</main>
+
+<form method="post" action="#" class="form" style="position: absolute;">
+  <select onchange="window.location.href='?'+this.value">
+    <option>-------- Status --------</option>
+    <option value="evidence=&witness=&experts=">Nothing uploaded</option>
+    <option value="evidence=complete&witness=&experts=">Evidence uploaded</option>
+    <option value="evidence=&witness=complete&experts=">Witness statements uploaded</option>
+<!--
+    <option value="evidence=&witness=&experts=complete">Experts proposed</option>
+    <option value="evidence=complete&witness=complete&experts=complete">Upload expert's report</option>
+    <option value="evidence=complete&witness=complete&experts=complete&expert-report=complete">Expert's report uploaded</option>
+-->
+  </select>
+</form>
+{% endblock %}

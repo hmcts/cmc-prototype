@@ -571,6 +571,110 @@
               <p>The court will review the case. We'll email you if we set a hearing date to tell you how to prepare.</p>
 
 
+              {% elseif data['claimant'] == 11.1 %}
+              <div class="status-block single">
+                <h2 class="heading-medium">Send us more details before the hearing</h2>
+                <p>The court has ordered you to send us:</p>
+
+                <ul class="list list-bullet">
+                  <li>witness statements</li>
+                  <li>your evidence</li>
+                </ul>
+
+                <p><a href="order-response?party=claimant" class="button">Send us the details</a></p>
+
+                <h2 class="heading-small">See the full legal document</h2>
+
+                <p><a href="/public/images/order.pdf">Download the court's order</a> (PDF, 123KB)</a> if you want to see the full legal document that sets out these instructions.</p>
+
+
+                <h2 class="heading-small">If you don't send us more details</h2>
+
+                <p>The court can cancel your claim.</p>
+
+                <hr/>
+
+                <h2 class="heading-medium">View the defendant's response</h2>
+
+                <p><a href="order-response/view?party=claimant" class="button secondary-button">View their response</a></p>
+
+                <hr />
+
+
+              {% elseif data['claimant'] == 11.11 %}
+              <div class="status-block">
+                <h2 class="heading-medium">Send us more details before the hearing</h2>
+
+                <p>The court has ordered you to send us more details.</p>
+
+                <p><a href="/public/images/order.pdf">Download the court's order</a> (PDF, 123KB)</a> to find out the details you need to send.</p>
+
+                <h2 class="heading-small">Where to post the details</h2>
+
+                <p>You need to post the details to both the court and the defendant.</p>
+
+                <p>The court's address is:</p>
+
+                <p>
+                  Civil Money Claims<br/>
+                  St. Katharine's House<br/>
+                  21-27 St. Katharine's Street<br/>
+                  Northampton<br/>
+                  NN1 2LH
+                </p>
+
+                <p>The defendant's address is:</p>
+
+                <p>
+                  Mary Richards <br/>
+                  12 Garden View<br />
+                  Bristol<br />
+                  BS4 7FB
+                </p>
+
+                <h2 class="heading-small">If you don't send us the details</h2>
+
+                <p>The court can cancel your claim.</p>
+
+              </div>
+
+
+
+              {% elseif data['claimant'] == 11.2 or data['claimant'] == 11.21 %}
+              <div class="status-block single">
+                <h2 class="heading-medium">We've received your response</h2>
+
+                {% if data['claimant'] == 11.2 %}
+                <p>We've sent the defendant your list of proposed experts. They need to choose one.</p>
+                <p>When they've chosen, we'll ask you to send us questions for the expert to answer in their report.</p>
+                {% else %}
+                <p>We'll contact you when we've set a date for the hearing.</p>
+                {% endif %}
+
+                <h2 class="heading-small">Upload more evidence</h2>
+
+
+              <p>You can upload more evidence or witness statements until {{ now | date( 'add', 15, 'days' ) | date
+              }}. You can also view your response.</p>
+              <p><a href="order-response?party=claimant&evidence=complete&experts=complete&witness=complete"
+                    class="button secondary-button">Upload more or view your response</a></p>
+              </div>
+              <hr />
+              <h2 class="heading-medium">View the defendant's response</h2>
+
+              <p><a href="order-response/view?party=claimant" class="button secondary-button">View their response</a></p>
+              <hr />
+
+              <hr/>
+
+
+              {% elseif data['claimant'] == 11.7 %}
+              <div class="status-block single">
+                <h2 class="heading-medium">We'll contact you if we set a hearing date</h2>
+                <p>We'll explain how to prepare.</p>
+
+              </div>
+
                 {% elseif data['claimant'] == 12 %}
                 <div class="status-block single">
                   <h2 class="heading-medium">Respond to the defendant</h2>
@@ -2061,6 +2165,11 @@
     <option value="10.9" {% if data['claimant'] == 10.9 %}selected{% endif %}>Defence rejected - with mediation</option>
     <option value="10.91" {% if data['claimant'] == 10.91 %}selected{% endif %}>Defence rejected - no mediation</option>
 
+    <option>------- Order response ----------</option>
+    <option value="11.1" {% if data['claimant'] == 11.1 %}selected{% endif %}>Respond to order</option>
+    <option value="11.11" {% if data['claimant'] == 11.11 %}selected{% endif %}>Respond to order (offline)</option>
+    <option value="11.21" {% if data['claimant'] == 11.21 %}selected{% endif %}>Responded to order</option>
+    <option value="11.7" {% if data['claimant'] == 11.7 %}selected{% endif %}>Everything received</option>
     <option>------- Offer and agreements ----------</option>
     <option value="11" {% if data['claimant'] == 11 %}selected{% endif %}>Offer from defendant  </option>
     <option value="12" {% if data['claimant'] == 12 %}selected{% endif %}>Reject offer from defendant  </option>
