@@ -593,52 +593,106 @@
 
 
 
-            {% elseif data['defendant'] == 10 or data['defendant'] == 12 %}
-
-            <div class="status-block ">
-             <h2 class="heading-small">Settle out of court</h2>
-              <p>You made an offer to settle the claim out of court. Jan Clark can accept or reject your offer.</p>
-              <p>We’ll email you when they respond.</p>
-            </div>
-            <div class="status-block single">
-             <h2 class="heading-small">You've rejected the claim</h2>
-             <p>You need to <a href="forms/dq-form">complete a directions questionnaire</a> form to tell us more about the claim.</p>
-             <p>Your defence won't proceed if you don't complete and return the form before 4pm on <span class="dates5"></span>.</p>
-              <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=9">Download your response</a> (PDF, 123KB)</p>
-            </div>
-
-              {% elseif data['defendant'] == 11 %}
+              {% elseif data['defendant'] == 12.1 %}
               <div class="status-block single">
-                <h2 class="heading-medium">Wait for the claimant to respond</h2>
-                <p>You've rejected the claim. You’ve agreed to try mediation.</p>
-                <p>We'll ask Jan Clark if they'll try mediation.</p>
-                <p>If they agree, we'll contact you with details of your appointment. If not, you might have to go to a hearing.</p>
-                <p><a href="mediation/how-mediation-works">Find out how mediation works</a></p>
-              </div>
-              <!--<div class="status-block single">-->
-              <!--<h2 class="heading-small">Settle out of court</h2>-->
-              <!--<p>You may still <a href="offer-agreement/make-offer?defendant=defendant">settle the claim out of-->
-              <!--court</a>. For example you could offer to fix goods you sold the claimant or suggest a payment.</p>-->
-              <!--<p>You can avoid getting a County Court Judgment if the claimant accepts your offer.</p>-->
-              <!--</div>-->
+                <h2 class="heading-medium">Send us more details before the hearing</h2>
 
-              {% elseif data['defendant'] == 11.1 %}
+                <p>The court has ordered you to send us:</p>
+
+                <ul class="list list-bullet">
+                  <li>witness statements</li>
+                  <li>your evidence</li>
+                </ul>
+
+                <p><a href="order-response?party=defendant" class="button" style="margin-bottom: 15px">Send us the details</a></p>
+
+                <h2 class="heading-small">See the full legal document</h2>
+
+                <p><a href="/public/images/order.pdf">Download the court's order</a> (PDF, 123KB) if you want to see the full legal document that sets out these instructions.</p>
+
+                <h2 class="heading-small">If you don't send us more details</h2>
+
+                <p>The court can cancel your defence and the claimant can request
+                  a County Court Judgment (CCJ) against you.</p>
+
+                <hr/>
+
+                <h2 class="heading-medium">View the claimant's response</h2>
+
+                <p><a href="order-response/view?party=claimant" class="button secondary-button">View their response</a></p>
+
+                <br>
+              </div>
+
+
+
+              {% elseif data['defendant'] == 12.11 %}
               <div class="status-block single">
-                <h2 class="heading-medium">Wait for the claimant to respond</h2>
-                <p>You’ve rejected the claim and automatically registered for free telephone mediation.</p>
+                <h2 class="heading-medium">Send us more details before the hearing</h2>
+                <p>The court has ordered you to send us more details.</p>
+                <p><a href="/public/images/order.pdf">Download the court's order</a> (PDF, 123KB) to find out the details you need to send.</p>
 
-                <p>We'll contact you with an appointment, unless Jan Clark chooses to opt out of mediation.</p>
 
-                <p>If they opt out of mediation the court will review the case. You might have to go to a hearing.</p>
-                <!--<p>We'll contact you if we set a hearing date to tell you how to prepare.</p>-->
-                <p><a href="mediation/how-mediation-works">Find out how mediation works</a></p>
+                <h2 class="heading-small">Where to post the details</h2>
+
+                <p>You need to post the details to both the court and the claimant.</p>
+
+                <p>The court's address is:</p>
+
+                <p>
+                  Civil Money Claims<br/>
+                  St. Katharine's House<br/>
+                  21-27 St. Katharine's Street<br/>
+                  Northampton<br/>
+                  NN1 2LH
+                </p>
+
+                <p>The claimant's address is:</p>
+
+                <p>
+                  Mary Richards <br/>
+                  12 Garden View<br />
+                  Bristol<br />
+                  BS4 7FB
+                </p>
+
+                <h2 class="heading-small">If you don't send us more details</h2>
+
+                <p>The court can cancel your defence and the claimant can request
+                  a County Court Judgment (CCJ) against you.</p>
+
+
               </div>
-              <!--<div class="status-block single">-->
-              <!--<h2 class="heading-small">Settle out of court</h2>-->
-              <!--<p>You may still <a href="offer-agreement/make-offer?defendant=defendant">settle the claim out of-->
-              <!--court</a>. For example you could offer to fix goods you sold the claimant or suggest a payment.</p>-->
-              <!--<p>You can avoid getting a County Court Judgment if the claimant accepts your offer.</p>-->
-              <!--</div>-->
+
+
+
+              {% elseif data['defendant'] == 12.2 %}
+              <div class="status-block single">
+                <h2 class="heading-medium">We've received your response</h2>
+                <p>We'll contact you to tell you when we've set a date for the hearing, or if we need more information.</p>
+
+                <h2 class="heading-small">Upload more evidence</h2>
+
+              <p>You can upload more evidence or witness statements until {{ now | date( 'add', 15, 'days' ) | date
+              }}. You can also view your response.</p>
+              <p><a href="order-response?party=claimant&evidence=complete&experts=complete&witness=complete"
+                    class="button secondary-button">Upload more or view your response</a></p>
+              </div>
+              <hr/>
+              <h2 class="heading-medium">View the claimant's response</h2>
+
+              <p><a href="order-response/view?party=claimant" class="button secondary-button">View their response</a></p>
+
+
+
+
+              {% elseif data['defendant'] == 12.9 %}
+              <div class="status-block single">
+                <h2 class="heading-medium">We'll contact you if we set a hearing date</h2>
+                <p>We'll explain how to prepare.</p>
+
+              </div>
+
 
               {% elseif data['defendant'] == 13 %}
               <div class="status-block single">
@@ -2968,7 +3022,6 @@
   <!--</div>-->
   <!--</div>-->
 
-  <fieldset></fieldset>
   {% include 'prototypes/features-to-be-built/includes/contact.html' %}
 </main>
 <form method="post" action="#" class="form" style="position: absolute;">
@@ -3038,6 +3091,10 @@
     <option value="11" {% if data['defendant'] == 11 %}selected{% endif %}>7. I dispute the claim + mediation </option>
     <option value="11.1" {% if data['defendant'] == 11.1 %}selected{% endif %}>7. I dispute the claim + mediation pilot </option>
     <option value="12" {% if data['defendant'] == 12 %}selected{% endif %}>8. I dispute the claim + offer made </option>
+    <option>------ Order response -------</option>
+    <option value="12.1" {% if data['defendant'] == 12.1 %}selected{% endif %}>Respond to order</option>
+    <option value="12.11" {% if data['defendant'] == 12.11 %}selected{% endif %}>Respond to order (offline)</option>
+    <option value="12.9" {% if data['defendant'] == 12.9 %}selected{% endif %}>Everything received</option>
 
     <option>------ offers and mediation -------</option>
     <option value="10" {% if data['defendant'] == 10 %}selected{% endif %}>9. Offer sent to claimant </option>

@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="5" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <div class="govuk-box-highlight">
+        <h1 class="bold-large">You've uploaded your evidence</h1>
+      </div>
+    <h2 class="heading-medium">What happens next</h2>
+
+    <p>We’ve told the {% if data[‘party’] == ‘claimant’ %}defendant{% else %}claimant{% endif %} that you’ve uploaded evidence. They can look at if they want to.</p>
+
+    <p>You still need to <a href="../experts?evidence=complete">propose 3 experts</a>.</p>
+
+    <p>You can upload more evidence until {{ now | date('add', 14, 'days') | date }}.</p>
+
+    <p>You can upload more witness statements until {{ now | date('add', 12, 'days') | date }}.</p>
+
+
+    <h2 class="heading-medium">Help and support</h2>
+    <p>Email: moneyclaims@justice.gov.uk<br>
+      Telephone: 0300 123 7050<br>
+    Hours: 9am to 5pm, Monday to Friday</p>
+    <p><a href="https://www.gov.uk/call-charges">Find out about call charges</a> <span class="font-xsmall">(opens in a new window)</span></p>
+  </fieldset>
+  <br>
+  <a href="../../{% if data['party'] == 'defendant' %}defendant?defendant=12.1{% else %}claimant?claimant=11.1{% endif %}&evidence=complete" class="button">Go to your account</a>
+</div>
+</div>
+{% include 'prototypes/features-to-be-built/includes/contact.html' %}
+</main>
+{% endblock %}
