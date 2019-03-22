@@ -66,6 +66,16 @@
                 <p><a class="button" href="../defendant/task-list">Respond to the claim</a></p>
               </div>
 
+              {% elseif data['defendant'] == 2.1 %}
+              <div class="status-block single">
+                <h2 class="heading-medium">Respond to the claim</h2>
+                <p>You requested more time to respond. </p>
+                <p>The claimant's judgment request has been cancelled.</p>
+                <p>You now need to respond before 4pm on <span class="dates3"></span> (33 days remaining).</p>
+                <p><a class="button" href="../defendant/task-list">Respond to the claim</a></p>
+
+              </div>
+
               {% elseif data['defendant'] == 3 %}
               <h2 class="heading-medium">Pay the claim amount</h2>
               <p>You didn't respond to a money claim against you by Jan Clark. The amount claimed is £1,500.</p>
@@ -100,6 +110,11 @@
               {% elseif data['defendant'] == 3.3 %}
               <h2 class="heading-medium">We'll post you a copy of the claimant's response</h2>
               <p>The response will explain what you need to do next.</p>
+
+              {% elseif data['defendant'] == 3.4 %}
+              <h2 class="heading-medium">We'll post you a copy of the claimant's response</h2>
+              <p>The response will explain what you need to do next.</p>
+              <p>The claimant's judgment request has been cancelled.</p>
 
 
               {% elseif data['defendant'] == 3.9 %}
@@ -3292,12 +3307,14 @@
     <option value="0">Choose</option>
     <option value="1" {% if data['defendant'] == 1 %}selected{% endif %}>1. Respond to claim</option>
     <option value="2" {% if data['defendant'] == 2 %}selected{% endif %}>2. More time requested</option>
+    <option value="2.1" {% if data['defendant'] == 2.1 %}selected{% endif %}>More time requested - judgment cancelled</option>
     <option>------ CCJs -------</option>
     <option value="3" {% if data['defendant'] == 3 %}selected{% endif %}>3. Default CCJ requested </option>
     <option value="3.1" {% if data['defendant'] == 3.1 %}selected{% endif %}>Default CCJ requested (paper) </option>
     <option value="3.2" {% if data['defendant'] == 3.2 %}selected{% endif %}>Default CCJ issued (paper)</option>
     <option>------ Responses to claims -------</option>
     <option value="3.3" {% if data['defendant'] == 3.3 %}selected{% endif %}>Responded on paper</option>
+    <option value="3.4" {% if data['defendant'] == 3.4 %}selected{% endif %}>Responded on paper - judgment cancelled</option>
     <option value="3.902" {% if data['defendant'] == 3.902 %}selected{% endif %}>3.902 I admit part of the claim - immediately</option>
     <option value="3.9" {% if data['defendant'] == 3.9 %}selected{% endif %}>3.9 I admit part of the claim - instalments</option>
     <option value="3.9001" {% if data['defendant'] == 3.9001 %}selected{% endif %}>3.9001 I admit part of the claim - instalments (organisation)</option>
