@@ -1,0 +1,137 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="2" %}
+
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+
+
+<main id="content" role="main">
+
+
+  {% include "includes/phase_banner_beta.html" %}
+
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+      <a href="#" class="link-back">Back</a>
+
+      {% if data['scenario'] != 2 %}
+      <h1 class="heading-large">
+        Can the mediation service use 07123&nbsp;456789 to call you?
+      </h1>
+      {% endif %}
+
+      {% if data['scenario'] != 1 %}
+      <h1 class="heading-large">
+        Is Michael Jones the right person for the mediation service to call?
+      </h1>
+      {% endif %}
+
+      {% if data['scenario'] != 2 %}
+      <form
+        name="aspnetForm"
+        method="post"
+        id="aspnetForm"
+        autocomplete="off"
+        onsubmit="multiNavigation('radio-mediation-group-4', ['Yes', 'No'], ['../../task-list', '../../task-list']);return false;"
+      >
+
+        <div class="form-group">
+          <fieldset class="inline">
+            <div class="multiple-choice">
+              <input id="radio-yes" type="radio" name="radio-mediation-group-4" value="Yes">
+              <label for="radio-yes" data-target="yes-info">Yes</label>
+            </div>
+            <div class="multiple-choice" data-target="no">
+              <input id="radio-no" type="radio" name="radio-mediation-group-4" value="No">
+              <label for="radio-no">No</label>
+            </div>
+            <div class="panel panel-border-narrow js-hidden" id="no">
+              <p>Enter a phone number the mediation service can use. We won't give the number to anyone else.</p>
+              <input class="form-control" id="phone-claimant" type="number" name="phone-claimant"
+                     value="{{data['phone-claimant']}}">
+            </div>
+          </fieldset>
+          <input type="hidden" name="mediation" value="complete">
+
+
+          <div class="form-group">
+            <input type="submit" class="button" value="Save and continue"/>
+          </div>
+
+        </div>
+      </form>
+      {% endif %}
+
+      {% if data['scenario'] != 1 %}
+      <form
+        name="aspnetForm"
+        method="post"
+        id="aspnetForm"
+        autocomplete="off"
+        onsubmit="multiNavigation('radio-mediation-group-4', ['Yes', 'No'], ['../../task-list', '../../task-list']);return false;"
+      >
+
+        <div class="form-group">
+          <fieldset class="">
+            <div class="multiple-choice" data-target="yes">
+              <input id="radio-yes" type="radio" name="radio-mediation-group-4" value="Yes">
+              <label for="radio-yes" data-target="yes-info">Yes</label>
+            </div>
+            <div class="panel panel-border-narrow js-hidden" id="yes">
+              <label class="form-label" for="">Confirm telephone number</label>
+              <input class="form-control" id="phone-claimant" type="number" name="phone-claimant"
+                     value="02012346788">
+              <fieldset></fieldset>
+            </div>
+            <div class="multiple-choice" data-target="no">
+              <input id="radio-no" type="radio" name="radio-mediation-group-4" value="No">
+              <label for="radio-no">No</label>
+            </div>
+            <div class="panel panel-border-narrow js-hidden" id="no">
+              <label class="form-label" for="">Who should the mediation service call?</label>
+              <input class="form-control" id="name-claimant" type="number" name="name-claimant"
+                     value="{{data['name-claimant']}}">
+              <fieldset></fieldset>
+              <label class="form-label" for="">Enter this person's phone number, including extension if required</label>
+              <span class="form-hint">
+      For example, 02012346788 ext. 153
+    </span>
+              <input class="form-control" id="phone-claimant" type="number" name="phone-claimant"
+                     value="{{data['phone-claimant']}}">
+              <fieldset></fieldset>
+            </div>
+          </fieldset>
+          <input type="hidden" name="mediation" value="complete">
+
+
+          <div class="form-group">
+            <input type="submit" class="button" value="Save and continue"/>
+          </div>
+
+        </div>
+      </form>
+      {% endif %}
+
+    </div>
+  </div>
+  {% include 'prototypes/prototype-apr-2019/includes/contact.html' %}
+</main>
+
+<form method="post" action="#" class="for4" style=" float: left;">
+  <select onchange="window.location.href='?scenario='+this.value">
+    <option value="1" {% if data[
+    'scenario'] == 1 %}selected{% endif %}>Individual</option>
+    <option value="2" {% if data[
+    'scenario'] == 2 %}selected{% endif %}>Company or Organisation</option>
+  </select>
+</form>
+
+{% endblock %}

@@ -1,0 +1,143 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="2" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <a href="#" class="link-back">Back</a>
+      <h1 class="heading-large">
+        <a href="../../../task-list?som=complete" style="text-decoration: none; color: #000; cursor: default;">List your bank and savings accounts</a>        
+      </h1>
+
+  <p>
+
+
+    Put a minus (-) in front of the amount if you're overdrawn. For example £-804.45.
+  </p>
+
+        <form action="disabled" method="get" class="form">
+
+
+             <div id="timeline" class="timeline">
+          <div class="triple-column mobile-hide">
+            <div id="timeline-heading-1" class="column-1 mobile-hide">
+              <label class="form-label-bold" for="event-form-control">
+                Type of account
+              </label>
+            </div>
+
+
+            <div id="timeline-heading-3 mobile-hide" class="column-2 ">
+              <label class="form-label-bold" for="timeline-heading-2">
+                Joint account
+              </label>
+            </div>
+
+            <div id="timeline-heading-2 mobile-hide" class="column-3 ">
+              <label class="form-label-bold" for="timeline-heading-3">
+                Balance
+              </label>
+              <span class="form-hint"> </span>
+            </div>
+          </div>
+
+
+
+          <div class="timeline-rows">
+            <div class="triple-column">
+             <label class="form-label-bold mobile-show">1. Type of account</label>
+
+              <select class="form-control column-1" name="select-box">
+              <option>Choose</option>
+              <option>Current account</option>
+              <option>Savings account</option>
+                <option>ISA</option>
+                <option>Other</option>
+              </select>
+               <label class="form-label-bold mobile-show">Joint account</label>
+
+              <select class="form-control column-3" name="select-box">
+                <option>Choose</option>
+                <option>Yes </option>
+                <option>No</option>
+              </select>
+
+              <label class="form-label-bold mobile-show">Balance</label>
+
+              <input class="form-control column-2 fee pound" type="text" id="amount1" name="date-1"
+                     value="{{data['bank-ammount-1']}}">
+
+            </div>
+
+            <div class="triple-column">
+                        <label class="form-label-bold mobile-show">2 .Type of account</label>
+
+              <select class="form-control column-1" name="select-box">
+                <option>Choose</option>
+                <option>Current account</option>
+                <option>Savings account</option>
+                <option>ISA</option>
+                <option>Other</option>
+              </select>
+                                      <label class="form-label-bold mobile-show">Joint account</label>
+
+              <select class="form-control column-3" name="select-box">
+                <option>Choose</option>
+                <option>Yes</option>
+                <option>No</option>
+              </select>
+
+                        <label class="form-label-bold mobile-show">Balance</label>
+
+              <input class="form-control column-2 fee pound" type="text" id="amount1" name="date-1"
+                     value="{{data['bank-ammount-1']}}">
+
+            </div>
+
+
+          </div>
+
+          <div class="timeline-row">
+          <div id="add-event-container">
+            <a class="secondary-button" id="add-another-event-button" href="#">Add another account</a>
+          </div>
+            <!--           <a class="" id="calculate" href="#">Calculate total</a>
+             -->        </div>
+
+        <script>
+          $(document).ready(function () {
+            $('#add-another-event-button').click(function (event) {
+              event.preventDefault();
+              objNewRow = $('.timeline-rows .triple-column:first-child').clone();
+              objNewRow.find( 'input').val('');
+              objNewRow.appendTo( '.timeline-rows');
+            });
+          });
+        </script>
+
+                  </div>
+
+                </div>
+              </div>
+
+
+  </fieldset>
+
+  </div>
+
+  <div class="form-group">
+          <input type="submit" class="button" value="Save and continue"/>
+        </div>
+  </form>
+  </div>
+  </div>
+{% include 'prototypes/prototype-apr-2019/includes/contact.html' %}
+</main>
+{% endblock %}

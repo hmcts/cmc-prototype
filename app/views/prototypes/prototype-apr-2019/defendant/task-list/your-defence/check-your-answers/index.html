@@ -1,0 +1,379 @@
+{% extends "layout_task-list.html" %}
+{% block page_title %}
+Check your answers
+{% endblock %}
+{% block home_link %} ../../task-list {% endblock %}
+{% block proposition_header %}
+{% set my_account="2" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+
+  <h1 class="heading-large">
+    Check your answers <!-- for this task -->
+  </h1>
+  <table class="check-your-answers">
+    <thead>
+      <tr>
+        <th colspan="2">
+          <h2 class="heading-medium">
+            Your response
+          </h2>
+        </th>
+        <th>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      {% if data.radio_select_group2=="Some" %}<!-- start of partial -->
+      <tr>
+        <td class="no-border">
+          How much money do you believe you owe
+        </td>
+        <td class="no-border">
+          {% if data['owe-amount']!="" %}
+          £{{data['owe-amount']}}
+          {% else %}
+          £2000
+          {% endif %} <!-- end of partial -->
+        </td>
+        <td class="change-answer no-border">
+        <a href="../your-defence/partial?return_page={{ '../../task-list/owe-all/check-your-answers' | urlencode }}">
+
+            Change <span class="visuallyhidden">Name</span>
+          </a>
+        </td>
+      </tr>
+      <tr>
+        <td class="">
+          Why this is what you owe?
+        </td>
+        <td class="">
+          {% if data['owe-reason']!="" %}
+          {{data['owe-reason']}}
+          {% else %}
+          I've already paid a large amount
+          {% endif %} <!-- end of partial -->
+        </td>
+        <td class="change-answer ">
+ 
+        </td>
+      </tr>      
+      {% elseif data.radio_select_group2=="Paid-some" %}
+      <tr>
+        <td class="no-border">
+          How much money do you believe you owe
+        </td>
+        <td class="no-border">
+          {% if data['owe-amount']!="" %}
+          £{{data['owe-amount']}}
+          {% else %}
+          £2000
+          {% endif %} <!-- end of partial -->
+        </td>
+        <td class="change-answer no-border">
+          <a href="#">
+            Change <span class="visuallyhidden">Name</span>
+          </a>
+        </td>
+      </tr>
+      <tr>
+        <td class="no-border">
+          How much have you paid the claimant?
+        </td>
+        <td class="no-border">
+          {% if data['amount-paid']!="" %}
+          £{{data['amount-paid']}}
+          {% else %}
+          £2000
+          {% endif %} <!-- end of partial -->
+        </td>
+        <td class="change-answer no-border">
+        </td>
+      </tr>
+      <tr class="">
+        <td class="">
+          When did you pay this amount?
+        </td>
+        <td class="">
+          {% if data['amount-day']!="" %}
+          {{data['amount-day']}} {{data['amount-month']}} {{data['amount-year']}}
+          {% else %} 
+          31 01 2018
+          {% endif %} 
+        </td>
+        <td class="">
+        </td>
+      </tr> 
+      {% elseif data.radio_select_group2=="paid" %}
+      <tr>
+        <td class="no-border">
+          How much have you paid the claimant?
+        </td>
+        <td class="no-border">
+          {% if data['amount-paid']!="" %}
+          £{{data['amount-paid']}}
+          {% else %}
+          £2000
+          {% endif %} 
+        </td>
+        <td class="change-answer no-border">
+          <a href="#">
+            Change <span class="visuallyhidden">Name</span>
+          </a>
+        </td>
+      </tr>
+      <tr class="">
+        <td class="no-border">
+          When did you pay this amount?
+        </td>
+        <td class="no-border">
+          {% if data['amount-day']!="" %}
+          {{data['amount-day']}} {{data['amount-month']}} {{data['amount-year']}}
+          {% else %} 
+          31 01 2018
+          {% endif %} 
+        </td>
+        <td class="no-border">
+        </td>
+      </tr>
+      <tr>
+        <td class="">
+          Any additional comments (optional).
+        </td>
+        <td class="">
+          {% if data['owe-reason']!="" %}
+          {{data['owe-reason']}}
+          {% else %}
+          I've already paid a large amount
+          {% endif %} <!-- end of partial -->
+        </td>
+        <td class="change-answer ">
+
+        </td>
+      </tr>      
+      {% endif %} <!-- end of partial -->
+      {% if data['radio_select_group2']=="defend_now" %} <!-- start of defend --> 
+      <tr>
+        <td>
+          Why you disagree with the claim
+        </td>
+        <td>
+          {% if data['defence-disagree-claim']!="" %}
+          {{data['defence-disagree-claim']}}
+          {% else %} 
+          Mary Richards and I signed a contract for building works on our roof. The work on the roof was completed but there was a problem with one section. I asked Mary Richards to get the problem fixed, but hadn't had a reply.
+          I'll have to get another builder to rectify the problem which will cost me £1,430.
+          Therefore, I'm making a money claim for £1,500 to compensate for the extra money I am going to need to spend.
+          {% endif %} 
+        </td>
+        <td class="change-answer">
+          <a href="#">
+            Change <span class="visuallyhidden">Name</span>
+          </a>
+        </td>
+      </tr>
+      <tr>
+        {% endif %}  <!-- start of defendnow--> 
+        {% if data['radio_select_group2']=="defend_now" or data.radio_select_group2=="Some" or data.radio_select_group2=="Paid-some"  %} <!-- start of time-line and evidence -->
+        <tr>
+          <td class="no-border">
+            Your timeline of events
+          </td>
+          <td class="no-border">
+           {% if data['cd-date-1'] !='' %}
+           {{data['cd-date-1']}} - {{data['cd-timeline-1']}}<br>
+           {% if data['cd-date-2'] !='' %}
+           {{data['cd-date-2']}} - {{data['cd-timeline-2']}}<br>
+           {% endif %}
+           {% if data['cd-date-3'] !='' %}
+           {{data['cd-date-3']}} - {{data['cd-timeline-3']}}<br>
+           {% endif %}
+           {% if data['cd-date-4'] !='' %}
+           {{data['cd-date-4']}} - {{data['cd-timeline-4']}}<br>
+           {% endif %}
+           {% else %} 
+           -
+           {% endif %}  
+         </td>
+         <td class="change-answer no-border">
+        <a href="../your-defence/defence-2?return_page={{ '../../task-list/your-defence/check-your-answers' | urlencode }}">
+            Change <span class="visuallyhidden">Name</span>
+          </a>
+        </td>
+      </tr>
+      <tr>
+        <td>
+         Comments about their timeline
+       </td>
+       <td>
+         {% if data['defence-disagree-timeline']!="" %}
+         {{data['defence-disagree-timeline']}} 
+         {% else %} 
+         -
+         {% endif %} 
+       </td>
+       <td class="change-answer">
+       </td>
+     </tr>
+     <tr>
+      <td class="no-border">
+        Your evidence
+      </td>
+      <td class="no-border">
+       {% if data['legal-status1'] != true %}
+       {% if data['legal-status1'] != true %}
+       {% if data['legal-status1'] == 2 %}Contracts and agreements - {% endif %}
+       {% if data['legal-status1'] == 3 %}Expert witness - {% endif %}
+       {% if data['legal-status1'] == 4 %}Letters, emails and other correspondence - {% endif %}
+       {% if data['legal-status1'] == 5 %}Photo evidence - {% endif %}
+       {% if data['legal-status1'] == 6 %}Receipts - {% endif %}
+       {% if data['legal-status1'] == 7 %}Contracts and agreements - {% endif %}
+       {% if data['legal-status1'] == 'other' %}Statements of account - {% endif %}
+       {{data['legal-status-description-1'] }}<br>
+       {% endif %}        
+       {% if data['legal-status2'] != true %}
+       {% if data['legal-status2'] == 2 %}Contracts and agreements - {% endif %}
+       {% if data['legal-status2'] == 3 %}Expert witness - {% endif %}
+       {% if data['legal-status2'] == 4 %}Letters, emails and other correspondence - {% endif %}
+       {% if data['legal-status2'] == 5 %}Photo evidence - {% endif %}
+       {% if data['legal-status2'] == 6 %}Receipts - {% endif %}
+       {% if data['legal-status2'] == 7 %}Contracts and agreements - {% endif %}
+       {% if data['legal-status2'] == 'other' %}Statements of account - {% endif %}
+       {{data['legal-status-description-2'] }}<br>
+       {% endif %}         
+       {% if data['legal-status3']  != true %}
+       {% if data['legal-status3'] == 2 %}Contracts and agreements - {% endif %}
+       {% if data['legal-status3'] == 3 %}Expert witness - {% endif %}
+       {% if data['legal-status3'] == 4 %}Letters, emails and other correspondence - {% endif %}
+       {% if data['legal-status3'] == 5 %}Photo evidence - {% endif %}
+       {% if data['legal-status3'] == 6 %}Receipts - {% endif %}
+       {% if data['legal-status3'] == 7 %}Contracts and agreements - {% endif %}
+       {% if data['legal-status3'] == 'other' %}Statements of account - {% endif %}
+       {{data['legal-status-description-3'] }}<br>
+       {% endif %} 
+       {% if data['legal-status4']  != true %}
+       {% if data['legal-status4'] == 2 %}Contracts and agreements - {% endif %}
+       {% if data['legal-status4'] == 3 %}Expert witness - {% endif %}
+       {% if data['legal-status4'] == 4 %}Letters, emails and other correspondence - {% endif %}
+       {% if data['legal-status4'] == 5 %}Photo evidence - {% endif %}
+       {% if data['legal-status4'] == 6 %}Receipts - {% endif %}
+       {% if data['legal-status4'] == 7 %}Contracts and agreements - {% endif %}
+       {% if data['legal-status4'] == 'other' %}Statements of account - {% endif %}
+       {{data['legal-status-description-4'] }}<br>
+       {% endif %} 
+       {% else %} 
+       -
+       {% endif %}        
+     </td>
+     <td class="change-answer no-border">
+        <a href="../your-defence/defence-3?return_page={{ '../../task-list/your-defence/check-your-answers' | urlencode }}">
+        Change <span class="visuallyhidden">Name</span>
+      </a>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Comments about their evidence
+    </td>
+    <td>
+     {% if data['defence-disagree-evidence']!="" %}
+     {{data['defence-disagree-evidence']}}
+     {% else %} 
+     -
+     {% endif %} 
+   </td>
+   <td class="change-answer">
+   </td>
+ </tr>
+ <tr>
+  <td>
+    How this dispute has affected you
+  </td>
+  <td>
+   {% if data['defence-disagree-affect']!="" %}
+   {{data['defence-disagree-affect']}}
+   {% else %} 
+   -
+   {% endif %} 
+ </td>
+ <td class="change-answer">
+        <a href="../your-defence/defence-3?return_page={{ '../../task-list/your-defence/check-your-answers' | urlencode }}">
+    Change <span class="visuallyhidden">Name</span>
+  </a>
+</td>
+</tr>
+{% if data['radio-suggestion-group']=="Yes" %}
+<tr>
+  <td class="no-border">
+    Make a suggestion
+  </td>
+  <td class="no-border">
+    Yes
+  </td>
+  <td class="change-answer no-border">
+           <a href="../your-defence/suggest-or-not?return_page={{ '../../task-list/your-defence/check-your-answers' | urlencode }}">
+      Change <span class="visuallyhidden">Name</span>
+    </a>
+  </td>
+</tr>
+<tr>
+  <td>
+    Your suggestion
+  </td>
+  <td>
+    {{data['defence-suggestion']}}
+  </td>
+  <td class="change-answer">
+           <a href="../your-defence/offer-after-defence?return_page={{ '../../task-list/your-defence/check-your-answers' | urlencode }}">
+
+      Change <span class="visuallyhidden">Name</span>
+    </a>
+  </td>
+</tr>
+{% else %} 
+<tr>
+  <td>
+    Make a suggestion
+  </td>
+  <td>
+    No
+  </td>
+  <td class="change-answer">
+           <a href="../your-defence/suggest-or-not?return_page={{ '../../task-list/your-defence/check-your-answers' | urlencode }}">
+      Change <span class="visuallyhidden">Name</span>
+    </a>
+  </td>
+</tr>
+{% endif %} 
+<tr>
+  <td>
+    Free mediation
+  </td>
+  <td>
+    {% if data['radio-mediation-group']=="Yes" %}
+    Yes
+    {% else %} 
+    No
+    {% endif %}   
+  </td>
+  <td class="change-answer">
+   <a href="../your-defence/mediation?return_page={{ '../../task-list/your-defence/check-your-answers' | urlencode }}">
+      Change <span class="visuallyhidden">Name</span>
+    </a>
+  </td>
+</tr>
+{% endif %} <!-- end of time-line and evidence -->
+<tr>
+</tbody>
+</table>
+
+
+<br>
+<br>
+<a href="../../task-list">Return to task list</a>
+{% include 'prototypes/prototype-apr-2019/includes/contact.html' %}
+</main>
+{% endblock %}

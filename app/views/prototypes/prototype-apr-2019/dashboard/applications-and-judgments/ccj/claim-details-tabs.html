@@ -1,0 +1,190 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="4" %}
+
+{% include "includes/propositional_navigation_new.html" %}
+{% endblock %}
+{% block content %}
+
+
+<main id="content" role="main">
+
+  {% include "includes/phase_banner_beta.html" %}
+
+  <div class="breadcrumbs" style="margin-bottom: -20px">
+    <ol>
+      <!--<li><a href="#" onclick="history.go(-1)">All claims</a></li>-->
+
+      <li><a href="">All claims</a></li>
+
+      <li aria-current="page">Claim details</li>
+
+    </ol>
+  </div>
+
+  <div class="grid-row">
+
+    <div class="details" style="margin-top: -30px">
+        <span style=""><h2 style="">
+          <h2 class="heading-medium">Jan Clark v Mary Richards</h2>
+          <h2 class="font-xsmall" style="margin-top: -10px">Claim number: <span style="">352MC733</span></h2>
+    </div>
+    <fieldset></fieldset>
+
+    <div class="column-full-width">
+
+      <div class="govuk-tabs" data-module="tabs">
+        <h2 class="govuk-tabs__title">
+          Contents
+        </h2>
+
+        <ul class="govuk-tabs__list" role="tablist">
+
+          <li class="govuk-tabs__list-item" role="presentation">
+            <a class="govuk-tabs__tab govuk-tabs__tab--selected"
+               href="#next-steps"
+               id="tab_next-steps" role="tab" aria-controls="next-steps" tabindex="0"
+               aria-selected="true">
+              Next steps
+            </a>
+          </li>
+
+          <li class="govuk-tabs__list-item" role="presentation">
+            <a class="govuk-tabs__tab"
+               href="#history"
+               id="tab_history" role="tab" aria-controls="history" tabindex="-1" aria-selected="false">
+              Claim history
+            </a>
+          </li>
+
+          <li class="govuk-tabs__list-item" role="presentation">
+            <a class="govuk-tabs__tab"
+               href="#documents"
+               id="tab_documents" role="tab" aria-controls="documents" tabindex="-1" aria-selected="false">
+              Documents
+            </a>
+          </li>
+
+          <li class="govuk-tabs__list-item" role="presentation">
+            <a class="govuk-tabs__tab"
+               href="#settlement"
+               id="tab_settlement" role="tab" aria-controls="settlement" tabindex="-1"
+               aria-selected="false">
+              Settle out of court
+            </a>
+          </li>
+
+        </ul>
+
+        <section class="govuk-tabs__panel" id="next-steps" role="tabpanel" aria-labelledby="tab_next-steps">
+
+          <div class="column-two-thirds">
+
+            <h2 class="heading-l">Next steps</h2>
+            <div class="description" style="background-color: #fff">
+              <h4 class=" heading-small">Respond to a County Court Judgment (CCJ)</h4>
+              <p>You didn't respond to this claim by the deadline of 24 December 2018.</p>
+
+              <p>Jan Clark requested a <a href="../../../defendant/correspondence/forms/default-judgment?check=1">County
+                Court Judgment (CCJ)</a> against you. When we've processed the request we'll
+                post a copy of judgment to you and to Jan Clark.</p>
+
+              <p>A CCJ means the court orders you to pay the judgment debt. If you pay the full amount within one month
+                of the date of judgment, the CCJ is removed from the public register. You can pay £15 to <a
+                  href="https://www.gov.uk/government/publications/form-n443-application-for-a-certificate-of-satisfaction-or-cancellation">apply
+                  for a certificate</a> that confirms this.</p>
+
+              <div class="form-group">
+                <form method="post" action="do-you-owe-money" class="form">
+                  {{formData | safe}}
+                  <input type="hidden" name="" value="on">
+                  <input type="submit" class="button" value="Respond to your CCJ">
+                </form>
+              </div>
+
+              <fieldset></fieldset>
+              {% include 'prototypes/prototype-apr-2019/includes/contact.html' %}
+            </div>
+
+            <div class="column-one-third">
+              <div class="right-column-nav" style="margin-top: 20px">
+                <!--<hr class="light-hr" style="margin-top: 5px">-->
+                <h3 class="heading-small">More actions</h3>
+                <p></p><a href="">I've paid in full</a></p>
+              </div>
+            </div>
+
+          </div>
+
+        </section>
+
+
+        <section class="govuk-tabs__panel govuk-tabs__panel--hidden" id="history" role="tabpanel"
+                 aria-labelledby="tab_history">
+
+          <div class="column-two-thirds">
+
+            <h2 class="heading-l">Claim history</h2>
+
+            <div class="hmcts-timeline" style="margin-top: 50px">
+              <div class="hmcts-timeline__item">
+                <div class="hmcts-timeline__header">
+                  <h2 class="hmcts-timeline__title">Jan Clark requested a default County Court Judgment (CCJ) against
+                    you</h2>
+                  <!--<p class="hmcts-timeline__by">by claimant</p>-->
+                  <p>You didn't respond to this claim by the deadline of 24 December 2018.</p>
+                  <p style="margin-top: -10px"><a
+                    href="../../../defendant/correspondence/forms/default-judgment?check=1">Download
+                    County Court Judgment</a>
+                    (PDF, 123KB)</p>
+                </div>
+                <p class="hmcts-timeline__date" style="margin-top: -10px">
+                  <time style="color: grey">28 December 2018</time>
+                </p>
+              </div>
+              <div class="hmcts-timeline__item">
+                <div class="hmcts-timeline__header">
+                  <h2 class="hmcts-timeline__title">Claim made against you</h2>
+                  <!--<p class="hmcts-timeline__by">by claimant</p>-->
+                  <p><a href="../../../defendant/correspondence/forms/claim-form-claimant?check=1">Download claim
+                    form</a>
+                    (PDF, 123KB)</p>
+                </div>
+                <p class="hmcts-timeline__date" style="margin-top: -10px">
+                  <time style="color: grey">6 December 2018</time>
+                </p>
+              </div>
+            </div>
+
+          </div>
+
+        </section>
+
+
+        <section class="govuk-tabs__panel govuk-tabs__panel--hidden" id="documents" role="tabpanel"
+                 aria-labelledby="tab_documents">
+
+
+        </section>
+
+
+        <section class="govuk-tabs__panel govuk-tabs__panel--hidden" id="settlement" role="tabpanel"
+                 aria-labelledby="tab_settlement">
+
+
+        </section>
+
+      </div>
+
+    </div>
+  </div>
+
+</main>
+
+<script src="/public/javascripts/govuk-tabs.js"></script>
+
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <a href="#" class="link-back">Back</a>
+
+    <form method="post" action="expert-reports/check-and-send" class="form">
+
+      <div class="form-group">
+        <h1 class="heading-large">Upload your expert's {% if data['type'] == 'report' %}response{% else %}report{% endif %}</h1>
+
+        <div id="uploads">
+
+          <div id="experts">
+            <p>You can upload as many files as you need.</p>
+            <ol class="list uploaded-files" style="margin-bottom: 15px;"></ol>
+            <label for="experts-upload" class="secondary-button">Add files</label>
+            <input id="experts-upload" type="file" onchange="return upload('experts');" multiple />
+          </div>
+
+          <div class="form-group" style="margin-top: 45px" id="submit">
+            <input type="submit" class="button" value="Check and submit expert's {% if data['type'] == 'report' %}response{% else %}report{% endif %}"/>
+          </div>
+
+        </div>
+
+      </div>
+    </form>
+
+    </div>
+  </form>
+</div>
+</div>
+{% include 'prototypes/prototype-apr-2019/includes/contact.html' %}
+</main>
+{% endblock %}
