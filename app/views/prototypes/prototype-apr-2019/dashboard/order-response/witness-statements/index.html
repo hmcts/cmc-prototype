@@ -17,18 +17,23 @@ Money Claims Prototype
 
       <div class="form-group">
         <h1 class="heading-large">
-          <a href="how" style="text-decoration:none; color: #000; cursor: default;">Upload your witness statements</a>
+          <a href="how" style="text-decoration:none; color: #000; cursor: default;">Upload your witness statement{% if data['witnesses'] != 'self' %}s{% endif %}</a>
         </h1>
-        <p>You must upload a witness statement for yourself and each witness supporting your claim.</p>
-        <p>Each witness must write their own statement, including you.</p>
-        <p>All witness statements must:</p>
+
+        {% if data['witnesses'] != 'self' %}
+        <p>You must upload a witness statement for {% if data['witnesses'] == 'both' %}yourself and{% endif %} each witness supporting your claim.</p>
+        <p>Each witness must write their own statement{% if data['witnesses'] == 'both' %}, including you{% endif %}.</p>
+
+        {% endif %}
+
+        <p>{% if data['witnesses'] != 'self' %}All{% else %}Your{% endif %} witness statements must:</p>
 
         <ul class="list list-bullet">
           <li>start with the name of the case and the claim number - 'Clark v Richards. Claim number: 352MC733'</li>
-          <li>include the witness's full name and address</li>
+          <li>include {% if data['witnesses'] != 'self' %}the witness's{% else %}your{% endif %} full name and address</li>
           <li>use numbered paragraphs and numbered pages</li>
           <li>end with this paragraph: 'I believe that the facts stated in this witness statement are true.'</li>
-          <li>be signed and dated by the witness</li>
+          <li>be signed and dated by {% if data['witnesses'] != 'self' %}the witness{% else %}you{% endif %}</li>
         </ul>
 
         <p>You can <a href="/public/images/Witness statement.docx">download and complete a witness statement template</a> (DOCX, 123KB). When you've completed it, upload the file on this page.</p>
@@ -57,4 +62,12 @@ Money Claims Prototype
 </div>
 {% include 'prototypes/prototype-apr-2019/includes/contact.html' %}
 </main>
+<form method="post"  action="#" class="form" style="position: absolute;">
+  <select id="check2" name="check2" onchange="window.location.href='witness-statements?witnesses='+this.value">
+    <option  value="0"> - Witnesses</option>
+    <option  value="both" {% if data['witnesses'] == 'both' %}selected{% endif %}>Self + others</option>
+    <option  value="self" {% if data['witnesses'] == 'self' %}selected{% endif %}>Self only</option>
+    <option  value="others" {% if data['witnesses'] == 'others' %}selected{% endif %}>Others only</option>
+  </select>
+</form>
 {% endblock %}
