@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds" style="display:none">
+      <!--<a href="#" class="link-back">Back</a>-->
+      <form method="post" action="s-c-upload?ccj=satisfy" class="form">
+        <h1 class="heading-large">You can't cancel the CCJ</h1>
+        <p>You didn’t pay the claim within 28 days of it being issued. This means you can't cancel it.</p>
+        <p>You can instead apply to have it shown as paid or ‘satisfied’ on public records. The CCJ will be removed from the register after 6 years.</p>
+        <div class="form-group">
+          <input type="submit" class="button" value="Apply to show the CCJ as paid" />
+        </div>
+      </form>
+    </div>
+  </div>
+{% include 'prototypes/prototype-apr-2019/includes/contact.html' %}
+</main>
+<script>
+  $(document).ready(function () {
+    var end_date = "{{data['set-year']}}-{{data['set-month']}}-{{data['set-day']}}"
+    var difference = moment(end_date).diff(moment("2018-5-4"), 'days')
+    $("#st").html(moment())
+    $("#ed").html(moment(end_date))
+    if(difference < 28) {
+      window.location.href = "s-c-upload?ccj=cancel";
+    }else if(difference > 28) {
+      $(".column-two-thirds").show();
+    }
+  })
+</script>
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <a href="#" class="link-back">Back</a>
+
+       <form
+       name="aspnetForm"
+       method="post"
+       onsubmit="conditionalNavigation('questions', 'yes', 'ask', 'confirmation-page');return false;"
+       id="aspnetForm"
+       autocomplete="off">
+
+      <h1 class="heading-large">
+       Do you have any questions for the expert about their report?
+      </h1>
+
+      <fieldset>
+
+        <div class="multiple-choice">
+          <input id="radio-1" type="radio" name="questions" value="yes">
+          <label for="radio-1">Yes</label>
+        </div>
+        <div class="multiple-choice" data-target="no">
+          <input id="radio-2" type="radio" name="questions" value="no">
+          <label for="radio-2">No</label>
+        </div>
+        <div class="panel panel-border-narrow js-hidden" id="no">
+          <p>You will not be able to submit any questions later.</p>
+        </div>
+
+      </fieldset>
+      <div class="form-group">
+        <input type="submit" class="button" value="Save and continue"/>
+      </div>
+    </form>
+  </div>
+</div>
+{% include 'prototypes/prototype-apr-2019/includes/contact.html' %}
+</main>
+{% endblock %}

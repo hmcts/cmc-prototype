@@ -1,0 +1,150 @@
+{% extends "layout_task-list.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block home_link %} ../../task-list {% endblock %}
+{% block proposition_header %}
+{% set my_account="2" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% import 'prototypes/prototype-apr-2019/includes/address.html' as address %}
+
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <a href="#" class="link-back">Back</a>
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('task-list')%}
+      <form method="post" action="{{ data.return_page if data.return_page | length > 0 else '../task-list' }}" class="form">
+        {% else %}
+
+        <form
+          name="aspnetForm"
+          method="post"
+          onsubmit="conditionalNavigation('correspondence-address', 'Sol', 'your-details/sol-handoff', 'your-details/date-of-birth');return false;"
+          id="aspnetForm"
+          autocomplete="off">
+
+          {% endif %}
+          {{formData | safe}}
+          <h1 class="heading-large">
+            Confirm your details
+          </h1>
+          <p>The claimant provided these details.</p>
+          <fieldset>
+            <div class="form-group">
+              <h2 class="heading-medium" style="margin-top: 0.75em">Your name</h2>
+              <p>If you change your name here, we'll tell the claimant. It's up to them to decide whether they agree to change it for their claim.</p>
+              <div class="form-group-compound address-item form-group">
+                <label class="form-label" for="name-title">Title</label>
+                <input class="form-control" value="Mrs" id="name-title" style="width: 25%" />
+              </div>
+              <div class="form-group-compound address-item form-group">
+                <label class="form-label" for="name-first">First name</label>
+                <input class="form-control" value="Mary" id="name-first" />
+              </div>
+              <div class="form-group-compound address-item form-group">
+                <label class="form-label" for="name-last">Last name</label>
+                <input class="form-control" value="Richards" id="name-last" />
+              </div>
+              <h2 class="heading-medium">Your address</h2>
+              <div id="addressManualWrapper">
+                <div id="address-details" class="address-manual-input disabled">
+                  <div class="form-group-compound address-item form-group"><a name="address_addressline1"></a><label
+                    class="form-label" for="Address_AddressLine1">Address line 1</label><input class="form-control" value="101 Regents Road" ></span></div>
+                    <div class="form-group-compound address-item form-group"><a name="address_addressline2"></a><label
+                      class="form-label" for="Address_AddressLine2">Address line 2
+                    (optional)</label><input class="form-control" value="Shiplake" ></span></div>
+                    <div class="form-group-compound address-item form-group"><a name="address_addressline3"></a><label
+                      class="form-label" for="Address_AddressLine3">Town or city
+                    </label><input autocorrect="off" class="form-control" value="Henley on Thames" ></span></div>
+                    <div class="address-item form-group"><a name="address_postcode"></a><label
+                      class="form-label" for="Address_Postcode">Postcode</label><input class="form-control form-control-1-4" value="RG9 4BW" ></span></div>
+                    </div>
+                  </div>
+                  <h2 class="heading-small">Do you want post about the claim sent to this address?</h2>
+                  <div class="form-group">
+                    <fieldset>
+                     <div class="multiple-choice" data-target="correspondence-address">
+                      <input type="radio" id="no-correspondence" name="correspondence-address" value="No" {% if data['addressType'] != 'diff' %} checked{% endif %}>
+                      <label for="no-correspondence">Yes</label>
+                    </div>
+                     <div class="multiple-choice">
+                      <input type="radio" id="sol-correspondence" name="correspondence-address" value="Sol">
+                      <label for="sol-correspondence">I want post about the claim sent to my solicitor</label>
+                    </div>
+                    <div class="multiple-choice" data-target="contact-by-phone">
+                      <input type="radio" id="add-correspondence" name="correspondence-address" value="Yes" {% if data['addressType'] == 'diff' %} checked{% endif %}>
+                      <label for="add-correspondence">No, use a different address</label>
+                    </div>
+                    <div class="panel panel-border-narrow js-hidden" id="contact-by-phone">
+                      <div id="addressManualWrapper">
+                        <p>All correspondence will be sent to this address. This is known as an 'address for service'.</p>
+
+
+                        {% if data['addressType'] == 'diff' %}
+                      <div id="addressManualWrapper">
+                          <div id="address-details" class="address-manual-input disabled">
+                            <div class="form-group-compound address-item form-group"><a name="address_addressline1"></a><label
+                              class="form-label" for="Address_AddressLine1">Address line 1</label><input class="form-control" value="45 Commercial Road" ></span></div>
+                              <div class="form-group-compound address-item form-group"><a name="address_addressline2"></a><label
+                                class="form-label" for="Address_AddressLine2">Address line 2
+                              (optional)</label><input class="form-control" value="" ></span></div>
+                              <div class="form-group-compound address-item form-group"><a name="address_addressline3"></a><label
+                                class="form-label" for="Address_AddressLine3">Town or city
+                              </label><input autocorrect="off" class="form-control" value="London" ></span></div>
+                              <div class="address-item form-group"><a name="address_postcode"></a><label
+                                class="form-label" for="Address_Postcode">Postcode</label><input class="form-control form-control-1-4" value="W1D 5HF" ></span></div>
+                              </div>
+                            </div>
+                            </div>
+                      </div>
+
+                        {% else %}
+                        {{ address.lookup('service') }}
+                        {% endif %}
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <h2 class="heading-medium">Your phone number</h2>
+                <p>We might need to speak to you about this claim. We'll only call on weekdays between 9am and 5pm.</p>
+
+                <fieldset>
+                  <legend class="visuallyhidden">Phone</legend>
+
+                  <div class="form-group">
+                    <input class="form-control form-control" id="defendant-phone" name="defendant-phone" type="text" value="07682 621225">
+                  </div>
+                </fieldset>
+
+                {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('task-list')%}
+                <div class="form-group">
+                  <input type="submit" class="button" value="Save changes"/>
+                </div>
+                <a href="{{ data.return_page if data.return_page | length > 0 else '../task-list' }}">Cancel</a>
+                {% else %}
+                <div class="form-group">
+                  <input type="submit" class="button" value="Save and continue"/>
+                </div>
+                {% endif %}
+              </div>
+            </form>
+          </div>
+        </div>
+      {% include 'prototypes/prototype-apr-2019/includes/contact.html' %}
+</main>
+
+
+<form method="post"  action="#" class="for4" style=" float: left;">
+  <select onchange="window.location.href='?addressType='+this.value">
+    <option value="">Type</option>
+    <option value="same" {% if data['addressType'] == 'same' %}selected{% endif %}>Same address</option>
+    <option value="diff" {% if data['addressType'] == 'diff' %}selected{% endif %}>Different correspondence address</option>
+  </select>
+</form>
+
+{% endblock %}

@@ -1,0 +1,80 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="4" %}
+
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+
+
+<main id="content" role="main">
+
+  {% include "includes/phase_banner_beta.html" %}
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+      <a href="#" class="link-back">Back</a>
+
+      <h1 class="heading-large">
+        Risks at the address
+      </h1>
+
+      <p>The bailiff needs to know about anything that may put them in danger at the address. For example:</p>
+
+      <ul class="list list-bullet">
+        <li>if there's anyone else living at the address who has been involved with the police</li>
+        <li>if the defendant keeps any dogs or other potentially dangerous animals</li>
+      </ul>
+
+      <h2 class="heading-small">Do you believe that the bailiff may be at risk at the address?
+      </h2>
+      <form
+        name="aspnetForm"
+        method="post"
+        onsubmit="conditionalNavigation('radio-indent-group-risk-property', 'Yes', 'check-your-answers', 'check-your-answers');return false;"
+        id="aspnetForm"
+        autocomplete="off">
+
+        <div class="form-group">
+          <fieldset>
+            <div class="multiple-choice" data-target="contact-by-text">
+              <input id="dob-yes" type="radio" name="radio-indent-group-risk-property" value="Yes">
+              <label for="example-contact-by-text">Yes</label>
+            </div>
+            <div class="panel panel-border-narrow js-hidden" id="contact-by-text">
+              <label class="form-label-bold" for="risk-property-textarea">
+                Give details
+              </label>
+              <textarea class="form-control" id="risk-property-textarea" rows="4" name="risk-property" type="text"
+                        style="width: 100%" value="">{{data['risk-property']}}</textarea>
+
+            </div>
+
+
+            <div class="multiple-choice">
+              <input id="radio-no" type="radio" name="radio-indent-group-risk-property" value="No">
+              <label for="radio-no" data-target="no-info">
+                No
+              </label>
+            </div>
+        </div>
+
+
+        </fieldset>
+
+        <input id="advert-option-next--button" type="submit" value="Save and continue" class="button"
+               data-ignore-double-submit="true">
+      </form>
+
+
+    </div>
+  </div>
+  </div>
+{% include 'prototypes/prototype-apr-2019/includes/contact.html' %}
+</main>
+{% endblock %}

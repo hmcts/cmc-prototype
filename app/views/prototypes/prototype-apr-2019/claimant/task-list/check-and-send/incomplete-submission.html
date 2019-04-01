@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="2" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <a href="#" class="link-back">Back</a>
+      <h1 class="heading-large">
+        You need to complete all sections before you submit your claim
+      </h1>
+      <p>You still need to complete:</p>
+      <ul class="list list-bullet">
+                  {% if eligibility=="hide" %}
+
+        {% if data.resolve_dispute!="complete" %}
+        <li><a href="../resolve-dispute">Resolving this dispute </li>
+          {% endif %}
+          {% if data.your_details!="complete" %}
+          <li><a href="../your-details">Your details</a> </li>
+          {% endif %}
+          {% if data.their_details!="complete" %}
+          <li><a href="../their-details">Their details</a> </li>
+          {% endif %}
+          {% if data.claim_amount!="complete" %}
+          <li><a href="../claim-amount-alt">Claim amount</a> </li>
+          {% endif %}
+          {% if data.claim_details!="complete" %}
+          <li><a href="../claim-details">Claim details</a> </li>
+          {% endif %}
+        </ul>
+        <a href="../../task-list">Back to task list</a>
+      </div>
+    {% include 'prototypes/prototype-apr-2019/includes/contact.html' %}
+</main>
+{% endblock %}
