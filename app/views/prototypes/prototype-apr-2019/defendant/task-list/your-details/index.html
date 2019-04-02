@@ -110,6 +110,8 @@ Money Claims Prototype
                   </div>
                 </div>
 
+
+                {% if data['phoneNumber'] == 'provided' %}
                 <h2 class="heading-medium">Your phone number</h2>
                 <p>We might need to speak to you about this claim. We'll only call on weekdays between 9am and 5pm.</p>
 
@@ -120,6 +122,7 @@ Money Claims Prototype
                     <input class="form-control form-control" id="defendant-phone" name="defendant-phone" type="text" value="07682 621225">
                   </div>
                 </fieldset>
+                {% endif %}
 
                 {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('task-list')%}
                 <div class="form-group">
@@ -140,10 +143,12 @@ Money Claims Prototype
 
 
 <form method="post"  action="#" class="for4" style=" float: left;">
-  <select onchange="window.location.href='?addressType='+this.value">
+  <select onchange="window.location.href='?'+this.value">
     <option value="">Type</option>
-    <option value="same" {% if data['addressType'] == 'same' %}selected{% endif %}>Same address</option>
-    <option value="diff" {% if data['addressType'] == 'diff' %}selected{% endif %}>Different correspondence address</option>
+    <option value="addressType=same" {% if data['addressType'] == 'same' %}selected{% endif %}>Same address</option>
+    <option value="addressType=diff" {% if data['addressType'] == 'diff' %}selected{% endif %}>Different correspondence address</option>
+    <option value="phoneNumber=provided" {% if data['phoneNumber'] == 'provided' %}selected{% endif %}>Phone number provided</option>
+    <option value="phoneNumber=none" {% if data['phoneNumber'] == 'none' %}selected{% endif %}>Phone number not provided</option>
   </select>
 </form>
 
