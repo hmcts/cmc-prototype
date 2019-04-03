@@ -10,65 +10,125 @@ Money Claims Prototype
 <main id="content" role="main">
   {% include "includes/phase_banner_beta.html" %}
   <div class="grid-row">
-    <div class="column-two-thirds">
+    <div>
       <a href="#" class="link-back">Back</a>
 
-      <h1 class="heading-large">
-        The {% if data['party'] == "defendant" %}defendant{% else %}claimant{% endif %}'s response to the order
-      </h1>
+        <h1 class="heading-large">
+          The {% if data['party'] == "defendant" %}defendant{% else %}claimant{% endif %}'s response to the order
+        </h1>
 
-      <h2 class="heading-small">Witness statements</h2>
+        <table class="check-your-answers uploads">
+          <thead>
+            <tr>
+              <th colspan="2">
+                <h2 id='cd' class="heading-medium">
+                  Their witness statements
+                </h2>
+              </th>
+              <th>
+                Uploaded on
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                File 1
+              </td>
+              <td>
+                <a href="#">Witness statement - Tim Howard.pdf</a>
+              </td>
+              <td>
+                {{ now | date('subtract', 8, 'days') | date }}
+              </td>
+            </tr>
+          <tbody>
+            <tr>
+              <td>
+                File 2
+              </td>
+              <td>
+                <a href="#">Witness statement - James Watts.docx</a>
+              </td>
+              <td>
+                {{ now | date('subtract', 8, 'days') | date }}
+              </td>
+            </tr>
+        </tbody>
+      </table>
 
-      <p style="margin-bottom: 4px;">Uploaded on {{ now | date('subtract', 5, 'days') | date }}:</p>
-      <ul>
-          <li><a href="#">Witness statement - Tim Howard.pdf</a></li>
-          <li><a href="#">Witness statement - James Watts.docx</a></li>
-      </ul>
-
-      <h2 class="heading-small">Their evidence</h2>
-
-      <p style="margin-bottom: 4px;">Uploaded on {{ now | date('subtract', 2, 'days') | date }}:</p>
-      <ul>
-        <li><a href="#">Emails.pdf</a></li>
-        <li><a href="#">Contract.pdf</a></li>
-      </ul>
-      <p style="margin-bottom: 4px; margin-top: 16px">Uploaded on {{ now | date('subtract', 1, 'days') | date }}:</p>
-      <ul>
-        <li><a href="#">Photo 1.jpg</a></li>
-        <li><a href="#">Photo 2.jpg</a></li>
-      </ul>
-
-<!--
-      {% if data['party'] == "defendant" %}
-      <h2 class="heading-small">Chosen expert</h2>
-      <p style="margin-bottom: 4px;">Due by {{ now | date('add', 14, 'days') | date }}.</p>
-      <p>The defendant has not yet chosen an expert.</p>
-      {% else %}
-      <h2 class="heading-small">Proposed experts</h2>
-      <p style="margin-bottom: 10px;">Proposed on {{ now | date('add', 14, 'days') | date }}:</p>
-
-      <p>
-        John Austin<br />
-        Cost: £450<br />
-        Area of expertise: Structural engineering
-      </p>
-      <p>
-        Ronald Davidson<br />
-        Cost: £500<br />
-        Area of expertise: Structural engineering
-      </p>
-      <p>
-        Julie Tuffnel<br />
-        Cost: £700<br />
-        Area of expertise: Structural engineering
-      </p>
-      {% endif %}
--->
+      <br />
+      <br />
+      <table class="check-your-answers uploads">
+        <thead>
+          <tr>
+            <th colspan="2">
+              <h2 id='cd' class="heading-medium">
+                Their evidence
+              </h2>
+            </th>
+            <th>
+              Uploaded on
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              File 1
+            </td>
+            <td>
+              <a href="#">Emails.pdf</a>
+              <br />"You can see the emails dated {{ date | date('subtract', 123, 'days') | date }} and {{ date | date('subtract', 134, 'days') | date }} that they claimed not to receive."
+            </td>
+            <td>
+              {{ now | date('subtract', 5, 'days') | date }}
+            </td>
+          </tr>
+        <tbody>
+          <tr>
+            <td>
+              File 2
+            </td>
+            <td>
+              <a href="#">Photo 1.jpg</a>
+              <br />"The photos show that the roof was not adequately supported."
+            </td>
+            <td>
+              {{ now | date('subtract', 5, 'days') | date }}
+            </td>
+          </tr>
+          <tr>
+            <td>
+              File 3
+            </td>
+            <td>
+              <a href="#">Photo 2.jpg</a>
+            </td>
+            <td>
+              {{ now | date('subtract', 4, 'days') | date }}
+            </td>
+          </tr>
+          <tr>
+            <td>
+              File 4
+            </td>
+            <td>
+              <a href="#">Contract.pdf</a>
+              <br />"The signed contract shows the materials we agreed to use."
+            </td>
+            <td>
+              {{ now | date('subtract', 2, 'days') | date }}
+            </td>
+          </tr>
+      </tbody>
+    </table>
 
     </div>
   </form>
 </div>
 </div>
+<br />
 {% include 'prototypes/prototype-apr-2019/includes/contact.html' %}
 </main>
 
