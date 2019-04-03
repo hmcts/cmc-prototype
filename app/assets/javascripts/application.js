@@ -1357,13 +1357,21 @@ $('ul.jui-tree__folder-group li a').click(function(){
   $(target).removeClass('js-hidden');
 });
 
-
 function upload( docName ) {
 
   if ( $( $('#uploads #' + docName + ' input')[0].files.length ) ) {
     for (i=0; i<$('#uploads #' + docName + ' input')[0].files.length; i++ ) {
 
-      $('#uploads #' + docName + ' ol').append( '<li class="file"><a href="#">' + $('#uploads #' + docName + ' input')[0].files[i].name +'</a> <a href="#" class="remove" onclick="$(this).parent().remove();return false;">Remove</a></li>' );
+      strUpload =  '<li class="file desc"><a href="#">' + $('#uploads #' + docName + ' input')[0].files[i].name +'</a><a href="#" class="remove" onclick="$(this).parent().remove();return false;">Remove</a>';
+
+      if ( docName == 'evidence' ) {
+        strUpload += '<p><label for="description' + i + '"">Short description (optional)</label></p><textarea id="description' + i + '"></textarea>';
+      }
+
+      strUpload += '</li>';
+  
+      $('#uploads #' + docName + ' ol').append( strUpload );
+
     }
 
     $( $('#uploads #' + docName + ' input')[0] ).val(null);
