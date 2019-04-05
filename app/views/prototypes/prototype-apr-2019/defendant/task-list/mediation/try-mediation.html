@@ -29,9 +29,14 @@ Money Claims Prototype
         method="post"
         id="aspnetForm"
         autocomplete="off"
-        onsubmit="multiNavigation('radio-mediation-group', ['Yes', 'No'], ['statements-all', '../../task-list']);return false;">
+        onsubmit="multiNavigation('radio-mediation-group', ['Yes', 'No'], ['statements-all', '../../{% if data['source'] != 'order' %}task-list{% else %}../dashboard/order-response/mediation/confirmation-page{% endif %}']);return false;">
 
-        <input id="your-offer" name="offer" type="hidden">
+        <input id="your-offer" name="offer" type="hidden" />
+        {% if data['source'] == 'order' %}
+        <input name="mediation" value="rejected" type="hidden" />
+        {% else %}
+        <input type="hidden" name="mediation" value="complete" />
+        {% endif %}
 
         <div class="form-group">
           <fieldset>
@@ -56,7 +61,6 @@ Money Claims Prototype
 
 
           </fieldset>
-          <input type="hidden" name="mediation" value="complete">
 
 
           <div class="form-group">
