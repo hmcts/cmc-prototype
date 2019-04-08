@@ -73,8 +73,8 @@
                 <p>We've cancelled the claimant's request for a County Court Judgment (CCJ) against you.</p>
                 <p>You now need to respond before 4pm on <span class="dates3"></span> (33 days remaining).</p>
                 <p><a class="button" href="../defendant/task-list">Respond to the claim</a></p>
-
               </div>
+
 
               {% elseif data['defendant'] == 3 %}
               <h2 class="heading-medium">We'll contact you</h2>
@@ -97,6 +97,20 @@
               <p><a href="party-details/claimant">Contact Jan Clark</a> if you need their payment details.
                 Make sure you get receipts for any payments.</p>
               <option value="12" {% if data['defendant'] == 12 %}selected{% endif %}> </option>
+
+              {% elseif data['defendant'] == 3.21 %}
+              <!-- CCJ issued from digital service -->
+              <h2 class="heading-medium">You have been issued a CCJ</h2>
+              <p>A County Court Judgment (CCJ) of £1500 has been issued against you on 12 April 2019. <a href="#">View CCJ</a></p>
+              <p>This happened because you didn't respond to the claim sent to you on 14 March 2019. <a href="#">View claim</a></p>
+              <!-- <p>We've sent a paper copy of the judgment to you and to Jan Clark.</p>  -->
+              <p><a class="button" href="/prototypes/prototype-apr-2019/dashboard/application-and-judgements/set-aside-deafult-ccj/settle-out-of-court-before-one-month">Respond to CCJ</a></p>
+              <!-- <p>If you pay the debt within one month of the date of judgment, the CCJ is removed from the public register.
+                You can pay £15 to <a href="https://www.gov.uk/government/publications/form-n443-application-for-a-certificate-of-satisfaction-or-cancellation">apply for a certificate</a> that confirms this.</p>
+              <p><a href="party-details/claimant">Contact Jan Clark</a> if you need their payment details.
+                Make sure you get receipts for any payments.</p>  -->
+
+
 
 
               {% elseif data['defendant'] == 3.3 %}
@@ -3302,10 +3316,12 @@
     <option value="1" {% if data['defendant'] == 1 %}selected{% endif %}>1. Respond to claim</option>
     <option value="2" {% if data['defendant'] == 2 %}selected{% endif %}>2. More time requested</option>
     <option value="2.1" {% if data['defendant'] == 2.1 %}selected{% endif %}>More time requested - judgment cancelled</option>
+
     <option>------ CCJs -------</option>
     <option value="3" {% if data['defendant'] == 3 %}selected{% endif %}>3. Default CCJ requested </option>
     <option value="3.1" {% if data['defendant'] == 3.1 %}selected{% endif %}>Default CCJ requested (paper) </option>
     <option value="3.2" {% if data['defendant'] == 3.2 %}selected{% endif %}>Default CCJ issued (paper)</option>
+
     <option>------ Responses to claims -------</option>
     <option value="3.3" {% if data['defendant'] == 3.3 %}selected{% endif %}>Responded on paper</option>
     <option value="3.4" {% if data['defendant'] == 3.4 %}selected{% endif %}>Responded on paper - judgment cancelled</option>
@@ -3389,13 +3405,13 @@
     <option value="15" {% if data['defendant'] == 15 %}selected{% endif %}>11. Counter sign offer </option>
     <option value="16" {% if data['defendant'] == 16 %}selected{% endif %}>11. Agreement signed by both parties </option>
 
-
     <option>------ Settled -------</option>
     <option value="17.1" {% if data['defendant'] == 17.1 %}selected{% endif %}>17.1. No judgment - claimant says paid</option>
     <option value="17.2" {% if data['defendant'] == 17.2 %}selected{% endif %}>17.2. Judgment issued - claimant says paid within a month</option>
     <option value="17.3" {% if data['defendant'] == 17.3 %}selected{% endif %}>17.3. Judgment issued - claimant says paid after a month</option>
     <option value="17.4" {% if data['defendant'] == 17.4 %}selected{% endif %}>17.4. Certificate issued</option>
     <option value="18" {% if data['defendant'] == 18 %}selected{% endif %}>18. Discontinued</option>
+
   </select>
 </form>
 {% endblock %}

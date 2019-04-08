@@ -26,7 +26,7 @@ Money Claims Prototype
       <form
       name="aspnetForm"
       method="post"
-      onsubmit="multiNavigation('response-owe', ['owe-all', 'owe-some', 'owe-none' ], [ '../task-list', '../task-list', 'do-you-owe-money/defence-options' ]);return false;"
+      onsubmit="multiNavigation('response-owe', ['owe-all', 'owe-some', 'owe-none', 'owe-some-default-ccj', 'owe-none-default-ccj' ], [ '../task-list', '../task-list', 'do-you-owe-money/defence-options', '../../dashboard/applications-and-judgments/set-aside-deafult-ccj/part-defence-how-set-aside-works', '../../dashboard/applications-and-judgments/set-aside-deafult-ccj/full-defence-how-set-aside-works'  ]);return false;"
       id="aspnetForm"
       autocomplete="off">
 
@@ -41,7 +41,12 @@ Money Claims Prototype
                 {% endif %}</label>
             </div>
             <div class="multiple-choice" data-target="set-date">
-              <input id="radio-owe-some" type="radio" name="response-owe" value="owe-some" onclick="$('#amount-owed').val( $('owe-amount').val() | 500 )" >
+              {% if data['defaultccj']=="true" %}
+                  <input id="radio-owe-some" type="radio" name="response-owe" value="owe-some-default-ccj" onclick="$('#amount-owed').val( $('owe-amount').val() | 500 )" >
+              {% else %}
+                  <input id="radio-owe-some" type="radio" name="response-owe" value="owe-some" onclick="$('#amount-owed').val( $('owe-amount').val() | 500 )" >
+              {% endif %}
+
               <label for="radio-owe-some">Yes, a lower amount</label>
             </div>
             <div class="panel panel-border-narrow js-hidden" id="set-date">
@@ -49,7 +54,11 @@ Money Claims Prototype
               <input class="form-control timeline-column-4 fee pound" type="text" id="owe-amount" name="owe-amount" value="{{ data['owe-amount'] }}" onkeyup="$('#amount-owed').val(this.value)" >
             </div>
             <div class="multiple-choice">
-              <input id="radio-owe-none" type="radio" name="response-owe" value="owe-none" onclick="$('#amount-owed').val(0)" >
+              {% if data['defaultccj']=="true" %}
+                  <input id="radio-owe-none" type="radio" name="response-owe" value="owe-none-default-ccj" onclick="$('#amount-owed').val(0)" >
+              {% else %}
+                  <input id="radio-owe-none" type="radio" name="response-owe" value="owe-none" onclick="$('#amount-owed').val(0)" >
+              {% endif %}
               <label for="radio-owe-none">No, I owe them nothing</label>
             </div>
           </fieldset>

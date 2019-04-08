@@ -78,36 +78,39 @@ Money Claims Prototype
                                     {% elseif data['control-box'] == 15 %}
                                     <!--    Dispute the claim plus offer  -->
                                     <form action="../../dashboard/home?dashboard=2.17" method="post">
-                                      {% else %}
-                                      <form action="../../dashboard/new-claim/eligibility/registration" method="get">
-                                        {% endif %}
+                                      {% elseif  data['defaultccj'] == "true" %}
+                                        <!--    Dispute the claim plus offer  -->
+                                        <form action="../../dashboard/applications-and-judgments/set-aside-deafult-ccj/settle-out-of-court" method="post">
+                                          {% else %}
+                                            <form action="../../dashboard/new-claim/eligibility/registration" method="get">
+                                          {% endif %}
 
-                                        <input type="hidden" name="control-box" value="{{ data['control-box'] }}"/>
+                                            <input type="hidden" name="control-box" value="{{ data['control-box'] }}"/>
 
-                                        <form action="exit-page" method="post">
-                                          <p></p>
-                                          <h1 class="heading-medium">
-                                            Sign in to civil and family court services
-                                          </h1>
-                                          <div class='form-group'>
-                                            <label class=" form-label" for="user_email">Email address</label>
-                                            <input class="optional form-control form-control-3-4" name="emailaddy"
-                                                   type="email"/>
-                                          </div>
-                                          <div class='form-group'>
-                                            <label class="password optional form-label"
-                                                   for="user_password">Password</label>
-                                            <input autocomplete="off"
-                                                   class="password optional form-control form-control-3-4"
-                                                   name="pword" type="password"/>
-                                          </div>
-                                          <p>
-                                            <a href="forgotten-password-enter-email">Forgotten password?</a>
-                                          </p>
-                                          <div class='form-group'>
-                                            <input type="submit" name="commit" value="Sign in" class="btn button"/>
-                                          </div>
-                                        </form>
+                                            <form action="exit-page" method="post">
+                                              <p></p>
+                                              <h1 class="heading-medium">
+                                                Sign in to civil and family court services
+                                              </h1>
+                                              <div class='form-group'>
+                                                <label class=" form-label" for="user_email">Email address</label>
+                                                <input class="optional form-control form-control-3-4" name="emailaddy"
+                                                       type="email"/>
+                                              </div>
+                                              <div class='form-group'>
+                                                <label class="password optional form-label"
+                                                       for="user_password">Password</label>
+                                                <input autocomplete="off"
+                                                       class="password optional form-control form-control-1-4"
+                                                       name="pword" type="password"/>
+                                              </div>
+                                              <p>
+                                                <a href="forgotten-password-enter-email">Forgotten password?</a>
+                                              </p>
+                                              <div class='form-group'>
+                                                <input type="submit" name="commit" value="Sign in" class="btn button"/>
+                                              </div>
+                                            </form>
     </div><!-- class="column-two-thirds col1" -->
 
 
@@ -155,6 +158,7 @@ Money Claims Prototype
     'control-box'] == 14 %}selected{% endif %}>9 - Counterclaim made by defendant</option>
   </select>
 </form>
+
 <form method="post" action="#" class="form" style="float: left;">
   <select id="control-box2" name="control-box2" onchange="window.location.href='sign-in?control-box='+this.value">
     <option value="0" {% if data[
@@ -173,6 +177,9 @@ Money Claims Prototype
     <option>------- counter claim -------</option>
     <option value="15" {% if data[
     'control-box'] == 15 %}selected{% endif %}>5 - Counterclaim made by defendant</option>
+    <option>------- Default CCJ -------</option>
+    <option value="16" {% if data[
+    'control-box'] == 16 %}selected{% endif %}>6 - Default CCJ - First response</option>
   </select>
 </form>
 

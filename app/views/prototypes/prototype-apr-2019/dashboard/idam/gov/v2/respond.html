@@ -42,29 +42,28 @@ Money Claims Prototype
   </ul>
   </p>
       <div class="clearfix">
-{% if data['mcol2'] == 1 %}
-       <form method="get" name="registration" action="enter-claim-number?mcol=1" id="registration">
-        <input type="hidden" name="control-box" value="4">
-        <input type="hidden" name="mcol" value="3">
-        <input type="hidden" name="respond" value="true">
-        <input type="hidden" name="make_claim" value="false">
-        {% elseif data['mcol2'] == 2%}
-        <form method="get" name="registration" action="enter-claim-number?mcol=2" id="registration">
-          <input type="hidden" name="mcol" value="2">
-          {% else %}
+        {% if data['mcol2'] == 1 %}
           <form method="get" name="registration" action="enter-claim-number?mcol=1" id="registration">
-        <input type="hidden" name="mcol" value="3">
+            <input type="hidden" name="control-box" value="4">
+            <input type="hidden" name="mcol" value="3">
             <input type="hidden" name="respond" value="true">
             <input type="hidden" name="make_claim" value="false">
-            {% endif %}
-                <input type="submit" class="button button-start" value="Respond to a money claim"/>
+        {% elseif data['mcol2'] == 2%}
+          <form method="get" name="registration" action="enter-claim-number?mcol=2" id="registration">
+            <input type="hidden" name="mcol" value="2">
+        {% else %}
+          <form method="get" name="registration" action="enter-claim-number?mcol=1" id="registration">
+            <input type="hidden" name="mcol" value="3">
+            <input type="hidden" name="respond" value="true">
+            <input type="hidden" name="make_claim" value="false">
+        {% endif %}
+
+            <input type="submit" class="button button-start" value="Respond to a money claim"/>
+          </form>
+      </div>
 
 
-
-              </form>
-        </div>
-
-        <h2 class="heading-medium">Return to an existing claim</h2>
+    <h2 class="heading-medium">Return to an existing claim</h2>
     <p><a href="enter-claim-number?control-box=5&mcol=4">Sign in to your account</a> to check updates and manage your response.</p>
           {% if data['mcol2'] == 1 %}
           <!--beta-->
@@ -93,8 +92,13 @@ Money Claims Prototype
     </div>
   </div>
 
+
+
+
+
+  <!--  Right side stuff -->
         <div class="column-third">
-<aside class="govuk-related-items" data-module="track-click" role="complementary">
+    <aside class="govuk-related-items" data-module="track-click" role="complementary">
           <h2 data-track-count="sidebarRelatedItemSection">
             Business debt and bankruptcy
           </h2>

@@ -11,10 +11,21 @@ Money Claims Prototype
       <h1 class="heading-large">
         Claim details
       </h1>
+
+
+
+      {% if data['defaultccj'] == "true" %}
+        <div class="panel panel-border-narrow">
+          <p>You have been given a County Court Judgment (CCJ) because you did not respond to this claim.</p>
+          <p>You can request the CCJ to be removed as part of your response.</p>
+        </div>
+      {% endif %}
+
       <p class=""><span class="bold">Claim number:</span> 352MC733</p>
       <p class=""><span class="bold">Claim amount:</span> £1,500</p>
+
       <details>
-        <summary><span class="">View amount breakdown</summary>
+        <summary><span class="summary">View amount breakdown</summary>
           <div class="panel panel-border-narrow">
             <table class="table-form">
               <caption class="visuallyhidden">Amount payable by defendant</caption>
@@ -83,13 +94,19 @@ Money Claims Prototype
           </table>
         </div>
       </details>
-      <h2 class="heading-small">Reason for claim:</h2>
+
+
+
+
+      <h2 class="heading-small"  style="margin-top:40px;">Reason for claim:</h2>
       <p>This claim is about building works.</p>
       <p>Mary Richards and I signed a contract for building works on my roof. The work on the roof was completed but
         there was a problem with one section. I asked Mary Richards to get the problem fixed, but didn't get a
       reply.</p> <p>I'll have to get another builder to rectify the problem which will cost me £1,430.</P> <p>Therefore, I'm making a money
       claim for £1,500 to compensate for the money I'm going to need to spend on the roof and also the claim fee.</p>
-      <p class="bold">Timeline</p>
+
+
+      <h3 class="heading-small" style="margin-top:50px;">Timeline</h3>
       <div class="form-fields">
         <table>
           <thead>
@@ -128,7 +145,9 @@ Money Claims Prototype
           </tbody>
         </table>
       </div>
-      <p class="bold">Evidence</p>
+
+
+      <h3 class="heading-small" style="margin-top:50px;">Evidence</h3>
       <div class="form-fields">
         <table>
           <thead>
@@ -150,23 +169,43 @@ Money Claims Prototype
         </table>
       </div>
 
+
       <div class="clearfix">
-        <a class="button" href="sign-in?control-box=4" role="button">Respond to claim</a>
-       </div>
+        {% if data['defaultccj'] == "true" %}
+          <a class="button" href="sign-in" role="button">Respond to CCJ</a>
+        {% else %}
+          <a class="button" href="sign-in?control-box=4" role="button">Respond to claim</a>
+        {% endif %}
+      </div>
+
+
+
       <br>
+      <br>
+
       <details>
-        <summary>How we use and store your personal information</summary>
+        <summary><span class="summary">How we use and store your personal information</span></summary>
         <div class="panel panel-border-narrow">
           <p>This claim contains personal information about you that Jan Clark has provided, for example your name and address.</p>
           <p>Find out about how we use and store your <a href="/dashboard/v4/idam/privacy"  data-sso="false" data-journey-click="footer:Click:Privacy policy">personal information.</a></p>
         </div>
       </details>
 
-            <h3 class="heading-small">Download the claim</h3>
-      <ul class="list">
-              <li> <a target="_blank"   href='../../claimant/correspondence/claim-form-claimant?check=2'>Download claim</a> (PDF, 102 KB).</li>
 
+      <h3 class="heading-small">Download the claim</h3>
+      <ul class="list">
+        <li> <a target="_blank"   href='../../claimant/correspondence/claim-form-claimant?check=2'>Download claim</a> (PDF, 102 KB).</li>
       </ul>
+
+
+      {% if data['defaultccj'] == "true" %}
+        <h3 class="heading-small">Download the CCJ</h3>
+        <ul class="list">
+          <li> <a target="_blank"   href='#'>Download CCJ</a> (PDF, 48 KB).</li>
+        </ul>
+      {% endif %}
+
+
     {% include 'prototypes/prototype-apr-2019/includes/contact.html' %}
 </main>
 {% endblock %}
