@@ -1035,133 +1035,7 @@ li:before {
   {% if data['check'] == '1' or data['check'] == 1.1  or data['check'] == '2' or data['check'] == '3' or data['check'] == '4' or data['check'] == 5 or data['check']== 8 or data['check']== 9 or data['check'] == '5'  or data['check'] == '6' or data['check'] == 7 or data['check'] == 8.1  %}
 
 
-{% if data['check'] == 1 or data['check'] == 1.1 or data['check'] == 5 or data['check'] == 6 or data['check'] == 7 or data['check'] == '8' or data['check'] == 8.1 or data['check'] == '9' %}
-    <table>
-      <thead>
-        <tr>
-          <th colspan="2">
-            <h2 class="heading-medium">
-              {% set inc = inc+1 %}{{ inc }}. Tell us more about the claim
-            </h2>
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-
-
-              <tr>
-                <td>
-                  Preferred hearing centre
-                </td>
-                <td>
-                  Guildford County Court
-                </td>
-              </tr>
-
-              <tr>
-                <td class="no-border">
-                  Have you already got a report written by an expert?
-                </td>
-                <td class="no-border">
-                  Yes
-                </td>
-              </tr>
-              <tr>
-                <td class="no-border">
-                  Report 1
-                </td>
-                <td class="no-border">
-                  Expert's name: Dave Williams<br />
-                  Date of report: {{ date | date('subtract', 1, 'week') | date }}
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  Report 2
-                </td>
-                <td>
-                  Expert's name: Steve Wilson<br />
-                  Date of report: {{ date | date('subtract', 2, 'week') | date }}
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  Do you want the court's permission to hire an expert?
-                </td>
-                <td>
-                  Yes
-                </td>
-              </tr>
-              <tr>
-                <td class="no-border">
-                  Does the claim involve something an expert can still examine?
-                </td>
-                <td class="no-border">
-                  Yes
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  What is there to examine?
-                </td>
-                <td>
-                  The damage to the roof can still be seen.
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  List the parts of the claim which need specialist knowledge to be resolved
-                </td>
-                <td>
-                  I would like an expert to examine the roof and confirm that the work was not up to a reasonable standard.
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  Do you want to give evidence as a witness?
-                </td>
-                <td>
-                  {{ data['self']|capitalize or 'Yes' }}
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  Other witnesses
-                </td>
-                <td>
-                  {{ data['other-witnesses'] or 2}}
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  Dates unavailable
-                </td>
-                <td>
-                  {{ date | date('add', 1, 'week') | date('dddd D MMMM YYYY') }}<br />
-                  {{ date | date('add', 12, 'days') | date('dddd D MMMM YYYY') }}<br />
-                  {{ date | date('add', 25, 'days') | date('dddd D MMMM YYYY') }}<br />
-                  {{ date | date('add', 35, 'days') | date('dddd D MMMM YYYY') }}<br />
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  Support required for a hearing
-                </td>
-                <td>
-                  Welsh interpreter<br />
-                  Disabled access
-                </td>
-              </tr>
-      </tbody>
-    </table>
-     {% endif %}
-
-
-    {% if data['check'] == '2' or data['check'] == '3' or data['check'] == '4' or data['check'] == 7 %}
     <table style="padding-bottom:900px">
-    {% else %}
-    <table >
-    {% endif %}
       <thead>
         <tr>
           <th colspan="2">
@@ -1254,6 +1128,64 @@ li:before {
 
 
   </main>
+
+
+
+
+{% if data['check'] == 1 or data['check'] == 1.1 or data['check'] == 5 or data['check'] == 6 or data['check'] == 7 or data['check'] == '8' or data['check'] == 8.1 or data['check'] == '9' %}
+
+
+<main id="content"  role="main">
+  <header>
+
+      <table class="crestLogo">
+        <tbody>
+          <tr>
+            <td></td>
+            <td rowspan="2" class="claim-details">
+              <h1>Defendant's hearing requirements</h1>
+
+              <p>In the County Court Business Centre Online Civil Money Claims</p>
+
+              <p><strong>Claim number:</strong> 000LR095<br>
+              <strong>Issued on:</strong> {{ now | date('subtract', 5, 'days' ) | date }}<br>
+              <strong>Response received on:</strong> {{ now | date }} at 3:25PM</p></td>
+            </tr>
+          </tbody>
+    </table>
+
+
+  </header> 
+
+  {% set party = 'defendant' %}
+  {% include 'prototypes/prototype-apr-2019/includes/dq-form.html' %}
+
+  <table class="footer">
+    <tbody>
+      <tr>
+        <tr>
+          <td>
+            OCON180
+          </td>
+          <td>
+            For further details of the courts www.gov.uk/find-court-tribunal
+          </td>
+          <td >
+            &copy; Crown copyright Page 1 of 1
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+
+  </main>
+
+{% endif %}
+
+
+
+
+
   <form method="post"  action="#" class="form" style="position: absolute;">
     <select id="check2" name="check2" onchange="window.location.href='?check='+this.value">
       <option  value="0" >Choose</option>
