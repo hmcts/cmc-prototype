@@ -29,50 +29,52 @@ Money Claims Prototype
         onsubmit="conditionalNavigation('court-search', 'postcode', 'court', 'expert-required');return false;"
         id="aspnetForm"
         autocomplete="off">
-
         {% endif %}
 
-          {% if data['scenario'] == 1 or data['scenario'] == 2 or data['scenario'] == 5 or data['court-search'] == 'postcode' or data['reject-court'] == 'yes' or data['scenario'] == 6 or data['scenario'] == 7 or data['scenario'] == 8 %}
+
+        {% if data['scenario'] == 1 or data['scenario'] == 2 or data['scenario'] == 5 or data['court-search'] == 'postcode' or data['reject-court'] == 'yes' or data['scenario'] == 6 or data['scenario'] == 7 or data['scenario'] == 8 or data['scenario'] == "ccjsetaside" %}
 
           {% if data['reject-court'] != 'yes' and data['scenario'] != 6 and data['scenario'] != 7 %}
-          <h1 class="heading-large">Choose a hearing location</h1>
+            <h1 class="heading-large">Choose a hearing location</h1>
           {% else %}
-          <h1 class="heading-large">Request a hearing location</h1>
+            <h1 class="heading-large">Request a hearing location</h1>
           {% endif %}
 
           {% if data['scenario'] == 5 or data['court-search'] == 'postcode' %}
-          <p>The nearest court to N18 2TN is Edmonton County Court.</p>
+            <p>The nearest court to N18 2TN is Edmonton County Court.</p>
           {% endif %}
 
           {% if ( data['scenario'] != 5 and data['court-search'] != 'postcode' ) or data['reject-court'] == 'no' or data['scenario'] == 6 or data['scenario'] == 8 %}
-          {% if ( ( data['reject-court'] != 'yes' and data['scenario'] != 6 ) or data['scenario'] == 8 ) and data['scenario'] != 7  %}
-          <p>Tell us your preferred location for a hearing, in case the claim goes to one.</p>
+            {% if ( ( data['reject-court'] != 'yes' and data['scenario'] != 6 ) or data['scenario'] == 8 ) and data['scenario'] != 7  %}
+              {% if data['scenario'] == "ccjsetaside" %}
+                  <p>Tell us your preferred location for a hearing, in case your request to remove your CCJ requires one.</p>
+              {% else %}
+                  <p>Tell us your preferred location for a hearing, in case the claim goes to one.</p>
+              {% endif %}
+              <p>We'll use the location you choose unless the {% if data['scenario'] == 2 %}defendant{% else %}claimant{% endif %} has an exceptional reason to object, for example accessibility needs.</p>
+            {% endif %}
 
-          <p>We'll use the location you choose unless the {% if data['scenario'] == 2 %}defendant{% else %}claimant{% endif %} has an exceptional reason to object, for example accessibility needs.</p>
-          {% endif %}
-
-          {% if data['scenario'] != 5 and data['court-search'] != 'postcode' and data['scenario'] != 8 and data['scenario'] != 7  %}
-          <p>You can {% if data['reject-court'] != 'yes' and data['scenario'] != 6 %}choose{% else %}request{% endif %} any location - Guildford County Court is nearest to the home address you gave us.</p>
-
-          {% endif %}
+            {% if data['scenario'] != 5 and data['court-search'] != 'postcode' and data['scenario'] != 8 and data['scenario'] != 7  %}
+              <p>You can {% if data['reject-court'] != 'yes' and data['scenario'] != 6 %}choose{% else %}request{% endif %} any location - Guildford County Court is nearest to the home address you gave us.</p>
+            {% endif %}
           {% endif %}
 
           {% if data['scenario'] != 8 and data['scenario'] != 7 %}
-          <details role="group">
-            <summary role="button" aria-controls="details-content-0" aria-expanded="false">View accessibility facilities available at this court</summary>
-            <div class="panel" id="details-content-0" aria-hidden="true">
-              <h2 class="heading-small">Loop hearing</h2>
-              <p>Loop hearing facilities are available at the ground floor counter.</p>
+            <details role="group">
+              <summary role="button" aria-controls="details-content-0" aria-expanded="false"><span class="summary">View accessibility facilities available at this court</span></summary>
+              <div class="panel" id="details-content-0" aria-hidden="true">
+                <h2 class="heading-small">Loop hearing</h2>
+                <p>Loop hearing facilities are available at the ground floor counter.</p>
 
-              <h2 class="heading-small">Disabled access</h2>
-              <p>Disabled toilet facilities. Parking can be arranged by contacting the court in advance.</p>
+                <h2 class="heading-small">Disabled access</h2>
+                <p>Disabled toilet facilities. Parking can be arranged by contacting the court in advance.</p>
 
-              <h2 class="heading-small">Assistance dogs</h2>
-              <p>Guide dogs are welcome at this court.</p>
-            </div>
-          </details>
+                <h2 class="heading-small">Assistance dogs</h2>
+                <p>Guide dogs are welcome at this court.</p>
+              </div>
+            </details>
           {% endif %}
-   
+
 
           {% if data['scenario'] != 8 and data['scenario'] != 7 %}
           <h1 class="heading-medium">Do you want to {% if data['reject-court'] != 'yes' and data['scenario'] != 6 %}choose{% else %}request{% endif %} {% if data['scenario'] == 5 or data['court-search'] == 'postcode' %}Edmonton County Court{% else %}Guildford County Court{% endif %}?</h1>
@@ -133,7 +135,7 @@ Money Claims Prototype
         <p>The defendant chose this location.</p>
 
         <details role="group">
-          <summary role="button" aria-controls="details-content-0" aria-expanded="false">View accessibility facilities available at this court</summary>
+          <summary role="button" aria-controls="details-content-0" aria-expanded="false"><span class="summary">View accessibility facilities available at this court</span></summary>
           <div class="panel" id="details-content-0" aria-hidden="true">
             <h2 class="heading-small">Loop hearing</h2>
             <p>Loop hearing facilities are available at the ground floor counter.</p>
@@ -145,7 +147,7 @@ Money Claims Prototype
             <p>Guide dogs are welcome at this court.</p>
           </div>
         </details>
- 
+
         <h3 class="heading-medium">Do you have any accessibility needs which are not met at this court?</h3>
 
         {% else %}
@@ -175,9 +177,17 @@ Money Claims Prototype
 
           {% endif %}
 
-          <div class="form-group">
-            <input type="submit" class="button" value="Save and continue">
-          </div>
+
+          {% if data['scenario'] == "ccjsetaside" %}
+            <div class="form-group">
+              <p><a class="button" href="/prototypes/prototype-apr-2019/defendant/task-list/hearing/dates">Continue</a></p>
+            </div>
+          {% else %}
+            <div class="form-group">
+              <input type="submit" class="button" value="Save and continue">
+            </div>
+          {% endif%}
+
       </form>
 
     </div>
@@ -196,6 +206,8 @@ Money Claims Prototype
     <option value="4" {% if data['scenario'] == 4 %}selected{% endif %}>Defendant = Individual, User = Claimant</option>
     <option value="6" {% if data['scenario'] == 6 or data['reject-court'] == 'no' %}selected{% endif %}>Request other</option>
     <option value="7" {% if data['scenario'] == 7 or data['reject-court'] == 'no' %}selected{% endif %}>Request other - fallback</option>
+    <option value=""> -- CCJ set aside --</option>
+    <option value="ccjsetaside" {% if data['scenario'] == "ccjsetaside"%}selected{% endif %}>CCj setaside</option>
   </select>
 </form>
 
