@@ -80,58 +80,33 @@ Money Claims Prototype
       {% endif %}
       <hr />
 
-<!--
 
-      {% if data['party'] != 'defendant' %}
-      <h2 class="heading-small">Propose 3 experts</h2>
+      <h2 class="heading-small">Reconsider mediation</h2>
+      {% if data['mediation'] == 'complete' %}
+      <p>You’ve agreed to try mediation.</p>
+      <p>We'll ask {% if data['party'] == "defendant" %}Jan Clark{% else %}Mary Richards{% endif %} if they'll try mediation.</p>
+      <p>If they agree, we'll contact you with details of your appointment. If not, you might have to go to a hearing.</p>
+      <p><a href="mediation/how-mediation-works?post-response=yes">Find out how free mediation works</a>.  </p>
 
-      {% if data['experts'] == 'complete' %}
-      <p>You proposed the following three experts on {{ now | date }}:</p>
+      {% elseif data['mediation'] == 'rejected' %}
+      <p>You said you don't want to try mediation.</p>
+      <p>If you change your mind, you have until {{ now | date('add', 8, 'days') | date }} to let us know.</p>
+      <p><a href="mediation/how-mediation-works?post-response=yes">Find out how free mediation works</a>.  </p>
 
-      <ul>
-        <li>John Austin - £450</li>
-        <li>Ronald Davidson - £500</li>
-        <li>Julie Tuffnel - £700</li>
-      </ul>
-
-      {% else %}
-      <p>Due by {{ now | date('add', 14, 'days') | date }}</p>
-      <p>The court has approved your request to hire an expert. You must propose 3 independent experts for the {% if data['party'] == 'defendant' %}claimant{% else %}defendant{% endif %} to choose from.</p>
       <div class="form-group">
-        <a href="order-response/experts" class="secondary-button">Propose experts</a>
+        <a href="../defendant/task-list/mediation/try-mediation?source=order" class="secondary-button">Tell us if you want free mediation</a>
       </div>
-      {% endif %}
-
 
       {% else %}
-
-      <h2 class="heading-small">Choose an expert</h2>
-
-      {% if data['experts'] == 'complete' %}
-      <p>You selected John Austin on {{ now | date }}.</p>
-
-      {% else %}
-      <p>Due by {{ now | date('add', 3, 'days') | date }}</p>
-      <p>The claimant has made a shortlist of 3 independant experts, you must pick one to appoint and supply the questions you wish to ask them.</p>
-      <div class="form-group">
-        <a href="order-response/choose-expert" class="secondary-button">Select an expert</a>
-      </div>
-      {% endif %}
-
-      {% endif %}
-      <hr />
-
--->
-
-      <h2 class="heading-small">Consider mediation</h2>
       <p>The court has reviewed your case and believes it could be resolved by free mediation.</p>
-       <p><a href="mediation/how-mediation-works?post-response=yes">Find out how free mediation works</a>.  </p>
 
-      <p>To confirm you want a free telephone mediation session, contact the Small Claims Mediation service by {{ now | date('add', 7, 'days') | date }} - you can either:</p>
-      <ul class="list list-bullet">
-  <li>call 01604 795511</li>
-  <li>email <a href="">scmreferrals@hmcts.gsi.gov.uk</a><br>(include the claim number and your telephone number)</li>
-  </ul>
+      <p><a href="mediation/how-mediation-works?post-response=yes">Find out how free mediation works</a>.  </p>
+
+      <div class="form-group">
+        <a href="../defendant/task-list/mediation/try-mediation?source=order" class="secondary-button">Tell us if you want free mediation</a>
+      </div>
+
+      {% endif %}
 
       <hr />
 
@@ -151,12 +126,11 @@ Money Claims Prototype
 <form method="post" action="#" class="form" style="position: absolute;">
   <select onchange="window.location.href='?'+this.value">
     <option>-------- Status --------</option>
-    <option value="evidence=&witness=&experts=">Nothing uploaded</option>
-    <option value="evidence=complete&witness=&experts=">Evidence uploaded</option>
-    <option value="evidence=&witness=complete&experts=">Witness statements uploaded</option>
-    <option value="evidence=&witness=&experts=complete">Experts proposed</option>
-    <option value="evidence=complete&witness=complete&experts=complete">Upload expert's report</option>
-    <option value="evidence=complete&witness=complete&experts=complete&expert-report=complete">Expert's report uploaded</option>
+    <option value="evidence=&witness=&mediation=">Nothing uploaded</option>
+    <option value="evidence=complete&witness=&mediation=">Evidence uploaded</option>
+    <option value="evidence=&witness=complete&mediation=">Witness statements uploaded</option>
+    <option value="evidence=&witness=&mediation=complete">Mediation accepted</option>
+    <option value="evidence=&witness=&mediation=rejected">Mediation rejected</option>
   </select>
 </form>
 {% endblock %}
