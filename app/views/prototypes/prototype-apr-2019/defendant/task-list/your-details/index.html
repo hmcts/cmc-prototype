@@ -111,29 +111,40 @@ Money Claims Prototype
                 </div>
 
 
-                {% if data['phoneNumber'] == 'provided' %}
-                <h2 class="heading-medium">Your phone number</h2>
-                <p>We might need to speak to you about this claim. We'll only call on weekdays between 9am and 5pm.</p>
 
-                <fieldset>
-                  <legend class="visuallyhidden">Phone</legend>
 
-                  <div class="form-group">
-                    <input class="form-control form-control" id="defendant-phone" name="defendant-phone" type="text" value="07682 621225">
-                  </div>
-                </fieldset>
+                {% if data['phoneNumber'] == 'provided' or data['defaultccj'] == 'true' %}
+                  <h2 class="heading-medium">Your phone number</h2>
+                  <p>We might need to speak to you about this claim. We'll only call on weekdays between 9am and 5pm.</p>
+
+                  <fieldset>
+                    <legend class="visuallyhidden">Phone</legend>
+
+                    <div class="form-group">
+                      <input class="form-control form-control" id="defendant-phone" name="defendant-phone" type="text" value="07682 621225">
+                    </div>
+                  </fieldset>
                 {% endif %}
 
-                {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('task-list')%}
-                <div class="form-group">
-                  <input type="submit" class="button" value="Save changes"/>
-                </div>
-                <a href="{{ data.return_page if data.return_page | length > 0 else '../task-list' }}">Cancel</a>
+
+
+                {% if data['defaultccj'] == 'true' %}
+                    <p><a class="button" href="/prototypes/prototype-apr-2019/dashboard/applications-and-judgments/set-aside-deafult-ccj/was-letter-received">Save and continue</a></p>
                 {% else %}
-                <div class="form-group">
-                  <input type="submit" class="button" value="Save and continue"/>
-                </div>
+                    {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('task-list')%}
+                        <div class="form-group">
+                          <input type="submit" class="button" value="Save changes"/>
+                        </div>
+                        <a href="{{ data.return_page if data.return_page | length > 0 else '../task-list' }}">Cancel</a>
+                        {% else %}
+                        <div class="form-group">
+                          <input type="submit" class="button" value="Save and continue"/>
+                        </div>
+                    {% endif %}
                 {% endif %}
+
+
+
               </div>
             </form>
           </div>
@@ -149,6 +160,7 @@ Money Claims Prototype
     <option value="addressType=diff" {% if data['addressType'] == 'diff' %}selected{% endif %}>Different correspondence address</option>
     <option value="phoneNumber=provided" {% if data['phoneNumber'] == 'provided' %}selected{% endif %}>Phone number provided</option>
     <option value="phoneNumber=none" {% if data['phoneNumber'] == 'none' %}selected{% endif %}>Phone number not provided</option>
+    <option value="defaultccj=true" {% if data['defaultccj'] == 'true' %}selected{% endif %}>Default CCJ - Set aside</option>
   </select>
 </form>
 

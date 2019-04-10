@@ -13,6 +13,7 @@ Check your answers
   <h1 class="heading-large">
     Check your evidence uploads
   </h1>
+
   <table class="check-your-answers uploads">
     <thead>
       <tr>
@@ -25,6 +26,7 @@ Check your answers
         </th>
       </tr>
     </thead>
+
     <tbody>
       <tr>
         <td>
@@ -38,7 +40,7 @@ Check your answers
           <a href="upload">Change</a>
         </td>
       </tr>
-    <tbody>
+
       <tr>
         <td>
           File 2
@@ -49,6 +51,7 @@ Check your answers
         </td>
         <td class="change-answer no-border"></td>
       </tr>
+
       <tr>
         <td>
           File 3
@@ -58,6 +61,7 @@ Check your answers
         </td>
         <td class="change-answer no-border"></td>
       </tr>
+
       <tr>
         <td>
           File 4
@@ -68,17 +72,27 @@ Check your answers
         </td>
         <td class="change-answer"></td>
       </tr>
-  </tbody>
-</table>
 
-<br />
+    </tbody>
+  </table>
 
-<p>Make sure you've uploaded the right documents - you can't remove a document after you've uploaded it.</p>
-  
-<form method="get" action="confirmation-page" class="form">
-  <div class="form-group">
-    <button id="submit" class="button" >Submit evidence</button>
-  </div>
-{% include 'prototypes/prototype-apr-2019/includes/contact.html' %}
+  <br/>
+
+  <p>Make sure you've uploaded the right documents - you can't remove a document after you've uploaded it.</p>
+
+  {% if data['defaultccj'] == 'true' %}
+      <p><a class="button" href="/prototypes/prototype-apr-2019/defendant/task-list/hearing/court?scenario=ccjsetaside">Continue</a></p>
+  {% else %}
+      <form method="get" action="confirmation-page" class="form">
+        <div class="form-group">
+          <button id="submit" class="button" >Submit evidence</button>
+        </div>
+      </form>
+  {% endif %}
+
+
+
+  {% include 'prototypes/prototype-apr-2019/includes/contact.html' %}
+
 </main>
 {% endblock %}

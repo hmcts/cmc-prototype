@@ -11,8 +11,14 @@ Money Claims Prototype
 	<div class="grid-row">
 		<div class="column-two-thirds">
 			<div class="govuk-box-highlight">
-				<h1 class="bold-large">You've submitted your response{% if data['confirmation'] == 9 or data['counter'] == 'SET-OFF-COUNTER' or data['counter'] == 'FULL-COUNTER' %} and counterclaim{% endif %}</h1>
-				<br>
+
+        {% if data['defaultccj'] == 'true' %}
+          <h1 class="bold-large">You've submitted your CCJ removal request</h1>
+        {% else %}
+          <h1 class="bold-large">You've submitted your response{% if data['confirmation'] == 9 or data['counter'] == 'SET-OFF-COUNTER' or data['counter'] == 'FULL-COUNTER' %} and counterclaim{% endif %}</h1>
+        {% endif %}
+
+        <br>
 				<p class="">
 					Claim reference: <br><strong class="bold-large">352MC733</strong>
 				</p>
@@ -33,6 +39,18 @@ Money Claims Prototype
 				Download your response{% if data['radio_select_group2'] == "defend_now" or data['confirmation']== 12 %} and hearing requirements<br />{% endif %}{% if data['confirmation'] == 9 or data['counter'] == 'SET-OFF-COUNTER' or data['counter'] == 'FULL-COUNTER' %} and counterclaim{% endif %}</a> (PDF, 123KB)
 			</p>
 		</div>
+
+
+    <!--   CCJ SET ASIDE  -->
+    {% if data['defaultccj'] == 'true' %}
+      <h2 class="heading-medium">What happens next</h2>
+
+      <p>A judge will review your application and you will be assigned a hearing date.</p>
+
+      <p>We'll sent you an email when the hearing is confirmed.</p>
+
+      <p><a class="button" href='/prototypes/prototype-apr-2019/dashboard/home'>Go to your account</a></p>
+    {% endif %}
 
 
 		<!-- Admit all - pay Immediately -->
