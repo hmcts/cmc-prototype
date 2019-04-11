@@ -32,7 +32,7 @@ Money Claims Prototype
 
         {% endif %}
 
-          {% if data['scenario'] == 1 or data['scenario'] == 2 or data['scenario'] == 5 or data['court-search'] == 'postcode' or data['reject-court'] == 'yes' or data['scenario'] == 6 or data['scenario'] == 7 or data['scenario'] == 8 %}
+          {% if data['scenario'] == 1 or data['scenario'] == 2 or data['scenario'] == 5 or data['court-search'] == 'postcode' or data['reject-court'] == 'yes' or data['scenario'] == 6 or data['scenario'] == 7 or data['scenario'] == 8 or data['scenario'] == "ccjsetaside" %}
 
           {% if data['reject-court'] != 'yes' and data['scenario'] != 6 and data['scenario'] != 7 %}
           <h1 class="heading-large">Choose a hearing location</h1>
@@ -46,7 +46,13 @@ Money Claims Prototype
 
           {% if ( data['scenario'] != 5 and data['court-search'] != 'postcode' ) or data['reject-court'] == 'no' or data['scenario'] == 6 or data['scenario'] == 8 %}
           {% if ( ( data['reject-court'] != 'yes' and data['scenario'] != 6 ) or data['scenario'] == 8 ) and data['scenario'] != 7  %}
-          <p>Tell us your preferred location for a hearing, in case the claim goes to one.</p>
+
+            {% if data['scenario'] == "ccjsetaside" %}
+                <p>Tell us your preferred location for a hearing, in case your request to remove your CCJ requires one.</p>
+            {% else %}
+                <p>Tell us your preferred location for a hearing, in case the claim goes to one.</p>
+            {% endif %}
+
 
           <p>We'll use the location you choose unless the {% if data['scenario'] == 2 %}defendant{% else %}claimant{% endif %} has an exceptional reason to object, for example accessibility needs.</p>
           {% endif %}
@@ -174,13 +180,20 @@ Money Claims Prototype
               </div>
             </fieldset>
           </div>
-
           {% endif %}
 
+
+          {% if data['scenario'] == 'ccjsetaside' %}
+          <div class="form-group">
+            <p><a class="button" href="/prototypes/prototype-apr-2019/defendant/task-list/hearing/dates">Continue</a></p>
+          </div>
+          {% else %}
           <div class="form-group">
             <input type="submit" class="button" value="Save and continue">
           </div>
-      </form>
+          {% endif%}
+
+        </form>
 
     </div>
   {% include 'prototypes/prototype-apr-2019/includes/contact.html' %}
