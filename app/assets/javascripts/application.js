@@ -1365,13 +1365,13 @@ console.log(docName);
 
       strUpload =  '<li class="file desc"><a href="#">' + $('#uploads #' + docName + ' input')[0].files[i].name +'</a><a href="#" class="remove" onclick="$(this).parent().remove();return false;">Remove</a>';
       if ( docName == 'evidence' ) {
-        strUpload += '<p><label for="description' + i + '">Short description (optional)</label></p><textarea id="description' + i + '"></textarea>';
+        strUpload += '<p><label for="description' + i + '">Enter a short description (optional)</label></p><textarea id="description' + i + '"></textarea>';
       } else if ( docName == 'witness' ) {
-        strUpload += '<p style="margin-top:20px"><label for="name' + i + '">Name of witness</label><br /><input type="text" id="name' + i + '" class="form-control" /></p>';
+        strUpload += '<p style="margin-top:20px"><label for="name' + i + '">Enter the witness’s name</label><br /><input type="text" id="name' + i + '" class="form-control" /></p>';
       }
 
       strUpload += '</li>';
-  
+
       $('#uploads #' + docName + ' ol').append( strUpload );
 
     }
