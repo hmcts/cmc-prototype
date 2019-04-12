@@ -1098,7 +1098,16 @@
 
 
 
-              {% else %}
+              <!--   CCJ set aside requested -->
+              {% elseif data['defendant'] == 20 %}
+                <h2 class="heading-medium">You have requested to remove the CCJ</h2>
+                <p>You have to wait for the the court will review your request.</p>
+                <p>You may need to go to a hearing.</p>
+                <p>We'll send you a letter and email with the courts response.</p>
+                <p>Your CCJ will remain until your request is completed.</p>
+
+
+                {% else %}
               <h2 class="heading-medium">Your defence is being processed</h2>
               <p> We will email you to explain what to do next.</p>
               {% endif %}
@@ -3259,6 +3268,51 @@
                 {% endif %}
 
 
+                <!--  CCJ set aside requested by defendant  -->
+                {% if data['defendant'] == 20 %}
+                    <div class="hmcts-timeline__item">
+                      <div class="hmcts-timeline__header">
+                        <h2 class="hmcts-timeline__title">You requested to remove the CCJ</h2>
+                        <!--<p class="hmcts-timeline__by">by defendant</p>-->
+                      </div>
+                      <p class="hmcts-timeline__date">
+                        <time style="color: grey">{{ now | date( 'add', 15, 'days' ) | date }}</time>
+                      </p>
+                    </div>
+
+                    <div class="hmcts-timeline__item">
+                      <div class="hmcts-timeline__header">
+                        <h2 class="hmcts-timeline__title">Debt was paid in full</h2>
+                      </div>
+                      <p class="hmcts-timeline__date"  style="color: grey">
+                        24 April 2018
+                      </p>
+                    </div>
+
+                    <div class="hmcts-timeline__item">
+                      <div class="hmcts-timeline__header">
+                        <h2 class="hmcts-timeline__title">A default CCJ was issued to the defendant</h2>
+                      </div>
+                      <p><a target="_blank"   href="/prototypes/prototype-apr-2019/defendant/correspondence/forms/judgment-order?check=1">Download CCJ</a> (PDF, 48 KB)</p>
+                      <p class="hmcts-timeline__date"  style="color: grey; margin-top: -15px;">
+                        31 December 2018
+                      </p>
+                    </div>
+
+                    <div class="hmcts-timeline__item">
+                      <div class="hmcts-timeline__header">
+                        <h2 class="hmcts-timeline__title">You submitted your claim</h2>
+                        <!--<p class="hmcts-timeline__by">by claimant</p>-->
+                        <p><a href="../claimant/correspondence/claim-form-claimant?check=1">Download claim</a>
+                          (PDF, 123KB)</p>
+                      </div>
+                      <p class="hmcts-timeline__date"  style="color: grey; margin-top: -15px;">
+                        15 December 2018
+                      </p>
+                    </div>
+                {% endif %}
+
+
               </div>
 
 
@@ -3420,6 +3474,11 @@
     <option value="17.3" {% if data['defendant'] == 17.3 %}selected{% endif %}>17.3. Judgment issued - claimant says paid after a month</option>
     <option value="17.4" {% if data['defendant'] == 17.4 %}selected{% endif %}>17.4. Certificate issued</option>
     <option value="18" {% if data['defendant'] == 18 %}selected{% endif %}>18. Discontinued</option>
+
+
+    <option>------ CCJ set aside -------</option>
+    <option value="20" {% if data['defendant'] == 20 %}selected{% endif %}>CCJ set aside request submitted</option>
+
 
   </select>
 </form>

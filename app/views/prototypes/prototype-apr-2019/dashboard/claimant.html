@@ -36,7 +36,7 @@
             or data['claimant'] == 10.83 or data['claimant'] == 10.831 or data['claimant'] == 10.832 or data['claimant'] == 10.84 or data['claimant'] == 10.85 or data['claimant'] == 10.9
             or data['claimant'] == 10.91 or data['claimant'] == 11.1 or data['claimant'] == 11.11 or data['claimant'] == 11.2 or data['claimant'] == 11.21 or data['claimant'] == 11.3
             or data['claimant'] == 11.4 or data['claimant'] == 11.5 or data['claimant'] == 11.51 or data['claimant'] == 11.6 or data['claimant'] == 11.61 or data['claimant'] == 11.7
-            or data['claimant'] == 12 or data['claimant'] == 13.1 or data['claimant'] == 16 or data['claimant'] == 17 or data['claimant'] == 20 or data['claimant'] == 20.1 or data['claimant'] == 20.2 or data['claimant'] == 21%}
+            or data['claimant'] == 12 or data['claimant'] == 13.1 or data['claimant'] == 16 or data['claimant'] == 17 or data['claimant'] == 20 or data['claimant'] == 20.1 or data['claimant'] == 20.2 or data['claimant'] == 21 or data['claimant'] == 23 or data['claimant'] == 24 %}
             <li role="presentation"><a href="#next-steps" role="tab" tabindex="0" aria-controls="next-steps" aria-selected="true">Next steps</a></li>
             <li role="presentation"><a href="#history" role="tab" tabindex="-1" aria-controls="history">Claim history</a></li>
             {% endif %}
@@ -971,6 +971,28 @@
                    (opens in a new window)</span></p>
               </div>
 
+
+              {% elseif data['claimant'] == 23 %}
+                <div class="status-block single">
+                  <h2 class="heading-medium">Decide on attending a CCJ removal only hearing</h2>
+                  <p>Mary Richards has requested to remove the CCJ you issued.</p>
+                  <p>This hearing is not about the claim.  It is just about removing the CCJ. </p>
+
+                  <p><a class="button" href="">Decide on attending</a></p>
+                </div>
+
+              {% elseif data['claimant'] == 24 %}
+                <div class="status-block single">
+                  <h2 class="heading-medium">Decide on attending a CCJ removal only hearing</h2>
+                  <p>Mary Richards has requested to remove the CCJ you issued.</p>
+                  <p>This hearing is not about the claim.  It is just about removing the CCJ. </p>
+
+                  <p>Since you've already agreed the CCJ can be removed this CCJ removal request is unlikely to require a eharing.</p>
+
+                  <p><a class="button" href="">Decide on attending</a></p>
+                </div>
+
+
               {% endif %}
 
             </div>
@@ -1058,6 +1080,23 @@
 
 
           </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
         <div class="tabs-panel" id="history" role="tabpanel" aria-hidden="true">
@@ -2201,6 +2240,8 @@
               </div>
               {% endif %}
 
+
+
               {% if data['claimant'] == 12 %}
               <div class="hmcts-timeline__item">
                 <div class="hmcts-timeline__header">
@@ -2243,6 +2284,99 @@
                 </p>
               </div>
               {% endif %}
+
+
+
+
+
+              <!-- Claimant finds out defendant has request CCJ to be set aside/removed  -->
+              {% if data['claimant'] == 23 %}
+                  <div class="hmcts-timeline__item">
+                    <div class="hmcts-timeline__header">
+                      <h2 class="hmcts-timeline__title">The defendant has requested to remove the CCJ</h2>
+                      <!--<p class="hmcts-timeline__by">by defendant</p>-->
+                    </div>
+                    <p class="hmcts-timeline__date">
+                      <time style="color: grey">{{ now | date( 'add', 15, 'days' ) | date }}</time>
+                    </p>
+                  </div>
+                  <div class="hmcts-timeline__item">
+                    <div class="hmcts-timeline__header">
+                      <h2 class="hmcts-timeline__title">A default CCJ was issued to the defendant</h2>
+
+                    </div>
+                    <p class="hmcts-timeline__date"  style="color: grey">
+                      31 December 2018
+                    </p>
+                  </div>
+                  <div class="hmcts-timeline__item">
+                    <div class="hmcts-timeline__header">
+                      <h2 class="hmcts-timeline__title">You submitted your claim</h2>
+                      <!--<p class="hmcts-timeline__by">by claimant</p>-->
+                      <p><a href="../claimant/correspondence/claim-form-claimant?check=1">Download claim</a>
+                        (PDF, 123KB)</p>
+                    </div>
+                    <p class="hmcts-timeline__date"  style="color: grey; margin-top: -15px;">
+                      15 December 2018
+                    </p>
+                  </div>
+              {% endif %}
+
+
+              <!-- Claimant finds out defendant has request CCJ to be set aside/removed  -->
+              {% if data['claimant'] == 24 %}
+                  <div class="hmcts-timeline__item">
+                    <div class="hmcts-timeline__header">
+                      <h2 class="hmcts-timeline__title">The defendant has requested to remove the CCJ</h2>
+                      <!--<p class="hmcts-timeline__by">by defendant</p>-->
+                    </div>
+                    <p class="hmcts-timeline__date">
+                      <time style="color: grey">{{ now | date( 'add', 15, 'days' ) | date }}</time>
+                    </p>
+                  </div>
+
+                  <div class="hmcts-timeline__item">
+                    <div class="hmcts-timeline__header">
+                      <h2 class="hmcts-timeline__title">You said you were fine for CCJ to be removed</h2>
+                    </div>
+                    <p class="hmcts-timeline__date"  style="color: grey">
+                      24 April 2018
+                    </p>
+                  </div>
+
+                  <div class="hmcts-timeline__item">
+                    <div class="hmcts-timeline__header">
+                      <h2 class="hmcts-timeline__title">Debt was paid in full</h2>
+                    </div>
+                    <p class="hmcts-timeline__date"  style="color: grey">
+                      24 April 2018
+                    </p>
+                  </div>
+
+                  <div class="hmcts-timeline__item">
+                    <div class="hmcts-timeline__header">
+                      <h2 class="hmcts-timeline__title">A default CCJ was issued to the defendant</h2>
+                    </div>
+                    <p><a target="_blank"   href="/prototypes/prototype-apr-2019/defendant/correspondence/forms/judgment-order?check=1">Download CCJ</a> (PDF, 48 KB)</p>
+                    <p class="hmcts-timeline__date"  style="color: grey; margin-top: -15px;">
+                      31 December 2018
+                    </p>
+                  </div>
+
+                  <div class="hmcts-timeline__item">
+                    <div class="hmcts-timeline__header">
+                      <h2 class="hmcts-timeline__title">You submitted your claim</h2>
+                      <!--<p class="hmcts-timeline__by">by claimant</p>-->
+                      <p><a href="../claimant/correspondence/claim-form-claimant?check=1">Download claim</a>
+                        (PDF, 123KB)</p>
+                    </div>
+                    <p class="hmcts-timeline__date"  style="color: grey; margin-top: -15px;">
+                      15 December 2018
+                    </p>
+                  </div>
+              {% endif %}
+
+
 
             </div>
 
@@ -2355,6 +2489,11 @@
     <option value="20.1" {% if data['claimant'] == 20.1 %}selected{% endif %}>Settled - paid in full - cancelled</option>
     <option value="20.2" {% if data['claimant'] == 20.2 %}selected{% endif %}>Settled - paid in full - satisfied</option>
     <option value="21" {% if data['claimant'] == 21 %}selected{% endif %}>Settled - discontinued</option>
+
+
+    <option>------- CCJ set aside ----------</option>
+    <option value="23" {% if data['claimant'] == 23 %}selected{% endif %}>CCJ - defendant requested set aside</option>
+    <option value="24" {% if data['claimant'] == 24 %}selected{% endif %}>CCJ - defendant requested set aside - claimant agreed</option>
 
   </select>
 </form>
