@@ -35,7 +35,10 @@ Money Claims Prototype
           <fieldset>
             <div class="form-group">
               <h2 class="heading-medium" style="margin-top: 0.75em">Your name</h2>
+                    {% if data['defaultccj'] == 'true' %}
+                          {% else %}
               <p>If you change your name here, we'll tell the claimant. It's up to them to decide whether they agree to change it for their claim.</p>
+                          {% endif %}
               <div class="form-group-compound address-item form-group">
                 <label class="form-label" for="name-title">Title</label>
                 <input class="form-control" value="Mrs" id="name-title" style="width: 25%" />
@@ -63,6 +66,8 @@ Money Claims Prototype
                       class="form-label" for="Address_Postcode">Postcode</label><input class="form-control form-control-1-4" value="RG9 4BW" ></span></div>
                     </div>
                   </div>
+                  {% if data['defaultccj'] == 'true' %}
+                        {% else %}
                   <h2 class="heading-small">Do you want post about the claim sent to this address?</h2>
                   <div class="form-group">
                     <fieldset>
@@ -82,6 +87,7 @@ Money Claims Prototype
                       <div id="addressManualWrapper">
                         <p>All correspondence will be sent to this address. This is known as an 'address for service'.</p>
 
+                        {% endif %}
 
                         {% if data['addressType'] == 'diff' %}
                       <div id="addressManualWrapper">
@@ -110,12 +116,12 @@ Money Claims Prototype
                   </div>
                 </div>
 
-
-
-
+    <div class="column-two-thirds">
                 {% if data['phoneNumber'] == 'provided' or data['defaultccj'] == 'true' %}
                   <h2 class="heading-medium">Your phone number</h2>
-                  <p>We might need to speak to you about this claim. We'll only call on weekdays between 9am and 5pm.</p>
+                  <p>We might need to speak to you about {% if data['defaultccj'] == 'true' %}this CCJ{% else %}this claim{% endif %}.
+                    We'll only call on weekdays between 9am and 5pm.</p>
+</div>
 
                   <fieldset>
                     <legend class="visuallyhidden">Phone</legend>
@@ -124,6 +130,7 @@ Money Claims Prototype
                       <input class="form-control form-control" id="defendant-phone" name="defendant-phone" type="text" value="07682 621225">
                     </div>
                   </fieldset>
+
                 {% endif %}
 
 
