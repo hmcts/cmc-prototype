@@ -194,16 +194,13 @@ Money Claims Prototype
 
         <h3 class="heading-medium">Does this court meet your accessibility needs?</h3>
 
-        {% else %}
-        <h1 class="heading-large">Do you have accessibility needs which mean you want to ask for the hearing to be held at a specific court?</h1>
-
-        <p>If not, the hearing will be held at the court the claimant chooses.</p>
-
-        {% endif %}
-
 
           <div class="form-group">
             <fieldset>
+              <div class="multiple-choice">
+                <input id="radio-court-no" type="radio" name="reject-court" value="no">
+                <label for="radio-court-no">Yes</label>
+              </div>
               <div class="multiple-choice" data-target="reason">
                 <input id="radio-court-yes" type="radio" name="reject-court" value="yes">
                 <label for="radio-court-yes">No{% if data['scenario'] == 4 %} - I want to request a different court{% endif %}</label>
@@ -214,12 +211,34 @@ Money Claims Prototype
                   <textarea class="form-control form-control-3-4" rows="3" name="court-reason" type="text" id="court-reason"></textarea>
                 </div>
               </div>
-              <div class="multiple-choice">
-                <input id="radio-court-no" type="radio" name="reject-court" value="no">
-                <label for="radio-court-no">Yes</label>
-              </div>
             </fieldset>
           </div>
+        {% else %}
+        <h1 class="heading-large">Do you have accessibility needs which mean you want to ask for the hearing to be held at a specific court?</h1>
+
+        <p>If not, the hearing will be held at the court the claimant chooses.</p>
+
+        <div class="form-group">
+          <fieldset>
+            <div class="multiple-choice" data-target="reason">
+              <input id="radio-court-yes" type="radio" name="reject-court" value="yes">
+              <label for="radio-court-yes">Yes{% if data['scenario'] == 4 %} - I want to request a different court{% endif %}</label>
+            </div>
+            <div class="panel panel-border-narrow js-hidden" id="reason">
+              <div class="form-group">
+                <label class="form-label" for="court-reason">Briefly explain your reasons</label>
+                <textarea class="form-control form-control-3-4" rows="3" name="court-reason" type="text" id="court-reason"></textarea>
+              </div>
+            </div>
+            <div class="multiple-choice">
+              <input id="radio-court-no" type="radio" name="reject-court" value="no">
+              <label for="radio-court-no">No</label>
+            </div>
+          </fieldset>
+        </div>
+
+        {% endif %}
+
           {% endif %}
 
 
