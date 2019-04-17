@@ -405,6 +405,22 @@ module.exports = function(app){
   })
 
 
+  app.post( '/' + strPath + 'defendant/task-list/hearing/support', (req, res) => {
+
+    if ( !req.session.data['scenario'] ) {
+      req.session.data['scenario'] = 1;
+    }
+
+    if ( ( req.session.data['scenario'] == 1 || req.session.data['scenario'] == 2 ) || ( ( req.session.data['scenario'] == 3 || req.session.data['scenario'] == 4 ) && ( req.session.data['hearing-loop'] == 'yes' || req.session.data['disabled-access'] == 'yes' || req.session.data['other'] == 'yes' ) ) ) {
+      res.redirect('/' + strPath + 'defendant/task-list/hearing/court');
+    } else {
+      res.redirect('/' + strPath + 'defendant/task-list/hearing/expert-required' );
+    }
+
+
+  })
+
+
   app.get('*/prototype-admin/view-data', function(req, res){
       res.render('prototype-admin/view-data', { data: JSON.stringify( req.session, null, 2) } )
   });

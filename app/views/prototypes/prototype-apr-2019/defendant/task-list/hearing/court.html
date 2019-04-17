@@ -65,16 +65,36 @@ Money Claims Prototype
 
           {% if data['scenario'] != 8 and data['scenario'] != 7 %}
           <details role="group">
-            <summary role="button" aria-controls="details-content-0" aria-expanded="false">See this court's accessibility facilities</summary>
+            <summary role="button" aria-controls="details-content-0" aria-expanded="false">See this court's facilities</summary>
             <div class="panel" id="details-content-0" aria-hidden="true">
+
               <h2 class="heading-small">Loop hearing</h2>
               <p>Loop hearing facilities are available at the ground floor counter.</p>
+
+              <h2 class="heading-small">Baby changing facility</h2>
+              <p>This court has baby changing facilities on the ground floor within the disabled toilet.</p>
+
+              <h2 class="heading-small">Children's waiting room</h2>
+              <p>There is a childrens room on the 1st floor. In addition there is a portable toy box available.</p>
+
+              <h2 class="heading-small">Parking</h2>
+              <p>The closest public parking is in the Bedford Road car park.</p>
+
+              <h2 class="heading-small">Refreshments</h2>
+              <p>ot and cold vending machines can be found on the ground floor.</p>
 
               <h2 class="heading-small">Disabled access</h2>
               <p>Disabled toilet facilities. Parking can be arranged by contacting the court in advance.</p>
 
+              <h2 class="heading-small">Interview room</h2>
+              <p>here are up to six private interview rooms on the ground floor, with a further six on the second floor.</p>
+
               <h2 class="heading-small">Assistance dogs</h2>
               <p>Guide dogs are welcome at this court.</p>
+
+              <h2 class="heading-small">Video facilities</h2>
+              <p>Court/hearing room video conferencing facilities and prison to court video link facilities are available (by prior arrangement)</p>
+
             </div>
           </details>
           {% endif %}
@@ -139,34 +159,51 @@ Money Claims Prototype
         <p>The defendant chose this location.</p>
 
         <details role="group">
-          <summary role="button" aria-controls="details-content-0" aria-expanded="false">See this court's accessibility facilities</summary>
+          <summary role="button" aria-controls="details-content-0" aria-expanded="false">See this court's facilities</summary>
           <div class="panel" id="details-content-0" aria-hidden="true">
-            <h2 class="heading-small">Loop hearing</h2>
-            <p>Loop hearing facilities are available at the ground floor counter.</p>
 
-            <h2 class="heading-small">Disabled access</h2>
-            <p>Disabled toilet facilities. Parking can be arranged by contacting the court in advance.</p>
+              <h2 class="heading-small">Loop hearing</h2>
+              <p>Loop hearing facilities are available at the ground floor counter.</p>
 
-            <h2 class="heading-small">Assistance dogs</h2>
-            <p>Guide dogs are welcome at this court.</p>
+              <h2 class="heading-small">Baby changing facility</h2>
+              <p>This court has baby changing facilities on the ground floor within the disabled toilet.</p>
+
+              <h2 class="heading-small">Children's waiting room</h2>
+              <p>There is a childrens room on the 1st floor. In addition there is a portable toy box available.</p>
+
+              <h2 class="heading-small">Parking</h2>
+              <p>The closest public parking is in the Bedford Road car park.</p>
+
+              <h2 class="heading-small">Refreshments</h2>
+              <p>ot and cold vending machines can be found on the ground floor.</p>
+
+              <h2 class="heading-small">Disabled access</h2>
+              <p>Disabled toilet facilities. Parking can be arranged by contacting the court in advance.</p>
+
+              <h2 class="heading-small">Interview room</h2>
+              <p>here are up to six private interview rooms on the ground floor, with a further six on the second floor.</p>
+
+              <h2 class="heading-small">Assistance dogs</h2>
+              <p>Guide dogs are welcome at this court.</p>
+
+              <h2 class="heading-small">Video facilities</h2>
+              <p>Court/hearing room video conferencing facilities and prison to court video link facilities are available (by prior arrangement)</p>
+
           </div>
         </details>
 
-        <h3 class="heading-medium">Do you have accessibility needs which can't be met by this court?</h3>
-
-        {% else %}
-        <h1 class="heading-large">Do you have accessibility needs which mean you want to ask for the hearing to be held at a specific location?</h1>
-
-        <p>If not, the hearing will be held at the court the claimant chooses.</p>
-
-        {% endif %}
+        <h3 class="heading-medium">Does this court meet your accessibility needs?</h3>
 
 
           <div class="form-group">
             <fieldset>
+              <div class="multiple-choice">
+                <input id="radio-court-no" type="radio" name="reject-court" value="no">
+                <label for="radio-court-no">Yes</label>
+              </div>
               <div class="multiple-choice" data-target="reason">
                 <input id="radio-court-yes" type="radio" name="reject-court" value="yes">
-                <label for="radio-court-yes">Yes{% if data['scenario'] == 4 %}, I want to request a different court{% endif %}</label>
+                <label for="radio-court-yes">No{% if data['scenario'] == 4 %} - I want to request a different court{% endif %}</label>
               </div>
               <div class="panel panel-border-narrow js-hidden" id="reason">
                 <div class="form-group">
@@ -174,12 +211,34 @@ Money Claims Prototype
                   <textarea class="form-control form-control-3-4" rows="3" name="court-reason" type="text" id="court-reason"></textarea>
                 </div>
               </div>
-              <div class="multiple-choice">
-                <input id="radio-court-no" type="radio" name="reject-court" value="no">
-                <label for="radio-court-no">No</label>
-              </div>
             </fieldset>
           </div>
+        {% else %}
+        <h1 class="heading-large">Do your accessibility needs mean you want to ask for the hearing to be held at a specific court?</h1>
+
+        <p>If not, the hearing will be held at the court the claimant chooses.</p>
+
+        <div class="form-group">
+          <fieldset>
+            <div class="multiple-choice" data-target="reason">
+              <input id="radio-court-yes" type="radio" name="reject-court" value="yes">
+              <label for="radio-court-yes">Yes{% if data['scenario'] == 4 %} - I want to request a different court{% endif %}</label>
+            </div>
+            <div class="panel panel-border-narrow js-hidden" id="reason">
+              <div class="form-group">
+                <label class="form-label" for="court-reason">Briefly explain your reasons</label>
+                <textarea class="form-control form-control-3-4" rows="3" name="court-reason" type="text" id="court-reason"></textarea>
+              </div>
+            </div>
+            <div class="multiple-choice">
+              <input id="radio-court-no" type="radio" name="reject-court" value="no">
+              <label for="radio-court-no">No</label>
+            </div>
+          </fieldset>
+        </div>
+
+        {% endif %}
+
           {% endif %}
 
 
