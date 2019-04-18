@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <!--<div class="breadcrumbs">-->
+    <!--<ol>-->
+      <!--<li><a href="../review-agreement">Agreement overview</a></li>-->
+      <!--</ol>-->
+      <!--</div>-->
+      <div class="grid-row">
+        <div class="column-two-thirds">
+          <a href="#" class="link-back">Back</a>
+          <h1 class="heading-large">Make a legal agreement</h1>
+
+
+
+
+
+          <h3 class="heading-medium">What's in it</h3>
+          <p>You can make a legal agreement to settle out of court. It's based on the information you and {% if data['defendant'] == "defendant" %}Jan Clark{% else %}Mary Richards {% endif %} have provided. It has not been reviewed by the court.</p>
+          <h2 class="heading-medium" >What happens when you sign</h2>
+          <p>If you and {% if data['defendant'] == "defendant" or data['defendant'] == "defendant_signed" %}Jan Clark{% else %}Mary Richards {% endif %} sign this agreement it replaces the court claim.
+
+          <p>Once signed the agreement is confidential. You must not tell anyone about what's in it.</p>
+
+          <h2 class="heading-medium" >If the agreement is broken</h2>
+
+            {% if data['defendant'] == "defendant" or data['defendant'] == "defendant_signed"%}
+            <p>Jan Clark can ask the court to either:</p>
+            <ul class="list list-bullet">
+            <li class="">request a judgment for any money still owed under this agreement</li>
+            <li class="">restart the original claim for the full amount and arrange a hearing</li>
+
+
+            {% else %}
+              <p class="">You can ask the court to either:</p>
+              <ul class="list list-bullet">
+            <li class="">request a judgment for any money still owed under this agreement</li>
+            <li class="">restart the original claim for the full amount and arrange a hearing</li>
+            {% endif %}
+
+
+
+          </ul>
+
+          <a href="agreement/offer" class="button">View and sign the agreement</a>
+        </div>
+      </div>
+    </main>
+    {% endblock %}

@@ -1,0 +1,133 @@
+{% extends "layout_task-list.html" %}
+{% block page_title %} Your money claims account {% endblock %}
+{% block proposition_header %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main" ">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <header class="page-heading page-heading-with-context page-heading-without-breadcrumb">
+       <a href="#" class="link-back">Back</a>
+       <h1 class="heading-large">
+        <span class="heading-secondary">Claim number:</span>
+        352MC733 
+      </h1>
+      <h2 class="heading-medium">Claim status</h2>
+     
+      {% if data['defendant'] == 1  %}
+      <p><span class="bold">15 May 2017</span><br>TYour defence is being processed. We will email you to explain what to do next.</p>
+      
+      {% elseif data['defendant'] == 2  %}
+      <p><span class="bold">15 May 2017</span><br>The court has issued a County Court Judgment against you. This means that the court has formally decided that you owe the money.</p>
+      <p><strong class="bold">Judgment details</strong><br><a href='{{ asset_path }}images/Country-court-judgment.pdf' download>Download the County Court Judgment</a>. </p>
+      <p>The judgment explains:</p>
+      <ol class="list list-bullet">
+        <li>how much you owe</li>
+        <li>how to pay (in full or in instalments)</li>
+        <li>the deadline for paying</li>
+        <li>who to pay</li>
+      </ol>
+      <p><a href="https://www.gov.uk/county-court-judgments-ccj-for-debt/ccjs-and-your-credit-rating">Records of judgments</a> are kept for 6 years unless you pay the full amount within a month - this can make it hard to get credit.</p>
+      <p>If you don’t owe the money, you can <a href="https://www.gov.uk/county-court-judgments-ccj-for-debt/if-you-dont-owe-the-money">ask the court to cancel</a>, or ‘set aside’, the judgment.</p>
+      <p>If you do owe the money, you should arrange to <a href="https://www.gov.uk/county-court-judgments-ccj-for-debt/if-you-do-owe-the-money-pay-the-judgment">pay what you can afford</a>.</p>
+     
+      {% elseif data['defendant'] == 3  %}
+      <p><span class="bold">15 May 2017</span><br>We've emailed Jan Clark telling them that you will pay their money claim immediately.</p>
+      <h2 class="heading-small">What happens next</h2>
+      <p>When Jan Clark gets your payment they must tell you and the court you’ve paid their money claim.</p>
+      
+      {% elseif data['defendant'] == 4  %}
+      <p><span class="bold">15 May 2017</span><br>We've emailed Jan Clark your instalment plan.</p>
+      <h2 class="heading-small">What happens next</h2>
+      <p>Jan Clark needs to respond to your suggested instalment plan on or before <span id="Date"></span>. We’ll contact you when Jan Clark responds.</p>
+      
+      {% elseif data['defendant'] == 5  %}
+      <p><span class="bold">15 May 2017</span><br>We've emailed Jan Clark your offer to pay the money claim on <span id="Date"></span> and your explanation of why you can’t pay before then.</p>
+      <h2 class="heading-small">What happens next</h2>
+      <p>They need to respond to your offer on or before <span id="Date3"></span>.</p> 
+      <p>If Jan Clark rejects your offer to pay by a set date then the court will decide how you can pay.</p>
+
+      {% elseif data['defendant'] == 6  %}
+      <p><span class="bold">15 May 2017</span><br>The claimant has requested mediation to help settle this dispute.</p>
+      <div class="form-group">
+      <p> <a class="button" href="defendant-response/mediation?defendant=mediation">Respond to mediation request </a></p>
+     </div>
+      {% elseif data['defendant'] == 7  %}
+      <p><span class="bold">15 May 2017</span><br>A mediator will contact both the claimant and you within the next 14 days to arrange an appointment.</p>
+
+
+
+      {% else  %}
+      <p>Your defence is being processed. We will email you to explain what to do next.</p>
+
+     
+     {% endif %}
+
+
+
+
+     {% if data['defendant'] != 1 or data['defendant'] != 2 %}
+
+     <h2 class="heading-medium">Claim history </h2>
+     <details>
+      <summary>You have 1 event in your claim history</summary>
+      <div class="history-timeline">
+        <div class="data">
+          <span class="data-item bold-large">20</span>
+          <span class="data-item bold-xsmall">April 2017</span>
+          <span class="data-item bold-xsmall"></span>
+        </div>
+        <div class="history-statement">You responded to the claim.</div>
+      </div>
+    </details>
+    {% endif %}
+    {% if data['defendant'] == 2 %}
+
+
+    {% else %}
+
+    <h2 class="heading-medium">More options </h2>
+
+    <h2 class="heading-small">Make a suggestion to settle the claim</h2>
+    <p>
+     <a href='#'>Make a offer</a> to settle the claim out of court. This will avoid going to a hearing. 
+   </p>
+       {% if data['defendant'] == 1 or data['defendant'] == 3 or data['defendant'] == 4 or data['defendant'] == 5 or data['defendant'] == 8%}
+
+   <h2 class="heading-small">Request mediation</h2>
+   <p>
+     <a href='#'>Request free telephone mediation</a>. Many people resolve their dispute before a hearing by taking part in a telephone mediation</a>.
+   </p>  
+   {% endif %} 
+
+   {% endif %} 
+ </div>
+ <div class="column-one-third">
+  <div class="meta-data">
+    <ul role="navigation" class="font-xsmall list" style="padding-top: 100px">
+      <li><strong class="bold">Claimant name:</strong><br> Jan Clark</li>
+      <li><strong class="bold">Claim amount:</strong><br>£1302.23 </li>
+      <li><strong class="bold">Claim details:</strong><br><a href="view-claim">Download claim details</a> </li>
+      <li><strong class="bold">Your response:</strong><br><a href="view-claim">Download your response</a> </li>
+    </ul>
+  </div>
+</div>
+</div>
+</main>
+<form method="post"  action="#" class="form" style="position: absolute;">
+  <select id="defendant2" name="defendant2" onchange="window.location.href='/dashboard/defendant?defendant='+this.value">
+    <option  value="0" >Choose</option>
+    <option value="1" {% if data['defendant'] == 1 %}selected{% endif %}>1. Response being processed</option>
+    <option  value="2" {% if data['defendant'] == 2 %}selected{% endif %}>2. CCJ issued issued </option>
+    <option  value="3" {% if data['defendant'] == 3 %}selected{% endif %}>3. Full admission - immediate payment </option>
+    <option  value="4" {% if data['defendant'] == 4 %}selected{% endif %}>4. Full admission - instalment plan </option>
+    <option  value="5" {% if data['defendant'] == 5 %}selected{% endif %}>5. Full admission - set date payment </option>
+    <option  value="6" {% if data['defendant'] == 6 %}selected{% endif %}>6. Mediation request from claimant </option>
+    <option  value="7" {% if data['defendant'] == 7 %}selected{% endif %}>7. Mediation accepted </option>
+    <option  value="8" {% if data['defendant'] == 8 %}selected{% endif %}>8. Mediation Rejected </option>
+  </option>
+</select>
+</form>
+{% endblock %}

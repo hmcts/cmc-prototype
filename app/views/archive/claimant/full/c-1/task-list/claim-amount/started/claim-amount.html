@@ -1,0 +1,170 @@
+{% extends "layout_task-list.html" %}
+
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+
+{% block home_link %} index {% endblock %}
+
+{% block content %}
+
+
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+
+  <div class="breadcrumbs">
+    <ol>
+      <li>
+        <a href="../../task-list{{ formQuery | safe }}">Make a money claim</a>
+      </li>
+      <li>
+        Claim amount
+      </li>
+    </ol>
+  </div>
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+      <form method="post" action="started/claim-interest" class="form">
+
+        {{formData | safe}}
+
+        <h1 class="heading-large">
+          Claim amount
+        </h1>
+
+        <p>Your claim could be for a single amount or might be made up of multiple items.</p>
+
+        <div class="panel panel-border-wide">
+          <p>Don't include interest - we'll ask you about this next.</p>
+
+          <p>Don't include your claim fee - we'll add this for you.</p>
+        </div>
+
+        <!--<details>-->
+
+          <!--<summary>-->
+            <!--<span class="summary">What you can claim for</span>-->
+          <!--</summary>-->
+
+          <!--<div class="panel panel-border-narrow">-->
+            <!--<p>Content goes here...</p>-->
+          <!--</div>-->
+
+        <!--</details>-->
+
+        <br>
+
+        <!--<a href="" style="float: left" data-alert="This feature is not available in this demo">More about what you can claim</a>-->
+
+        <table class="table-form">
+          <caption class="visuallyhidden">Your claim amount</caption>
+          <thead>
+          <tr>
+            <th scope="col">Reason for this amount <span class="form-hint">Explain what this amount is for</span></th>
+            <th class="numeric last" scope="col">Amount <span
+              class="form-hint">You can give a single amount here</span></th>
+          </tr>
+          </thead>
+          <tfoot>
+          <tr>
+            <th scope="col">Total:</th>
+            <td class="numeric last"><span class="bold-medium">£<span id="totalSum">1500.00</span></span></td>
+
+          </tr>
+          </tfoot>
+          <tbody>
+          <tr>
+            <th scope="row">
+              <input type="text" maxlength="" size="48" type="text" id="item1"
+                     name="claim-item" value="rent arrears">
+            </th>
+            <td class="numeric last">
+              <input class="fee pound" maxlength="10" size="7" type="text" value="1500.00"
+                     name="costs-column"
+                     id="amount1">
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">
+              <input type="text" maxlength="" size="48" type="text" id="item2"
+                     name="claim-item" value="{{data['claim-item-2']}}">
+            </th>
+            <td class="numeric last">
+              <input class="fee pound" maxlength="10" size="7" type="text" value="{{data['costs-column-2']}}"
+                     name="costs-column"
+                     id="amount2">
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">
+              <input type="text" maxlength="" size="48" type="text" id="item3"
+                     name="claim-item" value="{{data['claim-item-3']}}">
+            </th>
+            <td class="numeric last">
+              <input class="fee pound" maxlength="10" size="7" type="text" value="{{data['costs-column-3']}}"
+                     name="costs-column"
+                     id="amount3">
+            </td>
+          </tr>
+
+          <th scope="row">
+            <input type="text" maxlength="" size="48" type="text" id="item4"
+                   name="claim-item" value="{{data['claim-item-4']}}">
+          </th>
+          <td class="numeric last">
+            <input class="fee pound" maxlength="10" size="7" type="text" value="{{data['costs-column-4']}}"
+                   name="costs-column"
+                   id="amount4">
+          </td>
+
+          </tr>
+          </tbody>
+        </table>
+
+        <fieldset></fieldset>
+
+        <div class="form-group">
+          <input type="submit" class="button" value="Save and continue">
+        </div>
+      </form>
+
+    </div>
+  </div>
+</main>
+
+
+{% endblock %}
+
+{% block extra_js_1 %}
+<script type="text/javascript">
+  (function numericInputsSum(targetSpanId, sourceInputsIds) {
+    var targetSpan = $('#' + targetSpanId);
+    var sourceInputs = []
+
+    function updateSums() {
+      var sum = 0.0
+      for (var i = 0; i < sourceInputs.length; i++) {
+        sum += getNumericValue(sourceInputs[i].val())
+      }
+      targetSpan.text(sum.toFixed(2))
+    }
+
+    function getNumericValue(value) {
+      var numeric = parseFloat(value);
+      return isNaN(numeric) ? 0 : numeric;
+    }
+
+    for (var i = 0; i < sourceInputsIds.length; i++) {
+      var input = $('#' + sourceInputsIds[i]);
+      if (input) {
+        sourceInputs.push(input)
+        input.blur(function onNumericInputChanged() {
+          updateSums()
+        })
+      }
+    }
+  })('totalSum', ['amount1', 'amount2', 'amount3', 'amount4'])
+</script>
+{% endblock %}

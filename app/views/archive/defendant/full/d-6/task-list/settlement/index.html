@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <a href="#" class="link-back">Back</a>
+      <h1 class="heading-large">Settlement agreements</h1>
+
+
+      <p>A settlement agreement is a legal agreement between you and the claimant describing how and when you will repay them.</p>
+      <p>If the claimant chooses to sign your agreement, the claim will be put on hold and they will not be able to issue a CCJ against you unless you break the agreement.</p>
+      <p>If they do not sign the settlement agreement, they are still able to issue a CCJ against you.</p>
+
+
+     <h2 class="heading-medium">Do you wish to sign a settlement agreement?</h2>
+      <form
+      name="aspnetForm"
+      method="get"
+      onsubmit="multiNavigation('radio-settlement', ['yes', 'no'], ['settlement/sign', '../task-list?agreement=complete&']);return false;"
+      id="aspnetForm"
+      autocomplete="off">
+      <div class="form-group">
+        <fieldset>
+          <div class="multiple-choice">
+            <input id="radio-yes" type="radio" name="radio-settlement" value="yes">
+            <label for="radio-yes">Yes</label>
+          </div>
+          <div class="multiple-choice" data-target="no-settlement">
+            <input id="radio-no" type="radio" name="radio-settlement" value="no">
+            <label for="radio-no" data-target="no-info">No</label>
+          </div>
+
+          <div class="panel panel-border-narrow js-hidden" id="no-settlement">
+            <p>If you do not make a settlement agreement, the claimant will be able to issue a CCJ against you which will harm your credit rating.</p>
+          </div>
+        </fieldset>
+        <input id="advert-option-next--button" type="submit" value="Save and continue" class="button">
+
+      </form>
+    </div>
+
+  </div>
+</main>
+{% endblock %}

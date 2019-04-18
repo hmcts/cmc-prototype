@@ -1,0 +1,68 @@
+gi{% extends "layout_task-list.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block home_link %} ../task-list {% endblock %}
+{% block proposition_header %}
+{% set my_account="1" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div>
+      <a href="#" class="link-back">Back</a>
+      {{formData | safe}}
+      {% if data['upload'] == '1'%}
+      <form method="post" action="../statement/residence" class="form">
+        {% elif data['upload'] == '2' %}
+        <form method="post" action="../statement/upload" class="form">
+          {% else %}
+          <form method="post" action="../statement/{% if data['radio-pay-group'] == 'Instalments' %}repayment-plan{% else %}../pay-by-set-date{% endif %}" class="form">
+            {% endif %}
+            <h1 class="heading-large">
+              Explain why you can't pay immediately
+            </h1>
+            {% if data['upload'] == '2'%}
+            <div class="panel panel-border-wide">
+              <p>You need to upload your company or organisation's most recent statement of accounts.</p>
+              {% if data['radio-pay-group'] == 'Instalments' %}
+              <p>{% if data.counterclaim=="true" %}Mary Richards{%else%}Jan Clark{% endif %} will review these and can reject your repayment plan if they feel you can pay more or sooner.</p>
+              {% else %}
+              <p>{% if data.counterclaim=="true" %}Mary Richards{%else%}Jan Clark{% endif %} will review these and can reject your suggested date if they feel you can pay sooner.</p>
+              {% endif %}
+              <p>If they reject your repayment plan, the court will use these details to calculate a repayment plan.</p>
+            </div>
+            {% else %}
+            <p>You need to provide {% if data.counterclaim=="true" %}Mary Richards{%else%}Jan Clark{% endif %} with details of:
+              <ul class="list list-bullet">
+                <li>monthly bills and expenses</li>
+                <li>monthly income and benefits</li>
+                <li>bank balances and savings</li>
+                <li>debts or court orders</li>
+              </ul>
+              {% if data['radio-pay-group'] == 'Instalments' %}
+              <p>They will review these and can reject your repayment plan if they feel you can pay more or sooner.</p>
+              {% else %}
+              <p>{% if data.counterclaim=="true" %}Mary Richards{%else%}Jan Clark{% endif %} will review these and can reject your suggested date if they feel you can pay sooner.</p>
+              {% endif %}
+              <p>If they reject your repayment plan, the court will use these details to calculate a repayment plan.</p>
+
+              {% endif %}
+              <input type="hidden" name="your_defence_options" value="complete">
+              <div class="form-group">
+                <input type="submit" class="button" value="Continue"/>
+              </div>
+            </form>
+          </div>
+        </div>
+      </main>
+      <form method="post"  action="#" class="form" style="; float: left">
+        <select id="dashboard2" name="dashboard2" onchange="window.location.href='explanation?upload='+this.value">
+          <option >Choose </option>
+          <option value="1" {% if data['upload'] == 1 %}selected{% endif %}>1 Statement of means</option>
+          <option value="2" {% if data['upload'] == 2 %}selected{% endif %}>2 Document upload</option>
+        </select>
+      </form>
+      {% endblock %}

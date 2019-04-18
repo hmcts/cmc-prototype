@@ -17,7 +17,7 @@ Money Claims Prototype
         Give us more information for a hearing
       </h1>
 
-      <p>You need to complete each section on this page or {% if data['party'] == "defendant" %}the court may cancel your defence and give you a County Court Judgment (CCJ){% else %}the claim will not proceed to a hearing{% endif %}.</p>
+      <p>You need to complete each section on this page by {{ now | date('add', 12, 'days') | date }}, or {% if data['party'] == "defendant" %}the court may cancel your defence and give you a County Court Judgment (CCJ){% else %}the claim will not proceed to a hearing{% endif %}.</p>
 
       <hr />
 
@@ -36,8 +36,6 @@ Money Claims Prototype
       </div>
 
       {% else %}
-      <p>Due by {{ now | date('add', 12, 'days') | date }}</p>
-
       <p>You must complete a witness statement for any witnesses whose evidence you want to use at the hearing, including yourself.</p>
 
       <p>To make sure your witness statements have all the information the court needs you should either:</p>
@@ -72,7 +70,6 @@ Money Claims Prototype
       </div>
 
       {% else %}
-      <p>Due by {{ now | date('add', 14, 'days') | date }}</p>
       <p>You must upload copies of any evidence you intend to use at the hearing.</p>
       <div class="form-group">
         <a href="order-response/evidence" class="secondary-button">Upload evidence</a>

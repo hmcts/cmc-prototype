@@ -1,0 +1,153 @@
+{% extends "layout_task-list.html" %}
+
+{% block page_title %}
+Check your answers
+{% endblock %}
+{% block home_link %} ../../task-list {% endblock %}
+{% block proposition_header %}
+{% set my_account="2" %}
+
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+
+<main id="content" role="main">
+
+  <h1 class="heading-large">
+    Check your answers <!-- for this task -->
+  </h1>
+
+  <table class="check-your-answers">
+
+    <thead>
+      <tr>
+        <th colspan="2">
+          <h2 class="heading-medium">
+            Your details
+          </h2>
+        </th>
+        <th>
+        </th>
+      </tr>
+    </thead>
+
+    <tbody>
+
+      <tr>
+        <td>
+          Name:
+        </td>
+        <td>
+         {{data['defendant_title']}} Mary Richards
+       </td>
+       <td class="change-answer">
+               <a href="../your-details/index?return_page={{ '../../task-list/your-details/check-your-answers' | urlencode }}">
+
+          Change <span class="visuallyhidden">Name</span>
+        </a>
+      </td>
+    </tr>
+    
+    <tr>
+
+      <tr>
+      <td class="no-border">
+          Address:
+        </td>
+        <td class="no-border">
+          101 Regents road<br>
+          Shiplake<br>
+          Henley on Thames<br>
+          RG9 4BW 
+        </td>
+        <td class="no-border change-answer">
+            <a href="../your-details/address?return_page={{ '../../task-list/your-details/check-your-answers' | urlencode }}">
+
+            Change <span class="visuallyhidden">Name</span>
+          </a>
+        </td>
+      </tr>
+      <tr class="">
+        <td>
+          Correspondence address:
+        </td>
+        <td>
+
+          {% if data['correspondence-address']=="Yes" %}
+
+          {{data['d-addressLine1']}}<br>
+          {{data['d-addressLine2']}}<br>
+          {{data['d-address-town']}}<br>
+          {{data['d-addressPostcode']}}<br>
+          {% else %} 
+          Same as address<br>
+          {% endif %} 
+
+
+        </td>
+        <td class="change-answer">
+        
+      </td>
+    </tr>      
+    <tr>
+      <td>
+        Date of birth:
+      </td>
+      <td>
+        {% if data['day']!="" %}
+
+
+        {{data['day']}} {{data['month']}} {{data['year']}}
+
+        {% elseif data['day']=="" %} 
+        31 01 1978
+        {% endif %} 
+
+
+
+      </td>
+      <td class="change-answer">
+
+            <a href="../your-details/date-of-birth?return_page={{ '../../task-list/your-details/check-your-answers' | urlencode }}">
+          Change <span class="visuallyhidden">Name</span>
+        </a>
+      </td>
+    </tr>
+
+    <tr>
+      <tr>
+        <td>
+          Telephone (optional):
+        </td>
+        <td>
+
+          {% if data['defendant-phone']!="" %}
+
+
+          {{data['defendant-phone']}}
+
+          {% elseif data['defendant-phone']=="" %} 
+          07827999612
+          {% endif %} 
+
+        </td>
+        <td class="change-answer">
+            <a href="../your-details/number?return_page={{ '../../task-list/your-details/check-your-answers' | urlencode }}">
+            Change <span class="visuallyhidden">Name</span>
+          </a>
+        </td>
+      </tr>
+
+      <tr>
+
+      </tbody>
+    </table>
+
+    <br>
+    <br>
+
+    <a href="../../task-list">Return to task list</a>
+
+  </main>
+
+  {% endblock %}

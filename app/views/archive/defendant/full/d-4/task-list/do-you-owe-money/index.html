@@ -1,0 +1,124 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="2" %}
+
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <a href="#" class="link-back">Back</a>
+      <h1 class="heading-large">
+        Do you owe the money claimed?
+      </h1>
+<p>You could get a County Court Judgment (CCJ) in all cases.  </p>
+       <details class="form-group">
+
+                <summary>Find out when you could get a CCJ</summary>
+
+                <div class="panel panel-border-narrow">
+
+
+
+                  <h3 class="heading-small">Admit all of the claim</h3>
+                  <p>If you admit all of the claim is fair you can contact the claimant yourself and pay the money. Ask them to let the court know when they have your payment.</p>
+                  <p>The claimant can ask for a County Court Judgment (CCJ) to be made against you if you admit the claim. If they ask for a CCJ to be made you against you then you can apply for a:</p>
+                  <ul class="list list-bullet">
+                    <li>certificate of cancellation if you pay the debt within 28 days</li>
+                    <li>certificate of satisfaction if you pay the debt after 28 days</li>
+                  </ul>
+
+                  <h3 class="heading-small" >Admit part of the claim</h3>
+                  <p>If you think the claim is too high you can offer the amount you think you owe as part of your defence. You’ll get the chance to explain why your offer is the amount you believe you owe.</p>
+                  <p>The claimant can ask for a County Court Judgment (CCJ) to be made against you if you part admit the claim. If they ask for a CCJ to be made you against you then you can apply for a:</p>
+                  <ul class="list list-bullet">
+                    <li>certificate of cancellation if you pay the debt within 28 days</li>
+                    <li>certificate of satisfaction if you pay the debt after 28 days</li>
+                  </ul>
+
+                  <h3 class="heading-small">Reject the claim</h3>
+                  <p>If you don't accept you owe the amount of money claimed you can prepare and submit your defence online. You might have to go to a hearing - it can take up to 7 months to get a hearing date.</p>
+
+                  <p>If you reject the claim and lose your case, you’ll get a County Court Judgment (CCJ) ordering you to pay the full claim amount and any costs. Details of the CCJ will be entered on the Register of Judgments, Orders and Fines for 6 years.</p>
+
+
+                </div>
+              </details>
+
+
+      {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('task-list')%}
+      <form
+        name="aspnetForm"
+        method="post"
+        onsubmit="multiNavigation('radio_select_group', ['all', 'Some', 'reject'], ['../do-you-owe-money/check-your-answers', '../do-you-owe-money/partial-defence-options', '../do-you-owe-money/defence-options']);return false;"
+        id="aspnetForm"
+        autocomplete="off">
+
+        {% else %}
+
+
+        <form
+          name="aspnetForm"
+          method="post"
+          onsubmit="multiNavigation('radio_select_group', ['all', 'Some', 'reject'], ['../task-list', '../task-list', 'do-you-owe-money/defence-options']);return false;"
+          id="aspnetForm"
+          autocomplete="off">
+          {% endif %}
+
+
+
+
+
+          <div class="form-group">
+            <fieldset>
+              <legend class="visually-hidden">Your response</legend>
+              <div class="multiple-choice">
+                <input id="radio-yes" type="radio" name="radio_select_group" value="all" {{ checked("radio_select_group", "all") }}>
+                <label for="radio-yes" data-target="yes-info">
+                  <strong class="bold-small">I admit all of the claim </strong><br>
+                  <p>You can either pay the claim  amount in full or by instalments</p>
+                </label>
+              </div>
+              <div class="multiple-choice">
+                <input id="radio-some" type="radio" name="radio_select_group" value="Some" {{ checked("radio_select_group", "Some") }}>
+                <label for="radio-some" data-target="some-info">
+                  <strong class="bold-small">I admit part of the claim  </strong><br>
+                  <p>You agree you owe some money but not the amount claimed </p>
+                </label>
+              </div>
+
+
+              <div class="multiple-choice">
+                <input id="radio-no" type="radio" name="radio_select_group" value="reject" {{ checked("radio_select_group", "reject") }}>
+                <label for="radio-no" data-target="no-info  "> <strong class="bold-small">I reject all of the claim</strong><br>
+                  <p>You have either paid what you believe you owe or you reject the claim
+                </label>
+              </div>
+
+              <input type="hidden" name="do_you_owe_money" value="complete">
+
+
+              <p></p>
+
+              {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('task-list')%}
+              <div class="form-group">
+                <input type="submit" class="button" value="Save and continue"/>
+              </div>
+
+              <a href="#" onclick="goBack()">Cancel</a>
+              {% else %}
+              <div class="form-group">
+                <input type="submit" class="button" value="Save and continue"/>
+              </div>
+              {% endif %}
+        </form>
+
+    </div>
+</main>
+{% endblock %}

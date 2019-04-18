@@ -1,0 +1,636 @@
+{% extends "layout_task-list.html" %}
+
+{% block page_title %}
+Check your answers
+{% endblock %}
+{% block home_link %} ../task-list {% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+
+  <div class="breadcrumbs">
+    <ol>
+      <li>
+        <a href="../task-list{{ formQuery | safe }}">Make a money claim</a>
+      </li>
+      <li>
+        Check your answers
+      </li>
+    </ol>
+  </div>
+
+  <h1 class="heading-large">
+    Check your answers before submitting your claim
+  </h1>
+
+
+
+<!--   <table class="check-your-answers">
+
+    <thead>
+    <tr>
+      <th colspan="2">
+        <h2 class="heading-medium">
+          Money claim rules
+        </h2>
+      </th>
+      <th>
+      </th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr>
+      <td>
+        Read and understood rules:
+      </td>
+      <td>
+        Yes
+      </td>
+      <td class="change-answer">
+        <a href="#">
+          Change <span class="visuallyhidden">Name</span>
+        </a>
+      </td>
+    </tr>
+    </tbody>
+  </table> -->
+
+<!--   <table class="check-your-answers">
+
+    <thead>
+    <tr>
+      <th colspan="2">
+        <h2 class="heading-medium">
+          Competing the claim
+        </h2>
+      </th>
+      <th>
+      </th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr>
+      <td>
+        Read and understood warning:
+      </td>
+      <td>
+        Yes
+      </td>
+      <td class="change-answer">
+        <a href="#">
+          Change <span class="visuallyhidden">Name</span>
+        </a>
+      </td>
+    </tr>
+    </tbody>
+  </table> -->
+
+  <table class="check-your-answers">
+
+    <thead>
+      <tr>
+        <th colspan="2">
+          <h2 class="heading-medium" id="name">
+            Your details
+          </h2>
+        </th>
+        <th>
+        </th>
+      </tr>
+    </thead>
+
+    <tbody>
+<!--     <tr>
+      <td>
+        About you
+      </td>
+      <td>
+        {{data['claimant-type']}}
+      </td>
+      <td class="change-answer">
+        <a href="#">
+          Change <span class="visuallyhidden">Name</span>
+        </a>
+      </td>
+    </tr> -->
+    <tr>
+      <td >
+        Name:
+      </td>
+      <td>
+        {{data['claimant-firstname']}} {{data['claimant-middlename']}} {{data['claimant-lastname']}}
+      </td>
+      <td class="change-answer">
+        <a href="../task-list/your-details/name?return_page={{ '../../task-list/check-and-send#name' | urlencode }}">
+          Change <span class="visuallyhidden">Why you believe you're owed the money</span></a>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Date of birth:
+        </td>
+        <td>
+         {{data['day']}} {{data['month']}} {{data['year']}}
+       </td>
+       <td class="change-answer">
+        <a href="../task-list/your-details/date-of-birth?return_page={{ '../../task-list/check-and-send#name' | urlencode }}">
+          Change <span class="visuallyhidden">Date of birth</span></a>
+        </td>
+      </tr>
+      <tr>
+
+        <tr>
+          <td>
+            Phone:
+          </td>
+          <td>
+            {{data['claimant-phone']}}
+          </td>
+          <td class="change-answer">
+            <a href="../task-list/your-details/phone?return_page={{ '../../task-list/check-and-send#name' | urlencode }}">
+              Change <span class="visuallyhidden">Phone</span></a>
+            </td>
+          </tr>
+          <td class="no-border">
+            Address:
+          </td>
+          <td class="no-border">
+            {{data['addressLine1']}}<br>
+            {{data['addressLine2']}}<br>
+            {{data['addressLine3']}}<br>
+            {{data['addressPostcode']}}
+          </td>
+          <td class="change-answer no-border">
+            <a href="../task-list/your-details/address?return_page={{ '../../task-list/check-and-send#name' | urlencode }}">
+              Change <span class="visuallyhidden">Address</span></a>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Correspondence address:
+            </td>
+            <td>
+              {% if data['correspondence-address']=="Yes" %}
+              {{data['c-addressLine1']}}<br>
+              {{data['c-addressLine2']}}<br>
+              {{data['c-addressLine3']}}<br>
+              {{data['c-addressPostcode']}}
+              {% else %} 
+              Same as address<br>
+              {% endif %} 
+            </td>
+            <td class="change-answer">
+
+            </td>
+          </tr>    
+<!--     <tr>
+      <td>
+        Updates:
+      </td>
+      <td>
+        Email and text
+      </td>
+      <td class="change-answer">
+        <a href="#">
+          Change <span class="visuallyhidden">How to be contacted</span>
+        </a>
+      </td>
+    </tr> -->
+  </tbody>
+</table>
+
+<table class="check-your-answers">
+
+  <thead>
+    <tr>
+      <th colspan="2">
+        <h2 class="heading-medium" id="their-detail">
+          Their details
+        </h2>
+      </th>
+      <th>
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+   <!--  <tr>
+      <td>
+        About them
+      </td>
+      <td>
+        {{data['defendant-type']}}
+      </td>
+      <td class="change-answer">
+        <a href="#">
+          Change <span class="visuallyhidden">Type</span>
+        </a>
+      </td>
+    </tr> -->
+    <tr>
+      <td>
+        Their name:
+      </td>
+      <td>
+        {{data['defendant-firstname']}} {{data['defendant-lastname']}}
+      </td>
+      <td class="change-answer">
+        <a href="../task-list/their-details/index?return_page={{ '../../task-list/check-and-send#their-detail' | urlencode }}">
+          Change <span class="visuallyhidden">Their</span></a>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Their address:
+        </td>
+        <td>
+          {{data['d-addressLine1']}}<br>
+          {{data['d-addressLine2']}}<br>
+          {{data['d-addressLine3']}}<br>
+          {{data['d-addressPostcode']}}
+        </td>
+        <td class="change-answer">
+          <a href="../task-list/their-details/address?return_page={{ '../../task-list/check-and-send#their-detail' | urlencode }}">
+            Change <span class="visuallyhidden">Their</span></a>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Their email:
+          </td>
+          <td>
+
+            {% if data['defendant-email']!="" %}
+            {{data['defendant-email']}}
+
+            {% else %} 
+            None
+            {% endif %}    
+
+
+          </td>
+          <td class="change-answer">
+            <a href="../task-list/their-details/email?return_page={{ '../../task-list/check-and-send#their-detail' | urlencode }}">
+              Change <span class="visuallyhidden">Their</span></a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+    
+  <table class="check-your-answers">
+
+    <thead>
+      <tr>
+        <th colspan="2">
+          <h2 class="heading-medium" id="claim-amount">
+            Claim amount
+          </h2>
+        </th>
+        <th>
+        </th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td class="">
+          Claim amount:
+        </td>
+        <td class="">
+
+         £{{data['totalSum']}}
+
+       </td>
+       <td class="change-answer ">
+
+        <a href="../task-list/claim-amount/index?return_page={{ '../../task-list/check-and-send#claim-amount' | urlencode }}">
+          Change <span class="visuallyhidden">Why you believe you're owed the money</span>
+        </a> 
+      </td>
+    </tr>
+
+
+    {% if data['interest-rate']=="No interest" %}
+
+    <tr>
+      <td class="no-border" >
+        Interest rate:
+      </td>
+      <td  class="no-border">
+        I don't want to claim interest
+
+      </td>
+      <td class="change-answer no-border ">
+              <a href="../task-list/claim-amount/claim-interest?return_page={{ '../../task-list/check-and-send#claim-amount' | urlencode }}">
+
+        Change <span class="visuallyhidden">Why you believe you're owed the money</span>
+      </a> 
+    </td>
+  </tr>
+  {% endif %}    
+
+
+  {% if data['interest-rate']=="Different rate" %}
+  <tr>
+    <td class="no-border">
+      Interest rate:
+    </td>
+    <td class="no-border">
+
+
+      {{data['rate']}}%
+
+
+
+    </td>
+    <td class="change-answer no-border">              
+    <a href="../task-list/claim-amount/claim-interest?return_page={{ '../../task-list/check-and-send#claim-amount' | urlencode }}">
+
+        Change <span class="visuallyhidden">Why you believe you're owed the money</span>
+      </a> 
+      </td>
+    </tr> 
+
+    <tr>
+      <td class="">
+        Why you’re entitled to this rate:
+      </td>
+      <td class="">
+
+
+       {{data['rate-why']}}
+
+
+     </td>
+     <td></td>
+   </tr>         
+   {% endif %}
+
+
+
+   {% if data['interest-rate']=="8 percent" %}
+   <tr>
+    <td >
+      Interest rate:
+    </td>
+    <td >
+
+
+     8%
+
+   </td>
+      <td class="change-answer no-border">
+                  <a href="../task-list/claim-interest/claim-interest?return_page={{ '../../task-list/check-and-send#claim-amount' | urlencode }}">
+
+      Change <span class="visuallyhidden">Why you believe you're owed the money</span></a>
+    </td>
+  </tr>     
+  {% endif %} 
+
+
+  {% if data['interest-rate']!="No interest" %}
+
+  {% if data['interest-date']=="Issue date" %}
+  <tr>
+    <td>
+      Date interest applied from:
+    </td>
+    <td>
+      From the date I submit the claim
+    </td>
+    <td class="change-answer ">
+                  <a href="../task-list/claim-amount/interest-date?return_page={{ '../../task-list/check-and-send#claim-amount' | urlencode }}">
+
+      Change <span class="visuallyhidden">Why you believe you're owed the money</span></a>
+
+
+     
+    </tr>
+    {% endif %} 
+
+    {% if data['interest-date']=="Particular date" %}
+    <tr>
+      <td class="no-border">
+        Date interest applied from:
+      </td>
+      <td class="no-border">
+       {{ data['interest-day'] }} {{ data['interest-month'] }} {{ data['interest-year'] }}
+     </td>
+     <td class="change-answer no-border">
+                  <a href="../task-list/claim-amount/interest-date?return_page={{ '../../task-list/check-and-send#claim-amount' | urlencode }}">
+
+      Change <span class="visuallyhidden">Why you believe you're owed the money</span></a>
+
+
+     
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Explain why you're claiming from this date:
+      </td>
+      <td>
+        {{data['date-why']}}
+      </td>
+      <td class="change-answer">
+
+      </td>
+    </tr>
+
+
+    {% endif %} 
+    {% endif %} 
+
+
+
+
+    {% if data['interest-date']=="Particular date" and data['interest-rate']!="No interest" %}
+
+    <tr>
+      <td>
+        Interest to date:
+      </td>
+      <td>
+        £13
+      </td>
+      <td class="change-answer">
+        <a href="#">
+          <span class="visuallyhidden">Interest</span>
+        </a>
+      </td>
+    </tr>
+
+
+    {% endif %}
+    <tr>
+      <td>
+        Claim fee:
+      </td>
+      <td>
+        £70
+      </td>
+      <td class="change-answer">
+        <a href="#">
+          <span class="visuallyhidden">Claim fee</span>
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+       <span class="bold"> Total:</span>
+     </td>
+     <td >
+      <span class="bold">{{data['totalClaimAmount']}}</span>
+    </td>
+    <td class="change-answer">
+      <a href="#">
+        <span class="visuallyhidden">Total </span>
+      </a>
+    </td>
+  </tr>
+</tbody>
+</table>
+
+<table class="check-your-answers">
+
+  <thead>
+    <tr>
+      <th colspan="2">
+        <h2 id='cd' class="heading-medium">
+          Claim details
+        </h2>
+      </th>
+      <th>
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+  <!--   <tr>
+      <td>
+        What happened:
+      </td>
+      <td>
+        {{data['date-1']}} {{data['timeline-1']}}<br>
+        {{data['date-2']}} {{data['timeline-2']}}<br>
+        {{data['date-3']}} {{data['timeline-3']}}<br>
+        {{data['date-4']}} {{data['timeline-4']}}<br>
+        {{data['date-5']}} {{data['timeline-5']}}<br>
+        {{data['date-6']}} {{data['timeline-6']}}<br>
+        {{data['date-7']}} {{data['timeline-7']}}<br>
+        {{data['date-8']}} {{data['timeline-8']}}
+      </td>
+      <td class="change-answer">
+        <a href="#">
+          Change <span class="visuallyhidden">What happened</span>
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Provide evidence:
+      </td>
+      <td>
+        {{data['claim-reason']}}
+      </td>
+      <td class="change-answer">
+        <a href="#">
+          Change <span class="visuallyhidden">Why you believe you're owed the money</span>
+        </a>
+      </td>
+    </tr> -->
+    <tr>
+      <td>
+        Why you believe you're owed the money:
+      </td>
+      <td>
+        {{data['claim-reason']}}
+      </td>
+      <td class="change-answer">
+        <a href="../task-list/claim-details/index?return_page={{ '../../task-list/check-and-send#cd' | urlencode }}">
+          Change <span class="visuallyhidden">Why you believe you're owed the money</span>
+        </a>
+      </td>
+    </tr>
+   <!--  <tr>
+      <td>
+        How this dispute has affected you:<br>(optional)
+      </td>
+      <td>
+        {{data['claim-affect']}}
+      </td>
+      <td class="change-answer">
+        <a href="#">
+          Change <span class="visuallyhidden">How this dispute has affected you (optional)</span>
+        </a>
+      </td>
+    </tr>
+    <tr> -->
+    </tr>
+  </tbody>
+</table>
+
+<fieldset></fieldset>
+<h2 class="heading-medium">Statement of truth</h2>
+
+<div class="notice text">
+  <i class="icon icon-important">
+    <span class="visually-hidden">Warning</span>
+  </i>
+  <strong class="bold-small">
+    You could be fined or go to prison if you deliberately give untrue or misleading information.
+  </strong>
+</div>
+
+<!--
+  <div class="form-group">
+    <form method="get" action="/prototype-14/task-list/check-and-send/payment-methods">
+      {% set completed = true if data.check_before_you_start == "complete" and data.read_rules == "complete" and data.completing_your_claim == "complete" and data.your_details == "complete" and data.their_details == "complete" and data.claim_amount == "complete" and data.claim_details == "complete" %}
+      <input type="submit" value="Submit and continue to payment (£70.00)" class="button" {{ "disabled" if not completed }}></input>
+    </form>
+  </div>
+
+  <p class="bold">You can only submit your claim after completing all sections.</p> -->
+
+
+  <div class="form-group">
+    <a name="hasacceptedtermsandconditions"></a>
+
+    <div class="multiple-choice text">
+      <input class="" id="HasAcceptedTermsAndConditions" type="checkbox" value="true">
+      <label for="HasAcceptedTermsAndConditions"> I believe that the facts stated in this claim are true.</label>
+    </div>
+
+
+    <span class="field-validation-valid" data-valmsg-for="HasAcceptedTermsAndConditions" data-valmsg-replace="true" aria-live="polite"></span></div>
+
+    <form method="post" action="check-and-send/enter-card" class="form">
+
+      <button id="submit" class="button" disabled>Submit and continue to payment (£70.00)</button>
+    </form>
+    <script>
+      $(document).ready(function () {
+        $("#HasAcceptedTermsAndConditions").click(function() {
+          var checked_status = this.checked;
+          if (checked_status == true) {
+           $("#submit").removeAttr("disabled");
+         } else {
+           $("#submit").attr("disabled", "disabled");
+         }
+       });
+
+      });
+    </script>
+
+    <!--<div class="back">-->
+    <!--<a href="#">Cancel application</a>-->
+    <!--</div>-->
+
+  </main>
+
+  {% endblock %}

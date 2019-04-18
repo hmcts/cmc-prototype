@@ -1,0 +1,80 @@
+{% extends "layout_task-list.html" %}
+
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+
+{% block home_link %} ../../task-list {% endblock %}
+
+{% block content %}
+
+
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+
+  <div class="breadcrumbs">
+    <ol>
+      <li>
+        <a href="../../task-list{{ formQuery | safe }}">Make a money claim</a>
+      </li>
+      <li>
+        Claim details
+      </li>
+    </ol>
+  </div>
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+      <form method="post" action="affect" class="form">
+
+        {{formData | safe}}
+
+        <h1 class="heading-large">
+          Why you believe you're owed the money
+        </h1>
+
+        <p>Briefly explain why you are owed the money. The defendant will read your explanation and get a chance to respond to it.</p>
+<p>List any evidence such as contracts or receipts you will use if your case goes to a hearing. A judge will read your explanation if your case goes to a hearing.</p>
+        <p>You can download or print your explanation if you want someone to look at it before you submit it.</p>
+        <fieldset>
+
+          <legend class="visuallyhidden">
+            Why you believe you're owed the money
+          </legend>
+
+          <textarea class="form-control form-control-3-4 form-control-large"
+                    id="claim-details-1"
+                    rows="3"
+                    name="claim-details1"
+                    type="text"
+                    style="width: 100%"
+                    value="{{data['claim-reason']}}"></textarea>
+
+        </fieldset>
+
+        <br>
+
+        <!--<details>-->
+
+        <!--<summary>-->
+        <!--<span class="summary">Specific assistance if needed (hide if not relevant)</span>-->
+        <!--</summary>-->
+
+        <!--<div class="panel panel-border-narrow">-->
+        <!--<p>Contextual guidance goes here...</p>-->
+        <!--</div>-->
+
+        <!--</details>-->
+
+        <div class="form-group">
+          <input type="submit" class="button" value="Save and continue"/>
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+
+</main>
+{% endblock %}

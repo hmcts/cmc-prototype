@@ -1,0 +1,128 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="2" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <a href="#" class="link-back">Back</a>
+      {% if data.radio_select_group2=="Some" or data['partial'] == 1 %}
+      <h1 class="heading-large">How much money do you believe you owe? </h1>
+      <form
+      name="aspnetForm"
+      action="defence-2"
+      method="get"
+      id="aspnetForm"
+      autocomplete="off">
+      {% elseif data.radio_select_group2=="Paid-some" or data['partial'] == 2%}
+      <h1 class="heading-large">How much have you paid the claimant? </h1>
+      <form
+      name="aspnetForm"
+      action="defence-2"
+      method="get"
+      id="aspnetForm"
+      autocomplete="off">
+      {% elseif data.radio_select_group2=="paid" or data['partial'] == 3 %}
+      <h1 class="heading-large">How much and when did you pay? </h1>
+      <form
+      name="aspnetForm"
+      action="../../task-list"
+      method="get"
+      id="aspnetForm"
+      autocomplete="off">
+      <input type="hidden" name="your_defence" value="complete">
+      {% endif %}
+      <div class="form-group">
+        <fieldset>
+          <legend class="visually-hidden">Defence</legend>
+          <div id="claim-details">
+            <div id="describe-wrapper-claim-details-1" class="form-group">
+              {% if data.radio_select_group2=="Some" or data['partial'] == 1%}
+              <p class="">The amount being claimed is £1,500</p>
+              <h3 class="heading-small">How much money do you believe you owe? </h3>
+              <div class="form-group">
+                <input class="fee pound" maxlength="8" size="8" type="text" value="{{data['owe-amount']}}"
+                name="owe-amount"
+                id="owe-amount">
+              </div>
+              {% elseif data.radio_select_group2=="paid" or data.radio_select_group2=="Paid-some" or data['partial'] == 2 or data['partial'] == 3  %}
+              <h3 class="heading-small">How much have you paid the claimant? </h3>
+              <div class="form-group">
+                <input class="fee pound" maxlength="8" size="8" type="text" value="{{data['amount-paid']}}"
+                name="amount-paid"
+                id="amount-paid">
+              </div>
+              <div class="form-group">
+                <fieldset>
+                  <p class="form-label-bold">When did you pay this amount?</p>
+                  <div class="form-date">
+                    <p class="form-hint">For example, 12 12 2017</p>
+                    <div class="form-group form-group-day">
+                      <label for="dob-day">Day</label>
+                      <input class="form-control" id="amount-day" type="number" name="amount-day" value="{{data['amount-day']}}" pattern="[0-9]*" min="0"
+                      max="31">
+                    </div>
+                    <div class="form-group form-group-month">
+                      <label for="dob-month">Month</label>
+                      <input class="form-control" id="amount-month" name="amount-month" value="{{data['amount-month']}}" type="number" pattern="[0-9]*"
+                      min="0" max="12">
+                    </div>
+                    <div class="form-group form-group-year">
+                      <label for="dob-year">Year</label>
+                      <input class="form-control" id="amount-year" name="amount-year"  value="{{data['amount-year']}}" type="number" pattern="[0-9]*" min="0"
+                      max="2014">
+                    </div>
+                  </div>
+                </fieldset>
+              </div>
+              {% endif %}
+              <div class="form-group">
+                <label class="form-label-bold" for="offer">
+                  
+                 {% if data.radio_select_group2=="Some" or data['partial'] == 1%}
+                 Explain why this is what you owe, rather than the full amount. 
+                 {% elseif data.radio_select_group2=="Paid-some" or data['partial'] == 2%}
+                 Explain why you don't owe the full amount.
+                 {% elseif data.radio_select_group2=="paid" or data['partial'] == 3%}
+                 Any additional comments (optional). 
+                 {% endif %}
+               </label>
+               <textarea class="form-control form-control-3-4 form-control-large"
+               id="owe-reason"
+               rows="4"
+               name="owe-reason"
+               cols="40"
+               type="text"
+               style="width: 95%"
+               >{{data['owe-reason']}}</textarea>
+             </div>
+           </div>
+         </div>
+       </fieldset>
+       <div class="panel panel-border-wide">
+        <p>Your response will be sent to the claimant Jan Clark. A judge will not consider your response unless your case goes to a hearing.</p>
+      </div>
+      <div class="form-group">
+        <input id="advert-option-next--button" type="submit" value="Save and continue" class="button"
+        data-ignore-double-submit="true">
+      </div>
+    </div>
+  </form>
+</div>
+</div>
+</main>
+<form method="post"  action="#" class="form" style="; float: left">
+  <select id="dashboard2" name="dashboard2" onchange="window.location.href='partial?partial='+this.value">
+    <option  value="0" >Claimant view</option>
+    <option value="1" {% if data['partial'] == 1 %}selected{% endif %}>1. The amount is too much</option>
+    <option value="2" {% if data['partial'] == 2 %}selected{% endif %}>2. I've paid what I believe I owe</option>
+    <option value="3" {% if data['partial'] == 3 %}selected{% endif %}>3. I've already paid</option>
+  </select>
+</form>
+{% endblock %}

@@ -1,0 +1,221 @@
+{% extends "layout_task-list.html" %}
+
+{% block page_title %}
+Check your answers
+{% endblock %}
+{% block home_link %} ../../task-list {% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+      <a href="#" class="link-back">Back</a>
+
+  <h1 class="heading-large">
+    Check your answers
+  </h1>
+
+  <table class="check-your-answers">
+
+    <thead>
+      <tr>
+        <th colspan="2">
+          <h2 class="heading-medium">
+            Claim amount
+          </h2>
+        </th>
+        <th>
+        </th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td class="no-border">
+          Claim amount:
+        </td>
+        <td class="no-border">
+
+         £{{data['totalSum']}}
+
+       </td>
+       <td class="change-answer no-border">
+        <a href="../claim-amount/index?return_page={{ '../../task-list/claim-amount/check-your-answers' | urlencode }}">
+          Change <span class="visuallyhidden">Why you believe you're owed the money</span>
+        </a> 
+      </td>
+    </tr>
+
+
+    {% if data['interest-rate']=="No interest" %}
+
+    <tr>
+      <td >
+        Interest rate:
+      </td>
+      <td >
+        I don't want to claim interest
+
+      </td>
+      <td class="change-answer ">
+
+      </td>
+    </tr>
+    {% endif %}    
+
+
+    {% if data['interest-rate']=="Different rate" %}
+    <tr>
+      <td class="no-border">
+        Interest rate:
+      </td>
+      <td class="no-border">
+
+
+        {{data['rate']}}%
+
+
+
+      </td>
+      <td class="change-answer no-border">
+
+      </td>
+    </tr> 
+    <tr>
+      <td class="no-border">
+        Why you’re entitled to this rate:
+      </td>
+      <td class="no-border">
+
+
+       {{data['rate-why']}}
+
+
+     </td>
+     <td class="change-answer no-border">
+
+     </td>
+   </tr>         
+   {% endif %}
+
+
+
+   {% if data['interest-rate']=="8 percent" %}
+   <tr>
+    <td class="no-border">
+      Interest rate:
+    </td>
+    <td class="no-border">
+
+
+     8%
+
+    </td>
+    <td class="change-answer no-border">
+
+    </td>
+  </tr>     
+  {% endif %} 
+
+
+  {% if data['interest-rate']!="No interest" %}
+
+  {% if data['interest-date']=="Issue date" %}
+  <tr>
+    <td>
+      Date interest applied from:
+    </td>
+    <td>
+      From the date I submit the claim
+    </td>
+    <td class="change-answer">
+
+    </td>
+  </tr>
+  {% endif %} 
+
+  {% if data['interest-date']=="Particular date" %}
+  <tr>
+    <td class="no-border">
+      Date interest applied from:
+    </td>
+    <td class="no-border">
+     {{ data['interest-day'] }} {{ data['interest-month'] }} {{ data['interest-year'] }}
+   </td>
+   <td class="change-answer no-border">
+
+   </td>
+ </tr>
+ <tr>
+  <td>
+    Explain why you're claiming from this date:
+  </td>
+  <td>
+    {{data['date-why']}}
+  </td>
+  <td class="change-answer">
+
+  </td>
+</tr>
+
+
+{% endif %} 
+{% endif %} 
+
+
+
+{% if data['interest-date']=="Particular date" %}
+
+<tr>
+  <td>
+    Interest to date:
+  </td>
+  <td>
+    £13
+  </td>
+  <td class="change-answer">
+    <a href="#">
+      <span class="visuallyhidden">Interest</span>
+    </a>
+  </td>
+</tr>
+
+
+{% endif %}
+<tr>
+  <td>
+    Claim fee:
+  </td>
+  <td>
+    £70
+  </td>
+  <td class="change-answer">
+    <a href="#">
+      <span class="visuallyhidden">Claim fee</span>
+    </a>
+  </td>
+</tr>
+<tr>
+  <td>
+   <span class="bold"> Total:</span>
+ </td>
+ <td >
+  <span class="bold">{{data['totalClaimAmount']}}</span>
+</td>
+<td class="change-answer">
+  <a href="#">
+    <span class="visuallyhidden">Total </span>
+  </a>
+</td>
+</tr>
+</tbody>
+</table>
+
+
+
+<br>
+<br>
+
+
+</main>
+
+{% endblock %}
