@@ -1,0 +1,57 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+
+{% block content %}
+
+
+<main id="content" role="main">
+
+  {% include "includes/phase_banner_beta.html" %}
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+      <a href="#" onclick="history.go(-1)" class="link-back">Back</a>
+
+      {% if data['lower-amount']=="true" %}
+          <h1 class="heading-large">
+            Contact Jan Clark to settle the claim
+          </h1>
+      {% else %}
+          <h1 class="heading-large">
+            Contact Jan Clark to arrange payment
+          </h1>
+      {% endif %}
+
+      <p><a href="../../party-details/claimant">Get Jan Clark's contact details</a></p>
+      <p>Get proof you have paid them.<br>
+        We'll contact you when they've told us you've paid.</p>
+
+      <h2 class="bold font-medium">Speed up removing your CCJ</h2>
+      <p>If you apply to get your CCJ removed you may be approved quicker if you have a 'consent order'.
+        This is a document signed by you and Jan Clark stating you're both willing for this CCJ to be removed.</p>
+
+      <br>
+
+      <p><a href="#">I have already contacted Jan Clark</a>
+
+
+    </div>
+  </div>
+
+  {% include 'prototypes/prototype-apr-2019/includes/contact.html' %}
+</main>
+
+<form method="post"  action="#" class="form" style="float: left;">
+  <select id="control-box2" name="control-box2" onchange="window.location.href='settle-out-of-court?beforeccjdeadline='+this.value">
+    <option value="true">Defendant</option>
+    <option value="true" >- Before 1 month CCJ deadline</option>
+    <option value="false">- After 1 month CCJ deadline</option>
+  </select>
+</form>
+
+
+{% endblock %}
