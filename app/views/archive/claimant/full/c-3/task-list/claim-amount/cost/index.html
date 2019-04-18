@@ -1,0 +1,209 @@
+{% extends "layout_task-list.html" %}
+
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="1" %}
+
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+      <form method="post" action="total" class="form">
+
+        {{formData | safe}}
+      <a href="#" class="link-back">Back</a>
+
+        <h1 class="heading-xlarge">Fees you'll pay</h1>
+
+        <p>You must pay the claim fee up front. However, we'll add it to the amount you're claiming back from the
+          defendant.</p>
+        <p>If you’re on a low income or get certain benefits you might be
+          able to get <a href="https://www.gov.uk/get-help-with-court-fees">help with fees</a>. If you need help with fees you can't use this service to make a money claim.</p>
+
+        <!--         <p>Remember the court might decide that you're owed the money but it's up to you to decide if you have a reasonable prospect of getting it back.</p>
+         -->
+
+        <table>
+          <thead>
+          <tr>
+            <th scope="col"></th>
+            <th class="numeric" scope="col"></th>
+          </tr>
+          </thead>
+          <tbody>
+
+          <tr>
+            <td>Claim fee</td>
+            <td class="numeric">£70</td>
+          </tr>
+
+          <tr>
+            <td>Hearing fee (if your claim goes to a hearing)</td>
+            <td class="numeric">£115</td>
+          </tr>
+
+          <tr>
+            <td>Other fees - for example, to update your claim once submitted</td>
+            <td class="numeric">varies by case</td>
+          </tr>
+
+          </tbody>
+        </table>
+
+        <details>
+          <summary>How these fees are calculated</summary>
+
+          <div class="panel">
+            <table class="expandable-demo">
+              <p>The fee is based on the amount you're claiming, including any interest.
+              </p>
+              <thead>
+              <tr>
+                <th scope="col">Claim amount</th>
+                <th scope="col">Claim fee</th>
+                <!--<th scope="col">Paper form fee</th>-->
+                <th scope="col">Hearing fee</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <td>
+                  <ul class="list">
+                    <li>£0.01 to £300</li>
+                  </ul>
+                </td>
+                <td>£25</td>
+                <!--<td>£35</td>-->
+                <td>£25</td>
+              </tr>
+              <tr>
+                <td>
+                  <ul class="list">
+                    <li>£300.01 to £500</li>
+                  </ul>
+                </td>
+                <td>£35</td>
+                <!--<td>£50</td>-->
+                <td>£55</td>
+              </tr>
+              <tr>
+                <td>
+                  <ul class="list">
+                    <li>£500.01 to £1,000</li>
+                  </ul>
+                </td>
+                <td>£60</td>
+                <!--<td>£70</td>-->
+                <td>£80</td>
+              </tr>
+              <tr>
+                <td>
+                  <ul class="list">
+                    <li>£1,000.01 to £1,500</li>
+                  </ul>
+                </td>
+                <td>£70</td>
+                <!--<td>£80</td>-->
+                <td>£115</td>
+              </tr>
+              <tr>
+                <td>
+                  <ul class="list">
+                    <li>£1,500.01 to £3,000</li>
+                  </ul>
+                </td>
+                <td>£105</td>
+                <!--<td>£115</td>-->
+                <td>£170</td>
+              </tr>
+              <tr>
+                <td>
+                  <ul class="list">
+                    <li>£3,000.01 to £5,000</li>
+                  </ul>
+                </td>
+                <td>£185</td>
+                <!--<td>£205</td>-->
+                <td>£335</td>
+              </tr>
+              <tr>
+                <td>
+                  <ul class="list">
+                    <li>£5,000.01 to £10,000</li>
+                  </ul>
+                </td>
+                <td>£410</td>
+                <!--<td>£455</td>-->
+                <td>£335</td>
+              </tr>
+              <tr>
+                <td>
+                  <ul class="list">
+                    <li>£10,000.01 to £25,000 </li>
+                  </ul>
+                </td>
+                <td>  4.5% of the claim</td>
+                <!--<td>£455</td>-->
+                <td>£545</td>
+              </tr>
+              <tr>
+                <td>
+                  <ul class="list">
+                    <li>£25,000.01 to £100,000 </li>
+                  </ul>
+                </td>
+                <td>  4.5% of the claim</td>
+                <!--<td>£455</td>-->
+                <td>£1090</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </details>
+
+        <fieldset></fieldset>
+
+        <!-- <details>
+
+          <summary><span class="summary">What if I also claim interest</span></summary>
+
+          <div class="panel panel-border-narrow">
+
+            <p>Content goes here...claim fee varies depending on interest</p>
+
+          </div>
+
+        </details> -->
+
+        <br>
+
+      {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}
+        <div class="form-group">
+          <input type="submit" class="button" value="Save and continue"/>
+        </div>
+
+
+        <a href="{{ data.return_page if data.return_page | length > 0 else '../task-list' }}">Cancel</a>
+
+      {% else %}
+        <div class="form-group">
+          <input type="submit" class="button" value="Continue"/>
+        </div>
+
+      {% endif %}
+
+      </form>
+
+    </div>
+  </div>
+
+</main>
+{% endblock %}

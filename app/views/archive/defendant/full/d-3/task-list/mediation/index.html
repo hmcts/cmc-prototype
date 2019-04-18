@@ -1,0 +1,134 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="2" %}
+
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+
+
+<main id="content" role="main">
+
+
+
+  {% include "includes/phase_banner_beta.html" %}
+
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+      <a href="#" class="link-back">Back</a>
+
+
+      <h1 class="heading-large">
+        Free mediation
+      </h1>
+
+      <p class="">You might feel you need to go to a hearing now. However, many people resolve their dispute before
+        a hearing by taking part in telephone mediation.</p>
+
+        <p>A mediator will:</p>
+        <ul class="list list-bullet">
+          <li>listen to each side separately - you won’t talk to directly to the other side</li>
+          <li>ask you to consider what the other side says, but won’t make you compromise</li>
+          <li>help you reach an agreement, if possible</li>
+        </ul>
+
+
+
+        <h1 class="heading-medium">
+          Will you try mediation?
+        </h1>
+
+
+
+
+      {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}        
+      <form
+      name="aspnetForm"
+      method="post"
+      id="aspnetForm"
+      autocomplete="off" 
+      onsubmit="multiNavigation('radio-mediation-group', ['Yes', 'No'], ['../mediation', '../mediation']);return false;"
+      >
+
+      {% else %}
+      <form
+      name="aspnetForm"
+      method="post"
+      id="aspnetForm"
+      autocomplete="off" 
+      onsubmit="multiNavigation('radio-mediation-group', ['Yes', 'No'], ['../task-list', '../task-list']);return false;"
+      >
+      {% endif %}
+
+
+
+
+        <input id="your-offer" name="offer" type="hidden">
+
+        <div class="form-group">
+          <fieldset>
+
+            <legend class="visually-hidden">Will you try mediation?</legend>
+
+            <p>Over 68% of people who use our Mediation Service settle on the day.*</p>
+
+            <div class="multiple-choice">
+              <input id="radio-yes" type="radio" name="radio-mediation-group" value="Yes">
+              <label for="radio-yes" data-target="yes-info">Yes, I want to take part in telephone mediation.</label>
+            </div>
+
+            <div class="panel panel-border-narrow js-hidden" id="yes-info">
+              <p>If both you and Jan Clark say yes, we'll contact you to set up an appointment and answer
+                any questions you have.</p>
+              </div>
+
+              <div class="multiple-choice">
+                <input id="radio-no" type="radio" name="radio-mediation-group" value="No">
+                <label for="radio-no" data-target="no-info">No, I don't want mediation</label>
+              </div>
+
+              <div class="panel panel-border-narrow js-hidden" id="no-info">
+                <p>If you can reach an agreement with Jan Clark you don't need to go to a hearing. You'll need to
+                  explain your side and if the court
+                  decides you owe the money, you might have to pay more or get a <a
+                  href="https://www.gov.uk/county-court-judgments-ccj-for-debt">County
+                  Court Judgment (CCJ)</a> made against you.</p>
+                </div>
+
+              </fieldset>
+              <input type="hidden" name="mediation" value="complete">
+
+
+        {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}
+        <div class="form-group">
+          <input type="submit" class="button" value="Save changes"/>
+        </div>
+
+
+        <a href="{{ data.return_page if data.return_page | length > 0 else '../task-list' }}">Cancel</a>
+
+        {% else %}
+        <div class="form-group">
+          <input type="submit" class="button" value="Save and continue"/>
+        </div>
+
+        {% endif %}
+
+            </div>
+          </form>
+          <p></p><br>
+          <p>*Source: Money Claim Mediation Service statistics, April 2015 to March 2016.
+            <p/>
+
+          </div>
+        </div>
+      </main>
+
+
+      {% endblock %}

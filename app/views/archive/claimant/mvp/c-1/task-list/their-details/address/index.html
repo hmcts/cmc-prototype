@@ -1,0 +1,114 @@
+{% extends "layout_task-list.html" %}
+
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+
+{% block home_link %} ../../task-list {% endblock %}
+
+{% block content %}
+
+
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+
+  {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}
+  {% else %}
+  <div class="breadcrumbs">
+    <ol>
+      <li>
+        <a href="../../task-list{{ formQuery | safe }}">Make a money claim</a>
+      </li>
+      <li>
+        Their details
+      </li>
+    </ol>
+  </div>
+  {% endif %}
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}
+      <form method="post" action="{{ data.return_page if data.return_page | length > 0 else '../task-list' }}" class="form">
+
+
+        {% else %}
+        <form method="post" action="email" class="form">
+
+          {% endif %}
+
+          {{formData | safe}}
+
+          <h1 class="heading-large">
+            Their address
+          </h1>
+
+<!--           <p>Enter their current or last known address.</p>
+ -->
+          
+            <p>You must enter the defendant’s residential address to make a claim against them.</p>
+          
+<!--           <p>You must not give someone's work address unless you're claiming against them in relation to their job or work.</p>
+ -->
+
+          <fieldset>
+            <legend class="visuallyhidden">
+              Postcode
+            </legend>
+
+            <!--<div class="form-group">-->
+            <!--<input class="form-control" id="claimant_address" name="claimant-address" type="text" value="{{data['claimant-address']}}">-->
+            <!--</div>-->
+
+            <br>
+
+            <div class="form-group">
+
+
+
+             <div class="form-group-compound address-item form-group">
+              <label class="form-label" for="addressLine1">Address line 1</label>
+              <input class="form-control" id="addressLine1" name="d-addressLine1" type="text" value="{{data['d-addressLine1']}}" >
+            </div>
+
+            <div class="form-group-compound address-item form-group">
+              <label class="form-label" for="addressLine2">Address line 2 (optional)</label>
+              <input  class="form-control" id="addressLine2" name="d-addressLine2" type="text" value="{{data['d-addressLine2']}}">
+            </div>
+
+            <div class="form-group-compound address-item form-group">
+              <label class="form-label" for="addressLine3">Town or city</label>
+              <input id="addressLine3" name="d-addressLine3" type="text" value="{{data['d-addressLine3']}}">
+
+            </div>
+
+            <div class="address-item form-group">
+              <label class="form-label" for="addressPostcode">Postcode</label>
+              <input class="form-control form-control-large form-control-1-4" id='d-addressPostcode' name="addressPostcode" type="text" value="{{data['d-addressPostcode']}}">
+            </div>
+            <fieldset></fieldset>
+
+            {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}
+            <div class="form-group">
+              <input type="submit" class="button" value="Save changes"/>
+            </div>
+
+
+            <a href="{{ data.return_page if data.return_page | length > 0 else '../task-list' }}">Cancel</a>
+
+            {% else %}
+            <div class="form-group">
+              <input type="submit" class="button" value="Save and continue"/>
+            </div>
+
+            {% endif %}
+
+          </fieldset>
+
+        </form>
+
+      </div>
+    </div>
+
+  </main>
+  {% endblock %}

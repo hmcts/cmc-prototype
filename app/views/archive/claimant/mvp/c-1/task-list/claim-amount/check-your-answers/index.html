@@ -1,0 +1,256 @@
+{% extends "layout_task-list.html" %}
+
+{% block page_title %}
+Check your answers
+{% endblock %}
+{% block home_link %} ../../task-list {% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+
+  <h1 class="heading-large">
+    Check your answers
+  </h1>
+
+  <table class="check-your-answers">
+
+    <thead>
+      <tr>
+        <th colspan="2">
+          <h2 class="heading-medium">
+            Claim amount
+          </h2>
+        </th>
+        <th>
+        </th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td class="">
+          Claim amount:
+        </td>
+        <td class="">
+
+         £{{data['totalSum']}}
+
+       </td>
+       <td class="change-answer ">
+        <a href="../claim-amount/index?return_page={{ '../../task-list/claim-amount/check-your-answers' | urlencode }}">
+          Change <span class="visuallyhidden">Why you believe you're owed the money</span>
+        </a> 
+      </td>
+    </tr>
+
+
+    {% if data['interest-rate']=="No interest" %}
+
+    <tr>
+      <td class="no-border" >
+        Interest rate:
+      </td>
+      <td  class="no-border">
+        I don't want to claim interest
+
+      </td>
+      <td class="change-answer no-border ">
+       <a href="../claim-amount/claim-interest?return_page={{ '../../task-list/claim-amount/check-your-answers' | urlencode }}">
+        Change <span class="visuallyhidden">Why you believe you're owed the money</span>
+      </a> 
+    </td>
+  </tr>
+  {% endif %}    
+
+
+  {% if data['interest-rate']=="Different rate" %}
+  <tr>
+    <td class="no-border">
+      Interest rate:
+    </td>
+    <td class="no-border">
+
+
+      {{data['rate']}}%
+
+
+
+    </td>
+    <td class="change-answer no-border">
+      <a href="../claim-amount/claim-interest?return_page={{ '../../task-list/claim-amount/check-your-answers' | urlencode }}">
+        Change <span class="visuallyhidden">Why you believe you're owed the money</span>
+      </td>
+    </tr> 
+
+    <tr>
+      <td class="">
+        Why you’re entitled to this rate:
+      </td>
+      <td class="">
+
+
+       {{data['rate-why']}}
+
+
+     </td>
+     <td></td>
+   </tr>         
+   {% endif %}
+
+
+
+   {% if data['interest-rate']=="8 percent" %}
+   <tr>
+    <td >
+      Interest rate:
+    </td>
+    <td >
+
+
+     8%
+
+   </td>
+   <td class="change-answer ">
+    <a href="../claim-amount/claim-interest?return_page={{ '../../task-list/claim-amount/check-your-answers' | urlencode }}">
+      Change <span class="visuallyhidden">Why you believe you're owed the money</span>
+    </td>
+  </tr>     
+  {% endif %} 
+
+
+  {% if data['interest-rate']!="No interest" %}
+
+  {% if data['interest-date']=="Issue date" %}
+  <tr>
+    <td>
+      Date interest applied from:
+    </td>
+    <td>
+      From the date I submit the claim
+    </td>
+    <td class="change-answer ">
+      <a href="../claim-amount/interest-date?return_page={{ '../../task-list/claim-amount/check-your-answers' | urlencode }}">
+        Change <span class="visuallyhidden">Why you believe you're owed the money</span>
+      </td>
+    </tr>
+    {% endif %} 
+
+    {% if data['interest-date']=="Particular date" %}
+    <tr>
+      <td class="no-border">
+        Date interest applied from:
+      </td>
+      <td class="no-border">
+       {{ data['interest-day'] }} {{ data['interest-month'] }} {{ data['interest-year'] }}
+     </td>
+     <td class="change-answer no-border">
+      <a href="../claim-amount/interest-date?return_page={{ '../../task-list/claim-amount/check-your-answers' | urlencode }}">
+        Change <span class="visuallyhidden">Why you believe you're owed the money</span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Explain why you're claiming from this date:
+      </td>
+      <td>
+        {{data['date-why']}}
+      </td>
+      <td class="change-answer">
+
+      </td>
+    </tr>
+
+
+    {% endif %} 
+    {% endif %} 
+
+
+
+    {% if data['interest-date']=="Particular date" and data['interest-rate']=="No interest" %}
+
+    <tr>
+      <td>
+        Interest to date:
+      </td>
+      <td>
+        £13
+      </td>
+      <td class="change-answer">
+        <a href="#">
+          <span class="visuallyhidden">Interest</span>
+        </a>
+      </td>
+    </tr>
+
+
+    {% endif %}
+    <tr>
+      <td>
+        Claim fee:
+      </td>
+      <td>
+        £70
+      </td>
+      <td class="change-answer">
+        <a href="#">
+          <span class="visuallyhidden">Claim fee</span>
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+       <span class="bold"> Total:</span>
+     </td>
+     <td >
+      <span class="bold">{{data['totalClaimAmount']}}</span>
+    </td>
+    <td class="change-answer">
+      <a href="#">
+        <span class="visuallyhidden">Total </span>
+      </a>
+    </td>
+  </tr>
+</tbody>
+</table>
+
+<table class="check-your-answers">
+  <thead>
+    <tr>
+      <th colspan="2">
+        <h2 class="heading-medium">
+          Other fees
+        </h2>
+      </th>
+      <th>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <tr>
+      <td>
+        Hearing fee (if your claim goes to a hearing)
+      </td>
+      <td >
+        £115
+      </td>
+      <td >
+
+      </td>
+    </tr>
+
+
+
+  </tbody>
+</table>
+
+
+<br>
+<br>
+
+<a href="../../task-list">Return to task list</a>
+
+</main>
+
+{% endblock %}

@@ -1,0 +1,124 @@
+{% extends "layout_task-list.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block home_link %} ../task-list {% endblock %}
+{% block proposition_header %}
+{% set my_account="1" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <a href="#" class="link-back">Back</a>
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <h1 class="heading-large">
+        Do you accept the repayment plan?
+      </h1>
+      <h2 class="heading-medium">How they want to pay</h2>
+
+              <p class="panel">This payment plan is calculated using the financial information Mary Richards has entered. It hasn't been reviewed by court staff.</p>
+
+      <table class="instalment-table">
+        <tbody>
+          <tr>
+          </tr><tr>
+            <td class="">
+              The first payment of
+            </td>
+            <td class="">
+              £100
+            </td>
+            <td class="change-answer ">
+            </td>
+          </tr>
+          <tr class="">
+            <td class="">
+              Followed by equal monthly instalments of
+            </td>
+            <td class="">
+              £200
+            </td>
+            <td class="">
+            </td>
+          </tr>
+          <tr class="">
+            <td class="">
+              Make the first payment on
+            </td>
+            <td >
+              1 December 2017
+            </td>
+            <td>
+            </td>
+          </tr>
+          <tr>
+            <td class="">
+              Last payment on
+            </td>
+            <td class="">
+              1 October 2019
+            </td>
+            <td class=" ">
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <h2 class="heading-medium">Do you accept the payment plan?</h2>
+          {% if data['determination'] == "1" %}
+            <form
+              name="aspnetForm"
+              method="post"
+
+              onsubmit="multiNavigation('radio-indent-group', ['reject_stop_claim', 'accept_stop_claim'], ['../task-list?determined_figure=reject&', '../task-list?determined_figure=accept&']);return false;"
+
+              id="aspnetForm"
+              autocomplete="off">
+
+           {% else %}
+            <form
+              name="aspnetForm"
+              method="post"
+
+              onsubmit="multiNavigation('radio-indent-group', ['reject_stop_claim', 'accept_stop_claim'], ['payment-method/rejection-reason', '../task-list']);return false;"
+
+              id="aspnetForm"
+              autocomplete="off">
+      {% endif %}
+
+
+      <div class="form-group">
+        <fieldset>
+          <div class="multiple-choice" data-target="accept">
+            <input id="radio-yes" type="radio" name="radio-indent-group" value="accept_stop_claim">
+            <label for="radio-yes" data-target="yes-info"> I accept this repayment plan</label>
+          </div>
+          <div class="panel panel-border-narrow js-hidden" id="accept">
+            <p>By agreeing to the payment method you will stop the claim. If the defendant stops paying, you can ask the court to enforce payment.</p>
+          </div>
+          <div class="multiple-choice" data-target="reject-offer">
+            <input id="radio-no" type="radio" name="radio-indent-group" value="reject_stop_claim">
+            <label for="radio-no" data-target="no-info"> I reject this repayment plan</label>
+          </div>
+      {% if data['determination'] == "1" %}
+      {% else %}
+          <div class="panel panel-border-narrow js-hidden" id="reject-offer">
+            <p>By rejecting their payment offer this claim be sent to the court to determine what the defendant can afford to pay. </p>
+          </div>
+      {% endif %}
+
+
+
+
+
+        </fieldset>
+        <input type="hidden" name="payment_method" value="complete">
+        <input id="advert-option-next--button" type="submit" value="Save and continue" class="button"
+        data-ignore-double-submit="true">
+      </div>
+    </form>
+  </div>
+</div>
+</main>
+{% endblock %}

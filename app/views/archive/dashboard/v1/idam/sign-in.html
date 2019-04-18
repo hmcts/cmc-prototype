@@ -1,0 +1,122 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+
+{% block home_link %} index {% endblock %}
+
+{% block content %}
+
+
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+      <h1 class='heading-large' id='page-h1'>
+        Sign in
+      </h1>
+      <p  >Not registered yet? <a href="create-account">Register</a></p>
+
+       
+
+    {% if data['control-box'] == 1 %}
+    <!-- first time user - make claim -->
+     <form  action="account-activated" method="get">
+          <input type="hidden" name="make_claim" value="true">
+              <input type="hidden" name="respond" value="false">
+
+
+    {% elseif data['control-box'] == 2 %}
+    <!-- returning to a claim -->
+     <form action="/dashboard/home?dashboard=6" method="post">
+
+    {% elseif data['control-box'] == 3 %}
+    <!-- Issue a CCJ -->
+     <form action="/dashboard/home?dashboard=3" method="post">
+  
+    {% elseif data['control-box'] == 4 %}
+    <!-- Respond to a claim first time -->
+     <form  action="account-activated" method="get">
+    <input type="hidden" name="respond" value="true">
+    <input type="hidden" name="make_claim" value="false">
+
+   
+    {% elseif data['control-box'] == 5 %}
+    <!-- return to a response first time -->
+     <form action="/dashboard/home?dashboard=2" method="post">
+    
+    {% elseif data['control-box'] == 6 %}
+    <!-- Mediation request from defendant -->
+     <form action="/dashboard/home?dashboard=7" method="post">
+    
+    {% elseif data['control-box'] == 7 %}
+<!--    Suggestion and Mediation request from defendant  -->
+     <form action="/dashboard/home?dashboard=9" method="post">
+  
+      {% elseif data['control-box'] == 8 %}
+    <!-- CCJ issued -->
+     <form action="/dashboard/home?dashboard=5" method="post">
+      
+
+    {% else %}
+          <form action="account-activated" method="get">
+    {% endif %}
+
+
+
+        <div class='form-group'>
+          <label class="email optional form-label" for="user_email">Email</label>
+          <input autofocus="autofocus" class="string email optional form-control" type="email" value=""
+                 name="user[email]" id="user_email"/>
+        </div>
+        <div class='form-group'>
+          <label class="password optional form-label" for="user_password">Password</label>
+          <input autocomplete="off" class="password optional form-control" type="password" name="user[password]"
+                 id="user_password"/>
+        </div>
+        <div class='form-group'>
+          <input type="submit" name="commit" value="Sign in" class="btn button"/>
+        </div>
+        <div>
+          <a href="">Forgot your password?</a>
+          <br>
+        </div>
+        Read our
+        <a href="tandcs">terms and conditions</a>
+
+      </form>
+
+      <div class='grid-row contactus-link'>
+
+      </div>
+</main>
+<form method="post"  action="#" class="form" style="float: left;">
+  <select id="control-box" name="control-box" onchange="this.form.submit()">
+    <option  value="0" {% if data['control-box'] == 0 %}selected{% endif %}>Claimant</option>
+
+    <option  value="1" {% if data['control-box'] == 1 %}selected{% endif %}>1 - make-claim-new</option>
+    <option value="2" {% if data['control-box'] == 2 %}selected{% endif %}>2 - make-claim-return</option>
+    <option value="3" {% if data['control-box'] == 3 %}selected{% endif %}>3 - make-claim-CCJ</option>
+        <option value="6" {% if data['control-box'] == 6 %}selected{% endif %}>4 - Response mediation only </option>
+    <option value="7" {% if data['control-box'] == 7 %}selected{% endif %}>5 - Response offer + mediation</option>
+
+  </select>
+  </form>
+<form method="post"  action="#" class="form" style="float: left;">
+
+  <select id="control-box" name="control-box" onchange="this.form.submit()">
+    <option  value="0" {% if data['control-box'] == 0 %}selected{% endif %}>Defendant</option>
+    <option value="4" {% if data['control-box'] == 4 %}selected{% endif %}>1 - Respond to claim-new</option>
+    <option value="5" {% if data['control-box'] == 5 %}selected{% endif %}>2 - Respond to claim-return</option>
+    <option value="8" {% if data['control-box'] == 8 %}selected{% endif %}>3 - CCJ Issued</option>
+
+  </select>
+
+
+</form>
+
+{% endblock %}
+

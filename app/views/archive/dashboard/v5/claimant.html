@@ -1,0 +1,431 @@
+{% extends "layout_task-list.html" %}
+{% block page_title %} Your money claims account {% endblock %}
+{% block proposition_header %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main" ">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <header class="page-heading page-heading-with-context page-heading-without-breadcrumb">
+        <a href="#" class="link-back">Back</a>
+        <h1 class="heading-large">
+          <span class="heading-secondary">Claim number:</span>
+          {% if data['claimant'] == 1.2  %}
+          Draft
+          {% else  %}
+          391MC645
+          {% endif  %}
+        </h1>
+        <div id="tabs" >
+          <div class="nav-tabs">
+            <ul class="tabs-nav">
+              <li><a href="#tabs-1">Claim status <span class="alert-icon stat"></span></a></li>
+              <li><a href="#tabs-2">Claim history</a></li>
+              {% if data['claimant'] == 10 or data['claimant'] == 11 or data['claimant'] == 12 or data['claimant'] == 16  %}
+              <li><a  href="#tabs-3">Settle out of court <span class="alert-icon settle"></span></a></li>
+              {%else%}
+              {% endif  %}
+            </ul>
+          </div>
+          {% if data['claimant'] == 1 or data['claimant'] == 3 or data['claimant'] == 17 or data['claimant'] == 11 or data['claimant'] == 12 or data['claimant'] == 13 or data['claimant'] == 14 or data['claimant'] == 15 or  data['claimant'] == 16 %}
+          <style> .alert-icon.stat{ display:none}</style>
+          {% if  data['claimant'] == 12  %}
+          <style> .alert-icon.settle{ display:none}</style>
+          {%endif%}
+          {%else%}
+          {% endif  %}
+          <div class="tab-content">
+            <div id="tabs-1" class="tab-pane">
+              {% if data['claimant'] == 1.2  %}
+              <h2 class="heading-medium">This claim has not been submitted</h2>
+              <p>Your claim is saved as a draft.</p>
+              <p><a href="../../claimant/full/c-3/task-list" class="button secondary-button"> Continue with claim.</a></p>
+              {% elseif data['claimant'] == 1  %}
+              <h2 class="heading-medium">Your claim has been sent</h2>
+              <div class="">
+                <p>Jan Clark has until 28 December to respond. They can request an extra 14 days if they need it. We'll let you know if they do.</p>
+              </div>
+              {% elseif data['claimant'] == 2  %}
+              <h2 class="heading-medium">You can request a County Court Judgment</h2>
+              <div class=" ">
+                <p>Mary Richards has not responded to your claim by the deadline. You can request a County Court Judgment (CCJ) to get what's owed. </p>
+                <p><a href="applications-and-judgments/default-judgment" class="button secondary-button">Request a County Court Judgment</a></p>
+                <p>Mary Richards can still respond to the claim until you request a CCJ.</p>
+              </div>
+              <p>A CCJ means the court orders the defendant to pay you</p>
+              {% elseif data['claimant'] == 3  %}
+              <h2 class="heading-medium">You've requested a County Court Judgment (CCJ).</h2>
+              <div class="">
+                <p>You requested a CCJ on <span class="date">19 October</span>. We will contact you within 5 days.
+                </p>
+                <p>Mary Richards can no longer respond to your claim</p>
+              </div>
+              {% elseif data['claimant'] == 4  %}
+              <h2 class="heading-medium">The defendant's response </h2>
+              <p>Mary Richards admits they owe all the money. They've offered to pay you in instalments.</p>
+              <p>You can accept or reject their offer.</p>
+              <p> <a href="claimant-response/admit-the-claim/task-list" class="button secondary-button">Respond to the offer</a></p>
+              {% elseif data['claimant'] == 4.1  %}
+              <h2 class="heading-medium">The defendant's response </h2>
+              <p>Mary Richards admits they owe all the money. They have offered to pay you in full on {{ now | date( 'add', 3, 'months') | date }} and have signed a settlement agreement.</p>
+              <p>You need to accept or reject their payment proposal and settlement agreement.</p>
+              <p> <a href="claimant-response/admit-the-claim/task-list?payment=full" class="button secondary-button">Respond to the defendant</a></p>
+              {% elseif data['claimant'] == 4.2  %}
+              <h2 class="heading-medium">The defendant's response </h2>
+              <p>Mary Richards admits they owe all the money. They have offered to pay you in full immediately. They have until {{ now | date( 'add', 5, 'days') | date }} to pay.</p>
+              <p>When you have been paid in full, you need to <a href="idam/contact-us?type=service_specific">contact the court</a> to let them know.</p>
+              <h3 class="heading-medium">What to do if they don't pay</h3>
+              <p>If you have not been paid by {{ now | date('add', 5, 'days') | date }}, you will then be able to request a County Court Judgment and enforcement.</p>
+
+              {% elseif data['claimant'] == 5  %}
+              <div class="">
+                <h2 class="heading-medium">The defendant's response </h2>
+                <p>Mary Richards believes they owe you £1,000. They've offered to pay you in instalments. You need to accept or reject that this is amount owed.</p>
+                <div class="form-group">
+                  <p> <a href="claimant-response/part-admit/task-list" class="button secondary-button">Respond to the defendant</a></p>
+                </div>
+              </div>
+              {% elseif data['claimant'] == 6  %}
+              <div class="">
+                <h2 class="heading-medium">The defendant's response </h2>
+                <p>Mary Richards believes that they've paid the claim in full on 13 October 2017. Has the claim has been paid in full? </p>
+                <div class="form-group">
+                  <p> <a href="claimant-response/paid-what-owe-claim-amount/task-list" class="button secondary-button">Respond to the defendant</a></p>
+                </div>
+              </div>
+              {% elseif data['claimant'] == 7  %}
+              <div class="">
+                <h2 class="heading-medium">The defendant's response </h2>
+                <p> Mary Richards believes that they've paid what they owe, £1000. You need to accept or reject this response.</p>
+                <div class="form-group">
+                  <p> <a href="claimant-response/paid-what-owe-less-claim-amount/task-list" class="button secondary-button">Respond to the defendant</a></p>
+                </div>
+              </div>
+              {% elseif data['claimant'] == 8  %}
+              <div class="">
+                <h2 class="heading-medium">The defendant's response </h2>
+                <p>Mary Richards has rejected your claim. You need to accept or reject this response. </p>
+                <div class="form-group">
+                  <p> <a href="claimant-response/dispute-claim/task-list" class="button secondary-button">Respond to the defendant </a></p>
+                </div>
+              </div>
+              {% elseif data['claimant'] == 9  %}
+              <div class="">
+                <h2 class="heading-medium">The defendant's response </h2>
+                <p>Mary Richards has rejected your claim. You need to accept or reject this response. </p>
+                <div class="form-group">
+                  <p> <a class="" href="claimant-response/dispute-claim/task-list">Respond to the defendant </a></p>
+                </div>
+              </div>
+              {% elseif data['claimant'] ==10  %}
+              {% if data['offer']=="show" %}
+              <h2 class="heading-medium">Offer from claimant</h2>
+              <p>Mary Richards wants to settle out of court.</p><p> <a href="offer-agreement/view-offer?defendant=offer">View their offer.</a></p>
+              {% else %}
+              <h2 class="heading-medium">The defendant's response </h2>
+              <p>Mary Richards has rejected your claim. You need to accept or reject this response. </p>
+              <p> <a href="claimant-response/dispute-claim/task-list" class="button secondary-button">Respond to the defendant</a></p>
+              {% endif %}
+              {% elseif data['claimant'] == 10.1 or data['claimant'] == 10.62 %}
+              <h2 class="heading-medium">A settlement agreement has been made</h2>
+              <p>Both you and the defendant have signed a settlement agreement saying the defendant can pay you in instalments of £250 per month, starting 1 {{ now |  date("add", 1, "month") | date( "MMMM YYYY" ) }}.</p>
+              <p><a href="#">View settlement agreement</a></p>
+              <p>When you have been paid in full, you need to <a href="idam/contact-us?type=service_specific">contact the court</a> to let them know.</p>
+              {% elseif data['claimant'] == 10.11 %}
+              <h2 class="heading-medium">A County Court Judgment has been issued</h2>
+              <p>You have accepted the defendant's repayment plan and a County Court Judgment has been issued.</p>
+              <p><a href="#">View judgment</a></p>
+              <p>When you have been paid in full, you need to contact the court to let them know.</p>
+
+
+              {% elseif data['claimant'] == 10.2 %}
+              <h2 class="heading-medium">Repayment plan proposed</h2>
+              <p>You have proposed a repayment plan of £250 per month, starting 1 {{ now |  date("add", 1, "month") | date( "MMMM YYYY" ) }}.</p>
+              <p>We'll contact you when they have responded to your proposal.</p>
+              {% elseif data['claimant'] == 10.3 %}
+              <h2 class="heading-medium">Payment determined</h2>
+              <p>The court has determined a repayment plan.</p>
+              {% elseif data['claimant'] == 10.4 %}
+              <h2 class="heading-medium">A settlement agreement has been made</h2>
+              <p>Both you and the defendant have signed a settlement agreement saying the defendant can pay you in full by {{ now |  date("add", 3, "months") | date( "D MMMM YYYY" ) }}.</p>
+              <p><a href="#">View settlement agreement</a></p>
+              {% elseif data['claimant'] == 10.5 %}
+              <h2 class="heading-medium">The defendant will pay you immediately</h2>
+              <p>The defendant said they will pay you immediately. They have until {{ now | date('add', 5, 'days') | date }} for the money to reach you.</p>
+              <p>When you have been paid, you need to <a href="idam/contact-us?type=service_specific">contact the court</a> to let them know.</p>
+              <h3 class="heading-medium">What to do if they don't pay</h3>
+              <p>If you have not been paid by {{ now | date('add', 5, 'days') | date }}, you will then be able to request a County Court Judgment and enforcement.</p>
+              {% elseif data['claimant'] == 10.51 %}
+              <h2 class="heading-medium">The defendant will pay you immediately</h2>
+              <p>The defendant said they would pay you by {{ now | date('subtract', 1, 'days') | date }}. Any cheques or transfers should be clear in your account by this date.</p>
+              <p>When you have been paid, you need to <a href="idam/contact-us?type=service_specific">contact the court</a> to let them know.</p>
+              <h3 class="heading-medium">What to do if they haven't paid</h3>
+              <p>If you have not been paid as agreed, you can <a href="/dashboard/v4/applications-and-judgments/default-judgment?radio-proceed=none">request a County Court Judgment</a> and enforcement.</p>
+
+              {% elseif data['claimant'] == 10.6 %}
+              <h2 class="heading-medium">Awaiting judge's repayment plan</h2>
+              <p>You have rejected the defendant's proposed repayment plan and been unable to agree a suitable alternative.</p>
+              <p>A judge will determine a suitable repayment plan within the next 10 days. We'll contact you when it's available.</p>
+
+              {% elseif data['claimant'] == 10.61 %}
+              <h2 class="heading-medium">You've signed a settlement agreement</h2>
+              <p>You have signed a settlement agreement saying the defendant can pay you in instalments of £250 per month, starting 1 May 2018.</p>
+              <p>We've emailed Mary Richards the repayment plan and the settlement agreement for them to sign. We'll contact you when they have responded.</p></p>
+              <p><a href="">View the settlement agreement</a></p>
+              {% elseif data['claimant'] == 10.8 %}
+              <h2 class="heading-medium">Awaiting judge's repayment plan</h2>
+              <p>The defendant feels your proposed repayment plan is unaffordable.</p>
+              <p>A judge will determine a suitable repayment plan within the next 10 days. We'll contact you when it's available.</p>
+              {% elseif data['claimant'] == 11 or data['claimant'] == 12 or data['claimant'] == 16 %}
+              <h2 class="heading-medium">The case will be reviewed by a judge</h2>
+              <p>You have rejected the defendant's response and asked for the claim to be reviewed by a judge. We'll contact you if a hearing date is scheduled and explain what you need to do to prepare. </p>
+              {% elseif data['claimant'] == 17  %}
+              <h2 class="heading-medium">You’ve signed the agreement</h2>
+              <p>You've both signed a legal agreement which replaces the claim. </p>
+              {% elseif data['claimant'] == 12  %}
+              <div class="">
+               <h2 class="heading-medium">The case will be reviewed by a judge</h2>
+               <p>You have rejected the defendant's response and asked for the claim to be reviewed by a judge. We'll contact you if a hearing date is scheduled and explain what you need to do to prepare. </p
+               </div>
+               {% elseif data['claimant'] == 13  %}
+               <div class="">
+                <h2 class="heading-medium">You've requested free mediation  </h2>
+                <p>The defendant Mary Richards will be asked if they would like free mediation. We will notify you once the defendant responds.</p>
+              </div>
+              {% elseif data['claimant'] == 14  %}
+              <h2 class="heading-medium">The defendant has accepted mediation  </h2>
+              <div class="">
+                <p>A mediator will contact both the defendant and you within the next 14 days to arrange an appointment.</p>
+              </div>
+              {% elseif data['claimant'] == 15  %}
+              <h2 class="heading-medium">The case will be reviewed by a judge</h2>
+              <div class="">
+                <p>You have rejected the defendant's response and asked for the claim to be reviewed by a judge. We'll contact you if a hearing date is scheduled and explain what you need to do to prepare.</p>
+              </div>
+              {% elseif data['claimant'] == 17  %}
+              <h2 class="heading-medium">You settled out of court</h2>
+              <div class="">
+                <p>   You both signed an agreement to settle out of court. The claim is now closed.</p>
+                <p><a href='#'>View agreement.</a></p>
+              </div>
+              {% elseif data['claimant'] == 18  %}
+              <h2 class="heading-medium">You need to respond to this counterclaim</h2>
+              <p>You need to respond by <span class="dates"></span> (14 days
+              remaining). </p>
+              <p><a href="view-claims/view-counterclaim1" class="button secondary-button">View and respond to the counterclaim </a></p>
+              <p>If you don't respond Mary Richards can ask for a default County Court Judgment (CCJ) against you. A CCJ means the court orders you to pay the money.</p>
+              <div class="form-group">
+              </div>
+              {% endif %}
+              {% if data['claimant'] == 19  %}
+              <div class="">
+                <h2 class="heading-medium">The defendant's response </h2>
+                <p>The defendant Mary Richards has rejected your the claim. </p>
+                <div class="form-group">
+                  <p> <a class="" href="claimant-response/dispute-claim/view-response?mediation=no">View full response </a></p>
+                </div>
+              </div>
+              {% endif %}
+              {% if data['claimant'] == 17 or data['claimant'] == 18 or data['claimant'] == 10.5 or data['claimant'] == 10.51 or data['claimant'] == 10.11 %}
+              {% else %}
+              <h2 class="heading-medium">More options </h2>
+              {% endif %}
+
+              {% if data['claimant'] == 1.2 or data['claimant'] == 1 or data['claimant'] == 2 or data['claimant'] == 3 or data['claimant'] == 4  or data['claimant'] == 10 or data['claimant'] == 11  or data['claimant'] == 12 or data['claimant'] == 17%}
+              {% endif %}
+              {% if data['claimant'] == 1.2 or data['claimant'] == 1 or data['claimant'] == 2 or data['claimant'] == 3 or data['claimant'] == 4  or data['claimant'] == 10 or data['claimant'] == 10.1 or data['claimant'] == 10.2 or data['claimant'] == 10.11 or data['claimant'] == 10.3 or data['claimant'] == 10.4 or data['claimant'] == 10.5 or data['claimant'] == 10.51 or data['claimant'] == 10.62 or data['claimant'] == 11  or data['claimant'] == 12 or data['claimant'] == 16 or data['claimant'] == 17 or data['claimant'] == 18%}
+              {% else %}
+              <h2 class="heading-small">Settle out of court</h2>
+              <p>
+                You can <a href='offer-agreement/make-offer?defendant=claimant'>make an offer</a> to settle the claim out of court. If your offer is accepted the claim won't go to a court hearing.
+              </p>
+              {% endif %}
+              {% if data['claimant'] == 1.2 or data['claimant'] == 1 or data['claimant'] == 2 or data['claimant'] == 3 or data['claimant'] == 4  or data['claimant'] == 8 or data['claimant'] == 10.1 or data['claimant'] == 10.2 or data['claimant'] == 10.11 or data['claimant'] == 10.3 or data['claimant'] == 10.4 or data['claimant'] == 10.5 or data['claimant'] == 10.51 or data['claimant'] == 10.62 or data['claimant'] == 13 or data['claimant'] == 14 or data['claimant'] == 17 or data['claimant'] == 18 %}
+              {% else %}
+              <h2 class="heading-small">Request mediation</h2>
+              <p>
+                You can <a href='#'>request free telephone mediation</a> to help resolve the claim without a court hearing.
+              </p>
+              {% endif %}
+              {% if data['claimant'] == 10.1 or data['claimant'] == 10.62 or data['claimant'] == 10.2 or data['claimant'] == 10.3 or data['claimant'] == 10.4 %}
+              <h2 class="heading-small">Request County Court Judgment and enforcement</h2>
+
+              <p>
+                If the defendant does not pay you as agreed and breaks the settlement agreement, you can <a href='/dashboard/v4/applications-and-judgments/default-judgment'>request a County Court Judgment</a> against Mary Richards and <a href='#'>ask the court to enforce payment</a>.
+              </p>
+
+              {% endif %}
+              {% if data['claimant'] == 18 or data['claimant'] == 17 or data['claimant'] == 10.1 or data['claimant'] == 10.11 or data['claimant'] == 10.4 or data['claimant'] == 10.5 or data['claimant'] == 10.51 or data['claimant'] == 10.62 %}
+              {% else %}
+              <h2 class="heading-small">Cancel your claim</h2>
+              <p>
+                You can <a href='#'>cancel your claim</a>. For example, if you’ve been paid or don’t want to continue your case against the defendant.
+              </p>
+              {% endif %}
+            </div>
+            <div id="tabs-2" class="tab-pane">
+              <h2 class="heading-medium">Claim history</h2>
+              {% if data['claimant'] == 1.2  %}
+              <p>You have no claim history</p>
+              {% elseif data['claimant'] == 11 or data['claimant'] == 12 or data['claimant'] == 13 or data['claimant'] == 14  or data['claimant'] == 16 or data['claimant'] == 17%}
+              {% if  data['claimant'] == 16 or data['claimant'] == 17%}
+              <div class="history-timeline">
+                <div class="history-statement"> <span > 5 October 2017</span>You made a counter offer to settle out of court.</div>
+              </div>
+              {% endif %}
+              {% if data['claimant'] == 12  or data['claimant'] == 16 or data['claimant'] == 17%}
+              <div class="history-timeline">
+                <div class="history-statement"> <span > 4 October 2017</span>Mary Richards has made an offer to settle out of court.  </div>
+              </div>
+              {% endif %}
+              {% if  data['claimant'] == 14%}
+              <div class="history-timeline">
+                <div class="history-statement"> <span > 5 October 2017</span>You've requested free mediation. The defendant Mary Richards will be asked if they would like free mediation. </div>
+              </div>
+              {% endif %}
+              <div class="history-timeline">
+                <div class="history-statement"> <span > 3 October 2017</span>You rejected Mary Richards response. <a href="#">View details</a> </div>
+              </div>
+              <div class="history-timeline">
+                <div class="history-statement"> <span > 1 October 2017</span>Mary Richards responded your claim. <a href="#">View details</a> </div>
+              </div>
+              <div class="history-timeline ">
+                <div class="history-statement"> <span > 14 September 2017</span>Your claim was sent to Mary Richards.</div>
+              </div>
+              {% elseif  data['claimant'] == 14%}
+              <div class="history-timeline">
+                <div class="history-statement">   <span > 8 October 2017</span>You requested free mediation. </div>
+              </div>
+              {% elseif data['claimant'] == 12 or data['claimant'] == 16 or data['claimant'] == 17%}
+              <div class="history-timeline">
+                <div class="history-statement">   <span > 8 October 2017</span>The defendant made an offer. </div>
+              </div>
+              {% elseif data['claimant'] == 14 %}
+              <h2 class="heading-medium">Claim history </h2>
+              <div class="history-timeline">
+                <div class="history-statement"> <span > 3 October 2017</span>You requested free mediation to help resolve this dispute.</div>
+              </div>
+              <div class="history-timeline">
+                <div class="history-statement"> <span > 1 October 2017</span>The defendant rejected your claim. </div>
+              </div>
+              <div class="history-timeline">
+                <div class="history-statement"> <span > 14 September 2017</span>Your claim was sent to Mary Richards.</div>
+              </div>
+              {% elseif data['claimant'] == 18 %}
+              <div class="history-timeline ">
+                <div class="history-statement"> <span > 16 September 2017</span>Counterclaim sent by Mary Richards. <a href="view-claim">View counterclaim.</a></div>
+              </div>
+              {%else%}
+              <div class="history-timeline last">
+                <div class="history-statement"> <span > 14 September 2017</span>Your claim was sent to Mary Richards.</div>
+              </div>
+              {% endif %}
+            </div>
+            {% if data['claimant'] == 10 or data['claimant'] == 11 or data['claimant'] == 12 or data['claimant'] == 16   %}
+            <div id="tabs-3" class="tab-pane">
+             {% if data['claimant'] == 10 or  data['claimant'] == 11%}
+             <h2 class="heading-medium">The defendant wants to settle out of court. </h2>
+             <p>Mary Richards has made an offer to settle out of court. You can accept, reject or make a counter offer.</p>
+             <a href="offer-agreement/view-offer?defendant=offer">View and respond to offer.</a>
+             {% elseif data['claimant'] == 12   %}
+             <h2 class="heading-medium">Your offer has been sent to the defendant </h2>
+             <p>Mary Richards can accept, reject or make a counter offer. We'll email you when they respond.</p>
+             <p>If you settle out of court you’ll sign an agreement that replaces the claim. Until then the claim continues and might go to a court hearing.</p>
+             {% elseif data['claimant'] == 16  %}
+             <h2 class="heading-medium">Sign a legal agreement to settle out of court</h2>
+             <div class="">
+              <p>   The defendant has accepted your offer. You need to sign a legal agreement to settle out of court. Mary Richards has signed the agreement.</p>
+              <p><a href='offer-agreement/agreement'>View and sign the agreement. </a></p>
+            </div>
+            {% elseif data['claimant'] == 17  %}
+            <h2 class="heading-medium">Sign a legal agreement to settle out of court</h2>
+            <div class="">
+              <p>   The defendant has accepted your offer. You need to sign a legal agreement to settle out of court. Mary Richards has signed the agreement.</p>
+              <p><a href='offer-agreement/agreement'>View and sign the agreement. </a></p>
+            </div>
+            {% endif %}
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    <div class="column-one-third">
+      {% if data['claimant'] == 1.2 or  data['claimant'] == 3 %}
+      {% elseif data['claimant'] == 18  %}
+      <div class="meta-data">
+        <p  class="heading-small" style="padding-top: 100px">About counterclaim</p>
+        <ul role="navigation" class="font-xsmall list">
+          <li><strong class="bold">Claimant name:</strong><br> Mary Richards</li>
+          <li><strong class="bold">Claim amount:</strong><br>£3240.34 </li>
+        </ul>
+      </div>
+      {% else %}
+      <div class="meta-data">
+        <p  class="heading-small" style="padding-top: 100px">About claim</p>
+        <ul role="navigation" class="font-xsmall list">
+          <li><strong class="bold">Defendant name:</strong><br> Mary Richards</li>
+          <li><strong class="bold">Claim amount:</strong><br>£1500.00 </li>
+          <li><strong class="bold">Claim details:</strong><br><a href="view-claims/view-claim">View claim</a> </li>
+        </ul>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</main>
+<form method="post"  action="#" class="form" style="position: absolute;">
+  <select id="claimant2" name="claimant2" onchange="window.location.href='?claimant='+this.value">
+    <option  value="0" >Choose</option>
+    <option value="1.2" {% if data['claimant'] == 1.2 %}selected{% endif %}>0. Draft claim</option>
+    <option value="1" {% if data['claimant'] == 1 %}selected{% endif %}>1. Claim being processed</option>
+    <option  value="2" {% if data['claimant'] == 2 %}selected{% endif %}>2. Request a CCJ</option>
+    <option value="3" {% if data['claimant'] == 3 %}selected{% endif %}>3. CCJ has been requested </option>
+    <option>------- Defendant responses  ----------</option>
+    <option value="4" {% if data['claimant'] == 4 %}selected{% endif %}>4. Admit all the claim  - pay in instalments</option>
+    <option value="4.1" {% if data['claimant'] == 4.1 %}selected{% endif %}>4.1 Admit all the claim  - pay in full on set date</option>
+    <option value="4.2" {% if data['claimant'] == 4.2 %}selected{% endif %}>4.2 Admit all the claim  - pay in full immediately</option>
+    <option value="5" {% if data['claimant'] == 5 %}selected{% endif %}>5. Part admit the claim  </option>
+    <option value="6" {% if data['claimant'] == 6 %}selected{% endif %}>6. Paid what I believe i owe - claim amount  </option>
+    <option value="7" {% if data['claimant'] == 7 %}selected{% endif %}>7. Paid what I believe i owe - LESS than claim amount  </option>
+    <option value="8" {% if data['claimant'] == 8 %}selected{% endif %}>8. Dispute claim   </option>
+    <option value="10" {% if data['claimant'] == 10 %}selected{% endif %}>9. Dispute claim + offer made  </option>
+    <option>------- Claimant responses  ----------</option>
+    <option value="10.1" {% if data['claimant'] == 10.1 %}selected{% endif %}>10.1. Accepted repayment plan - settlement</option>
+    <option value="10.11" {% if data['claimant'] == 10.11 %}selected{% endif %}>10.11. Accepted repayment plan - judgment</option>
+<!--    <option value="10.2" {% if data['claimant'] == 10.2 %}selected{% endif %}>10.2. Accepted court repayment plan</option>  -->
+<!--    <option value="10.11" {% if data['claimant'] == 10.11 %}selected{% endif %}>10.11. Accepted repayment plan - not due</option>  -->
+<!--    <option value="10.3" {% if data['claimant'] == 10.3 %}selected{% endif %}>10.3. Repayment plan determined</option> -->
+    <option value="10.4" {% if data['claimant'] == 10.4 %}selected{% endif %}>10.4. Accepted full payment on set date</option>
+    <option value="10.5" {% if data['claimant'] == 10.5 %}selected{% endif %}>10.5. Accepted immediate payment</option>
+    <option value="10.51" {% if data['claimant'] == 10.51 %}selected{% endif %}>10.51. Accepted immediate payment - not paid</option>
+    <option value="10.6" {% if data['claimant'] == 10.6 %}selected{% endif %}>10.6. Repayment plans rejected - redetermination</option>
+    <option value="10.61" {% if data['claimant'] == 10.61 %}selected{% endif %}>10.61. Repayment plans rejected - countered</option>
+    <option value="10.62" {% if data['claimant'] == 10.62 %}selected{% endif %}>10.62. Repayment plans rejected - countered  - accepted</option>
+    <option value="10.8" {% if data['claimant'] == 10.8 %}selected{% endif %}>10.8. Repayment plans rejected - countered - rejected</option>
+    <option>------- Offer and agreements  ----------</option>
+    <option value="11" {% if data['claimant'] == 11 %}selected{% endif %}>11. Offer from defendant  </option>
+    <option value="12" {% if data['claimant'] == 12 %}selected{% endif %}>12. Made counter offer  </option>
+    <option value="16" {% if data['claimant'] == 16 %}selected{% endif %}>13. Counter sign agreement - message  </option>
+    <option value="17" {% if data['claimant'] == 17 %}selected{% endif %}>14. Agreement signed - message  </option>
+    <option>------- Mediation  ----------</option>
+    <option value="13" {% if data['claimant'] == 13 %}selected{% endif %}>15. Make mediation offer to defendant  </option>
+    <option value="14" {% if data['claimant'] == 14 %}selected{% endif %}>16. Mediation accepted by defendant  </option>
+    <option value="15" {% if data['claimant'] == 15  %}selected{% endif %}>17. Sent claim to a judge  </option>
+    <option>------- Counterclaim  ----------</option>
+    <option value="18" {% if data['claimant'] == 18 %}selected{% endif %}>18. Respond to counterclaim  </option>
+<!--
+      <option value="19" {% if data['claimant'] == 19 %}selected{% endif %}>19. Defendant's response   </option>
+    -->
+  </select>
+</form>
+{% endblock %}
+{% block extra_js_1 %}
+<script src="/public/javascripts/jquery-ui.js"></script>
+<script type="text/javascript">
+  window.moj.init();
+  $( function() {
+    $( "#tabs" ).tabs();
+  } );
+</script>
+{% endblock %}

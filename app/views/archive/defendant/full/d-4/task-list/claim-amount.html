@@ -1,0 +1,83 @@
+{% extends "layout_task-list.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <a href="#" class="link-back">Back</a>
+      <!--<a href="#" class="link-back">Back</a>-->
+      <h1 class="heading-large">
+        Claim amount
+      </h1>
+      <table class="table-form">
+        <caption class="visuallyhidden">Amount payable by defendant</caption>
+        <thead>
+          <tr>
+            <th scope="col"></th>
+            <th class="numeric last" scope="col">Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Claim amount</th>
+            <td class="numeric last">
+              <label class="visuallyhidden" for="amount">Claim amount</label>
+              {% if data.counterclaim=="true" %}
+              £2800.00
+              {%else%}
+              £1500.00
+              {% endif %}
+              <span class="font-small">
+              </span>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">
+              <details role="group">
+                <summary role="button" aria-controls="details-content-0" aria-expanded="false">
+                  Interest to date of judgment
+                </summary>
+                <div class="panel text-small" id="details-content-0" aria-hidden="true">
+                  Interest calculated at 8% for 23 days <br> <span class="font-xsmall">(20 November 2016 to 23 January 2017)</span>
+                </div>
+              </details>
+            </th>
+            <td class="numeric last">
+              <label class="visuallyhidden" for="amount">Interest</label>
+              <span class="font-small">
+                {% if data.counterclaim=="true" %}
+                £200.34
+                {%else%}
+                £68.20
+                {% endif %}
+              </span>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">Claim fee</th>
+            <td class="numeric last">
+              <label class="visuallyhidden" for="amount">Claim fee</label>
+              <span class="font-small">
+               {% if data.counterclaim=="true" %}
+               £240.00
+               {%else%}
+               £75.00
+               {% endif %}
+             </span>
+           </td>
+         </tr>
+         <tr>
+          <th scope="col" class="bold-medium">Total</th>
+          {% if data.counterclaim=="true" %}
+          <td class="numeric last bold-medium">£<span name="subt" id="subt">3240.34</span></td>
+          {%else%}
+          <td class="numeric last bold-medium">£<span name="subt" id="subt">1643.20</span></td>
+          {% endif %}
+        </tr>
+      </tbody>
+    </table>
+  </main>
+  {% endblock %}

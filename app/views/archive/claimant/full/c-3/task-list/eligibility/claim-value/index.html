@@ -1,0 +1,92 @@
+{% extends "layout_task-list.html" %}
+
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block home_link %} ../../task-list {% endblock %}
+{% block proposition_header %}
+{% set my_account="1" %}
+
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+
+
+
+
+      {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('task-list')%}
+
+        <form
+        name="aspnetForm"
+        method="post"
+        onsubmit="multiNavigation('radio_group', ['above_total','below'], ['result?a=age&', 'check-your-answers']);return false;">
+
+
+
+        {% else %}
+
+        <form
+        name="aspnetForm"
+        method="post"
+        onsubmit="multiNavigation('radio_group', ['above_total','below', 'dont-know'], ['result?a=age&', 'age', 'result?a=age2&']);return false;">
+
+
+        {% endif %}
+
+
+        {{formData | safe}}
+        <a href="#" class="link-back">Back</a>
+
+        <h1 class="heading-large">
+          Total amount you're claiming
+        </h1>
+
+        <fieldset>
+          <legend class="visuallyhidden">
+            Do you live in the UK
+          </legend>
+
+          <div class="multiple-choice">
+            <input id="radio-1" type="radio" name="radio_group" value="above_total">
+            <label for="radio-1">Over £10,000</label>
+          </div>
+          <div class="multiple-choice">
+            <input id="radio-2" type="radio" name="radio_group" value="below">
+            <label for="radio-2">£10,000 or less</label>
+          </div>
+          <div class="multiple-choice">
+            <input id="radio-3" type="radio" name="radio_group" value="dont-know">
+            <label for="radio-3">I don't know the amount</label>
+          </div>
+
+        </fieldset>
+
+        {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}
+        <div class="form-group">
+          <input type="submit" class="button" value="Save changes"/>
+        </div>
+
+
+        <a href="{{ data.return_page if data.return_page | length > 0 else '../task-list' }}">Cancel</a>
+
+        {% else %}
+        <div class="form-group">
+          <input type="submit" class="button" value="Save and continue"/>
+        </div>
+
+        {% endif %}
+
+      </form>
+
+    </div>
+  </div>
+
+</main>
+{% endblock %}

@@ -1,0 +1,489 @@
+{% extends "layout_task-list.html" %}
+{% block page_title %} Your money claims account {% endblock %}
+{% block proposition_header %}
+{% include "includes/propositional_navigation.html" %}
+{% set dashboard="1" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main" ">
+{% include "includes/phase_banner_beta.html" %}
+
+<div class="grid-row">
+  <div class="column-full">
+    <h1 class="heading-large">
+      Your money claims account
+    </h1>
+    {% if data['dashboard'] != 6 %}
+    <a class="newclaim" href="../../claimant/full/c-2/task-list" class="">Make a new money claim</a>
+    {% endif %}
+    {% set show_all = true if data['dashboard'] == 8 %}
+
+    {% set claimant_table = true if show_all==true or data['dashboard'] == 1 or data['dashboard'] == 1.2 or data['dashboard'] == 6 or data['dashboard'] == 3 or data['dashboard'] == 7 or data['dashboard'] == 4  or show_all==true or data['dashboard'] == 9 or data['dashboard'] == 10 or data['dashboard'] == 11 or data['dashboard'] == 12 or data['dashboard'] == 13 or data['dashboard'] == 18 or data['dashboard'] == 20 or data['dashboard'] == 23  or  data['dashboard'] == 24 or data['dashboard'] == 25 or data['dashboard'] == 26 or data['dashboard'] == 28%}
+    {% set defendant_table = true if show_all==true or data['dashboard'] == 2 or data['dashboard'] == 2.1 or data['dashboard'] == 5  or data['dashboard'] == 14 or data['dashboard'] == 15 or  data['dashboard'] == 16  or  data['dashboard'] == 17 or  data['dashboard'] == 19 or  data['dashboard'] == 21 or  data['dashboard'] == 22 or  data['dashboard'] == 27%}
+
+    {% if claimant_table!=true and defendant_table!=true %}
+    <h2 class="heading-medium type-heading claims">
+      Claims you've made
+    </h2>
+    <table class="claim-dashboard claims ">
+      <thead>
+      <tr>
+        <th scope="col">Claim number</th>
+        <th scope="col"">Defendant name</th>
+        <th scope="col"">Claim amount</th>
+        <th scope="col" class="mobile-hide">Status</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="draft mobile-table" >
+        <td ><a href="claimant?claimant=1.2">Draft claim</a></td>
+        <td >- </td>
+        <td >- </td>
+        <td class="mobile-hide"><a href="../../claimant/full/c-2/task-list">Continue with claim </a> </td>
+      </tr>
+      <tr>
+        <td  class="mobile-table-status" colspan="3">Status: <a href="../../claimant/full/c-2/task-list">Continue with claim </a> </td>
+      </tr>
+
+      </tbody>
+    </table>
+    <h2 class="heading-medium type-heading claims">
+      Claims made against you
+    </h2>
+    <table class="claim-dashboard claims ">
+      <thead>
+      <tr>
+        <th scope="col">Claim number</th>
+        <th scope="col"">Defendant name</th>
+        <th scope="col"">Claim amount</th>
+        <th scope="col" class="mobile-hide">Status</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="mobile-table">
+        <td ><a href="defendant?defendant=1.1">242MC435</a></td>
+        <td >Jan Clark  </td>
+        <td >£1500 </td>
+        <td class="mobile-hide mobile-table"><a a href="../../defendant/full/d-3/task-list">Respond to claim.</a> <br><span class="font-xsmall">(14 days remaining)</span> </td>
+      </tr>
+      <tr >
+        <td class="mobile-table-status" colspan="3">Status: <a a href="../../defendant/full/d-3/task-list">Respond to claim.</a> <span class="font-xsmall">(14 days remaining)</span> </td>
+      </tr>
+      </tbody>
+    </table>
+    {% endif %}
+    {% if claimant_table==true %}
+    <h2 class="heading-medium type-heading claims">
+      Claims you've made
+    </h2>
+    <table class="claim-dashboard claims ">
+      <thead>
+      <tr>
+        <th scope="col">Claim number</th>
+        <th scope="col"">Defendant name</th>
+        <th scope="col"">Claim amount</th>
+        <th scope="col" class="mobile-hide">Status</th>
+      </tr>
+      </thead>
+      <tbody>
+      {% endif %}
+      {% if show_all==true or data['dashboard'] == 6  %}
+      <tr class="draft mobile-table" >
+        <td ><a href="claimant?claimant=1.2">Draft claim</a></td>
+        <td >- </td>
+        <td >- </td>
+        <td class="mobile-hide"><a href="../../claimant/full/c-2/task-list">Continue with claim </a> </td>
+      </tr>
+      <tr>
+        <td  class="mobile-table-status" colspan="3">Status: <a href="../../claimant/full/c-2/task-list">Continue with claim </a> </td>
+      </tr>
+      {% endif %}
+      {% if show_all==true or data['dashboard'] == 1.2 %}
+      <tr class="mobile-table">
+        <td ><a href="claimant?claimant=1">352MC733</a></td>
+        <td >Mary Richards </td>
+        <td >£1500 </td>
+        <td class="mobile-hide">Your claim has been sent. Jan Clark has until 12 October to respond. They can request an extra 14 days if they need it.</td>
+      </tr>
+      <tr>
+        <td  class="mobile-table-status" colspan="3">Status: Your claim has been sent. Jan Clark has until 12 October to respond. They can request an extra 14 days if they need it. </td>
+      </tr>
+      {% endif %}
+      {% if show_all==true or data['dashboard'] == 3 or data['dashboard'] == 1 %}
+      <tr class="mobile-table" >
+        <td ><a href="claimant?claimant=2">352MC733</a></td>
+        <td >Mary Richards </td>
+        <td >£1500 </td>
+        <td  class="mobile-hide">The defendant has not responded to your claim. You can request a County Court Judgment to get what's owed.
+
+        </td>
+      </tr>
+      <tr>
+        <td  class="mobile-table-status" colspan="3">The defendant has not responded to your claim. You can request a County Court Judgment to get what's owed. </td>
+      </tr>
+      {% endif %}
+      {% if  show_all==true or data['dashboard'] == 4 %}
+      <tr class="mobile-table" >
+        <td ><a href="claimant?claimant=3">352MC733</a></td>
+        <td >Mary Richards </td>
+        <td >£1500 </td>
+        <td class="mobile-hide">You requested a County Court Judgment on <span class="date">19 October.</td>
+      </tr>
+      <tr>
+        <td  class="mobile-table-status" colspan="3">Status: You requested a County Court Judgment on <span class="date">19 October. We'll contact you within 5 days.</td>
+      </tr>
+      {% endif %}
+
+      {% if show_all==true or data['dashboard'] == 1 or data['dashboard'] == 7  %}
+      <tr class="mobile-table" >
+        <td ><a href="claimant?claimant=4">352MC733</a></td>
+        <td >Mary Richards</td>
+        <td >£1500 </td>
+        <td class="mobile-hide">Jan Clark has <a href='defendant-response/view-claim-def?response=med'>rejected your claim.</a> They have requested free mediation to help you come to an agreement.
+        </td>
+      </tr>
+      <tr>
+        <td  class="mobile-table-status" colspan="3">Status: Jan Clark has <a href='defendant-response/view-claim-def?response=med'>rejected your claim.</a> They have requested free mediation to help you come to an agreement. </td>
+      </tr>
+      {% endif %}
+      {% if show_all==true or data['dashboard'] == 1 or data['dashboard'] == 9   %}
+      <tr class="mobile-table" >
+        <td ><a href="claimant?claimant=5">352MC733</a></td>
+        <td >Mary Richards</td>
+        <td >£1500 </td>
+        <td class="mobile-hide">Mary Richards	has responded to your claim.</td>
+      </tr>
+      <tr>
+        <td  class="mobile-table-status" colspan="3">Status: Mary Richards has responded to your claim. </td>
+      </tr>
+      {% endif %}
+      {% if show_all==true or data['dashboard'] == 1 or data['dashboard'] == 28   %}
+      <tr class="mobile-table" >
+        <td ><a href="claimant?claimant=11">352MC733</a></td>
+        <td >Mary Richards</td>
+        <td >£1500 </td>
+        <td class="mobile-hide">Mary Richards	has responded to your claim.</td>
+      </tr>
+      <tr>
+        <td  class="mobile-table-status" colspan="3">Status: Mary Richards has responded to your claim. </td>
+      </tr>
+      {% endif %}
+
+
+      {% if show_all==true or data['dashboard'] == 1 or data['dashboard'] == 10   %}
+      <tr class="mobile-table" >
+        <td ><a href="claimant?claimant=6">352MC733</a></td>
+        <td >Mary Richards</td>
+        <td >£1500 </td>
+        <td class="mobile-hide">The defendant has rejected your claim. <a href='defendant-response/view-claim-def?response=no_med_suggestion'>View their response</a>.
+        </td>
+      </tr>
+      <tr>
+        <td  class="mobile-table-status" colspan="3">Status: The defendant has rejected your claim. <a href='defendant-response/view-claim-def?response=no_med_suggestion'>View their response</a>. </td>
+      </tr>
+      {% endif %}
+
+      {% if show_all==true or data['dashboard'] == 1 or data['dashboard'] == 24   %}
+      <tr class="mobile-table" >
+        <td ><a href="claimant?claimant=12">352MC733</a></td>
+        <td >Mary Richards</td>
+        <td >£1500 </td>
+        <td class="mobile-hide">Mary Richards has responded to your claim and has made an offer to settle.</td>
+      </tr>
+      <tr>
+        <td  class="mobile-table-status" colspan="3">Status: Mary Richards believes they owe £1,000 and is prepared to pay this amount by instalments. <a href='defendant-response/view-claim-partial?response=owe-some'>View their response</a>. </td>
+      </tr>
+      {% endif %}
+
+      {% if show_all==true or data['dashboard'] == 1 or data['dashboard'] == 25   %}
+      <tr class="mobile-table" >
+        <td ><a href="#">352MC733</a></td>
+        <td >Mary Richards</td>
+        <td >£1500 </td>
+        <td class="mobile-hide">Mary Richards has paid £1000 and believes they don’t owe any more money. <a href='defendant-response/view-claim-partial?response=paid-some'>View their response</a>.</td>
+      </tr>
+      <tr>
+        <td  class="mobile-table-status" colspan="3">Status: Mary Richards has paid £1000 and believes they don’t owe any more money. <a href='defendant-response/view-claim-def?response=no_med_suggestion'>View their response</a>. </td>
+      </tr>
+      {% endif %}
+
+
+      {% if show_all==true or data['dashboard'] == 1 or data['dashboard'] == 26   %}
+      <tr class="mobile-table" >
+        <td ><a href="#">352MC733</a></td>
+        <td >Mary Richards</td>
+        <td >£1500 </td>
+        <td class="mobile-hide">Mary Richards has accepted your claim. They've offered to pay	in instalments. <a href='defendant-response/view-claim-admit-all?response=instalments'>View their response</a>.</td>
+      </tr>
+      <tr>
+        <td  class="mobile-table-status" colspan="3">Status: Mary Richards admits all of the claim	and will pay the money by installments . <a href='defendant-response/view-claim-def?response=no_med_suggestion'>View their response</a>. </td>
+      </tr>
+      {% endif %}
+
+
+      {% if show_all==true or data['dashboard'] == 1 or data['dashboard'] == 11   %}
+      <tr class="mobile-table" >
+        <td ><a href="claimant?claimant=7">352MC733</a></td>
+        <td >Mary Richards</td>
+        <td >£1500</td>
+        <td class="mobile-hide">Your counter offer has been sent. We'll let you know when Mary Richards responds.</td>
+      </tr>
+      <tr>
+        <td  class="mobile-table-status" colspan="3">Status: Your counter offer has been sent. We'll let you know when Jan Clark responds. </td>
+      </tr>
+      {% endif %}
+      {% if show_all==true or data['dashboard'] == 1 or data['dashboard'] == 12   %}
+      <tr class="mobile-table" >
+        <td ><a href="claimant?claimant=8">352MC733</a></td>
+        <td >Mary Richards</td>
+        <td >£1500 </td>
+        <td class="mobile-hide">You've requested free mediation. Mary Richards has until 11 October 2017 to respond.</td>
+      </tr>
+      <tr>
+        <td  class="mobile-table-status" colspan="3">Status: Your offer of mediation has been sent. We'll let you know when Jan Clark responds. </td>
+      </tr>
+      {% endif %}
+      {% if show_all==true or data['dashboard'] == 1 or data['dashboard'] == 13   %}
+      <tr class="mobile-table" >
+        <td ><a href="claimant?claimant=9">352MC733</a></td>
+        <td >Mary Richards</td>
+        <td >£1500 </td>
+        <td class="mobile-hide">You've both agreed to mediation. You'll be contacted in the next 14 days to agree a date.</td>
+      </tr>
+      <tr>
+        <td  class="mobile-table-status" colspan="3">Status: You've both agreed to mediation. You'll be contacted in the next 14 days to arrange an appointment. </td>
+      </tr>
+      {% endif %}
+      {% if show_all==true or data['dashboard'] == 1 or data['dashboard'] == 18   %}
+      <tr class="mobile-table" >
+        <td ><a href="claimant?claimant=10">352MC733</a></td>
+        <td >Mary Richards</td>
+        <td >£1500 </td>
+        <td class="mobile-hide">Jan Clark has submitted their defence. The case will be reviewed by a judge and might go to a hearing.</td>
+      </tr>
+      <tr>
+        <td  class="mobile-table-status" colspan="3">Status: Jan Clark has submitted their defence. The case will be reviewed by a judge and might go to a hearing.</td>
+      </tr>
+      {% endif %}
+
+      {% if show_all==true or data['dashboard'] == 1 or data['dashboard'] == 20   %}
+      <tr  class="mobile-table" >
+        <td ><a href="claimant?claimant=11">352MC733</a></td>
+        <td >Mary Richards</td>
+        <td >£1500 </td>
+        <td class="mobile-hide">Mary Richards wants to settle out of court. View <a href='defendant-response/suggestion?defendant=offer'>their offer</a>.</td>
+      </tr>
+      <tr>
+        <td  class="mobile-table-status" colspan="3">Status: Mary Richards wants to settle out of court. View <a href='defendant-response/suggestion?defendant=offer'>their offer</a>. </td>
+      </tr>
+      {% endif %}
+
+
+      {% if show_all==true or data['dashboard'] == 1 or data['dashboard'] == 23   %}
+      <tr  class="mobile-table" >
+        <td ><a href="#">352MC733</a></td>
+        <td >Mary Richards</td>
+        <td >£1500 </td>
+        <td class="mobile-hide">The defendant has agreed to your offer. <a href="agreement?defendant=claimant_signed">Counter sign the agreement</a>.</td>
+      </tr>
+      <tr>
+        <td  class="mobile-table-status" colspan="3">Status: The defendant has agreed to your offer. <a href="agreement?defendant=claimant_signed">Counter sign the agreement</a>. </td>
+      </tr>
+      {% endif %}
+
+
+      {% if claimant_table==true %}
+      </tbody>
+    </table>
+    {% endif %}
+
+
+    {% if defendant_table==true %}
+    <h2 class="heading-medium type-heading" >
+      Claims made against you
+    </h2>
+    <table class="claim-dashboard" >
+      <thead>
+      <tr>
+        <th scope="col">Claim number</th>
+        <th scope="col"">Claimant name</th>
+        <th scope="col"">Claim amount</th>
+        <th scope="col" class="mobile-hide">Status</th>
+      </tr>
+      </thead>
+      <tbody>
+      {% endif %}
+      {% if show_all==true  or data['dashboard'] == 2 %}
+      <tr class="mobile-table">
+        <td ><a href="defendant?defendant=1.1">352MC733</a></td>
+        <td >Jan Clark  </td>
+        <td >£1500 </td>
+        <td class="mobile-hide"><a a href="../../defendant/full/d-3/task-list">Respond to claim.</a> <br><span class="font-xsmall">(14 days remaining)</span> </td>
+      </tr>
+      <tr>
+        <td  class="mobile-table-status" colspan="3">Status: <a a href="../../defendant/full/d-3/task-list">Respond to claim.</a> <br><span class="font-xsmall">(14 days remaining)</span> </td>
+      </tr>
+      {% endif %}
+      {% if show_all==true or data['dashboard'] == 2.1   %}
+      <tr class="mobile-table">
+        <td ><a href="defendant?defendant=1">352MC733</a></td>
+        <td >Jan Clark  </td>
+        <td >£1500 </td>
+        <td >Your defence has been sent. The case will be reviewed by a judge and might go to a hearing.</td>
+      </tr>
+      <tr>
+        <td  class="mobile-table-status" colspan="3">Status: Your defence has been sent. The case will be reviewed by a judge and might go to a hearing. </td>
+      </tr>
+      {% endif %}
+      {% if show_all==true or data['dashboard'] == 5 %}
+      <tr class="mobile-table">
+        <td ><a href="defendant?defendant=2">352MC733</a></td>
+        <td>Jan Clark  </td>
+        <td >£1500 </td>
+        <td>Jan Clark requested a County Court Judgment (CCJ) against you on <span class="dates"></span>. We'll contact you both within 5 days.</td>
+      </tr>
+      <tr>
+        <td  class="mobile-table-status" colspan="3">Status: Jan Clark requested a County Court Judgment against you on <span class=""dates2">17 October</span>. We'll contact you both within 5 days. </td>
+      </tr>
+      {% endif %}
+      {% if show_all==true or data['dashboard'] == 27 %}
+      <tr class="mobile-table">
+        <td ><a href="defendant?defendant=12">352MC733</a></td>
+        <td>Jan Clark  </td>
+        <td >£1500 </td>
+        <td>You have a County Court Judgment (CCJ) against you. It was issued on 1 October 2017. You must pay Jan Clark £1500.</td>
+      </tr>
+      <tr>
+        <td  class="mobile-table-status" colspan="3">Status: Jan Clark requested a County Court Judgment against you on <span class=""dates2">17 October</span>. We'll contact you both within 5 days. </td>
+      </tr>
+      {% endif %}
+      {% if show_all==true or data['dashboard'] == 14 %}
+      <tr class="mobile-table">
+        <td><a href="defendant?defendant=3">352MC733</a></td>
+        <td >Jan Clark  </td>
+        <td >£1500 </td>
+        <td >You have admitted the claim. You must pay the full amount by 28 Oct.</td>
+      </tr>
+      <tr>
+        <td  class="mobile-table-status" colspan="3">Status: You have admitted the claim. You must pay the full amount by 28 Oct. </td>
+      </tr>
+      {% endif %}
+      {% if show_all==true or data['dashboard'] == 15 %}
+      <tr class="mobile-table">
+        <td><a href="defendant?defendant=6">352MC733</a></td>
+        <td >Jan Clark  </td>
+        <td >£1500 </td>
+        <td>Jan Clark has requested free mediation to help you come to an agreement.</td>
+      </tr>
+      <tr>
+        <td  class="mobile-table-status" colspan="3">Status: Jan Clark has requested <a href='defendant-response/mediation?defendant=mediation'>free mediation</a> to help you come to an agreement. </td>
+      </tr>
+      {% endif %}
+      {% if show_all==true or data['dashboard'] == 16 %}
+      <tr class="mobile-table">
+        <td ><a href="defendant?defendant=7">352MC733</a></td>
+        <td >Jan Clark  </td>
+        <td >£1500 </td>
+        <td >You have rejected the offer of mediation. The case will be reviewed by a judge and might go to a hearing.</td>
+      </tr>
+      <tr>
+        <td  class="mobile-table-status" colspan="3">Status: You have rejected the offer of mediation. The case will be reviewed by a judge and might go to a hearing. </td>
+      </tr>
+      {% endif %}
+      {% if show_all==true or data['dashboard'] == 17 %}
+      <tr class="mobile-table">
+        <td ><a href="defendant?defendant=8">352MC733</a></td>
+        <td >Jan Clark  </td>
+        <td >£1500 </td>
+        <td >You have both agreed to mediation. You'll be contacted in the next 14 days to arrange an appointment.</td>
+      </tr>
+      <tr>
+        <td  class="mobile-table-status" colspan="3">Status: You have both agreed to mediation. You'll be contacted in the next 14 days to arrange an appointment. </td>
+      </tr>
+      {% endif %}
+      {% if show_all==true or data['dashboard'] == 19 %}
+      <tr class="mobile-table">
+        <td ><a href="defendant?defendant=9">352MC733</a></td>
+        <td >Jan Clark  </td>
+        <td >£1500 </td>
+        <td >The claimant has made a counter offer. </td>
+      </tr>
+      <tr>
+        <td  class="mobile-table-status" colspan="3">Status: The claimant has made a counter offer. </td>
+      </tr>
+      {% endif %}
+
+      {% if show_all==true or data['dashboard'] == 21 %}
+      <tr class="mobile-table">
+        <td ><a href="defendant?defendant=10">352MC733</a></td>
+        <td >Jan Clark  </td>
+        <td >£1500 </td>
+        <td><a a href="../../defendant/full/d-3/task-list">Respond to claim.</a> <br><span class="font-xsmall">(14 days remaining)</span>  </td>
+      </tr>
+      <tr>
+        <td  class="mobile-table-status" colspan="3">Status: <a a href="../../defendant/full/d-3/task-list">Respond to claim.</a> <br><span class="font-xsmall">(14 days remaining)</span>  </td>
+      </tr>
+      {% endif %}
+
+
+      {% if show_all==true or data['dashboard'] == 22 %}
+      <tr class="mobile-table">
+        <td><a href="#">352MC733</a></td>
+        <td>Jan Clark  </td>
+        <td>£1500 </td>
+        <td>The claimant agreed to your offer. You need to counter sign the agreement.   </td>
+      </tr>
+      <tr>
+        <td class="mobile-table-status" colspan="3">Status: The claimant agreed to your offer. <a href="agreement?defendant=defendant_signed">Counter sign the agreement.</a>. </td>
+      </tr>
+      {% endif %}
+
+      {% if defendant_table==true %}
+      </tbody>
+    </table>
+    {% endif %}
+  </div>
+</div>
+</main>
+<form method="post"  action="#" class="form" style="; float: left">
+  <select id="dashboard2" name="dashboard2" onchange="window.location.href='home?dashboard='+this.value">
+    <option  value="0" >Claimant view</option>
+    <option value="1.2" {% if data['dashboard'] == 1.2 %}selected{% endif %}>1. Claim being processed</option>
+    <option value="3" {% if data['dashboard'] == 3 %}selected{% endif %}>2. CCJ - request judgement</option>
+    <option value="4" {% if data['dashboard'] == 4 %}selected{% endif %}>3. CCJ - judgement requested</option>
+    <option value="6" {% if data['dashboard'] == 6 %}selected{% endif %}>4. Draft claim</option>
+    <option value="20" {% if data['dashboard'] == 20 %}selected{% endif %}>5. Offer to settle</option>
+
+<!--    <option value="7" {% if data['dashboard'] == 7 %}selected{% endif %}>6. Full defence response - reject + mediation only</option>
+    <option value="9" {% if data['dashboard'] == 9 %}selected{% endif %}>7. Full defence response - reject + offer and Mediation - stepped</option>-->
+    <option value="28" {% if data['dashboard'] == 28 %}selected{% endif %}>7.1. Full defence response - reject + offer and Mediation - concatenated</option>
+    <option value="10" {% if data['dashboard'] == 10 %}selected{% endif %}>8. Full defence response - reject only</option>
+    <option value="24" {% if data['dashboard'] == 24 %}selected{% endif %}>9. The claim amount is too much + mediation only</option>
+    <option value="25" {% if data['dashboard'] == 25 %}selected{% endif %}>10. I've paid what i owe + mediation only</option>
+    <option value="26" {% if data['dashboard'] == 26 %}selected{% endif %}>11. I admit all the money - instalments</option>
+    <option value="11" {% if data['dashboard'] == 11 %}selected{% endif %}>12. Makes counter offer - message</option>
+    <option value="12" {% if data['dashboard'] == 12 %}selected{% endif %}>13. Mediation offer to defendant - message</option>
+    <option value="13" {% if data['dashboard'] == 13 %}selected{% endif %}>14. Mediation offer agreed - message</option>
+    <option value="18" {% if data['dashboard'] == 18 %}selected{% endif %}>15. Case sent to judge </option>
+    <option value="23" {% if data['dashboard'] == 23 %}selected{% endif %}>16. Claimant counter sign agreement </option>
+    <option value="8" {% if data['dashboard'] == 8 %}selected{% endif %}>Show all</option>
+  </select>
+</form>
+<form method="post"  action="#" class="form" style=" float: left;">
+  <select id="dashboard2" name="dashboard2" onchange="window.location.href='home?dashboard='+this.value">
+    <option  value="0" >Defendant view</option>
+    <option value="2" {% if data['dashboard'] == 2 %}selected{% endif %}>1. Respond to claim - make an offer</option>
+    <option value="2.1" {% if data['dashboard'] == 2.1 %}selected{% endif %}>2. Response being processed</option>
+    <option value="5" {% if data['dashboard'] == 5 %}selected{% endif %}>3.  CCJ requested against defendant</option>
+    <option value="27" {% if data['dashboard'] == 27 %}selected{% endif %}>4.  CCJ issued against defendant</option>
+    <option value="14" {% if data['dashboard'] == 14 %}selected{% endif %}>5.  Full admission - immediate payment</option>
+    <option value="15" {% if data['dashboard'] == 15 %}selected{% endif %}>6.  Mediation request from claimant</option>
+    <option value="16" {% if data['dashboard'] == 16 %}selected{% endif %}>7.  Mediation request - rejected</option>
+    <option value="17" {% if data['dashboard'] == 17 %}selected{% endif %}>8.  Mediation request - accepted</option>
+    <option value="19" {% if data['dashboard'] == 19 %}selected{% endif %}>9.  Counter offer from claimant</option>
+    <!--     <option value="21" {% if data['dashboard'] == 21 %}selected{% endif %}>9.  Offer sent</option>
+     -->    <option value="22" {% if data['dashboard'] == 22 %}selected{% endif %}>10.  Counter sign offer</option>
+    <option value="8" {% if data['dashboard'] == 8 %}selected{% endif %}>Show all</option>
+  </select>
+</form>
+{% endblock %}
