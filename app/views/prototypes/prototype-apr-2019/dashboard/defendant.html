@@ -1109,6 +1109,19 @@
                 <p>We'll contact you by post and email when the court has reviewed your request. You'll still have the judgment against you until then.</p>
 
 
+
+              {% elseif data['defendant'] == 21 %}
+                <h2 class="heading-medium">You sad you would pay Jan Clark</h2>
+                <p>Once you've paid you can request to remove the CCJ.</p>
+                <p><a class="button" href="/prototypes/prototype-apr-2019/dashboard/applications-and-judgments/set-aside-default-ccj/have-you-paid">Continue to cancel CCJ</a></p>
+
+
+              {% elseif data['defendant'] == 22 %}
+                <h2 class="heading-medium">You said you would settle with Jan Clark</h2>
+                <p>Once you've settled you can request to remove the CCJ.</p>
+                <p><a class="button" href="/prototypes/prototype-apr-2019/dashboard/applications-and-judgments/set-aside-default-ccj/have-you-settled">Continue to cancel CCJ</a></p>
+
+
                 {% else %}
 
 
@@ -3273,7 +3286,7 @@
 
 
                 <!--  CCJ set aside requested by defendant  -->
-                {% if data['defendant'] == 20 %}
+                {% if data['defendant'] == 20  or  data['defendant'] == 21  or  data['defendant'] == 22 %}
                     <div class="hmcts-timeline__item">
                       <div class="hmcts-timeline__header">
                         <h2 class="hmcts-timeline__title">You requested to remove the CCJ</h2>
@@ -3317,6 +3330,10 @@
                 {% endif %}
 
 
+
+
+
+
               </div>
 
 
@@ -3347,9 +3364,9 @@
         <div class="tabs-panel" id="contact" role="tabpanel">
 
           <div class="tabs-panel-inner text" tabindex="0">
-            
+
             <h2 class="heading-medium">Claimant's details</h2>
-            
+
             <table class="govuk-table">
               <tbody class="govuk-table__body">
               <tr class="govuk-table__row">
@@ -3514,6 +3531,8 @@
 
     <option>------ CCJ set aside -------</option>
     <option value="20" {% if data['defendant'] == 20 %}selected{% endif %}>CCJ set aside request submitted</option>
+    <option value="21" {% if data['defendant'] == 21 %}selected{% endif %}>Contacting claimant to pay</option>
+    <option value="22" {% if data['defendant'] == 22 %}selected{% endif %}>Contacting claimant to settle</option>
 
 
   </select>
