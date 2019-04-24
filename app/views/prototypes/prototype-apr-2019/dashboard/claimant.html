@@ -34,7 +34,7 @@
             or data['claimant'] == 10.02 or data['claimant'] == 10.03 or data['claimant'] == 10.11 or data['claimant'] == 10.4 or data['claimant'] == 10.5 or data['claimant'] == 10.6
             or data['claimant'] == 10.601 or data['claimant'] == 10.61 or data['claimant'] == 10.801 or data['claimant'] == 10.81 or data['claimant'] == 10.82 or data['claimant'] == 3.2
             or data['claimant'] == 10.83 or data['claimant'] == 10.831 or data['claimant'] == 10.832 or data['claimant'] == 10.84 or data['claimant'] == 10.85 or data['claimant'] == 10.9
-            or data['claimant'] == 10.91 or data['claimant'] == 11.1 or data['claimant'] == 11.11 or data['claimant'] == 11.2 or data['claimant'] == 11.21 or data['claimant'] == 11.3
+            or data['claimant'] == 10.91 or data['claimant'] == 11.1 or data['claimant'] == 11.101 or data['claimant'] == 11.101 or data['claimant'] == 11.11 or data['claimant'] == 11.2 or data['claimant'] == 11.21 or data['claimant'] == 11.3
             or data['claimant'] == 11.4 or data['claimant'] == 11.5 or data['claimant'] == 11.51 or data['claimant'] == 11.6 or data['claimant'] == 11.61 or data['claimant'] == 11.7
             or data['claimant'] == 12 or data['claimant'] == 16 or data['claimant'] == 17 or data['claimant'] == 20 or data['claimant'] == 20.1 or data['claimant'] == 20.2 or data['claimant'] == 21 or data['claimant'] == 23 or data['claimant'] == 24 %}
             <li role="presentation"><a href="#next-steps" role="tab" tabindex="0" aria-controls="next-steps" aria-selected="true">Next steps</a></li>
@@ -577,43 +577,78 @@
                 </ul>
 
                 <p>You must do this by {{ now | date( 'add', 12, 'days' ) | date }}.</p>
-
                 <p>You can also tell us if you want to try mediation.</p>
-
                 <p><a href="order-response?party=claimant" class="button">Send us the details</a></p>
 
                 <h2 class="heading-small">See the full legal document</h2>
-
                 <p><a href="/public/images/order.pdf">Download the court's order</a> (PDF, 123KB) if you want to see the full legal document that sets out these instructions.</p>
 
-
                 <h2 class="heading-small">If you don't send us more details</h2>
-
                 <p>The court can cancel your claim.</p>
-
                 <hr/>
 
                 <h2 class="heading-medium">View the defendant's response to the order</h2>
-
                 <p><a href="order-response/view?party=claimant" class="button secondary-button">See the details they sent the court</a></p>
+              </div>
 
-                <hr />
+
+              {% elseif data['claimant'] == 11.101 %}
+              <div class="status-block single">
+                <h2 class="heading-medium">Send us more details by {{ now | date( 'add', 12, 'days' ) | date }}</h2>
+                <p>The court has ordered you to send us:</p>
+
+                <ul class="list list-bullet">
+                  <li>witness statements</li>
+                  <li>your evidence</li>
+                </ul>
+
+                <p>You were meant do this by {{ minus | date( 'subtract', 1, 'days' ) | date }}. You now have until  {{ now | date( 'add', 11, 'days' ) | date }} to comply with the order of your claim will be automatically cancelled.</p>
+                <p>You can also tell us if you want to try mediation.</p>
+                <p><a href="order-response?party=claimant" class="button">Send us the details</a></p>
+
+                <h2 class="heading-small">See the full legal document</h2>
+                <p><a href="/public/images/order.pdf">Download the court's order</a> (PDF, 123KB) if you want to see the full legal document that sets out these instructions.</p>
+
+                <h2 class="heading-small">If you don't send us more details</h2>
+                <p>The court will cancel your claim on {{ now | date( 'add', 11, 'days' ) | date }}.</p>
+                <hr/>
+
+                <h2 class="heading-medium">View the defendant's response to the order</h2>
+                <p><a href="order-response/view?party=claimant" class="button secondary-button">See the details they sent the court</a></p>
+              </div>
+
+              {% elseif data['claimant'] == 11.1011 %}
+              <div class="status-block single">
+                <h2 class="heading-medium">Your claim has been cancelled</h2>
+                <p>You did not respond to the court's order by the deadline and so your claim has been cancelled.</p>
+                <p>You can make an application to re-start the claim if exceptional cirumstances prevented you from responding.</p>
+              </div>
+
+              {% elseif data['claimant'] == 11.102 %}
+              <div class="status-block single">
+                <h2 class="heading-medium">Mary Richards has not responsed to the order</h2>
+                <p>They now have until {{ now | date( 'add', 11, 'days' ) | date }} to comply with the order or their defence will automatically before cancelled.</p>
+              </div>
+
+              {% elseif data['claimant'] == 11.103 %}
+              <div class="status-block single">
+                <h2 class="heading-medium">You can request a County Court Judgment</h2>
+                <p>Mary Richards did not responded to the court order by the deadline. You can request a County Court Judgment (CCJ) against them.</p>
+                <p>The court will order them to pay the money. It doesn't guarantee that they'll pay it.</p>
+                <p><a href="applications-and-judgments/default-judgment" class="button">Request a CCJ</a></p>
+              </div>
 
 
               {% elseif data['claimant'] == 11.11 %}
               <div class="status-block">
                 <h2 class="heading-medium">Send us more details before the hearing</h2>
-
                 <p>The court has ordered you to send us more details.</p>
-
                 <p><a href="/public/images/order.pdf">Download the court's order</a> (PDF, 123KB)</a> to find out the details you need to send.</p>
 
                 <h2 class="heading-small">Where to post the details</h2>
-
                 <p>You need to post the details to both the court and the defendant.</p>
 
                 <p>The court's address is:</p>
-
                 <p>
                   Civil Money Claims<br/>
                   St. Katharine's House<br/>
@@ -623,7 +658,6 @@
                 </p>
 
                 <p>The defendant's address is:</p>
-
                 <p>
                   Mary Richards <br/>
                   12 Garden View<br />
@@ -632,7 +666,6 @@
                 </p>
 
                 <h2 class="heading-small">If you don't send us the details</h2>
-
                 <p>The court can cancel your claim.</p>
 
               </div>
@@ -640,27 +673,26 @@
 
               {% elseif data['claimant'] == 11.2 or data['claimant'] == 11.21 %}
               <div class="status-block single">
-                <h2 class="heading-medium">Waiting for the defendant to choose an expert</h2>
 
-                {% if data['claimant'] == 11.2 %}
+                {% if data['claimant'] == 11.21 %}
+                <h2 class="heading-medium">We'll contact you if we set a hearing date</h2>
+                <p>We'll explain how to prepare.</p>
+
+                {% elseif data['claimant'] == 11.2 %}
+                <h2 class="heading-medium">Waiting for the defendant to choose an expert</h2>
                 <p>We've sent the defendant your list of proposed experts. They need to choose one.</p>
                 <p>When they've chosen, we'll ask you to send us questions for the expert to answer in their report.</p>
-                {% else %}
-                <p>We'll contact you when we've set a date for the hearing.</p>
                 {% endif %}
 
                 <h2 class="heading-small">Upload more evidence</h2>
 
 
               <p>You can upload more evidence or witness statements until {{ now | date( 'add', 15, 'days' ) | date }}. You can also view your response.</p>
-              <p><a href="order-response?party=claimant&evidence=complete&experts=complete&witness=complete"
-                    class="button secondary-button">Upload more or view your response</a></p>
+              <p><a href="order-response?party=claimant&evidence=complete&experts=complete&witness=complete" class="button secondary-button">Upload more or view your response</a></p>
               </div>
               <hr />
               <h2 class="heading-medium">View the defendant's response to the order</h2>
-
               <p><a href="order-response/view?party=defendant" class="button secondary-button">See the details they sent the court</a></p>
-              <hr />
 
 
 
@@ -673,21 +705,14 @@
 
                 <p><a href="order-response/questions?party=claimant" class="button">See the defendant's questions and ask your own</a></p>
 
-                <h2 class="heading-small">Upload more evidence</h2>
+                  <h2 class="heading-small">Upload more evidence</h2>
 
-              <p>You can upload more evidence or witness statements until {{ now | date( 'add', 15, 'days' ) | date
-              }}. You can also view your response.</p>
-              <p><a href="order-response?party=claimant&evidence=complete&experts=complete&witness=complete"
-                    class="button secondary-button">Upload more or view your response</a></p>
+                <p>You can upload more evidence or witness statements until {{ now | date( 'add', 15, 'days' ) | date }}. You can also view your response.</p>
+                <p><a href="order-response?party=claimant&evidence=complete&experts=complete&witness=complete" class="button secondary-button">Upload more or view your response</a></p>
 
-                    <hr/>
-
-                    <h2 class="heading-medium">View the defendant's response to the order</h2>
-
-                    <p><a href="order-response/view?party=claimant" class="button secondary-button">See the details they sent the court</a></p>
-                    <hr />
-
-                    <hr/>
+                <hr/>
+                <h2 class="heading-medium">View the defendant's response to the order</h2>
+                <p><a href="order-response/view?party=claimant" class="button secondary-button">See the details they sent the court</a></p>
 
               </div>
 
@@ -819,22 +844,24 @@
               <div class="status-block single">
                 <h2 class="heading-medium">We'll contact you if we set a hearing date</h2>
                 <p>We'll explain how to prepare.</p>
-
+                <hr />
+                <h2 class="heading-medium">View the defendant's response to the order</h2>
+                <p><a href="order-response/view?party=claimant" class="button secondary-button">See the details they sent the court</a></p>
               </div>
 
-                {% elseif data['claimant'] == 12 %}
-                <div class="status-block single">
-                  <h2 class="heading-medium">Respond to the defendant</h2>
-                  <p>Mary Richards has rejected your claim.</p>
-                  <p>You can accept or reject their response. You need to respond before 4pm on {{ now | date('add', 5, 'days') | date }}. If you don't respond by then, you might have to go to hearing.</p>
-                  <div class="form-group">
-                    <form method="post" action="claimant-response/dispute-claim/task-list" class="form">
-                      {{formData | safe}}
-                      <input type="hidden" name="mediation-pilot" value="on">
-                      <input type="submit" class="button" value="View and respond">
-                    </form>
-                  </div>
+              {% elseif data['claimant'] == 12 %}
+              <div class="status-block single">
+                <h2 class="heading-medium">Respond to the defendant</h2>
+                <p>Mary Richards has rejected your claim.</p>
+                <p>You can accept or reject their response. You need to respond before 4pm on {{ now | date('add', 5, 'days') | date }}. If you don't respond by then, you might have to go to hearing.</p>
+                <div class="form-group">
+                  <form method="post" action="claimant-response/dispute-claim/task-list" class="form">
+                    {{formData | safe}}
+                    <input type="hidden" name="mediation-pilot" value="on">
+                    <input type="submit" class="button" value="View and respond">
+                  </form>
                 </div>
+              </div>
 
 
               {% elseif data['claimant'] == 16 %}
@@ -1024,8 +1051,8 @@
             data['claimant'] != 3.2 and data['claimant'] != 10.12 and data['claimant'] != 10.01 and
             data['claimant'] != 10.4 and data['claimant'] != 10.5 and data['claimant'] != 10.81 and data['claimant']
             != 10.82 and data['claimant'] != 10.83 and data['claimant'] != 16 and data['claimant'] != 17 and data['claimant'] !=
-            4.2 and data['claimant'] != 4.3 and data['claimant'] != 11.1 and data['claimant'] != 11.11 and data['claimant'] != 11.2 and data['claimant'] != 11.21
-            and data['claimant'] != 11.3 and data['claimant'] != 11.4 and data['claimant'] != 11.5 and data['claimant'] != 11.51 and data['claimant'] != 11.6 and data['claimant'] != 11.61 and data['claimant'] != 11.7 and data['claimant'] != 10 and data['claimant'] != 11%}
+            4.2 and data['claimant'] != 4.3 and data['claimant'] != 11.2 and data['claimant'] != 11.21
+            and data['claimant'] != 11.4 and data['claimant'] != 11.5 and data['claimant'] != 11.51 and data['claimant'] != 11.6 and data['claimant'] != 11.61 and data['claimant'] != 10 and data['claimant'] != 11%}
 
 
             <div class="column-two-thirds" style="margin-top: -10px">
@@ -2458,16 +2485,22 @@
 
     <option>------- Order response ----------</option>
     <option value="11.1" {% if data['claimant'] == 11.1 %}selected{% endif %}>Respond to order</option>
+    <option value="11.101" {% if data['claimant'] == 11.101 %}selected{% endif %}>Not responded (you)</option>
+    <option value="11.1011" {% if data['claimant'] == 11.1011 %}selected{% endif %}>Not responded (you - claim cancelled)</option>
+    <option value="11.102" {% if data['claimant'] == 11.102 %}selected{% endif %}>Not responded (other party)</option>
+    <option value="11.103" {% if data['claimant'] == 11.103 %}selected{% endif %}>Not responded (other party - defence cancelled)</option>
     <option value="11.11" {% if data['claimant'] == 11.11 %}selected{% endif %}>Respond to order (offline)</option>
+    <option value="11.21" {% if data['claimant'] == 11.21 %}selected{% endif %}>Responded to order - before deadline</option>
+    <option value="11.7" {% if data['claimant'] == 11.7 %}selected{% endif %}>Responded to order - after deadline</option>
+<!--
     <option value="11.2" {% if data['claimant'] == 11.2 %}selected{% endif %}>Responded to order - with experts</option>
-    <option value="11.21" {% if data['claimant'] == 11.21 %}selected{% endif %}>Responded to order - no experts</option>
     <option value="11.3" {% if data['claimant'] == 11.3 %}selected{% endif %}>Supply expert questions</option>
     <option value="11.4" {% if data['claimant'] == 11.4 %}selected{% endif %}>Supply expert report</option>
     <option value="11.5" {% if data['claimant'] == 11.5 %}selected{% endif %}>Report uploaded, claimant to supply queries</option>
     <option value="11.51" {% if data['claimant'] == 11.51 %}selected{% endif %}>Report uploaded, defendant has supplied queries</option>
     <option value="11.6" {% if data['claimant'] == 11.6 %}selected{% endif %}>Queries supplied, upload answers</option>
     <option value="11.61" {% if data['claimant'] == 11.61 %}selected{% endif %}>No queries</option>
-    <option value="11.7" {% if data['claimant'] == 11.7 %}selected{% endif %}>Everything received</option>
+-->
 
 
     <option>------- Offer and agreements ----------</option>
