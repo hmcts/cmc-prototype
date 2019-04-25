@@ -15,7 +15,7 @@ Money Claims Prototype
 
         <form method="post" action="{% if data['party'] == 'claimant' or data['check'] == 2 or data['check'] == 4 %}../../../dashboard/claimant-response/dispute-claim/task-list{% else %}../../task-list{% endif %}" class="form">
 
-          {% if data['scenario'] == "ccjsetaside" %}
+          {% if data['defaultccj'] == 'true' %}
               <h1 class="heading-large">Are there dates in the next 9 months when you can’t go to a hearing?</h1>
           {% else %}
               <h1 class="heading-large">Are there dates in the next 9 months when you or your witnesses can’t go to a hearing?</h1>
@@ -44,9 +44,17 @@ Money Claims Prototype
             </dl>
           </div>
 
-          <div class="form-group">
-            <input type="submit" class="button" value="Save and continue">
-          </div>
+
+          {% if data['defaultccj'] == 'true' %}
+              <p><a class="button" href="support">Continue</a></p>
+              <br>
+          {% else %}
+              <div class="form-group">
+                <input type="submit" class="button" value="Save and continue">
+              </div>
+          {% endif %}
+
+
         </form>
 
 
