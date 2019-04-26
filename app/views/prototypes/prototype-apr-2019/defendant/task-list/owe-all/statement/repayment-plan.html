@@ -16,14 +16,14 @@ Money Claims Prototype
 				Your repayment plan
 			</h1>
 			{% if data.radio_select_group=="Some"%}
-			<p>You admit you owe {% if data['owe-amount'] =='' %}£300{% else %}£{{data['owe-amount']}}{% endif %}</p>
+			    <p>You admit you owe {% if data['owe-amount'] =='' %}£300{% else %}£{{data['owe-amount']}}{% endif %}</p>
 			{% else %}
-			<p>The total amount claimed is £1,500. This includes the claim fee and any interest.</p>
+			    <p>The total amount claimed is £1,500. This includes the claim fee and any interest.</p>
 			{% endif %}
 
 
 			<form action="../../../task-list?settlement=true&" method="post" class="form">
-	
+
              <input type="hidden" name="plan" value="complete">
 
 				<div class="form-group">
@@ -54,10 +54,16 @@ Money Claims Prototype
 						</div>
 					</fieldset>
 				</div>
-				<div class="form-group">
-					<p class="heading-small">Length of repayment plan</p>
-					<p id="duration">-</p>
-				</div>
+
+
+        {% if data['vary'] != 'true' %}
+            <div class="form-group">
+              <p class="heading-small">Length of repayment plan</p>
+              <p id="duration">-</p>
+            </div>
+        {% endif %}
+
+
 				<div class="form-group">
 					<fieldset>
 						<legend class="visually-hidden">When you want them to make the first payment</legend>
@@ -79,9 +85,17 @@ Money Claims Prototype
 						</div>
 					</fieldset>
 				</div>
-				<div class="form-group">
-					<input type="submit" class="button" value="Save and continue"/>
-				</div>
+
+
+        {% if data['vary'] == 'true' %}
+            <p><a class="button" href="../statement/explanation">Continue</a></p>
+        {% else %}
+            <div class="form-group">
+              <input type="submit" class="button" value="Save and continue"/>
+            </div>
+        {% endif %}
+
+
 			</form>
 		</div>
 	</div>
