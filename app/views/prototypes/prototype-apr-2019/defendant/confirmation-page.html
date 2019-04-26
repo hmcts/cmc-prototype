@@ -26,6 +26,8 @@ Money Claims Prototype
 					<strong class="bold">{{ now | date }}</strong>
 				</p>
 			</p>
+
+        	{% if data['defaultccj'] != 'true' %}
 			<p>
 				{% if data['radio-pay-group'] == "Instalments" or data['confirmation']== 2 %}
 				<a  class="font-medium" href="correspondence/forms/claim-form-defendant?check=4" target="new" style="color: #FFFFFF" >
@@ -37,19 +39,17 @@ Money Claims Prototype
 				<a  class="font-medium" href="correspondence/forms/claim-form-defendant?check=2" target="new" style="color: #FFFFFF" >
 				{% endif %}
 
-        {% if data['defaultccj'] == 'true' %}
-          </a>
-        {% else %}
-            Download your response
-            {% if data['radio_select_group2'] == "defend_now" or data['confirmation']== 12 %}
-                and hearing requirements<br />
-            {% endif %}
-            {% if data['confirmation'] == 9 or data['counter'] == 'SET-OFF-COUNTER' or data['counter'] == 'FULL-COUNTER' %}
-                and counterclaim
-            {% endif %}
-             (PDF, 123KB)
-        {% endif %}
-				</p>
+	            Download your response
+	            {% if data['radio_select_group2'] == "defend_now" or data['confirmation']== 12 %}
+	                and hearing requirements<br />
+	            {% endif %}
+	            {% if data['confirmation'] == 9 or data['counter'] == 'SET-OFF-COUNTER' or data['counter'] == 'FULL-COUNTER' %}
+	                and counterclaim
+	            {% endif %}
+	             (PDF, 123KB)
+				</a>
+			</p>
+	        {% endif %}
 		</div>
 
 
