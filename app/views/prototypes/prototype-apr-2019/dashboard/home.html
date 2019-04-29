@@ -970,7 +970,7 @@
         <thead>
         <tr>
           <th scope="col"><span style="font-size: medium">Claim number</span></th>
-          <th scope="col"><span style="font-size: medium">Defendant name</span></th>
+          <th scope="col"><span style="font-size: medium">Claimant name</span></th>
           <th scope="col"><span style="font-size: medium">Claim amount</span></th>
           <th scope="col"><span style="font-size: medium">Next steps</span></th>
           <th scope="col"><span style="font-size: medium">Deadline</span></th>
@@ -2339,6 +2339,23 @@
         {% endif %}
 
 
+        <!--  Requested to vary CCJ payment plan -->
+        {% if show_all==true or data['dashboard'] == 2.9995 %}
+            <tr class="mobile-table">
+              <td>352MC733</td>
+              <td>Jan Clark</td>
+              <td>£1500</td>
+              <td class="mobile-hide">Wait for the claimant to respond to vary request</td>
+              <td>-</td>
+              <td><a href="/prototypes/prototype-apr-2019/dashboard/defendant?defendant=23">View</a></td>
+            </tr>
+            <tr>
+              <td class="mobile-table-status" colspan="3"></td>
+            </tr>
+        {% endif %}
+
+
+
         {% if defendant_table==true %}
         </tbody>
       </table>
@@ -2543,6 +2560,8 @@
     <option>-------- CCJ set aside --------</option>
     <option value="2.9991" {% if data['dashboard'] == 2.9991 %}selected{% endif %}>CCJ set aside requested</option>
 
+    <option>-------- CCJ vary - defendant waiting for response --------</option>
+    <option value="2.9995" {% if data['dashboard'] == 2.9991 %}selected{% endif %}>CCJ set aside requested</option>
 
 
   </select>
