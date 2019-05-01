@@ -74,28 +74,30 @@ Money Claims Prototype
 
 
 
+        {% if data['vary'] != 'true' %}
+            <div class="form-group">
+              <fieldset>
+                <legend class="visually-hidden">When you want them to make the first payment</legend>
+                <p class="form-label-bold">When will you make the first payment?</p>
+                <div class="form-date">
+                  <p class="form-hint">For example, {{ now | date('add', 1, 'months') | date('D M YYYY') }}</p>
+                  <div class="form-group form-group-day">
+                    <label for="dob-day">Day</label>
+                    <input class="form-control" id="instalment-day" name="instalment-day" type="number" pattern="[0-9]*" min="0" max="31" value="{{data['instalment-day']}}" >
+                  </div>
+                  <div class="form-group form-group-month">
+                    <label for="dob-month">Month</label>
+                    <input class="form-control" id="instalment-month" name="instalment-month" type="number" pattern="[0-9]*" min="0" max="12" value="{{data['instalment-month']}}">
+                  </div>
+                  <div class="form-group form-group-year">
+                    <label for="dob-year">Year</label>
+                    <input class="form-control" id="instalment-year" name="instalment-year" type="number" pattern="[0-9]*" min="0" max="2024" value="{{data['instalment-year']}}">
+                  </div>
+                </div>
+              </fieldset>
+            </div>
+        {% endif %}
 
-				<div class="form-group">
-					<fieldset>
-						<legend class="visually-hidden">When you want them to make the first payment</legend>
-						<p class="form-label-bold">When will you make the first payment?</p>
-						<div class="form-date">
-							<p class="form-hint">For example, {{ now | date('add', 1, 'months') | date('D M YYYY') }}</p>
-							<div class="form-group form-group-day">
-								<label for="dob-day">Day</label>
-								<input class="form-control" id="instalment-day" name="instalment-day" type="number" pattern="[0-9]*" min="0" max="31" value="{{data['instalment-day']}}" >
-							</div>
-							<div class="form-group form-group-month">
-								<label for="dob-month">Month</label>
-								<input class="form-control" id="instalment-month" name="instalment-month" type="number" pattern="[0-9]*" min="0" max="12" value="{{data['instalment-month']}}">
-							</div>
-							<div class="form-group form-group-year">
-								<label for="dob-year">Year</label>
-								<input class="form-control" id="instalment-year" name="instalment-year" type="number" pattern="[0-9]*" min="0" max="2024" value="{{data['instalment-year']}}">
-							</div>
-						</div>
-					</fieldset>
-				</div>
 
 
         {% if data['vary'] == 'true' %}
