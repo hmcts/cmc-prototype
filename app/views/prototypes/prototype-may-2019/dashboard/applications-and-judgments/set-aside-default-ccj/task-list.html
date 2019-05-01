@@ -1,0 +1,206 @@
+{% extends "layout_task-list.html" %}
+
+{% block page_title %} Task list {% endblock %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="/public/stylesheets/dm_list.css"/>
+{% endblock %}
+
+{% block proposition_header %}
+    {% set my_account="2" %}
+    {% include "includes/propositional_navigation.html" %}
+{% endblock %}
+
+
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <header class="page-heading page-heading-with-context page-heading-without-breadcrumb">
+
+
+        <h1 class="heading-large">
+          Request to remove a CCJ
+        </h1>
+
+
+        <!-- Section 1 -->
+        <table id="table-of-tasks">
+          <thead>
+            <tr>
+              <th scope="col" id="col-task">
+                <span class="task-group">
+                  <span class="group-number" id="task-number"></span>
+                  Your contact details
+                </span>
+                <th class="numeric" id="task-status" scope="col" id="col-status">
+                  <span type="hidden" class="visually-hidden">task status</span>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr id="read-rules">
+                <td class="task">
+                  <a href="/prototypes/prototype-may-2019/defendant/task-list/your-details?defaultccj=true">
+                    <span class="task-name">Confirm your details </span>
+                  </a>
+                </td>
+                <td class="numeric" id="task-status" scope="col" id="col-status">
+                    {% if data.confirmdetails=="complete" %}
+                        {% include "includes/task_status_finished.html" %}
+                    {% else %}
+                        {% include "includes/task_status_incomplete.html" %}
+                    {% endif %}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+
+          <br>
+          <br>
+
+
+          <!-- Section 2 -->
+          <table id="table-of-tasks">
+            <thead>
+              <tr>
+                <th scope="col" id="col-task">
+                  <span class="task-group">
+                    <span class="group-number" id="task-number"></span>
+                    Why you didn't respond to the claim
+                  </span>
+                </th>
+                <th class="numeric" id="task-status" scope="col" id="col-status"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr id="completing-your-claim">
+                <td class="task">
+                  <a href="was-letter-received">
+                    <span class="task-name">Explain why you didn't respond</span>
+                  </a>
+                </td>
+                <td class="numeric" id="task-status" scope="col" id="col-status">
+                  {% if data.explainreason=="complete" %}
+                      {% include "includes/task_status_finished.html" %}
+                  {% else %}
+                      {% include "includes/task_status_incomplete.html" %}
+                  {% endif %}
+                </td>
+              </tr>
+
+              <tr id="completing-your-claim">
+                <td class="task">
+                  <a href="upload-evidence">
+                    <span class="task-name">Submit any evidence</span>
+                  </a>
+                </td>
+                <td class="numeric" id="task-status" scope="col" id="col-status">
+                  {% if data.evidencesection=="complete" %}
+                      {% include "includes/task_status_finished.html" %}
+                  {% else %}
+                      {% include "includes/task_status_incomplete.html" %}
+                  {% endif %}
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+
+
+
+          <br>
+          <br>
+
+
+
+          <table id="table-of-tasks">
+            <thead>
+                <tr>
+                  <th scope="col" id="col-task">
+                      <span class="task-group">
+                        <span class="group-number" id="task-number"></span>
+                        Your hearing requirements
+                      </span>
+                  </th>
+                  <th class="numeric" id="task-status" scope="col" id="col-status"></th>
+                </tr>
+            </thead>
+
+            <tbody>
+            <tr>
+              <td class="task">
+                <a href="/prototypes/prototype-may-2019/defendant/task-list/hearing/court?scenario=ccjsetaside">
+                  <span class="task-name">Give us details in case there's a hearing</span>
+                </a>
+              </td>
+              <td class="numeric" id="task-status" scope="col" id="col-status">
+                {% if data.hearing=="complete" %}
+                    {% include "includes/task_status_finished.html" %}
+                {% else %}
+                    {% include "includes/task_status_incomplete.html" %}
+                {% endif %}
+              </td>
+            </tr>
+            </tbody>
+          </table>
+
+
+          <br>
+          <br>
+
+
+          <!--  SECTION 3  -->
+            <table id="table-of-tasks" class="submit">
+              <thead>
+                <tr>
+                  <th scope="col" id="col-task">
+                    <span class="task-group">
+                      <span class="group-number" id="task-number"></span>
+                      Submit
+                    </span>
+                  </th>
+                  <th class="numeric" id="task-status" scope="col" id="col-status"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr id="check-and-send">
+                  <td>
+                   <a href="check-answers">
+                     <span class="button">Check and submit your request</span>
+                   </a>
+                 </td>
+              </tr>
+            </tbody>
+          </table>
+
+
+    </div>
+
+
+
+    <!--  Right side claim details -->
+    <div class="column-one-third">
+      <ul class="actions">
+      </ul>
+      <div class="meta-data" style="margin-left:80px;">
+        <ul role="navigation" class="font-xsmall list">
+          <li><strong class="bold">Claim reference:</strong><br>352MC733</li>
+           <a href='task-list/view-claim'>View claim</a></li>
+        </ul>
+      </div>
+    </div>
+
+
+
+
+
+  </div>
+
+</main>
+
+{% endblock %}
+{% block extra_js_1 %}<!-- ticky list javascript one -->{% endblock %}
+{% block extra_js_2 %}<!-- ticky list javascript two -->{% endblock %}
