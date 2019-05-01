@@ -1,0 +1,125 @@
+{% extends "layout_task-list.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block home_link %} ../../task-list {% endblock %}
+{% block proposition_header %}
+{% set my_account="1" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      {{formData | safe}}
+      <a href="#" class="link-back">Back</a>
+      <h1 class="heading-large">
+        Do you want to make a counterclaim?
+      </h1>
+      <p>You can make a counterclaim if you believe the claimant Jan Clark owes you money.</p>
+      <p>You'll need to pay a court fee if you make a counterclaim. </p>
+      <details role="group">
+        <summary role="button" aria-controls="details-content-0" aria-expanded="false">View claim fees</summary>
+        <div class="panel" id="details-content-0" aria-hidden="true">
+          <p>The fee is based on the amount you're claiming, including interest.
+          </p><table class="expandable-demo">
+            <thead>
+              <tr>
+                <th scope="col">Claim amount</th>
+                <th scope="col">Fee</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <ul class="list">
+                    <li>£0.01 to £300</li>
+                  </ul>
+                </td>
+                <td>£25</td>
+              </tr>
+              <tr>
+                <td>
+                  <ul class="list">
+                    <li>£300.01 to £500</li>
+                  </ul>
+                </td>
+                <td>£35</td>
+              </tr>
+              <tr>
+                <td>
+                  <ul class="list">
+                    <li>£500.01 to £1,000</li>
+                  </ul>
+                </td>
+                <td>£60</td>
+              </tr>
+              <tr>
+                <td>
+                  <ul class="list">
+                    <li>£1,000.01 to £1,500</li>
+                  </ul>
+                </td>
+                <td>£70</td>
+              </tr>
+              <tr>
+                <td>
+                  <ul class="list">
+                    <li>£1,500.01 to £3,000</li>
+                  </ul>
+                </td>
+                <td>£105</td>
+              </tr>
+              <tr>
+                <td>
+                  <ul class="list">
+                    <li>£3,000.01 to £5,000</li>
+                  </ul>
+                </td>
+                <td>£185</td>
+              </tr>
+              <tr>
+                <td>
+                  <ul class="list">
+                    <li>£5,000.01 to £10,000</li>
+                  </ul>
+                </td>
+                <td>£410</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
+      <br>
+
+      <form
+        name="aspnetForm"
+        method="GET"
+        onsubmit="multiNavigation('radio_group', ['Yes','No'], ['counter-claim-ineligible?a=cc&', 'create-account']);return false;"
+        id="aspnetForm"
+        autocomplete="off">
+      <input id="your-offer" name="offer" type="hidden">
+      <div class="form-group">
+        <fieldset>
+          <div class="multiple-choice">
+            <input id="radio-yes" type="radio" name="radio_group" value="Yes" >
+            <label for="radio-yes" data-target="yes-info">Yes</label>
+          </div>
+
+          <div class="multiple-choice">
+            <input id="radio-no" type="radio" name="radio_group" value="No">
+            <label for="radio-no" data-target="no-info">No</label>
+          </div>
+        </fieldset>
+        <input type="hidden" name="counterclaim" value="complete">
+        <div class="form-group">
+          <input type="submit" class="button" value="Continue"/>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+{% include 'prototypes/prototype-may-2019/includes/contact.html' %}
+</main>
+{% endblock %}

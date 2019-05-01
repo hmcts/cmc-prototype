@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <form
+      name="aspnetForm"
+      method="post"
+      onsubmit="multiNavigation('radio_group2', ['uk','claimant_non_uk'], ['landlord', 'result?a=c-address&']);return false;"
+      id="aspnetForm"
+      autocomplete="off">
+      {{formData | safe}}
+      <a href="#" class="link-back">Back</a>
+      <h1 class="heading-large">
+        Do you have a postal address in the UK?
+      </h1>
+      <p>The UK is made up of England, Scotland, Wales and Northern Ireland.</p>
+      <fieldset class="inline">
+        <legend class="visuallyhidden">
+          Do you live in the UK
+        </legend>
+        <div class="multiple-choice">
+          <input id="radio-1" type="radio" name="radio_group2" value="uk">
+          <label for="radio-1">Yes</label>
+        </div>
+        <div class="multiple-choice">
+          <input id="radio-2" type="radio" name="radio_group2" value="claimant_non_uk">
+          <label for="radio-2">No</label>
+        </div>
+      </fieldset>
+      {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}
+      <div class="form-group">
+        <input type="submit" class="button" value="Save changes"/>
+      </div>
+      <a href="{{ data.return_page if data.return_page | length > 0 else '../task-list' }}">Cancel</a>
+      {% else %}
+      <div class="form-group">
+        <input type="submit" class="button" value="Continue"/>
+      </div>
+      {% endif %}
+    </form>
+  </div>
+</div>
+{% include 'prototypes/prototype-may-2019/includes/contact.html' %}
+</main>
+{% endblock %}

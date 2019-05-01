@@ -1,0 +1,58 @@
+{% extends "layout_task-list.html" %}
+{% block page_title %}
+Check your answers
+{% endblock %}
+{% block home_link %} ../task-list {% endblock %}
+{% block proposition_header %}
+{% set my_account="1" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <h1 class="heading-large">
+    Check your expert's {% if data['type'] == 'report' %}response{% else %}report{% endif %}
+  </h1>
+  <table class="check-your-answers">
+    <thead>
+      <tr>
+        <th colspan="2">
+          <h2 id='cd' class="heading-medium">
+            Your expert's {% if data['type'] == 'report' %}response{% else %}report{% endif %}
+          </h2>
+        </th>
+        <th>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>
+            Expert's {% if data['type'] == 'report' %}response{% else %}report{% endif %} uploaded
+          </td>
+          <td>
+            <ul>
+              <li><a href="#">Expert {% if data['type'] == 'report' %}response{% else %}report{% endif %} - John Davies.docx</a></li>
+            </ul></td>
+          <td class="change-answer">
+         <a href="upload">
+          Change
+        </a>
+          </td>
+        </tr>
+
+  </tbody>
+</table>
+
+
+<br />
+
+<p>Make sure you've uploaded the right documents - you can't remove a document after you've uploaded it.</p>
+
+<form method="get" action="confirmation-page" class="form">
+  <div class="form-group">
+    <button class="button" >Submit expert's {% if data['type'] == 'report' %}response{% else %}report{% endif %}</button>
+  </div>
+{% include 'prototypes/prototype-may-2019/includes/contact.html' %}
+</main>
+{% endblock %}

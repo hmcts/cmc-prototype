@@ -1,0 +1,60 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+
+{% block content %}
+
+
+<main id="content" role="main">
+
+  {% include "includes/phase_banner_beta.html" %}
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+      <a href="#" onclick="history.go(-1)" class="link-back">Back</a>
+
+      <h1 class="heading-large">
+          Will you pay the £1500 now?
+      </h1>
+
+      <form
+        name="aspnetForm"
+        method="post"
+        onsubmit="multiNavigation('radio-set-receive-claim', ['Yes', 'No'], ['contact-claimant', '../vary/pay-default-ccj-options']);return false;"
+        id="aspnetForm"
+        autocomplete="off">
+
+        <div class="form-group">
+          <fieldset>
+
+            <div class="multiple-choice" data-target="pay">
+              <input id="set-aside-yes" type="radio" name="radio-set-receive-claim" value="Yes" aria-controls="paid-off" aria-expanded="false">
+              <label for="set-aside-yes">Yes</label>
+            </div>
+
+            <div class="multiple-choice" data-target="vary">
+              <input id="set-aside-no" type="radio" name="radio-set-receive-claim" value="No">
+              <label for="set-aside-no">No</label>
+            </div>
+            <div class="panel panel-border-narrow js-hidden" id="vary">
+              <p> You can't get the judgment removed if you don't pay immediately. It will stay on the register for 6 years. </p>
+            </div>
+
+          </fieldset>
+        </div>
+
+        <div class="form-group">
+          <input type="submit" class="button" value="Continue" />
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+
+  {% include 'prototypes/prototype-may-2019/includes/contact.html' %}
+</main>
+{% endblock %}

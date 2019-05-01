@@ -1,0 +1,92 @@
+{% extends "layout_task-list.html" %}
+
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+
+{% block home_link %} ../../task-list {% endblock %}
+{% block proposition_header %}
+{% set my_account="1" %}
+
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+
+
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+
+
+  {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}
+  {% else %}
+      <a href="#" class="link-back">Back</a>
+
+  {% endif %}
+
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+      <h1 class="heading-large">Do you want to add another defendant?</h1>
+
+        <form method="post" action="defendant-add" class="form">
+
+
+        <input type="hidden" name="their_details" value="complete">
+        <fieldset class="form-group inline">
+          <legend class="visually-hidden">Do you want to add another defendant?</legend>
+
+          <div class="multiple-choice" data-target="add-defendant-yes">
+            <input id="company" name="addDefendant" type="radio" value="yes">
+            <label for="company">Yes</label>
+          </div>
+
+          <div class="multiple-choice">
+            <input id="individual" name="addDefendant" type="radio" value="no">
+            <label for="individual">No</label>
+          </div>
+
+        </fieldset>
+
+
+        <div class="form-group">
+          <input type="submit" class="button" value="Save and continue">
+        </div>
+      </form>
+
+    {% if data['defendants'].length > 1 %}
+      <h1 class="heading-medium">
+        Already added
+      </h1>
+      <div class="column-full">
+        <div class="column-one-third bold">Defendant</div>
+        <div class="column-one-third bold">Address</div>
+      </div>
+      <hr class="column-full">
+      {% for defendant in data['defendants'] %}
+      <div class="column-full">
+        <div class="column-one-third">
+          {{ defendant.defendantNo}}. {{ defendant.defendantName }}
+        </div>
+        <div class="column-one-third">{{ defendant.defendantAddress }}</div>
+        <div class="column-one-third"><a class="change link" href="defendant-name">Change</a> <a class="link" onclick="delete_item(this)">Remove</a></div>
+        <hr class="column-full">
+      </div>
+
+      {% endfor %}
+    {% endif %}
+
+
+    <script type='text/javascript'>
+        function delete_item(el) {
+            el.parentNode.parentNode.parentNode.removeChild(el.parentNode.parentNode);
+        }
+
+    </script>
+
+    </div>
+  </div>
+
+{% include 'prototypes/prototype-may-2019/includes/contact.html' %}
+</main>
+{% endblock %}

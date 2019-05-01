@@ -1,0 +1,59 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <a href="#" class="link-back">Back</a>
+
+    <form method="post" action="check-and-send" class="form">
+
+      <div class="form-group">
+        <h1 class="heading-large">Send questions to the expert</h1>
+
+        <p>The expert will write a report which answers the questions you and the {% if data['party'] == "defendant" %}claiamant{% else %}defendant{% endif %}ask.</p>
+
+      <div class="questions">
+
+        <div class="question">
+          <h2 class="heading-medium" name="1" style="margin-top: 20px; margin-bottom: 10px">Question 1</h2>
+          <textarea class="timeline-column-text" rows="4" style="width: 100%"></textarea>
+        </div>
+
+      </div>
+
+      <p><a href="" class="button secondary-button" style="margin-bottom: 25px; margin-top: 15px;" id="add-another">Add another question</a></p>
+
+      <input id="advert-option-next--button" type="submit" value="Save and continue" class="button" />
+      </div>
+
+
+      </div>
+    </form>
+
+    </div>
+  </form>
+</div>
+</div>
+{% include 'prototypes/prototype-may-2019/includes/contact.html' %}
+</main>
+
+<script>
+  $(document).ready(function () {
+    $('#add-another').click(function (event) {
+      event.preventDefault();
+      objQuestion = $('.question:last-child').clone();
+      objQuestion.find('h2').text( 'Question ' + ++$('.question').length );
+      $('.questions').append( objQuestion );
+    });
+  });
+</script>
+
+{% endblock %}

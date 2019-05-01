@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<!--[if lt IE 9]><html class="lte-ie8" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--><html lang="en"><!--<![endif]-->
+<head>
+    <meta charset="utf-8" />
+    <style>
+#content {
+  margin-top:3em
+}
+@page {
+  size: 8.5in 11in;
+  margin: 10%;
+  @top-right {
+    content: "Page " counter(page) " of " counter(pages);
+    /*noinspection CssNoGenericFontName*/
+    font-family: "Open Sans";
+  }
+}
+html {
+  /*noinspection CssNoGenericFontName*/
+  font-family: "Open Sans";
+  max-width: 960px;
+  margin: 0 auto;
+  background:#d9d9d9
+}
+#content{
+  background:#fff;
+  padding:70px;
+  padding-bottom: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+body {
+  counter-reset: section;
+  font-family: "nta", Arial, sans-serif;
+  font-weight: 400;
+  text-transform: none;
+  font-size: 19px;
+  line-height: 1.25;
+  -webkit-font-smoothing: antialiased;
+}
+.section {
+  margin-bottom: 25px;
+}
+.section .section-heading {
+  margin-bottom: 10px;
+}
+.section .section-heading strong:before {
+  counter-increment: section;
+  content: counter(section) ". ";
+}
+table {
+  width: 100%;
+  border-spacing: 0;
+}
+table td {
+  border-bottom: 1px solid #999;
+  padding: 5px;
+  text-align:left;
+  line-height: 1.25;
+  padding: 0.63158em 1.05263em 0.67368em 0;
+  font-size: 18px;
+  vertical-align:top;
+}
+p{
+  font-size: 18px;
+}
+table th {
+ text-align:left;
+ border-bottom: 1px solid #999;
+}
+table td:first-child {
+  width: 280px;
+  vertical-align: top;
+  font-weight:700;
+}
+td.single-cell{
+ font-weight:100!important;
+}
+.no-border{
+  border: none;
+}
+table td:last-child {
+  width: auto;
+}
+header table td, header table tr:last-child td {
+  border: none;
+}
+header td {
+  margin: 0;
+  padding: 0;
+}
+.heading-medium{
+  padding-bottom: 0;
+  margin-bottom: 0.4em;
+  margin-top: 1.5em;
+  font-size:22px;
+}
+.claim-number {
+  font-weight:700;
+  font-size:19px;
+}
+.crestLogo tr td:nth-child(1) {
+  width: 30%;
+}
+.crest{
+  width:80%
+}
+h1 {
+  font-weight:100;
+  font-size:24px;
+}
+.seal{
+  width: 12%;
+  float: right;
+  padding-top: 30px;
+}
+.page-title {
+  text-align:center;
+  padding-top:20px;
+  font-size:14px
+}
+.page-title span{
+  float:right
+}
+.crestLogo{
+  margin-top:40px
+}
+.page-break{
+  background: #d9d9d9;
+  margin-left: -70px;
+  margin-right: -70px;
+  margin-top: 20px;
+}
+.claim-details{
+  text-align:right
+}
+.footer td{
+  font-size:10px;
+  padding-top:40px;
+  border-bottom: none;
+}
+.footer td:nth-child(3){
+  text-align:right
+}
+</style>
+<main id="content"  role="main">
+  <header>
+
+    <table class="crestLogo">
+    <tbody>
+      <tr>
+        <td></td>
+        <td rowspan="2" class="claim-details">
+
+{% if data['check'] == 3 or data['check'] == 4 %}
+          <h1>Judgment by admission</h1>
+{% elseif data['check'] == 5 or data['check'] == 6 %}
+          <h1>Judgment by determination</h1>
+{% else %}
+          <h1>Default judgment</h1>
+{% endif %}
+
+          <p>In the County Court Business Centre Online Civil Money Claims</p>
+          <p><strong>Claim number:</strong> 352MC733<br>
+            <strong>Date of order:</strong> {{ now | date }}</p></td>
+          </tr>
+        </tbody>
+      </table>
+      <img class="seal"  src="{{ asset_path }}/images/court-logos/seal.png" alt="" />
+
+    </header>
+
+    <table >
+      <tbody>
+       <tr>
+        <td>
+          Claimant name:
+        </td>
+        <td>
+         Jan Clark
+       </td>
+     </tr>
+       <tr>
+        <td>
+          Defendant name:
+        </td>
+        <td>
+          Mary Richards
+       </td>
+     </tr>
+
+   </tbody>
+ </table>
+
+ {% if data['check'] == 1 %}
+<p>You have not responded to the money claim made against you.</p>
+<p><strong>The court orders you to pay the claimant £1,500 immediately.</strong></p>
+
+ {% elseif data['check'] == 2 %}
+ <p>You have not responded to the money claim made against you.</p>
+ <p><strong>The court orders you to pay the claimant £1,500 immediately, plus interest to the date of judgment.</strong></p>
+
+ {% elseif data['check'] == 3 %}
+<p>The claimant has accepted your offer.</p>
+<p><strong>The court orders you to pay the claimant £1,250 by instalments of £250 per month.</strong></p>
+<p>The first payment must reach the claimant by {{ now | date('add', 1, 'month') | date }} and on or before this date each month until the debt has been paid.</p>
+
+ {% elseif data['check'] == 4 %}
+<p>The claimant has accepted your offer.</p>
+<p><strong>The court orders you to pay the claimant £1,250 by {{ now | date('add', 3, 'month') | date }}.</strong></p>
+
+{% elseif data['check'] == 5 %}
+<p>The claimant has rejected your payment plan. The court has decided an alternative payment plan.</p>
+<p><strong>The court orders you to pay the claimant £1,250 by instalments of £250 per month.</strong></p>
+<p>The first payment must reach the claimant by {{ now | date('add', 1, 'month') | date }} and on or before this date each month until the debt has been paid.</p>
+
+{% elseif data['check'] == 6 %}
+<p>The claimant has rejected your payment plan. The court has decided an alternative payment plan.</p>
+<p><strong>The court orders you to pay the claimant £1,250 by {{ now | date('add', 3, 'month') | date }}.</strong></p>
+
+ {% else %}
+<p>The court orders you to pay the claimant £1,500, plus interest to the date of judgment.</p>
+<p>You must pay the claimant the total of £1500 immediately.</p>
+
+ {% endif %}
+
+<h2 class="heading-medium">If you don't pay</h2>
+<p>Your goods may be removed and sold, or other enforcement proceedings may be taken against you.</p>
+<p>You will have to pay the costs of any enforcement action against you.</p>
+
+<h2 class="heading-medium">How to pay</h2>
+
+<p>Contact Jan Clark if you need their payment details.</p>
+<p>{CAN WE PUT THE CLAIMANT'S CONTACT DETAILS HERE?}</p>
+
+<h2 class="heading-medium">Removing the judgment from the register</h2>
+
+<p>If you pay in full within one month, or you have already paid, you can ask the court to remove the judgment from the register. The judgment won't appear in credit agency searches, though some agencies may not update their records immediately. </p>
+<p>If you pay in full in more than one month, you can ask the court to mark the judgment as satisfied. Any credit agency that checks the register will see you've paid the money, though some may not update their records immediately. The judgment will remain on the register for 6 years but it'll be marked as satisfied.</p>
+<p>If you need proof that the judgment is cancelled or satisfied you can pay £15 to get a certificate (<a href="https://www.gov.uk/government/publications/form-n443-application-for-a-certificate-of-satisfaction-or-cancellation">https://www.gov.uk/government/publications/form-n443-application-for-a-certificate-of-satisfaction-or-cancellation</a>).</p>
+
+<h2 class="heading-medium">If you believe you don't owe the money</h2>
+<p>You can apply to the court to set aside the judgment.</p>
+<p>To get a judgment set aside, fill in an application notice (<a href="https://www.gov.uk/government/publications/form-n244-application-notice">https://www.gov.uk/government/publications/form-n244-application-notice</a>) and send it to the court.</p>
+<p>You may have to pay a court fee of £255. You may be apply to get help with court fees.</p>
+<p>You'll have to go to a court hearing to explain why you don't owe the money.</p>
+<p>If you don't go to the hearing, your application will be rejected and you’ll have to pay the amount in the judgment.</p>
+
+<table class="footer" style="margin-top: 400px">
+  <tbody>
+    <tr>
+      <tr>
+        <td>
+          N30(1) Judgment for Claimant (acceptance)
+        </td>
+        <td>
+          For further details of the courts www.gov.uk/find-court-tribunal
+        </td>
+        <td >
+          &copy; Crown copyright
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</main>
+<form method="post"  action="#" class="form" style="position: absolute">
+  <select id="check2" name="check2" onchange="window.location.href='?check='+this.value">
+    <option  value="0" >Choose</option>
+    <option  value="1" {% if data['check'] == 1 %}selected{% endif %}>1. Immediate payment not paid</option>
+    <option  value="2" {% if data['check'] == 2 %}selected{% endif %}>2. Set date</option>
+    <option  value="3" {% if data['check'] == 3 %}selected{% endif %}>3. Instalments</option>
+  </select>
+</form>
