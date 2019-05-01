@@ -1,0 +1,70 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="1" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+
+  <div class="grid-row">
+
+    <a href="#" class="link-back">Back</a>
+
+    <h1 class="heading-large">
+      View the {% if data['party'] == 'defendant' %}claimant{% else %}defendant{% endif %}'s questions for the expert
+    </h1>
+
+    <table class="check-your-answers">
+      <tbody>
+          <tr>
+            <td>
+              Question 1
+            </td>
+            <td>
+              Do you believe the work as it stands is of an acceptable quality?
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Question 2
+            </td>
+            <td>
+              Do you the damage suffered was a result of poor workmanship?
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Question 3
+            </td>
+            <td>
+              Do you believe the property is safe to live in?
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Question 4
+            </td>
+            <td>
+              How much do you believe it would cost to rectify the issues to a suitable standard?
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+    {% if data['type'] != 'view' %}
+      <form method="get" action="questions/have-any" class="form">
+        <div class="form-group">
+          <button class="button">Continue</button>
+        </div>
+      </form>
+    {% endif %}
+
+</div>
+
+{% include 'prototypes/prototype-may-2019/includes/contact.html' %}
+</main>
+{% endblock %}

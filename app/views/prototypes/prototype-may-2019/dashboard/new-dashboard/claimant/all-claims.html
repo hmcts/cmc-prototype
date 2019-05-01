@@ -1,0 +1,272 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="4" %}
+
+{% include "includes/propositional_navigation_new.html" %}
+{% endblock %}
+{% block content %}
+
+
+<main id="content" role="main">
+
+  {% include "includes/phase_banner_beta.html" %}
+
+  <div class="grid-row">
+    <div class="column-full">
+
+      <h1 class="heading-large" id="page-h1" style="margin-bottom: 20px">
+        All claims
+      </h1>
+
+      <a class="newclaim" href="../../new-claim/eligibility" style="margin-bottom: 40px">Make a new money claim</a>
+
+      <!--<h2 class="heading-medium type-heading claims">-->
+      <!--Claims you've made-->
+    <!--</h2>-->
+
+      <div class="tabGroup3">
+        <a id="tabH" class="tab-on" onclick="tabGroup3(tabContent, 'TAB-ONE')" href="javascript: void(0)">Claims you've
+          made</a>
+        <a id="tabI" class="tab" onclick="tabGroup3(tabContent, 'TAB-TWO')" href="javascript: void(0)">Claims made
+          against you</a>
+        <!--<div class="govuk-form-group" style="float: right; margin-bottom: -10px">-->
+          <!--<label class="font-xsmall" for="sort">-->
+            <!--Sort by-->
+          <!--</label>-->
+          <!--<select class="govuk-select" id="sort" name="sort" style="font-size: 14px">-->
+            <!--<option value="">Issue date</option>-->
+            <!--<option value="">Claim amount</option>-->
+            <!--<option value="" selected="">Deadline</option>-->
+          <!--</select>-->
+        <!--</div>-->
+        <hr style="margin-top: -1px">
+      </div>
+
+      <div id="tabContent" class="top_30">
+
+        <div id="tabOneContent">
+
+          <div class="table-container container">
+            <table class="clickable">
+              <!--<caption>-->
+              <!--<span class="table-caption">-->
+              <!--Claims you've made-->
+              <!--</span>-->
+              <!--</caption>-->
+              <thead>
+              <tr>
+                <th scope="col">
+                  <span style="font-size: medium">Claim number</span>
+                </th>
+                <th scope="col">
+                  <span style="font-size: medium">Defendant</span>
+                </th>
+                <th class="numeric" scope="col">
+                  <span style="font-size: medium">Claim amount</span>
+                </th>
+                <th scope="col">
+                  <span style="font-size: medium">Next steps</span>
+                </th>
+                <th scope="col">
+                  <span style="font-size: medium">Deadline</span>
+                </th>
+                <th scope="col">
+
+                  <span style="font-size: medium">Action(s)</span>
+
+                </th>
+              </tr>
+              </thead>
+              <tbody>
+
+              <!--draft claim 01-->
+              <tr class="draft" id="claim-continue-draft">
+                <td aria-label="Claim-number">
+                  -<br>
+                  <span class="font-xsmall">Drafted on 8 Dec 2018</span>
+                </td>
+                <td aria-label="Defendants">
+                  Michael Jones
+                </td>
+                <td aria-label="Claimed" class="numeric claimed-amount">
+                  £1,500
+                </td>
+                <td aria-label="Next steps">
+                  Continue draft claim
+                </td>
+                <td aria-label="Deadline">
+                  -
+                </td>
+                <td aria-label="Action">
+                  <a class="" href="../../../claimant/task-list">Continue</a>
+                  <a class="" href="delete-draft">Delete</a>
+                </td>
+              </tr>
+
+              <!--claim 02-->
+              <tr class="submitted" id="">
+                <td aria-label="Claim-number">
+                  352MC733<br>
+                  <span class="font-xsmall">Issued on 5 Dec 2018</span>
+                </td>
+                <td aria-label="Defendants">
+                  Mary Richards<br>
+                </td>
+                <td aria-label="Claimed" class="numeric claimed-amount">
+                  £1,500
+                </td>
+                <td aria-label="Next steps">
+                  {% if data["claimant"] == 1 %}
+                  Waiting for the defendant to respond
+                  {% endif %}
+
+                  {% if data["claimant"] == 2 %}
+                  Respond to defendant
+                  {% endif %}
+
+                  {% if data["claimant"] == 3 %}
+                  The court will review<br> the case
+                  {% endif %}
+
+                  {% if data["claimant"] == 4 %}
+                  Prepare for the hearing
+                  {% endif %}
+
+                  {% if data["claimant"] == 5 %}
+                  Pay the hearing fee
+                  {% endif %}
+
+                </td>
+                <td aria-label="Deadline">
+                  {% if data["claimant"] == 1 %}
+                  -
+                  {% endif %}
+
+                  {% if data["claimant"] == 2 %}
+                  26 Jan 2019<br>
+                  <span class="font-xsmall">19 days left</span>
+                  {% endif %}
+
+                  {% if data["claimant"] == 3 %}
+                  -
+                  {% endif %}
+
+                  {% if data["claimant"] == 4 %}
+                  30 Feb 2019<br>
+                  <span class="font-xsmall">10 days left</span>
+                  {% endif %}
+
+                  {% if data["claimant"] == 5 %}
+                  20 Mar 2019<br>
+                  <span class="font-xsmall">5 days left</span>
+                  {% endif %}
+
+                </td>
+                <td aria-label="Action">
+                  {% if data["claimant"] == 1 %}
+                  <a class="" href="claim-details-c1">View</a>
+                  {% endif %}
+
+                  {% if data["claimant"] == 2 %}
+                  <a class="" href="claim-details-c2">View</a>
+                  {% endif %}
+
+                  {% if data["claimant"] == 3 %}
+                  <a class="" href="claim-details-c3">View</a>
+                  {% endif %}
+
+                  {% if data["claimant"] == 4 %}
+                  <a class="" href="claim-details-c4">View</a>
+                  {% endif %}
+
+                  {% if data["claimant"] == 5 %}
+                  <a class="" href="claim-details-c5">View</a>
+                  {% endif %}
+
+                </td>
+              </tr>
+
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+
+
+        <div id="tabTwoContent">
+
+          <div class="table-container container">
+            <table class="clickable">
+              <!--<caption>-->
+              <!--<span class="table-caption">-->
+              <!--Claims made against you-->
+              <!--</span>-->
+              <!--</caption>-->
+              <thead>
+              <tr>
+                <th scope="col">
+                  <span style="font-size: medium">
+                    Claim number
+                  </span>
+                </th>
+                <th scope="col">
+                  <span style="font-size: medium">Claimant</span>
+                </th>
+                <th class="numeric" scope="col">
+                  <span style="font-size: medium">Claim amount</span>
+                </th>
+                <th scope="col">
+                  <span style="font-size: medium">Next steps</span>
+                </th>
+                <th scope="col">
+                  <span style="font-size: medium">Deadline</span>
+                </th>
+                <th scope="col">
+                  <span style="font-size: medium">Action(s)</span>
+                </th>
+              </tr>
+              </thead>
+              <tbody>
+
+              <!--claim 02-->
+              <tr class="submitted" id="claim-dx">
+                <td aria-label="Claim-number">
+                  0000LR125<br>
+                  <span class="font-xsmall">Issued on 7 Nov 2018</span>
+                </td>
+                <td aria-label="Claimant">
+                  Kate Beckinsale
+                </td>
+                <td aria-label="Claimed" class="numeric claimed-amount">
+                  £2,456
+                </td>
+                <td aria-label="Next steps">
+                  Pay the judgment debt
+                </td>
+                <td aria-label="Deadline">
+                  30 Jan 2019<br>
+                  <span class="font-xsmall">19 days left</span>
+                </td>
+                <td aria-label="Action">
+                  <a class="" href="">View</a>
+                </td>
+              </tr>
+
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+      </div>
+
+      {% include 'prototypes/prototype-may-2019/includes/contact.html' %}
+    </div>
+
+</main>
+
+
+{% endblock %}

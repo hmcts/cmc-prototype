@@ -1,0 +1,67 @@
+{% extends "layout_task-list.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block home_link %} ../../task-list {% endblock %}
+{% block proposition_header %}
+{% set my_account="1" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}        
+  {% else %}
+  <a href="#" class="link-back">Back</a>
+  {% endif %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}        
+      <form method="post" action="{{ data.return_page if data.return_page | length > 0 else '../task-list' }}" class="form">
+        {% else %}
+        <form method="post" action="../../task-list" class="form">
+          {% endif %}
+          {{formData | safe}}
+          <h1 class="heading-large">
+            Get updates
+          </h1>
+          <p>Find out what's happening with your claim, and if there's a response for you to view.</p>
+          <p>You can choose both.</p>
+          <fieldset>
+            <legend class="visuallyhidden">
+              Preferences
+            </legend>
+            <div class="multiple-choice" data-target="contact-by-email">
+              <input id="email-updates" name="updates" type="checkbox" value="Email updates" {{ checked("updates", "Email updates") }}>
+              <label for="email-updates">Email updates</label>
+            </div>
+            <div class="panel panel-border-narrow js-hidden" id="contact-by-email">
+              <p>We'll send updates to</p>
+              <input class="form-control form-control" id="claimant_phone2" name="claimant-phone2" type="text" value="youremail@gmail.com">
+            </div>
+            <div class="multiple-choice" data-target="contact-by-text">
+              <input id="text-updates" name="updates" type="checkbox" value="Text updates" {{ checked("updates", "Text updates") }}>
+              <label for="text-updates">Text updates</label>
+            </div>
+            <div class="panel panel-border-narrow js-hidden" id="contact-by-text">
+              <p>We'll send texts to: </p>
+              <input class="form-control form-control" id="claimant_phone2" name="claimant-phone2" type="text" value="072827999617">
+            </div>
+            <input type="hidden" name="your_details" value="complete">
+          </fieldset>
+          {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}
+          <div class="form-group">
+            <input type="submit" class="button" value="Save changes"/>
+          </div>
+          <a href="{{ data.return_page if data.return_page | length > 0 else '../task-list' }}">Cancel</a>
+          {% else %}
+          <div class="form-group">
+            <input type="submit" class="button" value="Save and continue"/>
+          </div>
+          {% endif %}
+        </form>
+      </div>
+    </div>
+  {% include 'prototypes/prototype-may-2019/includes/contact.html' %}
+</main>
+{% endblock %}

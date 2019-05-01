@@ -1,0 +1,133 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="2" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <a href="#" class="link-back">Back</a>
+
+      <h1 class="heading-large">
+        Give us more information for a hearing
+      </h1>
+
+      <p>You need to complete each section on this page by {{ now | date('add', 12, 'days') | date }}, or {% if data['party'] == "defendant" %}the court may cancel your defence and give you a County Court Judgment (CCJ){% else %}the claim will not proceed to a hearing{% endif %}.</p>
+
+      <hr />
+
+      <h2 class="heading-small">Complete and upload witness statements</h2>
+      {% if data['witness'] == 'complete' %}
+      <p>You uploaded these documents on {{ now | date }}:</p>
+
+      <ul>
+          <li>Steve Smith: <a href="#">Witness statement 1.pdf</a></li>
+          <li>Ben Clark: <a href="#">Witness statement 2.docx</a></li>
+      </ul>
+
+      <br />
+      <div class="form-group">
+        <a href="order-response/witness-statements" class="secondary-button">Upload more witness statements</a>
+      </div>
+
+      {% else %}
+      <p>You must complete a witness statement for any witnesses whose evidence you want to use at the hearing, including yourself.</p>
+
+      <p>To make sure your witness statements have all the information the court needs you should either:</p>
+
+        <ul class="list list-bullet">
+          <li><a href="/public/images/Witness%20statement.docx">download the witness statement template</a> (DOCX, 123KB)</li>
+          <li><a href="order-response/witness-statements">follow the witness statement guidance</a></li>
+        </ul>
+
+      <div class="form-group">
+        <a href="order-response/witness-statements" class="secondary-button">Upload witness statements</a>
+      </div>
+      {% endif %}
+
+      <hr />
+
+      <h2 class="heading-small">Upload your evidence</h2>
+
+      {% if data['evidence'] == 'complete' %}
+      <p>You uploaded these documents on {{ now | date }}:</p>
+
+      <ul>
+        <li><a href="#">Emails.pdf</a></li>
+        <li><a href="#">Photo 1.jpg</a></li>
+        <li><a href="#">Photo 2.jpg</a></li>
+        <li><a href="#">Contract.pdf</a></li>
+      </ul>
+
+      <br />
+      <div class="form-group">
+        <a href="order-response/evidence" class="secondary-button">Upload more evidence</a>
+      </div>
+
+      {% else %}
+      <p>You must upload copies of any evidence you intend to use at the hearing.</p>
+      <div class="form-group">
+        <a href="order-response/evidence" class="secondary-button">Upload evidence</a>
+      </div>
+      {% endif %}
+      <hr />
+
+
+      <h2 class="heading-small">Mediation</h2>
+      {% if data['mediation'] == 'complete' %}
+      <p>You’ve agreed to try mediation.</p>
+      <p>We'll ask {% if data['party'] == "defendant" %}Jan Clark{% else %}Mary Richards{% endif %} if they'll try mediation.</p>
+      <p>If they agree, we'll contact you with details of your appointment. If not, you might have to go to a hearing.</p>
+      <p><a href="mediation/how-mediation-works?post-response=yes">Find out how free mediation works</a>.  </p>
+
+      {% elseif data['mediation'] == 'rejected' %}
+      <p>You said you don't want to try mediation.</p>
+      <p>If you change your mind, you should <a href="../../../defendant/task-list/mediation/try-mediation?source=order">let us know</a>.</p>
+      <p><a href="mediation/how-mediation-works?post-response=yes">Find out how free mediation works</a>.  </p>
+
+      <div class="form-group">
+        <a href="../defendant/task-list/mediation/try-mediation?source=order" class="secondary-button">Tell us if you want free mediation</a>
+      </div>
+
+      {% else %}
+      <p>The court has reviewed your case and believes it could be resolved by free mediation.</p>
+
+      <p><a href="mediation/how-mediation-works?post-response=yes">Find out how free mediation works</a>.  </p>
+
+      <div class="form-group">
+        <a href="../defendant/task-list/mediation/try-mediation?source=order" class="secondary-button">Tell us if you want free mediation</a>
+      </div>
+
+      {% endif %}
+
+      <hr />
+
+
+
+      <h2 class="heading-medium">Responding by post</h2>
+
+      <p>If you can't upload the required documents, you can <a href="order-response/offline">respond to the order by post</a> instead.</p>
+
+    </div>
+  </form>
+</div>
+</div>
+{% include 'prototypes/prototype-may-2019/includes/contact.html' %}
+</main>
+
+<form method="post" action="#" class="form" style="position: absolute;">
+  <select onchange="window.location.href='?'+this.value">
+    <option>-------- Status --------</option>
+    <option value="evidence=&witness=&mediation=">Nothing uploaded</option>
+    <option value="evidence=complete&witness=&mediation=">Evidence uploaded</option>
+    <option value="evidence=&witness=complete&mediation=">Witness statements uploaded</option>
+    <option value="evidence=&witness=&mediation=complete">Mediation accepted</option>
+    <option value="evidence=&witness=&mediation=rejected">Mediation rejected</option>
+  </select>
+</form>
+{% endblock %}

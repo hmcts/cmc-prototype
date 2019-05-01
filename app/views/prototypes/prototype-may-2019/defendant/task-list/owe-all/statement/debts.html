@@ -1,0 +1,109 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="2" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <a href="#" class="link-back">Back</a>
+      <h1 class="heading-large">
+        Do you have loans or credit card debts?
+
+      </h1>
+      <form action="expenses" method="post" class="form">
+        <div class="form-group">
+          <fieldset>
+            <div class="multiple-choice" data-target="yes">
+              <input id="radio-repayment" type="radio" name="radio-debt-group" value="Yes">
+              <label for="radio-repayment" data-target="repayment-info">Yes</label>
+            </div>
+            <div class="panel panel-border-narrow js-hidden" id="yes">
+              <div id="timeline" class="timeline">
+                <div class="triple-column">
+                  <div id="timeline-heading-1" class="column-1 mobile-hide">
+                    <label class="form-label-bold " for="event-form-control">
+                      List each loan or credit card debt
+                    </label>
+                  </div>
+                  <div id="timeline-heading-2" class="column-4 mobile-hide">
+                    <label class="form-label-bold" for="date-form-control">
+                      Total owed
+                    </label>
+                  </div>
+                  <div id="timeline-heading-2" class="column-3 mobile-hide">
+                    <label class="form-label-bold" for="date-form-control">
+                      Monthly payments
+                    </label>
+                  </div>
+                </div>
+                <div class="timeline-rows">
+                 <div class="triple-column">
+                             <label  class="form-label-bold mobile-show" >1. List each loan or credit card debt</label>
+
+                   <input class="form-control column-1" type="text" id="event-form-control" name="debt-name-1'"
+                   value="{{data['debt-name-1']}}">
+                                                <label  class="form-label-bold mobile-show" >Total owed</label>
+
+                   <input class="form-control column-4 fee pound" type="text" id="amount1" name="debt-owed-1"
+                   value="{{data['debt-owed-1']}}">
+                                                <label  class="form-label-bold mobile-show" >Monthly payments</label>
+
+                   <input class="form-control column-4 fee pound" type="text" id="amount1" name="debt-ammount-1"
+                   value="{{data['debt-ammount-1']}}">
+                 </div>
+                 <div class="triple-column">
+                                                <label  class="form-label-bold mobile-show" >2. List each debt</label>
+
+                   <input class="form-control column-1" type="text" id="event-form-control" name="debt-name-2"
+                   value="{{data['debt-name-2']}}">
+                                                                   <label  class="form-label-bold mobile-show" >Total owed</label>
+
+                   <input class="form-control column-4 fee pound" type="text" id="amount1" name="debt-owed-2"
+                   value="{{data['debt-owed-2']}}">
+                                                                   <label  class="form-label-bold mobile-show" >Monthly payments</label>
+
+                   <input class="form-control column-4 fee pound" type="text" id="amount1" name="debt-ammount-2"
+                   value="{{data['debt-ammount-2']}}">
+                 </div>
+               </div>
+               <div class="timeline-row">
+                <div id="add-event-container">
+                  <a class="secondary-button" id="add-another-event-button" href="#">Add a debt</a>
+                </div>
+<!--           <a class="" id="calculate" href="#">Calculate total</a>
+-->        </div>
+</div>
+</div>
+<div class="multiple-choice">
+  <input id="radio-no" type="radio" name="radio-debt-group" value="no">
+  <label for="radio-no" data-target="no-info">No</label>
+</div>
+</div>
+</div>
+</fieldset>
+<script>
+  $(document).ready(function () {
+    $('#add-another-event-button').click(function (event) {
+      event.preventDefault();
+      objNewRow = $('.timeline-rows .triple-column:first-child').clone();
+      objNewRow.find( 'input').val('');
+      objNewRow.appendTo( '.timeline-rows');
+    });
+  });
+</script>
+</div>
+<div class="form-group">
+  <input type="submit" class="button" value="Save and continue"/>
+</div>
+</form>
+</div>
+</div>
+{% include 'prototypes/prototype-may-2019/includes/contact.html' %}
+</main>
+{% endblock %}

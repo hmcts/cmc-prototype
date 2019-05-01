@@ -1,0 +1,60 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block home_link %} ../../task-list {% endblock %}
+{% block proposition_header %}
+{% set my_account="4" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% import 'prototypes/features-to-be-built/includes/address.html' as address %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <a href="#" onclick="history.go(-1)" class="link-back">Back</a>
+      <h1 class="heading-large">
+        Was this your home address on 6 December 2018?
+      </h1>
+      <ul class="">
+        <li>24 Acacia Drive</li>
+        <li>London</li>
+        <li>SW1 H9A</li>
+      </ul>
+
+      <br>
+      <form
+        name="aspnetForm"
+        method="post"
+        onsubmit="multiNavigation('correspondence-address', ['No', 'Yes'], ['did-you-share-new-address', 'reason-for-not-receiving-claim']);return false;"
+        id="aspnetForm"
+        autocomplete="off">
+
+        <div class="form-group">
+          <fieldset>
+            <div class="multiple-choice" data-target="correspondence-address">
+              <input type="radio" id="no-correspondence" name="correspondence-address" value="Yes" {% if data['addressType']
+              != 'diff' %} checked{% endif %}>
+              <label for="no-correspondence">Yes</label>
+            </div>
+            <div class="multiple-choice" data-target="contact-by-phone">
+              <input type="radio" id="add-correspondence" name="correspondence-address" value="No" {% if data['addressType']
+              == 'diff' %} checked{% endif %}>
+              <label for="add-correspondence">No</label>
+            </div>
+          </fieldset>
+        </div>
+
+        <div class="form-group">
+          <input type="submit" class="button" value="Continue"/>
+        </div>
+
+      </form>
+    </div>
+  </div>
+
+  {% include 'prototypes/features-to-be-built/includes/contact.html' %}
+</main>
+
+{% endblock %}

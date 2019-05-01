@@ -1,0 +1,107 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block content %}
+
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <a href="#" onclick="history.go(-1)" class="link-back">Back</a>
+
+      <h1 class="heading-large">
+        Upload supporting evidence (optional)
+      </h1>
+
+      <form class="form">
+
+        {% if data["did-not-respond"] == "on" %}
+        <p>You can upload letters, emails and any other correspondence to prove that:</p>
+        <ul class="list list-bullet">
+          <li>you can't respond to the claim by the deadline, for example you were away</li>
+          <li>content - any other valid reason</li>
+        </ul>
+        {% endif %}
+
+        {% if data["did-not-receive"] == "on" %}
+        <p>You can upload letters, emails and any other correspondence to prove that:</p>
+        <ul class="list list-bullet">
+          <li>you gave the claimant your new address before the claim was issued</li>
+          <li>the claimant should have known that you had moved</li>
+        </ul>
+        {% endif %}
+
+        <br>
+        <label class="heading-small" for="upload-description">Briefly describe what you’re uploading and why</label>
+        <textarea class="form-control autoExpand form-control-3-4" id="textarea" rows="4" data-min-rows="4"
+                  width="100%"></textarea>
+        <br>
+        <div id="uploadFileButton">
+          <div class="govuk-form-group">
+            <label class="first-button button-secondary" for="file-upload-1">
+              Choose file
+            </label>
+            <input class="govuk-file-upload evidence-upload-js" id="file-upload-1" name="file-upload-1"
+                   type="file"
+                   accept=".jpg, .jpeg, .bmp, .tif, .tiff, .png, .pdf, .txt, .doc, .dot, .docx, .dotx, .xls, .xlt, .xla, .xlsx, .xltx, .xlsb, .ppt, .pot, .pps, .ppa, .pptx, .potx, .ppsx"
+                   style="display: none;">
+          </div>
+        </div>
+        <div id="upload-spinner">
+          <div class="lds-spinner">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+          <div class="govuk-heading-m spinner-text">File uploading</div>
+        </div>
+        <p></p>
+        <p>
+        </p>
+        <table class="govuk-table" id="files-uploaded">
+          <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th class="govuk-table__header" colspan="2">Uploaded files</th>
+          </tr>
+          </thead>
+          <tbody id="evidence-list" class="govuk-table__body">
+          <tr id="row_no_files" class="govuk-table__row">
+            <td class="govuk-table__cell">No files uploaded</td>
+            <td class="govuk-table__cell">&nbsp;</td>
+          </tr>
+          </tbody>
+        </table>
+        <input id="add-file" name="add-file" type="submit" value="Add file"
+               class="govuk-button secondary-button evidence-upload-nojs" style="display: none;">
+        <p></p>
+
+      </form>
+
+      <div class="form-group">
+        <form method="post" action="../set-aside/hearing-dates" class="form">
+          {{formData | safe}}
+          <input type="hidden" name="set-aside" value="on">
+          <input type="submit" class="button" value="Save and continue">
+        </form>
+      </div>
+
+    </div>
+  </div>
+  {% include 'prototypes/prototype-may-2019/includes/contact.html' %}
+</main>
+
+<script src="/public/javascripts/evidenceUpload.js"></script>
+<script src="/public/javascripts/newFileUpload.js"></script>
+
+{% endblock %}
