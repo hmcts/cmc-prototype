@@ -180,6 +180,16 @@ module.exports = function(app){
   })
 
 
+  app.post( '/' + strPath + 'defendant/task-list/your-details/date-of-birth', (req, res) => {
+
+    if (req.session.data['year'] > 2000 ) {
+      res.redirect('/' + strPath + 'defendant/task-list/your-details/under-18');
+    } else {
+      res.redirect('/' + strPath + 'defendant/task-list/your-details/number');
+    }
+
+  })
+
   app.post( '/' + strPath + 'claimant/task-list/their-details/defendant-add', (req, res) => {
 
     if (req.body.addDefendant === undefined) {
@@ -206,6 +216,22 @@ module.exports = function(app){
     } else {
       res.redirect('/' + strPath + 'claimant/task-list');
     }
+
+  })
+
+
+  app.post( '/' + strPath + 'defendant/task-list/hearing/support', (req, res) => {
+
+    if ( !req.session.data['scenario'] ) {
+      req.session.data['scenario'] = 1;
+    }
+
+    if ( ( req.session.data['scenario'] == 1 || req.session.data['scenario'] == 2 ) || ( ( req.session.data['scenario'] == 3 || req.session.data['scenario'] == 4 ) && ( req.session.data['hearing-loop'] == 'yes' || req.session.data['disabled-access'] == 'yes' || req.session.data['other'] == 'yes' ) ) ) {
+      res.redirect('/' + strPath + 'defendant/task-list/hearing/court');
+    } else {
+      res.redirect('/' + strPath + 'defendant/task-list/hearing/expert-required' );
+    }
+
 
   })
 
