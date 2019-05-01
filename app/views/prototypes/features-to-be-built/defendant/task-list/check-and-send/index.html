@@ -147,7 +147,7 @@ Check your answers
         data['check']== 9 or data['check']== 12 or data['check']== 17%}
         I reject all of the claim
         {% else %}
-        I admit all of the claim
+	I dispute all of the claim
         {% endif %}
       </td>
       <td class=" change-answer">
@@ -1343,43 +1343,24 @@ Check your answers
     </thead>
     <tbody>
 
-    {% if data['check'] == 17 %}
-    <tr>
-      <td>
-        Will you try free mediation?
-      </td>
-      <td>
+										<tr>
+											<td>
+												Will you try free mediation?
+											</td>
+											<td>
                         {% if data['resolve_dispute']=="complete" %}
                         No
                         {% else %}
                         Yes
                         {% endif %}
-      </td>
-      <td class="change-answer">
-        <a href="../task-list/mediation?return_page={{ '../../task-list' | urlencode }}">
-          Change <span class="visuallyhidden">Name</span>
-        </a>
-      </td>
-    </tr>
-    {% else %}
+											</td>
+											<td class="change-answer">
+												<a href="../task-list/mediation?return_page={{ '../../task-list' | urlencode }}">
+													Change <span class="visuallyhidden">Name</span>
+												</a>
+											</td>
+										</tr>
 
-    <tr>
-      <td>
-        Will you try free mediation?
-      </td>
-      <td>
-        {% if data['resolve_dispute']=="complete" %}
-        Yes
-        {% else %}
-        No
-        {% endif %}
-      </td>
-      <td class="change-answer">
-        <a href="../task-list/mediation?return_page={{ '../../task-list' | urlencode }}">
-          Change <span class="visuallyhidden">Name</span>
-        </a>
-      </td>
-    </tr>
     {% if data['resolve_dispute']=="complete" %}
     <tr>
       <td>
@@ -1410,13 +1391,11 @@ Check your answers
         </a>
       </td>
     </tr>
-    {% else %}
-    {% endif %}
 
     {% endif %}
 
 
-  					{% include "prototypes/prototype-mar-2019/includes/dq-check.html" %}
+  					{% include "prototypes/features-to-be-built/includes/dq-check.html" %}
 
 
     </tbody>
@@ -1462,18 +1441,24 @@ Check your answers
              value="{{data['defendant_name']}}">
     </div>
     {% endif %}
-    <!--
-    <strong class="bold-small">
-      You could be fined or go to prison if you deliberately give untrue or misleading information.
-    </strong>
-  </div>
-  -->
     <div class="form-group">
       <div class="multiple-choice text">
         <input id="HasAcceptedTermsAndConditions" type="checkbox" value="true">
         <label for="HasAcceptedTermsAndConditions"> I believe that the facts stated in this response are true.</label>
       </div>
     </div>
+
+{% if data['radio_select_group2']=="defend_now" or data['check']== 9  %}
+<div class="form-group">
+	<div class="form-group">
+	  <div class="multiple-choice text">
+	    <input class="" id="HasAcceptedTermsAndConditions2" type="checkbox" value="true">
+	    <label for="HasAcceptedTermsAndConditions2">The hearing requirement details on this page are true to the best of my knowledge.</label>
+	  </div>
+	</div>
+</div>
+
+{% endif %}
     <form method="get" action="../confirmation-page?" class="form">
       {% if data.radio_select_group=="all" and data['radio-pay-group']=="Immediately" or data['check']== 1 %}
       <!-- FA - pay immediately -->
