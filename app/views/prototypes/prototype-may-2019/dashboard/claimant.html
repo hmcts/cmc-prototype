@@ -1016,6 +1016,46 @@
                 </div>
 
 
+              {% elseif data['claimant'] == 26 %}
+                <!--  Vary requested - by set date -->
+                <h2 class="heading-medium">Respond to the defendant</h2>
+                <p>Mary Richards has requested to pay in full on 28 July 2019.</p>
+                <p>You can accept or reject their offer.</p>
+                <p><a href="#" class="button">View and respond</a></p>
+
+
+              {% elseif data['claimant'] == 27 %}
+                <!-- Vary requested - installments -->
+                <h2 class="heading-medium">Respond to the defendant</h2>
+                <p>Mary Richards has requested to change her payment to new instalments.</p>
+                <p>You can accept or reject their offer.</p>
+                <p><a href="#" class="button">View and respond</a></p>
+
+
+              {% elseif data['claimant'] == 28 %}
+                <!-- Accepted the Vary request, so CCJ UPDATED -->
+                <div class="status-block">
+                  <h2 class="heading-medium">Wait for the defendant to pay you</h2>
+                  <p>A new County Court Judgment has been issued.</p>
+                  <p>We'll send a copy of the judgment to you and to Mary Richards.</p>
+                  <p>When you've been paid in full, you need to let us know.</p>
+                  <p><a href="paid-in-full/claimant" class="button secondary-button">Tell us you've been paid</a></p><br>
+                </div>
+                <div class="status-block single">
+                  <h2 class="heading-medium">Ask the court to recover the debt</h2>
+                  <p>If the defendant doesn't pay, you can <a href="https://www.gov.uk/make-court-claim-for-money/enforce-a-judgment">ask the court to recover the debt</a>. There's no guarantee that the court will get your money back.</p>
+                </div>
+
+
+              {% elseif data['claimant'] == 29 %}
+                <!-- Rejected the Vary request - Redetermination -->
+                <h2 class="heading-medium">Wait for a judge to review the case</h2>
+                <p>You've rejected the defendant's repayment plan and haven't been able to agree to an alternative plan.</p>
+                <p>A judge will review the case. We'll contact you to tell you what to do next.</p>
+
+
+
+
               {% endif %}
 
             </div>
@@ -1102,6 +1142,15 @@
 
 
           </div>
+
+
+
+
+
+
+
+
+
 
 
         <div class="tabs-panel" id="history" role="tabpanel" aria-hidden="true">
@@ -2534,6 +2583,12 @@
     <option>------- CCJ set aside ----------</option>
     <option value="23" {% if data['claimant'] == 23 %}selected{% endif %}>CCJ - defendant requested set aside</option>
     <option value="24" {% if data['claimant'] == 24 %}selected{% endif %}>CCJ - defendant requested set aside - claimant agreed</option>
+
+
+    <option>------- CCJ vary by defendant----------</option>
+    <option value="26" {% if data['claimant'] == 26 %}selected{% endif %}>CCJ - respond to defendant - pay by set date</option>
+    <option value="27" {% if data['claimant'] == 27 %}selected{% endif %}>CCJ - respond to defendant - pay by installments</option>
+
 
   </select>
 </form>
