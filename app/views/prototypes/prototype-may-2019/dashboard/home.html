@@ -886,18 +886,25 @@
         {% endif %}
 
 
+
         {% if data['dashboard'] == 1.9995 %}
-        <tr class="mobile-table">
-          <td>352MC733</td>
-          <td>Mary Richards</td>
-          <td>£1500</td>
-          <td class="mobile-hide">Respond to the defendant's vary judgement request</td>
-          <td>20 July 2019</td>
-          <td><a href="claimant?claimant=9.1">View</a></td>
-        </tr>
-        <tr>
-          <td class="mobile-table-status" colspan="3"></td>
-        </tr>
+          <tr class="mobile-table">
+            <td>352MC733</td>
+            <td>Mary Richards</td>
+            <td>£1500</td>
+            <td class="mobile-hide">Respond to the defendant's vary judgement request</td>
+            <td>20 July 2019</td>
+
+            {% if data['instalments'] == "true" %}
+                <td><a href="/prototypes/prototype-may-2019/dashboard/claimant?claimant=26">View</a></td>
+            {% else %}
+                <td><a href="/prototypes/prototype-may-2019/dashboard/claimant?claimant=27">View</a></td>
+            {% endif %}
+
+          </tr>
+          <tr>
+            <td class="mobile-table-status" colspan="3"></td>
+          </tr>
         {% endif %}
 
 
@@ -2382,6 +2389,31 @@
 
 
 
+        <!--  Defendant - Claim details - Accepted by claimant & New plan proposed by claimant & New plan proposed by claimant -->
+        {% if show_all==true or data['dashboard'] == 2.9996  or  show_all==true or data['dashboard'] == 2.9997  or  show_all==true or data['dashboard'] == 2.9998 %}
+            <tr class="mobile-table">
+              <td>352MC733</td>
+              <td>Jan Clark</td>
+              <td>£1500</td>
+              <td class="mobile-hide">Start new payment plan</td>
+              <td>-</td>
+              {% if show_all==true or data['dashboard'] == 2.9996 %}
+                <td><a href="/prototypes/prototype-may-2019/dashboard/defendant?defendant=24">View</a></td>
+              {% elif show_all==true or data['dashboard'] == 2.9997 %}
+                <td><a href="/prototypes/prototype-may-2019/dashboard/defendant?defendant=25">View</a></td>
+              {% elif show_all==true or data['dashboard'] == 2.9998 %}
+                <td><a href="/prototypes/prototype-may-2019/dashboard/defendant?defendant=26">View</a></td>
+              {% endif %}
+            </tr>
+            <tr>
+              <td class="mobile-table-status" colspan="3"></td>
+            </tr>
+        {% endif %}
+
+
+
+
+
         {% if defendant_table==true %}
         </tbody>
       </table>
@@ -2600,7 +2632,9 @@
 
     <option>-------- CCJ vary - defendant waiting for response --------</option>
     <option value="2.9995" {% if data['dashboard'] == 2.9995 %}selected{% endif %}>CCJ set aside requested</option>
-
+    <option value="2.9996" {% if data['dashboard'] == 2.9996 %}selected{% endif %}>Accepted by claimant</option>
+    <option value="2.9997" {% if data['dashboard'] == 2.9997 %}selected{% endif %}>New plan proposed by claimant</option>
+    <option value="2.9998" {% if data['dashboard'] == 2.9998 %}selected{% endif %}>New plan from determination</option>
 
   </select>
 </form>
