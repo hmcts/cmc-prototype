@@ -30,11 +30,18 @@ Money Claims Prototype
                         style="width: 95%"
               >{{data['reject_response2']}}</textarea>
             </div>
-            <input type="hidden" name="radio-indent-group2" value="reject_stop_claim">
-            <input type="hidden" name="reject" value="complete">
-            <div class="form-group">
-              <input type="submit" class="button" value="Save and continue"/>
-            </div>
+
+
+            {% if data['vary'] == 'true' %}
+                <p><a class="button" href="/prototypes/prototype-may-2019/dashboard/applications-and-judgments/vary/task-list-claimant-response?ownplansuggested=complete&">Continue</a></p>
+            {% else %}
+                <input type="hidden" name="radio-indent-group2" value="reject_stop_claim">
+                <input type="hidden" name="reject" value="complete">
+                <div class="form-group">
+                  <input type="submit" class="button" value="Save and continue"/>
+                </div>
+            {% endif %}
+
           </fieldset>
         </div>
       </form>
