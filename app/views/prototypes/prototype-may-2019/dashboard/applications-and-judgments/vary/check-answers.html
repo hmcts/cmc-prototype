@@ -56,85 +56,96 @@
     </table>
 
 
-    <!--  Claimant's plan  -->
-    <table class="check-your-answers">
-      <thead>
-        <tr>
-          <th colspan="2">
-            <h2 class="heading-medium" id="name">
-              Alternative plan
-            </h2>
-          </th>
-          <th>
-          </th>
-        </tr>
-      </thead>
 
-      <tbody>
+    {% if data.suggestownplan == 'true' %}
 
-        <tr>
-          <td>
-            Your plan
-          </td>
-          <td>
-            xyz
-          </td>
-          <td class="change-answer">
+        <!--  Claimant's plan  -->
+        <table class="check-your-answers">
+          <thead>
+            <tr>
+              <th colspan="2">
+                <h2 class="heading-medium" id="name">
+                  Alternative plan
+                </h2>
+              </th>
+              <th>
+              </th>
+            </tr>
+          </thead>
 
-          </td>
-        </tr>
+          <tbody>
 
-        <tr>
-          <td>
-            Courts decision of your plan
-          </td>
-          <td>
-            xyz
-          </td>
-          <td class="change-answer">
+            <tr>
+              <td>
+                Your plan
+              </td>
+              <td>
+                xyz
+              </td>
+              <td class="change-answer">
 
-          </td>
-        </tr>
+              </td>
+            </tr>
 
-        <tr>
-          <td>
-            Courts proposed plan
-          </td>
-          <td>
-            xyz
-          </td>
-          <td class="change-answer">
+            <tr>
+              <td>
+                Courts decision of your plan
+              </td>
+              <td>
+                {% if data['courtspaymentplan'] != 'true' %}
+                  Court accepts your plan
+                {% else %}
+                  Court rejects your plan
+                {% endif %}
+              </td>
+              <td class="change-answer">
 
-          </td>
-        </tr>
-
-        <tr>
-          <td>
-            Your decision of the court's plan
-          </td>
-          <td>
-            xyz
-          </td>
-          <td class="change-answer">
-
-          </td>
-        </tr>
-
-        <tr>
-          <td>
-            Your reason for requesting a new plan
-          </td>
-          <td>
-            xyz
-          </td>
-          <td class="change-answer">
-
-          </td>
-        </tr>
+              </td>
+            </tr>
 
 
-      </tbody>
-    </table>
+            {% if data['courtspaymentplan'] == 'true' %}
+                <tr>
+                  <td>
+                    Courts proposed plan
+                  </td>
+                  <td>
+                    xyz
+                  </td>
+                  <td class="change-answer">
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    Your decision of the court's plan
+                  </td>
+                  <td>
+                    xyz
+                  </td>
+                  <td class="change-answer">
+                  </td>
+                </tr>
+            {% endif %}
+
+
+            {% if data['redeterminationrequested'] == 'true' %}
+                <tr>
+                  <td>
+                    Your reason for requesting a new plan
+                  </td>
+                  <td>
+                    xyz
+                  </td>
+                  <td class="change-answer">
+                  </td>
+                </tr>
+            {% endif %}
+
+          </tbody>
+        </table>
+
+    {% endif %}
 
 
     <!--  STETEMENT OF TRUTH   -->

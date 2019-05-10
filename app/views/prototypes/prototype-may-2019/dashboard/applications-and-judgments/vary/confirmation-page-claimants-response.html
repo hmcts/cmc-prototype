@@ -25,19 +25,21 @@ Money Claims Prototype
 
       <h2 class="heading-medium">What happens next</h2>
 
-      <!--  If any plan is accepted  -->
-      <p>The the new payment plan will begin on 20 July 2019.</p>
 
-      <p>Mary Richards should being paying you £200 monthly from then onwards.</p>
+      {% if data['redeterminationrequested'] != 'true' %}
+          <!--  If any plan is accepted  -->
+          <p>The the new payment plan will begin on 20 July 2019.</p>
 
-      <p><a class="button" href='/prototypes/prototype-may-2019/dashboard/home?dashboard=1.9997'>Go to your account</a></p>
+          <p>Mary Richards should being paying you £200 monthly from then onwards.</p>
 
+          <p><a class="button" href='/prototypes/prototype-may-2019/dashboard/home?dashboard=1.9997'>Go to your account</a></p>
 
-      <!-- If redetermination is requested  -->
-      <p>*** We'll send you a letter once the judge has reviewed your request for a new payment plan. ***</p>
+      {% else %}
+          <!-- If redetermination is requested  -->
+          <p>We'll send you a letter once the judge has reviewed your request for a new payment plan.</p>
 
-      <p><a class="button" href='/prototypes/prototype-may-2019/dashboard/home?dashboard=1.9998'>Go to your account</a></p>
-
+          <p><a class="button" href='/prototypes/prototype-may-2019/dashboard/home?dashboard=1.9998'>Go to your account</a></p>
+      {% endif %}
 
       <br>
 
@@ -47,27 +49,13 @@ Money Claims Prototype
 </div>
 </main>
 
-<!--
+
 <form method="post"  action="#" class="form" style="position: absolute;">
-	<select id="check2" name="check2" onchange="window.location.href='?confirmation='+this.value">
-		<option  value="0" >Choose</option>
-		<option  value="1&defendant=" {% if data['confirmation'] == '1' and 'defendant' != 'org' %}selected{% endif %}>0. F/A - pay immediately</option>
-		<option  value="2&defendant=" {% if data['confirmation'] == '2' and 'defendant' != 'org' %}selected{% endif %}>1. F/A - pay instalments</option>
-		<option  value="2&defendant=org" {% if data['confirmation'] == '2' and 'defendant' == 'org' %}selected{% endif %}>1. F/A - pay instalments (organisation)</option>
-		<option  value="3&defendant=" {% if data['confirmation'] == '3' and 'defendant' != 'org' %}selected{% endif %}>2. F/A - Pay set date</option>
-		<option  value="3&defendant=org" {% if data['confirmation'] == '3' and 'defendant' == 'org' %}selected{% endif %}>2. F/A - Pay set date (organisation)</option>
-		<option  value="4&defendant=" {% if data['confirmation'] == '4' and 'defendant' != 'org' %}selected{% endif %}>3. P/A - I admit part of the claim - immediately</option>
-		<option  value="6&defendant=" {% if data['confirmation'] == '6' and 'defendant' != 'org' %}selected{% endif %}>4. P/A - I admit part of the claim - by instalments </option>
-		<option  value="6&defendant=org" {% if data['confirmation'] == '6' and 'defendant' == 'org' %}selected{% endif %}>4. P/A - I admit part of the claim - by instalments (organisation)</option>
-		<option  value="7&defendant=" {% if data['confirmation'] == '7' and 'defendant' != 'org' %}selected{% endif %}>5. P/A - I admit part of the claim - pay set date  </option>
-		<option  value="7&defendant=org" {% if data['confirmation'] == '7' and 'defendant' == 'org' %}selected{% endif %}>5. P/A - I admit part of the claim - pay set date (organisation)</option>
-		<option  value="12" {% if data['confirmation'] == 12 %}selected{% endif %}>6. R/C - I dispute the claim</option>
-		<option  value="16" {% if data['confirmation'] == 16 %}selected{% endif %}>8. R/C - Paid full claim</option>
-		<option  value="8" {% if data['confirmation'] == 8 %}selected{% endif %}>9. R/C - Paid less </option>
-		<option  value="9" {% if data['confirmation'] == 9 %}selected{% endif %}>9. Counterclaim - set off</option>
+	<select id="check2" name="check2" onchange="window.location.href='?redeterminationrequested='+this.value">
+		<option  value="false&" {% if data['redeterminationrequested'] != 'true' %}selected{% endif %}>Claimant - Agreed plan</option>
+		<option  value="true&"  {% if data['redeterminationrequested'] == 'true' %}selected{% endif %}>Claimant - Requested Redetermination</option>
 	</select>
 </form>
--->
 
 <!--
 
