@@ -149,13 +149,36 @@ module.exports = function(app){
         res.redirect( '../task-list' );
 
       } else if ( req.session.data['claimant-payment-request'] == 'Immediately' )  {
-        res.redirect( 'counter-offer/court-date' );
+            if (req.session.data['vary'] == 'true')
+            {
+                res.redirect( 'counter-offer/court-date?proposedplan=immediately&' );
+            }
+            else
+            {
+                res.redirect( 'counter-offer/court-date' );
+            }
+
 
       } else if ( req.session.data['claimant-payment-request'] == 'Set-date' )  {
-        res.redirect( 'counter-offer/pay-by-set-date' );
+            if (req.session.data['vary'] == 'true')
+            {
+                res.redirect( 'counter-offer/pay-by-set-date?proposedplan=setdate&' );
+            }
+            else
+            {
+                res.redirect( 'counter-offer/pay-by-set-date' );
+            }
+
 
       } else if ( req.session.data['claimant-payment-request'] == 'Instalments' )  {
-        res.redirect( 'counter-offer/repayment-plan' );
+            if (req.session.data['vary'] == 'true')
+            {
+                res.redirect( 'counter-offer/repayment-plan?proposedplan=setdate&' );
+            }
+            else
+            {
+                res.redirect( 'counter-offer/repayment-plan' );
+            }
       }
 
 
@@ -287,7 +310,7 @@ module.exports = function(app){
 
     if ( req.session.data['counterclaim-proceed'] == 'no' ) {
           req.session.data['counter'] = 'NOT-PROCEED';
-    } 
+    }
 
 /*
     if (req.session.data['counter-amount'] > ( (req.session.data['amount-owed']*1) + 10000 ) && req.session.data['counterclaim-proceed'] == 'yes'  ) {
@@ -299,7 +322,7 @@ module.exports = function(app){
     } else {
       res.redirect('/' + strPath + 'defendant/task-list' );
     }
-    
+
   })
 
 
