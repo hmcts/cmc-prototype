@@ -114,7 +114,7 @@
       <tr>
         <th colspan="2">
           <h2 class="heading-medium" id="name">
-            Your details
+            Your set aside responses
           </h2>
         </th>
         <th>
@@ -128,7 +128,11 @@
             Claim letter received
           </td>
           <td>
-            No
+            {% if data['letterreeived'] == 'true' %}
+                Yes
+            {% else %}
+                No
+            {% endif %}
           </td>
           <td class="change-answer">
             <a href="../task-list/your-details/index?return_page={{ '../../task-list' | urlencode }}">
@@ -137,75 +141,96 @@
           </td>
         </tr>
 
-        <tr>
-          <td>
-            Reason for late response
-          </td>
-          <td>
-            asnwer
-          </td>
-          <td class="change-answer">
-            <a href="../task-list/your-details/index?return_page={{ '../../task-list' | urlencode }}">
-              Change <span class="visuallyhidden">Name</span>
-            </a>
-          </td>
-        </tr>
 
-        <tr>
-          <td>
-            Confirm address on <br>6 December 2018
-          </td>
-          <td>
-            No, I moved
-          </td>
-          <td class="change-answer">
-            <a href="../task-list/your-details/index?return_page={{ '../../task-list' | urlencode }}">
-              Change <span class="visuallyhidden">Name</span>
-            </a>
-          </td>
-        </tr>
+        {% if data['letterreeived'] == 'true' %}
+            <tr>
+              <td>
+                Reason for late response
+              </td>
+              <td style="white-space: pre-wrap;">{{ data['reason-for-not-responding'] }}</td>
+              <td class="change-answer">
+                <a href="">
+                  Change <span class="visuallyhidden">Name</span>
+                </a>
+              </td>
+            </tr>
+        {% else %}
+            <tr>
+              <td>
+                Date you found out about CCJ
+              </td>
+              <td>
+                17 March 2019
+              </td>
+              <td class="change-answer">
+                <a href="">
+                  Change <span class="visuallyhidden">Name</span>
+                </a>
+              </td>
+            </tr>
 
-        <tr>
-          <td>
-            Reason for not receiving letter?
-          </td>
-          <td>
-            No
-          </td>
-          <td class="change-answer">
-            <a href="../task-list/your-details/index?return_page={{ '../../task-list' | urlencode }}">
-              Change <span class="visuallyhidden">Name</span>
-            </a>
-          </td>
-        </tr>
+          <tr>
+            <td>
+              Confirm address on <br>6 December 2018
+            </td>
+            <td>
+              {% if data['addresscorrect'] == 'true' %}
+                  Yes, 24 Acacia Drive
+              {% else %}
+                  No, I moved
+              {% endif %}
+            </td>
+            <td class="change-answer">
+              <a href="">
+                Change <span class="visuallyhidden">Name</span>
+              </a>
+            </td>
+          </tr>
 
-        <tr>
-          <td>
-            Update the Mr Jan Clark of new address?
-          </td>
-          <td>
-            No
-          </td>
-          <td class="change-answer">
-            <a href="../task-list/your-details/index?return_page={{ '../../task-list' | urlencode }}">
-              Change <span class="visuallyhidden">Name</span>
-            </a>
-          </td>
-        </tr>
 
-        <tr>
-          <td>
-            How did you update the Mr Jan Clark?
-          </td>
-          <td>
-            No
-          </td>
-          <td class="change-answer">
-            <a href="../task-list/your-details/index?return_page={{ '../../task-list' | urlencode }}">
-              Change <span class="visuallyhidden">Name</span>
-            </a>
-          </td>
-        </tr>
+          {% if data['addresscorrect'] == 'true' %}
+              <tr>
+                <td>
+                  Reason for not receiving letter?
+                </td>
+                <td style="white-space: pre-wrap;">{{ data['reason-for-not-receive-post'] }}</td>
+                <td class="change-answer">
+                  <a href="">
+                    Change <span class="visuallyhidden">Name</span>
+                  </a>
+                </td>
+              </tr>
+          {% else %}
+              <tr>
+                <td>
+                  Update the Jan Clark of new address?
+                </td>
+                <td>
+                  No
+                </td>
+                <td class="change-answer">
+                  <a href="">
+                    Change <span class="visuallyhidden">Name</span>
+                  </a>
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  How did you update the Jan Clark?
+                </td>
+                <td>
+                  No
+                </td>
+                <td class="change-answer">
+                  <a href="">
+                    Change <span class="visuallyhidden">Name</span>
+                  </a>
+                </td>
+              </tr>
+          {% endif %}
+
+        {% endif %}
 
 
       </tbody>
@@ -311,7 +336,7 @@
         Reason for late response
       </td>
       <td>
-        asnwer
+        answer
       </td>
       <td class="change-answer">
         <a href="#">
@@ -344,7 +369,7 @@
       </td>
       <td>
         No support required
-      </td>s
+      </td>
       <td class="change-answer">
         <a href="#">
           Change <span class="visuallyhidden">Name</span>
@@ -418,9 +443,27 @@
 
       <p><a class="button" href="/prototypes/prototype-may-2019/defendant/task-list/check-and-send/enter-card">Submit and continue to payment (£255)</a></p>
 
-
-
-
-
 </main>
+
+
+
+<form method="post"  action="#" class="for4" style=" float: left; ">
+  <select style="height:25px;" onchange="window.location.href='?'+this.value">
+    <option value="#"
+            {% if data.suggestownplan == 'false' %}selected{% endif %}
+    >Claim received - didn't respond</option>
+    <option value="#"
+            {% if data.suggestownplan == 'true' and data.courtspaymentplan != 'true' %}selected{% endif %}
+    >Claim received - didn't respond</option>
+    <option value="#"
+            {% if data['courtspaymentplan'] == 'true' and  data['redeterminationrequested'] != 'true' %}selected{% endif %}
+    >Claim not received - wrong address - didn't update claimant</option>
+    <option value="#"
+            {% if data.suggestownplan == 'true' and data.courtspaymentplan != 'true' and data['redeterminationrequested'] == 'true' %}selected{% endif %}
+    >Claim not received - wrong address - Update claimant</option>
+  </select>
+</form>
+
+
+
 {% endblock %}
