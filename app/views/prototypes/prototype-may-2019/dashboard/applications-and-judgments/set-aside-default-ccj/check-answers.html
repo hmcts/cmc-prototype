@@ -169,71 +169,71 @@
               </td>
             </tr>
 
-          <tr>
-            <td>
-              Confirm address on <br>6 December 2018
-            </td>
-            <td>
-              {% if data['addresscorrect'] == 'true' %}
-                  Yes, 24 Acacia Drive
-              {% else %}
-                  No, I moved
-              {% endif %}
-            </td>
-            <td class="change-answer">
-              <a href="">
-                Change <span class="visuallyhidden">Name</span>
-              </a>
-            </td>
-          </tr>
+            <tr>
+              <td>
+                Confirm address on <br>6 December 2018
+              </td>
+              <td>
+                {% if data['addresscorrect'] == 'true' %}
+                    Yes, 24 Acacia Drive
+                {% else %}
+                    No, I moved
+                {% endif %}
+              </td>
+              <td class="change-answer">
+                <a href="">
+                  Change <span class="visuallyhidden">Name</span>
+                </a>
+              </td>
+            </tr>
 
 
-          {% if data['addresscorrect'] == 'true' %}
-              <tr>
-                <td>
-                  Reason for not receiving letter?
-                </td>
-                <td style="white-space: pre-wrap;">{{ data['reason-for-not-receive-post'] }}</td>
-                <td class="change-answer">
-                  <a href="">
-                    Change <span class="visuallyhidden">Name</span>
-                  </a>
-                </td>
-              </tr>
-          {% else %}
-              <tr>
-                <td>
-                  Update Jan Clark of new address?
-                </td>
-                <td>
-                  {% if data['updatedclaimantofaddress'] == 'true' %}
-                      Yes
-                  {% else %}
-                      No
-                  {% endif %}
-                </td>
-                <td class="change-answer">
-                  <a href="">
-                    Change <span class="visuallyhidden">Name</span>
-                  </a>
-                </td>
-              </tr>
+            {% if data['addresscorrect'] == 'true' %}
+                <tr>
+                  <td>
+                    Reason for not receiving letter?
+                  </td>
+                  <td style="white-space: pre-wrap;">{{ data['reason-for-not-receive-post'] }}</td>
+                  <td class="change-answer">
+                    <a href="">
+                      Change <span class="visuallyhidden">Name</span>
+                    </a>
+                  </td>
+                </tr>
+            {% else %}
+                <tr>
+                  <td>
+                    Update Jan Clark of new address?
+                  </td>
+                  <td>
+                    {% if data['updatedclaimantofaddress'] == 'true' %}
+                        Yes
+                    {% else %}
+                        No
+                    {% endif %}
+                  </td>
+                  <td class="change-answer">
+                    <a href="">
+                      Change <span class="visuallyhidden">Name</span>
+                    </a>
+                  </td>
+                </tr>
 
-              {% if data['updatedclaimantofaddress'] == 'true' %}
-                    <tr>
-                      <td>
-                        How did you update Jan Clark?
-                      </td>
-                      <td style="white-space: pre-wrap;">{{ data['methodofinformingclaimant'] }}</td>
-                      <td class="change-answer">
-                        <a href="">
-                          Change <span class="visuallyhidden">Name</span>
-                        </a>
-                      </td>
-                    </tr>
-              {% endif %}
+                {% if data['updatedclaimantofaddress'] == 'true' %}
+                      <tr>
+                        <td>
+                          How did you update Jan Clark?
+                        </td>
+                        <td style="white-space: pre-wrap;">{{ data['methodofinformingclaimant'] }}</td>
+                        <td class="change-answer">
+                          <a href="">
+                            Change <span class="visuallyhidden">Name</span>
+                          </a>
+                        </td>
+                      </tr>
+                {% endif %}
 
-          {% endif %}
+            {% endif %}
 
         {% endif %}
 
@@ -441,18 +441,22 @@
 
 <form method="post"  action="#" class="for4" style=" float: left; ">
   <select style="height:25px;" onchange="window.location.href='?'+this.value">
-    <option value="#"
-            {% if data.suggestownplan == 'false' %}selected{% endif %}
+    <option value="letterreeived=true&"
+            {% if data.letterreeived == 'true' %}selected{% endif %}
     >Claim received - didn't respond</option>
-    <option value="#"
-            {% if data.suggestownplan == 'true' and data.courtspaymentplan != 'true' %}selected{% endif %}
-    >Claim received - didn't respond</option>
-    <option value="#"
-            {% if data['courtspaymentplan'] == 'true' and  data['redeterminationrequested'] != 'true' %}selected{% endif %}
+
+    <option value="letterreeived=false&addresscorrect=true&"
+            {% if data.letterreeived != 'true' and  data.addresscorrect == 'true' %}selected{% endif %}
+    >Claim not received - correct address - reason for received</option>
+
+    <option value="letterreeived=false&addresscorrect=false&updatedclaimantofaddress=false&"
+            {% if data.letterreeived != 'true' and  data.addresscorrect == 'false' and data['updatedclaimantofaddress'] != 'true'  %}selected{% endif %}
     >Claim not received - wrong address - didn't update claimant</option>
-    <option value="#"
-            {% if data.suggestownplan == 'true' and data.courtspaymentplan != 'true' and data['redeterminationrequested'] == 'true' %}selected{% endif %}
+
+    <option value="letterreeived=false&addresscorrect=false&updatedclaimantofaddress=true&"
+            {% if data.letterreeived != 'true' and  data.addresscorrect == 'false' and data['updatedclaimantofaddress'] == 'true' %}selected{% endif %}
     >Claim not received - wrong address - Update claimant</option>
+
   </select>
 </form>
 
