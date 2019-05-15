@@ -203,10 +203,14 @@
           {% else %}
               <tr>
                 <td>
-                  Update the Jan Clark of new address?
+                  Update Jan Clark of new address?
                 </td>
                 <td>
-                  No
+                  {% if data['updatedclaimantofaddress'] == 'true' %}
+                      Yes
+                  {% else %}
+                      No
+                  {% endif %}
                 </td>
                 <td class="change-answer">
                   <a href="">
@@ -215,19 +219,20 @@
                 </td>
               </tr>
 
-              <tr>
-                <td>
-                  How did you update the Jan Clark?
-                </td>
-                <td>
-                  No
-                </td>
-                <td class="change-answer">
-                  <a href="">
-                    Change <span class="visuallyhidden">Name</span>
-                  </a>
-                </td>
-              </tr>
+              {% if data['updatedclaimantofaddress'] == 'true' %}
+                    <tr>
+                      <td>
+                        How did you update Jan Clark?
+                      </td>
+                      <td style="white-space: pre-wrap;">{{ data['methodofinformingclaimant'] }}</td>
+                      <td class="change-answer">
+                        <a href="">
+                          Change <span class="visuallyhidden">Name</span>
+                        </a>
+                      </td>
+                    </tr>
+              {% endif %}
+
           {% endif %}
 
         {% endif %}
@@ -331,19 +336,6 @@
       </td>
     </tr>
 
-    <tr>
-      <td>
-        Reason for late response
-      </td>
-      <td>
-        answer
-      </td>
-      <td class="change-answer">
-        <a href="#">
-          Change <span class="visuallyhidden">Name</span>
-        </a>
-      </td>
-    </tr>
 
     <tr>
       <td>
@@ -365,7 +357,7 @@
 
     <tr>
       <td>
-        Support you'd required
+        Support you'd require
       </td>
       <td>
         No support required
