@@ -16,12 +16,12 @@ Money Claims Prototype
        <form
        name="aspnetForm"
        method="post"
-       onsubmit="conditionalNavigation('questions', 'yes', 'ask', 'confirmation-page');return false;"
+       onsubmit="conditionalNavigation('questions', 'yes', '../expert-reports', 'confirmation-page');return false;"
        id="aspnetForm"
        autocomplete="off">
 
       <h1 class="heading-large">
-       Do you have any questions for the expert about their report?
+       Do you or the {% if data['party'] == "defendant" %}claimant{% else %}defendant{% endif %} have any questions for the expert about their report?
       </h1>
 
       <fieldset>
@@ -35,7 +35,7 @@ Money Claims Prototype
           <label for="radio-2">No</label>
         </div>
         <div class="panel panel-border-narrow js-hidden" id="no">
-          <p>You will not be able to submit any questions later.</p>
+          <p>You need to have checked that the {% if data['party'] == "defendant" %}claimant{% else %}defendant{% endif %} doesn't have any questions</p>
         </div>
 
       </fieldset>

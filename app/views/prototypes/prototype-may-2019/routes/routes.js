@@ -173,7 +173,7 @@ module.exports = function(app){
       } else if ( req.session.data['claimant-payment-request'] == 'Instalments' )  {
             if (req.session.data['vary'] == 'true')
             {
-                res.redirect( 'counter-offer/repayment-plan?proposedplan=setdate&' );
+                res.redirect( 'counter-offer/repayment-plan?proposedplan=instalments&' );
             }
             else
             {
