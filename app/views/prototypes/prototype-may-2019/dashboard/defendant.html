@@ -639,17 +639,25 @@
               </div>
 
 
-              {% elseif data['defendant'] == 12.1 %}
+              {% elseif data['defendant'] == 12.1 or data['defendant'] == 12.1001 or data['defendant'] == 12.1002 %}
               <div class="status-block single">
                 <h2 class="heading-medium">Send us more details before the hearing</h2>
-                <p>The court has ordered you to send us:</p>
+                <p>The court has ordered you to send us the following by {{ now | date( 'add', 12, 'days' ) | date }}:</p>
 
                 <ul class="list list-bullet">
                   <li>witness statements</li>
                   <li>your evidence</li>
                 </ul>
 
-                <p>You must do this by {{ now | date( 'add', 12, 'days' ) | date }}.</p>
+                {% if data['defendant'] == 12.1001 or data['defendant'] == 12.1002 %}
+                <p>And the following by {{ now | date( 'add', 18, 'days' ) | date }}:</p>
+
+                <ul class="list list-bullet">
+                  {% if data['defendant'] == 12.1001 %}<li>your expert's report</li>{% endif %}
+                  {% if data['defendant'] == 12.1002 %}<li>responses to queries about the expert's report</li>{% endif %}
+                </ul>
+                {% endif %}
+
                 <p><a href="order-response?party=defendant" class="button" style="margin-bottom: 15px">Send us the details</a></p>
 
                 <h2 class="heading-small">See the full legal document</h2>
@@ -3587,6 +3595,8 @@
 
     <option>------ Order response -------</option>
     <option value="12.1" {% if data['defendant'] == 12.1 %}selected{% endif %}>Respond to order</option>
+    <option value="12.1001" {% if data['defendant'] == 12.1001 %}selected{% endif %}>Respond to order - with expert report</option>
+    <option value="12.1002" {% if data['defendant'] == 12.1002 %}selected{% endif %}>Respond to order - with expert queries</option>
     <option value="12.101" {% if data['defendant'] == 12.101 %}selected{% endif %}>Not responded (you)</option>
     <option value="12.1011" {% if data['defendant'] == 12.1011 %}selected{% endif %}>Not responded (you - defence cancelled)</option>
     <option value="12.102" {% if data['defendant'] == 12.102 %}selected{% endif %}>Not responded (other party)</option>
