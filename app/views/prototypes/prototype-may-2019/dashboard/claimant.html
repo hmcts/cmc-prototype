@@ -76,8 +76,9 @@
                 <p>Mary Richards has also made an offer to settle. <a href="#settle-out-of-court">Respond to the offer</a>.</p>
               </div>
               <div class="status-block single">
-                <h2 class="heading-medium">If you've been paid</h2>
-                <p><a href="paid-in-full/claimant?endClaim=yes">Tell us if you want to end the claim</a> because the defendant has paid you.</p>
+                <h2 class="heading-medium">Tell us you've ended the claim</h2>
+                <p>If you've been paid or you've made another agreement with the defendant, you need to tell us.</p>
+                  <p><a href="paid-in-full/claimant?endClaim=yes" class="button secondary-button">Tell us you've settled</a></p><br>
               </div>
 
             </div>
@@ -139,7 +140,7 @@
               <div class="status-block">
                 <h2 class="heading-medium">Wait for the defendant to pay you</h2>
                 <p>A County Court Judgment has been issued against Mary Richards.</p>
-                <p>We'll send a copy of the judgment to you and to them.</p>
+                <p>We'll send you both a copy of the judgment.</p>
                 <p>You need to tell us when you've been paid in full.</p>
                 <p><a href="paid-in-full/claimant" class="button secondary-button">Tell us you've been paid</a></p><br>
               </div>
@@ -197,9 +198,8 @@
                 <h2 class="heading-medium">Wait for the defendant to pay you</h2>
                   <p>The defendant said they'll pay you immediately.</p>
                   <p>They must make sure you have the money by {{ now | date('add', 5, 'days') | date }}. Any cheques or transfers should be clear in your account by then.</p>
-                  <p>You need to tell us if you've settled the claim, for example because the defendant has paid you.</p>
-                  <p>You can settle for less than the full claim amount.</p>
-                  <p><a href="paid-in-full/claimant" class="button secondary-button">Tell us you've settled</a></p><br>
+                  <p>If you've been paid or you've made another agreement with the defendant, you need to tell us.</p>
+                    <p><a href="paid-in-full/claimant?endClaim=yes" class="button secondary-button">Tell us you've settled</a></p><br>
               </div>
               <div class="status-block single">
                 <h2 class="heading-medium">Request a County Court Judgment</h2>
@@ -213,8 +213,7 @@
                 <h2 class="heading-medium">Wait for the defendant to pay you</h2>
                   <p>The defendant said they'll pay you immediately.</p>
                   <p>They must make sure you have the money by {{ now | date('add', 5, 'days') | date }}. Any cheques or transfers should be clear in your account by then.</p>
-                  <p>You need to tell us if you've settled the claim, for example because the defendant has paid you.</p>
-                  <p>You can settle for less than the full claim amount.</p>
+                  <p>If you've been paid or you've made another agreement with the defendant, you need to tell us.</p>
                   <p><a href="paid-in-full/claimant" class="button secondary-button">Tell us you've settled</a></p><br>
               </div>
               <div class="status-block single">
@@ -370,9 +369,9 @@
               {% elseif data['claimant'] == 10.11 %}
               <div class="status-block">
                 <h2 class="heading-medium">Wait for the defendant to pay you</h2>
-                 <p>A County Court Judgment has been issued.</p>
-                 <p>We'll send a copy of the judgment to you and to Mary Richards.</p>
-                 <p>When you've been paid in full, you need to let us know.</p>
+                 <p>A County Court Judgment has been issued against Mary Richards.</p>
+                 <p>We'll send you both a copy of the judgment.</p>
+                 <p>You need to tell us when you've been paid in full.</p>
                   <p><a href="paid-in-full/claimant" class="button secondary-button">Tell us you've been paid</a></p><br>
               </div>
               <div class="status-block single">
@@ -502,7 +501,7 @@
                 <h2 class="heading-medium">Wait for the defendant to pay you</h2>
                  <p>The defendant has admitted they owe £{{ data['owe-amount'] or '1,200' }}. They said they'll pay you immediately.</p>
                  <p>They must make sure you have the money by {{ now | date( 'add', 5, 'days') | date }}. Any cheques or transfers should be clear in your account.</p>
-                 <p>You need to tell us if you've settled the claim, for example because the defendant has paid you.</p>
+                 <p>If you've been paid or you've made another agreement with the defendant, you need to tell us.</p>
                 <p><a href="paid-in-full/claimant" class="button secondary-button">Tell us you've settled</a></p>
                 <p>If the defendant doesn't pay by the deadline, you can request a County Court Judgment.</p>
 
@@ -512,7 +511,7 @@
                 <h2 class="heading-medium">Wait for the defendant to pay you</h2>
                  <p>The defendant has admitted they owe £{{ data['owe-amount'] or '1,200' }}. They said they'll pay you immediately.</p>
                  <p>They must make sure you have the money by {{ now | date('subtract', 2, 'days') | date }}. Any cheques or transfers should be clear in your account.</p>
-                 <p>You need to tell us if you've settled the claim, for example because the defendant has paid you.</p>
+                 <p>If you've been paid or you've made another agreement with the defendant, you need to tell us.</p>
                 <p><a href="paid-in-full/claimant" class="button secondary-button">Tell us you've settled</a></p>
                 <p>If the defendant doesn't pay by the deadline, you can <a href="applications-and-judgments/default-judgment">request a County Court Judgment</a>.</p>
 
@@ -1123,11 +1122,9 @@
             -->
 
             <!-- without discontinuance -->
-              <h2 class="heading-medium">If you've been paid</h2>
-              <p>
-                <a href="paid-in-full/claimant?endClaim=yes">Tell us if you want to end the claim</a> because the defendant has paid you.
-                {% if data['claimant'] == 3 %} This will cancel your request for judgment.{% endif %}
-              </p>
+            <h2 class="heading-medium">Tell us you've ended the claim</h2>
+            <p>If you've been paid or you've made another agreement with the defendant, you need to tell us. {% if data['claimant'] == 3 %}This will cancel your request for judgment.{% endif %}</p>
+              <p><a href="paid-in-full/claimant?endClaim=yes" class="button secondary-button">Tell us you've settled</a></p>
               <br>
             </div>
 
@@ -2560,17 +2557,7 @@
     <option value="11.11" {% if data['claimant'] == 11.11 %}selected{% endif %}>Respond to order (offline)</option>
     <option value="11.21" {% if data['claimant'] == 11.21 %}selected{% endif %}>Responded to order - before deadline</option>
     <option value="11.7" {% if data['claimant'] == 11.7 %}selected{% endif %}>Responded to order - after deadline</option>
-<!--
-    <option value="11.2" {% if data['claimant'] == 11.2 %}selected{% endif %}>Responded to order - with experts</option>
-    <option value="11.3" {% if data['claimant'] == 11.3 %}selected{% endif %}>Supply expert questions</option>
-    <option value="11.4" {% if data['claimant'] == 11.4 %}selected{% endif %}>Supply expert report</option>
-    <option value="11.5" {% if data['claimant'] == 11.5 %}selected{% endif %}>Report uploaded, claimant to supply queries</option>
-    <option value="11.6" {% if data['claimant'] == 11.6 %}selected{% endif %}>Queries supplied, upload answers</option>
-    <option value="11.51" {% if data['claimant'] == 11.51 %}selected{% endif %}>Report uploaded, defendant has supplied queries</option>
-    <option value="11.61" {% if data['claimant'] == 11.61 %}selected{% endif %}>No queries</option>
--->
-
-
+    
     <option>------- Offer and agreements ----------</option>
     <option value="11" {% if data['claimant'] == 11 %}selected{% endif %}>Offer from defendant  </option>
     <option value="12" {% if data['claimant'] == 12 %}selected{% endif %}>Reject offer from defendant  </option>
