@@ -42,30 +42,38 @@ Money Claims Prototype
 
         <!-- Attending  -->
             {% if data['claimantattending'] == 'true' %}
-                <p>We'll contact you with a date of the hearing.</p>
-                <p> <a class="button" href=''>Go to your account</a> </p>
+                <!-- if the claim is settled  -->
+                {% if data['claimsettled'] == 'true' %}
+                    <p>We'll contact you with a date if there is a hearing.</p>
+                    <p> <a class="button" href='/prototypes/prototype-may-2019/dashboard/claimant?claimant=33'>Go to your account</a> </p>
+                {% else %}
+                    <p>We'll contact you with a date if there is a hearing.</p>
+                    <p>After the hearing Mary Richards will respond to your claim.</p>
+                    <p> <a class="button" href='/prototypes/prototype-may-2019/dashboard/claimant?claimant=34'>Go to your account</a> </p>
+                {% endif %}
+
             {% else %}
 
         <!-- Not attending -->
             <!-- if the claim is settled  -->
                 {% if data['claimsettled'] == 'true' %}
                     <p>We'll send you a letter about the outcome of Mary Richards removing CCJ request.</p>
-                    <p> <a class="button" href=''>Go to your account</a> </p>
+                    <p> <a class="button" href='/prototypes/prototype-may-2019/dashboard/claimant?claimant=36'>Go to your account</a> </p>
                 {% else %}
             <!-- if the claim isn't currently settled  -->
                     <p>Wait for the outcome of Mary Richards removing CCJ hearing.</p>
                     <p>Once that happens Mary Richards will respond to your claim.</p>
-                    <p> <a class="button" href=''>Go to your account</a> </p>
+                    <p> <a class="button" href='/prototypes/prototype-may-2019/dashboard/claimant?claimant=37'>Go to your account</a> </p>
                 {% endif %}
             {% endif %}
 
 
     {% else %}
         <p>Mary Richards has until 4pm on <span id="Date"></span> to respond to your claim. They can ask for an extra 14 days if they need it. We'll email you when they respond.</p>
-      
+
         <p>You can request a County Court Judgment (CCJ) against them if they don't respond.</p>
 
-   
+
 
             <!-- {% if data['totalSum'] < 370.01 %}
             <h3 class="heading-small">Mediation</h3>
@@ -126,9 +134,13 @@ Money Claims Prototype
 <form method="post"  action="#" class="form" style="position: absolute;">
   <select id="check2" name="check2" onchange="window.location.href='?'+this.value">
     <option  value="claimantresponsetosetaside=false&">Claim submitted</option>
-    <option  value="claimantresponsetosetaside=true&claimantattending=true&"
+    <option  value="claimantresponsetosetaside=true&claimantattending=true&claimsettled=false&"
              {% if data['claimantresponsetosetaside'] == 'true' and data['claimantattending'] == 'true' and data['claimsettled'] == 'false' %}selected{% endif %}
-            >Claimant - Defendant's set aside hearing - Attending</option>
+            >Claimant - Defendant's set aside hearing - Attending - Claim not settled </option>
+    <option  value="claimantresponsetosetaside=true&claimantattending=true&claimsettled=true&"
+             {% if data['claimantresponsetosetaside'] == 'true' and data['claimantattending'] == 'true' and data['claimsettled'] == 'false' %}selected{% endif %}
+            >Claimant - Defendant's set aside hearing - Attending - Claim already settled</option>
+
     <option  value="claimantresponsetosetaside=true&claimantattending=false&claimsettled=false&"
              {% if data['claimantresponsetosetaside'] == 'true' and data['claimantattending'] == 'false' and data['claimsettled'] == 'false'  %}selected{% endif %}
             >Claimant - Defendant's set aside hearing - Not Attending - Claim not settled </option>
