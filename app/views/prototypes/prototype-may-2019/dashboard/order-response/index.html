@@ -73,15 +73,31 @@ Money Claims Prototype
       <p>You must upload copies of any evidence you intend to use at the hearing.</p>
       <p>Include copies of these if you have them:</p>
       <ul class="list list-bullet">
-  <li>contracts or agreements relating to the claim</li>
-  <li>any relevant text messages, emails or letters</li>
-</ul>
+        <li>contracts or agreements relating to the claim</li>
+        <li>any relevant text messages, emails or letters</li>
+      </ul>
       <div class="form-group">
         <a href="order-response/evidence" class="secondary-button">Upload evidence</a>
       </div>
       {% endif %}
       <hr />
 
+      {% if data['generic'] == 'true' %}
+      <h2 class="heading-small">Upload your [generic thing]</h2>
+      <p>[Some optional generic guidance]</p>
+      <div class="form-group">
+        <a href="order-response/generic-upload" class="secondary-button">Upload [generic thing]</a>
+      </div>
+
+      <hr />
+      <h2 class="heading-small">Confirm you have [done generic thing]</h2>
+      <p>[Some optional generic guidance]</p>
+      <div class="form-group">
+        <a href="order-response/generic-confirm" class="secondary-button">Confirm you have [done generic thing]</a>
+      </div>
+      <hr />
+
+      {% endif %}
 
       {% if data['claimant'] == 11.1001  or data['defendant'] == 12.1001 or data['claimant'] == 11.1002 or data['defendant'] == 12.1002 or data['expert'] == 'complete' %}
 
@@ -166,6 +182,7 @@ Money Claims Prototype
     <option value="evidence=complete&witness=&expert=">Evidence uploaded</option>
     <option value="evidence=&witness=complete&expert=">Witness statements uploaded</option>
     <option value="evidence=&witness=&expert=complete">Expert report uploaded</option>
+    <option value="generic=true">With generic uploads</option>
   </select>
 </form>
 {% endblock %}
