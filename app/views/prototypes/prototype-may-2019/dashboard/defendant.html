@@ -668,6 +668,29 @@
                 <p><a href="order-response/view?party=claimant" class="button secondary-button">See the details they sent the court</a></p>
               </div>
 
+              {% elseif data['defendant'] == 12.1003 %}
+
+              <div class="status-block single">
+                <h2 class="heading-medium">Send us more details before the hearing</h2>
+                <p>The court has ordered you to send us the following by {{ now | date( 'add', 12, 'days' ) | date }}:</p>
+
+                <ul class="list list-bullet">
+                  <li>witness statements</li>
+                  <li>your evidence</li>
+                  <li>[generic upload]</li>
+                  <li>confirm you have [done a generic thing]</li>
+                </ul>
+
+                <p><a href="order-response?party=defendant&generic=true" class="button" style="margin-bottom: 15px">Send us the details</a></p>
+
+                <h2 class="heading-small">See the full legal document</h2>
+                <p><a href="/public/images/order.pdf">Download the court's order</a> (PDF, 123KB) if you want to see the full legal document that sets out these instructions.</p>
+                <hr />
+
+                <h2 class="heading-medium">View the claimant's response to the order</h2>
+                <p><a href="order-response/view?party=claimant" class="button secondary-button">See the details they sent the court</a></p>
+              </div>
+
               {% elseif data['defendant'] == 12.101 %}
               <div class="status-block single">
                 <h2 class="heading-medium">Send us more details by {{ now | date( 'add', 11, 'days' ) | date }}</h2>
@@ -772,15 +795,18 @@
               {% elseif data['defendant'] == 12.2 %}
               <div class="status-block single">
                 <h2 class="heading-medium">Wait for us to contact you</h2>
-                <p>We'll contact you to tell you when we've set a date for the hearing.</p>
+                <p>We'll contact you to tell you when we've set a date for the hearing, or if we need more information.</p>
 
                 <h2 class="heading-small">Upload more evidence</h2>
+                <p>You can upload more evidence or witness statements until {{ now | date( 'add', 15, 'days' ) | date }}. You can also view your response.</p>
+                <p><a href="order-response?party=claimant&evidence=complete&experts=complete&witness=complete" class="button secondary-button">Upload more or view your response</a></p>
 
-              <p>You can upload more evidence or witness statements until {{ now | date( 'add', 15, 'days' ) | date
-              }}. You can also view your response.</p>
-              <p><a href="order-response?party=claimant&evidence=complete&experts=complete&witness=complete"
-                    class="button secondary-button">Upload more or view your response</a></p>
+                <h2 class="heading-small">Tell us you've nothing more to add</h2>
+                <p>If you don't intend to add any more evidence, you can let us know so your case moves forward sooner.</p>
+                <p><a href="order-response/finished" class="button secondary-button">Tell us you've finished</a></p>
+
               </div>
+
               <hr/>
               <h2 class="heading-medium">View the claimant's response</h2>
 
@@ -3604,6 +3630,7 @@
     <option value="12.1" {% if data['defendant'] == 12.1 %}selected{% endif %}>Respond to order</option>
     <option value="12.1001" {% if data['defendant'] == 12.1001 %}selected{% endif %}>Respond to order - with expert report</option>
     <option value="12.1002" {% if data['defendant'] == 12.1002 %}selected{% endif %}>Respond to order - with expert queries</option>
+    <option value="12.1003" {% if data['defendant'] == 12.1003 %}selected{% endif %}>Respond to order - with generic things</option>
     <option value="12.11" {% if data['defendant'] == 12.11 %}selected{% endif %}>Respond to order (offline)</option>
     <option value="12.101" {% if data['defendant'] == 12.101 %}selected{% endif %}>Not responded (you)</option>
     <option value="12.1011" {% if data['defendant'] == 12.1011 %}selected{% endif %}>Not responded (you - defence cancelled)</option>
@@ -3611,7 +3638,7 @@
     <option value="12.103" {% if data['defendant'] == 12.103 %}selected{% endif %}>Not responded (other party - claim cancelled)</option>
     <option value="12.2" {% if data['defendant'] == 12.2 %}selected{% endif %}>Responded to order - before deadline</option>
     <option value="12.9" {% if data['defendant'] == 12.9 %}selected{% endif %}>Responded to order - after deadline</option>
-
+    
     <option>------ Offers and mediation -------</option>
     <option value="10" {% if data['defendant'] == 10 %}selected{% endif %}>9. Offer sent to claimant </option>
     <option value="13" {% if data['defendant'] == 13 %}selected{% endif %}>10. Offer rejected by the claimant </option>
