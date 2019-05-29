@@ -12,7 +12,15 @@ Money Claims Prototype
 		<div class="column-two-thirds">
 			<div class="govuk-box-highlight">
 
-        <h1 class="bold-large">You've submitted your response to Mary Richard's payment plan request</h1>
+				{% if data['redeterminationrequested'] != 'true' %}
+	          <!--  If any plan is accepted  -->
+
+	        <h1 class="bold-large">You've accepted the new repayment plan</h1>
+
+	      {% else %}
+	          <!-- If redetermination is requested  -->
+	        <h1 class="bold-large">You've asked the court to make a repayment plan</h1>
+	      {% endif %}
 
         <br>
 
@@ -28,15 +36,14 @@ Money Claims Prototype
 
       {% if data['redeterminationrequested'] != 'true' %}
           <!--  If any plan is accepted  -->
-          <p>The the new payment plan will begin on 20 July 2019.</p>
 
-          <p>Mary Richards should being paying you £200 monthly from then onwards.</p>
+          <p>Mary Richards should start paying you £200 per month on 20 July 2019.</p>
 
           <p><a class="button" href='/prototypes/prototype-may-2019/dashboard/home?dashboard=1.9997'>Go to your account</a></p>
 
       {% else %}
           <!-- If redetermination is requested  -->
-          <p>We'll send you a letter once the judge has reviewed your request for a new payment plan.</p>
+          <p>We'll send you a letter when a judge has reviewed your request.</p>
 
           <p><a class="button" href='/prototypes/prototype-may-2019/dashboard/home?dashboard=1.9998'>Go to your account</a></p>
       {% endif %}
@@ -46,7 +53,6 @@ Money Claims Prototype
 			{% include "includes/contact.html" %}
 		</div>
 	</div>
-</div>
 </main>
 
 
