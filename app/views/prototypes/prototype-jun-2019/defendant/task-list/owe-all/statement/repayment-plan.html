@@ -1,0 +1,150 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="2" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+	{% include "includes/phase_banner_beta.html" %}
+	<div class="grid-row">
+		<div class="column-two-thirds">
+			<a href="#" class="link-back">Back</a>
+			<h1 class="heading-large">
+				Your repayment plan
+			</h1>
+			{% if data.radio_select_group=="Some"%}
+			    <p>You admit you owe {% if data['owe-amount'] =='' %}£300{% else %}£{{data['owe-amount']}}{% endif %}</p>
+			{% else %}
+			    <p>The total amount claimed is £1,500. This includes the claim fee and any interest.</p>
+			{% endif %}
+
+
+			<form action="../../../task-list?settlement=true&" method="post" class="form">
+
+             <input type="hidden" name="plan" value="complete">
+
+				<div class="form-group">
+					<fieldset>
+						<legend class="visually-hidden">Followed by equal payments of</legend>
+						<label class="form-label-bold" for="instalment-first-payment">
+							Regular payments of
+						</label>
+						<p class="form-hint">For example, £50</p>
+						<input class="fee pound" maxlength="8" size="8" type="text" value="{{data['instalment-first-payment']}}" name="instalment-first-payment" id="instalment-first-payment">
+					</fieldset>
+				</div>
+				<div class="heading-small">How often you'll make payments</div>
+				<div class="form-group">
+					<fieldset>
+						<legend class="visually-hidden">How often you'll make payments</legend>
+						<div class="multiple-choice">
+							<input id="radio-01" type="radio" name="radio-payment-frequency" value="Each week" {{ checked("radio-payment-frequency", "Each week") }}>
+							<label for="radio-01" data-target="info-01">Every week</label>
+						</div>
+						<div class="multiple-choice">
+							<input id="radio-02" type="radio" name="radio-payment-frequency" value="Every 2 weeks" {{ checked("radio-payment-frequency", "Every 2 weeks") }}>
+							<label for="radio-02" data-target="info-02">Every 2 weeks</label>
+						</div>
+						<div class="multiple-choice">
+							<input id="radio-03" type="radio" name="radio-payment-frequency" value="Every month" {{ checked("radio-payment-frequency", "Each month") }}>
+							<label for="radio-03" data-target="info-03">Every month</label>
+						</div>
+					</fieldset>
+				</div>
+
+
+        {% if data['vary'] == 'true' %}
+            {% if data['knownamount'] == 'true' %}
+                <div class="form-group">
+                  <p class="heading-small">Length of repayment plan</p>
+                  <p id="duration">-</p>
+                </div>
+            {% endif %}
+
+        {% else %}
+            <div class="form-group">
+              <p class="heading-small">Length of repayment plan</p>
+              <p id="duration">-</p>
+            </div>
+
+        {% endif %}
+
+
+
+        {% if data['vary'] != 'true' %}
+            <div class="form-group">
+              <fieldset>
+                <legend class="visually-hidden">When you want them to make the first payment</legend>
+                <p class="form-label-bold">When will you make the first payment?</p>
+                <div class="form-date">
+                  <p class="form-hint">For example, {{ now | date('add', 1, 'months') | date('D M YYYY') }}</p>
+                  <div class="form-group form-group-day">
+                    <label for="dob-day">Day</label>
+                    <input class="form-control" id="instalment-day" name="instalment-day" type="number" pattern="[0-9]*" min="0" max="31" value="{{data['instalment-day']}}" >
+                  </div>
+                  <div class="form-group form-group-month">
+                    <label for="dob-month">Month</label>
+                    <input class="form-control" id="instalment-month" name="instalment-month" type="number" pattern="[0-9]*" min="0" max="12" value="{{data['instalment-month']}}">
+                  </div>
+                  <div class="form-group form-group-year">
+                    <label for="dob-year">Year</label>
+                    <input class="form-control" id="instalment-year" name="instalment-year" type="number" pattern="[0-9]*" min="0" max="2024" value="{{data['instalment-year']}}">
+                  </div>
+                </div>
+              </fieldset>
+            </div>
+        {% endif %}
+
+
+
+        {% if data['vary'] == 'true' %}
+            <p><a class="button" href="../statement/explanation">Continue</a></p>
+        {% else %}
+            <div class="form-group">
+              <input type="submit" class="button" value="Save and continue"/>
+            </div>
+        {% endif %}
+
+
+			</form>
+		</div>
+	</div>
+{% include 'prototypes/prototype-jun-2019/includes/contact.html' %}
+</main>
+<script>
+	$(document).ready(function () {
+		$('#instalment-first-payment, input[name=radio-payment-frequency]').change( function() {
+			if ( $('#instalment-first-payment').val() && $("input[name=radio-payment-frequency]:checked").length ) {
+				var intAmount = 1500;
+				var strDuration = '';
+				intRepayment = $('#instalment-first-payment').val();
+				intInstalments = Math.ceil( intAmount / intRepayment);
+				if ($('#radio-01').prop("checked")) {
+					intDaysAway = 7;
+				} else if ($('#radio-02').prop("checked")) {
+					intDaysAway = 14;
+				} else if ($('#radio-03').prop("checked")) {
+					intDaysAway = 30;
+				}
+
+				intRepaymentDays = intDaysAway * intInstalments;
+				strFrequency = $('input[name=radio-payment-frequency]:checked').val();
+
+				strDuration = intInstalments;
+				if (strFrequency == 'Each week' ) {
+					strDuration +=  ' weeks';
+				} else if (strFrequency == 'Every 2 weeks' ) {
+					strDuration =  intInstalments*2 + ' weeks';
+				} else {
+					strDuration +=  ' months';
+				}
+
+				$('#duration').text( strDuration );
+			}
+		})
+	});
+</script>
+{% endblock %}

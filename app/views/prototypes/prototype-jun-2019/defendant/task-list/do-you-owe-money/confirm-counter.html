@@ -1,0 +1,63 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="2" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <a href="#" class="link-back">Back</a>
+      <h1 class="heading-large">
+        Possible counterclaim
+      </h1>
+
+      <p>If you owe Jan Clark money, but you believe they owe you more than the amount in their claim, you should:</p>
+
+    <ul class="list list-bullet">
+      <li>admit the amount you owe them</li>
+      <li>tell us how much you believe they owe you and consider a counterclaim</li>
+    </ul>
+
+    <p>For example, if you owe Jan Clark £500, but they owe you £750, you should admit you owe £500 and make a counterclaim against them for £750.<br />You should not reject the £500 and claim they owe you £250.</p>
+
+
+  <h2 class="heading-medium">Do you owe Jan Clark any money?</h2>
+
+      <form method="post" action="../../../claimant/task-list/claim-amount-alt/interest-q">
+
+        <div class="form-group">
+          <fieldset>
+            <div class="multiple-choice">
+              <input id="radio-owe-all" type="radio" name="response-owe" value="owe-all" onclick="$('#amount-owed').val(1500)" >
+              <label for="radio-owe-all">Yes, I owe them £1,500, but they owe me £2,500</label>
+            </div>
+            <div class="multiple-choice" data-target="set-date">
+              <input id="radio-owe-some" type="radio" name="response-owe" value="owe-some" onclick="$('#amount-owed').val( $('owe-amount').val() | 500 )" >
+              <label for="radio-owe-some">Yes, I owe a lower amount, but they owe me £2,500</label>
+            </div>
+            <div class="panel panel-border-narrow js-hidden" id="set-date">
+              <label class="form-label" for="rate">How much?</label>
+              <input class="form-control timeline-column-4 fee pound" type="text" id="owe-amount" name="owe-amount" value="{{ data['owe-amount'] }}" onkeyup="$('#amount-owed').val(this.value)" >
+            </div>
+            <div class="multiple-choice">
+              <input id="radio-owe-none" type="radio" name="response-owe" value="owe-none" onclick="$('#amount-owed').val(0)" >
+              <label for="radio-owe-none">No, I owe them nothing and they owe me £2,500</label>
+            </div>
+          </fieldset>
+        </div>
+
+
+        <div class="form-group">
+          <input type="submit" class="button" value="Save and continue"/>
+        </div>
+
+      </form>
+    </div>
+  {% include 'prototypes/prototype-jun-2019/includes/contact.html' %}
+</main>
+{% endblock %}

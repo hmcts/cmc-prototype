@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="2" %}
+
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+
+
+<main id="content" role="main">
+
+
+  {% include "includes/phase_banner_beta.html" %}
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <form method="post" action="../../task-list" class="form">
+        {{formData | safe}}
+        <h1 class="heading-large">
+          You must still submit your response
+        </h1>
+
+        <p>When you submit your response, we'll email Jan Clark to ask if they'll try mediation.</p>
+        <p>If they agree, we'll send you an email with details of your appointment. The claim against you will be put on
+          hold until the mediation process is complete.</p>
+        <p>If Jan Clark doesn't agree to mediation, their claim against you will go to court.</p>
+        <p>You should now return to your task list and submit your response.</p>
+
+        <input type="hidden" name="resolve_dispute" value="complete">
+
+        <div class="form-group">
+          <input type="submit" class="button" value="Return to task list"/>
+        </div>
+
+    </div>
+  </div>
+{% include 'prototypes/prototype-jun-2019/includes/contact.html' %}
+</main>
+{% endblock %}

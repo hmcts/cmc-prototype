@@ -1,0 +1,66 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+
+{% block content %}
+
+
+<main id="content" role="main">
+
+  {% include "includes/phase_banner_beta.html" %}
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+      <a href="#" onclick="history.go(-1)" class="link-back">Back</a>
+
+      <h1 class="heading-large">
+          Change the judgment
+      </h1>
+
+      <p>If you can't pay in full now, you can apply to change the payment terms in the judgment, for example to pay by instalments.</p>
+      <p>You'll have to pay a £50 fee.</p>
+
+      <form
+        name="aspnetForm"
+        method="post"
+        onsubmit="multiNavigation('radio-vary-switch', ['Yes', 'No'], ['../vary/pay-default-ccj-options', 'cancel-ccj-info']);return false;"
+        id="aspnetForm"
+        autocomplete="off">
+
+        <div class="form-group">
+          <fieldset>
+            <p class="heading-medium" style="margin-top:20px">Do you want to change the CCJ?</p>
+            <div class="multiple-choice" data-target="vary">
+              <input id="vary-yes" type="radio" name="radio-vary-switch" value="Yes" aria-controls="paid-off" aria-expanded="false">
+              <label for="vary-yes">Yes</label>
+            </div>
+            <!-- <div class="panel panel-border-narrow js-hidden" id="vary">
+              <p>You will have to pay a £50 fee.</p>
+            </div> -->
+
+            <div class="multiple-choice" data-target="defence">
+              <input id="vary-no" type="radio" name="radio-vary-switch" value="No">
+              <label for="vary-no">No, I want to remove the CCJ</label>
+            </div>
+            <div class="panel panel-border-narrow js-hidden" id="defence">
+              <p>You'll have to go to a hearing. If the judgment is removed you will then have to submit a defence for the original claim.</p>
+            </div>
+
+          </fieldset>
+        </div>
+
+        <div class="form-group">
+          <input type="submit" class="button" value="Continue" />
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+
+  {% include 'prototypes/prototype-jun-2019/includes/contact.html' %}
+</main>
+{% endblock %}

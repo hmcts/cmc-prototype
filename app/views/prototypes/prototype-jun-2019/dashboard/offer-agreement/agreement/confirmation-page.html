@@ -1,0 +1,127 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+
+      <div class="govuk-box-highlight">
+        {% if data['defendant'] == "defendant_signed" or data['type'] == 2 %}
+
+        <h1 class="bold-large">You’ve settled out of court</h1>
+        <br>
+        <p>
+          <strong class="bold">
+            <!--<span id="Date2"></span>-->
+            23 December 2018
+          </strong>
+        </p>
+        <p>
+          <a class="font-medium" href='../../../defendant/correspondence/forms/agreement?check=2'
+             style="color: #FFFFFF">Download agreement as a PDF</a>
+        </p>
+        {% elif data['defendant'] == "offer" or data['defendant'] == "defendant" or data['type'] == 1%}
+        <h1 class="bold-large">You've signed the agreement</h1>
+
+        {%else%}
+
+        <h1 class="bold-large">You've signed the agreement</h1>
+        <p>
+          <a class="font-medium" href='../../../defendant/correspondence/forms/agreement?check=2'
+             style="color: #FFFFFF">Download agreement as a PDF</a>
+        </p>
+        {%endif%}
+
+
+      </div>
+
+
+      <fieldset>
+        <h2 class="heading-medium">What happens next</h2>
+
+
+        {% if data['defendant'] == "defendant" or data['type'] == 1 %}
+        <p>Mary Richards will also be asked to sign. The agreement settles the claim once you've both signed.</p>
+        {% include "includes/survey.html" %}
+
+        <p><a class="button" href='../../home?dashboard=1.17'>Go to your account</a></p>
+
+        {% elseif data['defendant'] == "defendant_signed" or data['type'] == 2 %}
+        <p>You've both signed a settlement agreement.</p>
+        {% include "includes/survey.html" %}
+
+        <!--<p><a class="button" href='../../home?dashboard=2.16'>Go to your account</a></p>-->
+
+        <p><a class="button" href='../../new-dashboard/defendant/all-claims-7'>Go to your account</a></p>
+
+
+        {% elseif data['defendant'] == "claimant_signed" %}
+        <p>The defendant Mary Richards and you have both signed.</p>
+        {% include "includes/survey.html" %}
+
+        {% else %}
+
+        <p>Mary Richards will also be asked to sign.</p>
+        {% include "includes/survey.html" %}
+
+        <!--<p><a class="button" href='../../home?dashboard=1.17'>Go to your account</a></p>-->
+        <p><a class="button" href='../../new-dashboard/claimant/all-claims-5'>Go to your account</a></p>
+
+        {% endif %}
+
+        {% include "includes/contact.html" %}
+
+    </div>
+  </div>
+</main>
+
+<form method="post" action="#" class="form" style="position: absolute;">
+  <select id="claimant2" name="claimant2" onchange="window.location.href='?type='+this.value">
+    <option value="0">Choose</option>
+    <option value="1" {% if data[
+    'type'] == 1 %}selected{% endif %}>1. Claimant signed agreement</option>
+    <option value="2" {% if data[
+    'type'] == 2 %}selected{% endif %}>2. Defendant countersigned agreement</option>
+
+  </select>
+</form>
+
+{% if data['defendant'] == "defendant_signed" %}
+
+{%else%}
+
+<div id="daysPassing" data-dayspassurl="../../new-dashboard/claimant/email3"
+     data-dayspasstimetoprompt="5000" data-dayspassdays="3" style="position: absolute;
+  height: 100%;
+  width: 100%;">
+
+  <div class="spinner-block">
+    <h2 class="govuk-heading-m">Days passing by... <span id="days">3</span></h2>
+    <div class="spinner spinner-1"></div>
+  </div>
+
+</div>
+
+<a class="gem-c-pagination__link active" id="triggerDaysPassing" style="position:">
+  <span class="gem-c-pagination__link-title">
+      <svg class="gem-c-pagination__link-icon" xmlns="http://www.w3.org/2000/svg" height="13" width="17"
+           viewBox="0 0 17 13">
+        <path fill="currentColor"
+              d="m10.107-0.0078125-1.4136 1.414 4.2926 4.293h-12.986v2h12.896l-4.1855 3.9766 1.377 1.4492 6.7441-6.4062-6.7246-6.7266z"></path>
+      </svg>
+      <span class="gem-c-pagination__link-text">
+        Simulate time passing
+      </span>
+  </span>
+</a>
+
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,498 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="4" %}
+
+{% include "includes/propositional_navigation_new.html" %}
+{% endblock %}
+{% block content %}
+
+
+<main id="content" role="main">
+
+  {% include "includes/phase_banner_beta.html" %}
+
+  <div class="grid-row">
+    <div class="column-full">
+
+      <h1 class="heading-large" id="page-h1" style="margin-bottom: 20px">
+        All claims
+      </h1>
+
+      <!--<div class="hmcts-banner">-->
+        <!--<div class="hmcts-banner__message">-->
+          <!--<h2 class="heading-medium" style="margin-top: 0px">The draft claim has been deleted</h2>-->
+          <!--<p><a href="#">Dismiss</a></p>-->
+        <!--</div>-->
+      <!--</div>-->
+
+      <a class="newclaim" href="../../new-claim/eligibility" style="margin-bottom: 40px">Make a new money claim</a>
+
+      <!--<h2 class="heading-medium type-heading claims">-->
+      <!--Claims you've made-->
+      <!--</h2>-->
+
+      <div class="tabGroup3">
+        <a id="tabH" class="tab-on" onclick="tabGroup3(tabContent, 'TAB-ONE')" href="javascript: void(0)">Claims you've
+          made</a>
+        <a id="tabI" class="tab" onclick="tabGroup3(tabContent, 'TAB-TWO')" href="javascript: void(0)">Claims made
+          against you</a>
+        <div class="govuk-form-group" style="float: right; margin-bottom: -10px">
+          <label class="font-xsmall" for="sort">
+            Sort by
+          </label>
+          <select class="govuk-select" id="sort" name="sort" style="font-size: 14px">
+            <option value="">Claim number</option>
+            <option value="">Issue date</option>
+            <option value="">Name</option>
+            <option value="">Claim amount</option>
+            <option value="">Deadline</option>
+            <option value="" selected="">Drafts</option>
+          </select>
+        </div>
+        <hr style="margin-top: -1px">
+      </div>
+
+      <div id="tabContent" class="top_30">
+
+        <div id="tabOneContent">
+
+          <div class="table-container container">
+            <table class="clickable">
+              <!--<caption>-->
+              <!--<span class="table-caption">-->
+              <!--Claims you've made-->
+              <!--</span>-->
+              <!--</caption>-->
+              <thead>
+              <tr>
+                <th scope="col">
+                  <span style="font-size: medium">Claim number</span>
+                </th>
+                <th scope="col">
+                  <span style="font-size: medium">Defendant</span>
+                </th>
+                <th class="numeric" scope="col">
+                  <span style="font-size: medium">Claim amount</span>
+                </th>
+                <th scope="col">
+                  <span style="font-size: medium">Next steps</span>
+                </th>
+                <th scope="col">
+                  <span style="font-size: medium">Deadline</span>
+                </th>
+                <th scope="col">
+
+                  <span style="font-size: medium">Action(s)</span>
+
+                </th>
+              </tr>
+              </thead>
+              <tbody>
+
+              <!--draft claim 02-->
+              <tr class="draft" id="claim-continue-draft">
+                <td aria-label="Claim-number">
+                  -<br>
+                  <span class="font-xsmall">Drafted on 6 Dec 2018</span>
+                </td>
+                <td aria-label="Defendants">
+                  Goddard Plumbing<br><span class="font-xsmall"> + 2 others</span>
+                </td>
+                <td aria-label="Claimed" class="numeric claimed-amount">
+                  £3,456
+                </td>
+                <td aria-label="Next steps">
+                  Continue draft claim
+                </td>
+                <td aria-label="Deadline">
+                  -
+                </td>
+                <td aria-label="Action">
+                  <a class="" href="../../../claimant/task-list">Continue</a> &nbsp;
+                  <a class="" href="">Delete</a>
+                </td>
+              </tr>
+
+              <!--claim 02-->
+              <tr class="submitted" id="">
+                <td aria-label="Claim-number">
+                  352MC733<br>
+                  <span class="font-xsmall">Issued on 5 Dec 2018</span>
+                </td>
+                <td aria-label="Defendants">
+                  Mary Richards<br>
+                </td>
+                <td aria-label="Claimed" class="numeric claimed-amount">
+                  £1,500
+                </td>
+                <td aria-label="Next steps">
+                  {% if data["claimant"] == 1 %}
+                  Waiting for the defendant to respond
+                  {% endif %}
+
+                  {% if data["claimant"] == 2 %}
+                  Respond to defendant
+                  {% endif %}
+
+                  {% if data["claimant"] == 3 %}
+                  The court will review<br> the case
+                  {% endif %}
+
+                  {% if data["claimant"] == 4 %}
+                  Prepare for the hearing
+                  {% endif %}
+
+                  {% if data["claimant"] == 5 %}
+                  Pay the hearing fee
+                  {% endif %}
+
+                </td>
+                <td aria-label="Deadline">
+                  {% if data["claimant"] == 1 %}
+                  -
+                  {% endif %}
+
+                  {% if data["claimant"] == 2 %}
+                  26 Jan 2019<br>
+                  <span class="font-xsmall">19 days left</span>
+                  {% endif %}
+
+                  {% if data["claimant"] == 3 %}
+                  -
+                  {% endif %}
+
+                  {% if data["claimant"] == 4 %}
+                  30 Feb 2019<br>
+                  <span class="font-xsmall">10 days left</span>
+                  {% endif %}
+
+                  {% if data["claimant"] == 5 %}
+                  20 Mar 2019<br>
+                  <span class="font-xsmall">5 days left</span>
+                  {% endif %}
+
+                </td>
+                <td aria-label="Action">
+                  {% if data["claimant"] == 1 %}
+                  <a class="" href="claim-details-c1">View</a>
+                  {% endif %}
+
+                  {% if data["claimant"] == 2 %}
+                  <a class="" href="claim-details-c2">View</a>
+                  {% endif %}
+
+                  {% if data["claimant"] == 3 %}
+                  <a class="" href="claim-details-c3">View</a>
+                  {% endif %}
+
+                  {% if data["claimant"] == 4 %}
+                  <a class="" href="claim-details-c4">View</a>
+                  {% endif %}
+
+                  {% if data["claimant"] == 5 %}
+                  <a class="" href="claim-details-c5">View</a>
+                  {% endif %}
+
+                </td>
+              </tr>
+
+              <!--claim 03-->
+              <tr class="draft" id="claim-continue-draft">
+                <td aria-label="Claim-number">
+                  324MC645<br>
+                  <span class="font-xsmall">Issued on 2 Dec 2018</span>
+                </td>
+                <td aria-label="Defendants">
+                  Sirishas Beauty
+                </td>
+                <td aria-label="Claimed" class="numeric claimed-amount">
+                  £1,698
+                </td>
+                <td aria-label="Next steps">
+                  Respond to defendant
+                </td>
+                <td aria-label="Deadline">
+                  26 Jan 2019<br>
+                  <span class="font-xsmall">20 days left</span>
+                </td>
+                <td aria-label="Action">
+                  <a class="" href="">View</a> &nbsp;
+                </td>
+              </tr>
+
+              <!--claim 04-->
+              <tr class="draft" id="claim-continue-draft">
+                <td aria-label="Claim-number">
+                  244MC467<br>
+                  <span class="font-xsmall">Issued on 30 Nov 2018</span>
+                </td>
+                <td aria-label="Defendants">
+                  BTA Travel Agent
+                </td>
+                <td aria-label="Claimed" class="numeric claimed-amount">
+                  £567
+                </td>
+                <td aria-label="Next steps">
+                  Respond to offer
+                </td>
+                <td aria-label="Deadline">
+                  7 Jan 2019<br>
+                  <span class="font-xsmall">1 day left</span>
+                </td>
+                <td aria-label="Action">
+                  <a class="" href="">View</a> &nbsp;
+                </td>
+              </tr>
+
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+
+
+        <div id="tabTwoContent">
+
+          <div class="table-container container">
+            <table class="clickable">
+              <!--<caption>-->
+              <!--<span class="table-caption">-->
+              <!--Claims made against you-->
+              <!--</span>-->
+              <!--</caption>-->
+              <thead>
+              <tr>
+                <th scope="col">
+                  <span style="font-size: medium">
+                    Claim number
+                  </span>
+                </th>
+                <th scope="col">
+                  <span style="font-size: medium">Claimant</span>
+                </th>
+                <th class="numeric" scope="col">
+                  <span style="font-size: medium">Claim amount</span>
+                </th>
+                <th scope="col">
+                  <span style="font-size: medium">Next steps</span>
+                </th>
+                <th scope="col">
+                  <span style="font-size: medium">Deadline</span>
+                </th>
+                <th scope="col">
+                  <span style="font-size: medium">Action(s)</span>
+                </th>
+              </tr>
+              </thead>
+              <tbody>
+
+              <!--claim 01-->
+              <tr class="draft" id="claim-d1">
+                <td aria-label="Claim-number">
+                  352MC733<br>
+                  <span class="font-xsmall">Issued on 11 Jan 2019</span>
+                </td>
+                <td aria-label="Claimant">
+                  Jan Clark
+                </td>
+                <td aria-label="Claimed" class="numeric claimed-amount">
+                  £300
+                </td>
+                <td aria-label="Next steps">
+                  Respond to the claim
+                </td>
+                <td aria-label="Deadline">
+                  30 Jan 2019<br>
+                  <span class="font-xsmall">19 days left</span>
+                </td>
+                <td aria-label="Action">
+                  <a class="" href="../../../defendant/task-list">Continue response</a>
+                </td>
+              </tr>
+
+              <!--claim 02-->
+              <tr class="submitted" id="claim-dx">
+                <td aria-label="Claim-number">
+                  0000LR125<br>
+                  <span class="font-xsmall">Issued on 7 Nov 2018</span>
+                </td>
+                <td aria-label="Claimant">
+                  Kate Beckinsale
+                </td>
+                <td aria-label="Claimed" class="numeric claimed-amount">
+                  £2,456
+                </td>
+                <td aria-label="Next steps">
+                  Pay the judgment debt
+                </td>
+                <td aria-label="Deadline">
+                  30 Jan 2019<br>
+                  <span class="font-xsmall">19 days left</span>
+                </td>
+                <td aria-label="Action">
+                  <a class="" href="">View</a>
+                </td>
+              </tr>
+
+              <!--claim 03-->
+              <tr class="submitted" id="claim-dx">
+                <td aria-label="Claim-number">
+                  0000LR089<br>
+                  <span class="font-xsmall">Issued on 3 Oct 2018</span>
+                </td>
+                <td aria-label="Claimant">
+                  Lowell Portfolio
+                </td>
+                <td aria-label="Claimed" class="numeric claimed-amount">
+                  £500
+                </td>
+                <td aria-label="Next steps">
+                  Pay the judgment debt
+                </td>
+                <td aria-label="Deadline">
+                  15 Jan 2019<br>
+                  <span class="font-xsmall">Overdue</span>
+                </td>
+                <td aria-label="Action">
+                  <a class="" href="">View</a>
+                </td>
+              </tr>
+
+              <!--claim 04-->
+              <tr class="submitted" id="claim-dx">
+                <td aria-label="Claim-number">
+                  0000LR067<br>
+                  <span class="font-xsmall">Issued on 4 Sep 2018</span>
+                </td>
+                <td aria-label="Claimant">
+                  Lowell Portfolio
+                </td>
+                <td aria-label="Claimed" class="numeric claimed-amount">
+                  £500
+                </td>
+                <td aria-label="Next steps">
+                  Pay the judgment debt
+                </td>
+                <td aria-label="Deadline">
+                  1 Dec 2018<br>
+                  <span class="font-xsmall">Overdue</span>
+                </td>
+                <td aria-label="Action">
+                  <a class="" href="">View</a>
+                </td>
+              </tr>
+
+              <!--claim 05-->
+              <tr class="submitted" id="claim-dx">
+                <td aria-label="Claim-number">
+                  0000LR058<br>
+                  <span class="font-xsmall">Issued on 5 Aug 2018</span>
+                </td>
+                <td aria-label="Claimant">
+                  Lowell Portfolio
+                </td>
+                <td aria-label="Claimed" class="numeric claimed-amount">
+                  £500
+                </td>
+                <td aria-label="Next steps">
+                  Pay the judgment debt
+                </td>
+                <td aria-label="Deadline">
+                  16 Nov 2018<br>
+                  <span class="font-xsmall">Overdue</span>
+                </td>
+                <td aria-label="Action">
+                  <a class="" href="">View</a>
+                </td>
+              </tr>
+
+              <!--claim 06-->
+              <tr class="submitted" id="claim-dx">
+                <td aria-label="Claim-number">
+                  0000LR043<br>
+                  <span class="font-xsmall">Issued on 1 Aug 2018</span>
+                </td>
+                <td aria-label="Claimant">
+                  Lowell Portfolio
+                </td>
+                <td aria-label="Claimed" class="numeric claimed-amount">
+                  £500
+                </td>
+                <td aria-label="Next steps">
+                  Pay the judgment debt
+                </td>
+                <td aria-label="Deadline">
+                  1 Nov 2018<br>
+                  <span class="font-xsmall">Overdue</span>
+                </td>
+                <td aria-label="Action">
+                  <a class="" href="">View</a>
+                </td>
+              </tr>
+
+              <!--claim 07-->
+              <tr class="submitted" id="claim-dx">
+                <td aria-label="Claim-number">
+                  0000LR033<br>
+                  <span class="font-xsmall">Issued on 5 Jul 2018</span>
+                </td>
+                <td aria-label="Claimant">
+                  Lowell Portfolio
+                </td>
+                <td aria-label="Claimed" class="numeric claimed-amount">
+                  £500
+                </td>
+                <td aria-label="Next steps">
+                  Pay the judgment debt
+                </td>
+                <td aria-label="Deadline">
+                  17 Oct 2018<br>
+                  <span class="font-xsmall">Overdue</span>
+                </td>
+                <td aria-label="Action">
+                  <a class="" href="">View</a>
+                </td>
+              </tr>
+
+              <!--claim 08-->
+              <tr class="submitted" id="claim-dx">
+                <td aria-label="Claim-number">
+                  0000LR027<br>
+                  <span class="font-xsmall">Issued on 2 Jun 2018</span>
+                </td>
+                <td aria-label="Claimant">
+                  Lowell Portfolio
+                </td>
+                <td aria-label="Claimed" class="numeric claimed-amount">
+                  £500
+                </td>
+                <td aria-label="Next steps">
+                  Pay the judgment debt
+                </td>
+                <td aria-label="Deadline">
+                  22 Sep 2018<br>
+                  <span class="font-xsmall">Overdue</span>
+                </td>
+                <td aria-label="Action">
+                  <a class="" href="">View</a>
+                </td>
+              </tr>
+
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+      </div>
+
+      {% include 'prototypes/prototype-jun-2019/includes/contact.html' %}
+    </div>
+
+</main>
+
+
+{% endblock %}

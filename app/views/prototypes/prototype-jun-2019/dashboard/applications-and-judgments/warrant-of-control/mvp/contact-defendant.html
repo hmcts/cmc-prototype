@@ -1,0 +1,53 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="4" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <a href="#" class="link-back">Back</a>
+
+      <h1 class="heading-large">
+        Is this the right phone number to contact the defendant?
+      </h1>
+
+      <div class="panel panel-border-wide">
+        <h3 class="heading-small">07824999612</h3>
+      </div>
+
+      <p>The court will try to phone Mary Richards to ask for payment.</p>
+
+      <div class="form-group">
+        <fieldset>
+          <div class="multiple-choice" data-target="contact-defendant-1">
+            <input type="radio" id="no-change" name="radio-contact-defendant" value="No" {{ checked("contact-defendant-1",
+            "No") }} >
+            <label for="no-change">Yes</label>
+          </div>
+          <div class="multiple-choice" data-target="contact-defendant-2">
+            <input type="radio" id="add-contact" name="radio-contact-defendant" value="Yes" {{ checked("contact-defendant-2",
+            "Yes") }}>
+            <label for="add-contact">No, use a different phone number</label>
+          </div>
+          <div class="panel panel-border-narrow js-hidden" id="contact-defendant-2">
+            <label class="form-label" for="phone-defendant">Enter their mobile or home number</label>
+            <input class="form-control" id="phone-defendant" type="number" name="phone-defendant"
+                   value="{{data['phone-defendant']}}">
+          </div>
+      </div>
+
+      <a href="additional-information" class="button" type="submit">Save and continue</a>
+
+    </div>
+    <fieldset></fieldset>
+    <fieldset></fieldset>
+
+{% include 'prototypes/prototype-jun-2019/includes/contact.html' %}
+</main>
+{% endblock %}
