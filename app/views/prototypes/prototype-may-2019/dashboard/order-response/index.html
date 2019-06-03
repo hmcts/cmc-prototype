@@ -17,42 +17,12 @@ Money Claims Prototype
         Give us more information for a hearing
       </h1>
 
-      <p>You need to complete each section on this page by {{ now | date('add', 12, 'days') | date }}, or {% if data['party'] == "defendant" %}the court may cancel your defence and give you a County Court Judgment (CCJ){% else %}the claim will not proceed to a hearing{% endif %}.</p>
+      <p>You need to complete all relevant sections of this page and tell us you've finished by {{ now | date('add', 12, 'days') | date }}, or {% if data['party'] == "defendant" %}the court may cancel your defence and give you a County Court Judgment (CCJ){% else %}the claim will not proceed to a hearing{% endif %}.</p>
 
       <hr />
 
-      <h2 class="heading-small">Complete and upload witness statements</h2>
-      {% if data['witness'] == 'complete' %}
-      <p>You uploaded these documents on {{ now | date }}:</p>
 
-      <ul>
-          <li>Steve Smith: <a href="#">Witness statement 1.pdf</a></li>
-          <li>Ben Clark: <a href="#">Witness statement 2.docx</a></li>
-      </ul>
-
-      <br />
-      <div class="form-group">
-        <a href="order-response/witness-statements" class="secondary-button">Upload more witness statements</a>
-      </div>
-
-      {% else %}
-      <p>You must complete a witness statement for any witnesses whose evidence you want to use at the hearing, including yourself.</p>
-
-      <p>To make sure your witness statements have all the information the court needs you should either:</p>
-
-        <ul class="list list-bullet">
-          <li><a href="/public/images/Witness%20statement.docx">download the witness statement template</a> (DOCX, 123KB)</li>
-          <li><a href="order-response/witness-statements">follow the witness statement guidance</a></li>
-        </ul>
-
-      <div class="form-group">
-        <a href="order-response/witness-statements" class="secondary-button">Upload witness statements</a>
-      </div>
-      {% endif %}
-
-      <hr />
-
-      <h2 class="heading-small">Upload your evidence</h2>
+      <h2 class="heading-small">Upload any evidence</h2>
 
       {% if data['evidence'] == 'complete' %}
       <p>You uploaded these documents on {{ now | date }}:</p>
@@ -99,6 +69,37 @@ Money Claims Prototype
 
       {% endif %}
 
+      <h2 class="heading-small">Complete and upload any witness statements</h2>
+      {% if data['witness'] == 'complete' %}
+      <p>You uploaded these documents on {{ now | date }}:</p>
+
+      <ul>
+          <li>Steve Smith: <a href="#">Witness statement 1.pdf</a></li>
+          <li>Ben Clark: <a href="#">Witness statement 2.docx</a></li>
+      </ul>
+
+      <br />
+      <div class="form-group">
+        <a href="order-response/witness-statements" class="secondary-button">Upload more witness statements</a>
+      </div>
+
+      {% else %}
+      <p>You must complete a witness statement for any witnesses whose evidence you want to use at the hearing, including yourself.</p>
+
+      <p>To make sure your witness statements have all the information the court needs you should either:</p>
+
+        <ul class="list list-bullet">
+          <li><a href="/public/images/Witness%20statement.docx">download the witness statement template</a> (DOCX, 123KB)</li>
+          <li><a href="order-response/witness-statements">follow the witness statement guidance</a></li>
+        </ul>
+
+      <div class="form-group">
+        <a href="order-response/witness-statements" class="secondary-button">Upload witness statements</a>
+      </div>
+      {% endif %}
+
+      <hr />
+      
       {% if data['claimant'] == 11.1001  or data['defendant'] == 12.1001 or data['claimant'] == 11.1002 or data['defendant'] == 12.1002 or data['expert'] == 'complete' %}
 
 
@@ -163,6 +164,11 @@ Money Claims Prototype
       <hr />
 
       {% endif %}
+
+      <h2 class="heading-medium">Once you've finished, you need to let us know</h2>
+      <a href="order-response/finished" class="button">Tell us you've finished</a>
+
+      <hr />
 
       <h2 class="heading-medium">Responding by post</h2>
       <p>If you can't upload the required documents, you can <a href="order-response/offline">respond to the order by post</a> instead.</p>
