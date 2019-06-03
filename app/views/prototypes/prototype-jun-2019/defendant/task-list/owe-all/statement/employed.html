@@ -1,0 +1,88 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="2" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <a href="#" class="link-back">Back</a>
+      {% if data['employed']=="employed,self_employed"  %}
+      <form action="self-employed" method="post" class="form">
+      {% elseif data['employed']=="employed"  %}
+      <form action="court-orders" method="post" class="form">
+      {% elseif data['employed']=="self_employed"  %}
+      <form action="tax" method="post" class="form">
+      {% endif  %}
+          {% if data['employed']=="employed,self_employed" or data['employed']=="employed" %}
+          <h1 class="heading-large">
+            Who employs you?
+          </h1>
+          <div class="form-group">
+            <label class="form-label" for="input-text-a">
+              Employer name
+            </label>
+            <input class="form-control " id="input-text-a" type="text">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="input-text-a">
+              Job title
+            </label>
+            <input class="form-control " id="input-text-a" type="text">
+          </div>
+          <div class="timeline-row">
+            <div id="add-event-container">
+              <a class="secondary-button" id="add-another-event-button" href="#">Add another job</a>
+            </div>
+            <!--           <a class="" id="calculate" href="#">Calculate total</a>
+            -->        </div>
+            <script>
+              $(document).ready(function () {
+                $('#add-another-event-button').click(function (event) {
+                  event.preventDefault();
+                  $('.timeline-rows').append(
+                    '<div class="timeline-row">' +
+                    '<input class="form-control timeline-column-3" style="margin-right: 1px; margin-right: 10px;" type="text">' +
+                    '<input class="form-control timeline-column-4 fee pound" style="margin-left: 3px" type="text">' +
+                    '</div>'
+                    );
+                });
+              });
+            </script>
+            <div class="form-group">
+              <input type="submit" class="button" value="Save and continue"/>
+            </div>
+          </form>
+          {% elseif data['employed']=="self_employed" or data.radio_employment_group=="Yes"%}
+          <h1 class="heading-large">
+            What are you self-employed as?
+          </h1>
+          <form action="court-orders" method="post" class="form">
+            <div class="form-group">
+              <label class="form-label" for="input-text-a">
+                Job title
+              </label>
+              <input class="form-control " id="input-text-a" type="text">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="input-text-a">
+                Annual turnover
+              </label>
+              <input class="form-control " id="input-text-a" type="text">
+            </div>
+
+            <div class="form-group">
+              <input type="submit" class="button" value="Save and continue"/>
+            </div>
+          </form>
+          {% endif %} <!-- end of partial -->
+        </div>
+      </div>
+    {% include 'prototypes/prototype-jun-2019/includes/contact.html' %}
+</main>
+{% endblock %}

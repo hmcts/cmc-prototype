@@ -1,0 +1,96 @@
+{% extends "layout_task-list.html" %}
+{% block page_title %}
+Check your answers
+{% endblock %}
+{% block home_link %} ../task-list {% endblock %}
+{% block proposition_header %}
+{% set my_account="1" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <h1 class="heading-large">
+    Check your evidence uploads before submitting
+  </h1>
+
+  <table class="check-your-answers uploads">
+    <thead>
+      <tr>
+        <th colspan="2">
+          <p>Make sure you've uploaded the right documents - you can't remove documents after you submit.</p>
+
+        </th>
+        <th>
+        </th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td>
+          File 1
+        </td>
+        <td>
+          <a href="#">Emails.pdf</a>
+          <br />You can see the emails dated {{ date | date('subtract', 123, 'days') | date }} and {{ date | date('subtract', 134, 'days') | date }} that they claimed not to receive.
+        </td>
+        <td class="change-answer no-border">
+          <a href="upload">Change</a>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          File 2
+        </td>
+        <td>
+          <a href="#">Photo 1.jpg</a>
+          <br />The photos show that the roof was not adequately supported.
+        </td>
+        <td class="change-answer no-border"></td>
+      </tr>
+
+      <tr>
+        <td>
+          File 3
+        </td>
+        <td>
+          <a href="#">Photo 2.jpg</a>
+        </td>
+        <td class="change-answer no-border"></td>
+      </tr>
+
+      <tr>
+        <td>
+          File 4
+        </td>
+        <td>
+          <a href="#">Contract.pdf</a>
+          <br />The signed contract shows the materials we agreed to use.
+        </td>
+        <td class="change-answer"></td>
+      </tr>
+
+    </tbody>
+  </table>
+
+  <br/>
+
+
+  {% if data['defaultccj'] == 'true' %}
+      <p><a class="button" href="/prototypes/prototype-jun-2019/dashboard/applications-and-judgments/set-aside-default-ccj/task-list?evidencesection=complete">Continue</a></p>
+  {% else %}
+      <form method="get" action="confirmation-page" class="form">
+        <div class="form-group">
+          <button id="submit" class="button" >Submit evidence</button>
+        </div>
+      </form>
+  {% endif %}
+
+
+
+  {% include 'prototypes/prototype-jun-2019/includes/contact.html' %}
+
+</main>
+{% endblock %}

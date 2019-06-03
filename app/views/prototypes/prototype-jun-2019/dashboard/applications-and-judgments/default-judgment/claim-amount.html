@@ -1,0 +1,104 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="4" %}
+
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <a href="#" class="link-back">Back</a>
+      <h1 class="heading-large">
+        Judgment amount
+      </h1>
+      <p>Judgment will be entered against the defendant for this amount.</p>
+      <form class="form" action="{% if data['radio-proceed'] == "judgment" %}../../../dashboard/claimant-response/admit-the-claim/task-list{% elseif data['radio-proceed'] == "judgment-pa" %}../../../dashboard/claimant-response/part-admit/task-list {% elseif data['radio-proceed'] == 'not-signed' %}check-your-judgment{% else %}payment-options{% endif %}" method="post">
+
+        <table class="table-form">
+          <caption class="visuallyhidden">Amount payable by defendant</caption>
+          <thead>
+            <tr>
+              <th scope="col"></th>
+              <th class="numeric last" scope="col">Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Claim amount</th>
+              <td class="numeric last">
+                <label class="visuallyhidden" for="amount">Claim amount</label>
+                <span class="font-small"> {% if data['radio-proceed']=="judgment-pa" %}£1200{%else%}£1643.20{%endif%}</span>
+              </td>
+            </tr>
+            {% if data['radio-proceed']=="judgment-pa" %}
+            {% else %}
+
+            <tr>
+              <th scope="row">
+                <details>
+                  <summary>
+                    Interest to date
+                  </summary>
+                  <div class="panel text-small">
+                    Interest calculated at 8% for 23 days <br> <span class="font-xsmall">({{ now | date('subtract', 23, 'days' ) | date }} to {{ now | date }})</span>
+                  </div>
+                </details>
+              </th>
+              <td class="numeric last">
+                <label class="visuallyhidden" for="amount">Interest</label>
+                <span class="font-small">£68.20</span>
+              </td>
+            </tr>
+
+            <tr>
+              <th scope="row">Claim fee</th>
+              <td class="numeric last">
+                <label class="visuallyhidden" for="amount">Claim fee</label>
+                <span class="font-small">£75</span>
+              </td>
+            </td>
+          </tr>
+
+ {% endif %}
+          {% if data['radio-indent-group2']=="Yes" %}
+          <tr>
+            <th scope="col" class="bold-small">Sub total</th>
+            <td class="numeric last bold-small">£<span name="subt" id="subt" >1643.20</span></td>
+            <input type="text" hidden="" value="1643.20" name="num1" id="num1" />
+          </tr>
+          <tr>
+            <th scope="col">Minus amount already paid</th>
+            <td class="numeric last">£200</td>
+          </tr>
+          <tr>
+            <th scope="col" class="bold-medium">Total</th>
+            <td class="numeric last bold-medium">£<span name="subt" id="subt" >1643.20</span></td>
+            <input type="text" hidden="" value="1643.20" name="num1" id="num1" />
+          </tr>
+
+          {% else  %}
+          <tr>
+            <th scope="col" class="bold-medium">Total</th>
+            <td class="numeric last bold-medium">£<span name="subt" id="subt" >{% if data['radio-proceed']=="judgment-pa" %}1200{%else%}1643.20{%endif%}</span></td>
+            <input type="text" hidden="" value="1643.20" name="num1" id="num1" />
+          </tr>
+          {% endif %}
+
+
+        </tbody>
+      </table>
+
+      <input type="hidden" name="judgment" value="complete">
+      <input type="submit" value="Save and continue" class="button">
+    </form>
+
+  </div>
+</div>
+{% include 'prototypes/prototype-jun-2019/includes/contact.html' %}
+</main>
+{% endblock %}

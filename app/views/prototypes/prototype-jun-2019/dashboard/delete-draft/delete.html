@@ -1,0 +1,69 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+
+{% block content %}
+
+
+<main id="content" role="main">
+
+  {% include "includes/phase_banner_beta.html" %}
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+      <a href="#" onclick="history.go(-1)" class="link-back">Back</a>
+
+      <h1 class="heading-large">
+        Are you sure you want to delete this draft claim?
+      </h1>
+
+      <div class="panel panel-border-wide">
+        <p>
+          Defendant: <span class="bold">Mary Richards</span><br>
+          Claim amount: <span class="bold">£1,500</span>
+        </p>
+      </div>
+
+      <form
+        name="aspnetForm"
+        method="post"
+        id="aspnetForm"
+        autocomplete="off"
+        onsubmit="multiNavigation('radio-group', ['Yes', 'No'], ['confirm-deleted', '../home?dashboard=1.1&']);return false;">
+
+        <input id="draft-claim" name="delete-draft" type="hidden">
+
+        <div class="form-group">
+          <fieldset>
+
+            <legend class="visually-hidden">Are you sure?</legend>
+
+
+            <div class="multiple-choice">
+              <input id="radio-yes" type="radio" name="radio-group" value="Yes">
+              <label for="radio-yes" data-target="yes-info">Yes</label>
+            </div>
+
+            <div class="multiple-choice">
+              <input id="radio-no" type="radio" name="radio-group" value="No">
+              <label for="radio-no" data-target="no-info">No</label>
+            </div>
+
+
+          </fieldset>
+
+          <div class="form-group">
+            <input type="submit" class="button" value="Confirm"/>
+          </div>
+
+        </div>
+      </form>
+
+    </div>
+  </div>
+{% include 'prototypes/prototype-jun-2019/includes/contact.html' %}
+</main>
+{% endblock %}
