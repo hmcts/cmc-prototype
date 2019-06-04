@@ -168,6 +168,9 @@
         <!--  STETEMENT OF TRUTH   -->
         <br>
         <div class="column-two-thirds">
+          <!--   IS THIS NEEDED?  -->
+          <!--
+
           <h2 class="heading-medium">Statement of truth</h2>
 
           <p>When you’re satisfied that your answers are accurate, you should tick to “sign” this statement of
@@ -208,46 +211,49 @@
           {% endif %}
 
 
-          <div class="form-group">
-            <div class="form-group">
-              <div class="multiple-choice text">
-                <input class="" id="HasAcceptedTermsAndConditions2" type="checkbox" value="true">
-                <label for="HasAcceptedTermsAndConditions2">The hearing requirement details on this page are true to the best of my knowledge.</label>
-              </div>
-            </div>
-          </div>
+
+                  <div class="form-group">
+                    <div class="form-group">
+                      <div class="multiple-choice text">
+                        <input class="" id="HasAcceptedTermsAndConditions2" type="checkbox" value="true">
+                        <label for="HasAcceptedTermsAndConditions2">The hearing requirement details on this page are true to the best of my knowledge.</label>
+                      </div>
+                    </div>
+                  </div>
+          -->
+
+            {% endif %}
 
 
-    {% endif %}
+            {% if data['claimantattending'] != 'true' %}
+                  <br>
+            {% else %}
+                  <br>
+            {% endif %}
+            <p><a class="button" href="../../../claimant/confirmation-page?claimantresponsetosetaside=true&">Submit</a></p>
 
-
-    {% if data['claimantattending'] != 'true' %}
-          <br>
-    {% endif %}
-    <p><a class="button" href="../../../claimant/confirmation-page?claimantresponsetosetaside=true&">Submit</a></p>
-
-</main>
-
-
-
-
-<form method="post"  action="#" class="for4" style=" float: left; ">
-  <select style="height:25px;" onchange="window.location.href='?'+this.value">
-    <option value="claimantattending=false&"
-            {% if data.claimantattending != 'true' %}selected{% endif %}
-    >Claimant - Not Attending</option>
-
-    <option value="claimantattending=true&claimantsupportneeds=false&"
-            {% if data.claimantattending == 'true'  and  data.claimantsupportneeds != 'true' %}selected{% endif %}
-    >Claimant - Attending - No Support needs</option>
-
-    <option value="claimantattending=true&claimantsupportneeds=true&"
-            {% if data.claimantattending == 'true'  and  data.claimantsupportneeds == 'true' %}selected{% endif %}
-    >Claimant - Attending - Support needs</option>
-
-  </select>
-</form>
+        </main>
 
 
 
-{% endblock %}
+
+        <form method="post"  action="#" class="for4" style=" float: left; ">
+          <select style="height:25px;" onchange="window.location.href='?'+this.value">
+            <option value="claimantattending=false&"
+                    {% if data.claimantattending != 'true' %}selected{% endif %}
+            >Claimant - Not Attending</option>
+
+            <option value="claimantattending=true&claimantsupportneeds=false&"
+                    {% if data.claimantattending == 'true'  and  data.claimantsupportneeds != 'true' %}selected{% endif %}
+            >Claimant - Attending - No Support needs</option>
+
+            <option value="claimantattending=true&claimantsupportneeds=true&"
+                    {% if data.claimantattending == 'true'  and  data.claimantsupportneeds == 'true' %}selected{% endif %}
+            >Claimant - Attending - Support needs</option>
+
+          </select>
+        </form>
+
+
+
+        {% endblock %}
