@@ -1,0 +1,57 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+
+  {% include "includes/phase_banner_beta.html" %}
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+      <div class="govuk-box-highlight">
+        <h1 class="bold-large">
+
+          <!--
+            {% if data['more-time'] == 'Yes' and data['other-problem'] == 'No' %}
+            You have an extra 19 days to respond
+            {% endif %}
+          -->
+          <h1 class="bold-large">You've asked the court to review the order</h1> 
+          <p><a href="../../../defendant/correspondence/forms/order-review" class="font-medium" style="color: #FFFFFF">Download request for review of order</a> (PDF, 123KB)</p>
+
+        </h1>
+      </div>
+
+      <h2 class="heading-medium">What happens next</h2>
+
+
+<!--
+      {% if data['more-time'] == 'Yes' %}
+
+      <p>
+
+        {% if data['other-problem'] != 'No' %}
+        You have an extra 19 days to respond.
+        {% endif %}
+        You must respond by {{ date | date('add', 31, 'days') | date }}.
+      </p>
+      {% endif %}
+-->
+
+      <p>A judge will review the order.</p>
+      <p>We'll contact both you and {% if data['party'] == 'claimant' %}Mary Richards{%else%}Jan Clark{% endif %} by post to tell you what to do next.</p>
+
+      <p><a href="../../../dashboard/home?dashboard={% if data['party'] == 'claimant' %}1.291{% else %}2.724{% endif %}" class="button">Go to your account</a></p>
+
+      {% include "includes/contact.html" %}
+
+    </div>
+
+  </div>
+</main>
+{% endblock %}
