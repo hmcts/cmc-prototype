@@ -102,7 +102,7 @@
 
 
               {% elseif data['defendant'] == 3.21 %}
-              <!-- CCJ issued from digital service -->
+              <!-- CCJ issued from digital service after 1 month deadline -->
               <h2 class="heading-medium">You have been issued a CCJ</h2>
               <p>A County Court Judgment (CCJ) of £1500 has been issued against you on 12 June 2019. <a href="#">View CCJ</a></p>
               <p>This happened because you didn't respond to the claim sent to you on 14 March 2019. <a href="#">View claim</a></p>
@@ -115,12 +115,12 @@
 
 
               {% elseif data['defendant'] == 3.22 %}
-              <!-- CCJ issued from digital service -->
+              <!-- CCJ issued from digital service before 1 month deadline -->
               <h2 class="heading-medium">You have been issued a CCJ</h2>
               <p>A County Court Judgment (CCJ) of £1500 has been issued against you on 12 June 2019. <a href="#">View CCJ</a></p>
               <p>This happened because you didn't respond to the claim sent to you on 14 March 2019. <a href="#">View claim</a></p>
 
-              <p>If you pay the debt before 14 July 2019, the CCJ is removed from the public register.
+              <p>If you pay the debt before 12 July 2019, the CCJ is removed from the public register.
                 You can pay £15 to <a href="https://www.gov.uk/government/publications/form-n443-application-for-a-certificate-of-satisfaction-or-cancellation">apply for a certificate</a> that confirms this.</p>
               <p><a href="party-details/claimant">Contact Jan Clark</a> if you need their payment details.
                 Make sure you get receipts for any payments.</p>
@@ -803,7 +803,7 @@
 
                 <h2 class="heading-small">If you have a problem with the order</h2>
                 <p>You can <a href="order-response/review/reason">ask the court to review it</a>. You need to do this before 4pm on {{ now | date('add', 12, 'days') | date }}.</p>
-  
+
               </div>
 
 
@@ -3403,6 +3403,8 @@
     <option value="3" {% if data['defendant'] == 3 %}selected{% endif %}>3. Default CCJ requested </option>
     <option value="3.1" {% if data['defendant'] == 3.1 %}selected{% endif %}>Default CCJ requested (paper) </option>
     <option value="3.2" {% if data['defendant'] == 3.2 %}selected{% endif %}>Default CCJ issued (paper)</option>
+    <option value="3.21" {% if data['defendant'] == 3.21 %}selected{% endif %}>Default CCJ issued - After 1 month deadline</option>
+    <option value="3.22" {% if data['defendant'] == 3.22 %}selected{% endif %}>Default CCJ issued - Before 1 month deadline</option>
 
     <option>------ Responses to claims -------</option>
     <option value="3.3" {% if data['defendant'] == 3.3 %}selected{% endif %}>Responded on paper</option>
