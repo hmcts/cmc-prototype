@@ -61,6 +61,166 @@
         <br>
 
 
+        <!--  HOW MUCH DO YOU OWE  -->
+        <table id="table-of-tasks">
+          <thead>
+          <tr>
+            <th scope="col" id="col-task">
+                <span class="task-group">
+                  <span class="group-number" id="task-number"></span>
+                  How much do you owe
+                </span>
+            <th class="numeric" id="task-status" scope="col" id="col-status">
+              <span type="hidden" class="visually-hidden">task status</span>
+            </th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr id="read-rules">
+            <td class="task">
+              <a href="/prototypes/prototype-jun-2019/defendant/task-list/do-you-owe-money?defaultccj=true&afterccjdeadline=true&">
+                <span class="task-name">How much do you owe</span>
+              </a>
+            </td>
+            <td class="numeric" id="task-status" scope="col" id="col-status">
+              {% if data.howmuchyouowe=="complete" %}
+                  {% include "includes/task_status_finished.html" %}
+              {% else %}
+                  {% include "includes/task_status_incomplete.html" %}
+              {% endif %}
+            </td>
+          </tr>
+
+          <!--  FULL ADMIT ONLY - GET THE USER TO PAY -->
+          {% if data['alreadysettled'] == 'false'  and  data['fulldefence'] == 'false'  and  data['lower-amount'] == 'false' %}
+              <tr id="read-rules">
+                <td class="task">
+                  <a href="pay-in-full-now">
+                    <span class="task-name">Can you pay the judgement</span>
+                  </a>
+                </td>
+                <td class="numeric" id="task-status" scope="col" id="col-status">
+                  {% if data.canpaynowanswered=="complete" %}
+                      {% include "includes/task_status_finished.html" %}
+                  {% else %}
+                      {% include "includes/task_status_incomplete.html" %}
+                  {% endif %}
+                </td>
+              </tr>
+
+              <!--  FULL ADMIT ONLY - CAN PAY JUDGEMENT PAYMENT TERMS  -->
+              {% if  data['canpaynow'] == 'true'  %}
+                  <tr id="read-rules">
+                    <td class="task">
+                      <a href="contact-claimant?contactclaimantstarted=true&contactedclaimantanswered=complete&">
+                        <span class="task-name">Arrange payment</span>
+                      </a>
+                    </td>
+                    <td class="numeric" id="task-status" scope="col" id="col-status">
+                      {% if data.contactedclaimantanswered=="complete" %}
+                          {% include "includes/task_status_finished.html" %}
+                      {% else %}
+                          {% include "includes/task_status_incomplete.html" %}
+                      {% endif %}
+                    </td>
+                  </tr>
+              {% endif %}
+
+              <!--  FULL ADMIT ONLY - CAN NOT PAY JUDGEMENT PAYMENT TERMS  -->
+              {% if  data['canpaynow'] == 'false'  %}
+                  <tr id="read-rules">
+                    <td class="task">
+                      <a href="../vary/pay-default-ccj-options">
+                        <span class="task-name">Pay to request new payment terms</span>
+                      </a>
+                    </td>
+                    <td class="numeric" id="task-status" scope="col" id="col-status">
+                      {% if data.xyz=="complete" %}
+                          {% include "includes/task_status_finished.html" %}
+                      {% else %}
+                          {% include "includes/task_status_incomplete.html" %}
+                      {% endif %}
+                    </td>
+                  </tr>
+              {% endif %}
+
+
+              <!--  FULL ADMIT ONLY - CONFIRM PAYMENT  -->
+              {% if  data['contactclaimantstarted'] == 'true'  %}
+                  <tr id="read-rules">
+                    <td class="task">
+                      <a href="have-you-paid">
+                        <span class="task-name">Confirm you've paid</span>
+                      </a>
+                    </td>
+                    <td class="numeric" id="task-status" scope="col" id="col-status">
+                      {% if data.paidclaimant=="complete" %}
+                          {% include "includes/task_status_finished.html" %}
+                      {% else %}
+                          {% include "includes/task_status_incomplete.html" %}
+                      {% endif %}
+                    </td>
+                  </tr>
+              {% endif %}
+
+          {% endif %}
+
+
+          </tbody>
+        </table>
+
+        <br>
+        <br>
+
+
+        <!--  the onard links for Guy's reference
+
+         '../../dashboard/applications-and-judgments/set-aside-default-ccj/pay-in-full-now?lower-amount=false&alreadysettled=false&fulldefence=false&',
+                                                '../../dashboard/applications-and-judgments/set-aside-default-ccj/pay-lower-amount-now?lower-amount=true&alreadysettled=false&fulldefence=false&',
+                                                '../../dashboard/applications-and-judgments/set-aside-default-ccj/cancel-ccj-info?fulldefence=true&lower-amount=false&alreadysettled=false&',
+                                                '../../dashboard/applications-and-judgments/set-aside-default-ccj/already-settled?alreadysettled=true&fulldefence=false&lower-amount=false&'  ]);return false;"
+      id="aspnetForm"
+
+      -->
+
+
+        <!-- Section 2 -->
+        <table id="table-of-tasks">
+          <thead>
+          <tr>
+            <th scope="col" id="col-task">
+                <span class="task-group">
+                  <span class="group-number" id="task-number"></span>
+                  Consider cancelling CCJ
+                </span>
+            </th>
+            <th class="numeric" id="task-status" scope="col" id="col-status"></th>
+          </tr>
+          </thead>
+          <tbody>
+            <tr id="completing-your-claim">
+              <td class="task">
+                <a href="cancel-ccj-info-paid-or-settled">
+                  <span class="task-name">Consider requesting to CCJ be cancelled</span>
+                </a>
+              </td>
+              <td class="numeric" id="task-status" scope="col" id="col-status">
+                {% if data.explainreason == 'complete' %}
+                {% include "includes/task_status_finished.html" %}
+                {% else %}
+                {% include "includes/task_status_incomplete.html" %}
+                {% endif %}
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+
+        <br>
+        <br>
+
+
+
         <!-- Section 2 -->
         <table id="table-of-tasks">
           <thead>
