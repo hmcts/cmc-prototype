@@ -16,15 +16,44 @@ Money Claims Prototype
 
       <a href="#" onclick="history.go(-1)" class="link-back">Back</a>
 
-  <h1 class="heading-large">
-        Remove a County Court Judgment
+      <h1 class="heading-large">
+        Cancel a County Court Judgment
       </h1>
       <!-- <p>If you've paid the debt or settled with the claimant, you should make sure they tell the court. When they do, the CCJ will be marked as satisfied.</p> -->
       <p>If you don't think the CCJ should have been issued in the first place, you can apply to have it removed. This is known as having it 'set aside'.</p>
       <p>You'll have to go to a hearing. The court will usually only remove a CCJ if it accepts you didn't know about the claim against you.</p>
       <p>You must pay a £255 fee to make the request. You can't get the fee refunded if the court rejects your request.</p>
 
-      <p><a class="button" href="task-list">Apply to cancel the CCJ</a></p>
+
+      <p class="heading-medium">Do you want to request to cancel this CCJ</p>
+
+      <form
+        name="aspnetForm"
+        method="post"
+        onsubmit="multiNavigation('radio-set-receive-claim', ['Yes', 'No'], ['task-list?cancelccj=true&cancelccjanswer=complete&', 'task-list?cancelccj=false&cancelccjanswer=complete&']);return false;"
+        id="aspnetForm"
+        autocomplete="off">
+
+        <div class="form-group">
+          <fieldset>
+            <div class="multiple-choice" data-target="pay">
+              <input id="set-aside-yes" type="radio" name="radio-set-receive-claim" value="Yes" aria-controls="paid-off" aria-expanded="false">
+              <label for="set-aside-yes">Yes</label>
+            </div>
+            <div class="multiple-choice" data-target="vary">
+              <input id="set-aside-no" type="radio" name="radio-set-receive-claim" value="No" aria-controls="paid-off" aria-expanded="false">
+              <label for="set-aside-no">No</label>
+            </div>
+          </fieldset>
+        </div>
+
+        <div class="form-group">
+          <input type="submit" class="button" value="Continue" />
+        </div>
+
+      </form>
+
+
 
         <!-- <p>The quickest way to remove the CCJ is for you to contact and settle the claim directly with Jan Clark.</p>
         <p>Your request is more likely to be successful and not require a court hearing if you get Jan Clark to agree the CCJ should be removed. </p> -->
