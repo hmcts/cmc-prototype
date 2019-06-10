@@ -20,9 +20,11 @@ Money Claims Prototype
       <form action="statement/explanation?upload=1" method="post" class="form">
         {% elif data['some'] == 2 %}
         <form action="../../task-list" method="post" class="form">
-          {% else %}
-          <form action="../../task-list" method="post" class="form">
-            {% endif %}
+          {% elif data['varyselected'] == 'true' %}
+          <form action="../../../dashboard/applications-and-judgments/set-aside-default-ccj/task-list" method="post" class="form">
+            {% else %}
+            <form action="../../task-list" method="post" class="form">
+              {% endif %}
             <div class="form-group">
               <fieldset>
                 <legend class="visually-hidden">How much they pay following this instalment</legend>
@@ -82,6 +84,7 @@ Money Claims Prototype
                 </div>
               </fieldset>
             </div>
+
             <fieldset>
               <legend class="visually-hidden">Explain why you can't pay the full amount immediately</legend>
               <div id="claim-details">
@@ -99,6 +102,8 @@ Money Claims Prototype
                 </div>
               </div>
             </fieldset>
+
+
             <div class="form-group">
               <input type="submit" class="button" value="Save and continue"/>
             </div>
@@ -106,6 +111,8 @@ Money Claims Prototype
         </div>
       </div>
     </main>
+
+
     <form method="post"  action="#" class="form" style="; float: left">
       <select id="dashboard2" name="dashboard2" onchange="window.location.href='repayment-plan?upload='+this.value">
         <option  value="0" >Choose </option>
