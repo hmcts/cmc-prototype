@@ -160,14 +160,17 @@
 
               {% elseif data['defendant'] == 3.91 %}
               <h2 class="heading-medium">We'll contact you with a mediation appointment</h2>
-              <p>Jan Clark rejected your admission of £1,200. They believe you owe them the full £1,500 claimed.</p>
+              <p>Jan Clark rejected your admission of £1,200. They believe you owe them the full {% if data['mediation-pilot'] == "on" %}£300{% else %}£1,500{% endif %} claimed.</p>
               <p>They've agreed to try mediation. We'll contact you with details of your appointment.</p>
               <p><a href="mediation/how-mediation-works">Find out how mediation works</a></p>
 
               {% elseif data['defendant'] == 3.92 %}
               <h2 class="heading-medium">Wait for the court to review the case</h2>
-              <p>Jan Clark rejected your admission of £1,200. They believe you owe them the full £1,500 claimed.</p>
-              <p>You might have to go to a court hearing. We'll contact you if we set a hearing date to tell you how to prepare.</p>
+
+              <p>Jan Clark rejeced your admission of £1,200. They believe you owe them the full £1,500 claimed.</p>
+
+              <p>Jan Clark rejected your admission of £1,200. They believe you owe them the full {% if data['mediation-pilot'] == "on" %}£300{% else %}£1,500{% endif %} claimed.</p>
+                <p>You might have to go to a court hearing. We'll contact you to tell you what to do next.</p>
 
 
               {% elseif data['defendant'] == 3.94 %}
@@ -242,14 +245,14 @@
 
               {% elseif data['defendant'] == 5 %}
               <h2 class="heading-medium">Wait for the claimant to respond</h2>
-              <p>You've offered to pay Jan Clark £1,500 on {% if data['set-month'] %}
+              <p>You've offered to pay Jan Clark {% if data['mediation-pilot'] == "on" %}£300{% else %}£1,500{% endif %} on {% if data['set-month'] %}
                               {{ ( data['set-month'] + ' ' + data['set-day'] + ' ' + data['set-year']) | date('D MMMM YYYY') }}{% else
                               %}{{ now | date('add', 3, 'months') | date('D MMMM YYYY') }}{% endif %}.</p>
               <p>We’ll contact you when they respond.</p>
 
               {% elseif data['defendant'] == 5.001 %}
               <h2 class="heading-medium">Wait for the claimant to respond</h2>
-              <p>You've said you owe £1,500 and offered to pay Jan Clark by 15 November 2018. You need to send them your company's financial details if you haven't already. </p>
+              <p>You've said you owe {% if data['mediation-pilot'] == "on" %}£300{% else %}£1,500{% endif %} and offered to pay Jan Clark by 15 November 2018. You need to send them your company's financial details if you haven't already. </p>
               <p><a href="party-details/claimant">Get Jan Clark's contact details</a></p>
               <p>We’ll contact you when they respond.</p>
 
@@ -257,7 +260,7 @@
               <h2 class="heading-medium">Pay the amount in the agreement</h2>
               <p>You've both signed a settlement agreement.</p>
               <p><a href="../defendant/correspondence/forms/agreement?check=2">Download the settlement agreement</a> (PDF, 123KB)</p>
-              <p>The agreement says you'll repay £1,500 by {% if data['set-month'] %}
+              <p>The agreement says you'll repay {% if data['mediation-pilot'] == "on" %}£300{% else %}£1,500{% endif %} by {% if data['set-month'] %}
                               {{ ( data['set-month'] + ' ' + data['set-day'] + ' ' + data['set-year']) | date('D MMMM YYYY') }}{% else
                               %}{{ now | date('add', 3, 'months') | date('D MMMM YYYY') }}{% endif %}.</p>
               <p>The claimant can't request a County Court Judgment against you unless you break the terms.</p>
@@ -315,7 +318,7 @@
 
               {% elseif data['defendant'] == 5.02 %}
               <h2 class="heading-medium">Pay the claim amount</h2>
-              <p>You said you'll pay Jan Clark £1,500 before 4pm on {{ now | date('add', 5, 'days') | date }}.</p>
+              <p>You said you'll pay Jan Clark {% if data['mediation-pilot'] == "on" %}£300{% else %}£1,500{% endif %} before 4pm on {{ now | date('add', 5, 'days') | date }}.</p>
               <p>If you pay by cheque or transfer the money must be clear in their account by then.</p>
               <p>If you don't pay, they can request a County Court Judgment against you.</p>
               <p><a href="party-details/claimant">Contact Jan Clark</a> if you need their payment details. Make sure you get receipts for any payments.</p>
@@ -323,7 +326,7 @@
               {% elseif data['defendant'] == 5.021 %}
               <h2 class="heading-medium">Pay the judgment debt</h2>
               <p>A County Court Judgment (CCJ) has been issued against you.</p>
-              <p>You agreed to pay the full £1,500 immediately. Because you didn't pay within 5 days, Jan Clark requested a CCJ against you.</p>
+              <p>You agreed to pay the full {% if data['mediation-pilot'] == "on" %}£300{% else %}£1,500{% endif %} immediately. Because you didn't pay within 5 days, Jan Clark requested a CCJ against you.</p>
               <p>The judgment sets out the terms of how you must pay.</p>
               <p>We'll post a copy of the judgment to you and to Jan Clark.</p>
               <p>If you pay the debt within one month of the date of judgment, the CCJ is removed from the public register. You can pay £15 to <a href="https://www.gov.uk/government/publications/form-n443-application-for-a-certificate-of-satisfaction-or-cancellation">apply for a certificate</a> that confirms this.</p>
@@ -485,7 +488,7 @@
               {% elseif data['defendant'] == 5.6 %}
               <h2 class="heading-medium">Wait for the court to review the case</h2>
               <p>The claimant has rejected your defence.</p>
-              <p>The court will review the case. We'll email you if we set a hearing date to tell you how to prepare.</p>
+              <p>The court will review the case. We'll contact you to tell you what to do next.</p>
 
 
               {% elseif data['defendant'] == 5.61 %}
@@ -504,7 +507,7 @@
 
               {% elseif data['defendant'] == 7 %}
               <h2 class="heading-medium">Your response to the claim</h2>
-              <p>You state that you paid £1500. Your explanation of why you don't owe any more money has been sent to
+              <p>You state that you paid {% if data['mediation-pilot'] == "on" %}£300{% else %}£1,500{% endif %}. Your explanation of why you don't owe any more money has been sent to
                 Jan Clark.</p>
               <p>We’ll contact you when they respond.</p>
               <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=8">Download your response and hearing requirements</a>
@@ -529,15 +532,16 @@
               {% elseif data['defendant'] == 8.1 %}
                 <h2 class="heading-medium">Wait for the court to review the case</h2>
                 <p>Jan Clark rejected your admission of £1,200.</p>
-                <p>They accept that you've paid them £1,200, but believe you owe the full £1,500 claimed.</p>
-                <p>You might have to go to a hearing. We'll contact you if we set a hearing date to tell you how to prepare.</p>
+
+                <p>They accept that you've paid them £1,200, but believe you owe the full {% if data['mediation-pilot'] == "on" %}£300{% else %}£1,500{% endif %} claimed.</p>
+                <p>You might have to go to a hearing. We'll contact you to tell you what to do next.</p>
 
 
               {% elseif data['defendant'] == 8.2 %}
               <div class="status-block single">
                 <h2 class="heading-medium">We'll contact you with a mediation appointment</h2>
                 <p>Jan Clark rejected your admission of £1,200.</p>
-                <p>They accept that you've paid them £1,200, but believe you owe the full £1,500 claimed.</p>
+                <p>They accept that you've paid them £1,200, but believe you owe the full {% if data['mediation-pilot'] == "on" %}£300{% else %}£1,500{% endif %} claimed.</p>
                 <p>They've agreed to try mediation. We'll contact you with details of your appointment.</p>
               </div>
 
@@ -545,7 +549,7 @@
                 <h2 class="heading-medium">Wait for the court to review the case</h2>
                 <p>Jan Clark rejected your admission of £1,200.</p>
                 <p>They said you didn't pay them £1,200.</p>
-                <p>You might have to go to a court hearing. We'll contact you if we set a hearing date to tell you how to prepare.</p>
+                <p>You might have to go to a court hearing. We'll contact you to tell you what to do next.</p>
 
 
               {% elseif data['defendant'] == 8.4 %}
@@ -598,7 +602,7 @@
                 <p>We'll contact you with an appointment, unless Jan Clark chooses to opt out of mediation.</p>
 
                 <p>If they opt out of mediation the court will review the case. You might have to go to a hearing.</p>
-                <!--<p>We'll contact you if we set a hearing date to tell you how to prepare.</p>-->
+                <!--<p>We'll contact you to tell you what to do next.</p>-->
                 <p><a href="mediation/how-mediation-works">Find out how mediation works</a></p>
               </div>
 
@@ -697,7 +701,7 @@
 
               {% elseif data['defendant'] == 12.9 %}
               <div class="status-block single">
-                <h2 class="heading-medium">We'll contact you if we set a hearing date</h2>
+                <h2 class="heading-medium">We'll contact you to tell you what to do next</h2>
                 <p>We'll explain how to prepare.</p>
 
               </div>
@@ -707,7 +711,7 @@
               <div class="status-block single">
                 <h2 class="heading-medium">Wait for the court to review the case</h2>
                 <p>The claimant rejected your offer to settle the claim.</p>
-                <p>The court will review the case. We'll email you if we set a hearing date to tell you how to prepare.</p>
+                <p>The court will review the case. We'll contact you to tell you what to do next.</p>
                 <!--<p>You need to <a href="forms/dq-form">complete a directions questionnaire</a> form to tell us more-->
                   <!--about the claim.</p>-->
                 <!--<p>Your defence won't proceed if you don't complete and return the form before 4pm on <span-->
@@ -759,12 +763,12 @@
 
               {% elseif data['defendant'] == 17.1 %}
               <h2 class="heading-medium">This claim is settled</h2>
-              <p>Jan Clark confirmed you paid £1,500 on {{ now | date('subtract', 2, 'days') | date }}.</p>
+              <p>Jan Clark confirmed you paid {% if data['mediation-pilot'] == "on" %}£300{% else %}£1,500{% endif %} on {{ now | date('subtract', 2, 'days') | date }}.</p>
 
 
               {% elseif data['defendant'] == 17.2 %}
                 <h2 class="heading-medium">This claim is settled</h2>
-              <p>Jan Clark confirmed you paid £1,500 on {{ now | date('subtract', 2, 'days') | date }}.</p>
+              <p>Jan Clark confirmed you paid {% if data['mediation-pilot'] == "on" %}£300{% else %}£1,500{% endif %} on {{ now | date('subtract', 2, 'days') | date }}.</p>
               <p>We'll tell the Registry Trust to remove your County Court Judgment (CCJ) from the register of
                 judgments.</p>
               <p>The CCJ won't appear in credit agency searches, though some agencies may not update their records
@@ -777,7 +781,7 @@
 
               {% elseif data['defendant'] == 17.3 %}
                 <h2 class="heading-medium">This claim is settled</h2>
-              <p>Jan Clark confirmed you paid £1,500 on {{ now | date('subtract', 2, 'days') | date }}. This claim is
+              <p>Jan Clark confirmed you paid {% if data['mediation-pilot'] == "on" %}£300{% else %}£1,500{% endif %} on {{ now | date('subtract', 2, 'days') | date }}. This claim is
                 now settled.</p>
               <p>We'll tell the Registry Trust to mark your County Court Judgment (CCJ) as paid on the register of
                 judgments.</p>
@@ -795,7 +799,7 @@
 
               {% elseif data['defendant'] == 17.4 %}
                 <h2 class="heading-medium">This claim is settled</h2>
-              <p>Jan Clark confirmed you paid £1,500 on {{ now | date('subtract', 2, 'days') | date }}. This claim is
+              <p>Jan Clark confirmed you paid {% if data['mediation-pilot'] == "on" %}£300{% else %}£1,500{% endif %} on {{ now | date('subtract', 2, 'days') | date }}. This claim is
                 now settled.</p>
               <p>Your CCJ will remain on the register of judgments but it'll be marked as paid. This will happen within
                 2 days, though it may take longer for credit agencies to update their records.</p>
