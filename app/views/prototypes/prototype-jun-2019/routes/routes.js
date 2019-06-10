@@ -91,8 +91,16 @@ module.exports = function(app){
     if ( req.session.data['response-owed'] && req.session.data['response-owed'] == 'yes' ) {
       res.redirect('/' + strPath + 'defendant/task-list/do-you-owe-money/amount-owed');
 
-    } else if ( req.session.data['response-owed'] ) {
-      res.redirect('/' + strPath + 'defendant/task-list');
+    }
+    else if ( req.session.data['response-owed'] )
+    {
+      if( req.session.data['cancelccj'] == 'true')
+      {
+        res.redirect('/' + strPath + 'dashboard/applications-and-judgments/set-aside-default-ccj/task-list?whydontowe=complete&radio_select_group=notpaid&response=DEFENCE&');
+      }
+      else {
+        res.redirect('/' + strPath + 'defendant/task-list');
+      }
 
     } else {
       res.render( strPath + 'defendant/task-list/do-you-owe-money/are-you-owed' );
@@ -228,7 +236,15 @@ module.exports = function(app){
       req.session.data['show_mediation'] = 'true';
       req.session.data['response'] = 'STATES-PAID';
 
-      res.redirect('/' + strPath + 'defendant/task-list');
+      if( req.session.data['cancelccj']=='true'  &&  req.session.data['fulldefence']=='true' )
+      {
+          res.redirect('/' + strPath + 'dashboard/applications-and-judgments/set-aside-default-ccj/task-list?whydontowe=complete&');
+      }
+      else
+      {
+          res.redirect('/' + strPath + 'defendant/task-list?');
+      }
+
 
     } else if ( req.session.data['radio_select_group2'] && req.session.data['radio_select_group2'] == 'defend_now' ) {
       req.session.data['response'] = 'DEFENCE';
@@ -379,11 +395,20 @@ module.exports = function(app){
 
   app.post( '/' + strPath + 'defendant/task-list/your-defence/paid-less', (req, res) => {
 
-    if (req.session.data['owe-amount'] < 1500 ) {
-      res.redirect('/' + strPath + 'defendant/task-list/your-defence/defence-message?radio_select_group2=Some_paid');
-    } else {
-      res.redirect('/' + strPath + 'defendant/task-list?radio_select_group2=amount_claimed&show_mediation=true');
+    if( req.session.data['cancelccj'] == 'true' )
+    {
+        res.redirect('/' + strPath + 'defendant/task-list/your-defence/defence-message');
     }
+    else
+    {
+        if (req.session.data['owe-amount'] < 1500 ) {
+          res.redirect('/' + strPath + 'defendant/task-list/your-defence/defence-message?radio_select_group2=Some_paid');
+        } else {
+          res.redirect('/' + strPath + 'defendant/task-list?radio_select_group2=amount_claimed&show_mediation=true');
+        }
+    }
+
+
 
   })
 
