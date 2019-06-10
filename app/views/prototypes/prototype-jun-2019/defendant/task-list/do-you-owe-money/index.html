@@ -26,7 +26,12 @@ Money Claims Prototype
       <form
       name="aspnetForm"
       method="post"
-      onsubmit="multiNavigation('response-owe', ['owe-all', 'owe-some', 'owe-none', 'owe-all-default-ccj','owe-some-default-ccj', 'owe-none-default-ccj' ], [ '../task-list', '../task-list', 'do-you-owe-money/defence-options',       '../../dashboard/applications-and-judgments/set-aside-default-ccj/pay-in-full-now?lower-amount=false&', '../../dashboard/applications-and-judgments/set-aside-default-ccj/pay-lower-amount-now?lower-amount=true&', '../../dashboard/applications-and-judgments/set-aside-default-ccj/cancel-ccj-info'  ]);return false;"
+      onsubmit="multiNavigation('response-owe', ['owe-all', 'owe-some', 'owe-none', 'owe-all-default-ccj', 'owe-some-default-ccj', 'owe-none-default-ccj' , 'response-already-settled'],
+                                                [ '../task-list', '../task-list', 'do-you-owe-money/defence-options',
+                                                '../../dashboard/applications-and-judgments/set-aside-default-ccj/task-list?lower-amount=false&alreadysettled=false&fulldefence=false&howmuchyouowe=complete&cancelccj=false&cancelccjanswer=null&',
+                                                '../../dashboard/applications-and-judgments/set-aside-default-ccj/task-list?lower-amount=true&alreadysettled=false&fulldefence=false&howmuchyouowe=complete&cancelccj=false&cancelccjanswer=null&',
+                                                '../../dashboard/applications-and-judgments/set-aside-default-ccj/task-list?fulldefence=true&lower-amount=false&alreadysettled=false&howmuchyouowe=complete&cancelccj=false&cancelccjanswer=null&',
+                                                '../../dashboard/applications-and-judgments/set-aside-default-ccj/task-list?alreadysettled=true&fulldefence=false&lower-amount=false&howmuchyouowe=complete&cancelccj=false&cancelccjanswer=null&'  ]);return false;"
       id="aspnetForm"
       autocomplete="off">
 
@@ -58,15 +63,10 @@ Money Claims Prototype
               <label for="radio-owe-some">Yes, a lower amount</label>
             </div>
 
-            {% if data['defaultccj']=="true" %}
-
-            {% else %}
                 <div class="panel panel-border-narrow js-hidden" id="set-date">
                   <label class="form-label" for="rate">How much?</label>
                   <input class="form-control timeline-column-4 fee pound" type="text" id="owe-amount" name="owe-amount" value="{{ data['owe-amount'] }}" onkeyup="$('#amount-owed').val(this.value)" >
                 </div>
-            {% endif %}
-
 
 
             <div class="multiple-choice">
@@ -77,6 +77,18 @@ Money Claims Prototype
               {% endif %}
               <label for="radio-owe-none">No, I owe them nothing</label>
             </div>
+
+
+            {% if data['defaultccj']=="true" %}
+              <div class="multiple-choice" data-target="set-date">
+                  <input id="response-already-settled" type="radio" name="response-owe" value="response-already-settled" onclick="" >
+                  <label for="response-already-settled">No, I've already settled</label>
+              </div>
+            {% endif %}
+
+
+
+
           </fieldset>
         </div>
 

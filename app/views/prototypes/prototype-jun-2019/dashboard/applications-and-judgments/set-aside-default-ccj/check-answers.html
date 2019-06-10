@@ -1,314 +1,314 @@
 {% extends "layout_task-list.html" %}
 
 {% block page_title %}
-  Check your answers
+Check your answers
 {% endblock %}
 
 {% block home_link %} ../task-list {% endblock %}
 
 {% block proposition_header %}
-  {% set my_account="2" %}
-  {% include "includes/propositional_navigation.html" %}
+{% set my_account="2" %}
+{% include "includes/propositional_navigation.html" %}
 {% endblock %}
 
 
 {% block content %}
 <main id="content" role="main">
 
-	{% include "includes/phase_banner_beta.html" %}
+  {% include "includes/phase_banner_beta.html" %}
 
   <a href="#" class="link-back">Back</a>
 
-	<h1 class="heading-large">
-		Check your answers
-	</h1>
+  <h1 class="heading-large">
+    Check your answers
+  </h1>
 
 
-    <!--  YOUR DETAILS  -->
-	  <table class="check-your-answers">
-      <thead>
-        <tr>
-          <th colspan="2">
-            <h2 class="heading-medium" id="name">
-              Your details
-            </h2>
-          </th>
-          <th>
-          </th>
-        </tr>
-      </thead>
-		  <tbody>
+  <!--  YOUR DETAILS  -->
+  <table class="check-your-answers">
+    <thead>
+    <tr>
+      <th colspan="2">
+        <h2 class="heading-medium" id="name">
+          Your details
+        </h2>
+      </th>
+      <th>
+      </th>
+    </tr>
+    </thead>
+    <tbody>
 
-			<tr>
-				<td>
-					Full name
-				</td>
-				<td>
-					Mrs Mary Richards
-				</td>
-				<td class="change-answer">
-					<a href="../task-list/your-details/index?return_page={{ '../../task-list' | urlencode }}">
-						Change <span class="visuallyhidden">Name</span>
-					</a>
-				</td>
-			</tr>
+    <tr>
+      <td>
+        Full name
+      </td>
+      <td>
+        Mrs Mary Richards
+      </td>
+      <td class="change-answer">
+        <a href="../task-list/your-details/index?return_page={{ '../../task-list' | urlencode }}">
+          Change <span class="visuallyhidden">Name</span>
+        </a>
+      </td>
+    </tr>
 
-			<tr>
-				<tr>
-					<td class="no-border">
-						Address
-					</td>
-					<td class="no-border">
-						101 Regents Road<br>
-						Shiplake<br>
-						Henley on Thames<br>
-						RG9 4BW
-					</td>
-					<td class="no-border change-answer">
-						<a href="../task-list/your-details/address?return_page={{ '../../task-list' | urlencode }}">
-							Change <span class="visuallyhidden"> Name</span>
-						</a>
-					</td>
-				</tr>
+    <tr>
+    <tr>
+      <td class="no-border">
+        Address
+      </td>
+      <td class="no-border">
+        101 Regents Road<br>
+        Shiplake<br>
+        Henley on Thames<br>
+        RG9 4BW
+      </td>
+      <td class="no-border change-answer">
+        <a href="../task-list/your-details/address?return_page={{ '../../task-list' | urlencode }}">
+          Change <span class="visuallyhidden"> Name</span>
+        </a>
+      </td>
+    </tr>
 
-				<tr>
-					<td>
-						Correspondence address
-					</td>
-					<td>
-						{% if data['correspondence-address']=="Yes" %}
-						{{data['d-addressLine1']}}<br>
-						{{data['d-addressLine2']}}<br>
-						{{data['d-address-town']}}<br>
-						{{data['d-addressPostcode']}}<br>
-						{% else %}
-						Same as address<br>
-						{% endif %}
-					</td>
-					<td class="change-answer">
-					</td>
-				</tr>
-
-				<tr>
-					<tr>
-						<td>
-							Contact number (optional)
-						</td>
-						<td>
-							{{ data['defendant-phone'] or '07824999612'}}
-						</td>
-						<td class="change-answer">
-							<a href="../task-list/your-details/number?return_page={{ '../../task-list' | urlencode }}">
-								Change <span class="visuallyhidden">Name</span>
-							</a>
-						</td>
-					</tr>
-        </tr>
-      </tbody>
-    </table>
-
-
-    <!--  SET ASIDE ANSWERS  -->
-    <table class="check-your-answers">
-      <thead>
-      <tr>
-        <th colspan="2">
-          <h2 class="heading-medium" id="name">
-            Your set aside responses
-          </h2>
-        </th>
-        <th>
-        </th>
-      </tr>
-      </thead>
-      <tbody>
-
-        <tr>
-          <td>
-            Claim letter received
-          </td>
-          <td>
-            {% if data['letterreeived'] == 'true' %}
-                Yes
-            {% else %}
-                No
-            {% endif %}
-          </td>
-          <td class="change-answer">
-            <a href="../task-list/your-details/index?return_page={{ '../../task-list' | urlencode }}">
-              Change <span class="visuallyhidden">Name</span>
-            </a>
-          </td>
-        </tr>
-
-
-        {% if data['letterreeived'] == 'true' %}
-            <tr>
-              <td>
-                Reason for late response
-              </td>
-              <td style="white-space: pre-wrap;">{{ data['reason-for-not-responding'] }}</td>
-              <td class="change-answer">
-                <a href="">
-                  Change <span class="visuallyhidden">Name</span>
-                </a>
-              </td>
-            </tr>
+    <tr>
+      <td>
+        Correspondence address
+      </td>
+      <td>
+        {% if data['correspondence-address']=="Yes" %}
+        {{data['d-addressLine1']}}<br>
+        {{data['d-addressLine2']}}<br>
+        {{data['d-address-town']}}<br>
+        {{data['d-addressPostcode']}}<br>
         {% else %}
-            <tr>
-              <td>
-                Date you found out about CCJ
-              </td>
-              <td>
-                17 March 2019
-              </td>
-              <td class="change-answer">
-                <a href="">
-                  Change <span class="visuallyhidden">Name</span>
-                </a>
-              </td>
-            </tr>
-
-            <tr>
-              <td>
-                Confirm address on <br>6 December 2018
-              </td>
-              <td>
-                {% if data['addresscorrect'] == 'true' %}
-                    Yes, 24 Acacia Drive
-                {% else %}
-                    No, I moved
-                {% endif %}
-              </td>
-              <td class="change-answer">
-                <a href="">
-                  Change <span class="visuallyhidden">Name</span>
-                </a>
-              </td>
-            </tr>
-
-
-            {% if data['addresscorrect'] == 'true' %}
-                <tr>
-                  <td>
-                    Reason for not receiving letter?
-                  </td>
-                  <td style="white-space: pre-wrap;">{{ data['reason-for-not-receive-post'] }}</td>
-                  <td class="change-answer">
-                    <a href="">
-                      Change <span class="visuallyhidden">Name</span>
-                    </a>
-                  </td>
-                </tr>
-            {% else %}
-                <tr>
-                  <td>
-                    Update Jan Clark of new address?
-                  </td>
-                  <td>
-                    {% if data['updatedclaimantofaddress'] == 'true' %}
-                        Yes
-                    {% else %}
-                        No
-                    {% endif %}
-                  </td>
-                  <td class="change-answer">
-                    <a href="">
-                      Change <span class="visuallyhidden">Name</span>
-                    </a>
-                  </td>
-                </tr>
-
-                {% if data['updatedclaimantofaddress'] == 'true' %}
-                      <tr>
-                        <td>
-                          How did you update Jan Clark?
-                        </td>
-                        <td style="white-space: pre-wrap;">{{ data['methodofinformingclaimant'] }}</td>
-                        <td class="change-answer">
-                          <a href="">
-                            Change <span class="visuallyhidden">Name</span>
-                          </a>
-                        </td>
-                      </tr>
-                {% endif %}
-
-            {% endif %}
-
+        Same as address<br>
         {% endif %}
+      </td>
+      <td class="change-answer">
+      </td>
+    </tr>
+
+    <tr>
+    <tr>
+      <td>
+        Contact number (optional)
+      </td>
+      <td>
+        {{ data['defendant-phone'] or '07824999612'}}
+      </td>
+      <td class="change-answer">
+        <a href="../task-list/your-details/number?return_page={{ '../../task-list' | urlencode }}">
+          Change <span class="visuallyhidden">Name</span>
+        </a>
+      </td>
+    </tr>
+    </tr>
+    </tbody>
+  </table>
 
 
-      </tbody>
-    </table>
+  <!--  SET ASIDE ANSWERS  -->
+  <table class="check-your-answers">
+    <thead>
+    <tr>
+      <th colspan="2">
+        <h2 class="heading-medium" id="name">
+          Your set aside responses
+        </h2>
+      </th>
+      <th>
+      </th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <tr>
+      <td>
+        Claim letter received
+      </td>
+      <td>
+        {% if data['letterreeived'] == 'true' %}
+        Yes
+        {% else %}
+        No
+        {% endif %}
+      </td>
+      <td class="change-answer">
+        <a href="../task-list/your-details/index?return_page={{ '../../task-list' | urlencode }}">
+          Change <span class="visuallyhidden">Name</span>
+        </a>
+      </td>
+    </tr>
 
 
-    <!--  EVIDENCE  -->
-    <table class="check-your-answers">
-      <thead>
-      <tr>
-        <th colspan="2">
-          <h2 class="heading-medium" id="name">
-            Evidence
-          </h2>
-        </th>
-        <!-- <th>
-        </th>  -->
-      </tr>
-      </thead>
+    {% if data['letterreeived'] == 'true' %}
+    <tr>
+      <td>
+        Reason for late response
+      </td>
+      <td style="white-space: pre-wrap;">{{ data['reason-for-not-responding'] }}</td>
+      <td class="change-answer">
+        <a href="">
+          Change <span class="visuallyhidden">Name</span>
+        </a>
+      </td>
+    </tr>
+    {% else %}
+    <tr>
+      <td>
+        Date you found out about CCJ
+      </td>
+      <td>
+        17 March 2019
+      </td>
+      <td class="change-answer">
+        <a href="">
+          Change <span class="visuallyhidden">Name</span>
+        </a>
+      </td>
+    </tr>
 
-      <tbody>
-      <tr>
-        <td>
-          File 1
-        </td>
-        <td>
-          <a href="#">Emails.pdf</a>
-          <br />You can see the emails dated {{ date | date('subtract', 123, 'days') | date }} and {{ date | date('subtract', 134, 'days') | date }} that they claimed not to receive.
-        </td>
-        <!-- <td class="change-answer no-border">
-          <a href="upload">Change</a>
-        </td>  -->
-      </tr>
-
-      <tr>
-        <td>
-          File 2
-        </td>
-        <td>
-          <a href="#">Photo 1.jpg</a>
-          <br />The photos show that the roof was not adequately supported.
-        </td>
-        <!-- <td class="change-answer no-border"></td>  -->
-      </tr>
-
-      <tr>
-        <td>
-          File 3
-        </td>
-        <td>
-          <a href="#">Photo 2.jpg</a>
-        </td>
-        <!--  <td class="change-answer no-border"></td>  -->
-      </tr>
-
-      <tr>
-        <td>
-          File 4
-        </td>
-        <td>
-          <a href="#">Contract.pdf</a>
-          <br />The signed contract shows the materials we agreed to use.
-        </td>
-        <!-- <td class="change-answer"></td>  -->
-      </tr>
-
-      </tbody>
-
-    </table>
+    <tr>
+      <td>
+        Confirm address on <br>6 December 2018
+      </td>
+      <td>
+        {% if data['addresscorrect'] == 'true' %}
+        Yes, 24 Acacia Drive
+        {% else %}
+        No, I moved
+        {% endif %}
+      </td>
+      <td class="change-answer">
+        <a href="">
+          Change <span class="visuallyhidden">Name</span>
+        </a>
+      </td>
+    </tr>
 
 
-    <!--  HEARING REQUIREMENTS  -->
-    <table class="check-your-answers">
+    {% if data['addresscorrect'] == 'true' %}
+    <tr>
+      <td>
+        Reason for not receiving letter?
+      </td>
+      <td style="white-space: pre-wrap;">{{ data['reason-for-not-receive-post'] }}</td>
+      <td class="change-answer">
+        <a href="">
+          Change <span class="visuallyhidden">Name</span>
+        </a>
+      </td>
+    </tr>
+    {% else %}
+    <tr>
+      <td>
+        Update Jan Clark of new address?
+      </td>
+      <td>
+        {% if data['updatedclaimantofaddress'] == 'true' %}
+        Yes
+        {% else %}
+        No
+        {% endif %}
+      </td>
+      <td class="change-answer">
+        <a href="">
+          Change <span class="visuallyhidden">Name</span>
+        </a>
+      </td>
+    </tr>
+
+    {% if data['updatedclaimantofaddress'] == 'true' %}
+    <tr>
+      <td>
+        How did you update Jan Clark?
+      </td>
+      <td style="white-space: pre-wrap;">{{ data['methodofinformingclaimant'] }}</td>
+      <td class="change-answer">
+        <a href="">
+          Change <span class="visuallyhidden">Name</span>
+        </a>
+      </td>
+    </tr>
+    {% endif %}
+
+    {% endif %}
+
+    {% endif %}
+
+
+    </tbody>
+  </table>
+
+
+  <!--  EVIDENCE  -->
+  <table class="check-your-answers">
+    <thead>
+    <tr>
+      <th colspan="2">
+        <h2 class="heading-medium" id="name">
+          Evidence
+        </h2>
+      </th>
+      <!-- <th>
+      </th>  -->
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr>
+      <td>
+        File 1
+      </td>
+      <td>
+        <a href="#">Emails.pdf</a>
+        <br />You can see the emails dated {{ date | date('subtract', 123, 'days') | date }} and {{ date | date('subtract', 134, 'days') | date }} that they claimed not to receive.
+      </td>
+      <!-- <td class="change-answer no-border">
+        <a href="upload">Change</a>
+      </td>  -->
+    </tr>
+
+    <tr>
+      <td>
+        File 2
+      </td>
+      <td>
+        <a href="#">Photo 1.jpg</a>
+        <br />The photos show that the roof was not adequately supported.
+      </td>
+      <!-- <td class="change-answer no-border"></td>  -->
+    </tr>
+
+    <tr>
+      <td>
+        File 3
+      </td>
+      <td>
+        <a href="#">Photo 2.jpg</a>
+      </td>
+      <!--  <td class="change-answer no-border"></td>  -->
+    </tr>
+
+    <tr>
+      <td>
+        File 4
+      </td>
+      <td>
+        <a href="#">Contract.pdf</a>
+        <br />The signed contract shows the materials we agreed to use.
+      </td>
+      <!-- <td class="change-answer"></td>  -->
+    </tr>
+
+    </tbody>
+
+  </table>
+
+
+  <!--  HEARING REQUIREMENTS  -->
+  <table class="check-your-answers">
     <thead>
     <tr>
       <th colspan="2">
@@ -373,66 +373,70 @@
   </table>
 
 
-    <!--  STETEMENT OF TRUTH   -->
-    <br>
-    <div class="column-two-thirds">
-      <h2 class="heading-medium">Statement of truth</h2>
-      <p>  The information on this page forms your response. You can see it on the
-      response form after you submit.</p>
-      <p>When you’re satisfied that your answers are accurate, you should tick to “sign” this statement of
+  <!--  STETEMENT OF TRUTH   -->
+  <br>
+  <div class="column-two-thirds">
+    <h2 class="heading-medium">Statement of truth</h2>
+    <!--
+    <p>  The information on this page forms your response. You can see it on the
+    response form after you submit.</p>
+    -->
+    <p>When you’re satisfied that your answers are accurate, you should tick to “sign” this statement of
       truth on the form.</p>
 
-      {% if data['defendant'] == 'org' or data['defendant'] == 'Sole-trader' or data['check']==10 %}
-          <p>You must hold a senior position in your organisation to sign the statement of truth.</p>
-          <details class='form-group'>
-            <summary>
-              <span class="summary">Types of senior position</span>
-            </summary>
-            <div class="panel">
-              <p>A senior position could be a:</p>
-              <ul class="list-bullet list">
-                <li>director</li>
-                <li>treasurer</li>
-                <li>chief executive</li>
-                <li>manager or other officer of the company or corporation</li>
-              </ul>
-              <p>If your corporation isn't registered, a senior position could be:</p>
-                <ul class="list-bullet list">
-                  <li>the chairperson or president</li>
-                  <li>another officer of the corporation</li>
-                </ul>
-            </div>
-          </details>
-          <div class="form-group">
-            <label class="form-label" for="claimant_title">Full name</label>
-            <input type="text" class="form-control form-control-1-2" id="claimant_title" name="claimant_title" value="">
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="defendant_firstname">Job title</label>
-            <input class="form-control form-control-1-2" id="defendant_name" name="defendant_name" type="text"
-            value="{{data['defendant_name']}}">
-          </div>
-      {% endif %}
+    {% if data['defendant'] == 'org' or data['defendant'] == 'Sole-trader' or data['check']==10 %}
+    <p>You must hold a senior position in your organisation to sign the statement of truth.</p>
+    <details class='form-group'>
+      <summary>
+        <span class="summary">Types of senior position</span>
+      </summary>
+      <div class="panel">
+        <p>A senior position could be a:</p>
+        <ul class="list-bullet list">
+          <li>director</li>
+          <li>treasurer</li>
+          <li>chief executive</li>
+          <li>manager or other officer of the company or corporation</li>
+        </ul>
+        <p>If your corporation isn't registered, a senior position could be:</p>
+        <ul class="list-bullet list">
+          <li>the chairperson or president</li>
+          <li>another officer of the corporation</li>
+        </ul>
+      </div>
+    </details>
+    <div class="form-group">
+      <label class="form-label" for="claimant_title">Full name</label>
+      <input type="text" class="form-control form-control-1-2" id="claimant_title" name="claimant_title" value="">
+    </div>
+    <div class="form-group">
+      <label class="form-label" for="defendant_firstname">Job title</label>
+      <input class="form-control form-control-1-2" id="defendant_name" name="defendant_name" type="text"
+             value="{{data['defendant_name']}}">
+    </div>
+    {% endif %}
 
 
+    <div class="form-group">
+      <div class="multiple-choice text">
+        <input id="HasAcceptedTermsAndConditions" type="checkbox" value="true">
+        <label for="HasAcceptedTermsAndConditions"> I believe that the facts stated in this response are true.</label>
+      </div>
+    </div>
+
+    <!-- Marc said this is not needed in a review -->
+    <!--
+    <div class="form-group">
       <div class="form-group">
         <div class="multiple-choice text">
-          <input id="HasAcceptedTermsAndConditions" type="checkbox" value="true">
-          <label for="HasAcceptedTermsAndConditions"> I believe that the facts stated in this response are true.</label>
+          <input class="" id="HasAcceptedTermsAndConditions2" type="checkbox" value="true">
+          <label for="HasAcceptedTermsAndConditions2">The hearing requirement details on this page are true to the best of my knowledge.</label>
         </div>
       </div>
+    </div>
+    -->
 
-      <div class="form-group">
-        <div class="form-group">
-          <div class="multiple-choice text">
-            <input class="" id="HasAcceptedTermsAndConditions2" type="checkbox" value="true">
-            <label for="HasAcceptedTermsAndConditions2">The hearing requirement details on this page are true to the best of my knowledge.</label>
-          </div>
-        </div>
-      </div>
-
-
-      <p><a class="button" href="/prototypes/prototype-jun-2019/defendant/task-list/check-and-send/enter-card">Submit and continue to payment (£255)</a></p>
+    <p><a class="button" href="/prototypes/prototype-may-2019/defendant/task-list/check-and-send/enter-card">Submit and continue to payment (£255)</a></p>
 
 </main>
 
