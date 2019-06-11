@@ -155,47 +155,41 @@ h1 {
           <p>In the County Court Business Centre Online Civil Money Claims</p>
           <p><strong>Claim number:</strong> 000LR095<br>
             <strong>Date:</strong> {{ now | date }}</p></td>
-          </tr>
-        </tbody>
-      </table>
+        </tr>
+      </tbody>
+    </table>
 
-    </header>
+  </header>
 
-    <table >
-      <tbody>
-       <tr>
+  <table >
+    <tbody>
+      <tr>
         <td>
-          Claimant
+         Claimant
         </td>
         <td>
           Jan Clark
-       </td>
-     </tr>
-       <tr>
+        </td>
+        </tr>
+        <tr>
         <td>
           Defendant
         </td>
         <td>
-          Mary Richards
-       </td>
-     </tr>
-     <tr>
-   </tbody>
- </table>
+         Mary Richards
+        </td>
+      </tr>
+    </tbody>
+  </table>
 
- <br />
+  <br />
 
- <p>Jan Clark missed the deadline to tell us they'd finished uploading their hearing information. The deadline was 4pm on {{ date | date('subtract', 1, 'days') | date }}.</p>
+  <p>{% if data['party'] == 'claimant' %}Mary Richards{% else %}Jan Clark{% endif %} missed the deadline to tell us they'd finished uploading their hearing information. The deadline was 4pm on {{ date | date('subtract', 1, 'days') | date }}.</p>
 
-   <p>They now have until 4pm on {{ date | date('add', 12, 'days') | date }} to upload the hearing information and tell us they've finished, otherwise the court will cancel their claim.</p>
+  <p>They now have until 4pm on {{ date | date('add', 12, 'days') | date }} to upload the hearing information and tell us they've finished, otherwise the court will cancel their {% if data['party'] == 'claimant' %}defence{% else %}claim{% endif %}.</p>
 
- <p>Mary Richards missed the deadline to tell us they'd finished uploading their hearing information. The deadline was 4pm on {{ date | date('subtract', 1, 'days') | date }}.</p>
-
-   <p>They now have until 4pm on {{ date | date('add', 12, 'days') | date }} to upload the hearing information and tell us they've finished, otherwise the court will cancel the defence.</p>
-
-<table class="footer" style="margin-top: 600px">
-  <tbody>
-    <tr>
+  <table class="footer" style="margin-top: 600px">
+    <tbody>
       <tr>
         <td>
           ON24
@@ -203,10 +197,18 @@ h1 {
         <td>
           For further details of the courts www.gov.uk/find-court-tribunal
         </td>
-        <td >
+        <td>
           &copy; Crown copyright Page 1 of 1
         </td>
       </tr>
     </tbody>
   </table>
+
 </main>
+
+<form method="post" action="#" class="form" style="position: absolute;">
+  <select onchange="window.location.href='?party='+this.value">
+    <option value="claimant" {% if data['party'] == 'claimant' %}selected{% endif %}>Claimant</option>
+    <option value="defendant" {% if data['party'] == 'defendant' %}selected{% endif %}>Defendant</option>
+  </select>
+</form>
