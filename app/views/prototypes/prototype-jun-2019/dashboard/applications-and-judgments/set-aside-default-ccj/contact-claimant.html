@@ -19,7 +19,7 @@ Money Claims Prototype
       <div class="">
           {% if data['lower-amount']=="true" %}
               <h1 class="heading-large">
-                Settle or apply to cancel CCJ
+                Settle or apply to cancel the judgment
               </h1>
           {% else %}
               <h1 class="heading-large">
@@ -28,31 +28,46 @@ Money Claims Prototype
           {% endif %}
       </div>
 
-      <br>
-      <div class="notice">
-        <i class="icon icon-important">
-          <span class="visually-hidden">Warning</span>
-        </i>
-        <strong class="bold-small">
-          Bailiffs can be used to enforce this judgement while you're settling.
-        </strong>
-      </div>
 
-      <p class="heading-medium">Resolving the claim</p>
-      <p>You can can try to settle with Jan Clark but they can enforced the judgement at any time until they agree the claim is settled.</p>
+      <div class="">
+          {% if data['lower-amount']=="true" %}
 
-      <p>Or you can pause enforcement by paying to cancel the judgement and defend the claim.  You can still settle after this point.</p>
+          <!-- <p class="heading-medium">Resolving the claim</p> -->
+          <p>If you don't think you owe the full claim amount, you can can try to settle with Jan Clark.</p>
+
+          <br>
+          <div class="notice">
+            <i class="icon icon-important">
+              <span class="visually-hidden">Warning</span>
+            </i>
+            <strong class="bold-small">
+              Jan Clark can bring enforcement action at any time until they agree the claim is settled.
+            </strong>
+          </div>
 
 
+          <p>Alternatively you can apply to cancel the judgment. It will be put on hold until a judge reviews it. You'll have to pay a fee of £255. You might have to go to a hearing.</p>
+
+          {% else %}
 
 
+      {% endif %}
 
 
       {% if data['lower-amount']=="true" %}
       {% else %}
         <p>Make sure you get receipts for any payments.</p>
         <p><a href="../../party-details/claimant">Get Jan Clark's contact details</a></p>
-        <p>We'll contact you when they confirm you've settled.</p>
+
+        <br>
+        <div class="notice">
+          <i class="icon icon-important">
+            <span class="visually-hidden">Warning</span>
+          </i>
+          <strong class="bold-small">
+            Jan Clark can bring enforcement action at any time until they agree the claim is settled.
+          </strong>
+        </div>
 
           <p><a href="have-you-paid" class="button secondary-button">I've already paid the claimant</a></p>
       {% endif %}
@@ -60,7 +75,7 @@ Money Claims Prototype
 
 
       {% if data['lower-amount']=="true" %}
-      <h2 class="heading-medium">Will you try to settle the claim</h2>
+      <h2 class="heading-medium">Will you try to settle the claim?</h2>
 
           <form
             name="aspnetForm"
@@ -76,11 +91,17 @@ Money Claims Prototype
               <fieldset>
                 <div class="multiple-choice" data-target="pay">
                   <input id="set-aside-yes" type="radio" name="radio-set-receive-claim" value="Yes" aria-controls="paid-off" aria-expanded="false">
-                  <label for="set-aside-yes">Yes - risk of bailiffs</label>
+                  <label for="set-aside-yes">Yes, I'll contact the claimant</label>
+                </div>
+                <div class="panel panel-border-narrow js-hidden" id="pay" style="padding-bottom:15px;">
+                  <p>The claimant will still be able to enforce the judgment, even if you settle.</p>
                 </div>
                 <div class="multiple-choice" data-target="vary">
                   <input id="set-aside-no" type="radio" name="radio-set-receive-claim" value="No" aria-controls="paid-off" aria-expanded="false">
-                  <label for="set-aside-no">No - pay to defend and stop any bailiffs</label>
+                  <label for="set-aside-no">No, I'll apply to cancel the judgment</label>
+                </div>
+                <div class="panel panel-border-narrow js-hidden" id="vary" style="padding-bottom:15px;">
+                  <p>You'll also have to enter a defence for the original claim.</p>
                 </div>
               </fieldset>
             </div>
