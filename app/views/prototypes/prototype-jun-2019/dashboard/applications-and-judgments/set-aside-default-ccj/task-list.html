@@ -147,7 +147,9 @@
               {% endif %}
 
 
+
               <!--  FULL ADMIT ONLY - CONFIRM PAYMENT  -->
+              <!--
               {% if  data['canpaynow'] == 'true'  and  data['contactclaimantstarted'] == 'true'  %}
                   <tr id="read-rules">
                     <td class="task">
@@ -164,6 +166,7 @@
                     </td>
                   </tr>
               {% endif %}
+               -->
 
           {% endif %}
 
@@ -235,6 +238,43 @@
         <br>
 
 
+        <!--  ALREADY SETTLED  -->
+        {% if data['alreadysettled'] == 'true' %}
+        <table id="table-of-tasks">
+          <thead>
+              <tr>
+                <th scope="col" id="col-task">
+                                  <span class="task-group">
+                                    <span class="group-number" id="task-number"></span>
+                                    Get judgment updated
+                                  </span>
+                </th>
+                <th class="numeric" id="task-status" scope="col" id="col-status"></th>
+              </tr>
+          </thead>
+
+          <tbody>
+              <tr>
+                <td class="task">
+                  <a href="already-settled">
+                    <span class="task-name">Get Jan Clark to update the court</span>
+                  </a>
+                </td>
+                <td class="numeric" id="task-status" scope="col" id="col-status">
+                  {% if data.claimantupdate=="complete" %}
+                      {% include "includes/task_status_finished.html" %}
+                  {% else %}
+                      {% include "includes/task_status_incomplete.html" %}
+                  {% endif %}
+                </td>
+              </tr>
+          </tbody>
+        </table>
+
+        <br>
+        <br>
+        {% endif %}
+
 
         <!--  VARY JUDGMENT -->
         {% if data['varyselected'] == 'true' %}
@@ -242,10 +282,10 @@
               <thead>
               <tr>
                 <th scope="col" id="col-task">
-                              <span class="task-group">
-                                <span class="group-number" id="task-number"></span>
-                                Change CCJ payment terms
-                              </span>
+                      <span class="task-group">
+                        <span class="group-number" id="task-number"></span>
+                        Change CCJ payment terms
+                      </span>
                 </th>
                 <th class="numeric" id="task-status" scope="col" id="col-status"></th>
               </tr>
@@ -303,7 +343,7 @@
 
         <!-- REQUEST CCJ TO BE CANCELLED -->
         {% if  data['canpaynow'] == 'true'  and  data['paidclaimant'] == "complete"
-            or data['alreadysettled'] == 'true'
+            or data['alreadysettled'] == 'true'  and  data['claimantupdate'] == "complete"
             or data['fulldefence'] == 'true'
             or data['has-settled'] == 'false'  and  data['lower-amount'] == 'true' and data['contactclaimantstarted'] != 'true' %}
             <table id="table-of-tasks">
@@ -330,7 +370,6 @@
                     {% if  data['fulldefence'] == 'true'
                     or data['has-settled'] == 'false'  and  data['lower-amount'] == 'true'  %}
                         <a href="cancel-ccj-info">
-                          <span class="task-name">Ask the court to cancel</span>
                         </a>
                     {% else %}
                         <a href="cancel-ccj-info-paid-or-settled">
@@ -375,7 +414,26 @@
                   <th class="numeric" id="task-status" scope="col" id="col-status"></th>
                 </tr>
               </thead>
+
               <tbody>
+                {% if  data['fulldefence'] == 'false' %}
+                    <tr id="completing-your-claim">
+                      <td class="task">
+                        <a href="claimant-agree">
+                          <span class="task-name">Does Jan Clark agree to cancel CCJ</span>
+                        </a>
+                      </td>
+                      <td class="numeric" id="task-status" scope="col" id="col-status">
+                        {% if data.claimantagree == 'complete' %}
+                            {% include "includes/task_status_finished.html" %}
+                        {% else %}
+                            {% include "includes/task_status_incomplete.html" %}
+                        {% endif %}
+                      </td>
+                    </tr>
+                {% endif %}
+
+
                 <tr id="completing-your-claim">
                   <td class="task">
                     <a href="was-letter-received">

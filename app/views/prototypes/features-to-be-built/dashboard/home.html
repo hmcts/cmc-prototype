@@ -123,7 +123,7 @@
           <td>352MC733</td>
           <td>Mary Richards</td>
           <td>{% if data['mediation-pilot'] == "on" %}£300{% else %}£1,500{% endif %}</td>
-          <td class="mobile-hide">We'll post you a copy of the judgment</td>
+          <td class="mobile-hide">Wait for the defendant to pay you</td>
           <td>-</td>
           <td><a href="claimant?claimant=3.4">View</a></td>
         </tr>
@@ -269,6 +269,8 @@
             This claim is settled
             {% elif data['dashboard'] == 2.2 %}
             Respond to the claim
+            {% elif data['dashboard'] == 2.201 %}
+            Respond to the claim
             {% elif data['dashboard'] == 2.3 %}
             Pay the judgment debt
             {% elif data['dashboard'] == 2.31 %}
@@ -401,86 +403,10 @@
 
           <!-- Deadline column -->
           <td>
-            {% if data['dashboard'] == 1.5 %}
-            -
-            {% elif data['dashboard'] == 1.501 %}
-            -
-            {% elif data['dashboard'] == 1.51 %}
-            -
-            {% elif data['dashboard'] == 1.511 %}
-            -
-            {% elif data['dashboard'] == 1.52 %}
-            -
-            {% elif data['dashboard'] == 1.53 %}
-            -
-            {% elif data['dashboard'] == 1.6 %}
-            -
-            {% elif data['dashboard'] == 1.601 %}
-            -
-            {% elif data['dashboard'] == 1.6011 %}
-            -
-            {% elif data['dashboard'] == 1.602 %}
-            -
-            {% elif data['dashboard'] == 1.603 %}
-            -
-            {% elif data['dashboard'] == 1.611 %}
-            -
-            {% elif data['dashboard'] == 1.61 %}
-            DD MMM YYYY<br>
-            <span class="font-xsmall">X days left</span>
-            {% elif data['dashboard'] == 1.62 %}
-            -
-            {% elif data['dashboard'] == 1.7 %}
-            -
-            {% elif data['dashboard'] == 1.8 %}
-            -
-            {% elif data['dashboard'] == 1.9 or data['dashboard'] == 110 %}
-            DD MMM YYYY<br>
-            <span class="font-xsmall">X days left</span>
-            {% elif data['dashboard'] == 1.11%}
-            -
-            {% elif data['dashboard'] == 1.1101 %}
-            -
-            {% elif data['dashboard'] == 1.111 %}
-            -
-            {% elif data['dashboard'] == 1.112 %}
-            -
-            {% elif data['dashboard'] == 1.1121 %}
-            -
-            {% elif data['dashboard'] == 1.1122 %}
-            -
-            {% elif data['dashboard'] == 1.113 %}
-            -
-            {% elif data['dashboard'] == 1.114 %}
-            -
-            {% elif data['dashboard'] == 1.1141 %}
-            -
-            {% elif data['dashboard'] == 1.115 %}
-            -
-            {% elif data['dashboard'] == 1.1151 %}
-            -
-            {% elif data['dashboard'] == 1.116 %}
-            -
-            {% elif data['dashboard'] == 1.11701 %}
-            -
-            {% elif data['dashboard'] == 1.1171 or data['dashboard'] == 1.1172 %}
-            -
-            {% elif data['dashboard'] == 1.1173 %}
-            -
-            {% elif data['dashboard'] == 1.1174 %}
-            -
-            {% elif data['dashboard'] == 1.1175 %}
-            DD MMM YYYY<br>
-            <span class="font-xsmall">X days left</span>
-            {% elif data['dashboard'] == 1.118 %}
-            -
-            {% elif data['dashboard'] == 1.119 %}
-            -
-            {% elif data['dashboard'] == 1.1191 %}
-            -
-            {% elif data['dashboard'] == 1.1192 %}
-            -
-            {% elif data['dashboard'] == 1.117 %}
+            {% if data['dashboard'] == 110 %}
+            {{ now | date('add', 5, 'days') | date }}<br>
+            <span class="font-xsmall">5 days left</span>
+            {% else %}
             -
             {% endif %}
           </td>
@@ -640,7 +566,10 @@
           <td>Mary Richards</td>
           <td>{% if data['mediation-pilot'] == "on" %}£300{% else %}£1,500{% endif %}</td>
           <td class="mobile-hide">Respond to the defendant</td>
-          <td>-</td>
+          <td>
+            {{ now | date('add', 5, 'days') | date }}<br>
+            <span class="font-xsmall">5 days left</span>
+          </td>
           <td><a href="claimant?claimant=11">View</a></td>
         </tr>
         <tr>
@@ -656,8 +585,8 @@
           <td>{% if data['mediation-pilot'] == "on" %}£300{% else %}£1,500{% endif %}</td>
           <td class="mobile-hide">Respond to the defendant</td>
           <td>
-            DD MMM YYYY<br>
-            <span class="font-xsmall">X days left</span>
+            {{ now | date('add', 5, 'days') | date }}<br>
+            <span class="font-xsmall">5 days left</span>
           </td>
           <td><a href="claimant?claimant=12">View</a></td>
         </tr>
@@ -752,8 +681,8 @@
           <td>{% if data['mediation-pilot'] == "on" %}£300{% else %}£1,500{% endif %}</td>
           <td class="mobile-hide">Decide whether to proceed</td>
           <td>
-            DD MMM YYYY<br>
-            <span class="font-xsmall">X days left</span>
+            {{ now | date('add', 5, 'days') | date }}<br>
+            <span class="font-xsmall">5 days left</span>
           </td>
           <td><a href="claimant?claimant=9">View</a></td>
         </tr>
@@ -768,7 +697,10 @@
           <td>Mary Richards</td>
           <td>{% if data['mediation-pilot'] == "on" %}£300{% else %}£1,500{% endif %}</td>
           <td class="mobile-hide">Decide whether to proceed</td>
-          <td>-</td>
+          <td>
+            {{ now | date('add', 5, 'days') | date }}<br>
+            <span class="font-xsmall">5 days left</span>
+          </td>
           <td><a href="claimant?claimant=9.1">View</a></td>
         </tr>
         <tr>
@@ -797,10 +729,7 @@
           <td>Mary Richards</td>
           <td>{% if data['mediation-pilot'] == "on" %}£300{% else %}£1,500{% endif %}</td>
           <td class="mobile-hide">The claim will continue by post</td>
-          <td>
-            DD MMM YYYY<br>
-            <span class="font-xsmall">X days left</span>
-          </td>
+          <td>-</td>
           <td><a href="claimant?claimant=3.5">View</a></td>
         </tr>
         <tr>
@@ -814,10 +743,7 @@
           <td>Mary Richards</td>
           <td>{% if data['mediation-pilot'] == "on" %}£300{% else %}£1,500{% endif %}</td>
           <td class="mobile-hide">We'll post you the defendant's response</td>
-          <td>
-            DD MMM YYYY<br>
-            <span class="font-xsmall">X days left</span>
-          </td>
+          <td>-</td>
           <td><a href="claimant?claimant=3.6">View</a></td>
         </tr>
         <tr>
@@ -878,7 +804,7 @@
           <td>{% if data['mediation-pilot'] == "on" %}£300{% else %}£1,500{% endif %}</td>
           <td class="mobile-hide">Respond to the claim</td>
           <td>
-            DD MMM YYYY<br>
+            {{ now | date('add', 19, 'days') | date }}<br>
             <span class="font-xsmall">19 days left</span>
           </td>
           <td><a href="defendant?defendant=1">View</a></td>
@@ -895,10 +821,41 @@
           <td>{% if data['mediation-pilot'] == "on" %}£300{% else %}£1,500{% endif %}</td>
           <td class="mobile-hide">Respond to the claim</td>
           <td>
-            DD MMM YYYY<br>
+            {{ now | date('add', 33, 'days') | date }}<br>
             <span class="font-xsmall">33 days left</span>
           </td>
           <td><a href="defendant?defendant=2">View</a></td>
+        </tr>
+        <tr>
+          <td class="mobile-table-status" colspan="3"></td>
+        </tr>
+        {% endif %}
+
+        {% if show_all==true or data['dashboard'] == 2.201 %}
+        <tr class="mobile-table">
+          <td>352MC733</td>
+          <td>Jan Clark</td>
+          <td>{% if data['mediation-pilot'] == "on" %}£300{% else %}£1,500{% endif %}</td>
+          <td class="mobile-hide">Respond to the claim</td>
+          <td>
+            {{ now | date('add', 19, 'days') | date }}<br>
+            <span class="font-xsmall">33 days left</span>
+          </td>
+          <td><a href="defendant?defendant=2.1">View</a></td>
+        </tr>
+        <tr>
+          <td class="mobile-table-status" colspan="3"></td>
+        </tr>
+        {% endif %}
+
+        {% if show_all==true or data['dashboard'] == 2.241 %}
+        <tr class="mobile-table">
+          <td>352MC733</td>
+          <td>Jan Clark</td>
+          <td>{% if data['mediation-pilot'] == "on" %}£300{% else %}£1,500{% endif %}</td>
+          <td class="mobile-hide">Attend the hearing</td>
+          <td>-</td>
+          <td><a href="defendant?defendant=14.1">View</a></td>
         </tr>
         <tr>
           <td class="mobile-table-status" colspan="3"></td>
@@ -910,7 +867,7 @@
           <td>352MC733</td>
           <td>Jan Clark</td>
           <td>{% if data['mediation-pilot'] == "on" %}£300{% else %}£1,500{% endif %}</td>
-          <td class="mobile-hide">Pay the judgment debt</td>
+          <td class="mobile-hide">Pay the claim amount</td>
           <td>-</td>
           <td><a href="defendant?defendant=3">View</a></td>
         </tr>
@@ -920,6 +877,34 @@
         {% endif %}
 
 
+        {% if show_all==true or data['dashboard'] == 2.301 %}
+        <tr class="mobile-table">
+          <td>352MC733</td>
+          <td>Jan Clark</td>
+          <td>{% if data['mediation-pilot'] == "on" %}£300{% else %}£1,500{% endif %}</td>
+          <td class="mobile-hide">Pay the claim amount</td>
+          <td>-</td>
+          <td><a href="defendant?defendant=3.1">View</a></td>
+        </tr>
+        <tr>
+          <td class="mobile-table-status" colspan="3"></td>
+        </tr>
+        {% endif %}
+
+
+        {% if show_all==true or data['dashboard'] == 2.302 %}
+        <tr class="mobile-table">
+          <td>352MC733</td>
+          <td>Jan Clark</td>
+          <td>{% if data['mediation-pilot'] == "on" %}£300{% else %}£1,500{% endif %}</td>
+          <td class="mobile-hide">Pay the judgment debt</td>
+          <td>-</td>
+          <td><a href="defendant?defendant=3.2">View</a></td>
+        </tr>
+        <tr>
+          <td class="mobile-table-status" colspan="3"></td>
+        </tr>
+        {% endif %}
 
         {% if show_all==true or data['dashboard'] == 2.303 %}
         <tr class="mobile-table">
@@ -934,6 +919,23 @@
           <td class="mobile-table-status" colspan="3"></td>
         </tr>
         {% endif %}
+
+
+        {% if show_all==true or data['dashboard'] == 2.304 %}
+        <tr class="mobile-table">
+          <td>352MC733</td>
+          <td>Jan Clark</td>
+          <td>{% if data['mediation-pilot'] == "on" %}£300{% else %}£1,500{% endif %}</td>
+          <td class="mobile-hide">We'll post you a copy of the claimant's response</td>
+          <td>-</td>
+          <td><a href="defendant?defendant=3.4">View</a></td>
+        </tr>
+        <tr>
+          <td class="mobile-table-status" colspan="3"></td>
+        </tr>
+        {% endif %}
+
+
         {% if show_all==true or data['dashboard'] == 2.31 %}
         <tr class="mobile-table">
           <td>352MC733</td>
@@ -1293,7 +1295,10 @@
           <td>Jan Clark</td>
           <td>{% if data['mediation-pilot'] == "on" %}£300{% else %}£1,500{% endif %}</td>
           <td class="mobile-hide">Sign a settlement agreement</td>
-          <td>-</td>
+          <td>
+            {{ now | date('add', 7, 'days') | date }}<br>
+            <span class="font-xsmall">7 days left</span>
+          </td>
           <td><a href="defendant?defendant=5.011">View</a></td>
         </tr>
         <tr>
@@ -1391,7 +1396,10 @@
           <td>Jan Clark</td>
           <td>{% if data['mediation-pilot'] == "on" %}£300{% else %}£1,500{% endif %}</td>
           <td class="mobile-hide">Sign a settlement agreement</td>
-          <td>-</td>
+          <td>
+            {{ now | date('add', 7, 'days') | date }}<br>
+            <span class="font-xsmall">7 days left</span>
+          </td>
           <td><a href="defendant?defendant=5.201">View</a></td>
         </tr>
         <tr>
@@ -1433,7 +1441,10 @@
           <td>Jan Clark</td>
           <td>{% if data['mediation-pilot'] == "on" %}£300{% else %}£1,500{% endif %}</td>
           <td class="mobile-hide">Sign a settlement agreement</td>
-          <td>-</td>
+          <td>
+            {{ now | date('add', 7, 'days') | date }}<br>
+            <span class="font-xsmall">7 days left</span>
+          </td>
           <td><a href="defendant?defendant=5.3">View</a></td>
         </tr>
         <tr>
@@ -1447,7 +1458,10 @@
           <td>Jan Clark</td>
           <td>{% if data['mediation-pilot'] == "on" %}£300{% else %}£1,500{% endif %}</td>
           <td class="mobile-hide">Sign a settlement agreement</td>
-          <td>-</td>
+          <td>
+            {{ now | date('add', 7, 'days') | date }}<br>
+            <span class="font-xsmall">7 days left</span>
+          </td>
           <td><a href="defendant?defendant=5.30001">View</a></td>
         </tr>
         <tr>
@@ -1517,7 +1531,10 @@
           <td>Jan Clark</td>
           <td>{% if data['mediation-pilot'] == "on" %}£300{% else %}£1,500{% endif %}</td>
           <td class="mobile-hide">Sign a settlement agreement</td>
-          <td>-</td>
+          <td>
+            {{ now | date('add', 7, 'days') | date }}<br>
+            <span class="font-xsmall">7 days left</span>
+          </td>
           <td><a href="defendant?defendant=5.31">View</a></td>
         </tr>
         <tr>
@@ -1559,7 +1576,10 @@
           <td>Jan Clark</td>
           <td>{% if data['mediation-pilot'] == "on" %}£300{% else %}£1,500{% endif %}</td>
           <td class="mobile-hide">Pay by the agreed date</td>
-          <td>-</td>
+          <td>
+            {{ now | date('add', 5, 'days') | date }}<br>
+            <span class="font-xsmall">5 days left</span>
+          </td>
           <td><a href="defendant?defendant=5.33">View</a></td>
         </tr>
         <tr>
@@ -1623,19 +1643,16 @@
         </tr>
         {% endif %}
 
-
-
-
-
-
-
         {% if show_all==true or data['dashboard'] == 2.71 %}
         <tr class="mobile-table">
           <td>352MC733</td>
           <td>Jan Clark</td>
           <td>{% if data['mediation-pilot'] == "on" %}£300{% else %}£1,500{% endif %}</td>
           <td class="mobile-hide">Send us more details before the hearing</td>
-          <td>{{ now | date('add', 12, 'days') | date }}</td>
+          <td>
+            {{ now | date('add', 12, 'days') | date }}<br>
+            <span class="font-xsmall">12 days left</span>
+          </td>
           <td><a href="defendant?defendant=12.1">View</a></td>
         </tr>
         <tr>
@@ -1649,7 +1666,10 @@
           <td>Jan Clark</td>
           <td>{% if data['mediation-pilot'] == "on" %}£300{% else %}£1,500{% endif %}</td>
           <td class="mobile-hide">Send us more details before the hearing</td>
-          <td>{{ now | date('add', 12, 'days') | date }}</td>
+          <td>
+            {{ now | date('add', 12, 'days') | date }}<br>
+            <span class="font-xsmall">12 days left</span>
+          </td>
           <td><a href="defendant?defendant=12.11">View</a></td>
         </tr>
         <tr>
@@ -1664,7 +1684,7 @@
           <td>Jan Clark</td>
 
           <td>{% if data['mediation-pilot'] == "on" %}£300{% else %}£1,500{% endif %}</td>
-<td class="mobile-hide">We'll contact you if we set a hearing date</td>
+          <td class="mobile-hide">Wait for us to contact you</td>
           <td>-</td>
           <td><a href="defendant?defendant=12.9">View</a></td>
         </tr>
@@ -1794,7 +1814,10 @@
           <td>Jan Clark</td>
           <td>{% if data['mediation-pilot'] == "on" %}£300{% else %}£1,500{% endif %}</td>
           <td class="mobile-hide">Pay the amount agreed</td>
-          <td>-</td>
+          <td>
+            {{ now | date('add', 5, 'days') | date }}<br>
+            <span class="font-xsmall">5 days left</span>
+          </td>
           <td><a href="defendant?defendant=3.903">View</a></td>
         </tr>
         <tr>
@@ -1836,7 +1859,10 @@
           <td>Jan Clark</td>
           <td>{% if data['mediation-pilot'] == "on" %}£300{% else %}£1,500{% endif %}</td>
           <td class="mobile-hide">Sign a settlement agreement</td>
-          <td>-</td>
+          <td>
+            {{ now | date('add', 7, 'days') | date }}<br>
+            <span class="font-xsmall">7 days left</span>
+          </td>
           <td><a href="defendant?defendant=4">View</a></td>
         </tr>
         <tr>
@@ -1850,7 +1876,10 @@
           <td>Jan Clark</td>
           <td>{% if data['mediation-pilot'] == "on" %}£300{% else %}£1,500{% endif %}</td>
           <td class="mobile-hide">Sign a settlement agreement</td>
-          <td>-</td>
+          <td>
+            {{ now | date('add', 7, 'days') | date }}<br>
+            <span class="font-xsmall">7 days left</span>
+          </td>
           <td><a href="defendant?defendant=4.001">View</a></td>
         </tr>
         <tr>
@@ -2050,6 +2079,7 @@
     <option>-------- Defendant responses --------</option>
 
     <option value="1.42" {% if data['dashboard'] == 1.42 %}selected{% endif %}>Responded on paper</option>
+    <option value="1.43" {% if data['dashboard'] == 1.43 %}selected{% endif %}>Responded on paper - cancelled judgment</option>
     <option value="1.5" {% if data['dashboard'] == 1.5 %}selected{% endif %}>Full admit - pay immediately</option>
     <option value="1.501" {% if data['dashboard'] == 1.501 %}selected{% endif %}>Full admit - pay immediately - not paid</option>
     <option value="1.51" {% if data['dashboard'] == 1.51 %}selected{% endif %}>Full admit - pay set date</option>
@@ -2116,10 +2146,14 @@
     <option>Defendant view</option>
     <option value="2.1" {% if data['dashboard'] == 2.1 %}selected{% endif %}>1. Respond to claim </option>
     <option value="2.2" {% if data['dashboard'] == 2.2 %}selected{% endif %}>2. Respond more time requested</option>
+    <option value="2.201" {% if data['dashboard'] == 2.201 %}selected{% endif %}>Respond more time requested - judgment cancelled</option>
     <option>-------- CCJs --------</option>
     <option value="2.3" {% if data['dashboard'] == 2.3 %}selected{% endif %}>3. CCJ requested against defendant</option>
+    <option value="2.301" {% if data['dashboard'] == 2.301 %}selected{% endif %}>Default CCJ requested (paper) </option>
+    <option value="2.302" {% if data['dashboard'] == 2.302 %}selected{% endif %}>Default CCJ issued (paper)</option>
     <option>------ Defendant responses -------</option>
     <option value="2.303" {% if data['dashboard'] == 2.303 %}selected{% endif %}>Responded via paper</option>
+    <option value="2.304" {% if data['dashboard'] == 2.304 %}selected{% endif %}>Responded via paper - judgment cancelled</option>
     <option value="2.31" {% if data['dashboard'] == 2.31 %}selected{% endif %}>3.1 Admit all - pay immediately</option>
     <option value="2.32" {% if data['dashboard'] == 2.32 %}selected{% endif %}>3.2 Admit all - pay set date</option>
     <option value="2.321" {% if data['dashboard'] == 2.321 %}selected{% endif %}>3.21 Admit all - pay set date (organisation)</option>
