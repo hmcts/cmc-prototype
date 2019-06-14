@@ -33,11 +33,8 @@
             <li role="presentation"><a href="#history" role="tab" tabindex="-1" aria-controls="history">Claim
               history</a>
             </li>
-            {% if data['defendant'] == 12.1 or data['defendant'] == 12.11 or data['defendant'] == 12.2 or data['defendant'] == 12.21 or data['defendant'] == 12.3
-            or data['defendant'] == 12.31 or data['defendant'] == 12.4 or data['defendant'] == 12.5 or data['defendant'] == 12.51 or data['defendant'] == 12.6
-            or data['defendant'] == 12.7 or data['defendant'] == 12.8 or data['defendant'] == 5.6 or data['defendant'] == 5.61 or data['defendant'] == 9 or data['defendant'] == 11%}
-            <li role="presentation"><a href="#settle-out-of-court" role="tab" tabindex="-1" aria-controls="settle-out-of-court">Settle out of court</a>
-            </li>
+            {% if data['defendant'] < 16 %}
+            <li role="presentation"><a href="#settle-out-of-court" role="tab" tabindex="-1" aria-controls="settle-out-of-court">Settle out of court</a></li>
             {% endif %}
           </ul>
         </div>
@@ -66,12 +63,27 @@
                 <p><a class="button" href="../defendant/task-list">Respond to the claim</a></p>
               </div>
 
+              {% elseif data['defendant'] == 2.1 %}
+              <div class="status-block single">
+                <h2 class="heading-medium">Respond to the claim</h2>
+                <p>You requested more time to respond. </p>
+                <p>We've cancelled the claimant's request for a County Court Judgment (CCJ) against you.</p>
+                <p>You now need to respond before 4pm on <span class="dates3"></span> (33 days remaining).</p>
+                <p><a class="button" href="../defendant/task-list">Respond to the claim</a></p>
+              </div>
+
+
               {% elseif data['defendant'] == 3 %}
               <h2 class="heading-medium">We'll contact you</h2>
               <p>Jan Clark has requested a County Court Judgment (CCJ) against you because the deadline for your response has passed.</p>
               <p>If you've responded by post before the deadline, we may still be processing your response. If we receive your postal response, we'll reject the request for a CCJ.</p>
               <p>Otherwise we'll post a copy of the CCJ to you and to Jan Clark and explain what to do next.</p>
 
+              {% elseif data['defendant'] == 3.1 %}
+              <h2 class="heading-medium">Pay the claim amount</h2>
+              <p>Jan Clark has requested a County Court Judgment (CCJ) against you because the deadline for your response has passed.</p>
+              <p>If you've responded by post before the deadline, we may still be processing your response. If we receive your postal response, we'll reject the request for a CCJ.</p>
+              <p>Otherwise we'll post a copy of the CCJ to you and to Jan Clark and explain what to do next.</p>
 
               {% elseif data['defendant'] == 3.2 %}
               <h2 class="heading-medium">Pay the judgment debt</h2>
@@ -90,6 +102,12 @@
               <p>Because you responded to the claim using a paper form, all further action in this claim will be by post.</p>
               <p>Your online account won't be updated with the progress of this claim.</p>
               <p>If Jan Clark chooses to continue the claim we'll post you a copy of their response. This will explain what you need to do next.</p>
+
+              {% elseif data['defendant'] == 3.4 %}
+              <h2 class="heading-medium">We'll post you a copy of the claimant's response</h2>
+              <p>The response will explain what you need to do next.</p>
+              <p>We've cancelled the claimant's request for a County Court Judgment (CCJ) against you.</p>
+
 
               {% elseif data['defendant'] == 3.9 %}
               <h2 class="heading-medium">Wait for the claimant to respond</h2>
@@ -167,10 +185,8 @@
               {% elseif data['defendant'] == 3.92 %}
               <h2 class="heading-medium">Wait for the court to review the case</h2>
 
-              <p>Jan Clark rejeced your admission of £1,200. They believe you owe them the full £1,500 claimed.</p>
-
               <p>Jan Clark rejected your admission of £1,200. They believe you owe them the full {% if data['mediation-pilot'] == "on" %}£300{% else %}£1,500{% endif %} claimed.</p>
-                <p>You might have to go to a court hearing. We'll contact you to tell you what to do next.</p>
+              <p>You might have to go to a court hearing. We'll contact you to tell you what to do next.</p>
 
 
               {% elseif data['defendant'] == 3.94 %}
@@ -225,7 +241,7 @@
               <h2 class="heading-medium">Pay the judgment debt</h2>
               <p>A County Court Judgment (CCJ) has been issued against you.</p>
               <p>Jan Clark accepted your offer to pay £1,200. They rejected your repayment plan and requested a CCJ against you.</p>
-              <p>They suggested a new repayment plan. The court believes you can afford the claimant's plan, based on the financial details you provided.</p>
+              <p>They accepted a new repayment plan determined by the court, based on the financial details you provided.</p>
               <p><a href="counter-offer?offer=claimant&admission=determination" class="button secondary-button">View the repayment plan</a></p>
               <p>The judgment sets out the terms of how you must pay.</p>
               <p>We'll post a copy of the judgment to you and to Jan Clark.</p>
@@ -242,6 +258,7 @@
               <p>We'll post a copy of the judgment to you and to Jan Clark.</p>
               <p>If you pay the debt within one month of the date of judgment, the CCJ is removed from the public register. You can pay £15 to <a href="https://www.gov.uk/government/publications/form-n443-application-for-a-certificate-of-satisfaction-or-cancellation">apply for a certificate</a> that confirms this.</p>
               <p><a href="party-details/claimant">Contact Jan Clark</a> if you need their payment details. Make sure you get receipts for any payments.</p>
+
 
               {% elseif data['defendant'] == 5 %}
               <h2 class="heading-medium">Wait for the claimant to respond</h2>
@@ -537,6 +554,7 @@
                 <p>You might have to go to a hearing. We'll contact you to tell you what to do next.</p>
 
 
+
               {% elseif data['defendant'] == 8.2 %}
               <div class="status-block single">
                 <h2 class="heading-medium">We'll contact you with a mediation appointment</h2>
@@ -642,7 +660,7 @@
               {% elseif data['defendant'] == 12.11 %}
               <div class="status-block single">
                 <h2 class="heading-medium">Send us more details before the hearing</h2>
-                <p>The court has ordered you to send us more details.</p>
+                <p>The court has ordered you to send us more details. You need to do this before 4pm on {{ now | date( 'add', 15, 'days' ) | date }}.</p>
                 <p><a href="/public/images/order.pdf">Download the court's order</a> (PDF, 123KB) to find out the details you need to send.</p>
 
 
@@ -670,9 +688,11 @@
                 </p>
 
                 <h2 class="heading-small">If you don't send us more details</h2>
+                <p>The court can cancel your defence and the claimant can request a County Court Judgment (CCJ) against you.</p>
 
-                <p>The court can cancel your defence and the claimant can request
-                  a County Court Judgment (CCJ) against you.</p>
+                <h2 class="heading-small">If you have a problem with the order</h2>
+                <p>You can <a href="order-response/review/reason">ask the court to review it</a>. You need to do this before 4pm on {{ now | date('add', 12, 'days') | date }}.</p>
+
 
 
               </div>
@@ -3045,11 +3065,18 @@
     <option value="0">Choose</option>
     <option value="1" {% if data['defendant'] == 1 %}selected{% endif %}>1. Respond to claim</option>
     <option value="2" {% if data['defendant'] == 2 %}selected{% endif %}>2. More time requested</option>
+    <option value="2.1" {% if data['defendant'] == 2.1 %}selected{% endif %}>More time requested - judgment cancelled</option>
+
     <option>------ CCJs -------</option>
-    <option value="3" {% if data['defendant'] == 3 %}selected{% endif %}>3. Default CCJ issued </option>
+    <option value="3" {% if data['defendant'] == 3 %}selected{% endif %}>3. Default CCJ requested </option>
+    <option value="3.1" {% if data['defendant'] == 3.1 %}selected{% endif %}>Default CCJ requested (paper) </option>
+    <option value="3.2" {% if data['defendant'] == 3.2 %}selected{% endif %}>Default CCJ issued (paper)</option>
+    <option value="3.21" {% if data['defendant'] == 3.21 %}selected{% endif %}>Default CCJ issued - After 1 month deadline</option>
+    <option value="3.22" {% if data['defendant'] == 3.22 %}selected{% endif %}>Default CCJ issued - Before 1 month deadline</option>
+
     <option>------ Responses to claims -------</option>
     <option value="3.3" {% if data['defendant'] == 3.3 %}selected{% endif %}>Responded on paper</option>
-
+    <option value="3.4" {% if data['defendant'] == 3.4 %}selected{% endif %}>Responded on paper - judgment cancelled</option>
     <option value="3.902" {% if data['defendant'] == 3.902 %}selected{% endif %}>3.902 I admit part of the claim - immediately</option>
     <option value="3.9" {% if data['defendant'] == 3.9 %}selected{% endif %}>3.9 I admit part of the claim - instalments</option>
     <option value="3.9001" {% if data['defendant'] == 3.9001 %}selected{% endif %}>3.9001 I admit part of the claim - instalments (organisation)</option>
