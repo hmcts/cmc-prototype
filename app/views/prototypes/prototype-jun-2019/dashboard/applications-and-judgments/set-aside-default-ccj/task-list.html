@@ -128,16 +128,18 @@
                   </tr>
               {% endif %}
 
+
               <!--  FULL ADMIT ONLY - CAN NOT PAY JUDGEMENT PAYMENT TERMS  -->
+
               {% if  data['canpaynow'] == 'false'  %}
                   <tr id="read-rules">
                     <td class="task">
-                      <a href="../vary/pay-default-ccj-options">
-                        <span class="task-name">Request new payment terms</span>
+                      <a href="switch-to-vary">
+                        <span class="task-name">Judgment payment terms</span>
                       </a>
                     </td>
                     <td class="numeric" id="task-status" scope="col" id="col-status">
-                      {% if data.xyz=="complete" %}
+                      {% if data.varyanswered=="complete" %}
                           {% include "includes/task_status_finished.html" %}
                       {% else %}
                           {% include "includes/task_status_incomplete.html" %}
@@ -238,6 +240,7 @@
         <br>
 
 
+
         <!--  ALREADY SETTLED  -->
         {% if data['alreadysettled'] == 'true' %}
         <table id="table-of-tasks">
@@ -276,8 +279,9 @@
         {% endif %}
 
 
+
         <!--  VARY JUDGMENT -->
-        {% if data['varyselected'] == 'true' %}
+        {% if data['varyselected'] == 'true' and  data['canpaynow'] == 'false'  %}
             <table id="table-of-tasks">
               <thead>
               <tr>
@@ -295,7 +299,7 @@
               <tr>
                 <td class="task">
                   <a href="../vary/pay-default-ccj-options">
-                    <span class="task-name">New payment terms</span>
+                    <span class="task-name">Request new payment terms</span>
                   </a>
                 </td>
                 <td class="numeric" id="task-status" scope="col" id="col-status">
