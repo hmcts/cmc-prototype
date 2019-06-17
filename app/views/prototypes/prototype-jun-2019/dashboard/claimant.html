@@ -36,7 +36,7 @@
             or data['claimant'] == 10.83 or data['claimant'] == 10.831 or data['claimant'] == 10.832 or data['claimant'] == 10.84 or data['claimant'] == 10.85 or data['claimant'] == 10.9
             or data['claimant'] == 10.91 or data['claimant'] == 11.1 or data['claimant'] == 11.1001 or data['claimant'] == 11.1002 or data['claimant'] == 11.1003 or data['claimant'] == 11.101 or data['claimant'] == 11.101 or data['claimant'] == 11.102 or data['claimant'] == 11.103 or data['claimant'] == 11.11 or data['claimant'] == 11.1011 or data['claimant'] == 11.2 or data['claimant'] == 11.21 or data['claimant'] == 11.3
             or data['claimant'] == 11.4 or data['claimant'] == 11.5 or data['claimant'] == 11.51 or data['claimant'] == 11.6 or data['claimant'] == 11.61 or data['claimant'] == 11.7
-            or data['claimant'] == 12 or data['claimant'] == 14.1 or data['claimant'] == 16 or data['claimant'] == 17 or data['claimant'] == 20 or data['claimant'] == 20.1 or data['claimant'] == 20.2
+            or data['claimant'] == 12 or data['claimant'] == 13.2 or data['claimant'] == 14.1 or data['claimant'] == 16 or data['claimant'] == 17 or data['claimant'] == 20 or data['claimant'] == 20.1 or data['claimant'] == 20.2
             or data['claimant'] == 21 or data['claimant'] == 23 or data['claimant'] == 24 or data['claimant'] == 26  or data['claimant'] == 27  or data['claimant'] == 28
             or data['claimant'] == 33  or data['claimant'] == 34  or data['claimant'] == 36  or data['claimant'] == 37   %}
             <li role="presentation"><a href="#next-steps" role="tab" tabindex="0" aria-controls="next-steps" aria-selected="true">Next steps</a></li>
@@ -64,7 +64,7 @@
               <div class="status-block">
                 <h2 class="heading-medium">Respond to the defendant</h2>
                 <p>Mary Richards has rejected your claim.</p>
-                <p>You can accept or reject their response. You need to respond before 4pm on {{ now | date('add', 5, 'days') | date }}. If you don't respond by then, you might have to go to hearing.</p>
+                <p>You can accept or reject their response. You need to respond before 4pm on {{ now | date('add', 5, 'days') | date }}. If you don't respond by then, you might have to go to a hearing.</p>
                 <div class="form-group">
                   <form method="post" action="claimant-response/dispute-claim/task-list" class="form">
                     {{formData | safe}}
@@ -281,7 +281,7 @@
               {% elseif data['claimant'] == 8 %}
                 <h2 class="heading-medium">Respond to the defendant</h2>
                 <p>Mary Richards has rejected your claim.</p>
-                <p>You can accept or reject their response. You need to respond before 4pm on {{ now | date('add', 5, 'days') | date }}. If you don't respond by then, you might have to go to hearing.</p>
+                <p>You can accept or reject their response. You need to respond before 4pm on {{ now | date('add', 5, 'days') | date }}. If you don't respond by then, you might have to go to a hearing.</p>
                 <div class="form-group">
                 <form method="post" action="claimant-response/dispute-claim/task-list" class="form">
                   {{formData | safe}}
@@ -295,12 +295,7 @@
               <h2 class="heading-medium">Decide whether to proceed</h2>
               <p>Mary Richards has rejected your claim.</p>
               <p>You need to decide whether to proceed with the claim. You need to respond before 4pm on {{ now | date('add', 5, 'days') | date }}. Your claim won't continue if you don't respond by then.</p>
-              <div class="form-group">
-                <form method="post" action="claimant-response/dispute-claim/task-list" class="form">
-                  {{formData | safe}}
-                  <input type="submit" class="button" value="View and respond">
-                </form>
-              </div>
+              <a href="claimant-response/dispute-claim/task-list?dqs=off&mediation=off" class="button">View and respond</a>
 
               {% elseif data['claimant'] == 9.1 %}
               <div class="status-block single">
@@ -773,7 +768,7 @@
               <div class="status-block single">
                 <h2 class="heading-medium">Respond to the defendant</h2>
                 <p>Mary Richards has rejected your claim.</p>
-                <p>You can accept or reject their response. You need to respond before 4pm on {{ now | date('add', 5, 'days') | date }}. If you don't respond by then, you might have to go to hearing.</p>
+                <p>You can accept or reject their response. You need to respond before 4pm on {{ now | date('add', 5, 'days') | date }}. If you don't respond by then, you might have to go to a hearing.</p>
                 <div class="form-group">
                   <form method="post" action="claimant-response/dispute-claim/task-list" class="form">
                     {{formData | safe}}
@@ -2480,8 +2475,8 @@
     <option value="6" {% if data['claimant'] == 6 %}selected{% endif %}>States paid - claim amount</option>
     <option value="7" {% if data['claimant'] == 7 %}selected{% endif %}>States paid - less than the claim amount</option>
     <option value="8" {% if data['claimant'] == 8 %}selected{% endif %}>Dispute claim</option>
-    <option value="9" {% if data['claimant'] == 9 %}selected{% endif %}>Dispute claim + mediation</option>
-    <option value="9.1" {% if data['claimant'] == 9.1 %}selected{% endif %}>Dispute claim + mediation (pilot)</option>
+    <option value="9" {% if data['claimant'] == 9 %}selected{% endif %}>Dispute claim (offline DQs)</option>
+    <option value="9.1" {% if data['claimant'] == 9.1 %}selected{% endif %}>Dispute claim + mediation</option>
     <option value="10" {% if data['claimant'] == 10 %}selected{% endif %}>Dispute claim + offer made  </option>
     <option>------- Claimant responses ----------</option>
     <option value="10.1" {% if data['claimant'] == 10.1 %}selected{% endif %}>Accepted repayment plan - settlement (claimant/court plan)</option>
@@ -2505,6 +2500,7 @@
     <option value="10.85" {% if data['claimant'] == 10.85 %}selected{% endif %}>Part admit - rejected - mediation</option>
     <option value="10.9" {% if data['claimant'] == 10.9 %}selected{% endif %}>Defence rejected - with mediation</option>
     <option value="10.91" {% if data['claimant'] == 10.91 %}selected{% endif %}>Defence rejected - no mediation</option>
+    <option value="13.2" {% if data['claimant'] == 13.2 %}selected{% endif %}>Defence rejected - offline DQs</option>
 
     <option>------- Order response ----------</option>
     <option value="11.1" {% if data['claimant'] == 11.1 %}selected{% endif %}>Respond to order</option>

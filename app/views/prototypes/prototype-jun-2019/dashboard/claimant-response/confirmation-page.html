@@ -32,6 +32,9 @@ Money Claims Prototype
         {% elseif data['radio-indent-group2'] == "reject_stop_claim" or data['confirmation'] == 5 %}
         <h1 class="bold-large">County Court Judgment requested</h1>
 
+        {% elseif ( data['radio_select_group'] == "Yes" and data['mediation'] == 'off' and data['dqs'] == 'off' ) or data['confirmation'] == 9.1 %}
+        <h1 class="bold-large">You've rejected their response</h1>
+
         {% elseif data['radio-indent-group'] == "mediation-opt" or data['radio-indent-group'] == "mediation-accept" or data['radio-indent-group'] == 'reject_claim_claim_amount' or data['radio-indent-group'] == "set_date"  or  data['confirmation'] == 6 or data['confirmation'] == 7 %}
         <h1 class="bold-large">You've rejected their response</h1>
 
@@ -47,9 +50,8 @@ Money Claims Prototype
         {% elseif data['resolve_dispute'] == "complete" %}
         <h1 class="bold-large">You've agreed to mediation</h1>
 
-        {% elseif data['radio_select_group'] == "Yes"  or data['confirmation'] == 9  or data['meditation_ineligible'] == "complete" %}
+        {% elseif data['radio_select_group'] == "Yes" or data['confirmation'] == 9  or data['meditation_ineligible'] == "complete" %}
         <h1 class="bold-large">You've rejected their response</h1>
-
 
         {% else %}
         <h1 class="bold-large">You've rejected their response</h1>
@@ -60,7 +62,8 @@ Money Claims Prototype
         <p class="">Your claim number: <br><strong class="bold-large">352MC733</strong></p>
         <p><strong class="bold">{{ now | date }}</strong></p>
 
-        {% if data['radio_select_group'] == "Yes" %}
+        {% if ( data['radio_select_group'] == "Yes" and data['dqs'] == 'off' ) or data['confirmation'] == 9.1 %}
+        {% else %}
         <p>
         <a  class="font-medium" href="../../claimant/correspondence/dqs" target="new" style="color: #FFFFFF" >
         Download your hearing requirements</a> (PDF, 123KB)</p>
@@ -214,6 +217,14 @@ Money Claims Prototype
 
         <p><a class="button" href='../../dashboard/home?dashboard=1.1192'>Go to your account</a></p>
 
+        {% elseif ( data['radio_select_group'] == "Yes" and data['mediation'] == 'off' and data['dqs'] == 'off' ) or data['confirmation'] == 9.1 %}
+
+        <p>You need to <a href="forms/dq-form">complete a directions questionnaire</a> to tell us more
+          about your claim.</p>
+        <p>The claim won't proceed if you don't complete and return the form before 4pm on {{ data | date( 'add', 14, 'days' ) | date }}.</p>
+
+        <p><a class="button" href='../home?dashboard=1.192'>Go to your account</a></p>
+
         {% elseif data['radio-indent-group'] == "mediation-reject" or  data['radio-indent-group'] == 'reject_claim_claim_amount' or  data['radio-indent-group'] == 'No' or data['meditation_ineligible'] == 'complete' or ( data['radio-indent-group'] == 'Yes' and data['meditation_ineligible'] == 'complete' ) or data['radio_select_group'] == "Yes"  or data['confirmation'] == 9  %}
 
         <p>We'll review the case. We'll contact you to tell you what to do next. </p>
@@ -280,6 +291,7 @@ Money Claims Prototype
           <option value="7"  {% if data['confirmation'] == '7' %}selected{% endif %}>Mediation proposed</option>
           <option value="8"  {% if data['confirmation'] == '8' %}selected{% endif %}>Claim settled</option>
           <option value="9"  {% if data['confirmation'] == '9' %}selected{% endif %}>Claim proceeding</option>
+          <option value="9.1"  {% if data['confirmation'] == 9.1 %}selected{% endif %}>Claim proceeding - offline dqs</option>
       </select>
     </form>
 

@@ -34,17 +34,21 @@
             or data['claimant'] == 10.02 or data['claimant'] == 10.03 or data['claimant'] == 10.11 or data['claimant'] == 10.4 or data['claimant'] == 10.5 or data['claimant'] == 10.6
             or data['claimant'] == 10.601 or data['claimant'] == 10.61 or data['claimant'] == 10.801 or data['claimant'] == 10.81 or data['claimant'] == 10.82 or data['claimant'] == 3.2
             or data['claimant'] == 10.83 or data['claimant'] == 10.831 or data['claimant'] == 10.832 or data['claimant'] == 10.84 or data['claimant'] == 10.85 or data['claimant'] == 10.9
-            or data['claimant'] == 10.91 or data['claimant'] == 11.1 or data['claimant'] == 11.11 or data['claimant'] == 11.2 or data['claimant'] == 11.21 or data['claimant'] == 11.3
+            or data['claimant'] == 10.91 or data['claimant'] == 11.1 or data['claimant'] == 11.1001 or data['claimant'] == 11.1002 or data['claimant'] == 11.1003 or data['claimant'] == 11.101 or data['claimant'] == 11.101 or data['claimant'] == 11.102 or data['claimant'] == 11.103 or data['claimant'] == 11.11 or data['claimant'] == 11.1011 or data['claimant'] == 11.2 or data['claimant'] == 11.21 or data['claimant'] == 11.3
             or data['claimant'] == 11.4 or data['claimant'] == 11.5 or data['claimant'] == 11.51 or data['claimant'] == 11.6 or data['claimant'] == 11.61 or data['claimant'] == 11.7
-            or data['claimant'] == 12 or data['claimant'] == 16 or data['claimant'] == 17 or data['claimant'] == 20 or data['claimant'] == 20.1 or data['claimant'] == 20.2 or data['claimant'] == 21%}
+            or data['claimant'] == 12 or data['claimant'] == 14.1 or data['claimant'] == 16 or data['claimant'] == 17 or data['claimant'] == 20 or data['claimant'] == 20.1 or data['claimant'] == 20.2
+            or data['claimant'] == 21 or data['claimant'] == 23 or data['claimant'] == 24 or data['claimant'] == 26  or data['claimant'] == 27  or data['claimant'] == 28
+            or data['claimant'] == 33  or data['claimant'] == 34  or data['claimant'] == 36  or data['claimant'] == 37   %}
             <li role="presentation"><a href="#next-steps" role="tab" tabindex="0" aria-controls="next-steps" aria-selected="true">Next steps</a></li>
             <li role="presentation"><a href="#history" role="tab" tabindex="-1" aria-controls="history">Claim history</a></li>
+            <li role="presentation"><a href="#contact" role="tab" tabindex="-1" aria-controls="history">Defendant's details</a></li>
             {% endif %}
 
             {% if data['claimant'] == 10 or data['claimant'] == 11%}
             <li role="presentation"><a href="#next-steps" role="tab" tabindex="-1" aria-controls="next-steps">Next steps</a></li>
             <li role="presentation"><a href="#history" role="tab" tabindex="-1" aria-controls="history">Claim history</a></li>
             <li role="presentation"><a href="#settle-out-of-court" role="tab" tabindex="0" aria-controls="settle-out-of-court" aria-selected="true" id="settle">Settle out of court</a></li>
+            <li role="presentation"><a href="#contact" role="tab" tabindex="-1" aria-controls="history">Defendant's details</a></li>
             {% endif %}
 
           </ul>
@@ -60,7 +64,7 @@
               <div class="status-block">
                 <h2 class="heading-medium">Respond to the defendant</h2>
                 <p>Mary Richards has rejected your claim.</p>
-                <p>You can accept or reject their response. You need to respond before 4pm on {{ now | date('add', 5, 'days') | date }}. If you don't respond by then, you might have to go to hearing.</p>
+                <p>You can accept or reject their response. You need to respond before 4pm on {{ now | date('add', 5, 'days') | date }}. If you don't respond by then, you might have to go to a hearing.</p>
                 <div class="form-group">
                   <form method="post" action="claimant-response/dispute-claim/task-list" class="form">
                     {{formData | safe}}
@@ -117,7 +121,20 @@
               <p>You can request a County Court Judgment (CCJ) against them if they don't respond by the deadline.</p>
 
 
+              {% elseif data['claimant'] == 3.11 %}
+              <h2 class="heading-medium">Wait for the defendant to respond</h2>
+              <p>Mary Richards requested an extra 14 days to respond, by post. They now have until 4pm on <span class="dates"></span> to respond.</p>
+              <p>We've cancelled your request for a County Court Judgment (CCJ) against them.</p>
+              <p>You can request a CCJ against them if they don't respond by the deadline.</p>
 
+
+              {% elseif data['claimant'] == 3.3 %}
+              <div class="status-block single">
+                <h2 class="heading-medium">Wait for the judgment to be confirmed</h2>
+                <p>We'll contact you within 5 days to tell you whether the judgment has been entered.</p>
+                <p>Mary Richards can no longer respond to your claim using this service - they may have responded by post.</p>
+                <p>If we receive a postal response that they sent before the deadline we'll reject your request for judgment.</p>
+              </div>
 
 
               {% elseif data['claimant'] == 3.4 %}
@@ -125,12 +142,12 @@
                 <h2 class="heading-medium">Wait for the defendant to pay you</h2>
                 <p>A County Court Judgment has been issued against Mary Richards.</p>
                 <p>We'll send you both a copy of the judgment.</p>
-                <p>When you've been paid in full, you need to let us know.</p>
+                <p>You need to tell us when you've been paid in full.</p>
                 <p><a href="paid-in-full/claimant" class="button secondary-button">Tell us you've been paid</a></p><br>
               </div>
               <div class="status-block single">
                 <h2 class="heading-medium">Ask the court to recover the debt</h2>
-                <p>If the defendant doesn't pay by the deadline, you can <a href="https://www.gov.uk/make-court-claim-for-money/enforce-a-judgment">ask the court to recover the debt</a>. There's no guarantee that the court will get your money back.</p>
+                <p>If the defendant doesn't pay, you can <a href="https://www.gov.uk/make-court-claim-for-money/enforce-a-judgment">ask the court to recover the debt</a>. There's no guarantee that the court will get your money back.</p>
               </div>
 
 
@@ -141,11 +158,23 @@
                 <p>Your online account won't be updated with the progress of this claim.</p>
                 <p>We'll post you a copy of the defendant's response. This will explain what you need to do next.</p>
               </div>
+
+              {% elseif data['claimant'] == 3.6 %}
+              <div>
+                <h2 class="heading-medium">We'll post you the defendant's response</h2>
+                <p>The defendant responded to your claim by post. This means you can no longer use this service to continue your claim - you'll need to use paper forms instead.</p>
+                <p>We've cancelled your request for a County Court Judgment (CCJ) against them.</p>
+
+                <p>The response will tell you what you need to do next.</p>
+              </div>
+
+
               {% elseif data['claimant'] == 4 %}
               <h2 class="heading-medium">Respond to the defendant</h2>
               <p>The defendant has offered to pay in instalments.</p>
               <p>You can accept or reject their offer.</p>
               <p><a href="claimant-response/admit-the-claim/task-list?radio-pay-group=Instalments" class="button">View and respond</a></p>
+
 
               {% elseif data['claimant'] == 4.01 %}
               <h2 class="heading-medium">Respond to the defendant</h2>
@@ -198,7 +227,7 @@
 
 
               {% elseif data['claimant'] == 5 %}
-              <div class="">
+              <div>
                 <h2 class="heading-medium">Respond to the defendant</h2>
                 <p>The defendant has admitted they owe £{{ data['owe-amount'] or '1,200' }}. They said they don't owe the full amount you claimed.
                 <p>They've offered to pay the £{{ data['owe-amount'] or '1,200' }} immediately.
@@ -289,31 +318,31 @@
               <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=9">Download their hearing
                 requirements</a> (PDF, 13KB)</p>
 
-                {% elseif data['claimant'] == 9 %}
+              {% elseif data['claimant'] == 9 %}
+              <h2 class="heading-medium">Decide whether to proceed</h2>
+              <p>Mary Richards has rejected your claim.</p>
+              <p>You need to decide whether to proceed with the claim. You need to respond before 4pm on {{ now | date('add', 5, 'days') | date }}. Your claim won't continue if you don't respond by then.</p>
+              <div class="form-group">
+                <form method="post" action="claimant-response/dispute-claim/task-list" class="form">
+                  {{formData | safe}}
+                  <input type="submit" class="button" value="View and respond">
+                </form>
+              </div>
+
+              {% elseif data['claimant'] == 9.1 %}
+              <div class="status-block single">
                 <h2 class="heading-medium">Decide whether to proceed</h2>
                 <p>Mary Richards has rejected your claim.</p>
                 <p>You need to decide whether to proceed with the claim. You need to respond before 4pm on {{ now | date('add', 5, 'days') | date }}. Your claim won't continue if you don't respond by then.</p>
+                <!-- <p>The claim has been automatically registered for free telephone mediation. We'll contact you with a mediation appointment unless you choose to opt out.</p> -->
                 <div class="form-group">
-                  <form method="post" action="claimant-response/dispute-claim/task-list" class="form">
-                    {{formData | safe}}
-                    <input type="submit" class="button" value="View and respond">
-                  </form>
+                <form method="post" action="claimant-response/dispute-claim/task-list" class="form">
+                  {{formData | safe}}
+                  <input type="hidden" name="mediation-pilot" value="on">
+                  <input type="submit" class="button" value="View and respond">
+                </form>
                 </div>
-
-                {% elseif data['claimant'] == 9.1 %}
-                <div class="status-block single">
-                  <h2 class="heading-medium">Decide whether to proceed</h2>
-                  <p>Mary Richards has rejected your claim.</p>
-                  <p>You need to decide whether to proceed with the claim. You need to respond before 4pm on {{ now | date('add', 5, 'days') | date }}. Your claim won't continue if you don't respond by then.</p>
-                  <!-- <p>The claim has been automatically registered for free telephone mediation. We'll contact you with a mediation appointment unless you choose to opt out.</p> -->
-                  <div class="form-group">
-                  <form method="post" action="claimant-response/dispute-claim/task-list" class="form">
-                    {{formData | safe}}
-                    <input type="hidden" name="mediation-pilot" value="on">
-                    <input type="submit" class="button" value="View and respond">
-                  </form>
-                  </div>
-                </div>
+              </div>
 
 
               {% elseif data['claimant'] == 10.001 %}
@@ -369,14 +398,14 @@
               {% elseif data['claimant'] == 10.11 %}
               <div class="status-block">
                 <h2 class="heading-medium">Wait for the defendant to pay you</h2>
-                <p>A County Court Judgment has been issued against Mary Richards.</p>
-                <p>We'll send you both a copy of the judgment.</p>
+                 <p>A County Court Judgment has been issued against Mary Richards.</p>
+                 <p>We'll send you both a copy of the judgment.</p>
                  <p>You need to tell us when you've been paid in full.</p>
                   <p><a href="paid-in-full/claimant" class="button secondary-button">Tell us you've been paid</a></p><br>
               </div>
               <div class="status-block single">
                  <h2 class="heading-medium">Ask the court to recover the debt</h2>
-                <p>If the defendant doesn't pay by the deadline, you can <a href="https://www.gov.uk/make-court-claim-for-money/enforce-a-judgment">ask the court to recover the debt</a>. There's no guarantee that the court will get your money back.</p>
+                <p>If the defendant doesn't pay, you can <a href="https://www.gov.uk/make-court-claim-for-money/enforce-a-judgment">ask the court to recover the debt</a>. There's no guarantee that the court will get your money back.</p>
               </div>
               <!--<div class="status-block single">-->
                 <!--<h2 class="heading-small">Ask the court to recover the debt</h2>-->
@@ -530,13 +559,13 @@
 
 
               {% elseif data['claimant'] == 10.832 %}
-              <h2 class="heading-small">Wait for the court to review the case</h2>
+              <h2 class="heading-medium">Wait for the court to review the case</h2>
               <p>You've rejected Mary Richard's response and said you want to take the case to court.</p>
               <p>The court will review the case. We'll contact you to tell you what to do next.</p>
 
 
               {% elseif data['claimant'] == 10.84 %}
-              <h2 class="heading-small">Wait for the court to review the case</h2>
+              <h2 class="heading-medium">Wait for the court to review the case</h2>
               <p>You've rejected Mary Richard's response and said you want to take the case to court.</p>
               <p>The court will review the case. We'll contact you to tell you what to do next.</p>
 
@@ -550,10 +579,12 @@
 
 
               {% elseif data['claimant'] == 10.9 %}
-              <h2 class="heading-medium">We'll contact you to try to arrange a mediation appointment</h2>
-              <p>You've rejected the defendant's response</p>
-              <p>You've both agreed to try mediation. We'll contact you to try to arrange an appointment.</p>
-              <p><a href="mediation/how-mediation-works">Find out how mediation works</a></p>
+              <div>
+                <h2 class="heading-medium">We'll contact you to try to arrange a mediation appointment</h2>
+                <p>You've rejected the defendant's response</p>
+                <p>You've both agreed to try mediation. We'll contact you to try to arrange an appointment.</p>
+                <p><a href="../dashboard/mediation/how-mediation-works">Find out how mediation works</a></p>
+              </div>
 
 
               {% elseif data['claimant'] == 10.91 %}
@@ -670,7 +701,7 @@
                 <div class="status-block single">
                   <h2 class="heading-medium">Respond to the defendant</h2>
                   <p>Mary Richards has rejected your claim.</p>
-                  <p>You can accept or reject their response. You need to respond before 4pm on {{ now | date('add', 5, 'days') | date }}. If you don't respond by then, you might have to go to hearing.</p>
+                  <p>You can accept or reject their response. You need to respond before 4pm on {{ now | date('add', 5, 'days') | date }}. If you don't respond by then, you might have to go to a hearing.</p>
                   <div class="form-group">
                     <form method="post" action="claimant-response/dispute-claim/task-list" class="form">
                       {{formData | safe}}
@@ -698,11 +729,12 @@
               </div>
 
               {% elseif data['claimant'] == 13 %}
-              <div class="">
+              <div>
                 <h2 class="heading-medium">We'll ask the defendant about mediation</h2>
                 <p>You've agreed to try mediation.</p>
                 <p>We'll ask Mary Richards if they want to take part in mediation. We'll tell you how they respond.</p>
               </div>
+
 
               {% elseif data['claimant'] == 13.2 %}
               <div class="status-block single">
@@ -711,26 +743,26 @@
                   about your claim.</p>
                 <p>The claim won't proceed if you don't complete and return the form before 4pm on <span
                   class="dates5"></span>.</p>
-                <p><a class="" href="../defendant/correspondence/forms/claim-form-defendant?check=9">Download their
+                <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=9">Download their
                   response</a> (PDF, 123KB)</p>
               </div>
 
               {% elseif data['claimant'] == 14 %}
               <h2 class="heading-medium">The defendant wants to try mediation </h2>
-              <div class="">
+              <div>
                 <p>A mediator will contact both you and the defendant within 14 days to try to arrange an appointment.</p>
               </div>
 
               {% elseif data['claimant'] == 15 %}
-              <h2 class="heading-medium">A judge will review the claim</h2>
-              <div class="">
+              <h2 class="heading-medium">Wait for a judge to review the case</h2>
+              <div>
                 <p>You've rejected the defendant's response and asked for a judge to review the claim. We'll contact
                   you if we set a hearing date to tell you how to prepare.</p>
               </div>
 
               {% elseif data['claimant'] == 17 %}
               <h2 class="heading-medium">You settled out of court</h2>
-              <div class="">
+              <div>
                 <p> You've both signed an agreement to settle out of court. The claim is now settled.</p>
                 <p><a href="../defendant/correspondence/forms/agreement?check=1">Download the settlement agreement</a>
                   (PDF, 123KB)</p>
@@ -740,38 +772,39 @@
               <h2 class="heading-medium">You need to respond to this counterclaim</h2>
               <p>You need to respond by <span class="dates"></span> (14 days
                 remaining). </p>
-              <p><a class="" href="view-claims/view-counterclaim1">View and respond to the counterclaim </a></p>
+              <p><a href="view-claims/view-counterclaim1">View and respond to the counterclaim </a></p>
               <p>If you don't respond Mary Richards can ask for a default County Court Judgment (CCJ) against you. A
                 CCJ means the court orders you to pay the money.</p>
               <div class="form-group">
               </div>
 
+
               {% elseif data['claimant'] == 19 %}
-              <div class="">
+              <div>
                 <h2 class="heading-medium">The defendant's response </h2>
                 <p>The defendant Mary Richards has rejected your the claim. </p>
                 <div class="form-group">
-                  <p><a class="" href="claimant-response/dispute-claim/view-response?mediation=no">View full
+                  <p><a href="claimant-response/dispute-claim/view-response?mediation=no">View full
                     response </a></p>
                 </div>
               </div>
 
               {% elseif data['claimant'] == 20 %}
-              <div class="">
+              <div>
                 <h2 class="heading-medium">This claim is settled</h2>
                 <p>Mary Richards paid you on {{ now | date( 'subtract', 5, 'days' ) | date }}.</p>
               </div>
 
 
               {% elseif data['claimant'] == 20.1 %}
-              <div class="">
+              <div>
                 <h2 class="heading-medium">This claim is settled</h2>
                 <p>Mary Richards paid you on {{ now | date( 'subtract', 5, 'days' ) | date }}.</p>
                 <p>The defendant's County Court Judgment will be cancelled.</p>
               </div>
 
               {% elseif data['claimant'] == 20.2 %}
-              <div class="">
+              <div>
                 <h2 class="heading-medium">This claim is settled</h2>
                 <p>Mary Richards paid you on {{ now | date( 'subtract', 5, 'days' ) | date }}.</p>
                 <p>The defendant's County Court Judgment will be marked as paid.</p>
@@ -779,7 +812,7 @@
 
 
               {% elseif data['claimant'] == 21 %}
-              <div class="">
+              <div>
                 <h2 class="heading-medium">You stopped this claim</h2>
                 <p>You ended the claim on {{ now | date( 'subtract', 5, 'days' ) | date }}.</p>
               </div>
@@ -811,14 +844,14 @@
             <!--continues and might go to a court hearing.</p>-->
             <!--{% elseif data['claimant'] == 16 %}-->
             <!--<h2 class="heading-medium">Sign a legal agreement to settle out of court</h2>-->
-            <!--<div class="">-->
+            <!--<div>-->
             <!--<p> The defendant has accepted your offer. You need to sign a legal agreement to settle out of-->
             <!--court Mary Richards has signed the agreement.</p>-->
             <!--<p><a href='offer-agreement/agreement'>View and sign the agreement. </a></p>-->
             <!--</div>-->
             <!--{% elseif data['claimant'] == 17 %}-->
             <!--<h2 class="heading-medium">Sign a legal agreement to settle out of court</h2>-->
-            <!--<div class="">-->
+            <!--<div>-->
             <!--<p> The defendant has accepted your offer. You need to sign a legal agreement to settle out of-->
             <!--court Mary Richards has signed the agreement.</p>-->
             <!--<p><a href='offer-agreement/agreement'>View and sign the agreement. </a></p>-->
@@ -843,9 +876,8 @@
             {% if data['claimant'] < 20 and data['claimant'] != 1.2 and data['claimant'] != 10.11 and data['claimant'] != 3.3 and data['claimant'] != 3.4 and data['claimant'] != 18 and
             data['claimant'] != 3.2 and data['claimant'] != 10.12 and data['claimant'] != 10.01 and
             data['claimant'] != 10.4 and data['claimant'] != 10.5 and data['claimant'] != 10.81 and data['claimant']
-            != 10.82 and data['claimant'] != 10.83 and data['claimant'] != 16 and data['claimant'] != 17 and data['claimant'] !=
-            4.2 and data['claimant'] != 4.3 and data['claimant'] != 11.1 and data['claimant'] != 11.11 and data['claimant'] != 11.2 and data['claimant'] != 11.21
-            and data['claimant'] != 11.3 and data['claimant'] != 11.4 and data['claimant'] != 11.5 and data['claimant'] != 11.51 and data['claimant'] != 11.6 and data['claimant'] != 11.61 and data['claimant'] != 11.7 and data['claimant'] != 10 and data['claimant'] != 11%}
+            != 10.82 and data['claimant'] != 10.83 and data['claimant'] != 11.1011 and data['claimant'] != 17 and data['claimant'] !=
+            4.2 and data['claimant'] != 4.3 and data['claimant'] != 11.4 and data['claimant'] != 11.5 and data['claimant'] != 11.51 and data['claimant'] != 11.6 and data['claimant'] != 11.61 and data['claimant'] != 10 and data['claimant'] != 11%}
 
 
             <div class="column-two-thirds" style="margin-top: -10px">
@@ -884,8 +916,7 @@
 
           <div class="tabs-panel-inner text" tabindex="0">
 
-            <fieldset></fieldset>
-
+            <h2 class="heading-medium">Claim history</h2>
             <div class="hmcts-timeline" style="margin-top: 30px">
 
               {% if data['claimant'] == 1 %}
@@ -1002,9 +1033,9 @@
               </div>
               <div class="hmcts-timeline__item">
                 <div class="hmcts-timeline__header">
-                  <h2 class="hmcts-timeline__title">The defendant admitted the claim <br>(or whatever the defendant did)</h2>
+                  <h2 class="hmcts-timeline__title">The defendant admitted the claim</h2>
                   <!--<p class="hmcts-timeline__by">by defendant</p>-->
-                  <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=2">Download their response</a>
+                  <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=2">Download their response and hearing requirements</a>
                     (PDF, 123KB)</p>
                 </div>
                 <p class="hmcts-timeline__date" style="margin-top: -10px">
@@ -1104,7 +1135,7 @@
                 <div class="hmcts-timeline__header">
                   <h2 class="hmcts-timeline__title">The defendant said they've paid what they'd owed you</h2>
                   <!--<p class="hmcts-timeline__by">by defendant</p>-->
-                  <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=8">Download their response</a>
+                  <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=8">Download their response and hearing requirements</a>
                     (PDF, 123KB)</p>
                 </div>
                 <p class="hmcts-timeline__date" style="margin-top: -10px">
@@ -1129,7 +1160,7 @@
                 <div class="hmcts-timeline__header">
                   <h2 class="hmcts-timeline__title">The defendant disputed the whole claim</h2>
                   <!--<p class="hmcts-timeline__by">by defendant</p>-->
-                  <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=1">Download their response</a>
+                  <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=1">Download their response and hearing requirements</a>
                     (PDF, 123KB)</p>
                 </div>
                 <p class="hmcts-timeline__date" style="margin-top: -10px">
@@ -1163,7 +1194,7 @@
                 <div class="hmcts-timeline__header">
                   <h2 class="hmcts-timeline__title">The defendant disputed the whole claim</h2>
                   <!--<p class="hmcts-timeline__by">by defendant</p>-->
-                  <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=1">Download their response</a>
+                  <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=1">Download their response and hearing requirements</a>
                     (PDF, 123KB)</p>
                 </div>
                 <p class="hmcts-timeline__date" style="margin-top: -10px">
@@ -1195,9 +1226,9 @@
               </div>
               <div class="hmcts-timeline__item">
                 <div class="hmcts-timeline__header">
-                  <h2 class="hmcts-timeline__title">The defendant disputed the whole claim <br>(or whatever the defendant did)</h2>
+                  <h2 class="hmcts-timeline__title">The defendant disputed the whole claim</h2>
                   <!--<p class="hmcts-timeline__by">by defendant</p>-->
-                  <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=1">Download their response</a>
+                  <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=1">Download their response and hearing requirements</a>
                     (PDF, 123KB)</p>
                 </div>
                 <p class="hmcts-timeline__date" style="margin-top: -10px">
@@ -1249,9 +1280,9 @@
               </div>
               <div class="hmcts-timeline__item">
                 <div class="hmcts-timeline__header">
-                  <h2 class="hmcts-timeline__title">The defendant disputed the whole claim <br>(or whatever the defendant did)</h2>
+                  <h2 class="hmcts-timeline__title">The defendant disputed the whole claim</h2>
                   <!--<p class="hmcts-timeline__by">by defendant</p>-->
-                  <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=1">Download their response</a>
+                  <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=1">Download their response and hearing requirements</a>
                     (PDF, 123KB)</p>
                 </div>
                 <p class="hmcts-timeline__date" style="margin-top: -10px">
@@ -1312,9 +1343,9 @@
               </div>
               <div class="hmcts-timeline__item">
                 <div class="hmcts-timeline__header">
-                  <h2 class="hmcts-timeline__title">The defendant disputed the whole claim <br>(or whatever the defendant did)</h2>
+                  <h2 class="hmcts-timeline__title">The defendant disputed the whole claim</h2>
                   <!--<p class="hmcts-timeline__by">by defendant</p>-->
-                  <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=1">Download their response</a>
+                  <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=1">Download their response and hearing requirements</a>
                     (PDF, 123KB)</p>
                 </div>
                 <p class="hmcts-timeline__date" style="margin-top: -10px">
@@ -1639,7 +1670,7 @@
                 <div class="hmcts-timeline__header">
                   <h2 class="hmcts-timeline__title">The defendant said they'd paid what they'd owed you</h2>
                   <!--<p class="hmcts-timeline__by">by defendant</p>-->
-                  <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=8">Download their response</a>
+                  <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=8">Download their response and hearing requirements</a>
                     (PDF, 123KB)</p>
                 </div>
                 <p class="hmcts-timeline__date" style="margin-top: -10px">
@@ -1682,7 +1713,7 @@
                 <div class="hmcts-timeline__header">
                   <h2 class="hmcts-timeline__title">The defendant said they'd paid what they'd owed you</h2>
                   <!--<p class="hmcts-timeline__by">by defendant</p>-->
-                  <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=8">Download their response</a>
+                  <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=8">Download their response and hearing requirements</a>
                     (PDF, 123KB)</p>
                 </div>
                 <p class="hmcts-timeline__date" style="margin-top: -10px">
@@ -1725,7 +1756,7 @@
                 <div class="hmcts-timeline__header">
                   <h2 class="hmcts-timeline__title">The defendant said they'd paid what they'd owed you</h2>
                   <!--<p class="hmcts-timeline__by">by defendant</p>-->
-                  <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=8">Download their response</a>
+                  <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=8">Download their response and hearing requirements</a>
                     (PDF, 123KB)</p>
                 </div>
                 <p class="hmcts-timeline__date" style="margin-top: -10px">
@@ -1845,7 +1876,7 @@
                 <div class="hmcts-timeline__header">
                   <h2 class="hmcts-timeline__title">The defendant disputed the whole claim</h2>
                   <!--<p class="hmcts-timeline__by">by defendant</p>-->
-                  <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=1">Download their response</a>
+                  <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=1">Download their response and hearing requirements</a>
                     (PDF, 123KB)</p>
                 </div>
                 <p class="hmcts-timeline__date" style="margin-top: -10px">
@@ -1869,9 +1900,9 @@
               <div class="hmcts-timeline__item">
                 <div class="hmcts-timeline__header">
                   <h2 class="hmcts-timeline__title">You said you wouldn't try mediation</h2>
-                  <!--<p class="hmcts-timeline__by">by claimant</p>-->
+                  <p><a href="../claimant/correspondence/dqs">Download your hearing requirements</a> (PDF, 123KB)</p>
                 </div>
-                <p class="hmcts-timeline__date">
+                <p class="hmcts-timeline__date" style="margin-top: -10px">
                   <time style="color: grey">{{ now | date( 'add', 5, 'days' ) | date }}</time>
                 </p>
               </div>
@@ -1879,8 +1910,7 @@
                 <div class="hmcts-timeline__header">
                   <h2 class="hmcts-timeline__title">The defendant disputed the whole claim</h2>
                   <!--<p class="hmcts-timeline__by">by defendant</p>-->
-                  <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=1">Download their response</a>
-                    (PDF, 123KB)</p>
+                  <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=1">Download their response and hearing requirements</a> (PDF, 123KB)</p>
                 </div>
                 <p class="hmcts-timeline__date" style="margin-top: -10px">
                   <time style="color: grey">{{ now | date( 'add', 5, 'days' ) | date }}</time>
@@ -2022,6 +2052,8 @@
               </div>
               {% endif %}
 
+
+
               {% if data['claimant'] == 12 %}
               <div class="hmcts-timeline__item">
                 <div class="hmcts-timeline__header">
@@ -2043,9 +2075,9 @@
               </div>
               <div class="hmcts-timeline__item">
                 <div class="hmcts-timeline__header">
-                  <h2 class="hmcts-timeline__title">The defendant disputed the whole claim <br>(or whatever the defendant did)</h2>
+                  <h2 class="hmcts-timeline__title">The defendant disputed the whole claim</h2>
                   <!--<p class="hmcts-timeline__by">by defendant</p>-->
-                  <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=1">Download their response</a>
+                  <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=1">Download their response and hearing requirements</a>
                     (PDF, 123KB)</p>
                 </div>
                 <p class="hmcts-timeline__date" style="margin-top: -10px">
@@ -2075,7 +2107,6 @@
 
           <div class="tabs-panel-inner text" tabindex="0">
 
-            <fieldset></fieldset>
 
             <h2 class="heading-medium">Respond to the defendant</h2>
             <p>Mary Richards has made an offer to settle out of court.</p>
@@ -2084,6 +2115,37 @@
             <!--<p>You must accept or reject the offer before 4pm on {{ now | date('add', 7, 'days') | date }}. <span style="color: #DF3034">Think there's no deadline for out of court offers?</span></p>-->
            <!---->
             <p><a href="offer-agreement/view-offer?defendant=offer" class="button">View and respond</a></p>
+
+          </div>
+        </div>
+
+        <div class="tabs-panel" id="contact" role="tabpanel">
+
+          <div class="tabs-panel-inner text" tabindex="0">
+
+            <h2 class="heading-medium">Defendant's details</h2>
+
+            <table class="govuk-table">
+            <tbody class="govuk-table__body">
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell--left">Name</td>
+              <td class="govuk-table__cell--right">Mrs Mary Richards</td>
+            </tr>
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell--left">Address</td>
+              <td class="govuk-table__cell--right">24 Acacia Drive<br>London<br>SW1 H9A</td>
+
+            </tr>
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell--left">Telephone</td>
+              <td class="govuk-table__cell--right">07824999612</td>
+            </tr>
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell--left">Email</td>
+              <td class="govuk-table__cell--right">mary.richards@gmail.com</td>
+            </tr>
+            </tbody>
+          </table>
 
           </div>
         </div>
@@ -2101,6 +2163,7 @@
     <option>-------- Claimant view --------</option>
     <option value="1" {% if data['claimant'] == 1 %}selected{% endif %}>Claim being processed</option>
     <option value="3.1" {% if data['claimant'] == 3.1 %}selected{% endif %}>More time requested by defendant</option>
+    <option value="3.11" {% if data['claimant'] == 3.11 %}selected{% endif %}>More time requested by defendant - judgment cancelled</option>
     <option>-------- CCJs --------</option>
     <option value="2" {% if data['claimant'] == 2 %}selected{% endif %}>CCJ - request judgment</option>
     <option value="3" {% if data['claimant'] == 3 %}selected{% endif %}>CCJ - judgment requested</option>
@@ -2108,6 +2171,7 @@
     <option value="3.4" {% if data['claimant'] == 3.4 %}selected{% endif %}>CCJ - issued (paper)</option>
     <option>------- Defendant responses ----------</option>
     <option value="3.5" {% if data['claimant'] == 3.5 %}selected{% endif %}>Responded on paper</option>
+    <option value="3.6" {% if data['claimant'] == 3.6 %}selected{% endif %}>Responded on paper - judgment cancelled</option>
     <option value="4" {% if data['claimant'] == 4 %}selected{% endif %}>Full admit - pay in instalments</option>
     <option value="4.01" {% if data['claimant'] == 4.01 %}selected{% endif %}>Full admit - pay in instalments (organisation)</option>
     <option value="4.1" {% if data['claimant'] == 4.1 %}selected{% endif %}>Full admit - pay in full on set date</option>
