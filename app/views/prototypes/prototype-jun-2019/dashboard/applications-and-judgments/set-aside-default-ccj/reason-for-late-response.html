@@ -20,7 +20,12 @@ Money Claims Prototype
         Explain why you didn't respond until now
       </h1>
 
-      <form action="task-list?latereply=true&missingletter=false&updatedaddress=false&explainreason=complete&" method="post" class="form">
+      {% if  data['aftercontact'] == 'true' %}
+          <form action="task-list-after-contact?latereply=false&missingletter=false&updatedaddress=true&explainreasonaftercontact=complete" method="post" class="form">
+      {% else %}
+          <form action="task-list?latereply=false&missingletter=false&updatedaddress=true&explainreason=complete" method="post" class="form">
+      {% endif %}
+
 
           <fieldset>
             <div class="form-date">
