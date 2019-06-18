@@ -30,22 +30,44 @@ Money Claims Prototype
       <form
         name="aspnetForm"
         method="post"
-        onsubmit="multiNavigation('radio-set-receive-claim', ['Yes', 'No'], ['task-list?cancelccj=true&cancelccjanswer=complete&', 'task-list?cancelccj=false&cancelccjanswer=complete&']);return false;"
+        onsubmit="multiNavigation('radio-set-receive-claim', ['Yes', 'No','Yes-aftercontact','No-aftercontact'],
+                                                            ['task-list?cancelccj=true&cancelccjanswer=complete&',
+                                                            'task-list?cancelccj=false&cancelccjanswer=complete&',
+                                                            'task-list-after-contact?cancelccjaftercontact=true&cancelccjftercontactanswera=complete&',
+                                                            'task-list-after-contact?cancelccjaftercontact=false&cancelccjftercontactanswera=complete&']);return false;"
         id="aspnetForm"
         autocomplete="off">
 
-        <div class="form-group">
-          <fieldset>
-            <div class="multiple-choice" data-target="pay">
-              <input id="set-aside-yes" type="radio" name="radio-set-receive-claim" value="Yes" aria-controls="paid-off" aria-expanded="false">
-              <label for="set-aside-yes">Yes</label>
+
+        {% if  data['aftercontact'] == 'true' %}
+            <div class="form-group">
+              <fieldset>
+                <div class="multiple-choice" data-target="pay">
+                  <input id="set-aside-yes-aftercontact" type="radio" name="radio-set-receive-claim" value="Yes-aftercontact" aria-controls="paid-off" aria-expanded="false">
+                  <label for="set-aside-yes-aftercontact">Yes</label>
+                </div>
+                <div class="multiple-choice" data-target="vary">
+                  <input id="set-aside-no-aftercontact" type="radio" name="radio-set-receive-claim" value="No-aftercontact" aria-controls="paid-off" aria-expanded="false">
+                  <label for="set-aside-no-aftercontact">No</label>
+                </div>
+              </fieldset>
             </div>
-            <div class="multiple-choice" data-target="vary">
-              <input id="set-aside-no" type="radio" name="radio-set-receive-claim" value="No" aria-controls="paid-off" aria-expanded="false">
-              <label for="set-aside-no">No</label>
+        {% else %}
+            <div class="form-group">
+              <fieldset>
+                <div class="multiple-choice" data-target="pay">
+                  <input id="set-aside-yes" type="radio" name="radio-set-receive-claim" value="Yes" aria-controls="paid-off" aria-expanded="false">
+                  <label for="set-aside-yes">Yes</label>
+                </div>
+                <div class="multiple-choice" data-target="vary">
+                  <input id="set-aside-no" type="radio" name="radio-set-receive-claim" value="No" aria-controls="paid-off" aria-expanded="false">
+                  <label for="set-aside-no">No</label>
+                </div>
+              </fieldset>
             </div>
-          </fieldset>
-        </div>
+        {% endif %}
+
+
 
         <div class="form-group">
           <input type="submit" class="button" value="Continue" />
