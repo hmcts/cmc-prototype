@@ -13,7 +13,9 @@ Money Claims Prototype
 			<div class="govuk-box-highlight">
 
         {% if data['defaultccj'] == 'true' %}
-            {% if data['cancelccj'] == 'true' %}
+            {% if data['varyselected'] == 'true' %}
+                <h1 class="bold-large">You've applied to change the judgment payment terms</h1>
+            {% elif data['cancelccj'] == 'true' %}
                 <h1 class="bold-large">You've applied to cancel the judgment</h1>
             {% elif data['alreadysettled'] == 'true' %}
                 <h1 class="bold-large">Contact Jan Clark</h1>
@@ -70,7 +72,21 @@ Money Claims Prototype
     {% if data['defaultccj'] == 'true' %}
       <h2 class="heading-medium">What happens next</h2>
 
-        {% if data['cancelccj'] == 'true' %}
+        {% if data['varyselected'] == 'true' %}
+            <p>Jan Clark has 19 days to accept or reject your payment plan.</p>
+            <p>We'll contact you if they respond. If they don't respond your plan will be accepted.</p>
+            <p>You must follow the judgment's existing terms until you hear from us.</p>
+
+            <p class="heading-small">If Jan Clark accepts your plan</p>
+            <p>The court will update the judgment and you can change your payments to the new plan.</p>
+
+            <p class="heading-small">If Jan Clark rejects your plan</p>
+            <p>The court will determine how you must pay.</p>
+
+            <p><a class="button" href='/prototypes/prototype-jun-2019/dashboard/defendant?defendant=23'>Go to your account</a></p>
+
+
+        {% elif data['cancelccj'] == 'true' %}
             <p>The court will review your application. You might have to go to a hearing.</p>
             <p>We'll contact you to tell you what to do next.</p>
             <p><a class="button" href='../dashboard/defendant?defendant=20'>Go to your account</a></p>
@@ -522,12 +538,14 @@ Money Claims Prototype
 		<option  value="8&defaultccj=false&" {% if data['confirmation'] == 8 %}selected{% endif %}>9. R/C - Paid less </option>
 		<option  value="9&defaultccj=false&" {% if data['confirmation'] == 9 %}selected{% endif %}>9. Counterclaim - set off</option>
     <!--  Resonding to CCJ  -->
-    <option  value="xyz&defaultccj=true&cancelccj=true&paperresponserequired=false&" {% if data['defaultccj'] == 'true' and data['cancelccj'] == 'true'  and data['paperresponserequired'] == 'false' %}selected{% endif %}
+    <option  value="xyz&defaultccj=true&cancelccj=true&paperresponserequired=false&varyselected=false&" {% if data['defaultccj'] == 'true' and data['cancelccj'] == 'true'  and data['paperresponserequired'] == 'false'  and   data['varyselected'] == 'false' %}selected{% endif %}
              >Defendant - Full or part admit - Requested set aside CCJ</option>
-    <option  value="xyz&defaultccj=true&cancelccj=true&paperresponserequired=true&" {% if data['defaultccj'] == 'true' and data['cancelccj'] == 'true'  and data['paperresponserequired'] == 'true'  %}selected{% endif %}
+    <option  value="xyz&defaultccj=true&cancelccj=true&paperresponserequired=true&varyselected=false&" {% if data['defaultccj'] == 'true' and data['cancelccj'] == 'true'  and data['paperresponserequired'] == 'true'  and   data['varyselected'] == 'false'  %}selected{% endif %}
              >Defendant - Full admit - Counter claim - Requested set aside CCJ</option>
-    <option  value="xyz&defaultccj=true&cancelccj=false&paperresponserequired=false&" {% if data['defaultccj'] == 'true' and data['cancelccj'] == 'false'  and data['paperresponserequired'] == 'false'  %}selected{% endif %}
+    <option  value="xyz&defaultccj=true&cancelccj=false&paperresponserequired=false&varyselected=false&" {% if data['defaultccj'] == 'true' and data['cancelccj'] == 'false'  and data['paperresponserequired'] == 'false'  and   data['varyselected'] == 'false' %}selected{% endif %}
              >Defendant - Contact claimant to settle</option>
+    <option  value="xyz&defaultccj=true&varyselected=true&" {% if data['defaultccj'] == 'true' and data['varyselected'] == 'true' %}selected{% endif %}
+    >Defendant - Vary judgement reqest submitted</option>
 
   </select>
 </form>
