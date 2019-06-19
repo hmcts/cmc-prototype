@@ -103,10 +103,17 @@
 
               {% elseif data['defendant'] == 3.21 %}
                 <!-- CCJ issued from digital service after 1 month deadline -->
+
                 <h2 class="heading-medium">Respond to the judgment</h2>
                 <p>A County Court Judgment has been issued against you.</p>
-                <p>Jan clark made a money claim for {% if data['mediation-pilot'] == "on" %}£300{% else %}£1,500{% endif %} against you on 14 March 2019.</p>
-                <p>Because you didn't respond, a judgment was issued against you on 12 April 2019.</p>
+                {% if data['scenario2'] == 'true' %}
+                  <p>Jan Clark made a money claim for £600 against you on 14 March 2019.</p>
+                  <p>Because you didn't respond, a judgment was issued against you on 12 April 2019.</p>
+                {% else %}
+                  <p>Jan Clark made a money claim for {% if data['mediation-pilot'] == "on" %}£300{% else %}£1,500{% endif %} against you on 14 March 2019.</p>
+                  <p>Because you didn't respond, a judgment was issued against you on 12 April 2019.</p>
+                {% endif %}
+
                 <p><a class="button" href="applications-and-judgments/set-aside-default-ccj/task-list?defaultccj=true&afterccjdeadline=true&">Respond to the judgment</a></p>
 
                 <br>
