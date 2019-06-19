@@ -268,7 +268,7 @@
 
 
         <!--  VARY JUDGMENT -->
-        {% if data['varyselected'] == 'true' and  data['canpaynow'] == 'false'  %}
+        {% if data['fulldefence'] == 'false'  and  data['lower-amount'] == 'false' and  data['canpaynow'] == 'false'  %}
             <table id="table-of-tasks">
               <thead>
               <tr>
@@ -301,37 +301,38 @@
                   </tr>
               {% endif %}
 
+              <!-- if vary requested -->
+              {% if  data['varyselected'] == 'true'  %}
+                  <tr>
+                    <td class="task">
+                      <a href="../vary/pay-default-ccj-options">
+                        <span class="task-name">Request new payment terms</span>
+                      </a>
+                    </td>
+                    <td class="numeric" id="task-status" scope="col" id="col-status">
+                      {% if data.newpaymentterms=="complete" %}
+                            {% include "includes/task_status_finished.html" %}
+                      {% else %}
+                            {% include "includes/task_status_incomplete.html" %}
+                      {% endif %}
+                    </td>
+                  </tr>
 
-              <tr>
-                <td class="task">
-                  <a href="../vary/pay-default-ccj-options">
-                    <span class="task-name">Request new payment terms</span>
-                  </a>
-                </td>
-                <td class="numeric" id="task-status" scope="col" id="col-status">
-                  {% if data.newpaymentterms=="complete" %}
-                        {% include "includes/task_status_finished.html" %}
-                  {% else %}
-                        {% include "includes/task_status_incomplete.html" %}
-                  {% endif %}
-                </td>
-              </tr>
-
-              <tr>
-                <td class="task">
-                  <a href="../../../defendant/task-list/owe-all/statement/explanation  ">
-                    <span class="task-name">Your financial details</span>
-                  </a>
-                </td>
-                <td class="numeric" id="task-status" scope="col" id="col-status">
-                  {% if data.financialdetails=="complete" %}
-                  {% include "includes/task_status_finished.html" %}
-                  {% else %}
-                  {% include "includes/task_status_incomplete.html" %}
-                  {% endif %}
-                </td>
-              </tr>
-
+                  <tr>
+                    <td class="task">
+                      <a href="../../../defendant/task-list/owe-all/statement/explanation  ">
+                        <span class="task-name">Your financial details</span>
+                      </a>
+                    </td>
+                    <td class="numeric" id="task-status" scope="col" id="col-status">
+                      {% if data.financialdetails=="complete" %}
+                      {% include "includes/task_status_finished.html" %}
+                      {% else %}
+                      {% include "includes/task_status_incomplete.html" %}
+                      {% endif %}
+                    </td>
+                  </tr>
+              {% endif %}
 
               </tbody>
             </table>
