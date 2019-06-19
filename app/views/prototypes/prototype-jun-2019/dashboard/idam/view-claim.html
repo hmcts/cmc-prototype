@@ -45,7 +45,11 @@ Money Claims Prototype
               <th scope="row">Cost of repairing the roof</th>
               <td class="numeric last">
 
-                £1000
+                {% if data['scenario2'] == 'true' %}
+                    £100
+                {% else %}
+                    £1000
+                {% endif %}
                     <span class="font-small">
                     </span>
               </td>
@@ -84,16 +88,17 @@ Money Claims Prototype
               <td class="numeric last">
                 <label class="visuallyhidden" for="amount">Claim fee</label>
                     <span class="font-small">
-
                      £70
-
                    </span>
               </td>
             </tr>
             <tr>
               <th scope="col" class="bold">Claim total</th>
-
-              <td class="numeric last bold">£<span name="subt" id="subt">1,500</span></td>
+              {% if data['scenario2'] == 'true' %}
+                  <td class="numeric last bold">£<span name="subt" id="subt">600</span></td>
+              {% else %}
+                  <td class="numeric last bold">£<span name="subt" id="subt">1,500</span></td>
+              {% endif %}
             </tr>
             </tbody>
           </table>
@@ -109,12 +114,14 @@ Money Claims Prototype
         there was a problem with one section. I asked Mary Richards to get the problem fixed, but didn't get a
         reply.</p>
       <p>I phoned several times and even sent a letter but I got no response.</p>
-      <p>I'll have to get another builder to rectify the problem which will cost me £1,430.</P>
+
 
       {% if data['scenario2'] == 'true' %}
+        <p>I'll have to get another builder to rectify the problem which will cost me £570.</P>
       {% else %}
-      <p>Therefore, I'm making a money
-        claim for £1,500 to compensate for the money I'm going to need to spend on the roof and also the claim fee.</p>
+        <p>I'll have to get another builder to rectify the problem which will cost me £1,430.</P>
+        <p>Therefore, I'm making a money
+          claim for £1,500 to compensate for the money I'm going to need to spend on the roof and also the claim fee.</p>
       {% endif %}
 
 
