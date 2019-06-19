@@ -68,7 +68,7 @@
             <th scope="col" id="col-task">
                 <span class="task-group">
                   <span class="group-number" id="task-number"></span>
-                  What you owe
+                  How much you owe
                 </span>
             <th class="numeric" id="task-status" scope="col" id="col-status">
               <span type="hidden" class="visually-hidden">task status</span>
@@ -132,24 +132,6 @@
               -->
 
               <!--  FULL ADMIT ONLY - CAN NOT PAY JUDGEMENT PAYMENT TERMS  -->
-
-              {% if  data['canpaynow'] == 'false'  %}
-                  <tr id="read-rules">
-                    <td class="task">
-                      <a href="switch-to-vary">
-                        <span class="task-name">Judgment payment terms</span>
-                      </a>
-                    </td>
-                    <td class="numeric" id="task-status" scope="col" id="col-status">
-                      {% if data.varyanswered=="complete" %}
-                          {% include "includes/task_status_finished.html" %}
-                      {% else %}
-                          {% include "includes/task_status_incomplete.html" %}
-                      {% endif %}
-                    </td>
-                  </tr>
-              {% endif %}
-
 
 
               <!--  FULL ADMIT ONLY - CONFIRM PAYMENT  -->
@@ -301,6 +283,25 @@
               </thead>
 
               <tbody>
+
+              {% if  data['canpaynow'] == 'false'  %}
+                  <tr id="read-rules">
+                    <td class="task">
+                      <a href="switch-to-vary">
+                        <span class="task-name">Ask to change the judgment</span>
+                      </a>
+                    </td>
+                    <td class="numeric" id="task-status" scope="col" id="col-status">
+                      {% if data.varyanswered=="complete" %}
+                          {% include "includes/task_status_finished.html" %}
+                      {% else %}
+                          {% include "includes/task_status_incomplete.html" %}
+                      {% endif %}
+                    </td>
+                  </tr>
+              {% endif %}
+
+
               <tr>
                 <td class="task">
                   <a href="../vary/pay-default-ccj-options">
