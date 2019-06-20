@@ -13,63 +13,31 @@ Money Claims Prototype
   <a href="#" class="link-back">Back</a>
   <div class="grid-row">
     <div class="column-two-thirds">
-      {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}
-      <form method="post" action="{{ data.return_page if data.return_page | length > 0 else '../task-list' }}" class="form">
-        {% else %}
-        <form method="post" action="their-details/enter-details" class="form">
-          {% endif %}
-          {{formData | safe}}
-          <h1 class="heading-large">
-            {% if data['defendants'].length > 0 %}
-              <span class="form-hint">Defendant {{ data['defendants'].length + 1 }}</span>
-            {% endif %}
-            Who are you making the claim against?
-          </h1>
-          {% if not data['defendants'] %}
-          <p>You'll have a chance to add more defendants later.</p>
-          {% endif %}
 
+        <form method="post" action="their-details/dispute-type" class="form">
 
-          <fieldset>
-            <div class="multiple-choice">
-              <input id="radio-1" type="radio" name="defendant-type" value="Individual" {{ checked("defendant-type", "Individual") }}>
-              <label for="radio-1">
-                <strong class="bold-small">An individual</strong><br>
-                <span class="form-hint">For example someone you lent money to</span>
-              </label>
-            </div>
-            <div class="multiple-choice">
-              <input id="radio-2" type="radio" name="defendant-type" value="Sole trader" {{ checked("defendant-type", "Sole trader") }}>
-              <label for="radio-2">
-                <strong class="bold-small">A sole trader or self-employed person</strong><br>
-                <span class="form-hint">For example a tradesperson who did work for you</span>
-              </label>
-            </div>
-            <div class="multiple-choice">
-              <input id="radio-3" type="radio" name="defendant-type" value="Company" {{ checked("defendant-type", "Company") }}>
-              <label for="radio-3">
-                <strong class="bold-small">A company</strong><br>
-                <span class="form-hint">For example a company that sold you goods or services</span>
-              </label>
-            </div>
-            <div class="multiple-choice">
-              <input id="radio-4" type="radio" name="defendant-type" value="Organisation" {{ checked("defendant-type", "Organisation") }}>
-              <label for="radio-4">
-                <strong class="bold-small">Another type of organisation</strong><br>
-                <span class="form-hint">For example a partnership, trust, charity, club or association</span>
-              </label>
-            </div>
-          </fieldset>
-          {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}
+          <h1 class="heading-large">Getting the defendant's details right</h1>
+
+          <p>It is crucial that you get the defendant's details correct.</p>
+          <p>So much as a typo in a name, or suing a company by its trading name rather than its registered name, may prevent you from reclaiming your money.</p>
+
+          <p>You need to be absolutely sure of:</p>
+          <ul class="list list-bullet">
+            <li><strong class="bold-small">their trading status</strong> - whether they are an individual, a sole trader or a company</li>
+            <li><strong class="bold-small">their full, legal name</strong> - for companies this may not be the name you know them by</li>
+            <li><strong class="bold-small">their registered or home address</strong> - for companies such as shops this is unlikely to be the shop you visited</li>
+          </ul>
+
+          <p>The best thing to do is speak to the defendant and have them confirm these details in writing.</p>
+
+          <p>Otherwise, we can help you find the correct details.</p>
+
           <div class="form-group">
-            <input type="submit" class="button" value="Save changes"/>
+            <input type="submit" class="button" value="Continue"/>
           </div>
-          <a href="{{ data.return_page if data.return_page | length > 0 else '../task-list' }}">Cancel</a>
-          {% else %}
-          <div class="form-group">
-            <input type="submit" class="button" value="Save and continue"/>
-          </div>
-          {% endif %}
+
+          <p><a href="their-details/defendant-type">I am confident I already know the correct details</a></p>
+
         </form>
       </div>
     </div>
