@@ -17,32 +17,30 @@ Money Claims Prototype
       <form
         name="aspnetForm"
         method="post"
-        onsubmit="multiNavigation('coho', ['yes','no'], ['company', 'sole-trader' ]);return false;"
+        onsubmit="multiNavigation('company', ['yes','no'], ['enter-details?defendant-type=Company&', 'defendant-type' ]);return false;"
         id="aspnetForm"
         autocomplete="off">
 
         <h1 class="heading-large">
-          Search for the business on Companies House
+          The defendant is likely a company
         </h1>
 
-        <p>You can search for free on the <a href="https://beta.companieshouse.gov.uk/" target="_blank">Companies House website</a> (opens in new window).</p>
-
-        <p>Make sure that the 'Registered office address' and the people listed look appropriate, or it may not be the right business.</p>
+        <p>Based on the answers you've provided, it is likely that the defendant is a registered company.</p>
 
         <h1 class="heading-medium">
-          Were you able to find an entry for the business?
+          Do you agree that this is the case?
         </h1>
         <fieldset>
-          <div class="multiple-choice" data-target="note">
-            <input id="radio-1" type="radio" name="coho" value="yes" {{ checked("coho", "yes") }}>
+          <div class="multiple-choice">
+            <input id="radio-1" type="radio" name="company" value="yes" {{ checked("company", "yes") }}>
             <label for="radio-1">Yes</label>
           </div>
-          <div class="panel js-hidden" id="note">
-            Make a note of the company's full name and registered address as you will need them shortly.
-          </div>
-          <div class="multiple-choice">
-            <input id="radio-2" type="radio" name="coho" value="no" {{ checked("coho", "no") }}>
+          <div class="multiple-choice" data-target="info">
+            <input id="radio-2" type="radio" name="company" value="no" {{ checked("company", "no") }}>
             <label for="radio-2">No</label>
+          </div>
+          <div class="panel js-hidden" id="info">
+            You will need to tell us what type of business you believe they are.
           </div>
 
         </fieldset>
