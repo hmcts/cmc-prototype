@@ -13,7 +13,9 @@ Money Claims Prototype
 			<div class="govuk-box-highlight">
 
         {% if data['defaultccj'] == 'true' %}
-            {% if data['varyselected'] == 'true' %}
+            {% if  data['aftersettle'] == 'true'  and  data['cancelccjaftercontact'] == 'false'  %}
+                <h1 class="bold-large">You've not cancelled the judgment</h1>
+            {% elif data['varyselected'] == 'true' %}
                 <h1 class="bold-large">You've applied to change the judgment payment terms</h1>
             {% elif data['cancelccj'] == 'true' %}
                 <h1 class="bold-large">You've applied to cancel the judgment</h1>
@@ -72,7 +74,13 @@ Money Claims Prototype
     {% if data['defaultccj'] == 'true' %}
       <h2 class="heading-medium">What happens next</h2>
 
-        {% if data['varyselected'] == 'true' %}
+        {% if  data['aftersettle'] == 'true'  and  data['cancelccjaftercontact'] == 'false'  %}
+            <p>Ask Jan Clark to tells us you've settled the claim. Then judgement will be marked as satisfied.</p>
+            <p>You'll then be able to get a certificate of satisfaction.</p>
+
+            <p><a class="button" href='../dashboard/defendant?defendant=21'>Go to your account</a></p>
+
+        {% elif data['varyselected'] == 'true' %}
             <p>Jan Clark has 19 days to accept or reject your payment plan.</p>
             <p>We'll contact you if they respond. If they don't respond your plan will be accepted.</p>
             <p>You must follow the judgment's existing terms until you hear from us.</p>
@@ -104,7 +112,8 @@ Money Claims Prototype
               <p>Jan Clark can bring enforcement action if you don't follow the terms of the judgment.</p>
             </div>
             <br>
-            {% if data['varytoimmediately'] == 'true'  %}
+
+            {% if data['varytoimmediately'] == 'true' or data['cancelccjaftercontact'] == 'false'  %}
                 <p><a class="button" href='../dashboard/defendant?defendant=21'>Go to your account</a></p>
             {% else %}
                 <p><a class="button" href='../dashboard/defendant'>Go to your account</a></p>
