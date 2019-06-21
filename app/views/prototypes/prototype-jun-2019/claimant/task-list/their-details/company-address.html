@@ -1,0 +1,70 @@
+{% extends "layout_task-list.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block home_link %} ../../task-list {% endblock %}
+{% block proposition_header %}
+{% set my_account="1" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% import 'prototypes/prototype-jun-2019/includes/address.html' as address %}
+
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}
+  {% else %}
+  <a href="#" class="link-back">Back</a>
+  {% endif %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      
+      <form method="post" action="email" class="form">
+
+        <h1 class="heading-large">
+          Their registered company address
+        </h1>
+
+        <p>You need to use the company's registered company address, which could be different to, for example the branch you visited.</p>
+        <p>You can often find the company's registered company address in paperwork such as Terms & Conditions documents, or else you can <a href="https://beta.companieshouse.gov.uk/" target="_blank">search Companies House </a> (opens in new window).</p>
+
+        <p>The company's registered office must be in England in Wales. Some companies operating in the UK are registered abroad and you will not be able to claim against them with this service.</p>
+
+        <h2 class="heading-medium">
+          Enter their registered company address
+        </h2>
+
+        {{ address.lookup('defendant') }}
+
+        <h2 class="heading-small">Has the defendant asked for post about the claim to be sent to a different address?</h2>
+        </p>
+        <div class="form-group">
+          <fieldset>
+           <div class="multiple-choice" data-target="correspondence-address">
+            <input type="radio" id="no-correspondence" name="correspondence-address" checked="" value="No" {{ checked("correspondence-address", "No") }} >
+            <label for="no-correspondence">No</label>
+          </div>
+          <div class="multiple-choice" data-target="contact-by-phone">
+            <input type="radio" id="add-correspondence" name="correspondence-address" value="Yes" {{ checked("correspondence-address", "Yes") }}>
+            <label for="add-correspondence">Yes, use a different address</label>
+          </div>
+          <div class="panel panel-border-narrow js-hidden" id="contact-by-phone">
+            <div id="addressManualWrapper">
+             <p>All correspondence will be sent to this address.
+             This is known as an 'address for service'. It cannot be their work address, or a solicitor's address.</p>
+             {{ address.lookup('service') }}
+            </div>
+          </div>
+        </div>
+
+
+    <div class="form-group">
+      <input type="submit" class="button" value="Save and continue"/>
+    </div>
+
+  </form>
+</div>
+</div>
+{% include 'prototypes/prototype-jun-2019/includes/contact.html' %}
+</main>
+{% endblock %}
