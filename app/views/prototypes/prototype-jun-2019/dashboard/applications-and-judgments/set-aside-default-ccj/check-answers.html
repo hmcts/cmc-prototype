@@ -379,9 +379,11 @@ Check your answers
 
 
 
-
-    {% if data['varyselected'] == 'true'  %}
-        <br>
+  <br>
+  {% if data['varyselected'] == 'true'  %}
+      {% if data['varytoimmediately'] == 'true'  %}
+          <p><a class="button" href="../../../defendant/confirmation-page?varyselected=false&">Submit</a></p>
+      {% else %}
         <h2 class="heading-medium">Declaration</h2>
         <div class="form-group">
           <div class="multiple-choice text">
@@ -389,15 +391,13 @@ Check your answers
             <label for="HasAcceptedTermsAndConditions"> I declare that the details I have given are true to the best of my knowledge.</label>
           </div>
         </div>
-
         <p><a class="button" href="../../../defendant/task-list/check-and-send/enter-card">Sign, submit and continue to payment (£50)</a></p>
-    {% elif data['cancelccj'] == 'true'  %}
-        <br>
-        <p><a class="button" href="../../../defendant/task-list/check-and-send/enter-card">Submit and continue to payment (£255)</a></p>
-    {% else %}
-        <br>
-        <p><a class="button" href="../../../defendant/confirmation-page">Submit</a></p>
-    {% endif %}
+      {% endif %}
+  {% elif data['cancelccj'] == 'true'  %}
+      <p><a class="button" href="../../../defendant/task-list/check-and-send/enter-card">Submit and continue to payment (£255)</a></p>
+  {% else %}
+      <p><a class="button" href="../../../defendant/confirmation-page">Submit</a></p>
+  {% endif %}
 
 </main>
 
