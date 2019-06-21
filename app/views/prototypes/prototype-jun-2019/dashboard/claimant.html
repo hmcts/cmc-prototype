@@ -37,7 +37,7 @@
             or data['claimant'] == 10.91 or data['claimant'] == 11.1 or data['claimant'] == 11.1001 or data['claimant'] == 11.1002 or data['claimant'] == 11.1003 or data['claimant'] == 11.101 or data['claimant'] == 11.101 or data['claimant'] == 11.102 or data['claimant'] == 11.103 or data['claimant'] == 11.11 or data['claimant'] == 11.1011 or data['claimant'] == 11.2 or data['claimant'] == 11.21 or data['claimant'] == 11.3
             or data['claimant'] == 11.4 or data['claimant'] == 11.5 or data['claimant'] == 11.51 or data['claimant'] == 11.6 or data['claimant'] == 11.61 or data['claimant'] == 11.7
             or data['claimant'] == 12 or data['claimant'] == 13.2 or data['claimant'] == 14.1 or data['claimant'] == 16 or data['claimant'] == 17 or data['claimant'] == 20 or data['claimant'] == 20.1 or data['claimant'] == 20.2
-            or data['claimant'] == 21 or data['claimant'] == 23 or data['claimant'] == 24 or data['claimant'] == 26  or data['claimant'] == 27  or data['claimant'] == 28
+            or data['claimant'] == 21 or data['claimant'] == 23 or data['claimant'] == 24 or data['claimant'] == 26  or data['claimant'] == 27  or data['claimant'] == 28  or data['claimant'] == 29
             or data['claimant'] == 33  or data['claimant'] == 34  or data['claimant'] == 36  or data['claimant'] == 37   %}
             <li role="presentation"><a href="#next-steps" role="tab" tabindex="0" aria-controls="next-steps" aria-selected="true">Next steps</a></li>
             <li role="presentation"><a href="#history" role="tab" tabindex="-1" aria-controls="history">Claim history</a></li>
@@ -953,20 +953,20 @@
                 </div>
 
 
-              {% elseif data['claimant'] == 26 %}
-                <!--  Vary requested - by set date -->
-                <h2 class="heading-medium">Respond to the defendant</h2>
-                <p>Mary Richards has requested to pay in full on 28 July 2019.</p>
-                <p>You can accept or reject their offer.</p>
-                <p><a href="/prototypes/prototype-jun-2019/dashboard/applications-and-judgments/vary/task-list-claimant-response?instalments=false&bysetdate=true&vary=true&" class="button">View and respond</a></p>
-
-
-              {% elseif data['claimant'] == 27 %}
-                <!-- Vary requested - installments -->
+              {% elseif data['claimant'] == 26  or  data['claimant'] == 27  %}
+                <!--  Vary requested - by set date and installmanets  -->
                 <h2 class="heading-medium">Respond to the defendant</h2>
                 <p>Mary Richards has asked to change how they repay you.</p>
-                <p>You can accept or reject their request. The request will be accepted if you don't respond by 20 July 2019.</p>
-                <p><a href="/prototypes/prototype-jun-2019/dashboard/applications-and-judgments/vary/task-list-claimant-response?instalments=true&bysetdate=false&vary=true&" class="button">View and respond</a></p>
+                {% if data['claimant'] == 26 %}
+                    <!-- by set date -->
+                    <p>They have requested to pay in full on 28 July 2019.</p>
+                {% elseif data['claimant'] == 27 %}
+                    <!-- by installments -->
+                    <p>They have requested to pay £75 every week.</p>
+                {% endif %}
+                <p><a href="/prototypes/prototype-jun-2019/dashboard/applications-and-judgments/vary/task-list-claimant-response?instalments=false&bysetdate=true&vary=true&" class="button">View and respond</a></p>
+                <p>The request will be accepted if you don't respond by {{ now | date( 'add', 14, 'days' ) | date }}.</p>
+
 
 
               {% elseif data['claimant'] == 28 %}
@@ -974,10 +974,10 @@
                 <div class="status-block">
                   <h2 class="heading-medium">Wait for the defendant to pay you</h2>
                   <p>A new County Court Judgment (CCJ) has been issued.</p>
+                  <p><a href="repayment-plan?who=claimant&amp;plan=instalments">View the repayment plan</a></p>
                   <p>We'll send a copy of the judgment to you and to Mary Richards.</p>
-                  <p>When you've been paid in full, you need to let us know.</p>
-                  <p><a href="paid-in-full/claimant" class="button secondary-button">Tell us you've been paid</a></p><br>
                 </div>
+
                 <div class="status-block single">
                   <h2 class="heading-medium">Ask the court to recover the debt</h2>
                   <p>If the defendant doesn't pay, you can <a href="https://www.gov.uk/make-court-claim-for-money/enforce-a-judgment">ask the court to recover the debt</a>. There's no guarantee that the court will get your money back.</p>
@@ -1074,7 +1074,8 @@
             data['claimant'] != 3.2 and data['claimant'] != 10.12 and data['claimant'] != 10.01 and
             data['claimant'] != 10.4 and data['claimant'] != 10.5 and data['claimant'] != 10.81 and data['claimant']
             != 10.82 and data['claimant'] != 10.83 and data['claimant'] != 11.1011 and data['claimant'] != 17 and data['claimant'] !=
-            4.2 and data['claimant'] != 4.3 and data['claimant'] != 11.4 and data['claimant'] != 11.5 and data['claimant'] != 11.51 and data['claimant'] != 11.6 and data['claimant'] != 11.61 and data['claimant'] != 10 and data['claimant'] != 11%}
+            4.2 and data['claimant'] != 4.3 and data['claimant'] != 11.4 and data['claimant'] != 11.5 and data['claimant'] != 11.51 and data['claimant'] != 11.6 and data['claimant'] != 11.61 and data['claimant'] != 10 and data['claimant'] != 11
+             or data['claimant'] == 26  or data['claimant'] == 27  or data['claimant'] == 28  or data['claimant'] == 29  %}
 
 
             <div class="column-two-thirds" style="margin-top: -10px">
@@ -2543,7 +2544,7 @@
     <option value="26" {% if data['claimant'] == 26 %}selected{% endif %}>CCJ - respond to defendant - pay by set date</option>
     <option value="27" {% if data['claimant'] == 27 %}selected{% endif %}>CCJ - respond to defendant - pay by installments</option>
     <option value="28" {% if data['claimant'] == 28 %}selected{% endif %}>CCJ - accepted vary request</option>
-    <option value="29" {% if data['claimant'] == 29 %}selected{% endif %}>CCJ - rejected vary request</option>
+    <option value="29" {% if data['claimant'] == 29 %}selected{% endif %}>CCJ - rejected vary request - redetermination </option>
 
 
     <option>------- CCJ set aside by defendant----------</option>
