@@ -16,7 +16,14 @@ Money Claims Prototype
       {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}
       <form method="post" action="{{ data.return_page if data.return_page | length > 0 else '../task-list' }}" class="form">
         {% else %}
-        <form method="post" action="enter-details" class="form">
+
+        <form
+          name="aspnetForm"
+          method="post"
+          onsubmit="multiNavigation('defendant-type', ['Individual','Sole trader', 'Organisation', 'Company'], ['enter-details', 'enter-details', 'enter-details', 'company-name' ]);return false;"
+          id="aspnetForm"
+          autocomplete="off">
+
           {% endif %}
           {{formData | safe}}
           <h1 class="heading-large">
