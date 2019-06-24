@@ -99,14 +99,32 @@ Money Claims Prototype
 
 <form method="post"  action="#" class="form" style="position: absolute;">
   <select id="check2" name="check2" onchange="window.location.href='?who='+this.value">
-    <option  value="defendant&plan=instalments" {% if data['who'] == 'defendant'  and  data['plan'] == 'instalments' %}selected{% endif %}
-              >Defendant - Instalments</option>
-    <option  value="defendant&plan=Set-date"  {% if data['who'] == 'defendant'  and  data['plan'] == 'Set-date' %}selected{% endif %}
-              >Defendant - Fixed date</option>
-    <option  value="claimant&plan=instalments" {% if data['who'] == 'claimant'  and  data['plan'] == 'instalments' %}selected{% endif %}
-              >Claimant - Instalments</option>
-    <option  value="claimant&plan=Set-date"  {% if data['who'] == 'claimant'  and  data['plan'] == 'Set-date' %}selected{% endif %}
-              >Claimant - Fixed date</option>
+    <option  value="claimant&plan=instalments&claimant=10.1&defendant=null&"
+             {% if data['who'] == 'claimant'  and  data['plan'] == 'instalments' and  data['claimant'] != 28  %}selected{% endif %}
+              >Default plan - Not vary - Claimant - Instalments </option>
+    <option  value="claimant&plan=Set-date&claimant=10.1&defendant=null&"
+             {% if data['who'] == 'claimant'  and  data['plan'] == 'Set-date' and  data['claimant'] != 28  %}selected{% endif %}
+    >Default plan - Not vary - Claimant - Set date </option>
+    <option  value="defendant&plan=instalments&defendant=3.904&claimant=null&"
+             {% if data['who'] == 'defendant'  and  data['plan'] == 'instalments' and  data['defendant'] != 25 and data['defendant'] != 25  and  data['defendant'] != 26  %}selected{% endif %}
+    >Default plan - Not vary - Defendant - Instalments </option>
+    <option  value="defendant&plan=Set-date&defendant=3.904&claimant=null&"
+             {% if data['who'] == 'defendant'  and  data['plan'] == 'Set-date' and data['defendant'] != 25  and  data['defendant'] != 26 %}selected{% endif %}
+    >Default plan - Not vary - Defendant - Set date </option>
+
+
+    <option  value="claimant&plan=instalments&claimant=28&defendant=null&"
+              {% if data['who'] == 'claimant'  and  data['plan'] == 'instalments'  and  data['claimant'] == 28 %}selected{% endif %}
+              >Vary - Claimant - Instalments</option>
+    <option  value="claimant&plan=Set-date&claimant=28&defendant=null&"
+             {% if data['who'] == 'claimant'  and  data['plan'] == 'Set-date'  and  data['claimant'] == 28 %}selected{% endif %}
+              >Vary - Claimant - Set date</option>
+    <option  value="defendant&plan=instalments&defendant=25&claimant=null&"
+             {% if data['who'] == 'defendant'  and  data['plan'] == 'instalments' and  data['defendant'] == 25  or  data['defendant'] == 26 %}selected{% endif %}
+              >Vary - Defendant - Instalments</option>
+    <option  value="defendant&plan=Set-date&defendant=25&claimant=null&"
+             {% if data['who'] == 'defendant'  and  data['plan'] == 'Set-date' and  data['defendant'] == 25  or  data['defendant'] == 26  %}selected{% endif %}
+              >Vary - Defendant - Set date</option>
 
 
   </select>
