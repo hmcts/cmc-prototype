@@ -46,9 +46,12 @@ Money Claims Prototype
               <p>Make sure you get receipts for any payments.</p>
               <p><a href="../../party-details/claimant">Get Jan Clark's contact details</a></p>
 
-              <div class="panel panel-border-narrow"  style="padding-bottom:15px;">
-                <p>Jan Clark can bring enforcement action if you don't follow the terms of the judgment.</p>
-              </div>
+
+              {%  if data['afterccjdeadline'] == 'true'  %}
+                    <div class="panel panel-border-narrow"  style="padding-bottom:15px;">
+                      <p>Jan Clark can bring enforcement action if you don't follow the terms of the judgment.</p>
+                    </div>
+              {% endif %}
 
               <p>The judgement will remain but will be marked as satisfied when Jan Clark confirms you've paid.</p>
 
@@ -81,9 +84,11 @@ Money Claims Prototype
                   <input id="set-aside-yes" type="radio" name="radio-set-receive-claim" value="Yes"  >
                   <label for="set-aside-yes">Yes, I'll contact the claimant</label>
                 </div>
-                <div class="panel panel-border-narrow js-hidden" id="pay" style="padding-bottom:15px;">
-                  <p>The claimant will still be able to enforce the judgment until they confirm you've settled.</p>
-                </div>
+                {%  if data['afterccjdeadline'] == 'true'  %}
+                    <div class="panel panel-border-narrow js-hidden" id="pay" style="padding-bottom:15px;">
+                      <p>The claimant will still be able to enforce the judgment until they confirm you've settled.</p>
+                    </div>
+                {%   endif  %}
 
                 <div class="multiple-choice" data-target="vary">
                   <input id="set-aside-no" type="radio" name="radio-set-receive-claim" value="No" >
