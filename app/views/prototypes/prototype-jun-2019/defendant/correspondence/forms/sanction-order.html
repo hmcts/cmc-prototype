@@ -184,7 +184,7 @@ h1 {
 
   <br />
 
-  <p>{% if data['party'] == 'claimant' %}Mary Richards{% else %}Jan Clark{% endif %} missed the deadline to tell us they'd finished uploading their hearing information. The deadline was 4pm on {{ date | date('subtract', 1, 'days') | date }}.</p>
+  <p>{% if data['party'] == 'claimant' %}Mary Richards{% elseif data['party'] == 'both' %}Mary Richards and Jan Clark{% else %}Jan Clark{% endif %} missed the deadline to tell us they'd finished uploading their hearing information. The deadline was 4pm on {{ date | date('subtract', 1, 'days') | date }}.</p>
 
   <p>They now have until 4pm on {{ date | date('add', 12, 'days') | date }} to upload the hearing information and tell us they've finished, otherwise the court will cancel their {% if data['party'] == 'claimant' %}defence{% else %}claim{% endif %}.</p>
 
@@ -210,5 +210,6 @@ h1 {
   <select onchange="window.location.href='?party='+this.value">
     <option value="claimant" {% if data['party'] == 'claimant' %}selected{% endif %}>Claimant</option>
     <option value="defendant" {% if data['party'] == 'defendant' %}selected{% endif %}>Defendant</option>
+    <option value="both" {% if data['party'] == 'both' %}selected{% endif %}>Both</option>
   </select>
 </form>
