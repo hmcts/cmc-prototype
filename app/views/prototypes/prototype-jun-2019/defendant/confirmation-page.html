@@ -108,10 +108,11 @@ Money Claims Prototype
         {% else %}
             <p>Make sure you get receipts for any payments.</p>
             <p><a href="../../party-details/claimant">Get Jan Clark's contact details</a></p>
-            <div class="panel panel-border-narrow"  style="padding-bottom:15px;">
-              <p>Jan Clark can bring enforcement action if you don't follow the terms of the judgment.</p>
-            </div>
-
+            {%  if data['afterccjdeadline'] == 'true'  %}
+                <div class="panel panel-border-narrow"  style="padding-bottom:15px;">
+                  <p>Jan Clark can bring enforcement action if you don't follow the terms of the judgment.</p>
+                </div>
+            {% endif %}
 
             {% if data['afterccjdeadline'] == 'false'  %}
                 <p>If Jan Clark tells us you've settled the claim by 4pm on {{ now |  date("add", 7, "day") | date( "D MMMM YYYY" ) }}, the CCJ will be removed from the public register.</p>
