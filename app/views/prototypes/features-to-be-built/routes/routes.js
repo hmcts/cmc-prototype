@@ -184,8 +184,10 @@ module.exports = function(app){
 
     if (req.session.data['year'] > 2000 ) {
       res.redirect('/' + strPath + 'defendant/task-list/your-details/under-18');
-    } else {
+    } else if (req.session.data['year'] <= 2000 ) {
       res.redirect('/' + strPath + 'defendant/task-list/your-details/number');
+    } else {
+      res.render( strPath + 'defendant/task-list/your-details/date-of-birth');
     }
 
   })
