@@ -22,7 +22,7 @@ Money Claims Prototype
         </h1>
 
         {% if data['instalments'] != 'true' %}
-            <p>Mary Richards wants to pay you the remaining amount by 28 July 2019.</p>
+            <p>Mary Richards wants to pay you the remaining amount by 28 October 2019.</p>
         {% else %}
             <p>Mary Richards wants to pay you in instalments.</p>
             <h2 class="heading-medium">How they want to pay</h2>
@@ -78,12 +78,10 @@ Money Claims Prototype
                 <summary><span class="summary">View current plan</span></summary>
                 <div class="panel">
 
-                  {% if data['instalments'] == 'true' %}
-                  <p>Mary Richards pays in instalments of £150 per month.</p>
+                  {% if data['planwas'] == 'setdate' %}
+                      <p>Mary Richards will pay by {{ now |  date("add", 16, "day") | date( "D MMMM YYYY" ) }}.</p>
                   {% else %}
-                  <p>Mary Richards will pay by 28 August 2019.</p>
-
-                  <div class="column-two-thirds">
+                      <div class="column-two-thirds">
                     <table class="" >
                       <tbody>
 
@@ -566,7 +564,7 @@ Money Claims Prototype
           </div>
         </details>
 
-        <p><a class="button" href="/prototypes/prototype-may-2019/dashboard/applications-and-judgments/vary/task-list-claimant-response?viewvaryplan=complete&">Continue</a></p>
+        <p><a class="button" href="task-list-claimant-response?viewvaryplan=complete&">Continue</a></p>
 
       </form>
     </div>
@@ -576,8 +574,20 @@ Money Claims Prototype
 
 <form method="post"  action="#" class="form" style="position: absolute;">
   <select id="check2" name="check2" onchange="window.location.href='?vary=true&instalments='+this.value">
-    <option  value="true&" {% if data['instalments'] == 'true' %}selected{% endif %}>Change to new instalments</option>
-    <option  value="false&"  {% if data['instalments'] != 'true' %}selected{% endif %}>Change to new set date</option>
+    <option  value="true&planwas=instalments&"
+             {% if  data['instalments'] == 'true'  and  data['planwas'] == 'instalments'  %}selected{% endif %}
+              >Change to new instalments - from instalments</option>
+    <option  value="true&planwas=setdate&"
+             {% if data['instalments'] == 'true'  and  data['planwas'] == 'setdate'  %}selected{% endif %}
+              >Change to new instalments - from set date</option>
+    <option  value="false&planwas=instalments&"
+             {% if  data['instalments'] == 'false'  and  data['planwas'] == 'instalments'  %}selected{% endif %}
+    >Change to new set date - from instalments</option>
+    <option  value="false&planwas=setdate&"
+             {% if data['instalments'] == 'false'  and  data['planwas'] == 'setdate'  %}selected{% endif %}
+    >Change to new set date - from set date</option>
+
+
   </select>
 </form>
 
