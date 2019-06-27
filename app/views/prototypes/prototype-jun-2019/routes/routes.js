@@ -395,9 +395,9 @@ module.exports = function(app){
 
   app.post( '/' + strPath + 'defendant/task-list/your-defence/paid-less', (req, res) => {
 
-    if( req.session.data['cancelccj'] == 'true' )
+    if( req.session.data['defaultccj'] == 'true' )
     {
-        res.redirect('/' + strPath + 'defendant/task-list/your-defence/defence-message');
+        res.redirect('/' + strPath + 'dashboard/applications-and-judgments/set-aside-default-ccj/task-list?how_much_paid=complete&');
     }
     else
     {
