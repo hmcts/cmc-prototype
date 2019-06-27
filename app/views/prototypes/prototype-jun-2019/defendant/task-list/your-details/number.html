@@ -53,18 +53,25 @@ Money Claims Prototype
 
 
 
-        </fieldset>
-          <input type="hidden" name="confirm_details" value="complete">
-              {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}
-              <div class="form-group">
-                <input type="submit" class="button" value="Save changes"/>
-              </div>
-              <a href="{{ data.return_page if data.return_page | length > 0 else '../task-list' }}">Cancel</a>
-              {% else %}
-              <div class="form-group">
-                <input type="submit" class="button" value="Save and continue"/>
-              </div>
-              {% endif %}
+          {% if data['defaultccj'] == 'true' %}
+              <p><a class="button" href="../../../dashboard/applications-and-judgments/set-aside-default-ccj/task-list?confirmdetails=complete&">Save and continue</a></p>
+
+          {% else %}
+
+              </fieldset>
+                <input type="hidden" name="confirm_details" value="complete">
+                    {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}
+                    <div class="form-group">
+                      <input type="submit" class="button" value="Save changes"/>
+                    </div>
+                    <a href="{{ data.return_page if data.return_page | length > 0 else '../task-list' }}">Cancel</a>
+                    {% else %}
+                    <div class="form-group">
+                      <input type="submit" class="button" value="Save and continue"/>
+                    </div>
+                    {% endif %}
+          {% endif %}
+
 
       </form>
 
