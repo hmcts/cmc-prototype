@@ -76,8 +76,8 @@ Money Claims Prototype
      method="post"
      onsubmit="multiNavigation('radio-pay-group', ['Immediately', 'Set-date', 'Instalments'],
                                                     ['../set-aside-default-ccj/task-list?newpaymentterms=complete&varytoimmediately=true&',
-                                                    '../../../defendant/task-list/owe-all/pay-by-set-date?vary=true&repaymentplan=false&varyselected=true&',
-                                                    '../../../defendant/task-list/owe-all/statement/repayment-plan?vary=true&repaymentplan=true&varyselected=true&' ]);return false;"
+                                                    '../../../defendant/task-list/owe-all/pay-by-set-date?vary=true&repaymentplan=false&instalments=false&varyselected=true&',
+                                                    '../../../defendant/task-list/owe-all/statement/repayment-plan?vary=true&repaymentplan=true&instalments=true&varyselected=true&' ]);return false;"
      id="aspnetForm"
      autocomplete="off">
 
@@ -99,7 +99,7 @@ Money Claims Prototype
 
           <div class="multiple-choice" data-target="set-date">
               <input id="radio-no" type="radio" name="radio-pay-group" value="Set-date">
-              {% if data['instalments'] != 'true' %}
+              {% if data['instalments'] == 'true' %}
                   <label for="radio-no">By a set date</label>
               {% else %}
                   <label for="radio-no">By a different date</label>
@@ -108,7 +108,7 @@ Money Claims Prototype
 
           <div class="multiple-choice" data-target="instalments">
               <input id="radio-repayment" type="radio" name="radio-pay-group" value="Instalments">
-              {% if data['instalments'] != 'true' %}
+              {% if data['instalments'] == 'true' %}
                   <label for="radio-repayment" data-target="repayment-info">I'll suggest a new repayment plan</label>
               {% else %}
                   <label for="radio-repayment" data-target="repayment-info">I'll suggest a repayment plan</label>
@@ -138,10 +138,10 @@ Money Claims Prototype
   <select id="check2" name="check2" onchange="window.location.href='?vary=true&instalments='+this.value">
     <option  value="true&"
              {% if  data['instalments'] == 'true'  %}selected{% endif %}
-              >Change from instalments</option>
+              >Vary -  from instalments</option>
     <option  value="false&"
              {% if data['instalments'] == 'false'  %}selected{% endif %}
-              >Change from set date</option>
+              >Vary -  from set date</option>
 
   </select>
 </form>
