@@ -102,7 +102,7 @@ Money Claims Prototype
 
       {% endif %}
 
-      {% if data['claimant'] == 11.1001  or data['defendant'] == 12.1001 or data['claimant'] == 11.1002 or data['defendant'] == 12.1002 or data['expert'] == 'complete' %}
+      {% if data['claimant'] == 11.1001  or data['defendant'] == 12.1001 or data['expert'] == 'complete' %}
 
 
       {% if data['claimant'] == 11.1001 or data['defendant'] == 12.1001 %}
@@ -118,33 +118,13 @@ Money Claims Prototype
 
       <p>Once you have received the expert's report you need to:</p>
       <ol class="list list-number">
-        <li>Upload the report.</li>
+        <li>Share the report with the {% if data['party'] == "defendant" %}claimant{% else %}defendant{% endif %}</li>
         <li>Ask the expert any questions either of you have about the report.</li>
-        <li>Upload the expert's response.</li>
+        <li>Upload the expert's report along with any questions and answers about it</li>
       </ol>
 
       <div class="form-group">
-        <a href="order-response/expert-reports?type=" class="secondary-button">Upload the expert's report</a>
-      </div>
-
-      {% elseif data['claimant'] == 11.1002 or data['defendant'] == 12.1002 %}
-      <h2 class="heading-small">Upload the expert's response</h2>
-
-      <p>You uploaded the expert's report on {{ now | date('subtract', 5, 'days') | date }}:</p>
-      <ul>
-        <li><a href="#">Report.pdf</a></li>
-      </ul>
-      <br />
-
-      <p>Now you need to:</p>
-      <ol class="list list-number">
-        <li>Ask the {% if data['party'] == "defendant" %}claimant{% else %}defendant{% endif %} if they have any questions about the expert's report.</li>
-        <li>Ask the expert any questions either of you have about the report.</li>
-        <li>Let us know if you had questions and upload the expert's response along with the questions.</li>
-      </ol>
-
-      <div class="form-group">
-        <a href="order-response/expert-reports/questions?party=claimant&type=report" class="secondary-button">Upload the expert's response</a>
+        <a href="order-response/expert-reports?type=" class="secondary-button">Upload the expert's documents</a>
       </div>
 
 

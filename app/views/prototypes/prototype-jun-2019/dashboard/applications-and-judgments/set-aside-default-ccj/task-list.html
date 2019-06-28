@@ -94,6 +94,24 @@
                 </tr>
 
 
+                {% if data.paidwhatiowe == 'true' %}
+                    <tr id="their-details">
+                      <td class="task">
+                        <a href="../../../defendant/task-list/your-defence/paid-less">
+                          <span class="task-name">Tell us how much you've paid</span>
+                        </a>
+                      </td>
+                      <td class="numeric" id="task-status" scope="col" id="col-status">
+                        {% if data.how_much_paid=="complete" %}
+                        {% include "includes/task_status_finished.html" %}
+                        {% else %}
+                        {% include "includes/task_status_incomplete.html" %}
+                        {% endif %}
+                      </td>
+                    </tr>
+                {% endif %}
+
+
 
               <!--  FULL ADMIT ONLY - GET THE USER TO PAY -->
               {% if data['alreadysettled'] == 'false'  and  data['fulldefence'] == 'false'  and  data['lower-amount'] == 'false' %}
@@ -450,24 +468,7 @@
 
 
 
-              {% if data.radio_select_group=="paid" and data.do_you_owe_money=="complete" or  data['lower-amount'] == 'true' %}
 
-                  <tr id="their-details">
-                    <td class="task">
-                      <a href="../../../defendant/task-list/do-you-owe-money/partial-defence-options">
-                        <span class="task-name">Tell us how much you've paid</span>
-                      </a>
-                    </td>
-                    <td class="numeric" id="task-status" scope="col" id="col-status">
-                      {% if data.how_much_paid=="complete" %}
-                          {% include "includes/task_status_finished.html" %}
-                      {% else %}
-                          {% include "includes/task_status_incomplete.html" %}
-                      {% endif %}
-                    </td>
-                  </tr>
-
-              {% endif %}
 
 
               <tr id="their-details">

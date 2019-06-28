@@ -395,9 +395,9 @@ module.exports = function(app){
 
   app.post( '/' + strPath + 'defendant/task-list/your-defence/paid-less', (req, res) => {
 
-    if( req.session.data['cancelccj'] == 'true' )
+    if( req.session.data['defaultccj'] == 'true' )
     {
-        res.redirect('/' + strPath + 'defendant/task-list/your-defence/defence-message');
+        res.redirect('/' + strPath + 'dashboard/applications-and-judgments/set-aside-default-ccj/task-list?how_much_paid=complete&');
     }
     else
     {
@@ -412,17 +412,18 @@ module.exports = function(app){
 
   })
 
-
   app.post( '/' + strPath + 'defendant/task-list/your-details/date-of-birth', (req, res) => {
 
     if (req.session.data['year'] > 2000 ) {
       res.redirect('/' + strPath + 'defendant/task-list/your-details/under-18');
-    } else {
+    } else if (req.session.data['year'] <= 2000 ) {
       res.redirect('/' + strPath + 'defendant/task-list/your-details/number');
+    } else {
+      res.render( strPath + 'defendant/task-list/your-details/date-of-birth');
     }
 
   })
-
+  
   app.post( '/' + strPath + 'claimant/task-list/their-details/defendant-add', (req, res) => {
 
     if (req.body.addDefendant === undefined) {
