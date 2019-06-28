@@ -12,18 +12,21 @@ Money Claims Prototype
 	<div class="grid-row">
 		<div class="column-two-thirds">
 			<a href="#" class="link-back">Back</a>
+
 			<h1 class="heading-large">
-				Your repayment plan
-			</h1>
+          {% if data['instalments'] == 'true' and  data['vary'] == 'true'%}
+              Propose a new repayment plan
+          {% else %}
+              Your repayment plan
+          {% endif %}
+      </h1>
+
 			{% if data.radio_select_group=="Some"%}
 			    <p>You admit you owe {% if data['owe-amount'] =='' %}£300{% else %}£{{data['owe-amount']}}{% endif %}</p>
 			{% else %}
-          {% if data['scenario2'] == 'true' %}
-                <p>The total amount claimed is £600. This includes the claim fee and any interest.</p>
-          {% else %}
-                <p>The total amount claimed is £1,500. This includes the claim fee and any interest.</p>
+          {% if data['vary'] == 'true'%}
+                <p>The amount in the judgment is £1,500.</p>
           {% endif %}
-
 			{% endif %}
 
 
@@ -146,4 +149,22 @@ Money Claims Prototype
 		})
 	});
 </script>
+
+
+<form method="post"  action="#" class="form" style="position: absolute;">
+  <select id="check2" name="check2" onchange="window.location.href='?'+this.value">
+    <option  value="vary=null&instalments=null&"
+             {% if  data['vary'] != 'true'  and  data['instalments'] != 'true'  %}selected{% endif %}
+    >Regular payment plan - not vary</option>
+    <option  value="vary=true&instalments=true&"
+             {% if  data['vary'] == 'true'  and  data['instalments'] == 'true'  %}selected{% endif %}
+    >Vary from instalments</option>
+    <option  value="vary=true&instalments=false&"
+             {% if  data['vary'] == 'true'  and   data['instalments'] == 'false'  %}selected{% endif %}
+    >Vary from set date</option>
+
+  </select>
+</form>
+
+
 {% endblock %}

@@ -278,11 +278,13 @@ Money Claims Prototype
 
 	    {% if data['radio-mediation-group']=="Yes" %}
       	<p>We'll ask if they want to try mediation. If they agree, we'll contact you with an appointment.</p>
-      	<p>If they don't want to try mediation, we'll contact you to tell you what to do next.</p>
+      	<p>If they don't want to try mediation the court will review the case. You might have to go to a hearing.</p>
 	    {% else %}
 
-	    <p>We'll contact you to tell you what to do next.</p>
+	    <p>The court will review the case. You might have to go to a hearing.</p>
 	    {% endif %}
+
+		<p>We'll contact you to tell you what to do next.</p>
 
 
 
@@ -294,28 +296,32 @@ Money Claims Prototype
 			<p>We’ve emailed Jan Clark your response, explaining why you reject the claim.</p>
 			<h2 class="heading-medium">What happens next</h2>
 
-		<p>We'll contact you by post when Jan Clark responds.</p>
-
-   <p>If Jan Clark accepts your response the claim will be settled.</p>
+   <p>If Jan Clark accepts your response the claim will be settled. We'll contact you by post when they respond.</p>
 
           {% if data['radio-indent-group']=="Yes" or data['resolve_dispute']== "complete" %}
 
           {% if data['mediation-pilot']=="on" %}
-          <p>If Jan Clark rejects your response and doesn't opt out of mediation, we'll contact you with a mediation appointment.</li>
-            <p>If they opt out of mediation, we'll tell you what to do next.</p>
-
+          <p>If Jan Clark rejects your response,</p>
+          <ul class="list list-bullet">
+            <li>we'll contact you with a mediation appointment, unless Jan Clark chooses to opt out of mediation.</li>
+            <li>if they opt out of mediation the court will review the case. You might have to go to a hearing. We'll
+              contact you to tell you what to do next.
+            </li>
+          </ul>
 
           {%else%}
           <p>If Jan Clark rejects your response we'll ask them to try mediation. If they agree, we'll contact you to
             arrange an appointment.</p>
-          <p>If they reject mediation, we'll tell you what to do next.</p>
+          <p>If they reject mediation the court will review the case. You might have to go to a hearing.</p>
+          <p>We'll contact you to tell you what to do next.</p>
 
           {% endif %}
 
 
 
     {% else %}
-			<p>If they reject your response, we'll contact you to tell you what to do next.</p>
+			<p>If they reject your response the court will review the case. You might have to go to a hearing.</p>
+			<p>We'll contact you to tell you what to do next.</p>
     {% endif %}
 
 			{% include "includes/settle.html" %}
@@ -343,11 +349,10 @@ Money Claims Prototype
 
       <h2 class="heading-medium">What happens next</h2>
 
-			<p>We'll contact you by post when Jan Clark responds.</p>
+      <p>If Jan Clark accepts your response the claim will be settled. We'll contact you by post when they respond.</p>
 
-      <p>If they accept your response the claim is settled. </p>
-
-      <p>If they reject your response, we'll tell you what to do next.</p>
+      <p>If they reject your response the court will review the case. You might have to go to a hearing.</p>
+      <p>We'll contact you to tell you what to do next.</p>
 
       {% include "includes/settle.html" %}
 
@@ -361,17 +366,17 @@ Money Claims Prototype
 			{% elseif  data.radio_select_group2=="paid" or data['confirmation']== 16 %}
 		<p>You told us you've paid the full claim amount of £{{ data['owe-amount'] or '1,500' }}. We've sent Jan Clark this response.</p>
 			<h2 class="heading-medium">What happens next</h2>
-			<p>We'll contact you when Jan Clark responds.</p>
-
-			<p>If they accept your response the claim will be settled.</p>
+			<p>If Jan Clark accepts your response the claim will be settled. We'll contact you when they respond.</p>
 
 
             {% if data['radio-indent-group']=="Yes" or data['resolve_dispute']== "complete" %}
-            <p>If they reject your response we'll ask them to try mediation. If
+            <p>If Jan Clark rejects your response we'll ask them to try mediation. If
               they agree, we'll contact you to arrange an appointment.</p>
-            <p>If they reject mediation, we'll tell you what to do next.</p>
+            <p>If they reject mediation the court will review the case. You might have to go to a hearing.</p>
+            <p>We'll contact you to tell you what to do next.</p>
             {% else %}
-            <p>If they reject it, we'll contact you to tell you what to do next.</p>
+            <p>If they reject your response the court will review the case. You might have to go to a hearing.</p>
+            <p>We'll contact you to tell you what to do next.</p>
             {% endif %}
 
 			{% include "includes/survey.html" %}
