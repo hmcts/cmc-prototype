@@ -1,0 +1,65 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+
+{% block content %}
+
+
+<main id="content" role="main">
+
+  {% include "includes/phase_banner_beta.html" %}
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+      <a href="#" onclick="history.go(-1)" class="link-back">Back</a>
+
+      {% if data['afterccjdeadline'] == 'false' %}
+
+      <h1 class="heading-large">
+        Pay the debt to get the judgment cancelled
+      </h1>
+      <p>If you pay Jan Clark £1,500 before 19 May 2019, the judgment will be cancelled.</p>
+      <p><a href="../../party-details/claimant">Get Jan Clark's contact details</a></p>
+      <p>We'll contact you when they confirm you've paid.</p>
+      <p><a class="button" href="/prototypes/prototype-jul-2019/dashboard/applications-and-judgments/set-aside-default-ccj/settle-out-of-court?afterccjdeadline=true">I don't owe the money</a>
+
+      {% else %}
+
+      <h1 class="heading-large">
+        Apply to cancel a judgment
+      </h1>
+      <p>The court will usually only cancel a judgment if it accepts you didn't know about the claim at the time it was issued.</p>
+      <p>You must pay a £255 fee. You might have to go to a hearing. You can't get the fee refunded if the court rejects your request.</p>
+
+      <h3 class="heading-medium">If the court cancels the judgment</h3>
+      <p>Your claim defence will be sent to Jan Clark.</p>
+
+      <h3 class="heading-medium">If your request is rejected</h3>
+      <p>You'll have to comply with the terms of the judgment.</p>
+      <p>You won't be able to get the £255 fee back.</p>
+
+      <p><a class="button" href="/prototypes/prototype-jul-2019/defendant/task-list/your-details?defaultccj=true">Apply to cancel the judgment</a></p>
+
+
+      {% endif %}
+
+
+    </div>
+  </div>
+
+  {% include 'prototypes/prototype-jul-2019/includes/contact.html' %}
+</main>
+
+<form method="post"  action="#" class="form" style="float: left;">
+  <select id="control-box2" name="control-box2" onchange="window.location.href='settle-out-of-court?beforeccjdeadline='+this.value">
+    <option value="true">Defendant</option>
+    <option value="true" >- Before 1 month CCJ deadline</option>
+    <option value="false">- After 1 month CCJ deadline</option>
+  </select>
+</form>
+
+
+{% endblock %}

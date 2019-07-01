@@ -1,0 +1,62 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="4" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <a href="#" class="link-back">Back</a>
+
+      <h1 class="heading-large">
+        What type of bailiffs do you want to use?
+      </h1>
+
+      <form
+        name="aspnetForm"
+        method="post"
+        onsubmit="conditionalNavigation('radio-bailiffs-group', 'Yes', 'chances-of-success', 'https://hmcts-cet-prototype.herokuapp.com/writs/');return false;"
+        id="aspnetForm"
+        autocomplete="off">
+        <div class="form-group">
+          <fieldset class="">
+            <div class="multiple-choice">
+              <input id="radio-yes" type="radio" name="radio-bailiffs-group" value="Yes">
+              <label for="radio-yes" style="font-weight: bold">County court bailiffs<span class="form-hint"
+                                                                                          style="margin-top: 5px">Apply for a warrant of control if the is debt no more than £5000 including the court fee. The court fee is £77.</span></label>
+        </div>
+        <div class="multiple-choice">
+          <input id="radio-no" type="radio" name="radio-bailiffs-group" value="No">
+          <label for="radio-no" style="font-weight: bold">High court bailiffs<span class="form-hint"
+                                                                                      style="margin-top: 5px">Apply for a writ of control if the debt is at least £600. The court fee is £66.</span></label>
+        </div>
+
+            <details>
+              <summary><span class="summary">What's the difference?</span></summary>
+              <div class="panel panel-border-narrow">
+                <p>County court bailiffs enforce warrants, work for the courts, and charge no extra fees.</p>
+
+                <p>High court bailiffs are also known as High Court Enforcement Officers (HCEO). High court bailiffs enforce
+                  writs, work for private companies, and <a href="">charge extra fees</a>. These fees are added to the debt, but
+                  if they
+                  cannot get your money back you will have to pay the fees.</p>
+              </div>
+            </details>
+    </div>
+    </fieldset>
+
+    <input id="advert-option-next--button" type="submit" value="Save and continue" class="button"
+           data-ignore-double-submit="true">
+    </form>
+
+  </div>
+  </div>
+  <fieldset></fieldset>
+  {% include 'prototypes/prototype-jul-2019/includes/contact.html' %}
+</main>
+{% endblock %}

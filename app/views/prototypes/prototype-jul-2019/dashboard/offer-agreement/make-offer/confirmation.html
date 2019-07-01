@@ -1,0 +1,64 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="2" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+	{% include "includes/phase_banner_beta.html" %}
+	<div class="grid-row">
+		<div class="column-two-thirds">
+			<div class="govuk-box-highlight">
+				<h1 class="bold-large">We've sent your offer to {% if data['defendant'] == "defendant" %}Jan Clark {% elseif data['defendant'] == "claimant" %}Mary Richards {% else %}Jan Clark{% endif %} </h1>
+
+     <p>
+          <strong class="bold">
+            <!--<span id="Date2"></span>-->
+            20 December 2018
+          </strong>
+        </p>
+				</div>
+			<fieldset>
+				<h2 class="heading-medium">What happens next</h2>
+				<p >{% if data['defendant'] == "defendant" %}Jan Clark {% elseif data['defendant'] == "claimant" %}Mary Richards {% else %}Jan Clark{% endif %} can accept or reject your offer. We'll email you when they respond.</p>
+  {% include "includes/survey.html" %}
+
+          <p><a class="button" href='../../new-dashboard/defendant/all-claims-5'>Go to your account</a></p>
+        <!--<p><a class="button" href='../../home?dashboard=2.1'>Go to your account</a></p>-->
+
+  {% include "includes/contact.html" %}
+
+			</fieldset>
+
+		</div>
+	</div>
+{% include 'prototypes/prototype-jul-2019/includes/contact.html' %}
+
+  <div id="daysPassing" data-dayspassurl="../../new-dashboard/defendant/email5"
+       data-dayspasstimetoprompt="5000" data-dayspassdays="3">
+
+    <div class="spinner-block">
+      <h2 class="govuk-heading-m">Days passing by... <span id="days">3</span></h2>
+      <div class="spinner spinner-1"></div>
+    </div>
+
+  </div>
+
+  <a class="gem-c-pagination__link active" id="triggerDaysPassing">
+  <span class="gem-c-pagination__link-title">
+      <svg class="gem-c-pagination__link-icon" xmlns="http://www.w3.org/2000/svg" height="13" width="17"
+           viewBox="0 0 17 13">
+        <path fill="currentColor"
+              d="m10.107-0.0078125-1.4136 1.414 4.2926 4.293h-12.986v2h12.896l-4.1855 3.9766 1.377 1.4492 6.7441-6.4062-6.7246-6.7266z"></path>
+      </svg>
+      <span class="gem-c-pagination__link-text">
+        Simulate time passing
+      </span>
+  </span>
+  </a>
+
+</main>
+{% endblock %}

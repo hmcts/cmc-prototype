@@ -1,0 +1,85 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="2" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <a href="#" class="link-back">Back</a>
+      <h1 class="heading-large">
+        Submitting a counterclaim
+      </h1>
+
+      <form action="../../../claimant/task-list/claim-details/reason" class="form" method="post">
+
+
+
+      {% if data['response-owe'] != 'owe-none' and (data['counter-amount']*1 >= data['amount-owed']*1 ) %}
+
+      <p>
+        You agree that you owe the claimant £{{ data['amount-owed']|numeral or '1,500' }}, but say they owe you £{{ data['totalSum'] or '2,000' }}.
+      </p>
+
+      {% if data['response-owe'] !== 'owe-all' %}
+      <p>
+        You need to explain why they owe you £{{ data['totalSum'] or '2,000' }} in order to make a counterclaim for this amount.
+      </p>
+      {% else %}
+      <p>You need to explain why:</p>
+      <ul class="list-bullet">
+        <li>you don't owe them the full £1,500</li>
+        <li>they owe you £{{ data['totalSum'] or '2,000' }}</li>
+      </ul>
+
+      {% endif %}
+
+      <p>You'll need to pay a fee to cover the £{{ data['counter-amount'] - data['amount-owed'] }} extra that is being claimed.</p>
+
+
+
+      {% elseif (data['counter-amount'] > 0) and ( data['amount-owed']*1 == 0 ) %}
+      <p>
+        You deny that you owe the claimant any money and believe they owe you £{{ data['totalSum'] or '2,000' }}.
+      </p>
+      <p>You need to explain:</p>
+      <ul class="list-bullet">
+        <li>why you don't owe them anything</li>
+        <li>why they owe you £{{ data['totalSum'] or '2,000' }}</li>
+      </ul>
+      <br />
+      <p>You'll need to pay a fee to cover the £{{ data['counter-amount'] - data['amount-owed'] }} extra that is being claimed.
+      </p>
+
+
+
+      {% else %}
+
+      <p>
+        You agree that you owe the claimant £{{ data['amount-owed']|numeral or '1,500' }}, but say they owe you £{{ data['totalSum'] or 500 }}.
+      </p>
+      <p>
+        You need to:
+      <ul class="list-bullet">
+        <li>explain why they owe you £{{ data['totalSum'] or 500 }}</li>
+        <li>tell us when you intend to pay the outstanding £{{ data['amount-owed'] - data['counter-amount'] }}</li>
+      </ul>
+      <br />
+      <p> There will be no fee to pay as the amount you are owed will be offest from the amount of the original claim.</p>
+
+      {% endif %}
+
+        <div class="form-group">
+          <input type="hidden" name="counterclaim" value="true" />
+          <input type="submit" class="button" value="Save and continue"/>
+        </div>
+      </form>
+    </div>
+  {% include 'prototypes/prototype-jul-2019/includes/contact.html' %}
+</main>
+{% endblock %}

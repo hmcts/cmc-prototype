@@ -1,0 +1,111 @@
+hhm{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="4" %}
+
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <a href="#" class="link-back">Back</a>
+
+      <h1 class="heading-large">
+        Is this the address you want a bailiff to visit?
+      </h1>
+
+      <p>24 Acacia Drive<br>
+        London<br>
+        SW1 H9A</p>
+
+      <div class="form-group">
+        <fieldset>
+          <div class="multiple-choice" data-target="correspondence-address">
+            <input type="radio" id="no-correspondence" name="correspondence-address" value="No" {{ checked("correspondence-address",
+            "No") }} >
+            <label for="no-correspondence">Yes</label>
+          </div>
+          <div class="multiple-choice" data-target="contact-by-phone">
+            <input type="radio" id="add-correspondence" name="correspondence-address" value="Yes" {{ checked("correspondence-address",
+            "Yes") }}>
+            <label for="add-correspondence">No, use a different address</label>
+          </div>
+          <div class="panel panel-border-narrow js-hidden" id="contact-by-phone">
+            <div id="addressManualWrapper">
+
+              <fieldset class="form-group">
+                <div id="postcode-finder">
+                  <label class="form-label" for="postcode">Enter a UK postcode</label>
+                  <input class="form-control form-control-1-4" id="postcode" name="postcodeFinder" type="text" value="">
+                  <a id="find-button" class="button secondary-button">Find address</a>
+                </div>
+                <div class="form-group error" id="postcode-seach-error" style="display:none; margin-top: 20px;">
+            <span class="error-message">
+              We can't find an address for that postcode. Try again or enter the address manually.
+            </span>
+                </div>
+                <div id="select-address" class="form-group" style="display: none;">
+                  <label class="form-label">
+                    Pick an address
+                  </label>
+                  <select id="addressList" class="form-control" name="addressSelect"
+                          onchange="updateAddress(this.value)" title="Pick an address">
+                    <option value="">Select an address</option>
+                  </select>
+                </div>
+                <div id="manual-address" style="display: none;" class="">
+                  <div class="form-group">
+                    <label class="form-label" for="street-1" id="street-label">Address</label>
+                    <input class="form-control" id="street-1" name="claimant_AddressLine1" type="text" value="">
+                    <input class="form-control second-text-input" id="street-2" name="claimant_AddressLine2" type="text"
+                           value="" title="Street line 2">
+                    <input class="form-control second-text-input" id="street-3" name="claimant_AddressLine3" type="text"
+                           value="" title="Street line 3">
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="town" id="town-label">Town or city</label>
+                    <input class="form-control" id="town" name="claimant_city" type="text" value="">
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="postcode-full" id="postcode-label">Postcode</label>
+                    <input class="form-control form-control-1-4" id="postcode-full" name="claimant_Postcode" type="text"
+                           value="">
+                  </div>
+                  <div class="form-group" id="country-group">
+                    <label class="form-label" for="country">Country</label>
+                    <input class="form-control" id="country" name="claimant_country" type="hidden" value="">
+                  </div>
+                </div>
+                <div id="enter-manually">
+                  <a class="link" href="#" onclick="return showAbroadAddress();">Enter address manually</a>
+                </div>
+              </fieldset>
+            </div>
+          </div>
+      </div>
+
+
+      <!--<div class="notice">-->
+      <!--<i class="icon icon-important">-->
+      <!--<span class="visually-hidden">Warning</span>-->
+      <!--</i>-->
+      <!--<strong class="bold-small">-->
+      <!--If the defendant doesn't live at this address the bailiff won't be able to serve it and your claim will-->
+      <!--be delayed further.-->
+      <!--</strong>-->
+      <!--</div>-->
+
+      <!--<input id="advert-option-next&#45;&#45;button" type="submit" value="Save and continue" class="button"-->
+      <!--data-ignore-double-submit="true">-->
+      <a href="contact-defendant" class="button" type="submit">Save and continue</a>
+
+    </div>
+  </div>
+  <fieldest></fieldest>
+{% include 'prototypes/prototype-jul-2019/includes/contact.html' %}
+</main>
+{% endblock %}

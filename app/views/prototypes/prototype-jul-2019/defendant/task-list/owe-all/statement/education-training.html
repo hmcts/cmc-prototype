@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="2" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <a href="#" class="link-back">Back</a>
+      {% if data['over_16']!="" %}
+
+      <h1 class="heading-large">
+        Children aged 16 to 19 living with you
+      </h1>
+      <p>How many are both:
+        <ul class="list list-bullet">
+          <li>in full-time education or training</li>
+          <li>single (unmarried and not in a civil partnership)</li>
+        </ul>
+        <div class="form-group">
+          <label class="form-label" for="number-of-children">Enter number</label>
+          <input class="form-control form-control-1-8" type="text" name="number-of-children">
+        </div>
+        <form action="{%if ( data['radio-disabled'] == 'Yes' and data['radio-partner-disabled'] == 'Yes' ) or data['radio-disabled-severe'] == 'Yes' %}adult-dependants{% else %}child-disabled{% endif %}" method="post" class="form">
+          {% else %}
+          <script>window.location.href = "{%if ( data['radio-disabled'] == 'Yes' and data['radio-partner-disabled'] == 'Yes' ) or data['radio-disabled-severe'] == 'Yes' %}adult-dependants{% else %}child-disabled{% endif %}";</script>
+          {% endif %}
+          <div class="form-group">
+            <input type="submit" class="button" value="Save and continue"/>
+          </div>
+        </form>
+      </div>
+    </div>
+  {% include 'prototypes/prototype-jul-2019/includes/contact.html' %}
+</main>
+{% endblock %}

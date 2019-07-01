@@ -1,0 +1,249 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="4" %}
+
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <!--<a href="#" class="link-back">Back</a>-->
+  <fieldset></fieldset>
+  <h1 class="heading-large">
+    Check your answers
+  </h1>
+
+
+
+    <table class="check-your-answers">
+      <thead>
+      <tr>
+        <th colspan="2">
+          <h2 class="heading-medium" id="name">
+            Application details
+          </h2>
+        </th>
+        <th>
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+
+      <tr>
+        <td>
+          Was the claim sent to your address on 6 Dec 2018?
+        </td>
+        <td>
+          Yes<br>
+        </td>
+        <td class="change-answer">
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          Why didn't you respond to the claim?
+        </td>
+        <td>
+          I was away and missed the response deadline.
+        </td>
+        <td class="change-answer">
+          <a href="details-defendant">Change</a>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          Upload supporting evidence (optional)
+        </td>
+        <td>
+          <a href="">ticket.jpg</a>
+        </td>
+        <td class="change-answer">
+          <a href="contact-defendant">Change</a>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          Dates unavailable in the next 6 weeks
+        </td>
+        <td>
+          No
+        </td>
+        <td class="change-answer">
+          <a href="contact-defendant">Change</a>
+        </td>
+      </tr>
+
+
+      <tr>
+        <td>
+          Phone number
+        </td>
+        <td>
+          07824999612
+        </td>
+        <td class="change-answer">
+          <a href="contact-defendant">Change</a>
+        </td>
+      </tr>
+
+      </tbody>
+    </table>
+
+    <table class="check-your-answers">
+      <thead>
+      <tr>
+        <th colspan="2">
+          <h2 class="heading-medium" id="name">
+            Your response to the claim
+          </h2>
+        </th>
+        <th>
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+
+      <tr>
+        <td>
+          Do you owe the money claimed?
+        <td>
+          I dispute all of the claim
+
+        </td>
+        <td class="change-answer">
+          <a href="claim-amount-deduct">Change</a>
+        </td>
+      </tr>
+
+      </tbody>
+    </table>
+
+    <table class="check-your-answers">
+      <thead>
+      <tr>
+        <th colspan="2">
+          <h2 class="heading-medium" id="name">
+            Response details
+          </h2>
+        </th>
+        <th>
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+
+      <tr>
+        <td>
+          Why you disagree with the claim
+        </td>
+        <td>
+
+        </td>
+        <td class="change-answer">
+          <a href="additional-information">Change</a>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Your timeline of what happened (optional)
+        </td>
+        <td>
+
+        </td>
+        <td class="change-answer">
+          <a href="car-details">Change</a>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Comments about their timeline (optional)
+        </td>
+        <td>
+
+        </td>
+        <td class="change-answer">
+          <a href="description-defendant">Change</a>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Your evidence (optional)
+        </td>
+        <td>
+
+        </td>
+        <td class="change-answer">
+          <a href="risk-defendant">Change</a>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Comments about their evidence (optional)
+        </td>
+        <td>
+
+        </td>
+        <td class="change-answer">
+          <a href="risk-property">Change</a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+
+    <div class="column-two-thirds">
+
+
+      <h2 class="heading-medium">Statement of truth</h2>
+
+      <p>
+        The information on this page forms your application to set aside judgment.
+      </p>
+
+      <p>
+        When you’re satisfied that your answers are accurate, you should tick to “sign” this statement of truth on the
+        form.
+      </p>
+
+      <div class="form-group">
+        <div class="multiple-choice text">
+          <input class="" id="HasAcceptedTermsAndConditions" type="checkbox" value="true">
+          <label for="HasAcceptedTermsAndConditions"> I believe that the facts stated in this response are true.</label>
+        </div>
+      </div>
+
+      <a href="check-and-send/enter-card" class="button" type="submit">Submit and continue to payment (£255)</a>
+
+    </div>
+
+</main>
+
+
+<form method="post" action="#" class="form" style="position: absolute;">
+  <select id="control-box2" name="control-box2" onchange="window.location.href='?control-box='+this.value">
+    <option value="0" {% if data[
+    'control-box'] == 0 %}selected{% endif %}>Choose</option>
+
+    <option value="1" {% if data[
+    'control-box'] == 1 %}selected{% endif %}>Individual</option>
+    <option value="2" {% if data[
+    'control-box'] == 2 %}selected{% endif %}>Sole trader</option>
+    <option value="3" {% if data[
+    'control-box'] == 3 %}selected{% endif %}>Company</option>
+    <option value="4" {% if data[
+    'control-box'] == 4 %}selected{% endif %}>Organisation</option>
+    <option value="5" {% if data[
+    'control-box'] == 5 %}selected{% endif %}>Pay by set date</option>
+    <option value="6" {% if data[
+    'control-box'] == 6 %}selected{% endif %}>Immediately</option>
+  </select>
+
+</form>
+
+{% endblock %}
