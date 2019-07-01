@@ -17,27 +17,29 @@ Money Claims Prototype
       </h1>
 
       {% if data['defendant'] == "defendant" %}
-      <!-- Content for defendant -->
-
-      <p>You may avoid getting a County Court Judgment (CCJ) if you settle out of court.</p>
-      <p>If Jan Clark accepts your offer you'll both sign a legal agreement.</p>
-      <p>If Jan Clark rejects your offer it can't be mentioned in court.</p>
-
+          <!-- Content for defendant -->
+          {% if data['newoffer'] == 'true' %}
+              <p>You may avoid getting a County Court Judgment (CCJ) if you settle out of court.</p>
+              <p>If Jan Clark accepts your offer it will become a legal agreement.</p>
+              <p>If Jan Clark rejects your offer it can't be mentioned in court.</p>
+          {% else %}
+              <p>You may avoid getting a County Court Judgment (CCJ) if you settle out of court.</p>
+              <p>If Jan Clark accepts your offer you'll both sign a legal agreement.</p>
+              <p>If Jan Clark rejects your offer it can't be mentioned in court.</p>
+          {% endif %}
 
       {% elseif data['defendant'] == "claimant" %}
-      <!-- Content fo claimant -->
-
-      <p>You can avoid going to a hearing if you settle out of court.</p>
-      <p>Out of court offers are confidential. They can't be mentioned in court if you don't reach an agreement.</p>
-      <p class="panel panel-border-wide">If Mary Richards accepts your offer you'll both sign a legal agreement. This agreement will replace the claim.</p>
-      <p>You can ask the court to make a judgment against Mary Richards if they break the agreement.</p>
-
+          <!-- Content fo claimant -->
+          <p>You can avoid going to a hearing if you settle out of court.</p>
+          <p>Out of court offers are confidential. They can't be mentioned in court if you don't reach an agreement.</p>
+          <p class="panel panel-border-wide">If Mary Richards accepts your offer you'll both sign a legal agreement. This agreement will replace the claim.</p>
+          <p>You can ask the court to make a judgment against Mary Richards if they break the agreement.</p>
 
       {% else %}
-      <p>You can avoid going to a hearing if you settle out of court.</p>
-      <p>Out of court offers are confidential. They can't be mentioned in court if you don't reach an agreement.</p>
-      <p class="panel panel-border-wide">If Mary Richards accepts your offer you'll both sign a legal agreement. This agreement will replace the claim.</p>
-      <p>You can ask the court to make a judgment against Mary Richards if they break the agreement.</p>
+          <p>You can avoid going to a hearing if you settle out of court.</p>
+          <p>Out of court offers are confidential. They can't be mentioned in court if you don't reach an agreement.</p>
+          <p class="panel panel-border-wide">If Mary Richards accepts your offer you'll both sign a legal agreement. This agreement will replace the claim.</p>
+          <p>You can ask the court to make a judgment against Mary Richards if they break the agreement.</p>
 
       {% endif %}
 
@@ -46,7 +48,10 @@ Money Claims Prototype
 
 
       <div class="form-group">
-        <a href="make-offer/offer" class="button">Continue</a>
+        <p><a href="make-offer/offer" class="button">Continue</a></p>
+        {% if data['newoffer'] == 'true' %}
+            <p><a href="">Don't make offer</a></p>
+        {% endif %}
       </div>
     </div>
   </form>
@@ -54,4 +59,31 @@ Money Claims Prototype
 </div>
 {% include 'prototypes/prototype-jul-2019/includes/contact.html' %}
 </main>
+
+
+<form method="post"  action="#" class="for4" style=" float: left; ">
+  <select style="height:25px;" onchange="window.location.href='?'+this.value">
+    <option value="defendant=defendant&newoffer=false&"
+            {% if data['defendant'] == 'defendant'  and  data['newoffer'] != 'true'  %}selected{% endif %}
+    >Defendant</option>
+
+    <option value="defendant=claimant&newoffer=false&"
+            {% if data['defendant'] == 'claimant'  and  data['newoffer'] != 'true'  %}selected{% endif %}
+    >Claimant</option>
+
+    <option value="defendant=defendant&newoffer=true&"
+            {% if data['defendant'] == 'defendant'  and  data['newoffer'] == 'true'  %}selected{% endif %}
+    >Defendant - New type of offer</option>
+
+    <!--
+    <option value="defendant=claimant&newoffer=true"
+            {% if data['defendant'] == 'claimant'  and  data['newoffer'] == 'true' %}selected{% endif %}
+    >Claimant - New offers</option>
+    -->
+
+  </select>
+</form>
+
+
+
 {% endblock %}
