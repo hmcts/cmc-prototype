@@ -1,0 +1,90 @@
+{% extends "layout_task-list.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block home_link %} ../task-list {% endblock %}
+{% block proposition_header %}
+{% set my_account="1" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <a href="#" class="link-back">Back</a>
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <h1 class="heading-large">
+        Repayment plan changed
+      </h1>
+
+      <p>The court has accepted your repayment amount.</p>
+      <p>The defendant asked to pay in weekly instalments and the court accepted this. The revised repayment plan is below.</p>
+
+      <table class="instalment-table">
+        <tbody>
+          <tr class="">
+            <td class="">
+              Regular payments of
+            </td>
+            <td class="">
+              £75
+            </td>
+            <td class="">
+            </td>
+          </tr>
+          <tr class="">
+            <td class="">
+              Frequency of payments
+            </td>
+            <td class="">
+              Weekly
+            </td>
+            <td class="">
+            </td>
+          </tr>
+          <tr class="">
+            <td class="">
+              Make the first payment on
+            </td>
+            <td >
+              1 {{ now |  date("add", 1, "month") | date( "MMMM YYYY" ) }}
+            </td>
+            <td>
+            </td>
+          </tr>
+          <tr>
+            <td class="">
+              Last payment on
+            </td>
+            <td class="">
+              1 {{ now |  date("add", 7, "month") | date( "MMMM YYYY" ) }}
+            </td>
+            <td class=" ">
+            </td>
+          </tr>
+         <tr>
+            <td class="">
+              Length of repayment plan
+            </td>
+            <td class="">
+              8 months
+            </td>
+            <td class=" ">
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <form method="post" action="../../task-list">
+
+        <input type="hidden" name="payment_method" value="complete">
+
+        <input id="advert-option-next--button" type="submit" value="Save and continue" class="button"
+        data-ignore-double-submit="true">
+      </div>
+    </form>
+  </div>
+</div>
+{% include 'prototypes/prototype-jul-2019/includes/contact.html' %}
+</main>
+{% endblock %}

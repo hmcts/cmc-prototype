@@ -1,0 +1,147 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <a href="#" class="link-back">Back</a>
+      <h1 class="heading-large">Respond to the settlement agreement</h1>
+
+
+      <form action="{% if data['counter'] == 'yes' %}confirmation{% else %}../../task-list{% endif %}" method="post" class="form">
+
+      <br>
+      <table class="offer-table">
+        <thead>
+          <tr>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>The agreement</td>
+
+            <td>
+
+              Mary Richards
+              {% if data['claimant-payment-request']=="Immediately" %}
+              will pay £1,500 immediately. Jan Clark will receive the money no later than {{ now | date( 'add', 5, 'days') | date }}. Any cheques or transfers will be clear in Jan Clark's account by this date.
+              {% elseif data['claimant-payment-request']=="Instalments"  %}
+                will repay £1,500, in instalments of
+                {% if data['instalment-first-payment'] %}
+                £{{data['instalment-first-payment']}}
+                {% else %}
+                £200
+                {% endif %}
+
+                {% if data['radio-payment-frequency'] %}
+                {{ data['radio-payment-frequency'] | lower  }}{% else %}
+                every month{% endif %}.
+              <br />The first instalment will be paid by
+                {% if data['instalment-day'] %}
+                {{ ( data['instalment-month'] + ' ' + data['instalment-day'] + ' ' + data['instalment-year']) | date('D MMMM YYYY') }}{% else %}
+                31 March 2018{% endif %}.
+
+
+              {% elseif data['claimant-payment-request']=="Set-date" %}
+              will pay £1,500 no later than
+                {% if data['set-day'] %}
+                {{ ( data['set-month'] + ' ' + data['set-day'] + ' ' + data['set-year']) | date('D MMMM YYYY') }}
+                {% else %}
+                {{ date | date('add', 1, 'year') | date('D MMMM YYYY') }}
+                {% endif %}
+              {% else %}
+              will pay £1,500 no later than {{ date | date('add', 1, 'year') | date('D MMMM YYYY') }}.
+              {% endif %}
+            </td>
+          </tr>
+          <tr>
+            <td>Completion date</td>
+            <td>
+
+              {% if data['claimant-payment-request']=="Immediately" %}
+              {{ now | date( 'add', 5, 'days') | date }}
+              {% elseif data['claimant-payment-request']=="Instalments" and data['instalment-month'] %}
+              {{ ( data['instalment-month'] + ' ' + data['instalment-day'] + ' ' + data['instalment-year']) | date('add', 1, 'year') | date('D MMMM YYYY') }}
+              {% elseif data['claimant-payment-request']=="Set-date" %}
+                {% if data['set-day'] %}
+                {{ ( data['set-month'] + ' ' + data['set-day'] + ' ' + data['set-year']) | date('D MMMM YYYY') }}
+                {% else %}
+                {{ date | date('add', 1, 'year') | date('D MMMM YYYY') }}
+                {% endif %}
+              {% else %}
+              {{ date | date('add', 1, 'year') | date('D MMMM YYYY') }}
+              {% endif %}
+
+
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div>
+
+       {% if data.radio_select_group=="Some" or data['settle'] == 1   %}
+        <p>This agreement settles the claim made by Jan Clark against Mary Richards, including the part that Mary Richards admitted.</p>
+
+        {%else%}
+        <p>This agreement settles the claim made by Jan Clark against Mary Richards. This includes all money owed in the claim, for example court fees, expenses or interest.</p>
+
+         <p>Neither party can make any further claims relating to this case, other than to enforce it.</p>
+      {%endif%}
+
+        <p>Either party can view and download this agreement from their Money Claims account. Both parties should keep a copy of this agreement.</p>
+
+
+        <h3 class="heading-medium">If the agreement is broken</h3>
+        <p>The claimant can request a County Court Judgment (CCJ) for any money still owed from this agreement.</p>
+      </div>
+
+
+      <h2 class="heading-medium">Do you want to sign the settlement agreement?</h2>
+      <p>You can choose not to sign the settlement agreement, for example if you think you can't afford it.</p>
+      <p>Make sure this agreement includes everything you've agreed with Jan Clark before signing. You won't be able to change this later.</p>
+
+      <div class="form-group">
+        <fieldset>
+
+          <div class="multiple-choice" data-target="yes-info">
+            <input id="radio-yes" type="radio" name="accept-settlement" value="Yes">
+            <label for="radio-yes">
+              Yes - I confirm I've read and accept the terms of the agreement.
+            </label>
+          </div>
+          <div class="panel panel-border-narrow js-hidden" id="yes-info">The claim will be put on hold and the claimant can't request a CCJ against you.</div>
+
+          <div class="multiple-choice" data-target="no-info">
+            <input id="radio-no" type="radio" name="accept-settlement" value="No">
+            <label for="radio-no">
+             No - I reject the terms of the agreement.
+            </label>
+          </div>
+          <div class="panel panel-border-narrow js-hidden" id="no-info">The claimant can request a CCJ against you to enforce the repayment plan shown in the agreement. You can ask a judge to change the plan based on your financial details. The court has reviewed the plan and believes you can afford it, so a judge may not change it.</div>
+
+        </fieldset>
+      </div>
+
+
+        <input type="hidden" name="agreement" value="complete">
+
+        <input id="advert-option-next--button" type="submit" value="Save and continue" class="button">
+
+      </form>
+    </div>
+  </div>
+</main>
+<form method="post"  action="#" class="form" style="; float: left">
+  <select id="dashboard2" name="dashboard2" onchange="window.location.href='?settle='+this.value">
+    <option  value="0" ></option>
+    <option value="2" {% if data['settle'] == 2 %}selected{% endif %}>Full admission</option>
+    <option value="1" {% if data['settle'] == 1 %}selected{% endif %}>Part admission</option>
+  </select>
+</form>
+{% endblock %}

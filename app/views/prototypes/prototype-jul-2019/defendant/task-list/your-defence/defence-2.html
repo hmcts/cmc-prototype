@@ -1,0 +1,183 @@
+{% extends "layout_task-list.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="2" %}
+
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+
+
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <a href="#" class="link-back">Back</a>
+
+      <h1 class="heading-large">Add your timeline of events </h1>
+
+
+      <div class="description-block">
+        <h3 class="heading-small">Their timeline</h3>
+        <div class="form-fields">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Date</th>
+                <th scope="col">What happened</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>03/11/2017</td>
+                <td>I contacted {% if data.counterclaim=="true" %}Jan Clark{%else%}Mary Richards{% endif %} to discuss building works on our roof.</td>
+              </tr>
+              <tr>
+                <td>06/11/2017</td>
+                <td>We agreed what work should be done and signed a contract.</td>
+              </tr>
+              <tr>
+                <td>30/11/2017</td>
+                <td>The work started on the roof.</td>
+              </tr>
+              <tr class="show-more">
+                <td>21/12/2017</td>
+                <td>The work on the roof was completed but I noticed that there was a problem with one
+                section</a>.
+              </td>
+            </tr>
+            <tr  class="show-more">
+              <td>27/12/2017</td>
+              <td>I sent an email to Mary Richards and asked them to get the problem fixed.</td>
+            </tr>
+            <tr class="show-more">
+              <td>15/01/2018</td>
+              <td>I hadn't had a reply so I told them I would be making a money claim.</td>
+            </tr>
+          <tr class="show-more">
+            <td >27/12/2017</td>
+            <td>I sent an email to Mary Richards and asked them to get the problem fixed.</td>
+          </tr>
+          <tr class="show-more">
+            <td>15/01/2018</td>
+            <td>I hadn't had a reply so I told them I would be making a money claim.</td>
+          </tr>
+          <tr >
+            <td class="no-border">
+              <a href="#" class="toggle">Show more</a>
+              <a href="#" class="toggle" style="display: none">Show less</a>
+            </td>
+            <td class="no-border"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div style="padding-top: 30px;"></div>
+
+  <h3 class="heading-small">Add your timeline of events (optional)</h3>
+
+
+  <form
+  name="aspnetForm"
+  action="defence-3"
+  method="get"
+  id="aspnetForm"
+  autocomplete="off">
+  <fieldset>
+    <p>Include dates if you know them.</p>
+    <div id="timeline" class="timeline">
+      <div class="timeline-headings mobile-hide">
+        <div id="timeline-heading-1" class="timeline-column-1">
+          <label class="form-label-bold" for="date-form-control">
+            Date
+          </label>
+          <span class="form-hint">For example, {{ now | date('MMMM YYYY')}} </span>
+        </div>
+        <div id="timeline-heading-2" class="timeline-column-2">
+          <label class="form-label-bold" for="event-form-control">
+            What happened
+          </label>
+          <span class="form-hint">For example, you might have signed a contract</span>
+        </div>
+      </div>
+      <div class="timeline-rows">
+        <div class="timeline-row">
+
+          <label class="form-label-bold mobile-show" for="cd-date-1">1. Date</label>
+          <span class="form-hint mobile-show">For example, 1 May 2017 </span>
+
+          <input class="form-control timeline-column-1" type="text" id="cd-date-1" name="cd-date-1"
+          value="{{data['cd-date-1']}}">
+
+          <label for="timeline-1" class="form-label-bold mobile-show" for="cd-timeline-1">What happened</label>
+          <span class="form-hint mobile-show">For example, you might have signed a contract</span>
+
+
+          <textarea class="timeline-column-text" name="cd-timeline-1" id="timeline-1" value="{{data['cd-timeline-1']}}"  rows="2">{{data['cd-timeline-1']}}</textarea>
+        </div>
+        <div class="timeline-row">
+          <label class="form-label-bold mobile-show" for="cd-date-2">2. Date</label>
+
+          <input class="form-control timeline-column-1" type="text" id="cd-date-2" name="cd-date-2"
+          value="{{data['cd-date-2']}}">
+          <label class="form-label-bold mobile-show" for="cd-timeline-2">What happened</label>
+
+          <textarea class="timeline-column-text" id="cd-timeline-2" name="cd-timeline-2"  value="{{data['cd-timeline-2']}}" rows="2">{{data['cd-timeline-2']}}</textarea>
+        </div>
+        <div class="timeline-row">
+          <label class="form-label-bold mobile-show" for="cd-date-3">3. Date</label>
+
+          <input class="form-control timeline-column-1" type="text" id="cd-date-3" name="cd-date-3"
+          value="{{data['cd-date-3']}}">
+          <label class="form-label-bold mobile-show" for="cd-timeline-3">What happened</label>
+
+          <textarea class="timeline-column-text" id="cd-timeline-3" name="cd-timeline-3" value="{{data['cd-timeline-3']}}" rows="2">{{data['cd-timeline-3']}}</textarea>
+        </div>
+        <div class="timeline-row">
+          <label class="form-label-bold mobile-show" for="cd-date-4">4. Date</label>
+
+          <input class="form-control timeline-column-1" type="text" id="cd-date-3" name="cd-date-4"
+          value="{{data['cd-date-4']}}">
+          <label class="form-label-bold mobile-show" for="cd-timeline-4">What happened</label>
+
+          <textarea class="timeline-column-text" id="cd-timeline-4" name="cd-timeline-4" value="{{data['cd-timeline-4']}}" rows="2">{{data['cd-timeline-4']}}</textarea>
+        </div>
+      </div>
+    </div>
+    <div class="timeline-row">
+    <div id="add-event-container">
+      <a class="secondary-button" id="add-another-event-button" href="#">Add another event</a>
+    </div>
+    </div>
+    <br>
+    <div id="claim-details">
+      <div id="describe-wrapper-claim-details-1" class="form-group">
+        <label class="form-label-bold" for="offer">
+          <h3 class="heading-small">Add any comments about their timeline (optional)</h3>
+        </label>
+        <textarea class="form-control form-control-3-4 form-control-medium"
+        id="defence-disagree-timeline"
+        rows="4"
+        name="defence-disagree-timeline"
+        cols="20"
+        type="text"
+        style="width: 95%"
+        data-store="">{{data['defence-disagree-timeline']}}</textarea>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <input id="advert-option-next--button" type="submit" value="Save and continue" class="button"
+      data-ignore-double-submit="true">
+    </div>
+  </div>
+</form>
+</div>
+</div>
+{% include 'prototypes/prototype-jul-2019/includes/contact.html' %}
+</main>
+{% endblock %}

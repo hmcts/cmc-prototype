@@ -1,0 +1,190 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="4" %}
+
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <a href="#" class="link-back">Back</a>
+      <h1 class="heading-large">
+        How much do you want to enforce?
+      </h1>
+
+      <p>The balance outstanding on the judgment is <span class="bold">{% if data['radio-indent-group2']=="Yes" %}£1,443.2{%else%}£1,643.20{%endif%}</span>
+      </p>
+
+      <p>Mary Richards was ordered to pay immediately.</p>
+
+      <details>
+        <summary><span class="summary">View amount breakdown</span></summary>
+        <div class="panel panel-border-narrow">
+
+          <table class="table-form">
+            <caption class="visuallyhidden"></caption>
+            <thead>
+            <tr>
+              <th scope="col">Amount breakdown</th>
+              <th class="numeric last" scope="col">Amount</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <th scope="row">Claim amount</th>
+              <td class="numeric last">
+                <label class="visuallyhidden" for="amount">Claim amount</label>
+                <span
+                  class="font-small">£1,500</span>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">Interest to date</th>
+              <td class="numeric last">
+                <label class="visuallyhidden" for="amount">Interest to date</label>
+                <span
+                  class="font-small">£68.20</span>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">Claim fee</th>
+              <td class="numeric last">
+                <label class="visuallyhidden" for="amount">Claim fee</label>
+                <span
+                  class="font-small">£75</span>
+              </td>
+            </tr>
+
+            {% if data['radio-indent-group2']=="Yes" %}
+            <tr>
+              <th scope="row">Minus amount already paid</th>
+              <td class="numeric last">
+                <label class="visuallyhidden" for="amount">Minus amount already paid</label>
+                <span
+                  class="font-small">£200</span>
+              </td>
+            </tr>
+            {%endif%}
+
+            <tr>
+              <th scope="row" style="font-weight: bold">Balance outstanding</th>
+              <td class="numeric last">
+                <label class="visuallyhidden" for="amount">Balance oustanding</label>
+                <span
+                  class="font-small" style="font-weight: bold">{% if data['radio-indent-group2']=="Yes" %}£1,443.2{%else%}£1,643.20{%endif%}</span>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+
+        </div>
+      </details>
+
+      <form class="form" action="{% if data['radio-proceed'] == " judgment
+      " %}../../../dashboard/claimant-response/admit-the-claim/task-list{% elseif data['radio-proceed'] == "judgment-pa"
+      %}../../../dashboard/claimant-response/part-admit/task-list {% elseif data['radio-proceed'] == 'not-signed'
+      %}check-your-anwsers{% else %}../additional-information{% endif %}" method="post">
+      <table class="table-form">
+        <caption class="visuallyhidden"></caption>
+        <thead>
+        <tr>
+          <th scope="col"></th>
+          <th class="numeric last" scope="col">Amount</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <th scope="row">Amount to enforce</th>
+          <td class="numeric last">
+            <label class="visuallyhidden" for="enforce-amount">Amount to enforce
+            </label>
+            <input class="fee pound" maxlength="10" size="7" type="text" value="" name="enforce-amount"
+                   id="enforce-amount">
+          </td>
+        </tr>
+        <!--{% if data['radio-proceed']=="judgment-pa" %}-->
+        <!--{% else %}-->
+
+        <tr>
+          <th scope="row">
+            <details>
+              <summary>
+                Interest to date
+              </summary>
+              <div class="panel text-small">
+                Interest calculated at 8% since judgment is issued <br> <span class="font-xsmall">({{ now | date('subtract', 6, 'days' ) | date }} to {{ now | date }})</span>
+              </div>
+            </details>
+          </th>
+          <td class="numeric last">
+            <label class="visuallyhidden" for="amount">Interest</label>
+            <span class="font-small">£131.46</span>
+          </td>
+        </tr>
+
+        <tr>
+          <th scope="row">Issue fee</th>
+          <td class="numeric last">
+            <label class="visuallyhidden" for="fee">Issue fee</label>
+            <span class="font-small">£77</span>
+          </td>
+        </tr>
+
+        <tr>
+          <th scope="col" class="bold-medium">Total</th>
+          <td class="numeric last bold-medium">£<span name="subt" id="subt">208.46</span>
+          </td>
+          <input type="text" hidden="" value="" name="num1" id="num1"/>
+        </tr>
+        <!--<tr>-->
+        <!--<th scope="col" class="bold-medium">Total</th>-->
+        <!--<td class="numeric last bold-medium">£<span name="fee" id="fee">77</span>-->
+        <!--</td>-->
+        <!--<input type="text" hidden="" value="" name="num3" id="num3"/>-->
+        <!--</tr>-->
+
+        <!--{% endif %}-->
+        <!--{% if data['radio-indent-group2']=="Yes" %}-->
+        <!--<tr>-->
+        <!--<th scope="col" class="bold-small">Sub total</th>-->
+        <!--<td class="numeric last bold-small">£<span name="subt" id="subt">1443.20</span></td>-->
+        <!--<input type="text" hidden="" value="1443.20" name="num1" id="num1"/>-->
+        <!--</tr>-->
+        <!--<tr>-->
+        <!--<th scope="col">Minus amount already paid</th>-->
+        <!--<td class="numeric last">£200</td>-->
+        <!--</tr>-->
+        <!--<tr>-->
+        <!--<th scope="col" class="bold-medium">Total</th>-->
+        <!--<td class="numeric last bold-medium"><span name="subt" id="subt"></span></td>-->
+        <!--<input type="text" hidden="" value="" name="num1" id="num1"/>-->
+        <!--</tr>-->
+
+        <!--{% else %}-->
+
+        <!--<tr>-->
+          <!--<th scope="col" class="bold-medium">Total</th>-->
+          <!--<td class="numeric last bold-medium">£<span name="subt" id="subt">77</span>-->
+          <!--</td>-->
+          <!--<input type="text" hidden="" value="" name="num1" id="num1"/>-->
+        <!--</tr>-->
+        <!--{% endif %}-->
+
+
+        </tbody>
+      </table>
+
+      <input type="hidden" name="judgment" value="complete">
+      <input type="submit" value="Save and continue" class="button">
+      </form>
+
+    </div>
+  </div>
+{% include 'prototypes/prototype-jul-2019/includes/contact.html' %}
+</main>
+{% endblock %}

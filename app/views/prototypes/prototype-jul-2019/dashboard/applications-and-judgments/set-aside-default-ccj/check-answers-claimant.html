@@ -1,0 +1,259 @@
+{% extends "layout_task-list.html" %}
+
+{% block page_title %}
+  Check your answers
+{% endblock %}
+
+{% block home_link %} ../task-list {% endblock %}
+
+{% block proposition_header %}
+  {% set my_account="2" %}
+  {% include "includes/propositional_navigation.html" %}
+{% endblock %}
+
+
+{% block content %}
+<main id="content" role="main">
+
+	{% include "includes/phase_banner_beta.html" %}
+
+  <a href="#" class="link-back">Back</a>
+
+	<h1 class="heading-large">
+		Check your answers
+	</h1>
+
+
+    <!--  YOUR DETAILS  -->
+	  <table class="check-your-answers">
+      <thead>
+        <tr>
+          <th colspan="2">
+            <h2 class="heading-medium" id="name">
+              Your details
+            </h2>
+          </th>
+          <th>
+          </th>
+        </tr>
+      </thead>
+		  <tbody>
+
+			<tr>
+				<td>
+					Full name
+				</td>
+				<td>
+					Mrs Jan Clark
+				</td>
+				<td class="change-answer">
+				</td>
+			</tr>
+
+      </tbody>
+    </table>
+
+
+    <!--  SET ASIDE ANSWERS  -->
+    <table class="check-your-answers">
+      <thead>
+      <tr>
+        <th colspan="2">
+          <h2 class="heading-medium" id="name">
+            Your responses
+          </h2>
+        </th>
+        <th>
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+
+        <tr>
+          <td>
+            Will you attend the hearing?
+          </td>
+          <td>
+            {% if data['claimantattending'] == 'true' %}
+                Yes
+            {% else %}
+                No
+            {% endif %}
+          </td>
+          <td class="change-answer">
+            <a href="../task-list/your-details/index?return_page={{ '../../task-list' | urlencode }}">
+              Change <span class="visuallyhidden">Name</span>
+            </a>
+          </td>
+        </tr>
+
+      </tbody>
+    </table>
+
+
+    <!--  Only show the hearing requirements if claimant is attending -->
+    {% if data['claimantattending'] == 'true' %}
+        <!--  HEARING REQUIREMENTS  -->
+        <table class="check-your-answers">
+          <thead>
+          <tr>
+            <th colspan="2">
+              <h2 class="heading-medium" id="name">
+                Hearing requirements
+              </h2>
+            </th>
+            <th>
+            </th>
+          </tr>
+          </thead>
+          <tbody>
+
+          <tr>
+            <td>
+              Dates you can’t go to a hearing
+            </td>
+            <td>
+              15 September 2019<br>
+              16 September 2019<br>
+              17 September 2019<br>
+              18 September 2019<br>
+              19 September 2019<br>
+            </td>
+            <td class="change-answer">
+              <a href="#">
+                Change <span class="visuallyhidden">Name</span>
+              </a>
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              Support you'd require
+            </td>
+            <td>
+              {% if data['claimantsupportneeds'] == 'true' %}
+                  Hearing loop
+              {% else %}
+                  No support required
+              {% endif %}
+            </td>
+            <td class="change-answer">
+              <a href="#">
+                Change <span class="visuallyhidden">Name</span>
+              </a>
+            </td>
+          </tr>
+
+          {% if data['claimantsupportneeds'] == 'true' %}
+            <tr>
+              <td>
+                Preferred location for a hearing
+              </td>
+              <td>
+                Guildford County Court
+              </td>
+              <td class="change-answer">
+                <a href="#">
+                  Change <span class="visuallyhidden">Name</span>
+                </a>
+              </td>
+            </tr>
+          {% endif %}
+
+          </tbody>
+        </table>
+
+
+
+        <!--  STETEMENT OF TRUTH   -->
+        <br>
+        <div class="column-two-thirds">
+          <!--   IS THIS NEEDED?  -->
+          <!--
+
+          <h2 class="heading-medium">Statement of truth</h2>
+
+          <p>When you’re satisfied that your answers are accurate, you should tick to “sign” this statement of
+            truth on the form.</p>
+
+          {% if data['defendant'] == 'org' or data['defendant'] == 'Sole-trader' or data['check']==10 %}
+          <p>You must hold a senior position in your organisation to sign the statement of truth.</p>
+          <details class='form-group'>
+            <summary>
+              <span class="summary">Types of senior position</span>
+            </summary>
+            <div class="panel">
+              <p>A senior position could be a:</p>
+              <ul class="list-bullet list">
+                <li>director</li>
+                <li>treasurer</li>
+                <li>chief executive</li>
+                <li>manager or other officer of the company or corporation</li>
+              </ul>
+              <p>If your corporation isn't registered, a senior position could be:</p>
+              <ul class="list-bullet list">
+                <li>the chairperson or president</li>
+                <li>another officer of the corporation</li>
+              </ul>
+            </div>
+          </details>
+
+          <div class="form-group">
+            <label class="form-label" for="claimant_title">Full name</label>
+            <input type="text" class="form-control form-control-1-2" id="claimant_title" name="claimant_title" value="">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="defendant_firstname">Job title</label>
+            <input class="form-control form-control-1-2" id="defendant_name" name="defendant_name" type="text"
+                   value="{{data['defendant_name']}}">
+          </div>
+          {% endif %}
+
+
+
+                  <div class="form-group">
+                    <div class="form-group">
+                      <div class="multiple-choice text">
+                        <input class="" id="HasAcceptedTermsAndConditions2" type="checkbox" value="true">
+                        <label for="HasAcceptedTermsAndConditions2">The hearing requirement details on this page are true to the best of my knowledge.</label>
+                      </div>
+                    </div>
+                  </div>
+          -->
+
+            {% endif %}
+
+
+            {% if data['claimantattending'] != 'true' %}
+                  <br>
+            {% else %}
+                  <br>
+            {% endif %}
+            <p><a class="button" href="../../../claimant/confirmation-page?claimantresponsetosetaside=true&">Submit</a></p>
+
+        </main>
+
+
+
+
+        <form method="post"  action="#" class="for4" style=" float: left; ">
+          <select style="height:25px;" onchange="window.location.href='?'+this.value">
+            <option value="claimantattending=false&"
+                    {% if data.claimantattending != 'true' %}selected{% endif %}
+            >Claimant - Not Attending</option>
+
+            <option value="claimantattending=true&claimantsupportneeds=false&"
+                    {% if data.claimantattending == 'true'  and  data.claimantsupportneeds != 'true' %}selected{% endif %}
+            >Claimant - Attending - No Support needs</option>
+
+            <option value="claimantattending=true&claimantsupportneeds=true&"
+                    {% if data.claimantattending == 'true'  and  data.claimantsupportneeds == 'true' %}selected{% endif %}
+            >Claimant - Attending - Support needs</option>
+
+          </select>
+        </form>
+
+
+
+        {% endblock %}

@@ -1,0 +1,55 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="2" %}
+
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <a href="#" onclick="history.go(-1)" class="link-back">Back</a>
+      <h1 class="heading-large">
+        Why do you believe you don't owe Jan Clark any money?
+      </h1>
+
+     <form method="post" action="are-you-owed">
+
+      <div class="form-group">
+        <legend class="visually-hidden">What do you want to do?</legend>
+        <div class="multiple-choice">
+          <input id="radio-yes" type="radio" name="radio_select_group2" value="paid" {{ checked("radio_select_group2", "paid") }}>
+          <label for="radio-yes" data-target="yes-info">
+          <strong class="">I've paid what I believe I owe</strong><br>
+         </label>
+        </div>
+        <div class="multiple-choice">
+          <input id="radio-no" type="radio" name="radio_select_group2" value="defend_now" {{ checked("radio_select_group2", "defend_now") }}>
+          <label for="radio-no" data-target="yes-info">I dispute all of the claim</label>
+        </div>
+        <div class="multiple-choice">
+          <input id="radio-counter" type="radio" name="radio_select_group2" value="counter" {{ checked("radio_select_group2", "counter") }}>
+          <label for="radio-counter">Because they owe me more than {% if data['mediation-pilot']=="on" %}
+            £300
+            {%else%}
+            £1,500
+            {% endif %}</label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <input type="submit" class="button" value="Save and continue"/>
+      </div>
+
+    </form>
+  </div>
+</div>
+</div>
+{% include 'prototypes/prototype-jul-2019/includes/contact.html' %}
+</main>
+{% endblock %}
