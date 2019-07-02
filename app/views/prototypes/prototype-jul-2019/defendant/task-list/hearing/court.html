@@ -13,7 +13,6 @@ Money Claims Prototype
   <div class="grid-row">
     <div class="column-two-thirds">
 
-
         {% if ( data['scenario'] == 3 or data['scenario'] == 4 )  and data['reject-court'] != 'yes' %}
         <form
         name="aspnetForm"
@@ -194,37 +193,16 @@ Money Claims Prototype
           </div>
         </details>
 
-        <h3 class="heading-medium">Does this court meet your accessibility needs?</h3>
+                <p>You can ask for a different court. Your request won't usually be granted unless the defendant's choice doesn't have facilities you need.</p>
 
+        <h3 class="heading-medium">Do you need to request a different court?</h3>
 
-          <div class="form-group">
-            <fieldset>
-              <div class="multiple-choice">
-                <input id="radio-court-no" type="radio" name="reject-court" value="no">
-                <label for="radio-court-no">Yes</label>
-              </div>
-              <div class="multiple-choice" data-target="reason">
-                <input id="radio-court-yes" type="radio" name="reject-court" value="yes">
-                <label for="radio-court-yes">No{% if data['scenario'] == 4 %} - I want to request a different court{% endif %}</label>
-              </div>
-              <div class="panel panel-border-narrow js-hidden" id="reason">
-                <div class="form-group">
-                  <label class="form-label" for="court-reason">Briefly explain your reasons</label>
-                  <textarea class="form-control form-control-3-4" rows="3" name="court-reason" type="text" id="court-reason"></textarea>
-                </div>
-              </div>
-            </fieldset>
-          </div>
-        {% else %}
-        <h1 class="heading-large">Do your accessibility needs mean you want to ask for the hearing to be held at a specific court?</h1>
-
-        <p>If not, the hearing will be held at the court the claimant chooses.</p>
 
         <div class="form-group">
           <fieldset>
             <div class="multiple-choice" data-target="reason">
               <input id="radio-court-yes" type="radio" name="reject-court" value="yes">
-              <label for="radio-court-yes">Yes{% if data['scenario'] == 4 %} - I want to request a different court{% endif %}</label>
+              <label for="radio-court-yes">Yes{% if data['scenario'] == 4 %}{% endif %}</label>
             </div>
             <div class="panel panel-border-narrow js-hidden" id="reason">
               <div class="form-group">
@@ -235,6 +213,32 @@ Money Claims Prototype
             <div class="multiple-choice">
               <input id="radio-court-no" type="radio" name="reject-court" value="no">
               <label for="radio-court-no">No</label>
+            </div>
+          </fieldset>
+        </div>
+        {% else %}
+        <h1 class="heading-large">Do you want to ask for the hearing to be held at a specific court?</h1>
+
+        <!-- <p>If not, the hearing will be held at the court the claimant chooses.</p> -->
+
+        <div class="form-group">
+          <fieldset>
+            <div class="multiple-choice" data-target="reason">
+              <input id="radio-court-yes" type="radio" name="reject-court" value="yes">
+              <label for="radio-court-yes">Yes</label>
+            </div>
+            <!-- <div class="panel panel-border-narrow js-hidden" id="reason">
+              <div class="form-group">
+                <label class="form-label" for="court-reason">Briefly explain your reasons</label>
+                <textarea class="form-control form-control-3-4" rows="3" name="court-reason" type="text" id="court-reason"></textarea>
+              </div>
+            </div> -->
+            <div class="multiple-choice" data-target="claimant-choice">
+              <input id="radio-court-no" type="radio" name="reject-court" value="no">
+              <label for="radio-court-no">No</label>
+            </div>
+            <div class="panel panel-border-narrow js-hidden" id="claimant-choice" style="padding-bottom:15px;">
+              <p>The hearing will be held at the court the claimant chooses.</p>
             </div>
           </fieldset>
         </div>
