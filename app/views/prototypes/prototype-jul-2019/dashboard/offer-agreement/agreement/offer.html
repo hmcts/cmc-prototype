@@ -65,7 +65,6 @@ Money Claims Prototype
 
         <p>To apply, download and complete form N244 from HMCTS Formfinder and send it to the County Court Business Centre. You need to say on the form which of the 3 options you're applying for.</a></p>
 
-
         </p>
       </div>
       <h2 class="heading-medium">Sign the agreement</h2>
@@ -78,10 +77,50 @@ Money Claims Prototype
         </div>
       </div>
 
-      <a href="confirmation-page" class="button">Sign and submit</a>
+
+
+      {% if data['newoffer'] == 'true'  %}
+          {% if data['defendant'] == "defendant" %}
+              <p><a href="#" class="button">Sign agreement</a></p>
+              <p><a href="">Don't make offer</a></p>
+          {% else %}
+              <p><a href="../new-offers/allow-another-offer" class="button">Sign agreement</a></p>
+              <p><a href="../new-offers/allow-another-offer">Don't make offer</a></p>
+          {% endif %}
+      {% else %}
+          <a href="confirmation-page" class="button">Sign and submit</a>
+      {% endif %}
+
       <fieldset></fieldset>
     </div>
   </div>
 {% include 'prototypes/prototype-jul-2019/includes/contact.html' %}
 </main>
+
+
+
+<form method="post"  action="#" class="for4" style=" float: left; ">
+  <select style="height:25px;" onchange="window.location.href='?'+this.value">
+    <option value="defendant=defendant&newoffer=false&"
+            {% if data['defendant'] == 'defendant'  and  data['newoffer'] != 'true'  %}selected{% endif %}
+    >Defendant</option>
+
+    <option value="defendant=claimant&newoffer=false&"
+            {% if data['defendant'] == 'claimant'  and  data['newoffer'] != 'true'  %}selected{% endif %}
+    >Claimant</option>
+
+    <option value="defendant=defendant&newoffer=true&"
+            {% if data['defendant'] == 'defendant'  and  data['newoffer'] == 'true'  %}selected{% endif %}
+    >Defendant - New type of offer</option>
+
+    <!--
+    <option value="defendant=claimant&newoffer=true"
+            {% if data['defendant'] == 'claimant'  and  data['newoffer'] == 'true' %}selected{% endif %}
+    >Claimant - New offers</option>
+    -->
+
+  </select>
+</form>
+
+
 {% endblock %}
