@@ -29,6 +29,7 @@
                 </th>
               </tr>
             </thead>
+
             <tbody>
               <!-- Check before you start -->
               <tr id="check-before-you-start">
@@ -41,18 +42,43 @@
                 </td>
                 <td class="numeric" id="task-status" scope="col" id="col-status">
                   {% if data.their_response=="complete" %}
-                  {% include "includes/task_status_finished.html" %}
+                      {% include "includes/task_status_finished.html" %}
                   {% else %}
-                  {% include "includes/task_status_incomplete.html" %}
+                      {% include "includes/task_status_incomplete.html" %}
                   {% endif %}
                 </td>
               </tr>
+
+              {% if data['defendantmadeoffer'] == 'true' %}
+                    <!-- Check before you start -->
+                    <tr id="check-before-you-start">
+                      <td class="task">
+                        <a href="../../offer-agreement/view-offer?defendant=claimant&newoffer=true&fromtheclaimanttasklist=true&">
+                          <span class="task-name">
+                            Respond to their offer
+                          </span>
+                        </a>
+                      </td>
+                      <td class="numeric" id="task-status" scope="col" id="col-status">
+                        {% if data.offerresponse=="complete" %}
+                            {% include "includes/task_status_finished.html" %}
+                        {% else %}
+                            <!--   {% include "includes/task_status_incomplete.html" %}  -->
+                        {% endif %}
+                      </td>
+                    </tr>
+              {% endif %}
+
             </tbody>
           </table>
 
           <br/>
           <br/>
-          <table id="table-of-tasks">
+
+
+        {% if data['offeracceptedbyclaimant'] != 'true' %}
+
+            <table id="table-of-tasks">
             <thead>
               <tr>
                 <th scope="col" id="col-task">
@@ -100,6 +126,11 @@
         </table>
         <br>
         <br>
+        {% endif %}
+
+
+
+
 
 
 
