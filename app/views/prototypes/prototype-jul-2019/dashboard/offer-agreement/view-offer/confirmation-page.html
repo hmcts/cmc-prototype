@@ -13,10 +13,15 @@ Money Claims Prototype
     <div class="column-two-thirds">
 
       <div class="govuk-box-highlight">
-        {% if data['radio-indent-group'] == "counter" or data['confirmation'] == 1 %}
-        <h1 class="bold-large">Your offer has been sent to the defendant</h1>
 
-{% elseif data['radio-indent-group'] == "Counter_defendant"  or data['confirmation'] == 6 %}
+        <!--  the defendant is sending another offer to the claimant  -->
+        {% if data['respondtoclaimantnocounter'] == 'true' %}
+        <h1 class="bold-large">Your offer has been sent to Jan Clar</h1>
+
+        {% elif data['radio-indent-group'] == "counter" or data['confirmation'] == 1 %}
+
+
+        {% elseif data['radio-indent-group'] == "Counter_defendant"  or data['confirmation'] == 6 %}
         <h1 class="bold-large">Your offer has been sent to the claimant</h1>
 
 
@@ -46,12 +51,20 @@ Money Claims Prototype
           <strong class="bold"><span id="Date2"></span></strong>
         </p>
       </div>
+
+
+
       <fieldset>
         <h2 class="heading-medium">What happens next</h2>
-        {% if data['radio-indent-group'] == "counter" or data['confirmation'] == 1 %}
-        <p>Mary Richards can accept, reject or make a counter offer. We'll email you when they respond.
-        </p>
-        <p> View your claim status on <a href='#'>your money claims account</a>. </p>
+        {% if data['respondtoclaimantnocounter'] == 'true' %}
+            <p>Jan Clark can accept, reject or make a counter offer. We'll email you when they respond.</p>
+            <p><a class="button" href='../../defendant?defendant=12'>Go to your account</a></p>
+
+        {% elif data['radio-indent-group'] == "counter" or data['confirmation'] == 1 %}
+            <p>Mary Richards can accept, reject or make a counter offer. We'll email you when they respond.
+            </p>
+            <p> View your claim status on <a href='#'>your money claims account</a>. </p>
+
 
         {% elseif data['radio-indent-group'] == "Counter_defendant"  or data['confirmation'] == 6 %}
         <p>The claimant Jan Clark can accept your counter offer, reject it or suggest an alternative. We'll email you when the defendant responds.
@@ -62,7 +75,7 @@ Money Claims Prototype
 
         {% elseif data['radio-indent-group'] == "reject-offer" or data['radio-indent-group'] == "Stop" or data['radio-indent-group'] == "Continue" or data['confirmation'] == 6 %}
         <p>We'll send your response to the defendant.</p>
-  {% include "includes/survey.html" %}
+            {% include "includes/survey.html" %}
 
           <p><a class="button" href='../../home?dashboard=1.13'>Go to your account</a></p>
 

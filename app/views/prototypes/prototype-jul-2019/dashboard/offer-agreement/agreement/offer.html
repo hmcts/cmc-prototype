@@ -81,8 +81,15 @@ Money Claims Prototype
 
       {% if data['newoffer'] == 'true'  %}
           {% if data['defendant'] == "defendant" %}
-              <p><a href="../../../defendant/task-list?offersection=complete&" class="button">Sign agreement</a></p>
-              {% if data['fromthetasklist'] == 'true' %}
+              {% if data['respondtoclaimantnocounter'] == 'true' %}
+                  <p><a href="../new-offers/check-answers" class="button">Sign agreement</a></p>
+              {% else %}
+                  <p><a href="../../../defendant/task-list?offersection=complete&" class="button">Sign agreement</a></p>
+              {% endif %}
+
+              {% if data['respondtoclaimantnocounter'] == 'true' %}
+                  <p><a href="../../defendant?defendant=9">Don't make offer</a></p>
+              {% elif data['fromthetasklist'] == 'true' %}
                     <p><a href="../../../defendant/task-list?offersection=complete&">Don't make offer</a></p>
               {% else %}
                     <p><a href="">Don't make offer</a></p>
