@@ -84,8 +84,15 @@ Money Claims Prototype
               <p><a href="#" class="button">Sign agreement</a></p>
               <p><a href="">Don't make offer</a></p>
           {% else %}
-              <p><a href="../new-offers/allow-another-offer" class="button">Sign agreement</a></p>
-              <p><a href="../new-offers/allow-another-offer">Don't make offer</a></p>
+              <!--  claimant rew offer, accept and reject routes -->
+              {% if data['offeraccepted'] == 'true'  %}
+                  <p><a href="confirmation-page" class="button">Sign agreement</a></p>
+                  <p><a href="#">Don't make offer</a></p>
+              {% else %}
+                  <p><a href="../new-offers/allow-another-offer" class="button">Sign agreement</a></p>
+                  <p><a href="#">Don't make offer</a></p>
+              {% endif %}
+
           {% endif %}
       {% else %}
           <a href="confirmation-page" class="button">Sign and submit</a>
