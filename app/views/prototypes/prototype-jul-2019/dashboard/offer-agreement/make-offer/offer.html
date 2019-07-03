@@ -98,9 +98,17 @@ Money Claims Prototype
                     {% endif %}
                   </p>
                 </div>
+
+
                 <div class="form-group">
-                  <input type="submit" class="button" value="Submit offer"/>
+                  {% if data['newoffer'] == 'true' %}
+                      <p><a href="../agreement" class="button">Continue</a></p>
+                  {% else %}
+                      <input type="submit" class="button" value="Submit offer"/>
+                  {% endif %}
                 </div>
+
+
               </fieldset>
             </div>
           </form>
@@ -108,4 +116,21 @@ Money Claims Prototype
       </div>
     {% include 'prototypes/prototype-jul-2019/includes/contact.html' %}
 </main>
+
+
+<form method="post"  action="#" class="for4" style=" float: left; ">
+  <select style="height:25px;" onchange="window.location.href='?'+this.value">
+    <option value="newoffer=false&"
+            {% if data['newoffer'] != 'true'  %}selected{% endif %}
+            >Old type of offer</option>
+
+    <option value="newoffer=true&"
+            {% if data['newoffer'] == 'true'  %}selected{% endif %}
+            >New type of offer</option>
+
+  </select>
+</form>
+
+
+
 {% endblock %}
