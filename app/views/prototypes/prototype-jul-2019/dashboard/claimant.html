@@ -561,7 +561,7 @@
               <p>The court will review the case. We'll contact you to tell you what to do next.</p>
 
 
-              {% elseif data['claimant'] == 11.1 or data['claimant'] == 11.1001 %}
+              {% elseif data['claimant'] == 11.1 or data['claimant'] == 11.1001 or data['claimant'] == 11.4 or data['claimant'] == 11.6  %}
               <div class="status-block single">
                 <h2 class="heading-medium">Send us more details before the hearing</h2>
                 <p>The court has ordered you to send these details before 4pm on {{ now | date( 'add', 12, 'days' ) | date }}:</p>
@@ -585,11 +585,26 @@
                 <h2 class="heading-small">See the full legal document</h2>
                 <p><a href="/public/images/order.pdf">Download the court's order</a> (PDF, 123KB) if you want to see the full legal document that sets out these instructions.</p>
 
+
+                {% if data['claimant'] == 11.4 %}
+                <hr/>
+
+                <h2 class="heading-medium">Respond to the defendant's request for a judge to review the order</h2>
+                <p>Mary Richards has asked for a judge to review the order.</p>
+                <p>You have until {{ now | date( 'add', 12, 'days' ) | date }} to add your own comments.</p>
+                <a href="order-response/review/respond" class="button">Respond to the request</a>
+                {% endif %}
+
                 <hr/>
 
                 <h2 class="heading-medium">View the defendant's response to the order</h2>
                 <p><a href="order-response/view?party=claimant" class="button secondary-button">See the details they sent the court</a></p>
 
+                {% if data['claimant'] == 11.6 %}
+                <h3 class="heading-small">View the defendant's response to your request to review the order</h3>
+                <p><a href="../defendant/correspondence/forms/order-review">Download the request to review the order</a> (PDF, 123KB)</p>
+
+                {% endif %}
               </div>
 
               {% elseif data['claimant'] == 11.1003 %}
@@ -677,7 +692,6 @@
               {% elseif data['claimant'] == 11.11 or data['claimant'] == 11.5 %}
               <div class="status-block single">
 
-
                 {% if data['claimant'] == 11.5 %}
                 <h2 class="heading-medium">Respond to the defendant's request for a judge to review the order</h2>
                 <p>Mary Richards has asked for a judge to review the order.</p>
@@ -688,10 +702,8 @@
                 {% endif %}
 
                 <h2 class="heading-medium">Send us more details before the hearing</h2>
-                <p>The court has ordered you to send us more details.
+                <p>The court has ordered you to send us more details. You need to do this before 4pm on {{ now | date( 'add', 15, 'days' ) | date }}.</p>
 
-                  <p>You need to make sure the court and the defendant receive the letter with the details before 4pm on {{ now | date( 'add', 19, 'days' ) | date }}</p>
-                  <p>
                 <p><a href="/public/images/order.pdf">Download the court's order</a> (PDF, 123KB) to find out the details you need to send.</p>
 
                 <h2 class="heading-small">Where to post the details</h2>
@@ -717,7 +729,7 @@
                 <h2 class="heading-small">If you don't send us the details</h2>
                 <p>The court will cancel your claim after 4pm on {{ now | date( 'add', 19, 'days' ) | date }}.</p>
 
-                {% if data['claimant'] ==11.11 %}
+                {% if data['claimant'] == 11.11 %}
 
                 <h2 class="heading-small">If you have a problem with the order</h2>
                 <p>You can <a href="order-response/review/reason">ask the court to review it</a>. You need to do this before 4pm on {{ now | date('add', 12, 'days') | date }}.</p>
@@ -772,36 +784,6 @@
                 <p>We'll contact both you and Mary Richards by post to tell you what to do next.</p>
               </div>
  -->
-
-              {% elseif data['claimant'] == 11.4 %}
-              <div class="status-block single">
-                <h2 class="heading-medium">Send us more details before the hearing</h2>
-                <p>The court has ordered you to send these details before 4pm on {{ now | date( 'add', 12, 'days' ) | date }}:</p>
-
-                <ul class="list list-bullet">
-                  <li>any documents relevant to the case, like contracts, agreements or letters</li>
-                  <li>witness statements</li>
-                </ul>
-
-                <p><a href="order-response?party=claimant" class="button">Send us the details</a></p>
-
-                <h2 class="heading-small">See the full legal document</h2>
-                <p><a href="/public/images/order.pdf">Download the court's order</a> (PDF, 123KB) if you want to see the full legal document that sets out these instructions.</p>
-
-                <hr/>
-
-                <h2 class="heading-medium">Respond to the defendant's request for a judge to review the order</h2>
-                <p>Mary Richards has asked for a judge to review the order.</p>
-                <p>You have until {{ now | date( 'add', 12, 'days' ) | date }} to add your own comments.</p>
-                <a href="order-response/review/respond" class="button">Respond to the request</a>
-
-                <hr/>
-
-                <h2 class="heading-medium">View the defendant's response to the order</h2>
-                <p><a href="order-response/view?party=claimant" class="button secondary-button">See the details they sent the court</a></p>
-
-
-              </div>
 
 
               {% elseif data['claimant'] == 12 %}
@@ -2560,6 +2542,7 @@
 <!--     <option value="11.3" {% if data['claimant'] == 11.3 %}selected{% endif %}>Order review requested - by me</option> -->
     <option value="11.4" {% if data['claimant'] == 11.4 %}selected{% endif %}>Order review requested - by other party</option>
     <option value="11.5" {% if data['claimant'] == 11.5 %}selected{% endif %}>Order review requested - by other party (offline)</option>
+    <option value="11.6" {% if data['claimant'] == 11.6 %}selected{% endif %}>Order review requested - reviewed by defendant</option>
 
     <option>------- Hearing ----------</option>
     <option value="14.1" {% if data['claimant'] == 14.1 %}selected{% endif %}>Hearing date set - details</option>
