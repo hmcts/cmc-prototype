@@ -51,6 +51,28 @@
                 </td>
               </tr>
 
+
+              {% if data['defendantmadeoffer'] == 'true' %}
+                  <!-- Check before you start -->
+                  <tr id="check-before-you-start">
+                    <td class="task">
+                      <a href="../../offer-agreement/view-offer?defendant=claimant&newoffer=true&partadmitviewonly=true&">
+                          <span class="task-name">
+                            View their offer
+                          </span>
+                      </a>
+                    </td>
+                    <td class="numeric" id="task-status" scope="col" id="col-status">
+                      {% if data.offerresponseviewed=="complete" %}
+                          {% include "includes/task_status_finished.html" %}
+                      {% else %}
+                      <!--   {% include "includes/task_status_incomplete.html" %}  -->
+                      {% endif %}
+                    </td>
+                  </tr>
+              {% endif %}
+
+
             </tbody>
           </table>
           <br>
@@ -67,7 +89,31 @@
                 <th class="numeric" id="task-status" scope="col" id="col-status"></th>
               </tr>
             </thead>
+
             <tbody>
+
+            {% if data['defendantmadeoffer'] == 'true' %}
+                <!-- Check before you start -->
+                <tr id="check-before-you-start">
+                  <td class="task">
+                    <a href="../../offer-agreement/view-offer?defendant=claimant&newoffer=true&partadmitviewonly=false&partadmittasklist=true&">
+                          <span class="task-name">
+                            Accept or reject their offer
+                          </span>
+                    </a>
+                  </td>
+                  <td class="numeric" id="task-status" scope="col" id="col-status">
+                    {% if data.offerresponsedecidedpartadmit=="complete" %}
+                      {% include "includes/task_status_finished.html" %}
+                    {% else %}
+                    <!--   {% include "includes/task_status_incomplete.html" %}  -->
+                    {% endif %}
+                  </td>
+                </tr>
+            {% endif %}
+
+
+
              <tr id="completing-your-claim">
               <td class="task">
                 <a href="task-list/amount-owed{{formQuery}}">
@@ -98,7 +144,10 @@
                 {% endif %}
               </td>
             </tr>
-             {%elif data.radio_select_group_owed=="No" %}
+
+
+
+             {% elif data.radio_select_group_owed=="No" %}
             <tr id="their-details">
               <td class="task">
                 <a href="task-list/request-mediation{{formQuery}}">
@@ -115,6 +164,8 @@
             </tr>
              {% else %}
              {% endif %}
+
+
 
 
 

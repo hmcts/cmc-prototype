@@ -16,39 +16,87 @@ Money Claims Prototype
         Are you willing to receive another offer from Mary Richards?
       </h1>
 
-        <form
-          name="aspnetForm"
-          method="post"
-          onsubmit="multiNavigation('radio-indent-group', ['Yes', 'No'], ['check-answers?moreoffers=true&', 'check-answers?moreoffers=false&']);return false;"
-          id="aspnetForm"
-          autocomplete="off">
 
-          <div class="form-group">
-            <fieldset>
-              <div class="multiple-choice" data-target="accept">
-                <input id="radio-yes" type="radio" name="radio-indent-group" value="Yes">
-                <label for="radio-yes" data-target="yes-info">Yes</label>
-              </div>
-              <!--
-              <div class="panel panel-border-narrow js-hidden" id="accept">
-                <p>Continue to make a settlement agreement between you and the defendant.</p>
-              </div>
-              -->
-              <div class="multiple-choice" data-target="counter">
-                <input id="radio-counter" type="radio" name="radio-indent-group" value="No">
-                <label for="radio-counter" data-target="no-info">No</label>
-              </div>
-              <!--
-              <div class="panel panel-border-narrow js-hidden" id="counter">
-                <p>If you reject the offer you can't mention it in court.</p>
-              </div>
-              -->
-            </fieldset>
-            <input id="advert-option-next--button" type="submit" value="Continue" class="button"
-                   data-ignore-double-submit="true">
-          </div>
+      {% if data['partadmittasklist'] == 'true' %}
+          <form
+            name="aspnetForm"
+            method="post"
+            onsubmit="multiNavigation('radio-indent-group', ['Yes', 'No'],
+                                            ['../../claimant-response/part-admit/task-list?offerresponsedecidedpartadmit=complete&moreoffers=true&',
+                                             '../../claimant-response/part-admit/task-list?offerresponsedecidedpartadmit=complete&moreoffers=true&']);return false;"
+            id="aspnetForm"
+            autocomplete="off">
 
-        </form>
+            <div class="form-group">
+              <fieldset>
+                <div class="multiple-choice" data-target="accept">
+                  <input id="radio-yes" type="radio" name="radio-indent-group" value="Yes">
+                  <label for="radio-yes" data-target="yes-info">Yes</label>
+                </div>
+                <div class="multiple-choice" data-target="counter">
+                  <input id="radio-counter" type="radio" name="radio-indent-group" value="No">
+                  <label for="radio-counter" data-target="no-info">No</label>
+                </div>
+              </fieldset>
+              <input id="advert-option-next--button" type="submit" value="Continue" class="button"
+                     data-ignore-double-submit="true">
+            </div>
+          </form>
+
+
+        {% elif data['fromtheclaimanttasklist'] == 'true' %}
+            <form
+              name="aspnetForm"
+              method="post"
+              onsubmit="multiNavigation('radio-indent-group', ['Yes', 'No'],
+                                        ['../../claimant-response/dispute-claim/task-list?offerresponse=complete&offeracceptedbyclaimant=true&moreoffers=true&offeracceptedbyclaimant=false&',
+                                         '../../claimant-response/dispute-claim/task-list?offerresponse=complete&offeracceptedbyclaimant=true&moreoffers=true&offeracceptedbyclaimant=false&']);return false;"
+              id="aspnetForm"
+              autocomplete="off">
+
+              <div class="form-group">
+                <fieldset>
+                  <div class="multiple-choice" data-target="accept">
+                    <input id="radio-yes" type="radio" name="radio-indent-group" value="Yes">
+                    <label for="radio-yes" data-target="yes-info">Yes</label>
+                  </div>
+                  <div class="multiple-choice" data-target="counter">
+                    <input id="radio-counter" type="radio" name="radio-indent-group" value="No">
+                    <label for="radio-counter" data-target="no-info">No</label>
+                  </div>
+                </fieldset>
+                <input id="advert-option-next--button" type="submit" value="Continue" class="button"
+                       data-ignore-double-submit="true">
+              </div>
+            </form>
+
+
+        {% else %}
+            <form
+              name="aspnetForm"
+              method="post"
+              onsubmit="multiNavigation('radio-indent-group', ['Yes', 'No'], ['check-answers?moreoffers=true&', 'check-answers?moreoffers=false&']);return false;"
+              id="aspnetForm"
+              autocomplete="off">
+
+              <div class="form-group">
+                <fieldset>
+                  <div class="multiple-choice" data-target="accept">
+                    <input id="radio-yes" type="radio" name="radio-indent-group" value="Yes">
+                    <label for="radio-yes" data-target="yes-info">Yes</label>
+                  </div>
+                  <div class="multiple-choice" data-target="counter">
+                    <input id="radio-counter" type="radio" name="radio-indent-group" value="No">
+                    <label for="radio-counter" data-target="no-info">No</label>
+                  </div>
+                </fieldset>
+                <input id="advert-option-next--button" type="submit" value="Continue" class="button"
+                       data-ignore-double-submit="true">
+              </div>
+            </form>
+        {% endif %}
+
+
     </div>
   </div>
   {% include 'prototypes/prototype-jul-2019/includes/contact.html' %}
