@@ -1324,15 +1324,46 @@
                   <!--(PDF, 123KB)</p>-->
               <!--</div>-->
 
+              <!-- Defendant rejected claimants counter offer - no more offers-->
+              {% elseif data['defendant'] == 13.01 %}
+                  <div class="status-block single">
+                    <h2 class="heading-medium">Wait for the court to review the case</h2>
+                    <p>You've rejected the the Jan Clark's offer.</p>
+                    <p>The court will review the case. We'll contact you to tell you what to do next.</p>
+                  </div>
+
               <!-- claimant rejected offer but allows another offer  -->
               {% elseif data['defendant'] == 13.1 %}
                   <div class="status-block single">
-                    <h2 class="heading-medium">Wait for the court to review the case</h2>
-                    <p>The claimant rejected your offer to settle the claim.</p>
-                    <p>They will allow you to make another offer.</p>
-                    <p><a class="button" href="offer-agreement/new-offers/view-reason-for-reject?&newoffer=true&respondtoclaimantnocounter=true&defendant=defendant&">Make another offer</a></p>
-                    <p>The court will review the case. We'll contact you to tell you what to do next.</p>
+                      <h2 class="heading-medium">Wait for the court to review the case</h2>
+                      <p>Jan Clark rejected your offer to settle the claim.</p>
+                      <p>They will allow you to make another offer.</p>
+                      <p><a class="button" href="offer-agreement/new-offers/view-reason-for-reject?&newoffer=true&respondtoclaimantnocounter=true&defendant=defendant&">Make another offer</a></p>
+                      <p>The court will review the case. We'll contact you to tell you what to do next.</p>
                   </div>
+
+
+              <!-- claimant rejected offer but allows another offer  -->
+              {% elseif data['defendant'] == 13.2 %}
+                  <div class="status-block single">
+                      <h2 class="heading-medium">Wait for the court to review the case</h2>
+                      <p>Jan Clark rejected your offer to settle the claim.</p>
+                      <p>They made a counteroffer.</p>
+                      <p><a class="button" href="offer-agreement/new-offers/view-reason-for-reject?&newoffer=true&respondtoclaimantnocounter=false&defendant=defendant&nomoreofffersallowed=true&">Respond to counteroffer</a></p>
+                      <p>The court will review the case. We'll contact you to tell you what to do next.</p>
+                  </div>
+
+
+              <!-- claimant rejected offer but allows another offer  -->
+              {% elseif data['defendant'] == 13.3 %}
+              <div class="status-block single">
+                <h2 class="heading-medium">Wait for the court to review the case</h2>
+                <p>Jan Clark rejected your offer to settle the claim.</p>
+                <p>They made a counteroffer.</p>
+                <p><a class="button" href="offer-agreement/new-offers/view-reason-for-reject?&newoffer=true&respondtoclaimantnocounter=false&defendant=defendant&nomoreofffersallowed=false&">Respond to counteroffer</a></p>
+                <p>The court will review the case. We'll contact you to tell you what to do next.</p>
+              </div>
+
 
 
               {% elseif data['defendant'] == 14.1 %}
@@ -4056,12 +4087,20 @@
     <option value="12.5" {% if data['defendant'] == 12.5 %}selected{% endif %}>Order review requested - by other party (offline)</option>
     <option value="12.6" {% if data['defendant'] == 12.6 %}selected{% endif %}>Order review requested - reviewed by claimant</option>
 
+
     <option>------- Hearing ----------</option>
     <option value="14.1" {% if data['claimant'] == 14.1 %}selected{% endif %}>Hearing date set - details</option>
 
+
+
+
     <option>------ Offers and mediation -------</option>
     <option value="10" {% if data['defendant'] == 10 %}selected{% endif %}>9. Offer sent to claimant </option>
-    <option value="13" {% if data['defendant'] == 13 %}selected{% endif %}>10. Offer rejected by the claimant </option>
+    <option value="13" {% if data['defendant'] == 13 %}selected{% endif %}>10. Offer rejected by the claimant - no more offers</option>
+    <option value="13.01" {% if data['defendant'] == 13.01 %}selected{% endif %}>Defendant rejected claimants counter offer - no more offers</option>
+    <option value="13.1" {% if data['defendant'] == 13.1 %}selected{% endif %}>Offer rejected by the claimant - Make new offer only</option>
+    <option value="13.2" {% if data['defendant'] == 13.2 %}selected{% endif %}>Offer rejected by the claimant - Respond to counter offer only</option>
+    <option value="13.3" {% if data['defendant'] == 13.3 %}selected{% endif %}>Offer rejected by the claimant - Respond to counter offer and make offer</option>
     <option value="15" {% if data['defendant'] == 15 %}selected{% endif %}>11. Counter sign offer </option>
     <option value="16" {% if data['defendant'] == 16 %}selected{% endif %}>11. Agreement signed by both parties </option>
 

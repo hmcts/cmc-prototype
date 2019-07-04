@@ -16,7 +16,14 @@ Money Claims Prototype
         Jan Clark's reason for rejecting your offer
       </h1>
 
-      <form action="../make-offer" method="get" class="form">
+
+      <!-- when there is a coutner offer to respond to -->
+      {% if data['respondtoclaimantnocounter'] == 'false' %}
+          <form action="../view-offer" method="get" class="form">
+      {% else %}
+          <form action="../make-offer" method="get" class="form">
+      {% endif %}
+
 
         <div class="form-group">
           <fieldset>
@@ -27,7 +34,6 @@ Money Claims Prototype
                <input type="submit" class="button" value="Continue"/>
             </div>
 
-
           </fieldset>
         </div>
 
@@ -37,19 +43,6 @@ Money Claims Prototype
   {% include 'prototypes/prototype-jul-2019/includes/contact.html' %}
 </main>
 
-
-<form method="post"  action="#" class="for4" style=" float: left; ">
-  <select style="height:25px;" onchange="window.location.href='?'+this.value">
-    <option value="newoffer=false&"
-            {% if data['newoffer'] != 'true'  %}selected{% endif %}
-            >Old type of offer</option>
-
-    <option value="newoffer=true&"
-            {% if data['newoffer'] == 'true'  %}selected{% endif %}
-            >New type of offer</option>
-
-  </select>
-</form>
 
 
 

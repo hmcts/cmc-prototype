@@ -19,27 +19,33 @@ Money Claims Prototype
         <form
           name="aspnetForm"
           method="post"
-          onsubmit="multiNavigation('radio-indent-group', ['Yes', 'No'],
+          onsubmit="multiNavigation('radio-indent-group', ['Yes', 'No','No-defendant-done-with-offers'],
                         ['../make-offer?makecounteroffer=true&',
-                        'allow-another-offer?makecounteroffer=false&']);return false;"
+                        'allow-another-offer?makecounteroffer=false&',
+                        '../../defendant?defendant=13.01&']);return false;"
           id="aspnetForm"
           autocomplete="off">
 
           <div class="form-group">
             <fieldset>
-              <div class="multiple-choice" data-target="accept">
-                <input id="radio-yes" type="radio" name="radio-indent-group" value="Yes">
-                <label for="radio-yes" data-target="yes-info">Yes</label>
-              </div>
-              <!--
-              <div class="panel panel-border-narrow js-hidden" id="accept">
-                <p>Continue to make a settlement agreement between you and the defendant.</p>
-              </div>
-              -->
+
+                <div class="multiple-choice" data-target="accept">
+                  <input id="radio-yes" type="radio" name="radio-indent-group" value="Yes">
+                  <label for="radio-yes" data-target="yes-info">Yes</label>
+                </div>
+
+                {% if data['respondtoclaimantnocounter'] == 'false'  %}
+                    <div class="multiple-choice" data-target="counter">
+                      <input id="radio-counter" type="radio" name="radio-indent-group" value="No-defendant-done-with-offers">
+                      <label for="radio-counter" data-target="no-info">No</label>
+                    </div>
+                {% else %}
+
                   <div class="multiple-choice" data-target="counter">
                     <input id="radio-counter" type="radio" name="radio-indent-group" value="No">
                     <label for="radio-counter" data-target="no-info">No</label>
                   </div>
+                {% endif %}
 
               <!--
               <div class="panel panel-border-narrow js-hidden" id="counter">

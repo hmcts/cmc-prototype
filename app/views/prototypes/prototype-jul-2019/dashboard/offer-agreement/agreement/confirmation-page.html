@@ -37,6 +37,7 @@ Money Claims Prototype
 
 
 
+
         {% elif data['defendant'] == "defendant_signed" or data['type'] == 2 %}
 
             <h1 class="bold-large">You’ve settled out of court</h1>
@@ -76,7 +77,17 @@ Money Claims Prototype
 
         {% if data['newoffer'] == 'true'  %}
 
-            {% if data['offeraccepted'] == 'true'  %}
+            <!-- when there is a coutneroffer from the claimant which is accepted by the defendant -->
+            {% if data['respondtoclaimantnocounter'] == 'false' %}
+                {% if data['offeraccepted'] == 'true' %}
+                    <p>You've both signed a settlement agreement.</p>
+                    <p><a class="button" href='../../defendant?defendant=16'>Go to your account</a></p>
+                {% else %}
+                    <p>We will contact you if Jan Clark responds to your offer.</p>
+                    <p><a class="button" href='../../defendant?defendant=10'>Go to your account</a></p>
+                {% endif %}
+
+            {% elif data['offeraccepted'] == 'true'  %}
                 <p>You've both signed a settlement agreement.</p>
                 <p><a class="button" href='../../claimant?claimant=17'>Go to your account</a></p>
 

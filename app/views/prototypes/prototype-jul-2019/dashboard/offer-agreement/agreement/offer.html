@@ -31,7 +31,13 @@ Money Claims Prototype
 
 
             {% if data['defendant'] == "defendant" %}
-            <td>Jan Clark: I'll pay a maximum of £100 towards any new materials.
+
+                {% if data['defendant'] == "defendant"  and  data['respondtoclaimantnocounter'] == 'false'  %}
+                    <td>Come to fix the roof sometime next week.
+                {% else %}
+                    <td>Jan Clark: I'll pay a maximum of £100 towards any new materials.
+                {% endif %}
+
 
             {% else %}
             <td>
@@ -42,7 +48,11 @@ Money Claims Prototype
           </tr>
           <tr>
             <td>Completion date</td>
-            <td>1 January 2019</td>
+            {% if data['defendant'] == "defendant"  and  data['respondtoclaimantnocounter'] == 'false'  %}
+                <td>14 July 2019</td>
+            {% else %}
+                <td>1 January 2020</td>
+            {% endif %}
           </tr>
         </tbody>
 
@@ -81,7 +91,14 @@ Money Claims Prototype
 
       {% if data['newoffer'] == 'true'  %}
           {% if data['defendant'] == "defendant" %}
-              {% if data['respondtoclaimantnocounter'] == 'true' %}
+
+              {% if data['respondtoclaimantnocounter'] == 'false'  %}
+                  {% if data['nomoreofffersallowed'] == 'false'  %}
+                      <p><a href="confirmation-page?offeraccepted=false&" class="button">Sign agreement</a></p>
+                  {% else %}
+                      <p><a href="confirmation-page?offeraccepted=true&" class="button">Sign agreement</a></p>
+                  {% endif %}
+              {% elif data['respondtoclaimantnocounter'] == 'true' %}
                   <p><a href="../new-offers/check-answers" class="button">Sign agreement</a></p>
               {% else %}
                   <p><a href="../../../defendant/task-list?offersection=complete&" class="button">Sign agreement</a></p>
