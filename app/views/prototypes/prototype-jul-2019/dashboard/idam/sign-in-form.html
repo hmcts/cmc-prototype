@@ -99,8 +99,18 @@ Money Claims Prototype
                                           <form action="/prototypes/prototype-jul-2019/dashboard/claimant?claimant=27" method="post">
 
                                       {% elseif data['newoffer'] == 'true' %}
-                                            <!--    Claimant responding to offer made by defendant  -->
-                                            <form action="/prototypes/prototype-jul-2019/dashboard/claimant?claimant=10" method="post">
+
+                                            {% if data['claimanthasaccpted']  ==  'true'  %}
+                                                  <form action="/prototypes/prototype-jul-2019/dashboard/defendant?defendant=16&" method="post">
+                                            {% elif data['claimanthasaccpted']  ==  'false'  %}
+                                                  <form action="/prototypes/prototype-jul-2019/dashboard/defendant?defendant=13&" method="post">
+                                            {% elif data['respondtoclaimantnocounter'] == 'false'  and  data['respondtoclaimantofferonly'] == 'false'  %}
+                                                <!--    Claimant responding to offer made by defendant  -->
+                                                <form action="/prototypes/prototype-jul-2019/dashboard/defendant?defendant=13.3&" method="post">
+                                            {% else %}
+                                                <form action="/prototypes/prototype-jul-2019/dashboard/claimant?claimant=10" method="post">
+                                            {% endif %}
+
 
 
                                       {% else %}
