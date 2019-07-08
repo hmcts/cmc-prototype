@@ -154,7 +154,8 @@ module.exports = function(app){
     if ( req.session.data['claimant-payment-request'] ) {
 
       if ( req.session.data['defendant'] == 'org' && req.session.data['claimant-payment-request'] == 'Immediately' ) {
-        res.redirect( '../task-list' );
+
+          res.redirect( '../task-list' );
 
       } else if ( req.session.data['claimant-payment-request'] == 'Immediately' )  {
             if (req.session.data['vary'] == 'true')
@@ -206,7 +207,12 @@ module.exports = function(app){
     if ( req.session.data['radio-pay-group'] ) {
 
       if ( req.session.data['defendant'] == 'org' && req.session.data['radio-pay-group'] == 'Immediately' ) {
-        res.redirect( '../task-list' );
+        
+        if (req.session.data['return'] == 'less-than' ) {
+          res.redirect( '../../paid-what-owe-less-claim-amount/task-list' );
+        } else {
+          res.redirect( '../task-list' );
+        }
 
       } else if ( req.session.data['radio-pay-group'] == 'Immediately' )  {
         res.redirect( 'counter-offer/court-date' );
@@ -384,7 +390,12 @@ module.exports = function(app){
   app.post( '/' + strPath + 'dashboard/claimant-response/part-admit/task-list/counter-offer/pay-by-set-date', (req, res) => {
 
     if (req.session.data['defendant'] == 'org' ) {
-        res.redirect( '../../task-list' );
+        
+        if (req.session.data['return'] == 'less-than' ) {
+          res.redirect( '../../../paid-what-owe-less-claim-amount/task-list' );
+        } else {
+          res.redirect( '../../task-list' );
+        }
     } else if (req.session.data['set-year'] > 2018 ) {
       res.redirect('/' + strPath + 'dashboard/claimant-response/part-admit/task-list/counter-offer/approved');
     } else {
