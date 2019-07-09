@@ -40,8 +40,12 @@ Money Claims Prototype
 
 
             {% else %}
-            <td>
-              Mary Richards: I will fix the roof if you'll give me access and pay for any extra materials.
+                {% if data['makecounteroffer'] == 'true'  %}
+                      <td>Come to fix my roof sometime next week.
+                {% else %}
+                      <td>Mary Richards: I will fix the roof if you'll give me access and pay for any extra materials.
+                {% endif %}
+
             {% endif %}
 
             </td>
@@ -51,7 +55,11 @@ Money Claims Prototype
             {% if data['defendant'] == "defendant"  and  data['respondtoclaimantnocounter'] == 'false'  %}
                 <td>14 July 2019</td>
             {% else %}
-                <td>1 January 2020</td>
+                {% if data['makecounteroffer'] == 'true'  %}
+                    <td>14 July 2019
+                {% else %}
+                    <td>30 August 2019
+                {% endif %}
             {% endif %}
           </tr>
         </tbody>
