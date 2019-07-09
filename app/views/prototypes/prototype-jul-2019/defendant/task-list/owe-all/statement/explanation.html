@@ -1,0 +1,74 @@
+{% extends "layout_task-list.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block home_link %} ../task-list {% endblock %}
+{% block proposition_header %}
+{% set my_account="1" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+        <div class="column-two-thirds">
+
+      <a href="#" class="link-back">Back</a>
+      {{formData | safe}}
+
+            {% if data['defendant'] == 'org' %}
+            <form method="post" action="../../../task-list" class="form">
+            {% else %}
+            <form method="post" action="../statement/bank-account" class="form">
+            {% endif %}
+
+            <h1 class="heading-large">
+              Send Jan Clark your financial details
+            </h1>
+
+
+            {% if data['vary'] == 'true' %}
+                <p>You need to give Jan Clark details of your finances.</p>
+                <p>We'll ask you for the details then we'll send them to Jan Clark to review.
+                <p>They can reject your proposal if they believe you can pay sooner.</p>
+                <p>If they reject your proposal, the court will make a new plan using your financial details.</p>
+
+
+            {% elseif data['defendant'] == 'org' %}
+              <p>You need to send Jan Clark your company or organisation's most recent statement of accounts.</p>
+              <p>They'll review your accounts and can reject your suggested repayment plan if they believe you can pay sooner.</p>
+              <p>If they reject your plan, the court will make a new plan based on your financial details.</p>
+              <p><a href="../../../../dashboard/party-details/claimant">Get Jan Clark's contact details</a>.</p>
+
+              <input type="hidden" name="som" value="complete">
+
+            {% else %}
+
+            <p>You need to give {% if data.counterclaim=="true" %}Mary Richards{%else%}Jan Clark{% endif %} details of your finances.</p>
+              <p>We'll ask you for the details then we'll send them to {% if data.counterclaim=="true" %}Mary Richards{%else%}Jan Clark{% endif %} to review.
+              {% if data['radio-pay-group'] != 'Instalments' %}
+                <p>They can reject your proposal if they believe you can pay sooner.</p>
+              {% endif %}
+            <p>If they reject your proposal, the court will make a new plan using your financial details.</p>
+
+            {% endif %}
+
+
+            <input type="hidden" name="your_defence_options" value="complete">
+              <div class="form-group">
+                <input type="submit" class="button" value="Continue"/>
+              </div>
+            </form>
+          </div>
+        </div>
+      </main>
+
+      <form method="post"  action="#" class="for4" style=" float: left;">
+        <select onchange="window.location.href='?defendant='+this.value">
+          <option value="">Defendant type</option>
+          <option value="indi" {% if data['defendant'] == 'indi' %}selected{% endif %}>Individual</option>
+          <option value="org" {% if data['defendant'] == 'org' %}selected{% endif %}>Organisation</option>
+        </select>
+      </form>
+
+      {% endblock %}

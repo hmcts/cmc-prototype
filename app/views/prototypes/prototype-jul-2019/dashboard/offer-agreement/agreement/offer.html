@@ -1,0 +1,172 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <a href="#" class="link-back">Back</a>
+      <h1 class="heading-large">Terms of the agreement</h1>
+
+
+      <p >You need to sign the agreement.</p>
+
+
+      <br>
+      <table class="offer-table">
+
+        <thead>
+          <tr>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td>The offer</td>
+
+
+            {% if data['defendant'] == "defendant" %}
+
+                {% if data['respondtoclaimantnocounter'] == 'false'  %}
+                    <td>Come to fix my roof sometime next week.
+                {% else %}
+                    <td>Jan Clark: I'll pay a maximum of £100 towards any new materials.
+                {% endif %}
+
+
+            {% else %}
+            <td>
+              Mary Richards: I will fix the roof if you'll give me access and pay for any extra materials.
+            {% endif %}
+
+            </td>
+          </tr>
+          <tr>
+            <td>Completion date</td>
+            {% if data['defendant'] == "defendant"  and  data['respondtoclaimantnocounter'] == 'false'  %}
+                <td>14 July 2019</td>
+            {% else %}
+                <td>1 January 2020</td>
+            {% endif %}
+          </tr>
+        </tbody>
+
+      </table>
+      <div>
+        <h3 class="heading-medium"></h3>
+
+        <p>This agreement settles the claim made by Jan Clark against Mary Richards. This includes all money owed in the claim, for example court fees, expenses or interest.</p>
+        <p>Neither party can make any further claims relating to this case, other than to enforce it.</p>
+        <p>Either party can view and download this agreement from their Money Claims account. Both parties should keep a copy of this agreement.</p>
+
+
+        <h3 class="heading-medium">If the agreement is broken</h3>
+        <p>The claimant can apply to:</p>
+        <ul class="list list-bullet">
+          <li>request a judgment for any money still owed from this agreement</li>
+          <li>resume the original claim or counterclaim for the full amount of the claim</li>
+          <li>ask the court to enforce any of the steps to be taken</p>
+        </ul>
+
+        <p>To apply, download and complete form N244 from HMCTS Formfinder and send it to the County Court Business Centre. You need to say on the form which of the 3 options you're applying for.</a></p>
+
+        </p>
+      </div>
+      <h2 class="heading-medium">Sign the agreement</h2>
+
+      <p>Make sure this agreement includes everything you've agreed with Mary Richards before signing. You won't be able to change this later.</p>
+      <div class="form-group">
+        <div class="multiple-choice text">
+          <input class="" id="HasAcceptedTermsAndConditions" type="checkbox" value="true">
+          <label for="HasAcceptedTermsAndConditions">I confirm I've read and accept the terms of the agreement.</label>
+        </div>
+      </div>
+
+
+
+      {% if data['newoffer'] == 'true'  %}
+          {% if data['defendant'] == "defendant" %}
+
+              {% if data['respondtoclaimantnocounter'] == 'false'  %}
+                  {% if data['nomoreofffersallowed'] == 'false'  %}
+                      <p><a href="confirmation-page?offeraccepted=false&" class="button">Sign agreement</a></p>
+                  {% else %}
+                      <p><a href="confirmation-page?offeraccepted=true&" class="button">Sign agreement</a></p>
+                  {% endif %}
+              {% elif data['respondtoclaimantnocounter'] == 'true' %}
+                  <p><a href="../new-offers/check-answers" class="button">Sign agreement</a></p>
+              {% else %}
+                  <p><a href="../../../defendant/task-list?offersection=complete&madeandsignedagreement=true&" class="button">Sign agreement</a></p>
+              {% endif %}
+
+              {% if data['respondtoclaimantnocounter'] == 'true' %}
+                  <p><a href="../../defendant?defendant=9">Don't make offer</a></p>
+              {% elif data['fromthetasklist'] == 'true' %}
+                    <p><a href="../../../defendant/task-list?offersection=complete&">Don't make offer</a></p>
+              {% else %}
+                    <p><a href="">Don't make offer</a></p>
+              {% endif %}
+          {% else %}
+
+              <!--  claimant rew offer, accept and reject routes -->
+              {% if data['offeraccepted'] == 'true'  %}
+                  {% if data['fromtheclaimanttasklist'] == 'true' %}
+                      <p><a href="../../claimant-response/dispute-claim/task-list?offerresponse=complete&offeracceptedbyclaimant=true&" class="button">Sign agreement</a></p>
+                      <p><a href="../../claimant-response/dispute-claim/task-list?offerresponse=complete&offeracceptedbyclaimant=false&">Reject offer</a></p>
+                  {% else %}
+                      <p><a href="confirmation-page" class="button">Sign agreement</a></p>
+                      <p><a href="#">Reject offer</a></p>
+                  {% endif %}
+              {% else %}
+                  <!--  claimant makes new offer -->
+                  <p><a href="../new-offers/allow-another-offer?madeandsignedagreement=true&" class="button">Sign agreement</a></p>
+                  {% if data['fromtheclaimanttasklist'] == 'true' %}
+                      <p><a href="../../claimant-response/dispute-claim/task-list?offerresponse=complete&offeracceptedbyclaimant=false&">Don't make offer</a></p>
+                  {% else %}
+                      <p><a href="">Don't make offer</a></p>
+                  {% endif %}
+              {% endif %}
+
+          {% endif %}
+      {% else %}
+          <a href="confirmation-page" class="button">Sign and submit</a>
+      {% endif %}
+
+      <fieldset></fieldset>
+    </div>
+  </div>
+{% include 'prototypes/prototype-jul-2019/includes/contact.html' %}
+</main>
+
+
+
+<form method="post"  action="#" class="for4" style=" float: left; ">
+  <select style="height:25px;" onchange="window.location.href='?'+this.value">
+    <option value="defendant=defendant&newoffer=false&"
+            {% if data['defendant'] == 'defendant'  and  data['newoffer'] != 'true'  %}selected{% endif %}
+    >Defendant</option>
+
+    <option value="defendant=claimant&newoffer=false&"
+            {% if data['defendant'] == 'claimant'  and  data['newoffer'] != 'true'  %}selected{% endif %}
+    >Claimant</option>
+
+    <option value="defendant=defendant&newoffer=true&"
+            {% if data['defendant'] == 'defendant'  and  data['newoffer'] == 'true'  %}selected{% endif %}
+    >Defendant - New type of offer</option>
+
+    <!--
+    <option value="defendant=claimant&newoffer=true"
+            {% if data['defendant'] == 'claimant'  and  data['newoffer'] == 'true' %}selected{% endif %}
+    >Claimant - New offers</option>
+    -->
+
+  </select>
+</form>
+
+
+{% endblock %}

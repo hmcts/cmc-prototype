@@ -1,0 +1,100 @@
+{% extends "layout_task-list.html" %}
+{% block page_title %}
+Check your answers
+{% endblock %}
+{% block home_link %} ../../task-list {% endblock %}
+{% block proposition_header %}
+{% set my_account="2" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+
+  <h1 class="heading-large">
+    Check your answers <!-- for this task -->
+  </h1>
+  <table class="check-your-answers">
+    <thead>
+      <tr>
+        <th colspan="2">
+          <h2 class="heading-medium">
+            Do you owe the money claimed?
+          </h2>
+        </th>
+        <th>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="">
+          Do you owe the money claimed?
+        </td>
+        <td class="">
+          {% if data.radio_select_group=="all" %}
+          I admit all of the claim
+          {% elseif data.radio_select_group=="Some" %}
+          I reject part of the claim 
+          {% elseif data.radio_select_group=="reject" %}
+          I reject all of the claim
+          {% else %}
+          I admit all of the claim
+          {% endif %} 
+        </td>
+        <td class=" change-answer">
+          <a href="../do-you-owe-money/index?return_page={{ '../../task-list/do-you-owe-money/check-your-answers' | urlencode }}">
+            Change <span class="visuallyhidden">Name</span>
+          </a>
+        </td>
+      </tr>
+      {% if data.radio_select_group=="Some" %}
+      <tr>
+        <td>
+          Why are you rejecting part of this claim?
+        </td>
+        <td>
+          {% if data.radio_select_group2=="Some" %}
+          The claim amount is too much
+          {% elseif data.radio_select_group2=="Paid-some" %}
+          I've paid what I believe I owe 
+          {% else %}
+          I've paid what I believe I owe 
+          {% endif %} 
+        </td>
+        <td class="change-answer">
+          <a href="../do-you-owe-money/partial-defence-options?return_page={{ '../../task-list/do-you-owe-money/check-your-answers' | urlencode }}">
+            Change <span class="visuallyhidden">Name</span>
+          </a>
+        </td>
+      </tr>
+      {% elseif data.radio_select_group=="reject" %}
+      <tr>
+        <td>
+          Why do you reject all the claim?
+        </td>
+        <td>
+          {% if data.radio_select_group2=="Paid" %}
+          I've already paid the claim in full
+          {% elseif data.radio_select_group2=="defend_now" %}
+          I dispute the claim 
+          {% else %}
+          I've already paid the claim in full
+          {% endif %} 
+        </td>
+        <td class="change-answer">
+        <a href="../do-you-owe-money/defence-options?return_page={{ '../../task-list/do-you-owe-money/check-your-answers' | urlencode }}">
+            Change <span class="visuallyhidden">Name</span>
+          </a>
+        </td>
+      </tr>
+      {% else %}
+      {% endif %} 
+    </tbody>
+  </table>
+  <br>
+  <br>
+  <a href="../../task-list">Return to task list</a>
+{% include 'prototypes/prototype-jul-2019/includes/contact.html' %}
+</main>
+{% endblock %}

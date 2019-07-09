@@ -1,0 +1,139 @@
+{% extends "layout_task-list.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block home_link %} ../../task-list {% endblock %}
+{% block proposition_header %}
+{% set my_account="1" %}
+
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+        <a href="#" class="link-back">Back</a>
+
+      {% if data['amount-owed'] %}
+      <form method="post" action="../../../defendant/task-list/owe-all" class="form">
+     {% elseif data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}
+     <form method="post" action="{{ data.return_page if data.return_page | length > 0 else '../task-list' }}" class="form">
+      {% else %}
+      <form method="post" action="../../task-list" class="form">
+        {% endif %}
+        {{formData | safe}}
+        <h1 class="heading-large">
+          List any evidence (optional)
+        </h1>
+        <p>You only need to list your evidence for now. You may be asked to provide the actual evidence later.</p>
+
+        <br>
+        <fieldset>
+          <legend class="visuallyhidden">
+            Explain what happened
+          </legend>
+          <div id="timeline" class="timeline">
+            <div class="timeline-headings">
+              <div id="timeline-heading-2" class="timeline-column-2">
+                <label class="form-label-bold" for="event-form-control">
+                  List your evidence
+                </label>
+              </div>
+            </div>
+            <div class="timeline-rows">
+
+              <div class="timeline-row ">
+                <select class="form-control-select otherType1" name="legal-status2" id="legal-status">
+                  <option value="1">-- Please make a selection --</option>
+                  <option value="2" {% if data['legal-status2'] == 2 %}selected{% endif %}>Contracts and agreements</option>
+                  <option value="3" {% if data['legal-status2'] == 3 %}selected{% endif %}>Expert witness</option>
+                  <option value="4" {% if data['legal-status2'] == 4 %}selected{% endif %}>Letters, emails and other correspondence</option>
+                  <option value="5" {% if data['legal-status2'] == 5 %}selected{% endif %}>Photo evidence</option>
+                  <option value="6" {% if data['legal-status2'] == 6 %}selected{% endif %}>Receipts</option>
+                  <option value="7" {% if data['legal-status2'] == 7 %}selected{% endif %}>Statements of account</option>
+                  <option value="other" {% if data['legal-status2'] == "other" %}selected{% endif %}>Other</option>
+                </select>
+                <div class="panel panel-border-narrow other1" {% if data['legal-status2'] %} style="display: none" {% else %}style="display: none; margin-bottom: 0;"{% endif %} >
+                  <p>Describe this evidence in more detail (optional). <span class="evidence-message1"></span></p>
+                  <textarea class="timeline-column-text" name="legal-status-description-2" id="timeline-1" rows="2">{{ data['legal-status-description-2'] }}</textarea>
+                </div>
+                <div class="timeline-row ">
+                  <select class="form-control-select otherType2" name="legal-status3" id="legal-status">
+                    <option value="1">-- Please make a selection --</option>
+                    <option value="2" {% if data['legal-status3'] == 2 %}selected{% endif %}>Contracts and agreements</option>
+                    <option value="3" {% if data['legal-status3'] == 3 %}selected{% endif %}>Expert witness</option>
+                    <option value="4" {% if data['legal-status3'] == 4 %}selected{% endif %}>Letters, emails and other correspondence</option>
+                    <option value="5" {% if data['legal-status3'] == 5 %}selected{% endif %}>Photo evidence</option>
+                    <option value="6" {% if data['legal-status3'] == 6 %}selected{% endif %}>Receipts</option>
+                    <option value="7" {% if data['legal-status3'] == 7 %}selected{% endif %}>Statements of account</option>
+                    <option value="other" {% if data['legal-status3'] == "other" %}selected{% endif %}>Other</option>
+                  </select>
+                  <div class="panel panel-border-narrow other2" {% if data['legal-status3'] %} style="display: none" {% else %}style="display: none; margin-bottom: 0;"{% endif %} >
+                    <p>Describe this evidence in more detail (optional). <span class="evidence-message2"></span></p>
+                    <textarea class="timeline-column-text" name="legal-status-description-3" id="timeline-1" rows="2">{{ data['legal-status-description-3'] }}</textarea>
+                  </div>
+                  <div class="timeline-row ">
+                    <select class="form-control-select otherType3" name="legal-status4" id="legal-status">
+                      <option value="1">-- Please make a selection --</option>
+                      <option value="2" {% if data['legal-status4'] == 2 %}selected{% endif %}>Contracts and agreements</option>
+                      <option value="3" {% if data['legal-status4'] == 3 %}selected{% endif %}>Expert witness</option>
+                      <option value="4" {% if data['legal-status4'] == 4 %}selected{% endif %}>Letters, emails and other correspondence</option>
+                      <option value="5" {% if data['legal-status4'] == 5 %}selected{% endif %}>Photo evidence</option>
+                      <option value="6" {% if data['legal-status4'] == 6 %}selected{% endif %}>Receipts</option>
+                      <option value="7" {% if data['legal-status4'] == 7 %}selected{% endif %}>Statements of account</option>
+                      <option value="other" {% if data['legal-status4'] == "other" %}selected{% endif %}>Other</option>
+                    </select>
+                    <div class="panel panel-border-narrow other3" {% if data['legal-status4'] %} style="display: none" {% else %}style="display: none; margin-bottom: 0;"{% endif %} >
+                      <p>Describe this evidence in more detail (optional). <span class="evidence-message3"></span></p>
+                      <textarea class="timeline-column-text" name="legal-status-description-4" id="timeline-1" rows="2">{{ data['legal-status-description-4'] }}</textarea>
+                    </div>
+                  </div>
+                          <div class="timeline-row">
+                <select class="form-control-select otherType"  name="legal-status1" id="legal-status" >
+                  <option value="1">-- Please make a selection --</option>
+                  <option value="2" {% if data['legal-status1'] == 2 %}selected{% endif %}>Contracts and agreements</option>
+                  <option value="3" {% if data['legal-status1'] == 3 %}selected{% endif %}>Expert witness</option>
+                  <option value="4" {% if data['legal-status1'] == 4 %}selected{% endif %}>Letters, emails and other correspondence</option>
+                  <option value="5" {% if data['legal-status1'] == 5 %}selected{% endif %}>Photo evidence</option>
+                  <option value="6" {% if data['legal-status1'] == 6 %}selected{% endif %}>Receipts</option>
+                  <option value="7" {% if data['legal-status1'] == 7 %}selected{% endif %}>Statements of account</option>
+                  <option value="other" {% if data['legal-status1'] == "other" %}selected{% endif %}>Other</option>
+                </select>
+                <div class="panel panel-border-narrow other" {% if data['legal-status1'] %} style="display: none;" {% else %}style="display: none; margin-bottom: 0;"{% endif %} >
+                  <p>Describe this evidence in more detail (optional). <span class="evidence-message"></span></p>
+                  <textarea class="timeline-column-text" name="legal-status-description-1" id="timeline-1" rows="2">{{ data['legal-status-description-1'] }}</textarea>
+                </div>
+              </div>
+                </div>
+                <div id="add-event-container">
+                  <a class="secondary-button" id="add-another-event-button" href="#">Add more evidence</a>
+                </div>
+                <br>
+              </fieldset>
+    <input type="hidden" name="claim_details" value="complete">
+
+    <!--<details>-->
+              <!--<summary>-->
+              <!--<span class="summary">Specific assistance if needed (hide if not relevant)</span>-->
+              <!--</summary>-->
+              <!--<div class="panel panel-border-narrow">-->
+              <!--<p>Contextual guidance goes here...</p>-->
+              <!--</div>-->
+              <!--</details>-->
+              {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}
+              <div class="form-group">
+                <input type="submit" class="button" value="Save changes"/>
+              </div>
+              <a href="{{ data.return_page if data.return_page | length > 0 else '../task-list' }}">Cancel</a>
+              {% else %}
+              <div class="form-group">
+                <input type="submit" class="button" value="Save and continue"/>
+              </div>
+              {% endif %}
+            </form>
+          </div>
+        </div>
+      {% include 'prototypes/prototype-jul-2019/includes/contact.html' %}
+</main>
+{% endblock %}

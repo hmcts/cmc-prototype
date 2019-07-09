@@ -1,0 +1,81 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="2" %}
+
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <a href="#" class="link-back">Back</a>
+      <h1 class="heading-large">Why do you disagree with the claim? </h1>
+      <div class="description-block">
+        <h3 class="bold-small">Their reasons for making the claim</h4>
+          <p>{% if data.counterclaim=="true" %}Jan Clark{%else%}Mary Richards{% endif %} and I signed a contract for building works on our roof. The work on the roof was completed but
+            there was a problem with one section. I asked {% if data.counterclaim=="true" %}Jan Clark{%else%}Mary Richards{% endif %} to get the problem fixed, but hadn't had a
+            reply.</p> <p class="show-more">I'll have to get another builder to rectify the problem which will cost me {% if data['mediation-pilot']=="on" %}£270{%else%}£1,430{% endif %}. </P> <p class="show-more">Therefore, I'm making a
+            money claim for {% if data['mediation-pilot']=="on" %}£300{%else%}£1,500{% endif %} to compensate for the extra money I am going to need to spend.</p>
+            <a href="#" class="toggle">Show more</a>
+            <a href="#" class="toggle" style="display: none">Show less</a>
+          </p>
+        </div>
+        <!--<div class="updates-border-thin"></div>-->
+                    <div style="padding-top: 30px;"></div>
+
+        <form
+        name="aspnetForm"
+        action="defence-2"
+        method="get"
+        id="aspnetForm"
+        autocomplete="off">
+        <div class="form-group">
+            <legend class="visually-hidden">Defence</legend>
+            <div id="claim-details">
+              <div id="describe-wrapper-claim-details-1" class="form-group">
+                <label class="form-label" for="offer">
+
+                  <h3 class="heading-small">Briefly explain why you disagree with the claim </h3>
+                  <div class=""><p>If you fail to dispute any part of the claim the court may assume you admit it. </p>
+
+                    <p>You should also say if you accept any parts of the claim.</p>
+                  <p>Don't give us a detailed timeline - we'll ask for that separately.</p>  </div>
+
+                </label>
+
+                    <textarea class="form-control form-control-3-4 form-control-large"
+                    id="defence-disagree-claim"
+                    rows="4"
+                    name="defence-disagree-claim"
+                    cols="40"
+                    type="text"
+                    style="width: 95%"
+                    >{{data['defence-disagree-claim']}}</textarea>
+                  </div>
+                </div>
+              </div>
+
+              <div class="panel panel-border-wide">
+                <p>
+                  Your response will be sent to Jan Clark.
+                </p>
+              </div>
+
+
+            <input type="hidden" name="show_mediation" value="true">
+            <div class="form-group">
+              <input id="advert-option-next--button" type="submit" value="Save and continue" class="button"
+              data-ignore-double-submit="true">
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  {% include 'prototypes/prototype-jul-2019/includes/contact.html' %}
+</main>
+{% endblock %}

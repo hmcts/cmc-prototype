@@ -1201,8 +1201,7 @@
                   <h2 class="heading-small">Upload more information</h2>
 
 
-                <p>You can upload more documents or witness statements until {{ now | date( 'add', 15, 'days' ) | date
-                }}. You can also view your response.</p>
+                <p>You can upload more documents or witness statements until {{ now | date( 'add', 15, 'days' ) | date }}. You can also view your response.</p>
                 <p><a href="order-response?party=claimant&evidence=complete&experts=complete&witness=complete"
                       class="button secondary-button">Upload more or view your response</a></p>
 
@@ -1229,6 +1228,14 @@
                 <p>We'll contact both you and Jan Clark by post to tell you what to do next.</p>
               </div>
 
+              {% elseif data['defendant'] == 12.5 %}
+              <div class="status-block single">
+                <h2 class="heading-medium">Wait for the claimant to review the order</h2>
+                <p>You've asked for a judge to review the order.</p>
+                <p>Jan Clark has until {{ now | date( 'add', 12, 'days' ) | date }} to add her own comments to the request.</p>
+                <p><a href="../defendant/correspondence/forms/order-review">Download the request for review of the order</a> (PDF, 123KB)</p>
+                <p>We'll contact both you and {% if data['party'] == 'claimant' %}Mary Richards{%else%}Jan Clark{% endif %} by post to tell you what to do next.</p>
+              </div>
 
               {% elseif data['defendant'] == 12.9 %}
               <div class="status-block single">
@@ -1431,11 +1438,18 @@
 
               <!--  CCJ has been issued - Defendant should have contacted the claimant - Before CCJ Deadline -->
               {% elseif data['defendant'] == 21 %}
-                <h2 class="heading-medium">After settling the claim</h2>
-                <p>Ask Jan Clark to tells us you've settled the claim. Then judgement will be marked as satisfied.</p>
-                <p>You'll then be able to get a certificate of satisfaction.</p>
+                <h2 class="heading-medium">Ask Jan Clark to tell us you've settled</h2>
+                <p>When Jan Clark confirms you've settled, the judgement will be marked as satisfied.</p>
+                <p>You can then pay £15 for a <a href="https://www.gov.uk/government/publications/form-n443-application-for-a-certificate-of-satisfaction-or-cancellation">certificate of satisfaction</a>.</p>
+                <hr>
+                <p class="heading-small">Apply to cancel the judgment</p>
+                <p>The court will usually only cancel a judgment if it accepts you didn't know about the claim at the time it was issued.</p>
 
-                <details>
+                <div>
+                  <a class="button secondary-button" href="cancel-ccj-info-paid-or-settled?claimantupdate=complete&">Apply to cancel judgment</a>
+                </div>
+
+                <!-- <details>
                   <summary >
                     <span class="summary">Cancel the judgement (optional)</span>
                   </summary>
@@ -1447,7 +1461,7 @@
                                 >Apply to cancel judgment</a></p>
                       </div>
                 </details>
-                <br>
+                <br> -->
 
 
               <!--  CCJ has been issued - Defendant should have contacted the claimant - Before the CCJ deadline -->
@@ -3970,6 +3984,7 @@
     <option value="12.9" {% if data['defendant'] == 12.9 %}selected{% endif %}>Responded to order - confirmed</option>
     <option value="12.3" {% if data['defendant'] == 12.3 %}selected{% endif %}>Order review requested - by me</option>
     <option value="12.4" {% if data['defendant'] == 12.4 %}selected{% endif %}>Order review requested - by other party</option>
+    <option value="12.5" {% if data['defendant'] == 12.5 %}selected{% endif %}>Order review requested - other party to review</option>
 
     <option>------- Hearing ----------</option>
     <option value="14.1" {% if data['claimant'] == 14.1 %}selected{% endif %}>Hearing date set - details</option>

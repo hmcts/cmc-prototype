@@ -1,0 +1,65 @@
+{% extends "layout_task-list.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block home_link %} ../../task-list {% endblock %}
+{% block proposition_header %}
+{% set my_account="1" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% import 'prototypes/prototype-jul-2019/includes/address.html' as address %}
+
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}
+  {% else %}
+  <a href="#" class="link-back">Back</a>
+  {% endif %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+          <form method="post" action="company-address" class="form">
+
+            <h1 class="heading-large">
+              Enter the business's full legal name
+            </h1>
+
+            <p>Follow these steps or your claim may fail:</p>
+
+            <ul class="list list-bullet">
+              <li>make sure you have the correct full legal name - this may not be the name you're familiar with (for example, British Gas is British Gas Trading Limited)</li>
+              <li>don't assume shop or brand names are full legal names - they can be very different (for example, 'ST&H Group Limited' is the full legal name of Saga Holidays)</li>
+<!--
+              <li>don't assume shop or brand names are full legal names - they can be very different (for example, DSG Retail Limited is the full legal name of CurrysPCWorld)</li>
+-->
+              <li>to claim against a franchise, make sure you enter the full legal name of the business that runs the branch, not the chain</li>
+              <li>always include 'ltd', 'limited' or 'plc' if it's part of the business name on paperwork or on the Companies House website</li>
+            </ul>
+
+            <p>You'll have to pay an extra fee to correct any details later.</p>
+
+            <fieldset>
+              <div class="form-group">
+                <label class="form-label" for="defendant_name">Business's full legal name</label>
+                <input class="form-control " id="defendant_name" name="defendant_name" type="text"
+                value="{{data['defendant_name']}}">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="defendant-contact-name">Contact person (optional) </label>
+                <p class="form-hint">This might be a person you've discussed the claim with</p>
+                <input class="form-control" id="defendant-contact-name" name="defendant-contact-name" type="text"
+                value="{{data['defendant-contact-name']}}">
+              </div>
+            </fieldset>
+
+    <div class="form-group">
+      <input type="submit" class="button" value="Save and continue"/>
+    </div>
+
+  </form>
+</div>
+</div>
+{% include 'prototypes/prototype-jul-2019/includes/contact.html' %}
+</main>
+{% endblock %}

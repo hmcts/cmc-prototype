@@ -1,0 +1,112 @@
+{% extends "layout_task-list.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block home_link %} ../task-list {% endblock %}
+{% block proposition_header %}
+{% set my_account="1" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <a href="#" class="link-back">Back</a>
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <h1 class="heading-large">
+        The defendant can't afford your plan
+      </h1>
+
+      <p>Based on the financial details provided by the defendant, we don't believe they would be able to make these repayments.</p>
+
+      <p>The court affordability calculator has determined a new repayment plan as the most the defendant can repay.</p>
+
+      <h2 class="heading-medium">The court's proposed repayment plan</h2>
+      <table class="instalment-table">
+        <tbody>
+          <tr class="">
+            <td class="">
+              Regular payments of
+            </td>
+            <td class="">
+              £75
+            </td>
+            <td class="">
+            </td>
+          </tr>
+          <tr class="">
+            <td class="">
+              Frequency of payments
+            </td>
+            <td class="">
+              Weekly
+            </td>
+            <td class="">
+            </td>
+          </tr>
+          <tr class="">
+            <td class="">
+              Make the first payment on
+            </td>
+            <td >
+              1 {{ now |  date("add", 1, "month") | date( "MMMM YYYY" ) }}
+            </td>
+            <td>
+            </td>
+          </tr>
+          <tr>
+            <td class="">
+              Last payment on
+            </td>
+            <td class="">
+              1 {{ now |  date("add", 7, "month") | date( "MMMM YYYY" ) }}
+            </td>
+            <td class=" ">
+            </td>
+          </tr>
+         <tr>
+            <td class="">
+              Length of repayment plan
+            </td>
+            <td class="">
+              8 months
+            </td>
+            <td class=" ">
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+     <h2 class="heading-medium">Do you accept the court's proposed repayment plan?</h2>
+      <form
+      name="aspnetForm"
+      method="post"
+      onsubmit="multiNavigation('radio-indent-group2', ['reject_stop_claim', 'accept_stop_claim'], ['../court-payment-method/rejection-reason?determined=reject&', '{% if data['return'] == 'less-than' %}../../../paid-what-owe-less-claim-amount/task-list{% else %}../../task-list{% endif %}?determined=accept&']);return false;"
+      id="aspnetForm"
+      autocomplete="off">
+      <div class="form-group">
+        <fieldset>
+          <div class="multiple-choice" data-target="accept">
+            <input id="radio-yes" type="radio" name="radio-indent-group2" value="accept_stop_claim">
+            <label for="radio-yes" data-target="yes-info"> I want to accept this repayment plan</label>
+          </div>
+          <div class="panel panel-border-narrow js-hidden" id="accept">
+            <p>If the defendant agrees to the repayment plan, the claim will be put on hold. If they don't, a judge will make a repayment plan.</p>
+          </div>
+          <div class="multiple-choice" data-target="reject-offer">
+            <input id="radio-no" type="radio" name="radio-indent-group2" value="reject_stop_claim">
+            <label for="radio-no" data-target="no-info"> I want a judge to make a repayment plan</label>
+          </div>
+
+        </fieldset>
+
+        <input type="hidden" name="court_payment_method" value="complete">
+        <input id="advert-option-next--button" type="submit" value="Save and continue" class="button"
+        data-ignore-double-submit="true">
+      </div>
+    </form>
+  </div>
+</div>
+{% include 'prototypes/prototype-jul-2019/includes/contact.html' %}
+</main>
+{% endblock %}
