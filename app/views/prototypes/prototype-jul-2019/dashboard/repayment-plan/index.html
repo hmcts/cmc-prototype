@@ -84,13 +84,53 @@ Money Claims Prototype
 
         {% endif %}
 
-        {% if data['after19daydeadline'] != 'true' %}
+
+
+        {% if data['defendantsplan'] == 'true' %}
+            <!-- Show only vary option as defendant cant have a redetermination request for their own plan  -->
+            <details>
+              <summary >
+                <span class="summary">If you think you can't afford the repayment plan</span>
+              </summary>
+              <div class="panel">
+                <p>You can pay a £50 fee to ask the claimant to agree to change the payment terms in the judgment.</p>
+
+                <p><a class="button secondary-button"
+                      href="applications-and-judgments/set-aside-default-ccj/task-list?justvaryonly=true&"
+                >Ask to change the payment terms</a></p>
+              </div>
+            </details>
+
+        {% elif data['after19daydeadline'] != 'true' %}
+            <!-- Before 19 days passes both sides can ask for a redeterminaton for free of a judgement repayment plan -->
             {% if data['who'] == 'claimant' %}
                 <p>If you think the defendant can repay you sooner, you can <a href="claimant-redetermination">ask a judge to make a new repayment plan</a>.</p>
             {% else %}
                 <p>If you think you can't afford the repayment plan, you can <a href="../defendant/task-list/redetermination">ask a judge to make a new repayment plan</a>.</p>
             {% endif %}
+
+        {% else %}
+            <!-- After 19 days both sides need to pay for a vary to adjust a payment plan on a judgement -->
+            {% if data['who'] == 'claimant' %}
+
+            {% else %}
+                <details>
+                  <summary >
+                    <span class="summary">If you think you can't afford the repayment plan</span>
+                  </summary>
+                  <div class="panel">
+                    <p>You can pay a £50 fee to ask the claimant to agree to change the payment terms in the judgment.</p>
+
+                    <p><a class="button secondary-button"
+                          href="applications-and-judgments/set-aside-default-ccj/task-list?justvaryonly=true&"
+                    >Ask to change the payment terms</a></p>
+                  </div>
+                </details>
+            {% endif %}
+
         {% endif %}
+
+
 
     </div>
   </div>
@@ -101,60 +141,69 @@ Money Claims Prototype
 <form method="post"  action="#" class="form" style="position: absolute;">
   <select id="check2" name="check2" onchange="window.location.href='?who='+this.value">
 
-    <option  value="claimant&plan=instalments&claimant=10.1&defendant=null&after19daydeadline=false&"
-             {% if data['who'] == 'claimant'  and  data['plan'] == 'instalments' and  data['claimant'] != 28  %}selected{% endif %}
-              >Default plan - Not vary - Claimant - Instalments </option>
-    <option  value="claimant&plan=Set-date&claimant=10.1&defendant=null&after19daydeadline=false&"
-             {% if data['who'] == 'claimant'  and  data['plan'] == 'Set-date' and  data['claimant'] != 28  %}selected{% endif %}
-    >Default plan - Not vary - Claimant - Set date </option>
-    <option  value="defendant&plan=instalments&defendant=3.904&claimant=null&after19daydeadline=false&"
-             {% if data['who'] == 'defendant'  and  data['plan'] == 'instalments' and  data['defendant'] != 25 and data['defendant'] != 25  and  data['defendant'] != 26  %}selected{% endif %}
-    >Default plan - Not vary - Defendant - Instalments </option>
-    <option  value="defendant&plan=Set-date&defendant=3.904&claimant=null&after19daydeadline=false&"
-             {% if data['who'] == 'defendant'  and  data['plan'] == 'Set-date' and data['defendant'] != 25  and  data['defendant'] != 26 %}selected{% endif %}
-    >Default plan - Not vary - Defendant - Set date </option>
+    <option  value="claimant&plan=instalments&claimant=10.1&defendant=null&after19daydeadline=false&defendantsplan=false&"
+             {% if data['who'] == 'claimant'  and  data['plan'] == 'instalments' and  data['claimant'] != 28   and  data['defendantsplan'] != 'true'  %}selected{% endif %}
+              >Default plan - Not from a vary plan - Claimant - Instalments </option>
+    <option  value="claimant&plan=Set-date&claimant=10.1&defendant=null&after19daydeadline=false&defendantsplan=false&"
+             {% if data['who'] == 'claimant'  and  data['plan'] == 'Set-date' and  data['claimant'] != 28   and  data['defendantsplan'] != 'true'  %}selected{% endif %}
+    >Default plan - Not from a vary plan - Claimant - Set date </option>
+    <option  value="defendant&plan=instalments&defendant=3.904&claimant=null&after19daydeadline=false&defendantsplan=false&"
+             {% if data['who'] == 'defendant'  and  data['plan'] == 'instalments' and  data['defendant'] != 25 and data['defendant'] != 25  and  data['defendant'] != 26   and  data['defendantsplan'] != 'true'  %}selected{% endif %}
+    >Default plan - Not from a vary plan - Defendant - Instalments </option>
+    <option  value="defendant&plan=Set-date&defendant=3.904&claimant=null&after19daydeadline=false&defendantsplan=false&"
+             {% if data['who'] == 'defendant'  and  data['plan'] == 'Set-date' and data['defendant'] != 25  and  data['defendant'] != 26  and  data['defendantsplan'] != 'true'  %}selected{% endif %}
+    >Default plan - Not from a vary plan - Defendant - Set date </option>
 
-    <option  value="claimant&plan=instalments&claimant=28&defendant=null&after19daydeadline=false&"
-              {% if data['who'] == 'claimant'  and  data['plan'] == 'instalments'  and  data['claimant'] == 28 %}selected{% endif %}
-              >Vary - Claimant - Instalments</option>
-    <option  value="claimant&plan=Set-date&claimant=28&defendant=null&after19daydeadline=false&"
-             {% if data['who'] == 'claimant'  and  data['plan'] == 'Set-date'  and  data['claimant'] == 28 %}selected{% endif %}
-              >Vary - Claimant - Set date</option>
-    <option  value="defendant&plan=instalments&defendant=25&claimant=null&after19daydeadline=false&"
-             {% if data['who'] == 'defendant'  and  data['plan'] == 'instalments' and  data['defendant'] == 25  or  data['defendant'] == 26 %}selected{% endif %}
-              >Vary - Defendant - Instalments</option>
-    <option  value="defendant&plan=Set-date&defendant=25&claimant=null&after19daydeadline=false&"
-             {% if data['who'] == 'defendant'  and  data['plan'] == 'Set-date' and  data['defendant'] == 25  or  data['defendant'] == 26  %}selected{% endif %}
-              >Vary - Defendant - Set date</option>
+    <option  value="claimant&plan=instalments&claimant=28&defendant=null&after19daydeadline=false&defendantsplan=false&"
+              {% if data['who'] == 'claimant'  and  data['plan'] == 'instalments'  and  data['claimant'] == 28  and  data['defendantsplan'] != 'true'  %}selected{% endif %}
+              >From a vary plan - Claimant - Instalments</option>
+    <option  value="claimant&plan=Set-date&claimant=28&defendant=null&after19daydeadline=false&defendantsplan=false&"
+             {% if data['who'] == 'claimant'  and  data['plan'] == 'Set-date'  and  data['claimant'] == 28  and  data['defendantsplan'] != 'true'  %}selected{% endif %}
+              >From a vary plan - Claimant - Set date</option>
+    <option  value="defendant&plan=instalments&defendant=25&claimant=null&after19daydeadline=false&defendantsplan=false&"
+             {% if data['who'] == 'defendant'  and  data['plan'] == 'instalments' and  data['defendant'] == 25  or  data['defendant'] == 26  and  data['defendantsplan'] != 'true'  %}selected{% endif %}
+              >From a vary plan - Defendant - Instalments</option>
+    <option  value="defendant&plan=Set-date&defendant=25&claimant=null&after19daydeadline=false&defendantsplan=false&"
+             {% if data['who'] == 'defendant'  and  data['plan'] == 'Set-date' and  data['defendant'] == 25  or  data['defendant'] == 26   and  data['defendantsplan'] != 'true'  %}selected{% endif %}
+              >From a vary plan - Defendant - Set date</option>
 
 
     <!--   After 19 days so can't ask for a redetermination  -->
-    <option  value="claimant&plan=instalments&claimant=10.1&defendant=null&after19daydeadline=true&"
-             {% if data['who'] == 'claimant'  and  data['plan'] == 'instalments' and  data['claimant'] != 28  and  data['after19daydeadline'] == 'true'  %}selected{% endif %}
-            >After 19 days - Default plan - Not vary - Claimant - Instalments </option>
-    <option  value="claimant&plan=Set-date&claimant=10.1&defendant=null&after19daydeadline=true&"
-             {% if data['who'] == 'claimant'  and  data['plan'] == 'Set-date' and  data['claimant'] != 28  and  data['after19daydeadline'] == 'true'   %}selected{% endif %}
-            >After 19 days - Default plan - Not vary - Claimant - Set date </option>
-    <option  value="defendant&plan=instalments&defendant=3.904&claimant=null&after19daydeadline=true&"
-             {% if data['who'] == 'defendant'  and  data['plan'] == 'instalments' and  data['defendant'] != 25 and data['defendant'] != 25  and  data['defendant'] != 26  and  data['after19daydeadline'] == 'true'   %}selected{% endif %}
-            >After 19 days - Default plan - Not vary - Defendant - Instalments </option>
-    <option  value="defendant&plan=Set-date&defendant=3.904&claimant=null&after19daydeadline=true&"
-             {% if data['who'] == 'defendant'  and  data['plan'] == 'Set-date' and data['defendant'] != 25  and  data['defendant'] != 26  and  data['after19daydeadline'] == 'true'  %}selected{% endif %}
-            >After 19 days - Default plan - Not vary - Defendant - Set date </option>
+    <option  value="claimant&plan=instalments&claimant=10.1&defendant=null&after19daydeadline=true&defendantsplan=false&"
+             {% if data['who'] == 'claimant'  and  data['plan'] == 'instalments' and  data['claimant'] != 28  and  data['after19daydeadline'] == 'true'   and  data['defendantsplan'] != 'true'  %}selected{% endif %}
+            >After 19 days - Default plan - Not from a vary plan - Claimant - Instalments </option>
+    <option  value="claimant&plan=Set-date&claimant=10.1&defendant=null&after19daydeadline=true&defendantsplan=false&"
+             {% if data['who'] == 'claimant'  and  data['plan'] == 'Set-date' and  data['claimant'] != 28  and  data['after19daydeadline'] == 'true'  and  data['defendantsplan'] != 'true'    %}selected{% endif %}
+            >After 19 days - Default plan - Not from a vary plan - Claimant - Set date </option>
+    <option  value="defendant&plan=instalments&defendant=3.904&claimant=null&after19daydeadline=true&defendantsplan=false&"
+             {% if data['who'] == 'defendant'  and  data['plan'] == 'instalments' and  data['defendant'] != 25 and data['defendant'] != 25  and  data['defendant'] != 26  and  data['after19daydeadline'] == 'true'   and  data['defendantsplan'] != 'true'   %}selected{% endif %}
+            >After 19 days - Default plan - Not from a vary plan - Defendant - Instalments </option>
+    <option  value="defendant&plan=Set-date&defendant=3.904&claimant=null&after19daydeadline=true&defendantsplan=false&"
+             {% if data['who'] == 'defendant'  and  data['plan'] == 'Set-date' and data['defendant'] != 25  and  data['defendant'] != 26  and  data['after19daydeadline'] == 'true'   and  data['defendantsplan'] != 'true'  %}selected{% endif %}
+            >After 19 days - Default plan - Not from a vary plan - Defendant - Set date </option>
 
-    <option  value="claimant&plan=instalments&claimant=28&defendant=null&after19daydeadline=true&"
-             {% if data['who'] == 'claimant'  and  data['plan'] == 'instalments'  and  data['claimant'] == 28  and  data['after19daydeadline'] == 'true'  %}selected{% endif %}
-            >After 19 days - Vary - Claimant - Instalments</option>
-    <option  value="claimant&plan=Set-date&claimant=28&defendant=null&after19daydeadline=true&"
-             {% if data['who'] == 'claimant'  and  data['plan'] == 'Set-date'  and  data['claimant'] == 28  and  data['after19daydeadline'] == 'true'  %}selected{% endif %}
-            >After 19 days - Vary - Claimant - Set date</option>
-    <option  value="defendant&plan=instalments&defendant=25&claimant=null&after19daydeadline=true&"
-             {% if data['who'] == 'defendant'  and  data['plan'] == 'instalments' and  data['defendant'] == 25  or  data['defendant'] == 26  and  data['after19daydeadline'] == 'true'  %}selected{% endif %}
-            >After 19 days - Vary - Defendant - Instalments</option>
-    <option  value="defendant&plan=Set-date&defendant=25&claimant=null&after19daydeadline=true&"
-             {% if data['who'] == 'defendant'  and  data['plan'] == 'Set-date' and  data['defendant'] == 25  or  data['defendant'] == 26  and  data['after19daydeadline'] == 'true'   %}selected{% endif %}
-            >After 19 days - Vary - Defendant - Set date</option>
+    <option  value="claimant&plan=instalments&claimant=28&defendant=null&after19daydeadline=true&defendantsplan=false&"
+             {% if data['who'] == 'claimant'  and  data['plan'] == 'instalments'  and  data['claimant'] == 28  and  data['after19daydeadline'] == 'true'   and  data['defendantsplan'] != 'true'  %}selected{% endif %}
+            >After 19 days - From a vary plan - Claimant - Instalments</option>
+    <option  value="claimant&plan=Set-date&claimant=28&defendant=null&after19daydeadline=true&defendantsplan=false&"
+             {% if data['who'] == 'claimant'  and  data['plan'] == 'Set-date'  and  data['claimant'] == 28  and  data['after19daydeadline'] == 'true'  and  data['defendantsplan'] != 'true'   %}selected{% endif %}
+            >After 19 days - From a vary plan - Claimant - Set date</option>
+    <option  value="defendant&plan=instalments&defendant=25&claimant=null&after19daydeadline=true&defendantsplan=false&"
+             {% if data['who'] == 'defendant'  and  data['plan'] == 'instalments' and  data['defendant'] == 25  or  data['defendant'] == 26  and  data['after19daydeadline'] == 'true'  and  data['defendantsplan'] != 'true'   %}selected{% endif %}
+            >After 19 days - From a vary plan - Defendant - Instalments</option>
+    <option  value="defendant&plan=Set-date&defendant=25&claimant=null&after19daydeadline=true&defendantsplan=false&"
+             {% if data['who'] == 'defendant'  and  data['plan'] == 'Set-date' and  data['defendant'] == 25  or  data['defendant'] == 26  and  data['after19daydeadline'] == 'true'  and  data['defendantsplan'] != 'true'  %}selected{% endif %}
+            >After 19 days - From a vary plan - Defendant - Set date</option>
 
+
+
+    <option  value="defendant&plan=instalments&claimant=null&defendantsplan=true&"
+             {% if data['who'] == 'defendant'  and  data['plan'] == 'instalments'  and   data['defendantsplan'] == 'true' %} selected{% endif %}
+    >Plan made by defendant - Defendant - Instalments </option>
+
+    <option  value="defendant&plan=Set-date&claimant=null&defendantsplan=true&"
+             {% if data['who'] == 'defendant'  and  data['plan'] == 'Set-date'  and  data['defendantsplan'] == 'true' %} selected{% endif %}
+    >Plan made by defendant - Defendant - Instalments </option>
 
 
   </select>
