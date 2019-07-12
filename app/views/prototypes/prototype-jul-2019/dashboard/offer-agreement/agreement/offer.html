@@ -13,8 +13,11 @@ Money Claims Prototype
       <a href="#" class="link-back">Back</a>
       <h1 class="heading-large">Terms of the agreement</h1>
 
-
-      <p >You need to sign the agreement.</p>
+      {% if data['newoffer'] == 'true' %}
+          <p>You both need to sign the agreement for it to become a legal contract.</p>
+      {% else %}
+          <p>You need to sign the agreement.</p>
+      {% endif %}
 
 
       <br>
@@ -32,23 +35,25 @@ Money Claims Prototype
 
             {% if data['defendant'] == "defendant" %}
 
-                {% if data['respondtoclaimantnocounter'] == 'false'  %}
-                    <td>Come to fix my roof sometime next week.
+                {% if data['makeoffernow'] == 'true'  %}
+                    <td style="white-space: pre-wrap;">{{ data['the-offer-text'] }}</td>
+                {% elif data['respondtoclaimantnocounter'] == 'false'  %}
+                    <td>Come to fix my roof sometime next week.</td>
                 {% else %}
-                    <td>Jan Clark: I'll pay a maximum of £100 towards any new materials.
+                    <td>Jan Clark: I'll pay a maximum of £100 towards any new materials.</td>
                 {% endif %}
 
 
             {% else %}
-                {% if data['makecounteroffer'] == 'true'  %}
-                      <td>Come to fix my roof sometime next week.
+                {% if data['makeoffernow'] == 'true'  %}
+                    <td style="white-space: pre-wrap;">{{ data['the-offer-text'] }}</td>
+                {% elif data['makecounteroffer'] == 'true'  %}
+                      <td>I will fix the roof if you'll give me access and you pay for any extra materials.</td>
                 {% else %}
-                      <td>Mary Richards: I will fix the roof if you'll give me access and pay for any extra materials.
+                      <td>Mary Richards: I will fix the roof if you'll give me access and pay for any extra materials.</td>
                 {% endif %}
 
             {% endif %}
-
-            </td>
           </tr>
           <tr>
             <td>Completion date</td>
@@ -65,6 +70,8 @@ Money Claims Prototype
         </tbody>
 
       </table>
+
+
       <div>
         <h3 class="heading-medium"></h3>
 
@@ -74,14 +81,16 @@ Money Claims Prototype
 
 
         <h3 class="heading-medium">If the agreement is broken</h3>
-        <p>The claimant can apply to:</p>
+        <p>Jan Clark can apply to:</p>
         <ul class="list list-bullet">
           <li>request a judgment for any money still owed from this agreement</li>
           <li>resume the original claim or counterclaim for the full amount of the claim</li>
           <li>ask the court to enforce any of the steps to be taken</p>
         </ul>
 
+        <!--
         <p>To apply, download and complete form N244 from HMCTS Formfinder and send it to the County Court Business Centre. You need to say on the form which of the 3 options you're applying for.</a></p>
+        -->
 
         </p>
       </div>
@@ -133,10 +142,11 @@ Money Claims Prototype
               {% else %}
                   <!--  claimant makes new offer -->
                   <p><a href="../new-offers/allow-another-offer?madeandsignedagreement=true&" class="button">Sign agreement</a></p>
+
                   {% if data['fromtheclaimanttasklist'] == 'true' %}
                       <p><a href="../../claimant-response/dispute-claim/task-list?offerresponse=complete&offeracceptedbyclaimant=false&">Don't make offer</a></p>
                   {% else %}
-                      <p><a href="">Don't make offer</a></p>
+                      <p><a href="../new-offers/allow-another-offer">Don't make offer</a></p>
                   {% endif %}
               {% endif %}
 

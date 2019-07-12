@@ -21,7 +21,7 @@ Money Claims Prototype
           {% if data['newoffer'] == 'true' %}
               <p>You may avoid getting a County Court Judgment (CCJ) if you settle out of court.</p>
               <p>If Jan Clark accepts your offer it will become a legal agreement.</p>
-              <p>If Jan Clark rejects your offer it can't be mentioned in court.</p>
+              <p>If Jan Clark rejects your offer it can't be mentioned in court because XYZZZZZZZZZZZ.</p>
           {% else %}
               <p>You may avoid getting a County Court Judgment (CCJ) if you settle out of court.</p>
               <p>If Jan Clark accepts your offer you'll both sign a legal agreement.</p>
@@ -37,7 +37,7 @@ Money Claims Prototype
 
       {% else %}
           <p>You can avoid going to a hearing if you settle out of court.</p>
-          <p>Out of court offers are confidential. They can't be mentioned in court if you don't reach an agreement.</p>
+          <p>Out of court offers are confidential. They can't be mentioned in court if you don't reach an agreement because XYZZZZZZZZZZZ.</p>
           <p class="panel panel-border-wide">If Mary Richards accepts your offer you'll both sign a legal agreement. This agreement will replace the claim.</p>
           <p>You can ask the court to make a judgment against Mary Richards if they break the agreement.</p>
 
@@ -49,22 +49,29 @@ Money Claims Prototype
 
       <div class="form-group">
 
-        <p><a href="make-offer/offer" class="button">Continue</a></p>
-        {% if data['newoffer'] == 'true' %}
-            {% if data['respondtoclaimantnocounter'] == 'true' %}
-                <p><a href="../defendant?defendant=9">I don't want to make an offer</a></p>
-            {% elif data['fromthetasklist'] == 'true' %}
-                <p><a href="../../defendant/task-list?offersection=complete&">I don't want to make an offer</a></p>
-            {% elif data['fromtheclaimanttasklist'] == 'true' %}
-                <p><a href="../claimant-response/dispute-claim/task-list?offerresponse=complete&offeracceptedbyclaimant=false&">I don't want to make an offer</a></p>
-            {% else %}
-                <p><a href="">I don't want to make an offer</a></p>
-            {% endif %}
-        {% endif %}
+          <form action="make-offer/offer?makeoffernow=true&" method="post">
+
+              <div class='form-group'>
+                <input type="submit" name="commit" value="Continue" class="btn button"/>
+              </div>
+
+              {% if data['newoffer'] == 'true' %}
+                  {% if data['respondtoclaimantnocounter'] == 'true' %}
+                      <p><a href="../defendant?defendant=9&makeoffernow=false&">I don't want to make an offer</a></p>
+                  {% elif data['fromthetasklist'] == 'true' %}
+                      <p><a href="../../defendant/task-list?offersection=complete&makeoffernow=flase&">I don't want to make an offer</a></p>
+                  {% elif data['fromtheclaimanttasklist'] == 'true' %}
+                      <p><a href="../claimant-response/dispute-claim/task-list?offerresponse=complete&offeracceptedbyclaimant=false&makeoffernow=false&">I don't want to make an offer</a></p>
+                  {% else %}
+                      <p><a href="&makeoffernow=false&">I don't want to make an offer</a></p>
+                  {% endif %}
+              {% endif %}
+          </form>
 
       </div>
+
     </div>
-  </form>
+
 </div>
 </div>
 {% include 'prototypes/prototype-jul-2019/includes/contact.html' %}

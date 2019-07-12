@@ -2507,15 +2507,26 @@
 
 
             <h2 class="heading-medium">Respond to the defendant</h2>
-            <p>Mary Richards has made an offer to settle out of court.</p>
-            <p>If you accept the offer, you can make a legal agreement between you and Mary Richards and resolve your dispute without a hearing.</p>
+            {% if data['offerwasrejected'] == 'true' %}
+                <p>Mary Richards rejected your offer  to settle out of court and has made a counteroffer.</p>
+                <p>If you accept the offer, you can make a legal agreement between you and Mary Richards and resolve your dispute without a hearing.</p>
+                <p><a href="offer-agreement/new-offers/view-reason-for-reject?defendant=claimant&newoffer=true&" class="button">View and respond</a></p>
+
+            {% else %}
+                <p>Mary Richards has made an offer to settle out of court.</p>
+                <p>If you accept the offer, you can make a legal agreement between you and Mary Richards and resolve your dispute without a hearing.</p>
+                <p><a href="offer-agreement/view-offer?defendant=claimant&newoffer=true&" class="button">View and respond</a></p>
+
+            {% endif %}
+
 
             <!--<p>You must accept or reject the offer before 4pm on {{ now | date('add', 7, 'days') | date }}. <span style="color: #DF3034">Think there's no deadline for out of court offers?</span></p>-->
            <!---->
-            <p><a href="offer-agreement/view-offer?defendant=claimant&newoffer=true&" class="button">View and respond</a></p>
 
           </div>
         </div>
+
+
 
         <div class="tabs-panel" id="contact" role="tabpanel">
 
