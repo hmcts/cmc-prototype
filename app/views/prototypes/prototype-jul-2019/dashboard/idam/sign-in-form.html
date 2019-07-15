@@ -98,12 +98,17 @@ Money Claims Prototype
                                           <form action="/prototypes/prototype-jul-2019/dashboard/claimant?claimant=27" method="post">
 
 
+                                      <!--   OUT OF COURT OFFERS  -->
                                       {% elseif data['newoffer'] == 'true' %}
-                                            {% if data['offeracceptedbydefendant']  ==  'true'  %}
+                                            {% if  data['firstoffer'] == 'true'  and  data['defendant'] == 'claimant'  %}
+                                                  <!--  New offer in parrallel to claim  -->
+                                                  <form action="/prototypes/prototype-jul-2019/dashboard/claimant?claimant=11.00001&" method="post">
+
+                                            {% elif data['offeracceptedbydefendant']  ==  'true'  %}
                                                   <form action="/prototypes/prototype-jul-2019/dashboard/claimant?claimant=17&" method="post">
                                             {% elif data['offerrejectedbydefendant']  ==  'true'  %}
                                                   <form action="/prototypes/prototype-jul-2019/dashboard/claimant?claimant=16.1&" method="post">
-                                            {% elif data['defendantmadeoffer']  ==  'true'  %}
+                                            {% elif data['defendantmadeoffer'] ==  'true'  %}
                                                   {% if data['partadmitstart'] == 'true' %}
                                                       <form action="/prototypes/prototype-jul-2019/dashboard/claimant?claimant=5&" method="post">
                                                   {% else %}

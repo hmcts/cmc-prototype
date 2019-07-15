@@ -44,11 +44,11 @@
             <li role="presentation"><a href="#contact" role="tab" tabindex="-1" aria-controls="history">Defendant's details</a></li>
             {% endif %}
 
-            {% if data['claimant'] == 10 or data['claimant'] == 11%}
-            <li role="presentation"><a href="#next-steps" role="tab" tabindex="-1" aria-controls="next-steps">Next steps</a></li>
-            <li role="presentation"><a href="#history" role="tab" tabindex="-1" aria-controls="history">Claim history</a></li>
-            <li role="presentation"><a href="#settle-out-of-court" role="tab" tabindex="0" aria-controls="settle-out-of-court" aria-selected="true" id="settle">Settle out of court</a></li>
-            <li role="presentation"><a href="#contact" role="tab" tabindex="-1" aria-controls="history">Defendant's details</a></li>
+            {% if data['claimant'] == 10 or data['claimant'] == 11  or data['claimant'] == 11.00001  %}
+                <li role="presentation"><a href="#next-steps" role="tab" tabindex="-1" aria-controls="next-steps">Next steps</a></li>
+                <li role="presentation"><a href="#history" role="tab" tabindex="-1" aria-controls="history">Claim history</a></li>
+                <li role="presentation"><a href="#settle-out-of-court" role="tab" tabindex="0" aria-controls="settle-out-of-court" aria-selected="true" id="settle">Settle out of court</a></li>
+                <li role="presentation"><a href="#contact" role="tab" tabindex="-1" aria-controls="history">Defendant's details</a></li>
             {% endif %}
 
           </ul>
@@ -56,7 +56,7 @@
 
         <div class="tabs-content">
 
-          {% if data['claimant'] == 10 or data['claimant'] == 11%}
+          {% if data['claimant'] == 10 or data['claimant'] == 11   or  data['claimant'] == 11.00001  %}
           <div class="tabs-panel" id="next-steps" role="tabpanel" aria-hidden="true">
 
             <div class="tabs-panel-inner text" tabindex="-1">
@@ -2492,13 +2492,22 @@
           <div class="tabs-panel-inner text" tabindex="0">
 
 
-            <h2 class="heading-medium">Respond to the defendant</h2>
-            {% if data['offerwasrejected'] == 'true' %}
+
+            <!--  where no offer was made by either party so far -->
+            {% if data['claimant'] == 11.00001 %}
+                <h2 class="heading-medium">You can still settle out of court</h2>
+                <p>You can avoid going to a hearing if you settle out of court.</p>
+
+                <p><a href="offer-agreement/make-offer?defendant=claimant&fromclaimanttab=true&" class="button">Make an offer to settle</a></p>
+
+            {% elif data['offerwasrejected'] == 'true' %}
+                <h2 class="heading-medium">Respond to the defendant</h2>
                 <p>Mary Richards rejected your offer  to settle out of court and has made a counteroffer.</p>
                 <p>If you accept the offer, you can make a legal agreement between you and Mary Richards and resolve your dispute without a hearing.</p>
                 <p><a href="offer-agreement/new-offers/view-reason-for-reject?defendant=claimant&newoffer=true&" class="button">View and respond</a></p>
 
             {% else %}
+                <h2 class="heading-medium">Respond to the defendant</h2>
                 <p>Mary Richards has made an offer to settle out of court.</p>
                 <p>If you accept the offer, you can make a legal agreement between you and Mary Richards and resolve your dispute without a hearing.</p>
                 <p><a href="offer-agreement/view-offer?defendant=claimant&newoffer=true&" class="button">View and respond</a></p>
@@ -2631,6 +2640,7 @@
     <option value="14.1" {% if data['claimant'] == 14.1 %}selected{% endif %}>Hearing date set - details</option>
 
     <option>------- Offer and agreements ----------</option>
+    <option value="11" {% if data['claimant'] == 11.00001 %}selected{% endif %}>Claimant - Make first offer</option>
     <option value="11" {% if data['claimant'] == 11 %}selected{% endif %}>Offer from defendant  </option>
     <option value="12" {% if data['claimant'] == 12 %}selected{% endif %}>Reject offer from defendant  </option>
     <option value="16" {% if data['claimant'] == 16 %}selected{% endif %}>Accept offer</option>
@@ -2671,8 +2681,8 @@
 <script src="/public/javascripts/jquery-ui.js"></script>
 <script type="text/javascript">
   window.moj.init()
-  {% if data['claimant'] == 10 or data['claimant'] == 11 %}
-  $('#settle').click();
+  {% if data['claimant'] == 10   or   data['claimant'] == 11   or   data['claimant'] == 11.00001 %}
+      $('#settle').click();
   {% endif %}
 </script>
 {% endblock %}
