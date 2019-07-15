@@ -740,7 +740,7 @@
               </div>
 
 
-              {% elseif data['defendant'] == 12.11 %}
+              {% elseif data['defendant'] == 12.11 or data['defendant'] == 12.111 %}
               <div class="status-block single">
                 <h2 class="heading-medium">Send us more details before the hearing</h2>
                 <p>The court has ordered you to send us more details.</p>
@@ -776,9 +776,18 @@
                 <h2 class="heading-small">If you don't send us more details</h2>
                 <p>The court can cancel your defence and the claimant can request a County Court Judgment (CCJ) against you.</p>
 
+                {% if data['defendant'] == 12.11 %}
                 <h2 class="heading-small">If you have a problem with the order</h2>
                 <p>You can <a href="order-response/review/reason">ask the court to review it</a>. You need to do this before 4pm on {{ now | date('add', 12, 'days') | date }}.</p>
                 <p>A judge will consider your request. You should give details of how you want the order changed and the reasons for your request.</p>
+
+                {% elseif data['defendant'] == 12.111 %}
+                <h2 class="heading-small">If you have a problem with the order</h2>
+                <p>You can ask the court to review it. You need to email your request to the court before 4pm on {{ now | date('add', 12, 'days') | date }}.</p>
+                <p>The court's email address is: <a href="mailto:moneyclaims@justice.gov.uk">moneyclaims@justice.gov.uk</a></p>
+                <p>A judge will consider your request. You should give details of how you want the order changed and the reasons for your request.</p>
+
+                {% endif %}
 
               </div>
 
