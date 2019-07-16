@@ -100,14 +100,24 @@ Money Claims Prototype
 
                                       <!--   OUT OF COURT OFFERS  -->
                                       {% elseif data['newoffer'] == 'true' %}
-                                            {% if  data['firstoffer'] == 'true'  and  data['defendant'] == 'claimant'  %}
-                                                  <!--  New offer in parrallel to claim  -->
-                                                  <form action="/prototypes/prototype-jul-2019/dashboard/claimant?claimant=11.00001&" method="post">
 
-                                            {% elif data['offeracceptedbydefendant']  ==  'true'  %}
-                                                  <form action="/prototypes/prototype-jul-2019/dashboard/claimant?claimant=17&" method="post">
-                                            {% elif data['offerrejectedbydefendant']  ==  'true'  %}
-                                                  <form action="/prototypes/prototype-jul-2019/dashboard/claimant?claimant=16.1&" method="post">
+
+                                            <!--  CLAIMANT  -->
+                                            {% if  data['theclaimant'] == 'true'  %}
+                                                {% if data['offeracceptedbydefendant']  ==  'true'  %}
+                                                    <!--  The claimants offer is accpted by the defendant   -->
+                                                    <form action="/prototypes/prototype-jul-2019/dashboard/claimant?claimant=17.01&" method="post">
+
+                                                {% elif data['offerrejectedbydefendant']  ==  'true'  %}
+                                                    <!--  The claimants offer is accpted by the defendant   -->
+                                                    <form action="/prototypes/prototype-jul-2019/dashboard/claimant?claimant=16.1&" method="post">
+
+                                                {% elif  data['firstoffer'] == 'true' %}
+                                                    <!--  New offer in parrallel to claim  -->
+                                                    <form action="/prototypes/prototype-jul-2019/dashboard/claimant?claimant=11.00001&" method="post">
+                                                {% endif %}
+
+
                                             {% elif data['defendantmadeoffer'] ==  'true'  %}
                                                   {% if data['partadmitstart'] == 'true' %}
                                                       <form action="/prototypes/prototype-jul-2019/dashboard/claimant?claimant=5&" method="post">

@@ -30,18 +30,25 @@
 
             {% if data['claimant'] == 1 or data['claimant'] == 3.1 or data['claimant'] == 3.11 or data['claimant'] == 3.3 or data['claimant'] == 3.4 or data['claimant'] == 3.5 or data['claimant'] == 3.6 or data['claimant'] == 2 or data['claimant'] == 3 or data['claimant'] == 4 or data['claimant'] == 4.01 or data['claimant'] == 4.1 or data['claimant'] == 4.11 or data['claimant'] == 4.2 or data['claimant'] == 4.3 or data['claimant'] == 5
             or data['claimant'] == 5.1 or data['claimant'] == 5.11 or data['claimant'] == 5.2 or data['claimant'] == 5.21 or data['claimant'] == 6 or data['claimant'] == 7
-            or data['claimant'] == 8 or data['claimant'] == 9 or data['claimant'] == 9.1 or data['claimant'] == 10.1 or data['claimant'] == 10.001 or data['claimant'] == 10.01
+             or data['claimant'] == 9 or data['claimant'] == 9.1 or data['claimant'] == 10.1 or data['claimant'] == 10.001 or data['claimant'] == 10.01
             or data['claimant'] == 10.02 or data['claimant'] == 10.03 or data['claimant'] == 10.11 or data['claimant'] == 10.4 or data['claimant'] == 10.5 or data['claimant'] == 10.6
             or data['claimant'] == 10.601 or data['claimant'] == 10.61 or data['claimant'] == 10.801 or data['claimant'] == 10.81 or data['claimant'] == 10.82 or data['claimant'] == 3.2
             or data['claimant'] == 10.83 or data['claimant'] == 10.831 or data['claimant'] == 10.832 or data['claimant'] == 10.84 or data['claimant'] == 10.85 or data['claimant'] == 10.9
             or data['claimant'] == 10.91 or data['claimant'] == 11.1 or data['claimant'] == 11.1001 or data['claimant'] == 11.1003 or data['claimant'] == 11.101 or data['claimant'] == 11.101 or data['claimant'] == 11.102 or data['claimant'] == 11.103 or data['claimant'] == 11.11 or data['claimant'] == 11.111 or data['claimant'] == 11.12 or data['claimant'] == 11.13 or data['claimant'] == 11.1011 or data['claimant'] == 11.2 or data['claimant'] == 11.21 or data['claimant'] == 11.3
             or data['claimant'] == 11.4 or data['claimant'] == 11.5 or data['claimant'] == 11.51 or data['claimant'] == 11.6 or data['claimant'] == 11.61 or data['claimant'] == 11.7
-            or data['claimant'] == 12 or data['claimant'] == 13.2 or data['claimant'] == 14.1 or data['claimant'] == 16  or data['claimant'] == 16.1 or data['claimant'] == 17 or data['claimant'] == 20 or data['claimant'] == 20.1 or data['claimant'] == 20.2
+            or data['claimant'] == 12 or data['claimant'] == 13.2 or data['claimant'] == 14.1 or data['claimant'] == 16  or data['claimant'] == 16.1 or data['claimant'] == 17  or data['claimant'] == 17.01  or data['claimant'] == 20 or data['claimant'] == 20.1 or data['claimant'] == 20.2
             or data['claimant'] == 21 or data['claimant'] == 23 or data['claimant'] == 24 or data['claimant'] == 26  or data['claimant'] == 27  or data['claimant'] == 28  or data['claimant'] == 29
             or data['claimant'] == 33  or data['claimant'] == 34  or data['claimant'] == 36  or data['claimant'] == 37   %}
             <li role="presentation"><a href="#next-steps" role="tab" tabindex="0" aria-controls="next-steps" aria-selected="true">Next steps</a></li>
             <li role="presentation"><a href="#history" role="tab" tabindex="-1" aria-controls="history">Claim history</a></li>
             <li role="presentation"><a href="#contact" role="tab" tabindex="-1" aria-controls="history">Defendant's details</a></li>
+            {% endif %}
+
+            {% if  data['claimant'] == 8   %}
+                  <li role="presentation"><a href="#next-steps" role="tab" tabindex="-1" aria-controls="next-steps" aria-selected="true">Next steps</a></li>
+                  <li role="presentation"><a href="#history" role="tab" tabindex="-1" aria-controls="history">Claim history</a></li>
+                  <li role="presentation"><a href="#settle-out-of-court" role="tab" tabindex="-1" aria-controls="settle-out-of-court"id="settle">Settle out of court</a></li>
+                  <li role="presentation"><a href="#contact" role="tab" tabindex="-1" aria-controls="history">Defendant's details</a></li>
             {% endif %}
 
             {% if data['claimant'] == 10 or data['claimant'] == 11  or data['claimant'] == 11.00001  %}
@@ -849,6 +856,7 @@
                 </div>
               </div>
 
+
               {% elseif data['claimant'] == 14.1 %}
               <div>
                 <h2 class="heading-medium">Attend the hearing</h2>
@@ -895,9 +903,6 @@
                     <li>Wait until someone calls your name.</li>
                   </ol>
 
-
-
-
               </div>
 
 
@@ -917,15 +922,6 @@
                   <p>The court will review the case. We'll contact you to tell you what to do next.</p>
                 </div>
 
-
-
-              {% elseif data['claimant'] == 17 %}
-              <div class="status-block single">
-                <h2 class="heading-medium">This claim is settled</h2>
-                <p>You've both signed a settlement agreement.</p>
-                <p>The agreement explains what can happen if either party breaks the terms.</p>
-                <p><a href="../defendant/correspondence/forms/agreement?check=1">Download the agreement</a></p>
-              </div>
 
               {% elseif data['claimant'] == 13 %}
               <div>
@@ -958,13 +954,26 @@
                   you if we set a hearing date to tell you how to prepare.</p>
               </div>
 
+
+
               {% elseif data['claimant'] == 17 %}
-              <h2 class="heading-medium">You settled out of court</h2>
-              <div>
-                <p> You've both signed an agreement to settle out of court. The claim is now settled.</p>
-                <p><a href="../defendant/correspondence/forms/agreement?check=1">Download the settlement agreement</a>
-                  (PDF, 123KB)</p>
-              </div>
+                  <div class="status-block single">
+                    <h2 class="heading-medium">This claim is settled</h2>
+                    <p>You've both signed a settlement agreement.</p>
+                    <p>The agreement explains what can happen if either party breaks the terms.</p>
+                    <p><a href="../defendant/correspondence/forms/agreement?check=1">Download the agreement</a></p>
+                  </div>
+
+
+              {% elseif data['claimant'] == 17.01 %}
+                  <h2 class="heading-medium">You settled out of court</h2>
+                  <div>
+                    <p>Mary Richards has accepted your offer to settle out of court.</p>
+                    <p>You've both signed an agreement to settle out of court. The claim is now settled.</p>
+                    <p><a href="../defendant/correspondence/forms/agreement?check=1">Download the settlement agreement</a>
+                      (PDF, 123KB)</p>
+                  </div>
+
 
               {% elseif data['claimant'] == 18 %}
               <h2 class="heading-medium">You need to respond to this counterclaim</h2>
@@ -2499,7 +2508,7 @@
 
 
             <!--  where no offer was made by either party so far -->
-            {% if data['claimant'] == 11.00001 %}
+            {% if data['claimant'] == 8  or  data['claimant'] == 11.00001  %}
                 <h2 class="heading-medium">You can still settle out of court</h2>
                 <p>You can avoid going to a hearing if you settle out of court.</p>
 
@@ -2649,8 +2658,10 @@
     <option value="11" {% if data['claimant'] == 11 %}selected{% endif %}>Offer from defendant  </option>
     <option value="12" {% if data['claimant'] == 12 %}selected{% endif %}>Reject offer from defendant  </option>
     <option value="16" {% if data['claimant'] == 16 %}selected{% endif %}>Accept offer</option>
-    <option value="16" {% if data['claimant'] == 161 %}selected{% endif %}>Claimant's offer rejected by defendant - No more offers</option>
+    <option value="16.1" {% if data['claimant'] == 16.1 %}selected{% endif %}>Claimant's offer rejected by defendant - No more offers</option>
+
     <option value="17" {% if data['claimant'] == 17 %}selected{% endif %}>Agreement signed by both parties  </option>
+    <option value="17.01" {% if data['claimant'] == 17.01 %}selected{% endif %}>Offeraccepted and agreement signed by both parties</option>
 
     <option>------- Settled ----------</option>
     <option value="20" {% if data['claimant'] == 20 %}selected{% endif %}>Settled - marked paid</option>
