@@ -61,7 +61,7 @@ Money Claims Prototype
                 <td>{{ data['offerDateDay'] }} July 2019</td>
             {% else %}
                 {% if data['makecounteroffer'] == 'true'  %}
-                    <td>14 July 2019
+                    <td>{{ data['offerDateDay'] }} August 2019
                 {% else %}
                     <td>{{ data['offerDateDay'] }} August 2019
                 {% endif %}
@@ -107,14 +107,13 @@ Money Claims Prototype
 
 
       {% if data['newoffer'] == 'true'  %}
-          {% if data['defendant'] == "defendant" %}
+          {% if data['theclaimant'] == 'false' %}
 
-              {% if data['respondtoclaimantnocounter'] == 'false'  %}
-                  {% if data['nomoreofffersallowed'] == 'false'  %}
-                      <p><a href="confirmation-page?offeraccepted=false&" class="button">Sign agreement</a></p>
-                  {% else %}
-                      <p><a href="confirmation-page?offeraccepted=true&" class="button">Sign agreement</a></p>
-                  {% endif %}
+              {% if data['respondtoclaimantofferonly'] == 'true'  %}
+                  <p><a href="../new-offers/check-answers?offeraccepted=true&" class="button">Sign agreement</a></p>
+
+              {% elif data['respondtoclaimantnocounter'] == 'false'  %}
+                  <p><a href="../new-offers/check-answers" class="button">Sign agreement</a></p>
               {% elif data['respondtoclaimantnocounter'] == 'true' %}
                   <p><a href="../new-offers/check-answers" class="button">Sign agreement</a></p>
               {% else %}
