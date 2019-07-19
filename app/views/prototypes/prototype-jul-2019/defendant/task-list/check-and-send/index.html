@@ -1482,29 +1482,47 @@ Check your answers
 
 
 
-                {% if data['madeandsignedagreement'] == 'true' %}
-                    <!--  offer made by defendant  -->
-                    <table class="check-your-answers">
-                      <thead>
-                      <tr>
-                        <th colspan="2">
-                          <h2 class="heading-medium">
-                            Settle out of court
-                          </h2>
-                        </th>
-                        <th>
-                        </th>
-                      </tr>
-                      </thead>
-                      <tbody>
 
+                <!--  offer made by defendant  -->
+                <table class="check-your-answers">
+                  <thead>
+                  <tr>
+                    <th colspan="2">
+                      <h2 class="heading-medium">
+                        Settle out of court
+                      </h2>
+                    </th>
+                    <th>
+                    </th>
+                  </tr>
+                  </thead>
+                  <tbody>
+
+                  <tr>
+                    <td>
+                      Make an offer
+                    </td>
+                    <td>
+                      {% if data['madeandsignedagreement'] == 'true'   %}
+                          Yes
+                      {%  else  %}
+                          No
+                      {% endif  %}
+                    </td>
+                    <td class="change-answer">
+                      <a href="">
+                        Change <span class="visuallyhidden">Name</span>
+                      </a>
+                    </td>
+                  </tr>
+
+
+                  {% if data['madeandsignedagreement'] == 'true'   %}
                       <tr>
                         <td>
-                          Your offer
+                          Details
                         </td>
-                        <td>
-                          XYZ
-                        </td>
+                        <td style="white-space: pre-wrap;">{{ data['the-offer-text'] }}</td>
                         <td class="change-answer">
                           <a href="">
                             Change <span class="visuallyhidden">Name</span>
@@ -1512,7 +1530,21 @@ Check your answers
                         </td>
                       </tr>
 
-                {% endif %}
+                      <tr>
+                        <td>
+                          Offer completed by
+                        </td>
+                        <!-- Pay in installment content also needs considering -->
+                        <td>
+                          {{ data['offerDateDay'] }} August 2019
+                        </td>
+                        <td class="change-answer">
+                          <a href="#">
+                            Change <span class="visuallyhidden">Name</span>
+                          </a>
+                        </td>
+                      </tr>
+                  {% endif  %}
 
 
 
