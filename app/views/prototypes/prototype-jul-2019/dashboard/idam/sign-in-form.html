@@ -103,24 +103,33 @@ Money Claims Prototype
 
                                             <!--  CLAIMANT  -->
                                             {% if  data['theclaimant'] == 'true'  %}
+
                                                 {% if data['offeracceptedbydefendant']  ==  'true'  %}
                                                     <!--  The claimants offer is accpted by the defendant   -->
                                                     <form action="/prototypes/prototype-jul-2019/dashboard/claimant?claimant=17.01&" method="post">
-
-                                                {% elif data['offerrejectedbydefendant']  ==  'true'  %}
-                                                    <!--  The claimants offer is accpted by the defendant   -->
-                                                    <form action="/prototypes/prototype-jul-2019/dashboard/claimant?claimant=16.1&" method="post">
 
                                                 {% elif  data['firstoffer'] == 'true' %}
                                                     <!--  New offer in parrallel to claim  -->
                                                     <form action="/prototypes/prototype-jul-2019/dashboard/claimant?claimant=11.00001&" method="post">
 
                                                 {% elif data['defendantmadeoffer'] ==  'true'  %}
-                                                      {% if data['partadmitstart'] == 'true' %}
+                                                      {% if data['offerwasrejected'] == 'true' %}
+                                                          <form action="/prototypes/prototype-jul-2019/dashboard/claimant?claimant=10.91&" method="post">
+                                                      {% elif data['offerwasrejected'] == 'false' %}
+                                                          <form action="/prototypes/prototype-jul-2019/dashboard/claimant?claimant=10.91&" method="post">
+                                                      {% elif data['partadmitstart'] == 'true' %}
                                                           <form action="/prototypes/prototype-jul-2019/dashboard/claimant?claimant=5&" method="post">
-                                                      {% else %}
+                                                      {% elif data['partadmitstart'] == 'false' %}
                                                           <form action="/prototypes/prototype-jul-2019/dashboard/claimant?claimant=8&" method="post">
                                                       {% endif %}
+
+
+
+                                                {% elif data['offerrejectedbydefendant']  ==  'true'  %}
+                                                    <!--  The claimants offer is rejectd by the defendant   -->
+                                                    <form action="/prototypes/prototype-jul-2019/dashboard/claimant?claimant=16.1&" method="post">
+
+
 
                                                 {% else %}
                                                       <form action="/prototypes/prototype-jul-2019/dashboard/claimant?claimant=10" method="post">
