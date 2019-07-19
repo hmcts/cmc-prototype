@@ -16,28 +16,22 @@ Money Claims Prototype
       {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}
       <form method="post" action="{{ data.return_page if data.return_page | length > 0 else '../task-list' }}" class="form">
         {% else %}
-        <form method="post" action="their-details/enter-details" class="form">
+
+        <form
+          name="aspnetForm"
+          method="post"
+          onsubmit="multiNavigation('defendant-type', ['Sole trader', 'Company'], ['name-intro-trader', 'name-intro' ]);return false;"
+          id="aspnetForm"
+          autocomplete="off">
+
           {% endif %}
           {{formData | safe}}
-          <h1 class="heading-large">
-            {% if data['defendants'].length > 0 %}
-              <span class="form-hint">Defendant {{ data['defendants'].length + 1 }}</span>
-            {% endif %}
-            Who are you making the claim against?
-          </h1>
-          {% if not data['defendants'] %}
-          <!-- <p>You'll have a chance to add more defendants later.</p> -->
-          {% endif %}
 
+          <h1 class="heading-large">
+            What kind of business is it?
+          </h1>
 
           <fieldset>
-            <div class="multiple-choice">
-              <input id="radio-1" type="radio" name="defendant-type" value="Individual" {{ checked("defendant-type", "Individual") }}>
-              <label for="radio-1">
-                <strong class="bold-small">An individual</strong><br>
-                <span class="form-hint">For example someone you lent money to</span>
-              </label>
-            </div>
             <div class="multiple-choice">
               <input id="radio-2" type="radio" name="defendant-type" value="Sole trader" {{ checked("defendant-type", "Sole trader") }}>
               <label for="radio-2">
@@ -52,27 +46,27 @@ Money Claims Prototype
                 <span class="form-hint">For example a company that sold you goods or services</span>
               </label>
             </div>
-            <div class="multiple-choice">
-              <input id="radio-4" type="radio" name="defendant-type" value="Organisation" {{ checked("defendant-type", "Organisation") }}>
-              <label for="radio-4">
-                <strong class="bold-small">Another type of organisation</strong><br>
-                <span class="form-hint">For example a partnership, trust, charity, club or association</span>
-              </label>
-            </div>
           </fieldset>
-          {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}
-          <div class="form-group">
-            <input type="submit" class="button" value="Save changes"/>
+
+
+        <details>
+          <summary><span class="summary">I need help working out what kind of business it is</span></summary>
+          <div class="panel panel-border-narrow">
+            <p>A single person, such as a tradesman, could be a sole trader or a registered company.</p>
+            <p>To find out, look at the business's name on paperwork such as receipts, invoices or on their terms and conditions on their website.</p>
+            <p>The official name is often in smallprint and footers rather than being the name shown on a logo.</p>
+            <p>A registered company's name will end in 'ltd' or 'limited'.</p>
+            <p>If in doubt, <a href="https://beta.companieshouse.gov.uk/">search Companies House</a> to see if the business is a registred company</a> - check the listed employees and address to make sure it's the company you are looking for.</p> 
           </div>
-          <a href="{{ data.return_page if data.return_page | length > 0 else '../task-list' }}">Cancel</a>
-          {% else %}
+        </details>
+
           <div class="form-group">
             <input type="submit" class="button" value="Save and continue"/>
           </div>
-          {% endif %}
+
         </form>
       </div>
     </div>
-  {% include 'prototypes/features-to-be-built/includes/contact.html' %}
+  {% include 'prototypes/prototype-jul-2019/includes/contact.html' %}
 </main>
 {% endblock %}
