@@ -18,7 +18,14 @@ Money Claims Prototype
       <div class="govuk-box-highlight">
         {% if data['newoffer'] == 'true'  %}
 
-            {% if data['offeraccepted'] == 'true'  %}
+            {% if  data['firstoffer'] == 'true'  %}
+                {% if data['theclaimant'] == 'true'  %}
+                    <h1 class="bold-large">Your offer has been sent to Mary Richards</h1>
+                {% else %}
+                    <h1 class="bold-large">Your offer has been sent to Jan Clark</h1>
+                {% endif %}
+                <br>
+            {% elif data['offeraccepted'] == 'true'  %}
                 <h1 class="bold-large">You’ve settled out of court</h1>
                 <br>
                 <p><strong class="bold">{{ now | date( "D MMMM YYYY" ) }}</strong></p>
@@ -33,13 +40,13 @@ Money Claims Prototype
                 {% endif %}
                 </h1>
                 <br>
+
             {% endif %}
 
 
 
 
         {% elif data['defendant'] == "defendant_signed" or data['type'] == 2 %}
-
             <h1 class="bold-large">You’ve settled out of court</h1>
             <br>
             <p>
@@ -58,7 +65,6 @@ Money Claims Prototype
             <h1 class="bold-large">You've signed the agreement</h1>
 
         {% else %}
-
             <h1 class="bold-large">You've signed the agreement</h1>
             <p>
               <a class="font-medium" href='../../../defendant/correspondence/forms/agreement?check=2'
@@ -77,32 +83,43 @@ Money Claims Prototype
 
         {% if data['newoffer'] == 'true'  %}
 
+            <!--   DEFENDANT  -->
             {% if data['theclaimant'] == 'false'  %}
-                {% if data['respondtoclaimantofferonly'] == 'true' and  data['theclaimant'] == 'false' %}
-                    {% if data['offeraccepted'] == 'true' %}
-                        <p>You've both signed a settlement agreement.</p>
-                        <p><a class="button" href='../../defendant?defendant=16&'>Go to your account</a></p>
-                    {% else %}
-                        <p>The court will review the case. We'll contact you to tell you what to do next.</p>
-                        <p><a class="button" href='../../defendant?defendant=13.01&'>Go to your account</a></p>
-                    {% endif %}
+
+                {% if data['offeraccepted'] == 'true' %}
+                      <p>You will need to follow the terms of the agreement.</p>
+                      <p><a href="../defendant/correspondence/forms/agreement?check=2">Download the agreement</a> (PDF, 123KB)</p>
+                      <p><a class="button" href='../../defendant?defendant=16&'>Go to your account</a></p>
+
+                {% elif  data['firstoffer'] == 'true'  %}
+                    <!--  Just an offer made by the defendant -->
+                    <p>We will contact you if Jan Clark responds to your offer.</p>
+                    <p><a class="button" href='../../defendant?defendant=10&'>Go to your account</a></p>
+
+                {% elif data['respondtoclaimantofferonly'] == 'true' %}
+                      <!-- rejected offer and made no counter offer -->
+                      <p>The court will review the case. We'll contact you to tell you what to do next.</p>
+                      <p><a class="button" href='../../defendant?defendant=13.01&'>Go to your account</a></p>
 
                 <!-- when there is a coutneroffer from the claimant which is accepted by the defendant -->
                 {% elif data['respondtoclaimantnocounter'] == 'false' %}
-                    {% if data['offeraccepted'] == 'true' %}
-                        <p>You've both signed a settlement agreement.</p>
-                        <p><a class="button" href='../../defendant?defendant=16&'>Go to your account</a></p>
-                    {% else %}
-                        {% if data['makecounteroffer'] == 'true'  %}
-                            <p>We will contact you if Jan Clark responds to your offer.</p>
-                            <p><a class="button" href='../../defendant?defendant=10&'>Go to your account</a></p>
-                        {% else %}
-                            <p>The court will review the case. We'll contact you to tell you what to do next.</p>
-                            <p><a class="button" href='../../defendant?defendant=13.01&'>Go to your account</a></p>
-                        {% endif %}
+                      {% if data['makecounteroffer'] == 'true'  %}
+                          <p>We will contact you if Jan Clark responds to your offer.</p>
+                          <p><a class="button" href='../../defendant?defendant=10&'>Go to your account</a></p>
+                      {% else %}
+                          <p>The court will review the case. We'll contact you to tell you what to do next.</p>
+                          <p><a class="button" href='../../defendant?defendant=13.01&'>Go to your account</a></p>
+                      {% endif %}
 
-                    {% endif %}
                 {% endif %}
+
+
+            <!--  CLAIMANT -->
+
+            {% elif  data['firstoffer'] == 'true'  %}
+                <p>We will contact you if Mary Richards responds to your offer.</p>
+                <p>Continue with your claim.</p>
+                <p><a class="button" href='../../claimant?claimant=11.00001'>Go to your account</a></p>
 
             {% elif data['offeraccepted'] == 'true'  %}
                 <p>You've both signed a settlement agreement.</p>
@@ -129,6 +146,8 @@ Money Claims Prototype
                 <p><a class="button" href='../../claimant?claimant=11.1'>Go to your account</a></p>
 
             {% endif %}
+
+
 
 
         {% elif data['defendant'] == "defendant" or data['type'] == 1 %}

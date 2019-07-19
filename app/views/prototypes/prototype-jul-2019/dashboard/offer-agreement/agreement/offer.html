@@ -55,6 +55,7 @@ Money Claims Prototype
 
             {% endif %}
           </tr>
+
           <tr>
             <td>Completion date</td>
             {% if data['defendant'] == "defendant"  and  data['respondtoclaimantnocounter'] == 'false'  %}
@@ -107,11 +108,14 @@ Money Claims Prototype
 
 
       {% if data['newoffer'] == 'true'  %}
+
+          <!--  DEFENDANT -->
           {% if data['theclaimant'] == 'false' %}
 
-              {% if data['respondtoclaimantofferonly'] == 'true'  %}
+              {% if data['firstoffer'] == 'true'  %}
+                  <p><a href="../new-offers/check-answers?offeraccepted=false&" class="button">Sign agreement</a></p>
+              {% elif data['respondtoclaimantofferonly'] == 'true'  %}
                   <p><a href="../new-offers/check-answers?offeraccepted=true&" class="button">Sign agreement</a></p>
-
               {% elif data['respondtoclaimantnocounter'] == 'false'  %}
                   <p><a href="../new-offers/check-answers" class="button">Sign agreement</a></p>
               {% elif data['respondtoclaimantnocounter'] == 'true' %}
@@ -127,25 +131,25 @@ Money Claims Prototype
               {% else %}
                     <p><a href="">Don't make offer</a></p>
               {% endif %}
+
           {% else %}
 
+              <!--  CLAIMANT  -->
               <!--  claimant rew offer, accept and reject routes -->
               {% if data['offeraccepted'] == 'true'  %}
                   {% if data['fromtheclaimanttasklist'] == 'true' %}
                       <p><a href="../../claimant-response/dispute-claim/task-list?offerresponse=complete&offeracceptedbyclaimant=true&" class="button">Sign agreement</a></p>
                       <p><a href="../../claimant-response/dispute-claim/task-list?offerresponse=complete&offeracceptedbyclaimant=false&">Reject offer</a></p>
                   {% else %}
-                      <p><a href="confirmation-page" class="button">Sign agreement</a></p>
+                      <p><a href="../new-offers/check-answers" class="button">Sign agreement</a></p>
                       <p><a href="#">Reject offer</a></p>
                   {% endif %}
               {% else %}
-                  <!--  claimant makes new offer -->
-                  <p><a href="../new-offers/allow-another-offer?madeandsignedagreement=true&" class="button">Sign agreement</a></p>
 
                   {% if data['fromtheclaimanttasklist'] == 'true' %}
                       <p><a href="../../claimant-response/dispute-claim/task-list?offerresponse=complete&offeracceptedbyclaimant=false&">Don't make offer</a></p>
                   {% else %}
-                      <p><a href="../new-offers/allow-another-offer">Don't make offer</a></p>
+                      <p><a href="../new-offers/check-answers?" class="button">Sign agreement</a></p>
                   {% endif %}
               {% endif %}
 
