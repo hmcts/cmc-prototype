@@ -24,19 +24,18 @@
 	</h1>
 
 
-    {% if  data['respondtoclaimantnocounter'] == 'true'   and   data['respondtoclaimantofferonly'] == 'false' %}
+    {% if  data['firstoffer'] == 'true'  or  data['respondtoclaimantnocounter'] == 'true'   and   data['respondtoclaimantofferonly'] == 'false' %}
 
         <table class="check-your-answers">
           <thead>
-          <tr>
-            <th colspan="2">
-              <h2 class="heading-medium" id="name">
-                  Your offer
-              </h2>
-            </th>
-            <th>
-            </th>
-          </tr>
+            <tr>
+              <th colspan="2">
+                <h2 class="heading-medium" id="name">
+                    Your offer
+                </h2>
+              </th>
+              <th></th>
+            </tr>
           </thead>
 
 
@@ -75,9 +74,6 @@
 
 
     {%  else  %}
-
-
-
 
             <!--  Proposed plan  -->
             <table class="check-your-answers">
@@ -275,39 +271,87 @@
       <br>
       <br>
 
-      {% if data['respondtoclaimantnocounter'] == 'true' %}
-        <div class="form-group">
-          <p><a class="button" href="../view-offer/confirmation-page">Submit</a></p>
-        </div>
-      {% else %}
-          <div class="form-group">
-            <p><a class="button" href="../agreement/confirmation-page">Submit</a></p>
-          </div>
-      {% endif %}
 
-
-
+      <div class="form-group">
+        <p><a class="button" href="../agreement/confirmation-page">Submit</a></p>
+      </div>
 
 </main>
 
 
-<!--
-<form method="post"  action="#" class="for4" style=" float: left; ">
-  <select style="height:25px;" onchange="window.location.href='?'+this.value">
-    <option value="suggestownplan=false&"
-      {% if data.suggestownplan == 'false' %}selected{% endif %}
-      >Accept defendant's proposed plan</option>
-    <option value="suggestownplan=true&courtspaymentplan=false&"
-      {% if data.suggestownplan == 'true' and data.courtspaymentplan != 'true' %}selected{% endif %}
-      >Claimant's proposed plan accepted by court</option>
-    <option value="suggestownplan=true&courtspaymentplan=true&redeterminationrequested=false&"
-      {% if data['courtspaymentplan'] == 'true' and  data['redeterminationrequested'] != 'true' %}selected{% endif %}
-      >Court's proposed plan accepted by Claimant</option>
-    <option value="suggestownplan=true&courtspaymentplan=true&redeterminationrequested=true&"
-       {% if data.suggestownplan == 'true' and data.courtspaymentplan != 'true' and data['redeterminationrequested'] == 'true' %}selected{% endif %}
-       >Court's proposed plan rejected by Claimant</option>
+
+
+
+
+<form method="post"  action="#" class="form" style="position: absolute;">
+  <select id="check2" name="check2" onchange="window.location.href='?'+this.value">
+
+
+    <option  value="firstoffer=false&theclaimant=true&offeraccepted=true&respondtoclaimantnocounter=false&"
+             {% if  data['theclaimant'] == 'true'  and  data['offeraccepted'] == 'true'  %}selected{% endif %}
+    >Claimant - Accept offer</option>
+
+
+    <option  value="firstoffer=true&theclaimant=true&"
+             {% if  data['theclaimant'] == 'true'  and  data['firstoffer'] == 'true'  %}selected{% endif %}
+    >Claimant - Make offer only</option>
+
+
+
+
+    <option  value=""
+             {% if  data['theclaimant'] == 'true'  and
+                    data['firstoffer'] == 'false' and
+                    data['offeraccepted'] == 'false' and
+                    data['makecounteroffer'] == 'false' and
+                    data['moreoffers'] == 'true'  %}selected{% endif %}
+    >Claimant - Reject offer - Make counteroffer - Allow more offers</option>
+
+
+    <!--
+        <option  value    <!--
+        >Claimant - Reject offer - No counteroffer - Don't allow more offers</option>
+
+        <option  value=""
+
+        >Claimant - Reject offer - Make counteroffer - Allow more offers</option>
+
+        <option  value=""
+
+        >Claimant - Reject offer - No counteroffer - Don't allow more offers</option>
+
+        -->
+
+    <option  value="firstoffer=true&theclaimant=false&respondtoclaimantnocounter=true&respondtoclaimantofferonly=false&"
+             {% if  data['theclaimant'] == 'false'  and  data['firstoffer'] == 'true'  %}selected{% endif %}
+    >Defendant - Make offer only</option>
+
+
+
+    <option  value=""
+             {% if  data['theclaimant'] == 'false'  and  data['offeraccepted'] == 'true' and data['firstoffer'] != 'true'  %}selected{% endif %}
+    >Defendant - Accept offer</option>
+
+
+    <option  value=""
+        {% if  data['theclaimant'] == 'false'  and  data['offeraccepted'] == 'false'  and  data['firstoffer'] != 'true'  %}selected{% endif %}
+    >Defendant - Reject offer or counteroffer only</option>
+
+
+
+    <option  value="theclaimant=false&offeraccepted=false&makecounteroffer=true&firstoffer=false&"
+        {% if  data['theclaimant'] == 'false'  and  data['offeraccepted'] == 'false'  and  data['makecounteroffer'] == 'true'  and  data['firstoffer'] != 'true'  %}selected{% endif %}
+    >Defendant - Reject offer - Make counteroffer</option>
+
+
+
+    <option  value="theclaimant=false&offeraccepted=false&makecounteroffer=false&firstoffer=false&"
+        {% if  data['theclaimant'] == 'false'  and  data['offeraccepted'] == 'false'  and  data['makecounteroffer'] == 'false'  and  data['firstoffer'] != 'true'  %}selected{% endif %}
+    >Defendant - Reject offer - Don't make counteroffer</option>
+
   </select>
 </form>
--->
+
+
 
 {% endblock %}
