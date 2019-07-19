@@ -13,38 +13,221 @@ Check your answers
   <h1 class="heading-large">
     Check your answers
   </h1>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!--  Proposed plan  -->
+        <table class="check-your-answers">
+          <thead>
+              <tr>
+                <th colspan="2">
+                  <h2 class="heading-medium" id="name">
+                    The defendant's offer
+                  </h2>
+                </th>
+                <th>
+                </th>
+              </tr>
+          </thead>
+
+          <tbody>
+          <tr>
+              <td>
+                Your response
+              </td>
+              <!-- Pay in installment content also needs considering -->
+              <td>
+                {% if data['offeraccepted'] == 'true'  %}
+                    Accept the offer
+                {% else %}
+                    Rejected the offer
+                {% endif %}
+
+              </td>
+              <td class="change-answer">
+                <a href="#">
+                  Change <span class="visuallyhidden">Name</span>
+                </a>
+              </td>
+          </tr>
+
+
+        {% if data['offeraccepted'] == 'true'  %}
+        {% else %}
+            <tr>
+              <td>
+                Reason for rejecting
+              </td>
+              <!-- Pay in installment content also needs considering -->
+              <td style="white-space: pre-wrap;" >{{ data['rejection-reason'] }}</td>
+              <td class="change-answer">
+                <a href="#">
+                  Change <span class="visuallyhidden">Name</span>
+                </a>
+              </td>
+            </tr>
+
+
+            <!--  Counter offer  -->
+            <table class="check-your-answers">
+              <thead>
+                  <tr>
+                    <th colspan="2">
+                      <h2 class="heading-medium" id="name">
+                        Your counter offer
+                      </h2>
+                    </th>
+                    <th>
+                    </th>
+                  </tr>
+              </thead>
+
+              <tbody>
+                  <tr>
+                    <td>
+                      Make counter offer
+                    </td>
+                    <!-- Pay in installment content also needs considering -->
+                    <td>
+                      {% if data['makecounteroffer'] == 'true'  %}
+                          Yes
+                      {% else %}
+                          No
+                      {% endif %}
+                    </td>
+                    <td class="change-answer">
+                      <a href="#">
+                        Change <span class="visuallyhidden">Name</span>
+                      </a>
+                    </td>
+                  </tr>
+
+                  {% if data['makecounteroffer'] == 'true'  %}
+                      <tr>
+                        <td>
+                          Details
+                        </td>
+                        <!-- Pay in installment content also needs considering -->
+                        <td  style="white-space: pre-wrap;" >{{ data['the-offer-text'] }}</td>
+                        <td class="change-answer">
+                          <a href="#">
+                            Change <span class="visuallyhidden">Name</span>
+                          </a>
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td>
+                          Offer completed by
+                        </td>
+                        <!-- Pay in installment content also needs considering -->
+                        <td>
+                          {{ data['offerDateDay'] }} August 2019
+                        </td>
+                        <td class="change-answer">
+                          <a href="#">
+                            Change <span class="visuallyhidden">Name</span>
+                          </a>
+                        </td>
+                      </tr>
+                  {% endif %}
+
+              </tbody>
+            </table>
+
+
+
+
+              <table class="check-your-answers">
+                <thead>
+                <tr>
+                  <th colspan="2">
+                    <h2 class="heading-medium" id="name">
+                      More offers
+                    </h2>
+                  </th>
+                  <th>
+                  </th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr>
+                  <td>
+                    Allow more offers
+                  </td>
+                  <!-- Pay in installment content also needs considering -->
+                  <td>
+                    {% if data['moreoffers'] == 'true'  %}
+                    Yes
+                    {% elif data['moreoffers'] == 'false'  %}
+                    No
+                    {% endif %}
+                  </td>
+                  <td class="change-answer">
+                    <a href="#">
+                      Change <span class="visuallyhidden">Name</span>
+                    </a>
+                  </td>
+                </tr>
+
+                </tbody>
+              </table>
+
+      {% endif %}
+
+
+
   <table class="check-your-answers">
-    <thead>
-      <tr>
-        <th colspan="2">
-          <h2 id='cd' class="heading-medium">
-            Your response
-          </h2>
-        </th>
-        <th>
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>
-          Do you want to proceed with the claim?
-        </td>
-        <td>
-         {%if data.radio_select_group=="Yes" %}
-         Yes
-         {%elif data.radio_select_group=="No" %}
-         No
-         {% else %}
-         No
-         {% endif %}
-       </td>
-       <td class="change-answer">
-        <a href="#">
-          Change <span class="visuallyhidden">Why you believe you're owed the money</span>
-        </a>
-      </td>
-    </tr>
+
+    {% if data['offeraccepted'] != 'true'  %}
+        <thead>
+        <tr>
+          <th colspan="2">
+            <h2 id='cd' class="heading-medium">
+              Your response
+            </h2>
+          </th>
+          <th>
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>
+            Do you want to proceed with the claim?
+          </td>
+          <td>
+            {%if data.radio_select_group=="Yes" %}
+            Yes
+            {%elif data.radio_select_group=="No" %}
+            No
+            {% else %}
+            No
+            {% endif %}
+          </td>
+          <td class="change-answer">
+            <a href="#">
+              Change <span class="visuallyhidden">Why you believe you're owed the money</span>
+            </a>
+          </td>
+        </tr>
+
+    {% endif %}
+
+
 
     <tr>
     {%if data.radio_select_group=="Yes" and data.mediation!="off" %}
