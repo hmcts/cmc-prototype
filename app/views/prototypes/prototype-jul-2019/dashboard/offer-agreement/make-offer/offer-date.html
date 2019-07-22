@@ -14,22 +14,29 @@ Money Claims Prototype
 
       <a href="#" class="link-back">Back</a>
       <h1 class="heading-large">
-        Make an offer
+        When will all parts of this offer be complete?
       </h1>
 
-          <form action="../make-offer/offer-date?makeoffernow=true&" method="get" class="form">
+      {% if data['makeoffernow'] == 'true' %}
+          <form action="../agreement/offer?makeoffernow=true&" method="get" class="form">
+      {% else %}
+          <form action="confirmation" method="get" class="form">
+      {% endif %}
 
 
+
+
+<!--
           <fieldset>
 
                 <div class="form-group">
                     <legend class="visually-hidden">Suggest a resolution</legend>
                     <p>Make it clear:</p>
                             <ul class="list list-bullet"><li>what you'll do, for example make a payment, fix a problem or return goods</li>
-                          <li>anything you're also asking {% if data['party'] == "defendant" %}Jan Clark{% else %}Mary Richards{% endif %} to do as part of the settlement</li></ul>
+                          <li>anything you're also asking {% if data['party'] == "defendant" %}Jan Clark{% else %}Mary Richards{% endif %} to do as part of the settlement</li></ul> -->
 
 
-                    <label class="bold-medium">Your offer</label>
+                    <!-- <label class="bold-medium">Your offer</label>
                     <textarea class="form-control form-control-3-4 form-control-large"
                     id="the-offer-text"
                     rows="4"
@@ -38,10 +45,26 @@ Money Claims Prototype
                     type="text"
                     style="width: 100%;  height: 9em;"
                     >{{data['the-offer-text']}}</textarea>
-                </div>
+                </div> -->
 
 
-<!--
+
+                <!-- <label class="form-label-bold" for="claimant_date_of_birth_day">
+                  <div class="bold-medium">
+
+                    {% if data['defendant'] == "defendant" %}
+                          Content for defendant -->
+                          <!-- When will all parts of this offer be done? -->
+                    <!-- {% elseif data['defendant'] == "claimant" %} -->
+                          <!-- Content fo claimant -->
+                          <!-- When would this be done by? -->
+                    <!-- {% else %} -->
+                          <!-- When will you complete the offer by? -->
+                    <!-- {% endif %} -->
+                  <!-- </div> -->
+                <!-- </label> -->
+
+
                 <div class="input form-group date optional claimant_date_of_birth field_with_hint"><p
                     class="form-hint text">For example, 23 04 2017</p>
                     <div class="input form-group know-date-input">
@@ -91,7 +114,7 @@ Money Claims Prototype
                 {% if data['newoffer'] == 'true' %}
                     <input type="submit" class="button" value="Continue"/>
                 {% else %}
-                    <input type="submit" class="button" value="Continue"/>
+                    <input type="submit" class="button" value="Submit offer"/>
                 {% endif %}
               </div>
 
