@@ -77,6 +77,10 @@
           </table>
           <br>
           <br>
+
+
+
+
           <table id="table-of-tasks">
             <thead>
               <tr>
@@ -114,6 +118,11 @@
 
 
 
+<!--  IF OUT OF COURT OFFER IS ACCEPTED THEN DON@@T SHOW OTHER OPTIONS - THIS FEELS CONTROVERSIAL  -->
+{% if  data['offeraccepted'] != 'true'  %}
+
+
+
              <tr id="completing-your-claim">
               <td class="task">
                 <a href="task-list/amount-owed{{formQuery}}">
@@ -122,9 +131,9 @@
               </td>
               <td class="numeric" id="task-status" scope="col" id="col-status">
                 {% if data.amount_owed=="complete" %}
-                {% include "includes/task_status_finished.html" %}
+                    {% include "includes/task_status_finished.html" %}
                 {% else %}
-                {% include "includes/task_status_incomplete.html" %}
+                    {% include "includes/task_status_incomplete.html" %}
                 {% endif %}
               </td>
             </tr>
@@ -238,13 +247,13 @@
 
           </tbody>
         </table>
-        <br>
-        <br>
 
 
 
         {% if data.radio_select_group=="No" %}
 
+        <br>
+        <br>
         <table id="table-of-tasks">
           <thead>
             <tr>
@@ -272,13 +281,21 @@
               {% endif %}
             </td>
           </tr>
-        </tbody>
-      </table>
-      <br />
-      <br />
       {% endif %}
 
 
+
+<!--  end of non out of court stuff -->
+{% endif %}
+        </tbody>
+        </table>
+
+
+
+
+        <!--  GREEN BUTTON SECTION -->
+        <br>
+        <br>
         <table id="table-of-tasks" class="submit">
           <thead>
             <tr>
