@@ -73,15 +73,21 @@
                 <!-- defendant journeys  -->
                 {% elif  data['theclaimant'] == 'false'  %}
 
+
                       {% if  data['firstoffer'] == 'true'  %}
                             <form action="/prototypes/prototype-jul-2019/dashboard/defendant?" method="post">
+                      {% elif  data['respondtoclaimantnocounter'] == 'true'  %}
+                            <form action="/prototypes/prototype-jul-2019/dashboard/defendant?defendant=13.1&" method="post">
                       {% elif data['claimanthasaccpted']  ==  'true'  %}
-                            <form action="defendant?defendant=16&" method="post">
+                            <form action="/prototypes/prototype-jul-2019/dashboard/defendant?defendant=16&" method="post">
                       {% elif data['claimanthasaccpted']  ==  'false'  %}
                             <form action="/prototypes/prototype-jul-2019/dashboard/defendant?defendant=13&" method="post">
                       {% elif data['respondtoclaimantnocounter'] == 'false'  and  data['respondtoclaimantofferonly'] == 'false'  %}
                             <!--    Claimant responding to offer made by defendant  -->
                             <form action="/prototypes/prototype-jul-2019/dashboard/defendant?defendant=13.3&" method="post">
+                      {% elif data['respondtoclaimantnocounter'] == 'false'  and  data['respondtoclaimantofferonly'] == 'true'  %}
+                            <!--    Offer rejected - Respond to counteroffer only  -->
+                            <form action="/prototypes/prototype-jul-2019/dashboard/defendant?defendant=13.2&" method="post">
                       {% endif %}
                 {% endif %}
 
