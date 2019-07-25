@@ -24,7 +24,8 @@
 	</h1>
 
 
-    {% if  data['firstoffer'] == 'true'  or  data['respondtoclaimantnocounter'] == 'true'   and   data['respondtoclaimantofferonly'] == 'false' %}
+    {% if  data['firstoffer'] == 'true'  and  data['offeraccepted'] != 'true'  or
+           data['respondtoclaimantnocounter'] == 'false'   and   data['respondtoclaimantofferonly'] == 'true' and  data['offeraccepted'] != 'true'%}
 
         <table class="check-your-answers">
           <thead>
@@ -260,12 +261,6 @@
 
 
 
-
-
-
-
-
-
       <br>
       <br>
 
@@ -285,13 +280,18 @@
   <select id="check2" name="check2" onchange="window.location.href='?'+this.value">
 
 
-    <option  value="firstoffer=false&theclaimant=true&offeraccepted=true&respondtoclaimantnocounter=false&"
-             {% if  data['theclaimant'] == 'true'  and  data['offeraccepted'] == 'true'  %}selected{% endif %}
+    <option  value="firstoffer=false&theclaimant=true&offeraccepted=true&respondtoclaimantnocounter=false&firstoffer=false&"
+             {% if  data['theclaimant'] == 'true'  and
+                    data['offeraccepted'] == 'true'  %}selected{% endif %}
     >Claimant - Accept offer</option>
 
-    <option  value="firstoffer=true&theclaimant=true&"
-             {% if  data['theclaimant'] == 'true'  and  data['firstoffer'] == 'true'  %}selected{% endif %}
+
+    <option  value="firstoffer=true&theclaimant=true&offeraccepted=false&"
+             {% if  data['theclaimant'] == 'true'  and
+                    data['firstoffer'] == 'true'  and
+                    data['offeraccepted'] != 'true'  %}selected{% endif %}
     >Claimant - Make offer only</option>
+
 
     <option  value="theclaimant=true&firstoffer=false&offeraccepted=false&makecounteroffer=true&moreoffers=true&"
              {% if  data['theclaimant'] == 'true'  and
@@ -301,6 +301,7 @@
                     data['moreoffers'] == 'true'  %}selected{% endif %}
     >Claimant - Reject offer - Make counter offer - Allow more offers</option>
 
+
     <option  value="theclaimant=true&firstoffer=false&offeraccepted=false&makecounteroffer=true&moreoffers=false&"
              {% if  data['theclaimant'] == 'true'  and
                     data['firstoffer'] == 'false' and
@@ -308,6 +309,7 @@
                     data['makecounteroffer'] == 'true' and
                     data['moreoffers'] == 'false'  %}selected{% endif %}
     >Claimant - Reject offer - Make counter offer - Don't allow more offers</option>
+
 
     <option  value="theclaimant=true&firstoffer=false&offeraccepted=false&makecounteroffer=false&moreoffers=true&"
              {% if  data['theclaimant'] == 'true'  and
@@ -317,6 +319,7 @@
                     data['moreoffers'] == 'true'  %}selected{% endif %}
     >Claimant - Reject offer - No counter offer - Allow more offers</option>
 
+
     <option  value="theclaimant=true&firstoffer=false&offeraccepted=false&makecounteroffer=false&moreoffers=false&"
              {% if  data['theclaimant'] == 'true'  and
                     data['firstoffer'] == 'false' and
@@ -325,34 +328,45 @@
                     data['moreoffers'] == 'false'  %}selected{% endif %}
     >Claimant - Reject offer - No counter offer - Don't allow more offers</option>
 
-    <option  value="firstoffer=true&theclaimant=false&respondtoclaimantnocounter=true&respondtoclaimantofferonly=false&"
-             {% if  data['theclaimant'] == 'false'  and  data['firstoffer'] == 'true'  %}selected{% endif %}
+
+    <option  value="firstoffer=true&theclaimant=false&respondtoclaimantnocounter=true&respondtoclaimantofferonly=false&offeraccepted=false"
+             {% if  data['theclaimant'] == 'false'  and
+                    data['firstoffer'] == 'true'  %}selected{% endif %}
     >Defendant - Make offer only</option>
 
-    <option  value=""
+
+    <option  value="theclaimant=false&offeraccepted=true&firstoffer=false&"
              {% if  data['theclaimant'] == 'false'  and
                     data['offeraccepted'] == 'true' and
                     data['firstoffer'] != 'true'  %}selected{% endif %}
     >Defendant - Accept offer</option>
 
-    <option  value=""
-        {% if  data['theclaimant'] == 'false'  and
-               data['offeraccepted'] == 'false'  and
-               data['firstoffer'] != 'true'  %}selected{% endif %}
-    >Defendant - Reject offer or counter offer only</option>
 
-    <option  value="theclaimant=false&offeraccepted=false&makecounteroffer=true&firstoffer=false&"
-        {% if  data['theclaimant'] == 'false'  and
-               data['offeraccepted'] == 'false'  and
-               data['makecounteroffer'] == 'true'  and
-               data['firstoffer'] != 'true'  %}selected{% endif %}
+    <option  value="theclaimant=false&offeraccepted=false&firstoffer=false&respondtoclaimantnocounter=true&respondtoclaimantofferonly=true&"
+             {% if  data['theclaimant'] == 'false'  and
+                    data['offeraccepted'] == 'false'  and
+                    data['firstoffer'] != 'false'  and
+                    data['respondtoclaimantnocounter'] == 'true'  and
+                    data['respondtoclaimantofferonly'] == 'true'  %}selected{% endif %}
+    >Defendant - Reject offer only</option>
+
+
+    <option  value="theclaimant=false&offeraccepted=false&makecounteroffer=true&firstoffer=false&respondtoclaimantnocounter=false&respondtoclaimantofferonly=false&"
+            {% if  data['theclaimant'] == 'false'  and
+                   data['offeraccepted'] == 'false'  and
+                   data['makecounteroffer'] == 'true'  and
+                   data['firstoffer'] != 'true'  and
+                   data['respondtoclaimantnocounter'] != 'true'  and
+                   data['respondtoclaimantofferonly'] != 'true' %}selected{% endif %}
     >Defendant - Reject offer - Make counter offer</option>
 
-    <option  value="theclaimant=false&offeraccepted=false&makecounteroffer=false&firstoffer=false&"
-        {% if  data['theclaimant'] == 'false'  and
-               data['offeraccepted'] == 'false'  and
-               data['makecounteroffer'] == 'false'  and
-               data['firstoffer'] != 'true'  %}selected{% endif %}
+    <option  value="theclaimant=false&offeraccepted=false&makecounteroffer=false&firstoffer=false&respondtoclaimantnocounter=false&respondtoclaimantofferonly=false&"
+            {% if  data['theclaimant'] == 'false'  and
+                   data['offeraccepted'] == 'false'  and
+                   data['makecounteroffer'] == 'false'  and
+                   data['firstoffer'] != 'true'  and
+                   data['respondtoclaimantnocounter'] != 'true'  and
+                   data['respondtoclaimantofferonly'] != 'true' %}selected{% endif %}
     >Defendant - Reject offer - Don't make counter offer</option>
 
   </select>

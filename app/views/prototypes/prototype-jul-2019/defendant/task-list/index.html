@@ -320,20 +320,25 @@
             </thead>
                 <tbody>
 
-                    <tr id="their-details">
-                      <td class="task">
-                        <a href="../dashboard/offer-agreement/make-offer?defendant=defendant&newoffer=true&fromthetasklist=true&respondtoclaimantnocounter=null">
-                          <span class="task-name">Make an offer</span>
-                        </a>
-                      </td>
-                      <td class="numeric" id="task-status" scope="col" id="col-status">
-                        {% if data.offersection=="complete" %}
-                            {% include "includes/task_status_finished.html" %}
-                        {% else %}
-                            {% include "includes/task_status_incomplete.html" %}
-                        {% endif %}
-                      </td>
-                    </tr>
+
+                    <!--  Only show offers if the defendant does part admit or full defence -->
+                    {%  if  data['response-owe']  !=  'owe-all'  %}
+                        <tr id="their-details">
+                          <td class="task">
+                            <a href="../dashboard/offer-agreement/make-offer?defendant=defendant&newoffer=true&fromthetasklist=true&respondtoclaimantnocounter=null">
+                              <span class="task-name">Make an offer</span>
+                            </a>
+                          </td>
+                          <td class="numeric" id="task-status" scope="col" id="col-status">
+                            {% if data.offersection=="complete" %}
+                                {% include "includes/task_status_finished.html" %}
+                            {% else %}
+                                {% include "includes/task_status_incomplete.html" %}
+                            {% endif %}
+                          </td>
+                        </tr>
+                    {%  endif  %}
+
 
                     <tr id="their-details">
                       <td class="task">
