@@ -22,35 +22,29 @@ Money Claims Prototype
       <form
         name="aspnetForm"
         method="post"
-        onsubmit="multiNavigation('correspondence-address', ['Yes','No'], ['email', '{% if data['defendant-type'] == 'Company' %}found-address{% else %}email{% endif %}' ]);return false;"
+        onsubmit="multiNavigation('found-address', ['Yes','No'], ['email', 'company-address' ]);return false;"
         id="aspnetForm"
         autocomplete="off">
 
         <h1 class="heading-large">
-          {% if data['defendant-type'] == 'Company' %}
-            Has the defendant asked for post to be sent to a specific address?
-          {% else %}
-            Has the defendant asked for post about the claim to be sent to a different address?
-          {% endif %}
-          
+            Do you already have an address for the company? 
         </h1>
 
         <div class="form-group">
           <div class="multiple-choice" data-target="contact-by-phone">
-            <input type="radio" id="add-correspondence" name="correspondence-address" value="Yes" {{ checked("correspondence-address", "Yes") }}>
-            <label for="add-correspondence">Yes</label>
+            <input type="radio" id="add-found" name="found-address" value="Yes" {{ checked("found-address", "Yes") }}>
+            <label for="add-found">Yes</label>
           </div>
           <div class="panel panel-border-narrow js-hidden" id="contact-by-phone">
             <div id="addressManualWrapper">
               <h2 class="heading-small">Enter the address</h2>
 
-             {% if data['defendant-type'] != 'Company' %}This is known as an 'address for service'. It cannot be their work address, or a solicitor's address.{% endif %}</p>
              {{ address.lookup('service') }}
             </div>
           </div>
            <div class="multiple-choice" data-target="correspondence-address">
-            <input type="radio" id="no-correspondence" name="correspondence-address" value="No" {{ checked("correspondence-address", "No") }} >
-            <label for="no-correspondence">No</label>
+            <input type="radio" id="no-found" name="found-address" value="No" {{ checked("found-address", "No") }} >
+            <label for="no-found">No</label>
           </div>
         </div>
 
