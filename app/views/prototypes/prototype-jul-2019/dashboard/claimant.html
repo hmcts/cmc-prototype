@@ -30,7 +30,7 @@
 
             {% if data['claimant'] == 1 or data['claimant'] == 3.1 or data['claimant'] == 3.11 or data['claimant'] == 3.3 or data['claimant'] == 3.4 or data['claimant'] == 3.5 or data['claimant'] == 3.6 or data['claimant'] == 2 or data['claimant'] == 3 or data['claimant'] == 4 or data['claimant'] == 4.01 or data['claimant'] == 4.1 or data['claimant'] == 4.11 or data['claimant'] == 4.2 or data['claimant'] == 4.3 or data['claimant'] == 5
             or data['claimant'] == 5.1 or data['claimant'] == 5.11 or data['claimant'] == 5.2 or data['claimant'] == 5.21 or data['claimant'] == 6 or data['claimant'] == 7
-             or data['claimant'] == 9 or data['claimant'] == 9.1 or data['claimant'] == 10.1 or data['claimant'] == 10.001 or data['claimant'] == 10.01
+             or data['claimant'] == 9 or data['claimant'] == 9.1 or data['claimant'] == 9.2 or data['claimant'] == 10.1 or data['claimant'] == 10.001 or data['claimant'] == 10.01
             or data['claimant'] == 10.02 or data['claimant'] == 10.03 or data['claimant'] == 10.11 or data['claimant'] == 10.4 or data['claimant'] == 10.5 or data['claimant'] == 10.6
             or data['claimant'] == 10.601 or data['claimant'] == 10.61 or data['claimant'] == 10.801 or data['claimant'] == 10.81 or data['claimant'] == 10.82 or data['claimant'] == 3.2
             or data['claimant'] == 10.83 or data['claimant'] == 10.831 or data['claimant'] == 10.832 or data['claimant'] == 10.84 or data['claimant'] == 10.85 or data['claimant'] == 10.9
@@ -317,6 +317,16 @@
                   <input type="submit" class="button" value="View and respond">
                 </form>
                 </div>
+              </div>
+
+              {% elseif data['claimant'] == 9.2 %}
+              <div class="status-block single">
+                <h2 class="heading-medium">The court ended the claim</h2>
+                <p>This is because you didn't proceed before the deadline of 4pm on {{ now | date('subtract', 2, 'days') | date }}.</p>
+                <p>You can contact us to apply for the claim to be restarted.</p>
+
+                <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=9">Download the defendant's full response</a> (PDF, 123KB).</p>
+
               </div>
 
 
@@ -1193,7 +1203,7 @@
             {% endif %}
 
             {% if data['claimant'] < 20 and data['claimant'] != 10.11 and data['claimant'] != 3.3 and data['claimant'] != 3.4 and data['claimant'] != 18 and
-            data['claimant'] != 3.2 and data['claimant'] != 10.12 and data['claimant'] != 10.01 and
+            data['claimant'] != 3.2 and data['claimant'] != 9.2 and data['claimant'] != 10.12 and data['claimant'] != 10.01 and
             data['claimant'] != 10.4 and data['claimant'] != 10.5 and data['claimant'] != 10.81 and data['claimant']
             != 10.82 and data['claimant'] != 10.83 and data['claimant'] != 11.1011 and data['claimant'] != 17 and data['claimant'] !=
             4.2 and data['claimant'] != 4.3 and data['claimant'] != 11.5 and data['claimant'] != 11.51 and data['claimant'] != 11.6 and data['claimant'] != 11.61 and data['claimant'] != 10 and data['claimant'] != 11
@@ -2629,6 +2639,7 @@
     <option value="9" {% if data['claimant'] == 9 %}selected{% endif %}>Dispute claim (offline DQs)</option>
     <option value="9.1" {% if data['claimant'] == 9.1 %}selected{% endif %}>Dispute claim + mediation</option>
     <option value="10" {% if data['claimant'] == 10 %}selected{% endif %}>Dispute claim + offer made  </option>
+    <option value="9.2" {% if data['claimant'] == 9.2 %}selected{% endif %}>Dispute claim - past deadline</option>
     <option>------- Claimant responses ----------</option>
     <option value="10.1" {% if data['claimant'] == 10.1 %}selected{% endif %}>Accepted repayment plan - settlement (claimant/court plan)</option>
     <option value="10.001" {% if data['claimant'] == 10.001 %}selected{% endif %}>Accepted repayment plan - settlement (def's plan)</option>
