@@ -22,12 +22,12 @@ Money Claims Prototype
       <form
         name="aspnetForm"
         method="post"
-        onsubmit="multiNavigation('correspondence-address', ['Yes','No'], ['email', '{% if data['defendant-type'] == 'Company' %}found-address{% else %}email{% endif %}' ]);return false;"
+        onsubmit="multiNavigation('correspondence-address', ['Yes','No'], ['email', '{% if data['defendant-type'] == 'Company' or data['defendant-type'] == 'Organisation' %}found-address{% else %}email{% endif %}' ]);return false;"
         id="aspnetForm"
         autocomplete="off">
 
         <h1 class="heading-large">
-          {% if data['defendant-type'] == 'Company' %}
+          {% if data['defendant-type'] == 'Company' or data['defendant-type'] == 'Organisation' %}
             Has the defendant asked for post to be sent to a specific address?
           {% else %}
             Has the defendant asked for post about the claim to be sent to a different address?
