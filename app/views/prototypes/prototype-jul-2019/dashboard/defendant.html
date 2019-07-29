@@ -38,8 +38,11 @@
                 and data['defendant'] != 3.9031 and data['defendant'] != 4.01 and data['defendant'] != 3.2 and data['defendant'] != 4.02
                 and data['defendant'] != 4.1 and data['defendant'] != 4.2 and data['defendant'] != 5.0111 and data['defendant'] != 5.021
                 and data['defendant'] != 5.3001 and data['defendant'] != 5.301 and data['defendant'] != 5.302 and data['defendant'] != 5.52
-                and data['defendant'] != 13) %}
-                <li role="presentation"><a href="#settle-out-of-court" role="tab" tabindex="-1" aria-controls="settle-out-of-court">Settle out of court</a></li>
+                and data['defendant'] != 13  and data['defendant'] != 15.04  and data['defendant'] != 15.05) %}
+                <li role="presentation">
+                  <a href="#settle-out-of-court" role="tab" tabindex="-1"
+                     aria-controls="settle-out-of-court" id="settle">Settle out of court</a>
+                </li>
             {% endif %}
 
             <li role="presentation"><a href="#contact" role="tab" tabindex="-1" aria-controls="history">Claimant's details</a></li>
@@ -1339,6 +1342,68 @@
                 <!--<p><a href="../defendant/correspondence/forms/claim-form-defendant?check=9">Download your response</a>-->
                   <!--(PDF, 123KB)</p>-->
               <!--</div>-->
+
+
+
+
+              <!--  NEW SETTLEMENT OFFERS STUFF  -->
+
+                <!--  15.01 Next step tab - You’ve made an offer, now wait  -->
+                {% elseif data['defendant'] == 15.01 %}
+                    <div class="status-block single">
+                        <p>[ Any dashboard state ]</p>
+                        <br>
+                        <h2 class="heading-medium">Your offer</h2>
+                        <p>You've made an out of court offer.  We'll contact you if Jan Clark responds.</p>
+                    </div>
+
+
+                <!--  15.02 Next step tab - You’ve been sent an offer, View offer  -->
+                {% elseif data['defendant'] == 15.02 %}
+                    <div class="status-block single">
+                        <p>[ Any dashboard state ]</p>
+                        <br>
+                        <h2 class="heading-medium">New offer</h2>
+                        <p>Mary Richards has sent you an out of court offer.</p>
+                        <p><a class="button" onclick="$('#settle').click()">View offer</a></p>
+                    </div>
+
+
+                <!--  15.03 Next step tab - Jan Clark has responded to your offer, View offer  -->
+                {% elseif data['defendant'] == 15.03 %}
+                    <div class="status-block single">
+                        <p>[ Any dashboard state ]</p>
+                        <br>
+                        <h2 class="heading-medium">Response to your offer</h2>
+                        <p>Mary Richards has responded to your offer. </p>
+                        <p><a class="button" onclick="$('#settle').click()">View offer</a></p>
+                    </div>
+
+
+                <!--  15.04 Next step tab - Offer Accepted  -->
+                {% elseif data['defendant'] == 15.04 %}
+                    <div class="status-block single">
+                        <h2 class="heading-medium">This claim is settled</h2>
+                        <p>Mary Richard's accepted your out of court offer.</p>
+                        <p>You've both signed a settlement agreement.</p>
+                        <p>The agreement explains what can happen if either party breaks the terms.</p>
+                        <p><a
+                          href="../defendant/correspondence/forms/agreement?check=2">Download the agreement</a> (PDF, 123KB)</p>
+                    </div>
+
+
+                <!--  15.05 Next step tab - Offer Accepted  -->
+                {% elseif data['defendant'] == 15.05 %}
+                    <div class="status-block single">
+                      <h2 class="heading-medium">This claim is settled</h2>
+                      <p>You accepted Mary Richard's out of court offer.</p>
+                      <p>You've both signed a settlement agreement.</p>
+                      <p>The agreement explains what can happen if either party breaks the terms.</p>
+                      <p><a
+                        href="../defendant/correspondence/forms/agreement?check=2">Download the agreement</a> (PDF, 123KB)</p>
+                    </div>
+
+
 
 
               <!--   SETTLEMENT AGREEMENT  -  BOTH SIGNED    -->
@@ -3841,23 +3906,77 @@
             </div>
           </div>
 
+
+
+          <!--  STAB FOR SETTLE OUT OF COURT -  DEFENDANT  -->
+
           <div class="tabs-panel" id="settle-out-of-court" role="tabpanel" aria-hidden="true">
 
-            <div class="tabs-panel-inner text" tabindex="0">
 
-              <h2 class="heading-medium">You can still settle out of court</h2>
+            <!--  15.11 Offers tab - Make offer  -->
+            <!--    -->
+            {% if data['defendant'] == 15.11 %}
+                <div class="tabs-panel-inner text" tabindex="0">
+                    <h2 class="heading-medium">You can still settle out of court</h2>
+                    <p>If the case isn't resolved through mediation, you can still settle it without going to court.</p>
+                    <p>For example you could offer to fix goods you sold the claimant or suggest a payment.</p>
+                    <p>You can avoid getting a County Court Judgment if the claimant accepts your offer.</p>
+                    <p><a href="offer-agreement/make-offer?theclaimant=false&defendant=defendant&returntonine=true&newoffer=true&firstoffer=true&fromtheclaimanttasklist=false&respondtoclaimantofferonly=false&" class="button">Make an offer to settle</a></p>
+                </div>
 
-              <p>If the case isn't resolved through mediation, you can still settle it without going to court.</p>
 
-              <p>For example you could offer to fix goods you sold the claimant or suggest a payment.</p>
+            <!--  15.12 Offers tab - Wait for response to your offer  -->
+            {% elseif data['defendant'] == 15.12    or  data['defendant'] == 15.01  %}
+                <div class="tabs-panel-inner text" tabindex="0">
+                    <h2 class="heading-medium">Wait for a response</h2>
+                    <p>You've made an offer.  We'll contact you if Mary Richards responds.</p>
+                </div>
 
-              <p>You can avoid getting a County Court Judgment if the claimant accepts your offer.</p>
 
-              <p><a href="offer-agreement/make-offer?theclaimant=false&defendant=defendant&returntonine=true&newoffer=true&firstoffer=true&fromtheclaimanttasklist=false&respondtoclaimantofferonly=false&" class="button">Make an offer to settle</a></p>
+            <!--  15.13  Offers tab - New offer received  -->
+            {% elseif data['defendant'] == 15.13    or  data['defendant'] == 15.02  %}
+                <div class="tabs-panel-inner text" tabindex="0">
+                    <h2 class="heading-medium">You've been sent an offer</h2>
+                    <p>Mary Richards has send you an out of court offer.</p>
+                    <p><a class="button" >View offer</a></p>
+                </div>
 
 
-            </div>
+            <!--  15.14 Offers tab - Rejected - No more offers - NOT USED FOR CLAIMANT -->
+            <!-- CLAIMANT CAN MAKE OFFER ANY TIME DEFENDNT REJECTS OFFER  -->
+
+
+            <!--  15.15 Offers tab - Rejected - make new offer  -->
+            {% elseif data['defendant'] == 15.15  or  data['defendant'] == 15.02 %}
+                <div class="tabs-panel-inner text" tabindex="0">
+                    <h2 class="heading-medium">Your offer was rejected</h2>
+                    <p>Mary Richards rejected your out of court offer.</p>
+                    <p><a class="button">Make an offer</a></p>
+                </div>
+
+
+            <!--  15.16 Offers tab - Rejected - respond to counter offer  -->
+            {% elseif data['defendant'] == 15.16 %}
+                <div class="tabs-panel-inner text" tabindex="0">
+                    <h2 class="heading-medium">Your offer was rejected</h2>
+                    <p>Mary Richards rejected your out of court offer and made a counter offer.</p>
+                    <p><a class="button">Respond to offer</a></p>
+                </div>
+
+
+            {% else %}
+                <div class="tabs-panel-inner text" tabindex="0">
+                    <h2 class="heading-medium">You can still settle out of court</h2>
+                    <p>If the case isn't resolved through mediation, you can still settle it without going to court.</p>
+                    <p>For example you could offer to fix goods you sold the claimant or suggest a payment.</p>
+                    <p>You can avoid getting a County Court Judgment if the claimant accepts your offer.</p>
+                    <p><a href="offer-agreement/make-offer?theclaimant=false&defendant=defendant&returntonine=true&newoffer=true&firstoffer=true&fromtheclaimanttasklist=false&respondtoclaimantofferonly=false&" class="button">Make an offer to settle</a></p>
+                </div>
+
+            {% endif %}
           </div>
+
+
 
 
         <div class="tabs-panel" id="contact" role="tabpanel">
@@ -4026,6 +4145,7 @@
 
 
     <option>------ Offers and mediation -------</option>
+    <!--
     <option value="10" {% if data['defendant'] == 10 %}selected{% endif %}>9. Offer sent to claimant </option>
     <option value="13" {% if data['defendant'] == 13 %}selected{% endif %}>10. Offer rejected by the claimant - no more offers</option>
     <option value="13.01" {% if data['defendant'] == 13.01 %}selected{% endif %}>Defendant rejected claimants counter offer - no more offers</option>
@@ -4034,6 +4154,21 @@
     <option value="13.3" {% if data['defendant'] == 13.3 %}selected{% endif %}>Offer rejected by the claimant - Respond to counter offer and make offer</option>
     <option value="15" {% if data['defendant'] == 15 %}selected{% endif %}>11. Counter sign offer </option>
     <option value="16.1" {% if data['defendant'] == 16.1 %}selected{% endif %}>Offer accepted and signed by claimant</option>
+    -->
+
+    <option value="15.01" {% if data['defendant'] == 15.01 %}selected{% endif %}>Next steps tab - You’ve made an offer, now wait</option>
+    <option value="15.02" {% if data['defendant'] == 15.02 %}selected{% endif %}>Next steps tab - You’ve been sent an offer, View offer</option>
+    <option value="15.03" {% if data['defendant'] == 15.03 %}selected{% endif %}>Next steps tab - Jan Clark/Mary Richards has responded to your offer, View offer</option>
+    <option value="15.04" {% if data['defendant'] == 15.04 %}selected{% endif %}>Next steps tab - Offer accepted by defendant</option>
+    <option value="15.05" {% if data['defendant'] == 15.05 %}selected{% endif %}>Next steps tab - Accepted defendant's offer</option>
+
+    <option value="15.11" {% if data['defendant'] == 15.11 %}selected{% endif %}>Offers tab - Make offer</option>
+    <option value="15.12" {% if data['defendant'] == 15.12 %}selected{% endif %}>Offers tab - Wait for response to your offer</option>
+    <option value="15.13" {% if data['defendant'] == 15.13 %}selected{% endif %}>Offers tab - New offer received</option>
+    <option value="15.15" {% if data['defendant'] == 15.15 %}selected{% endif %}>Offers tab - Rejected - make new offer</option>
+    <option value="15.16" {% if data['defendant'] == 15.16 %}selected{% endif %}>Offers tab - Rejected - respond to counter offer</option>
+
+
 
 
     <option>------ Settled -------</option>
@@ -4063,14 +4198,25 @@
   </select>
 </form>
 {% endblock %}
+
+
 {% block extra_js_1 %}
 <script src="/public/javascripts/jquery.tabs.js"></script>
 <script src="/public/javascripts/jquery-ui.js"></script>
 <script type="text/javascript">
   window.moj.init()
 
-  {% if data['defendant'] == 10 %}
-        $('#settle-out-of-court').click();
+  {% if data['defendant'] == 10 or
+        data['defendant'] == 15.11 or
+        data['defendant'] == 15.12 or
+        data['defendant'] == 15.13 or
+        data['defendant'] == 15.14 or
+        data['defendant'] == 15.15 or
+        data['defendant'] == 15.16 or
+        data['defendant'] == 15.17 or
+        data['defendant'] == 15.18
+  %}
+        $('#settle').click();
   {% endif %}
 
   $(function () {
