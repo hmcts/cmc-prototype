@@ -28,15 +28,17 @@ Money Claims Prototype
             {% elif data['offeraccepted'] == 'true'  %}
                 <h1 class="bold-large">You’ve settled out of court</h1>
                 <br>
+                <!--
                 <p><strong class="bold">{{ now | date( "D MMMM YYYY" ) }}</strong></p>
                 <p>
                   <a class="font-medium" href='../../../defendant/correspondence/forms/agreement?check=2'
                      style="color: #FFFFFF">Download agreement as a PDF</a>
                 </p>
+                -->
             {% elif data['offeraccepted'] == 'false'  %}
                 <h1 class="bold-large">You’ve rejected the offer
                 {% if data['makecounteroffer'] == 'true'  %}
-                    and made a counteroffer
+                    and made a counter offer
                 {% endif %}
                 </h1>
                 <br>
@@ -112,7 +114,6 @@ Money Claims Prototype
 
 
             <!--  CLAIMANT -->
-
             {% elif  data['firstoffer'] == 'true'  %}
                 <p>We will contact you if Mary Richards responds to your offer.</p>
                 <p>Continue with your claim.</p>
@@ -124,11 +125,11 @@ Money Claims Prototype
 
             {% elif data['offeraccepted'] == 'false'  %}
 
-                <!-- counteroffer -->
+                <!-- counter offer -->
                 {% if data['makecounteroffer'] == 'true'  %}
                       <p>We will contact you if Mary Richards responds to your offer.</p>
                       <p>This doesn't stop you from continuing with your claim.</p>
-                <!-- No counteroffer  -->
+                <!-- No counter offer  -->
                 {% elif data['makecounteroffer'] == 'false'  %}
                       <p>Continue with your claim.</p>
                 {% endif %}
@@ -137,7 +138,7 @@ Money Claims Prototype
                 {% if data['moreoffers'] == 'true'  %}
                     <p>You may receive another offer from Mary Richards.</p>
                 {% elif data['moreoffers'] == 'false'  %}
-                    <p>You won't receive any more offers.</p>
+                    <p>You won't receive any more offers from Mary Richards.</p>
                 {% endif %}
 
                 <p><a class="button" href='../../claimant?claimant=11.1'>Go to your account</a></p>
@@ -187,28 +188,100 @@ Money Claims Prototype
   <select id="claimant2" name="claimant2" onchange="window.location.href='?'+this.value">
 
     <option value="type=0&">Choose</option>
-    <option value="type=1&" {% if data['type'] == 1 %}selected{% endif %}>1. Claimant signed agreement</option>
-    <option value="type=2&" {% if data['type'] == 2 %}selected{% endif %}>2. Defendant countersigned agreement</option>
+    <option value="type=1&newoffer=false&" {% if data['type'] == 1 %}selected{% endif %}>OLD - 1. Claimant signed agreement</option>
+    <option value="type=2&newoffer=false&" {% if data['type'] == 2 %}selected{% endif %}>OLD - 2. Defendant countersigned agreement</option>
 
-    <option value="newoffer=true&offeraccepted=true&defendant=claimant&"
-            {% if  data['newoffer'] == 'true'  and  data['offeraccepted'] == 'true'  and  data['defendant'] == 'claimant' %}selected{% endif %}
-            >New offers - Claimant - Offer accepted</option>
 
-    <option value="newoffer=true&offeraccepted=false&defendant=claimant&makecounteroffer=true&moreoffers=true&"
-            {% if  data['newoffer'] == 'true'  and  data['offeraccepted'] == 'false'  and   data['makecounteroffer'] == 'true' and   data['moreoffers'] == 'true'  and data['defendant'] == 'claimant' %}selected{% endif %}
-            >New offers - Claimant - Rejected offer - Counterclaim - Allow another offer</option>
+    <option  value="newoffer=true&firstoffer=false&theclaimant=true&offeraccepted=true&respondtoclaimantnocounter=false&firstoffer=false&"
+             {% if  data['theclaimant'] == 'true'  and
+                    data['offeraccepted'] == 'true'  %}selected{% endif %}
+                    >NEW - Claimant - Accept offer</option>
 
-    <option value="newoffer=true&offeraccepted=false&defendant=claimant&makecounteroffer=true&moreoffers=false&"
-            {% if  data['newoffer'] == 'true'  and  data['offeraccepted'] == 'false'  and   data['makecounteroffer'] == 'true' and   data['moreoffers'] == 'false'  and data['defendant'] == 'claimant' %}selected{% endif %}
-            >New offers - Claimant - Rejected offer - Counterclaim - Not another offer</option>
 
-    <option value="newoffer=true&offeraccepted=false&defendant=claimant&makecounteroffer=false&moreoffers=true&"
-            {% if  data['newoffer'] == 'true'  and  data['offeraccepted'] == 'false'  and   data['makecounteroffer'] == 'false' and   data['moreoffers'] == 'true'  and data['defendant'] == 'claimant' %}selected{% endif %}
-    >New offers - Claimant - Rejected offer - No counterclaim - Allow another offer</option>
+    <option  value="newoffer=true&firstoffer=true&theclaimant=true&offeraccepted=false&"
+             {% if  data['theclaimant'] == 'true'  and
+                    data['firstoffer'] == 'true'  and
+                    data['offeraccepted'] != 'true'  %}selected{% endif %}
+                    >NEW - Claimant - Make offer only</option>
 
-    <option value="newoffer=true&offeraccepted=false&defendant=claimant&makecounteroffer=false&moreoffers=false&"
-            {% if  data['newoffer'] == 'true'  and  data['offeraccepted'] == 'false'  and   data['makecounteroffer'] == 'false' and   data['moreoffers'] == 'false'  and data['defendant'] == 'claimant' %}selected{% endif %}
-    >New offers - Claimant - Rejected offer - No counterclaim - Not another offer</option>
+
+    <option  value="newoffer=true&theclaimant=true&firstoffer=false&offeraccepted=false&makecounteroffer=true&moreoffers=true&"
+             {% if  data['theclaimant'] == 'true'  and
+                    data['firstoffer'] == 'false' and
+                    data['offeraccepted'] == 'false' and
+                    data['makecounteroffer'] == 'true' and
+                    data['moreoffers'] == 'true'  %}selected{% endif %}
+                    >NEW - Claimant - Reject offer - Make counter offer - Allow more offers</option>
+
+
+    <option  value="newoffer=true&theclaimant=true&firstoffer=false&offeraccepted=false&makecounteroffer=true&moreoffers=false&"
+             {% if  data['theclaimant'] == 'true'  and
+                    data['firstoffer'] == 'false' and
+                    data['offeraccepted'] == 'false' and
+                    data['makecounteroffer'] == 'true' and
+                    data['moreoffers'] == 'false'  %}selected{% endif %}
+                    >NEW - Claimant - Reject offer - Make counter offer - Don't allow more offers</option>
+
+
+    <option  value="newoffer=true&theclaimant=true&firstoffer=false&offeraccepted=false&makecounteroffer=false&moreoffers=true&"
+             {% if  data['theclaimant'] == 'true'  and
+                    data['firstoffer'] == 'false' and
+                    data['offeraccepted'] == 'false' and
+                    data['makecounteroffer'] == 'false' and
+                    data['moreoffers'] == 'true'  %}selected{% endif %}
+                    >NEW - Claimant - Reject offer - No counter offer - Allow more offers</option>
+
+
+    <option  value="newoffer=true&theclaimant=true&firstoffer=false&offeraccepted=false&makecounteroffer=false&moreoffers=false&"
+             {% if  data['theclaimant'] == 'true'  and
+                    data['firstoffer'] == 'false' and
+                    data['offeraccepted'] == 'false' and
+                    data['makecounteroffer'] == 'false' and
+                    data['moreoffers'] == 'false'  %}selected{% endif %}
+                    >NEW - Claimant - Reject offer - No counter offer - Don't allow more offers</option>
+
+
+    <option  value="newoffer=true&firstoffer=true&theclaimant=false&respondtoclaimantnocounter=true&respondtoclaimantofferonly=false&offeraccepted=false"
+             {% if  data['theclaimant'] == 'false'  and
+                    data['firstoffer'] == 'true'  %}selected{% endif %}
+                    >NEW - Defendant - Make offer only</option>
+
+
+    <option  value="newoffer=true&theclaimant=false&offeraccepted=true&firstoffer=false&"
+             {% if  data['theclaimant'] == 'false'  and
+                    data['offeraccepted'] == 'true' and
+                    data['firstoffer'] != 'true'  %}selected{% endif %}
+                    >NEW - Defendant - Accept offer</option>
+
+
+    <option  value="newoffer=true&theclaimant=false&offeraccepted=false&firstoffer=false&respondtoclaimantnocounter=true&respondtoclaimantofferonly=true&makecounteroffer=false&"
+             {% if  data['theclaimant'] == 'false'  and
+                    data['offeraccepted'] == 'false'  and
+                    data['firstoffer'] == 'false'  and
+                    data['makecounteroffer'] != 'true'   and
+                    data['respondtoclaimantnocounter'] == 'true'  and
+                    data['respondtoclaimantofferonly'] == 'true'  %}selected{% endif %}
+                    >NEW - Defendant - Reject offer only</option>
+
+
+    <option  value="newoffer=true&theclaimant=false&offeraccepted=false&makecounteroffer=true&firstoffer=false&respondtoclaimantnocounter=false&respondtoclaimantofferonly=false&"
+             {% if  data['theclaimant'] == 'false'  and
+                    data['offeraccepted'] == 'false'  and
+                    data['makecounteroffer'] == 'true'  and
+                    data['firstoffer'] != 'true'  and
+                    data['respondtoclaimantnocounter'] != 'true'  and
+                    data['respondtoclaimantofferonly'] != 'true' %}selected{% endif %}
+                    >NEW - Defendant - Reject offer - Make counter offer</option>
+
+
+    <option  value="newoffer=true&theclaimant=false&offeraccepted=false&makecounteroffer=false&firstoffer=false&respondtoclaimantnocounter=false&respondtoclaimantofferonly=false&"
+             {% if  data['theclaimant'] == 'false'  and
+                    data['offeraccepted'] == 'false'  and
+                    data['makecounteroffer'] == 'false'  and
+                    data['firstoffer'] != 'true'  and
+                    data['respondtoclaimantnocounter'] != 'true'  and
+                    data['respondtoclaimantofferonly'] != 'true' %}selected{% endif %}
+                    >NEW - Defendant - Reject offer - Don't make counter offer</option>
 
 
   </select>
@@ -220,7 +293,7 @@ Money Claims Prototype
     {% if data['defendant'] == "defendant_signed" %}
 
     {% else %}
-
+    <!--
           <div id="daysPassing" data-dayspassurl="../../new-dashboard/claimant/email3"
                data-dayspasstimetoprompt="5000" data-dayspassdays="3" style="position: absolute;
             height: 100%;
@@ -245,7 +318,7 @@ Money Claims Prototype
                 </span>
             </span>
           </a>
-
+    -->
     {% endif %}
 
 {% endblock %}
