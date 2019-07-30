@@ -13,7 +13,8 @@ Check your answers
   <h1 class="heading-large">
     Check your evidence uploads before submitting
   </h1>
-  <table class="check-your-answers">
+
+  <table class="check-your-answers uploads">
     <thead>
       <tr>
         <th colspan="2">
@@ -24,35 +25,77 @@ Check your answers
         </th>
       </tr>
     </thead>
+
     <tbody>
-        <tr>
-          <td>
-            Uploaded evidence
-          </td>
-          <td>
-            <ul>
-              <li><a href="#">Emails.pdf</a></li>
-              <li><a href="#">Photo 1.jpg</a></li>
-              <li><a href="#">Photo 2.jpg</a></li>
-              <li><a href="#">Contract.pdf</a></li>
-            </ul></td>
-          <td class="change-answer">
-         <a href="upload">
-          Change
-        </a>
-          </td>
-        </tr>
+      <tr>
+        <td>
+          File 1
+        </td>
+        <td>
+          <a href="#">Emails.pdf</a>
+          <br />You can see the emails dated {{ date | date('subtract', 123, 'days') | date }} and {{ date | date('subtract', 134, 'days') | date }} that they claimed not to receive.
+        </td>
+        <td class="change-answer no-border">
+          <a href="upload">Change</a>
+        </td>
+      </tr>
 
-  </tbody>
-</table>
+      <tr>
+        <td>
+          File 2
+        </td>
+        <td>
+          <a href="#">Photo 1.jpg</a>
+          <br />The photos show that the roof was not adequately supported.
+        </td>
+        <td class="change-answer no-border"></td>
+      </tr>
 
-<br />
+      <tr>
+        <td>
+          File 3
+        </td>
+        <td>
+          <a href="#">Photo 2.jpg</a>
+        </td>
+        <td class="change-answer no-border"></td>
+      </tr>
+
+      <tr>
+        <td>
+          File 4
+        </td>
+        <td>
+          <a href="#">Contract.pdf</a>
+          <br />The signed contract shows the materials we agreed to use.
+        </td>
+        <td class="change-answer"></td>
+      </tr>
+
+    </tbody>
+  </table>
+
+  <br/>
 
 
-<form method="get" action="confirmation-page" class="form">
-  <div class="form-group">
-    <button id="submit" class="button" >Submit evidence</button>
-  </div>
+  {% if data['defaultccj'] == 'true' %}
+      {% if  data['aftercontact'] == 'true' %}
+          <p><a class="button"  href="../../applications-and-judgments/set-aside-default-ccj/task-list-after-contact?evidencesectionaftercontact=complete&scenario=ccjsetaside">Continue</a></p>
+      {% else %}
+          <p><a class="button" href="/prototypes/prototype-jul-2019/dashboard/applications-and-judgments/set-aside-default-ccj/task-list?evidencesection=complete">Continue</a></p>
+      {% endif %}
+
+  {% else %}
+      <form method="get" action="confirmation-page" class="form">
+        <div class="form-group">
+          <button id="submit" class="button" >Submit evidence</button>
+        </div>
+      </form>
+  {% endif %}
+
+
+
 {% include 'prototypes/features-to-be-built/includes/contact.html' %}
+
 </main>
 {% endblock %}
