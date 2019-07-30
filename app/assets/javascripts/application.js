@@ -594,7 +594,7 @@ function showSelectAddress( strPrefix ) {
 
   function showAbroadAddress( strPrefix ) {
     $('#' + strPrefix + '_street-label').html('Address');
-    $('#' + strPrefix + '_postcode-label').html('Postal/ZIP code');
+    $('#' + strPrefix + '_postcode-label').html('Postcode');
     $('#' + strPrefix + '_manual-address').show();
     $('#' + strPrefix + '_country').attr('type', 'text');
     $('#' + strPrefix + '_manual-address').addClass( 'abroad' );
