@@ -58,7 +58,11 @@ Money Claims Prototype
                   <label for="radio-yes" data-target="yes-info">Yes</label>
                 </div>
                 <div class="panel panel-border-narrow js-hidden" id="accept">
-                  <p>Continue to sign a settlement agreement.</p>
+                    {% if data['theclaimant'] == 'true' %}
+                    <p>You'll need to sign a settlement agreement to formalise it. If Mary Richards breaks the agreement you'll be able to resume the claim.</p>
+                    {% else %}
+                    <p>You'll need to sign a settlement agreement to formalise it.</p>
+                    {% endif %}
                 </div>
 
                 {% if data['respondtoclaimantofferonly'] == 'false'  %}
@@ -75,7 +79,7 @@ Money Claims Prototype
 
 
                 <div class="panel panel-border-narrow js-hidden" id="counter">
-                  <p>If you reject the offer you can't mention it in court because XYZZZZZZZZZZZZ.</p>
+                  <p>The offer is private between you and {% if data['theclaimant'] == 'true' %}Mary Richards{% else %}Jan Clark{% endif %}. If you reject it you can't tell a judge about it if there's a hearing.</p>
                 </div>
               </fieldset>
               <input id="advert-option-next--button" type="submit" value="Continue" class="button"
@@ -121,7 +125,11 @@ Money Claims Prototype
                 <label for="radio-yes" data-target="yes-info">Yes</label>
               </div>
               <div class="panel panel-border-narrow js-hidden" id="accept">
-                <p>You'll be able to make a legal agreement between you and Jan Clark.</p>
+                  {% if data['theclaimant'] == 'true' %}
+                  <p>You'll need to sign a settlement agreement to formalise it. If Mary Richards breaks the agreement you'll be able to resume the claim.</p>
+                  {% else %}
+                  <p>You'll need to sign a settlement agreement to formalise it.</p>
+                  {% endif %}
               </div>
 
               <div class="multiple-choice" data-target="decline">
@@ -130,7 +138,7 @@ Money Claims Prototype
               </div>
               <div class="multiple-choice" data-target="counter">
                 <input id="radio-counter" type="radio" name="radio-indent-group" value="Counter_defendant">
-                <label for="radio-counter" data-target="no-info">Make a counter offer</label>
+                <label for="radio-counter" data-target="no-info">I want to make my own offer</label>
               </div>
             </fieldset>
 
@@ -141,8 +149,8 @@ Money Claims Prototype
 
       {% else %}
           <h1 class="heading-large">
-            <span class="heading-secondary">Defendant's response </span>
-            Mary Richard's offer
+            <span class="heading-secondary">Defendant's response</span>
+            Their offer
           </h1>
           <p class="">
           </p>
@@ -201,14 +209,18 @@ Money Claims Prototype
                               <label for="radio-yes" data-target="yes-info">Yes</label>
                             </div>
                             <div class="panel panel-border-narrow js-hidden" id="accept">
-                              <p>Continue to make a settlement agreement between you and the defendant.</p>
+                                {% if data['theclaimant'] == 'true' %}
+                                <p>You'll need to sign a settlement agreement to formalise it. If Mary Richards breaks the agreement you'll be able to resume the claim.</p>
+                                {% else %}
+                                <p>You'll need to sign a settlement agreement to formalise it.</p>
+                                {% endif %}
                             </div>
                             <div class="multiple-choice" data-target="counter">
                               <input id="radio-counter" type="radio" name="radio-indent-group" value="No">
                               <label for="radio-counter" data-target="no-info">No</label>
                             </div>
                             <div class="panel panel-border-narrow js-hidden" id="counter">
-                              <p>If you reject the offer you can't mention it in court because XYZZZZZZZZZZZZ.</p>
+                              <p>The offer is private between you and {% if data['theclaimant'] == 'true' %}Mary Richards{% else %}Jan Clark{% endif %}. If you reject it you can't tell a judge about it if there's a hearing.</p>
                             </div>
                           </fieldset>
                           <input id="advert-option-next--button" type="submit" value="Continue" class="button"
@@ -232,14 +244,18 @@ Money Claims Prototype
                     <label for="radio-yes" data-target="yes-info">Yes</label>
                   </div>
                   <div class="panel panel-border-narrow js-hidden" id="accept">
-                    <p>You can make a legal agreement between you and Mary Richards.</p>
+                      {% if data['theclaimant'] == 'true' %}
+                      <p>You'll need to sign a settlement agreement to formalise it. If Mary Richards breaks the agreement you'll be able to resume the claim.</p>
+                      {% else %}
+                      <p>You'll need to sign a settlement agreement to formalise it.</p>
+                      {% endif %}
                   </div>
                   <div class="multiple-choice" data-target="reject-offer">
                     <input id="radio-no" type="radio" name="radio-indent-group" value="reject-offer">
                     <label for="radio-no" data-target="no-info">No</label>
                   </div>
-                  <div class="panel panel-border-narrow js-hidden" id="reject-offer">
-                    <p>If you reject the offer you can't mention it in court because XYZZZZZZZZZZZZ.</p>
+                  <div class="panel panel-border-narrow js-hidden" id="counter">
+                    <p>The offer is private between you and {% if data['theclaimant'] == 'true' %}Mary Richards{% else %}Jan Clark{% endif %}. If you reject it you can't tell a judge about it if there's a hearing.</p>
                   </div>
                     <!--  <div class="multiple-choice" data-target="counter">
                     <input id="radio-counter" type="radio" name="radio-indent-group" value="Counter">
@@ -262,25 +278,29 @@ Money Claims Prototype
                   <fieldset>
                     <div class="multiple-choice" data-target="accept">
                       <input id="radio-yes" type="radio" name="radio-indent-group" value="Yes">
-                      <label for="radio-yes" data-target="yes-info">Yes, I accept their offer</label>
+                      <label for="radio-yes" data-target="yes-info">Yes</label>
                     </div>
                     <div class="panel panel-border-narrow js-hidden" id="accept">
-                      <p>Continue to make a settlement agreement between you and the defendant.</p>
+                        {% if data['theclaimant'] == 'true' %}
+                        <p>You'll need to sign a settlement agreement to formalise it. If Mary Richards breaks the agreement you'll be able to resume the claim.</p>
+                        {% else %}
+                        <p>You'll need to sign a settlement agreement to formalise it.</p>
+                        {% endif %}
                     </div>
-                    <div class="multiple-choice" data-target="counter">
-                      <input id="radio-counter" type="radio" name="radio-indent-group" value="Counter">
-                      <label for="radio-counter" data-target="no-info">No, I want to make a counter offer</label>
-                    </div>
-                    <div class="panel panel-border-narrow js-hidden" id="counter">
-                     <p>Continue to make a counter offer. If the defendant agrees you can make an agreement to settle the claim.</p>
-                   </div>
                    <div class="multiple-choice" data-target="decline">
                     <input id="radio-no" type="radio" name="radio-indent-group" value="Decline">
-                    <label for="radio-no" data-target="no-info">No, I don't accept their offer</label>
+                    <label for="radio-no" data-target="no-info">No</label>
                   </div>
                   <div class="panel panel-border-narrow js-hidden" id="decline">
-                   <p>Continue to consider free mediation.</p>
+                   <p>We'll ask you to consider free telephone mediation.</p>
                  </div>
+                 <div class="multiple-choice" data-target="counter">
+                   <input id="radio-counter" type="radio" name="radio-indent-group" value="Counter">
+                   <label for="radio-counter" data-target="no-info">I want to make my own offer</label>
+                 </div>
+                 <!-- <div class="panel panel-border-narrow js-hidden" id="counter">
+                  <p>Continue to make a counter offer. If the defendant agrees you can make an agreement to settle the claim.</p>
+                </div> -->
                </fieldset>
                <input id="advert-option-next--button" type="submit" value="Continue" class="button"
                data-ignore-double-submit="true">

@@ -20,9 +20,9 @@ Money Claims Prototype
 
             {% if  data['firstoffer'] == 'true'  %}
                 {% if data['theclaimant'] == 'true'  %}
-                    <h1 class="bold-large">Your offer has been sent</h1>
+                    <h1 class="bold-large">You've made an offer to settle out of court</h1>
                 {% else %}
-                    <h1 class="bold-large">Your offer has been sent</h1>
+                    <h1 class="bold-large">You've made an offer to settle out of court</h1>
                 {% endif %}
                 <br>
             {% elif data['offeraccepted'] == 'true'  %}
@@ -38,7 +38,7 @@ Money Claims Prototype
             {% elif data['offeraccepted'] == 'false'  %}
                 <h1 class="bold-large">You’ve rejected the offer
                 {% if data['makecounteroffer'] == 'true'  %}
-                    and made a counter offer
+                    and made your own offer
                 {% endif %}
                 </h1>
                 <br>
@@ -86,13 +86,14 @@ Money Claims Prototype
             {% if data['theclaimant'] == 'false'  %}
 
                 {% if data['offeraccepted'] == 'true' %}
-                      <p>You will need to follow the terms of the agreement.</p>
+                      <p>You need to follow the terms of the agreement.</p>
+                      <p>If you break the terms Jan Clark will be able to resume their claim against you.</p>
                       <p><a href="../defendant/correspondence/forms/agreement?check=2">Download the agreement</a> (PDF, 123KB)</p>
                       <p><a class="button" href='../../defendant?defendant=16&'>Go to your account</a></p>
 
                 {% elif  data['firstoffer'] == 'true'  %}
                     <!--  Just an offer made by the defendant -->
-                    <p>We will contact you if Jan Clark responds to your offer.</p>
+                    <p>Jan Clark can accept or reject your offer. We'll contact you if they respond.</p>
                     <p><a class="button" href='../../defendant?defendant=15.01'>Go to your account</a></p>
 
                 {% elif data['respondtoclaimantofferonly'] == 'true' %}
@@ -103,7 +104,7 @@ Money Claims Prototype
                 <!-- when there is a coutneroffer from the claimant which is accepted by the defendant -->
                 {% elif data['respondtoclaimantnocounter'] == 'false' %}
                       {% if data['makecounteroffer'] == 'true'  %}
-                          <p>We will contact you if Jan Clark responds to your offer.</p>
+                          <p>Jan Clark can accept or reject your offer. We'll contact you if they respond.</p>
                           <p><a class="button" href='../../defendant?defendant=15.01'>Go to your account</a></p>
                       {% else %}
                           <p>The court will review the case. We'll contact you to tell you what to do next.</p>
@@ -114,33 +115,37 @@ Money Claims Prototype
 
 
             <!--  CLAIMANT -->
-            {% elif  data['firstoffer'] == 'true'  %}
-                <p>We will contact you if Mary Richards responds to your offer.</p>
-                <p>Continue with your claim.</p>
+            {% elif data['firstoffer'] == 'true'  %}
+                <p>We'll contact you if Mary Richards responds to your offer.</p>
+                <p>You can still continue with your claim.</p>
                 <p><a class="button" href='../../claimant?claimant=11.7'>Go to your account</a></p>
 
             {% elif data['offeraccepted'] == 'true'  %}
                 <p>You've both signed a settlement agreement.</p>
+                {% if data['theclaimant'] == 'true' %}
+                <p>If Mary Richards breaks the terms you'll be able to resume your claim.</p>
+                {% else %}
+                <p>If you break the terms Jan Clark will be able to resume their claim against you.</p>
+                {% endif %}
                 <p><a class="button" href='../../claimant?claimant=17'>Go to your account</a></p>
 
             {% elif data['offeraccepted'] == 'false'  %}
 
                 <!-- counter offer -->
                 {% if data['makecounteroffer'] == 'true'  %}
-                      <p>We will contact you if Mary Richards responds to your offer.</p>
-                      <p>This doesn't stop you from continuing with your claim.</p>
-                <!-- No counter offer  -->
-                {% elif data['makecounteroffer'] == 'false'  %}
-                      <p>Continue with your claim.</p>
+                      <p>Mary Richards can accept or reject your offer. We'll contact you if they respond.</p>
                 {% endif %}
 
                 <!--  with and without futher offers  -->
                 {% if data['moreoffers'] == 'true'  %}
-                    <p>You may receive another offer from Mary Richards.</p>
+                      <p>Mary Richards can make you another offer.</p>
                 {% elif data['moreoffers'] == 'false'  %}
-                    <p>You won't receive any more offers from Mary Richards.</p>
+                      <p>You won't receive any more offers from Mary Richards.</p>
                 {% endif %}
 
+
+
+                <p>You can still continue with your claim.</p>
                 <p><a class="button" href='../../claimant?claimant=11.1'>Go to your account</a></p>
 
             {% endif %}
@@ -149,13 +154,18 @@ Money Claims Prototype
 
 
         {% elif data['defendant'] == "defendant" or data['type'] == 1 %}
-            <p>Mary Richards will also be asked to sign. The agreement settles the claim once you've both signed.</p>
+            <p>We'll ask Jan Clark to sign. If they do the agreement will become a legal contract.</p>
             {% include "includes/survey.html" %}
 
             <p><a class="button" href='../../home?dashboard=1.17'>Go to your account</a></p>
 
         {% elseif data['defendant'] == "defendant_signed" or data['type'] == 2 %}
             <p>You've both signed a settlement agreement.</p>
+            {% if data['theclaimant'] == 'true' %}
+            <p>If Mary Richards breaks the terms you'll be able to resume your claim.</p>
+            {% else %}
+            <p>If you break the terms Jan Clark will be able to resume their claim against you.</p>
+            {% endif %}
             {% include "includes/survey.html" %}
 
             <!--<p><a class="button" href='../../home?dashboard=2.16'>Go to your account</a></p>-->
@@ -163,11 +173,17 @@ Money Claims Prototype
 
 
         {% elseif data['defendant'] == "claimant_signed" %}
-            <p>The defendant Mary Richards and you have both signed.</p>
+        <p>You've both signed a settlement agreement.</p>
+        {% if data['theclaimant'] == 'true' %}
+        <p>If Mary Richards breaks the terms you'll be able to resume your claim.</p>
+        {% else %}
+        <p>If you break the terms Jan Clark will be able to resume their claim against you.</p>
+        {% endif %}
             {% include "includes/survey.html" %}
 
         {% else %}
-            <p>Mary Richards will also be asked to sign.</p>
+            <p>We'll ask Mary Richards to sign the agreement. If they do it will become a legal contract.</p>
+              <p>If Mary Richards breaks the terms you'll be able to resume your claim.</p>
             {% include "includes/survey.html" %}
 
             <!--<p><a class="button" href='../../home?dashboard=1.17'>Go to your account</a></p>-->
