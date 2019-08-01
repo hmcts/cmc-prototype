@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="2" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <a href="#" onclick="history.go(-1)" class="link-back">Back</a>
+
+        <form method="post" action="contact-defendant" class="form">
+
+          <h1 class="heading-large">Are there dates in the next 6 weeks when you can’t go to a private hearing?</h1>
+
+          <div class="form-group">
+            <fieldset>
+              <div class="multiple-choice" data-target="dates">
+                <input id="radio-self-yes" type="radio" name="self" value="yes">
+                <label for="radio-self-yes">Yes</label>
+              </div>
+              <div class="multiple-choice">
+                <input id="radio-self-no" type="radio" name="self" value="no">
+                <label for="radio-self-no">No</label>
+              </div>
+            </fieldset>
+          </div>
+
+
+          <div id="dates" class="js-hidden">
+            <h2 class="heading-medium">Select the dates you can’t go to a hearing</h2>
+            <p>Only select dates of important events, such as medical appointments or other court hearings.</p>
+            <div id="date-picker" class="datepicker"></div>
+            <h2 class="heading-medium">Dates selected</h2>
+            <dl id="dates-cant-attend-list" class="add-another-list">
+            </dl>
+          </div>
+
+          <div class="form-group">
+            <input type="submit" class="button" value="Save and continue">
+          </div>
+        </form>
+
+
+    </div>
+  {% include 'prototypes/prototype-aug-2019/includes/contact.html' %}
+</main>
+
+<script src="/public/javascripts/bootstrap-datepicker1.8.0.min.js"></script>
+<script src="/public/javascripts/lodash-4.17.0.js"></script>
+<script src="/public/javascripts/datepicker.js"></script>
+
+
+{% endblock %}

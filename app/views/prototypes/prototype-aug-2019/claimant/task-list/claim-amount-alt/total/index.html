@@ -1,0 +1,334 @@
+{% extends "layout_task-list.html" %}
+
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+
+{% block home_link %} ../../task-list {% endblock %}
+{% block proposition_header %}
+{% set my_account="1" %}
+
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+
+
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+
+      <a href="#" class="link-back">Back</a>
+
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      {% if data['amount-owed'] %}
+      <form method="post" action="../../../defendant/task-list/counter-claim/counter-proceed" class="form">
+
+      {% elseif data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}
+
+      <form method="post" action="{{ data.return_page if data.return_page | length > 0 else '../task-list' }}" class="form">
+        {% else %}
+
+      <form method="post" action="../../task-list" class="form">
+
+          {% endif %}
+
+          {{formData | safe}}
+
+          <h1 class="heading-large">
+            {% if data['counter'] == 'FULL-COUNTER' or data['counter'] == 'SET-OFF-COUNTER' %}Making a counterclaim{% else %}Total amount you're claiming{% endif %}
+          </h1>
+
+          {% if data['counter'] == 'FULL-COUNTER' %}
+
+          <p>Claiming money from someone who claims against you is called a 'counterclaim'.</p>
+
+          <h2 class="heading-medium">Counterclaim fee</h2>
+          <p>You need to pay a £70 claim fee to make a £{{ data['counter-amount']|numeral }} counterclaim.</p>
+
+          {% elseif data['counter'] == 'SET-OFF-COUNTER' %}
+
+          <p>Claiming money from someone who claims against you is called a 'counterclaim'.</p>
+          <h2 class="heading-medium">Counterclaim fee</h2>
+          <p>You need to pay a £70 fee to make a counterclaim. The fee is based on the difference between your counterclaim amount and what you admitted you owe.</p>
+
+          {% endif %}
+
+          <p>
+
+          <fieldset>
+            <legend class="visuallyhidden">
+              Total amount you're claiming
+            </legend>
+
+            <table class="table-form" style="margin-bottom: 20px;"{% if data['counter'] == 'FULL-COUNTER' or data['counter'] == 'SET-OFF-COUNTER' %} id="counter-table"{% endif %}>
+              <caption class="visuallyhidden"></caption>
+              <tfoot>
+                <tr>
+                  <th scope="col" style="border-bottom: none">Total claim amount</th>
+                  <td class="numeric last" style="border-bottom: none"><span id="totalAmountDisplay" class="bold-medium">£1583</span></td>
+                </tr>
+              </tfoot>
+              <tbody>
+                <tr>
+                  <th scope="row">Claim amount</th>
+                  <td class="numeric last">
+                    <label class="visuallyhidden" for="amount">Claim amount</label>
+                    <span class="font-small">  £{{data['totalSum'] or data['counter-amount']|numeral }}</span>
+                  </td>
+                </tr>
+                {% if data['radio_group2']=="interest_yes" %}
+
+                <tr>
+                  <th scope="row">Interest to date</th>
+                  <td class="numeric last">
+                    <label class="visuallyhidden" for="amount">:  </label>
+
+                    <span id="interestValue" class="font-small">£14</span>
+
+                  </td>
+                </tr>
+                {% endif %}
+
+                {% if data['counter'] == 'FULL-COUNTER' or data['counter'] == 'SET-OFF-COUNTER' or not data['counter'] %}
+                <tr id="claim-fee">
+                  <th scope="row">Claim fee</th>
+                  <td class="numeric last">
+                    <label class="visuallyhidden" for="amount">Claim fee</label>
+
+                    <span id="interestValue" class="font-small">£70</span>
+
+                  </td>
+                </tr>
+                {% endif %}
+
+            </tbody>
+          </table>
+
+        {% if data['counter'] == 'FULL-COUNTER' or data['counter'] == 'SET-OFF-COUNTER' or not data['counter'] %}
+        <p>If you settle out of court we won't refund your claim fee. You can ask the defendant to pay back your claim fee as part of the settlement.</p>
+
+        {% endif %}
+
+        {% if ( not data['counter'] ) %}
+        <table style="margin-top: 40px; margin-bottom: 20px">
+          <thead>
+          <tr>
+            <th scope="col">Other fees</th>
+            <th class="numeric" scope="col"></th>
+          </tr>
+          </thead>
+          <tbody>
+
+          <tr>
+            <td>Hearing fee</td>
+            <td class="numeric">£115</td>
+          </tr>
+
+          </tbody>
+        </table>
+
+        <p style="margin-bottom: 50px">You don't have to pay a hearing fee unless the claim goes to a hearing.</p>
+
+        {% endif %}
+
+
+        {% if data['counter'] == 'FULL-COUNTER' or data['counter'] == 'SET-OFF-COUNTER' or not data['counter'] %}
+
+        <details>
+          <summary>
+            {% if ( not data['counter'] ) %}
+                How these fees are calculated
+            {% else %}
+                How this fee is calculated
+            {% endif %}
+          </summary>
+          <div class="panel">
+
+
+            <table class="expandable-demo">
+              <p>The fee is based on the amount you're claiming, including any interest.
+              </p>
+              <thead>
+              <tr>
+                <th scope="col">Claim amount</th>
+                <th scope="col">Claim fee</th>
+                {% if ( not data['counter'] ) %}
+                <th scope="col">Hearing fee</th>
+                {% endif %}
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <td>
+                  <ul class="list">
+                    <li>£0.01 to £300</li>
+                  </ul>
+                </td>
+                <td>£25</td>
+                {% if ( not data['counter'] ) %}
+                <td>£25</td>
+                {% endif %}
+              </tr>
+              <tr>
+                <td>
+                  <ul class="list">
+                    <li>£300.01 to £500</li>
+                  </ul>
+                </td>
+                <td>£35</td>
+                {% if ( not data['counter'] ) %}
+                <td>£55</td>
+                {% endif %}
+              </tr>
+              <tr>
+                <td>
+                  <ul class="list">
+                    <li>£500.01 to £1,000</li>
+                  </ul>
+                </td>
+                <td>£60</td>
+                {% if ( not data['counter'] ) %}
+                <td>£80</td>
+                {% endif %}
+              </tr>
+              <tr>
+                <td>
+                  <ul class="list">
+                    <li>£1,000.01 to £1,500</li>
+                  </ul>
+                </td>
+                <td>£70</td>
+                {% if ( not data['counter'] ) %}
+                <td>£115</td>
+                {% endif %}
+              </tr>
+              <tr>
+                <td>
+                  <ul class="list">
+                    <li>£1,500.01 to £3,000</li>
+                  </ul>
+                </td>
+                <td>£105</td>
+                {% if ( not data['counter'] ) %}
+                <td>£170</td>
+                {% endif %}
+              </tr>
+              <tr>
+                <td>
+                  <ul class="list">
+                    <li>£3,000.01 to £5,000</li>
+                  </ul>
+                </td>
+                <td>£185</td>
+                {% if ( not data['counter'] ) %}
+                <td>£335</td>
+                {% endif %}
+              </tr>
+              <tr>
+                <td>
+                  <ul class="list">
+                    <li>£5,000.01 to £10,000</li>
+                  </ul>
+                </td>
+                <td>£410</td>
+                {% if ( not data['counter'] ) %}
+                <td>£335</td>
+                {% endif %}
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </details>
+
+        {% endif %}
+
+          <input type="hidden" name="claim_amount" value="complete">
+          <input type="hidden" id="totalClaimAmount" name="totalClaimAmount">
+
+        </fieldset>
+
+        {% if data['counter'] == 'FULL-COUNTER' or data['counter'] == 'SET-OFF-COUNTER' %}
+
+        <h1 class="heading-medium">
+          Do you want to make this counterclaim?
+        </h1>
+
+        <div class="form-group">
+          <fieldset class="inline">
+
+            <div class="multiple-choice">
+              <input id="radio-yes" type="radio" name="counterclaim-proceed" value="yes">
+              <label for="radio-yes" data-target="yes-info">Yes</label>
+            </div>
+
+            <div class="multiple-choice">
+              <input id="radio-no" type="radio" name="counterclaim-proceed" value="no">
+              <label for="radio-no" data-target="no-info">No</label>
+            </div>
+
+          </fieldset>
+        </div>
+
+        {% endif %}
+
+        <!-- Application to set aside so not normal defence -->
+        {% if data['cancelccj'] == 'true' %}
+            <p><a class="button" href="../../../dashboard/applications-and-judgments/set-aside-default-ccj/task-list?how_much_paid=complete&whydontowe=complete">Continue</a></p>
+        {% else %}
+            {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}
+                <div class="form-group">
+                  <input type="submit" class="button" value="Save and continue"/>
+                </div>
+
+
+                <a href="{{ data.return_page if data.return_page | length > 0 else '../task-list' }}">Cancel</a>
+
+                {% else %}
+                <div class="form-group">
+                  <input type="submit" class="button" value="Save and continue"/>
+                </div>
+            {% endif %}
+
+        {% endif %}
+      </form>
+
+    </div>
+  </div>
+{% include 'prototypes/prototype-aug-2019/includes/contact.html' %}
+</main>
+
+
+<script type="text/javascript">
+  (function numericInputsSum(targetSpanId, claimAmount, interestValue) {
+
+    claimAmount = parseInt(claimAmount.replace(',', '')) + interestValue;
+
+    var x = '£' + parseFloat(claimAmount, 10).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString();
+
+    if (x.endsWith('.00')) {
+      x = x.replace('.00', '');
+    }
+
+    $('#' + targetSpanId).text(x);
+    $('#totalClaimAmount').val(x)
+
+
+  })('totalAmountDisplay', "{{data['totalSum'] or data['counter-amount']}}", {{data['radio_group2']=="interest_no"}} || {{data['radio_group2']!="interest_yes"}} ? {% if data['amount-owed'] %} 0 : 14 {% else %} 70 : 84{% endif %})
+</script>
+
+<style>
+#counter-table th {
+  font-weight: 400;
+}
+
+#counter-table #totalAmountDisplay {
+  font-weight: 400;
+}
+
+#counter-table #claim-fee th, #counter-table #claim-fee td span {
+  font-weight: 600;
+}
+</style>
+
+{% endblock %}

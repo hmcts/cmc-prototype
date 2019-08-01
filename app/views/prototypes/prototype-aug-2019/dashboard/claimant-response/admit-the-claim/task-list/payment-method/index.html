@@ -1,0 +1,129 @@
+{% extends "layout_task-list.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block home_link %} ../task-list {% endblock %}
+{% block proposition_header %}
+{% set my_account="1" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <a href="#" class="link-back">Back</a>
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <h1 class="heading-large">
+        How they want to pay
+      </h1>
+
+
+      {% if data['radio-pay-group'] =='Set-date' %}
+      <p>Mary Richards has offered to pay you in full by {{ now | date( 'add', 3, 'months') | date }}.</p>
+      {% else %}
+      <table class="instalment-table">
+        <tbody>
+          <tr class="">
+            <td class="">
+              Regular payments of
+            </td>
+            <td class="">
+              £75
+            </td>
+            <td class="">
+            </td>
+          </tr>
+          <tr class="">
+            <td class="">
+              Frequency of payments
+            </td>
+            <td class="">
+              Weekly
+            </td>
+            <td class="">
+            </td>
+          </tr>
+          <tr class="">
+            <td class="">
+              First payment on
+            </td>
+            <td >
+              1 {{ now |  date("add", 1, "month") | date( "MMMM YYYY" ) }}
+            </td>
+            <td>
+            </td>
+          </tr>
+          <tr>
+            <td class="">
+              Last payment on
+            </td>
+            <td class="">
+              1 {{ now |  date("add", 13, "month") | date( "MMMM YYYY" ) }}
+            </td>
+            <td class=" ">
+            </td>
+          </tr>
+           <tr>
+              <td class="">
+                Length of repayment plan
+              </td>
+              <td class="">
+                1 year
+              </td>
+              <td class=" ">
+              </td>
+            </tr>
+        </tbody>
+      </table>
+
+      {% endif %}
+
+      <h2 class="heading-medium">Do you accept the repayment plan?</h2>
+          {% if data['determination'] == "1" %}
+            <form
+              name="aspnetForm"
+              method="post"
+
+              onsubmit="multiNavigation('radio-indent-group', ['reject_stop_claim', 'accept_stop_claim'], ['../task-list?determined_figure=reject&', '../task-list?determined_figure=accept&']);return false;"
+
+              id="aspnetForm"
+              autocomplete="off">
+
+           {% else %}
+            <form
+              name="aspnetForm"
+              method="post"
+
+              onsubmit="multiNavigation('radio-indent-group', ['reject_stop_claim', 'accept_stop_claim'], ['counter-offer', '../task-list']);return false;"
+
+              id="aspnetForm"
+              autocomplete="off">
+      {% endif %}
+
+
+      <div class="form-group">
+        <fieldset>
+          <div class="multiple-choice">
+            <input id="radio-yes" type="radio" name="radio-indent-group" value="accept_stop_claim">
+            <label for="radio-yes" data-target="yes-info">Yes</label>
+          </div>
+          <div class="multiple-choice" data-target="reject-offer">
+            <input id="radio-no" type="radio" name="radio-indent-group" value="reject_stop_claim">
+            <label for="radio-no">
+              No - I'll suggest my own
+              {% if data['defendant'] == 'org' %}
+              <p class="panel  panel-border-narrow js-hidden" id="reject-offer">The defendant should have sent you their financial details. You'll need to send them to us. We'll issue a CCJ against them. The terms of the CCJ will depend on whether we believe they can afford your suggested repayment plan.</p>
+              {% endif %}
+            </label>
+          </div>
+        </fieldset>
+        <input type="hidden" name="payment_method" value="complete">
+        <input id="advert-option-next--button" type="submit" value="Save and continue" class="button"
+        data-ignore-double-submit="true">
+      </div>
+    </form>
+  </div>
+</div>
+{% include 'prototypes/prototype-aug-2019/includes/contact.html' %}
+</main>
+{% endblock %}

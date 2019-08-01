@@ -1,0 +1,77 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="2" %}
+
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+
+
+<main id="content" role="main">
+
+  {% include "includes/phase_banner_beta.html" %}
+
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <a href="#" class="link-back">Back</a>
+
+      <div class="govuk-box-highlight">
+        {% if data['accept-settlement'] == 'Yes' %}
+        <h1 class="bold-large">You've both signed a settlement agreement</h1>
+        <p style="margin-top: 24px"><a href="../../../defendant/correspondence/forms/agreement?check=3" class="font-medium" style="color: #FFFFFF;">Download settlement agreement</a> (PDF, 123KB)</p>
+        {% else %}
+        <h1 class="bold-large">You've rejected the settlement agreement</h1>
+        {% endif %}
+      </div>
+
+
+      {% if data['accept-settlement'] == 'Yes' %}
+      <p>The agreement says you'll repay £1,500 by
+      {% if data['set-month'] %}
+        {{ ( data['set-month'] + ' ' + data['set-day'] + ' ' + data['set-year']) | date('D MMMM YYYY') }}{% else %}{{ now | date('add', 3, 'months') | date('D MMMM YYYY') }}{% endif %}.</p>
+
+        <p>The claimant can't request a County Court Judgment against you unless you break the terms.</p>
+      {% endif %}
+
+      <h2 class="heading-medium">What happens next</h2>
+
+
+      {% if data['accept-settlement'] == 'Yes' %}
+      <p><a href="../../../dashboard/party-details/claimant">Contact Jan Clark</a> if you need their payment details.</p>
+      <p>Make sure you get receipts for any payments.</p>
+
+      {% else %}
+
+      <p>The claimant can request a County Court Judgment (CCJ) against you. A CCJ would order you to repay the money in line with the terms of the agreement.</p>
+      <p>If they request a CCJ, you can ask a judge to consider changing the repayment plan, based on your financial details.</p>
+      <p>The court has reviewed the plan and believes you can afford it, so a judge may not change it.</p>
+      <p>We'll email you when the claimant responds.</p>
+      {% endif %}
+
+
+      {% include "includes/survey.html" %}
+      <p><a href="../../../dashboard/defendant?defendant={% if data['accept-settlement'] == 'No' %}5.3002{%elseif data['claimant-payment-request'] == 'Set-date' %}5.01{% elseif defendant == '5.3' or defendant == '5.31' %}5.32{% else %}5.2{% endif %}" class="button">Go to your account</a></p>
+
+    {% include "includes/contact.html" %}
+    </div>
+
+
+
+</div>
+{% include 'prototypes/features-to-be-built/includes/contact.html' %}
+</main>
+
+
+<form method="post"  action="#" class="form" style="position: absolute;">
+  <select id="check2" name="check2" onchange="window.location.href='?accept-settlement='+this.value">
+    <option  value="0" >Choose</option>
+    <option  value="Yes" {% if data['accept-settlement'] == 'Yes' %}selected{% endif %}>Settlement accepted</option>
+    <option  value="No" {% if data['accept-settlement'] == 'No' %}selected{% endif %}>Settlement rejected</option>
+  </select>
+</form>
+{% endblock %}

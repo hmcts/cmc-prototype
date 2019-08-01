@@ -1,0 +1,204 @@
+{% extends "layout_task-list.html" %}
+{% block page_title %}
+Check your answers
+{% endblock %}
+{% block home_link %} ../task-list {% endblock %}
+{% block proposition_header %}
+{% set my_account="1" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <h1 class="heading-large">
+    Check your answers
+  </h1>
+  <form method="get" action="../../confirmation-page?" class="form">
+    <table class="check-your-answers">
+      <thead>
+      <tr>
+        <th colspan="2">
+          <h2 id='cd' class="heading-medium">
+            Your response
+          </h2>
+        </th>
+        <th>
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>
+          Do you agree the defendant has paid £{{ data['owe-amount'] or '1,430' }}?
+        </td>
+        <td>
+          {%if data.radio_select_group2=="Yes" %}
+          Yes
+          {%elif data.radio_select_group2=="No" %}
+          No
+          {% else %}
+          No
+          {% endif %}
+        </td>
+        <td class="change-answer">
+          <a
+            href="../task-list/claim-details/reason?return_page={{ '../../task-list/claim-details/check-your-answers' | urlencode }}">
+            Change <span class="visuallyhidden">Why you believe you're owed the money</span>
+          </a>
+        </td>
+      </tr>
+      {%if data.radio_select_group2=="No" %}
+      <tr>
+        <td>
+          Reason for rejecting their response
+        </td>
+        <td>
+          {% if data['reject_response']!="" %}
+          {{data['reject_response']}}
+          {% else %}
+          They haven't paid and they never will
+          {% endif %}
+        </td>
+        <td class="change-answer">
+          <a
+            href="../task-list/claim-details/reason?return_page={{ '../../task-list/claim-details/check-your-answers' | urlencode }}">
+            Change <span class="visuallyhidden">Why you believe you're owed the money</span>
+          </a>
+        </td>
+      </tr>
+      <table class="check-your-answers">
+        <thead>
+        <tr>
+          <th colspan="2">
+            <h2 class="heading-medium">
+              Free telephone mediation
+            </h2>
+          </th>
+          <th>
+          </th>
+        </tr>
+        </thead>
+        <td>
+          Opt out?
+        </td>
+        <td>
+          {% if data['resolve_dispute']=="complete" %}
+          No
+          {% elseif data['meditation_ineligible']=="complete" %}
+          Yes
+          {% endif %}
+        </td>
+        <td class="change-answer">
+          <a
+            href="../task-list/request-mediation?return_page={{ '../../task-list' | urlencode }}">
+            Change <span class="visuallyhidden">Why you believe you're owed the money</span>
+          </a>
+        </td>
+        {% if data['resolve_dispute']=="complete" %}
+        <tr>
+          <td>
+            Agree to all statements
+          </td>
+          <td>
+            Yes, I agree
+          </td>
+          <td class="change-answer">
+            <a href="../task-list/request-mediation/statements-all?return_page={{ '../../task-list' | urlencode }}">
+              Change <span class="visuallyhidden">Name</span>
+            </a>
+          </td>
+        </tr>
+
+        <tr>
+          <td>Contact number
+          </td>
+          <td>
+            {{ data['phone-claimant'] or '07123456789'}}
+          </td>
+          <td class="change-answer">
+            <a href="../task-list/request-mediation/previous-phone?return_page={{ '../../task-list' | urlencode }}">
+              Change <span class="visuallyhidden">Name</span>
+            </a>
+          </td>
+        </tr>
+        {% else %}
+        {% endif %}
+        </tbody>
+      </table>
+      {% endif %}
+
+
+      {% include "prototypes/prototype-aug-2019/includes/dq-check.html" %}
+
+      {%if data.radio_select_group2=="Yes" %}
+      <tr>
+        <td>
+          Do you want to settle the claim for the £{{ data['owe-amount'] or '1,430' }}?
+        </td>
+        <td>
+          {%if data.radio_select_group=="Yes" %}
+          Yes
+          {%elif data.radio_select_group=="No" %}
+          No
+          {% else %}
+          Yes
+          {% endif %}
+        </td>
+        <td class="change-answer">
+          <a href="#">
+            Change <span class="visuallyhidden">Why you believe you're owed the money</span>
+          </a>
+        </td>
+      </tr>
+      {% endif %}
+      {% if data.radio_select_group=="No" %}
+      <tr>
+        <td>
+          Reason for rejecting their response
+        </td>
+        <td>
+          {% if data['reject_response']!="" %}
+          {{data['reject_response']}}
+          {% else %}
+          I want the remaining amount of the claim.
+          {% endif %}
+        </td>
+        <td class="change-answer">
+          <a
+            href="../task-list/claim-details/reason?return_page={{ '../../task-list/claim-details/check-your-answers' | urlencode }}">
+            Change <span class="visuallyhidden">Why you believe you're owed the money</span>
+          </a>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Will you try free mediation?
+        </td>
+        <td>
+          {%if data.radio_indent_group2=="accept-mediation" %}
+          Yes
+          {%elif data.radio_indent_group2=="decline-mediation" %}
+          No
+          {% else %}
+          No
+          {% endif %}
+        </td>
+        <td class="change-answer">
+          <a
+            href="../task-list/claim-details/reason?return_page={{ '../../task-list/claim-details/check-your-answers' | urlencode }}">
+            Change <span class="visuallyhidden">Why you believe you're owed the money</span>
+          </a>
+        </td>
+      </tr>
+      {% else %}
+      {% endif %}
+      </tbody>
+    </table>
+    <fieldset></fieldset>
+    <div class="form-group">
+      <button id="submit" class="button">Submit response</button>
+    </div>
+  </form>
+  {% include 'prototypes/prototype-aug-2019/includes/contact.html' %}
+</main>
+{% endblock %}

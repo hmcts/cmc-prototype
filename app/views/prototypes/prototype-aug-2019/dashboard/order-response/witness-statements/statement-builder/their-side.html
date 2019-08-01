@@ -1,0 +1,179 @@
+
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <a href="#" class="link-back">Back</a>
+
+      <form method="get" autocomplete="off" action="other">
+
+        <h1 class="heading-large">Dissprove the defendant’s response</h1>
+
+        <div class="description-block">
+          <h2 class="heading-small">Their defence</h2>
+
+          <p>This claim is about building works.</p>
+          <p>Mary Richards and I signed a contract for building works on my roof. The work on the roof was completed but there was a problem with one section. I asked Mary Richards to get the problem fixed, but didn't get a reply.</p>
+          <p class="show-more">I'll have to get another builder to rectify the problem which will cost me £1,430.</p>
+          <p class="show-more">Therefore, I'm making a money claim for £1,500 to compensate for the extra money I am going to need to spend.</p>
+          <a href="#" class="toggle">Show more</a>
+          <a href="#" class="toggle" style="display: none">Show less</a>
+
+          <br />
+          <br />
+          <br />
+          <h2 class="heading-small">Their timeline</h2>
+          <div class="form-fields">
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">Date</th>
+                  <th scope="col">What happened</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>03/11/2017</td>
+                  <td>I contacted {% if data.counterclaim=="true" %}Jan Clark{%else%}Mary Richards{% endif %} to discuss building works on our roof.</td>
+                </tr>
+                <tr>
+                  <td>06/11/2017</td>
+                  <td>We agreed what work should be done and signed a contract.</td>
+                </tr>
+                <tr>
+                  <td>30/11/2017</td>
+                  <td>The work started on the roof.</td>
+                </tr>
+                <tr class="show-more">
+                  <td>21/12/2017</td>
+                  <td>The work on the roof was completed but I noticed that there was a problem with one
+                  section</a>.
+                </td>
+                </tr>
+                <tr  class="show-more">
+                  <td>27/12/2017</td>
+                  <td>I sent an email to Mary Richards and asked them to get the problem fixed.</td>
+                </tr>
+                <tr class="show-more">
+                  <td>15/01/2018</td>
+                  <td>I hadn't had a reply so I told them I would be making a money claim.</td>
+                </tr>
+              <tr class="show-more">
+                <td >27/12/2017</td>
+                <td>I sent an email to Mary Richards and asked them to get the problem fixed.</td>
+              </tr>
+              <tr class="show-more">
+                <td>15/01/2018</td>
+                <td>I hadn't had a reply so I told them I would be making a money claim.</td>
+              </tr>
+              <tr >
+                <td class="no-border">
+                  <a href="#" class="toggle">Show more</a>
+                  <a href="#" class="toggle" style="display: none">Show less</a>
+                </td>
+                <td class="no-border"></td>
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+      </div>
+
+        <h1 class="heading-medium">
+          How does the evidence you've provided, and any other facts, dissprove the defendant's version of the claim?
+        </h1>
+
+        <p>When referencing your evidence, you should use the appropriate exhibit reference. For example, <i>"…in the signed contract (Exhibit A5)…"</i></p>
+        <p>When stating any other facts, you should provide your sources.</p>
+
+        <details>
+          <summary>Review your evidence and references</summary>
+          <table>
+            <tbody>
+              <tr>
+                <td style="width: 100px; font-weight: bold">
+                  Exhibit A1
+                </td>
+                <td>
+                  <a href="#">Emails.pdf</a>
+                  <br />You can see the emails dated {{ date | date('subtract', 123, 'days') | date }} and {{ date | date('subtract', 134, 'days') | date }} that they claimed not to receive.
+                </td>
+              </tr>
+
+              <tr>
+                <td style="width: 100px; font-weight: bold">
+                  Exhibit A2
+                </td>
+                <td>
+                  <a href="#">Photo 1.jpg</a>
+                  <br />The photos show that the roof was not adequately supported.
+                </td>
+                <td class="change-answer no-border"></td>
+              </tr>
+
+              <tr>
+                <td style="width: 100px; font-weight: bold">
+                  Exhibit A3
+                </td>
+                <td>
+                  <a href="#">Photo 2.jpg</a>
+                </td>
+                <td class="change-answer no-border"></td>
+              </tr>
+
+              <tr>
+                <td style="width: 100px; font-weight: bold">
+                  Exhibit A4
+                </td>
+                <td>
+                  <a href="#">Contract.pdf</a>
+                  <br />The signed contract shows the materials we agreed to use.
+                </td>
+                <td class="change-answer"></td>
+              </tr>
+
+            </tbody>
+          </table>
+
+        </details>
+
+        <details>
+          <summary>View witness statement guidance</summary>
+
+          <p>A good witness statement:</p>
+          <ul class="list list-bullet">
+            <li>states facts, not opinions</li>
+            <li>clearly reference supporting evidence or sources of facts</li>
+            <li>follows a chronological order of events</li>
+            <li>is clear, concise and to the point</li>
+            <li>covers all the differences between your view of the case and that of the other party</li>
+            <li>avoids or explains jargon</li>
+            <li>answers any questions a judge might have about your case</li>
+            <li>is truthful and not misleading</li>
+          </ul>
+        
+        </details>
+
+        <p>
+          <textarea style="height: 400px" id="response"></textarea>
+        </p>
+
+      <div class="form-group">
+        <input type="submit" class="button" value="Save and continue"/>
+      </div>
+
+    </form>
+  </div>
+</div>
+{% include 'prototypes/prototype-aug-2019/includes/contact.html' %}
+</main>
+{% endblock %}

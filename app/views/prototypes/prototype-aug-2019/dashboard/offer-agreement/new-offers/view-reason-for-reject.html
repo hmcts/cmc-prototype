@@ -1,0 +1,57 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="2" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <a href="#" class="link-back">Back</a>
+
+
+      <h1 class="heading-large">
+        Reason your offer was rejected
+      </h1>
+
+
+      <!-- when there is a coutner offer to respond to -->
+      {% if data['respondtoclaimantnocounter'] == 'false'   or  data['theclaimant'] == 'true'  and data['defendantmadeoffer'] ==  'true' %}
+          <form action="../view-offer" method="get" class="form">
+      {% else %}
+          <form action="../make-offer" method="get" class="form">
+      {% endif %}
+
+
+        <div class="form-group">
+          <fieldset>
+            <p class="heading-small">Their reason:</p>
+            {% if  data['theclaimant'] == 'true'  %}
+                <p>"I'm booked up every day for the next 2 weeks."</p>
+            {% else %}
+                {% if data['usertestingparttwo'] == 'true' %}
+                    <p>"I want it fixed this week as I'm going away soon. It's not good enough you coming to fix the roof in September."</p>
+                {% else %}
+                    <p>"I want it fixed by next week as I'm going away. It's not good enough you coming to fix the roof in August."</p>
+                {% endif %}
+            {% endif %}
+
+
+            <div class="form-group">
+               <input type="submit" class="button" value="Continue"/>
+            </div>
+
+          </fieldset>
+        </div>
+
+      </form>
+    </div>
+  </div>
+  {% include 'prototypes/prototype-aug-2019/includes/contact.html' %}
+</main>
+
+{% endblock %}

@@ -1,0 +1,63 @@
+{% extends "layout_task-list.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block home_link %} ../../task-list {% endblock %}
+{% block proposition_header %}
+{% set my_account="1" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% import 'prototypes/prototype-aug-2019/includes/address.html' as address %}
+
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}
+  {% else %}
+  <a href="#" class="link-back">Back</a>
+  {% endif %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+      <form
+        name="aspnetForm"
+        method="post"
+        onsubmit="multiNavigation('found-address', ['Yes','No'], ['email', 'company-address' ]);return false;"
+        id="aspnetForm"
+        autocomplete="off">
+
+        <h1 class="heading-large">
+            Have you got an address for the {% if data['defendant-type'] == 'Company' %}company{% elseif data['defendant-type'] == 'Organisation' %}organisation{% endif %}?
+        </h1>
+
+        <p>If not, we'll show you how to find one.</p>
+
+        <div class="form-group">
+          <div class="multiple-choice" data-target="contact-by-phone">
+            <input type="radio" id="add-found" name="found-address" value="Yes" {{ checked("found-address", "Yes") }}>
+            <label for="add-found">Yes</label>
+          </div>
+          <div class="panel panel-border-narrow js-hidden" id="contact-by-phone">
+            <div id="addressManualWrapper">
+              <h2 class="heading-small">Enter the address</h2>
+
+             {{ address.lookup('service') }}
+            </div>
+          </div>
+           <div class="multiple-choice" data-target="correspondence-address">
+            <input type="radio" id="no-found" name="found-address" value="No" {{ checked("found-address", "No") }} >
+            <label for="no-found">No</label>
+          </div>
+        </div>
+
+
+    <div class="form-group">
+      <input type="submit" class="button" value="Save and continue"/>
+    </div>
+
+  </form>
+</div>
+</div>
+{% include 'prototypes/prototype-aug-2019/includes/contact.html' %}
+</main>
+{% endblock %}

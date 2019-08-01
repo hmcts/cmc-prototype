@@ -1,0 +1,95 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+	{% include "includes/phase_banner_beta.html" %}
+	<div class="grid-row">
+		<div class="column-two-thirds">
+			<div class="govuk-box-highlight">
+
+				{% if data['redeterminationrequested'] != 'true' %}
+	          <!--  If any plan is accepted  -->
+
+	        <h1 class="bold-large">You've accepted the new repayment plan</h1>
+
+	      {% else %}
+	          <!-- If redetermination is requested  -->
+	        <h1 class="bold-large">You've asked the court to make a repayment plan</h1>
+	      {% endif %}
+
+        <br>
+
+        <p class="">
+					Claim reference: <br><strong class="bold-large">352MC733</strong>
+				</p>
+				<p><strong class="bold">{{ now | date }}</strong></p>
+
+		  </div>
+
+      <h2 class="heading-medium">What happens next</h2>
+
+
+      {% if data['redeterminationrequested'] != 'true' %}
+          <!--  If any plan is accepted  -->
+
+          <p>We'll tell Mary Richards they should start paying you £200 per month on 20 July 2019.</p>
+					<p>We'll update the judgment with the new payment plan.</p>
+
+          <p><a class="button" href='/prototypes/prototype-aug-2019/dashboard/home?dashboard=1.9997'>Go to your account</a></p>
+
+      {% else %}
+          <!-- If redetermination is requested  -->
+          <p>We'll send you a letter when a judge has reviewed your request.</p>
+
+          <p><a class="button" href='/prototypes/prototype-aug-2019/dashboard/home?dashboard=1.9998'>Go to your account</a></p>
+      {% endif %}
+
+      <br>
+
+			{% include "includes/contact.html" %}
+		</div>
+	</div>
+</main>
+
+
+<form method="post"  action="#" class="form" style="position: absolute;">
+	<select id="check2" name="check2" onchange="window.location.href='?redeterminationrequested='+this.value">
+		<option  value="false&" {% if data['redeterminationrequested'] != 'true' %}selected{% endif %}>Claimant - Agreed plan</option>
+		<option  value="true&"  {% if data['redeterminationrequested'] == 'true' %}selected{% endif %}>Claimant - Requested Redetermination</option>
+	</select>
+</form>
+
+<!--
+
+
+<div id="daysPassing" data-dayspassurl="../dashboard/new-dashboard/defendant/email4"
+     data-dayspasstimetoprompt="5000" data-dayspassdays="5">
+
+  <div class="spinner-block">
+    <h2 class="govuk-heading-m">Days passing by... <span id="days">5</span></h2>
+    <div class="spinner spinner-1"></div>
+  </div>
+
+</div>
+
+<a class="gem-c-pagination__link active" id="triggerDaysPassing">
+  <span class="gem-c-pagination__link-title">
+      <svg class="gem-c-pagination__link-icon" xmlns="http://www.w3.org/2000/svg" height="13" width="17"
+           viewBox="0 0 17 13">
+        <path fill="currentColor"
+              d="m10.107-0.0078125-1.4136 1.414 4.2926 4.293h-12.986v2h12.896l-4.1855 3.9766 1.377 1.4492 6.7441-6.4062-6.7246-6.7266z"></path>
+      </svg>
+      <span class="gem-c-pagination__link-text">
+        Simulate time passing
+      </span>
+  </span>
+</a>
+
+-->
+
+{% endblock %}

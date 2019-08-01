@@ -1,0 +1,98 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="2" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <a href="#" class="link-back">Back</a>
+      <h1 class="heading-large">
+        You need to complete all sections before you submit your response
+      </h1>
+      <p>You still need to complete:</p>
+      <ul class="list list-bullet">
+        {% if data.confirm_details!="complete" %}
+        <li><a href="../your-details">Confirm your details</a> </li>
+        {% endif %}
+        {% if data.more_time_to_respond!="complete" %}
+        <li><a href="../more-time-to-respond">Do you want more time to respond?</a> </li>
+        {% endif %}
+        {% if data.do_you_owe_money!="complete" %}
+        <li><a href="../do-you-owe-money">Do you owe the money claimed?</a> </li>
+        {% endif %}
+        {% if data.radio_select_group2=="defend_now" and data.do_you_owe_money=="complete" and data.radio_select_group!="Some" and data.radio_select_group!="all"%}
+        {% if data.your_defence!="complete" %}
+        <li><a href="../your-defence">Why do you disagree with the claim?</a> </li>
+        {% endif %}
+        {% if data.mediation!="complete" %}
+        <li><a href="../mediation">Free mediation</a></li>
+        {% endif %}
+        {% if data.radio_cc_group=="Yes" %}
+        {% if data.counterclaim_amount!="complete" %}
+        <li><a href="../counterclaim-amount">Counterclaim amount</a></li>
+        {% endif %}
+        {% if data.counterclaim_details!="complete" %}
+        <li><a href="../counterclaim-details">Counterclaim details</a></li>
+        {% endif %}
+        {% endif %}
+        {% elseif data.radio_select_group2=="paid" and data.do_you_owe_money=="complete" and data.radio_select_group!="Some" and data.radio_select_group!="all"%}
+        {% if data.your_defence!="complete" %}
+        <li><a href="../your-defence">How much and when did you pay?</a> </li>
+        {% endif %}
+        {% elseif data.radio_select_group=="Some" and data.do_you_owe_money=="complete" and data.radio_select_group2=="defend_now" %}
+        {% if data.your_defence!="complete" %}
+        <li><a href="../your-defence">Your response to the claim</a> </li>
+        {% endif %}
+        {% elseif data.radio_select_group=="all" and data.do_you_owe_money=="complete" %}
+        {% if data.data.owe_some!="complete" %}
+        <li><a href="../owe-all">When will you pay?</a> </li>
+        {% endif %}
+        {% elseif data.radio_select_group2=="Paid-some" and data.do_you_owe_money=="complete" %}
+        {% if data.data.your_defence!="complete" %}
+        <li><a href="../your-defence"> How much have you paid the claimant?</a> </li>
+        {% endif %}
+        {% if data.mediation!="complete" %}
+        <li><a href="../mediation">Free mediation</a></li>
+        {% endif %}
+        {% if data.radio_cc_group=="Yes" %}
+        {% if data.counterclaim_amount!="complete" %}
+        <li><a href="../counterclaim-amount">Counterclaim amount</a></li>
+        {% endif %}
+        {% if data.counterclaim_details!="complete" %}
+        <li><a href="../counterclaim-details">Counterclaim details</a></li>
+        {% endif %}
+        {% endif %}
+        {% elseif data.radio_select_group=="Some" and data.do_you_owe_money=="complete" and data.radio_select_group2!="defend_now" %}
+        {% if data.data.your_defence!="complete" %}
+        <li><a href="../your-defence">How much money do you believe you owe?</a> </li>
+        {% endif %}
+        {% if data.data.owe_some!="complete" %}
+        <li><a href="../owe-all">When will you pay?</a> </li>
+        {% endif %}
+        {% if data.mediation!="complete" %}
+        <li><a href="../mediation">Free mediation</a></li>
+        {% endif %}
+        {% if data.counterclaim!="complete" %}
+        <li><a href="../counterclaim">Make a counterclaim</a></li>
+        {% endif %}
+        {% if data.radio_cc_group=="Yes" %}
+        {% if data.counterclaim_amount!="complete" %}
+        <li><a href="../counterclaim-amount">Counterclaim amount</a></li>
+        {% endif %}
+        {% if data.counterclaim_details!="complete" %}
+        <li><a href="../counterclaim-details">Counterclaim details</a></li>
+        {% endif %}
+        {% endif %}
+        {% endif %}
+      </ul>
+      <a href="../../task-list">Back to task list</a>
+    </div>
+  {% include 'prototypes/prototype-aug-2019/includes/contact.html' %}
+</main>
+{% endblock %}

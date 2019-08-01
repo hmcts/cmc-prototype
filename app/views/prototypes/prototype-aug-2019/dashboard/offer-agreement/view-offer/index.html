@@ -1,0 +1,327 @@
+1{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <a href="#" class="link-back">Back</a>
+
+
+
+      <!-- defendant responding to counteroffer -->
+      {% if data['theclaimant'] == 'false'  and  data['respondtoclaimantnocounter'] == 'false'  %}
+          <h1 class="heading-large">
+            <span class="heading-secondary">Claimant's response </span>
+            Jan Clark's counter offer
+          </h1>
+          <p class=""></p>
+          <table class="offer-table">
+            <thead>
+            <tr>
+            </tr>
+            </thead>
+
+
+            <tbody>
+                <tr>
+                  <td>The offer</td>
+                  {% if data['usertestingparttwo'] == 'true' %}
+                      <td>Come to fix my roof this week.  I want you to pay for the materials. </td>
+                  {% else %}
+                      <td>Come to fix my roof sometime next week.</td>
+                  {% endif %}
+                </tr>
+                <tr>
+                  <td>By when</td>
+                  {% if data['usertestingparttwo'] == 'true' %}
+                      <td>11 August 2019</td>
+                  {% else %}
+                      <td>14 July 2019</td>
+                  {% endif %}
+                </tr>
+            </tbody>
+
+          </table>
+
+
+          <h2 class="heading-medium">Do you accept the offer?</h2>
+          <form
+            name="aspnetForm"
+            method="post"
+            onsubmit="multiNavigation('radio-indent-group', ['Yes', 'No', 'No-but-make-offer-instead'],
+                                      ['../offer-agreement/agreement/offer?offeraccepted=true&makeoffernow=false&',
+                                         'new-offers/check-answers?offeraccepted=false&',
+                                         'new-offers/why-reject?offeraccepted=false&rejection-reason=&']);return false;"
+            id="aspnetForm"
+            autocomplete="off">
+
+            <div class="form-group">
+              <fieldset>
+                <div class="multiple-choice" data-target="accept">
+                  <input id="radio-yes" type="radio" name="radio-indent-group" value="Yes">
+                  <label for="radio-yes" data-target="yes-info">Yes</label>
+                </div>
+                <div class="panel panel-border-narrow js-hidden" id="accept">
+                    {% if data['theclaimant'] == 'true' %}
+                        <p>You'll need to sign a settlement agreement to formalise it. If Mary Richards breaks the agreement you'll be able to resume the claim.</p>
+                    {% else %}
+                        <p>You'll need to sign a settlement agreement to formalise it.</p>
+                    {% endif %}
+                </div>
+
+                {% if data['respondtoclaimantofferonly'] == 'false'  %}
+                    <div class="multiple-choice" data-target="counter">
+                      <input id="radio-counter" type="radio" name="radio-indent-group" value="No-but-make-offer-instead">
+                      <label for="radio-counter" data-target="no-info">No</label>
+                    </div>
+                {% else %}
+                    <div class="multiple-choice" data-target="counter">
+                      <input id="radio-counter" type="radio" name="radio-indent-group" value="No">
+                      <label for="radio-counter" data-target="no-info">No</label>
+                    </div>
+                {% endif %}
+
+
+                <div class="panel panel-border-narrow js-hidden" id="counter">
+                  <p>The offer is private between you and {% if data['theclaimant'] == 'true' %}Mary Richards{% else %}Jan Clark{% endif %}. If you reject it you can't tell a judge about it if there's a hearing.</p>
+                </div>
+              </fieldset>
+              <input id="advert-option-next--button" type="submit" value="Continue" class="button"
+                     data-ignore-double-submit="true">
+            </div>
+
+
+      {% elif data['defendant'] == "defendant" %}
+          <h1 class="heading-large">
+            <span class="heading-secondary">Claimant's response </span>
+            Jan Clark's counter offer
+          </h1>
+          <p class=""></p>
+          <table class="offer-table">
+            <thead>
+              <tr>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>The offer</td>
+                <td>I'll pay a maximum of £100 towards any new materials.
+                </td>
+              </tr>
+              <tr>
+                <td>By when</td>
+                <td>1 August 2019</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h2 class="heading-medium">Do you accept the offer?</h2>
+          <form
+          name="aspnetForm"
+          method="post"
+          onsubmit="multiNavigation('radio-indent-group', ['Yes', 'Counter_defendant', 'decline_counter'], ['agreement', 'view-offer/counter-suggestion', 'view-offer/confirmation-page']);return false;"
+          id="aspnetForm"
+          autocomplete="off">
+          <div class="form-group">
+            <fieldset>
+              <div class="multiple-choice" data-target="accept">
+                <input id="radio-yes" type="radio" name="radio-indent-group" value="Yes">
+                <label for="radio-yes" data-target="yes-info">Yes</label>
+              </div>
+              <div class="panel panel-border-narrow js-hidden" id="accept">
+                  {% if data['theclaimant'] == 'true' %}
+                  <p>You'll need to sign a settlement agreement to formalise it. If Mary Richards breaks the agreement you'll be able to resume the claim.</p>
+                  {% else %}
+                  <p>You'll need to sign a settlement agreement to formalise it.</p>
+                  {% endif %}
+              </div>
+
+              <div class="multiple-choice" data-target="decline">
+                <input id="radio-no" type="radio" name="radio-indent-group" value="decline_counter">
+                <label for="radio-no" data-target="no-info">No</label>
+              </div>
+              <div class="multiple-choice" data-target="counter">
+                <input id="radio-counter" type="radio" name="radio-indent-group" value="Counter_defendant">
+                <label for="radio-counter" data-target="no-info">I want to make my own offer</label>
+              </div>
+            </fieldset>
+
+            <input id="advert-option-next--button" type="submit" value="Continue" class="button"
+            data-ignore-double-submit="true">
+          </div>
+
+
+      {% else %}
+          <h1 class="heading-large">
+            <span class="heading-secondary">Defendant's response</span>
+            Their offer
+          </h1>
+          <p class="">
+          </p>
+          <table class="offer-table">
+            <thead>
+              <tr>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>The offer</td>
+                {% if data['defendantsoffertwo'] == 'true' %}
+                    <td>I will come back and fix the roof and use the spare materials I had left over from the job.</td>
+                {% else %}
+                    <td>I will fix the roof if you'll give me access and you pay for any extra materials.</td>
+                {% endif %}
+
+              </tr>
+              <tr>
+                <td>By when</td>
+                {% if data['defendantsoffertwo'] == 'true' %}
+                    <td>1 August 2019</td>
+                {% else %}
+                    <td>1 September 2019</td>
+                {% endif %}
+              </tr>
+            </tbody>
+          </table>
+
+          {% if data['partadmitviewonly'] != "true"  %}
+              <h2 class="heading-medium">Do you accept the offer?</h2>
+          {% endif %}
+
+
+
+
+          {% if data['defendant'] == "claimant"  and  data['newoffer'] == 'true'  %}
+
+              {% if data['partadmitviewonly'] == "true"  %}
+                    <p><a class="button" href="../claimant-response/part-admit/task-list?offerresponseviewed=complete&">Continue</a></p>
+
+              {% else  %}
+                      <form
+                        name="aspnetForm"
+                        method="post"
+                        onsubmit="multiNavigation('radio-indent-group', ['Yes', 'No'],
+                                  ['../offer-agreement/agreement/offer?offeraccepted=true&makeoffernow=false&',
+                                     'new-offers/why-reject?offeraccepted=false&rejection-reason=&']);return false;"
+                        id="aspnetForm"
+                        autocomplete="off">
+
+                        <div class="form-group">
+                          <fieldset>
+                            <div class="multiple-choice" data-target="accept">
+                              <input id="radio-yes" type="radio" name="radio-indent-group" value="Yes">
+                              <label for="radio-yes" data-target="yes-info">Yes</label>
+                            </div>
+                            <div class="panel panel-border-narrow js-hidden" id="accept">
+                                {% if data['theclaimant'] == 'true' %}
+                                <p>You'll need to sign a settlement agreement to formalise it. If Mary Richards breaks the agreement you'll be able to resume the claim.</p>
+                                {% else %}
+                                <p>You'll need to sign a settlement agreement to formalise it.</p>
+                                {% endif %}
+                            </div>
+                            <div class="multiple-choice" data-target="counter">
+                              <input id="radio-counter" type="radio" name="radio-indent-group" value="No">
+                              <label for="radio-counter" data-target="no-info">No</label>
+                            </div>
+                            <div class="panel panel-border-narrow js-hidden" id="counter">
+                              <p>The offer is private between you and {% if data['theclaimant'] == 'true' %}Mary Richards{% else %}Jan Clark{% endif %}. If you reject it you can't tell a judge about it if there's a hearing.</p>
+                            </div>
+                          </fieldset>
+                          <input id="advert-option-next--button" type="submit" value="Continue" class="button"
+                                 data-ignore-double-submit="true">
+                        </div>
+              {% endif %}
+
+
+
+          {% elif data['defendant'] == "offer" %}
+              <form
+              name="aspnetForm"
+              method="post"
+              onsubmit="multiNavigation('radio-indent-group', ['Yes', 'Counter', 'reject-offer'], ['agreement', 'view-offer/counter-suggestion', 'view-offer/confirmation-page']);return false;"
+              id="aspnetForm"
+              autocomplete="off">
+              <div class="form-group">
+                <fieldset>
+                  <div class="multiple-choice" data-target="accept">
+                    <input id="radio-yes" type="radio" name="radio-indent-group" value="Yes">
+                    <label for="radio-yes" data-target="yes-info">Yes</label>
+                  </div>
+                  <div class="panel panel-border-narrow js-hidden" id="accept">
+                      {% if data['theclaimant'] == 'true' %}
+                      <p>You'll need to sign a settlement agreement to formalise it. If Mary Richards breaks the agreement you'll be able to resume the claim.</p>
+                      {% else %}
+                      <p>You'll need to sign a settlement agreement to formalise it.</p>
+                      {% endif %}
+                  </div>
+                  <div class="multiple-choice" data-target="reject-offer">
+                    <input id="radio-no" type="radio" name="radio-indent-group" value="reject-offer">
+                    <label for="radio-no" data-target="no-info">No</label>
+                  </div>
+                  <div class="panel panel-border-narrow js-hidden" id="counter">
+                    <p>The offer is private between you and {% if data['theclaimant'] == 'true' %}Mary Richards{% else %}Jan Clark{% endif %}. If you reject it you can't tell a judge about it if there's a hearing.</p>
+                  </div>
+                    <!--  <div class="multiple-choice" data-target="counter">
+                    <input id="radio-counter" type="radio" name="radio-indent-group" value="Counter">
+                    <label for="radio-counter" data-target="no-info">Make a counter offer</label>
+                  </div>-->
+                </fieldset>
+                <input id="advert-option-next--button" type="submit" value="Continue" class="button"
+                data-ignore-double-submit="true">
+              </div>
+
+
+          {% else %}
+                <form
+                name="aspnetForm"
+                method="post"
+                onsubmit="multiNavigation('radio-indent-group', ['Yes', 'Counter', 'Decline'], ['../agreement', 'counter-suggestion', 'mediation']);return false;"
+                id="aspnetForm"
+                autocomplete="off">
+                <div class="form-group">
+                  <fieldset>
+                    <div class="multiple-choice" data-target="accept">
+                      <input id="radio-yes" type="radio" name="radio-indent-group" value="Yes">
+                      <label for="radio-yes" data-target="yes-info">Yes</label>
+                    </div>
+                    <div class="panel panel-border-narrow js-hidden" id="accept">
+                        {% if data['theclaimant'] == 'true' %}
+                        <p>You'll need to sign a settlement agreement to formalise it. If Mary Richards breaks the agreement you'll be able to resume the claim.</p>
+                        {% else %}
+                        <p>You'll need to sign a settlement agreement to formalise it.</p>
+                        {% endif %}
+                    </div>
+                   <div class="multiple-choice" data-target="decline">
+                    <input id="radio-no" type="radio" name="radio-indent-group" value="Decline">
+                    <label for="radio-no" data-target="no-info">No</label>
+                  </div>
+                  <div class="panel panel-border-narrow js-hidden" id="decline">
+                   <p>We'll ask you to consider free telephone mediation.</p>
+                 </div>
+                 <div class="multiple-choice" data-target="counter">
+                   <input id="radio-counter" type="radio" name="radio-indent-group" value="Counter">
+                   <label for="radio-counter" data-target="no-info">I want to make my own offer</label>
+                 </div>
+                 <!-- <div class="panel panel-border-narrow js-hidden" id="counter">
+                  <p>Continue to make a counter offer. If the defendant agrees you can make an agreement to settle the claim.</p>
+                </div> -->
+               </fieldset>
+               <input id="advert-option-next--button" type="submit" value="Continue" class="button"
+               data-ignore-double-submit="true">
+             </div>
+          {% endif %}
+
+
+   {% endif %}
+ </form>
+</div>
+</div>
+{% include 'prototypes/prototype-aug-2019/includes/contact.html' %}
+</main>
+{% endblock %}

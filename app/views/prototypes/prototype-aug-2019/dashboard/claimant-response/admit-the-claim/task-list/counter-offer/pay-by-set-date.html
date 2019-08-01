@@ -1,0 +1,65 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="4" %}
+
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+
+
+<main id="content" role="main">
+
+  {% include "includes/phase_banner_beta.html" %}
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+      <a href="#" class="link-back">Back</a>
+
+      <h1 class="heading-large">
+        When do you want the defendant to pay?
+      </h1>
+
+      <p class="panel">The court will review your suggestion and may reject it if it's sooner than the defendant can afford to repay the money.</p>
+
+      <br />
+      <form action="pay-by-set-date" method="post" class="form">
+        <div class="form-group">
+          <fieldset>
+
+            <div class="form-date">
+
+              <p class="form-hint">For example, {{ date | date('add', 1, 'month') | date('D M YYYY') }}</p>
+
+              <div class="form-group form-group-day">
+                <label for="set-day">Day</label>
+                <input class="form-control" id="set-day" name="set-day" type="number" pattern="[0-9]*" min="0"
+                       max="31">
+              </div>
+
+              <div class="form-group form-group-month">
+                <label for="set-month">Month</label>
+                <input class="form-control" id="set-month" name="set-month" type="number" pattern="[0-9]*"
+                       min="0" max="12">
+              </div>
+
+              <div class="form-group form-group-year">
+                <label for="set-year">Year</label>
+                <input class="form-control" id="set-year" name="set-year" type="number" pattern="[0-9]*" min="0">
+              </div>
+            </div>
+          </fieldset>
+        </div>
+
+        <input id="advert-option-next--button" type="submit" value="Save and continue" class="button">
+    </form>
+
+  </div>
+  </div>
+{% include 'prototypes/prototype-aug-2019/includes/contact.html' %}
+</main>
+{% endblock %}
