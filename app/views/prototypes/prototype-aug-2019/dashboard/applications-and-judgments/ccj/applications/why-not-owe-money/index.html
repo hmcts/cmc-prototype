@@ -1,0 +1,57 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="2" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <a href="#" onclick="history.go(-1)" class="link-back">Back</a>
+      <h1 class="heading-large">
+        Do you owe Jan Clark any money?
+      </h1>
+
+      <p>Don't deduct any money you believe they owe you. We'll ask about this later.</p>
+
+      <form
+        name="aspnetForm"
+        method="post"
+        onsubmit="multiNavigation('response-owe', ['owe-some', 'owe-none' ], [ 'why-not-owe-money/partial-defence-options', 'why-not-owe-money/defence-options' ]);return false;"
+        id="aspnetForm"
+        autocomplete="off">
+
+        <div class="form-group">
+          <fieldset>
+            <div class="multiple-choice" data-target="set-date">
+              <input id="radio-owe-some" type="radio" name="response-owe" value="owe-some" onclick="$('#amount-owed').val( $('owe-amount').val() | 500 )" >
+              <label for="radio-owe-some">Yes, I owe some money but not the full amount of £1,500 </label>
+            </div>
+            <div class="panel panel-border-narrow js-hidden" id="set-date">
+              <label class="form-label" for="rate">How much?</label>
+              <input class="form-control timeline-column-4 fee pound" type="text" id="owe-amount" name="owe-amount" value="{{ data['owe-amount'] }}" onkeyup="$('#amount-owed').val(this.value)" >
+            </div>
+            <div class="multiple-choice">
+              <input id="radio-owe-none" type="radio" name="response-owe" value="owe-none" onclick="$('#amount-owed').val(0)" >
+              <label for="radio-owe-none">No, I owe them nothing</label>
+            </div>
+          </fieldset>
+        </div>
+
+        <input type="hidden" name="amount-owed" id= "amount-owed" />
+        <input type="hidden" name="do_you_owe_money" value="complete" />
+
+        <div class="form-group">
+          <input type="submit" class="button" value="Save and continue"/>
+        </div>
+
+      </form>
+
+    </div>
+  {% include 'prototypes/prototype-aug-2019/includes/contact.html' %}
+</main>
+{% endblock %}

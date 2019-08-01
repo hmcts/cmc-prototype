@@ -1,0 +1,80 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="4" %}
+
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+
+
+<main id="content" role="main">
+
+  {% include "includes/phase_banner_beta.html" %}
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+      <a href="#" class="link-back">Back</a>
+
+      <h1 class="heading-large">
+        Does the defendant have anything valuable?
+      </h1>
+
+      <p>If Mary Richards has assets that could be sold at auction, such as a vehicle or jewellery, it could help you recover your money.</p>
+
+      <form
+        name="aspnetForm"
+        method="post"
+        onsubmit="conditionalNavigation('radio-indent-group-car', 'Yes', 'contact-defendant', 'contact-defendant');return false;"
+        id="aspnetForm"
+        autocomplete="off">
+
+        <div class="form-group">
+          <fieldset>
+            <div class="multiple-choice" data-target="contact-by-text">
+              <input id="dob-yes" type="radio" name="radio-indent-group-car" value="Yes">
+              <label for="example-contact-by-text">Yes</label>
+            </div>
+            <div class="panel panel-border-narrow js-hidden" id="contact-by-text">
+              <label class="form-label-bold" for="case-details-textarea">
+                Give details of their valuable or luxury items
+              </label>
+              <p class="text">If they have a vehicle, include the make, model, colour, licence plate and where it's
+                usually parked.</p>
+              <p class="text">The bailiff can't take the defendant's vehicle if:</p>
+              <ul class="list list-bullet">
+                <li>it's vital for their work, for example to make deliveries</li>
+                <li>it was bought on finance, such as hire purchase</li>
+              </ul>
+              <textarea class="form-control" id="case-details-textarea" rows="4" name="case-details" type="text"
+                        style="width: 100%" value="">{{data['car-details']}}</textarea>
+
+            </div>
+
+
+            <div class="multiple-choice">
+              <input id="radio-no" type="radio" name="radio-indent-group-car" value="No">
+              <label for="radio-no" data-target="no-info">
+                No
+              </label>
+            </div>
+        </div>
+
+
+        </fieldset>
+
+        <input id="advert-option-next--button" type="submit" value="Save and continue" class="button"
+               data-ignore-double-submit="true">
+      </form>
+
+
+    </div>
+  </div>
+  </div>
+{% include 'prototypes/prototype-aug-2019/includes/contact.html' %}
+</main>
+{% endblock %}

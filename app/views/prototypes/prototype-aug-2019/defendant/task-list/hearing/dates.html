@@ -1,0 +1,79 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <a href="#" class="link-back">Back</a>
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+        <form method="post" action="{% if data['party'] == 'claimant' or data['check'] == 2 or data['check'] == 4 %}../../../dashboard/claimant-response/dispute-claim/task-list{% else %}../../task-list{% endif %}" class="form">
+
+          {% if data['defaultccj'] == 'true' %}
+              <h1 class="heading-large">Are there dates in the next 9 months when you can’t go to a hearing?</h1>
+          {% else %}
+              <h1 class="heading-large">Are there dates in the next 9 months when you or your witnesses can’t go to a hearing?</h1>
+          {% endif %}
+
+          <div class="form-group">
+            <fieldset>
+              <div class="multiple-choice" data-target="dates">
+                <input id="radio-self-yes" type="radio" name="self" value="yes">
+                <label for="radio-self-yes">Yes</label>
+              </div>
+              <div class="multiple-choice">
+                <input id="radio-self-no" type="radio" name="self" value="no">
+                <label for="radio-self-no">No</label>
+              </div>
+            </fieldset>
+          </div>
+
+
+          <div id="dates" class="js-hidden">
+            <h2 class="heading-medium">Select the dates you can’t go to a hearing</h2>
+            <p>These should only be the dates of important events like medical appointments, other court hearings or holidays you've already booked.</p>
+            <div id="date-picker" class="datepicker"></div>
+            <h2 class="heading-medium">Dates selected</h2>
+            <dl id="dates-cant-attend-list" class="add-another-list">
+            </dl>
+          </div>
+
+
+          {% if data['defaultccj'] == 'true' %}
+              {% if  data['aftercontact'] == 'true' %}
+                  <p><a class="button" href="/prototypes/prototype-aug-2019/dashboard/applications-and-judgments/set-aside-default-ccj/task-list-after-contact?hearingaftercontact=complete&">Continue</a></p>
+                  <br>
+              {% else %}
+                  <p><a class="button" href="/prototypes/prototype-aug-2019/dashboard/applications-and-judgments/set-aside-default-ccj/task-list?hearing=complete&">Continue</a></p>
+                  <br>
+              {% endif %}
+
+          {% elif data['claimantattending'] == 'true'  %}
+              <p><a class="button" href="/prototypes/prototype-aug-2019/dashboard/applications-and-judgments/set-aside-default-ccj/task-list?hearing=complete&">Continue</a></p>
+              <br>
+          {% else %}
+              <div class="form-group">
+                <input type="submit" class="button" value="Save and continue">
+              </div>
+          {% endif %}
+
+
+        </form>
+
+
+    </div>
+  {% include 'prototypes/prototype-aug-2019/includes/contact.html' %}
+</main>
+
+<script src="/public/javascripts/bootstrap-datepicker1.8.0.min.js"></script>
+<script src="/public/javascripts/lodash-4.17.0.js"></script>
+<script src="/public/javascripts/datepicker.js"></script>
+
+
+{% endblock %}

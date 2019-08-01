@@ -1,0 +1,62 @@
+{% extends "layout.html" %}
+
+
+{% import 'prototypes/prototype-aug-2019/includes/upload.html' as upload %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+
+{% block content %}
+
+
+<main id="content" role="main">
+
+  {% include "includes/phase_banner_beta.html" %}
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+      <a href="#" onclick="history.go(-1)" class="link-back">Back</a>
+
+      <h1 class="heading-large">
+        Upload evidence
+      </h1>
+
+      <p>Upload any evidence that supports your reason for not responding to the claim, for example emails between yourself and the claimant.</p>
+
+      <!-- {% if data['updateaddress'] == "true" %}
+          <p>Include any evidence that you told Jan Clark you'd changed address.</p>
+      {% endif %}
+
+      {% if data['has-settled'] == "true" %}
+          <p>Include any settlement agreement you made with the claimant.</p>
+      {% endif %}
+
+      {% if data['has-paid'] == "true" %}
+          <p>Include any proof of payment you received from the claimant.</p>
+      {% endif %} -->
+
+
+      <form action="/prototypes/prototype-aug-2019/dashboard/order-response/evidence/check-and-send" method="get" class="form">
+        {{ upload.form('evidence', 'Check and submit evidence') }}
+      </form>
+
+      <div class="form-group">
+        <br>
+        {% if  data['aftercontact'] == 'true' %}
+            <p><a href="task-list-after-contact?evidencesectionaftercontact=complete&scenario=ccjsetaside">Continue without evidence</a></p>
+        {% else %}
+            <p><a href="task-list?evidencesection=complete&scenario=ccjsetaside">Continue without evidence</a></p>
+        {% endif %}
+
+      </div>
+
+      <br>
+
+
+    </div>
+  </div>
+
+  {% include 'prototypes/prototype-aug-2019/includes/contact.html' %}
+</main>
+{% endblock %}

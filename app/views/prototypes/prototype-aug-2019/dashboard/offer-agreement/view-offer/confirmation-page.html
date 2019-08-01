@@ -1,0 +1,153 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+      <div class="govuk-box-highlight">
+
+        <!--  the defendant is sending another offer to the claimant  -->
+        {% if data['respondtoclaimantnocounter'] == 'true' %}
+        <h1 class="bold-large">Your offer has been sent to Jan Clark</h1>
+
+        {% elif data['radio-indent-group'] == "counter" or data['confirmation'] == 1 %}
+
+
+        {% elseif data['radio-indent-group'] == "Counter_defendant"  or data['confirmation'] == 6 %}
+        <h1 class="bold-large">Your offer has been sent to the claimant</h1>
+
+
+
+        {% elseif data['radio-indent-group'] == "reject-offer" or data['radio-indent-group'] == "Stop" or data['radio-indent-group'] == "Continue" or data['radio-indent-group'] == "decline_counter" or data['confirmation'] == 6 %}
+        <h1 class="bold-large">You've rejected an offer to settle out of court</h1>
+
+
+
+        {% elseif data['radio-indent-group'] == "accept-mediation" or data['radio-indent-group2'] == "accept-mediation" or data['radio-indent-group2'] == "accept-claimant-mediation" or data['confirmation'] == 2 or data['confirmation'] == 3 or data['confirmation'] == 5 %}
+        <h1 class="bold-large">You have requested free mediation</h1>
+
+
+        {% elseif data['radio-indent-group'] == "decline-mediation" or data['radio-indent-group2'] == "decline-mediation" or data['confirmation'] == 3 or data['confirmation'] == 4 %}
+        <h1 class="bold-large">A judge will review your case</h1>
+
+
+        {% elseif data['radio-indent-group2'] == "decline-claimant-mediation" or data['confirmation'] == 6 %}
+        <h1 class="bold-large">You have declined the mediation offer</h1>
+
+
+
+        {% else %}
+        <h1 class="bold-large">You have requested free mediation</h1>
+        {% endif %}
+        <p>
+          <strong class="bold"><span id="Date2"></span></strong>
+        </p>
+      </div>
+
+
+
+      <fieldset>
+        <h2 class="heading-medium">What happens next</h2>
+        {% if data['respondtoclaimantnocounter'] == 'true' %}
+            <p>Jan Clark can accept, reject or make a counter offer. We'll email you when they respond.</p>
+            <p><a class="button" href='../../defendant?defendant=12'>Go to your account</a></p>
+
+        {% elif data['radio-indent-group'] == "counter" or data['confirmation'] == 1 %}
+            <p>Mary Richards can accept, reject or make a counter offer. We'll email you when they respond.
+            </p>
+            <p> View your claim status on <a href='#'>your money claims account</a>. </p>
+
+
+        {% elseif data['radio-indent-group'] == "Counter_defendant"  or data['confirmation'] == 6 %}
+        <p>The claimant Jan Clark can accept your counter offer, reject it or suggest an alternative. We'll email you when the defendant responds.
+        </p>
+        <p> View your claim status on <a href='#'>your money claims account</a>. </p>
+
+
+
+        {% elseif data['radio-indent-group'] == "reject-offer" or data['radio-indent-group'] == "Stop" or data['radio-indent-group'] == "Continue" or data['confirmation'] == 6 %}
+        <p>We'll send your response to the defendant.</p>
+            {% include "includes/survey.html" %}
+
+          <p><a class="button" href='../../home?dashboard=1.13'>Go to your account</a></p>
+
+
+
+        {% elseif data['radio-indent-group'] == "decline_counter" or data['confirmation'] == 6 %}
+        <p>You've rejected Jan Clark's offer to settle.
+        </p>
+        <p> View your claim status on <a href='#'>your money claims account</a>. </p>
+
+
+
+
+
+        {% elseif data['radio-indent-group'] == "accept-mediation" or data['radio-indent-group2'] == "accept-mediation" or data['confirmation'] == 3 %}
+        <p>A mediator will contact both the defendant and you within the next 14 days to arrange an appointment.</p>
+        <p> View your claim status on <a href='#'>your money claims account</a>. </p>
+
+        {% elseif data['radio-indent-group'] == "decline-mediation" or data['radio-indent-group2'] == "decline-mediation" or data['confirmation'] == 4 %}
+        <p>The case will be reviewed by a judge and might go to a hearing. We'll contact you to tell you what to do next.</p>
+        <p> View your claim status on <a href='#'>your money claims account</a>. </p>
+
+
+
+
+        {% elseif data['radio-indent-group2'] == "accept-claimant-mediation" or data['confirmation'] == 5%}
+
+        <p>A mediator will contact both you and Jan Clark within the next 14 days to arrange an appointment.</p>
+        <p> View your claim status on <a href='#'>your money claims account</a>. </p>
+
+        {% elseif data['response'] == "no_med_suggestion" or data['confirmation'] == 2 %}
+        <p>The defendant Mary Richards will be asked if they would like free mediation. We'll email you when the defendant responds.</p>
+        <p> View your claim status on <a href='#'>your money claims account</a>. </p>
+
+
+
+        {% elseif data['radio-indent-group2'] == "decline-claimant-mediation" or data['confirmation'] == 6 %}
+
+        <p>You've rejected Jan Clark's offer of mediation. We'll email you when they respond.</p>
+        <p> View your claim status on <a href='#'>your money claims account</a>. </p>
+
+
+        {% else %}
+        <p>The defendant Mary Richards can accept your counter offer, reject it or suggest an alternative. We'll email you when the defendant responds.
+        </p>
+        <p> View your claim status on <a href='#'>your money claims account</a>. </p>
+
+        {% endif %}
+
+        {% include "includes/contact.html" %}
+
+      </fieldset>
+
+    </div>
+  </div>
+</main>
+<form method="post"  action="#" class="form" style=" float: left;">
+  <select id="confirmation2" name="confirmation2" onchange="window.location.href='confirmation-page?confirmation='+this.value">
+    <option  value="0" >Claimant</option>
+    <option value="1" {% if data['confirmation'] == 1 %}selected{% endif %}>1. Counter offer</option>
+    <option  value="2" {% if data['confirmation'] == 2 %}selected{% endif %}>2. Request free mediation</option>
+    <option  value="3" {% if data['confirmation'] == 3 %}selected{% endif %}>3. Make an offer offer of mediation</option>
+    <option  value="4" {% if data['confirmation'] == 4 %}selected{% endif %}>4. Reject offer of mediation</option>
+    <option  value="5" {% if data['confirmation'] == 5 %}selected{% endif %}>5. Accept def offer of mediation</option>
+  </select>
+</form>
+<form method="post"  action="#" class="form" style=" float: left;">
+
+  <select id="confirmation2" name="confirmation2" onchange="window.location.href='confirmation-page?confirmation='+this.value">
+    <option  value="0" >Defendant</option>
+    <option  value="6" {% if data['confirmation'] == 6 %}selected{% endif %}>1. Reject claimant offer of meditation</option>
+  </select>
+
+</form>
+{% endblock %}

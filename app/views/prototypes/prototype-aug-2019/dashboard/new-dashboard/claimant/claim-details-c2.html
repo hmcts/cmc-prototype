@@ -1,0 +1,186 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="4" %}
+
+{% include "includes/propositional_navigation_new.html" %}
+{% endblock %}
+{% block content %}
+
+<main id="content" role="main">
+
+  {% include "includes/phase_banner_beta.html" %}
+
+  <div class="breadcrumbs" style="margin-bottom: -20px">
+    <ol>
+      <!--<li><a href="#" onclick="history.go(-1)">All claims</a></li>-->
+
+      <li><a href="all-claims?claimant=2">All claims</a></li>
+
+      <li aria-current="page">Claim details</li>
+
+    </ol>
+  </div>
+
+  <div class="grid-row">
+
+    <div class="details" style="margin-top: -30px">
+        <span style=""><h2 style="">
+          <h2 class="heading-medium">Jan Clark v Mary Richards</h2>
+          <h2 class="font-xsmall" style="margin-top: -10px">Claim number: <span style="">352MC733</span></h2>
+    </div>
+    <!--<div class="divider"></div>-->
+
+    <div class="column-full-width">
+
+      <div class="tabGroup3" style="margin-top: 40px">
+        <a id="tabH" class="tab-on" onclick="tabGroup3(tabContent, 'TAB-ONE')" href="javascript: void(0)">Next steps</a>
+        <a id="tabI" class="tab" onclick="tabGroup3(tabContent, 'TAB-TWO')" href="javascript: void(0)">Claim history</a>
+        <hr style="margin-top: -2px">
+      </div>
+
+      <div id="tabContent" class="top_30">
+
+        <div id="tabOneContent">
+          <div class="column-two-thirds">
+            <div class="description" style="background-color: #fff">
+              <!--Action one-->
+              <h4 class=" heading-small">Respond to defendant</h4>
+              <p>Mary Richards has rejected your claim. </p>
+
+              <!--<p>The claim has been automatically registered for free-->
+              <!--telephone mediation.</p>-->
+
+              <!--<p>If you reject their response, we'll contact you with a mediation appointment unless you choose to opt out.</p>-->
+
+              <p>You need to accept or reject their defence before 23 February 2019.</p>
+
+              <!--<p>The claim won't proceed if you don't respond before 26 January 2019.</p>-->
+
+              <div class="form-group">
+                <form method="post" action="../../claimant-response/dispute-claim/task-list" class="form">
+                  {{formData | safe}}
+                  <!--<input type="hidden" name="mediation-pilot" value="on">-->
+                  <input type="submit" class="button" value="View and respond">
+                </form>
+              </div>
+
+              <!--<p><a href="">Download their response</a>-->
+                <!--(PDF, 123KB)</p>-->
+
+              <!--<p><a href="../../../defendant/correspondence/forms/dqs">Download their proposed hearing requirements</a>-->
+                <!--(PDF, 132KB)</p>-->
+
+              <fieldset></fieldset>
+              {% include 'prototypes/prototype-aug-2019/includes/contact.html' %}
+
+            </div>
+
+          </div>
+
+          <div class="column-one-third">
+            <div class="right-column-nav" style="margin-top: 20px">
+              <!--<hr class="light-hr" style="margin-top: 5px">-->
+              <h3 class="heading-small">More actions</h3>
+              <p></p><a href="">Tell us you've settled</a></p>
+              <p></p><a href="">Stopping the claim</a></p>
+            </div>
+          </div>
+
+        </div>
+
+        <div id="tabTwoContent">
+          <!--<h3 class="heading-medium">Claim history</h3><br>-->
+
+          <!--<div class="govuk-form-group">-->
+            <!--<label class="font-xsmall" for="sort">-->
+              <!--Sort by-->
+            <!--</label>-->
+            <!--<select class="govuk-select" id="sort" name="sort" style="font-size: 14px">-->
+              <!--<option value="" selected="">Newest</option>-->
+              <!--<option value="">Oldest</option>-->
+            <!--</select>-->
+          <!--</div>-->
+
+          <div class="wrapper">
+            <span class="font-xsmall breakable-text">Sort by:</span>&nbsp; &nbsp;
+            <h3 class="font-xsmall breakable-text">Newest</h3>&nbsp; &nbsp;
+            <span class="verticalLine">&nbsp; &nbsp; <a class="font-xsmall" href="">Oldest</a>&nbsp;
+            &nbsp;</span>
+          </div>
+
+          <div class="hmcts-timeline" style="margin-top: 40px">
+            <div class="hmcts-timeline__item">
+              <div class="hmcts-timeline__header">
+                <h2 class="hmcts-timeline__title">Mary Richards rejected your claim</h2>
+                <!--<p class="hmcts-timeline__by">by you (claimant)</p>-->
+                <p><a href="../../../defendant/correspondence/forms/claim-form-defendant">Download their response</a>
+                  (PDF, 123KB)</p>
+              </div>
+              <p class="hmcts-timeline__date" style="margin-top: -10px">
+                <time style="color: grey">21 December 2018</time>
+              </p>
+            </div>
+            <div class="hmcts-timeline__item">
+              <div class="hmcts-timeline__header">
+                <h2 class="hmcts-timeline__title">You submitted your claim</h2>
+                <!--<p class="hmcts-timeline__by">by you (claimant)</p>-->
+                <p><a href="../../../defendant/correspondence/forms/claim-form-claimant?check=1">Download claim</a>
+                  (PDF, 123KB)</p>
+              </div>
+              <p class="hmcts-timeline__date" style="margin-top: -10px">
+                <time style="color: grey">6 December 2018</time>
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+</main>
+
+<script src="/public/javascripts/tree.js"></script>
+<script src="/public/javascripts/casefile.js"></script>
+
+<script>
+  new HMCTSFrontend.SearchToggleButton({
+    toggleButton: {
+      container: $('.hmcts-search-toggle__toggle'),
+      text: 'Find case'
+    },
+    search: {
+      container: $('.hmcts-search')
+    }
+  })
+</script>
+
+<script>
+  new Casefile($('.jui-cf'))
+  new Tree($('.jui-tree'))
+  new Toolbar()
+
+  $('.jui-cf__rotate-button').on('click', function (e) {
+    var page = $(e.target).parents('.jui-cf__document-page')
+
+    if (page.hasClass('jui-cf__document-page--rotate-90')) {
+      page.removeClass('jui-cf__document-page--rotate-90')
+      page.addClass('jui-cf__document-page--rotate-180')
+    } else if (page.hasClass('jui-cf__document-page--rotate-180')) {
+      page.removeClass('jui-cf__document-page--rotate-180')
+      page.addClass('jui-cf__document-page--rotate-270')
+    } else if (page.hasClass('jui-cf__document-page--rotate-270')) {
+      page.removeClass('jui-cf__document-page--rotate-270')
+    } else {
+      page.addClass('jui-cf__document-page--rotate-90')
+    }
+
+  })
+</script>
+
+{% endblock %}

@@ -1,0 +1,475 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="4" %}
+
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <a href="#" class="link-back">Back</a>
+      <h1 class="heading-large">
+        Suggest instalments for the defendant
+      </h1>
+
+    <p class="panel">The court will review your suggestion and may reject it if it's more than the defendant can afford.</p>
+
+    <p>Total claim amount is £1643.20.</p>
+
+    {% if data['defendant'] != 'org' %}
+      <details class="form-group">
+        <summary><span  class="summary">See their financial details</span></summary>
+        <div class="panel">
+          <table class="instalment-table">
+            <tbody>
+              <tr>
+                <td class="no-border bold">
+                  Bank and savings accounts
+                </td>
+                <td class="no-border"> </td>
+              </tr>
+              <tr>
+                <td class="no-border">
+                  Type of account
+                </td>
+                <td class="no-border">Savings </td>
+              </tr>
+              <tr>
+                <td class="no-border">
+                  Balance
+                </td>
+                <td class="no-border">£100 </td>
+              </tr>
+              <tr>
+                <td class="">
+                  Joint account
+                </td>
+                <td class="">Yes </td>
+              </tr>
+              <tr>
+                <td>
+                  Where are they living?
+                </td>
+                <td >
+                  Home that they own
+                </td>
+              </tr>
+              <tr>
+                <td class="no-border bold">
+                  Children
+                </td>
+                <td class="no-border"></td>
+              </tr>
+              <tr>
+                <td class="no-border">
+                  Do any children live with them?
+                </td>
+                <td class="no-border">Yes</td>
+              </tr>
+              <tr>
+                <td>
+                  How many are aged 16 to 19?
+                </td>
+                <td >1</td>
+              </tr>
+              <tr>
+                <td>
+                How many aged 16 to 19 are in full-time education or training?
+                </td>
+                <td >1</td>
+              </tr>
+              <tr>
+                <td class="no-border bold">
+                  Maintenance
+                </td>
+                <td class="no-border"></td>
+              </tr>
+              <tr>
+                <td class="no-border">
+                  Do they or their partner pay maintenance for any children?
+                </td>
+                <td class="no-border">Yes</td>
+              </tr>
+              <tr>
+                <td>
+                  Number of children
+                </td>
+                <td >2</td>
+              </tr>
+              <tr>
+                <td class="no-border bold">
+                  Financial support
+                </td>
+                <td class="no-border"></td>
+              </tr>
+              <tr>
+                <td class="no-border">
+                  Do they support anyone else financially?
+                </td>
+                <td class="no-border">Yes</td>
+              </tr>
+              <tr>
+                <td class="no-border">
+                  Number of people
+                </td>
+                <td class="no-border">1</td>
+              </tr>
+              <tr>
+                <td class="">
+                  Give details
+                </td>
+                <td class="">Reason goes here</td>
+              </tr>
+              <tr>
+                <td class="no-border bold">
+                  Employment details
+                </td>
+                <td class="no-border"></td>
+              </tr>
+              <tr>
+                <td class="no-border">
+                  Do they have a job?
+                </td>
+                <td class="no-border">Yes</td>
+              </tr>
+              <tr>
+                <td class="">
+                  Type of job
+                </td>
+                <td class="">Employed and Self-employed</td>
+              </tr>
+              <tr>
+                <td class="no-border"></td>
+              </tr>
+              <tr>
+                <td class="no-border">
+                  Employer name
+                </td>
+                <td class="no-border">Smith Inc</td>
+              </tr>
+              <tr>
+                <td class="no-border">
+                  Job title
+                </td>
+                <td class="no-border">HR manager</td>
+              </tr>
+              <tr>
+                <td class="">
+                  List any other paid jobs (optional)
+                </td>
+                <td class=""> </td>
+              </tr>
+              <tr>
+                <td class="no-border bold">
+                  Self-employment details
+                </td>
+                <td class="no-border"></td>
+              </tr>
+              <tr>
+                <td class="no-border">
+                  Job title
+                </td>
+                <td class="no-border">Window Cleaner</td>
+              </tr>
+              <tr>
+                <td class="no-border">
+                  Annual turnover
+                </td>
+                <td class="no-border">£14,500</td>
+              </tr>
+              <tr>
+                <td class="no-border">
+                  Are they behind on tax payments?
+                </td>
+                <td class="no-border"> Yes</td>
+              </tr>
+              <tr>
+                <td class="no-border">
+                  Amount they owe?
+                </td>
+                <td class="no-border"> £300</td>
+              </tr>
+              <tr>
+                <td class="">
+                  Reason
+                </td>
+                <td class=""> Reason goes here</td>
+              </tr>
+              <tr>
+                <td class="no-border bold">
+                  Monthly income
+                </td>
+                <td class="no-border"> </td>
+              </tr>
+              <tr>
+                <td class="no-border">
+                  Take home pay
+                </td>
+                <td class="no-border">£800 </td>
+              </tr>
+              <tr>
+                <td class="no-border">
+                  Child benefit
+                </td>
+                <td class="no-border">£124 </td>
+              </tr>
+              <tr>
+                <td class="">
+                  Other income
+                </td>
+                <td class="">£40 </td>
+              </tr>
+              <tr>
+                <td class="no-border bold">
+                  Monthly expenses
+                </td>
+                <td class="no-border"> </td>
+              </tr>
+              <tr>
+                <td class="no-border">
+                  Mortgage
+                </td>
+                <td class="no-border">£743 </td>
+              </tr>
+              <tr>
+                <td class="no-border">
+                  Council Tax
+                </td>
+                <td class="no-border">£120 </td>
+              </tr>
+              <tr>
+                <td class="">
+                  Gas
+                </td>
+                <td class="">£83 </td>
+              </tr>              <tr>
+                <td class="no-border bold">
+                  Debts
+                </td>
+                <td class="no-border"> </td>
+              </tr>
+              <tr>
+                <td class="no-border">
+                  Do they have any debts they are behind on?
+                </td>
+                <td class="no-border"> Yes</td>
+              </tr>
+              <tr>
+                <td class="no-border">
+                  1. Debt
+                </td>
+                <td class="no-border">Mortgage</td>
+              </tr>
+              <tr>
+                <td class="no-border">
+                  Total owed
+                </td>
+                <td class="no-border">£200 </td>
+              </tr>
+              <tr>
+                <td class="no-border">
+                  2. Debt
+                </td>
+                <td class="no-border">Council tax or community charge</td>
+              </tr>
+              <tr>
+                <td class="no-border">
+                  Total owed
+                </td>
+                <td class="no-border">£100 </td>
+              </tr>
+              <tr>
+                <td class="no-border">
+                  3. Debt
+                </td>
+                <td class="no-border">Water</td>
+              </tr>
+              <tr>
+                <td>
+                  Total owed
+                </td>
+                <td>£100 </td>
+              </tr>
+              <tr>
+                <td class="no-border">
+                  Do you have any loan or credit card debts?
+                </td>
+                <td class="no-border"> Yes</td>
+              </tr>
+              <tr>
+                <td class="no-border">
+                  Debt
+                </td>
+                <td class="no-border">Credit card debt</td>
+              </tr>
+              <tr>
+                <td class="no-border">
+                  Total owed
+                </td>
+                <td class="no-border">£1200 </td>
+              </tr>
+              <tr>
+                <td class="">
+                  Monthly payments
+                </td>
+                <td class="">£100 </td>
+              </tr>
+              <tr>
+                <td class="no-border bold">
+                  Court orders
+                </td>
+                <td class="no-border"> </td>
+              </tr>
+              <tr>
+                <td class="no-border">
+                  Has a court ordered you to pay anyone else?
+                </td>
+                <td class="no-border">Yes </td>
+              </tr>
+              <tr>
+                <td class="no-border">
+                  Claim number
+                </td>
+                <td class="no-border">352MC733 </td>
+              </tr>
+              <tr>
+                <td class="">
+                  Amount you owe
+                </td>
+                <td class="">£130 </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
+
+      {% endif %}
+
+      <form action="repayment-plan" method="post" class="form">
+
+        <div class="form-group">
+          <fieldset>
+            <legend class="visually-hidden">Regular payments of</legend>
+            <label class="form-label-bold" for="instalment-first-payment">
+               Regular payments of
+            </label>
+                    <p class="form-hint">For example, £10</p>
+
+              <input class="fee pound" maxlength="8" size="8" type="text" value=""
+              name="instalment-first-payment"
+              id="instalment-first-payment">
+            </fieldset>
+
+        </div>
+
+
+
+
+        <div class="heading-small">How often do you want to receive payments?</div>
+        <p class="form-hint">The court will accept the defendant's payment frequency. We'll only consider your preferred frequency if a different plan is set by a judge later.</p>
+        <div class="form-group">
+          <fieldset>
+            <legend class="visually-hidden">How often do you want to receive payments?</legend>
+            <div class="multiple-choice">
+              <input id="radio-01" type="radio" name="radio-payment-frequency" value="Each week" {{ checked("radio-payment-frequency", "Each week") }}>
+              <label for="radio-01" data-target="info-01">Every week</label>
+            </div>
+            <div class="multiple-choice">
+              <input id="radio-02" type="radio" name="radio-payment-frequency" value="Every 2 weeks" {{ checked("radio-payment-frequency", "Every 2 weeks") }}>
+              <label for="radio-02" data-target="info-02">Every 2 weeks</label>
+            </div>
+            <div class="multiple-choice">
+              <input id="radio-03" type="radio" name="radio-payment-frequency" value="Every month" {{ checked("radio-payment-frequency", "Each month") }}>
+              <label for="radio-03" data-target="info-03">Every month</label>
+            </div>
+          </fieldset>
+        </div>
+
+
+        {% if data['vary'] != 'true' %}
+
+          <div class="form-group">
+            <p class="heading-small">Length of repayment plan</p>
+            <p id="duration">-</p>
+          </div>
+
+
+          <div class="form-group">
+            <fieldset>
+              <legend class="visually-hidden">Date for first instalment</legend>
+              <p class="heading-small">Date for first instalment</p>
+              <div class="form-date">
+                <p class="form-hint">This must be no sooner than {{ date | date('add', 1, 'month' ) | date('D M YYYY') }}</p>
+                <div class="form-group form-group-day">
+                  <label for="instalment-day">Day</label>
+                  <input class="form-control" id="instalment-day" type="number" pattern="[0-9]*" min="0"
+                  max="31">
+                </div>
+                <div class="form-group form-group-month">
+                  <label for="instalment-month">Month</label>
+                  <input class="form-control" id="instalment-month" type="number" pattern="[0-9]*"
+                  min="0" max="12">
+                </div>
+                <div class="form-group form-group-year">
+                  <label for="instalment-year">Year</label>
+                  <input class="form-control" id="instalment-year" type="number" pattern="[0-9]*" min="0"
+                  max="2024">
+                </div>
+              </div>
+            </fieldset>
+          </div>
+
+        {% endif %}
+
+
+          <div class="form-group">
+            <input id="advert-option-next--button" type="submit" value="Save and continue" class="button">
+          </div>
+          </fieldset>
+        </div>
+      </form>
+    </div>
+  </div>
+{% include 'prototypes/prototype-aug-2019/includes/contact.html' %}
+</main>
+
+<script>
+  $(document).ready(function () {
+    $('#instalment-first-payment, input[name=radio-payment-frequency]').change( function() {
+      if ( $('#instalment-first-payment').val() && $("input[name=radio-payment-frequency]:checked").length ) {
+        var intAmount = 1500;
+        var strDuration = '';
+        intRepayment = $('#instalment-first-payment').val();
+        intInstalments = Math.ceil( intAmount / intRepayment);
+        if ($('#radio-01').prop("checked")) {
+          intDaysAway = 7;
+        } else if ($('#radio-02').prop("checked")) {
+          intDaysAway = 14;
+        } else if ($('#radio-03').prop("checked")) {
+          intDaysAway = 30;
+        }
+
+        intRepaymentDays = intDaysAway * intInstalments;
+        strFrequency = $('input[name=radio-payment-frequency]:checked').val();
+
+        strDuration = intInstalments;
+        if (strFrequency == 'Each week' ) {
+          strDuration +=  ' weeks';
+        } else if (strFrequency == 'Every 2 weeks' ) {
+          strDuration =  intInstalments*2 + ' weeks';
+        } else {
+          strDuration +=  ' months';
+        }
+
+        $('#duration').text( strDuration );
+      }
+    })
+  });
+</script>
+
+{% endblock %}

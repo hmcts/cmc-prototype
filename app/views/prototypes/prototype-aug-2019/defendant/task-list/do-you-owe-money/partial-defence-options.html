@@ -1,0 +1,80 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="2" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <a href="#" class="link-back">Back</a>
+      <h1 class="heading-large">
+        Have you paid the claimant the amount you admit you owe?
+
+
+      </h1>
+
+      <form
+        name="aspnetForm"
+        method="get"
+        onsubmit="multiNavigation('part', ['Yes' , 'No', 'Yes-ccj-set-aside', 'No-ccj-set-aside'],
+                                          [ '../../task-list?radio_select_group=Some_paid&',
+                                            '../../../dashboard/applications-and-judgments/set-aside-default-ccj/task-list?how_much_paid=complete&',
+                                            '../../../dashboard/applications-and-judgments/set-aside-default-ccj/task-list?how_much_paid=complete&'
+                                            ]);return false;"
+        id="aspnetForm"
+        autocomplete="off">
+
+            <input id="your-offer" name="offer" type="hidden">
+            <div class="form-group">
+              <fieldset class="inline">
+
+
+                {% if data['defaultccj'] == 'true'   and data['lower-amount'] == 'true' %}
+
+                    <div class="multiple-choice" data-target="yes-info">
+                      <input id="radio-yes-ccj-set-aside" type="radio" name="part" value="Yes-ccj-set-aside" aria-controls="yes-info" aria-expanded="false">
+                      <label for="radio-yes-ccj-set-aside" data-target="yes-info">Yes</label>
+                    </div>
+
+                    <div class="multiple-choice">
+                      <input id="radio-no-ccj-set-aside" type="radio" name="part" value="No-ccj-set-aside">
+                      <label for="radio-no-ccj-set-aside" data-target="no-info">No</label>
+                    </div>
+
+                {% else %}
+
+                  <div class="multiple-choice" data-target="yes-info">
+                    <input id="radio-yes" type="radio" name="part" value="Yes" aria-controls="yes-info" aria-expanded="false">
+                    <label for="radio-yes" data-target="yes-info">Yes</label>
+                  </div>
+
+                  <div class="multiple-choice">
+                    <input id="radio-no" type="radio" name="part" value="No">
+                    <label for="radio-no" data-target="no-info">No</label>
+                  </div>
+
+                {% endif %}
+
+              </fieldset>
+
+              <input type="hidden" name="dates" value="false">
+              <input type="hidden" name="show_mediation" value="true">
+
+
+              <div class="form-group">
+                <input type="submit" class="button" value="Save and continue">
+              </div>
+
+            </div>
+          </form>
+        </div>
+      </div>
+  </div>
+  {% include 'prototypes/prototype-aug-2019/includes/contact.html' %}
+</main>
+{% endblock %}

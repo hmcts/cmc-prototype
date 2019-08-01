@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <a href="#" onclick="history.go(-1)" class="link-back">Back</a>
+      <h1 class="heading-large">
+        How did you tell Jan Clark your new address?
+      </h1>
+
+      {% if  data['aftercontact'] == 'true' %}
+          <form action="task-list-after-contact?latereply=false&missingletter=false&updatedaddress=true&explainreasonaftercontact=complete" method="post" class="form">
+      {% else %}
+          <form action="task-list?latereply=false&missingletter=false&updatedaddress=true&explainreason=complete" method="post" class="form">
+      {% endif %}
+
+
+        <!--<form action="../why-not-owe-money" method="get" class="form">-->
+        <div class="form-group">
+          <textarea class="form-control form-control-3-4 " id="methodofinformingclaimant" rows="3" name="methodofinformingclaimant" type="text" style="width: 100%" value=""></textarea>
+        </div>
+
+        <div class="form-group">
+          <input type="submit" class="button" value="Continue"/>
+        </div>
+
+      </form>
+   </div>
+ </div>
+{% include 'prototypes/prototype-aug-2019/includes/contact.html' %}
+</main>
+{% endblock %}
