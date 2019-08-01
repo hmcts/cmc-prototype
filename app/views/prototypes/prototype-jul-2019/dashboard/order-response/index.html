@@ -86,6 +86,7 @@ Money Claims Prototype
 
 
 
+
       <h2 class="heading-small">State your version of events</h2>
       {% if data['witness'] == 'complete' %}
       <p>You uploaded these documents on {{ now | date }}:</p>
@@ -95,19 +96,23 @@ Money Claims Prototype
           <li>Ben Clark: <a href="#">Witness statement 2.docx</a></li>
       </ul>
 
-      <br />
-      <div class="form-group">
-        <a href="order-response/witness-statements" class="secondary-button">Upload more witness statements</a>
-      </div>
+      <h2 class="heading-small">Produce your witness statement</h2>
+      {% if data['own-statement'] == 'complete' %}
+      <p>You produced your witness statement on {{ now | date }}.</p>
+
+      <p><a href="#">Download your witness statement</a> (PDF, 123KB)</p>
 
       {% else %}
       {% if experts == 'on' %}
-      <p>You need to upload these documents before 4pm on {{ now | date('add', 12, 'days') | date }}.</p>
+      <p>You need to produce your statement before 4pm on {{ now | date('add', 12, 'days') | date }}.</p>
       {% endif %}
       <p>Show us evidence and facts that you believe prove your case.</p>
 
       <div class="form-group">
+
         <a href="order-response/witness-statements/statement-builder" class="secondary-button">State your version of events</a>
+
+
       </div>
       {% endif %}
 
@@ -216,6 +221,7 @@ Money Claims Prototype
     <option>-------- Status --------</option>
     <option value="evidence=&witness=&expert=">Nothing uploaded</option>
     <option value="evidence=complete&witness=&expert=">Documents uploaded</option>
+    <option value="own-statement=complete&evidence=&witness=complete&expert=">Own statements uploaded</option>
     <option value="evidence=&witness=complete&expert=">Witness statements uploaded</option>
     <option value="evidence=&witness=&expert=complete">Expert report uploaded</option>
     <option value="generic=true">With generic uploads</option>
