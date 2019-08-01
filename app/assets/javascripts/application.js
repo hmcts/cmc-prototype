@@ -1358,12 +1358,17 @@ $('ul.jui-tree__folder-group li a').click(function(){
 });
 
 function upload( docName ) {
-console.log(docName);
 
   if ( $( $('#uploads #' + docName + ' input[type=file]')[0].files.length ) ) {
     for (i=0; i<$('#uploads #' + docName + ' input[type=file]')[0].files.length; i++ ) {
+      
+      strUpload = '';
 
-      strUpload =  '<li class="file desc"><a href="#">' + $('#uploads #' + docName + ' input[type=file]')[0].files[i].name +'</a><a href="#" class="remove" onclick="$(this).parent().remove();return false;">Remove</a>';
+      if ( docName == 'evidence' ) {
+        strUpload += '<h3 class="heading-small">Exhibit A' + parseInt(i+1) + '</h1>';
+      }
+
+      strUpload +=  '<li class="file desc' + ( docName == 'evidence' ? ' evidence' : '' ) +'"><a href="#">' + $('#uploads #' + docName + ' input[type=file]')[0].files[i].name +'</a><a href="#" class="remove" onclick="$(this).parent().remove();return false;">Remove</a>';
       if ( docName == 'evidence' ) {
         strUpload += '<p><label for="description' + i + '">Enter a short description (optional)</label></p><textarea id="description' + i + '"></textarea>';
       } else if ( docName == 'witness' ) {
