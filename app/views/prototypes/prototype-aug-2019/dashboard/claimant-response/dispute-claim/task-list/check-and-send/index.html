@@ -17,99 +17,52 @@ Check your answers
 
 
 
+        <!--  Where offers are included in a 'intention to proceed'  -->
+        {% if data['defendantmadeoffer'] == 'true'   and   data['claimantusertestingpartone'] != 'true'  %}
+              <!--  Proposed plan  -->
+              <table class="check-your-answers">
+                <thead>
+                    <tr>
+                      <th colspan="2">
+                        <h2 class="heading-medium" id="name">
+                          The defendant's offer
+                        </h2>
+                      </th>
+                      <th>
+                      </th>
+                    </tr>
+                </thead>
 
-
-
-
-
-
-
-
-
-
-
-        <!--  Proposed plan  -->
-        <table class="check-your-answers">
-          <thead>
-              <tr>
-                <th colspan="2">
-                  <h2 class="heading-medium" id="name">
-                    The defendant's offer
-                  </h2>
-                </th>
-                <th>
-                </th>
-              </tr>
-          </thead>
-
-          <tbody>
-          <tr>
-              <td>
-                Your response
-              </td>
-              <!-- Pay in installment content also needs considering -->
-              <td>
-                {% if data['offeraccepted'] == 'true'  %}
-                    Accept offer
-                {% else %}
-                    Rejected offer
-                {% endif %}
-
-              </td>
-              <td class="change-answer">
-                <a href="#">
-                  Change <span class="visuallyhidden">Name</span>
-                </a>
-              </td>
-          </tr>
-
-
-        {% if data['offeraccepted'] == 'true'  %}
-        {% else %}
-            <tr>
-              <td>
-                Reason for rejecting
-              </td>
-              <!-- Pay in installment content also needs considering -->
-              <td style="white-space: pre-wrap;" >{{ data['rejection-reason'] }}</td>
-              <td class="change-answer">
-                <a href="#">
-                  Change <span class="visuallyhidden">Name</span>
-                </a>
-              </td>
-            </tr>
-
-            </tbody>
-          </table>
-
-
-            <!--  Counter offer  -->
-            <table class="check-your-answers">
-              <thead>
-                  <tr>
-                    <th colspan="2">
-                      <h2 class="heading-medium" id="name">
-                        Your offer
-                      </h2>
-                    </th>
-                    <th>
-                    </th>
-                  </tr>
-              </thead>
-
-              <tbody>
-                  <tr>
+                <tbody>
+                <tr>
                     <td>
-                      Make offer
+                      Your response
                     </td>
                     <!-- Pay in installment content also needs considering -->
                     <td>
-                      {% if data['makecounteroffer'] == 'true'  %}
-                          Yes
+                      {% if data['offeraccepted'] == 'true'  %}
+                          Accept offer
                       {% else %}
-                          No
+                          Rejected offer
                       {% endif %}
+
                     </td>
+                    <td class="change-answer">
+                      <a href="#">
+                        Change <span class="visuallyhidden">Name</span>
+                      </a>
+                    </td>
+                </tr>
+
+
+              {% if data['offeraccepted'] == 'true'  %}
+              {% else %}
+                  <tr>
+                    <td>
+                      Reason for rejecting
+                    </td>
+                    <!-- Pay in installment content also needs considering -->
+                    <td style="white-space: pre-wrap;" >{{ data['rejection-reason'] }}</td>
                     <td class="change-answer">
                       <a href="#">
                         Change <span class="visuallyhidden">Name</span>
@@ -117,13 +70,106 @@ Check your answers
                     </td>
                   </tr>
 
-                  {% if data['makecounteroffer'] == 'true'  %}
+                  </tbody>
+                </table>
+
+
+                  <!--  Counter offer  -->
+                  <table class="check-your-answers">
+                    <thead>
+                        <tr>
+                          <th colspan="2">
+                            <h2 class="heading-medium" id="name">
+                              Your offer
+                            </h2>
+                          </th>
+                          <th>
+                          </th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                          <td>
+                            Make offer
+                          </td>
+                          <!-- Pay in installment content also needs considering -->
+                          <td>
+                            {% if data['makecounteroffer'] == 'true'  %}
+                                Yes
+                            {% else %}
+                                No
+                            {% endif %}
+                          </td>
+                          <td class="change-answer">
+                            <a href="#">
+                              Change <span class="visuallyhidden">Name</span>
+                            </a>
+                          </td>
+                        </tr>
+
+                        {% if data['makecounteroffer'] == 'true'  %}
+                              <tr>
+                                <td>
+                                  Details
+                                </td>
+                                <!-- Pay in installment content also needs considering -->
+                                <td  style="white-space: pre-wrap;" >{{ data['the-offer-text'] }}</td>
+                                <td class="change-answer">
+                                  <a href="#">
+                                    Change <span class="visuallyhidden">Name</span>
+                                  </a>
+                                </td>
+                              </tr>
+
+                              <tr>
+                                <td>
+                                  Offer completed by
+                                </td>
+                                <!-- Pay in installment content also needs considering -->
+                                <td>
+                                  {{ data['offerDateDay'] }} August 2019
+                                </td>
+                                <td class="change-answer">
+                                  <a href="#">
+                                    Change <span class="visuallyhidden">Name</span>
+                                  </a>
+                                </td>
+                              </tr>
+                        {% endif %}
+
+                    </tbody>
+                  </table>
+
+
+
+
+                    <table class="check-your-answers">
+                      <thead>
+                      <tr>
+                        <th colspan="2">
+                          <h2 class="heading-medium" id="name">
+                            More offers
+                          </h2>
+                        </th>
+                        <th>
+                        </th>
+                      </tr>
+                      </thead>
+
+                      <tbody>
                       <tr>
                         <td>
-                          Details
+                          Allow more offers
                         </td>
                         <!-- Pay in installment content also needs considering -->
-                        <td  style="white-space: pre-wrap;" >{{ data['the-offer-text'] }}</td>
+                        <td>
+                          {% if data['moreoffers'] == 'true'  %}
+                          Yes
+                          {% elif data['moreoffers'] == 'false'  %}
+                          No
+                          {% endif %}
+                        </td>
                         <td class="change-answer">
                           <a href="#">
                             Change <span class="visuallyhidden">Name</span>
@@ -131,71 +177,17 @@ Check your answers
                         </td>
                       </tr>
 
-                      <tr>
-                        <td>
-                          Offer completed by
-                        </td>
-                        <!-- Pay in installment content also needs considering -->
-                        <td>
-                          {{ data['offerDateDay'] }} August 2019
-                        </td>
-                        <td class="change-answer">
-                          <a href="#">
-                            Change <span class="visuallyhidden">Name</span>
-                          </a>
-                        </td>
-                      </tr>
-                  {% endif %}
+                      </tbody>
+                    </table>
 
-              </tbody>
-            </table>
+              {% endif  %}
+        {% endif  %}
 
 
-
-
-              <table class="check-your-answers">
-                <thead>
-                <tr>
-                  <th colspan="2">
-                    <h2 class="heading-medium" id="name">
-                      More offers
-                    </h2>
-                  </th>
-                  <th>
-                  </th>
-                </tr>
-                </thead>
-
-                <tbody>
-                <tr>
-                  <td>
-                    Allow more offers
-                  </td>
-                  <!-- Pay in installment content also needs considering -->
-                  <td>
-                    {% if data['moreoffers'] == 'true'  %}
-                    Yes
-                    {% elif data['moreoffers'] == 'false'  %}
-                    No
-                    {% endif %}
-                  </td>
-                  <td class="change-answer">
-                    <a href="#">
-                      Change <span class="visuallyhidden">Name</span>
-                    </a>
-                  </td>
-                </tr>
-
-                </tbody>
-              </table>
-
-      {% endif %}
-
-
-
+  <!-- show response if no offers or offer was rejected  -->
   <table class="check-your-answers">
 
-    {% if data['offeraccepted'] != 'true'  %}
+    {% if data['offeraccepted'] != 'true'  or  data['defendantmadeoffer'] == 'false'  or  data['claimantusertestingpartone'] == 'true'  %}
         <thead>
         <tr>
           <th colspan="2">
