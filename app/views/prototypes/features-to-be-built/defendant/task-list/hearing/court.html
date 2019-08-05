@@ -47,7 +47,7 @@ Money Claims Prototype
           {% if ( ( data['reject-court'] != 'yes' and data['scenario'] != 6 ) or data['scenario'] == 8 ) and data['scenario'] != 7  %}
 
             {% if data['scenario'] == "ccjsetaside" %}
-                <p>Tell us your preferred location for a hearing, in case one is needed about your CCJ.</p>
+                <p>Tell us your preferred location for a hearing, in case one is needed about the judgment.</p>
             {% else %}
                 <p>Tell us your preferred location for a hearing, in case the claim goes to one.</p>
             {% endif %}
@@ -64,8 +64,10 @@ Money Claims Prototype
 
           {% if data['scenario'] != 8 and data['scenario'] != 7 %}
           <details role="group">
-            <summary role="button" aria-controls="details-content-0" aria-expanded="false">See this court's facilities</summary>
-            <div class="panel" id="details-content-0" aria-hidden="true">
+            <summary role="button" aria-controls="details-content-0" aria-expanded="false">
+              <span class="summary">See this court's facilities</span></summary>
+
+                <div class="panel" id="details-content-0" aria-hidden="true">
 
               <h2 class="heading-small">Loop hearing</h2>
               <p>Loop hearing facilities are available at the ground floor counter.</p>
@@ -191,29 +193,29 @@ Money Claims Prototype
           </div>
         </details>
 
-        <h3 class="heading-medium">Does this court meet your accessibility needs?</h3>
+        <h3 class="heading-medium">Do you want to request a different court?</h3>
 
 
-          <div class="form-group">
-            <fieldset>
-              <div class="multiple-choice">
-                <input id="radio-court-no" type="radio" name="reject-court" value="no">
-                <label for="radio-court-no">Yes</label>
+        <div class="form-group">
+          <fieldset>
+            <div class="multiple-choice" data-target="reason">
+              <input id="radio-court-yes" type="radio" name="reject-court" value="yes">
+              <label for="radio-court-yes">Yes{% if data['scenario'] == 4 %}{% endif %}</label>
+            </div>
+            <div class="panel panel-border-narrow js-hidden" id="reason">
+              <div class="form-group">
+                <label class="form-label" for="court-reason">Briefly explain your reasons - the court will consider them, though it usually accepts the defendant's choice</label>
+                <textarea class="form-control form-control-3-4" rows="3" name="court-reason" type="text" id="court-reason"></textarea>
               </div>
-              <div class="multiple-choice" data-target="reason">
-                <input id="radio-court-yes" type="radio" name="reject-court" value="yes">
-                <label for="radio-court-yes">No{% if data['scenario'] == 4 %} - I want to request a different court{% endif %}</label>
-              </div>
-              <div class="panel panel-border-narrow js-hidden" id="reason">
-                <div class="form-group">
-                  <label class="form-label" for="court-reason">Briefly explain your reasons</label>
-                  <textarea class="form-control form-control-3-4" rows="3" name="court-reason" type="text" id="court-reason"></textarea>
-                </div>
-              </div>
-            </fieldset>
-          </div>
+            </div>
+            <div class="multiple-choice">
+              <input id="radio-court-no" type="radio" name="reject-court" value="no">
+              <label for="radio-court-no">No</label>
+            </div>
+          </fieldset>
+        </div>
         {% else %}
-        <h1 class="heading-large">Do your accessibility needs mean you want to ask for the hearing to be held at a specific court?</h1>
+        <h1 class="heading-large">Do you want to ask for the hearing to be held at a specific court?</h1>
 
         <p>If not, the hearing will be held at the court the claimant chooses.</p>
 
@@ -221,7 +223,7 @@ Money Claims Prototype
           <fieldset>
             <div class="multiple-choice" data-target="reason">
               <input id="radio-court-yes" type="radio" name="reject-court" value="yes">
-              <label for="radio-court-yes">Yes{% if data['scenario'] == 4 %} - I want to request a different court{% endif %}</label>
+              <label for="radio-court-yes">Yes</label>
             </div>
             <div class="panel panel-border-narrow js-hidden" id="reason">
               <div class="form-group">
@@ -229,9 +231,12 @@ Money Claims Prototype
                 <textarea class="form-control form-control-3-4" rows="3" name="court-reason" type="text" id="court-reason"></textarea>
               </div>
             </div>
-            <div class="multiple-choice">
+            <div class="multiple-choice" data-target="claimant-choice">
               <input id="radio-court-no" type="radio" name="reject-court" value="no">
               <label for="radio-court-no">No</label>
+            </div>
+            <div class="panel panel-border-narrow js-hidden" id="claimant-choice" style="padding-bottom:15px;">
+              <p>The hearing will be held at the court the claimant chooses.</p>
             </div>
           </fieldset>
         </div>
@@ -242,19 +247,19 @@ Money Claims Prototype
 
 
           {% if data['scenario'] == 'ccjsetaside' %}
-          <div class="form-group">
-            <p><a class="button" href="/prototypes/prototype-may-2019/defendant/task-list/hearing/dates">Continue</a></p>
-          </div>
+              <div class="form-group">
+                <p><a class="button" href="dates">Continue</a></p>
+              </div>
           {% else %}
-          <div class="form-group">
-            <input type="submit" class="button" value="Save and continue">
-          </div>
+              <div class="form-group">
+                <input type="submit" class="button" value="Save and continue">
+              </div>
           {% endif%}
 
         </form>
 
     </div>
-  {% include 'prototypes/prototype-may-2019/includes/contact.html' %}
+  {% include 'prototypes/features-to-be-built/includes/contact.html' %}
 </main>
 
 <form method="post" action="#" class="for4" style=" float: left;">
