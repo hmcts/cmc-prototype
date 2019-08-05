@@ -35,7 +35,7 @@
             or data['claimant'] == 10.601 or data['claimant'] == 10.61 or data['claimant'] == 10.801 or data['claimant'] == 10.81 or data['claimant'] == 10.82 or data['claimant'] == 3.2
             or data['claimant'] == 10.83 or data['claimant'] == 10.831 or data['claimant'] == 10.832 or data['claimant'] == 10.84 or data['claimant'] == 10.85 or data['claimant'] == 10.9
               or data['claimant'] == 11.1001 or data['claimant'] == 11.1003 or data['claimant'] == 11.101 or data['claimant'] == 11.101 or data['claimant'] == 11.102 or data['claimant'] == 11.103 or data['claimant'] == 11.11 or data['claimant'] == 11.111 or data['claimant'] == 11.12 or data['claimant'] == 11.13 or data['claimant'] == 11.1011 or data['claimant'] == 11.2 or data['claimant'] == 11.21 or data['claimant'] == 11.3
-            or data['claimant'] == 11.4 or data['claimant'] == 11.5 or data['claimant'] == 11.51 or data['claimant'] == 11.6 or data['claimant'] == 11.61 or data['claimant'] == 11.7
+            or data['claimant'] == 11.4 or data['claimant'] == 11.5 or data['claimant'] == 11.51 or data['claimant'] == 11.52 or data['claimant'] == 11.6 or data['claimant'] == 11.61 or data['claimant'] == 11.7
             or data['claimant'] == 12 or data['claimant'] == 13.2 or data['claimant'] == 14.1 or data['claimant'] == 16  or data['claimant'] == 16.1 or data['claimant'] == 17  or data['claimant'] == 17.01  or data['claimant'] == 20 or data['claimant'] == 20.1 or data['claimant'] == 20.2
             or data['claimant'] == 21 or data['claimant'] == 23 or data['claimant'] == 24 or data['claimant'] == 26  or data['claimant'] == 27  or data['claimant'] == 28  or data['claimant'] == 29
             or data['claimant'] == 33  or data['claimant'] == 34  or data['claimant'] == 36  or data['claimant'] == 37
@@ -714,7 +714,7 @@
               </div>
 
 
-              {% elseif data['claimant'] == 11.11 or data['claimant'] == 11.111 or data['claimant'] == 11.12 or data['claimant'] == 11.13 or data['claimant'] == 11.5 or data['claimant'] == 11.51 %}
+              {% elseif data['claimant'] == 11.11 or data['claimant'] == 11.111 or data['claimant'] == 11.12 or data['claimant'] == 11.13 or data['claimant'] == 11.5 or data['claimant'] == 11.51 or data['claimant'] == 11.52 %}
               <div class="status-block single">
 
                 {% if data['claimant'] == 11.5 %}
@@ -726,19 +726,24 @@
 
                 {% endif %}
 
-                {% if data['claimant'] == 11.51 %}
+                {% if data['claimant'] == 11.51 or data['claimant'] == 11.52 %}
 
                 <h2 class="heading-medium">Review Mary Richards' request</h2>
                 <p>Mary Richards has asked for a judge to change the order.</p>
                 <p><a href="">Download the request to see what they asked</a> (PDF, 123KB).</p>
-                <h4 class="heading-small">Comment on Mary Richards' request</h4>
 
+                {% if data['claimant'] == 11.51 %}
+                <h4 class="heading-small">Comment on Mary Richards' request</h4>
                 <p>If you want to comment on the request, email your comments to the court and to Mary Richards before 4pm on {{ now | date( 'add', 12, 'days' ) | date }}.</p>
 
                 <p>The court's email address is: <a href="mailto:moneyclaims@justice.gov.uk">moneyclaims@justice.gov.uk</a></p>
                 <p>Mary Richards' email address is: <a href="mailto:mary.richards@gmail.com">mary.richards@gmail.com</a></p>
 
+                {% else %}
+                <p>You had until 4pm on {{ now | date( 'add', 12, 'days' ) | date }} to send in your comments.</p>
+                <p>You must continue sending the information requested unless you we write to you to say otherwise.</p>
 
+                {% endif %}
 
                 <hr />
 
@@ -2830,6 +2835,7 @@
     <option value="11.4" {% if data['claimant'] == 11.4 %}selected{% endif %}>Order review requested - by other party</option>
     <option value="11.5" {% if data['claimant'] == 11.5 %}selected{% endif %}>Order review requested - by other party (offline)</option>
     <option value="11.51" {% if data['claimant'] == 11.51 %}selected{% endif %}>Order review requested - by other party (double offline)</option>
+    <option value="11.52" {% if data['claimant'] == 11.52 %}selected{% endif %}>Order review requested - by other party (double offline) - past deadline</option>
     <option value="11.6" {% if data['claimant'] == 11.6 %}selected{% endif %}>Order review requested - reviewed by defendant</option>
 
     <option>------- Hearing ----------</option>
@@ -2857,7 +2863,7 @@
     <option value="16.23" {% if data['claimant'] == 16.23 %}selected{% endif %}>Offers tab - New offer received</option>
     <option value="16.25" {% if data['claimant'] == 16.25 %}selected{% endif %}>Offers tab - Rejected - make new offer</option>
     <option value="16.27" {% if data['claimant'] == 16.27 %}selected{% endif %}>Offers tab - Rejected - respond to counter offer - allow new offer</option>
-    <option value="16.28" {% if data['claimant'] == 16.28 %}selected{% endif %}>Offers tab - Rejected by Claimant - always allow new offer</option>
+    <option value="16.28" {% if data['claimant'] == 16.28 %}selected{% endif %}>Offers tab - Rejected by claimant - always allow new offer</option>
 
 
     <option>------- Agreements only ----------</option>
