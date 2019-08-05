@@ -14,7 +14,10 @@ Money Claims Prototype
 
       <div class="govuk-box-highlight">
         <!--  GUY's scenario just for testing -->
-        {% if data['madeandsignedagreement'] == 'true' %}
+        {% if data['offeraccepted'] == 'true' %}
+            <h1 class="bold-large">You’ve settled out of court</h1>
+
+        {% elif data['madeandsignedagreement'] == 'true' %}
         <h1 class="bold-large">You've rejected their response</h1>
 
         {% elif ( data['radio-proceed'] == "judgment" or data['radio-proceed'] == "judgment-pa" or data['confirmation'] == 2 or data['confirmation'] == 2.1 ) %}
@@ -68,17 +71,27 @@ Money Claims Prototype
 
         {% if ( data['radio_select_group'] == "Yes" and data['dqs'] == 'off' ) or ( data['radio-indent-group'] == "accept_stop_claim_settled" ) or data['confirmation'] == 9.1 or data['confirmation'] == 8 %}
         {% else %}
-        <p>
-        <a  class="font-medium" href="../../claimant/correspondence/dqs" target="new" style="color: #FFFFFF" >
-        Download your hearing requirements</a> (PDF, 123KB)</p>
+            {% if data['offeraccepted'] != 'true' %}
+                <p>
+                <a  class="font-medium" href="../../claimant/correspondence/dqs" target="new" style="color: #FFFFFF" >
+                Download your hearing requirements</a> (PDF, 123KB)</p>
+            {% endif %}
         {% endif %}
 
     </div>
     <fieldset>
         <h2 class="heading-medium">What happens next</h2>
 
+        {% if data['offeraccepted'] == 'true' %}
+            <p>You've both signed a settlement agreement.</p>
+            <p>The agreement explains what can happen if either party breaks the terms.</p>
+            <p><a href="../defendant/correspondence/forms/agreement?check=2">Download the agreement</a> (PDF, 123KB)</p>
+
+            <p><a class="button" href='../../claimant?claimant=17'>Go to your account</a></p>
+
+
         <!--  GUY's scenario just for testing -->
-        {% if data['madeandsignedagreement'] == 'true' %}
+        {% elif data['madeandsignedagreement'] == 'true' %}
 
             <p>You need to <a href="forms/dq-form">complete a directions questionnaire</a> form to tell us your requirements in case there's a hearing.</p>
             <p>The claim won't proceed if you don't complete and return the form before 4pm on {{ data | date( 'add', 14, 'days' ) | date }}.</p>
