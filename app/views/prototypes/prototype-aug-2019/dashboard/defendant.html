@@ -1030,7 +1030,7 @@
               </div>
 
 
-              {% elseif data['defendant'] == 12.11 or data['defendant'] == 12.111 or data['defendant'] == 12.12 or data['defendant'] == 12.13 or data['defendant'] == 12.5 or data['defendant'] == 12.51 %}
+              {% elseif data['defendant'] == 12.11 or data['defendant'] == 12.111 or data['defendant'] == 12.12 or data['defendant'] == 12.13 or data['defendant'] == 12.5 or data['defendant'] == 12.51 or data['defendant'] == 12.52 %}
               <div class="status-block single">
 
                 {% if data['defendant'] == 12.5 %}
@@ -1040,12 +1040,14 @@
                 <a href="order-response/review/respond" class="button">Respond to the request</a>
                 <hr />
 
-                {% elseif data['defendant'] == 12.51 %}
+                {% elseif data['defendant'] == 12.51 or data['defendant'] == 12.52 %}
                 <h2 class="heading-medium">Review Jan Clark's request</h2>
                 <p>Jan Clark has asked the court to change the order.</p>
                 <p>A judge will review their request. We'll contact you if the judge makes a new order.</p>
                 <p>Continue doing everything the current order tells you to do unless we tell you a judge has made a new one.</p>
                 <p><a href="">Download the request to see what they asked</a> (PDF, 123KB).</p>
+
+                {% if data['defendant'] == 12.51 %}
                 <h4 class="heading-small">Comment on Jan Clark's request</h4>
 
                 <p>If you want to comment on the request, email your comments to the court and to Jan Clark before 4pm on {{ now | date( 'add', 12, 'days' ) | date }}.</p>
@@ -1053,6 +1055,11 @@
                 <p>The court's email address is: <a href="mailto:moneyclaims@justice.gov.uk">moneyclaims@justice.gov.uk</a></p>
                 <p>Jan Clark's email address is: <a href="mailto:jan.clark@gmail.com">jan.clark@gmail.com</a></p>
 
+                {% else %}
+                <p>You had until 4pm on {{ now | date( 'add', 12, 'days' ) | date }} to send in your comments.</p>
+                <p>You must continue sending the information requested unless you we write to you to say otherwise.</p>
+
+                {% endif %}
                 <hr />
 
                 {% endif %}
@@ -4269,6 +4276,7 @@
     <option value="12.4" {% if data['defendant'] == 12.4 %}selected{% endif %}>Order review requested - by other party</option>
     <option value="12.5" {% if data['defendant'] == 12.5 %}selected{% endif %}>Order review requested - by other party (offline)</option>
     <option value="12.51" {% if data['defendant'] == 12.51 %}selected{% endif %}>Order review requested - by other party (double offline)</option>
+    <option value="12.52" {% if data['defendant'] == 12.52 %}selected{% endif %}>Order review requested - by other party (double offline) - past deadlineeee</option>
     <option value="12.6" {% if data['defendant'] == 12.6 %}selected{% endif %}>Order review requested - reviewed by claimant</option>
 
 
