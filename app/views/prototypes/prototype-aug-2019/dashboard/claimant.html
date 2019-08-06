@@ -714,7 +714,7 @@
               </div>
 
 
-              {% elseif data['claimant'] == 11.11 or data['claimant'] == 11.111 or data['claimant'] == 11.12 or data['claimant'] == 11.13 or data['claimant'] == 11.5 or data['claimant'] == 11.51 or data['claimant'] == 11.52 %}
+              {% elseif data['claimant'] == 11.11 or data['claimant'] == 11.3 or data['claimant'] == 11.111 or data['claimant'] == 11.12 or data['claimant'] == 11.13 or data['claimant'] == 11.5 or data['claimant'] == 11.51 or data['claimant'] == 11.52 %}
               <div class="status-block single">
 
                 {% if data['claimant'] == 11.5 %}
@@ -772,13 +772,12 @@
                 <p><a href="/public/images/order.pdf">Download the order</a> (PDF, 123KB) to find out the details you need to send.</p>
 
                 {% else %}
-                <p>The court has ordered you to send us more details. You need to do this before 4pm on {{ now | date( 'add', 15, 'days' ) | date }}.</p>
+                <p>The court has ordered you to send us more details.</p>
                 <p><a href="/public/images/order.pdf">Download the order</a> (PDF, 123KB) to find out the details you need to send.</p>
 
                 {% endif %}
 
                 <h2 class="heading-small">Deadline for posting the details</h2>
-
                 <p>You must make sure the court and the defendant receive a letter with the details before 4pm on {{ now | date( 'add', 15, 'days' ) | date }}.</p>
 
 
@@ -815,6 +814,14 @@
                 <p>You can ask the court to review it. You need to email your request to the court before 4pm on {{ now | date('add', 12, 'days') | date }}.</p>
                 <p>The court's email address is: <a href="mailto:moneyclaims@justice.gov.uk">moneyclaims@justice.gov.uk</a></p>
                 <p>A judge will consider your request. You should give details of how you want the order changed and the reasons for your request.</p>
+
+                {% elseif data['claimant'] == 11.3 %}
+                <hr />
+                <h2 class="heading-medium">You've asked the court to review the order</h2>
+                <p>We'll tell Mary Richards you've made the request. They'll have until {{ now | date('add', 12, 'days') | date }} to add comments of their own.</p>
+                <p>A judge will then review the order and any comments. We'll contact you both by post to tell you what to do next.</p>
+                <p>Continue doing everything the order tells you to do unless you hear that a judge has changed it.</p>
+                
 
                 {% endif %}
 
@@ -2837,7 +2844,7 @@
     <option value="11.13" {% if data['claimant'] == 11.13 %}selected{% endif %}>Order not re-issued (offline)</option>
     <option value="11.21" {% if data['claimant'] == 11.21 %}selected{% endif %}>Responded to order - not confirmed</option>
     <option value="11.7" {% if data['claimant'] == 11.7 %}selected{% endif %}>Responded to order - confirmed</option>
-<!--     <option value="11.3" {% if data['claimant'] == 11.3 %}selected{% endif %}>Order review requested - by me</option> -->
+    <option value="11.3" {% if data['claimant'] == 11.3 %}selected{% endif %}>Order review requested - by me</option>
     <option value="11.4" {% if data['claimant'] == 11.4 %}selected{% endif %}>Order review requested - by other party</option>
     <option value="11.5" {% if data['claimant'] == 11.5 %}selected{% endif %}>Order review requested - by other party (offline)</option>
     <option value="11.51" {% if data['claimant'] == 11.51 %}selected{% endif %}>Order review requested - by other party (double offline)</option>
