@@ -725,12 +725,15 @@
                 <a href="order-response/review/respond" class="button">Respond to the request</a>
                 <hr />
 
-                {% endif %}
-
-                {% if data['claimant'] == 11.51 or data['claimant'] == 11.52 %}
+                {% elseif data['claimant'] == 11.51 or data['claimant'] == 11.52 %}
 
                 <h2 class="heading-medium">Read Mary Richards' request</h2>
                 <p>Mary Richards has asked for a judge to change the order.</p>
+
+                {% if data['claimant'] == 11.52 %}
+                You've missed the deadline to comment on their request. You needed to comment before 4pm on {{ now | date( 'subtract', 2, 'days' ) | date }}.
+                {% endif %}
+
                 <p>A judge will review their request. We'll contact you by post if the judge makes a new order.</p>
                 <p>Continue doing everything the current order tells you to do unless we tell you a judge has made a new one.</p>
                 <p><a href="">Download Mary Richards' request to see what they asked</a> (PDF, 123KB).</p>
@@ -741,13 +744,6 @@
 
                 <p>The court's email address is: <a href="mailto:moneyclaims@justice.gov.uk">moneyclaims@justice.gov.uk</a></p>
                 <p>Mary Richards' email address is: <a href="mailto:mary.richards@gmail.com">mary.richards@gmail.com</a></p>
-
-                {% else %}
-                <h4 class="heading-small">You've missed the deadline to comment on their request</h4>
-
-                <p>You needed to comment before 4pm on {{ now | date( 'add', 12, 'days' ) | date }}.</p>
-
-                <p>We'll contact you by post to tell you what to do next.</p>
 
                 {% endif %}
 
