@@ -1045,6 +1045,11 @@
                 {% elseif data['defendant'] == 12.51 or data['defendant'] == 12.52 %}
                 <h2 class="heading-medium">Read Jan Clark's request</h2>
                 <p>Jan Clark has asked the court to change the order.</p>
+
+                {% if data['claimant'] == 11.52 %}
+                You've missed the deadline to comment on their request. You needed to comment before 4pm on {{ now | date( 'subtract', 2, 'days' ) | date }}.
+                {% endif %}
+
                 <p>A judge will review their request. We'll contact you by post if the judge makes a new order.</p>
                 <p>Continue doing everything the current order tells you to do unless we tell you a judge has made a new one.</p>
                 <p><a href="">Download Jan Clark's request to see what they asked</a> (PDF, 123KB).</p>
@@ -1057,15 +1062,8 @@
                 <p>The court's email address is: <a href="mailto:moneyclaims@justice.gov.uk">moneyclaims@justice.gov.uk</a></p>
                 <p>Jan Clark's email address is: <a href="mailto:jan.clark@gmail.com">jan.clark@gmail.com</a></p>
 
-                {% else %}
-                <h4 class="heading-small">You've missed the deadline to comment on their request</h4>
-
-                <p>You needed to comment before 4pm on {{ now | date( 'add', 12, 'days' ) | date }}.</p>
-
-                <p>We'll contact you by post to tell you what to do next.</p>
-
-
                 {% endif %}
+
                 <hr />
 
                 {% endif %}
