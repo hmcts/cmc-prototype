@@ -1030,7 +1030,7 @@
               </div>
 
 
-              {% elseif data['defendant'] == 12.11 or data['defendant'] == 12.111 or data['defendant'] == 12.12 or data['defendant'] == 12.13 or data['defendant'] == 12.5 or data['defendant'] == 12.51 or data['defendant'] == 12.52 %}
+              {% elseif data['defendant'] == 12.11 or data['defendant'] == 12.3 or data['defendant'] == 12.111 or data['defendant'] == 12.12 or data['defendant'] == 12.13 or data['defendant'] == 12.5 or data['defendant'] == 12.51 or data['defendant'] == 12.52 %}
               <div class="status-block single">
 
                 {% if data['defendant'] == 12.5 %}
@@ -1045,6 +1045,11 @@
                 {% elseif data['defendant'] == 12.51 or data['defendant'] == 12.52 %}
                 <h2 class="heading-medium">Read Jan Clark's request</h2>
                 <p>Jan Clark has asked the court to change the order.</p>
+
+                {% if data['defendant'] == 12.52 %}
+                <p>You've missed the deadline to comment on their request. You needed to comment before 4pm on {{ now | date( 'subtract', 2, 'days' ) | date }}.</p>
+                {% endif %}
+
                 <p>A judge will review their request. We'll contact you by post if the judge makes a new order.</p>
                 <p>Continue doing everything the current order tells you to do unless we tell you a judge has made a new one.</p>
                 <p><a href="">Download Jan Clark's request to see what they asked</a> (PDF, 123KB).</p>
@@ -1057,15 +1062,8 @@
                 <p>The court's email address is: <a href="mailto:moneyclaims@justice.gov.uk">moneyclaims@justice.gov.uk</a></p>
                 <p>Jan Clark's email address is: <a href="mailto:jan.clark@gmail.com">jan.clark@gmail.com</a></p>
 
-                {% else %}
-                <h4 class="heading-small">You've missed the deadline to comment on their request</h4>
-
-                <p>You needed to comment before 4pm on {{ now | date( 'add', 12, 'days' ) | date }}.</p>
-
-                <p>We'll contact you by post to tell you what to do next.</p>
-
-
                 {% endif %}
+
                 <hr />
 
                 {% endif %}
@@ -1097,7 +1095,6 @@
                 {% endif %}
 
                 <h2 class="heading-small">Deadline for posting the details</h2>
-
                 <p>You must make sure the court and the claimant receive a letter with the details before 4pm on {{ now | date( 'add', 15, 'days' ) | date }}.
 
                 <h2 class="heading-small">Where to post the details</h2>
@@ -1115,7 +1112,7 @@
                 <p>The claimant's address is:</p>
 
                 <p>
-                  Mary Richards <br/>
+                  Jan Clark <br/>
                   12 Garden View<br />
                   Bristol<br />
                   BS4 7FB
@@ -1134,6 +1131,14 @@
                 <p>You can ask the court to review it. You need to email your request to the court before 4pm on {{ now | date('add', 12, 'days') | date }}.</p>
                 <p>The court's email address is: <a href="mailto:moneyclaims@justice.gov.uk">moneyclaims@justice.gov.uk</a></p>
                 <p>A judge will consider your request. You should give details of how you want the order changed and the reasons for your request.</p>
+
+                {% elseif data['defendant'] == 12.3 %}
+                <hr />
+                <h2 class="heading-medium">You've asked the court to review the order</h2>
+                <p>We'll tell Jan Clark you've made the request. They'll have until {{ now | date('add', 12, 'days') | date }} to add comments of their own.</p>
+                <p>A judge will then review the order and any comments. We'll contact you both by post to tell you what to do next.</p>
+                <p>Continue doing everything the order tells you to do unless you hear that a judge has changed it.</p>
+                
 
                 {% endif %}
 
@@ -4278,11 +4283,11 @@
     <option value="12.103" {% if data['defendant'] == 12.103 %}selected{% endif %}>Not responded (other party - claim cancelled)</option>
     <option value="12.2" {% if data['defendant'] == 12.2 %}selected{% endif %}>Responded to order - not confirmed</option>
     <option value="12.9" {% if data['defendant'] == 12.9 %}selected{% endif %}>Responded to order - confirmed</option>
-<!--     <option value="12.3" {% if data['defendant'] == 12.3 %}selected{% endif %}>Order review requested - by me</option> -->
+    <option value="12.3" {% if data['defendant'] == 12.3 %}selected{% endif %}>Order review requested - by me</option>
     <option value="12.4" {% if data['defendant'] == 12.4 %}selected{% endif %}>Order review requested - by other party</option>
     <option value="12.5" {% if data['defendant'] == 12.5 %}selected{% endif %}>Order review requested - by other party (offline)</option>
     <option value="12.51" {% if data['defendant'] == 12.51 %}selected{% endif %}>Order review requested - by other party (double offline)</option>
-    <option value="12.52" {% if data['defendant'] == 12.52 %}selected{% endif %}>Order review requested - by other party (double offline) - past deadlineeee</option>
+    <option value="12.52" {% if data['defendant'] == 12.52 %}selected{% endif %}>Order review requested - by other party (double offline) - past deadline</option>
     <option value="12.6" {% if data['defendant'] == 12.6 %}selected{% endif %}>Order review requested - reviewed by claimant</option>
 
 
