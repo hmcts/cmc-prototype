@@ -14,7 +14,7 @@ Money Claims Prototype
   <div class="grid-row">
     <div class="column-two-thirds">
 
-      <form method="post" action="services/dates" >
+      <form method="post" action="{% if data['contract'] == 'yes' %}goods/dates{% else %}services/dates{% endif %}" >
 
         <h1 class="heading-large">How was your agreement with Mary Richards made?</h1>
 
@@ -27,12 +27,14 @@ Money Claims Prototype
             <input id="radio-2" type="radio" name="company-name" value="no" >
             <label for="radio-2">Verbally</label>
           </div>
+          {% if data['contract'] != 'yes' %}
           <div class="multiple-choice">
             <input id="radio-3" type="radio" name="company-name" value="none" >
             <label for="radio-3">
               Other - for example, by paying for a specific service
             </label>
           </div>
+          {% endif %}
 
         </fieldset>
 
