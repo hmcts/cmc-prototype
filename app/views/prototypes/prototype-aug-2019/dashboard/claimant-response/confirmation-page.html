@@ -26,7 +26,10 @@ Money Claims Prototype
         {% elseif data['radio-indent-group'] == "accept_stop_claim" or data['radio-indent-group'] == "accept_stop_claim_claim_amount" or data['confirmation'] == 1 %}
         <h1 class="bold-large">You've accepted the repayment plan</h1>
 
-        {% elseif data['radio-indent-group'] == "accept_stop_claim_settled" or data['confirmation'] == 8 or data['confirmation'] == 8.1 %}
+        {% elseif data['radio-indent-group'] == "accept_stop_claim_settled" and data['radio_select_group'] == "No" or data['confirmation'] == 8.1 %}
+        <h1 class="bold-large">You haven't proceeded with the claim</h1>
+
+        {% elseif data['radio-indent-group'] == "accept_stop_claim_settled" or data['confirmation'] == 8 %}
         <h1 class="bold-large">You've accepted their response</h1>
 
         {% elseif ( data['claimant-payment-request'] == "Set-date" or data['claimant-payment-request'] == "Immediately" ) and data['radio-indent-group'] == "reject_stop_claim" and data['radio-indent-group2'] != "reject_stop_claim" or data['confirmation'] == 3  or data['confirmation'] == 3.1 or ( data['defendant'] == "org" and data['radio-indent-group'] == "reject_stop_claim" )%}
