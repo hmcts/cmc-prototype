@@ -59,9 +59,11 @@
 
               {% if data['defendant'] == 1 %}
               <div class="status-block single">
-                <h2 class="heading-medium">Jan Clark made a money claim against you</h2>
-                <h3 class="heading-small">You need to respond to this claim</h3>
-                <p>You must respond before 4pm on <span class="dates"></span>.</p>
+                <h2 class="heading-medium">A money claim has been made against you</h2>
+                <h3 class="heading-small">You must respond before 4pm on <span class="dates"></span></h3>
+                <p>A claim for £1,500 has been made against you by Jan Clark.</p>
+                <p>You need to respond to this claim before 4pm on <span class="dates"></span>.</p>
+                <p>Jan Clark could request a County Court Judgment against you if you don't respond.</p>
                 <p><a class="button" href="../defendant/task-list">Respond to the claim</a></p>
                 <p><a href="../defendant/correspondence/forms/claim-form-claimant?check=9">Download claim form</a> (PDF, 123KB)</p>
               </div>
@@ -69,7 +71,8 @@
               {% elseif data['defendant'] == 2 %}
               <div class="status-block single">
                 <h2 class="heading-medium">You requested more time to respond</h2>
-                <p>You now need to respond before 4pm on <span class="dates3"></span>.</p>
+                <h3 class="heading-small">You now need to respond before 4pm on <span class="dates3"></span></h3>
+                <p>Jan Clark could request a County Court Judgment against you if you don't respond.</p>
                 <p><a class="button" href="../defendant/task-list">Respond to the claim</a></p>
                 <p><a href="../defendant/correspondence/forms/claim-form-claimant?check=9">Download claim form</a> (PDF, 123KB)</p>
               </div>
@@ -77,7 +80,7 @@
               {% elseif data['defendant'] == 2.1 %}
               <div class="status-block single">
                 <h2 class="heading-medium">You requested more time to respond</h2>
-                <p>You now need to respond before 4pm on <span class="dates3"></span>.</p>
+                <h3 class="heading-small">You now need to respond before 4pm on <span class="dates3"></span></h3>
                 <p>We've cancelled the claimant's request for a County Court Judgment (CCJ) against you.</p>
                 <p><a class="button" href="../defendant/task-list">Respond to the claim</a></p>
               </div>
@@ -97,7 +100,7 @@
 
               {% elseif data['defendant'] == 3.2 %}
               <h2 class="heading-medium">A County Court Judgment (CCJ) has been issued against you</h2>
-              <h3 class="heading-small">You need to pay the amount in the judgment</h3>
+              <h3 class="heading-small">You need to pay £1,500 immediately</h3>
               <p>We've sent a copy of the judgment to you and to Jan Clark.</p>
               <p>If you pay the debt within one month of the date of judgment, the CCJ is removed from the public register.
                 You can pay £15 to <a href="https://www.gov.uk/government/publications/form-n443-application-for-a-certificate-of-satisfaction-or-cancellation">apply for a certificate</a> that confirms this.</p>
@@ -143,8 +146,6 @@
               <!-- CCJ issued from digital service before 1 month deadline -->
               <h2 class="heading-medium">A County Court Judgment (CCJ) has been issued against you</h2>
               <h3 class="heading-small">You need to pay Jan Clark £1,500 immediately</h3>
-              <p>The CCJ was issued on {{ now |  date("subtract", 2, "month") | date( "D MMMM YYYY" ) }}.</p>
-              <p>It says you need to pay £1,500 now.</p>
               <p>The judgment was issued because Jan Clark made a money claim against you on {{ now |  date("subtract", 21, "day") | date( "D MMMM YYYY" ) }} and you didn't respond.</p>
               <p>If Jan Clark tells us you've settled the claim by 4pm on {{ now |  date("add", 7, "day") | date( "D MMMM YYYY" ) }}, the CCJ will be removed from the public register.</p>
 
@@ -177,7 +178,7 @@
               {% elseif data['defendant'] == 3.4 %}
               <h2 class="heading-medium">We'll post you a copy of the claimant's response</h2>
               <p>The response will explain what you need to do next.</p>
-              <p>We've cancelled the claimant's request for a County Court Judgment (CCJ) against you.</p>
+              <p>We've cancelled the claimant's request for a County Court Judgment against you.</p>
 
 
               {% elseif data['defendant'] == 3.9 %}
@@ -210,7 +211,7 @@
 
               {% elseif data['defendant'] == 3.9012 %}
               <h2 class="heading-medium">You've both signed a settlement agreement</h2>
-              <h3 class="heading-small">You need to make the agreed repayments</h3>
+              <h3 class="heading-small">You need to start making repayments</h3>
               <p>The agreement says you'll repay £1,200 per month starting {% if data['set-month'] %}
                               {{ ( data['set-month'] + ' ' + data['set-day'] + ' ' + data['set-year']) | date('D MMMM YYYY') }}{% else
                               %}{{ now | date('add', 3, 'months') | date('D MMMM YYYY') }}{% endif %}.</p>
@@ -228,7 +229,7 @@
 
               {% elseif data['defendant'] == 3.903 %}
               <h2 class="heading-medium">The claimant accepted your response</h2>
-              <h3 class="heading-small">You need to pay Jan Clark £1,200 immediately</h3>
+              <h3 class="heading-small">You need to pay £1,200 immediately</h3>
               <p>Jan Clark accepted your admission of £1,200.</p>
               <p>You must pay them by {{ now | date('add', 5, 'days') | date }}. Any cheques or transfers must be clear in their account by then.</p>
               <p>If they don't receive the money by then, they can request a County Court Judgment against you.</p>
@@ -239,7 +240,7 @@
               {% elseif data['defendant'] == 3.9031 %}
               <!--  I admit part of the claim - pay immediately - accepted - not paid - CCJ  -->
               <h2 class="heading-medium">A County Court Judgment (CCJ) has been issued against you</h2>
-              <h3 class="heading-small">You need to pay Jan Clark £1,200 immediately</h3>
+              <h3 class="heading-small">You need to pay £1,200 immediately</h3>
               <p>Jan Clark accepted your offer to pay £1,200 immediately. Because you didn't pay within 5 days, they requested a CCJ against you.</p>
               <p>We'll post a copy of the judgment to you and to Jan Clark.</p>
               <h3 class="heading-small">Paying</h3>
@@ -267,7 +268,7 @@
 
               {% elseif data['defendant'] == 3.904 %}
               <h2 class="heading-medium">You've both signed a settlement agreement</h2>
-              <h3 class="heading-small">You need to make the agreed repayments</h3>
+              <h3 class="heading-small">You need to start making repayments</h3>
               <p>The agreement says you'll repay £1,200 by instalments of £{% if data['defendant'] == 5.2 %}200{% else %}250{% endif %} per month starting {{ now | date('add', 1, 'months') | date( 'D MMMM YYYY' ) }}.</p>
               <p><a href="../defendant/correspondence/forms/agreement?check=2">Download the settlement agreement</a> (PDF, 123KB)</p>
               <p>The claimant can't request a County Court Judgment against you unless you break the terms.</p>
@@ -318,7 +319,7 @@
               {% elseif data['defendant'] == 4.01 %}
                                 <!--  I admit part of the claim - pay immediately - accepted - not paid - CCJ  -->
               <h2 class="heading-medium">A County Court Judgment (CCJ) has been issued against you</h2>
-              <h3 class="heading-small">You need to pay the amount in the judgment</h3>
+              <h3 class="heading-small">The judgment explains how you must pay</h3>
                   <p>Jan Clark asked you to sign a settlement agreement. Because you didn't sign it, they requested a CCJ against you.</p>
                   <details>
                     <summary >
@@ -330,24 +331,21 @@
                     </div>
                   </details>
                   <p>We'll post a copy of the judgment to you and to Jan Clark.</p>
-
                   <h3 class="heading-small">Paying</h3>
                   <p>If you pay the debt before 4pm on {{ now | date('add', 16, 'days') | date }}, the CCJ will be removed from the public register.</p>
                   <p><a href="repayment-plan?who=defendant&plan=instalments&after19daydeadline=false" class="">View the judgement repayment plan</a></p>
                   <p><a href="party-details/claimant">Contact Jan Clark</a> if you need their payment details.
                     Make sure you get receipts for any payments.</p>
-
                   <br>
                   <h3 class="heading-small">Download the judgment</h3>
                   <ul class="list">
-                    <li> <a target="_blank"   href="/prototypes/prototype-may-2019/defendant/correspondence/forms/judgment-order?check=1">Download judgment</a> (PDF, 48 KB).</li>
+                    <li> <a target="_blank" href="/prototypes/prototype-may-2019/defendant/correspondence/forms/judgment-order?check=1">Download judgment</a> (PDF, 48 KB).</li>
                   </ul>
-
 
 
               {% elseif data['defendant'] == 4.02 %}
               <h2 class="heading-medium">A County Court Judgment (CCJ) has been issued against you</h2>
-              <h3 class="heading-small">You need to pay the amount in the judgment</h3>
+              <h3 class="heading-small">The judgment explains how you must pay</h3>
                   <p>Jan Clark asked you to sign a settlement agreement. Because you didn't sign it, they requested a CCJ against you.</p>
                   <details>
                     <summary >
@@ -366,19 +364,16 @@
                   <p><a href="party-details/claimant">Contact Jan Clark</a> if you need their payment details.
                     Make sure you get receipts for any payments.</p>
 
-                  <br>
                   <h3 class="heading-small">Download the judgment</h3>
                   <ul class="list">
                     <li> <a target="_blank"   href="/prototypes/prototype-may-2019/defendant/correspondence/forms/judgment-order?check=1">Download judgment</a> (PDF, 48 KB).</li>
                   </ul>
 
 
-
-
               {% elseif data['defendant'] == 4.1 %}
               <!-- I admit part of the claim - rejected - court offer - CCJ  -->
               <h2 class="heading-medium">A County Court Judgment (CCJ) has been issued against you</h2>
-              <h3 class="heading-small">You need to pay the amount in the judgment</h3>
+              <h3 class="heading-small">The judgment explains how you must pay</h3>
               <p>Jan Clark accepted your offer to pay £1,200. They rejected your repayment plan and requested a CCJ against you.</p>
               <p>They accepted a new repayment plan determined by the court, based on the financial details you provided.</p>
               <p><a href="repayment-plan?who=defendant&plan=instalments&after19daydeadline=false" class="">View the judgement repayment plan</a></p>
@@ -404,7 +399,7 @@
               {% elseif data['defendant'] == 4.2 %}
               <!--  I admit part of the claim - rejected - claimant offer - CCJ -->
               <h2 class="heading-medium">A County Court Judgment (CCJ) has been issued against you</h2>
-              <h3 class="heading-small">You need to pay the amount in the judgment</h3>
+              <h3 class="heading-small">The judgment explains how you must pay</h3>
               <p>Jan Clark accepted your offer to pay £1,200. They rejected your repayment plan and requested a CCJ against you.</p>
               <p>They suggested a new repayment plan. The court believes you can afford the claimant's plan, based on the financial details you provided.</p>
               <p><a href="repayment-plan?who=defendant&plan=instalments&after19daydeadline=false" class="">View the judgement repayment plan</a></p>
@@ -440,7 +435,7 @@
 
               {% elseif data['defendant'] == 5.01 %}
               <h2 class="heading-medium">You've both signed a settlement agreement</h2>
-              <h3 class="heading-small">You need to pay the amount in the agreement</h3>
+              <h3 class="heading-small">You need to pay by the agreed date</h3>
               <p>The agreement says you'll repay {% if data['mediation-pilot'] == "on" %}£300{% else %}£1,500{% endif %} by {% if data['set-month'] %}
                               {{ ( data['set-month'] + ' ' + data['set-day'] + ' ' + data['set-year']) | date('D MMMM YYYY') }}{% else
                               %}{{ now | date('add', 3, 'months') | date('D MMMM YYYY') }}{% endif %}.</p>
@@ -458,17 +453,15 @@
 
               {% elseif data['defendant'] == 5.0111 %}
               <h2 class="heading-medium">A County Court Judgment (CCJ) has been issued against you</h2>
-              <h3 class="heading-small">You need to pay the amount in the judgment</h3>
+              <h3 class="heading-small">The judgment explains how you must pay</h3>
               <p>Because you didn't pay on time or didn't pay the correct amount, the claimant requested a CCJ against you.</p>
               <p><a href="repayment-plan?who=defendant&plan=instalments&after19daydeadline=false" class="">View the judgement repayment plan</a></p>
               <p>We'll post a copy of the judgment to you and to Jan Clark.</p>
 
               <h3 class="heading-small">Paying</h3>
               <p>If you pay the debt before 4pm on {{ now | date('add', 16, 'days') | date }}, the CCJ will be removed from the public register.</p>
-
               <p><a href="party-details/claimant">Contact Jan Clark</a> if you need their payment details.
                 Make sure you get receipts for any payments.</p>
-
               <br>
               <h3 class="heading-small">Download the judgment</h3>
               <ul class="list">
@@ -479,7 +472,7 @@
               {% elseif data['defendant'] == 5.012 %}
               <!--  5.012. Any admit - accept - judgement   -->
               <h2 class="heading-medium">A County Court Judgment (CCJ) has been issued against you</h2>
-              <h3 class="heading-small">You need to pay the amount in the judgment</h3>
+              <h3 class="heading-small">The judgment explains how you must pay</h3>
               <p>If a defendant doesn't pay immediately, claimants can request a CCJ even if they accept a repayment plan.</p>
               <p>Jan Clark accepted your repayment plan and requested a CCJ against you.</p>
               <p><a href="repayment-plan?who=defendant&plan=instalments&after19daydeadline=false&defendantsplan=true&" class="">View the judgement repayment plan</a></p>
@@ -500,7 +493,7 @@
               {% elseif data['defendant'] == 5.013 %}
               <!--  5.013. Any admit - accepted - settlement not signed - judgment  -->
               <h2 class="heading-medium">A County Court Judgment (CCJ) has been issued against you</h2>
-              <h3 class="heading-small">You need to pay the amount in the judgment</h3>
+              <h3 class="heading-small">The judgment explains how you must pay</h3>
               <p>Jan Clark accepted your repayment plan. </p>
               <p>They asked you to sign a settlement agreement. Because you didn't sign it, they requested a CCJ against you.</p>
               <p><a href="repayment-plan?who=defendant&plan=instalments&after19daydeadline=false&defendantsplan=true&" class="">View the judgement repayment plan</a></p>
@@ -521,7 +514,7 @@
               {% elseif data['defendant'] == 5.014 %}
               <!--  5.014. I admit all of the claim - rejected - claimant plan - settlement not signed - judgment  -->
               <h2 class="heading-medium">A County Court Judgment (CCJ) has been issued against you</h2>
-              <h3 class="heading-small">You need to pay the amount in the judgment</h3>
+              <h3 class="heading-small">The judgment explains how you must pay</h3>
               <p>Jan Clark asked you to sign a settlement agreement. Because you didn't sign it, they requested a CCJ against you.</p>
               <details>
                 <summary >
@@ -558,7 +551,7 @@
               {% elseif data['defendant'] == 5.021 %}
               <!--   5.021. I admit all the claim - pay immediately - not paid - CCJ issued   -->
               <h2 class="heading-medium">A County Court Judgment (CCJ) has been issued against you</h2>
-              <h3 class="heading-small">You need to pay the amount in the judgment</h3>
+              <h3 class="heading-small">The judgment explains how you must pay</h3>
               <p>You agreed to pay the full {% if data['mediation-pilot'] == "on" %}£300{% else %}£1,500{% endif %} immediately. Because you didn't pay within 5 days, Jan Clark requested a CCJ against you.</p>
               <p>We'll post a copy of the judgment to you and to Jan Clark.</p>
 
@@ -614,7 +607,7 @@
 
               {% elseif data['defendant'] == 5.21 %}
               <h2 class="heading-medium">A County Court Judgment (CCJ) has been issued against you</h2>
-              <h3 class="heading-small">You need to pay the amount in the judgment</h3>
+              <h3 class="heading-small">The judgment explains how you must pay</h3>
               <p>Jan Clark accepted your repayment plan and requested a CCJ against you.</p>
               <p>If a defendant doesn't pay immediately, claimants can request a CCJ even if they accept a repayment
                 plan.</p>
@@ -652,7 +645,7 @@
               {% elseif data['defendant'] == 5.3001 %}
               <!--  I admit all of the claim - rejected - court offer - settlement - not signed - CCJ  -->
               <h2 class="heading-medium">A County Court Judgment (CCJ) has been issued against you</h2>
-              <h3 class="heading-small">You need to pay the amount in the judgment</h3>
+              <h3 class="heading-small">The judgment explains how you must pay</h3>
               <p>Jan Clark asked you to sign a settlement agreement. Because you didn't sign it, they requested a CCJ against you.</p>
               <details>
                 <summary >
@@ -695,7 +688,7 @@
               {% elseif data['defendant'] == 5.301 %}
               <!--   5.301. I admit all the claim - instalment plan payment - court offer (CCJ)   -->
               <h2 class="heading-medium">A County Court Judgment (CCJ) has been issued against you</h2>
-              <h3 class="heading-small">You need to pay the amount in the judgment</h3>
+              <h3 class="heading-small">The judgment explains how you must pay</h3>
               <p>Jan Clark rejected your repayment plan and requested a CCJ against you.</p>
               <p>They accepted a new repayment plan determined by the court, based on the financial details you provided.</p>
 
@@ -717,7 +710,7 @@
               {% elseif data['defendant'] == 5.302 %}
               <!-- 5.302. I admit all the claim - instalment plan payment - claimant offer (CCJ)   -->
               <h2 class="heading-medium">A County Court Judgment (CCJ) has been issued against you</h2>
-              <h3 class="heading-small">You need to pay the amount in the judgment</h3>
+              <h3 class="heading-small">The judgment explains how you must pay</h3>
               <p>Jan Clark rejected your repayment plan and requested a CCJ against you.</p>
               <p>They suggested a new repayment plan. The court believes you can afford the claimant's plan, based on the financial details you provided.</p>
               <p><a href="repayment-plan?who=defendant&plan=instalments&after19daydeadline=false" class="">View the judgement repayment plan</a></p>
