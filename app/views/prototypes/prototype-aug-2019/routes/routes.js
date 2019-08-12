@@ -1,6 +1,17 @@
 var strPath = 'prototypes/prototype-aug-2019/';
 
-module.exports = function(app){
+
+// Find the offers js file
+const offersRouter = require('./offers');
+
+
+module.exports = function(app)
+{
+
+  // Forwards any requests of the /offers URL to the offers Router js file
+  app.use( '/' + strPath + 'offers', offersRouter);
+
+
 
   // Route index page
   app.get('/', function (req, res) {
@@ -11,12 +22,14 @@ module.exports = function(app){
     res.render('index')
   })
 
+
   // add your routes here
   app.get('/postcode', function (req, res, next) {
     res.render('partials/addresses', {
       addresses: mockAddressesFor(req.query.postcode)
     })
   })
+
 
   const defaultState = () => {
     return {
@@ -207,7 +220,7 @@ module.exports = function(app){
     if ( req.session.data['radio-pay-group'] ) {
 
       if ( req.session.data['defendant'] == 'org' && req.session.data['radio-pay-group'] == 'Immediately' ) {
-        
+
         if (req.session.data['return'] == 'less-than' ) {
           res.redirect( '../../paid-what-owe-less-claim-amount/task-list' );
         } else {
@@ -390,7 +403,7 @@ module.exports = function(app){
   app.post( '/' + strPath + 'dashboard/claimant-response/part-admit/task-list/counter-offer/pay-by-set-date', (req, res) => {
 
     if (req.session.data['defendant'] == 'org' ) {
-        
+
         if (req.session.data['return'] == 'less-than' ) {
           res.redirect( '../../../paid-what-owe-less-claim-amount/task-list' );
         } else {
@@ -434,7 +447,7 @@ module.exports = function(app){
     }
 
   })
-  
+
   app.post( '/' + strPath + 'claimant/task-list/their-details/defendant-add', (req, res) => {
 
     if (req.body.addDefendant === undefined) {
