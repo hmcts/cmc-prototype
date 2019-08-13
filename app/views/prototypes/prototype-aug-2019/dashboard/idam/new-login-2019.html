@@ -35,8 +35,6 @@
                           {% endif %}
 
 
-                    {% elif  data['firstoffer'] == 'true'  %}
-                        <form action="/prototypes/prototype-aug-2019/dashboard/claimant?claimant=16.21" method="post">
 
                     {% elif data['offeracceptedbydefendant']  ==  'true'  %}
                         <!--  The claimants offer is accepted by the defendant   -->
@@ -64,9 +62,6 @@
                       {% if  data['firstoffer'] == 'true'  %}
                             <form action="/prototypes/prototype-aug-2019/dashboard/defendant?" method="post">
 
-                      <!--  Offer rejected - Make another offer only  -->
-                      {% elif  data['respondtoclaimantnocounter'] == 'true'  %}
-                            <form action="/prototypes/prototype-aug-2019/dashboard/defendant?defendant=15.031&" method="post">
 
                       <!-- Defendant finds out claimant has accepted their offer  -->
                       {% elif data['claimanthasaccpted']  ==  'true'  %}
@@ -76,6 +71,9 @@
                       {% elif data['claimanthasaccpted']  ==  'false'  %}
                             <form action="/prototypes/prototype-aug-2019/dashboard/defendant?defendant=15.03&" method="post">
 
+                      <!--  Offer rejected - Make another offer only  WRONG   -->
+                      {% elif  data['respondtoclaimantnocounter'] == 'true'  %}
+                            <form action="/prototypes/prototype-aug-2019/dashboard/defendant?defendant=15.031&" method="post">
 
                       {% elif data['respondtoclaimantnocounter'] == 'false'  and  data['respondtoclaimantofferonly'] == 'false'  %}
                             <!--    Defendant responding to coutner offer - is allowed more offers  -->
@@ -93,10 +91,12 @@
 
 
             {% else %}
-              <form action="../../dashboard/new-claim/eligibility/registration" method="get">
+
             {% endif %}
 
 
+
+                <form action="../../signin" method="get">
 
             <input type="hidden" name="control-box" value="{{ data['control-box'] }}"/>
 
