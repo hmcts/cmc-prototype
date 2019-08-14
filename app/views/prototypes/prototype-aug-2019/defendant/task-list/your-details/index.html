@@ -35,13 +35,26 @@ Money Claims Prototype
 
             <div class="form-group">
 
-                <h2 class="heading-medium" style="margin-top: 0.75em">Your name</h2>
 
                 {% if data['defaultccj'] == 'true' %}
                 {% else %}
                     <p>If you change your name here, we'll tell the claimant. It's up to them to decide whether they agree to change it for their claim.</p>
                 {% endif %}
 
+                {% if data['defendantType'] == 'Company' %}
+
+                <div class="form-group">
+                  <h2 class="heading-medium" style="margin-top: 0.75em">Company name</h2>
+                  <input class="form-control " id="claimant_name" name="claimant_name" type="text" value="Richards Roofing Ltd" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="defendant-contact-name">Contact person (optional) </label>
+                  <input class="form-control" id="defendant-contact-name" name="defendant-contact-name" type="text" value="Mary Richards" />
+                </div>
+
+                {% else %}
+
+                <h2 class="heading-medium" style="margin-top: 0.75em">Your name</h2>
                 <fieldset>
                     <div class="form-group-compound address-item form-group">
                         <label class="form-label" for="name-title">Title</label>
@@ -56,6 +69,8 @@ Money Claims Prototype
                         <input class="form-control" value="Richards" id="name-last" />
                     </div>
                 </fieldset>
+
+                {% endif %}
 
             </div>
 
@@ -96,7 +111,7 @@ Money Claims Prototype
 
 
 
-                {% if data['defaultccj'] == 'true' %}
+                {% if data['defaultccj'] == 'true' or data['defendantType'] == 'Company' %}
 
                 {% else %}
                     <h2 class="heading-small">Do you want post about the claim sent to this address?</h2>
@@ -209,6 +224,7 @@ Money Claims Prototype
   <select onchange="window.location.href='?'+this.value">
     <option value="">Type</option>
     <option value="addressType=same" {% if data['addressType'] == 'same' %}selected{% endif %}>Same address</option>
+    <option value="defendantType=Company" {% if data['defendantType'] == 'Company' %}selected{% endif %}>Company</option>
     <option value="addressType=diff" {% if data['addressType'] == 'diff' %}selected{% endif %}>Different correspondence address</option>
     <option value="phoneNumber=provided" {% if data['phoneNumber'] == 'provided' %}selected{% endif %}>Phone number provided</option>
     <option value="phoneNumber=none" {% if data['phoneNumber'] == 'none' %}selected{% endif %}>Phone number not provided</option>
