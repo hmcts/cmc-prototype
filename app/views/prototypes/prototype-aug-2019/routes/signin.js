@@ -20,13 +20,23 @@ const router = express();
               if (req.session.data['theclaimant'] == 'true')
               {
                   // Review the response submitted by the defendant -  part admit defence
+                  if (req.session.data['partadmitstart'] == 'false')
+                  {
+                      res.redirect('/' + strPath +  'dashboard/claimant?claimant=8' );
+                  }
+
 
                   // Review the response submitted by the defendant -  full defence
+                  else if (req.session.data['partadmitstart'] == 'true')
+                  {
+                      res.redirect('/' + strPath +  'dashboard/claimant?claimant=5' );
+                  }
+
 
                   // Offer accepted by defendant.
-                  if (req.session.data['offeracceptedbydefendant'] == 'true')
+                  else if (req.session.data['offeracceptedbydefendant'] == 'true')
                   {
-                      res.redirect('/' + strPath +  'dashboard/defendant?defendant=17.01' );
+                      res.redirect('/' + strPath +  'dashboard/claimant?claimant=17.01' );
                   }
 
                   else if (req.session.data['offerrejectedbydefendant'] == 'true')
@@ -34,22 +44,23 @@ const router = express();
                       // Offer rejected by defendant.  No more offers allowed from the defendant.
                       if (req.session.data['defendantmadeoffer'] == 'true')
                       {
-                          res.redirect('/' + strPath +  'dashboard/defendant?defendant=16.133' );
+                          res.redirect('/' + strPath +  'dashboard/claimant?claimant=16.27' );
                       }
 
                       // Offer rejected by defendant.  Review a counter offer put forward by the defendant.
                       else
                       {
-                          res.redirect('/' + strPath +  'dashboard/defendant?defendant=16.131' );
+                          res.redirect('/' + strPath +  'dashboard/claimant?claimant=16.25' );
                       }
                   }
 
                   // New offer from defendant.  This offer was created separately from any defence or response
                   else if (req.session.data['firstoffer'] == 'true')
                   {
-                      res.redirect('/' + strPath +  'dashboard/defendant?defendant=16.23' );
+                      res.redirect('/' + strPath +  'dashboard/claimant?claimant=16.23' );
                   }
               }
+
 
 
               // DEFENDANT  arrives here from an email prompt
