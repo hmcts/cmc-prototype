@@ -134,6 +134,8 @@ const router = express();
 
 
 
+
+
     // DEFENDANT  -  Respond to the first offer initiated by the claimant
     router.get('/defendant-offer-offer-made-by-claimant', function (req, res)
     {

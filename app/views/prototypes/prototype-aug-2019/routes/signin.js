@@ -87,7 +87,7 @@ const router = express();
                   // Offer rejected by claimant but claimant has made a counter offer. No more offers allowed.
                   else if (req.session.data['respondtoclaimantnocounter'] == 'true')
                   {
-                    res.redirect('/' + strPath +  'dashboard/defendant?defendant=15.032' );
+                    res.redirect('/' + strPath +  'dashboard/defendant?defendant=15.16' );
                   }
 
 
@@ -96,7 +96,7 @@ const router = express();
                       // Offer rejected by claimant but defendant is allowed to make another offer.  Claimant has NOT made a counter offer.
                       if (req.session.data['respondtoclaimantofferonly'] == 'false')
                       {
-                        res.redirect('/' + strPath +  'dashboard/defendant?defendant=15.031' );
+                        res.redirect('/' + strPath +  'dashboard/defendant?defendant=15.15' );
                       }
 
                       // Offer rejected by claimant but claimant has made a counter offere. More offers are allowed.
