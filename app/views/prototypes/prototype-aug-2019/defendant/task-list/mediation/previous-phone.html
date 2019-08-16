@@ -23,7 +23,9 @@ Money Claims Prototype
       <a href="#" class="link-back">Back</a>
 
       <form method="post" action="../../{% if data['source'] != 'order' %}task-list{% else %}../dashboard/order-response/mediation/confirmation-page{% endif %}">
-        <input type="hidden" name="mediation" value="complete" />
+
+      <input type="hidden" name="mediation" value="complete" />
+
 
       {% if data['scenario'] == 3 %}
       <h1 class="heading-large">
@@ -38,6 +40,7 @@ Money Claims Prototype
         <label class="form-label" for="">Phone number</label>
         <input class="form-control" id="phone-claimant" type="number" name="phone-claimant" value="{{data['phone-claimant']}}">
       </div>
+
 
       {% elseif data['scenario'] == 2 %}
       <h1 class="heading-large">
@@ -68,22 +71,24 @@ Money Claims Prototype
               <input class="form-control" id="phone-claimant" type="number" name="phone-claimant" value="{{data['phone-claimant']}}">
             </div>
           </fieldset>
+
+
       {% else %}
       <h1 class="heading-large">
         Can the mediation service use 07123&nbsp;456789 to call you?
       </h1>
 
       <div class="form-group">
-        <fieldset class="inline">
+        <fieldset class="">
           <div class="multiple-choice">
             <input id="radio-yes" type="radio" name="radio-mediation-group-4" value="Yes">
             <label for="radio-yes" data-target="yes-info">Yes</label>
           </div>
-          <div class="multiple-choice" data-target="no">
+          <div class="multiple-choice" data-target="no-to-number">
             <input id="radio-no" type="radio" name="radio-mediation-group-4" value="No">
             <label for="radio-no">No</label>
           </div>
-          <div class="panel panel-border-narrow js-hidden" id="no">
+          <div class="panel panel-border-narrow js-hidden" id="no-to-number">
             <p>Enter a phone number the mediation service can use. We won't give the number to anyone else.</p>
             <input class="form-control" id="phone-claimant" type="number" name="phone-claimant" value="{{data['phone-claimant']}}">
           </div>
