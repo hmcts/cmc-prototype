@@ -1357,6 +1357,7 @@ $('ul.jui-tree__folder-group li a').click(function(){
   $(target).removeClass('js-hidden');
 });
 
+intUploads = 0;
 function upload( docName ) {
 
   if ( $( $('#uploads #' + docName + ' input[type=file]')[0].files.length ) ) {
@@ -1365,7 +1366,7 @@ function upload( docName ) {
       strUpload = '';
 
       if ( docName == 'evidence' ) {
-        strUpload += '<h3 class="heading-small">Exhibit A' + parseInt(i+1) + '</h1>';
+        strUpload += '<h3 class="heading-small">Exhibit A' + ++intUploads + '</h1>';
       }
 
       strUpload +=  '<li class="file desc' + ( docName == 'evidence' ? ' evidence' : '' ) +'"><a href="#">' + $('#uploads #' + docName + ' input[type=file]')[0].files[i].name +'</a><a href="#" class="remove" onclick="$(this).parent().remove();return false;">Remove</a>';
