@@ -192,43 +192,53 @@ h1 {
    </tbody>
  </table>
 
+ <p>This is a County Court Judgment against you.</p>
+
  {% if data['check'] == 1 %}
 <p>You haven't responded to the money claim made against you.</p>
-<p><strong>The court orders you to pay the claimant £1,500 immediately.</strong></p>
+<p>The court orders you to pay the claimant £1,500 immediately.</p>
 
  {% elseif data['check'] == 2 %}
  <p>You haven't responded to the money claim made against you.</p>
- <p><strong>The court orders you to pay the claimant £1,500 immediately, which includes interest to the date of judgment.</strong></p>
+ <p>The court orders you to pay the claimant £1,500 immediately. This amount includes interest charged up to the date on this order.</p>
 
  {% elseif data['check'] == 3 %}
 <p>The claimant accepted your offer.</p>
-<p><strong>The court orders you to pay the claimant £1,250 by instalments of £250 per month.</strong></p>
+<p>The court orders you to pay the claimant £1,250 by instalments of £250 per month.</p>
 <p>The first payment must reach the claimant by {{ now | date('add', 1, 'month') | date }} and on or before this date each month until the debt has been paid.</p>
 
  {% elseif data['check'] == 4 %}
 <p>The claimant accepted your offer.</p>
-<p><strong>The court orders you to pay the claimant £1,250 by {{ now | date('add', 3, 'month') | date }}.</strong></p>
+<p>The court orders you to pay the claimant £1,250 by {{ now | date('add', 3, 'month') | date }}.</p>
 
 {% elseif data['check'] == 5 %}
 <p>The claimant rejected your payment plan. The court has decided an alternative payment plan.</p>
-<p><strong>The court orders you to pay the claimant £1,250 by instalments of £250 per month.</strong></p>
+<p>The court orders you to pay the claimant £1,250 by instalments of £250 per month.</p>
 <p>The first payment must reach the claimant by {{ now | date('add', 1, 'month') | date }} and on or before this date each month until the debt has been paid.</p>
 
 {% elseif data['check'] == 6 %}
 <p>The claimant rejected your payment plan. The court has decided an alternative payment plan.</p>
-<p><strong>The court orders you to pay the claimant £1,250 by {{ now | date('add', 3, 'month') | date }}.</strong></p>
+<p>The court orders you to pay the claimant £1,250 by {{ now | date('add', 3, 'month') | date }}.</p>
 
  {% else %}
-<p>The court orders you to pay the claimant £1,500, plus interest to the date of judgment.</p>
+<p>The court orders you to pay the claimant £1,500. This includes interest charged up to the date on this order.</p>
 <p>You must pay the claimant the total of £1500 immediately.</p>
 
  {% endif %}
 
-<p>Credit reference agencies can see the judgment in the public register. This makes it harder for you to get credit, like a mortgage or mobile phone contract.</p>
+<p>Credit reference agencies can see a County Court Judgment on your record in the public register. This can make it harder for you to get credit, like a mortgage or mobile phone contract.</p>
 
 <h2 class="heading-medium">If you don't pay</h2>
-<p>Your goods may be removed and sold, or other enforcement proceedings may be taken against you.</p>
-<p>You may have to pay the costs of any enforcement action against you.</p>
+<p>The claimant can ask the court to:</p>
+
+<ul class="list list-bullet">
+  <li>send bailiffs to your home or business to take or sell items</li>
+  <li>order your employer to deduct money from your wage to pay the debt</li>
+  <li>freeze assets or money in your business or bank account</li>
+  <li>force you to give them any money you make from selling a piece of land or property</li>
+</ul>
+
+<p>You may have to pay the fee it costs the claimant to ask the court to take these actions.</p>
 
 <h2 class="heading-medium">How to pay</h2>
 
@@ -246,20 +256,30 @@ h1 {
 
 <p>jan.clark@gmail.com</p>
 
-<h2 class="heading-medium">Removing the judgment from the register</h2>
+<h2 class="heading-medium">How to remove a judgment from the register</h2>
+<h4 class="heading-small">Pay in full within one month</h4>
+<p>If you pay in full within one month or you've already paid, you can ask the court to remove the judgment from the register.</p>
+<p>The judgment will be cancelled and won't appear in credit agency searches, though some agencies may not update their records immediately.</p>
+<h4 class="heading-small">Pay in full after one month</h4>
+<p>If you pay in full after one month, you can ask the court to mark the judgment as satisfied.</p>
+<p>Any credit agency that checks the register will see you've paid the money, though some may not update their records immediately.</p>
+  <p>The judgment will remain on the register for 6 years but it'll be marked as satisfied.</p>
 
-<p>If you pay in full within one month, or you have already paid, you can ask the court to remove the judgment from the register. The judgment won't appear in credit agency searches, though some agencies may not update their records immediately. </p>
-<p>If you pay in full after one month, you can ask the court to mark the judgment as satisfied. Any credit agency that checks the register will see you've paid the money, though some may not update their records immediately. The judgment will remain on the register for 6 years but it'll be marked as satisfied.</p>
-<p>If you need proof that the judgment is cancelled or satisfied you can pay £15 to get a certificate (<a href="https://www.gov.uk/government/publications/form-n443-application-for-a-certificate-of-satisfaction-or-cancellation">https://www.gov.uk/government/publications/form-n443-application-for-a-certificate-of-satisfaction-or-cancellation</a>).</p>
+ <h2 class="heading-medium">Get proof that a judgment is cancelled or satisfied</h2>
+ <p>You can pay £15 to get a certificate that proves a judgment is cancelled or satisfied: <a href="https://www.gov.uk/government/publications/form-n443-application-for-a-certificate-of-satisfaction-or-cancellation">https://www.gov.uk/government/publications/form-n443-application-for-a-certificate-of-satisfaction-or-cancellation</a>.</p>
 
- {% if data['check'] == 1 or data['check'] == 2 or data['check'] == 5 or data['check'] == 6 %}
+<p>If you paid in full within one month or had already paid, you can apply for a certificate of cancellation.</p>
+
+<p>If you paid in full after a month, you can apply for a certificate of satisfaction. </p>
+
+{% if data['check'] == 1 or data['check'] == 2 or data['check'] == 5 or data['check'] == 6 %}
 <h2 class="heading-medium">If you believe you don't owe the money</h2>
-<p>You can apply to the court to set aside the judgment.</p>
-<p>To get a judgment set aside, fill in an application notice (<a href="https://www.gov.uk/government/publications/form-n244-application-notice">https://www.gov.uk/government/publications/form-n244-application-notice</a>) and send it to the court.</p>
-<p>You may have to pay a court fee of up to £255. You may be apply to get help with court fees.</p>
-<p>You may have to go to a court hearing to explain why you don't owe the money.</p>
-<p>If you don't go to the hearing, your application could be rejected and you'll have to pay the amount in the judgment.</p>
- {% endif %}
+<p>You can apply to the court to have them set aside the judgment. If they agree to do this, it's removed from your record.</p>
+<p>To apply, complete this form and return it to the court: <a href="https://www.gov.uk/government/publications/form-n244-application-notice">https://www.gov.uk/government/publications/form-n244-application-notice</a>.</p>
+<p>You may have to pay a court fee of up to £255. You might be eligible to get help with court fees.</p>
+<p>The court could ask you go to a hearing to explain why you don't owe the money.</p>
+<p>If you don't go to the hearing, the court could reject your application and order you to pay the amount listed in this judgment.</p>
+{% endif %}
 
 <table class="footer" style="margin-top: 400px">
   <tbody>
