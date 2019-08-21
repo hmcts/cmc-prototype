@@ -621,7 +621,7 @@
                 <hr/>
 
                 <h2 class="heading-medium">View the defendant's response to the order</h2>
-                <p><a href="order-response/view?party=claimant" class="button secondary-button">See the details they sent the court</a></p>
+                <p><a href="order-response/view?party=defendant" class="button secondary-button">See the details they sent the court</a></p>
 
                 {% if data['claimant'] == 11.6 %}
                 <h3 class="heading-small">View the defendant's response to your request to review the order</h3>
@@ -639,8 +639,8 @@
                 <ul class="list list-bullet">
                   <li>any documents relevant to the case, like contracts, agreements or letters</li>
                   <li>witness statements</li>
-                  <li>[generic upload]</li>
-                  <li>confirm you have [done a generic thing]</li>
+                  <li>additional information listed in the order</li>
+                  <li>confirmation you've completed additional actions listed in the order</li>
                 </ul>
 
                 <p><a href="order-response?party=defendant&generic=true" class="button" style="margin-bottom: 15px">Send us the details</a></p>
@@ -649,8 +649,8 @@
                 <p><a href="/public/images/order.pdf">Download the court's order</a> (PDF, 123KB) if you want to see the full legal document that sets out these instructions.</p>
                 <hr />
 
-                <h2 class="heading-medium">View the claimant's response to the order</h2>
-                <p><a href="order-response/view?party=claimant" class="button secondary-button">See the details they sent the court</a></p>
+                <h2 class="heading-medium">View the defendant's response to the order</h2>
+                <p><a href="order-response/view?party=defendant" class="button secondary-button">See the details they sent the court</a></p>
               </div>
 
 
@@ -681,7 +681,7 @@
                 <hr/>
 
                 <h2 class="heading-medium">View the defendant's response to the order</h2>
-                <p><a href="order-response/view?party=claimant" class="button secondary-button">See the details they sent the court</a></p>
+                <p><a href="order-response/view?party=defendant" class="button secondary-button">See the details they sent the court</a></p>
               </div>
 
               {% elseif data['claimant'] == 11.1011 %}
@@ -752,13 +752,18 @@
                 <p><a href="">Download Mary Richards' request to see what they asked</a> (PDF, 123KB).</p>
 
                 {% if data['claimant'] == 11.51 %}
-                <h4 class="heading-small">Comment on Mary Richards' request</h4>
-                <p>If you want to comment on the request, email your comments to the court and to Mary Richards before 4pm on {{ now | date( 'add', 12, 'days' ) | date }}.</p>
 
-                <p>Include the claim number (352MC733) in the emails.</p>
+                <details>
+                  <summary><span class="summary">How to comment on Mary Richards' request</span></summary>
+                    <div class="panel">
+                      <p>If you want to comment on the request, email your comments to the court and to Mary Richards before 4pm on {{ now | date( 'add', 12, 'days' ) | date }}.</p>
 
-                <p>The court's email address is: <a href="mailto:moneyclaims@justice.gov.uk">moneyclaims@justice.gov.uk</a></p>
-                <p>Mary Richards' email address is: <a href="mailto:mary.richards@gmail.com">mary.richards@gmail.com</a></p>
+                      <p>Include the claim number (352MC733) in the emails.</p>
+
+                      <p>The court's email address is: <a href="mailto:moneyclaims@justice.gov.uk">moneyclaims@justice.gov.uk</a></p>
+                      <p>Mary Richards' email address is: <a href="mailto:mary.richards@gmail.com">mary.richards@gmail.com</a></p>
+                    </div>
+                </details>
 
                 {% endif %}
 
@@ -896,7 +901,7 @@
               </div>
 
 
-              {% elseif data['claimant'] == 14.1 %}
+              {% elseif data['claimant'] == 14.4 %}
               <div>
                 <h2 class="heading-medium">The court has set a hearing date</h2>
                 <table>
@@ -2857,10 +2862,13 @@
     <option value="11.6" {% if data['claimant'] == 11.6 %}selected{% endif %}>Order review requested - reviewed by defendant</option>
 
     <option>------- Hearing ----------</option>
-    <option value="14.1" {% if data['claimant'] == 14.1 %}selected{% endif %}>Hearing date set - details</option>
+    <option value="14.1" {% if data['claimant'] == 14.1 %}selected{% endif %}>TODO - Pay hearing fee</option>
+    <option value="14.2" {% if data['claimant'] == 14.2 %}selected{% endif %}>TODO - Pay hearing fee - sanctions order</option>
+    <option value="14.3" {% if data['claimant'] == 14.3 %}selected{% endif %}>TODO - Hearing fee paid</option>
+    <option value="14.4" {% if data['claimant'] == 14.4 %}selected{% endif %}>Hearing date set - details</option>
+    <option value="14.5" {% if data['claimant'] == 14.5 %}selected{% endif %}>TODO - Bundle ready?</option>
 
     <option>-------  Offers  ----------</option>
-
     <!--
     <option value="11.00001" {% if data['claimant'] == 11.00001 %}selected{% endif %}>Claimant - Make first offer</option>
     <option value="11" {% if data['claimant'] == 11 %}selected{% endif %}>Offer from defendant </option>
@@ -2895,6 +2903,7 @@
     <option value="20.1" {% if data['claimant'] == 20.1 %}selected{% endif %}>Settled - paid in full - cancelled</option>
     <option value="20.2" {% if data['claimant'] == 20.2 %}selected{% endif %}>Settled - paid in full - satisfied</option>
     <option value="21" {% if data['claimant'] == 21 %}selected{% endif %}>Settled - discontinued / not proceeded</option>
+    <option value="21" {% if data['claimant'] == 21 %}selected{% endif %}>TODO - Ended - didn't pay fee</option>
 
 
     <option>------- CCJ set aside ----------</option>
