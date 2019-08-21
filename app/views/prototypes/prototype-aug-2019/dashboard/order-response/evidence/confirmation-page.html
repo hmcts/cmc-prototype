@@ -18,9 +18,18 @@ Money Claims Prototype
 
     <p>We’ve told the {% if data[‘party’] == ‘claimant’ %}defendant{% else %}claimant{% endif %} that you’ve uploaded evidence. They can look at it if they want to.</p>
 
-    <p>You still need to <a href="../witness-statements?evidence=complete">upload your witness statements</a> or <a href="../finished">tell us you've nothing else to upload</a>. If you've not finished, you can upload more evidence until {{ now | date('add', 14, 'days') | date }}.</p>
+    <p>You still need to:</p>
+    <ol class="list list-bullet">
+      <li><a href="../generic-upload?evidence=complete">upload additional information requested by the court</a></li>
+      <li><a href="../generic-confirm?evidence=complete">confirm you've completed additional actions ordered by the court</a></li>
+      <li><a href="../witness-statements/statement-builder?evidence=complete">state your version of events</a></li>
+      <li><a href="../witness-statements?evidence=complete">upload any third-party witness statements</a></li>
+      <li>or <a href="../finished">tell us you've nothing else to upload</a></li>
+    </ol>
 
-    <a href="../../home?dashboard={% if data['party'] == 'defendant' %}2.71{% else %}1.28{% endif %}&evidence=complete" class="button">Go to your account</a>
+    <p>If you've not finished, you can upload more documents until {{ now | date('add', 14, 'days') | date }}.</p>
+
+    <a href="../../home?dashboard={% if data['party'] == 'defendant' %}2.7102{% else %}1.202{% endif %}&evidence=complete" class="button">Go to your account</a>
   
     {% include "includes/contact.html" %}
   </fieldset>

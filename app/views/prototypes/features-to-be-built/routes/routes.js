@@ -2,6 +2,7 @@ var strPath = 'prototypes/features-to-be-built/';
 
 module.exports = function(app){
 
+
   // Route index page
   app.get('/', function (req, res) {
     res.render('index')
@@ -19,6 +20,7 @@ module.exports = function(app){
   })
 
   const defaultState = () => {
+    
     return {
       claim: {
         css_class: "not-started",
