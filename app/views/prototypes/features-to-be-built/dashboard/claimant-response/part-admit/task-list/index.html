@@ -44,9 +44,9 @@
                 </td>
                 <td class="numeric" id="task-status" scope="col" id="col-status">
                   {% if data.their_response=="complete" %}
-                  {% include "includes/task_status_finished.html" %}
+                      {% include "includes/task_status_finished.html" %}
                   {% else %}
-                  {% include "includes/task_status_incomplete.html" %}
+                      {% include "includes/task_status_incomplete.html" %}
                   {% endif %}
                 </td>
               </tr>
@@ -55,6 +55,10 @@
           </table>
           <br>
           <br>
+
+
+
+
           <table id="table-of-tasks">
             <thead>
               <tr>
@@ -67,22 +71,19 @@
                 <th class="numeric" id="task-status" scope="col" id="col-status"></th>
               </tr>
             </thead>
+
             <tbody>
              <tr id="completing-your-claim">
               <td class="task">
                 <a href="task-list/amount-owed{{formQuery}}">
-                  {% if data[“mediation-pilot”]==“on” %}
-                  <span class="task-name">Accept or reject the £{{ data['owe-amount'] or '200' }}</span>
-                  {%else%}
-                  <span class="task-name">Accept or reject the £{{ data['owe-amount'] or '1,200' }}</span>
-                  {% endif %}
+                  <span class="task-name">Accept or reject the £{{ data['owe-amount'] or '800' }}</span>
                 </a>
               </td>
               <td class="numeric" id="task-status" scope="col" id="col-status">
                 {% if data.amount_owed=="complete" %}
-                {% include "includes/task_status_finished.html" %}
+                    {% include "includes/task_status_finished.html" %}
                 {% else %}
-                {% include "includes/task_status_incomplete.html" %}
+                    {% include "includes/task_status_incomplete.html" %}
                 {% endif %}
               </td>
             </tr>
@@ -102,7 +103,10 @@
                 {% endif %}
               </td>
             </tr>
-             {%elif data.radio_select_group_owed=="No" %}
+
+
+
+             {% elif data.radio_select_group_owed=="No" %}
             <tr id="their-details">
               <td class="task">
                 <a href="task-list/request-mediation{{formQuery}}">
@@ -119,6 +123,10 @@
             </tr>
              {% else %}
              {% endif %}
+
+
+
+
 
     {%if data['radio-indent-group'] == "reject_stop_claim" %}
              <tr id="your-details">
@@ -189,8 +197,44 @@
 
           </tbody>
         </table>
-        <br>
 
+
+
+        {% if data.radio_select_group_owed =="No" and data['dqs'] != 'off' %}
+        <br />
+        <br />
+        <table id="table-of-tasks">
+          <thead>
+            <tr>
+              <th scope="col" id="col-task">
+                <span class="task-group">
+                  <span class="group-number" id="task-number"></span>
+                  Your hearing requirements
+                </span>
+              </th>
+              <th class="numeric" id="task-status" scope="col" id="col-status"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="task">
+               <a href="../../../defendant/task-list/hearing/support?scenario=4&party=claimant">
+                 <span class="task-name">Give us details in case there's a hearing</span>
+               </a>
+             </td>
+              <td class="numeric" id="task-status" scope="col" id="col-status">
+              {% if data.hearing=="complete" %}
+              {% include "includes/task_status_finished.html" %}
+              {% else %}
+              {% include "includes/task_status_incomplete.html" %}
+              {% endif %}
+            </td>
+          </tr>
+        </tbody>
+        </table>
+      {% endif %}
+
+        <br>
         <br>
         <table id="table-of-tasks" class="submit">
           <thead>
@@ -232,5 +276,14 @@
       <option value="org" {% if data['defendant'] == 'org' %}selected{% endif %}>Organisation</option>
     </select>
   </form>
+
+  <form method="post"  action="#" class="for4" style=" float: left;">
+    <select onchange="window.location.href='?dqs='+this.value">
+      <option value="">Hearing requirements</option>
+      <option value="on" {% if data['dqs'] != 'off' %}selected{% endif %}>DQs on</option>
+      <option value="off" {% if data['dqs'] == 'off' %}selected{% endif %}>DQs off</option>
+    </select>
+  </form>
+
 
   {% endblock %}
