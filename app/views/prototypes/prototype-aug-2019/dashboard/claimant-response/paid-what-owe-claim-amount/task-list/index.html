@@ -111,7 +111,7 @@
 
 
 
-            {% if data.radio_select_group=="No" %}
+            {% if data.radio_select_group=="No" and data.dqs != "off" %}
 
             <table id="table-of-tasks">
               <thead>
@@ -183,6 +183,15 @@
     </div>
 
 </main>
+
+<form method="post"  action="#" class="for4" style=" float: left;">
+  <select onchange="window.location.href='?dqs='+this.value">
+    <option value="">Hearing requirements</option>
+    <option value="on" {% if data['dqs'] != 'off' %}selected{% endif %}>DQs on</option>
+    <option value="off" {% if data['dqs'] == 'off' %}selected{% endif %}>DQs off</option>
+  </select>
+</form>
+
 {% endblock %}
   {% block extra_js_1 %}<!-- ticky list javascript one -->{% endblock %}
   {% block extra_js_2 %}<!-- ticky list javascript two -->{% endblock %}

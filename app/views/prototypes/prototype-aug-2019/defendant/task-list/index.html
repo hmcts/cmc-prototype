@@ -377,7 +377,7 @@
 
 
 
-          {% if data['response'] == 'DEFENCE' or data['response'] == 'PART-ADMIT' %}
+          {% if ( data['response'] == 'DEFENCE' or data['response'] == 'PART-ADMIT' ) and data['dqs'] != 'off' %}
             <br>
             <table id="table-of-tasks">
               <thead>
@@ -470,6 +470,14 @@
     <option value="">Defendant type</option>
     <option value="indi" {% if data['defendant'] == 'indi' %}selected{% endif %}>Individual</option>
     <option value="org" {% if data['defendant'] == 'org' %}selected{% endif %}>Organisation</option>
+  </select>
+</form>
+
+<form method="post"  action="#" class="for4" style=" float: left;">
+  <select onchange="window.location.href='?dqs='+this.value">
+    <option value="">Hearing requirements</option>
+    <option value="on" {% if data['dqs'] != 'off' %}selected{% endif %}>DQs on</option>
+    <option value="off" {% if data['dqs'] == 'off' %}selected{% endif %}>DQs off</option>
   </select>
 </form>
 
