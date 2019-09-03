@@ -53,11 +53,11 @@ Money Claims Prototype
             {% endif %}
 
                 Download your response
-                {% if data['radio_select_group2'] == "defend_now" or data['confirmation']== 12 %}
-                    and hearing requirements<br />
-                {% endif %}
                 {% if data['confirmation'] == 9 or data['counter'] == 'SET-OFF-COUNTER' or data['counter'] == 'FULL-COUNTER' %}
                     and counterclaim
+                {% endif %}
+                {% if ( data['radio_select_group2'] == "defend_now" or data['confirmation']== 12 ) and data['dqs'] != 'off' %}
+                    and hearing requirements<br />
                 {% endif %}
                  (PDF, 123KB)
               </a>
@@ -477,6 +477,8 @@ Money Claims Prototype
 
           {% if data['radio-indent-group']=="Yes" or data['resolve_dispute']== "complete" %}
 
+          <p>We’ll ask Jan Clark if they want to try mediation. If they agree, we'll contact you with a date for an appointment. If not, we’ll tell you what to do.</p>
+
           {% if data['mediation-pilot']=="on" %}
 					<p>If they reject your response and agree to try mediation we'll contact you to arrange a call with the mediator.</p>
             <p>If they reject your response and don't want to try mediation, the court will review the case. You might have to go to a hearing.</p>
@@ -619,5 +621,13 @@ Money Claims Prototype
 </a>
 
 -->
+
+<form method="post"  action="#" class="for4" style=" float: left;">
+  <select onchange="window.location.href='?dqs='+this.value">
+    <option value="">Hearing requirements</option>
+    <option value="on" {% if data['dqs'] != 'off' %}selected{% endif %}>DQs on</option>
+    <option value="off" {% if data['dqs'] == 'off' %}selected{% endif %}>DQs off</option>
+  </select>
+</form>
 
 {% endblock %}
