@@ -36,7 +36,7 @@
             or data['claimant'] == 10.83 or data['claimant'] == 10.831 or data['claimant'] == 10.832 or data['claimant'] == 10.84 or data['claimant'] == 10.85 or data['claimant'] == 10.9
               or data['claimant'] == 11.1001 or data['claimant'] == 11.1003 or data['claimant'] == 11.101 or data['claimant'] == 11.101 or data['claimant'] == 11.102 or data['claimant'] == 11.103 or data['claimant'] == 11.11 or data['claimant'] == 11.111 or data['claimant'] == 11.12 or data['claimant'] == 11.13 or data['claimant'] == 11.1011 or data['claimant'] == 11.2 or data['claimant'] == 11.21 or data['claimant'] == 11.3 or data['claimant'] == 11.31
             or data['claimant'] == 11.4 or data['claimant'] == 11.41 or data['claimant'] == 11.42 or data['claimant'] == 11.5 or data['claimant'] == 11.51 or data['claimant'] == 11.52 or data['claimant'] == 11.6 or data['claimant'] == 11.61 or data['claimant'] == 11.7
-            or data['claimant'] == 12 or data['claimant'] == 13.2 or data['claimant'] == 14.1 or data['claimant'] == 16  or data['claimant'] == 16.1 or data['claimant'] == 17  or data['claimant'] == 17.01  or data['claimant'] == 20 or data['claimant'] == 20.1 or data['claimant'] == 20.2
+            or data['claimant'] == 12 or data['claimant'] == 13.2 or data['claimant'] == 14.1 or data['claimant'] == 14.2 or data['claimant'] == 14.3 or data['claimant'] == 14.4 or data['claimant'] == 16  or data['claimant'] == 16.1 or data['claimant'] == 17  or data['claimant'] == 17.01  or data['claimant'] == 20 or data['claimant'] == 20.1 or data['claimant'] == 20.2
             or data['claimant'] == 21 or data['claimant'] == 23 or data['claimant'] == 24 or data['claimant'] == 26  or data['claimant'] == 27  or data['claimant'] == 28  or data['claimant'] == 29
             or data['claimant'] == 33  or data['claimant'] == 34  or data['claimant'] == 36  or data['claimant'] == 37
             or data['claimant'] == 16.14  or  data['claimant'] == 16.15%}
@@ -1019,6 +1019,54 @@
               <div>
                 <p>A mediator will contact both you and the defendant within 14 days to try to arrange a call.</p>
               </div>
+
+
+              {% elseif data['claimant'] == 14.1 %}
+              <h2 class="heading-medium">Everyone has finished uploading documents</h2>
+
+              <h2 class="heading-small">You need to pay the hearing fee</h2>
+              <p>You need to pay £115 before 4pm(?) on {{ now | date( 'add', 33, 'days' ) | date }}.</p>
+
+              <p><a href="hearing-fee" class="button">Pay hearing fee</a></p>
+
+              {% import "prototypes/prototype-aug-2019/includes/fee-table.html" as feeTable %}
+              {{ feeTable.show( 'hearing' ) }}
+      
+              <hr />
+              <h2 class="heading-medium">View the defendant's response to the order</h2>
+              <p><a href="order-response/view?party=defendant" class="button secondary-button">See the details they sent the court</a></p>
+
+
+
+              {% elseif data['claimant'] == 14.2 %}
+              <h2 class="heading-medium">You missed the first deadline to respond to the court</h2>
+
+              <h2 class="heading-small">You need to pay the hearing fee</h2>
+              <p>You need to pay £115 before 4pm(?) on {{ now | date( 'add', 12, 'days' ) | date }}.</p>
+
+              <h2 class="heading-small">If you don't pay the fee</h2>
+              <p>The court will cancel your claim after 4pm on {{ now | date( 'add', 12, 'days' ) | date }}.</p>
+
+              <p><a href="hearing-fee" class="button">Pay hearing fee</a></p>
+
+              {% import "prototypes/prototype-aug-2019/includes/fee-table.html" as feeTable %}
+              {{ feeTable.show( 'hearing' ) }}
+    
+              <h2 class="heading-small">See the full legal document</h2>
+              <p><a href="../defendant/correspondence/forms/sanction-order">Download the court's order</a> (PDF, 123KB)</p>
+
+              <hr />
+              <h2 class="heading-medium">View the defendant's response to the order</h2>
+              <p><a href="order-response/view?party=defendant" class="button secondary-button">See the details they sent the court</a></p>
+
+
+
+
+              {% elseif data['claimant'] == 14.3 %}
+              <h2 class="heading-medium">Hearing fee received</h2>
+              <p>We'll contact you when we set a hearing date. We'll explain how to prepare.</p>
+
+
 
               {% elseif data['claimant'] == 15 %}
               <h2 class="heading-medium">Wait for a judge to review the case</h2>
