@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+
+{% block content %}
+
+
+<main id="content" role="main">
+
+  {% include "includes/phase_banner_beta.html" %}
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+      <a href="#" onclick="history.go(-1)" class="link-back">Back</a>
+
+      <div class="govuk-box-highlight">
+          {% if data['lower-amount']=="true" %}
+              <h1 class="heading-large">
+                Contact Jan Clark to settle the claim
+              </h1>
+          {% else %}
+              <h1 class="heading-large">
+                Contact Jan Clark to arrange payment
+              </h1>
+          {% endif %}
+      </div>
+
+      <p>Make sure you get receipts for any payments.</p>
+
+      <p><a href="../../party-details/claimant">Get Jan Clark's contact details</a></p>
+
+      <p>We'll contact you when they confirm you've paid.</p>
+
+
+  {% include 'prototypes/prototype-sep-2019/includes/contact.html' %}
+</main>
+
+<form method="post"  action="#" class="form" style="float: left;">
+  <select id="control-box2" name="control-box2" onchange="window.location.href='settle-out-of-court?beforeccjdeadline='+this.value">
+    <option value="true">Defendant</option>
+    <option value="true" >- Before 1 month CCJ deadline</option>
+    <option value="false">- After 1 month CCJ deadline</option>
+  </select>
+</form>
+
+
+{% endblock %}

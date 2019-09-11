@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% import 'prototypes/prototype-sep-2019/includes/upload.html' as upload %}
+{% block content %}
+
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <a href="#" class="link-back">Back</a>
+
+    <form method="post" action="generic-upload/check-and-send" class="form">
+
+      <div class="form-group">
+        <h1 class="heading-large">Upload additional information requested by the court</h1>
+        <p>From the order:</p>
+        <p>Please provide a copy of the roofing felt manufacturer's fitting instrucitons which you stated {% if data['party'] == "defendant" %}you followed acurately{% else %}was not followed{% endif %}.</p>
+        
+        {{ upload.form('generic', 'Check and submit' ) }}
+
+      </div>
+    </form>
+
+    </div>
+  </form>
+</div>
+</div>
+{% include 'prototypes/prototype-sep-2019/includes/contact.html' %}
+</main>
+{% endblock %}

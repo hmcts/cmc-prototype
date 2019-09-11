@@ -1,0 +1,91 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="2" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <a href="#" class="link-back">Back</a>
+
+      <h1 class="heading-large">
+
+      {% if data['counter'] == 'SET-OFF' %}
+        Explain why they owe you £{{ data['totalSum'] or '500' }}
+      {% else %}
+        Briefly explain your counterclaim
+      {% endif %}
+      </h1>
+
+
+
+      {% if data['counter'] == 'FULL-COUNTER' %}
+      <o>You need to explain:</p>
+      <ul class="list-bullet">
+        <li>why you don't owe them any money</li>
+        <li>why they owe you £{{ data['totalSum'] or '2,000' }}</li>
+      </ul>
+        <br />
+
+
+      {% elseif data['counter'] == 'SET-OFF' and data['response'] == 'PART-ADMIT' %}
+      <o>You need to explain:</p>
+      <ul class="list-bullet">
+        <li>why you don't owe them the full £1,500</li>
+        <li>why they owe you £{{ data['totalSum'] or '2,000' }}</li>
+      </ul>
+        <br />
+
+      {% elseif data['counter'] == 'SET-OFF' and data['response'] == 'STATES-PAID' and data['owe-amount'] < 1500 %}
+      <ul class="list-bullet">
+        <li>why you don't owe them the full £1,500</li>
+        <li>why they owe you £{{ data['totalSum'] or '500' }}</li>
+      </ul>
+        <br />
+
+      {% elseif data['counter'] == 'SET-OFF-COUNTER' and data['response'] == 'PART-ADMIT' %}
+      <o>You need to explain:</p>
+      <ul class="list-bullet">
+        <li>why you don't owe them the full £1,500</li>
+        <li>why they owe you £{{ data['totalSum'] or '2,000' }}</li>
+      </ul>
+        <br />
+      {% elseif data['counter'] == 'SET-OFF-COUNTER' %}
+      <o>You need to explain why they owe you £{{ data['totalSum'] or '2,000' }}</p>
+
+
+      {% endif %}
+
+
+
+      <p>Don't give us a detailed timeline - we'll ask for that later.</p>      
+
+      <form method="post" action="timeline" class="form">
+
+      <fieldset>
+        <legend class="visuallyhidden">
+          Why you're owed the money
+        </legend>
+        <textarea class="form-control form-control-3-4 form-control-large"
+        id="counter-reason"
+        rows="3"
+        name="counter-reason"
+        type="text"
+        style="width: 100%"
+        value="">{{data['counter-reason']}}</textarea>
+      </fieldset>
+
+      <div class="form-group">
+        <input type="submit" class="button" value="Save changes"/>
+      </div>
+
+      </form>
+    </div>
+  {% include 'prototypes/prototype-sep-2019/includes/contact.html' %}
+</main>
+{% endblock %}

@@ -1,0 +1,69 @@
+{% extends "layout_task-list.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block home_link %} ../../task-list {% endblock %}
+{% block proposition_header %}
+{% set my_account="1" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% import 'prototypes/prototype-sep-2019/includes/address.html' as address %}
+
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}
+  {% else %}
+  <a href="#" class="link-back">Back</a>
+  {% endif %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+      <form
+        name="aspnetForm"
+        method="post"
+        onsubmit="multiNavigation('correspondence-address', ['Yes','No'], ['email', '{% if data['defendant-type'] == 'Company' or data['defendant-type'] == 'Organisation' %}company-address{% else %}email{% endif %}' ]);return false;"
+        id="aspnetForm"
+        autocomplete="off">
+
+        <h1 class="heading-large">
+          {% if data['defendant-type'] == 'Company' or data['defendant-type'] == 'Organisation' %}
+            Has the defendant asked for post to be sent to a specific address?
+          {% else %}
+            Has the defendant asked for post about the claim to be sent to a different address?
+          {% endif %}
+
+        </h1>
+
+
+
+        <div class="form-group">
+          <div class="multiple-choice" data-target="contact-by-phone">
+            <input type="radio" id="add-correspondence" name="correspondence-address" value="Yes" {{ checked("correspondence-address", "Yes") }}>
+            <label for="add-correspondence">Yes</label>
+          </div>
+          <div class="panel panel-border-narrow js-hidden" id="contact-by-phone">
+            <div id="addressManualWrapper">
+              <h2 class="heading-small">Enter the address</h2>
+
+             {% if data['defendant-type'] != 'Company' %}This is known as an 'address for service'. It cannot be their work address, or a solicitor's address.{% endif %}</p>
+             {{ address.lookup('service') }}
+            </div>
+          </div>
+           <div class="multiple-choice" data-target="correspondence-address">
+            <input type="radio" id="no-correspondence" name="correspondence-address" value="No" {{ checked("correspondence-address", "No") }} >
+            <label for="no-correspondence">No</label>
+          </div>
+        </div>
+
+
+    <div class="form-group">
+      <input type="submit" class="button" value="Save and continue"/>
+    </div>
+
+  </form>
+</div>
+</div>
+{% include 'prototypes/prototype-sep-2019/includes/contact.html' %}
+</main>
+{% endblock %}

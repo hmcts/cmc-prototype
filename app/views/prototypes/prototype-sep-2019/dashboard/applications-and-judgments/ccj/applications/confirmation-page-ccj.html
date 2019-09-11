@@ -1,0 +1,106 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="5" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  <script>
+    $(document).ready(function () {
+      $('#yourOfferContent').html(formParam('offer'));
+    });
+  </script>
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <div class="govuk-box-highlight">
+
+        <h1 class="bold-large satisfaction" style="display:none">Application to cancel CCJ sent</h1>
+      {% if data['ccj']=="satisfy" %}
+      <!--satisfy judgment goes here-->
+
+						<h1 class="bold-large cancellation">Application to show CCJ as 'satisfied' sent</h1>
+
+        {% elseif  data['ccj']=="cancel" %}
+      <!--cancel judgment goes here-->
+
+						<h1 class="bold-large cancellation">Application to cancel CCJ sent</h1>
+
+        {% else %}
+          <!--set aside goes here-->
+        <h1 class="bold-large cancellation">Application to cancel CCJ sent</h1>
+
+        {% endif %}
+        <br>
+
+      </p>
+      <p>
+        <a class="font-medium" href='#' style="color: #FFFFFF" >Download your application as a PDF</a>
+      </p>
+    </div>
+    <fieldset>
+      <h2 class="heading-medium">What happens next</h2>
+           {% if data['ccj']=="satisfy" %}
+           <!--satisfy judgment goes here-->
+
+      <p>Your application has been sent to the court. </p>
+
+      <p>We'll ask Jan Clark to confirm you made the payment. They have 14 days to respond. We'll let you know when they do.</p>
+
+      <h3 class="heading-small">If the claimant agrees you paid</h3>
+
+      <p>Your CCJ will be marked as paid or 'satisfied' on public records. It takes 2 days for the register to update.</p>
+      <p>You can then request a 'certificate of satisfaction' if you need one. It costs £15.</p>
+      <p>If the claimant doesn't respond after 14 days the court will accept that you paid the claim.</p>
+
+      <h3 class="heading-small">If the claimant doesn't agree you paid</h3>
+      <p>The court will review your application and any evidence you've given. It normally takes about 2 weeks. We'll let you know when they've made a decision.</p>
+        {% elseif  data['ccj']=="cancel" %}
+           <!--Cancel judgment goes here-->
+
+      <p>Your application has been sent to the court. </p>
+
+      <p>We'll ask Jan Clark to confirm you made the payment. They have 14 days to respond. We'll email you when they do.</p>
+      <p>If the claimant doesn't respond after 14 days the court will accept that you paid the claim.</p>
+
+      <h3 class="heading-small">If the claimant agrees you paid</h3>
+
+      <p>Your CCJ will be removed from public records. It takes 2 working days for the register to update.</p>
+      <p>You can then request a 'certificate of cancellation' if you need one. It costs £15.</p>
+
+
+      <h3 class="heading-small">If the claimant doesn't agree you paid</h3>
+      <p>The court will review your application and any evidence you've given. It normally takes 3 to 5 weeks.</p>
+
+
+        {% else %}
+           <!--set aside goes here-->
+      <p>Your application has been sent to the court. You may need to go to a hearing.</p>
+      <p>We'll contact you when your application has been reviewed.</p>
+
+        {% endif %}
+      <br>
+      <p> View your claim status on <a href='#'>your money claims account</a>. </p>
+
+      <a href="#" class="button">Go to your account</a>
+
+      {% include 'includes/contact.html' %}
+
+    </fieldset>
+  </div>
+</div>
+
+</main>
+<form method="post"  action="#" class="form" style="; float: left">
+  <select id="dashboard2" name="dashboard2" onchange="window.location.href='confirmation-page-ccj?ccj='+this.value">
+    <option  value="0" >Choose </option>
+    <option value="satisfy" {% if data['satisfy'] == 1 %}selected{% endif %}>1 Satisfy</option>
+    <option value="cancel" {% if data['ccj'] == cancel %}selected{% endif %}>2 Cancel</option>
+    <option value="0" {% if data['ccj'] == 0 %}selected{% endif %}>2 Vary</option>
+
+  </select>
+</form>
+{% endblock %}

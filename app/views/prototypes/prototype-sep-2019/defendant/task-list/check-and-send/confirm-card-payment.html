@@ -1,0 +1,100 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+  GOV.UK prototype kit
+{% endblock %}
+
+{% block home_link %} index {% endblock %}
+{% block proposition_header %}
+{% set my_account="1" %}
+
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+	<!-- <div class="back">
+		<a href="javascript:history.back()">&#9664; Back</a>
+	</div> -->
+<div class="grid-row review-details">
+
+  <a href="#" class="link-back">Back</a>
+
+  <header class="main-header" role="banner">
+    <div class="page-trail">
+      <!--<span class="page-number">Page 14 of 15</span>-->
+      <span class="page-title">Confirm your payment</span>
+    </div>
+  </header>
+
+	  <div class="check-details">
+
+	  	<table>
+		    <tbody>
+		      <tr>
+		        <td>Card number:</td>
+		        <td class="table-info">************7470</td>
+		      </tr>
+		      <tr>
+		       <td>Expiry date:</td>
+		        <td class="table-info">11/19</td>
+		      </tr>
+		      <tr>
+		        <td>Name on card:</td>
+            {% if data['defaultccj'] == 'true' %}
+                <td class="table-info">Mary Richards</td>
+            {% else %}
+                <td class="table-info">{{data['claimant-firstname']}} {{data['claimant-middlename']}} {{data['claimant-lastname']}}</td>
+            {% endif %}
+		         </tr>
+		      <tr>
+		        <td>Billing address:</td>
+		        <td class="table-info">12 Nelson Road, Reading, RG1 1AA</td>
+		      </tr>
+		       <tr>
+		        <td>Email address:</td>
+		        <td class="table-info">youremail@gmail.com</td>
+		      </tr>
+		      <!--<tr>-->
+		        <!--<td>Payment of:</td>-->
+		        <!--<td class="table-info"></td>-->
+		      <!--</tr>-->
+		      <!--<tr>-->
+		        <td>Amount to pay:</td>
+
+            {% if data['varyselected'] == 'true' %}
+                <td class="table-info">£50</td>
+            {% elif data['defaultccj'] == 'true' %}
+                <td class="table-info">£255</td>
+            {% else %}
+                <td class="table-info">£70</td>
+            {% endif %}
+
+		      </tr>
+		    </tbody>
+  		</table>
+		</div>
+</div>
+
+	<div class="grid-row">
+		<div class="column-two-thirds">
+
+
+          <div class="form-group">
+              <a href="../../confirmation-page"><button class="button">Confirm payment</button></a>
+          </div>
+          <div class="back">
+              <a href="../check-and-send">Cancel payment</a>
+          </div>
+
+
+
+
+		 </div>
+	 </div>
+
+
+{% include 'prototypes/prototype-sep-2019/includes/contact.html' %}
+</main>
+{% endblock %}

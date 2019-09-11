@@ -1,0 +1,111 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="2" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <a href="#" class="link-back">Back</a>
+      <h1 class="heading-large">
+        Do you owe Jan Clark any money?
+      </h1>
+
+      <!-- <p>Jan Clark says you owe {% if data['mediation-pilot']=="on" %}
+        £300
+        {%else%}
+        £1,500
+        {% endif %}.</p> -->
+      <p>Don't deduct any money you believe they owe you. We'll ask about this later.</p>
+
+      <form
+      name="aspnetForm"
+      method="post"
+      onsubmit="multiNavigation('response-owe', ['owe-all', 'owe-some', 'owe-none',
+                                                  'owe-all-default-ccj', 'owe-some-default-ccj', 'owe-none-default-ccj' , 'response-already-settled'],
+                                                [ '../task-list', '../task-list', 'do-you-owe-money/defence-options',
+                                                '../../dashboard/applications-and-judgments/set-aside-default-ccj/task-list?lower-amount=false&alreadysettled=false&fulldefence=false&howmuchyouowe=complete&cancelccj=false&cancelccjanswer=null&',
+                                                '../../dashboard/applications-and-judgments/set-aside-default-ccj/task-list?lower-amount=true&alreadysettled=false&fulldefence=false&howmuchyouowe=complete&cancelccj=false&cancelccjanswer=null&',
+                                                '../../dashboard/applications-and-judgments/set-aside-default-ccj/defence-options-owe-nothing',
+                                                '../../dashboard/applications-and-judgments/set-aside-default-ccj/task-list?alreadysettled=true&fulldefence=false&lower-amount=false&howmuchyouowe=complete&cancelccj=false&cancelccjanswer=null&'  ]);return false;"
+      id="aspnetForm"
+      autocomplete="off">
+
+        <div class="form-group">
+          <fieldset>
+            <div class="multiple-choice">
+              {% if data['defaultccj']=="true" %}
+                  <input id="radio-owe-all" type="radio" name="response-owe" value="owe-all-default-ccj" onclick="$('#amount-owed').val( $('owe-amount').val() | 500 )" >
+              {% else %}
+                  <input id="radio-owe-all" type="radio" name="response-owe" value="owe-all" onclick="$('#amount-owed').val(1500)" >
+              {% endif %}
+
+              <label for="radio-owe-all">Yes, {% if data['mediation-pilot']=="on" %}
+                £300
+                {%else%}
+                    {% if data['scenario2'] == 'true' %}
+                        £600
+                    {% else %}
+                        £1,500
+                    {% endif %}
+                {% endif %}</label>
+            </div>
+
+
+            <div class="multiple-choice" data-target="set-date">
+              {% if data['defaultccj']=="true" %}
+                  <input id="radio-owe-some" type="radio" name="response-owe" value="owe-some-default-ccj" onclick="$('#amount-owed').val( $('owe-amount').val() | 500 )" >
+              {% else %}
+                  <input id="radio-owe-some" type="radio" name="response-owe" value="owe-some" onclick="$('#amount-owed').val( $('owe-amount').val() | 500 )" >
+              {% endif %}
+
+              <label for="radio-owe-some">Yes, a lower amount</label>
+            </div>
+
+            <div class="panel panel-border-narrow js-hidden" id="set-date">
+              <label class="form-label" for="rate">How much?</label>
+              <input class="form-control timeline-column-4 fee pound" type="text" id="owe-amount" name="owe-amount" value="{{ data['owe-amount'] }}" onkeyup="$('#amount-owed').val(this.value)" >
+            </div>
+
+
+            <div class="multiple-choice">
+              {% if data['defaultccj']=="true" %}
+                  <input id="radio-owe-none" type="radio" name="response-owe" value="owe-none-default-ccj" onclick="$('#amount-owed').val(0)" >
+              {% else %}
+                  <input id="radio-owe-none" type="radio" name="response-owe" value="owe-none" onclick="$('#amount-owed').val(0)" >
+              {% endif %}
+              <label for="radio-owe-none">No, I owe them nothing</label>
+            </div>
+
+
+            {% if data['defaultccj']=="true" %}
+              <div class="multiple-choice" >
+                  <input id="response-already-settled" type="radio" name="response-owe" value="response-already-settled" onclick="" >
+                  <label for="response-already-settled">No, I've already settled</label>
+              </div>
+            {% endif %}
+
+
+
+
+          </fieldset>
+        </div>
+
+        <input type="hidden" name="amount-owed" id= "amount-owed" />
+        <input type="hidden" name="do_you_owe_money" value="complete" />
+
+        <div class="form-group">
+          <input type="submit" class="button" value="Save and continue"/>
+        </div>
+
+      </form>
+
+    </div>
+  {% include 'prototypes/prototype-sep-2019/includes/contact.html' %}
+</main>
+{% endblock %}

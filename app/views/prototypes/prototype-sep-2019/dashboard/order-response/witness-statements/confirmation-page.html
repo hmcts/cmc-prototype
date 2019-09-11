@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="5" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <div class="govuk-box-highlight">
+        <h1 class="bold-large">You've uploaded witness statements</h1>
+      </div>
+    <h2 class="heading-medium">What happens next</h2>
+
+    <p>We’ve told the {% if data[‘party’] == ‘claimant’ %}defendant{% else %}claimant{% endif %} you uploaded witness statements. They can now see them if they want.</p>
+
+    <h4 class="heading-small">If you've finished uploading information</h4>
+
+      <p>You need to <a href="../finished">tell us when you've finished uploading information</a>.</p> You should do this before 4pm on {{ now | date('add', 14, 'days') | date }}.</p>
+
+
+    <h4 class="heading-small">Upload more information</h4>
+
+      <p>You can upload more witness statements until 4pm on {{ now | date('add', 14, 'days') | date }}.</p>
+
+    <a href="../../home?dashboard={% if data['party'] == 'defendant' %}2.722{% else %}1.28{% endif %}&witness=complete" class="button">Go to your account</a>
+
+    {% include "includes/contact.html" %}
+
+    </div>
+  </div>
+</main>
+{% endblock %}
