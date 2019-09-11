@@ -1,0 +1,61 @@
+{% extends "layout_task-list.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block home_link %} ../task-list {% endblock %}
+{% block proposition_header %}
+{% set my_account="1" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <a href="#" class="link-back">Back</a>
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+      <form
+        name="aspnetForm"
+        method="post"
+        onsubmit="multiNavigation('dispute-type', ['personal','business','other'], ['enter-details?defendant-type=Individual&', 'business-type', 'enter-details?defendant-type=Organisation&' ]);return false;"
+        id="aspnetForm"
+        autocomplete="off">
+
+        <h1 class="heading-large">
+          Who are you making the claim against?
+        </h1>
+
+          <fieldset>
+            <div class="multiple-choice">
+              <input id="radio-1" type="radio" name="dispute-type" value="personal" {{ checked("dispute-type", "personal") }}>
+              <label for="radio-1">
+                <strong class="bold-small">An individual</strong><br>
+                <span class="form-hint">For example someone you lent money to</span>
+              </label>
+            </div>
+            <div class="multiple-choice">
+              <input id="radio-2" type="radio" name="dispute-type" value="business" {{ checked("dispute-type", "business") }}>
+              <label for="radio-2">
+                <strong class="bold-small">A business</strong><br>
+                <span class="form-hint">Any type of company or trader</span>
+              </label>
+            </div>
+            <div class="multiple-choice">
+              <input id="radio-3" type="radio" name="dispute-type" value="other" {{ checked("dispute-type", "other") }}>
+              <label for="radio-3">
+                <strong class="bold-small">Another type of organisation</strong><br>
+                <span class="form-hint">For example, a charity, club, trust or association</span>
+              </label>
+            </div>
+          </fieldset>
+
+          <div class="form-group">
+            <input type="submit" class="button" value="Save and continue"/>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  {% include 'prototypes/prototype-sep-2019/includes/contact.html' %}
+</main>
+{% endblock %}

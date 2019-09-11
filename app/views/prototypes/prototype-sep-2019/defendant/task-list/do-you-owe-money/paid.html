@@ -1,0 +1,84 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="2" %}
+
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <a href="#" class="link-back">Back</a>
+      <h1 class="heading-large">
+       How much have you paid the claimant?
+
+      </h1>
+
+
+      <p>The total amount claimed is £1,500. This includes the claim fee and any interest.</p>
+
+
+
+
+      <form
+        name="aspnetForm"
+        method="get"
+        onsubmit="multiNavigation('radio_select_group', ['amount_claimed' , 'less_amount_claimed'], [ '../../task-list?radio_select_group2=amount_claimed&', '../../task-list?radio_select_group2=less_amount_claimed&']);return false;"
+        id="aspnetForm"
+        autocomplete="off">
+
+
+
+
+      <div class="form-group">
+        <legend class="visually-hidden">What do you want to do?</legend>
+        <div class="multiple-choice">
+            <input id="radio-yes" type="radio" name="radio_select_group" value="amount_claimed" {{ checked("radio_select_group2", "Some") }}>
+          <label for="radio-yes" data-target="yes-info">
+            The amount claimed
+          </label>
+          </div>
+          <div class="multiple-choice">
+          <input id="radio-some" type="radio" name="radio_select_group" value="less_amount_claimed" {{ checked("radio_select_group2", "Paid-some") }}>
+            <label for="radio-some" data-target="yes-info">
+             Less than the amount claimed
+            </label>
+            </div>
+
+
+          </div>
+
+
+      <div class="form-group">
+        <input type="submit" class="button" value="Save and continue"/>
+      </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+{% include 'prototypes/prototype-sep-2019/includes/contact.html' %}
+</main>
+<script>
+  $(document).ready(function () {
+    var end_date = "{{data['set-year']}}-{{data['set-month']}}-{{data['set-day']}}"
+    var difference = moment(end_date).diff(moment("2018-2-20"), 'days')
+    $("#st").html(moment())
+    $("#ed").html(moment(end_date))
+    if(difference < 1) {
+     $(".before").show();
+
+    }else if(difference > 1) {
+     $(".after").show();
+     $(".before").hide();
+
+
+    }
+  })
+</script>
+{% endblock %}

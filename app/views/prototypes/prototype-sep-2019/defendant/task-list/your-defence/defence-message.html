@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="2" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <a href="#" class="link-back">Back</a>
+      <h1 class="heading-large">You've paid less than the total claim amount </h1>
+      <form
+      name="aspnetForm"
+      action="../../task-list"
+      method="get"
+      id="aspnetForm"
+      autocomplete="off">
+
+      <div class="form-group">
+        <legend class="visually-hidden">Defence</legend>
+        <div id="claim-details">
+          <div id="describe-wrapper-claim-details-1" class="form-group">
+            <p class="">You need to explain why you believe you don't owe the remaining amount. </p>
+            <p>If Jan Clark rejects your explanation you might have to go to a hearing.</p>
+          </div>
+
+         <div class="form-group">
+
+           {% if data['cancelccj'] == 'true' %}
+                <p><a class="button" href="../../../dashboard/applications-and-judgments/set-aside-default-ccj/task-list?radio_select_group=paid&data.owed_money=complete&response=DEFENCE&">Continue</a></p>
+           {% else %}
+                <input id="advert-option-next--button" type="submit" value="Continue" class="button"
+                      data-ignore-double-submit="true">
+           {% endif %}
+
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+{% include 'prototypes/prototype-sep-2019/includes/contact.html' %}
+</main>
+{% endblock %}

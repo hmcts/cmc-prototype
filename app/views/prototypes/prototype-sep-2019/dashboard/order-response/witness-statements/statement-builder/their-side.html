@@ -1,0 +1,160 @@
+
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <a href="#" class="link-back">Back</a>
+
+      <form method="get" autocomplete="off" action="check-and-send">
+
+        <h1 class="heading-large">Dispute their response</h1>
+        <p>Tell us how you believe the evidence you have disproves their response. We'll use your answers in the witness statement.</p>
+
+        <p>Follow these guidelines:</p>
+
+        <ul class="list list-bullet">
+          <li>quote their response and timeline and make it clear what you disagree with</li>
+          <li>add a piece of evidence to support each point - for example 'Exhibit A1 - email to Mary Richards on 23 May shows the timeline we agreed'</li>
+          <li>make sure you use the right reference number for each piece of evidence</li>
+          <li>provide sources for any other facts you use</li>
+          <li>try to stick to facts, not opinions</li>
+          <li>explain any differences between your view of the case and the defendant's</li>
+          <li>avoid using jargon or technical language</li>
+        </ul>
+
+        </details>
+
+        <details>
+          <summary>See their version of the claim</summary>
+
+          <h2 class="heading-small">Their defence</h2>
+
+          <p>This claim is about building works.</p>
+          <p>Mary Richards and I signed a contract for building works on my roof. The work on the roof was completed but there was a problem with one section. I asked Mary Richards to get the problem fixed, but didn't get a reply.</p>
+          <p>I'll have to get another builder to rectify the problem which will cost me £1,430.</p>
+          <p>Therefore, I'm making a money claim for £1,500 to compensate for the extra money I am going to need to spend.</p>
+          </ul>
+
+          <h2 class="heading-small">Their timeline</h2>
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Date</th>
+                <th scope="col">What they say happened</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>03/11/2017</td>
+                <td>I contacted {% if data.counterclaim=="true" %}Jan Clark{%else%}Mary Richards{% endif %} to discuss building works on our roof.</td>
+              </tr>
+              <tr>
+                <td>06/11/2017</td>
+                <td>We agreed what work should be done and signed a contract.</td>
+              </tr>
+              <tr>
+                <td>30/11/2017</td>
+                <td>The work started on the roof.</td>
+              </tr>
+                <td>21/12/2017</td>
+                <td>The work on the roof was completed but I noticed that there was a problem with one
+                section</a>.
+              </td>
+              </tr>
+                <td>27/12/2017</td>
+                <td>I sent an email to Mary Richards and asked them to get the problem fixed.</td>
+              </tr>
+
+                <td>15/01/2018</td>
+                <td>I hadn't had a reply so I told them I would be making a money claim.</td>
+              </tr>
+
+              <td >27/12/2017</td>
+              <td>I sent an email to Mary Richards and asked them to get the problem fixed.</td>
+            </tr>
+
+              <td>15/01/2018</td>
+              <td>I hadn't had a reply so I told them I would be making a money claim.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        </details>
+
+
+
+        <details>
+          <summary>See a list of your evidence and references</summary>
+          <table>
+            <tbody>
+              <tr>
+                <td style="width: 100px; font-weight: bold">
+                  Exhibit A1
+                </td>
+                <td>
+                  <a href="#">Emails.pdf</a>
+                  <br />You can see the emails dated {{ date | date('subtract', 123, 'days') | date }} and {{ date | date('subtract', 134, 'days') | date }} that they claimed not to receive.
+                </td>
+              </tr>
+
+              <tr>
+                <td style="width: 100px; font-weight: bold">
+                  Exhibit A2
+                </td>
+                <td>
+                  <a href="#">Photo 1.jpg</a>
+                  <br />The photos show that the roof was not adequately supported.
+                </td>
+                <td class="change-answer no-border"></td>
+              </tr>
+
+              <tr>
+                <td style="width: 100px; font-weight: bold">
+                  Exhibit A3
+                </td>
+                <td>
+                  <a href="#">Photo 2.jpg</a>
+                </td>
+                <td class="change-answer no-border"></td>
+              </tr>
+
+              <tr>
+                <td style="width: 100px; font-weight: bold">
+                  Exhibit A4
+                </td>
+                <td>
+                  <a href="#">Contract.pdf</a>
+                  <br />The signed contract shows the materials we agreed to use.
+                </td>
+                <td class="change-answer"></td>
+              </tr>
+
+            </tbody>
+          </table>
+
+        </details>
+
+
+        <p>
+          <textarea style="height: 400px" id="response"></textarea>
+        </p>
+
+      <div class="form-group">
+        <input type="submit" class="button" value="Save and continue"/>
+      </div>
+
+    </form>
+  </div>
+</div>
+{% include 'prototypes/prototype-sep-2019/includes/contact.html' %}
+</main>
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="2" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <a href="#" onclick="history.go(-1)" class="link-back">Back</a>
+      <h1 class="heading-large">
+        Have you paid the claimant the amount you admit you owe?
+      </h1>
+
+      <form
+        name="aspnetForm"
+        method="get"
+        onsubmit="multiNavigation('part', ['Yes' , 'No'], [ '../../task-list?radio_select_group=Some_paid&', '../../task-list?radio_select_group=Some&']);return false;"
+        id="aspnetForm"
+        autocomplete="off">
+
+            <input id="your-offer" name="offer" type="hidden">
+            <div class="form-group">
+              <fieldset class="inline">
+                <div class="multiple-choice" data-target="yes-info">
+                  <input id="radio-yes" type="radio" name="part" value="Yes" aria-controls="yes-info" aria-expanded="false">
+                  <label for="radio-yes" data-target="yes-info">Yes</label>
+                </div>
+                <div class="multiple-choice">
+                  <input id="radio-no" type="radio" name="part" value="No">
+                  <label for="radio-no" data-target="no-info">No</label>
+                </div>
+              </fieldset>
+              <input type="hidden" name="dates" value="false">
+              <input type="hidden" name="show_mediation" value="true">
+
+
+              <div class="form-group">
+                <input type="submit" class="button" value="Save and continue">
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+  </div>
+  {% include 'prototypes/prototype-sep-2019/includes/contact.html' %}
+</main>
+{% endblock %}

@@ -1,0 +1,97 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <a href="#" class="link-back">Back</a>
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+      <form
+        name="aspnetForm"
+        method="post"
+        onsubmit="multiNavigation('expert-report', ['yes','no'], ['self', 'expert-guidance']);return false;"
+        id="aspnetForm"
+        autocomplete="off">
+
+          <h1 class="heading-large">Have you already got a report written by an expert?</h1>
+
+          <div class="form-group">
+            <fieldset>
+              <div class="multiple-choice" data-target="expert-report">
+                <input id="radio-expert-report-yes" type="radio" name="expert-report" value="yes">
+                <label for="radio-expert-report-yes">Yes</label>
+              </div>
+              <div class="panel panel-border-narrow js-hidden" id="expert-report">
+                <div id="reports">
+
+                <div class="report">
+                  <div class="form-group">
+                    <label class="form-label" for="expert-report-name">Expert's name</label>
+                    <input class="form-control" id="expert-report-name" name="expert-report-name" type="text" value="" />
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="day">When is the report dated?</label>
+
+                      <div class="form-group ">
+                        <fieldset>
+                          <p style="color: #6F777B">For example, {{ date | date('subtract', 10, 'days' ) | date('D M YYYY') }}</p>
+                          <div class="form-date">
+                            <div class="form-group form-group-day">
+                              <label for="day">Day</label>
+                              <input  class="form-control" name="day" id="day" type="number" pattern="[0-9]*" min="0" max="31" value="{{data['day']}}">
+                            </div>
+                            <div class="form-group form-group-month">
+                              <label for="month">Month</label>
+                              <input class="form-control" name="month" id="month" type="number" pattern="[0-9]*" min="0" max="12" value="{{data['month']}}">
+                            </div>
+                            <div class="form-group form-group-year">
+                              <label for="year">Year</label>
+                              <input class="form-control" name="year" id="year" type="number" pattern="[0-9]*" min="0" max="2014" value="{{data['year']}}">
+                            </div>
+                          </div>
+                          </fieldset>
+                        </div>
+
+                    </div>
+                  </div>
+                </div>
+                <p><a href="" class="button secondary-button" style="margin-bottom: 25px; margin-top: 15px;" id="add-another">Add another report</a></p>
+              </div>
+
+
+              <div class="multiple-choice">
+                <input id="radio-expert-report-no" type="radio" name="expert-report" value="no">
+                <label for="radio-expert-report-no">No</label>
+              </div>
+            </fieldset>
+          </div>
+
+          <div class="form-group">
+            <input type="submit" class="button" value="Save and continue">
+          </div>
+        </form>
+
+
+    </div>
+  {% include 'prototypes/prototype-sep-2019/includes/contact.html' %}
+</main>
+
+<script>
+  $(document).ready(function () {
+    $('#add-another').click(function (event) {
+      event.preventDefault();
+      objReport = $('.report:first-child').clone();
+      $('#reports').append( $('<h2 class="heading-medium"></h2>').text( 'Report ' + ($('.report').length+1) ));
+      $('#reports').append( objReport );
+    });
+  });
+</script>
+
+{% endblock %}

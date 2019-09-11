@@ -1,0 +1,62 @@
+{% extends "layout_task-list.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block home_link %} ../../task-list {% endblock %}
+{% block proposition_header %}
+{% set my_account="1" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% import 'prototypes/prototype-sep-2019/includes/address.html' as address %}
+
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}
+  {% else %}
+  <a href="#" class="link-back">Back</a>
+  {% endif %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+      <form method="post" action="service-address" class="form">
+
+        <h1 class="heading-large">
+          Enter the company's full legal name
+        </h1>
+
+
+          <p>Your claim may fail if you don't use the company's full legal name.</p>
+
+
+<!--
+        <h2 class="heading-small">Non-UK companies</h2>
+        <p>You can only claim against companies in England and Wales using this service. The ending of a company's full name can give a clue to a company's location - 'limited'. 'ltd' or 'plc' are common in the UK, whereas 'inc', 'GmbH', 'S.A.', 'B.V.' mean it is not a UK company.</p>
+-->
+
+        <p>You'll have to pay an extra fee to correct details later.</p>
+
+        <fieldset>
+          <div class="form-group">
+            <label class="form-label" for="defendant_name">Company's full legal name</label>
+            <input class="form-control " id="defendant_name" name="defendant_name" type="text"
+            value="{{data['defendant_name']}}">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="defendant-contact-name">Contact person (optional) </label>
+            <p class="form-hint">This might be a person you've discussed the claim with</p>
+            <input class="form-control" id="defendant-contact-name" name="defendant-contact-name" type="text"
+            value="{{data['defendant-contact-name']}}">
+          </div>
+        </fieldset>
+
+    <div class="form-group">
+      <input type="submit" class="button" value="Save and continue"/>
+    </div>
+
+  </form>
+</div>
+</div>
+{% include 'prototypes/prototype-sep-2019/includes/contact.html' %}
+</main>
+{% endblock %}
