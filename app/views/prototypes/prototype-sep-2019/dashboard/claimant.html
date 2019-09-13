@@ -37,7 +37,7 @@
               or data['claimant'] == 11.1001 or data['claimant'] == 11.1003 or data['claimant'] == 11.101 or data['claimant'] == 11.101 or data['claimant'] == 11.102 or data['claimant'] == 11.103 or data['claimant'] == 11.11 or data['claimant'] == 11.111 or data['claimant'] == 11.12 or data['claimant'] == 11.13 or data['claimant'] == 11.1011 or data['claimant'] == 11.2 or data['claimant'] == 11.21 or data['claimant'] == 11.3 or data['claimant'] == 11.31
             or data['claimant'] == 11.4 or data['claimant'] == 11.41 or data['claimant'] == 11.42 or data['claimant'] == 11.5 or data['claimant'] == 11.51 or data['claimant'] == 11.52 or data['claimant'] == 11.6 or data['claimant'] == 11.61 or data['claimant'] == 11.7
             or data['claimant'] == 12 or data['claimant'] == 13.2 or data['claimant'] == 14.1 or data['claimant'] == 14.2 or data['claimant'] == 14.3 or data['claimant'] == 14.4 or data['claimant'] == 14.5 or data['claimant'] == 16  or data['claimant'] == 16.1 or data['claimant'] == 17  or data['claimant'] == 17.01  or data['claimant'] == 20 or data['claimant'] == 20.1 or data['claimant'] == 20.2
-            or data['claimant'] == 21 or data['claimant'] == 23 or data['claimant'] == 24 or data['claimant'] == 26  or data['claimant'] == 27  or data['claimant'] == 28  or data['claimant'] == 29
+            or data['claimant'] == 21 or data['claimant'] == 21.1 or data['claimant'] == 23 or data['claimant'] == 24 or data['claimant'] == 26  or data['claimant'] == 27  or data['claimant'] == 28  or data['claimant'] == 29
             or data['claimant'] == 33  or data['claimant'] == 34  or data['claimant'] == 36  or data['claimant'] == 37
             or data['claimant'] == 16.14  or  data['claimant'] == 16.15%}
             <li role="presentation"><a href="#next-steps" role="tab" tabindex="0" aria-controls="next-steps" aria-selected="true">Latest update</a></li>
@@ -1265,6 +1265,20 @@
               <div>
                 <h2 class="heading-medium">You ended the claim on {{ now | date( 'subtract', 5, 'days' ) | date }}</h2>
               </div>
+
+
+              {% elseif data['claimant'] == 21.1 %}
+              <div class="status-block">
+                <h2 class="heading-medium">You both signed a settlement agreement</h2>
+                 <p>When you've been paid in full, you need to let us know.</p>
+                 <p><a href="paid-in-full/claimant" class="button secondary-button">Tell us you've been paid</a></p><br>
+              </div>
+              <div class="status-block single">
+                <h2 class="heading-medium">Request a County Court Judgment</h2>
+                <p>If the defendant doesn't pay or breaks the terms of the settlement agreement, you can <a href="applications-and-judgments/default-judgment">request a County Court Judgment</a>.</p>
+              <br>
+              </div>
+
 
               {% elseif data['claimant'] == 22 %}
               <div class="status-block single">
@@ -2992,6 +3006,7 @@
     <option value="20.1" {% if data['claimant'] == 20.1 %}selected{% endif %}>Settled - paid in full - cancelled</option>
     <option value="20.2" {% if data['claimant'] == 20.2 %}selected{% endif %}>Settled - paid in full - satisfied</option>
     <option value="21" {% if data['claimant'] == 21 %}selected{% endif %}>Settled - discontinued / not proceeded</option>
+    <option value="21.1" {% if data['claimant'] == 21.1 %}selected{% endif %}>Settled - successful mediation</option>
 
 
     <option>------- CCJ set aside ----------</option>
