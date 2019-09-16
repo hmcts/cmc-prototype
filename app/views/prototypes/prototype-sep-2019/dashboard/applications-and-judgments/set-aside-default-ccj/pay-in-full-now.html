@@ -19,7 +19,16 @@ Money Claims Prototype
       <h1 class="heading-large">
         Will you pay the claimant as set out in the judgment?
       </h1>
-      <p>The judgment says you owe Jan Clark £1,500. You must pay in instalments of £200 per month.</p>
+
+
+      {% if  data['ccjpaymenttype'] == 'instalments' %}
+          <p>The judgment says you owe Jan Clark £1,500. You must pay in instalments of £200 per month.</p>
+      {% elif  data['ccjpaymenttype'] == 'setdate' %}
+          <p>The judgment says you must pay £1,500 by {{ now |  date("add", 9, "day") | date( "D MMMM YYYY" ) }}.</p>
+      {% else %}
+          <p>The judgment says you must pay £1,500 immediately.</p>
+      {% endif %}
+
 
       <form
         name="aspnetForm"
@@ -64,4 +73,19 @@ Money Claims Prototype
 
   {% include 'prototypes/prototype-sep-2019/includes/contact.html' %}
 </main>
+
+
+
+<form method="post"  action="#" class="form" style="float: left;">
+  <select id="control-box2" name="control-box2" onchange="window.location.href='pay-in-full-now?ccjpaymenttype='+this.value">
+    <option value="immediately"  {% if data['ccjpaymenttype'] == 'immediately' %}selected{% endif %}>Immediately</option>
+    <option value="instalments"  {% if data['ccjpaymenttype'] == 'instalments' %}selected{% endif %} >Instalments</option>
+    <option value="setdate"      {% if data['ccjpaymenttype'] == 'setdate' %}selected{% endif %}>By set date</option>
+  </select>
+</form>
+
+
+
 {% endblock %}
+
+
