@@ -1387,6 +1387,7 @@ function upload( docName ) {
     $('#uploads #' + docName + ' .uploaded-files').show();
     if ( $('#uploads #' + docName + ' ol li').length ) {
       $( '#submit').show();
+      $('#uploads #' + docName + ' label').html('Add more files');
     }
 
   }

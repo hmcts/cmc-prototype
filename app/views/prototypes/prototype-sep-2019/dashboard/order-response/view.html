@@ -17,12 +17,16 @@ Money Claims Prototype
           {% if data['view'] == 'you' %}Your{% else %}The {% if data['party'] == "defendant" %}defendant{% else %}claimant{% endif %}'s{% endif %} response to the order
         </h1>
 
+        {% if data['view'] == 'them' %}
+          <p>The {% if data['party'] == "defendant" %}defendant{% else %}claimant{% endif %} can upload more documents until 4pm on {{ now | date('add', 1, 'days') | date }}.</p>
+        {% endif %}
+
         <table class="check-your-answers uploads">
           <thead>
             <tr>
               <th colspan="2">
                 <h2 id='cd' class="heading-medium">
-                  {% if data['view'] == 'you' %}Your{% else %}Their{% endif %} witness statements
+                  {% if data['view'] == 'you' %}Your{% else %}Their{% endif %} evidence
                 </h2>
               </th>
               <th>
@@ -33,25 +37,49 @@ Money Claims Prototype
           <tbody>
             <tr>
               <td>
-                Tim Howard
+                File 1
               </td>
               <td>
-                <a href="#">Witness statement 1.pdf</a>
+                <a href="#">Emails.pdf</a>
+                <br />"You can see the emails dated {{ date | date('subtract', 123, 'days') | date }} and {{ date | date('subtract', 134, 'days') | date }} that they claimed not to receive."
               </td>
               <td>
-                {{ now | date('subtract', 8, 'days') | date }}
+                {{ now | date('subtract', 5, 'days') | date }}
               </td>
             </tr>
-          <tbody>
             <tr>
               <td>
-                James Watts
+                File 2
               </td>
               <td>
-                <a href="#">Witness statement 2.docx</a>
+                <a href="#">Photo 1.jpg</a>
+                <br />"The photos show that the roof was not adequately supported."
               </td>
               <td>
-                {{ now | date('subtract', 8, 'days') | date }}
+                {{ now | date('subtract', 5, 'days') | date }}
+              </td>
+            </tr>
+            <tr>
+              <td>
+                File 3
+              </td>
+              <td>
+                <a href="#">Photo 2.jpg</a>
+              </td>
+              <td>
+                {{ now | date('subtract', 4, 'days') | date }}
+              </td>
+            </tr>
+            <tr>
+              <td>
+                File 4
+              </td>
+              <td>
+                <a href="#">Contract.pdf</a>
+                <br />"The signed contract shows the materials we agreed to use."
+              </td>
+              <td>
+                {{ now | date('subtract', 2, 'days') | date }}
               </td>
             </tr>
         </tbody>
@@ -59,12 +87,14 @@ Money Claims Prototype
 
       <br />
       <br />
+
+      <!--
       <table class="check-your-answers uploads">
         <thead>
           <tr>
             <th colspan="2">
               <h2 id='cd' class="heading-medium">
-                {% if data['view'] == 'you' %}Your{% else %}Their{% endif %} evidence
+                {% if data['view'] == 'you' %}Your{% else %}Their{% endif %} witness statements
               </h2>
             </th>
             <th>
@@ -75,54 +105,34 @@ Money Claims Prototype
         <tbody>
           <tr>
             <td>
-              File 1
+              Tim Howard
             </td>
             <td>
-              <a href="#">Emails.pdf</a>
-              <br />"You can see the emails dated {{ date | date('subtract', 123, 'days') | date }} and {{ date | date('subtract', 134, 'days') | date }} that they claimed not to receive."
+              <a href="#">Witness statement 1.pdf</a>
             </td>
             <td>
-              {{ now | date('subtract', 5, 'days') | date }}
-            </td>
-          </tr>
-        <tbody>
-          <tr>
-            <td>
-              File 2
-            </td>
-            <td>
-              <a href="#">Photo 1.jpg</a>
-              <br />"The photos show that the roof was not adequately supported."
-            </td>
-            <td>
-              {{ now | date('subtract', 5, 'days') | date }}
+              {{ now | date('subtract', 8, 'days') | date }}
             </td>
           </tr>
           <tr>
             <td>
-              File 3
+              James Watts
             </td>
             <td>
-              <a href="#">Photo 2.jpg</a>
+              <a href="#">Witness statement 2.docx</a>
             </td>
             <td>
-              {{ now | date('subtract', 4, 'days') | date }}
-            </td>
-          </tr>
-          <tr>
-            <td>
-              File 4
-            </td>
-            <td>
-              <a href="#">Contract.pdf</a>
-              <br />"The signed contract shows the materials we agreed to use."
-            </td>
-            <td>
-              {{ now | date('subtract', 2, 'days') | date }}
+              {{ now | date('subtract', 8, 'days') | date }}
             </td>
           </tr>
       </tbody>
     </table>
+  -->
+
+    <h2 id='cd' class="heading-medium">
+      {% if data['view'] == 'you' %}Your{% else %}Their{% endif %} witness statements
+    </h2>
+    <p>{% if data['view'] == 'you' %}You{% else %}They{% endif %} haven't uploaded any witness statements.</p>
 
     <br />
     <br />
@@ -151,7 +161,6 @@ Money Claims Prototype
             {{ now | date('subtract', 3, 'days') | date }}
           </td>
         </tr>
-      <tbody>
         <tr>
           <td>
             Responses to queries
@@ -165,6 +174,71 @@ Money Claims Prototype
         </tr>
     </tbody>
   </table>
+
+
+    <br />
+
+    <h2 id='cd' class="heading-medium">
+      Additional information requested by the court
+    </h2>
+    <span class="bold">From the order:</span></br >
+
+    Please provide a copy of the roofing felt manufacturer's fitting instrucitons which you stated {% if data['party'] == "defendant" %}you followed acurately{% else %}was not followed{% endif %}.
+    <table class="check-your-answers uploads">
+      <thead>
+        <tr>
+          <th colspan="2">
+          </th>
+          <th style="width: 10%; text-align:right; vertical-align: bottom">
+            Uploaded on
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            File 1
+          </td>
+          <td>
+            <a href="#">Photo.png</a>
+          </td>
+          <td>
+            {{ now | date('subtract', 5, 'days') | date }}
+          </td>
+        </tr>
+      </table>
+
+    <br />
+
+    <h2 id='cd' class="heading-medium">
+      Additional actions ordered by the court
+    </h2>
+    
+    <span class="bold">From the order:</span></br >
+
+    Please confirm you have supplied a sample of the disputed roofing material to the {% if data['party'] == "defendant" %}claimant{% else %}defendant{% endif %}.
+
+    <table class="check-your-answers ">
+      <thead>
+        <tr>
+          <th colspan="2">
+          </th>
+          <th style="width: 10%; text-align:right; vertical-align: bottom">
+            Confirmed on
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td colspan="2" style="font-weight: normal">
+            I confirm I've done this
+          </td>
+          <td style="width: 10%; text-align: right">
+            {{ now | date('subtract', 5, 'days') | date }}
+          </td>
+        </tr>
+      </table>
+      
 
     </div>
   </form>
