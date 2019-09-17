@@ -1365,11 +1365,15 @@ function upload( docName ) {
       
       strUpload = '';
 
+
+      strUpload +=  '<li class="file desc' + ( docName == 'evidence' ? ' evidence' : '' ) +'">';
+
+
       if ( docName == 'evidence' ) {
         strUpload += '<h3 class="heading-small">Exhibit A' + ++intUploads + '</h1>';
       }
 
-      strUpload +=  '<li class="file desc' + ( docName == 'evidence' ? ' evidence' : '' ) +'"><a href="#">' + $('#uploads #' + docName + ' input[type=file]')[0].files[i].name +'</a><a href="#" class="remove" onclick="$(this).parent().remove();return false;">Remove</a>';
+      strUpload += '<a href="#">' + $('#uploads #' + docName + ' input[type=file]')[0].files[i].name +'</a><a href="#" class="remove" onclick="$(this).parent().remove(); return false;">Remove</a>';
       if ( docName == 'evidence' ) {
         strUpload += '<p><label for="description' + i + '">Enter a short description (optional)</label></p><textarea id="description' + i + '"></textarea>';
       } else if ( docName == 'witness' ) {
@@ -1387,7 +1391,7 @@ function upload( docName ) {
     $('#uploads #' + docName + ' .uploaded-files').show();
     if ( $('#uploads #' + docName + ' ol li').length ) {
       $( '#submit').show();
-      $('#uploads #' + docName + ' label').html('Add more files');
+      $('#uploads #' + docName + ' label.secondary-button').html('Add more files');
     }
 
   }
