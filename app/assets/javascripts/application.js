@@ -1363,11 +1363,7 @@ function upload( docName ) {
   if ( $( $('#uploads #' + docName + ' input[type=file]')[0].files.length ) ) {
     for (i=0; i<$('#uploads #' + docName + ' input[type=file]')[0].files.length; i++ ) {
       
-      strUpload = '';
-
-
-      strUpload +=  '<li class="file desc' + ( docName == 'evidence' ? ' evidence' : '' ) +'">';
-
+      strUpload =  '<li class="file desc' + ( docName == 'evidence' ? ' evidence' : '' ) +'">';
 
       if ( docName == 'evidence' ) {
         strUpload += '<h3 class="heading-small">Exhibit A' + ++intUploads + '</h1>';
