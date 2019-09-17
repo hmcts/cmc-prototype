@@ -5,7 +5,8 @@ var strPath = 'prototypes/prototype-sep-2019/';
 const offersRouter = require('./offers');
 // Find the sign in js file
 const signinRouter = require('./signin');
-
+// Find the sign in js file
+const applicationsRouter = require('./applications');
 
 module.exports = function(app)
 {
@@ -13,6 +14,7 @@ module.exports = function(app)
   // Forwards any requests of the each sections router URL to the offers Router js file
   app.use( '/' + strPath + 'offers', offersRouter);
   app.use( '/' + strPath + 'signin', signinRouter);
+  app.use( '/' + strPath + 'applications', applicationsRouter);
 
 
   // Route index page
