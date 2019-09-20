@@ -5,8 +5,11 @@ var strPath = 'prototypes/prototype-sep-2019/';
 const offersRouter = require('./offers');
 // Find the sign in js file
 const signinRouter = require('./signin');
-// Find the sign in js file
+// Find the applications js file
 const applicationsRouter = require('./applications');
+// Find the emails js file
+const emailsRouter = require('./emails');
+
 
 module.exports = function(app)
 {
@@ -15,6 +18,8 @@ module.exports = function(app)
   app.use( '/' + strPath + 'offers', offersRouter);
   app.use( '/' + strPath + 'signin', signinRouter);
   app.use( '/' + strPath + 'applications', applicationsRouter);
+  app.use( '/' + strPath + 'emails', emailsRouter);
+
 
 
   // Route index page

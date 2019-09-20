@@ -5,11 +5,11 @@ const router = express();
 
 
 
-    // The routes file forwards offers requests to this offer router.
+    // The routes file forwards offers requests to this applications router.
     //  MUST BE  /applications
     router.get('/', function (req, res)
     {
-          res.send('this is the index for offers');
+          res.send('this is the index for applications');
     });
 
 

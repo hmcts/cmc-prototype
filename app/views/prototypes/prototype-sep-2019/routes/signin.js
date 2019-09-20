@@ -9,9 +9,36 @@ const router = express();
     //  MUST BE  strPath  /signin
     router.get('/', function (req, res)
     {
+          // When a CLAIMANT is asked if they want to attend a hearing of the defendant's request to set aside CCJ
+          if (req.session.data['claimantsetsetasideresponse'] == 'true')
+          {
+            res.redirect('/' + strPath +  'dashboard/home?dashboard=1.9991' );
+          }
 
-          //res.send('this is the index for signin AND THE session has been destroyed');
 
+          // When a CLAIMANT is asked to respond to the defendant's request to Vary the judgement
+          if (req.session.data['claimantvaryresponse'] == 'true')
+          {
+            res.redirect('/' + strPath +  'dashboard/claimant?claimant=27' );
+          }
+
+
+
+      // When a DEFENDAT user has a default CCJ and logs in for the first time
+          if (req.session.data['defaultccj'] == 'true')
+          {
+            // CCJ before 1 month deadline
+            if (req.session.data['afterccjdeadline'] == 'false')
+            {
+              res.redirect('/' + strPath +  'dashboard/defendant?defendant=3.22' );
+            }
+
+            // After CCJ 1 month deadline has passed
+            else if (req.session.data['afterccjdeadline'] == 'true')
+            {
+              res.redirect('/' + strPath +  'dashboard/defendant?defendant=3.21' );
+            }
+          }
 
           // For the new designs of offers
           if (req.session.data['newoffer'] == 'true')
