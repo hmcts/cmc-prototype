@@ -30,13 +30,13 @@ const router = express();
             // CCJ before 1 month deadline
             if (req.session.data['afterccjdeadline'] == 'false')
             {
-              res.redirect('/' + strPath +  'dashboard/defendant?defendant=3.22' );
+              res.redirect('/' + strPath +  'dashboard/home?dashboard=2.30002' );
             }
 
             // After CCJ 1 month deadline has passed
             else if (req.session.data['afterccjdeadline'] == 'true')
             {
-              res.redirect('/' + strPath +  'dashboard/defendant?defendant=3.21' );
+              res.redirect('/' + strPath +  'dashboard/home?dashboard=2.30001' );
             }
           }
 
