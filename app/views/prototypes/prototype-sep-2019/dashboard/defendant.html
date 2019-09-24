@@ -113,7 +113,7 @@
                   <!-- CCJ issued from digital service after 1 month deadline -->
 
                   <h2 class="heading-medium">A County Court Judgment (CCJ) has been issued against you</h2>
-
+                  <h3 class="heading-small">You need to pay Jan Clark £1,500 immediately</h3>
                   <p>Jan Clark made a money claim for £1,500 against you on {{ now |  date("subtract", 80, "day") | date( "D MMMM YYYY" ) }}.</p>
                   <p>Because you didn't respond, a CCJ was issued against you on {{ now |  date("subtract", 58, "day") | date( "D MMMM YYYY" ) }}.</p>
 
@@ -133,8 +133,9 @@
                   <!-- CCJ issued from digital service before 1 month deadline -->
                   <h2 class="heading-medium">A County Court Judgment (CCJ) has been issued against you</h2>
                   <h3 class="heading-small">You need to pay Jan Clark £1,500 immediately</h3>
-                  <p>The CCJ was issued because Jan Clark made a money claim against you on {{ now |  date("subtract", 21, "day") | date( "D MMMM YYYY" ) }} and you didn't respond.</p>
-                  <p>If Jan Clark confirms you've settled the claim before 4pm on {{ now |  date("add", 7, "day") | date( "D MMMM YYYY" ) }}, the CCJ will be removed from the public register.</p>
+                  <p>Jan Clark made a money claim for £1,500 against you on {{ now |  date("subtract", 50, "day") | date( "D MMMM YYYY" ) }}.</p>
+                  <p>Because you didn't respond, a CCJ was issued against you on {{ now |  date("subtract", 28, "day") | date( "D MMMM YYYY" ) }}.</p>
+                  <p>If Jan Clark confirms you've settled the claim before 4pm on {{ now |  date("add", 5, "day") | date( "D MMMM YYYY" ) }}, the CCJ will be removed from the public register.</p>
 
                   <p><a class="button" href="../applications/respond-to-judgement-within-one-month-of-judgement-being-issued">Respond to the judgment</a></p>
                   <br>
@@ -1484,7 +1485,7 @@
                 <h2 class="heading-medium">This claim is settled</h2>
                 <h3 class="heading-small">Your judgment will be removed from the register</h3>
               <p>Jan Clark confirmed you paid {% if data['mediation-pilot'] == "on" %}£300{% else %}£1,500{% endif %} on {{ now | date('subtract', 2, 'days') | date }}.</p>
-              <p>We'll tell the Registry Trust to remove your County Court Judgment (CCJ) from the register of
+              <p>Your County Court Judgment (CCJ) will be removed from the register of
                 judgments.</p>
               <p>The CCJ won't appear in credit agency searches, though some agencies may not update their records
                 immediately.</p>
@@ -1500,13 +1501,13 @@
                 <h3 class="heading-small">Your judgment will be marked as paid</h3>
                 <p>Jan Clark confirmed you paid {% if data['mediation-pilot'] == "on" %}£300{% else %}£1,500{% endif %} on {{ now | date('subtract', 2, 'days') | date }}. This claim is
                   now settled.</p>
-                <p>We'll tell the Registry Trust to mark your County Court Judgment (CCJ) as paid on the register of
+                <p>Your County Court Judgment (CCJ) will be marked as paid on the register of
                   judgments.</p>
 
                 <p>Any credit agency that checks the register will see you've paid the money, though some may not update
                   their records immediately.</p>
 
-                <p>The judgment will remain on the register for 6 years but it'll be marked as satisfied.</p>
+                <p>The CCJ will remain on the register for 6 years from the date of judgment, but it'll be marked as satisfied.</p>
 
                 <p>If you need proof that the CCJ is paid you can pay £15 to get a certificate of satisfaction.</p>
 
@@ -1588,9 +1589,11 @@
                 <p>We'll contact you by post and email when the court has reviewed your request. You'll still have the judgment against you until then.</p>
 
 
-              <!--  CCJ has been issued - Defendant should have contacted the claimant - Before CCJ Deadline -->
+              <!--  CCJ has been issued - Defendant should have contacted the claimant - After CCJ Deadline -->
               {% elseif data['defendant'] == 21 %}
-                <h2 class="heading-medium">Ask Jan Clark to tell us you've settled</h2>
+              <h2 class="heading-medium">Contact Jan Clark to arrange payment</h2>
+              <p><a href="party-details/claimant">Get Jan Clark's contact details</a></p>
+              <p>Make sure you get receipts for any payments.</p>
                 <p>When Jan Clark confirms you've settled, the judgment will be marked as satisfied.</p>
                 <p>You can then pay £15 for a <a href="https://www.gov.uk/government/publications/form-n443-application-for-a-certificate-of-satisfaction-or-cancellation">certificate of satisfaction</a>.</p>
                 <hr>
@@ -1601,27 +1604,14 @@
                   <a class="button secondary-button" href="cancel-ccj-info-paid-or-settled?claimantupdate=complete&">Apply to cancel judgment</a>
                 </div>
 
-                <!-- <details>
-                  <summary >
-                    <span class="summary">Cancel the judgment (optional)</span>
-                  </summary>
-                      <div class="panel">
-                          <p>You may pay £255 to apply to cancel the judgment. </p>
-                          <p>The court will usually only cancel a judgment if it accepts you didn't know about the claim at the time it was issued.</p>
-                          <p><a class="button secondary-button"
-                                href="applications-and-judgments/set-aside-default-ccj/task-list-after-contact?aftercontact=true&aftersettle=true"
-                                >Apply to cancel judgment</a></p>
-                      </div>
-                </details>
-                <br> -->
-
 
               <!--  CCJ has been issued - Defendant should have contacted the claimant - Before the CCJ deadline -->
               {% elseif data['defendant'] == 21.1 %}
-              <h2 class="heading-medium">After settling the claim</h2>
-              <p>Ask Jan Clark to tell us you've settled the claim.</p>
-
-              <p>If Jan Clark tells us you've settled the claim by 4pm on {{ now |  date("add", 7, "day") | date( "D MMMM YYYY" ) }}, the CCJ will be removed from the public register.</p>
+              <h2 class="heading-medium">Contact Jan Clark to arrange payment</h2>
+              <p><a href="party-details/claimant">Get Jan Clark's contact details</a></p>
+              <p>Make sure you get receipts for any payments.</p>
+              <p>When you've paid you need to ask Jan Clark to tell us.</p>
+              <p>If they tell us you've settled the claim by 4pm on {{ now |  date("add", 7, "day") | date( "D MMMM YYYY" ) }}, the CCJ will be removed from the public register.</p>
 
               <!-- <p>Then judgment will be marked as satisfied.</p>
               <p>You'll then be able to get a certificate of satisfaction.</p>  <!-->
@@ -1631,17 +1621,19 @@
 
 
 
-              <!--  CCJ has been issued - Defendant should have contacted the claimant to settle-->
+              <!--  CCJ has been issued - Defendant should have contacted the claimant to settle  - After the CCJ deadline  ---->
               {% elseif data['defendant'] == 22 %}
-                <h2 class="heading-medium">If you've settled the claim</h2>
-                <p>Ask Jan Clark to tells us you've settled the claim the judgment will be marked as satisfied.</p>
-                <p>You'll then be able to get a certificate of satisfaction.</p>
+                <h2 class="heading-medium">Contact Jan Clark to try to settle the claim</h2>
+                <p><a href="party-details/claimant">Get Jan Clark's contact details</a></p>
+                <h3 class="heading-small">If you've settled the claim</h3>
+                <p>You need to ask Jan Clark to tell us. If they do the judgment will be marked as satisfied.</p>
+                <p>You can then pay £15 for a <a href="https://www.gov.uk/government/publications/form-n443-application-for-a-certificate-of-satisfaction-or-cancellation">certificate of satisfaction</a>.</p>
                 <details>
                   <summary >
-                    <span class="summary">Cancel the judgment (optional)</span>
+                    <span class="summary">Cancel the judgment</span>
                   </summary>
                   <div class="panel">
-                    <p>You may pay £255 to apply to cancel the judgment. </p>
+                    <p>You can apply to cancel the judgment. You'll have to pay a £255 fee.</p>
                     <p>The court will usually only cancel a judgment if it accepts you didn't know about the claim at the time it was issued.</p>
                     <p><a class="button secondary-button"
                           href="applications-and-judgments/set-aside-default-ccj/task-list-after-contact?aftercontact=true&aftersettle=true"
@@ -1649,9 +1641,9 @@
                   </div>
                 </details>
                 <br>
-                <h2 class="heading-medium">If you've not settled the claim</h2>
-                <p>You must either pay the judgment or defend the claim. </p>
-                <p>To defend the claim you must pay £255 to apply to cancel the judgment.</p>
+                <h3 class="heading-small">If you haven't settled the claim</h3>
+                <p>You must either pay according to the terms of the judgment or submit a defence to the claim.</p>
+                <p>To defend the claim you must first pay £255 to apply to cancel the judgment.</p>
                 <p><a class="button secondary-button"
                       href="applications-and-judgments/set-aside-default-ccj/task-list-after-contact?aftercontact=true&aftersettle=false"
                 >Apply to cancel judgment</a></p>
@@ -1660,17 +1652,12 @@
 
               <!--  CCJ has been issued - Defendant should have contacted the claimant to settle  - Before the CCJ deadline  -->
               {% elseif data['defendant'] == 22.1 %}
-              <h2 class="heading-medium">If you've settled the claim</h2>
-              <p>Ask Jan Clark to tells us you've settled the claim.</p>
-              <p>If Jan Clark tells us you've settled the claim by 4pm on {{ now |  date("add", 7, "day") | date( "D MMMM YYYY" ) }}, the CCJ will be removed from the public register.</p>
+              <h2 class="heading-medium">Contact Jan Clark to try to settle the claim</h2>
+              <p><a href="party-details/claimant">Get Jan Clark's contact details</a></p>
+              <h3 class="heading-small">If you've settled the claim</h3>
+              <p>You need to ask Jan Clark to tell us.</p>
+              <p>If they tell us you've settled the claim by 4pm on {{ now |  date("add", 7, "day") | date( "D MMMM YYYY" ) }}, the CCJ will be removed from the public register.</p>
 
-              <br>
-              <h2 class="heading-medium">If you've not settled the claim</h2>
-              <p>You must either pay the judgment or defend the claim. </p>
-              <p>To defend the claim you must pay £255 to apply to cancel the judgment.</p>
-              <p><a class="button secondary-button"
-                    href="applications-and-judgments/set-aside-default-ccj/task-list-after-contact?aftercontact=true&aftersettle=false"
-              >Apply to cancel judgment</a></p>
 
 
 
