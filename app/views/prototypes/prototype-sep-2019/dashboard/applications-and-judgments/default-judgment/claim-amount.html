@@ -65,20 +65,25 @@ Money Claims Prototype
               </td>
           </tr>
 
-            <tr>
-              <th scope="row">Amount of interest included</th>
-              <td class="numeric last">
-                <label class="visuallyhidden" for="amount">Claim fee</label>
-                <span class="font-small">£34.24</span>
-              </td>
-          </tr>
+
+            {% if data['interest'] == "yes" %}
+
+              <tr>
+                <th scope="row">Amount of interest included</th>
+                <td class="numeric last">
+                  <label class="visuallyhidden" for="amount">Claim fee</label>
+                  <span class="font-small">£34.24</span>
+                </td>
+              </tr>
+
+            {% endif %}
 
           {% endif %}
           
           {% if data['radio-indent-group2']=="Yes" %}
           <tr>
             <th scope="col" class="bold-small">Sub total</th>
-            <td class="numeric last bold-small">£<span name="subt" id="subt" >1234.24</span></td>
+            <td class="numeric last bold-small">£<span name="subt" id="subt" >12{% if data['interest'] == "yes" %}34.24{% else %}00{% endif %}</span></td>
             <input type="text" hidden="" value="1643.20" name="num1" id="num1" />
           </tr>
           <tr>
@@ -94,8 +99,8 @@ Money Claims Prototype
           {% else  %}
           <tr>
             <th scope="col" class="bold-medium">Total</th>
-            <td class="numeric last bold-medium">£1234.24</td>
-            <input type="text" hidden="" value="1643.20" name="num1" id="num1" />
+            <td class="numeric last bold-medium">£12{% if data['interest'] == "yes" %}34.24{% else %}00{% endif %}</td>
+            <input type="text" hidden="" value="12{% if data['interest'] == "yes" %}34.24{% else %}00{% endif %}" name="num1" id="num1" />
           </tr>
           {% endif %}
 
@@ -112,7 +117,7 @@ Money Claims Prototype
 {% include 'prototypes/prototype-sep-2019/includes/contact.html' %}
 </main>
 <form method="post" action="#" class="form" style="position: absolute;">
-  <select name="interest" onchange="window.location.href='?'+this.value">
+  <select name="interest" onchange="window.location.href='?interest='+this.value">
     <option value="yes" {% if data['interest'] == 'yes' %}selected{% endif %}>With interest</option>
     <option value="no" {% if data['interest'] != 'yes' %}selected{% endif %}>Without interest</option>
   </select>
