@@ -52,7 +52,10 @@ const router = express();
     // DEFENDANT - Going from 'Respond to a judgment' task list to will you pay
     router.get('/will-you-pay', function (req, res)
     {
+        res.redirect('/' + strPath +  'dashboard/applications-and-judgments/set-aside-default-ccj/pay-in-full-now' );
+
         // If it is before the CCJ 1 month deadline then encourage users to pay immeidatelly, rather than paying whatever the judgement terms are.
+        /*
         if(req.session.data['afterccjdeadline'] == 'false')
         {
             res.redirect('/' + strPath +  'dashboard/applications-and-judgments/set-aside-default-ccj/pay-in-full-now-regardless-of-judgment' );
@@ -61,6 +64,8 @@ const router = express();
         {
             res.redirect('/' + strPath +  'dashboard/applications-and-judgments/set-aside-default-ccj/pay-in-full-now' );
         }
+        */
+
     });
 
 
