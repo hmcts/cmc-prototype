@@ -17,7 +17,7 @@ Money Claims Prototype
         Judgment amount
       </h1>
       <p>The judgment will order the defendant to pay £1,200, including your claim fee and any interest.</p>
-            <p>This means you'll recover the £1,200 as follows:</p>
+      <p>This means you'll recover the £1,200 as follows:</p>
       <form class="form" action="{% if data['radio-proceed'] == "judgment" %}../../../dashboard/claimant-response/admit-the-claim/task-list{% elseif data['radio-proceed'] == "judgment-pa" %}../../../dashboard/claimant-response/part-admit/task-list {% elseif data['radio-proceed'] == 'not-signed' %}check-your-judgment{% else %}payment-options{% endif %}" method="post">
 
         <table class="table-form">
@@ -28,6 +28,7 @@ Money Claims Prototype
               <th class="numeric last" scope="col">Amount</th>
             </tr>
           </thead>
+
           <tbody>
             <tr>
               <th scope="row">Amount of claim included</th>
@@ -39,36 +40,41 @@ Money Claims Prototype
             {% if data['radio-proceed']=="judgment-pa" %}
             {% else %}
 
-            <!-- <tr>
-              <th scope="row">
-                <details>
-                  <summary>
-                    Interest to date
-                  </summary>
-                  <div class="panel text-small">
-                    Interest calculated at 8% for 23 days <br> <span class="font-xsmall">({{ now | date('subtract', 23, 'days' ) | date }} to {{ now | date }})</span>
-                  </div>
-                </details>
-              </th>
-              <td class="numeric last">
-                <label class="visuallyhidden" for="amount">Interest</label>
-                <span class="font-small">£68.20</span>
-              </td>
-            </tr> -->
+            {% if data['interest'] == "yes" %}
 
-            <tr>
-              <th scope="row">Amount of claim fee included</th>
-              <td class="numeric last">
-                <label class="visuallyhidden" for="amount">Claim fee</label>
-                <span class="font-small">£70</span>
-              </td>
+              <tr>
+                <th scope="row">
+                  <details style="margin-bottom:0">
+                    <summary>Interest to date</summary>
+                    <p class="panel">
+                      Interested calcluated with daily interest amount of £1.07 for 32 days<br />
+                      <span class="font-xsmall">({{ now | date('subtract', 32, 'days' ) | date }} to {{ now | date }})</span>
+                    </p>
+                  </details>
+                </th>
+                <td class="numeric last">
+                  <label class="visuallyhidden" for="amount">Claim fee</label>
+                  <span class="font-small">£34.24</span>
+                </td>
+              </tr>
+
+            {% endif %}
+
+          <tr>
+            <th scope="row">Amount of claim fee included</th>
+            <td class="numeric last">
+              <label class="visuallyhidden" for="amount">Claim fee</label>
+              <span class="font-small">£70</span>
+            </td>
           </tr>
 
- {% endif %}
+
+          {% endif %}
+          
           {% if data['radio-indent-group2']=="Yes" %}
           <tr>
             <th scope="col" class="bold-small">Sub total</th>
-            <td class="numeric last bold-small">£<span name="subt" id="subt" >1200</span></td>
+            <td class="numeric last bold-small">£<span name="subt" id="subt" >12{% if data['interest'] == "yes" %}34.24{% else %}00{% endif %}</span></td>
             <input type="text" hidden="" value="1643.20" name="num1" id="num1" />
           </tr>
           <tr>
@@ -84,8 +90,8 @@ Money Claims Prototype
           {% else  %}
           <tr>
             <th scope="col" class="bold-medium">Total</th>
-            <td class="numeric last bold-medium"><span name="subt" id="subt" >£1200</span></td>
-            <input type="text" hidden="" value="1643.20" name="num1" id="num1" />
+            <td class="numeric last bold-medium">£12{% if data['interest'] == "yes" %}34.24{% else %}00{% endif %}</td>
+            <input type="text" hidden="" value="12{% if data['interest'] == "yes" %}34.24{% else %}00{% endif %}" name="num1" id="num1" />
           </tr>
           {% endif %}
 
@@ -101,4 +107,11 @@ Money Claims Prototype
 </div>
 {% include 'prototypes/features-to-be-built/includes/contact.html' %}
 </main>
+<form method="post" action="#" class="form" style="position: absolute;">
+  <select name="interest" onchange="window.location.href='?interest='+this.value">
+    <option value="yes" {% if data['interest'] == 'yes' %}selected{% endif %}>With interest</option>
+    <option value="no" {% if data['interest'] != 'yes' %}selected{% endif %}>Without interest</option>
+  </select>
+</form>
+
 {% endblock %}
