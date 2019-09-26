@@ -40,36 +40,18 @@ Money Claims Prototype
             {% if data['radio-proceed']=="judgment-pa" %}
             {% else %}
 
-            <!-- <tr>
-              <th scope="row">
-                <details>
-                  <summary>
-                    Interest to date
-                  </summary>
-                  <div class="panel text-small">
-                    Interest calculated at 8% for 23 days <br> <span class="font-xsmall">({{ now | date('subtract', 23, 'days' ) | date }} to {{ now | date }})</span>
-                  </div>
-                </details>
-              </th>
-              <td class="numeric last">
-                <label class="visuallyhidden" for="amount">Interest</label>
-                <span class="font-small">£68.20</span>
-              </td>
-            </tr> -->
-
-            <tr>
-              <th scope="row">Amount of claim fee included</th>
-              <td class="numeric last">
-                <label class="visuallyhidden" for="amount">Claim fee</label>
-                <span class="font-small">£70</span>
-              </td>
-          </tr>
-
-
             {% if data['interest'] == "yes" %}
 
               <tr>
-                <th scope="row">Amount of interest included</th>
+                <th scope="row">
+                  <details style="margin-bottom:0">
+                    <summary>Interest to date</summary>
+                    <p class="panel">
+                      Interested calcluated with daily interest amount of £1.07 for 32 days<br />
+                      <span class="font-xsmall">({{ now | date('subtract', 32, 'days' ) | date }} to {{ now | date }})</span>
+                    </p>
+                  </details>
+                </th>
                 <td class="numeric last">
                   <label class="visuallyhidden" for="amount">Claim fee</label>
                   <span class="font-small">£34.24</span>
@@ -78,8 +60,17 @@ Money Claims Prototype
 
             {% endif %}
 
+          <tr>
+            <th scope="row">Amount of claim fee included</th>
+            <td class="numeric last">
+              <label class="visuallyhidden" for="amount">Claim fee</label>
+              <span class="font-small">£70</span>
+            </td>
+          </tr>
+
+
           {% endif %}
-          
+
           {% if data['radio-indent-group2']=="Yes" %}
           <tr>
             <th scope="col" class="bold-small">Sub total</th>
@@ -88,7 +79,7 @@ Money Claims Prototype
           </tr>
           <tr>
             <th scope="col">Minus amount already paid</th>
-            <td class="numeric last">£200</td>
+            <td class="numeric last">£100</td>
           </tr>
           <tr>
             <th scope="col" class="bold-medium">Total</th>
