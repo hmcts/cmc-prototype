@@ -67,6 +67,13 @@
                 <td class="table-info">£50</td>
             {% elif data['defaultccj'] == 'true' %}
                 <td class="table-info">£255</td>
+            {% elif  data['general-application'] == 'true' %}
+                {% if  data['general-app-hearing'] == 'true' %}
+                    <td class="table-info">£255</td>
+                {% else %}
+                    <td class="table-info">£100</td>
+                {% endif %}
+
             {% else %}
                 <td class="table-info">£70</td>
             {% endif %}
@@ -82,7 +89,12 @@
 
 
           <div class="form-group">
-              <a href="../../confirmation-page"><button class="button">Confirm payment</button></a>
+              {% if  data['general-application'] == 'true' %}
+                  <a href="../../../dashboard/applications-and-judgments/general-application/confirmation-page.html"><button class="button">Confirm payment</button></a>
+              {% else %}
+                  <a href="../../confirmation-page"><button class="button">Confirm payment</button></a>
+              {% endif %}
+
           </div>
           <div class="back">
               <a href="../check-and-send">Cancel payment</a>
