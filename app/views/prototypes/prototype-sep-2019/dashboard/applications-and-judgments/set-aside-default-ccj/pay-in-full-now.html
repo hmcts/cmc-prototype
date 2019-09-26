@@ -20,14 +20,28 @@ Money Claims Prototype
         Will you pay the claimant as set out in the judgment?
       </h1>
 
+            {% if data['ccjpaymenttype'] == 'immediately' and data['afterccjdeadline'] == 'true' %}
+                <p>The judgment says you must pay £1,500 immediately.</p>
 
-      {% if  data['ccjpaymenttype'] == 'instalments' %}
-          <p>The judgment says you owe Jan Clark £1,500. You must pay in instalments of £200 per month.</p>
-      {% elif  data['ccjpaymenttype'] == 'setdate' %}
-          <p>The judgment says you must pay £1,500 by {{ now |  date("add", 25, "day") | date( "D MMMM YYYY" ) }}.</p>
-      {% else %}
-          <p>The judgment says you must pay £1,500 immediately.</p>
-      {% endif %}
+            {% elif data['ccjpaymenttype'] == 'setdate' and data['afterccjdeadline'] == 'true' %}
+                <p>The judgment says you must pay £1,500 by {{ now |  date("add", 25, "day") | date( "D MMMM YYYY" ) }}.</p>
+
+            {% elif data['ccjpaymenttype'] == 'instalments' and data['afterccjdeadline'] == 'true' %}
+                <p>The judgment says you owe Jan Clark £1,500. You must pay in instalments of £200 per month.</p>
+
+            {% elif data['ccjpaymenttype'] == 'immediately' and data['afterccjdeadline'] == 'false' %}
+                <p>The judgment says you must pay £1,500 immediately.</p>
+                <p>If you pay in full before 4pm on {{ now |  date("add", 23, "day") | date( "D MMMM YYYY" ) }}, and Jan Clark confirms it, the CCJ will be removed from the public register.</p>
+
+            {% elif data['ccjpaymenttype'] == 'setdate' and data['afterccjdeadline'] == 'false' %}
+                <p>The judgment says you must pay £1,500 by {{ now |  date("add", 25, "day") | date( "D MMMM YYYY" ) }}.</p>
+                <p>If you pay in full before 4pm on {{ now |  date("add", 23, "day") | date( "D MMMM YYYY" ) }}, and Jan Clark confirms it, the CCJ will be removed from the public register.</p>
+
+            {% elif data['ccjpaymenttype'] == 'instalments' and data['afterccjdeadline'] == 'false' %}
+                <p>The judgment says you owe Jan Clark £1,500. You must pay in instalments of £200 per month.</p>
+                <p>If you pay the full £1,500 before 4pm on {{ now |  date("add", 23, "day") | date( "D MMMM YYYY" ) }}, and Jan Clark confirms it, the CCJ will be removed from the public register.</p>
+
+            {% endif %}
 
 
       <form
@@ -45,18 +59,12 @@ Money Claims Prototype
             <div class="multiple-choice" data-target="pay">
               <input id="set-aside-yes" type="radio" name="radio-set-receive-claim" value="Yes" >
               <label for="set-aside-yes">Yes</label>
-            </div>
-            {% if  data['afterccjdeadline'] == 'true' %}
-                <div class="panel panel-border-narrow js-hidden" id="pay" style="padding-bottom:15px;">
-                    <p>You can pay in full at any time. The judgment will only be marked as satisfied when the claimant confirms you've paid.</p>
-                </div>
-            {% elif  data['afterccjdeadline'] == 'false' %}
-                <div class="panel panel-border-narrow js-hidden" id="pay" style="padding-bottom:15px;">
-                  <p>If Jan Clark confirms you've settled the claim before 4pm on {{ now |  date("add", 23, "day") | date( "D MMMM YYYY" ) }}, the CCJ will be removed from the public register.</p>
-
-                </div>
-            {% endif %}
-
+              </div>
+              {% if data['ccjpaymenttype'] == 'instalments' and data['afterccjdeadline'] == 'true' %}
+              <div class="panel panel-border-narrow js-hidden" id="pay" style="padding-bottom:15px;">
+                  <p>You can pay the outstanding debt at any time.</p>
+              </div>
+              {% endif %}
 
             <div class="multiple-choice" data-target="vary">
               <input id="set-aside-no" type="radio" name="radio-set-receive-claim" value="No">
@@ -94,5 +102,3 @@ Money Claims Prototype
 
 
 {% endblock %}
-
-
