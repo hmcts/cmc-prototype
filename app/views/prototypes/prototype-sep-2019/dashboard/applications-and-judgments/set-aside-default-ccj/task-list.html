@@ -167,83 +167,6 @@
         {% endif %}
 
 
-        <!--  VARY JUDGMENT -->
-        {% if data['fulldefence'] == 'false'  and  data['lower-amount'] == 'false' and  data['canpaynow'] == 'false'  or  data['justvaryonly'] == 'true' %}
-            <table id="table-of-tasks">
-              <thead>
-              <tr>
-                <th scope="col" id="col-task">
-                      <span class="task-group">
-                        <span class="group-number" id="task-number"></span>
-                        Change the terms of the judgment
-                      </span>
-                </th>
-                <th class="numeric" id="task-status" scope="col" id="col-status"></th>
-              </tr>
-              </thead>
-
-              <tbody>
-
-              {% if  data['canpaynow'] == 'false'  %}
-                  <tr id="read-rules">
-                    <td class="task">
-                      <a href="switch-to-vary">
-                        <span class="task-name">Ask to change the judgment</span>
-                      </a>
-                    </td>
-                    <td class="numeric" id="task-status" scope="col" id="col-status">
-                      {% if data.varyanswered=="complete" %}
-                          {% include "includes/task_status_finished.html" %}
-                      {% else %}
-                          {% include "includes/task_status_incomplete.html" %}
-                      {% endif %}
-                    </td>
-                  </tr>
-              {% endif %}
-
-              <!-- if vary requested -->
-              {% if  data['varyselected'] == 'true'  %}
-                  <tr>
-                    <td class="task">
-                      <a href="../vary/pay-default-ccj-options">
-                        <span class="task-name">Request new payment terms</span>
-                      </a>
-                    </td>
-                    <td class="numeric" id="task-status" scope="col" id="col-status">
-                      {% if data.newpaymentterms=="complete" %}
-                            {% include "includes/task_status_finished.html" %}
-                      {% else %}
-                            {% include "includes/task_status_incomplete.html" %}
-                      {% endif %}
-                    </td>
-                  </tr>
-
-                  {% if  data['varytoimmediately'] != 'true'  %}
-                      <tr>
-                        <td class="task">
-                          <a href="../../../defendant/task-list/owe-all/statement/explanation  ">
-                            <span class="task-name">Your financial details</span>
-                          </a>
-                        </td>
-                        <td class="numeric" id="task-status" scope="col" id="col-status">
-                          {% if data.financialdetails=="complete" %}
-                          {% include "includes/task_status_finished.html" %}
-                          {% else %}
-                          {% include "includes/task_status_incomplete.html" %}
-                          {% endif %}
-                        </td>
-                      </tr>
-                  {% endif %}
-
-              {% endif %}
-
-              </tbody>
-            </table>
-
-            <br>
-            <br>
-        {% endif %}
-
 
 
 
@@ -416,7 +339,7 @@
               <tbody>
               <tr>
                 <td class="task">
-                  <a href="/prototypes/prototype-sep-2019/defendant/task-list/hearing/support?scenario=ccjsetaside">
+                  <a href="../../../defendant/task-list/hearing/support?scenario=ccjsetaside">
                     <span class="task-name">Give us details in case there's a hearing</span>
                   </a>
                 </td>
@@ -434,6 +357,87 @@
             <br>
             <br>
 
+        {% endif %}
+
+
+
+
+
+        <!--  VARY JUDGMENT -->
+        {% if data['fulldefence'] == 'false'  and  data['lower-amount'] == 'false' and  data['canpaynow'] == 'false'
+            or  data['justvaryonly'] == 'true'
+            or  data['cancelccjanswer'] == 'complete'  and   data['cancelccj'] == 'false'   %}
+        <table id="table-of-tasks">
+          <thead>
+          <tr>
+            <th scope="col" id="col-task">
+                      <span class="task-group">
+                        <span class="group-number" id="task-number"></span>
+                        Change the terms of the judgment
+                      </span>
+            </th>
+            <th class="numeric" id="task-status" scope="col" id="col-status"></th>
+          </tr>
+          </thead>
+
+          <tbody>
+
+          <tr id="read-rules">
+            <td class="task">
+              <a href="switch-to-vary">
+                <span class="task-name">Ask to change the judgment</span>
+              </a>
+            </td>
+            <td class="numeric" id="task-status" scope="col" id="col-status">
+              {% if data.varyanswered=="complete" %}
+                  {% include "includes/task_status_finished.html" %}
+              {% else %}
+                  {% include "includes/task_status_incomplete.html" %}
+              {% endif %}
+            </td>
+          </tr>
+
+          <!-- if vary requested -->
+          {% if  data['varyselected'] == 'true'  %}
+          <tr>
+            <td class="task">
+              <a href="../vary/pay-default-ccj-options">
+                <span class="task-name">Request new payment terms</span>
+              </a>
+            </td>
+            <td class="numeric" id="task-status" scope="col" id="col-status">
+              {% if data.newpaymentterms=="complete" %}
+              {% include "includes/task_status_finished.html" %}
+              {% else %}
+              {% include "includes/task_status_incomplete.html" %}
+              {% endif %}
+            </td>
+          </tr>
+
+          {% if  data['varytoimmediately'] != 'true'  %}
+          <tr>
+            <td class="task">
+              <a href="../../../defendant/task-list/owe-all/statement/explanation  ">
+                <span class="task-name">Your financial details</span>
+              </a>
+            </td>
+            <td class="numeric" id="task-status" scope="col" id="col-status">
+              {% if data.financialdetails=="complete" %}
+              {% include "includes/task_status_finished.html" %}
+              {% else %}
+              {% include "includes/task_status_incomplete.html" %}
+              {% endif %}
+            </td>
+          </tr>
+          {% endif %}
+
+          {% endif %}
+
+          </tbody>
+        </table>
+
+        <br>
+        <br>
         {% endif %}
 
 

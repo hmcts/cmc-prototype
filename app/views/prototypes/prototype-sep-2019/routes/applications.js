@@ -69,6 +69,17 @@ const router = express();
     });
 
 
+    // DEFENDANT - Going from any defendant claim details page to the options of what applications to choose, including general
+    router.get('/select-type-of-application', function (req, res)
+    {
+      req.session.data = {};
+
+      res.redirect('/' + strPath +  'dashboard/applications-and-judgments/general-application/type-of-application' );
+    });
+
+
+
+
 
 module.exports = router;
 

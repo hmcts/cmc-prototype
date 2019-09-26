@@ -1,0 +1,211 @@
+{% extends "layout_task-list.html" %}
+
+{% block page_title %}
+Check your answers
+{% endblock %}
+
+{% block home_link %} ../task-list {% endblock %}
+
+{% block proposition_header %}
+{% set my_account="2" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+
+
+{% block content %}
+<main id="content" role="main">
+
+  {% include "includes/phase_banner_beta.html" %}
+
+  <a href="#" class="link-back">Back</a>
+
+  <h1 class="heading-large">
+    Check your answers
+  </h1>
+
+
+
+
+  <!--  EVIDENCE  -->
+  <table class="check-your-answers">
+    <thead>
+    <tr>
+      <th colspan="2">
+        <h2 class="heading-medium" id="name">
+          Evidence
+        </h2>
+      </th>
+      <!-- <th>
+      </th>  -->
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr>
+      <td>
+        File 1
+      </td>
+      <td>
+        <a href="#">Emails.pdf</a>
+        <br />You can see the emails dated {{ date | date('subtract', 123, 'days') | date }} and {{ date | date('subtract', 134, 'days') | date }} that they claimed not to receive.
+      </td>
+      <!-- <td class="change-answer no-border">
+        <a href="upload">Change</a>
+      </td>  -->
+    </tr>
+
+    <tr>
+      <td>
+        File 2
+      </td>
+      <td>
+        <a href="#">Photo 1.jpg</a>
+        <br />The photos show that the roof was not adequately supported.
+      </td>
+      <!-- <td class="change-answer no-border"></td>  -->
+    </tr>
+
+    <tr>
+      <td>
+        File 3
+      </td>
+      <td>
+        <a href="#">Photo 2.jpg</a>
+      </td>
+      <!--  <td class="change-answer no-border"></td>  -->
+    </tr>
+
+    <tr>
+      <td>
+        File 4
+      </td>
+      <td>
+        <a href="#">Contract.pdf</a>
+        <br />The signed contract shows the materials we agreed to use.
+      </td>
+      <!-- <td class="change-answer"></td>  -->
+    </tr>
+
+    </tbody>
+
+  </table>
+
+
+
+
+  <!--  HEARING REQUIREMENTS  -->
+  <table class="check-your-answers">
+    <thead>
+    <tr>
+      <th colspan="2">
+        <h2 class="heading-medium" id="name">
+          Hearing requirements
+        </h2>
+      </th>
+      <th>
+      </th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <tr>
+      <td>
+        Preferred location for a hearing
+      </td>
+      <td>
+        Guildford County Court
+      </td>
+      <td class="change-answer">
+        <a href="#">
+          Change <span class="visuallyhidden">Name</span>
+        </a>
+      </td>
+    </tr>
+
+
+    <tr>
+      <td>
+        Dates you can’t go to a hearing
+      </td>
+      <td>
+        15 September 2019<br>
+        16 September 2019<br>
+        17 September 2019<br>
+        18 September 2019<br>
+        19 September 2019<br>
+      </td>
+      <td class="change-answer">
+        <a href="#">
+          Change <span class="visuallyhidden">Name</span>
+        </a>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        Support you'd require
+      </td>
+      <td>
+        No support required
+      </td>
+      <td class="change-answer">
+        <a href="#">
+          Change <span class="visuallyhidden">Name</span>
+        </a>
+      </td>
+    </tr>
+
+    </tbody>
+  </table>
+
+
+  <!--  Declaration   -->
+  <!-- needs company option addition  !!   -->
+
+
+
+
+  <br>
+
+  {% if data['varytoimmediately'] == 'true'  %}
+      <p><a class="button" href="../../../defendant/confirmation-page?varyselected=false&">Submit</a></p>
+  {% else %}
+    <h2 class="heading-medium">Declaration</h2>
+    <div class="form-group">
+      <div class="multiple-choice text">
+        <input class="" id="HasAcceptedTermsAndConditions" type="checkbox" value="true">
+        <label for="HasAcceptedTermsAndConditions"> I declare that the details I have given are true to the best of my knowledge.</label>
+      </div>
+    </div>
+    <p><a class="button" href="../../../defendant/task-list/check-and-send/enter-card">Sign, submit and continue to payment (£50)</a></p>
+  {% endif %}
+
+
+</main>
+
+
+<!--
+<form method="post"  action="#" class="for4" style=" float: left; ">
+  <select style="height:25px;" onchange="window.location.href='?'+this.value">
+    <option value="letterreeived=true&"
+            {% if data.letterreeived == 'true' %}selected{% endif %}
+    >Claim received - didn't respond</option>
+
+    <option value="letterreeived=false&addresscorrect=true&"
+            {% if data.letterreeived != 'true' and  data.addresscorrect == 'true' %}selected{% endif %}
+    >Claim not received - correct address - reason for received</option>
+
+    <option value="letterreeived=false&addresscorrect=false&updatedclaimantofaddress=false&"
+            {% if data.letterreeived != 'true' and  data.addresscorrect == 'false' and data['updatedclaimantofaddress'] != 'true'  %}selected{% endif %}
+    >Claim not received - wrong address - didn't update claimant</option>
+
+    <option value="letterreeived=false&addresscorrect=false&updatedclaimantofaddress=true&"
+            {% if data.letterreeived != 'true' and  data.addresscorrect == 'false' and data['updatedclaimantofaddress'] == 'true' %}selected{% endif %}
+    >Claim not received - wrong address - Update claimant</option>
+
+  </select>
+</form>
+-->
+
+
+{% endblock %}

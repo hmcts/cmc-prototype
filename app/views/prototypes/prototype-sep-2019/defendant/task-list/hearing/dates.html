@@ -15,7 +15,7 @@ Money Claims Prototype
 
         <form method="post" action="{% if data['party'] == 'claimant' or data['check'] == 2 or data['check'] == 4 %}../../../dashboard/claimant-response/dispute-claim/task-list{% else %}../../task-list{% endif %}" class="form">
 
-          {% if data['defaultccj'] == 'true' %}
+          {% if data['defaultccj'] == 'true'  or   data['general-app-hearing'] == 'true'  %}
               <h1 class="heading-large">Are there dates in the next 9 months when you can’t go to a hearing?</h1>
           {% else %}
               <h1 class="heading-large">Are there dates in the next 9 months when you or your witnesses can’t go to a hearing?</h1>
@@ -45,6 +45,9 @@ Money Claims Prototype
           </div>
 
 
+
+
+
           {% if data['defaultccj'] == 'true' %}
               {% if  data['aftercontact'] == 'true' %}
                   <p><a class="button" href="/prototypes/prototype-sep-2019/dashboard/applications-and-judgments/set-aside-default-ccj/task-list-after-contact?hearingaftercontact=complete&">Continue</a></p>
@@ -53,6 +56,10 @@ Money Claims Prototype
                   <p><a class="button" href="/prototypes/prototype-sep-2019/dashboard/applications-and-judgments/set-aside-default-ccj/task-list?hearing=complete&">Continue</a></p>
                   <br>
               {% endif %}
+
+          {% elif  data['general-app-hearing'] == 'true'  %}
+                <p><a class="button" href="../../../dashboard/applications-and-judgments/general-application/check-answers">Continue</a></p>
+                <br>
 
           {% elif data['claimantattending'] == 'true'  %}
               <p><a class="button" href="/prototypes/prototype-sep-2019/dashboard/applications-and-judgments/set-aside-default-ccj/task-list?hearing=complete&">Continue</a></p>

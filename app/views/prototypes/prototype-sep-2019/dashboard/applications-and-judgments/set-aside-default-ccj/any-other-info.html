@@ -22,17 +22,26 @@ Money Claims Prototype
         Enter any other information relevant to your application
       </h1>
 
-      <div class="form-group">
-        <textarea class="form-control form-control-3-4 " id="any-other-information" rows="3"
-                  name="any-other-information" type="text" style="width: 100%">{{ data['any-other-information'] }}</textarea>
-      </div>
+      {% if  data['general-application'] == 'true' %}
+          {% if  data['general-app-hearing'] == 'true' %}
+                <form action="../../../defendant/task-list/hearing/support" method="get" class="form">
+          {% else %}
+                <form action="../general-application/check-answers" method="post" class="form">
+          {% endif %}
+      {% else %}
+          <form action="task-list?otherinfosection=complete&scenario=ccjsetaside" method="post" class="form">
+      {% endif %}
 
-      <form action="task-list?otherinfosection=complete&scenario=ccjsetaside" method="post" class="form">
+            <div class="form-group">
+              <textarea class="form-control form-control-3-4 " id="any-other-information" rows="3"
+                        name="any-other-information" type="text" style="width: 100%; height:150px;">{{ data['any-other-information'] }}</textarea>
+            </div>
 
-      <div class="form-group">
-        <input type="submit" class="button" value="Continue"/>
-      </div>
+            <div class="form-group">
+              <input type="submit" class="button" value="Continue"/>
+            </div>
 
+      </form>
 
     </div>
   </div>
