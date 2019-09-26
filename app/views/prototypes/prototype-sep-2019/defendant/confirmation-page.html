@@ -15,6 +15,8 @@ Money Claims Prototype
         {% if data['defaultccj'] == 'true' %}
             {% if  data['aftersettle'] == 'true'  and  data['cancelccjaftercontact'] == 'false'  %}
                 <h1 class="bold-large">You've not cancelled the judgment</h1>
+            {% elif  data['afterccjdeadline'] == 'false'  and  data['canpaynow'] == 'true'  %}
+                <h1 class="bold-large">Contact Jan Clark to settle the claim</h1>
             {% elif data['varyselected'] == 'true' %}
                 <h1 class="bold-large">You've applied to change the judgment payment terms</h1>
             {% elif data['cancelccj'] == 'true' %}
@@ -123,7 +125,7 @@ Money Claims Prototype
             {% endif %}
 
             {% if data['afterccjdeadline'] == 'false'  %}
-                <p>If Jan Clark tells us you've settled the claim by 4pm on {{ now |  date("add", 7, "day") | date( "D MMMM YYYY" ) }}, the CCJ will be removed from the public register.</p>
+                <p>If Jan Clark tells us you've settled the claim by 4pm on {{ now |  date("add", 23, "day") | date( "D MMMM YYYY" ) }}, the CCJ will be removed from the public register.</p>
                 <br>
                 <p><a class="button" href='../dashboard/defendant?defendant=21.1'>Go to your account</a></p>
             {% elif data['varytoimmediately'] == 'true' or data['cancelccjaftercontact'] == 'false'  %}
