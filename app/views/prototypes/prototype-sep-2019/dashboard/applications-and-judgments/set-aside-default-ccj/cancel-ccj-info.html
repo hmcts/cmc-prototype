@@ -21,10 +21,51 @@ Money Claims Prototype
         <h1 class="heading-large">
           Pay the debt to get the judgment cancelled
         </h1>
-        <p>If you pay Jan Clark £1,500 before 19 May 2019, the judgment will be cancelled.</p>
-        <p><a href="../../party-details/claimant">Get Jan Clark's contact details</a></p>
-        <p>We'll contact you when they confirm you've paid.</p>
-        <p><a class="button" href="/prototypes/prototype-sep-2019/dashboard/applications-and-judgments/set-aside-default-ccj/settle-out-of-court?afterccjdeadline=true">I don't owe the money</a>
+
+        <p>
+
+        <p>If you pay Jan Clark £1,500 before 4pm on {{ now |  date("add", 7, "day") | date( "D MMMM YYYY" ) }}, the judgment will be cancelled.</p>
+
+        <p>If you pay later, or you dispute all or part of the claim, the judgment will stay on the register for 6 years. You can apply to have it removed, but you'll have to pay a fee of £255.</p>
+
+        <!-- <p><a href="../../party-details/claimant">Get Jan Clark's contact details</a></p> -->
+        <!-- <p>We'll contact you when they confirm you've paid.</p> -->
+
+        <!-- <p><a class="button" href="/prototypes/prototype-sep-2019/dashboard/applications-and-judgments/set-aside-default-ccj/settle-out-of-court?afterccjdeadline=true">I don't owe the money</a> -->
+
+      <p class="heading-medium">Will you pay £1,500 before 4pm on {{ now |  date("add", 7, "day") | date( "D MMMM YYYY" ) }}?</p>
+
+          <form
+            name="aspnetForm"
+            method="post"
+            onsubmit="multiNavigation('radio-set-receive-claim', ['Yes', 'No'],
+                                                                   ['../../../defendant/confirmation-page?paywithinmonth=true&',
+                                                                    'settle-out-of-court?afterccjdeadline=true&']);return false;"
+            id="aspnetForm"
+            autocomplete="off">
+
+            <div class="form-group">
+              <fieldset>
+                <div class="multiple-choice" data-target="pay">
+                  <input id="set-aside-yes" type="radio" name="radio-set-receive-claim" value="Yes" aria-controls="paid-off" aria-expanded="false">
+                  <label for="set-aside-yes">Yes</label>
+                </div>
+                <div class="multiple-choice" data-target="vary">
+                  <input id="set-aside-no" type="radio" name="radio-set-receive-claim" value="No" aria-controls="paid-off" aria-expanded="false">
+                  <label for="set-aside-no">No</label>
+                </div>
+              </fieldset>
+            </div>
+
+            <div class="form-group">
+              <input type="submit" class="button" value="Continue" />
+            </div>
+
+          </form>
+
+        </div>
+      </div>
+
 
       {% else %}
 
