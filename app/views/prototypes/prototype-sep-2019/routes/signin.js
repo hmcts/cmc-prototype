@@ -15,7 +15,6 @@ const router = express();
             res.redirect('/' + strPath +  'dashboard/home?dashboard=1.9991' );
           }
 
-
           // When a CLAIMANT is asked to respond to the defendant's request to Vary the judgement
           if (req.session.data['claimantvaryresponse'] == 'true')
           {
@@ -24,7 +23,7 @@ const router = express();
 
 
 
-      // When a DEFENDAT user has a default CCJ and logs in for the first time
+          // When a DEFENDAT user has a default CCJ and logs in for the first time
           if (req.session.data['defaultccj'] == 'true')
           {
             // CCJ before 1 month deadline
@@ -40,6 +39,50 @@ const router = express();
             }
           }
 
+
+          //  DEFENDANT logs in after getting a response to their VARY request
+          if (req.session.data['defendantgetsvaryresponse'] == 'true')
+          {
+              // DEFENDANT - Vary plan accepted by the Claimant
+              if (req.session.data['planaccepted'] == 'true')
+              {
+                res.redirect('/' + strPath +  'dashboard/home?dashboard=2.9996' );
+              }
+
+              // DEFENDANT - Vary plan proposed by claimant
+              else if (req.session.data['claimantplan'] == 'true')
+              {
+                res.redirect('/' + strPath +  'dashboard/home?dashboard=2.9997' );
+              }
+
+              // DEFENDANT - Vary plan proposed by court/determination
+              else if (req.session.data['courtplan'] == 'true')
+              {
+                res.redirect('/' + strPath +  'dashboard/home?dashboard=2.9998' );
+              }
+
+              // DEFENDANT - Claimant has asked for redetermination
+              else if (req.session.data['redetermination'] == 'true')
+              {
+                res.redirect('/' + strPath +  'dashboard/home?dashboard=2.9999' );
+              }
+
+              // DEFENDANT - Update about other party requesting a Vary of the CCJ
+              else if (req.session.data['noresponsefromclaimant'] == 'true')
+              {
+                res.redirect('/' + strPath +  'dashboard/home?dashboard=2.9996001' );
+              }
+          }
+
+
+
+
+
+
+
+
+
+          // OFFERS TO SETTLE - NOT CURRENTLY PLANNED TO BE BUILT AS OF SEPTEMBER 2019
           // For the new designs of offers
           if (req.session.data['newoffer'] == 'true')
           {
