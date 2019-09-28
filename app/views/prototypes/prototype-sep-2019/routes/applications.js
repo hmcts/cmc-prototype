@@ -30,6 +30,7 @@ const router = express();
 
       req.session.data['defaultccj'] = 'true';
       req.session.data['afterccjdeadline'] = 'false';
+      req.session.data['ccjpaymenttype'] = 'immediately';
 
       res.redirect('/' + strPath +  'dashboard/applications-and-judgments/set-aside-default-ccj/task-list' );
     });
@@ -43,6 +44,7 @@ const router = express();
 
       req.session.data['defaultccj'] = 'true';
       req.session.data['afterccjdeadline'] = 'true';
+      req.session.data['ccjpaymenttype'] = 'immediately';
 
       res.redirect('/' + strPath +  'dashboard/applications-and-judgments/set-aside-default-ccj/task-list' );
     });
