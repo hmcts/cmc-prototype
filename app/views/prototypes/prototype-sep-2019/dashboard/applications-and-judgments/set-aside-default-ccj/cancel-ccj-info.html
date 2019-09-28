@@ -16,30 +16,31 @@ Money Claims Prototype
 
      <a href="#" onclick="history.go(-1)" class="link-back">Back</a>
 
-     {% if data['afterccjdeadline'] == 'false' %}
+     {% if data['afterccjdeadline'] == 'false'  and  data['response-owe'] != 'owe-none-default-ccj' %}
 
-       <h1 class="heading-large">
-         Pay the debt to get the judgment cancelled
-       </h1>
+         <h1 class="heading-large">
+           Pay the debt to get the judgment cancelled
+         </h1>
 
-     {% if data['paidwhatiowe'] == 'true' %}
-     <p>Jan Clark claims you owe them £1,500. You claim you've paid £500.</p>
-             {% endif %}
+         {% if data['paidwhatiowe'] == 'true' %}
+              <p>Jan Clark claims you owe them £1,500. You claim you've paid £500.</p>
+         {% endif %}
 
-       <p>If Jan Clark confirms you've paid £1,500 {% if data['paidwhatiowe'] == 'true' %}in total{% endif %} before 4pm on {{ now |  date("add", 7, "day") | date( "D MMMM YYYY" ) }}, the judgment will be cancelled.</p>
-       <p>If you pay later, or you dispute all or part of the claim, the judgment will stay on the register for 6 years. You can apply to have it removed, but you'll have to pay a fee of £255.</p>
 
-       <!-- <p><a href="../../party-details/claimant">Get Jan Clark's contact details</a></p> -->
-       <!-- <p>We'll contact you when they confirm you've paid.</p> -->
-       <!-- <p><a class="button" href="/prototypes/prototype-sep-2019/dashboard/applications-and-judgments/set-aside-default-ccj/settle-out-of-court?afterccjdeadline=true">I don't owe the money</a> -->
+         <p>If Jan Clark confirms you've paid £1,500 {% if data['paidwhatiowe'] == 'true' %}in total{% endif %} before 4pm on {{ now |  date("add", 7, "day") | date( "D MMMM YYYY" ) }}, the judgment will be cancelled.</p>
+         <p>If you pay later, or you dispute all or part of the claim, the judgment will stay on the register for 6 years. You can apply to have it removed, but you'll have to pay a fee of £255.</p>
 
-     <p class="heading-medium">Will you pay {% if data['paidwhatiowe'] == 'true' %}the remaining £1,000{% else %}£1,500{% endif %} before 4pm on {{ now |  date("add", 7, "day") | date( "D MMMM YYYY" ) }}?</p>
+           <!-- <p><a href="../../party-details/claimant">Get Jan Clark's contact details</a></p> -->
+           <!-- <p>We'll contact you when they confirm you've paid.</p> -->
+           <!-- <p><a class="button" href="/prototypes/prototype-sep-2019/dashboard/applications-and-judgments/set-aside-default-ccj/settle-out-of-court?afterccjdeadline=true">I don't owe the money</a> -->
+
+         <p class="heading-medium">Will you pay {% if data['paidwhatiowe'] == 'true' %}the remaining £1,000{% else %}£1,500{% endif %} before 4pm on {{ now |  date("add", 7, "day") | date( "D MMMM YYYY" ) }}?</p>
 
          <form
            name="aspnetForm"
            method="post"
            onsubmit="multiNavigation('radio-set-receive-claim', ['Yes', 'No'],
-                                                                  ['../../../defendant/confirmation-page?paywithinmonth=true&,
+                                                                  ['../../../defendant/confirmation-page?paywithinmonth=true&',
                                                                    'settle-out-of-court?afterccjdeadline=true&']);return false;"
            id="aspnetForm"
            autocomplete="off">
@@ -69,16 +70,20 @@ Money Claims Prototype
 
      {% else %}
 
+
+
        <h1 class="heading-large">
          Apply to cancel a judgment
        </h1>
-          <div class="panel panel-border-narrow"  style="padding-bottom:15px;">
-                <p>The court will usually only cancel a judgment if it accepts you didn't know about the claim at the time it was issued.</p>
-          </div>
-     <p>To apply to cancel a judgment you must:</p>
-     <ul class="list list-bullet">
-       <li>submit a defence to the original claim as part of the application</li>
-       <li>pay a fee of £255</li>
+
+        <div class="panel panel-border-narrow"  style="padding-bottom:15px;">
+            <p>The court will usually only cancel a judgment if it accepts you didn't know about the claim at the time it was issued.</p>
+        </div>
+
+       <p>To apply to cancel a judgment you must:</p>
+       <ul class="list list-bullet">
+         <li>submit a defence to the original claim as part of the application</li>
+         <li>pay a fee of £255</li>
        </ul>
 
        <p>You might have to go to a hearing. You can't get the fee back if the court rejects your request.</p>
