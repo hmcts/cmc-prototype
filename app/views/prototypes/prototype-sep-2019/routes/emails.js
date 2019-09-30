@@ -25,7 +25,7 @@ const router = express();
       req.session.data['defaultccj'] = 'true';
       req.session.data['afterccjdeadline'] = 'true';
 
-      res.redirect('/' + strPath +  'defendant/correspondence/email-defaultccj' );
+      res.redirect('/' + strPath +  'defendant/correspondence/email-defaultccj-initial' );
     });
 
 
@@ -37,7 +37,7 @@ const router = express();
       req.session.data['defaultccj'] = 'true';
       req.session.data['afterccjdeadline'] = 'false';
 
-      res.redirect('/' + strPath +  'defendant/correspondence/email-defaultccj' );
+      res.redirect('/' + strPath +  'defendant/correspondence/email-defaultccj-initial' );
     });
 
 
