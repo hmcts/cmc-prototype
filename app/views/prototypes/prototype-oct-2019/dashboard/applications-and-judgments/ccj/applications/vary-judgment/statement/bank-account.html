@@ -1,0 +1,125 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="2" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <a href="#" class="link-back">Back</a>
+      <h1 class="heading-large">
+
+        List your bank and saving accounts
+      </h1>
+
+
+  <span class="form-hint">
+
+
+    Put a minus (-) in front of the amount if you're overdrawn. For example £-804.45.
+  </span>
+
+
+
+        <form action="income" method="get" class="form">
+
+
+             <div id="timeline" class="timeline">
+          <div class="triple-column">
+            <div id="timeline-heading-1" class="column-1">
+              <label class="form-label-bold" for="event-form-control">
+                Type of account <span class="form-hint">For example current, savings or ISA</span>
+              </label>
+
+            </div>
+
+
+            <div id="timeline-heading-3" class="column-3 ">
+              <label class="form-label-bold" for="timeline-heading-3">
+                Balance
+              </label>
+              <span class="form-hint"> </span>
+            </div>
+            <div id="timeline-heading-2" class="column-2 ">
+              <label class="form-label-bold" for="timeline-heading-2">
+                Joint account
+              </label>
+              <span class="form-hint"> </span>
+            </div>
+          </div>
+          <div class="timeline-rows">
+            <div class="triple-column">
+              <input class="form-control column-1" type="text" id="event-form-control" name="timeline-1"
+              value="{{data['bank-name-1']}}">
+
+              <input class="form-control column-3 fee pound" type="text" id="amount1" name="date-1"
+                     value="{{data['bank-ammount-1']}}">
+              <select class="form-control column-2" name="select-box">
+                <option>Choose</option>
+                <option>Yes </option>
+                <option>No</option>
+              </select>
+            </div>
+
+            <div class="triple-column">
+              <input class="form-control column-1" type="text" id="event-form-control" name="timeline-1"
+                     value="{{data['bank-name-1']}}">
+
+              <input class="form-control column-3 fee pound" type="text" id="amount1" name="date-1"
+                     value="{{data['bank-ammount-1']}}">
+              <select class="form-control column-2" name="select-box">
+                <option>Choose</option>
+                <option>Yes </option>
+                <option>No</option>
+              </select>
+            </div>
+
+
+          </div>
+
+          <div class="timeline-row">
+          <div id="add-event-container">
+            <a class="secondary-button" id="add-another-event-button" href="#">Add another account</a>
+          </div>
+<!--           <a class="" id="calculate" href="#">Calculate total</a>
+ -->        </div>
+
+        <script>
+          $(document).ready(function () {
+            $('#add-another-event-button').click(function (event) {
+              event.preventDefault();
+              $('.timeline-rows').append(
+                '<div class="timeline-row">' +
+                '<input class="form-control timeline-column-3" style="margin-right: 1px; margin-right: 10px;" type="text">' +
+                '<input class="form-control timeline-column-4 fee pound" style="margin-left: 3px" type="text">' +
+                '</div>'
+                );
+            });
+          });
+        </script>
+
+                  </div>
+
+                </div>
+                <hr>
+              </div>
+
+
+          </fieldset>
+
+        </div>
+
+        <div class="form-group">
+          <input type="submit" class="button" value="Save and continue"/>
+        </div>
+      </form>
+    </div>
+  </div>
+{% include 'prototypes/prototype-oct-2019/includes/contact.html' %}
+</main>
+{% endblock %}

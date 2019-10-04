@@ -1,0 +1,79 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+
+{% block content %}
+
+
+<main id="content" role="main">
+
+  {% include "includes/phase_banner_beta.html" %}
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+      <a href="#" onclick="history.go(-1)" class="link-back">Back</a>
+
+      <h1 class="heading-large">
+          Most requests to change a claim go to a hearing
+      </h1>
+      <p>You're likely to need a hearing unless:</p>
+      <ul class="list list-bullet">
+        <li>you and the claimant both agree to the change you're asking for</li>
+        <li>you both agree that there's no need for a hearing</li>
+        <li>the court doesn't believe a hearing would be appropriate</li>
+        </ul>
+
+        <h3 class="heading-medium">
+            Do you think there will need to be a hearing?
+        </h3>
+
+      <form
+        name="aspnetForm"
+        method="post"
+        onsubmit="multiNavigation('radio-general-app-hearing', ['hearing-yes', 'hearing-no'],
+                                                                ['hearing-duration?general-app-hearing=true&',
+                                                                 'upload-documents?general-app-hearing=false&']);return false;"
+        id="aspnetForm"
+        autocomplete="off">
+
+        <div class="form-group">
+          <fieldset>
+
+            <div class="multiple-choice" data-target="hearing">
+              <input id="hearing-yes" type="radio" name="radio-general-app-hearing" value="hearing-yes" aria-controls="hearing" aria-expanded="false">
+              <label for="hearing-yes">Yes</label>
+            </div>
+            <div class="panel panel-border-narrow js-hidden" id="hearing" style="padding-bottom:15px;">
+              <div class="form-date">
+                <p>The fee will be £255.</p>
+              </div>
+            </div>
+            <div class="multiple-choice" data-target="no-hearing-info">
+              <input id="hearing-no" type="radio" name="radio-general-app-hearing" value="hearing-no" aria-controls="no-hearing-info" aria-expanded="false">
+              <label for="hearing-no">No</label>
+            </div>
+            <div class="panel panel-border-narrow js-hidden" id="no-hearing-info" style="padding-bottom:15px;">
+              <div class="form-date">
+                <p>The fee will be £100. If the court decides there should be a hearing, the fee will be £255. You'll have to pay the extra £155 or your application will be rejected.</p>
+              </div>
+            </div>
+
+          </fieldset>
+        </div>
+
+
+        <div class="form-group">
+          <input type="submit" class="button" value="Continue" />
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+
+  {% include 'prototypes/prototype-oct-2019/includes/contact.html' %}
+</main>
+{% endblock %}

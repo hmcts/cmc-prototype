@@ -1,0 +1,73 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="4" %}
+
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+
+
+<main id="content" role="main">
+
+  {% include "includes/phase_banner_beta.html" %}
+
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+      <a href="#" class="link-back">Back</a>
+
+      <h1 class="heading-large">
+        How do you want the defendant to pay?
+      </h1>
+
+      <form method="post" action="counter-offer">
+
+<!--
+      <form
+        name="aspnetForm"
+        method="post"
+        onsubmit="multiNavigation('radio-pay-group', ['Immediately', 'Instalments', 'Set-date'], ['counter-offer', 'counter-offer/repayment-plan', 'counter-offer/pay-by-set-date']);return false;"
+        id="aspnetForm"
+        autocomplete="off">
+-->
+
+        <div class="form-group">
+          <fieldset>
+
+            <legend class="visually-hidden">How do you want the defendant to pay?</legend>
+
+            <div class="multiple-choice">
+              <input id="radio-yes" type="radio" name="radio-pay-group" value="Immediately">
+              <label for="radio-yes" data-target="yes-info">Immediately</label>
+            </div>
+
+
+            <div class="multiple-choice">
+              <input id="radio-no" type="radio" name="radio-pay-group" value="Set-date">
+              <label for="radio-no" data-target="no-info">By a set date</label>
+            </div>
+
+
+            <div class="multiple-choice">
+              <input id="radio-repayment" type="radio" name="radio-pay-group" value="Instalments">
+              <label for="radio-repayment" data-target="repayment-info">I'll suggest a repayment plan</label>
+            </div>
+          </fieldset>
+        </div>
+
+        <input type="hidden" name="court_payment_method" value="complete">
+        <input id="advert-option-next--button" type="submit" value="Save and continue" class="button"
+               data-ignore-double-submit="true">
+
+      </form>
+
+    </div>
+  </div>
+{% include 'prototypes/prototype-oct-2019/includes/contact.html' %}
+</main>
+{% endblock %}

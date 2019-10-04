@@ -1,0 +1,89 @@
+{% extends "layout_task-list.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block home_link %} ../task-list {% endblock %}
+{% block proposition_header %}
+{% set my_account="1" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+{% set completed = true if data.read_rules == "complete" and data.your_details == "complete" and data.their_details == "complete" and data.claim_amount == "complete" and data.claim_details == "complete" %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and
+  data.return_page.includes('check-your-answers')%}
+  {% else %}
+  <a href="#" class="link-back">Back</a>
+  {% endif %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and
+      data.return_page.includes('check-your-answers')%}
+      <form method="post" action="your-details" class="form">
+        {% else %}
+              <form
+                name="aspnetForm"
+                method="post"
+                id="aspnetForm"
+                autocomplete="off"
+                onsubmit="multiNavigation('claimant-type', ['Individual', 'Sole trader','Company', 'Organisation' ], ['your-details/your-details', 'your-details/your-details' , 'your-details/your-details', 'your-details/your-details']);return false;"
+              >
+          {% endif %}
+          {{formData | safe}}
+          <h1 class="heading-large">
+            About you and this claim
+          </h1>
+
+
+          <fieldset>
+            <legend class="visuallyhidden">
+              Who is making this claim?
+            </legend>
+            <p>You're claiming as:</p>
+            <div class="multiple-choice">
+              <input id="radio-1" type="radio" name="claimant-type" value="Individual" {{ checked("defendant-type", "Individual") }}>
+              <label for="radio-1">
+                <strong class="bold-small">An individual</strong><br>
+                <span class="form-hint">You're claiming for yourself</span>
+              </label>
+            </div>
+            <div class="multiple-choice">
+              <input id="radio-2" type="radio" name="claimant-type" value="Sole trader" {{ checked("defendant-type", "Sole trader") }}>
+              <label for="radio-2">
+                <strong class="bold-small">A sole trader or self-employed person</strong><br>
+                <span class="form-hint">For example a tradesperson</span>
+              </label>
+            </div>
+            <div class="multiple-choice">
+              <input id="radio-3" type="radio" name="claimant-type" value="Company" {{ checked("defendant-type", "Company") }}>
+              <label for="radio-3">
+                <strong class="bold-small">A limited company</strong><br>
+                <span class="form-hint">For example a company that sells goods or services</span>
+              </label>
+            </div>
+            <div class="multiple-choice">
+              <input id="radio-4" type="radio" name="claimant-type" value="Organisation" {{ checked("defendant-type", "Organisation") }}>
+              <label for="radio-4">
+                <strong class="bold-small">Another type of organisation</strong><br>
+                <span class="form-hint">For example a partnership, trust, charity, club or association</span>
+              </label>
+            </div>
+          </fieldset>
+          {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and
+          data.return_page.includes('check-your-answers')%}
+          <div class="form-group">
+            <input type="submit" class="button" value="Save changes"/>
+          </div>
+          <a href="{{ data.return_page if data.return_page | length > 0 else '../task-list' }}">Cancel</a>
+          {% else %}
+          <div class="form-group">
+            <input type="submit" class="button" value="Save and continue"/>
+          </div>
+          {% endif %}
+        </form>
+      </div>
+    </div>
+  {% include 'prototypes/prototype-oct-2019/includes/contact.html' %}
+</main>
+{% endblock %}

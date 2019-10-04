@@ -1,0 +1,61 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="2" %}
+
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+
+
+<main id="content" role="main">
+
+  {% include "includes/phase_banner_beta.html" %}
+
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <a href="#" class="link-back">Back</a>
+
+
+
+      <h1 class="heading-large">
+        You have an extra 14 days to respond
+      </h1>
+      <p >You must respond before 4pm on <span id="Date3"></span>. </p>
+
+      <p >We'll email both you and {% if data.counterclaim=="true" %}Mary Richards{%else%}Jan Clark{% endif %} confirming the additional response time.  </p>
+
+
+      {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}
+      <form method="post" action="{{ data.return_page if data.return_page | length > 0 else '../task-list' }}" class="form">
+
+      {% else %}
+      <form
+      name="aspnetForm"
+      action="../../task-list"
+      method="get"
+      id="aspnetForm"
+      autocomplete="off">
+      {% endif %}
+
+
+      <p class="actions">
+        <input type="hidden" name="more_time_to_respond" value="complete">
+
+        <input id="advert-option-next--button" type="submit" value="Continue" class="button"
+        data-ignore-double-submit="true">
+        <!--<a href="aos">I need more time to respond</a>-->
+      </p>
+    </form>
+  </div>
+
+
+
+</div>
+{% include 'prototypes/prototype-oct-2019/includes/contact.html' %}
+</main>
+{% endblock %}

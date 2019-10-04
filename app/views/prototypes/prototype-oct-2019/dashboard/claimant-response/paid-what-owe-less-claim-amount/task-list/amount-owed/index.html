@@ -1,0 +1,73 @@
+{% extends "layout_task-list.html" %}
+
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+
+{% block home_link %} ../task-list {% endblock %}
+{% block proposition_header %}
+{% set my_account="1" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+
+
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+
+      <a href="#" class="link-back">Back</a>
+
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+  <h1 class="heading-large">
+    Has the defendant paid you £{{ data['owe-amount'] or '1,430' }}?
+
+      </h1>
+      
+      <!-- 
+      <form
+      name="aspnetForm"
+      method="post"
+      onsubmit="multiNavigation('radio_select_group2', ['Yes', 'No'], ['../task-list', '../../part-admit/task-list/amount-owed?owe-amount={{ data['owe-amount'] or '1,430' }}']);return false;"
+      id="aspnetForm"
+      autocomplete="off">
+       -->
+
+      <form action="../task-list" method="post">
+
+      <div class="form-group">
+        <fieldset>
+					<div class="multiple-choice" data-target="accept-offer">
+						<input id="radio-no" type="radio" name="radio_select_group2" value="Yes" aria-controls="accept-offer" aria-expanded="false">
+						<label class="bold" for="radio-no" data-target="no-info">Yes
+            </label>
+					</div>
+					<div>
+
+					</div>
+
+
+					<div class="multiple-choice" data-target="reject-offer">
+						<input id="radio-repayment" type="radio" name="radio_select_group2" value="No">
+						<label class="bold" for="radio-repayment" data-target="repayment-info">No
+            </label>
+
+					</div>
+				</fieldset>
+      </div>
+                  <input type="hidden" name="amount_paid" value="complete">
+
+      <input id="advert-option-next--button" type="submit" value="Save and continue" class="button"
+             data-ignore-double-submit="true">
+    </form>
+
+
+
+
+    </div>
+  </div>
+
+{% include 'prototypes/prototype-oct-2019/includes/contact.html' %}
+</main>
+{% endblock %}

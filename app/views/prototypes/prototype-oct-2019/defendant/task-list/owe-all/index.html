@@ -1,0 +1,75 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="2" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <a href="#" class="link-back">Back</a>
+      <h1 class="heading-large">
+        {% if data['counter-amount'] %}
+        When do you want to pay the £{% if data['counter-amount'] %}{{ (1500 - data['counter-amount']) | numeral }}{% else %}1,000{% endif %} you owe?
+        {% elseif data.radio_select_group=="Some" %}
+        When do you want to pay the £{{ data['owe-amount'] | numeral  or '1,200' }}?
+        {% else %}
+        When do you want to pay?
+        {% endif %}
+      </h1>
+
+
+   <form
+     name="aspnetForm"
+     method="post"
+     onsubmit="multiNavigation('radio-pay-group', ['Immediately', 'Instalments', 'Set-date'], ['../task-list', '../task-list', 'owe-all/pay-by-set-date']);return false;"
+     id="aspnetForm"
+     autocomplete="off">
+
+
+
+
+      <div class="form-group">
+        <fieldset>
+          <div class="multiple-choice" data-target="immediately">
+            <input id="radio-immediately" type="radio" name="radio-pay-group" value="Immediately">
+            <label for="radio-immediately">Immediately</label>
+          </div>
+          <div class="panel panel-border-narrow js-hidden" id="immediately">
+            <p>You must contact the claimant and pay the full amount within 5 days. Any cheques or transfers must be clear in their account.</p>
+          </div>
+          <div class="multiple-choice" data-target="set-date">
+            <input id="radio-no" type="radio" name="radio-pay-group" value="Set-date">
+            <label for="radio-no">By a set date</label>
+          </div>
+          <div class="panel panel-border-narrow js-hidden" id="set-date">
+            <p>The claimant can request a County Court Judgment (CCJ) against you if you don't pay immediately.</p>
+          </div>
+          <div class="multiple-choice" data-target="instalments">
+            <input id="radio-repayment" type="radio" name="radio-pay-group" value="Instalments">
+            <label for="radio-repayment" data-target="repayment-info">I'll suggest a repayment plan</label>
+          </div>
+          <div class="panel panel-border-narrow js-hidden" id="instalments">
+            <p>The claimant can request a County Court Judgment (CCJ) against you if you don't pay immediately.</p>
+          </div>
+        </fieldset>
+      </div>
+      <input type="hidden" name="owe_some" value="complete">
+      {% if data.radio_select_group=="Some"%}
+      <input type="hidden" name="owe_some_pa" value="complete">
+      {% else %}
+      <input type="hidden" name="owe_some_fa" value="complete">
+      {% endif %}
+      <div class="form-group">
+        <input type="submit" class="button" value="Save and continue"/>
+      </div>
+    </form>
+  </div>
+</div>
+{% include 'prototypes/prototype-oct-2019/includes/contact.html' %}
+</main>
+{% endblock %}

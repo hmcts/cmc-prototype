@@ -1,0 +1,90 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+
+{% block content %}
+
+
+<main id="content" role="main">
+
+  {% include "includes/phase_banner_beta.html" %}
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+      <a href="#" onclick="history.go(-1)" class="link-back">Back</a>
+
+      <h1 class="heading-large">
+        Help paying your court fee
+      </h1>
+
+      <p>If you’re on a low income or get certain benefits you could get financial help with court fees.</p>
+
+      <h3 class="bold">Getting help with this fee</h3>
+      <p>You'll need to <a href="https://www.gov.uk/get-help-with-court-fees">check your eligibility and apply for help with fees</a> (opens in a new window) for the N244 form.
+      You'll be given a help with fees reference.  e.g. HWF-1612-1345</br>
+
+      {% if data.varyselected == 'true' %}
+          <!--  Vary  -->
+          <h3 class="bold">Changing the payment terms</h3>
+          <p>Request the judgment payment terms be changed by <a href="https://www.gov.uk/government/publications/form-n244-application-notice" target="_blank">downloading and completing an N244 paper form</a> (opens in a new window).</p>
+
+      {% elif data.cancelccj == 'true' %}
+        <!-- Set aside -->
+        <h3 class="bold">Cancelling the judgment</h3>
+        <p>Request to cancel the judgment payment terms be changed by <a href="https://www.gov.uk/government/publications/form-n244-application-notice" target="_blank">downloading and completing an N244 paper form</a>.</p>
+
+      {% else %}
+          <!-- General -->
+          <h3 class="bold">Request the court to do something</h3>
+          <p>Make you request by <a href="https://www.gov.uk/government/publications/form-n244-application-notice" target="_blank">downloading and completing an N244 paper form</a> (opens in a new window).</p>
+      {% endif %}
+
+
+      <h3 class="bold">Post your N244 form</h3>
+      <p class="keep-formatting">
+        County Court Money Claims Centre<br>
+        PO Box 527<br>
+        Salford<br>
+        M5 0BY
+      </p>
+
+      <h3 class="bold">Pay the fee</h3>
+      <p>Pay using one of <a href="https://www.gov.uk/court-fees-what-they-are#how-to-pay-your-court-or-tribunal-fee" target="_blank">the court's payment options</a>. (opens in a new window)</p>
+
+
+      </form>
+
+    </div>
+  </div>
+
+  {% include 'prototypes/prototype-oct-2019/includes/contact.html' %}
+</main>
+
+
+
+<form method="post"  action="#" class="for4" style=" float: left; ">
+  <select style="height:25px;" onchange="window.location.href='?'+this.value">
+
+    <option value="varyselected=true&"
+            {% if data.varyselected == 'true' %}selected{% endif %}
+    >Vary</option>
+
+    <option value="cancelccj=true&"
+            {% if data.cancelccj == 'true' %}selected{% endif %}
+    >Set aside</option>
+
+    <option value="cancelccj=false&varyselected=false&"
+            {% if data.cancelccj != 'true' and  data.varyselected != 'true' %}selected{% endif %}
+    >General</option>
+
+  </select>
+</form>
+
+
+
+
+
+{% endblock %}

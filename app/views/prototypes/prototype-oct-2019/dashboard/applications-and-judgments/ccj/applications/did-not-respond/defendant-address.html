@@ -1,0 +1,95 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block home_link %} ../../task-list {% endblock %}
+{% block proposition_header %}
+{% set my_account="4" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% import 'prototypes/prototype-oct-2019/includes/address.html' as address %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <a href="#" onclick="history.go(-1)" class="link-back">Back</a>
+      <h1 class="heading-large">
+        Where the claim was sent
+      </h1>
+      <p class="">The claim was sent on 6 Dec 2018 to:</p>
+      <ul class="panel">
+        <li>24 Acacia Drive</li>
+        <li>London</li>
+        <li>SW1 H9A</li>
+      </ul>
+
+      <h2 class="heading-medium">Was this your address on 6 Dec 2018?</h2>
+      <form
+        name="aspnetForm"
+        method="post"
+        onsubmit="multiNavigation('correspondence-address', ['No', 'Yes'], ['why-not-respond', 'did-you-give-address']);return false;"
+        id="aspnetForm"
+        autocomplete="off">
+
+        <div class="form-group">
+          <fieldset>
+            <div class="multiple-choice" data-target="correspondence-address">
+              <input type="radio" id="no-correspondence" name="correspondence-address" value="No" {% if data['addressType']
+              != 'diff' %} checked{% endif %}>
+              <label for="no-correspondence">Yes</label>
+            </div>
+            <div class="multiple-choice" data-target="contact-by-phone">
+              <input type="radio" id="add-correspondence" name="correspondence-address" value="Yes" {% if data['addressType']
+              == 'diff' %} checked{% endif %}>
+              <label for="add-correspondence">No, I've moved</label>
+            </div>
+            <div class="panel panel-border-narrow js-hidden" id="contact-by-phone">
+              <div id="addressManualWrapper">
+
+                <p>All correspondence will be sent to this address. This is known as an 'address for service'.</p>
+
+                {% if data['addressType'] == 'diff' %}
+                <div id="addressManualWrapper">
+                  <div id="address-details" class="address-manual-input disabled">
+                    <div class="form-group-compound address-item form-group"><a name="address_addressline1"></a><label
+                      class="form-label" for="Address_AddressLine1">Address line 1</label><input class="form-control"
+                                                                                                 value="45 Commercial Road"></span>
+                    </div>
+                    <div class="form-group-compound address-item form-group"><a name="address_addressline2"></a><label
+                      class="form-label" for="Address_AddressLine2">Address line 2
+                      (optional)</label><input class="form-control" value=""></span></div>
+                    <div class="form-group-compound address-item form-group"><a name="address_addressline3"></a><label
+                      class="form-label" for="Address_AddressLine3">Town or city
+                    </label><input autocorrect="off" class="form-control" value="London"></span></div>
+                    <div class="address-item form-group"><a name="address_postcode"></a><label
+                      class="form-label" for="Address_Postcode">Postcode</label><input
+                      class="form-control form-control-1-4" value="W1D 5HF"></span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <input type="submit" class="button" value="Save and continue"/>
+            </div>
+
+            {% else %}
+            {{ address.lookup('service') }}
+            {% endif %}
+
+          </fieldset>
+        </div>
+
+        <div class="form-group">
+          <input type="submit" class="button" value="Save and continue"/>
+        </div>
+
+      </form>
+    </div>
+  </div>
+
+  {% include 'prototypes/prototype-oct-2019/includes/contact.html' %}
+</main>
+
+{% endblock %}
