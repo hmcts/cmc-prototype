@@ -1,0 +1,145 @@
+{% extends "layout_unbranded.html" %}
+{% block proposition_header %}
+{% include "includes/propositional_navigation_no_login.html" %}
+{% endblock %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <a href="#" class="link-back">Back</a>
+      <h1 class="heading-large">
+        You can't use this service
+      </h1>
+      <p>
+        {% if data['a']=="10k" %}
+        <p>This service is for claims of £10,000 or less.</p>
+      <p>For claims between £10,001 and £100,000 you might be able to <a href="mcol-eligibility"> use Money Claim Online (MCOL)</a>. </p>
+
+        <p>You can also claim by paper. <a target="_blank" href='http://formfinder.hmctsformfinder.justice.gov.uk/n1-eng.pdf'>Download a paper form</a> <span class="font-xsmall">(opens in a new window)</span>, complete it and return it to make your claim.</p>
+      <h3 class="heading-medium">Where to send paper forms</h3>
+      <p>County Court Money Claims Centre<br>
+        PO Box 527<br>
+        Salford<br>
+        M5 0BY<br>
+      </p>
+
+
+              {% elif data['a']=="amount-unknown" %}
+      <p>You need to know the claim amount to use this service.</p>
+
+      <p>If you can't calculate the claim amount, for example because you’re claiming for an injury or accident, you need to <a target="_blank" href='http://formfinder.hmctsformfinder.justice.gov.uk/n1-eng.pdf'>download a paper form</a> <span class="font-xsmall">(opens in a new window)</span>. Complete the form and return it.</p>
+
+      <h3 class="heading-medium">Where to send paper forms</h3>
+      <p>County Court Money Claims Centre<br>
+        PO Box 527<br>
+        Salford<br>
+        M5 0BY<br>
+      </p>
+
+        {% elif data['a']=="claim-multi" %}
+
+        <p>You can't use this service if more than one person or organisation is making the claim.</p>
+        <p><a target="_blank" href='http://formfinder.hmctsformfinder.justice.gov.uk/n1-eng.pdf'>Download a paper form</a> <span class="font-xsmall">(opens in a new window)</span> to claim on behalf of more than one person or organisation. Complete the form and return it to make your claim.</p>
+      <h3 class="heading-medium">Where to send paper forms</h3>
+      <p>County Court Money Claims Centre<br>
+        PO Box 527<br>
+        Salford<br>
+        M5 0BY<br>
+      </p>
+        {% elif data['a']=="def-multi" %}
+        <p>You can't use this service if your claim is against more than one person or business.</p>
+      Use <a href='https://www.moneyclaim.gov.uk/web/mcol/welcome'>Money Claim Online (MCOL)</a> for claims against 2 people or organisations.</p>
+        <p>To claim against more than 3 people or organisations <a target="_blank" href='http://formfinder.hmctsformfinder.justice.gov.uk/n1-eng.pdf'>download a paper form</a> <span class="font-xsmall">(opens in a new window).</span>Complete the form and return it to make your claim.</p>
+      <h3 class="heading-medium">Where to send paper forms</h3>
+      <p>County Court Money Claims Centre<br>
+        PO Box 527<br>
+        Salford<br>
+        M5 0BY<br>
+      </p>
+        {% elif data['a']=="c-address" %}
+        <p>You need to have an address in the UK to make a money claim.</p>
+
+
+        {% elif data['a']=="d-address" %}
+        <p>You can only use this service to claim against people or organisations with an address in England or Wales.</p>
+      <p>Depending on where you’ll be sending the claim, you might be able to claim using a paper form. <a target="_blank" href='https://www.moneyclaimsuk.co.uk/PDFForms/N1.pdf'>Download the paper form N1</a> <span class="font-xsmall">(opens in a new window) and <a target="_blank" href='https://www.moneyclaimsuk.co.uk/PDFForms/N510.pdf'>form N510</a><span class="font-xsmall"> (opens in a new window)</span>. Complete the forms and return them to make your claim.</p>
+      <h3 class="heading-medium">Where to send paper forms</h3>
+      <p>County Court Money Claims Centre<br>
+        PO Box 527<br>
+        Salford<br>
+        M5 0BY<br>
+      </p>
+        {% elif data['a']=="18" %}
+      <p>You need to be 18 or over to use this service.
+        <p>You might be able to get advice from organisations like <a target="_blank" href='https://www.citizensadvice.org.uk/about-us/contact-us/'>Citizens Advice</a> <span class="font-xsmall">(opens in a new window)</span> about making a claim.</p>
+
+          {% elif data['a']=="d18" %}
+      <p>You can only use this service to claim against a defendant who's 18 or over.
+        <p>You might be able to get advice from organisations like <a target="_blank" href='https://www.citizensadvice.org.uk/about-us/contact-us/'>Citizens Advice</a> <span class="font-xsmall">(opens in a new window)</span> about making a claim.</p>
+
+
+              {% elif data['a']=="hwf" %}
+           {% if data['version'] == "testing" %}
+              <p>You need to claim using a paper form if you want help paying your court fees.</p>
+              <p><a target="_blank" href="https://sm6gbj.axshare.com/hwf_calculator_start_page.html">Check if you're eligible for help paying your court fees.</a> <span class="font-xsmall">(opens in a new window)</span> </p>
+              <p>If you're eligible for help with fees, make your claim by post. <a target="_blank" href='http://formfinder.hmctsformfinder.justice.gov.uk/n1-eng.pdf'>Download a paper form.</a> <span class="font-xsmall">(opens in new window)</span>. Complete the form and return it to make your claim.</p>
+      <h3 class="heading-medium">Where to send paper forms</h3>
+      <p>County Court Money Claims Centre<br>
+        PO Box 527<br>
+        Salford<br>
+        M5 0BY<br>
+      </p>
+
+              {% else %}
+              <p>You need to use a paper form if you want <a href="https://www.gov.uk/get-help-with-court-fees">help paying your court fees.</a></p>
+            <p><a target="_blank" href='http://formfinder.hmctsformfinder.justice.gov.uk/n1-eng.pdf'>Download a paper form</a> <span class="font-xsmall">(opens in new window)</span>. Complete and return the form to make your claim.</p>
+      <h3 class="heading-medium">Where to send paper forms</h3>
+      <p>County Court Money Claims Centre<br>
+        PO Box 527<br>
+        Salford<br>
+        M5 0BY<br>
+      </p>
+           {% endif %}
+
+
+
+
+        {% elif data['a']=="landlord" %}
+        <p>You can't make a claim for a tenancy deposit using this service.</p>
+      <p>Get <a target="_blank" href="https://www.gov.uk/tenancy-deposit-protection/disputes-and-problems">help to resolve your dispute</a> <span class="font-xsmall">(opens in a new window)</span> with a landlord or tenant.</p>
+
+        {% elif data['a']=="sols" %}
+        <p>This service is currently for claimants representing themselves.</p>
+        <p>If you're a legal representative <a href='https://www.moneyclaim.gov.uk/web/mcol/welcome'>use the Money Claim Online (MCOL) service</a>.</p>
+
+        <p>Or <a target="_blank" href='http://formfinder.hmctsformfinder.justice.gov.uk/n1-eng.pdf'>download a paper form</a><span class="font-xsmall"> (opens in a new window). Complete and return the form to make your claim.</p>
+
+        {% elif data['a']=="crown" %}
+      You can't use this service to claim against <a target="_blank" href="https://www.gov.uk/government/publications/serve-the-treasury-solicitor-with-legal-proceedings">government departments</a> <span class="font-xsmall">(opens in a new window)</span>.
+      <p><a target="_blank" href='http://formfinder.hmctsformfinder.justice.gov.uk/n1-eng.pdf'>Download a paper form</a> <span class="font-xsmall">(opens in a new window)</span>, complete the form and return it to make your claim.</p>
+      <h3 class="heading-medium">Where to send paper forms</h3>
+      <p>County Court Money Claims Centre<br>
+        PO Box 527<br>
+        Salford<br>
+        M5 0BY<br>
+      </p>
+
+        {% endif %}
+      </p>
+    </div>
+  </div>
+{% include 'prototypes/prototype-oct-2019/includes/contact.html' %}
+</main>
+    <form method="post"  action="#" class="for4" style=" float: left;">
+      <select id="dashboard2" name="dashboard2" onchange="window.location.href='?version='+this.value">
+        <option  value="0" > </option>
+                <option value="testing" {% if data['version'] == 'testing' %}selected{% endif %}>Test</option>
+
+        <option  value="no-testing"  {% if data['version'] == 'no-testing' %}selected{% endif %}>Non-test</option>
+
+      </select>
+    </form>
+{% endblock %}

@@ -1,0 +1,85 @@
+{% extends "layout_task-list.html" %}
+
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+
+{% block home_link %} ../task-list {% endblock %}
+{% block proposition_header %}
+{% set my_account="1" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+
+
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+
+      <a href="#" class="link-back">Back</a>
+
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+      <form method="post" action="../task-list" class="form">
+
+     <h1 class="heading-large">
+      The defendant's response
+    </h1>
+
+      <p> Mary Richards said they paid you £{{ data['owe-amount'] or '1,430' }}. They said this is all they owe, not the amount you claimed.<p>
+
+      <p><a href="">Download their full response</a> (PDF, 123KB)</p>
+
+      <h2 class="heading-medium">Their defence</h2>
+      <p class="heading-small">When they paid this amount</p>
+      <p>{{ now | date('add' , 3 , 'days') | date( 'subtract', 1, 'months') | date }}</p>
+
+      <p class="heading-small">How they say they paid</p>
+      <p>I posted a cheque to Jan Clark.</p>
+
+      <p class="heading-small">Why they say they don't owe the amount you claimed</p>
+
+
+
+<p>"The amount I was quoted for was £1,430. I'm not paying the £70 court fee as this should have been settled for the claim was issued."</p>
+
+ <p class="heading-small">Their timeline of events</p>
+    <div class="form-fields">
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Date</th>
+            <th scope="col">What happened</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>03/11/2017</td>
+            <td>I contacted Mary Richards to discuss building works on our roof.</td>
+          </tr>
+          <tr>
+            <td>06/11/2017</td>
+            <td>We agreed what work should be done and signed a contract.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="heading-small">They disagree with your evidence</p>
+    <p>I didn't get an email from Jan about this, so I didn't get a chance to sort it out. It would be good to see a
+    copy of the email.</p>
+
+          <input type="hidden" name="their_response" value="complete">
+
+        <div class="form-group">
+          <input type="submit" class="button" value="Continue"/>
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+
+{% include 'prototypes/prototype-oct-2019/includes/contact.html' %}
+</main>
+{% endblock %}

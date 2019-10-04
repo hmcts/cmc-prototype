@@ -1,0 +1,63 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <a href="#" class="link-back">Back</a>
+
+    <form method="post" action="questions/ask" class="form">
+
+      <div class="form-group">
+
+        <h2 class="heading-large">Send us more details by post</h2>
+
+        <p><a href="/public/images/order2.pdf" download>Download the court's order</a> (PDF, 123KB)</a> to find out the details you need to send.</p>
+
+        <h2 class="heading-small">Deadline for posting the details</h2>
+
+        <p>You need to make sure the court and the {% if data['party'] == "defendant" %}claimant{% else %}defendant{% endif %} receive a letter with the details before 4pm on {{ now | date( 'add', 15, 'days' ) | date }}.</p>
+
+
+
+        <h2 class="heading-small">Where to post the details</h2>
+
+
+        <p>You need to post the details to both the court and the .</p>
+
+        <p>The court's address is:</p>
+
+        <p>
+          Civil Money Claims<br/>
+          St. Katharine's House<br/>
+          21-27 St. Katharine's Street<br/>
+          Northampton<br/>
+          NN1 2LH
+        </p>
+
+        <p>The {% if data['party'] == "defendant" %}claimant{% else %}defendant{% endif %}'s address is:</p>
+
+        <p>
+          {% if data['party'] == "defendant" %}Jan Clark{% else %}Mary Richards{% endif %}<br/>
+          12 Garden View<br />
+          Bristol<br />
+          BS4 7FB
+        </p>
+
+      </div>
+    </form>
+
+    </div>
+  </form>
+</div>
+</div>
+{% include 'prototypes/prototype-oct-2019/includes/contact.html' %}
+</main>
+{% endblock %}

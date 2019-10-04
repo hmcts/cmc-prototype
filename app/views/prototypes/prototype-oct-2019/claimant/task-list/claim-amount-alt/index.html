@@ -1,0 +1,38 @@
+{% extends "layout_task-list.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block home_link %} ../task-list {% endblock %}
+{% block proposition_header %}
+{% set my_account="1" %}
+{% import "prototypes/prototype-oct-2019/includes/claim-amount.html" as amount %}
+
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <a href="#" class="link-back">Back</a>
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}
+      <form method="post" action="../claim-amount-alt/interest-q" class="form">
+        {% else %}
+        <form method="post" action="claim-amount-alt/interest-q" class="form">
+          {% endif %}
+
+          {{formData | safe}}
+          {{ amount.form('claimant') }}
+
+
+</form>
+</div>
+</div>
+{% include 'prototypes/prototype-oct-2019/includes/contact.html' %}
+</main>
+{% endblock %}
+{% block extra_js_1 %}
+{{ amount.js('claimant') }}
+
+{% endblock %}

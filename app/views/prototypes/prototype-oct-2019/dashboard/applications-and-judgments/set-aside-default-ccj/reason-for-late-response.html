@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+
+{% block content %}
+
+
+<main id="content" role="main">
+
+  {% include "includes/phase_banner_beta.html" %}
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+      <a href="#" onclick="history.go(-1)" class="link-back">Back</a>
+
+      <h1 class="heading-large">
+        Explain why you didn't respond until now
+      </h1>
+
+      {% if  data['aftercontact'] == 'true' %}
+          <form action="task-list-after-contact?latereply=false&missingletter=false&updatedaddress=true&explainreasonaftercontact=complete" method="post" class="form">
+      {% else %}
+          <form action="task-list?latereply=false&missingletter=false&updatedaddress=true&explainreason=complete" method="post" class="form">
+      {% endif %}
+
+
+          <fieldset>
+            <div class="form-date">
+              <textarea class="form-control" name="reason-for-not-responding" type="text"
+                        id="reason-for-not-responding" value="{{data['reason-for-not-responding']}}"></textarea>
+            </div>
+          </fieldset>
+
+          <input id="advert-option-next--button" type="submit" value="Continue"
+                 class="button" data-ignore-double-submit="true">
+
+      </form>
+
+    </div>
+  </div>
+
+  {% include 'prototypes/prototype-oct-2019/includes/contact.html' %}
+</main>
+{% endblock %}

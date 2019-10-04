@@ -1,0 +1,293 @@
+{% extends "layout_task-list.html" %}
+{% block page_title %}
+Check your answers
+{% endblock %}
+{% block home_link %} ../task-list {% endblock %}
+{% block proposition_header %}
+{% set my_account="1" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <h1 class="heading-large">
+    Check your answers
+  </h1>
+  <table class="check-your-answers">
+    <thead>
+      <tr>
+        <th colspan="2">
+          <h2 id='cd' class="heading-medium">
+            Your response
+          </h2>
+        </th>
+        <th>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          Do you accept or reject their response?
+        </td>
+        <td>
+         {%if data.radio_select_group=="Yes" %}
+         I accept their response
+         {%elif data.radio_select_group=="No" %}
+         I reject their response
+         {% else %}
+         I reject their response
+         {% endif %}
+       </td>
+       <td class="change-answer">
+        <a href="#">
+          Change <span class="visuallyhidden">Why you believe you're owed the money</span>
+        </a>
+      </td>
+    </tr>
+
+
+    <table class="check-your-answers">
+      <thead>
+      <tr>
+        <th colspan="2">
+          <h2 class="heading-medium">
+            Free telephone mediation
+          </h2>
+        </th>
+        <th>
+        </th>
+      </tr>
+      </thead>
+      <td>
+        Opt out?
+      </td>
+      <td>
+        {% if data['resolve_dispute']=="complete" %}
+        No
+        {% elseif data['meditation_ineligible']=="complete" %}
+        Yes
+        {% endif %}
+      </td>
+      <td class="change-answer">
+        <a
+          href="../task-list/request-mediation?return_page={{ '../../task-list' | urlencode }}">
+          Change <span class="visuallyhidden">Why you believe you're owed the money</span>
+        </a>
+      </td>
+      {% if data['resolve_dispute']=="complete" %}
+      <tr>
+        <td>
+          Agree to all statements
+        </td>
+        <td>
+          Yes, I agree
+        </td>
+        <td class="change-answer">
+          <a href="../task-list/request-mediation/statements-all?return_page={{ '../../task-list' | urlencode }}">
+            Change <span class="visuallyhidden">Name</span>
+          </a>
+        </td>
+      </tr>
+
+      <tr>
+        <td>Contact number
+        </td>
+        <td>
+          {{ data['phone-claimant'] or '07123456789'}}
+        </td>
+        <td class="change-answer">
+          <a href="../task-list/request-mediation/previous-phone?return_page={{ '../../task-list' | urlencode }}">
+            Change <span class="visuallyhidden">Name</span>
+          </a>
+        </td>
+      </tr>
+      {% else %}
+      {% endif %}
+      </tbody>
+    </table>
+    </tr>
+
+
+
+
+    </tbody>
+  </table>
+
+
+
+                    {% if data['hearing'] == "complete" %}
+
+          <table class="check-your-answers">
+            <thead>
+              <tr>
+                <th colspan="2">
+                  <h2 class="heading-medium" id="money-owed">
+                    Your hearing requirements
+                  </h2>
+                </th>
+                <th>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  Preferred hearing centre?
+                </td>
+                <td>
+                  {{ data['county_court'] or 'Guildford County Court' }}
+                </td>
+                <td class="change-answer">
+                  <a href="#">Change</a>
+                </td>
+              </tr>
+              <tr>
+                <td class="no-border">
+                  Proposed experts
+                </td>
+                <td class="no-border">
+                </td>
+                <td class="change-answer no-border">
+                  <a href="#">Change</a>
+                </td>
+              </tr>
+              <tr>
+                <td class="no-border">
+                  Name
+                </td>
+                <td class="no-border">
+                  Dave Smith
+                </td>
+              </tr>
+              <tr>
+                <td class="no-border">
+                  Area of expertise
+                </td>
+                <td class="no-border">
+                  Builder
+                </td>
+              </tr>
+              <tr>
+                <td class="no-border">
+                  Expected cost
+                </td>
+                <td class="no-border">
+                  £125
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  Evidence given
+                </td>
+                <td>
+                  In person
+                </td>
+              </tr>
+              <tr>
+                <td class="no-border">
+                  Name
+                </td>
+                <td class="no-border">
+                  John Davies
+                </td>
+              </tr>
+              <tr>
+                <td class="no-border">
+                  Area of expertise
+                </td>
+                <td class="no-border">
+                  Plumber
+                </td>
+              </tr>
+              <tr>
+                <td class="no-border">
+                  Expected cost
+                </td>
+                <td class="no-border">
+                  £125
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  Evidence given
+                </td>
+                <td>
+                  In writing
+                </td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>
+                  Witnesses
+                </td>
+                <td>
+                  {{ data['other-witnesses'] or 2}}
+                </td>
+                <td class="change-answer">
+                  <a href="#">Change</a>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  Will you give evidence yourself?
+                </td>
+                <td>
+                  {{ data['self']|capitalize or 'Yes' }}
+                </td>
+                <td class="change-answer">
+                  <a href="#">Change</a>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  Dates unavailable
+                </td>
+                <td>
+                  {{ date | date('add', 1, 'week') | date('dddd D MMMM YYYY') }}<br />
+                  {{ date | date('add', 12, 'days') | date('dddd D MMMM YYYY') }}<br />
+                  {{ date | date('add', 25, 'days') | date('dddd D MMMM YYYY') }}<br />
+                  {{ date | date('add', 35, 'days') | date('dddd D MMMM YYYY') }}<br />
+                </td>
+                <td class="change-answer">
+                  <a href="#">Change</a>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  Support required for a hearing
+                </td>
+                <td>
+                  Welsh interpreter<br />
+                  Disabled access
+                </td>
+                <td class="change-answer">
+                  <a href="#">Change</a>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  Would you feel safe in a courtroom with the defendant?
+                </td>
+                <td>
+                  {{ data['safety']|capitalize or 'Yes' }}
+                  {% if data['safety-why'] %}<p>{{ data['safety-why'] }}</p>{% endif %}
+                </td>
+                <td class="change-answer">
+                  <a href="#">Change</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          {% endif %}
+
+  <br>
+<form method="get" action="../../confirmation-page?" class="form">
+  <div class="form-group">
+    <button id="submit" class="button" >Submit response</button>
+  </div>
+</form>
+{% include 'prototypes/prototype-oct-2019/includes/contact.html' %}
+</main>
+{% endblock %}

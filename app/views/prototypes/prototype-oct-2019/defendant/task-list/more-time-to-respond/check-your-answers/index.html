@@ -1,0 +1,80 @@
+{% extends "layout_task-list.html" %}
+
+{% block page_title %}
+Check your answers
+{% endblock %}
+{% block home_link %} ../../task-list {% endblock %}
+{% block proposition_header %}
+{% set my_account="2" %}
+
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+
+  <h1 class="heading-large">
+    Check your answers <!-- for this task -->
+  </h1>
+
+  <table class="check-your-answers">
+
+    <thead>
+      <tr>
+        <th colspan="2">
+          <h2 class="heading-medium">
+            More time to respond to claim
+          </h2>
+        </th>
+        <th>
+        </th>
+      </tr>
+    </thead>
+
+    <tbody>
+
+      <tr>
+        <td>
+          Additional time to respond 
+        </td>
+        {% if data['radio_select_group_time']=="Yes" %}
+        <td>
+         <p>You have an extra 14 days to respond. <br>Your claim response deadline is now <span id="Date3"></span>. </p>
+
+
+ 
+       </td>
+       <td class="change-answer">
+   
+      </td>
+
+      {% else %} 
+      <td>
+       No 
+     </td>
+     <td class="change-answer">
+        <a href="../more-time-to-respond/index?return_page={{ '../../task-list/more-time-to-respond/check-your-answers' | urlencode }}">
+
+        Change <span class="visuallyhidden">Name</span>
+      </a>
+    </td>
+    {% endif %} 
+
+
+  </tr>
+
+
+
+
+</tbody>
+</table>
+
+<br>
+<br>
+
+<a href="../../task-list">Return to task list</a>
+
+{% include 'prototypes/prototype-oct-2019/includes/contact.html' %}
+</main>
+{% endblock %}

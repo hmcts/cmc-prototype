@@ -1,0 +1,493 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block content %}
+<style type="text/css">
+  .report-error {
+    display: none
+  }
+</style>
+<main id="content" role="main">
+  <h1 class="heading-large">Dashboard</h1>
+  <ol class="list list-number">
+    <li><a href="home?dashboard=1.2">Home page</a></li>
+    <li><a href="claimant?claimant=5">Claimant</a></li>
+
+    <li><a href="defendant">Defendant</a></li>
+  </ol>
+
+  <h2 class="heading-medium">Dashboard redesign - monitoring case and next steps</h2>
+  <p>
+    User testing - 29.1.2019
+  </p>
+
+  <h4 class="heading-small">Claimant</h4>
+  <ol class="list list-number">
+    <li><a href="../claimant/task-list">Make a money claim</a></li>
+    <li><a href="new-dashboard/claimant/email1">Email - The defendant has rejected the claim</a></li>
+    </li>
+  </ol>
+  <fieldset></fieldset>
+  <h4 class="heading-small">Defendant</h4>
+  <ol class="list list-number">
+    <li><a href="new-dashboard/defendant/email1">Email notification about claim</a></li>
+    <li><a href="new-dashboard/defendant/enter-claim-reference">Enter claim reference and access code</a></li>
+    <li><a href="new-dashboard/defendant/email2">Email - Respond to claim</a></li>
+    <li><a href="new-dashboard/defendant/email4">Email - Claimant has rejected your response</a></li>
+    </li>
+  </ol>
+
+  <fieldset></fieldset>
+
+  <h2 class="heading-medium">Request judgment</h2>
+
+  <ol class="list list-number">
+    <li><a href="home?dashboard=1.3">Dashboard overview</a></li>
+    <li><a href="claimant?claimant=2">details page</a></li>
+    <li><a href="applications-and-judgments/default-judgment?control-box=1">Judgment against individual</a>(starts on -
+      do you know DOB)
+    </li>
+    <li><a href="applications-and-judgments/default-judgment/claim-amount-deduct?control-box=3">Judgment against company
+      or org</a>(starts on - Has the defendant paid some of the amount owed?)
+    </li>
+    <li><a href="applications-and-judgments/default-judgment/claim-amount-deduct?radio-indent-group=No">Has the
+      defendant paid some of the amount owed?</a></li>
+    <li><a href="applications-and-judgments/default-judgment/claim-amount?num2=&radio-indent-group2=No">Judgment
+      amount</a></li>
+    <li><a href="applications-and-judgments/default-judgment/payment-options">Payment options</a></li>
+    <li><a href="applications-and-judgments/default-judgment/pay-by-set-date?radio-pay-group=Set-date">Pay by
+      Immediately</a></li>
+    <li><a href="applications-and-judgments/default-judgment/pay-by-set-date?radio-pay-group=Set-date">Pay by set
+      date</a></li>
+    <li><a href="applications-and-judgments/default-judgment/repayment-plan?radio-pay-group=Instalments">Pay by
+      instalments</a></li>
+    <li><a href="applications-and-judgments/default-judgment/check-your-judgment">Check your answers</a></li>
+    <li><a href="applications-and-judgments/default-judgment/confirmation-page">Confirmation page</a></li>
+
+  </ol>
+
+  <h2 class="heading-medium">Request warrant of control - MVP</h2>
+
+
+
+  <ol class="list list-number">
+    <li><a href="applications-and-judgments/warrant-of-control/mvp/sign-in-form">Sign in</a></li>
+    <li><a href="home?dashboard=1.411">Dashboard overview</a></li>
+    <li><a href="claimant?claimant=10.121">Claim details page</a></li>
+    <li><a href="applications-and-judgments/warrant-of-control/mvp/before-you-start">Before you decide how to continue
+    </li>
+    <li><a href="applications-and-judgments/warrant-of-control/mvp/chances-of-success">Do you believe the defendant can pay you back?</li>
+    <li><a href="applications-and-judgments/warrant-of-control/mvp/claim-amount-deduct">Has the defendant paid any of the judgment amount?</li>
+    <li><a href="applications-and-judgments/warrant-of-control/mvp/claim-amount-instalments">How much do you want to enforce?</a></li>
+    <li><a href="applications-and-judgments/warrant-of-control/mvp/claimant-address">Claimant's correspondence address</li>
+    <li><a href="applications-and-judgments/warrant-of-control/mvp/warrant-address">Address to serve warrant</li>
+    <li><a href="applications-and-judgments/warrant-of-control/mvp/contact-defendant">Defendant's phone number</a></li>
+    <li><a href="applications-and-judgments/warrant-of-control/mvp/additional-information">Additional information</a>
+    </li>
+    <li><a href="applications-and-judgments/warrant-of-control/mvp/check-your-answers">Check your answers</a></li>
+    <li><a href="applications-and-judgments/warrant-of-control/check-and-send/enter-card">Enter card details</a></li>
+    <li><a href="applications-and-judgments/warrant-of-control/check-and-send/confirm-card-payment">Confirm your
+      payment</a></li>
+    <li><a
+      href="applications-and-judgments/warrant-of-control/check-and-send/confirmation-page?set-day=&set-month=&set-year=">Confirmation
+      page</a></li>
+    <!--<li><a href="applications-and-judgments/warrant-of-control/mvp/email-confirmation">Email confirmation - Warrant of-->
+    <!--Control is requested</a></li>-->
+  </ol>
+
+
+
+
+
+  <br>
+
+  <br>
+  <br>
+
+
+  <h2 class="heading-medium">Applications</h2>
+
+  <!--
+  <h4 class="heading-small">Lab testing scenarios</h4>
+  <li>*<a href="/prototype-admin/clear-data">Clear data</a>*</li>
+  <li><a href="/prototypes/prototype-oct-2019/defendant/correspondence/email-defaultccj?defaultccj=true&afterccjdeadline=true">Reject claim</a></li>
+  <li>*<a href="/prototype-admin/clear-data">Clear data</a>*</li>
+  <li><a href="/prototypes/prototype-oct-2019/defendant/correspondence/email-defaultccj?defaultccj=true&afterccjdeadline=true&scenario2=true&">Different claim - vary</a></li>
+  <li><a href="/prototypes/prototype-oct-2019/dashboard/home?dashboard=2.9996">Vary - response 1</a></li>
+  <li><a href="/prototypes/prototype-oct-2019/dashboard/home?dashboard=2.9997">Vary - response 2</a></li>
+  <li><a href="/prototypes/prototype-oct-2019/dashboard/home?dashboard=2.9998">Vary - response 3</a></li>
+  <li><a href="/prototypes/prototype-oct-2019/dashboard/home?dashboard=2.9999">Vary - response 4</a></li>
+  <br>
+  -->
+
+
+  <h4 class="heading-small">Set aside judgment</h4>
+  <ol class="list">
+    <!--<li><a href="applications-and-judgments/ccj/claim-details-mvp">MVP - response as part of application journey</a></li>-->
+    <!--<li><a href="applications-and-judgments/ccj/claim-details">Release 2 (for research purposes)</a></li>-->
+    <li>Start from email - Defendant</li>
+    <li><a href="/prototypes/prototype-oct-2019/emails/email-after-one-month-ccj-deadline">Set aside - default CCJ - email</a> (After 1 Month CCJ deadline)</li>
+    <li><a href="/prototypes/prototype-oct-2019/emails/email-before-one-month-ccj-deadline">Set aside - default CCJ - email</a> (Before 1 Month CCJ deadline)</li>
+    <br>
+
+    <li>Start from claim details - Defendant</li>
+    <details>
+      <summary>
+        <span class="summary">View links</span>
+      </summary>
+      <div class="panel">
+        <li><a href="/prototypes/prototype-oct-2019/dashboard/home?dashboard=2.30001">Defendant - Dashboard - Default CCJ issued</a>  (After 1 month CCJ deadline)</li>
+        <li><a href="/prototypes/prototype-oct-2019/dashboard/defendant?defendant=3.21&afterccjdeadline=true&">Defendant - Claim details - Default CCJ issued</a>  (After 1 month CCJ deadline)</li>
+        <li><a href="/prototypes/prototype-oct-2019/dashboard/home?dashboard=2.30002">Defendant - Dashboard - Default CCJ issued</a>  (Before 1 month CCJ deadline)</li>
+        <li><a href="/prototypes/prototype-oct-2019/dashboard/defendant?defendant=3.22&afterccjdeadline=false&">Defendant - Claim details - Default CCJ issued</a>  (Before 1 month CCJ deadline)</li>
+        <li><a href="/prototypes/prototype-oct-2019/dashboard/home?dashboard=2.19">Defendant - Dashboard - Claim is settled</a>  (After 1 month CCJ deadline)</li>
+        <li><a href="/prototypes/prototype-oct-2019/dashboard/defendant?defendant=17.3">Defendant - Claim details - Claim is settled</a>  (After 1 month CCJ deadline)</li>
+        <li><a href="/prototypes/prototype-oct-2019/dashboard/home?dashboard=2.21">Defendant - Dashboard - Claim is settled with certificate</a>  (After 1 month CCJ deadline)</li>
+        <li><a href="/prototypes/prototype-oct-2019/dashboard/defendant?defendant=17.4">Defendant - Claim details - Claim is settled with certificate</a>  (After 1 month CCJ deadline)</li>
+      </div>
+    </details>
+
+    <!--
+
+    <li>Defendant set aside a settled claim</li>
+    <li><a href="/prototypes/prototype-oct-2019/dashboard/applications-and-judgments/set-aside-default-ccj/task-list?defaultccj=true&afterccjdeadline=true&">Set aside triage task list</a> (after deadline)</li>
+    <br>
+    -->
+
+
+    <li>Defendant told to contact claimant</li>
+    <details>
+      <summary>
+        <span class="summary">View links</span>
+      </summary>
+      <div class="panel">
+        <li><a href="/prototypes/prototype-oct-2019/dashboard/home?dashboard=2.3002">Defendant - Dashboard</a> &nbsp; Before 1 month CCJ deadline (has agreed to pay in full)</li>
+        <li><a href="/prototypes/prototype-oct-2019/dashboard/defendant?defendant=21.1">Defendant - Claim details</a> &nbsp;Before 1 month CCJ deadline (has agreed to pay in full)</li>
+        <li><a href="/prototypes/prototype-oct-2019/dashboard/home?dashboard=2.3001">Defendant - Dashboard</a> &nbsp;After 1 month CCJ deadline (has agreed to pay in full)</li>
+        <li><a href="/prototypes/prototype-oct-2019/dashboard/defendant?defendant=21">Defendant - Claim details</a> &nbsp;After 1 month CCJ deadline (has agreed to pay in full)</li>
+        <br>
+        <li><a href="/prototypes/prototype-oct-2019/dashboard/home?dashboard=2.3004">Defendant - Dashboard</a> &nbsp;Before 1 month CCJ deadline (has agreed to settle)</li>
+        <li><a href="/prototypes/prototype-oct-2019/dashboard/defendant?defendant=22.1">Defendant - Claim details</a> &nbsp;Before 1 month CCJ deadline (has agreed to settle)</li>
+        <li><a href="/prototypes/prototype-oct-2019/dashboard/home?dashboard=2.3003">Defendant - Dashboard</a> &nbsp;After 1 month CCJ deadline (has agreed to settle)</li>
+        <li><a href="/prototypes/prototype-oct-2019/dashboard/defendant?defendant=22">Defendant - Claim details</a> &nbsp;After 1 month CCJ deadline (has agreed to settle)</li>
+      </div>
+    </details>
+
+
+    <li>Set aside requested by defendant</li>
+    <details>
+      <summary>
+        <span class="summary">View links</span>
+      </summary>
+      <div class="panel">
+        <li><a href="/prototypes/prototype-oct-2019/dashboard/home?dashboard=2.9991">Defendant - Dashboard</a></li>
+        <li><a href="/prototypes/prototype-oct-2019/dashboard/defendant?defendant=20">Defendant - Claim details</a></li>
+        </div>
+    </details>
+
+
+
+
+    <li>Claimant's attendance response to Defendant's CCJ set aside</li>
+    <details>
+      <summary >
+        <span class="summary">View links</span>
+      </summary>
+      <div class="panel">
+        <ol class="">
+          <li><a href="/prototypes/prototype-oct-2019/emails/tell-claimnt-set-aside-requested">Claimant - Status update email</a></li>
+          <li><a href="/prototypes/prototype-oct-2019/dashboard/home?dashboard=1.9991">Claimant - Dashboard</a> - will you attend</li>
+          <li><a href="/prototypes/prototype-oct-2019/dashboard/claimant?claimant=23">Claimant - Claim details</a> - will you attend</li>
+          <!-- <li><a href="/prototypes/prototype-oct-2019/dashboard/claimant?claimant=24">Claimant - Claim details - already agreed to set aside</a></li>  -->
+
+          <li><a href="/prototypes/prototype-oct-2019/dashboard/home?dashboard=1.999901">Claimant - Dashboard - Attending set aside hearing - Claim not settled</a></li>
+          <li><a href="/prototypes/prototype-oct-2019/dashboard/claimant?claimant=34">Claimant - Claim details - Attending set aside  hearing - Claim not settled</a></li>
+          <li><a href="/prototypes/prototype-oct-2019/dashboard/home?dashboard=1.999902">Claimant - Dashboard - Attending set aside  hearing - Claim settled</a></li>
+          <li><a href="/prototypes/prototype-oct-2019/dashboard/claimant?claimant=33">Claimant - Claim details - Attending set aside  hearing - Claim settled</a></li>
+          <li><a href="/prototypes/prototype-oct-2019/dashboard/home?dashboard=1.999903">Claimant - Dashboard - Not attending set aside  hearing - Claim not settled</a></li>
+          <li><a href="/prototypes/prototype-oct-2019/dashboard/claimant?claimant=37">Claimant - Claim details - Not attending set aside  hearing - Claim not settled</a></li>
+          <li><a href="/prototypes/prototype-oct-2019/dashboard/home?dashboard=1.999904">Claimant - Dashboard - Not attending set aside  hearing - Claim settled</a></li>
+          <li><a href="/prototypes/prototype-oct-2019/dashboard/claimant?claimant=36">Claimant - Claim details - Not attending set aside  hearing - Claim settled</a></li>
+
+          <li></li>
+        </ol>
+      </div>
+    </details>
+
+
+
+    <li>After Claim is settled - after a CCJ was issued</li>
+    <details>
+      <summary>
+        <span class="summary">View links</span>
+      </summary>
+      <div class="panel">
+        <ol class="">
+          <li>Defendant</li>
+          <li><a href="/prototypes/prototype-oct-2019/dashboard/home?dashboard=2.18">Defendant - Dashboard - Settled - Judgment issued - claimant says paid within a month</a></li>
+          <li><a href="/prototypes/prototype-oct-2019/dashboard/defendant?defendant=17.2">Defendant - Claim details - Settled - Judgment issued - claimant says paid within a month</a></li>
+          <li><a href="/prototypes/prototype-oct-2019/dashboard/home?dashboard=2.19">Defendant - Dashboard - Settled - Judgment issued - claimant says paid after a month</a></li>
+          <li><a href="/prototypes/prototype-oct-2019/dashboard/defendant?defendant=17.3">Defendant - Claim details - Settled - Judgment issued - claimant says paid after a month</a></li>
+        </ol>
+      </div>
+    </details>
+
+
+  </ol>
+
+
+
+
+  <br>
+  <h4 class="heading-small">Vary application by defendant</h4>
+  <ol class="list">
+
+    <li>Defendant Vary Starting point - Claim details states - Needs a BA to confirm </li>
+    <details>
+      <summary>
+        <span class="summary">View links</span>
+      </summary>
+      <div class="panel">
+        <ol class="">
+          <li>New states as part of applications work (same links as above)</li>
+          <li><a href="/prototypes/prototype-oct-2019/dashboard/home?dashboard=2.30001">Defendant - Dashboard - Default CCJ issued</a>  (After a month)</li>
+          <li><a href="/prototypes/prototype-oct-2019/dashboard/defendant?defendant=3.21">Defendant - Claim details - Default CCJ issued</a>  (After a month)</li>
+          <li><a href="/prototypes/prototype-oct-2019/dashboard/home?dashboard=2.30002">Defendant - Dashboard - Default CCJ issued</a>  (Before a month)</li>
+          <li><a href="/prototypes/prototype-oct-2019/dashboard/defendant?defendant=3.22">Defendant - Claim details - Default CCJ issued</a>  (Before a month)</li>
+          <br>
+          <li>Existing states</li>
+          <li><a href="/prototypes/prototype-oct-2019/dashboard/home?dashboard=2.53001">Defendant - Dashboard - 3.9031 I admit part of the claim - pay immediately - accepted - not paid - CCJ</a></li>
+          <li><a href="/prototypes/prototype-oct-2019/dashboard/defendant?defendant=3.9031">Defendant - Claim details - 3.9031 I admit part of the claim - pay immediately - accepted - not paid - CCJ</a></li>
+          <li><a href="/prototypes/prototype-oct-2019/dashboard/home?dashboard=2.5311">Defendant - Dashboard - I admit part of the claim - rejected - court offer - settlement - not signed - CCJ</a></li>
+          <li><a href="/prototypes/prototype-oct-2019/dashboard/defendant?defendant=4.01">Defendant - Claim details - I admit part of the claim - rejected - court offer - settlement - not signed - CCJ</a></li>
+          <li><a href="/prototypes/prototype-oct-2019/dashboard/home?dashboard=2.5312">Defendant - Dashboard - I admit part of the claim - rejected - claimant offer - settlement - not signed - CCJ</a></li>
+          <li><a href="/prototypes/prototype-oct-2019/dashboard/defendant?defendant=4.02">Defendant - Claim details - I admit part of the claim - rejected - claimant offer - settlement - not signed - CCJ</a></li>
+          <li><a href="/prototypes/prototype-oct-2019/dashboard/home?dashboard=2.532">Defendant - Dashboard - I admit part of the claim - rejected - court offer - CCJ</a></li>
+          <li><a href="/prototypes/prototype-oct-2019/dashboard/defendant?defendant=4.1">Defendant - Claim details - I admit part of the claim - rejected - court offer - CCJ</a></li>
+          <li><a href="/prototypes/prototype-oct-2019/dashboard/home?dashboard=2.5321">Defendant - Dashboard - I admit part of the claim - rejected - claimant offer - CCJ</a></li>
+          <li><a href="/prototypes/prototype-oct-2019/dashboard/defendant?defendant=4.2">Defendant - Claim details - I admit part of the claim - rejected - claimant offer - CCJ</a></li>
+          <li><a href="/prototypes/prototype-oct-2019/dashboard/home?dashboard=2.341">Defendant - Dashboard - 5.0111. Any admit - settlement - not paid - CCJ issued</a></li>
+          <li><a href="/prototypes/prototype-oct-2019/dashboard/defendant?defendant=5.0111">Defendant - Claim details - 5.0111. Any admit - settlement - not paid - CCJ issued</a></li>
+          <li><a href="/prototypes/prototype-oct-2019/dashboard/home?dashboard=2.35">Defendant - Dashboard - 5.012. Any admit - accept - judgement</a></li>
+          <li><a href="/prototypes/prototype-oct-2019/dashboard/defendant?defendant=5.012">Defendant - Claim details - 5.012. Any admit - accept - judgement</a></li>
+          <li><a href="/prototypes/prototype-oct-2019/dashboard/home?dashboard=2.351">Defendant - Dashboard - 5.013. Any admit - accepted - settlement not signed - judgment</a></li>
+          <li><a href="/prototypes/prototype-oct-2019/dashboard/defendant?defendant=5.013">Defendant - Claim details - 5.013. Any admit - accepted - settlement not signed - judgment</a></li>
+          <li><a href="/prototypes/prototype-oct-2019/dashboard/home?dashboard=2.3511">Defendant - Dashboard - 5.014. I admit all of the claim - rejected - claimant plan - settlement not signed - judgment</a></li>
+          <li><a href="/prototypes/prototype-oct-2019/dashboard/defendant?defendant=5.014">Defendant - Claim details - 5.014. I admit all of the claim - rejected - claimant plan - settlement not signed - judgment</a></li>
+          <li><a href="/prototypes/prototype-oct-2019/dashboard/home?dashboard=2.352">Defendant - Dashboard - 5.021. I admit all the claim - pay immediately - not paid - CCJ issued</a></li>
+          <li><a href="/prototypes/prototype-oct-2019/dashboard/defendant?defendant=5.021">Defendant - Claim details - 5.021. I admit all the claim - pay immediately - not paid - CCJ issued</a></li>
+          <li><a href="/prototypes/prototype-oct-2019/dashboard/home?dashboard=2.411">Defendant - Dashboard - I admit all of the claim - rejected - court offer - settlement - not signed - CCJ</a></li>
+          <li><a href="/prototypes/prototype-oct-2019/dashboard/defendant?defendant=5.3001">Defendant - Claim details - I admit all of the claim - rejected - court offer - settlement - not signed - CCJ</a></li>
+          <li><a href="/prototypes/prototype-oct-2019/dashboard/home?dashboard=2.42">Defendant - Dashboard - 5.301. I admit all the claim - instalment plan payment - court offer (CCJ)</a></li>
+          <li><a href="/prototypes/prototype-oct-2019/dashboard/defendant?defendant=5.301">Defendant - Claim details - 5.301. I admit all the claim - instalment plan payment - court offer (CCJ)</a></li>
+          <li><a href="/prototypes/prototype-oct-2019/dashboard/home?dashboard=2.421">Defendant - Dashboard - 5.302. I admit all the claim - instalment plan payment - claimant offer (CCJ)</a></li>
+          <li><a href="/prototypes/prototype-oct-2019/dashboard/defendant?defendant=5.302">Defendant - Claim details - 5.302. I admit all the claim - instalment plan payment - claimant offer (CCJ)</a></li>
+
+          <!-- <li><a href="/prototypes/prototype-oct-2019/dashboard/defendant?defendant=17.3">17.3. Judgment issued - claimant says paid after a month</a></li> -->
+          <!-- <li><a href="/prototypes/prototype-oct-2019/dashboard/defendant?defendant=5.52">5.52. I admit all the claim - court instalment plan payment rejected by defendant - redetermination - with CCJ</a></li>-->
+
+          <li>Any more?</li>
+        </ol>
+      </div>
+    </details>
+
+
+    <li>After defendant submits vary request</li>
+    <details>
+      <summary>
+        <span class="summary">View links</span>
+      </summary>
+      <div class="panel">
+        <ol class="">
+          <li><a href="home?dashboard=2.9995">Defendant - Dashboard - After defendant submitting vary</a></li>
+          <li><a href="defendant?defendant=23">Defendant - Claim details - After defendant submitting vary</a></li>
+        </ol>
+      </div>
+    </details>
+
+
+
+    <li>Claimant is asked to respond</li>
+    <details>
+      <summary>
+        <span class="summary">View links</span>
+      </summary>
+      <div class="panel">
+        <ol class="">
+          <li><a href="/prototypes/prototype-oct-2019/emails/tell-claimant-vary-requested">Claimant - Email - Vary requested</a></li>
+          <li><a href="home?dashboard=1.9995&instalments=false&">Claimant - Dashboard - Vary requested - by set date</a></li>
+          <li><a href="claimant?claimant=26">Claimant - Claim details - Vary requested - by set date</a></li>
+          <li><a href="home?dashboard=1.9995&instalments=true&">Claimant - Dashboard - Vary requested - installments</a></li>
+          <li><a href="claimant?claimant=27">Claimant - Claim details - Vary requested - installments</a></li>
+        </ol>
+      </div>
+    </details>
+
+
+    <li>After Claimant responds</li>
+    <details>
+      <summary>
+        <span class="summary">View links</span>
+      </summary>
+      <div class="panel">
+        <ol class="">
+          <li>Claimant</li>
+          <li><a href="home?dashboard=1.9997">Claimant - Dashboard - Accepted the Vary request</a></li>
+          <li><a href="claimant?claimant=28">Claimant - Claim details - Accepted the Vary request</a></li>
+          <li><a href="home?dashboard=1.9998">Claimant - Dashboard - Rejected the Vary request - Redetermination</a></li>
+          <li><a href="claimant?claimant=29">Claimant - Claim details - Rejected the Vary request - Redetermination</a></li>
+          <br>
+          <li>Defendant</li>
+          <li><a href="/prototypes/prototype-oct-2019/emails/tell-defendant-claimant-has-responded-to-vary-request-accept-plan">Defendant - Email - Vary response - Accepted by claimant</a></li>
+          <li><a href="home?dashboard=2.9996">Defendant - Dashboard - Accepted by claimant</a></li>
+          <li><a href="defendant?defendant=24">Defendant - Claim details - Accepted by claimant</a></li>
+          <br>
+          <li><a href="/prototypes/prototype-oct-2019/emails/tell-defendant-claimant-has-responded-to-vary-request-claimant-plan">Defendant - Email - Vary response - New plan proposed by claimant</a></li>
+          <li><a href="home?dashboard=2.9997">Defendant - Dashboard - New plan proposed by claimant</a></li>
+          <li><a href="defendant?defendant=25">Defendant - Claim details - New plan proposed by claimant</a></li>
+          <br>
+          <li><a href="/prototypes/prototype-oct-2019/emails/tell-defendant-claimant-has-responded-to-vary-request-court-plan">Defendant - Email - Vary response - New plan from determination</a></li>
+          <li><a href="home?dashboard=2.9998">Defendant - Dashboard - New plan from determination</a></li>
+          <li><a href="defendant?defendant=26">Defendant - Claim details - New plan from determination</a></li>
+          <br>
+          <li><a href="/prototypes/prototype-oct-2019/emails/tell-defendant-claimant-has-responded-to-vary-request-redetermination">Defendant - Email - Vary response - Claimant requested redetermination</a></li>
+          <li><a href="home?dashboard=2.9999">Defendant - Dashboard - Claimant rejected the Vary request - Redetermination</a></li>
+          <li><a href="defendant?defendant=27">Defendant - Claim details - Claimant rejected the Vary request - Redetermination</a></li>
+          <br>
+          <li><a href="/prototypes/prototype-oct-2019/emails/tell-defendant-claimant-did-not-respond">Defendant - Email - Vary response - Accepted automatically</a></li>
+          <li><a href="home?dashboard=2.9996001">Defendant - Dashboard - Accepted by default because of no claimant response</a></li>
+          <li><a href="defendant?defendant=24.001">Defendant - Claim details - Accepted by default because of no claimant response</a></li>
+
+        </ol>
+      </div>
+    </details>
+
+
+
+
+    <br>
+    <br>
+
+
+
+    <h2 class="heading-medium">Offers &nbsp;&nbsp;(parked)</h2>
+
+    <details>
+      <summary>
+        <span class="summary">View links</span>
+      </summary>
+      <div class="panel">
+          <br>
+          <ol class="">
+            <li>CLAIMANT</li>
+            <li><a href="../offers/claimant-intention-to-proceed-full-defence">Intention to proceed - Full defence</a></li>
+            <li><a href="../offers/claimant-intention-to-proceed-part-admit">Intention to proceed - Part admit</a></li>
+            <li><a href="../offers/claimant-offer-made-by-defendant">Respond to defendant's first offer</a></li>
+            <li><a href="../offers/claimant-offer-accepted">Offer accepted by defendant</a></li>
+            <li><a href="../offers/claimant-offer-rejected-only">Offer rejected by defendant - no counter offer</a></li>
+            <li><a href="../offers/claimant-offer-rejected-review-counter-offer">Offer rejected and respond to defendant's counter offer</a></li>
+            <li><a href="claimant?claimant=16.21">Make first offer from dashboard</a></li>
+          </ol>
+          <br>
+          <br>
+          <ol class="">
+            <li>DEFENDANT</li>
+            <li><a href="../defendant/correspondence/email?theclaimant=false&">Respond to a claim</a></li>
+            <li><a href="../offers/defendant-offer-offer-made-by-claimant">Respond to claimant's first offer</a></li>
+            <li><a href="../offers/defendant-offer-accepted">Offer accepted by claimant</a></li>
+            <li><a href="../offers/defendant-offer-rejected-no-more-actions">Offer rejected by claimant - no more offers</a></li>
+            <li><a href="../offers/defendant-offer-rejected-respond-to-counteroffer-no-more-offers">Offer rejected - Respond to counteroffer only</a></li>
+            <li><a href="../offers/defendant-offer-rejected-respond-make-another-offer-only">Offer rejected - Make another offer only</a></li>
+            <li><a href="../offers/defendant-offer-rejected-respond-to-counteroffer-and-more-offers">Offer rejected - Respond to counteroffer and optionally make offer</a></li>
+            <li><a href="defendant?defendant=15.11">Make first offer from dashboard</a></li>
+          </ol>
+          <br>
+      </div>
+    </details>
+
+
+
+
+    <br>
+
+
+
+
+    <!--
+    <ol class="">
+      <li>Defendant - Respond to claim</li>
+      <li><a href="../defendant/correspondence/email?theclaimant=false&">Defendant makes offer</a></li>
+      <br>
+      <li>Claimant - response</li>
+      <li><a href="new-dashboard/claimant/email1?theclaimant=true&newoffer=true&defendantmadeoffer=true&partadmitstart=false&">Respond to full defence</a></li>
+      <li><a href="new-dashboard/claimant/email1?theclaimant=true&newoffer=true&defendantmadeoffer=true&partadmitstart=true&">Respond to part admit</a></li>
+      <br>
+      <li>Make first offer from dashboard</li>
+      <li><a href="defendant?defendant=15.11&newoffer=true&theclaimant=false&firstoffer=true&">Defendant</a></li>
+      <li><a href="claimant?newoffer=true&theclaimant=true&claimant=8&defendant=claimant&firstoffer=true&">Claimant</a></li>
+      <br>
+      <li>Defendant - responds to offer </li>
+      <li><a href="offer-agreement/new-offers/email-offer-update-defendant?theclaimant=false&newoffer=true&firstoffer=false&claimanthasaccpted=null&respondtoclaimantnocounter=false&respondtoclaimantofferonly=true&">Offer rejected - Respond to counteroffer only</a></li>
+      <li><a href="offer-agreement/new-offers/email-offer-update-defendant?theclaimant=false&newoffer=true&firstoffer=false&claimanthasaccpted=null&respondtoclaimantnocounter=true&respondtoclaimantofferonly=false&">Offer rejected - Make another offer only</a></li>
+      <li><a href="offer-agreement/new-offers/email-offer-update-defendant?theclaimant=false&newoffer=true&firstoffer=false&claimanthasaccpted=null&respondtoclaimantnocounter=false&respondtoclaimantofferonly=false&">Offer rejected - Respond to counteroffer and make offer</a></li>
+      <br>
+      <li>Claimant - respond to offer </li>
+      <li><a href="offer-agreement/new-offers/email-claimant-respond-to-offer?theclaimant=true&defendant=claimant&newoffer=true&defendantmadeoffer=true&firstoffer=false&offerwasrejected=false&rejection-reason=&fromtheclaimanttasklist=false&">Respond to defendan't first offer</a></li>
+      <li><a href="offer-agreement/new-offers/email-claimant-respond-to-offer?theclaimant=true&defendant=claimant&newoffer=true&defendantmadeoffer=true&firstoffer=false&offerwasrejected=true&fromtheclaimanttasklist=false&firstoffer=false&">Offer rejected and respond to defendant's counter offer</a></li>
+      <br>
+      <li>Claimant - offer accepted and rejected</li>
+      <li><a href="offer-agreement/new-offers/email-offer-update-claimant?newoffer=true&theclaimant=true&offeracceptedbydefendant=true&offerrejectedbydefendant=false&partadmitstart=null&firstoffer=false&">Accepted</a></li>
+      <li><a href="offer-agreement/new-offers/email-offer-update-claimant?newoffer=true&theclaimant=true&offerrejectedbydefendant=true&offeracceptedbydefendant=false&partadmitstart=null&firstoffer=false&">Rejected</a></li>
+      <br>
+      <li>Defendant - offer accepted and rejected</li>
+      <li><a href="defendant?defendant=16.1&theclaimant=false&firstoffer=false&claimanthasaccpted=true&">Accepted</a></li>
+      <li><a href="offer-agreement/new-offers/email-offer-update-defendant?theclaimant=false&newoffer=true&firstoffer=false&claimanthasaccpted=false&">Offer rejected - no more offer</a> (Page already exists)</li>
+      <br>
+      <li>Email for update to offer which are not part of a claim response</li>
+      <li><a href="offer-agreement/new-offers/email-offer-update-defendant">Defendant update email</a></li>
+      <li><a href="offer-agreement/new-offers/email-offer-update-claimant">Claimant update email</a></li>
+      <br>
+      <br>
+
+      <li><a href="../offers/defendant-offer-rejected-respond-to-counteroffer-only">Offer rejected - Respond to counteroffer only</a></li>
+
+
+    </ol>
+
+    -->
+
+
+
+  </ol>
+
+
+  <fieldset></fieldset>
+
+  <h2 class="heading-medium">Proposed IDAM</h2>
+  <details>
+    <summary><span class="summary">IDAM screens<span></summary>
+    <h2 class="heading-medium">Proposed IDAM - new user making a claim using CMC</h2>
+    <p><a href="http://recordit.co/vlUWxzt8aL">The current live Idam solution</a></p>
+    <ol class="list list-number">
+      <li><a href="idam/start-page2">Start page</a></li>
+      <li><a href="idam/create-account">Create account</a></li>
+      <li><a href="idam/verify-email">Verify your email address instructions</a> (click on john.smith@gmail.com)</li>
+      <li><a href="idam/email-verify?to=Mary%20Richards">Email with link to verify account</a></li>
+      <li><a href="idam/sign-in">Sign in page </a></li>
+    </ol>
+    <h2 class="heading-medium">Proposed IDAM - defendant to responding to a claim</h2>
+    <ol class="list list-number">
+      <li><a href="idam/start-page">Start page</a></li>
+      <li><a href="idam/enter-claim-number">Enter claim number and security code</a></li>
+      <li><a href="idam/view-claim">View claim</a></li>
+      <li><a href="idam/create-account">Create account</a></li>
+      <li><a href="idam/verify-email">Verify your email address instructions</a> (click on john.smith@gmail.com)</li>
+      <li><a href="idam/email-verify?to=Mary%20Richards">Email with link to verify account</a></li>
+      <li><a href="idam/sign-in">Sign in page </a></li>
+    </ol>
+  </details>
+  </div>
+  {% include 'prototypes/prototype-oct-2019/includes/contact.html' %}
+</main>
+{% endblock %}

@@ -1,0 +1,63 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+
+{% block content %}
+
+
+<main id="content" role="main">
+
+  {% include "includes/phase_banner_beta.html" %}
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+      <a href="#" onclick="history.go(-1)" class="link-back">Back</a>
+
+      <h1 class="heading-large">
+          What do you want to do?
+      </h1>
+
+
+      <form
+        name="aspnetForm"
+        method="post"
+        onsubmit="multiNavigation('radio-app-type', ['set-aside', 'vary', 'general'],
+                                                             ['../../../applications/respond-to-judgement-within-one-month-of-judgement-being-issued',
+                                                              '../../../applications/respond-to-judgement-within-one-month-of-judgement-being-issued',
+                                                              'what?general-application=true&']);return false;"
+        id="aspnetForm"
+        autocomplete="off">
+
+        <div class="form-group">
+          <fieldset>
+            <div class="multiple-choice" data-target="pay">
+              <input id="set-aside" type="radio" name="radio-app-type" value="set-aside" aria-controls="paid-off" aria-expanded="false">
+              <label for="set-aside">I want to cancel my judgment</label>
+            </div>
+            <div class="multiple-choice" data-target="vary">
+              <input id="vary" type="radio" name="radio-app-type" value="vary" aria-controls="paid-off" aria-expanded="false">
+              <label for="vary">I want to change the judgment's payment terms</label>
+            </div>
+            <div class="multiple-choice" data-target="vary">
+              <input id="general" type="radio" name="radio-app-type" value="general" aria-controls="paid-off" aria-expanded="false">
+              <label for="general">Something else</label>
+            </div>
+
+          </fieldset>
+        </div>
+
+        <div class="form-group">
+          <input type="submit" class="button" value="Continue" />
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+
+  {% include 'prototypes/prototype-oct-2019/includes/contact.html' %}
+</main>
+{% endblock %}

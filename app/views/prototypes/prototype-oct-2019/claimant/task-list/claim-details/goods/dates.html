@@ -1,0 +1,58 @@
+{% extends "layout_task-list.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block home_link %} ../task-list {% endblock %}
+{% block proposition_header %}
+{% set my_account="1" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <a href="#" class="link-back">Back</a>
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+      <form method="post" action="in-person" >
+
+        <h1 class="heading-large">
+          When did you buy the item?
+        </h1>
+
+        <p>Enter the exact date if you know it, or your best estimate if not.</p> 
+
+          <div class="form-group">
+            <fieldset>
+              <p style="color: #6F777B">For example, {{ now | date( 'subtract', 5, 'months' ) | date('D M YYYY') }}</p>
+              <div class="form-date">
+                <div class="form-group form-group-day">
+                  <label for="day">Day</label>
+                  <input  class="form-control" name="day" id="day" type="number" pattern="[0-9]*" min="0" max="31" value="{{data['day']}}">
+                </div>
+                <div class="form-group form-group-month">
+                  <label for="month">Month</label>
+                  <input class="form-control" name="month" id="month" type="number" pattern="[0-9]*" min="0" max="12" value="{{data['month']}}">
+                </div>
+                <div class="form-group form-group-year">
+                  <label for="year">Year</label>
+                  <input class="form-control" name="year" id="year" type="number" pattern="[0-9]*" min="0" max="2020" value="{{data['year']}}">
+                </div>
+              </div>
+            </fieldset>
+          </div>
+
+          <p>
+            <input type="submit" class="secondary-button" value="Add another date" />
+          </p>
+
+          <div class="form-group">
+            <input type="submit" class="button" value="Save and continue"/>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  {% include 'prototypes/prototype-oct-2019/includes/contact.html' %}
+</main>
+{% endblock %}

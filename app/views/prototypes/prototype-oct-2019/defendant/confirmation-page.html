@@ -1,0 +1,636 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+	{% include "includes/phase_banner_beta.html" %}
+	<div class="grid-row">
+		<div class="column-two-thirds">
+			<div class="govuk-box-highlight">
+
+        {% if data['defaultccj'] == 'true' %}
+            {% if  data['aftersettle'] == 'true'  and  data['cancelccjaftercontact'] == 'false'  %}
+                <h1 class="bold-large">You've not cancelled the judgment</h1>
+            {% elif data['afterccjdeadline'] == 'false' and data['canpaynow'] == 'false'  %}
+                <h1 class="bold-large">Contact Jan Clark to try to settle the claim</h1>
+            {% elif data['varyselected'] == 'true' %}
+                <h1 class="bold-large">You've applied to change the judgment payment terms</h1>
+            {% elif data['cancelccj'] == 'true' %}
+                <h1 class="bold-large">You've applied to cancel the judgment</h1>
+            {% elif data['alreadysettled'] == 'true' %}
+                <h1 class="bold-large">Contact Jan Clark</h1>
+						{% elif data['canpaynow'] == 'true' or data['paywithinmonth'] == 'true' %}
+                <h1 class="bold-large">Contact Jan Clark to arrange payment</h1>
+            {% else %}
+                <h1 class="bold-large">Contact Jan Clark to try to settle the claim</h1>
+            {% endif %}
+
+
+
+        {% else %}
+          <h1 class="bold-large">You've submitted your response{% if data['confirmation'] == 9 or data['counter'] == 'SET-OFF-COUNTER' or data['counter'] == 'FULL-COUNTER' %} and counterclaim{% endif %}</h1>
+        {% endif %}
+
+        <br>
+				<p class="">
+					Claim reference: <br><strong class="bold-large">352MC733</strong>
+				</p>
+				<p>
+					<strong class="bold">{{ now | date }}</strong>
+				</p>
+
+
+      {% if data['defaultccj'] != 'true' %}
+          <p>
+            {% if data['radio-pay-group'] == "Instalments" or data['confirmation']== 2 %}
+                <a  class="font-medium" href="correspondence/forms/claim-form-defendant?check=4" target="new" style="color: #FFFFFF" >
+            {% elseif data['radio-pay-group'] == "Set-date" or data['confirmation']== 3 %}
+                <a  class="font-medium" href="correspondence/forms/claim-form-defendant?check=3" target="new" style="color: #FFFFFF" >
+            {% elseif data['radio_select_group2'] == "defend_now" or data['confirmation']== 12 %}
+                <a  class="font-medium" href="correspondence/forms/claim-form-defendant?check=9" target="new" style="color: #FFFFFF" >
+            {% else %}
+                <a  class="font-medium" href="correspondence/forms/claim-form-defendant?check=2" target="new" style="color: #FFFFFF" >
+            {% endif %}
+
+                Download your response
+                {% if data['confirmation'] == 9 or data['counter'] == 'SET-OFF-COUNTER' or data['counter'] == 'FULL-COUNTER' %}
+                    and counterclaim
+                {% endif %}
+                {% if ( data['radio_select_group2'] == "defend_now" or data['confirmation']== 12 ) and data['dqs'] != 'off' %}
+                    and hearing requirements<br />
+                {% endif %}
+                 (PDF, 123KB)
+              </a>
+			    </p>
+	        {% endif %}
+		</div>
+
+
+
+
+
+
+
+    <!--   CCJ SET ASIDE  -->
+    {% if data['defaultccj'] == 'true' %}
+      <h2 class="heading-medium">What happens next</h2>
+
+        {% if  data['aftersettle'] == 'true'  and  data['cancelccjaftercontact'] == 'false'  %}
+            <p>Ask Jan Clark to tell us you've settled the claim. Then judgment will be marked as satisfied.</p>
+            <p>You'll then be able to get a certificate of satisfaction.</p>
+
+            <p><a class="button" href='../dashboard/defendant?defendant=21'>Go to your account</a></p>
+
+        {% elif data['varyselected'] == 'true' %}
+            <p>Jan Clark has 19 days to accept or reject your payment plan.</p>
+            <p>We'll contact you if they respond. If they don't respond your plan will be accepted.</p>
+            <p>You must follow the judgment's existing terms until you hear from us.</p>
+
+            <p class="heading-small">If Jan Clark accepts your plan</p>
+            <p>The court will update the judgment and you can change your payments to the new plan.</p>
+
+            <p class="heading-small">If Jan Clark rejects your plan</p>
+            <p>The court will determine how you must pay.</p>
+
+            <p><a class="button" href='/prototypes/prototype-oct-2019/dashboard/defendant?defendant=23'>Go to your account</a></p>
+
+
+        {% elif data['cancelccj'] == 'true' %}
+            <p>The court will review your application. You might have to go to a hearing.</p>
+            <p>We'll contact you to tell you what to do next.</p>
+            <p><a class="button" href='../dashboard/defendant?defendant=20'>Go to your account</a></p>
+
+        {% elif data['alreadysettled'] == 'true' %}
+            <p>Ask Jan Clark to tell us when the claim was settled.</p>
+            {% include "prototypes/prototype-oct-2019/includes/claimants-contact-details.html" %}
+            <p>We'll contact you when they confirm you've settled. </p>
+
+            {% if data['afterccjdeadline']  ==  'true' %}
+                <p><a class="button" href='../dashboard/defendant?defendant=21'>Go to your account</a></p>
+            {% else %}
+                <p><a class="button" href='../dashboard/defendant?defendant=21.1'>Go to your account</a></p>
+            {% endif %}
+
+        {% else %}
+            <p>Make sure you get receipts for any payments.</p>
+            {% include "prototypes/prototype-oct-2019/includes/claimants-contact-details.html" %}
+            {%  if data['afterccjdeadline'] == 'true'  %}
+                <div class="panel panel-border-narrow"  style="padding-bottom:15px;">
+                  <p>Jan Clark can bring enforcement action if you don't follow the terms of the judgment.</p>
+                </div>
+            {% endif %}
+
+            {% if data['afterccjdeadline'] == 'false'  %}
+                <p>If Jan Clark tells us you've settled the claim by 4pm on {{ now |  date("add", 23, "day") | date( "D MMMM YYYY" ) }}, the CCJ will be removed from the public register.</p>
+                <br>
+                <p><a class="button" href='../dashboard/defendant?defendant=21.1'>Go to your account</a></p>
+            {% elif data['varytoimmediately'] == 'true' or data['cancelccjaftercontact'] == 'false'  %}
+                <br>
+                <p><a class="button" href='../dashboard/defendant?defendant=21'>Go to your account</a></p>
+            {% else %}
+                <br>
+                <p><a class="button" href='../dashboard/defendant'>Go to your account</a></p>
+            {% endif %}
+
+      {% endif %}
+
+      <br>
+    {% endif %}
+
+
+
+
+
+
+		<!-- Admit all - pay Immediately -->
+		{% if data['radio-pay-group']=="Immediately" and data.radio_select_group=="all" or data['confirmation']== 1 or data['confirmation']== 9 %}
+
+		<p>We've emailed Jan Clark to tell them you'll pay immediately.</p>
+
+
+		{% if data['confirmation'] == 9 or data['counter'] == 'SET-OFF-COUNTER' or data['counter'] == 'FULL-COUNTER' %}
+		<p>We've also sent your counterclaim to Jan Clark</p>
+		{% endif %}
+
+		<h2 class="heading-medium">What happens next</h2>
+
+    <p>You need to make sure that:</p>
+
+
+		<ul class="list list-bullet">
+      <li>they get the money by {{ now | date('add', 5, 'days') | date }} - they can request a County Court Judgment against you if not</li>
+      <li>any cheques or bank transfers are clear in their account by the deadline</li>
+      <li>you get a receipt for any payments</li>
+      <li>they tell the court that you've paid</li>
+    </ul>
+
+    <p><a href="../dashboard/party-details/claimant">Contact Jan Clark</a> if you need their payment details.</p>
+
+	    {% if data['confirmation'] == 9 or data['counter'] == 'SET-OFF-COUNTER' or data['counter'] == 'FULL-COUNTER' %}
+		{% include "prototypes/prototype-oct-2019/includes/counter.html" %}
+	    {% endif %}
+
+		<p><a class="button" href='../dashboard/home?dashboard=2.31'>Go to your account</a></p>
+
+
+
+
+
+
+		<!-- Admit all - pay instalments -->
+		{% elseif data['radio-pay-group']=="Instalments" and data.radio_select_group=="all" or data['confirmation']== 2 %}
+		<p>We've emailed Jan Clark to tell them you've suggested paying by instalments.</p>
+		<p>We'll contact you when they respond.</p>
+
+	    {% if data['confirmation'] == 9 or data['counter'] == 'SET-OFF-COUNTER' or data['counter'] == 'FULL-COUNTER' %}
+	    <p>We've also sent your counterclaim to Jan Clark.</p>
+	    {% endif %}
+
+		{% if data['defendant'] == 'org'  %}
+		{% include "prototypes/prototype-oct-2019/includes/org-confirm.html" %}
+		{% endif %}
+
+		<h2 class="heading-medium">What happens next</h2>
+
+	    <h3 class="heading-small">If Jan Clark accepts your offer</h3>
+
+		<p>You should:</p>
+
+		<ul class="list list-bullet">
+		  <li>set up your repayment plan to begin when you said it would</li>
+		  <li>{% if data.counterclaim=="true" %}<a href="party-details/defendant">contact Mary Richards</a>{%else%}<a href="party-details/claimant">contact Jan Clark</a>{% endif %} if you need their payment details</li>
+		  <li>make sure you get a receipt for each payment</li>
+		</ul>
+
+		<p>Because you’ve said you won’t pay immediately, Jan Clark can either:</p>
+		<ul class="list list-bullet">
+			<li>ask you to sign a settlement agreement to formalise the repayment plan</li>
+			<li>request a County Court Judgment against you</li>
+		</ul>
+
+
+
+
+	    <h3 class="heading-small">If Jan Clark rejects your offer</h3>
+
+		<p>The court will decide how you must pay.</p>
+
+	    {% if data['confirmation'] == 9 or data['counter'] == 'SET-OFF-COUNTER' or data['counter'] == 'FULL-COUNTER' %}
+		{% include "prototypes/prototype-oct-2019/includes/counter.html" %}
+	    {% endif %}
+
+    <br>
+    {% include "includes/survey.html" %}
+		<p><a class="button" href='../dashboard/home?dashboard=2.33'>Go to your account</a></p>
+
+
+
+
+		<!-- Admit all - pay by set date -->
+		{% elseif data['radio-pay-group']=="Set-date"  and ( data.radio_select_group=="all" or data['counter'] ) or data['confirmation']== 3 %}
+		<p>We've emailed Jan Clark your offer to pay by {% if data['set-day'] %}{{ ( data['set-month'] + ' ' + data['set-day'] + ' ' + data['set-year']) | date('D MMMM YYYY') }}{% else %}{{ date | date('add', 15, 'days') | date }}{% endif %} and your explanation of why you can’t pay before then.</p>
+		<p>We'll contact you when they respond.</p>
+
+	    {% if data['confirmation'] == 9 or data['counter'] == 'SET-OFF-COUNTER' or data['counter'] == 'FULL-COUNTER' %}
+	    <p>We've also sent your counterclaim to Jan Clark.</p>
+	    {% endif %}
+
+		{% if data['defendant'] == 'org' %}
+		{% include "prototypes/prototype-oct-2019/includes/org-confirm.html" %}
+		{% endif %}
+
+      <h2 class="heading-medium">What happens next</h2>
+
+	    <h3 class="heading-small">If Jan Clark accepts your offer</h3>
+		<p>You should:</p>
+		<ul class="list list-bullet">
+		<li>pay Jan Clark by {% if data['set-day'] %}{{ ( data['set-month'] + ' ' + data['set-day'] + ' ' + data['set-year']) | date('D MMMM YYYY') }}{% else %}{{ date | date('add', 15, 'days') | date }}{% endif %}</li>
+		<li>make sure any cheques or bank transfers are clear in their account by the deadline</li>
+		<li><a href="../dashboard/party-details/claimant">contact them</a> if you need their payment details</li>
+		<li>make sure you get a receipt for your payment</li>
+		</ul>
+		<p>Because you’ve said you won’t pay immediately, Jan Clark can either:</p>
+		<ul class="list list-bullet">
+			<li>ask you to sign a settlement agreement to formalise the repayment plan</li>
+			<li>request a County Court Judgment against you</li>
+		</ul>
+	    <h3 class="heading-small">If Jan Clark rejects your offer</h3>
+		<p>The court will decide how you must pay.</p>
+
+	    {% if data['confirmation'] == 9 or data['counter'] == 'SET-OFF-COUNTER' or data['counter'] == 'FULL-COUNTER' %}
+		{% include "prototypes/prototype-oct-2019/includes/counter.html" %}
+	    {% endif %}
+		{% include "includes/survey.html" %}
+		<p><a class="button" href='../dashboard/home?dashboard=2.32'>Go to your account</a></p>
+
+
+
+
+    <!-- I part admit the claim - pay immediately -->
+		{% elseif ( data.radio_select_group2=="Some" or data['counter'] )  and data['radio-pay-group']=="Immediately" or data['confirmation']== 4 %}
+          <p>You've said you owe £{{ data['owe-amount'] or '1,200' }} and offered to pay Jan Clark immediately.</p>
+
+          <!-- When a defendant does a part admit with an offer Guy added this -->
+            {% if data['madeandsignedagreement'] == 'true' %}
+                <p>You've also made an offer to settle out of court.</p>
+            {% endif %}
+
+
+          <p>We'll contact you when they respond.</p>
+            {% if data['confirmation'] == 9 or data['counter'] == 'SET-OFF-COUNTER' or data['counter'] == 'FULL-COUNTER' %}
+                <p>We've also sent your counterclaim to Jan Clark.</p>
+            {% endif %}
+            <h2 class="heading-medium">What happens next</h2>
+
+            <p>You need to pay Jan Clark £{{ data['owe-amount'] or '1,200' }} immediately.</p>
+
+          <p>Make sure that:</p>
+
+          <ul class="list list-bullet">
+            <li>they get the money by {{ now | date('add', 5, 'days') | date }} - they can request a County Court Judgment against you if not</li>
+            <li>any cheques or bank transfers are clear in their account by the deadline</li>
+            <li>you get a receipt for any payments</li>
+          </ul>
+
+          <p><a href="../dashboard/party-details/claimant">Contact Jan Clark</a> if you need their payment details.</p>
+
+            <h3 class="heading-small">If Jan Clark accepts your offer of £{{ data['owe-amount'] or '1,200' }}</h3>
+            <p>The claim will be settled.</p>
+
+
+              <h3 class="heading-small">If Jan Clark rejects your offer</h3>
+               {% if data['radio-mediation-group']=="Yes" %}
+            <p>We'll ask if they want to try mediation. If they agree, we'll contact you to try to arrange a call with the mediator.</p>
+            <p>If they don't want to try mediation the court will review the case for the full amount of {% if data['mediation-pilot'] == 'on' %}£300{% else %}£1,500{% endif %}</p>
+
+               {% else %}
+          <p>The court will review the case for the full amount of {% if data['mediation-pilot'] == 'on' %}£300{% else %}£1,500{% endif %}. </p>
+
+    {% endif %}
+
+
+
+
+
+	    {% if data['confirmation'] == 9 or data['counter'] == 'SET-OFF-COUNTER' or data['counter'] == 'FULL-COUNTER' %}
+		{% include "prototypes/prototype-oct-2019/includes/counter.html" %}
+	    {% endif %}
+		{% include "includes/survey.html" %}
+		<p><a class="button" href='../dashboard/home?dashboard=2.1'>Go to your account</a></p>
+
+
+    <!-- I part admit the claim - pay instalments -->
+		{% elseif ( data.radio_select_group2=="Some" or data['counter']) and data['radio-pay-group']=="Instalments" or data['confirmation']== 6 %}
+		<p>You believe you owe £{{ data['owe-amount'] or '1,200' }}. We've emailed Jan Clark your offer to pay this amount by instalments.</p>
+		<p>We've also sent them your explanation of why you don't believe you owe the amount claimed.</p>
+		<p>We'll contact you when they respond.</p>
+
+	    {% if data['confirmation'] == 9 or data['counter'] == 'SET-OFF-COUNTER' or data['counter'] == 'FULL-COUNTER' %}
+	    <p>We've also sent your counterclaim to Jan Clark.</p>
+	    {% endif %}
+
+		{% if data['defendant'] == 'org' %}
+		{% include "prototypes/prototype-oct-2019/includes/org-confirm.html" %}
+		{% endif %}
+
+	    <h2 class="heading-medium">What happens next</h2>
+
+	    <h3 class="heading-small">If Jan Clark accepts your offer</h3>
+
+		<p>You should:</p>
+
+		<ul class="list list-bullet">
+		  <li>set up your repayment plan to begin when you said it would</li>
+		  <li>{% if data.counterclaim=="true" %}<a href="party-details/defendant">contact Mary Richards</a>{%else%}<a href="party-details/claimant">contact Jan Clark</a>{% endif %} if you need their payment details</li>
+		  <li>make sure you get a receipt for each payment</li>
+		</ul>
+
+		<p>Because you’ve said you won’t pay immediately, Jan Clark can either:</p>
+		<ul class="list list-bullet">
+			<li>ask you to sign a settlement agreement to formalise the repayment plan</li>
+			<li>request a County Court Judgment against you for £{{ data['owe-amount'] or '1,200' }}</li>
+		</ul>
+
+		    <h3 class="heading-small">If Jan Clark disagrees that you only owe £{{ data['owe-amount'] or '1,200' }}</h3>
+			   {% if data['radio-mediation-group']=="Yes" %}
+      <p>We'll ask if they want to try mediation. If they agree, we'll contact you to try to arrange a call with the mediator.</p>
+      <p>If they don't want to try mediation the court will review the case for the full amount of {% if data['mediation-pilot'] == 'on' %}£300{% else %}£1,500{% endif %}.</p>
+
+			   {% else %}
+    <p>The court will review the case for the full amount of {% if data['mediation-pilot'] == 'on' %}£300{% else %}£1,500{% endif %}. </p>
+    {% endif %}
+
+		<h3 class="heading-small">If Jan Clark rejects your offer to pay in instalments</h3>
+			<p>The court will decide how you must pay.</p>
+
+	    {% if data['confirmation'] == 9 or data['counter'] == 'SET-OFF-COUNTER' or data['counter'] == 'FULL-COUNTER' %}
+		{% include "prototypes/prototype-oct-2019/includes/counter.html" %}
+	    {% endif %}
+		{% include "includes/survey.html" %}
+		<p><a class="button" href='../dashboard/home?dashboard=2.1'>Go to your account</a></p>
+
+
+		<!-- I part admit the claim - pay by set date -->
+		{% elseif ( data.radio_select_group2=="Some" or data['counter']) and data['radio-pay-group']=="Set-date" or data['confirmation']== 7 %}
+		<p>You believe you owe £{{ data['owe-amount'] or '1,200' }}. We've emailed Jan Clark your offer to pay this amount by {% if data['set-day'] %}{{ ( data['set-month'] + ' ' + data['set-day'] + ' ' + data['set-year']) | date('D MMMM YYYY') }}{% else %}{{ date | date('add', 15, 'days') | date }}{% endif %}.</p>
+		<p>We've also sent them your explanation of why you don't believe you owe the amount claimed.</p>
+		<p>We'll contact you when they respond.</p>
+
+	    {% if data['confirmation'] == 9 or data['counter'] == 'SET-OFF-COUNTER' or data['counter'] == 'FULL-COUNTER' %}
+	    <p>We've also sent your counterclaim to Jan Clark.</p>
+	    {% endif %}
+
+		{% if data['defendant'] == 'org' %}
+		{% include "prototypes/prototype-oct-2019/includes/org-confirm.html" %}
+		{% endif %}
+
+	    <h2 class="heading-medium">What happens next</h2>
+
+	    <h3 class="heading-small">If Jan Clark accepts your offer</h3>
+
+		<p>You should:</p>
+		<ul class="list list-bullet">
+		<li>pay Jan Clark by {% if data['set-day'] %}{{ ( data['set-month'] + ' ' + data['set-day'] + ' ' + data['set-year']) | date('D MMMM YYYY') }}{% else %}{{ date | date('add', 15, 'days') | date }}{% endif %}</li>
+		<li>make sure any cheques or bank transfers are clear in their account by the deadline</li>
+		<li><a href="../dashboard/party-details/claimant">contact them</a> if you need their payment details</li>
+		<li>make sure you get a receipt for your payment</li>
+		</ul>
+		<p>Because you’ve said you won’t pay immediately, Jan Clark can either:</p>
+		<ul class="list list-bullet">
+			<li>ask you to sign a settlement agreement to formalise the repayment plan</li>
+			<li>request a County Court Judgment against you for £{{ data['owe-amount'] or '1,200' }}</li>
+		</ul>
+
+		    <h3 class="heading-small">If Jan Clark disagrees that you only owe £{{ data['owe-amount'] or '1,200' }}</h3>
+			   {% if data['radio-mediation-group']=="Yes" %}
+      <p>We'll ask if they want to try mediation. If they agree, we'll contact you to try to arrange a call with the mediator.</p>
+      <p>If they don't want to try mediation the court will review the case for the full amount of {% if data['mediation-pilot'] == 'on' %}£300{% else %}£1,500{% endif %}.</p>
+
+			   {% else %}
+    <p>The court will review the case for the full amount of {% if data['mediation-pilot'] == 'on' %}£300{% else %}£1,500{% endif %}. </p>
+    {% endif %}
+		<h3 class="heading-small">If Jan Clark rejects your offer to pay by {% if data['set-day'] %}{{ ( data['set-month'] + ' ' + data['set-day'] + ' ' + data['set-year']) | date('D MMMM YYYY') }}{% else %}{{ date | date('add', 15, 'days') | date }}{% endif %}</h3>
+			<p>The court will decide how you must pay.</p>
+
+
+
+	    {% if data['confirmation'] == 9 or data['counter'] == 'SET-OFF-COUNTER' or data['counter'] == 'FULL-COUNTER' %}
+		{% include "prototypes/prototype-oct-2019/includes/counter.html" %}
+	    {% endif %}
+		{% include "includes/survey.html" %}
+		<p><a class="button" href='../dashboard/home?dashboard=2.1'>Go to your account</a></p>
+
+
+		<!-- paid what i owe -->
+		{% elseif ( data.radio_select_group2=="Paid-some" or data['counter']) or data['confirmation']== 8 %}
+		<p>You told us you've paid the £{{ data['owe-amount'] or '1,200' }} you believe you owe. We've sent Jan Clark this response.</p>
+
+	    {% if data['confirmation'] == 9 or data['counter'] == 'SET-OFF-COUNTER' or data['counter'] == 'FULL-COUNTER' %}
+	    <p>We've also sent your counterclaim to Jan Clark.</p>
+	    {% endif %}
+      <h2 class="heading-medium">What happens next</h2>
+	    {% if data['confirmation'] == 9 or data['counter'] == 'SET-OFF-COUNTER' or data['counter'] == 'FULL-COUNTER' %}
+	    <h3 class="heading-small">The claim against you</h2>
+	    {% endif %}
+
+
+		<h3 class="heading-small">If Jan Clark accepts your response</h3>
+		<p>The claim will be settled.</p>
+
+		<h3 class="heading-small">If Jan Clark rejects your response</h3>
+
+	    {% if data['radio-mediation-group']=="Yes" %}
+      	<p>We'll ask if they want to try mediation. If they agree, we'll contact you to try to arrange a call with the mediator.</p>
+      	<p>If they don't want to try mediation the court will review the case. You might have to go to a hearing.</p>
+	    {% else %}
+
+	    <p>The court will review the case. You might have to go to a hearing.</p>
+	    {% endif %}
+
+		<p>We'll contact you to tell you what to do next.</p>
+
+	    {% if data['confirmation'] == 9 or data['counter'] == 'SET-OFF-COUNTER' or data['counter'] == 'FULL-COUNTER' %}
+		{% include "prototypes/prototype-oct-2019/includes/counter.html" %}
+	    {% endif %}
+        <br>
+        {% include "includes/survey.html" %}
+		<p><a class="button" href='../dashboard/home?dashboard=2.6'>Go to your account</a></p>
+
+
+        <!-- Reject claim -->
+        {% elseif data.radio_select_group2=="defend_now" or data['confirmation']== 12 %}
+            <p>We’ve emailed Jan Clark your response, explaining why you reject the claim.</p>
+
+
+          {% if data['confirmation'] == 9 or data['counter'] == 'SET-OFF-COUNTER' or data['counter'] == 'FULL-COUNTER' %}
+              <p>We've also sent your counterclaim to Jan Clark.</p>
+          {% endif %}
+              <h2 class="heading-medium">What happens next</h2>
+          {% if data['confirmation'] == 9 or data['counter'] == 'SET-OFF-COUNTER' or data['counter'] == 'FULL-COUNTER' %}
+              <h3 class="heading-small">The claim against you</h2>
+          {% endif %}
+
+					<p>We'll contact you when Jan Clark responds, to tell you what to do next.</p>
+
+
+          <p>If Jan Clark accepts your response the claim will be ended.</p>
+
+          {% if data['radio-indent-group']=="Yes" or data['resolve_dispute']== "complete" %}
+
+          <p>We’ll ask Jan Clark if they want to try mediation. If they agree, we'll contact you to try to arrange an appointment. If not, we’ll tell you what to do.</p>
+
+          {% if data['mediation-pilot']=="on" %}
+					<p>If they reject your response and agree to try mediation we'll contact you to try to arrange a call with the mediator.</p>
+            <p>If they reject your response and don't want to try mediation, the court will review the case. You might have to go to a hearing.</p>
+
+          {%else%}
+          <p>If Jan Clark rejects your response we'll ask them to try mediation. If they agree, we'll contact you to try to arrange a call with the mediator.</p>
+          <p>If they reject mediation the court will review the case. You might have to go to a hearing.</p>
+
+
+          {% endif %}
+
+
+
+          {% else %}
+          <p>If they reject your response the court will review the case. You might have to go to a hearing.</p>
+
+
+          {% endif %}
+
+          {% if data['confirmation'] == 9 or data['counter'] == 'SET-OFF-COUNTER' or data['counter'] == 'FULL-COUNTER' %}
+          {% include "prototypes/prototype-oct-2019/includes/counter.html" %}
+          {% endif %}
+
+
+          <!--  THIS WILL BE REPLACED BY INCLUDING THE OFFER IN THE JOURNEY  -->
+          <!--  {% include "includes/settle.html" %}  -->
+
+          <br>
+          {% include "includes/survey.html" %}
+
+          {% if data['radio-indent-group']=="Yes" or data['resolve_dispute']== "complete" %}
+              {% if data['mediation-pilot']=="on" %}
+                  <p><a class="button" href='../dashboard/new-dashboard/defendant/all-claims?defendant=2'>Go to your account</a></p>
+              {% else %}
+                  <p><a class="button" href='../dashboard/home?dashboard=2.7'>Go to your account</a></p>
+              {% endif %}
+          {% else %}
+              <p><a class="button" href='../dashboard/home?dashboard=2.7'>Go to your account</a></p>
+          {% endif %}
+
+
+			<!-- Already paid -->
+			{% elseif  data.radio_select_group2=="paid" or data['confirmation']== 16 %}
+		<p>You told us you've paid £{{ data['owe-amount'] or '1,500' }}. We've sent Jan Clark this response.</p>
+
+		    {% if data['confirmation'] == 9 or data['counter'] == 'SET-OFF-COUNTER' or data['counter'] == 'FULL-COUNTER' %}
+		    <p>We've also sent your counterclaim to Jan Clark.</p>
+		    {% endif %}
+		    <h2 class="heading-medium">What happens next</h2>
+		    {% if data['confirmation'] == 9 or data['counter'] == 'SET-OFF-COUNTER' or data['counter'] == 'FULL-COUNTER' %}
+		    <h3 class="heading-small">The claim against you</h2>
+		    {% endif %}
+			<p>If Jan Clark accepts your response the claim will be settled. We'll contact you when they respond.</p>
+
+
+            {% if data['radio-indent-group']=="Yes" or data['resolve_dispute']== "complete" %}
+            <p>If Jan Clark rejects your response we'll ask them to try mediation. If
+              they agree, we'll contact you to try to arrange a call with the mediator.</p>
+            <p>If they reject mediation the court will review the case. You might have to go to a hearing.</p>
+            <p>We'll contact you to tell you what to do next.</p>
+            {% else %}
+            <p>If they reject your response the court will review the case. You might have to go to a hearing.</p>
+            <p>We'll contact you to tell you what to do next.</p>
+            {% endif %}
+
+		    {% if data['confirmation'] == 9 or data['counter'] == 'SET-OFF-COUNTER' or data['counter'] == 'FULL-COUNTER' %}
+			{% include "prototypes/prototype-oct-2019/includes/counter.html" %}
+		    {% endif %}
+
+      <br>
+			{% include "includes/survey.html" %}
+			<p><a class="button" href='../dashboard/home?dashboard=2.6'>Go to your account</a></p>
+
+			{% endif %}
+
+			{% include "includes/contact.html" %}
+		</div>
+	</div>
+</div>
+</main>
+<form method="post"  action="#" class="form" style="position: absolute;">
+	<select id="check2" name="check2" onchange="window.location.href='?confirmation='+this.value">
+		<option  value="0" >Choose</option>
+		<option  value="1&defendant=&defaultccj=false&" {% if data['confirmation'] == '1' and 'defendant' != 'org' %}selected{% endif %}>0. F/A - pay immediately</option>
+		<option  value="2&defendant=&defaultccj=false&" {% if data['confirmation'] == '2' and 'defendant' != 'org' %}selected{% endif %}>1. F/A - pay instalments</option>
+		<option  value="2&defendant=org&defaultccj=false&" {% if data['confirmation'] == '2' and 'defendant' == 'org' %}selected{% endif %}>1. F/A - pay instalments (organisation)</option>
+		<option  value="3&defendant=&defaultccj=false&" {% if data['confirmation'] == '3' and 'defendant' != 'org' %}selected{% endif %}>2. F/A - Pay set date</option>
+		<option  value="3&defendant=org&defaultccj=false&" {% if data['confirmation'] == '3' and 'defendant' == 'org' %}selected{% endif %}>2. F/A - Pay set date (organisation)</option>
+		<option  value="4&defendant=&defaultccj=false&" {% if data['confirmation'] == '4' and 'defendant' != 'org' %}selected{% endif %}>3. P/A - I admit part of the claim - immediately</option>
+		<option  value="6&defendant=&defaultccj=false&" {% if data['confirmation'] == '6' and 'defendant' != 'org' %}selected{% endif %}>4. P/A - I admit part of the claim - by instalments </option>
+		<option  value="6&defendant=org&defaultccj=false&" {% if data['confirmation'] == '6' and 'defendant' == 'org' %}selected{% endif %}>4. P/A - I admit part of the claim - by instalments (organisation)</option>
+		<option  value="7&defendant=&defaultccj=false&" {% if data['confirmation'] == '7' and 'defendant' != 'org' %}selected{% endif %}>5. P/A - I admit part of the claim - pay set date  </option>
+		<option  value="7&defendant=org&defaultccj=false&" {% if data['confirmation'] == '7' and 'defendant' == 'org' %}selected{% endif %}>5. P/A - I admit part of the claim - pay set date (organisation)</option>
+		<option  value="12&defaultccj=false&" {% if data['confirmation'] == 12 %}selected{% endif %}>6. R/C - I dispute the claim</option>
+		<option  value="16&defaultccj=false&" {% if data['confirmation'] == 16 %}selected{% endif %}>8. R/C - Paid full claim</option>
+		<option  value="8&defaultccj=false&" {% if data['confirmation'] == 8 %}selected{% endif %}>9. R/C - Paid less </option>
+		<option  value="9&defaultccj=false&" {% if data['confirmation'] == 9 %}selected{% endif %}>9. Counterclaim - set off</option>
+    <!--  Resonding to CCJ  -->
+    <option  value="xyz&defaultccj=true&cancelccj=true&paperresponserequired=false&varyselected=false&" {% if data['defaultccj'] == 'true' and data['cancelccj'] == 'true'  and data['paperresponserequired'] == 'false'  and   data['varyselected'] == 'false' %}selected{% endif %}
+             >Defendant - Full or part admit - Requested set aside CCJ</option>
+    <option  value="xyz&defaultccj=true&cancelccj=true&paperresponserequired=true&varyselected=false&" {% if data['defaultccj'] == 'true' and data['cancelccj'] == 'true'  and data['paperresponserequired'] == 'true'  and   data['varyselected'] == 'false'  %}selected{% endif %}
+             >Defendant - Full admit - Counter claim - Requested set aside CCJ</option>
+    <option  value="xyz&defaultccj=true&cancelccj=false&paperresponserequired=false&varyselected=false&" {% if data['defaultccj'] == 'true' and data['cancelccj'] == 'false'  and data['paperresponserequired'] == 'false'  and   data['varyselected'] == 'false' %}selected{% endif %}
+             >Defendant - Contact claimant to settle</option>
+    <option  value="xyz&defaultccj=true&varyselected=true&" {% if data['defaultccj'] == 'true' and data['varyselected'] == 'true' %}selected{% endif %}
+    >Defendant - Vary judgement reqest submitted</option>
+
+  </select>
+</form>
+
+
+
+
+
+<!--
+
+
+<div id="daysPassing" data-dayspassurl="../dashboard/new-dashboard/defendant/email4"
+     data-dayspasstimetoprompt="5000" data-dayspassdays="5">
+
+  <div class="spinner-block">
+    <h2 class="govuk-heading-m">Days passing by... <span id="days">5</span></h2>
+    <div class="spinner spinner-1"></div>
+  </div>
+
+</div>
+
+<a class="gem-c-pagination__link active" id="triggerDaysPassing">
+  <span class="gem-c-pagination__link-title">
+      <svg class="gem-c-pagination__link-icon" xmlns="http://www.w3.org/2000/svg" height="13" width="17"
+           viewBox="0 0 17 13">
+        <path fill="currentColor"
+              d="m10.107-0.0078125-1.4136 1.414 4.2926 4.293h-12.986v2h12.896l-4.1855 3.9766 1.377 1.4492 6.7441-6.4062-6.7246-6.7266z"></path>
+      </svg>
+      <span class="gem-c-pagination__link-text">
+        Simulate time passing
+      </span>
+  </span>
+</a>
+
+-->
+
+<form method="post"  action="#" class="for4" style=" float: left;">
+  <select onchange="window.location.href='?dqs='+this.value">
+    <option value="">Hearing requirements</option>
+    <option value="on" {% if data['dqs'] != 'off' %}selected{% endif %}>DQs on</option>
+    <option value="off" {% if data['dqs'] == 'off' %}selected{% endif %}>DQs off</option>
+  </select>
+</form>
+
+{% endblock %}
