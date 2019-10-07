@@ -81,6 +81,19 @@ const router = express();
 
 
 
+    // CLAIMANT - Doing a general application from the claim status page
+    router.get('/claimant-general-application-only', function (req, res)
+    {
+      req.session.data = {};
+
+      req.session.data['general-application'] = 'true';
+      req.session.data['claimant-application'] = 'true';
+
+      res.redirect('/' + strPath +  'dashboard/applications-and-judgments/general-application/what' );
+    });
+
+
+
 
 
 module.exports = router;
