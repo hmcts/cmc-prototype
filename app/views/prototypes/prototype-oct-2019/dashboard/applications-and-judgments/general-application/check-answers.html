@@ -43,9 +43,7 @@ Check your answers
       <td>
         What you've requested
       </td>
-      <td>
-
-      </td>
+      <td style="white-space: pre-line"></td>
       <td class="change-answer">
         <a href="#">
           Change <span class="visuallyhidden">Name</span>
@@ -57,9 +55,7 @@ Check your answers
       <td>
         Reason for request
       </td>
-      <td>
-
-      </td>
+      <td style="white-space: pre-line">{{  data['general-application-why']  }}</td>
       <td class="change-answer">
         <a href="#">
           Change <span class="visuallyhidden">Name</span>
@@ -72,7 +68,11 @@ Check your answers
         Requires a hearing
       </td>
       <td>
-
+        {% if  data['general-app-hearing'] == 'true' %}
+            Yes
+        {% else %}
+            No
+        {% endif %}
       </td>
       <td class="change-answer">
         <a href="#">
@@ -81,28 +81,35 @@ Check your answers
       </td>
     </tr>
 
-    <tr>
-      <td>
-        Hearing length
-      </td>
-      <td>
 
-      </td>
-      <td class="change-answer">
-        <a href="#">
-          Change <span class="visuallyhidden">Name</span>
-        </a>
-      </td>
-    </tr>
+    {% if  data['general-app-hearing'] == 'true' %}
+        <tr>
+          <td>
+            Hearing length
+          </td>
+              {% if  data['radio-general-app-hearing-duration'] == 'hearing-duration-different' %}
+                  <td>{{  data['hearing-hours']  }} Hours  {{ data['hearing-mins']  }}  Minutes</td>
+              {% elif  data['radio-general-app-hearing-duration'] == 'hearing-duration-unknown' %}
+                  <td>I don't know</td>
+              {% elif  data['radio-general-app-hearing-duration'] == 'hearing-duration-30' %}
+                  <td>30 minutes</td>
+              {% elif  data['radio-general-app-hearing-duration'] == 'hearing-duration-60' %}
+                  <td>1 hour</td>
+              {% endif %}
+          <td class="change-answer">
+            <a href="#">
+              Change <span class="visuallyhidden">Name</span>
+            </a>
+          </td>
+        </tr>
+    {% endif %}
 
 
     <tr>
       <td>
         Other information
       </td>
-      <td>
-
-      </td>
+      <td  style="white-space: pre-line">{{ data['any-other-information'] }}</td>
       <td class="change-answer">
         <a href="#">
           Change <span class="visuallyhidden">Name</span>
