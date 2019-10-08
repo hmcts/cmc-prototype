@@ -116,14 +116,8 @@
                   <h3 class="heading-small">You need to pay Jan Clark £1,500 immediately</h3>
                   <p>Jan Clark made a money claim for £1,500 against you on {{ now |  date("subtract", 80, "day") | date( "D MMMM YYYY" ) }}.</p>
                   <p>Because you didn't respond, a CCJ was issued against you on {{ now |  date("subtract", 58, "day") | date( "D MMMM YYYY" ) }}.</p>
-                  <!-- <h3 class="heading-small">Download the judgment</h3> -->
-                  <ul class="list">
-                    <li> <a target="_blank" href="../defendant/correspondence/forms/judgment-order?check=1">Download the judgment</a> (PDF, 48 KB).</li>
-                  </ul>
-                  <!-- <h3 class="heading-small">Download the claim</h3> -->
-                  <ul class="list">
-                    <li> <a target="_blank"   href='../claimant/correspondence/claim-form-claimant?check=2'>Download the claim</a> (PDF, 102 KB).</li>
-                  </ul>
+                  {% include "../includes/claimants-contact-details.html" %}
+                  <br>
 
 
 
@@ -134,14 +128,11 @@
                   <p>Jan Clark made a money claim for £1,500 against you on {{ now |  date("subtract", 50, "day") | date( "D MMMM YYYY" ) }}.</p>
                   <p>Because you didn't respond, a CCJ was issued against you on {{ now |  date("subtract", 7, "day") | date( "D MMMM YYYY" ) }}.</p>
                   <p>If Jan Clark confirms you've settled the claim before 4pm on {{ now |  date("add", 23, "day") | date( "D MMMM YYYY" ) }}, the CCJ will be removed from the public register.</p>
-                  <!-- <h3 class="heading-small">Download the CCJ</h3> -->
-                  <ul class="list">
-                    <li> <a target="_blank"   href="../defendant/correspondence/forms/judgment-order?check=1">Download the judgment</a> (PDF, 48 KB).</li>
-                  </ul>
-                  <!-- <h3 class="heading-small">Download the claim</h3> -->
-                  <ul class="list">
-                    <li> <a target="_blank"   href='../../claimant/correspondence/claim-form-claimant?check=2'>Download the claim</a> (PDF, 102 KB).</li>
-                  </ul>
+                  {% include "../includes/claimants-contact-details.html" %}
+                  <br>
+
+
+
 
 
               {% elseif data['defendant'] == 3.23 %}
@@ -1735,9 +1726,22 @@
 
               <!--  General applications    - this will need logic to know who and what state it has come from  -->
 
+              <hr>
               <h3 class="bold">Apply to cancel or change the judgment</h3>
               <p>You can pay a fee and <a href="../applications/select-type-of-application">ask the court to cancel or change the judgment</a>.</p>
               <p>The fee depends on what you're asking the court to change. It can be up to £255.</p>
+
+
+              {% if data['defendant'] == 3.21  or  data['defendant'] == 3.22 %}
+                  <hr>
+                  <ul class="list">
+                    <li> <a target="_blank"   href='../../claimant/correspondence/claim-form-claimant?check=2'>Download the claim</a> (PDF, 102 KB).</li>
+                  </ul>
+                  <ul class="list">
+                    <li> <a target="_blank"   href="../defendant/correspondence/forms/judgment-order?check=1">Download the judgment</a> (PDF, 48 KB).</li>
+                  </ul>
+              {% endif %}
+
 
             </div>
           </div>
