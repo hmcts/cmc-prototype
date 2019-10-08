@@ -61,106 +61,110 @@
             <br>
 
 
-            <!--  HOW MUCH DO YOU OWE  -->
-            <table id="table-of-tasks">
-              <thead>
-              <tr>
-                <th scope="col" id="col-task">
-                    <span class="task-group">
-                      <span class="group-number" id="task-number"></span>
-                      About the claim
-                    </span>
-                <th class="numeric" id="task-status" scope="col" id="col-status">
-                  <span type="hidden" class="visually-hidden">task status</span>
-                </th>
-              </tr>
-              </thead>
-              <tbody>
 
-                <tr id="read-rules">
-                  <td class="task">
-                    <a href="/prototypes/prototype-oct-2019/defendant/task-list/do-you-owe-money?defaultccj=true&">
-                      <span class="task-name">Tell us if you owe Jan Clark any money</span>
-                    </a>
-                  </td>
-                  <td class="numeric" id="task-status" scope="col" id="col-status">
-                    {% if data.howmuchyouowe=="complete" %}
-                        {% include "includes/task_status_finished.html" %}
-                    {% else %}
-                        {% include "includes/task_status_incomplete.html" %}
-                    {% endif %}
-                  </td>
-                </tr>
+            {% if data['alreadysettled'] == 'false'  and  data['fulldefence'] == 'false' %}
 
-
-                {% if data.paidwhatiowe == 'true' %}
-                    <tr id="their-details">
-                      <td class="task">
-                        <a href="../../../defendant/task-list/your-defence/paid-less">
-                          <span class="task-name">Tell us how much you've paid</span>
-                        </a>
-                      </td>
-                      <td class="numeric" id="task-status" scope="col" id="col-status">
-                        {% if data.how_much_paid=="complete" %}
-                        {% include "includes/task_status_finished.html" %}
-                        {% else %}
-                        {% include "includes/task_status_incomplete.html" %}
-                        {% endif %}
-                      </td>
+                  <!--  HOW MUCH DO YOU OWE  -->
+                  <table id="table-of-tasks">
+                    <thead>
+                    <tr>
+                      <th scope="col" id="col-task">
+                          <span class="task-group">
+                            <span class="group-number" id="task-number"></span>
+                            About the claim
+                          </span>
+                      <th class="numeric" id="task-status" scope="col" id="col-status">
+                        <span type="hidden" class="visually-hidden">task status</span>
+                      </th>
                     </tr>
-                {% endif %}
+                    </thead>
+                    <tbody>
 
 
-
-              <!--  FULL ADMIT ONLY - GET THE USER TO PAY -->
-              {% if data['alreadysettled'] == 'false'  and  data['fulldefence'] == 'false'  and  data['lower-amount'] == 'false' %}
-                  <tr id="read-rules">
-                    <td class="task">
-                      <a href="../../../applications/will-you-pay">
-                        <span class="task-name">Will you pay Jan Clark?</span>
-                      </a>
-                    </td>
-                    <td class="numeric" id="task-status" scope="col" id="col-status">
-                      {% if data.canpaynowanswered=="complete" %}
-                          {% include "includes/task_status_finished.html" %}
-                      {% else %}
-                          {% include "includes/task_status_incomplete.html" %}
-                      {% endif %}
-                    </td>
-                  </tr>
-              {% endif %}
-
-
-
-              <!--  PART ADMIT ONLY - Will user pay what they sa they owe -->
-              {% if data['alreadysettled'] == 'false'  and  data['fulldefence'] == 'false'  and  data['lower-amount'] == 'true' %}
-
-
-
-
-                  <!-- THE USER WILL TRY TO SETTLE WITH CLAIMANT -->
-                    <tr id="read-rules">
-                      <td class="task">
-                        <a href="contact-claimant?contactclaimantstarted=true&contactedclaimantanswered=complete&">
-                          <span class="task-name">Consider settling the claim</span>
-                        </a>
-                      </td>
-                      <td class="numeric" id="task-status" scope="col" id="col-status">
-                        {% if data.contactedclaimantanswered=="complete" %}
+                    <!--
+                      <tr id="read-rules">
+                        <td class="task">
+                          <a href="/prototypes/prototype-oct-2019/defendant/task-list/do-you-owe-money?defaultccj=true&">
+                            <span class="task-name">Tell us if you owe Jan Clark any money</span>
+                          </a>
+                        </td>
+                        <td class="numeric" id="task-status" scope="col" id="col-status">
+                          {% if data.howmuchyouowe=="complete" %}
                               {% include "includes/task_status_finished.html" %}
-                        {% else %}
+                          {% else %}
                               {% include "includes/task_status_incomplete.html" %}
-                        {% endif %}
-                      </td>
-                    </tr>
+                          {% endif %}
+                        </td>
+                      </tr>
+                    -->
 
-              {% endif %}
+                      {% if data.paidwhatiowe == 'true' %}
+                          <tr id="their-details">
+                            <td class="task">
+                              <a href="../../../defendant/task-list/your-defence/paid-less">
+                                <span class="task-name">Tell us how much you've paid</span>
+                              </a>
+                            </td>
+                            <td class="numeric" id="task-status" scope="col" id="col-status">
+                              {% if data.how_much_paid=="complete" %}
+                              {% include "includes/task_status_finished.html" %}
+                              {% else %}
+                              {% include "includes/task_status_incomplete.html" %}
+                              {% endif %}
+                            </td>
+                          </tr>
+                      {% endif %}
 
-          </tbody>
-        </table>
 
-        <br>
-        <br>
+
+                      <!--  FULL ADMIT ONLY - GET THE USER TO PAY -->
+                      {% if data['alreadysettled'] == 'false'  and  data['fulldefence'] == 'false'  and  data['lower-amount'] == 'false' %}
+                          <tr id="read-rules">
+                            <td class="task">
+                              <a href="../../../applications/will-you-pay">
+                                <span class="task-name">Will you pay Jan Clark?</span>
+                              </a>
+                            </td>
+                            <td class="numeric" id="task-status" scope="col" id="col-status">
+                              {% if data.canpaynowanswered=="complete" %}
+                                  {% include "includes/task_status_finished.html" %}
+                              {% else %}
+                                  {% include "includes/task_status_incomplete.html" %}
+                              {% endif %}
+                            </td>
+                          </tr>
+                      {% endif %}
+
+
+
+                      <!--  PART ADMIT ONLY - Will user pay what they sa they owe -->
+                      {% if data['alreadysettled'] == 'false'  and  data['fulldefence'] == 'false'  and  data['lower-amount'] == 'true' %}
+
+                          <!-- THE USER WILL TRY TO SETTLE WITH CLAIMANT -->
+                            <tr id="read-rules">
+                              <td class="task">
+                                <a href="contact-claimant?contactclaimantstarted=true&contactedclaimantanswered=complete&">
+                                  <span class="task-name">Consider settling the claim</span>
+                                </a>
+                              </td>
+                              <td class="numeric" id="task-status" scope="col" id="col-status">
+                                {% if data.contactedclaimantanswered=="complete" %}
+                                      {% include "includes/task_status_finished.html" %}
+                                {% else %}
+                                      {% include "includes/task_status_incomplete.html" %}
+                                {% endif %}
+                              </td>
+                            </tr>
+
+                      {% endif %}
+
+                </tbody>
+              </table>
+
+              <br>
+              <br>
+
+        {% endif %}
 
     <!-- end if for just vary only  -->
         {% endif %}
