@@ -47,16 +47,22 @@ Money Claims Prototype
         </div>
     </details>
 
-<p>Don't upload anything about the claim itself - we'll ask for this later.</p>
+      <!-- commented out by GUY  -->
+      <!-- <p>Don't upload anything about the claim itself - we'll ask for this later.</p>  -->
 
 
-      <form action="../set-aside-default-ccj/any-other-info" method="post" class="form">
+      <form class="form-group"  action="../set-aside-default-ccj/any-other-info" method="post" class="form"  onclick="changebutton()">
         {{ upload.form('evidence', 'Continue') }}
       </form>
 
-      <div class="form-group">
+      <div class="form-group"  id="green-button-without-evidence">
         <br>
         <p ><a class="button" href="../set-aside-default-ccj/any-other-info">Continue without files</a></p>
+      </div>
+
+      <div class="form-group"  id="blue-link-without-evidence" style="display: none;">
+        <br>
+        <p ><a href="../set-aside-default-ccj/any-other-info">Continue without files</a></p>
       </div>
 
       <br>
@@ -67,4 +73,21 @@ Money Claims Prototype
 
   {% include 'prototypes/prototype-oct-2019/includes/contact.html' %}
 </main>
+{% endblock %}
+
+
+
+
+{% block extra_js_1 %}
+
+<script type="text/javascript">
+
+  function changebutton()
+  {
+      document.getElementById("green-button-without-evidence").style.display = "none";
+      document.getElementById("blue-link-without-evidence").style.display = "block";
+  }
+
+</script>
+
 {% endblock %}
