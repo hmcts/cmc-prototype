@@ -176,86 +176,104 @@ Check your answers
         </a>
       </td>
     </tr>
-    {% else %}
-    <tr>
-      <td>
-        When you found out about the judgment
-      </td>
-      <td>
-        17 March 2019
-      </td>
-      <td class="change-answer">
-        <a href="">
-          Change <span class="visuallyhidden">Name</span>
-        </a>
-      </td>
-    </tr>
 
-    <tr>
-      <td>
-        Confirm address on <br>6 December 2018
-      </td>
-      <td>
+
+    {% else %}
+        <tr>
+          <td>
+            When you found out about the judgment
+          </td>
+          <td>
+            17 March 2019
+          </td>
+          <td class="change-answer">
+            <a href="">
+              Change <span class="visuallyhidden">Name</span>
+            </a>
+          </td>
+        </tr>
+
+
+        <tr>
+          <td>
+            Why you didn't respond
+          </td>
+          <td style="white-space: pre-wrap;">{{ data['reason-for-not-responding' ]}}</td>
+          <td class="change-answer">
+            <a href="">
+              Change <span class="visuallyhidden">Name</span>
+            </a>
+          </td>
+        </tr>
+
+
+        <tr>
+          <td>
+            Confirm address on <br>6 December 2018
+          </td>
+          <td>
+            {% if data['addresscorrect'] == 'true' %}
+            Yes, 24 Acacia Drive
+            {% else %}
+            No, I moved
+            {% endif %}
+          </td>
+          <td class="change-answer">
+            <a href="">
+              Change <span class="visuallyhidden">Name</span>
+            </a>
+          </td>
+        </tr>
+
+
+
+
         {% if data['addresscorrect'] == 'true' %}
-        Yes, 24 Acacia Drive
+            <tr>
+              <td>
+                Reason for not receiving letter?
+              </td>
+              <td style="white-space: pre-wrap;">{{ data['reason-for-not-receive-post'] }}</td>
+              <td class="change-answer">
+                <a href="">
+                  Change <span class="visuallyhidden">Name</span>
+                </a>
+              </td>
+            </tr>
         {% else %}
-        No, I moved
+            <tr>
+              <td>
+                Update Sam Clark of new address?
+              </td>
+              <td>
+                {% if data['updatedclaimantofaddress'] == 'true' %}
+                Yes
+                {% else %}
+                No
+                {% endif %}
+              </td>
+              <td class="change-answer">
+                <a href="">
+                  Change <span class="visuallyhidden">Name</span>
+                </a>
+              </td>
+            </tr>
+
+            {% if data['updatedclaimantofaddress'] == 'true' %}
+                <tr>
+                  <td>
+                    How did you update Sam Clark?
+                  </td>
+                  <td style="white-space: pre-wrap;">{{ data['methodofinformingclaimant'] }}</td>
+                  <td class="change-answer">
+                    <a href="">
+                      Change <span class="visuallyhidden">Name</span>
+                    </a>
+                  </td>
+                </tr>
+            {% endif %}
+
         {% endif %}
-      </td>
-      <td class="change-answer">
-        <a href="">
-          Change <span class="visuallyhidden">Name</span>
-        </a>
-      </td>
-    </tr>
-
-
-    {% if data['addresscorrect'] == 'true' %}
-    <tr>
-      <td>
-        Reason for not receiving letter?
-      </td>
-      <td style="white-space: pre-wrap;">{{ data['reason-for-not-receive-post'] }}</td>
-      <td class="change-answer">
-        <a href="">
-          Change <span class="visuallyhidden">Name</span>
-        </a>
-      </td>
-    </tr>
-    {% else %}
-    <tr>
-      <td>
-        Update Sam Clark of new address?
-      </td>
-      <td>
-        {% if data['updatedclaimantofaddress'] == 'true' %}
-        Yes
-        {% else %}
-        No
-        {% endif %}
-      </td>
-      <td class="change-answer">
-        <a href="">
-          Change <span class="visuallyhidden">Name</span>
-        </a>
-      </td>
-    </tr>
-
-    {% if data['updatedclaimantofaddress'] == 'true' %}
-    <tr>
-      <td>
-        How did you update Sam Clark?
-      </td>
-      <td style="white-space: pre-wrap;">{{ data['methodofinformingclaimant'] }}</td>
-      <td class="change-answer">
-        <a href="">
-          Change <span class="visuallyhidden">Name</span>
-        </a>
-      </td>
-    </tr>
-    {% endif %}
-
-    {% endif %}
 
     {% endif %}
 
@@ -385,6 +403,52 @@ Check your answers
   </table>
 
 
+
+
+  <!--  DEFENCE STUFF -->
+
+  {% if  data['fulldefence'] == 'true'  %}
+  <table class="check-your-answers">
+    <thead>
+        <tr>
+          <th colspan="2">
+            <h2 class="heading-medium" id="name">
+              Response to the original claim
+            </h2>
+          </th>
+          <th>
+          </th>
+        </tr>
+    </thead>
+
+
+    <tbody>
+          <tr>
+            <td>
+              Reason for not owing money
+            </td>
+            <td>
+              I dispute all of the claim
+            </td>
+            <td class="change-answer">
+              <a href="#">
+                Change <span class="visuallyhidden">Name</span>
+              </a>
+            </td>
+          </tr>
+
+      <!-- DEFENCE STUFF-->
+
+
+    </tbody>
+  </table>
+
+
+  {% endif %}
+
+
+
+
   <!--  Declaration   -->
   <!-- needs company option addition  !!   -->
 
@@ -406,6 +470,7 @@ Check your answers
         <p><a class="button" href="../../../defendant/task-list/check-and-send/enter-card">Sign, submit and continue to payment (£50)</a></p>
       {% endif %}
   {% elif data['cancelccj'] == 'true'  %}
+      <br>
       <p><a class="button" href="../../../defendant/task-list/check-and-send/enter-card">Submit and continue to payment (£255)</a></p>
   {% else %}
       <p><a class="button" href="../../../defendant/confirmation-page">Submit</a></p>
