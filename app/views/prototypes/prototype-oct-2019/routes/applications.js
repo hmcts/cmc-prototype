@@ -94,15 +94,21 @@ const router = express();
 
 
 
-    // HEARING REQUIREMENTS  - GEneral application
-    router.get('/general-application-hearing-requirements', function (req, res)
+    // HEARING REQUIREMENTS  - SET ASIDE  application
+    router.get('/set-aside-application-hearing-requirements', function (req, res)
     {
-
+      req.session.data['scenario'] = 'ccjsetaside';
 
       res.redirect('/' + strPath +  'defendant/task-list/hearing/support' );
     });
 
 
+
+    // HEARING REQUIREMENTS  - GENERAL application
+    router.get('/general-application-hearing-requirements', function (req, res)
+    {
+      res.redirect('/' + strPath +  'defendant/task-list/hearing/support' );
+    });
 
 
 module.exports = router;
