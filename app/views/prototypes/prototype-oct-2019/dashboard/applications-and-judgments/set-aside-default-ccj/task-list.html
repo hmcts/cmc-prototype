@@ -19,10 +19,19 @@
     <div class="column-two-thirds">
       <header class="page-heading page-heading-with-context page-heading-without-breadcrumb">
 
-
+        {% if data['radio-app-type'] == 'set-aside' %}
+        <h1 class="heading-large">
+          Cancel a judgment
+        </h1>
+        {% elseif data['radio-app-type'] == 'vary' or data['radio-app-type'] == 'general' %}
+        <h1 class="heading-large">
+          Change a judgment
+        </h1>
+        {% else %}
         <h1 class="heading-large">
           Respond to a judgment
         </h1>
+        {% endif %}
 
         {% if data['justvaryonly'] != 'true' %}
             <!--  Section 1  -  CONTACT DETAILS  -->
@@ -85,7 +94,7 @@
                       <tr id="read-rules">
                         <td class="task">
                           <a href="/prototypes/prototype-oct-2019/defendant/task-list/do-you-owe-money?defaultccj=true&">
-                            <span class="task-name">Tell us if you owe Jan Clark any money</span>
+                            <span class="task-name">Tell us if you owe Sam Clark any money</span>
                           </a>
                         </td>
                         <td class="numeric" id="task-status" scope="col" id="col-status">
@@ -122,7 +131,7 @@
                           <tr id="read-rules">
                             <td class="task">
                               <a href="../../../applications/will-you-pay">
-                                <span class="task-name">Will you pay Jan Clark?</span>
+                                <span class="task-name">Will you pay Sam Clark?</span>
                               </a>
                             </td>
                             <td class="numeric" id="task-status" scope="col" id="col-status">
@@ -192,7 +201,13 @@
                 <th scope="col" id="col-task">
                     <span class="task-group">
                       <span class="group-number" id="task-number"></span>
-                          Cancel or change a judgment
+                      {% if data['radio-app-type'] == 'set-aside' %}
+                        Apply to cancel a judgment
+                      {% elseif data['radio-app-type'] == 'vary' or data['radio-app-type'] == 'general' %}
+                        Apply to change a judgment
+                      {% else %}
+                        Respond to a judgment
+                      {% endif %}
                     </span>
                 </th>
                 <th class="numeric" id="task-status" scope="col" id="col-status"></th>
@@ -205,11 +220,11 @@
                     {% if  data['fulldefence'] == 'true'
                     or data['has-settled'] == 'false'  and  data['lower-amount'] == 'true'  %}
                         <a href="cancel-ccj-info-interstitial">
-                          <span class="task-name">How to cancel a judgment</span>
+                          <span class="task-name">Decide whether to apply</span>
                         </a>
                     {% else %}
                         <a href="cancel-ccj-info-paid-or-settled">
-                          <span class="task-name">How to cancel a judgment</span>
+                          <span class="task-name">Decide whether to apply</span>
                         </a>
                     {% endif %}
 
@@ -341,7 +356,7 @@
             <th scope="col" id="col-task">
                       <span class="task-group">
                         <span class="group-number" id="task-number"></span>
-                        Change the terms of the judgment
+                        Change the payment terms
                       </span>
             </th>
             <th class="numeric" id="task-status" scope="col" id="col-status"></th>
@@ -438,7 +453,7 @@
                 <tr id="their-details">
                   <td class="task">
                     <a href="defence-options-after-set-aside">
-                      <span class="task-name">Why you don't owe Jan Clark any money</span>
+                      <span class="task-name">Why you don't owe Sam Clark any money</span>
                     </a>
                   </td>
                   <td class="numeric" id="task-status" scope="col" id="col-status">
