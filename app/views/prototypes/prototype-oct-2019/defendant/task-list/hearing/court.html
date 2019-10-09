@@ -57,11 +57,15 @@ Money Claims Prototype
           <p>We'll use the location you choose unless the {% if data['scenario'] == 2 %}defendant{% else %}claimant{% endif %} has an exceptional reason to object, for example accessibility needs.</p>
           {% endif %}
 
-          {% if data['scenario'] != 5 and data['court-search'] != 'postcode' and data['scenario'] != 8 and data['scenario'] != 7  %}
-          <p>You can {% if data['reject-court'] != 'yes' and data['scenario'] != 6 %}choose{% else %}request{% endif %} any location - Guildford County Court is nearest to the address you gave us.</p>
+          {% endif %}
 
-          {% endif %}
-          {% endif %}
+
+          {% if data['scenario'] != 8 and data['scenario'] != 7 %}
+          <h1 class="heading-medium">Do you want to {% if data['reject-court'] != 'yes' and data['scenario'] != 6 %}choose{% else %}request{% endif %} {% if data['scenario'] == 5 or data['court-search'] == 'postcode' %}Edmonton County Court{% else %}Guildford County Court{% endif %}?</h1>
+
+
+          {% if data['scenario'] != 5 and data['court-search'] != 'postcode' and data['scenario'] != 8 and data['scenario'] != 7  %}
+          <p>This court is the closest to the address you gave us.</p>
 
           {% if data['scenario'] != 8 and data['scenario'] != 7 %}
           <details role="group">
@@ -101,9 +105,7 @@ Money Claims Prototype
           </details>
           {% endif %}
 
-
-          {% if data['scenario'] != 8 and data['scenario'] != 7 %}
-          <h1 class="heading-medium">Do you want to {% if data['reject-court'] != 'yes' and data['scenario'] != 6 %}choose{% else %}request{% endif %} {% if data['scenario'] == 5 or data['court-search'] == 'postcode' %}Edmonton County Court{% else %}Guildford County Court{% endif %}?</h1>
+          {% endif %}
 
           <div class="form-group">
             <fieldset>
@@ -113,7 +115,7 @@ Money Claims Prototype
               </div>
               <div class="multiple-choice" data-target="courtsearch">
                 <input id="radio-court-no" type="radio" name="court" value="no">
-                <label for="radio-court-no">No</label>
+                <label for="radio-court-no">No, I'll choose another</label>
               </div>
             </fieldset>
           </div>
