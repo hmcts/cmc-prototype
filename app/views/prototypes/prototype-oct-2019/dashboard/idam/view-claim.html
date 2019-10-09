@@ -7,7 +7,7 @@ Money Claims Prototype
   {% include "includes/phase_banner_beta.html" %}
   <div class="grid-row">
     <div class="column-two-thirds">
-      <!--<!--  <a href="#" onclick="history.go(-1)" class="link-back">Back</a>  -->-->
+
       <h1 class="heading-large">
         Claim details
       </h1>
@@ -16,8 +16,12 @@ Money Claims Prototype
 
       {% if data['defaultccj'] == "true" %}
       <div class="panel panel-border-narrow">
-        <p>A County Court Judgment was issued against you because you didn't respond to this claim.</p>
-        <p>You can ask the court to cancel the judgment. You'll have to pay a fee and you might have to go to a hearing.</p>
+      <p>A County Court Judgment was issued against you because you didn't respond to this claim.</p>
+      {% if data['afterccjdeadline'] == "false" %}
+      <p>If Sam Clark confirms you've settled the claim before 4pm on 1 November 2019, the CCJ will be removed from the public register.</p>
+      {% else %}
+      <p>You can ask the court to cancel the judgment. You'll have to pay a fee and you might have to go to a hearing.</p>
+      {% endif %}
       </div>
       {% endif %}
 
