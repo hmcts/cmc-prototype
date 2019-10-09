@@ -19,10 +19,19 @@
     <div class="column-two-thirds">
       <header class="page-heading page-heading-with-context page-heading-without-breadcrumb">
 
-
+        {% if data['radio-app-type'] == 'set-aside' %}
+        <h1 class="heading-large">
+          Cancel a judgment
+        </h1>
+        {% elseif data['radio-app-type'] == 'vary' or data['radio-app-type'] == 'general' %}
+        <h1 class="heading-large">
+          Change a judgment
+        </h1>
+        {% else %}
         <h1 class="heading-large">
           Respond to a judgment
         </h1>
+        {% endif %}
 
         {% if data['justvaryonly'] != 'true' %}
             <!--  Section 1  -  CONTACT DETAILS  -->
@@ -192,7 +201,13 @@
                 <th scope="col" id="col-task">
                     <span class="task-group">
                       <span class="group-number" id="task-number"></span>
-                          Cancel or change a judgment
+                      {% if data['radio-app-type'] == 'set-aside' %}
+                        Apply to cancel a judgment
+                      {% elseif data['radio-app-type'] == 'vary' or data['radio-app-type'] == 'general' %}
+                        Apply to change a judgment
+                      {% else %}
+                        Respond to a judgment
+                      {% endif %}
                     </span>
                 </th>
                 <th class="numeric" id="task-status" scope="col" id="col-status"></th>
@@ -205,11 +220,11 @@
                     {% if  data['fulldefence'] == 'true'
                     or data['has-settled'] == 'false'  and  data['lower-amount'] == 'true'  %}
                         <a href="cancel-ccj-info-interstitial">
-                          <span class="task-name">How to cancel a judgment</span>
+                          <span class="task-name">Decide whether to apply</span>
                         </a>
                     {% else %}
                         <a href="cancel-ccj-info-paid-or-settled">
-                          <span class="task-name">How to cancel a judgment</span>
+                          <span class="task-name">Decide whether to apply</span>
                         </a>
                     {% endif %}
 
@@ -341,7 +356,7 @@
             <th scope="col" id="col-task">
                       <span class="task-group">
                         <span class="group-number" id="task-number"></span>
-                        Change the terms of the judgment
+                        Change the payment terms
                       </span>
             </th>
             <th class="numeric" id="task-status" scope="col" id="col-status"></th>
