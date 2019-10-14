@@ -272,6 +272,16 @@
               <p>The claimant has also provided their hearing requirements.</p>
               <p><a href="../claimant/correspondence/dqs" target="_blank">Download their hearing requirements</a> (PDF, 123KB)</p>
 
+              {% elseif data['defendant'] == 3.921 %}
+              <h2 class="heading-medium">Sam Clark rejected your admission of £1,200</h2>
+              <p>They believe you owe them the full {% if data['mediation-pilot'] == "on" %}£300{% else %}£1,500{% endif %} claimed.</p>
+              <p>You'll have to go to a hearing.</p>
+              <p>You need to <a href="forms/dq-form">complete a directions questionnaire</a> form to give us more information before the hearing.</p>
+              <p>Your defence will be cancelled if you don't complete and return the form before 4pm on {{ now | date('add', 19, 'days') | date }}.</p>
+              <p>You also need to send a copy of the form to Sam Clark.</p>
+              <p>The claimant has also provided their hearing requirements.</p>
+              <p><a href="../claimant/correspondence/dqs" target="_blank">Download their hearing requirements</a> (PDF, 123KB)</p>
+
 
               {% elseif data['defendant'] == 3.94 %}
               <h2 class="heading-medium">A County Court Judgment (CCJ) has been issued against you</h2>
@@ -707,8 +717,26 @@
                 <p>The claimant has also provided their hearing requirements.</p>
                 <p><a href="../claimant/correspondence/dqs" target="_blank">Download their hearing requirements</a> (PDF, 123KB)</p>
 
+              {% elseif data['defendant'] == 8.11 %}
+              <h2 class="heading-medium">Sam Clark rejected your admission of £1,200</h2>
+                <p>They accept that you paid them £1,200, but believe you owe the full {% if data['mediation-pilot'] == "on" %}£300{% else %}£1,500{% endif %} claimed.</p>
+                <p>You'll have to go to a hearing.</p>
+                <p>You need to <a href="forms/dq-form">complete a directions questionnaire</a> form to give us more information before the hearing.</p>
+                <p>Your defence will be cancelled if you don't complete and return the form before 4pm on {{ now | date('add', 19, 'days') | date }}.</p>
+                <p>You also need to send a copy of the form to Sam Clark.</p>
+                <p>The claimant has also provided their hearing requirements.</p>
+                <p><a href="../claimant/correspondence/dqs" target="_blank">Download their hearing requirements</a> (PDF, 123KB)</p>
 
               {% elseif data['defendant'] == 8.2 %}
+              <div class="status-block single">
+                <h2 class="heading-medium">Sam Clark rejected your admission of £1,200</h2>
+                <p>They accept that you paid them £1,200, but believe you owe the full {% if data['mediation-pilot'] == "on" %}£300{% else %}£1,500{% endif %} claimed.</p>
+                <p>They've agreed to try mediation. We'll contact you to try to arrange an appointment.</p>
+                <p>The claimant has also provided their hearing requirements.</p>
+                <p><a href="../claimant/correspondence/dqs" target="_blank">Download their hearing requirements</a> (PDF, 123KB)</p>
+              </div>
+
+              {% elseif data['defendant'] == 8.21 %}
               <div class="status-block single">
                 <h2 class="heading-medium">Sam Clark rejected your admission of £1,200</h2>
                 <p>They accept that you paid them £1,200, but believe you owe the full {% if data['mediation-pilot'] == "on" %}£300{% else %}£1,500{% endif %} claimed.</p>
@@ -722,6 +750,16 @@
                 <p>They said you didn't pay this amount.</p>
                 <p>The court will review the case. You might have to go to a hearing.</p>
                 <p>We'll contact you to tell you what to do next.</p>
+                <p>The claimant has also provided their hearing requirements.</p>
+                <p><a href="../claimant/correspondence/dqs" target="_blank">Download their hearing requirements</a> (PDF, 123KB)</p>
+
+              {% elseif data['defendant'] == 8.31 %}
+              <h2 class="heading-medium">Sam Clark rejected your admission of £1,200</h2>
+                <p>They said you didn't pay this amount.</p>
+                <p>You'll have to go to a hearing.</p>
+                <p>You need to <a href="forms/dq-form">complete a directions questionnaire</a> form to give us more information before the hearing.</p>
+                <p>Your defence will be cancelled if you don't complete and return the form before 4pm on {{ now | date('add', 19, 'days') | date }}.</p>
+                <p>You also need to send a copy of the form to Sam Clark.</p>
                 <p>The claimant has also provided their hearing requirements.</p>
                 <p><a href="../claimant/correspondence/dqs" target="_blank">Download their hearing requirements</a> (PDF, 123KB)</p>
 
@@ -1759,7 +1797,8 @@
 
               <!--  General applications    - this will need logic to know who and what state it has come from  -->
 
-              <br>
+              <hr />
+
               <h2 class="heading-small">Apply to change something about the claim</h2>
               <p>You can pay a fee and <a href="../applications/select-type-of-application">ask the court</a> to change something in relation to this claim.</p>
               <p>This includes applying to cancel a judgment or change when you pay a claimant.</p>
@@ -3991,6 +4030,7 @@
     <option value="3.904" {% if data['defendant'] == 3.904 %}selected{% endif %}>3.904. I admit part the claim - instalment plan payment - accepted</option>
     <option value="3.91" {% if data['defendant'] == 3.91 %}selected{% endif %}>3.91. I admit part of the claim - rejected (mediation)</option>
     <option value="3.92" {% if data['defendant'] == 3.92 %}selected{% endif %}>3.92. I admit part of the claim - rejected (no mediation)</option>
+    <option value="3.921" {% if data['defendant'] == 3.921 %}selected{% endif %}>3.921. I admit part of the claim - rejected (no mediation) - paper DQs</option>
     <option value="3.94" {% if data['defendant'] == 3.94 %}selected{% endif %}>3.94. I admit part the claim - rejected - redetermination</option>
     <option value="4" {% if data['defendant'] == 4 %}selected{% endif %}>4. I admit part of the claim - rejected - court offer - settlement</option>
     <option value="4.001" {% if data['defendant'] == 4.001 %}selected{% endif %}>4.001. I admit part of the claim - rejected - claimant offer - settlement</option>
@@ -4001,10 +4041,11 @@
     <option value="8" {% if data['defendant'] == 8 %}selected{% endif %}>8. States paid </option>
     <option value="8.01" {% if data['defendant'] == 8.01 %}selected{% endif %}>8.01. States paid - less than</option>
     <option value="8.1" {% if data['defendant'] == 8.1 %}selected{% endif %}>8.1. States paid - rejected - amount (no mediation)</option>
+    <option value="8.11" {% if data['defendant'] == 8.11 %}selected{% endif %}>8.11. States paid - rejected - amount (no mediation) - paper DQs</option>
     <option value="8.2" {% if data['defendant'] == 8.2 %}selected{% endif %}>8.2. States paid - rejected - amount (with mediation)</option>
     <option value="8.3" {% if data['defendant'] == 8.3 %}selected{% endif %}>8.3. States paid - rejected - not paid (no mediation)</option>
+    <option value="8.31" {% if data['defendant'] == 8.31 %}selected{% endif %}>8.31. States paid - rejected - not paid (no mediation) - paper DQs</option>
     <option value="8.4" {% if data['defendant'] == 8.4 %}selected{% endif %}>8.4. States paid - rejected - not paid (with mediation)</option>
-
     <option value="5" {% if data['defendant'] == 5 %}selected{% endif %}>5. I admit all the claim - set date payment</option>
     <option value="5.001" {% if data['defendant'] == 5.001 %}selected{% endif %}>5.001. I admit all the claim - set date payment (organisation)</option>
     <option value="5.011" {% if data['defendant'] == 5.011 %}selected{% endif %}>5.011. I admit all the claim - set date payment - settlement</option>
