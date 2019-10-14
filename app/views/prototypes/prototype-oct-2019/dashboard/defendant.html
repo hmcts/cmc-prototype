@@ -1748,15 +1748,31 @@
               {% endif %}
 
 
-              <!--  General applications    - this will need logic to know who and what state it has come from  -->
 
+
+              <!--  Applications  -->
+              <!--  If CCJ then link to vary and setaside  -->
               <br>
+              <hr>
               <h2 class="heading-small">Apply to change something about the claim</h2>
-              <p>You can pay a fee and <a href="../applications/select-type-of-application">ask the court</a> to change something in relation to this claim.</p>
-                <p>This includes applying to cancel a judgment or change how you pay a claimant.</p>
+              <br>
+              <!--  CCJ states  -->
+              {% if  data['defendant'] == 3.21  or  data['defendant'] == 3.22  or  data['defendant'] == 17.2  or  data['defendant'] == 17.3  or  data['defendant'] == 3.9031  or
+                     data['defendant'] == 4.01  or  data['defendant'] == 4.02  or  data['defendant'] == 4.1  or  data['defendant'] == 4.2  or  data['defendant'] == 5.0111  or
+                     data['defendant'] == 5.012  or  data['defendant'] == 5.013  or  data['defendant'] == 5.014  or  data['defendant'] == 3.9031  or  data['defendant'] == 5.3001  or
+                     data['defendant'] == 5.301  or  data['defendant'] == 5.302  or  data['defendant'] == 5.52   %}
+
+                  <p>You can pay a fee and <a href="../applications/select-type-of-application">ask the court</a> to change something in relation to this claim.</p>
+                  <p>This includes applying to cancel a judgment or change how you pay a claimant.</p>
+              {% else %}  <!--  Non CCJ states  -->
+                  <p>If you think there's something wrong with this claim you can pay a fee and <a href="../applications/defendant-general-application-only">ask the court to change it</a>.</p>
+              {% endif %}
               <p>The fee depends on what you're asking the court to change. It can be up to £255.</p>
 
 
+              
+
+              <!--  A temporary place to store documents at the bottom of the page -->
               {% if data['defendant'] == 3.21  or  data['defendant'] == 3.22 %}
                   <hr>
                   <ul class="list">
