@@ -93,6 +93,17 @@ const router = express();
     });
 
 
+    // DEFENDANT - Doing a general application from the claim status page
+    router.get('/defendant-general-application-only', function (req, res)
+    {
+      req.session.data = {};
+
+      req.session.data['general-application'] = 'true';
+      req.session.data['defendant-application'] = 'true';
+
+      res.redirect('/' + strPath +  'dashboard/applications-and-judgments/general-application/what' );
+    });
+
 
     // HEARING REQUIREMENTS  - SET ASIDE  application
     router.get('/set-aside-application-hearing-requirements', function (req, res)
