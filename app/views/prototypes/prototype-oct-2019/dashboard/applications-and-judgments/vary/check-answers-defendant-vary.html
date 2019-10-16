@@ -125,6 +125,7 @@ Check your answers
     </thead>
     <tbody>
 
+    <!-- no longer needed
     <tr>
       <td>
         Pay as set out in the judgment
@@ -137,6 +138,7 @@ Check your answers
       </td>
     </tr>
 
+
     <tr>
       <td>
         Change the payment terms
@@ -148,6 +150,7 @@ Check your answers
         </a>
       </td>
     </tr>
+    -->
 
     <tr>
       <td>
@@ -199,7 +202,7 @@ Check your answers
     {% else %}
         <tr>
           <td>
-            How often you'll make payments
+            When you'll pay
           </td>
 
           <td style="white-space: pre-wrap;">{{ now |  date("add", 45, "day") | date( "D MMMM YYYY" ) }}</td>
@@ -840,21 +843,14 @@ Check your answers
 
 <form method="post"  action="#" class="for4" style=" float: left; ">
   <select style="height:25px;" onchange="window.location.href='?'+this.value">
-    <option value="letterreeived=true&"
-            {% if data.letterreeived == 'true' %}selected{% endif %}
-    >Claim received - didn't respond</option>
 
-    <option value="letterreeived=false&addresscorrect=true&"
-            {% if data.letterreeived != 'true' and  data.addresscorrect == 'true' %}selected{% endif %}
-    >Claim not received - correct address - reason for received</option>
+    <option value="instalments=true&"
+            {% if data['instalments'] == 'true' %}selected{% endif %}
+    >Vary to be in installments</option>
 
-    <option value="letterreeived=false&addresscorrect=false&updatedclaimantofaddress=false&"
-            {% if data.letterreeived != 'true' and  data.addresscorrect == 'false' and data['updatedclaimantofaddress'] != 'true'  %}selected{% endif %}
-    >Claim not received - wrong address - didn't update claimant</option>
-
-    <option value="letterreeived=false&addresscorrect=false&updatedclaimantofaddress=true&"
-            {% if data.letterreeived != 'true' and  data.addresscorrect == 'false' and data['updatedclaimantofaddress'] == 'true' %}selected{% endif %}
-    >Claim not received - wrong address - Update claimant</option>
+    <option value="instalments=false&"
+            {% if data['instalments'] == 'false' %}selected{% endif %}
+    >Vary to be by a set date</option>
 
   </select>
 </form>
