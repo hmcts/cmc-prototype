@@ -9,46 +9,21 @@ Money Claims Prototype
     <div class="column-two-thirds">
 
       <h1 class="heading-large">
-        You have a County Court Judgment (CCJ)
+        Claim details
       </h1>
 
-      <p>Sam Clark requested a CCJ against you because you didn't respond to their money claim.</p>
-
-      <h3 class="heading-medium" style="margin-top:40px;">What this means</h3>
-      <p>The court believes you owe Sam Clark £1,500.</p>
-      <p>The judgment explains how the court has ordered you to pay.</p>
-      <p><a target="_blank"   href="/prototypes/prototype-may-2019/defendant/correspondence/forms/judgment-order?check=1">Download the CCJ</a></p>
-      <p>A CCJ may make it harder to get credit, such as a mobile phone contract, credit card or mortgage.</p>
-
-      <h3 class="heading-medium" style="margin-top:40px;">What are my options?</h3>
-            <h3 class="heading-small">Settle the claim</h3>
-            <p>If Sam Clark tells us you've paid or agreed to settle the claim another way, the judgment will be marked as satisfied. It will stay on the register for 6 years.</p>
-            <h3 class="heading-small" style="margin-top:40px;">If you don't believe you owe the money</h3>
-            <p>Because you didn't respond in time, you can only dispute the claim by applying to cancel the CCJ.</p>
-            <p>The court will only cancel the CCJ if it accepts you didn't hear about the claim when Sam Clark made it against you.<p>
-            <p>It costs £255 to ask the court to consider your request. You can't get the fee back, whether or not the court accepts your request.</p>
-            <h3 class="heading-small" style="margin-top:40px;">If the court cancels the judgment</h3>
-            <p>When you apply to cancel, we'll also ask you to submit a defence to the original claim.</p>
-            <p>If the court cancels the judgment, we'll ask Sam Clark to respond to your defence.</p>
-            <p>If not, your defence will be cancelled. You'll have to pay Sam Clark £1,500.</p>
-            <h3 class="heading-small" style="margin-top:40px;">If you owe the money but can't pay now</h3>
-            <p>You can ask to change when you pay Sam Clark. You'll still owe £1,500 but you can ask to pay by a different date or in instalments.</p>
-            <p>You'll have to pay the court a £50 fee to make the request.</p>
-            <p>Sam Clark can accept or refuse your request. If they refuse, the court will review the case.</p>
-
-      <h3 class="heading-medium" style="margin-top:40px;">What if I do nothing?</h3>
-            <p>Sam Clark can use enforcement options to recover the money. These include asking the court to:</p>
-            <ul class="list list-bullet">
-              <li>send bailiffs to collect the money</li>
-              <li>take money out of your wages or any sale of land or property</li>
-                </ul>
 
 
-            <details>
-              <summary><span class="summary">View claim details</summary>
-              <div class="panel panel-border-narrow">
-
-
+      {% if data['defaultccj'] == "true" %}
+      <div class="panel panel-border-narrow">
+      <p>A County Court Judgment was issued against you because you didn't respond to this claim.</p>
+      {% if data['afterccjdeadline'] == "false" %}
+      <p>If Sam Clark confirms you've settled the claim before 4pm on 1 November 2019, the CCJ will be removed from the public register.</p>
+      {% else %}
+      <p>You can ask the court to cancel the judgment. You'll have to pay a fee and you might have to go to a hearing.</p>
+      {% endif %}
+      </div>
+      {% endif %}
 
       <p class=""><span class="bold">Claim number:</span> 352MC733</p>
       {% if data['scenario2'] == 'true' %}
@@ -58,8 +33,9 @@ Money Claims Prototype
       {% endif %}
 
 
-
-
+      <details>
+        <summary><span class="summary">View amount breakdown</summary>
+        <div class="panel panel-border-narrow">
           <table class="table-form">
             <caption class="visuallyhidden">Amount payable by defendant</caption>
             <thead>
@@ -91,7 +67,26 @@ Money Claims Prototype
                     </span>
               </td>
             </tr>
+            <!--                <tr>
+                              <th scope="row">
+                                <details role="group">
+                                  <summary role="button" aria-controls="details-content-0" aria-expanded="false">
+                                    Interest to date
+                                  </summary>
+                                  <div class="panel text-small" id="details-content-0" aria-hidden="true">
+                                    Interest calculated at 8% for 23 days <br> <span class="font-xsmall">(20 November 2016 to 23 January 2017)</span>
+                                  </div>
+                                </details>
+                              </th>
+                              <td class="numeric last">
+                                <label class="visuallyhidden" for="amount">Interest</label>
+                                <span class="font-small">
 
+                                  £68
+
+                                </span>
+                              </td>
+                            </tr>-->
             <tr>
               <th scope="row">Claim fee</th>
               <td class="numeric last">
@@ -111,8 +106,8 @@ Money Claims Prototype
             </tr>
             </tbody>
           </table>
-
-
+        </div>
+      </details>
 
 
 
@@ -221,14 +216,26 @@ Money Claims Prototype
       </div>
 
 
-
+      <div class="clearfix">
+        {% if data['defaultccj'] == "true" %}
+            <a class="button" href="new-login-2019.html" role="button">Continue</a>
+        {% else %}
+            <a class="button" href="../sign-in?control-box=4" role="button">Sign in to see your options</a>
+        {% endif %}
+      </div>
 
 
 
       <br>
       <br>
 
-
+      <details>
+        <summary><span class="summary">How we use and store your personal information</span></summary>
+        <div class="panel panel-border-narrow">
+          <p>This claim contains personal information about you that Sam Clark has provided, for example your name and address.</p>
+          <p>Find out about how we use and store your <a href="/dashboard/v4/idam/privacy"  data-sso="false" data-journey-click="footer:Click:Privacy policy">personal information.</a></p>
+        </div>
+      </details>
 
 
       <h3 class="heading-small">Download the claim</h3>
@@ -236,26 +243,14 @@ Money Claims Prototype
         <li> <a target="_blank"   href='../../claimant/correspondence/claim-form-claimant?check=2'>Download claim</a> (PDF, 102 KB).</li>
       </ul>
 
-    </div>
-  </details>
 
+      {% if data['defaultccj'] == "true" %}
+        <h3 class="heading-small">Download the CCJ</h3>
+        <ul class="list">
+          <li> <a target="_blank"   href="/prototypes/prototype-may-2019/defendant/correspondence/forms/judgment-order?check=1">Download CCJ</a> (PDF, 48 KB).</li>
+        </ul>
+      {% endif %}
 
-  <div class="clearfix">
-    {% if data['defaultccj'] == "true" %}
-        <a class="button" href="new-login-2019.html" role="button">Continue</a>
-    {% else %}
-        <a class="button" href="sign-in?control-box=4" role="button">Respond to claim</a>
-    {% endif %}
-  </div>
-<br><br>
-
-  <details>
-    <summary><span class="summary">How we use and store your personal information</span></summary>
-    <div class="panel panel-border-narrow">
-      <p>This claim contains personal information about you that Sam Clark has provided, for example your name and address.</p>
-      <p>Find out about how we use and store your <a href="/dashboard/v4/idam/privacy"  data-sso="false" data-journey-click="footer:Click:Privacy policy">personal information.</a></p>
-    </div>
-  </details>
 
       {% include 'prototypes/prototype-may-2019/includes/contact.html' %}
 </main>
