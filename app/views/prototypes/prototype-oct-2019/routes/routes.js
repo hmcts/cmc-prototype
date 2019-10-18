@@ -371,13 +371,27 @@ module.exports = function(app)
   })
 
 
-  app.post( '/' + strPath + 'dashboard/claimant-response/admit-the-claim/task-list/counter-offer/repayment-plan', (req, res) => {
+  // FULL ADMIT - CLAIMANT RESPONDS TO PAYMENT PLAN - CLAIMANT MAKES PLAN
+  app.post( '/' + strPath + 'dashboard/claimant-response/admit-the-claim/task-list/counter-offer/repayment-plan', (req, res) =>
+  {
+    req.session.data['validaionhigherthanjudgment'] = 'false';
 
-    if (req.session.data['defendant'] == 'org' ) {
+    if(req.session.data['defendant'] == 'org' )
+    {
         res.redirect( '../../task-list' );
-    } else if (req.session.data['instalment-first-payment'] < 251 ) {
+    }
+    else if (req.session.data['instalment-first-payment'] < 251 )
+    {
       res.redirect('/' + strPath + 'dashboard/claimant-response/admit-the-claim/task-list/counter-offer/approved');
-    } else {
+    }
+    else if (req.session.data['instalment-first-payment'] == 300 )
+    {
+      req.session.data['validaionhigherthanjudgment'] = 'true';
+
+      res.render( strPath + 'dashboard/claimant-response/admit-the-claim/task-list/counter-offer/repayment-plan' );
+    }
+    else
+    {
       res.redirect('/' + strPath + 'dashboard/claimant-response/admit-the-claim/task-list/counter-offer/court-offer');
     }
 

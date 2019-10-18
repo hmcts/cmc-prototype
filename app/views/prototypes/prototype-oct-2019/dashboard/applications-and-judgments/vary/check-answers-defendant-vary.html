@@ -27,15 +27,15 @@ Check your answers
   <!--  YOUR DETAILS  -->
   <table class="check-your-answers">
     <thead>
-    <tr>
-      <th colspan="2">
-        <h2 class="heading-medium" id="name">
-          Your details
-        </h2>
-      </th>
-      <th>
-      </th>
-    </tr>
+      <tr>
+        <th colspan="2" class="no-border">
+          <h2 class="heading-medium" id="name">
+            Your details
+          </h2>
+        </th>
+        <th class="no-border">
+        </th>
+      </tr>
     </thead>
     <tbody>
 
@@ -47,29 +47,29 @@ Check your answers
         Alex Richards
       </td>
       <td class="change-answer">
-        <a href="../task-list/your-details/index?return_page={{ '../../task-list' | urlencode }}">
+        <a href="">
           Change <span class="visuallyhidden">Name</span>
         </a>
       </td>
     </tr>
 
     <tr>
-    <tr>
-      <td class="no-border">
+      <td >
         Address
       </td>
-      <td class="no-border">
+      <td>
         101 Regents Road<br>
         Shiplake<br>
         Henley on Thames<br>
         RG9 4BW
       </td>
-      <td class="no-border change-answer">
-        <a href="../task-list/your-details/address?return_page={{ '../../task-list' | urlencode }}">
+      <td class="change-answer">
+        <a href="">
           Change <span class="visuallyhidden"> Name</span>
         </a>
       </td>
     </tr>
+
 
     <tr>
       <td>
@@ -86,6 +86,9 @@ Check your answers
         {% endif %}
       </td>
       <td class="change-answer">
+        <a href="">
+          Change <span class="visuallyhidden"> Name</span>
+        </a>
       </td>
     </tr>
 
@@ -98,7 +101,7 @@ Check your answers
         {{ data['defendant-phone'] or '07824999612'}}
       </td>
       <td class="change-answer">
-        <a href="../task-list/your-details/number?return_page={{ '../../task-list' | urlencode }}">
+        <a href="">
           Change <span class="visuallyhidden">Name</span>
         </a>
       </td>
@@ -114,17 +117,18 @@ Check your answers
   <table class="check-your-answers">
     <thead>
     <tr>
-      <th colspan="2">
+      <th colspan="2" class="no-border">
         <h2 class="heading-medium" id="name">
           Change the payment terms
         </h2>
       </th>
-      <th>
+      <th class="no-border">
       </th>
     </tr>
     </thead>
     <tbody>
 
+    <!-- no longer needed
     <tr>
       <td>
         Pay as set out in the judgment
@@ -137,6 +141,7 @@ Check your answers
       </td>
     </tr>
 
+
     <tr>
       <td>
         Change the payment terms
@@ -148,10 +153,11 @@ Check your answers
         </a>
       </td>
     </tr>
+    -->
 
     <tr>
       <td>
-        How do you want to pay
+        How you want to pay
       </td>
       {% if data['instalments'] == 'true' %}
           <td style="white-space: pre-wrap;">Instalments</td>
@@ -199,7 +205,7 @@ Check your answers
     {% else %}
         <tr>
           <td>
-            How often you'll make payments
+            When you'll pay
           </td>
 
           <td style="white-space: pre-wrap;">{{ now |  date("add", 45, "day") | date( "D MMMM YYYY" ) }}</td>
@@ -213,6 +219,13 @@ Check your answers
     {% endif %}
 
 
+
+
+
+
+
+
+    <!---  FINANCIAL DETAILS -->
 
     <table class="check-your-answers">
       <thead>
@@ -840,21 +853,14 @@ Check your answers
 
 <form method="post"  action="#" class="for4" style=" float: left; ">
   <select style="height:25px;" onchange="window.location.href='?'+this.value">
-    <option value="letterreeived=true&"
-            {% if data.letterreeived == 'true' %}selected{% endif %}
-    >Claim received - didn't respond</option>
 
-    <option value="letterreeived=false&addresscorrect=true&"
-            {% if data.letterreeived != 'true' and  data.addresscorrect == 'true' %}selected{% endif %}
-    >Claim not received - correct address - reason for received</option>
+    <option value="instalments=true&"
+            {% if data['instalments'] == 'true' %}selected{% endif %}
+    >Vary to be in installments</option>
 
-    <option value="letterreeived=false&addresscorrect=false&updatedclaimantofaddress=false&"
-            {% if data.letterreeived != 'true' and  data.addresscorrect == 'false' and data['updatedclaimantofaddress'] != 'true'  %}selected{% endif %}
-    >Claim not received - wrong address - didn't update claimant</option>
-
-    <option value="letterreeived=false&addresscorrect=false&updatedclaimantofaddress=true&"
-            {% if data.letterreeived != 'true' and  data.addresscorrect == 'false' and data['updatedclaimantofaddress'] == 'true' %}selected{% endif %}
-    >Claim not received - wrong address - Update claimant</option>
+    <option value="instalments=false&"
+            {% if data['instalments'] == 'false' %}selected{% endif %}
+    >Vary to be by a set date</option>
 
   </select>
 </form>

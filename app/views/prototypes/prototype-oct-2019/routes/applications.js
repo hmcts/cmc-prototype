@@ -37,7 +37,7 @@ const router = express();
 
 
 
-    // DEFENDANT - Respond to default CCJ withig one month of it being issued
+    // DEFENDANT - Respond to default CCJ within one month of it being issued
     router.get('/respond-to-judgement-after-one-month-of-judgement-being-issued', function (req, res)
     {
       req.session.data = {};
@@ -77,6 +77,16 @@ const router = express();
       req.session.data = {};
 
       res.redirect('/' + strPath +  'dashboard/applications-and-judgments/general-application/type-of-application' );
+    });
+
+
+
+    //  CLAIMANT -  Claimant responding to the option of attending a defendants hearing
+    router.get('/claimant-respond-to-hearing', function (req, res)
+    {
+      req.session.data = {};
+
+      res.redirect('/' + strPath +  'dashboard/applications-and-judgments/set-aside-default-ccj/claimant-decide-attend-hearing' );
     });
 
 
