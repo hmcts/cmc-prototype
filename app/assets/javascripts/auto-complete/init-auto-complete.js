@@ -1,5 +1,5 @@
 $(document).ready(function() {
-  const selects = document.querySelectorAll('select');
+  const selects = document.querySelectorAll('.auto-comp-field select');
   $.each(selects, function(index, select) {
     accessibleAutocomplete.enhanceSelectElement({
       selectElement: select,
