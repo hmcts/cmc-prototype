@@ -11,18 +11,49 @@ Money Claims Prototype
 <main id="content" role="main">
   {% include "includes/phase_banner_beta.html" %}
   <div class="grid-row">
+
+
+      <!-- CONDITIONAL ERROR  -->
+      {% if data['validaionhigherthanjudgment'] == 'true' %}
+      <div class="error-summary" role="alert" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
+
+        <h2 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
+          You've got serious problems
+        </h2>
+
+        <p>
+          Check the following errors and try again.
+        </p>
+
+        <ul class="error-summary-list">
+
+          {% if data['validaionhigherthanjudgment'] == 'true' %}
+          <li><a href="#enteramountsection">Regular payments amount: must be lower than orginal judgement amount</a></li>
+          {% endif %}
+
+        </ul>
+
+      </div>
+      {% endif %}
+
+
+
+
     <div class="column-two-thirds">
       <!--  <a href="#" onclick="history.go(-1)" class="link-back">Back</a>  -->
+
+
       <h1 class="heading-large">
         Suggest instalments for the defendant
       </h1>
 
-    <p class="panel">The court will review your suggestion and may reject it if it's more than the defendant can afford.</p>
+      <p class="panel">The court will review your suggestion and may reject it if it's more than the defendant can afford.</p>
+      <p>Total claim amount is £1643.20.</p>
 
-    <p>Total claim amount is £1643.20.</p>
 
-    {% if data['defendant'] != 'org' %}
-      <details class="form-group">
+
+      {% if data['defendant'] != 'org' %}
+          <details class="form-group">
         <summary><span  class="summary">See their financial details</span></summary>
         <div class="panel">
           <table class="instalment-table">
@@ -347,96 +378,109 @@ Money Claims Prototype
           </table>
         </div>
       </details>
-
       {% endif %}
+
+
 
       <form action="repayment-plan" method="post" class="form">
 
-        <div class="form-group">
-          <fieldset>
-            <legend class="visually-hidden">Regular payments of</legend>
-            <label class="form-label-bold" for="instalment-first-payment">
-               Regular payments of
-            </label>
-                    <p class="form-hint">For example, £10</p>
 
-              <input class="fee pound" maxlength="8" size="8" type="text" value=""
-              name="instalment-first-payment"
-              id="instalment-first-payment">
-            </fieldset>
+          <div class="form-group {% if data['validaionhigherthanjudgment'] == 'true' %} form-group-error {% endif %}" id="enteramountsection">
+              <fieldset>
+                  <legend class="visually-hidden">Regular payments of</legend>
+                  <label class="form-label-bold" for="instalment-first-payment">
+                     Regular payments of
+                  </label>
 
-        </div>
+                  <p class="form-hint">For example, £10</p>
 
+                  {% if data['validaionhigherthanjudgment'] == 'true' %}
+                          <p class="error-message">
+                                Please enter an amount lower than the original judgement
+                          </p>
+                  {% endif %}
 
-
-
-        <div class="heading-small">How often do you want to receive payments?</div>
-        <p class="form-hint">The court will accept the defendant's payment frequency. We'll only consider your preferred frequency if a different plan is set by a judge later.</p>
-        <div class="form-group">
-          <fieldset>
-            <legend class="visually-hidden">How often do you want to receive payments?</legend>
-            <div class="multiple-choice">
-              <input id="radio-01" type="radio" name="radio-payment-frequency" value="Each week" {{ checked("radio-payment-frequency", "Each week") }}>
-              <label for="radio-01" data-target="info-01">Every week</label>
-            </div>
-            <div class="multiple-choice">
-              <input id="radio-02" type="radio" name="radio-payment-frequency" value="Every 2 weeks" {{ checked("radio-payment-frequency", "Every 2 weeks") }}>
-              <label for="radio-02" data-target="info-02">Every 2 weeks</label>
-            </div>
-            <div class="multiple-choice">
-              <input id="radio-03" type="radio" name="radio-payment-frequency" value="Every month" {{ checked("radio-payment-frequency", "Each month") }}>
-              <label for="radio-03" data-target="info-03">Every month</label>
-            </div>
-          </fieldset>
-        </div>
-
-
-        {% if data['vary'] != 'true' %}
-
-          <div class="form-group">
-            <p class="heading-small">Length of repayment plan</p>
-            <p id="duration">-</p>
+                  <input class="fee pound {% if data['validaionhigherthanjudgment'] == 'true' %} form-control-error {% endif %}"
+                         maxlength="8" size="8" type="text" name="instalment-first-payment" id="instalment-first-payment"  value="{{ data['instalment-first-payment'] }}">
+              </fieldset>
           </div>
 
 
+
+
+          <div class="heading-small">How often do you want to receive payments?</div>
+          <p class="form-hint">The court will accept the defendant's payment frequency. We'll only consider your preferred frequency if a different plan is set by a judge later.</p>
           <div class="form-group">
             <fieldset>
-              <legend class="visually-hidden">Date for first instalment</legend>
-              <p class="heading-small">Date for first instalment</p>
-              <div class="form-date">
-                <p class="form-hint">This must be no sooner than {{ date | date('add', 1, 'month' ) | date('D M YYYY') }}</p>
-                <div class="form-group form-group-day">
-                  <label for="instalment-day">Day</label>
-                  <input class="form-control" id="instalment-day" type="number" pattern="[0-9]*" min="0"
-                  max="31">
-                </div>
-                <div class="form-group form-group-month">
-                  <label for="instalment-month">Month</label>
-                  <input class="form-control" id="instalment-month" type="number" pattern="[0-9]*"
-                  min="0" max="12">
-                </div>
-                <div class="form-group form-group-year">
-                  <label for="instalment-year">Year</label>
-                  <input class="form-control" id="instalment-year" type="number" pattern="[0-9]*" min="0"
-                  max="2024">
-                </div>
+              <legend class="visually-hidden">How often do you want to receive payments?</legend>
+              <div class="multiple-choice">
+                <input id="radio-01" type="radio" name="radio-payment-frequency" value="Each week" {{ checked("radio-payment-frequency", "Each week") }}>
+                <label for="radio-01" data-target="info-01">Every week</label>
+              </div>
+              <div class="multiple-choice">
+                <input id="radio-02" type="radio" name="radio-payment-frequency" value="Every 2 weeks" {{ checked("radio-payment-frequency", "Every 2 weeks") }}>
+                <label for="radio-02" data-target="info-02">Every 2 weeks</label>
+              </div>
+              <div class="multiple-choice">
+                <input id="radio-03" type="radio" name="radio-payment-frequency" value="Every month" {{ checked("radio-payment-frequency", "Each month") }}>
+                <label for="radio-03" data-target="info-03">Every month</label>
               </div>
             </fieldset>
           </div>
 
+
+
+        {% if data['vary'] != 'true' %}
+
+            <div class="form-group">
+              <p class="heading-small">Length of repayment plan</p>
+              <p id="duration">-</p>
+            </div>
+
+
+            <div class="form-group">
+              <fieldset>
+                <legend class="visually-hidden">Date for first instalment</legend>
+                <p class="heading-small">Date for first instalment</p>
+                <div class="form-date">
+                  <p class="form-hint">This must be no sooner than {{ date | date('add', 1, 'month' ) | date('D M YYYY') }}</p>
+                  <div class="form-group form-group-day">
+                    <label for="instalment-day">Day</label>
+                    <input class="form-control" id="instalment-day" type="number" pattern="[0-9]*" min="0"
+                    max="31">
+                  </div>
+                  <div class="form-group form-group-month">
+                    <label for="instalment-month">Month</label>
+                    <input class="form-control" id="instalment-month" type="number" pattern="[0-9]*"
+                    min="0" max="12">
+                  </div>
+                  <div class="form-group form-group-year">
+                    <label for="instalment-year">Year</label>
+                    <input class="form-control" id="instalment-year" type="number" pattern="[0-9]*" min="0"
+                    max="2024">
+                  </div>
+                </div>
+              </fieldset>
+            </div>
+
         {% endif %}
 
 
-          <div class="form-group">
-            <input id="advert-option-next--button" type="submit" value="Save and continue" class="button">
-          </div>
-          </fieldset>
+        <div class="form-group">
+          <input id="advert-option-next--button" type="submit" value="Save and continue" class="button">
         </div>
+
+
       </form>
+
     </div>
   </div>
 {% include 'prototypes/prototype-oct-2019/includes/contact.html' %}
 </main>
+
+
+
+
 
 <script>
   $(document).ready(function () {
@@ -471,5 +515,22 @@ Money Claims Prototype
     })
   });
 </script>
+
+
+
+<form method="post"  action="#" class="for4" style=" float: left; ">
+  <select style="height:25px;" onchange="window.location.href='?'+this.value">
+
+    <option value="validaionhigherthanjudgment=true&instalment-first-payment=300&"
+            {% if data.validaionhigherthanjudgment == 'true' %}selected{% endif %}
+    >Amount validation</option>
+
+    <option value="validaionhigherthanjudgment=false&instalment-first-payment=&"
+            {% if data.validaionhigherthanjudgment != 'true' %}selected{% endif %}
+    >No validation</option>
+
+  </select>
+</form>
+
 
 {% endblock %}
