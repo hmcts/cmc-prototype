@@ -40,33 +40,43 @@ Money Claims Prototype
 					Claim reference: <br><strong class="bold-large">352MC733</strong>
 				</p>
 				<p>
-					<strong class="bold">{{ now | date }}</strong>
+					<strong class="">{{ now | date }}</strong>
 				</p>
 
 
-      {% if data['defaultccj'] != 'true' %}
-          <p>
-            {% if data['radio-pay-group'] == "Instalments" or data['confirmation']== 2 %}
-                <a  class="font-medium" href="correspondence/forms/claim-form-defendant?check=4" target="new" style="color: #FFFFFF" >
-            {% elseif data['radio-pay-group'] == "Set-date" or data['confirmation']== 3 %}
-                <a  class="font-medium" href="correspondence/forms/claim-form-defendant?check=3" target="new" style="color: #FFFFFF" >
-            {% elseif data['radio_select_group2'] == "defend_now" or data['confirmation']== 12 %}
-                <a  class="font-medium" href="correspondence/forms/claim-form-defendant?check=9" target="new" style="color: #FFFFFF" >
-            {% else %}
-                <a  class="font-medium" href="correspondence/forms/claim-form-defendant?check=2" target="new" style="color: #FFFFFF" >
-            {% endif %}
-
-                Download your response
-                {% if data['confirmation'] == 9 or data['counter'] == 'SET-OFF-COUNTER' or data['counter'] == 'FULL-COUNTER' %}
-                    and counterclaim
-                {% endif %}
-                {% if ( data['radio_select_group2'] == "defend_now" or data['confirmation']== 12 ) and data['dqs'] != 'off' %}
-                    and hearing requirements<br />
-                {% endif %}
-                 (PDF, 123KB)
+        {% if data['cancelccj'] == 'true' %}
+            <p>
+              <a  class="" href="correspondence/forms/set-aside-application" target="new" style="color: #FFFFFF" >
+                Download your application
               </a>
-			    </p>
-	        {% endif %}
+            </p>
+        {% endif %}
+
+
+
+        {% if data['defaultccj'] != 'true' %}
+            <p>
+              {% if data['radio-pay-group'] == "Instalments" or data['confirmation']== 2 %}
+                  <a  class="font-medium" href="correspondence/forms/claim-form-defendant?check=4" target="new" style="color: #FFFFFF" >
+              {% elseif data['radio-pay-group'] == "Set-date" or data['confirmation']== 3 %}
+                  <a  class="font-medium" href="correspondence/forms/claim-form-defendant?check=3" target="new" style="color: #FFFFFF" >
+              {% elseif data['radio_select_group2'] == "defend_now" or data['confirmation']== 12 %}
+                  <a  class="font-medium" href="correspondence/forms/claim-form-defendant?check=9" target="new" style="color: #FFFFFF" >
+              {% else %}
+                  <a  class="font-medium" href="correspondence/forms/claim-form-defendant?check=2" target="new" style="color: #FFFFFF" >
+              {% endif %}
+
+                  Download your response
+                  {% if data['confirmation'] == 9 or data['counter'] == 'SET-OFF-COUNTER' or data['counter'] == 'FULL-COUNTER' %}
+                      and counterclaim
+                  {% endif %}
+                  {% if ( data['radio_select_group2'] == "defend_now" or data['confirmation']== 12 ) and data['dqs'] != 'off' %}
+                      and hearing requirements<br />
+                  {% endif %}
+                   (PDF, 123KB)
+                </a>
+            </p>
+        {% endif %}
 		</div>
 
 
