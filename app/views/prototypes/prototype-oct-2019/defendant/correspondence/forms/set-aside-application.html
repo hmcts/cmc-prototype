@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<!--[if lt IE 9]><html class="lte-ie8" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--><html lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8" />
+  <style>
+    #content {
+      margin-top:3em;
+      position: relative;
+    }
+    @page {
+      size: 8.5in 11in;
+      margin: 10%;
+      @top-right {
+        content: "Page " counter(page) " of " counter(pages);
+        /*noinspection CssNoGenericFontName*/
+        font-family: "Open Sans";
+      }
+    }
+    html {
+      /*noinspection CssNoGenericFontName*/
+      font-family: "Open Sans";
+      max-width: 960px;
+      margin: 0 auto;
+      background:#d9d9d9
+    }
+    #content{
+      background:#fff;
+      padding:70px;
+      padding-bottom: 10px;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+    body {
+      counter-reset: section;
+      font-family: "nta", Arial, sans-serif;
+      font-weight: 400;
+      text-transform: none;
+      font-size: 19px;
+      line-height: 1.25;
+      -webkit-font-smoothing: antialiased;
+    }
+    .section {
+      margin-bottom: 25px;
+    }
+    .section .section-heading {
+      margin-bottom: 10px;
+    }
+    .section .section-heading strong:before {
+      counter-increment: section;
+      content: counter(section) ". ";
+    }
+    table {
+      width: 100%;
+      border-spacing: 0;
+    }
+    table td {
+      border-bottom: 1px solid #999;
+      padding: 5px;
+      text-align:left;
+      line-height: 1.25;
+      padding: 0.63158em 1.05263em 0.67368em 0;
+      font-size: 18px;
+      vertical-align:top;
+    }
+    p{
+      font-size: 18px;
+    }
+    table th {
+      text-align:left;
+      border-bottom: 1px solid #999;
+    }
+    table td:first-child {
+      width: 280px;
+      vertical-align: top;
+      font-weight:700;
+    }
+    td.single-cell{
+      font-weight:100!important;
+    }
+    .no-border{
+      border: none;
+    }
+    table td:last-child {
+      width: auto;
+    }
+    header table td, header table tr:last-child td {
+      border: none;
+    }
+    header td {
+      margin: 0;
+      padding: 0;
+    }
+    .heading-medium{
+      padding-bottom: 0;
+      margin-bottom: 0.4em;
+      margin-top: 1.5em;
+      font-size:22px;
+    }
+    .claim-number {
+      font-weight:700;
+      font-size:19px;
+    }
+    .crestLogo tr td:nth-child(1) {
+      width: 30%;
+    }
+    .crest{
+      width:80%
+    }
+    h1 {
+      font-weight:100;
+      font-size:24px;
+    }
+    .seal{
+      width: 12%;
+      float: right;
+    }
+    .page-title {
+      text-align:center;
+      padding-top:20px;
+      font-size:14px
+    }
+    .page-title span{
+      float:right
+    }
+    .crestLogo{
+      margin-top:40px
+    }
+    .page-break{
+      background: #d9d9d9;
+      margin-left: -70px;
+      margin-right: -70px;
+      margin-top: 20px;
+    }
+    .claim-details{
+      text-align:right
+    }
+    .footer td{
+      font-size:10px;
+      padding-top:40px;
+      border-bottom: none;
+    }
+    .footer td:nth-child(3){
+      text-align:right
+    }
+
+    ol {
+      counter-reset: item;
+      list-style-type: none;
+    }
+
+    li {
+      margin-bottom: 10px;
+    }
+
+    li:before {
+      content: "2." counters(item, ".") " ";
+      counter-increment: item;
+      position: absolute;
+      left: 70px;
+      color: #888;
+    }
+
+  </style>
+</head>
+<main id="content"  role="main">
+  <header>
+    <table class="crestLogo">
+      <tbody>
+      <tr>
+        <td></td>
+        <td rowspan="2" class="claim-details">
+          <h1>Defendant's response</h1>
+
+          <p>In the County Court Business Centre Online Civil Money Claims</p>
+          <p><strong>Claim number:</strong> 000LR095<br>
+            <strong>Received on:</strong> {{ now | date }} at 3:25PM</p></td>
+
+      </tr>
+      </tbody>
+    </table>
+  </header>
+
+
+
+
+
+
+  <!--  YOUR DETAILS  -->
+  <table class="check-your-answers">
+    <thead>
+    <tr>
+      <th colspan="2" class="no-border">
+        <h2 class="heading-medium" id="name">
+          Your details
+        </h2>
+      </th>
+      <th class="no-border">
+      </th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <tr>
+      <td>
+        Full name
+      </td>
+      <td>
+        Alex Richards
+      </td>
+    </tr>
+
+
+    <tr>
+      <td class="no-border">
+        Address
+      </td>
+      <td class="no-border">
+        101 Regents Road<br>
+        Shiplake<br>
+        Henley on Thames<br>
+        RG9 4BW
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        Correspondence address
+      </td>
+      <td>
+        {% if data['correspondence-address']=="Yes" %}
+        {{data['d-addressLine1']}}<br>
+        {{data['d-addressLine2']}}<br>
+        {{data['d-address-town']}}<br>
+        {{data['d-addressPostcode']}}<br>
+        {% else %}
+        Same as address<br>
+        {% endif %}
+      </td>
+    </tr>
+
+
+    <tr>
+      <td>
+        Contact number (optional)
+      </td>
+      <td>
+        {{ data['defendant-phone'] or '07824999612'}}
+      </td>
+    </tr>
+
+    </tbody>
+  </table>
+
+
+  <br>
+  <br>
+
+
+  <!--  SET ASIDE ANSWERS  -->
+  <table class="check-your-answers">
+    <thead>
+    <tr class="no-border">
+      <th colspan="2" class="no-border">
+        <h2 class="heading-medium" id="name">
+          Cancel the judgment
+        </h2>
+      </th>
+      <th class="no-border">
+      </th>
+    </tr>
+    </thead>
+    <tbody>
+
+
+    <tr>
+      <td>
+        Apply to cancel the judgment
+      </td>
+      <td>
+        Yes
+      </td>
+
+    </tr>
+
+
+
+
+    <tr>
+      <td>
+        Claim letter received
+      </td>
+      <td>
+        {% if data['letterreeived'] == 'true' %}
+            Yes
+        {% else %}
+            No
+        {% endif %}
+      </td>
+    </tr>
+
+
+    {% if data['letterreeived'] == 'true' %}
+    <tr>
+      <td>
+        Reason for late response
+      </td>
+      <td style="white-space: pre-wrap;">{{ data['reason-for-not-responding'] }}</td>
+    </tr>
+
+
+    {% else %}
+    <tr>
+      <td>
+        When you found out about the judgment
+      </td>
+      <td>
+        17 March 2019
+      </td>
+
+    </tr>
+
+
+    <tr>
+      <td>
+        Why you didn't respond until now
+      </td>
+      <td style="white-space: pre-wrap;">I have been in hospital for the past 3 months.</td>
+
+    </tr>
+
+
+    <tr>
+      <td>
+        Confirm address on <br>6 December 2018
+      </td>
+      <td>
+        {% if data['addresscorrect'] == 'true' %}
+        Yes
+        {% else %}
+        No
+        {% endif %}
+      </td>
+
+    </tr>
+
+
+
+
+    {% if data['addresscorrect'] == 'true' %}
+    <tr>
+      <td>
+        Reason for not receiving letter
+      </td>
+      <td style="white-space: pre-wrap;">My post sometimes gets delivered to another address because they have a similar name and the same postcode.</td>
+
+    </tr>
+    {% else %}
+    <tr>
+      <td>
+        Tell claimant new address
+      </td>
+      <td>
+        {% if data['updatedclaimantofaddress'] == 'true' %}
+        Yes
+        {% else %}
+        No
+        {% endif %}
+      </td>
+    </tr>
+
+    {% if data['updatedclaimantofaddress'] == 'true' %}
+        <tr>
+          <td>
+            How you told the claimant
+          </td>
+          <td style="white-space: pre-wrap;">I sent them an email in October.</td>
+        </tr>
+    {% endif %}
+
+    {% endif %}
+
+    {% endif %}
+
+    <tr>
+      <td>
+        Any other information
+      </td>
+      <td style="white-space: pre-wrap;">{{ data['any-other-information'] }}</td>
+    </tr>
+
+    </tbody>
+  </table>
+
+  <br>
+  <br>
+
+
+
+  <!--  EVIDENCE  -->
+  {% if  data['noevidence'] != 'true'  %}
+      <table class="check-your-answers">
+        <thead>
+        <tr>
+          <th colspan="2" class="no-border">
+            <h2 class="heading-medium" id="name">
+              Evidence
+            </h2>
+          </th>
+          <!-- <th>
+          </th>  -->
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr>
+          <td>
+            File 1
+          </td>
+          <td>
+            Emails.pdf
+            <br />You can see the emails from my new landlord.
+          </td>
+          <!-- <td class="change-answer no-border">
+            <a href="upload">Change</a>
+          </td>  -->
+        </tr>
+
+        <tr>
+          <td>
+            File 2
+          </td>
+          <td>
+            Photo 1.jpg
+            <br/>The photos show the flat contract including the move date.
+          </td>
+
+          <!-- <td class="change-answer no-border"></td>  -->
+        </tr>
+
+        </tbody>
+
+      </table>
+  {% else %}
+      <div style="padding-bottom:80px" > </div>
+  {% endif %}
+
+
+  <!--  PAGE BREAK -->
+  <table class="footer">
+    <tbody>
+    <tr>
+    <tr>
+      <td>
+        N244
+      </td>
+      <td>
+
+      </td>
+      <td >
+        &copy; Crown copyright Page 1 of 2
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <div>&nbsp;</div>
+  <div class="page-break">&nbsp;</div>
+
+
+
+  <br>
+  <br>
+  <!--  HEARING REQUIREMENTS  -->
+  <table class="check-your-answers">
+  <thead>
+    <tr>
+      <th colspan="2" class="no-border">
+        <h2 class="heading-medium" id="name">
+          Hearing requirements
+        </h2>
+      </th>
+      <th class="no-border">
+      </th>
+    </tr>
+  </thead>
+
+
+  <tbody>
+
+    <tr>
+      <td>
+        Support you'd require
+      </td>
+      <td>
+        No support required
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        Preferred location for a hearing
+      </td>
+      <td>
+        Guildford County Court
+      </td>
+    </tr>
+
+
+    <tr>
+      <td>
+        Dates you can’t go to a hearing
+      </td>
+      <td>
+        15 September 2019<br>
+        16 September 2019<br>
+        17 September 2019<br>
+        18 September 2019<br>
+        19 September 2019<br>
+      </td>
+    </tr>
+
+</tbody>
+</table>
+  <br>
+  <br>
+
+
+
+
+  <!--  DEFENCE STUFF -->
+  {% if  data['fulldefence'] == 'true'  or   data['loweramount'] == 'true'   %}
+      <table class="check-your-answers">
+    <thead>
+    <tr>
+      <th colspan="2" class="no-border">
+        <h2 class="heading-medium" id="name">
+          Response to the original claim
+        </h2>
+      </th>
+      <th  class="no-border">
+      </th>
+    </tr>
+    </thead>
+
+
+    <tbody>
+
+    {% if data['fulldefence'] == 'true' %}
+    <tr>
+      <td>
+        Reason for not owing money
+      </td>
+      <td>
+        I dispute all of the claim
+      </td>
+    </tr>
+
+    <tr>
+      <td >
+        Why you believe you don't owe the money
+      </td>
+      <td>I did an quality job. I'm not responsible for it breaking.
+      </td>
+    </tr>
+    {% elif data['loweramount'] == 'true' %}
+    <tr>
+      <td>
+        How much money do you admit you owe?
+      </td>
+      <td>
+        £300
+      </td>
+    </tr>
+
+    <tr>
+      <td >
+        Why do you disagree with the amount claimed?
+      </td>
+      <td>Same format as claim response
+      </td>
+    </tr>
+    {% endif %}
+
+
+    <!-- DEFENCE STUFF-->
+
+    <tr>
+      <td>
+        Why you disagree with the claim
+      </td>
+      <td>
+        Same format as claim response
+      </td>
+    </tr>
+
+
+
+    <tr>
+      <td class="no-border">
+        Your timeline of what happened (optional)
+      </td>
+      <td class="no-border">Same format as claim response
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        Comments about their timeline (optional)
+      </td>
+      <td>Same format as claim response
+      </td>
+    </tr>
+
+
+
+    <tr>
+      <td class="no-border">
+        Your evidence (optional)
+      </td>
+      <td class="no-border">Same format as claim response
+      </td>
+    </tr>
+
+
+
+    <tr>
+      <td>
+        Comments about their evidence (optional)
+      </td>
+      <td>Same format as claim response</td>
+    </tr>
+
+
+    </tbody>
+  </table>
+       <div style="padding-bottom:80px" > </div>
+  {% endif %}
+
+  <!--  ALREADY SETTLED  - SO NO DEFENCE NEEDED  -->
+  {% if  data['alreadysettled'] == 'true'    %}
+        <div style="padding-bottom:780px" > </div>
+
+  {% endif %}
+
+
+
+
+
+
+  <table class="footer">
+    <tbody>
+    <tr>
+    <tr>
+      <td>
+        N244
+      </td>
+      <td>
+
+      </td>
+      <td >
+        &copy; Crown copyright Page 2 of 2
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <div>&nbsp;</div>
+  <!-- <div class="page-break">&nbsp;</div>  -->
+
+</main>
+
+
+
+
+
+
+<br>
+<br>
+
+
+
+
+<form method="post"  action="#" class="for4" style=" float: left; ">
+  <select style="height:25px;" onchange="window.location.href='?'+this.value">
+
+      <option value="letterreeived=true&"
+              {% if data.letterreeived == 'true' %}selected{% endif %}
+      >Claim received - didn't respond</option>
+
+      <option value="letterreeived=false&addresscorrect=true&"
+              {% if data.letterreeived != 'true' and  data.addresscorrect == 'true' %}selected{% endif %}
+      >Claim not received - correct address - reason for received</option>
+
+      <option value="letterreeived=false&addresscorrect=false&updatedclaimantofaddress=false&"
+              {% if data.letterreeived != 'true' and  data.addresscorrect == 'false' and data['updatedclaimantofaddress'] != 'true'  %}selected{% endif %}
+      >Claim not received - wrong address - didn't update claimant</option>
+
+      <option value="letterreeived=false&addresscorrect=false&updatedclaimantofaddress=true&"
+              {% if data.letterreeived != 'true' and  data.addresscorrect == 'false' and data['updatedclaimantofaddress'] == 'true' %}selected{% endif %}
+      >Claim not received - wrong address - Update claimant</option>
+
+      <option value="noevidence=true&"
+      >Without evidence</option>
+
+      <option value="noevidence=false&"
+      >With evidence</option>
+
+      <option value="alreadysettled=false&fulldefence=true&loweramount=false&"
+      >Full defence</option>
+
+      <option value="alreadysettled=false&fulldefence=false&loweramount=true&"
+      >Part admit</option>
+
+      <option value="alreadysettled=true&fulldefence=false&loweramount=false&"
+      >Already Settled</option>
+
+  </select>
+</form>
+
+
+
+<br>
+<br>
+
+
+
+
+
+<script src="{{ asset_path }}/javascripts/jquery-1.11.3.js"></script>
+<script>
+  $(document).ready(function() {
+    var monthNames = [ "January", "February", "March", "April", "May", "June",
+      "July", "August", "September", "October", "November", "December" ];
+    var monthNamesCal = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+      "Jul", "Aug", "Sept", "Oct", "Nov", "Dec" ];
+    var newDate = new Date();
+    newDate.setDate(newDate.getDate()+ 14) ;
+    var newDate2 = new Date();
+    newDate2.setDate(newDate2.getDate()) ;
+    var newDate3 = new Date();
+    newDate3.setDate(newDate3.getDate()+ 28);
+    var newDate4 = new Date();
+    newDate4.setDate(newDate4.getDate())+ 100 ;
+    /*$('#Date').html(" " + newDate.getDate() + ' ' + monthNames[newDate.getMonth()] + ' ' + newDate.getFullYear());
+     */$('#Date, .dates').html(" " + newDate.getDate() + ' ' + monthNames[newDate.getMonth()] + ' ' + newDate.getFullYear());
+    $('#Date2, .dates2').html(" " + newDate2.getDate() + ' ' + monthNames[newDate2.getMonth()] + ' ' + newDate2.getFullYear());
+    $('#Date3, .dates3').html(" " + newDate3.getDate() + ' ' + monthNames[newDate3.getMonth()] + ' ' + newDate3.getFullYear());
+    $('#DateCal, .datesCal').html(" " + newDate4.getDate() + ' ' + monthNamesCal[newDate4.getMonth()] + ' ' + newDate4.getFullYear());
+  });
+</script>
