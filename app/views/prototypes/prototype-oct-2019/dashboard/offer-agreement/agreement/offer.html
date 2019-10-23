@@ -14,9 +14,9 @@ Money Claims Prototype
       <h1 class="heading-large">Terms of the settlement agreement</h1>
 
       {% if data['makeoffernow'] == 'true'  %}
-          <p class="panel panel-border-wide">We'll also ask {% if data['theclaimant'] == 'true' %}Alex Richards{% else %}Sam Clark{% endif %} to sign. If they do this will become a legal contract.</p>
+          <p class="panel panel-border-wide">We'll also ask {% if data['theclaimant'] == 'true' %}{{ partyName( 'defendant' ) }}{% else %}{{ partyName( 'claimant' ) }}{% endif %} to sign. If they do this will become a legal contract.</p>
       {% else %}
-          <p class="panel panel-border-wide">{% if data['theclaimant'] == 'true' %}Alex Richards{% else %}Sam Clark{% endif %} has signed this agreement. If you also sign it will become a legal contract.</p>
+          <p class="panel panel-border-wide">{% if data['theclaimant'] == 'true' %}{{ partyName( 'defendant' ) }}{% else %}{{ partyName( 'claimant' ) }}{% endif %} has signed this agreement. If you also sign it will become a legal contract.</p>
       {% endif %}
 
 
@@ -40,7 +40,7 @@ Money Claims Prototype
                 {% elif data['respondtoclaimantnocounter'] == 'false'  %}
                     <td>Come to fix my roof sometime next week.</td>
                 {% else %}
-                    <td>Sam Clark: I'll pay a maximum of £100 towards any new materials.</td>
+                    <td>{{ partyName( 'claimant' ) }}: I'll pay a maximum of £100 towards any new materials.</td>
                 {% endif %}
 
             {% else %}
@@ -52,7 +52,7 @@ Money Claims Prototype
                       <td>I will fix the issue with the roof on Tuesday 20th of August.  I'm booked up until then.
                           <br>I'll bring the spare materials I had left over from the job.</td>
                 {% else %}
-                      <td>Alex Richards: I will fix the roof if you'll give me access and pay for any extra materials.</td>
+                      <td>{{ partyName( 'defendant' ) }}: I will fix the roof if you'll give me access and pay for any extra materials.</td>
                 {% endif %}
 
             {% endif %}
@@ -80,13 +80,13 @@ Money Claims Prototype
       <div>
         <h3 class="heading-medium"></h3>
 
-        <p>This agreement settles the claim made by Sam Clark against Alex Richards. This includes all money owed in the claim, for example court fees, expenses or interest.</p>
+        <p>This agreement settles the claim made by {{ partyName( 'claimant' ) }} against {{ partyName( 'defendant' ) }}. This includes all money owed in the claim, for example court fees, expenses or interest.</p>
         <p>Neither party can make any further claims relating to this case, other than to enforce it.</p>
         <p>Either party can view and download this agreement from their Money Claims account. Both parties should keep a copy of this agreement.</p>
 
 
         <h3 class="heading-medium">If the agreement is broken</h3>
-        <p>Sam Clark can apply to:</p>
+        <p>{{ partyName( 'claimant' ) }} can apply to:</p>
         <ul class="list list-bullet">
           <li>request a judgment for any money still owed from this agreement</li>
           <li>resume the original claim or counterclaim for the full amount of the claim</li>
@@ -101,7 +101,7 @@ Money Claims Prototype
       </div>
       <h2 class="heading-medium">Sign the agreement</h2>
 
-      <p>Make sure this agreement includes everything you've agreed with {% if data['theclaimant'] == 'true' %}Alex Richards{% else %}Sam Clark{% endif %} before signing. You won't be able to change this later.</p>
+      <p>Make sure this agreement includes everything you've agreed with {% if data['theclaimant'] == 'true' %}{{ partyName( 'defendant' ) }}{% else %}{{ partyName( 'claimant' ) }}{% endif %} before signing. You won't be able to change this later.</p>
       <div class="form-group">
         <div class="multiple-choice text">
           <input class="" id="HasAcceptedTermsAndConditions" type="checkbox" value="true">

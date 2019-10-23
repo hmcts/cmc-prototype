@@ -97,8 +97,8 @@ Money Claims Prototype
 
             <p>You need to <a href="forms/dq-form">complete a directions questionnaire</a> form to tell us your requirements in case there's a hearing.</p>
             <p>The claim won't proceed if you don't complete and return the form before 4pm on {{ data | date( 'add', 14, 'days' ) | date }}.</p>
-            <p>You'll also need to send a copy of the form to Alex Richards.</p>
-            <p>We'll email you if Alex Richards responds to your offer.</p>
+            <p>You'll also need to send a copy of the form to {{ partyName( 'defendant' ) }}.</p>
+            <p>We'll email you if {{ partyName( 'defendant' ) }} responds to your offer.</p>
 
             <p><a class="button" href='../home?dashboard=1.192'>Go to your account</a></p>
 
@@ -141,7 +141,7 @@ Money Claims Prototype
             {% endif %}
 
             {% if ( data['radio-proceed'] == "judgment" or data['radio-proceed'] == "judgment-pa" or data['confirmation'] == 2 or data['confirmation'] == 2.1 ) %}
-                <p>We'll post a copy of the judgment to you and to Alex Richards.</p>
+                <p>We'll post a copy of the judgment to you and to {{ partyName( 'defendant' ) }}.</p>
             {% endif %}
 
             {% include "includes/survey.html" %}
@@ -149,13 +149,13 @@ Money Claims Prototype
             <p><a class="button" href='../../dashboard/home?dashboard=1.113'>Go to your account</a></p>
 
         {% elseif data['radio-indent-group'] == "accept_stop_claim" or data['confirmation'] == 1 %}
-            <p>We've emailed Alex Richards to tell them you agree to their repayment plan and ask them to sign the settlement agreement.</p>
+            <p>We've emailed {{ partyName( 'defendant' ) }} to tell them you agree to their repayment plan and ask them to sign the settlement agreement.</p>
             <p>They must respond before 4pm on {{ now | date('add', 7, 'days') | date }}. We'll email you when they respond.</p>
             <p>If they sign the agreement, this claim is put on hold.</p>
             <p>If they don't sign the agreement or reject it, you can request a CCJ against them which orders them to pay in line with the terms of the repayment plan.</p>
 
             <h2 class="heading-medium">If you don't get paid</h2>
-            <p>If Alex Richards signs the settlement agreement but breaks the terms, you can request a County Court Judgment (CCJ) by signing in to your account.</p>
+            <p>If {{ partyName( 'defendant' ) }} signs the settlement agreement but breaks the terms, you can request a County Court Judgment (CCJ) by signing in to your account.</p>
 
             <p>After you've requested a CCJ you can ask the court to enforce payment.</p>
             {% include "includes/survey.html" %}
@@ -164,14 +164,14 @@ Money Claims Prototype
 
 
         {% elseif ( data['claimant-payment-request'] == "Set-date" or data['claimant-payment-request'] == "Immediately" ) and data['radio-indent-group'] == "reject_stop_claim" and data['radio-indent-group2'] != "reject_stop_claim" or data['confirmation'] == 3  %}
-            <p>We've emailed {% if data.counterclaim=="true" %}Sam Clark{%else%}Alex Richards{% endif %} your proposed repayment plan and settlement agreement for them to sign.</p>
+            <p>We've emailed {% if data.counterclaim=="true" %}{{ partyName( 'claimant' ) }}{%else%}{{ partyName( 'defendant' ) }}{% endif %} your proposed repayment plan and settlement agreement for them to sign.</p>
             <p>They must respond before 4pm on {{ now | date('add', 7, 'days') | date }}. We'll email you when they respond.</p>
             <p>If they sign the agreement, this claim is put on hold.</p>
             <p>If they don't sign the agreement or reject it, you can request a CCJ against them which orders them to pay in line with the terms of the repayment plan.</p>
             <p>If they don't think they can afford the plan, they can ask for a judge to make a different plan.</p>
 
             <h2 class="heading-medium">If you don't get paid</h2>
-            <p>If Alex Richards signs the settlement agreement but breaks the terms, you can request a County Court Judgment (CCJ) by signing in to your account.</p>
+            <p>If {{ partyName( 'defendant' ) }} signs the settlement agreement but breaks the terms, you can request a County Court Judgment (CCJ) by signing in to your account.</p>
 
             <p>After you've requested a CCJ you can ask the court to enforce payment.</p>
             {% include "includes/survey.html" %}
@@ -181,14 +181,14 @@ Money Claims Prototype
 
 
         {% elseif ( data['radio-indent-group2'] == "accept_stop_claim" or data['radio-indent-group'] == "reject_stop_claim" ) and data['radio-indent-group2'] != "reject_stop_claim"  or data['confirmation'] == 4 %}
-            <p>We've emailed Alex Richards the repayment plan and the settlement agreement for them to sign.</p>
+            <p>We've emailed {{ partyName( 'defendant' ) }} the repayment plan and the settlement agreement for them to sign.</p>
             <p>They must respond before 4pm on {{ now | date('add', 7, 'days') | date }}. We'll email you when they respond.</p>
             <p>If they sign the agreement, this claim is put on hold.</p>
             <p>If they don't sign the agreement or reject it, you can request a CCJ against them which orders them to pay in line with the terms of the repayment plan.</p>
             <p>If they don't think they can afford the plan, they can ask for a judge to make a different plan.</p>
 
             <h2 class="heading-medium">If you don't get paid</h2>
-            <p>If Alex Richards signs the settlement agreement but breaks the terms, you can request a County Court Judgment (CCJ) by signing in to your account.</p>
+            <p>If {{ partyName( 'defendant' ) }} signs the settlement agreement but breaks the terms, you can request a County Court Judgment (CCJ) by signing in to your account.</p>
 
             <p>After you've requested a CCJ you can ask the court to enforce payment.</p>
             {% include "includes/survey.html" %}
@@ -197,10 +197,10 @@ Money Claims Prototype
 
 
         {% elseif data['radio-indent-group2'] == "reject_stop_claim" or data['confirmation'] == 5 %}
-            <p>You've requested a County Court Judgment against Alex Richards.</p>
-            <p>When we've processed your request we'll post a copy of the judgment to you and to Alex Richards.</p>
-            <p>A judge will decide what Alex Richards can afford to pay, based on their financial details.</p>
-            <p >We'll contact both you and {% if data.counterclaim=="true" %}Sam Clark{%else%}Alex Richards{% endif %} to tell you what to do next.</p>
+            <p>You've requested a County Court Judgment against {{ partyName( 'defendant' ) }}.</p>
+            <p>When we've processed your request we'll post a copy of the judgment to you and to {{ partyName( 'defendant' ) }}.</p>
+            <p>A judge will decide what {{ partyName( 'defendant' ) }} can afford to pay, based on their financial details.</p>
+            <p >We'll contact both you and {% if data.counterclaim=="true" %}{{ partyName( 'claimant' ) }}{%else%}{{ partyName( 'defendant' ) }}{% endif %} to tell you what to do next.</p>
 
             {% include "includes/survey.html" %}
 
@@ -225,7 +225,7 @@ Money Claims Prototype
 
 
         {% elseif data['radio-indent-group'] == "mediation-opt" or data['confirmation'] == 7 %}
-            <p>You offered to try to resolve the claim using mediation. We'll ask Alex Richards if they want to try mediation. We'll email you when they respond.</p>
+            <p>You offered to try to resolve the claim using mediation. We'll ask {{ partyName( 'defendant' ) }} if they want to try mediation. We'll email you when they respond.</p>
             <p>If they agree, a mediator will contact you within 14 days to try to arrange a call. </p>
             <p>If they reject or don't respond within 7 days the court will review the case. You might have to go to a hearing.</p>
             <p>We'll contact you to tell you what to do next. </p>
@@ -237,7 +237,7 @@ Money Claims Prototype
 
 
         {% elif data['radio-indent-group'] == "accept_stop_claim_claim_amount" or data['radio-indent-group'] == "accept_stop_claim_settled" or data['confirmation'] == 8  or data['confirmation'] == 8.1 %}
-            <p>The claim {% if data['radio_select_group'] == 'No' or data['confirmation'] == 8.1 %}has now ended{% else %}is now settled{% endif %}. We've emailed Alex Richards to tell them.</p>
+            <p>The claim {% if data['radio_select_group'] == 'No' or data['confirmation'] == 8.1 %}has now ended{% else %}is now settled{% endif %}. We've emailed {{ partyName( 'defendant' ) }} to tell them.</p>
             {% include "includes/survey.html" %}
 
             <p><a class="button" href='../../dashboard/home?dashboard=1.1192'>Go to your account</a></p>
@@ -246,7 +246,7 @@ Money Claims Prototype
 
             <p>You need to <a href="../forms/dq-form">complete a directions questionnaire</a> form to tell us your requirements in case there's a hearing.</p>
                 <p>The claim won't proceed if you don't complete and return the form to us before 4pm on {{ data | date( 'add', 14, 'days' ) | date }}.</p>
-                <p>You also need to send a copy of the form to Alex Richards.</p>
+                <p>You also need to send a copy of the form to {{ partyName( 'defendant' ) }}.</p>
 
             <p><a class="button" href='../home?dashboard=1.192'>Go to your account</a></p>
 

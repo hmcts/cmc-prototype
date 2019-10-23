@@ -16,7 +16,7 @@ Money Claims Prototype
 
         <!--  the defendant is sending another offer to the claimant  -->
         {% if data['respondtoclaimantnocounter'] == 'true' %}
-        <h1 class="bold-large">Your offer has been sent to Sam Clark</h1>
+        <h1 class="bold-large">Your offer has been sent to {{ partyName( 'claimant' ) }}</h1>
 
         {% elif data['radio-indent-group'] == "counter" or data['confirmation'] == 1 %}
 
@@ -57,17 +57,17 @@ Money Claims Prototype
       <fieldset>
         <h2 class="heading-medium">What happens next</h2>
         {% if data['respondtoclaimantnocounter'] == 'true' %}
-            <p>Sam Clark can accept, reject or make a counter offer. We'll email you when they respond.</p>
+            <p>{{ partyName( 'claimant' ) }} can accept, reject or make a counter offer. We'll email you when they respond.</p>
             <p><a class="button" href='../../defendant?defendant=12'>Go to your account</a></p>
 
         {% elif data['radio-indent-group'] == "counter" or data['confirmation'] == 1 %}
-            <p>Alex Richards can accept, reject or make a counter offer. We'll email you when they respond.
+            <p>{{ partyName( 'defendant' ) }} can accept, reject or make a counter offer. We'll email you when they respond.
             </p>
             <p> View your claim status on <a href='#'>your money claims account</a>. </p>
 
 
         {% elseif data['radio-indent-group'] == "Counter_defendant"  or data['confirmation'] == 6 %}
-        <p>The claimant Sam Clark can accept your counter offer, reject it or suggest an alternative. We'll email you when the defendant responds.
+        <p>The claimant {{ partyName( 'claimant' ) }} can accept your counter offer, reject it or suggest an alternative. We'll email you when the defendant responds.
         </p>
         <p> View your claim status on <a href='#'>your money claims account</a>. </p>
 
@@ -82,7 +82,7 @@ Money Claims Prototype
 
 
         {% elseif data['radio-indent-group'] == "decline_counter" or data['confirmation'] == 6 %}
-        <p>You've rejected Sam Clark's offer to settle.
+        <p>You've rejected {{ partyName( 'claimant' ) }}'s offer to settle.
         </p>
         <p> View your claim status on <a href='#'>your money claims account</a>. </p>
 
@@ -103,23 +103,23 @@ Money Claims Prototype
 
         {% elseif data['radio-indent-group2'] == "accept-claimant-mediation" or data['confirmation'] == 5%}
 
-        <p>A mediator will contact both you and Sam Clark within the next 14 days to try to arrange a call.</p>
+        <p>A mediator will contact both you and {{ partyName( 'claimant' ) }} within the next 14 days to try to arrange a call.</p>
         <p> View your claim status on <a href='#'>your money claims account</a>. </p>
 
         {% elseif data['response'] == "no_med_suggestion" or data['confirmation'] == 2 %}
-        <p>The defendant Alex Richards will be asked if they would like free mediation. We'll email you when the defendant responds.</p>
+        <p>The defendant {{ partyName( 'defendant' ) }} will be asked if they would like free mediation. We'll email you when the defendant responds.</p>
         <p> View your claim status on <a href='#'>your money claims account</a>. </p>
 
 
 
         {% elseif data['radio-indent-group2'] == "decline-claimant-mediation" or data['confirmation'] == 6 %}
 
-        <p>You've rejected Sam Clark's offer of mediation. We'll email you when they respond.</p>
+        <p>You've rejected {{ partyName( 'claimant' ) }}'s offer of mediation. We'll email you when they respond.</p>
         <p> View your claim status on <a href='#'>your money claims account</a>. </p>
 
 
         {% else %}
-        <p>The defendant Alex Richards can accept your counter offer, reject it or suggest an alternative. We'll email you when the defendant responds.
+        <p>The defendant {{ partyName( 'defendant' ) }} can accept your counter offer, reject it or suggest an alternative. We'll email you when the defendant responds.
         </p>
         <p> View your claim status on <a href='#'>your money claims account</a>. </p>
 

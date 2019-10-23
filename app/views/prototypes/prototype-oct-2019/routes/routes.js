@@ -21,7 +21,6 @@ module.exports = function(app)
   app.use( '/' + strPath + 'emails', emailsRouter);
 
 
-
   // Route index page
   app.get('/', function (req, res) {
     res.render('index')
@@ -85,6 +84,31 @@ module.exports = function(app)
     res.render('prototype-13/review-agreement', cookie)
   })
 
+
+
+  app.post( '/prototype-admin/set-names', (req, res) => {
+    
+    if ( typeof req.session.names === 'undefined' ) {
+      req.session.names = {};
+      req.session.names.claimant = {};
+      req.session.names.defendant = {};
+    }
+
+    if ( req.session.data['claimant-first-name'] ) {
+      req.session.names.claimant.first = req.session.data['claimant-first-name'];
+    }
+    if ( req.session.data['claimant-last-name'] ) {
+      req.session.names.claimant.last = req.session.data['claimant-last-name'];
+    }
+    if ( req.session.data['defendant-first-name'] ) {
+      req.session.names.defendant.first = req.session.data['defendant-first-name'];
+    }
+    if ( req.session.data['defendant-last-name'] ) {
+      req.session.names.defendant.last = req.session.data['defendant-last-name'];
+    }
+
+    res.render( 'prototype-admin/set-names' );  
+  });
 
 
 

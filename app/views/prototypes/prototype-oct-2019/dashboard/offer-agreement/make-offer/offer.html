@@ -26,7 +26,7 @@ Money Claims Prototype
                     <legend class="visually-hidden">Suggest a resolution</legend>
                     <p>Make clear:</p>
                             <ul class="list list-bullet"><li>what you'll do, for example make a payment, fix a problem or return goods</li>
-                          <li>anything you're also asking {% if data['party'] == "defendant" %}Sam Clark{% else %}Alex Richards{% endif %} to do as part of the settlement</li></ul>
+                          <li>anything you're also asking {% if data['party'] == "defendant" %}{{ partyName( 'claimant' ) }}{% else %}{{ partyName( 'defendant' ) }}{% endif %} to do as part of the settlement</li></ul>
 
 
                     <label class="bold-medium">Your offer</label>
@@ -74,12 +74,12 @@ Money Claims Prototype
                    <p class="panel panel-border-wide">
                     {% if data['defendant'] == "defendant" %}
                     <!-- Content for defendant -->  <!--
-                    Sam Clark can accept or reject your offer.
+                    {{ partyName( 'claimant' ) }} can accept or reject your offer.
                     {% elseif data['defendant'] == "claimant" %}
                     <!-- Content fo claimant --><!--
-                    Alex Richards can accept or reject your offer.
+                    {{ partyName( 'defendant' ) }} can accept or reject your offer.
                     {% else %}
-                    Sam Clark can accept or reject your offer.
+                    {{ partyName( 'claimant' ) }} can accept or reject your offer.
                     {% endif %}
                   </p>
                   -->

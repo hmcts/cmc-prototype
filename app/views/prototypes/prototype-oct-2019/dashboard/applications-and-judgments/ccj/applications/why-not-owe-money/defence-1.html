@@ -17,8 +17,8 @@ Money Claims Prototype
       <h1 class="heading-large">Why do you disagree with the claim? </h1>
       <div class="description-block">
         <h3 class="bold-small">Their reasons for making the claim</h4>
-          <p>{% if data.counterclaim=="true" %}Sam Clark{%else%}Alex Richards{% endif %} and I signed a contract for building works on our roof. The work on the roof was completed but
-            there was a problem with one section. I asked {% if data.counterclaim=="true" %}Sam Clark{%else%}Alex Richards{% endif %} to get the problem fixed, but hadn't had a
+          <p>{% if data.counterclaim=="true" %}{{ partyName( 'claimant' ) }}{%else%}{{ partyName( 'defendant' ) }}{% endif %} and I signed a contract for building works on our roof. The work on the roof was completed but
+            there was a problem with one section. I asked {% if data.counterclaim=="true" %}{{ partyName( 'claimant' ) }}{%else%}{{ partyName( 'defendant' ) }}{% endif %} to get the problem fixed, but hadn't had a
             reply.</p> <p class="show-more">I'll have to get another builder to rectify the problem which will cost me {% if data['mediation-pilot']=="on" %}
             £270
             {%else%}
@@ -70,7 +70,7 @@ Money Claims Prototype
 
               <div class="panel panel-border-wide">
                 <p>
-                  Your response will be sent to Sam Clark.
+                  Your response will be sent to {{ partyName( 'claimant' ) }}.
                 </p>
               </div>
 

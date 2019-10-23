@@ -168,7 +168,7 @@ h1 {
          Claimant
         </td>
         <td>
-          Sam Clark
+          {{ partyName( 'claimant' ) }}
         </td>
         </tr>
         <tr>
@@ -176,7 +176,7 @@ h1 {
           Defendant
         </td>
         <td>
-         Alex Richards
+         {{ partyName( 'defendant' ) }}
         </td>
       </tr>
     </tbody>
@@ -184,7 +184,7 @@ h1 {
 
   <br />
 
-  <p>{% if data['party'] == 'claimant' %}Sam Clark{% elseif data['party'] == 'both' %}Sam Clark and Alex Richards{% else %}Alex Richards{% endif %} missed the deadline to tell the court they'd finished doing what the court ordered them to do. The deadline was 4pm on {{ date | date('subtract', 1, 'days') | date }}.</p>
+  <p>{% if data['party'] == 'claimant' %}{{ partyName( 'claimant' ) }}{% elseif data['party'] == 'both' %}{{ partyName( 'claimant' ) }} and {{ partyName( 'defendant' ) }}{% else %}{{ partyName( 'defendant' ) }}{% endif %} missed the deadline to tell the court they'd finished doing what the court ordered them to do. The deadline was 4pm on {{ date | date('subtract', 1, 'days') | date }}.</p>
 
   {% if data['party'] == 'both' %}
 

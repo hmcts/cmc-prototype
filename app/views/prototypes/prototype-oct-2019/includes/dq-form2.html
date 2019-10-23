@@ -37,7 +37,7 @@ table.new-dq td:last-child div {
     <tbody>
       <tr>
         <td><div>Name</div></td>
-        <td><div>Alex Richards</div></td>
+        <td><div>{{ partyName( 'defendant' ) }}</div></td>
       </tr>
       <tr>
         <tr>
@@ -70,7 +70,7 @@ table.new-dq td:last-child div {
           Email:
         </div></td>
         <td><div>
-                    {% if data['check'] =='1' %}alex.richards@smithlimited.com{% else %}alex.richards@gmail.com{% endif %}
+                    {% if data['check'] =='1' %}{{ partyName( 'defendant', 'email' ) }}@smithlimited.com{% else %}{{ partyName( 'defendant', 'email' ) }}@gmail.com{% endif %}
 
 
         </div></td>
@@ -226,7 +226,7 @@ table.new-dq td:last-child div {
 
               Signed
             </div></td>
-          <td><div>{% if party == 'claimant' %}Sam Clark{% else %}Alex Richards{% endif %}<br />{{ now | date( 'subtract', 1, 'day' ) | date }}
+          <td><div>{% if party == 'claimant' %}{{ partyName( 'claimant' ) }}{% else %}{{ partyName( 'defendant' ) }}{% endif %}<br />{{ now | date( 'subtract', 1, 'day' ) | date }}
           </div></td>
         </tr>
     </tbody>

@@ -41,7 +41,7 @@ Check your answers
 					Full name
 				</td>
 				<td class="no-border">
-					Alex Richards
+					{{ partyName( 'defendant' ) }}
 				</td>
 				<td class="change-answer no-border" rowspan="2">
 					<a href="../task-list/your-details/index?return_page={{ '../../task-list' | urlencode }}">
@@ -394,7 +394,7 @@ Check your answers
 								</td>
 								<td>
 									{% if data['check'] =='9'  or data['check'] =='8'  or data['check']== 12 %}
-									<p>Alex Richards and I signed a contract for building works on our roof. The work on the roof was completed but there was a problem with one section. I asked Alex Richards to get the problem fixed, but hadn't had a reply.</p>
+									<p>{{ partyName( 'defendant' ) }} and I signed a contract for building works on our roof. The work on the roof was completed but there was a problem with one section. I asked {{ partyName( 'defendant' ) }} to get the problem fixed, but hadn't had a reply.</p>
 									<p>I'll have to get another builder to rectify the problem which will cost me £1,430.</p>
 									<p>Therefore, I'm making a money claim for £1,500 to compensate for the extra money I am going to need to spend.</p>
 
@@ -472,7 +472,7 @@ Check your answers
 									How did you pay this amount?
 								</td>
 								<td>
-									{{ data['owe-reason'] or 'I paid this by cheque to Alex Richards in person' }}
+									{{ data['owe-reason'] or 'I paid this by cheque to them in person' }}
 								</td>
 								<td class="change-answer ">
 								</td>
@@ -513,7 +513,7 @@ Check your answers
 									How did you pay this amount?
 								</td>
 								<td>
-									{{ data['owe-reason'] or 'I paid this by cheque to Alex Richards in person' }}
+									{{ data['owe-reason'] or 'I paid this by cheque to them in person' }}
 								</td>
 								<td class="change-answer ">
 
@@ -568,7 +568,7 @@ Check your answers
 										How did you pay the amount claimed?
 									</td>
 									<td>
-											{{ data['owe-reason'] or 'I paid this by cheque to Alex Richards in person' }}
+											{{ data['owe-reason'] or 'I paid this by cheque to them in person' }}
 
 									</td>
 									<td class="change-answer ">
@@ -1414,9 +1414,9 @@ Check your answers
 												The agreement
 											</td>
 											<td >
-												Alex Richards
+												{{ partyName( 'defendant' ) }}
 												{% if data['radio-pay-group']=="Immediately" %}
-												will pay £1,500 immediately. Sam Clark will receive the money no later than {{ now | date( 'add', 5, 'days') | date }}. Any cheques or transfers will be clear in Sam Clark's account by this date.
+												will pay £1,500 immediately. {{ partyName( 'claimant' ) }} will receive the money no later than {{ now | date( 'add', 5, 'days') | date }}. Any cheques or transfers will be clear in {{ partyName( 'claimant' ) }}'s account by this date.
 												{% elseif data['radio-pay-group']=="Instalments"  %}
 												will repay £1,500, in instalments of
 												{% if data['instalment-first-payment'] %}

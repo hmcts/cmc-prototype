@@ -17,7 +17,7 @@
 
     <div class="details" style="margin-top: -30px">
         <span style=""><h2 style="">
-          <h2 class="heading-medium">Sam Clark v Alex Richards</h2>
+          <h2 class="heading-medium">{{ partyName( 'claimant' ) }} v {{ partyName( 'defendant' ) }}</h2>
           <h2 class="font-xsmall" style="margin-top: -10px">Claim number: <span style="">352MC733</span></h2>
     </div>
 
@@ -74,7 +74,7 @@
             <div class="tabs-panel-inner text" tabindex="-1">
 
               <div class="status-block">
-                <h2 class="heading-medium">Alex Richards rejected your claim</h2>
+                <h2 class="heading-medium">{{ partyName( 'defendant' ) }} rejected your claim</h2>
                 <p>You can accept or reject their response.</p>
                 <p>You need to respond before 4pm on {{ now | date('add', 5, 'days') | date }}.</p>
                 <p>If you don't respond by then, you might have to go to a hearing.</p>
@@ -88,7 +88,7 @@
               </div>
               <div class="status-block">
                 <h2 class="heading-medium">Offer to settle out of court</h2>
-                <p>Alex Richards has also made an offer to settle. <a href="#settle-out-of-court">Respond to the offer</a>.</p>
+                <p>{{ partyName( 'defendant' ) }} has also made an offer to settle. <a href="#settle-out-of-court">Respond to the offer</a>.</p>
               </div>
               <div class="status-block single">
                 <h2 class="heading-medium">Tell us you've ended the claim</h2>
@@ -106,16 +106,16 @@
 
               {% if data['claimant'] == 1 %}
               <h2 class="heading-medium">We've received your claim</h2>
-              <p>Alex Richards has until 4pm on 24 December 2018 to respond. They can request an extra 14 days if they need it.</p>
+              <p>{{ partyName( 'defendant' ) }} has until 4pm on 24 December 2018 to respond. They can request an extra 14 days if they need it.</p>
               <p>You can request a County Court Judgment against them if they don't respond by the deadline.</p>
 
 
               {% elseif data['claimant'] == 2 %}
               <div class="status-block single">
                 <h2 class="heading-medium">You can request a County Court Judgment</h2>
-                <p>Alex Richards didn't respond to your claim by the deadline. You can request a County Court Judgment (CCJ) against them.</p>
+                <p>{{ partyName( 'defendant' ) }} didn't respond to your claim by the deadline. You can request a County Court Judgment (CCJ) against them.</p>
                 <p>The court will order them to pay the money. It doesn't guarantee that they'll pay it.</p>
-                <p>Alex Richards can still respond to the claim until you request a CCJ.</p>
+                <p>{{ partyName( 'defendant' ) }} can still respond to the claim until you request a CCJ.</p>
                 <p><a href="applications-and-judgments/default-judgment" class="button">Request a CCJ</a></p>
               </div>
 
@@ -124,7 +124,7 @@
               <div class="status-block single">
                 <h2 class="heading-medium">We've received your request for judgment</h2>
                 <p>We'll contact you within 10 working days to tell you whether the judgment has been entered.</p>
-                <p>Alex Richards can no longer respond to your claim using this service - they may have responded by post.</p>
+                <p>{{ partyName( 'defendant' ) }} can no longer respond to your claim using this service - they may have responded by post.</p>
                 <p>It's possible we received a postal response before the deadline but hadn't processed it when you requested judgment.</p>
                 <p>If we discover this has happened, we'll reject your request.</p>
               </div>
@@ -136,7 +136,7 @@
               <p><a href="cancel-judgment" class="button secondary-button">Cancel your request for judgment</a></p>
 
               {% elseif data['claimant'] == 3.1 %}
-              <h2 class="heading-medium">Alex Richards asked for 14 more days to respond</h2>
+              <h2 class="heading-medium">{{ partyName( 'defendant' ) }} asked for 14 more days to respond</h2>
               <p>They now need to respond before 4pm on <span class="dates"></span>.</p>
               <p>You can request a County Court Judgment (CCJ) against them if they don't respond by the deadline.</p>
 
@@ -144,7 +144,7 @@
               {% elseif data['claimant'] == 3.11 %}
               <h2 class="heading-medium">Wait for the defendant to respond</h2>
 
-              <p>Alex Richards requested an extra 14 days to respond, by post. <p>They now need to respond before 4pm on <span class="dates"></span>.</p>
+              <p>{{ partyName( 'defendant' ) }} requested an extra 14 days to respond, by post. <p>They now need to respond before 4pm on <span class="dates"></span>.</p>
               <p>We've cancelled your request for a CCJ.</p>
               <p>You can request a CCJ against them if they don't respond by the deadline.</p>
 
@@ -153,7 +153,7 @@
               <div class="status-block single">
                 <h2 class="heading-medium">We've received your request for judgment</h2>
                 <p>We'll contact you within 10 working days to tell you whether the judgment has been entered.</p>
-                <p>Alex Richards can no longer respond to your claim using this service - they may have responded by post.</p>
+                <p>{{ partyName( 'defendant' ) }} can no longer respond to your claim using this service - they may have responded by post.</p>
                 <p>It's possible we received a postal response before the deadline but hadn't processed it when you requested judgment.</p>
                 <p>If we discover this has happened, we'll reject your request.</p>
               </div>
@@ -161,7 +161,7 @@
 
               {% elseif data['claimant'] == 3.4 %}
               <div class="status-block">
-                <h2 class="heading-medium">A County Court Judgment has been issued against Alex Richards</h2>
+                <h2 class="heading-medium">A County Court Judgment has been issued against {{ partyName( 'defendant' ) }}</h2>
                 <p>We'll send you both a copy of the judgment.</p>
                 <p>You need to tell us when you've been paid in full.</p>
                 <p><a href="paid-in-full/claimant" class="button secondary-button">Tell us you've been paid</a></p><br>
@@ -182,7 +182,7 @@
 
               {% elseif data['claimant'] == 3.6 %}
               <div>
-                <h2 class="heading-medium">Alex Richards responded to your claim by post</h2>
+                <h2 class="heading-medium">{{ partyName( 'defendant' ) }} responded to your claim by post</h2>
                 <p>We'll post you their response. </p>
                 <p>This means you can no longer use this service to continue your claim - you'll need to use paper forms instead.</p>
                 <p>We've cancelled your request for a County Court Judgment (CCJ) against them.</p>
@@ -191,7 +191,7 @@
 
 
               {% elseif data['claimant'] == 4 %}
-              <h2 class="heading-medium">Alex Richards offered to pay in instalments.</h2>
+              <h2 class="heading-medium">{{ partyName( 'defendant' ) }} offered to pay in instalments.</h2>
               <p>You can view their offer and accept or reject it.</p>
               <p><a href="claimant-response/admit-the-claim/task-list?radio-pay-group=Instalments" class="button">View and respond</a></p>
 
@@ -229,7 +229,7 @@
 
               {% elseif data['claimant'] == 4.3 %}
               <div class="status-block">
-                <h2 class="heading-medium">Alex Richards said they'll pay you immediately</h2>
+                <h2 class="heading-medium">{{ partyName( 'defendant' ) }} said they'll pay you immediately</h2>
                   <p>They must make sure you have the money by {{ now | date('add', 5, 'days') | date }}. Any cheques or transfers should be clear in your account by then.</p>
                   <p>If you've been paid or you've made another agreement with the defendant, you need to tell us.</p>
                   <p><a href="paid-in-full/claimant" class="button secondary-button">Tell us you've settled</a></p><br>
@@ -242,7 +242,7 @@
 
               {% elseif data['claimant'] == 5 %}
               <div>
-                <h2 class="heading-medium">Alex Richards said they don't owe the full amount you claimed</h2>
+                <h2 class="heading-medium">{{ partyName( 'defendant' ) }} said they don't owe the full amount you claimed</h2>
                 <p>They admitted they owe £{{ data['owe-amount'] or '800' }}.</p>
                 <p>They've offered to pay the £{{ data['owe-amount'] or '800' }} immediately.</p>
                 <p>You can accept or reject their offer.</p>
@@ -250,14 +250,14 @@
               </div>
 
               {% elseif data['claimant'] == 5.1 %}
-              <h2 class="heading-medium">Alex Richards said they don't owe the full amount you claimed</h2>
+              <h2 class="heading-medium">{{ partyName( 'defendant' ) }} said they don't owe the full amount you claimed</h2>
               <p>They admitted they owe £{{ data['owe-amount'] or '1,200' }}.</p>
               <p>They've offered to pay in instalments.</p>
               <p>You can accept or reject their offer.</p>
               <p><a href="claimant-response/part-admit/task-list?payment=full&radio-pay-group=Instalments" class="button">View and respond</a></p>
 
               {% elseif data['claimant'] == 5.11 %}
-              <h2 class="heading-medium">Alex Richards said they don't owe the full amount you claimed</h2>
+              <h2 class="heading-medium">{{ partyName( 'defendant' ) }} said they don't owe the full amount you claimed</h2>
               <p>They admitted they owe £{{ data['owe-amount'] or '1,200' }}.</p>
               <p>They've offered to pay in instalments. </p>
               <p>They'll send you their financial details. You can use these to decide whether to accept or reject their offer.</p>
@@ -265,7 +265,7 @@
 
 
               {% elseif data['claimant'] == 5.2 %}
-              <h2 class="heading-medium">Alex Richards said they don't owe the full amount you claimed</h2>
+              <h2 class="heading-medium">{{ partyName( 'defendant' ) }} said they don't owe the full amount you claimed</h2>
               <p>They admitted they owe £{{ data['owe-amount'] or '1,200' }}.</p>
               <p>They've offered to pay by {{ now | date( 'add', 3, 'months') | date }}.</p>
               <p>You can accept or reject their offer.</p>
@@ -273,7 +273,7 @@
 
 
               {% elseif data['claimant'] == 5.21 %}
-              <h2 class="heading-medium">Alex Richards said they don't owe the full amount you claimed</h2>
+              <h2 class="heading-medium">{{ partyName( 'defendant' ) }} said they don't owe the full amount you claimed</h2>
               <p>They admitted they owe £{{ data['owe-amount'] or '1,200' }}.</p>
               <p>They've offered to pay by {{ now | date( 'add', 3, 'months') | date }}. </p>
               <p>They'll send you their financial details. You can use these to decide whether to accept or reject their offer.</p>
@@ -282,20 +282,20 @@
 
               {% elseif data['claimant'] == 6 %}
               <div class="status-block single">
-                <h2 class="heading-medium">Alex Richards said they paid you {% if data['mediation-pilot'] == "on" %}£300{% else %}£1,500{% endif %}</h2>
+                <h2 class="heading-medium">{{ partyName( 'defendant' ) }} said they paid you {% if data['mediation-pilot'] == "on" %}£300{% else %}£1,500{% endif %}</h2>
                   <p>They said they did this on {{ now | date('add' , 3 , 'days') | date( 'subtract', 1, 'months') | date }}.
                 <p>You can accept or reject this response.</p>
                 <p><a href="claimant-response/paid-what-owe-claim-amount/task-list" class="button">View and respond</a></p>
               </div>
 
               {% elseif data['claimant'] == 7 %}
-              <h2 class="heading-medium">Alex Richards said they paid you {% if data['mediation-pilot'] == "on" %}£230{% else %}£1,430{% endif %}</h2>
+              <h2 class="heading-medium">{{ partyName( 'defendant' ) }} said they paid you {% if data['mediation-pilot'] == "on" %}£230{% else %}£1,430{% endif %}</h2>
               <p>They said they did this on {{ now | date('add' , 3 , 'days') | date( 'subtract', 1, 'months') | date }}.</p>
               <p>You can accept or reject this response.</p>
               <p><a href="claimant-response/paid-what-owe-less-claim-amount/task-list" class="button">View and respond</a></p>
 
               {% elseif data['claimant'] == 8 %}
-                <h2 class="heading-medium">Alex Richards rejected your claim</h2>
+                <h2 class="heading-medium">{{ partyName( 'defendant' ) }} rejected your claim</h2>
                 <p>You can accept or reject their response.</p>
 
                   <p>You need to respond before 4pm on {{ now | date('add', 5, 'days') | date }}.</p>
@@ -311,14 +311,14 @@
 
 
               {% elseif data['claimant'] == 9 %}
-              <h2 class="heading-medium">Alex Richards rejected your claim</h2>
+              <h2 class="heading-medium">{{ partyName( 'defendant' ) }} rejected your claim</h2>
               <p>You need to decide whether to proceed with the claim.</p>
               <p>You need to respond before 4pm on {{ now | date('add', 5, 'days') | date }}. Your claim won't continue if you don't respond by then.</p>
               <a href="claimant-response/dispute-claim/task-list?dqs=off&mediation=off" class="button">View and respond</a>
 
               {% elseif data['claimant'] == 9.1 %}
               <div class="status-block single">
-                <h2 class="heading-medium">Alex Richards rejected your claim</h2>
+                <h2 class="heading-medium">{{ partyName( 'defendant' ) }} rejected your claim</h2>
                 <p>You need to decide whether to proceed with the claim.</p>
                   <p>You need to respond before 4pm on {{ now | date('add', 5, 'days') | date }}. Your claim won't continue if you don't respond by then.</p>
                 <!-- <p>The claim has been automatically registered for free telephone mediation. We'll contact you to try to arrange a mediation appointment unless you choose to opt out.</p> -->
@@ -343,7 +343,7 @@
 
 
               {% elseif data['claimant'] == 10.001 %}
-              <h2 class="heading-medium">We've emailed Alex Richards the repayment plan and the settlement agreement</h2>
+              <h2 class="heading-medium">We've emailed {{ partyName( 'defendant' ) }} the repayment plan and the settlement agreement</h2>
               <p>They must respond before 4pm on {{ now | date('add', 7, 'days') | date }}. We'll email you when they respond.</p>
               <p>If they don't respond, you can
                 <a href="applications-and-judgments/default-judgment/claim-amount-deduct?radio-indent-group=No&radio-proceed=not-signed">request a County Court Judgment</a>.</p>
@@ -352,7 +352,7 @@
               {% elseif data['claimant'] == 10.01 %}
               <div class="status-block">
                 <h2 class="heading-medium">You both signed a settlement agreement</h2>
-                 <p>The agreement says Alex Richards will pay you in instalments of £250 per month, starting
+                 <p>The agreement says {{ partyName( 'defendant' ) }} will pay you in instalments of £250 per month, starting
                 {{ now | date("add", 1, "month") | date( "MMMM YYYY" ) }}.</p>
                  <p>When you've been paid in full, you need to let us know.</p>
                  <p><a href="paid-in-full/claimant" class="button secondary-button">Tell us you've been paid</a></p><br>
@@ -365,17 +365,17 @@
 
 
               {% elseif data['claimant'] == 10.02 %}
-              <h2 class="heading-medium">Alex Richards rejected your settlement agreement</h2>
+              <h2 class="heading-medium">{{ partyName( 'defendant' ) }} rejected your settlement agreement</h2>
               <p>You can request a County Court Judgment (CCJ) against them based on the repayment plan they offered.</p>
               <p>The court will order them to pay the money. It doesn't guarantee that they'll pay you.</p>
               <p><a href="applications-and-judgments/default-judgment/claim-amount-deduct?radio-indent-group=No&radio-proceed=not-signed" class="button">Request a CCJ</a></p>
 
 
               {% elseif data['claimant'] == 10.03 %}
-              <h2 class="heading-medium">Alex Richards hasn't signed your settlement agreement</h2>
+              <h2 class="heading-medium">{{ partyName( 'defendant' ) }} hasn't signed your settlement agreement</h2>
               <p>You can request a County Court Judgment (CCJ) against them based on the repayment plan shown in the agreement.</p>
               <p>The court will order them to pay the money. It doesn't guarantee that they'll pay you.</p>
-              <p>Alex Richards can still sign the settlement agreement until you request a CCJ.</p>
+              <p>{{ partyName( 'defendant' ) }} can still sign the settlement agreement until you request a CCJ.</p>
               <p><a
                 href="applications-and-judgments/default-judgment/claim-amount-deduct?radio-indent-group=No&radio-proceed=not-signed"
                 class="button" style="margin-bottom: 20px">Request a CCJ</a>
@@ -383,14 +383,14 @@
 
               {% elseif data['claimant'] == 10.1 %}
               <h2 class="heading-medium">You've signed a settlement agreement</h2>
-              <p>We've emailed Alex Richards the repayment plan and the settlement agreement for them to sign.</p>
+              <p>We've emailed {{ partyName( 'defendant' ) }} the repayment plan and the settlement agreement for them to sign.</p>
               <p>They must respond before 4pm on 22 August 2018. We'll email you when they respond.</p>
               <p>If they do not think they can afford the plan, they can ask for a judge to make a different plan.</p>
 
 
               {% elseif data['claimant'] == 10.11 %}
               <div class="status-block">
-                <h2 class="heading-medium">A County Court Judgment has been issued against Alex Richards</h2>
+                <h2 class="heading-medium">A County Court Judgment has been issued against {{ partyName( 'defendant' ) }}</h2>
                  <p>We'll send you both a copy of the judgment.</p>
                  <p>You need to tell us when you've been paid in full.</p>
                   <p><a href="paid-in-full/claimant" class="button secondary-button">Tell us you've been paid</a></p><br>
@@ -411,7 +411,7 @@
               <!--{% elseif data['claimant'] == 10.12 %}-->
               <!--<div class="status-block">-->
                 <!--<h2 class="heading-small">Ask the court to recover the debt</h2>-->
-                <!--<p>If Alex Richards doesn't pay by the deadline, you can <a href="applications-and-judgments/warrant-of-control/mvp/enforcement-selection">ask the court to recover the debt</a> for you.</p>-->
+                <!--<p>If {{ partyName( 'defendant' ) }} doesn't pay by the deadline, you can <a href="applications-and-judgments/warrant-of-control/mvp/enforcement-selection">ask the court to recover the debt</a> for you.</p>-->
                 <!--<p>You'll need to pay a fee each time you ask the court to recover the debt. The court adds this fee to the total debt owed to you.</p>-->
                 <!--<p>There's no guarantee that the court will get your money back.</p>-->
               <!--</div>-->
@@ -423,7 +423,7 @@
 
               {% elseif data['claimant'] == 10.121 %}
                 <h2 class="heading-medium">Ask the court to recover the debt</h2>
-                <p>If Alex Richards hasn't paid, you can ask the court to recover the debt for you.</p>
+                <p>If {{ partyName( 'defendant' ) }} hasn't paid, you can ask the court to recover the debt for you.</p>
                 <p>You'll need to pay a fee each time you ask the court to recover the debt. The court adds this fee to the total debt owed to you.</p>
                 <p>There is no guarantee that the court will get your money back.</p>
                 <p><a class="button" href="applications-and-judgments/warrant-of-control/mvp/enforcement-selection">Apply for the court to recover debt</a></p>
@@ -473,13 +473,13 @@
 
 
               {% elseif data['claimant'] == 10.6 %}
-              <h2 class="heading-medium">You rejected Alex Richards' repayment plan</h2>
+              <h2 class="heading-medium">You rejected {{ partyName( 'defendant' ) }}' repayment plan</h2>
               <p>You haven't been able to agree to an alternative plan.</p>
               <p>A judge will review the case. We'll contact you to tell you what to do next.</p>
 
               {% elseif data['claimant'] == 10.601 %}
 
-              <h2 class="heading-medium">You rejected Alex Richards' repayment plan</h2>
+              <h2 class="heading-medium">You rejected {{ partyName( 'defendant' ) }}' repayment plan</h2>
               <p>You need to send their financial details to the court.</p>
               <p>Make sure you include your claim number: 352MC733.</p>
               <p>The court will review the details to see if the defendant can afford your repayment plan.</p>
@@ -501,7 +501,7 @@
 
 
               {% elseif data['claimant'] == 10.61 %}
-              <h2 class="heading-medium">We've sent the agreement to Alex Richards</h2>
+              <h2 class="heading-medium">We've sent the agreement to {{ partyName( 'defendant' ) }}</h2>
               <p>We'll contact you when they respond.</p>
               <p>The agreement proposes they pay you in instalments of £250 per month, starting 1 May 2018.</p>
               <p>It's not binding unless they signs it.</p>
@@ -516,12 +516,12 @@
               -->
 
               {% elseif data['claimant'] == 10.801 %}
-              <h2 class="heading-medium">Alex Richards rejected the repayment plan</h2>
+              <h2 class="heading-medium">{{ partyName( 'defendant' ) }} rejected the repayment plan</h2>
               <p>They said they can't afford to pay based on the terms of the County Court Judgment.</p>
               <p>A judge will review the case. We'll contact you to tell you what to do next.</p>
 
               {% elseif data['claimant'] == 10.81 %}
-                <h2 class="heading-medium">Alex Richards admitted they owe £{{ data['owe-amount'] or '1,200' }}</h2>
+                <h2 class="heading-medium">{{ partyName( 'defendant' ) }} admitted they owe £{{ data['owe-amount'] or '1,200' }}</h2>
                  <p>They said they'll pay you immediately.</p>
                  <p>They must make sure you have the money by {{ now | date( 'add', 5, 'days') | date }}. Any cheques or transfers should be clear in your account.</p>
                  <p>If you've been paid or you've made another agreement with the defendant, you need to tell us.</p>
@@ -531,7 +531,7 @@
 
 
               {% elseif data['claimant'] == 10.82 %}
-                <h2 class="heading-medium">Alex Richards admitted they owe £{{ data['owe-amount'] or '1,200' }}</h2>
+                <h2 class="heading-medium">{{ partyName( 'defendant' ) }} admitted they owe £{{ data['owe-amount'] or '1,200' }}</h2>
                  <p>They said they'll pay you immediately.</p>
                  <p>They must make sure you have the money by {{ now | date('subtract', 2, 'days') | date }}. Any cheques or transfers should be clear in your account.</p>
                  <p>If you've been paid or you've made another agreement with the defendant, you need to tell us.</p>
@@ -546,27 +546,27 @@
 
 
               {% elseif data['claimant'] == 10.831 %}
-              <h2 class="heading-medium">You rejected Alex Richards' admission</h2>
+              <h2 class="heading-medium">You rejected {{ partyName( 'defendant' ) }}' admission</h2>
               <p>They said they owe £{{ data['owe-amount'] or '1,200' }}. </p>
               <p>You've both agreed to try mediation. We'll contact you to try to arrange a call with the mediator.</p>
               <p><a href="mediation/how-mediation-works">Find out how mediation works</a></p>
 
 
               {% elseif data['claimant'] == 10.832 %}
-              <h2 class="heading-medium">You rejected Alex Richards' response</h2>
+              <h2 class="heading-medium">You rejected {{ partyName( 'defendant' ) }}' response</h2>
               <p>You said you want to take the case to court.</p>
               <p>The court will review the case. We'll contact you to tell you what to do next.</p>
 
 
               {% elseif data['claimant'] == 10.84 %}
-              <h2 class="heading-medium">You rejected Alex Richards' responsee</h2>
+              <h2 class="heading-medium">You rejected {{ partyName( 'defendant' ) }}' responsee</h2>
               <p>You said you want to take the case to court.</p>
               <p>The court will review the case. We'll contact you to tell you what to do next.</p>
 
 
 
               {% elseif data['claimant'] == 10.85 %}
-              <h2 class="heading-medium">You rejected Alex Richards' admission</h2>
+              <h2 class="heading-medium">You rejected {{ partyName( 'defendant' ) }}' admission</h2>
               <p>They said they owe £1,000.</p>
               <p>You've both agreed to try mediation. We'll contact you to try to arrange a call with the mediator.</p>
               <p><a href="mediation/how-mediation-works">Find out how mediation works</a></p>
@@ -574,14 +574,14 @@
 
               {% elseif data['claimant'] == 10.9 %}
               <div>
-                <h2 class="heading-medium">You rejected Alex Richards' response</h2>
+                <h2 class="heading-medium">You rejected {{ partyName( 'defendant' ) }}' response</h2>
                 <p>You've both agreed to try mediation. We'll contact you to try to arrange a call with the mediator.</p>
                 <p><a href="../dashboard/mediation/how-mediation-works">Find out how mediation works</a></p>
               </div>
 
 
               {% elseif data['claimant'] == 10.91 %}
-                  <h2 class="heading-medium">You rejected Alex Richards' response</h2>
+                  <h2 class="heading-medium">You rejected {{ partyName( 'defendant' ) }}' response</h2>
                   <p>You said you want to take the case to court.</p>
                   <p>The court will review the case. We'll contact you to tell you what to do next.</p>
 
@@ -594,14 +594,14 @@
 
                 {% if data['claimant'] == 11.31 %}
                 <h2 class="heading-medium">You asked the court to review the order</h2>
-                <p>We'll tell Alex Richards. They can comment until {{ now | date('add', 12, 'days') | date }}.</p>
+                <p>We'll tell {{ partyName( 'defendant' ) }}. They can comment until {{ now | date('add', 12, 'days') | date }}.</p>
                 <p>A judge will then review the order and any comments. We'll contact you by post to tell you what to do next.</p>
                 <p>Continue doing everything the current order tells you to do unless we tell you a judge has made a new one.</p>
                 <p>That means you should follow the instructions on this page and begin sending us more details before the hearing.</p>
                 <hr />
 
                 {% elseif data['claimant'] == 11.41 or data['claimant'] == 11.42 %}
-                <h2 class="heading-medium">Alex Richards asked the court to change the order</h2>
+                <h2 class="heading-medium">{{ partyName( 'defendant' ) }} asked the court to change the order</h2>
 
                 {% if data['claimant'] == 11.41 %}
                 <p>A judge will review their request and your comments on it, if you send any.</p>
@@ -612,18 +612,18 @@
 
                 <p>We'll contact you by post if the judge makes a new order.</p>
                 <p>Continue doing everything the current order tells you to do unless we tell you a judge has made a new one.</p>
-                <p><a href="../defendant/correspondence/forms/order-review?party=claimant" target="_blank">Download Alex Richards' request to see what they asked</a> (PDF, 123KB).</p>
+                <p><a href="../defendant/correspondence/forms/order-review?party=claimant" target="_blank">Download {{ partyName( 'defendant' ) }}' request to see what they asked</a> (PDF, 123KB).</p>
 
                 {% if data['claimant'] == 11.41 %}
                 <details>
-                  <summary><span class="summary">How to comment on Alex Richards' request</span></summary>
+                  <summary><span class="summary">How to comment on {{ partyName( 'defendant' ) }}' request</span></summary>
                     <div class="panel">
-                      <p>If you want to comment on the request, email your comments to the court and to Alex Richards before 4pm on {{ now | date( 'add', 12, 'days' ) | date }}.</p>
+                      <p>If you want to comment on the request, email your comments to the court and to {{ partyName( 'defendant' ) }} before 4pm on {{ now | date( 'add', 12, 'days' ) | date }}.</p>
 
                       <p>Include the claim number (352MC733) in the emails.</p>
 
                       <p>The court's email address is: <a href="mailto:moneyclaims@justice.gov.uk">moneyclaims@justice.gov.uk</a></p>
-                      <p>Alex Richards' email address is: <a href="mailto:alex.richards@gmail.com">alex.richards@gmail.com</a></p>
+                      <p>{{ partyName( 'defendant' ) }}'s email address is: <a href="mailto:{{ partyName( 'defendant', 'email' ) }}@gmail.com">{{ partyName( 'defendant', 'email' ) }}@gmail.com</a></p>
                     </div>
                 </details>
                 {% endif %}
@@ -658,7 +658,7 @@
                 {% if data['claimant'] == 11.4 %}
                 <hr/>
 
-                <h2 class="heading-medium">Alex Richards asked for a judge to review the order</h2>
+                <h2 class="heading-medium">{{ partyName( 'defendant' ) }} asked for a judge to review the order</h2>
                 <p>You can respond to this request and add your own comments until 4pm on {{ now | date( 'add', 12, 'days' ) | date }}.</p>
                 <p>Continue doing everything the current order tells you to do unless we tell you a judge has made a new one.</p>
                 <a href="order-response/review/respond" class="button">Respond to the request</a>
@@ -735,7 +735,7 @@
 
               {% elseif data['claimant'] == 11.102 %}
               <div class="status-block single">
-                <h2 class="heading-medium">Alex Richards missed the first deadline to respond to the court's order</h2>
+                <h2 class="heading-medium">{{ partyName( 'defendant' ) }} missed the first deadline to respond to the court's order</h2>
                   <p>The first deadline was 4pm on {{ minus | date( 'subtract', 1, 'days' ) | date }}.</p>
                     <p>They now need to respond before 4pm on {{ now | date( 'add', 11, 'days' ) | date }}.</p>
                 <p>If they don't respond by then, the court will cancel their defence and you'll be able to request a County Court Judgment (CCJ) against them.</p>
@@ -747,7 +747,7 @@
 
               {% elseif data['claimant'] == 11.103 %}
               <div class="status-block single">
-                <h2 class="heading-medium">Alex Richards didn't respond to the court's order by the deadline</h2>
+                <h2 class="heading-medium">{{ partyName( 'defendant' ) }} didn't respond to the court's order by the deadline</h2>
                 <p>You can request a County Court Judgment (CCJ) against them.</p>
                 <p>A CCJ means the court orders them to pay the money. This doesn't guarantee that they'll pay it.</p>
                 <p><a href="applications-and-judgments/default-judgment" class="button">Request a CCJ</a></p>
@@ -759,7 +759,7 @@
 
                 {% if data['claimant'] == 11.3 %}
                 <h2 class="heading-medium">You asked the court to review the order</h2>
-                <p>We'll tell Alex Richards. They can comment until {{ now | date('add', 12, 'days') | date }}.</p>
+                <p>We'll tell {{ partyName( 'defendant' ) }}. They can comment until {{ now | date('add', 12, 'days') | date }}.</p>
                 <p>A judge will then review the order and any comments. We'll contact you by post to tell you what to do next.</p>
                 <p>Continue doing everything the current order tells you to do unless we tell you a judge has made a new one.</p>
                 <p>That means you should follow the instructions on this page and begin sending us more details before the hearing.</p>
@@ -767,7 +767,7 @@
                 <hr />
 
                 {% elseif data['claimant'] == 11.5 %}
-                <h2 class="heading-medium">Alex Richards asked for a judge to review the order</h2>
+                <h2 class="heading-medium">{{ partyName( 'defendant' ) }} asked for a judge to review the order</h2>
                 <p>You can respond to this request and add your own comments until 4pm on {{ now | date( 'add', 12, 'days' ) | date }}.</p>
                 <p>Continue doing everything the current order tells you to do unless we tell you a judge has made a new one.</p>
                 <a href="order-response/review/respond" class="button">Respond to the request</a>
@@ -775,7 +775,7 @@
 
                 {% elseif data['claimant'] == 11.51 or data['claimant'] == 11.52 %}
 
-                <h2 class="heading-medium">Alex Richards asked the court to change the order</h2>
+                <h2 class="heading-medium">{{ partyName( 'defendant' ) }} asked the court to change the order</h2>
 
                 {% if data['claimant'] == 11.51 %}
                 <p>A judge will review their request and your comments on it, if you send any.</p>
@@ -786,19 +786,19 @@
 
                 <p>We'll contact you by post if the judge makes a new order.</p>
                 <p>Continue doing everything the current order tells you to do unless we tell you a judge has made a new one.</p>
-                <p><a href="../defendant/correspondence/forms/order-review?party=claimant" target="_blank">Download Alex Richards' request to see what they asked</a> (PDF, 123KB).</p>
+                <p><a href="../defendant/correspondence/forms/order-review?party=claimant" target="_blank">Download {{ partyName( 'defendant' ) }}' request to see what they asked</a> (PDF, 123KB).</p>
 
                 {% if data['claimant'] == 11.51 %}
 
                 <details>
-                  <summary><span class="summary">How to comment on Alex Richards' request</span></summary>
+                  <summary><span class="summary">How to comment on {{ partyName( 'defendant' ) }}' request</span></summary>
                     <div class="panel">
-                      <p>If you want to comment on the request, email your comments to the court and to Alex Richards before 4pm on {{ now | date( 'add', 12, 'days' ) | date }}.</p>
+                      <p>If you want to comment on the request, email your comments to the court and to {{ partyName( 'defendant' ) }} before 4pm on {{ now | date( 'add', 12, 'days' ) | date }}.</p>
 
                       <p>Include the claim number (352MC733) in the emails.</p>
 
                       <p>The court's email address is: <a href="mailto:moneyclaims@justice.gov.uk">moneyclaims@justice.gov.uk</a></p>
-                      <p>Alex Richards' email address is: <a href="mailto:alex.richards@gmail.com">alex.richards@gmail.com</a></p>
+                      <p>{{ partyName( 'defendant' ) }}'s email address is: <a href="mailto:{{ partyName( 'defendant', 'email' ) }}@gmail.com">{{ partyName( 'defendant', 'email' ) }}@gmail.com</a></p>
                     </div>
                 </details>
 
@@ -851,7 +851,7 @@
 
                 <p>The defendant's address is:</p>
                 <p>
-                  Alex Richards <br/>
+                  {{ partyName( 'defendant' ) }} <br/>
                   12 Garden View<br />
                   Bristol<br />
                   BS4 7FB
@@ -920,7 +920,7 @@
                 <h2 class="heading-medium">Wait for the court to review the order</h2>
                 <p>You've asked for a judge to review the order.</p>
                 <p><a href="../defendant/correspondence/forms/order-review">Download the request for review of the order</a> (PDF, 123KB)</p>
-                <p>We'll contact both you and Alex Richards by post to tell you what to do next.</p>
+                <p>We'll contact both you and {{ partyName( 'defendant' ) }} by post to tell you what to do next.</p>
               </div>
  -->
 
@@ -928,7 +928,7 @@
               {% elseif data['claimant'] == 12 %}
               <div class="status-block single">
                 <h2 class="heading-medium">Respond to the defendant</h2>
-                <p>Alex Richards has rejected your claim.</p>
+                <p>{{ partyName( 'defendant' ) }} has rejected your claim.</p>
                 <p>You can accept or reject their response. You need to respond before 4pm on {{ now | date('add', 5, 'days') | date }}. If you don't respond by then, you might have to go to a hearing.</p>
                 <div class="form-group">
                   <form method="post" action="claimant-response/dispute-claim/task-list" class="form">
@@ -944,17 +944,17 @@
               <div>
                 <h2 class="heading-medium">We'll ask the defendant about mediation</h2>
                 <p>You've agreed to try mediation.</p>
-                <p>We'll ask Alex Richards if they want to take part in mediation. We'll tell you how they respond.</p>
+                <p>We'll ask {{ partyName( 'defendant' ) }} if they want to take part in mediation. We'll tell you how they respond.</p>
               </div>
 
 
               {% elseif data['claimant'] == 13.2 %}
               <div class="status-block single">
-                <h2 class="heading-medium">You rejected Alex Richards' response</h2>
+                <h2 class="heading-medium">You rejected {{ partyName( 'defendant' ) }}' response</h2>
                 <p>You need to <a href="forms/dq-form">complete a directions questionnaire</a> form to give us more information in case there's a hearing.</p>
                 <p>The claim won't proceed if you don't complete and return the form to us before 4pm on <span
                   class="dates"></span>.</p>
-                  <p>You also need to send a copy of the form to Alex Richards.</p>
+                  <p>You also need to send a copy of the form to {{ partyName( 'defendant' ) }}.</p>
                 <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=9">Download their
                   response</a> (PDF, 123KB)</p>
               </div>
@@ -1111,7 +1111,7 @@
                   <div class="status-block single">
                     <h2 class="heading-medium">Wait for the defendant to sign the settlement agreement</h2>
                     <p>You've agreed to the defendant's offer to settle out of court. You've signed an agreement to settle the claim.</p>
-                    <p>We've asked Alex Richards to sign the agreement. We'll email you when they respond.</p>
+                    <p>We've asked {{ partyName( 'defendant' ) }} to sign the agreement. We'll email you when they respond.</p>
                   </div>
 
 
@@ -1119,7 +1119,7 @@
               {% elseif data['claimant'] == 16.1 %}
                   <div class="status-block single">
                       <h2 class="heading-medium">The defendant has rejected your offer</h2>
-                      <p>Alex Richards has rejected your offer.</p>
+                      <p>{{ partyName( 'defendant' ) }} has rejected your offer.</p>
                       <p>The court will review the case. We'll contact you to tell you what to do next.</p>
                   </div>
 
@@ -1128,7 +1128,7 @@
               {% elseif data['claimant'] == 16.2 %}
                   <div class="status-block single">
                       <h2 class="heading-medium">The defendant has rejected your offer</h2>
-                      <p>Alex Richards has rejected your offer.</p>
+                      <p>{{ partyName( 'defendant' ) }} has rejected your offer.</p>
                       <p>The court will review the case. We'll contact you to tell you what to do next.</p>
                   </div>
 
@@ -1145,7 +1145,7 @@
 
                       <hr>
                       <h2 class="heading-medium">Your offer</h2>
-                      <p>You've made an offer to settle out of court. We'll contact you if Alex Richards responds.</p>
+                      <p>You've made an offer to settle out of court. We'll contact you if {{ partyName( 'defendant' ) }} responds.</p>
                   </div>
 
 
@@ -1166,7 +1166,7 @@
 
                       <hr>
                       <h2 class="heading-medium">Settlement offer</h2>
-                      <p>Alex Richards has made an offer to settle out of court.</p>
+                      <p>{{ partyName( 'defendant' ) }} has made an offer to settle out of court.</p>
                       <p><a href="#"  onclick="$('#settle').click()">Find out more</a></p>
                   </div>
 
@@ -1179,7 +1179,7 @@
 
                       <hr>
                       <h2 class="heading-medium">Your offer</h2>
-                      <p>Alex Richards has responded to your offer to settle out of court.</p>
+                      <p>{{ partyName( 'defendant' ) }} has responded to your offer to settle out of court.</p>
                       <p><a href="#"  onclick="$('#settle').click()">View response</a></p>
                   </div>
 
@@ -1191,7 +1191,7 @@
                       <p>[ Any dashboard state ]</p>
                       <hr>
                       <h2 class="heading-medium">Your offer</h2>
-                      <p>Alex Richards has responded to your offer to settle out of court.</p>
+                      <p>{{ partyName( 'defendant' ) }} has responded to your offer to settle out of court.</p>
                       <p><a href="#"  onclick="$('#settle').click()">View response</a></p>
                   </div>
 
@@ -1200,7 +1200,7 @@
               {% elseif data['claimant'] == 16.14 %}
                   <div class="status-block single">
                       <h2 class="heading-medium">This claim is settled</h2>
-                      <p>Alex Richards accepted your out of court offer.</p>
+                      <p>{{ partyName( 'defendant' ) }} accepted your out of court offer.</p>
                       <p>You've both signed a settlement agreement.</p>
                       <p>The agreement explains what can happen if either party breaks the terms.</p>
                       <p><a href="../defendant/correspondence/forms/agreement?check=2">Download the agreement</a> (PDF, 123KB)</p>
@@ -1211,7 +1211,7 @@
               {% elseif data['claimant'] == 16.15 %}
                   <div class="status-block single">
                       <h2 class="heading-medium">This claim is settled</h2>
-                      <p>You accepted Alex Richards's out of court offer.</p>
+                      <p>You accepted {{ partyName( 'defendant' ) }}'s out of court offer.</p>
                       <p>You've both signed a settlement agreement.</p>
                       <p>The agreement explains what can happen if either party breaks the terms.</p>
                       <p><a href="../defendant/correspondence/forms/agreement?check=2">Download the agreement</a> (PDF, 123KB)</p>
@@ -1236,7 +1236,7 @@
 
 
               {% elseif data['claimant'] == 17.01 %}
-                  <h2 class="heading-medium">Alex Richards accepted your offer to settle out of court</h2>
+                  <h2 class="heading-medium">{{ partyName( 'defendant' ) }} accepted your offer to settle out of court</h2>
                   <div>
                     <p>You've both signed an agreement. The claim is now settled.</p>
                     <p><a href="../defendant/correspondence/forms/agreement?check=1">Download the settlement agreement</a>
@@ -1258,7 +1258,7 @@
               <p>You need to respond by <span class="dates"></span> (14 days
                 remaining). </p>
               <p><a href="view-claims/view-counterclaim1">View and respond to the counterclaim </a></p>
-              <p>If you don't respond Alex Richards can ask for a default County Court Judgment (CCJ) against you. A
+              <p>If you don't respond {{ partyName( 'defendant' ) }} can ask for a default County Court Judgment (CCJ) against you. A
                 CCJ means the court orders you to pay the money.</p>
               <div class="form-group">
               </div>
@@ -1267,7 +1267,7 @@
               {% elseif data['claimant'] == 19 %}
               <div>
                 <h2 class="heading-medium">The defendant's response </h2>
-                <p>The defendant Alex Richards has rejected your the claim. </p>
+                <p>The defendant {{ partyName( 'defendant' ) }} has rejected your the claim. </p>
                 <div class="form-group">
                   <p><a href="claimant-response/dispute-claim/view-response?mediation=no">View full
                     response </a></p>
@@ -1276,20 +1276,20 @@
 
               {% elseif data['claimant'] == 20 %}
               <div>
-                <h2 class="heading-medium">Alex Richards paid you on {{ now | date( 'subtract', 5, 'days' ) | date }}</h2>
+                <h2 class="heading-medium">{{ partyName( 'defendant' ) }} paid you on {{ now | date( 'subtract', 5, 'days' ) | date }}</h2>
                 <p>The claim is now settled.</p>
               </div>
 
 
               {% elseif data['claimant'] == 20.1 %}
               <div>
-                <h2 class="heading-medium">Alex Richards paid you on {{ now | date( 'subtract', 5, 'days' ) | date }}</h2>
+                <h2 class="heading-medium">{{ partyName( 'defendant' ) }} paid you on {{ now | date( 'subtract', 5, 'days' ) | date }}</h2>
                 <p>Their County Court Judgment will be cancelled.</p>
               </div>
 
               {% elseif data['claimant'] == 20.2 %}
               <div>
-                <h2 class="heading-medium">Alex Richards paid you on {{ now | date( 'subtract', 5, 'days' ) | date }}</h2>
+                <h2 class="heading-medium">{{ partyName( 'defendant' ) }} paid you on {{ now | date( 'subtract', 5, 'days' ) | date }}</h2>
                 <p>The claim is now settled.</p>
                 <p>The defendant's County Court Judgment will be marked as paid.</p>
               </div>
@@ -1318,7 +1318,7 @@
               <div class="status-block single">
                 <h2 class="heading-medium">You have paid for a warrant of control</h2>
                 <p>A bailiff will try to recover the debt.</p>
-                <p>We'll post a letter with details of the warrant to you and to Alex Richards.</p>
+                <p>We'll post a letter with details of the warrant to you and to {{ partyName( 'defendant' ) }}.</p>
                 <p><a target="_blank" href="https://hmcts-cet-prototype.herokuapp.com/claimant-guidance/index">See other debt recovery options</a><span class="font-xsmall">
                    (opens in a new window)</span></p>
               </div>
@@ -1327,7 +1327,7 @@
               {% elseif data['claimant'] == 23 %}
                 <div class="status-block single">
                   <h2 class="heading-medium">Tell us if you'll attend a hearing</h2>
-                  <p>Alex Richards has applied to have the County Court Judgment against them removed.</p>
+                  <p>{{ partyName( 'defendant' ) }} has applied to have the County Court Judgment against them removed.</p>
                   <p>The court has asked you to say whether you'll attend a hearing.</p>
                   <p>The hearing is only about the judgment, not the claim.</p>
 
@@ -1338,7 +1338,7 @@
               {% elseif data['claimant'] == 24 %}
                 <div class="status-block single">
                   <h2 class="heading-medium">Decide on attending a CCJ removal only hearing</h2>
-                  <p>Alex Richards has requested to remove the CCJ you issued.</p>
+                  <p>{{ partyName( 'defendant' ) }} has requested to remove the CCJ you issued.</p>
                   <p>This hearing is not about the claim.  It is just about removing the CCJ. </p>
 
                   <p>Since you've already agreed the CCJ can be removed this CCJ removal request is unlikely to require a eharing.</p>
@@ -1350,7 +1350,7 @@
               {% elseif data['claimant'] == 26  or  data['claimant'] == 27  %}
                 <!--  Vary requested - by set date and installmanets  -->
                 <h2 class="heading-medium">Respond to the defendant</h2>
-                <p>Alex Richards has asked to change how they repay you.</p>
+                <p>{{ partyName( 'defendant' ) }} has asked to change how they repay you.</p>
                 {% if data['claimant'] == 26 %}
                     <!-- by set date -->
                     <p>They've asked to pay in full on 28 July 2019.</p>
@@ -1373,9 +1373,9 @@
                 <!-- Accepted the Vary request, so CCJ UPDATED -->
                 <div class="status-block">
                   <h2 class="heading-medium">A new County Court Judgment (CCJ) has been issued</h2>
-                  <p>You accepted Alex Richards's new payment plan.</p>
+                  <p>You accepted {{ partyName( 'defendant' ) }}'s new payment plan.</p>
                   <p><a href="repayment-plan?who=claimant&amp;plan=instalments">View the repayment plan</a></p>
-                  <p>We'll send a copy of the judgment to you and to Alex Richards.</p>
+                  <p>We'll send a copy of the judgment to you and to {{ partyName( 'defendant' ) }}.</p>
                 </div>
 
                 <div class="status-block single">
@@ -1396,30 +1396,30 @@
               {% elseif data['claimant'] == 33 %}
                 <!-- Claimant - Attending hearing of defendants set aside request - Claim already settled -->
                 <h2 class="heading-medium">Wait for the court's decision</h2>
-                <p>The court will decide whether there'll be a hearing about Alex Richards's County Court Judgment.</p>
+                <p>The court will decide whether there'll be a hearing about {{ partyName( 'defendant' ) }}'s County Court Judgment.</p>
                 <p>We'll contact you if the court sets a hearing date.</p>
 
 
               {% elseif data['claimant'] == 34 %}
                 <!-- Claimant - Attending hearing of defendants set aside request - Claim not settled-->
                 <h2 class="heading-medium">Wait for the court's decision</h2>
-                <p>The court will decide whether there'll be a hearing about Alex Richards's County Court Judgment.</p>
+                <p>The court will decide whether there'll be a hearing about {{ partyName( 'defendant' ) }}'s County Court Judgment.</p>
                 <p>We'll contact you if the court sets a hearing date.</p>
-                <p>If the court decides there won't be a hearing, we'll ask Alex Richards to respond to your claim.</p>
+                <p>If the court decides there won't be a hearing, we'll ask {{ partyName( 'defendant' ) }} to respond to your claim.</p>
 
 
               {% elseif data['claimant'] == 36 %}
                 <!-- Claimant - Not attending hearing of defendants set aside request - Claim already settled -->
                 <h2 class="heading-medium">Wait for the court's decision</h2>
-                <p>The court will decide whether Alex Richards's County Court Judgment should be cancelled.</p>
+                <p>The court will decide whether {{ partyName( 'defendant' ) }}'s County Court Judgment should be cancelled.</p>
                 <p>We'll contact you with the decision.</p>
 
               {% elseif data['claimant'] == 37 %}
                 <!-- Claimant - Not attending hearing of defendants set aside request - Claim not settled -->
                 <h2 class="heading-medium">Wait for the court's decision</h2>
-                <p>The court will decide whether Alex Richards's County Court Judgment should be cancelled.</p>
+                <p>The court will decide whether {{ partyName( 'defendant' ) }}'s County Court Judgment should be cancelled.</p>
                 <p>We'll contact you with the decision.</p>
-                <p>We'll then ask Alex Richards to respond to your claim.</p>
+                <p>We'll then ask {{ partyName( 'defendant' ) }} to respond to your claim.</p>
 
 
               {% endif %}
@@ -1430,26 +1430,26 @@
             <!--<div id="tabs-3" class="tab-pane">-->
             <!--{% if data['claimant'] == 10 or data['claimant'] == 11%}-->
             <!--<h2 class="heading-medium">The defendant wants to settle out of court </h2>-->
-            <!--<p>Alex Richards has made an offer to settle out of court You can accept, reject or make a counter-->
+            <!--<p>{{ partyName( 'defendant' ) }} has made an offer to settle out of court You can accept, reject or make a counter-->
             <!--offer.</p>-->
             <!--<a href="offer-agreement/view-offer?defendant=offer">View and respond to offer.</a>-->
             <!--{% elseif data['claimant'] == 12 %}-->
-            <!--<h2 class="heading-medium">We've sent your offer to Alex Richards</h2>-->
-            <!--<p>Alex Richards can accept, reject or make a counter offer. We'll email you when they respond.</p>-->
+            <!--<h2 class="heading-medium">We've sent your offer to {{ partyName( 'defendant' ) }}</h2>-->
+            <!--<p>{{ partyName( 'defendant' ) }} can accept, reject or make a counter offer. We'll email you when they respond.</p>-->
             <!--<p>If you settle out of court you’ll sign an agreement that replaces the claim. Until then the claim-->
             <!--continues and might go to a court hearing.</p>-->
             <!--{% elseif data['claimant'] == 16 %}-->
             <!--<h2 class="heading-medium">Sign a legal agreement to settle out of court</h2>-->
             <!--<div>-->
             <!--<p> The defendant has accepted your offer. You need to sign a legal agreement to settle out of-->
-            <!--court Alex Richards has signed the agreement.</p>-->
+            <!--court {{ partyName( 'defendant' ) }} has signed the agreement.</p>-->
             <!--<p><a href='offer-agreement/agreement'>View and sign the agreement. </a></p>-->
             <!--</div>-->
             <!--{% elseif data['claimant'] == 17 %}-->
             <!--<h2 class="heading-medium">Sign a legal agreement to settle out of court</h2>-->
             <!--<div>-->
             <!--<p> The defendant has accepted your offer. You need to sign a legal agreement to settle out of-->
-            <!--court Alex Richards has signed the agreement.</p>-->
+            <!--court {{ partyName( 'defendant' ) }} has signed the agreement.</p>-->
             <!--<p><a href='offer-agreement/agreement'>View and sign the agreement. </a></p>-->
             <!--</div>-->
             <!--{% endif %}-->
@@ -2743,22 +2743,22 @@
             {% elif  data['claimant'] == 16.22  or  data['claimant'] == 16.11 %}
                 <div class="tabs-panel-inner text" tabindex="0">
                     <h2 class="heading-medium">Wait for a response</h2>
-                    <p>You've made an offer.  We'll contact you if Alex Richards responds.</p>
+                    <p>You've made an offer.  We'll contact you if {{ partyName( 'defendant' ) }} responds.</p>
                 </div>
 
 
             <!-- Offers tab - New offer received  -->
             {% elif  data['claimant'] == 16.23  or  data['claimant'] == 16.12  %}
                 <h2 class="heading-medium">Respond to the defendant</h2>
-                <p>Alex Richards has made an offer to settle out of court.</p>
-                <p>If you accept the offer, you can make a legal agreement between you and Alex Richards and resolve your dispute without a hearing.</p>
+                <p>{{ partyName( 'defendant' ) }} has made an offer to settle out of court.</p>
+                <p>If you accept the offer, you can make a legal agreement between you and {{ partyName( 'defendant' ) }} and resolve your dispute without a hearing.</p>
                 <p><a href="offer-agreement/view-offer?theclaimant=true&defendant=claimant&newoffer=true&firstoffer=false&" class="button">View and respond</a></p>
 
 
             <!--  Offers tab - Rejected - make new offer  -->
             {% elif data['claimant'] == 16.25  or  data['claimant'] == 16.131  %}
                 <div class="tabs-panel-inner text" tabindex="0">
-                  <h2 class="heading-medium">Alex Richards rejected your offer</h2>
+                  <h2 class="heading-medium">{{ partyName( 'defendant' ) }} rejected your offer</h2>
                   <p>You can make another offer.</p>
                   <p><a class="button">Make a new offer</a></p>
                 </div>
@@ -2767,15 +2767,15 @@
             <!-- Offers tab - Rejected - respond to counter offer - always allow new offer  -->
             {% elif data['claimant'] == 16.27  or  data['claimant'] == 16.133 %}
                 <h2 class="heading-medium">Respond to the defendant</h2>
-                <p>Alex Richards rejected your offer to settle out of court. They've made you an offer.</p>
-                <p>If you accept the offer, you can make a legal agreement between you and Alex Richards and resolve your dispute without a hearing.</p>
+                <p>{{ partyName( 'defendant' ) }} rejected your offer to settle out of court. They've made you an offer.</p>
+                <p>If you accept the offer, you can make a legal agreement between you and {{ partyName( 'defendant' ) }} and resolve your dispute without a hearing.</p>
                 <p><a href="offer-agreement/new-offers/view-reason-for-reject?theclaimant=true&defendant=claimant&newoffer=true&firstoffer=false&" class="button">View and respond</a></p>
 
 
             <!-- Offers tab - Rejected by Claimant - always allow new offer  -->
             {% elif  data['claimant'] == 16.28   or   data['claimant'] == 11.1 %}
                 <h2 class="heading-medium">You've rejected the offer</h2>
-                <p>You rejected Sam Clark's offer to settle out of court.</p>
+                <p>You rejected {{ partyName( 'claimant' ) }}'s offer to settle out of court.</p>
                 <p><a href="offer-agreement/make-offer?theclaimant=true&defendant=claimant&firstoffer=true&" class="button">Make an offer</a></p>
 
 
@@ -2800,8 +2800,8 @@
 
             {% else %}
                 <h2 class="heading-medium">Respond to the defendant</h2>
-                <p>Alex Richards has made an offer to settle out of court.</p>
-                <p>If you accept the offer, you can make a legal agreement between you and Alex Richards and resolve your dispute without a hearing.</p>
+                <p>{{ partyName( 'defendant' ) }} has made an offer to settle out of court.</p>
+                <p>If you accept the offer, you can make a legal agreement between you and {{ partyName( 'defendant' ) }} and resolve your dispute without a hearing.</p>
                 <p><a href="offer-agreement/view-offer?defendant=claimant&newoffer=true&" class="button">View and respond</a></p>
 
             {% endif %}
@@ -2825,7 +2825,7 @@
             <tbody class="govuk-table__body">
             <tr class="govuk-table__row">
               <td class="govuk-table__cell--left">Name</td>
-              <td class="govuk-table__cell--right">Alex Richards</td>
+              <td class="govuk-table__cell--right">{{ partyName( 'defendant' ) }}</td>
             </tr>
             <tr class="govuk-table__row">
               <td class="govuk-table__cell--left">Address</td>
@@ -2838,7 +2838,7 @@
             </tr>
             <tr class="govuk-table__row">
               <td class="govuk-table__cell--left">Email</td>
-              <td class="govuk-table__cell--right">alex.richards@gmail.com</td>
+              <td class="govuk-table__cell--right">{{ partyName( 'defendant', 'email' ) }}@gmail.com</td>
             </tr>
             </tbody>
           </table>
