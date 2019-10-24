@@ -864,22 +864,14 @@
 
               <div class="status-block single">
                 <h2 class="heading-medium">The court has ordered you to send us more details</h2>
-                <p>You need to send these details before 4pm on {{ now | date( 'add', 12, 'days' ) | date }}:</p>
-
-                <ul class="list list-bullet">
-                  <li>any documents relevant to the case, like contracts, agreements or letters</li>
-                  <li>witness statements</li>
-                </ul>
+                <p>You need to send {% if data['defendant'] == 12.1001 %}general{% endif %} details before 4pm on {{ now | date( 'add', 12, 'days' ) | date }}.</p>
 
                 {% if data['defendant'] == 12.1001 %}
-                <p>You also need to send these details before 4pm on {{ now | date( 'add', 18, 'days' ) | date }}:</p>
-                <ul class="list list-bullet">
-                  <li>your expert's report</li>
-                  <li>responses to questions about the expert's report</li>
-                </ul>
+                <p>You also need to send expert report details before 4pm on {{ now | date( 'add', 18, 'days' ) | date }}.</p>
+
                 {% endif %}
 
-                <p><a href="order-response?party=defendant" class="button" style="margin-bottom: 15px">Find out more about what to send</a></p>
+                <p><a href="order-response?party=defendant" class="button" style="margin-bottom: 15px">Send us the details</a></p>
 
                 <p><a href="/public/images/order2.pdf" download>Download the court's order</a> (PDF, 123KB).</p>
                 <hr />
@@ -905,18 +897,10 @@
               {% elseif data['defendant'] == 12.1003 %}
 
               <div class="status-block single">
-                <h2 class="heading-medium">The court has ordered you to send us more details</h2>
-                <p>You need to send these details before 4pm on {{ now | date( 'add', 12, 'days' ) | date }}:</p>
-                <p>The court has ordered you to send these details:</p>
+                <h2 class="heading-medium">The court has ordered you to take actions to prepare for the hearing</h2>
+                <p>You need to send us details and do anything else the court ordered before 4pm on {{ now | date( 'add', 12, 'days' ) | date }}.</p>
 
-                <ul class="list list-bullet">
-                  <li>any documents relevant to the case, like contracts, agreements or letters</li>
-                  <li>witness statements</li>
-                  <li>additional information listed in the order</li>
-                  <li>confirmation you've completed additional actions listed in the order</li>
-                  </ul>
-
-                <p><a href="order-response?party=defendant&generic=true" class="button" style="margin-bottom: 15px">Find out more about what to send</a></p>
+                <p><a href="order-response?party=defendant&generic=true" class="button" style="margin-bottom: 15px">Find out what you need to do</a></p>
 
                 <p><a href="/public/images/order2.pdf" download>Download the court's order</a> (PDF, 123KB).</p>
                 <hr />
@@ -927,15 +911,9 @@
 
               {% elseif data['defendant'] == 12.101 %}
               <div class="status-block single">
-                <h2 class="heading-medium">You didn't respond to the order</h2>
-                <p>You missed the original deadline of 4pm on {{ minus | date( 'subtract', 1, 'days' ) | date }}. You must send details before 4pm on {{ now | date( 'add', 11, 'days' ) | date }}.</p>
-                <p>The court has ordered you to send us:</p>
-                <ul class="list list-bullet">
-                  <li>any documents relevant to the case, like contracts, agreements or letters</li>
-                  <li>witness statements</li>
-                </ul>
-                <h2 class="heading-small">If you don't send us more details</h2>
-                <p>The court will cancel your defence after 4pm on {{ now | date( 'add', 11, 'days' ) | date }} and the claimant can request a County Court Judgment (CCJ) against you.</p>
+                <h2 class="heading-medium">You missed the deadline to respond to the court's order</h2>
+                <p>You need to respond and send details before 4pm on {{ now | date( 'add', 12, 'days' ) | date }} or the court will cancel your defence and the claimant can request a County Court Judgment (CCJ) against you.</p>
+                
                 <p><a href="order-response?party=defendant" class="button" style="margin-bottom: 15px">Find out more about what to send</a></p>
 
 
