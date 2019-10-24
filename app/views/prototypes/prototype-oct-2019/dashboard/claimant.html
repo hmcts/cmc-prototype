@@ -34,7 +34,7 @@
             or data['claimant'] == 10.02 or data['claimant'] == 10.03 or data['claimant'] == 10.11 or data['claimant'] == 10.4 or data['claimant'] == 10.5 or data['claimant'] == 10.6
             or data['claimant'] == 10.601 or data['claimant'] == 10.61 or data['claimant'] == 10.801 or data['claimant'] == 10.81 or data['claimant'] == 10.82 or data['claimant'] == 3.2
             or data['claimant'] == 10.83 or data['claimant'] == 10.831 or data['claimant'] == 10.832 or data['claimant'] == 10.84 or data['claimant'] == 10.85 or data['claimant'] == 10.9
-              or data['claimant'] == 11.1001 or data['claimant'] == 11.1003 or data['claimant'] == 11.101 or data['claimant'] == 11.101 or data['claimant'] == 11.102 or data['claimant'] == 11.103 or data['claimant'] == 11.11 or data['claimant'] == 11.111 or data['claimant'] == 11.12 or data['claimant'] == 11.13 or data['claimant'] == 11.1011 or data['claimant'] == 11.2 or data['claimant'] == 11.21 or data['claimant'] == 11.3 or data['claimant'] == 11.31
+              or data['claimant'] == 11.1001 or data['claimant'] == 11.1003 or data['claimant'] == 11.101 or data['claimant'] == 11.101 or data['claimant'] == 11.102 or data['claimant'] == 11.103 or data['claimant'] == 11.104 or data['claimant'] == 11.105 or data['claimant'] == 11.11 or data['claimant'] == 11.111 or data['claimant'] == 11.12 or data['claimant'] == 11.13 or data['claimant'] == 11.1011 or data['claimant'] == 11.2 or data['claimant'] == 11.21 or data['claimant'] == 11.3 or data['claimant'] == 11.31
             or data['claimant'] == 11.4 or data['claimant'] == 11.41 or data['claimant'] == 11.42 or data['claimant'] == 11.5 or data['claimant'] == 11.51 or data['claimant'] == 11.52 or data['claimant'] == 11.6 or data['claimant'] == 11.61 or data['claimant'] == 11.7
             or data['claimant'] == 12 or data['claimant'] == 13.2 or data['claimant'] == 14.1 or data['claimant'] == 14.2 or data['claimant'] == 14.3 or data['claimant'] == 14.4 or data['claimant'] == 14.5 or data['claimant'] == 16  or data['claimant'] == 16.1 or data['claimant'] == 17  or data['claimant'] == 17.01  or data['claimant'] == 20 or data['claimant'] == 20.1 or data['claimant'] == 20.2
             or data['claimant'] == 21 or data['claimant'] == 21.1 or data['claimant'] == 23 or data['claimant'] == 24 or data['claimant'] == 26  or data['claimant'] == 27  or data['claimant'] == 28  or data['claimant'] == 29
@@ -705,12 +705,8 @@
                 <p>You need to respond and send details before 4pm on {{ now | date( 'add', 12, 'days' ) | date }} or the court will cancel your claim.</p>
 
                 <p><a href="order-response?party=claimant" class="button">Respond and send details</a></p>
-
-
-
-                  <p><a href="/public/images/order2.pdf" download>Download the court's original order</a> (PDF, 123KB).</p>
-                  <p><a href="../defendant/correspondence/forms/sanction-order">Download the court's follow-up order</a> (PDF, 123KB).</p>
-
+                <p><a href="/public/images/order2.pdf" download>Download the court's original order</a> (PDF, 123KB).</p>
+                <p><a href="../defendant/correspondence/forms/sanction-order">Download the court's follow-up order</a> (PDF, 123KB).</p>
 
                 <hr/>
 
@@ -733,11 +729,11 @@
               {% elseif data['claimant'] == 11.102 %}
               <div class="status-block single">
                 <h2 class="heading-medium">{{ partyName( 'defendant' ) }} missed the first deadline to respond to the court's order</h2>
-                  <p>The first deadline was 4pm on {{ minus | date( 'subtract', 1, 'days' ) | date }}.</p>
-                    <p>They now need to respond before 4pm on {{ now | date( 'add', 11, 'days' ) | date }}.</p>
+                <p>The first deadline was 4pm on {{ minus | date( 'subtract', 1, 'days' ) | date }}.</p>
+                <p>They now need to respond before 4pm on {{ now | date( 'add', 11, 'days' ) | date }}.</p>
                 <p>If they don't respond by then, the court will cancel their defence and you'll be able to request a County Court Judgment (CCJ) against them.</p>
-                  <p><a href="/public/images/order2.pdf" download>Download the court's original order</a> (PDF, 123KB).</p>
-                  <p><a href="../defendant/correspondence/forms/sanction-order">Download the court's follow-up order</a> (PDF, 123KB).</p>
+                <p><a href="/public/images/order2.pdf" download>Download the court's original order</a> (PDF, 123KB).</p>
+                <p><a href="../defendant/correspondence/forms/sanction-order?party=defendant">Download the court's follow-up order</a> (PDF, 123KB).</p>
                 </ul>
 
               </div>
@@ -750,6 +746,37 @@
                 <p><a href="applications-and-judgments/default-judgment" class="button">Request a CCJ</a></p>
               </div>
 
+
+              {% elseif data['claimant'] == 11.104 %}
+              <div class="status-block single">
+                <h2 class="heading-medium">The defendant and you didn't respond to the order</h2>
+
+                <p>{{ partyName( 'defendant' ) }} missed the original deadline to respond to the court's order.</p>
+                <p>They now need to respond before 4pm on {{ now | date( 'add', 11, 'days' ) | date }}.</p>
+                <p>If they don't respond by then, the court will cancel their defence and you'll be able to request a County Court Judgment (CCJ) against them.</p>
+
+                <p>You missed the original deadline to respond to the court's order.</p>
+                <p>You must send details before 4pm on {{ now | date( 'add', 11, 'days' ) | date }} or the court will cancel your claim.</p>
+
+                <h2 class="heading-small">Download documents</h2>
+                <p>You can download:</p>
+                <ul class="list list-bullet">
+                  <li><a href="/public/images/order2.pdf" download>the court's original order</a>  (PDF, 123KB)</li>
+                  <li><a href="../defendant/correspondence/forms/sanction-order?party=both">the court's follow-up order</a> (PDF, 123KB)</li>
+                </ul>
+
+              </div>
+
+              {% elseif data['claimant'] == 11.105 %}
+              <div class="status-block single">
+                <h2 class="heading-medium">Your claim and the defendant's defence have been cancelled</h2>
+                <p>You didn't respond to the court's order by the deadline.</p>
+                <p>{{ partyName( 'claimant' ) }} didn't respond to the court's order by the deadline and the court cancelled their defence.</p>
+              </div>
+              <hr>
+              <h3 class="heading-medium">Apply to restart the claim</h3>
+              <p>You can pay a fee and <a href="../applications/claimant-general-application-only">ask the court to restart the claim</a>.</p>
+              <p>The fee would be up to £255 and does not guarantee your claim will be restarted.</p>
 
               {% elseif data['claimant'] == 11.11 or data['claimant'] == 11.3 or data['claimant'] == 11.111 or data['claimant'] == 11.12 or data['claimant'] == 11.13 or data['claimant'] == 11.5 or data['claimant'] == 11.51 or data['claimant'] == 11.52 %}
               <div class="status-block single">
@@ -1470,7 +1497,7 @@
             data['claimant'] != 3.2 and data['claimant'] != 9.2 and data['claimant'] != 10.12 and data['claimant'] != 10.01 and
             data['claimant'] != 10.4 and data['claimant'] != 10.5 and data['claimant'] != 10.81 and data['claimant']
             != 10.82 and data['claimant'] != 10.83 and data['claimant'] != 11.1011 and data['claimant'] != 17 and data['claimant'] !=
-            4.2 and data['claimant'] != 4.3 and data['claimant'] != 11.5 and data['claimant'] != 14.5 and data['claimant'] != 11.61 and data['claimant'] != 10 and data['claimant'] != 11
+            4.2 and data['claimant'] != 4.3 and data['claimant'] != 11.5 and data['claimant'] != 11.105 and data['claimant'] != 14.5 and data['claimant'] != 11.61 and data['claimant'] != 10 and data['claimant'] != 11
              or data['claimant'] == 26  or data['claimant'] == 27  or data['claimant'] == 28  or data['claimant'] == 29  %}
 
 
@@ -1488,7 +1515,6 @@
               <h2 class="heading-medium">Tell us you've ended the claim</h2>
               <p>If you've been paid or you've made another agreement with the defendant, you need to tell us.</p>
               <p><a href="paid-in-full/claimant?endClaim=yes" class="button secondary-button">Tell us you've settled</a></p>
-              <br>
 
 
               <!--  General applications  - this will need logic to know that it comes from the claimant  -->
@@ -2847,8 +2873,10 @@
       </div>
     </div>
   </div>
+</div>
 
 {% include 'prototypes/prototype-oct-2019/includes/contact.html' %}
+
 </main>
 <form method="post" action="#" class="form" style="position: absolute;">
   <select id="claimant2" name="claimant2" onchange="window.location.href='?claimant='+this.value">
@@ -2914,6 +2942,8 @@
     <option value="11.1011" {% if data['claimant'] == 11.1011 %}selected{% endif %}>Not responded (you - claim cancelled)</option>
     <option value="11.102" {% if data['claimant'] == 11.102 %}selected{% endif %}>Not responded (other party)</option>
     <option value="11.103" {% if data['claimant'] == 11.103 %}selected{% endif %}>Not responded (other party - defence cancelled)</option>
+    <option value="11.104" {% if data['claimant'] == 11.104 %}selected{% endif %}>Not responded (both parties)</option>
+    <option value="11.105" {% if data['claimant'] == 11.105 %}selected{% endif %}>Not responded (both parties claim + defence cancelled)</option>
     <option value="11.11" {% if data['claimant'] == 11.11 %}selected{% endif %}>Respond to order (offline)</option>
     <option value="11.12" {% if data['claimant'] == 11.12 %}selected{% endif %}>Order re-issued (offline)</option>
     <option value="11.13" {% if data['claimant'] == 11.13 %}selected{% endif %}>Order not re-issued (offline)</option>
