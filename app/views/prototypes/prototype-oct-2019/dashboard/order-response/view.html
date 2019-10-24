@@ -18,7 +18,15 @@ Money Claims Prototype
         </h1>
 
         {% if data['view'] == 'them' %}
+          {% if data['done'] == 'done' %}
+
+          <p>The {% if data['party'] == "defendant" %}defendant{% else %}claimant{% endif %} has finished uploaded their documents.</p>
+
+          {% else %}
+
           <p>The {% if data['party'] == "defendant" %}defendant{% else %}claimant{% endif %} uploaded these documents. They can upload more until 4pm on {{ now | date('add', 1, 'days') | date }}.</p>
+
+          {% endif %}
         {% endif %}
 
         <table class="check-your-answers uploads">
@@ -88,7 +96,8 @@ Money Claims Prototype
       <br />
       <br />
 
-      <!--
+
+      {% if data['done'] == 'done' %}
       <table class="check-your-answers uploads">
         <thead>
           <tr>
@@ -127,13 +136,17 @@ Money Claims Prototype
           </tr>
       </tbody>
     </table>
-  -->
+
+    {% else %}
 
     <h2 id='cd' class="heading-medium">
       {% if data['view'] == 'you' %}Your{% else %}Their{% endif %} witness statements
     </h2>
     <p>{% if data['view'] == 'you' %}You{% else %}They{% endif %} haven't uploaded any witness statements.</p>
 
+    {% endif %}
+
+    
     <br />
     <br />
     <table class="check-your-answers uploads">

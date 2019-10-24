@@ -872,7 +872,6 @@
                 {% endif %}
 
                 <p><a href="order-response?party=defendant" class="button" style="margin-bottom: 15px">Send us the details</a></p>
-
                 <p><a href="/public/images/order2.pdf" download>Download the court's order</a> (PDF, 123KB).</p>
                 <hr />
 
@@ -885,7 +884,7 @@
                 {% endif %}
 
                 <h2 class="heading-medium">View the claimant's response to the order</h2>
-                <p><a href="order-response/view?party=claimant" class="button secondary-button">See the details they sent the court</a></p>
+                <p><a href="order-response/view?party=claimant&view=them&done=no" class="button secondary-button">See the details they sent the court</a></p>
 
                 {% if data['defendant'] == 12.6 %}
                 <h3 class="heading-small">View the claimant's response to your request to review the order</h3>
@@ -906,7 +905,7 @@
                 <hr />
 
                 <h2 class="heading-medium">View the claimant's response to the order</h2>
-                <p><a href="order-response/view?party=claimant" class="button secondary-button">See the details they sent the court</a></p>
+                <p><a href="order-response/view?party=claimant&view=them&done=no" class="button secondary-button">See the details they sent the court</a></p>
               </div>
 
               {% elseif data['defendant'] == 12.101 %}
@@ -922,7 +921,7 @@
 
                 <hr />
                 <h2 class="heading-medium">View the claimant's response to the order</h2>
-                <p><a href="order-response/view?party=claimant" class="button secondary-button">See the details they sent the court</a></p>
+                <p><a href="order-response/view?party=claimant&view=them&done=done" class="button secondary-button">See the details they sent the court</a></p>
               </div>
 
 
@@ -949,7 +948,7 @@
 
                 <hr />
                 <h2 class="heading-medium">View your response to the order</h2>
-                <p><a href="order-response/view?party=defendant&view=you" class="button secondary-button">See the details you sent to the court</a></p>
+                <p><a href="order-response/view?party=defendant&view=you&done=no" class="button secondary-button">See the details you sent to the court</a></p>
 
               </div>
 
@@ -1113,30 +1112,24 @@
               </div>
               <hr/>
               <h2 class="heading-medium">View the claimant's response</h2>
-              <p><a href="order-response/view?party=claimant" class="button secondary-button">View their response to the court's order</a></p>
+              <p><a href="order-response/view?party=claimant&view=them&done=no" class="button secondary-button">View their response to the court's order</a></p>
 
 
               {% elseif data['defendant'] == 12.21 %}
               <div class="status-block single">
                 <h2 class="heading-medium">Waiting for the claimant to send a list of experts</h2>
-                <p>We're waiting for the claimant to send us a list of 3 experts. We've told them they need to do this by {{ now | date( 'add', 5, 'days' ) | date
-                  }}.</p>
+                <p>We're waiting for the claimant to send us a list of 3 experts. We've told them they need to do this by {{ now | date( 'add', 5, 'days' ) | date }}.</p>
                 <p>We'll send you the list when we have it and ask you to choose one expert to make a report about the case.</p>
-
-                  <p>You can then send us questions for the expert to answer in their report.</p>
-
-                  <h2 class="heading-small">Upload more information</h2>
-
+                <p>You can then send us questions for the expert to answer in their report.</p>
+                <h2 class="heading-small">Upload more information</h2>
 
                 <p>You can upload more documents or witness statements until {{ now | date( 'add', 15, 'days' ) | date }}. You can also view your response.</p>
-                <p><a href="order-response?party=claimant&evidence=complete&experts=complete&witness=complete"
-                      class="button secondary-button">Upload more or view your response</a></p>
+                <p><a href="order-response?party=claimant&evidence=complete&experts=complete&witness=complete" class="button secondary-button">Upload more or view your response</a></p>
 
               </div>
               <hr/>
               <h2 class="heading-medium">View the claimant's response</h2>
-
-              <p><a href="order-response/view?party=claimant" class="button secondary-button">View their response to the court's order</a></p>
+              <p><a href="order-response/view?party=claimant&view=them&done=no" class="button secondary-button">View their response to the court's order</a></p>
 
               {% elseif data['defendant'] == 12.3 %}
 <!--
@@ -1178,8 +1171,8 @@
 
                 <hr />
                 <h2 class="heading-medium">View the responses to the order</h2>
-                <p><a href="order-response/view?party=claimant&view=you" class="button secondary-button">See the details you sent to the court</a></p>
-                <p><a href="order-response/view?party=defendant&view=them" class="button secondary-button">See the details the defendant sent to the court</a></p>
+                <p><a href="order-response/view?party=defendant&view=you&done=no" class="button secondary-button">See the details you sent to the court</a></p>
+                <p><a href="order-response/view?party=claimant&view=them&done=no" class="button secondary-button">See the details the defendant sent to the court</a></p>
 
               </div>
 
@@ -1280,24 +1273,22 @@
 
               <hr />
               <h2 class="heading-medium">View the responses to the order</h2>
-              <p><a href="order-response/view?party=defendant&view=you" class="button secondary-button">See the details you sent to the court</a></p>
-              <p><a href="order-response/view?party=claimant&view=them" class="button secondary-button">See the details the claimant sent the court</a></p>
+              <p><a href="order-response/view?party=defendant&view=you&done=no" class="button secondary-button">See the details you sent to the court</a></p>
+              <p><a href="order-response/view?party=claimant&view=them&done=done" class="button secondary-button">See the details the claimant sent the court</a></p>
 
 
 
               {% elseif data['defendant'] == 14.2 %}
               <h2 class="heading-medium">The claimant hasn't paid the hearing fee</h2>
-
               <p>{{ partyName( 'claimant' ) }} missed the original deadline to pay the hearing fee.</p>
-
               <p>They must pay it before 4pm on {{ now | date( 'add', 12, 'days' ) | date }} or the court will cancel their claim.</p>
 
               <p><a href="../defendant/correspondence/forms/fee-sanction-order">Download the court's order</a> (PDF, 123KB).</p>
 
               <hr />
               <h2 class="heading-medium">View the responses to the order</h2>
-              <p><a href="order-response/view?party=defendant&view=you" class="button secondary-button">See the details you sent to the court</a></p>
-              <p><a href="order-response/view?party=claimant&view=them" class="button secondary-button">See the details the claimant sent the court</a></p>
+              <p><a href="order-response/view?party=defendant&view=you&done=no" class="button secondary-button">See the details you sent to the court</a></p>
+              <p><a href="order-response/view?party=claimant&view=them&done=done" class="button secondary-button">See the details the claimant sent the court</a></p>
 
 
 
@@ -1307,8 +1298,8 @@
 
               <hr />
               <h2 class="heading-medium">View the responses to the order</h2>
-              <p><a href="order-response/view?party=defendant&view=you" class="button secondary-button">See the details you sent to the court</a></p>
-              <p><a href="order-response/view?party=claimant&view=them" class="button secondary-button">See the details the claimant sent the court</a></p>
+              <p><a href="order-response/view?party=defendant&view=you&done=no" class="button secondary-button">See the details you sent to the court</a></p>
+              <p><a href="order-response/view?party=claimant&view=them&done=done" class="button secondary-button">See the details the claimant sent the court</a></p>
 
 
 
@@ -1381,8 +1372,8 @@
                 <p>You can also check the notice to see the court's response to any special requests you made.</p>
               <hr />
               <h2 class="heading-medium">View the responses to the order</h2>
-              <p><a href="order-response/view?party=defendant&view=you" class="button secondary-button">See the details you sent to the court</a></p>
-              <p><a href="order-response/view?party=claimant&view=them" class="button secondary-button">See the details the claimant sent the court</a></p>
+              <p><a href="order-response/view?party=defendant&view=you&done=no" class="button secondary-button">See the details you sent to the court</a></p>
+              <p><a href="order-response/view?party=claimant&view=them&done=done" class="button secondary-button">See the details the claimant sent the court</a></p>
 
 
 
