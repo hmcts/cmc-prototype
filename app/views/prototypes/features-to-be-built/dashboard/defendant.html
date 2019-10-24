@@ -692,22 +692,16 @@
 
               <div class="status-block single">
                 <h2 class="heading-medium">The court has ordered you to send us more details</h2>
-                <p>You need to send these details before 4pm on {{ now | date( 'add', 12, 'days' ) | date }}:</p>
+                <p>You need to send {% if data['defendant'] == 12.1001 %}general{% endif %} details before 4pm on {{ now | date( 'add', 12, 'days' ) | date }}.</p>
 
-                <ul class="list list-bullet">
-                  <li>any documents relevant to the case, like contracts, agreements or letters</li>
-                  <li>witness statements</li>
-                </ul>
+
 
                 {% if data['defendant'] == 12.1001 %}
-                <p>You also need to send these details before 4pm on {{ now | date( 'add', 18, 'days' ) | date }}:</p>
-                <ul class="list list-bullet">
-                  <li>your expert's report</li>
-                  <li>responses to questions about the expert's report</li>
-                </ul>
+                <p>You also need to send expert report details before 4pm on {{ now | date( 'add', 18, 'days' ) | date }}.</p>
+
                 {% endif %}
 
-                <p><a href="order-response?party=defendant" class="button" style="margin-bottom: 15px">Find out more about what to send</a></p>
+                <p><a href="order-response?party=defendant" class="button" style="margin-bottom: 15px">Send us the details</a></p>
 
                 <p><a href="/public/images/order2.pdf">Download the court's order</a> (PDF, 123KB).</p>
                 <hr />
@@ -733,18 +727,11 @@
               {% elseif data['defendant'] == 12.1003 %}
 
               <div class="status-block single">
-                <h2 class="heading-medium">The court has ordered you to send us more details</h2>
-                <p>You need to send these details before 4pm on {{ now | date( 'add', 12, 'days' ) | date }}:</p>
-                <p>The court has ordered you to send these details:</p>
+                <h2 class="heading-medium">The court has ordered you to take actions to prepare for the hearing</h2>
+                <p>You need to send us details and do anything else the court ordered before 4pm on {{ now | date( 'add', 12, 'days' ) | date }}.</p>
 
-                <ul class="list list-bullet">
-                  <li>any documents relevant to the case, like contracts, agreements or letters</li>
-                  <li>witness statements</li>
-                  <li>additional information listed in the order</li>
-                  <li>confirmation you've completed additional actions listed in the order</li>
-                  </ul>
 
-                <p><a href="order-response?party=defendant&generic=true" class="button" style="margin-bottom: 15px">Find out more about what to send</a></p>
+                <p><a href="order-response?party=defendant&generic=true" class="button" style="margin-bottom: 15px">Find out what you need to do</a></p>
 
                 <p><a href="/public/images/order2.pdf">Download the court's order</a> (PDF, 123KB).</p>
                 <hr />
@@ -761,7 +748,7 @@
                 <p>If you don't, the court will cancel your defence and the claimant can request a County Court Judgment (CCJ) against you.</p>
 
 
-                <p><a href="order-response?party=defendant" class="button" style="margin-bottom: 15px">Find out more about what to send</a></p>
+                <p><a href="order-response?party=defendant" class="button" style="margin-bottom: 15px">Respond and send details</a></p>
 
 
 
@@ -776,30 +763,27 @@
 
               {% elseif data['defendant'] == 12.1011 %}
               <div class="status-block single">
-                <h2 class="heading-medium">Your defence has been cancelled</h2>
-                <p>You didn't respond to the court's order by the deadline.</p>
+                <h2 class="heading-medium">The court cancelled your defence</h2>
+                <p>This is because you didn't respond to the court's order by the deadline.</p>
                 <p>Jan Clark can now request a County Court Judgment (CCJ) against you. We'll contact you if they do.</p>
               </div>
 
 
               {% elseif data['defendant'] == 12.102 %}
               <div class="status-block single">
-                <h2 class="heading-medium">The claimant didn't respond to the order</h2>
-                <p>Jan Clark missed the original deadline to respond to the court's order.</p>
-                <p>They must now respond before 4pm on {{ now | date( 'add', 11, 'days' ) | date }} or the court will cancel their claim.</p>
-                <h2 class="heading-small">Download documents</h2>
-                <p>You can download:</p>
-                <ul class="list list-bullet">
-                  <li><a href="/public/images/order2.pdf">the court's original order</a>  (PDF, 123KB)</li>
-                  <li><a href="../defendant/correspondence/forms/sanction-order">the court's follow-up order</a> (PDF, 123KB)</li>
+                <h2 class="heading-medium">Sam Clark missed a deadline to respond to the court's order</h2>
+                <p>The deadline was 4pm on {{ minus | date( 'subtract', 1, 'days' ) | date }}.</p>
+                <p>They now need to respond before 4pm on {{ now | date( 'add', 11, 'days' ) | date }} or the court will cancel their claim.</p>
+                <p><a href="/public/images/order2.pdf" download>Download the court's original order</a> (PDF, 123KB).</p>
+                <p><a href="../defendant/correspondence/forms/sanction-order?party=defendant">Download the court's follow-up order</a> (PDF, 123KB).</p>
                 </ul>
 
               </div>
 
               {% elseif data['defendant'] == 12.103 %}
               <div class="status-block single">
-                <h2 class="heading-medium">The claim against you has been cancelled</h2>
-                <p>Jan Clark didn't respond to the court's order by the deadline and the court cancelled their claim.</p>
+                <h2 class="heading-medium">The court cancelled Sam Clark's claim against you</h2>
+                <p>This is because Sam Clark didn't respond to the court's order by the deadline.</p>
               </div>
 
 
@@ -992,7 +976,7 @@
               <div class="status-block single">
                 <h2 class="heading-medium">You told us you've finished responding</h2>
                 <p>You said you've done everything the court ordered you to do.</p>
-                <p>We'll review the case. We'll contact you to tell you what to do next.</p>
+                <p>We'll review the case and contact you to tell you what to do next.</p>
 
                 <hr />
                 <h2 class="heading-medium">View the responses to the order</h2>
