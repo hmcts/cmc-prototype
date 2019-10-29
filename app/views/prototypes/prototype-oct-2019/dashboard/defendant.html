@@ -144,6 +144,25 @@
 
 
 
+              <!--  When the defendant is returning when they have a draft general application  -->
+              {% elseif data['defendant'] == 3.2255 %}
+                  <p>You started a draft application to request something from the court.</p>
+                  <p>The draft will be deleted if it isn't submitted by {{ now |  date("add", 70, "day") | date }}.</p>
+                  <p><a class="button secondary-button"
+                        href="applications-and-judgments/general-application/what">Return to application</a></p>
+                  <hr>
+                  <h2 class="heading-medium">A County Court Judgment (CCJ) has been issued against you</h2>
+                  <h3 class="heading-small">You need to pay {{ partyName( 'claimant' ) }} £1,500 immediately</h3>
+                  <p>{{ partyName( 'claimant' ) }} made a money claim for £1,500 against you on {{ now |  date("subtract", 50, "day") | date( "D MMMM YYYY" ) }}.</p>
+                  <p>Because you didn't respond, a CCJ was issued against you on {{ now |  date("subtract", 7, "day") | date( "D MMMM YYYY" ) }}.</p>
+                  <p>If {{ partyName( 'claimant' ) }} confirms you've settled the claim before 4pm on {{ now |  date("add", 23, "day") | date( "D MMMM YYYY" ) }}, the CCJ will be removed from the public register.</p>
+                  {% include "../includes/claimants-contact-details.html" %}
+                  <h3 class="heading-small">If you don't pay</h3>
+                  <p>{{ partyName( 'claimant' ) }} can use enforcement options to recover the money. These include asking the court to:</p>
+                  <ul class="list list-bullet">
+                    <li>send bailiffs to collect the money</li>
+                    <li>take money out of your wages or any sale of land or property</li>
+                  </ul>
 
 
 
@@ -156,6 +175,12 @@
                 <p><a class="button" href="../defendant/task-list">Respond to the claim</a></p>
                 <p><a href="../defendant/correspondence/forms/claim-form-claimant?check=9">Download claim form</a> (PDF, 123KB)</p>
               </div>
+
+
+
+
+
+
 
 
               {% elseif data['defendant'] == 3.3 %}
@@ -4207,6 +4232,11 @@
     <option value="25" {% if data['defendant'] == 25 %}selected{% endif %}>25. CCJ vary - New plan proposed by claimant</option>
     <option value="26" {% if data['defendant'] == 26 %}selected{% endif %}>26. CCJ vary - New plan from determination</option>
     <option value="27" {% if data['defendant'] == 27 %}selected{% endif %}>27. CCJ vary - Waiting for Redetermination</option>
+
+
+    <option>------- Returning to an application  ----------</option>
+    <option value="3.2255" {% if data['defendant'] == 3.12345 %}selected{% endif %}>Return to draft general application</option>
+
 
 
   </select>
