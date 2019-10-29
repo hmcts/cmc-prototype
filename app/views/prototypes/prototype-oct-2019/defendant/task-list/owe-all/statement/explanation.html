@@ -44,14 +44,21 @@ Money Claims Prototype
 
             {% else %}
 
-            <p>You need to give {% if data.counterclaim=="true" %}{{ partyName( 'defendant' ) }}{%else%}{{ partyName( 'claimant' ) }}{% endif %} details of your finances.</p>
-              <p>We'll ask you for the details then we'll send them to {% if data.counterclaim=="true" %}{{ partyName( 'defendant' ) }}{%else%}{{ partyName( 'claimant' ) }}{% endif %} to review.
-              {% if data['radio-pay-group'] != 'Instalments' %}
-                <p>They can reject your proposal if they believe you can pay sooner.</p>
-              {% endif %}
-            <p>If they reject your proposal, the court will make a new plan using your financial details.</p>
+              <p>You need to give {% if data.counterclaim=="true" %}{{ partyName( 'defendant' ) }}{%else%}{{ partyName( 'claimant' ) }}{% endif %} details of your finances.</p>
+                <p>We'll ask you for the details then we'll send them to {% if data.counterclaim=="true" %}{{ partyName( 'defendant' ) }}{%else%}{{ partyName( 'claimant' ) }}{% endif %} to review.
+                {% if data['radio-pay-group'] != 'Instalments' %}
+                  <p>They can reject your proposal if they believe you can pay sooner.</p>
+                {% endif %}
+              <p>If they reject your proposal, the court will make a new plan using your financial details.</p>
 
             {% endif %}
+
+            <!--  When a user is varying a judgment and has already submitted financial details in the past  -->
+            {% if data['varyselected'] == 'true' %}
+                <p>You can review the financial details you submitted on 30 March 2019.
+                <br><a href="#">Download previous details</a> (PDF, 182KB) </p>
+            {% endif %}
+
 
 
             <input type="hidden" name="your_defence_options" value="complete">
