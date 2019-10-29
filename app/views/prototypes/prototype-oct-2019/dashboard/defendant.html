@@ -679,16 +679,18 @@
 
               {% elseif data['defendant'] == 5.71 %}
               <h2 class="heading-medium">Mediation was unsuccessful</h2>
-              <p>You and {{ partyName( 'claimant' ) }} agreed to try mediation, but it did not settle the claim.</p>
-              <p>The court will review the case. You might have to go to a hearing.</p>
-              <p>We'll contact you to tell you what to do next.</p>
-
+              <p>You weren’t able to resolve {{ partyName( 'claimant' ) }}'s claim against you using mediation.</p>
+              <p>You'll have to go to a hearing. We'll contact you with the details.</p>
 
               {% elseif data['defendant'] == 5.72 %}
               <h2 class="heading-medium">Mediation was unsuccessful</h2>
-              <p>You and {{ partyName( 'claimant' ) }} agreed to try mediation, but it did not settle the claim.</p>
-              <p>The court will review the case. You might have to go to a hearing.</p>
-              <p>You need to <a href="forms/dq-form">complete a directions questionnaire</a> form to give us more information.</p>
+              <p>You weren’t able to resolve {{ partyName( 'claimant' ) }}'s claim against you using mediation.</p>
+              <p>A legal advisor will review the case. We'll contact you to tell you what to do next.</p>
+
+              {% elseif data['defendant'] == 5.73 %}
+              <h2 class="heading-medium">Mediation was unsuccessful</h2>
+              <p>You weren’t able to resolve {{ partyName( 'claimant' ) }}'s claim against you using mediation.</p>
+              <p>You need to <a href="forms/dq-form">complete a directions questionnaire</a> form to give us more information in case there's a hearing.</p>
               <p>You must make sure we receive the form before 4pm on {{ now | date('add', 19, 'days') | date }} or we'll cancel your defence.</p>
               <p>You also need to send a copy of the form to {{ partyName( 'claimant' ) }}.</p>
 
@@ -4108,8 +4110,9 @@
     <option value="5.6" {% if data['defendant'] == 5.6 %}selected{% endif %}>5.6. Defence rejected - no mediation</option>
     <option value="5.601" {% if data['defendant'] == 5.601 %}selected{% endif %}>5.6. Defence rejected - no mediation (offline DQs)</option>
     <option value="5.61" {% if data['defendant'] == 5.61 %}selected{% endif %}>5.61. Defence rejected - with mediation</option>
-    <option value="5.71" {% if data['defendant'] == 5.71 %}selected{% endif %}>5.71. Defence rejected - mediation failed - DQs already done online</option>
-    <option value="5.72" {% if data['defendant'] == 5.72 %}selected{% endif %}>5.72. Defence rejected - mediation failed - paper DQs</option>
+    <option value="5.71" {% if data['defendant'] == 5.71 %}selected{% endif %}>5.71. Defence rejected - mediation failed - DQs done, going to hearing</option>
+    <option value="5.72" {% if data['defendant'] == 5.72 %}selected{% endif %}>5.72. Defence rejected - mediation failed - DQs done, going to legal advisor</option>
+    <option value="5.73" {% if data['defendant'] == 5.73 %}selected{% endif %}>5.73. Defence rejected - mediation failed - do paper DQs</option>
     <option value="9" {% if data['defendant'] == 9 %}selected{% endif %}>9. I dispute the claim </option>
     <option value="11" {% if data['defendant'] == 11 %}selected{% endif %}>11. I dispute the claim + mediation </option>
     <option value="11.1" {% if data['defendant'] == 11.1 %}selected{% endif %}>11.1. I dispute the claim + mediation pilot </option>
