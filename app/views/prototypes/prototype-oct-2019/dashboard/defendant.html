@@ -668,14 +668,31 @@
               <p>You also need to send a copy of the form to {{ partyName( 'claimant' ) }}.</p>
 
 
-
-
               {% elseif data['defendant'] == 5.61 %}
               <h2 class="heading-medium">{{ partyName( 'claimant' ) }} rejected your response</h2>
               <p>You've both agreed to try mediation. We'll contact you to try to arrange a call with a mediator.</p>
               <p><a href="mediation/how-mediation-works">Find out how mediation works</a></p>
               <p>They've also sent us their hearing requirements.</p>
               <p><a href="../claimant/correspondence/dqs" target="_blank">Download their hearing requirements</a> (PDF, 123KB)</p>
+
+
+
+              {% elseif data['defendant'] == 5.71 %}
+              <h2 class="heading-medium">Mediation was unsuccessful</h2>
+              <p>You weren’t able to resolve {{ partyName( 'claimant' ) }}'s claim against you using mediation.</p>
+              <p>You'll have to go to a hearing. We'll contact you with the details.</p>
+
+              {% elseif data['defendant'] == 5.72 %}
+              <h2 class="heading-medium">Mediation was unsuccessful</h2>
+              <p>You weren’t able to resolve {{ partyName( 'claimant' ) }}'s claim against you using mediation.</p>
+              <p>A legal advisor will review the case. We'll contact you to tell you what to do next.</p>
+
+              {% elseif data['defendant'] == 5.73 %}
+              <h2 class="heading-medium">Mediation was unsuccessful</h2>
+              <p>You weren’t able to resolve {{ partyName( 'claimant' ) }}'s claim against you using mediation.</p>
+              <p>You need to <a href="forms/dq-form">complete a directions questionnaire</a> form to give us more information in case there's a hearing.</p>
+              <p>You must make sure we receive the form before 4pm on {{ now | date('add', 19, 'days') | date }} or we'll cancel your defence.</p>
+              <p>You also need to send a copy of the form to {{ partyName( 'claimant' ) }}.</p>
 
 
               {% elseif data['defendant'] == 6 %}
@@ -3787,46 +3804,42 @@
 
                 <!--  CCJ set aside requested by defendant  -->
                 {% if data['defendant'] == 20  or  data['defendant'] == 21  or  data['defendant'] == 22  or  data['defendant'] == 23  or  data['defendant'] == 24  or  data['defendant'] == 25  or  data['defendant'] == 26 %}
+
+
+                    <div class="hmcts-timeline__item">
+                        <div class="hmcts-timeline__header">
+                            <h2 class="hmcts-timeline__title">You submitted your request to cancel the CCJ</h2>
+                            <!--<p class="hmcts-timeline__by">by claimant</p>-->
+                            <p><a href="../claimant/correspondence/claim-form-claimant?check=1">Download request</a>
+                            (PDF, 123KB)</p>
+                        </div>
+                        <p class="hmcts-timeline__date"  style="color: grey; margin-top: -15px;">
+                            <time style="color: grey">{{ now | date( 'subtract', 14, 'days' ) | date }}</time>
+                        </p>
+                    </div>
+
+
+                    <div class="hmcts-timeline__item">
+                        <div class="hmcts-timeline__header">
+                            <h2 class="hmcts-timeline__title">A default CCJ was issued against you</h2>
+                        </div>
+                        <p><a target="_blank"   href="/prototypes/prototype-oct-2019/defendant/correspondence/forms/judgment-order?check=1">Download CCJ</a> (PDF, 48 KB)</p>
+                        <p class="hmcts-timeline__date"  style="color: grey; margin-top: -15px;">
+                            <time style="color: grey">{{ now | date( 'subtract', 55, 'days' ) | date }}</time>
+                        </p>
+                    </div>
+
+
                     <div class="hmcts-timeline__item">
                       <div class="hmcts-timeline__header">
-                        <h2 class="hmcts-timeline__title">You requested to remove the CCJ</h2>
-                        <!--<p class="hmcts-timeline__by">by defendant</p>-->
+                          <h2 class="hmcts-timeline__title">A claim was made against you</h2>
+                          <!--<p class="hmcts-timeline__by">by defendant</p>-->
                       </div>
                       <p class="hmcts-timeline__date">
-                        <time style="color: grey">{{ now | date( 'add', 15, 'days' ) | date }}</time>
+                          <time style="color: grey">{{ now | date( 'subtract', 85, 'days' ) | date }}</time>
                       </p>
                     </div>
 
-                    <div class="hmcts-timeline__item">
-                      <div class="hmcts-timeline__header">
-                        <h2 class="hmcts-timeline__title">Debt was paid in full</h2>
-                      </div>
-                      <p class="hmcts-timeline__date"  style="color: grey">
-                        24 April 2018
-                      </p>
-                    </div>
-
-                    <div class="hmcts-timeline__item">
-                      <div class="hmcts-timeline__header">
-                        <h2 class="hmcts-timeline__title">A default CCJ was issued to the defendant</h2>
-                      </div>
-                      <p><a target="_blank"   href="/prototypes/prototype-oct-2019/defendant/correspondence/forms/judgment-order?check=1">Download CCJ</a> (PDF, 48 KB)</p>
-                      <p class="hmcts-timeline__date"  style="color: grey; margin-top: -15px;">
-                        31 December 2018
-                      </p>
-                    </div>
-
-                    <div class="hmcts-timeline__item">
-                      <div class="hmcts-timeline__header">
-                        <h2 class="hmcts-timeline__title">You submitted your claim</h2>
-                        <!--<p class="hmcts-timeline__by">by claimant</p>-->
-                        <p><a href="../claimant/correspondence/claim-form-claimant?check=1">Download claim</a>
-                          (PDF, 123KB)</p>
-                      </div>
-                      <p class="hmcts-timeline__date"  style="color: grey; margin-top: -15px;">
-                        15 December 2018
-                      </p>
-                    </div>
                 {% endif %}
 
 
@@ -4093,6 +4106,9 @@
     <option value="5.6" {% if data['defendant'] == 5.6 %}selected{% endif %}>5.6. Defence rejected - no mediation</option>
     <option value="5.601" {% if data['defendant'] == 5.601 %}selected{% endif %}>5.6. Defence rejected - no mediation (offline DQs)</option>
     <option value="5.61" {% if data['defendant'] == 5.61 %}selected{% endif %}>5.61. Defence rejected - with mediation</option>
+    <option value="5.71" {% if data['defendant'] == 5.71 %}selected{% endif %}>5.71. Defence rejected - mediation failed - DQs done, going to hearing</option>
+    <option value="5.72" {% if data['defendant'] == 5.72 %}selected{% endif %}>5.72. Defence rejected - mediation failed - DQs done, going to legal advisor</option>
+    <option value="5.73" {% if data['defendant'] == 5.73 %}selected{% endif %}>5.73. Defence rejected - mediation failed - do paper DQs</option>
     <option value="9" {% if data['defendant'] == 9 %}selected{% endif %}>9. I dispute the claim </option>
     <option value="11" {% if data['defendant'] == 11 %}selected{% endif %}>11. I dispute the claim + mediation </option>
     <option value="11.1" {% if data['defendant'] == 11.1 %}selected{% endif %}>11.1. I dispute the claim + mediation pilot </option>
