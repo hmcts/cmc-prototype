@@ -39,7 +39,7 @@
             or data['claimant'] == 12 or data['claimant'] == 13.2 or data['claimant'] == 14.1 or data['claimant'] == 14.2 or data['claimant'] == 14.3 or data['claimant'] == 14.4 or data['claimant'] == 14.5 or data['claimant'] == 16  or data['claimant'] == 16.1 or data['claimant'] == 17  or data['claimant'] == 17.01  or data['claimant'] == 20 or data['claimant'] == 20.1 or data['claimant'] == 20.2
             or data['claimant'] == 21 or data['claimant'] == 21.1 or data['claimant'] == 23 or data['claimant'] == 24 or data['claimant'] == 26  or data['claimant'] == 27  or data['claimant'] == 28  or data['claimant'] == 29
             or data['claimant'] == 33  or data['claimant'] == 34  or data['claimant'] == 36  or data['claimant'] == 37
-            or data['claimant'] == 16.14  or  data['claimant'] == 16.15%}
+            or data['claimant'] == 16.14  or  data['claimant'] == 16.15 or   data['claimant'] == 3.12345   %}
             <li role="presentation"><a href="#next-steps" role="tab" tabindex="0" aria-controls="next-steps" aria-selected="true">Latest update</a></li>
             <li role="presentation"><a href="#history" role="tab" tabindex="-1" aria-controls="history">Claim history</a></li>
             <li role="presentation"><a href="#contact" role="tab" tabindex="-1" aria-controls="history">Defendant's details</a></li>
@@ -134,6 +134,31 @@
               <h2 class="heading-medium">Cancel your request for judgment</h2>
               <p>You can cancel the request and end the claim or cancel and continue with it.</p>
               <p><a href="cancel-judgment" class="button secondary-button">Cancel your request for judgment</a></p>
+
+
+              <!--  When the claimant is returning when they have a draft general application  -->
+              {% elseif data['claimant'] == 3.12345 %}
+                  <br>
+                  <p>You started an application to change something about this claim.</p>
+                  <p>We'll delete it if you don't submit it by 4pm on {{ now |  date("add", 70, "day") | date }}.</p>
+                  <p><a class="button secondary-button"
+                        href="../applications/claimant-general-application-only">Resume the application</a></p>
+                  <hr>
+
+                  <div class="status-block single">
+                    <h2 class="heading-medium">We've received your request for judgment</h2>
+                    <p>We'll contact you within 10 working days to tell you whether the judgment has been entered.</p>
+                    <p>{{ partyName( 'defendant' ) }} can no longer respond to your claim using this service - they may have responded by post.</p>
+                    <p>It's possible we received a postal response before the deadline but hadn't processed it when you requested judgment.</p>
+                    <p>If we discover this has happened, we'll reject your request.</p>
+                  </div>
+
+                  <hr />
+
+                  <h2 class="heading-medium">Cancel your request for judgment</h2>
+                  <p>You can cancel the request and end the claim or cancel and continue with it.</p>
+                  <p><a href="cancel-judgment" class="button secondary-button">Cancel your request for judgment</a></p>
+
 
               {% elseif data['claimant'] == 3.1 %}
               <h2 class="heading-medium">{{ partyName( 'defendant' ) }} asked for 14 more days to respond</h2>
@@ -1518,16 +1543,20 @@
               <p><a href="paid-in-full/claimant?endClaim=yes" class="button secondary-button">Tell us you've settled</a></p>
 
 
-              <!--  General applications  - this will need logic to know that it comes from the claimant  -->
-              <hr>
-              <h3 class="heading-medium">Apply to change something about the claim</h3>
-              <p>You can pay a fee and <a href="../applications/claimant-general-application-only">ask the court</a> to change something in relation to this claim.</p>
-              <p>The fee depends on what you're asking the court to change. It can be up to £255.</p>
 
             </div>
 
 
             {% endif %}
+
+
+            <div class="column-two-thirds">
+                <!--  General applications  - this will need logic to know that it comes from the claimant  -->
+                <hr>
+                <h3 class="heading-medium">Apply to change something about the claim</h3>
+                <p>You can pay a fee and <a href="../applications/claimant-general-application-only">ask the court</a> to change something in relation to this claim.</p>
+                <p>The fee depends on what you're asking the court to change. It can be up to £255.</p>
+            </div>
 
 
             <!--<div class="right-column-nav" style="margin-top: 30px">-->
@@ -3069,6 +3098,10 @@
     <option value="34" {% if data['claimant'] == 34 %}selected{% endif %}>CCJ - defendant's set aside - claim not settled - not attending hearing</option>
     <option value="36" {% if data['claimant'] == 36 %}selected{% endif %}>CCJ - defendant's set aside - claim settled - attending hearing</option>
     <option value="37" {% if data['claimant'] == 37 %}selected{% endif %}>CCJ - defendant's set aside - claim not settled - not attending hearing</option>
+
+    <option>------- Returning to an application  ----------</option>
+    <option value="3.12345" {% if data['claimant'] == 3.12345 %}selected{% endif %}>Return to draft general application</option>
+
 
 
   </select>
