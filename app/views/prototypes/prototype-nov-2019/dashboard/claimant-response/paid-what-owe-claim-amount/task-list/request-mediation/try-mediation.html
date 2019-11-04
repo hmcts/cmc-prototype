@@ -1,0 +1,68 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="2" %}
+
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+
+
+<main id="content" role="main">
+
+  {% include "includes/phase_banner_beta.html" %}
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+      <!--  <a href="#" onclick="history.go(-1)" class="link-back">Back</a>  -->
+
+      <h1 class="heading-large">
+        Will you try free mediation?
+      </h1>
+
+      <form
+        name="aspnetForm"
+        method="post"
+        id="aspnetForm"
+        autocomplete="off"
+        onsubmit="multiNavigation('radio-mediation-group', ['Yes', 'No'], ['statements-all', '../../task-list']);return false;">
+
+        <input id="your-offer" name="offer" type="hidden">
+
+        <div class="form-group">
+          <fieldset>
+
+            <legend class="visually-hidden">Will you try mediation?</legend>
+
+
+            <div class="multiple-choice">
+              <input id="radio-yes" type="radio" name="radio-mediation-group" value="Yes">
+              <label for="radio-yes" data-target="yes-info">Yes</label>
+            </div>
+
+            <div class="multiple-choice">
+              <input id="radio-no" type="radio" name="radio-mediation-group" value="No">
+              <label for="radio-no" data-target="no-info">No</label>
+            </div>
+
+
+          </fieldset>
+          <input type="hidden" name="mediation" value="complete">
+
+
+          <div class="form-group">
+            <input type="submit" class="button" value="Save and continue"/>
+          </div>
+
+        </div>
+      </form>
+
+    </div>
+  </div>
+  {% include 'prototypes/prototype-nov-2018/includes/contact.html' %}
+</main>
+{% endblock %}

@@ -1,0 +1,226 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="2" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+
+{% if data['claimant'] == 11.1001 or data['defendant'] == 12.1001 or data['experts'] == 'on' %}
+{% set experts = 'on' %}
+
+{% endif %}
+
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <!--  <a href="#" onclick="history.go(-1)" class="link-back">Back</a>  -->
+
+
+      <h1 class="heading-large">
+          {% if experts != 'on' %}
+        Complete every task on this page before 4pm on {{ now | date('add', 12, 'days') | date }}  {% endif %}
+        {% if experts == 'on' %}Complete every task on this page before its deadline{% endif %}
+      </h1>
+
+      <p>If you don't, {% if data['party'] == "defendant" %}the court may cancel your defence and give you a County Court Judgment (CCJ){% else %}the court may cancel your claim{% endif %}.</p>
+
+      <p>When you've completed every task, you need to <a href="order-response/finished">tell us you've finished</a>.</p>
+
+
+      <hr />
+
+
+
+      <h2 class="heading-small">Upload any documents</h2>
+
+      {% if data['evidence'] == 'complete' %}
+      <p>You uploaded these documents on {{ now | date }}:</p>
+
+      <ul>
+        <li><a href="#">Emails.pdf</a></li>
+        <li><a href="#">Photo 1.jpg</a></li>
+        <li><a href="#">Photo 2.jpg</a></li>
+        <li><a href="#">Contract.pdf</a></li>
+      </ul>
+
+      <br />
+      <div class="form-group">
+        <a href="order-response/evidence" class="secondary-button">Upload more documents</a>
+      </div>
+
+      {% else %}
+      {% if experts == 'on' %}
+      <p>You need to upload these documents before 4pm on {{ now | date('add', 12, 'days') | date }}.</p>
+      {% endif %}
+      <p>Upload copies of any documents you intend to use at the hearing.</p>
+      <p>Include copies of these if you have them:</p>
+      <ul class="list list-bullet">
+        <li>contracts or agreements relating to the claim</li>
+        <li>any relevant text messages, emails or letters</li>
+        <li>[any additional requests]</li>
+      </ul>
+      <div class="form-group">
+        <a href="order-response/evidence" class="secondary-button">Upload documents</a>
+      </div>
+      {% endif %}
+
+      <hr />
+
+      {% if data['generic'] == 'true' %}
+      <h2 class="heading-small">Upload any other information the court ordered you to send</h2>
+<!--       <p>[Instructions from legal advisor]</p> -->
+      <p>Please provide a copy of the roofing felt manufacturer's fitting instrucitons which you stated {% if data['party'] == "defendant" %}you followed acurately{% else %}was not followed{% endif %}.</p>
+      <div class="form-group">
+        <a href="order-response/generic-upload" class="secondary-button">Upload information</a>
+      </div>
+
+      <hr />
+      <h2 class="heading-small">Confirm you've done anything else the court ordered</h2>
+<!--       <p>[Instructions from legal advisor]</p> -->
+      <p>Please confirm you have supplied a sample of the disputed roofing material to the {% if data['party'] == "defendant" %}claimant{% else %}defendant{% endif %}.</p>
+      <div class="form-group">
+        <a href="order-response/generic-confirm" class="secondary-button">Confirm you've done this</a>
+      </div>
+      <hr />
+
+      {% endif %}
+
+
+<!-- WITNESS STATEMENT BUILDER - REMOVED FOR NOW
+
+      <h2 class="heading-small">State your version of events</h2>
+      {% if data['own-statement'] == 'complete' %}
+      <p>You produced your witness statement on {{ now | date }}.</p>
+
+      <p><a href="#">Download your witness statement</a> (PDF, 123KB)</p>
+
+      {% else %}
+      {% if experts == 'on' %}
+      <p>You need to produce your statement before 4pm on {{ now | date('add', 12, 'days') | date }}.</p>
+      {% endif %}
+      <p>Show us the facts and evidence that prove your case.</p>
+
+      <div class="form-group">
+
+        <a href="order-response/witness-statements/statement-builder" class="secondary-button">State your version of events</a>
+
+
+      </div>
+      {% endif %}
+
+      <hr />
+-->
+
+      <h2 class="heading-small">Complete and upload any witness statements</h2>
+      {% if data['witness'] == 'complete' %}
+      <p>You uploaded these documents on {{ now | date }}:</p>
+
+      <ul>
+          <li>Steve Smith: <a href="#">Witness statement 1.pdf</a></li>
+          <li>Ben {{ partyName( 'claimant', 'last' ) }}: <a href="#">Witness statement 2.docx</a></li>
+      </ul>
+
+      <br />
+      <div class="form-group">
+        <a href="order-response/witness-statements" class="secondary-button">Upload more witness statements</a>
+      </div>
+
+      {% else %}
+      {% if experts == 'on' %}
+      <p>You need to upload these documents before 4pm on {{ now | date('add', 12, 'days') | date }}.</p>
+      {% endif %}
+      <p>Upload a witness statement for any witnesses whose evidence you want to use at the hearing, including yourself.</p>
+
+      <div class="form-group">
+        <a href="order-response/witness-statements" class="secondary-button">Upload witness statements</a>
+      </div>
+      {% endif %}
+
+      <hr />
+
+      {% if experts == 'on' or data['expert'] == 'complete' %}
+
+
+      {% if experts == 'on' %}
+      <h2 class="heading-small">Upload an expert report</h2>
+      {% if experts == 'on' %}
+      <p>You need to upload an expert report before 4pm on {{ now | date('add', 18, 'days') | date }}.</p>
+      {% endif %}
+      <p>The judge has given permission for you to use an expert. You need to follow these steps:</p>
+
+      <ol class="list list-number">
+        <li>Make a list of 3 independent experts who can provide a written report in return for a fee.</li>
+        <li>The {% if data['party'] == "defendant" %}claimant{% else %}defendant{% endif %} then picks one expert from the list.</li>
+        <li>You both provide questions for the expert to answer in the report, plus any extra information the expert asks for.</li>
+        <li>Pay the expert - you usually both share this cost.</li>
+      </ol>
+
+      <p>After you've received the expert's report you need to:</p>
+      <ol class="list list-number">
+        <li>Share the report with the {% if data['party'] == "defendant" %}claimant{% else %}defendant{% endif %}.</li>
+        <li>Ask the expert any questions either of you have about the report.</li>
+        <li>Upload the expert's report along with any questions and answers about it.</li>
+      </ol>
+
+      <div class="form-group">
+        <a href="order-response/expert-reports?type=" class="secondary-button">Upload the expert's documents</a>
+      </div>
+
+
+      {% else %}
+      <h2 class="heading-small">Upload the expert's report</h2>
+
+      <p>You uploaded the expert's report on {{ now | date('subtract', 5, 'days') | date }}:</p>
+      <ul>
+        <li><a href="#">Report.pdf</a></li>
+      </ul>
+      <br />
+
+      <p>You uploaded the responses to the questions on the expert's report on {{ now | date }}:</p>
+      <ul>
+        <li><a href="#">Responses.pdf</a></li>
+      </ul>
+
+      {% endif %}
+      <hr />
+
+      {% endif %}
+
+      <h2 class="heading-medium">Tell us you've finished</h2>
+      <p>You need to tell us when you've done everything the court ordered you to do. You should do this before 4pm on {% if experts == 'on' %}{{ now | date('add', 18, 'days') | date }}{% else %}{{ now | date('add', 12, 'days') | date }}{% endif %}.</p>
+      <a href="order-response/finished" class="button">Tell us you've finished</a>
+
+      <hr />
+
+      <h2 class="heading-medium">Responding by post</h2>
+      <p>If you can't upload the required documents, you can <a href="order-response/offline">respond to the order by post</a> instead.</p>
+
+      <hr />
+      <h2 class="heading-medium">If you have a problem with the order</h2>
+      <p>You can <a href="order-response/review/reason">ask the court to review it</a>. You need to do this before 4pm on {{ now | date('add', 19, 'days') | date }}.</p>
+      <p>A judge will consider your request. You should give details of how you want the order changed and the reasons for your request.</p>
+
+
+    </div>
+  </form>
+</div>
+</div>
+{% include 'prototypes/prototype-nov-2019/includes/contact.html' %}
+</main>
+
+<form method="post" action="#" class="form" style="position: absolute;">
+  <select onchange="window.location.href='?'+this.value">
+    <option>-------- Status --------</option>
+    <option value="evidence=&witness=&expert=">Nothing uploaded</option>
+    <option value="evidence=complete&witness=&expert=">Documents uploaded</option>
+    <option value="own-statement=complete&evidence=&witness=complete&expert=">Own statements uploaded</option>
+    <option value="evidence=&witness=complete&expert=">Witness statements uploaded</option>
+    <option value="evidence=&witness=&expert=complete">Expert report uploaded</option>
+    <option value="generic=true">With generic uploads</option>
+  </select>
+</form>
+{% endblock %}

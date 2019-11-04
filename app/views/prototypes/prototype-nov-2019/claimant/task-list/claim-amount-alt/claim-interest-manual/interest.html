@@ -1,0 +1,92 @@
+{% extends "layout_task-list.html" %}
+
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+
+{% block home_link %} ../../task-list {% endblock %}
+{% block proposition_header %}
+{% set my_account="1" %}
+
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+
+
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+
+      <!--  <a href="#" onclick="history.go(-1)" class="link-back">Back</a>  -->
+
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+
+
+
+        {{formData | safe}}
+
+        <h1 class="heading-large">
+          How much do you want to continue claiming?
+
+
+        </h1>
+        <form method="post" action="{% if data['amount-owed'] %}../../../../defendant/task-list/counter-claim/counter-type{% else %}../total{% endif %}">
+
+
+        <fieldset>
+          <legend class="visuallyhidden">
+            Interest
+          </legend>
+
+          <fieldset></fieldset>
+
+          <div class="multiple-choice">
+            <input id="radio-1" type="radio" name="continue-interest-rate" value="8" {{ checked('interest-rate', '8 percent') }}>
+            <label for="radio-1">8% per year
+            </label>
+          </div>
+
+          <div class="multiple-choice" data-target="different">
+            <input id="radio-2" name="continue-interest-rate" type="radio" value="different" {{ checked("interest-rate", "Different rate") }}>
+            <label for="radio-2">Specific daily interest amount</label>
+          </div>
+          <div class="panel panel-border-narrow js-hidden" id="different">
+            <label class="form-label" for="rate">Daily interest amount</label>
+            <input class="form-control form-control-1-4 fee pound" name="continue-interest-rate-amount" type="text" id="continue-interest-rate-amount" value="{{data['continue-interest-rate-amount']}}">
+
+          </div>
+
+
+
+        </fieldset>
+
+
+
+
+      {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}
+        <div class="form-group">
+          <input type="submit" class="button" value="Save and continue"/>
+        </div>
+
+
+        <a href="{{ data.return_page if data.return_page | length > 0 else '../task-list' }}">Cancel</a>
+
+      {% else %}
+        <div class="form-group">
+          <input type="submit" class="button" value="Save and continue"/>
+        </div>
+
+      {% endif %}
+      </form>
+
+    </div>
+
+
+  </div>
+
+
+{% include 'prototypes/prototype-nov-2019/includes/contact.html' %}
+</main>
+{% endblock %}

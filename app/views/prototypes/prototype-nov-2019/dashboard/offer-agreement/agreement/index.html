@@ -1,0 +1,68 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <!--<div class="breadcrumbs">-->
+    <!--<ol>-->
+      <!--<li><a href="../review-agreement">Agreement overview</a></li>-->
+      <!--</ol>-->
+      <!--</div>-->
+      <div class="grid-row">
+        <div class="column-two-thirds">
+          <!--  <a href="#" onclick="history.go(-1)" class="link-back">Back</a>  -->
+          <h1 class="heading-large">You can now make a settlement agreement</h1>
+
+
+          {% if data['newoffer'] == 'true' %}
+              <p>You both need to sign the agreement for it to become a legal contract.</p>
+
+          {% else %}
+              <p>The agreement will be based on the offer from {{ partyName( 'defendant' ) }} you've just accepted. It has not been reviewed by court staff or a judge.</p>
+
+              {% if  data['defendant'] != "defendant_signed"%}
+              <p>You both need to sign the agreement for it to become a legal contract.</p>
+              {% endif %}
+              {% if data['defendant'] == "defendant_signed" %}
+              You may avoid getting a County Court Judgment (CCJ) if you settle out of court.</p>
+              <p>You both need to sign the agreement for it to become a legal contract.</p>
+              {% endif %}
+          {% endif %}
+
+
+          {% if data['newoffer'] == 'true' %}
+              <a href="agreement/offer" class="button">Make an agreement</a>
+          {% else %}
+              <a href="agreement/offer" class="button">Make an agreement</a>
+          {% endif %}
+
+
+        </div>
+      </div>
+    {% include 'prototypes/prototype-nov-2019/includes/contact.html' %}
+</main>
+
+
+
+
+
+<form method="post"  action="#" class="for4" style=" float: left; ">
+  <select style="height:25px;" onchange="window.location.href='?'+this.value">
+    <option value="newoffer=false&"
+            {% if data['newoffer'] != 'true'  %}selected{% endif %}
+    >Old type of offer</option>
+
+    <option value="newoffer=true&"
+            {% if data['newoffer'] == 'true'  %}selected{% endif %}
+    >New type of offer</option>
+
+  </select>
+</form>
+
+
+{% endblock %}

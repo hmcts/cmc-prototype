@@ -1,0 +1,324 @@
+{% extends "layout_task-list.html" %}
+{% block page_title %}
+Check your answers
+{% endblock %}
+{% block home_link %} ../task-list {% endblock %}
+{% block proposition_header %}
+{% set my_account="1" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <h1 class="heading-large">
+    Check your answers
+  </h1>
+
+
+
+
+        <!--  Where offers are included in a 'intention to proceed'  -->
+        {% if data['defendantmadeoffer'] == 'true'   and   data['claimantusertestingpartone'] != 'true'  %}
+              <!--  Proposed plan  -->
+              <table class="check-your-answers">
+                <thead>
+                    <tr>
+                      <th colspan="2">
+                        <h2 class="heading-medium" id="name">
+                          The defendant's offer
+                        </h2>
+                      </th>
+                      <th>
+                      </th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                <tr>
+                    <td>
+                      Your response
+                    </td>
+                    <!-- Pay in installment content also needs considering -->
+                    <td>
+                      {% if data['offeraccepted'] == 'true'  %}
+                          Accept offer
+                      {% else %}
+                          Rejected offer
+                      {% endif %}
+
+                    </td>
+                    <td class="change-answer">
+                      <a href="#">
+                        Change <span class="visuallyhidden">Name</span>
+                      </a>
+                    </td>
+                </tr>
+
+
+              {% if data['offeraccepted'] == 'true'  %}
+              {% else %}
+                  <tr>
+                    <td>
+                      Reason for rejecting
+                    </td>
+                    <!-- Pay in installment content also needs considering -->
+                    <td style="white-space: pre-wrap;" >{{ data['rejection-reason'] }}</td>
+                    <td class="change-answer">
+                      <a href="#">
+                        Change <span class="visuallyhidden">Name</span>
+                      </a>
+                    </td>
+                  </tr>
+
+                  </tbody>
+                </table>
+
+
+                  <!--  Counter offer  -->
+                  <table class="check-your-answers">
+                    <thead>
+                        <tr>
+                          <th colspan="2">
+                            <h2 class="heading-medium" id="name">
+                              Your offer
+                            </h2>
+                          </th>
+                          <th>
+                          </th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                          <td>
+                            Make offer
+                          </td>
+                          <!-- Pay in installment content also needs considering -->
+                          <td>
+                            {% if data['makecounteroffer'] == 'true'  %}
+                                Yes
+                            {% else %}
+                                No
+                            {% endif %}
+                          </td>
+                          <td class="change-answer">
+                            <a href="#">
+                              Change <span class="visuallyhidden">Name</span>
+                            </a>
+                          </td>
+                        </tr>
+
+                        {% if data['makecounteroffer'] == 'true'  %}
+                              <tr>
+                                <td>
+                                  Details
+                                </td>
+                                <!-- Pay in installment content also needs considering -->
+                                <td  style="white-space: pre-wrap;" >{{ data['the-offer-text'] }}</td>
+                                <td class="change-answer">
+                                  <a href="#">
+                                    Change <span class="visuallyhidden">Name</span>
+                                  </a>
+                                </td>
+                              </tr>
+
+                              <tr>
+                                <td>
+                                  Offer completed by
+                                </td>
+                                <!-- Pay in installment content also needs considering -->
+                                <td>
+                                  {{ data['offerDateDay'] }} August 2019
+                                </td>
+                                <td class="change-answer">
+                                  <a href="#">
+                                    Change <span class="visuallyhidden">Name</span>
+                                  </a>
+                                </td>
+                              </tr>
+                        {% endif %}
+
+                    </tbody>
+                  </table>
+
+
+
+
+                    <table class="check-your-answers">
+                      <thead>
+                      <tr>
+                        <th colspan="2">
+                          <h2 class="heading-medium" id="name">
+                            More offers
+                          </h2>
+                        </th>
+                        <th>
+                        </th>
+                      </tr>
+                      </thead>
+
+                      <tbody>
+                      <tr>
+                        <td>
+                          Allow more offers
+                        </td>
+                        <!-- Pay in installment content also needs considering -->
+                        <td>
+                          {% if data['moreoffers'] == 'true'  %}
+                          Yes
+                          {% elif data['moreoffers'] == 'false'  %}
+                          No
+                          {% endif %}
+                        </td>
+                        <td class="change-answer">
+                          <a href="#">
+                            Change <span class="visuallyhidden">Name</span>
+                          </a>
+                        </td>
+                      </tr>
+
+                      </tbody>
+                    </table>
+
+              {% endif  %}
+        {% endif  %}
+
+
+  <!-- show response if no offers or offer was rejected  -->
+  <table class="check-your-answers">
+
+    {% if data['offeraccepted'] != 'true'  or  data['defendantmadeoffer'] == 'false'  or  data['claimantusertestingpartone'] == 'true'  %}
+        <thead>
+        <tr>
+          <th colspan="2">
+            <h2 id='cd' class="heading-medium">
+              Your response
+            </h2>
+          </th>
+          <th>
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>
+            Do you want to proceed with the claim?
+          </td>
+          <td>
+            {%if data.radio_select_group=="Yes" %}
+            Yes
+            {%elif data.radio_select_group=="No" %}
+            No
+            {% else %}
+            No
+            {% endif %}
+          </td>
+          <td class="change-answer">
+            <a href="#">
+              Change <span class="visuallyhidden">Why you believe you're owed the money</span>
+            </a>
+          </td>
+        </tr>
+
+    {% endif %}
+
+
+
+    <tr>
+    {%if data.radio_select_group=="Yes" and data.mediation!="off" %}
+    <table class="check-your-answers">
+      <thead>
+      <tr>
+        <th colspan="2">
+          <h2 class="heading-medium">
+            Free telephone mediation
+          </h2>
+        </th>
+        <th>
+        </th>
+      </tr>
+      </thead>
+      <td>
+        Will you try free mediation?
+      </td>
+      <td>
+        {% if data['resolve_dispute']=="complete" %}
+        Yes
+        {% elseif data['meditation_ineligible']=="complete" %}
+        No
+        {% endif %}
+      </td>
+      <td class="change-answer">
+        <a
+          href="../task-list/request-mediation?return_page={{ '../../task-list' | urlencode }}">
+          Change <span class="visuallyhidden">Why you believe you're owed the money</span>
+        </a>
+      </td>
+      {% if data['resolve_dispute']=="complete" %}
+      <tr>
+        <td>
+          Agree to all statements
+        </td>
+        <td>
+          Yes, I agree
+        </td>
+        <td class="change-answer">
+          <a href="../task-list/request-mediation/statements-all?return_page={{ '../../task-list' | urlencode }}">
+            Change <span class="visuallyhidden">Name</span>
+          </a>
+        </td>
+      </tr>
+
+      <tr>
+        <td>Contact number
+        </td>
+        <td>
+          {{ data['phone-claimant'] or '07123456789'}}
+        </td>
+        <td class="change-answer">
+          <a href="../task-list/request-mediation/previous-phone?return_page={{ '../../task-list' | urlencode }}">
+            Change <span class="visuallyhidden">Name</span>
+          </a>
+        </td>
+      </tr>
+      {% else %}
+      {% endif %}
+      </tbody>
+    </table>
+    {% endif %}
+
+    </tr>
+
+
+
+
+    </tbody>
+  </table>
+
+
+
+  {% include "prototypes/prototype-nov-2019/includes/dq-check.html" %}
+
+
+  {% if data['hearing'] == "complete" %}
+
+  <h2 class="heading-medium">Confirmation</h2>
+  <div class="form-group">
+    <div class="multiple-choice text">
+      <input class="" id="HasAcceptedTermsAndConditions" type="checkbox" value="true">
+      <label for="HasAcceptedTermsAndConditions">The hearing requirement details on this page are true to the best of my knowledge.</label>
+    </div>
+  </div>
+
+  {% endif %}
+
+  <br />
+
+<form method="get" action="../../confirmation-page?" class="form">
+  <div class="form-group">
+    <button id="submit" class="button" >Submit response</button>
+  </div>
+</form>
+{% include 'prototypes/prototype-nov-2019/includes/contact.html' %}
+</main>
+{% endblock %}

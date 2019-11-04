@@ -1,0 +1,1775 @@
+{% extends "layout_task-list.html" %}
+{% block page_title %}
+Check your answers
+{% endblock %}
+{% block home_link %} ../task-list {% endblock %}
+{% block proposition_header %}
+{% set my_account="2" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+	{% include "includes/phase_banner_beta.html" %}
+	<!--  <a href="#" onclick="history.go(-1)" class="link-back">Back</a>  -->
+	{% if data.radio_cc_group=="Yes" %}
+	<h1 class="heading-large">
+		<span class="heading-secondary">Step 1 of 2 -  Check your answers </span>
+		Your response to the claim
+	</h1>
+	{% else %}
+	<h1 class="heading-large">
+		Check your answers
+	</h1>
+	{% endif %}
+	{% if data.counterclaim=="true" %}
+	{%else%}
+	<table class="check-your-answers">
+		<thead>
+			<tr>
+				<th colspan="2">
+					<h2 class="heading-medium" id="name">
+						Your details
+					</h2>
+				</th>
+				<th>
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="no-border">
+					Full name
+				</td>
+				<td class="no-border">
+					{{ partyName( 'defendant' ) }}
+				</td>
+				<td class="change-answer no-border" rowspan="2">
+					<a href="../task-list/your-details/index?return_page={{ '../../task-list' | urlencode }}">
+						Change <span class="visuallyhidden">Name</span>
+					</a>
+				</td>
+			</tr>
+			<tr>
+				<tr>
+					<td class="no-border">
+						Address
+					</td>
+					<td class="no-border">
+						24 Acacia Drive<br />
+						London<br />
+						SW1 H9A
+					</td>
+				</tr>
+				<tr>
+					<td>
+						Correspondence address
+					</td>
+					<td>
+						{% if data['correspondence-address']=="Yes" %}
+						{{data['d-addressLine1']}}<br>
+						{{data['d-addressLine2']}}<br>
+						{{data['d-address-town']}}<br>
+						{{data['d-addressPostcode']}}<br>
+						{% else %}
+						Same as address<br>
+						{% endif %}
+					</td>
+					<td class="change-answer">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						Date of birth
+					</td>
+					<td>
+						{% if data['day'] %}
+						{{ ( data['month'] + ' ' + data['day'] + ' ' + data['year']) | date('D MMMM YYYY') }}
+						{% else  %}
+						31 January 1970
+						{% endif %}
+					</td>
+					<td class="change-answer">
+						<a href="../task-list/your-details/date-of-birth?return_page={{ '../../task-list' | urlencode }}">
+							Change <span class="visuallyhidden">Name</span>
+						</a>
+					</td>
+				</tr>
+				<tr>
+					<tr>
+						<td>
+							Contact number (optional)
+						</td>
+						<td>
+							{{ data['defendant-phone'] or '07824999612'}}
+						</td>
+						<td class="change-answer">
+							<a href="../task-list/your-details/number?return_page={{ '../../task-list' | urlencode }}">
+								Change <span class="visuallyhidden">Name</span>
+							</a>
+						</td>
+					</tr>
+					<tr>
+					</tbody>
+				</table>
+				{%endif%}
+				<table class="check-your-answers">
+					<thead>
+						<tr>
+							<th colspan="2">
+								<h2 class="heading-medium" id="money-owed">
+									Your response to the claim
+								</h2>
+							</th>
+							<th>
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>
+								Do you owe the money claimed?
+							</td>
+							<td>
+								{% if data.radio_select_group=="all" or data['check']== 1 or data['check']== 2 or data['check']== 3%}
+								I admit all of the claim
+								{% elseif data.radio_select_group=="Some" or data.radio_select_group=="Some_paid" or  data.radio_select_group=="some_cc" or data['check']== 4 or data['check']== 5 or data['check']== 6 or data['check']== 7 or data['check']== 14%}
+								I admit part of the claim
+								{% elseif data.radio_select_group=="reject" or data.radio_select_group2=="paid" or data.radio_select_group2=="Some_paid" or data.radio_select_group2=="amount_claimed" or data['check']== 8 or data['check']== 9 or data['check']== 12%}
+								I reject all of the claim
+								{% elseif data['counterclaim'] or data['check'] == 11 %}
+								I believe the claimant owes me money
+								{% else %}
+								I dispute all of the claim
+								{% endif %}
+							</td>
+							<td class=" change-answer">
+								<a href="../task-list/do-you-owe-money/index?return_page={{  '../../task-list' | urlencode }}">
+									Change <span class="visuallyhidden">Name</span>
+								</a>
+							</td>
+						</tr>
+						{% if data['counter'] or data['check'] == 11 %}
+
+						<tr>
+							<td>
+								How much do you owe them?
+							</td>
+							<td>
+								£1,500
+							</td>
+							<td class=" change-answer">
+								<a href="../task-list/do-you-owe-money/index?return_page={{  '../../task-list' | urlencode }}">
+									Change <span class="visuallyhidden">Name</span>
+								</a>
+							</td>
+						</tr>
+						{% endif %}
+
+						{% if  data.radio_select_group=="Some" or data.radio_select_group=="Some_paid"%}
+						<tr>
+							<td>Have you paid the claimant the amount you admit you owe?</td>
+							<td>
+								{{ data['part'] or 'No' }}
+							</td>
+							<td class="change-answer">
+								<a href="../task-list/do-you-owe-money/defence-options?return_page={{  '../../task-list' | urlencode }}">
+									Change <span class="visuallyhidden">Name</span>
+								</a>
+							</td>
+						</tr>
+						{% endif %}
+						{% if data.radio_select_group=="reject" or data.radio_select_group2=="paid" or data.radio_select_group2=="Some_paid" or data.radio_select_group2=="amount_claimed" or data['check']== 8 or data['check']== 9 or data['check']== 12%}
+
+						<tr>
+							<td>Why do you reject all of this claim?</td>
+							<td>
+								{% if data.radio_select_group=="Paid" or data['check']== 8 or data.radio_select_group2=="amount_claimed" %}
+								I've paid what I believe I owe
+								{% elseif data.radio_select_group2=="defend_now" or data.radio_select_group2=="defend_now_cc" or data['check']== 9 or data['check']== 12%}
+								I dispute all of the claim
+								{% else %}
+								Because they owe me more than £1,500
+								{% endif %}
+							</td>
+							<td class="change-answer">
+								<a href="../task-list/do-you-owe-money/defence-options?return_page={{  '../../task-list' | urlencode }}">
+									Change <span class="visuallyhidden">Name</span>
+								</a>
+							</td>
+						</tr>
+						{% else %}
+						{% endif %}
+
+				{% if ( data.radio_select_group == "all" and data['radio-pay-group'] == "Immediately" ) %}
+				{% else %}
+					</tbody>
+				</table>
+				{% endif %}
+
+				{% if data['counter'] or data['check'] == 11 %}
+				<table class="check-your-answers">
+					<thead>
+						<tr>
+							<th colspan="2">
+								<h2 class="heading-medium">
+									Counterclaim details
+								</h2>
+							</th>
+							<th>
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>
+								Claim amount
+							</td>
+							<td>
+								£{{ data['totalSum'] }}
+							</td>
+							<td class="change-answer">
+								<a href="#">Change <span class="visuallyhidden">Name</span></a>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								Claim interest
+							</td>
+							<td>
+								No
+							</td>
+							<td class="change-answer">
+								<a href="#">Change <span class="visuallyhidden">Name</span></a>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								Why you disagree with the claim
+							</td>
+							<td>
+								I do owe them the money, but they never showed up when I came to repair the roof, so I lost 2 day's wages (£500).
+							</td>
+							<td class="change-answer">
+								<a href="#">Change <span class="visuallyhidden">Name</span></a>
+							</td>
+						</tr>
+
+
+				        <tr>
+				          <tr>
+				            <td class="no-border">
+				              Your timeline of events (optional)
+				            </td>
+				            <td class="no-border">
+				             {% if data['cd-date-1'] !='' %}
+				             {{data['cd-date-1']}} - {{data['cd-timeline-1']}}<br>
+				             {% if data['cd-date-2'] !='' %}
+				             {{data['cd-date-2']}} - {{data['cd-timeline-2']}}<br>
+				             {% endif %}
+				             {% if data['cd-date-3'] !='' %}
+				             {{data['cd-date-3']}} - {{data['cd-timeline-3']}}<br>
+				             {% endif %}
+				             {% if data['cd-date-4'] !='' %}
+				             {{data['cd-date-4']}} - {{data['cd-timeline-4']}}<br>
+				             {% endif %}
+				             {% else %}
+				             -
+				             {% endif %}
+				           </td>
+				           <td class="change-answer no-border">
+				            <a href="#">
+				              Change <span class="visuallyhidden">Name</span>
+				            </a>
+				          </td>
+				        </tr>
+				        <tr>
+				          <td>
+				           Comments about their timeline (optional)
+				         </td>
+				         <td>
+				           {% if data['defence-disagree-timeline']!="" %}
+				           {{data['defence-disagree-timeline']}}
+				           {% else %}
+				           -
+				           {% endif %}
+				         </td>
+				         <td class="change-answer">
+				         </td>
+				       </tr>
+				       <tr>
+				        <td class="no-border">
+				          Your evidence  (optional)
+				        </td>
+				        <td class="no-border">
+				         {% if data['legal-status1'] != true %}
+				         {% if data['legal-status1'] != true %}
+				         {% if data['legal-status1'] == 2 %}Contracts and agreements - {% endif %}
+				         {% if data['legal-status1'] == 3 %}Expert witness - {% endif %}
+				         {% if data['legal-status1'] == 4 %}Letters, emails and other correspondence - {% endif %}
+				         {% if data['legal-status1'] == 5 %}Photo evidence - {% endif %}
+				         {% if data['legal-status1'] == 6 %}Receipts - {% endif %}
+				         {% if data['legal-status1'] == 7 %}Contracts and agreements - {% endif %}
+				         {% if data['legal-status1'] == 'other' %}Statements of account - {% endif %}
+				         {{data['legal-status-description-1'] }}<br>
+				         {% endif %}
+				         {% if data['legal-status2'] != true %}
+				         {% if data['legal-status2'] == 2 %}Contracts and agreements - {% endif %}
+				         {% if data['legal-status2'] == 3 %}Expert witness - {% endif %}
+				         {% if data['legal-status2'] == 4 %}Letters, emails and other correspondence - {% endif %}
+				         {% if data['legal-status2'] == 5 %}Photo evidence - {% endif %}
+				         {% if data['legal-status2'] == 6 %}Receipts - {% endif %}
+				         {% if data['legal-status2'] == 7 %}Contracts and agreements - {% endif %}
+				         {% if data['legal-status2'] == 'other' %}Statements of account - {% endif %}
+				         {{data['legal-status-description-2'] }}<br>
+				         {% endif %}
+				         {% if data['legal-status3']  != true %}
+				         {% if data['legal-status3'] == 2 %}Contracts and agreements - {% endif %}
+				         {% if data['legal-status3'] == 3 %}Expert witness - {% endif %}
+				         {% if data['legal-status3'] == 4 %}Letters, emails and other correspondence - {% endif %}
+				         {% if data['legal-status3'] == 5 %}Photo evidence - {% endif %}
+				         {% if data['legal-status3'] == 6 %}Receipts - {% endif %}
+				         {% if data['legal-status3'] == 7 %}Contracts and agreements - {% endif %}
+				         {% if data['legal-status3'] == 'other' %}Statements of account - {% endif %}
+				         {{data['legal-status-description-3'] }}<br>
+				         {% endif %}
+				         {% if data['legal-status4']  != true %}
+				         {% if data['legal-status4'] == 2 %}Contracts and agreements - {% endif %}
+				         {% if data['legal-status4'] == 3 %}Expert witness - {% endif %}
+				         {% if data['legal-status4'] == 4 %}Letters, emails and other correspondence - {% endif %}
+				         {% if data['legal-status4'] == 5 %}Photo evidence - {% endif %}
+				         {% if data['legal-status4'] == 6 %}Receipts - {% endif %}
+				         {% if data['legal-status4'] == 7 %}Contracts and agreements - {% endif %}
+				         {% if data['legal-status4'] == 'other' %}Statements of account - {% endif %}
+				         {{data['legal-status-description-4'] }}<br>
+				         {% endif %}
+				         {% else %}
+				         -
+				         {% endif %}
+				       </td>
+				       <td class="change-answer no-border">
+				        <a href="#">
+				          Change <span class="visuallyhidden">Name</span>
+				        </a>
+				      </td>
+				    </tr>
+				    <tr>
+				      <td>
+				        Comments about their evidence (optional)
+				      </td>
+				      <td>
+				       {% if data['defence-disagree-evidence']!="" %}
+				       {{data['defence-disagree-evidence']}}
+				       {% else %}
+				       -
+				       {% endif %}
+				     </td>
+				     <td class="change-answer">
+				     </td>
+				   </tr>
+					</tbody>
+				</table>
+				{% endif %}
+
+				{% if  data.radio_select_group=="Some" or data.radio_select_group2=="Some_paid" or data['check']== 4 or data['check']== 5 or data['check']== 6 or data['check']== 7 or data['check']== 9 or data['check']== 12 or data['check']== 8 or data.radio_select_group2=="amount_claimed" or data.radio_select_group=="Some_paid" or data.radio_select_group2=="defend_now" %}
+				<table class="check-your-answers">
+					<thead>
+						<tr>
+							<th colspan="2">
+								<h2 class="heading-medium">
+									Response details
+								</h2>
+							</th>
+							<th>
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+
+
+
+							{% if data['radio_select_group2']=="defend_now" or data['check']== 9 or data['check']== 12 or data['counterclaim'] %} <!-- start of defend -->
+							<tr>
+								<td>
+									Why you disagree with the claim
+								</td>
+								<td>
+									{% if data['check'] =='9'  or data['check'] =='8'  or data['check']== 12 %}
+									<p>{{ partyName( 'defendant' ) }} and I signed a contract for building works on our roof. The work on the roof was completed but there was a problem with one section. I asked {{ partyName( 'defendant' ) }} to get the problem fixed, but hadn't had a reply.</p>
+									<p>I'll have to get another builder to rectify the problem which will cost me £1,430.</p>
+									<p>Therefore, I'm making a money claim for £1,500 to compensate for the extra money I am going to need to spend.</p>
+
+									{% else %} {{data['defence-disagree-claim']}}{% endif %}
+								</td>
+								<td class="change-answer">
+									<a href="#">
+										Change <span class="visuallyhidden">Name</span>
+									</a>
+								</td>
+							</tr>
+							<tr>
+								{% endif %}  <!-- start of defend now-->
+
+								{% if data['radio_select_group']=="Some" or data['check']== 5 or data['check']== 6%} <!-- start of defend -->
+								<tr >
+									<td class="no-border">
+										How much money do you admit you owe?
+									</td>
+									<td class="no-border">
+										{% if data['check'] =='5'  or data['check'] =='6'   %}
+										£300
+										{% else %} £{{data['owe-amount']}}{% endif %}
+									</td>
+									<td class="change-answer no-border">
+										<a href="#">
+											Change <span class="visuallyhidden">Name</span>
+										</a>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Why do you disagree with the amount claimed?
+									</td>
+									<td>
+
+                    {{ data['owe_amount_why'] or "Because i don't owe them that much money." }}
+
+									</td>
+									<td class="change-answer">
+									</td>
+								</tr>
+								{% endif %}  <!-- start of part admit-->
+
+					{% if data.radio_select_group2=="amount_claimed" or data['check']== 8  %}
+
+						<tr>
+							<td class="no-border">How much have you paid?</td>
+							<td class="no-border">
+								£{{ data['owe-amount'] or '1500' }}
+							</td>
+							<td class="change-answer no-border">
+								<a href="../task-list/do-you-owe-money/defence-options?return_page={{  '../../task-list' | urlencode }}">
+									Change <span class="visuallyhidden">Name</span>
+								</a>
+							</td>
+						</tr>
+              <tr>
+							<td class="no-border">
+								When did you pay the claimant?
+							</td>
+							<td class="no-border">
+								{% if data['amount-day'] %}
+								{{ ( data['amount-month'] + ' ' + data['amount-day'] + ' ' + data['amount-year']) | date('D MMMM YYYY') }}
+								{% else %}
+								31 January 2018
+								{% endif %}
+							</td>
+							<td class="change-answer no-border">
+
+							</td>
+						</tr>
+						<tr>
+								<td>
+									How did you pay this amount?
+								</td>
+								<td>
+									{{ data['owe-reason'] or 'I paid this by cheque to them in person' }}
+								</td>
+								<td class="change-answer ">
+								</td>
+							</tr>
+							{% endif %} <!-- states paid full amount -->
+
+
+            {% if  data.radio_select_group2=="Some_paid"%}
+
+							<tr>
+								<td class="no-border">How much have you paid?</td>
+								<td class="no-border">
+									£{{ data['owe-amount'] or '1200' }}
+								</td>
+								<td class="change-answer no-border">
+									<a href="../task-list/do-you-owe-money/defence-options?return_page={{  '../../task-list' | urlencode }}">
+										Change <span class="visuallyhidden">Name</span>
+									</a>
+								</td>
+							</tr>
+            <tr class="no-border">
+								<td class="no-border">
+									When did you pay this amount?
+								</td>
+								<td class="no-border">
+									{% if data['amount-day'] %}
+									{{ ( data['amount-month'] + ' ' + data['amount-day'] + ' ' + data['amount-year']) | date('D MMMM YYYY') }}
+									{% else %}
+									31 January 2018
+									{% endif %}
+								</td>
+								<td class="change-answer no-border">
+
+								</td>
+							</tr>
+							<tr>
+								<td>
+									How did you pay this amount?
+								</td>
+								<td>
+									{{ data['owe-reason'] or 'I paid this by cheque to them in person' }}
+								</td>
+								<td class="change-answer ">
+
+								</td>
+							</tr>
+							<tr>
+								<td>
+									Why do you disagree with the amount claimed?
+								</td>
+								<td>
+                    {{ data['owe_amount_why'] or "Because i don't owe them that much money." }}
+								</td>
+								<td class="change-answer">
+                  						<a href="../task-list/do-you-owe-money/defence-options?return_page={{  '../../task-list' | urlencode }}">
+										Change <span class="visuallyhidden">Name</span>
+									</a>
+								</td>
+							</tr>
+							{% endif %} <!-- states paid paid less than the amount - goes in to a part admission -->
+
+								{% if data['radio_select_group']=="Some_paid" %} <!-- start of defend -->
+								<tr >
+									<td class="no-border">
+										How much money have you paid?
+									</td>
+									<td class="no-border">
+										£300
+									</td>
+									<td class="change-answer no-border">
+										<a href="#">
+											Change <span class="visuallyhidden">Name</span>
+										</a>
+									</td>
+								</tr>
+              				<tr>
+								<td class="no-border">
+									When did you pay this amount?
+								</td>
+								<td class="no-border">
+									{% if data['amount-day'] %}
+									{{ ( data['amount-month'] + ' ' + data['amount-day'] + ' ' + data['amount-year']) | date('D MMMM YYYY') }}
+									{% else %}
+									31 January 2018
+									{% endif %}
+								</td>
+								<td class="no-border">
+
+								</td>
+							</tr>
+								<tr>
+									<td>
+										How did you pay the amount claimed?
+									</td>
+									<td>
+											{{ data['owe-reason'] or 'I paid this by cheque to them in person' }}
+
+									</td>
+									<td class="change-answer ">
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Why do you disagree with the amount claimed?
+									</td>
+									<td>
+                    {{ data['owe_amount_why'] or "Because i don't owe them that much money." }}
+									</td>
+									<td class="change-answer">
+                    <a href="../task-list/claim-details/reason?return_page={{ '../../task-list/claim-details/check-your-answers' | urlencode }}">
+											Change <span class="visuallyhidden">Why you believe you're owed the money</span>
+										</a>
+									</td>
+								</tr>
+								{% endif %} <!--  admitted and paid what they admit to owing - goes in to a part admission -->
+
+								{% if data['radio_select_group2']=="defend_now" or data.radio_select_group=="Some" or data.radio_select_group2=="Some_paid" or  data.radio_select_group=="Some_paid"  or data['check']== 4 or data['check']== 5 or data['check']== 6 or data['check']== 7 or data['check']== 9 or data['check']== 12%} <!-- start of time-line and evidence -->
+								<tr>
+									<td class="no-border">
+										Your timeline of what happened (optional)
+									</td>
+									<td class="no-border">
+									</td>
+									<td class="change-answer no-border">
+										<a href="../task-list/claim-details/reason?return_page={{ '../../task-list/claim-details/check-your-answers' | urlencode }}">
+											Change <span class="visuallyhidden">Why you believe you're owed the money</span>
+										</a>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Comments about their timeline (optional)
+									</td>
+									<td>
+										{% if data['check'] =='9' %}They are exaggerating the what happened. My side of the story is this....{% else %} {{data['defence-disagree-timeline']}}{% endif %}
+									</td>
+									<td class="change-answer">
+									</td>
+								</tr>
+								<tr>
+									<td class="no-border">
+										Your evidence (optional)
+									</td>
+									<td class="no-border">
+									</td>
+									<td class="change-answer no-border">
+										<a href="../task-list/claim-details/reason?return_page={{ '../../task-list/claim-details/check-your-answers' | urlencode }}">
+											Change <span class="visuallyhidden">Why you believe you're owed the money</span>
+										</a>
+									</td>
+								</tr>
+								<tr class="subsection">
+									<td class="no-border">
+										{% if data['check'] =='9' %}Contracts and agreements{% else %}
+										{% if data['legal-status1'] == 2 %}Contracts and agreements - {% endif %}
+										{% if data['legal-status1'] == 3 %}Expert witness - {% endif %}
+										{% if data['legal-status1'] == 4 %}Letters, emails and other correspondence - {% endif %}
+										{% if data['legal-status1'] == 5 %}Photo evidence - {% endif %}
+										{% if data['legal-status1'] == 6 %}Receipts - {% endif %}
+										{% if data['legal-status1'] == 7 %}Contracts and agreements - {% endif %}
+										{% if data['legal-status1'] == 'other' %}Statements of account - {% endif %}
+										{% endif %}
+									</td>
+									<td class="no-border ">
+										{% if data['check'] =='9'  %}I have a signed contract showing that you broke the contract agreement.{% else %}{{data['legal-status-description-1'] }}{% endif %}
+									</td>
+									<td class="change-answer no-border">
+									</td>
+								</tr>
+								{% if data['legal-status2'] !='' or data['check'] =='9'  %}
+								<tr class="subsection">
+									<td class="no-border">
+										{% if data['check'] =='9' %}Photos {% else %}
+										{% if data['legal-status2'] == 2 %}Contracts and agreements - {% endif %}
+										{% if data['legal-status2'] == 3 %}Expert witness - {% endif %}
+										{% if data['legal-status2'] == 4 %}Letters, emails and other correspondence - {% endif %}
+										{% if data['legal-status2'] == 5 %}Photo evidence - {% endif %}
+										{% if data['legal-status2'] == 6 %}Receipts - {% endif %}
+										{% if data['legal-status2'] == 7 %}Contracts and agreements - {% endif %}
+										{% if data['legal-status2'] == 'other' %}Statements of account - {% endif %}
+										{% endif %}
+									</td>
+									<td class="no-border">
+										{% if data['check'] =='9'  %}The photos I've taken show the poor workmanship of the roof repair.{% else %}{{data['legal-status-description-2'] }}{% endif %}
+									</td>
+									<td class="change-answer no-border">
+									</td>
+									{% endif %}
+								</tr>
+								<tr>
+									<td>
+										Comments about their evidence (optional)
+									</td>
+									<td>
+										{% if data['check'] =='9' %}I never received any of these emails. Also the photos arent a fair refection of my work.{% else %} {{data['defence-disagree-evidence']}}{% endif %}
+									</td>
+									<td class="change-answer">
+									</td>
+								</tr>
+								{% endif %} <!-- end of time-line and evidence -->
+								<tr>
+								</tbody>
+							</table>
+							{% endif %}
+
+
+
+
+
+								{% if ( data['radio-pay-group']=="Instalments" or data['radio-pay-group']=="Set-date" or data['check']== 2  or data['check']== 5 ) and ( not( data['defendant'] ) or data['defendant'] != 'org' ) %}
+								<table class="check-your-answers">
+									<thead>
+										<tr>
+											<th colspan="2">
+												<h2 class="heading-medium">
+													Your financial details
+												</h2>
+											</th>
+											<th>
+											</th>
+										</tr>
+									</thead>
+									<tbody>
+
+										<tr>
+											<td class="no-border">
+												Bank and savings accounts
+											</td>
+											<td class="no-border"> </td>
+											<td class="change-answer no-border">
+												<a href="#">
+													Change <span class="visuallyhidden">Name</span>
+												</a>
+											</td>
+										</tr>
+										<tr>
+											<td class="no-border">
+												1. Type of account
+											</td>
+											<td class="no-border">Savings </td>
+											<td class="change-answer no-border">
+											</td>
+										</tr>
+										<tr>
+											<td class="no-border">
+												Balance
+											</td>
+											<td class="no-border">£100 </td>
+											<td class="change-answer no-border">
+											</td>
+										</tr>
+										<tr>
+											<td class="no-border">
+												Joint account
+											</td>
+											<td class="no-border">Yes </td>
+											<td class="change-answer no-border ">
+											</td>
+										</tr>
+										<tr>
+											<td class="no-border">
+												2. Type of account
+											</td>
+											<td class="no-border">Bank </td>
+											<td class="change-answer no-border">
+											</td>
+										</tr>
+										<tr>
+											<td class="no-border">
+												Balance
+											</td>
+											<td class="no-border">£350</td>
+											<td class="change-answer no-border">
+											</td>
+										</tr>
+										<tr>
+											<td>
+												Joint account
+											</td>
+											<td>Yes </td>
+											<td class="change-answer ">
+											</td>
+										</tr>
+										<tr>
+											<td>
+												Are you disabled?
+											</td>
+											<td >
+												Yes
+											</td>
+											<td class="change-answer">
+												<a href="#">
+													Change <span class="visuallyhidden">Name</span>
+												</a>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												Are you severely disabled?
+											</td>
+											<td >
+												Yes
+											</td>
+											<td class="change-answer">
+												<a href="#">
+													Change <span class="visuallyhidden">Name</span>
+												</a>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												Where do you live?
+											</td>
+											<td >
+												Home you own yourself (including if you have a mortgage)
+											</td>
+											<td class="change-answer">
+												<a href="#">
+													Change <span class="visuallyhidden">Name</span>
+												</a>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												Do you live with a partner?
+											</td>
+											<td >
+												Yes
+											</td>
+											<td class="change-answer">
+												<a href="#">
+													Change <span class="visuallyhidden">Name</span>
+												</a>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												Is your partner aged 18 or over?
+											</td>
+											<td >
+												Yes
+											</td>
+											<td class="change-answer">
+												<a href="#">
+													Change <span class="visuallyhidden">Name</span>
+												</a>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												Does your partner receive a pension?
+											</td>
+											<td >
+												No
+											</td>
+											<td class="change-answer">
+												<a href="#">
+													Change <span class="visuallyhidden">Name</span>
+												</a>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												Is your partner disabled?
+											</td>
+											<td >
+												Yes
+											</td>
+											<td class="change-answer">
+												<a href="#">
+													Change <span class="visuallyhidden">Name</span>
+												</a>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												Is your partner severely disabled?
+											</td>
+											<td >
+												No
+											</td>
+											<td class="change-answer">
+												<a href="#">
+													Change <span class="visuallyhidden">Name</span>
+												</a>
+											</td>
+										</tr>
+										<tr>
+											<td class="no-border">
+												Children
+											</td>
+											<td class="no-border"></td>
+											<td class="change-answer no-border">
+												<a href="#">
+													Change <span class="visuallyhidden">Name</span>
+												</a>
+											</td>
+										</tr>
+										<tr>
+											<td class="no-border">
+												Do any children live with you?
+											</td>
+											<td class="no-border">Yes</td>
+											<td class="change-answer no-border">
+											</td>
+										</tr>
+										<tr>
+											<td>
+												16 to 19
+											</td>
+											<td >1</td>
+											<td class="change-answer">
+											</td>
+										</tr>
+										<tr>
+											<td>
+												Number of children aged 16 to 19 full-time education or training
+											</td>
+											<td >1</td>
+											<td class="change-answer">
+												<a href="#">
+													Change <span class="visuallyhidden">Name</span>
+												</a>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												Are any of the children that live with you disabled?
+											</td>
+											<td>No</td>
+											<td class="change-answer">
+											</td>
+										</tr>
+										<tr>
+											<td class="no-border">
+												Financial support
+											</td>
+											<td class="no-border"></td>
+											<td class="change-answer no-border">
+												<a href="#">
+													Change <span class="visuallyhidden">Name</span>
+												</a>
+											</td>
+										</tr>
+										<tr>
+											<td class="no-border">
+												Do you support anyone else financially?
+											</td>
+											<td class="no-border">Yes</td>
+											<td class="change-answer no-border">
+											</td>
+										</tr>
+										<tr>
+											<td class="no-border">
+												Number of people
+											</td>
+											<td class="no-border">1</td>
+											<td class="change-answer no-border">
+											</td>
+										</tr>
+										<tr>
+											<td>
+												Give details
+											</td>
+											<td>Reason goes here</td>
+											<td class="change-answer ">
+											</td>
+										</tr>
+										<tr>
+											<td>
+												Do you claim Carer’s Allowance or Carer’s Credit?
+											</td>
+											<td>Yes</td>
+											<td class="change-answer">
+												<a href="#">
+													Change <span class="visuallyhidden">Name</span>
+												</a>
+											</td>
+										</tr>
+										<tr>
+											<td class="no-border">
+												Employment details
+											</td>
+											<td class="no-border"></td>
+											<td class="change-answer no-border">
+												<a href="#">
+													Change <span class="visuallyhidden">Name</span>
+												</a>
+											</td>
+										</tr>
+										<tr>
+											<td class="no-border">
+												Do you have a job?
+											</td>
+											<td class="no-border">Yes</td>
+											<td class="change-answer no-border">
+											</td>
+										</tr>
+										<tr>
+											<td>
+												Type of job
+											</td>
+											<td>Employed and self-employed</td>
+											<td class="change-answer ">
+											</td>
+										</tr>
+										<tr>
+											<td class="no-border">
+												Who employs you?
+											</td>
+											<td class="no-border"></td>
+											<td class="change-answer no-border">
+												<a href="#">
+													Change <span class="visuallyhidden">Name</span>
+												</a>
+											</td>
+										</tr>
+										<tr>
+											<td class="no-border">
+												Employer name
+											</td>
+											<td class="no-border">Smith Inc</td>
+											<td class="change-answer no-border">
+											</td>
+										</tr>
+										<tr>
+											<td>
+												Job title
+											</td>
+											<td>HR manager</td>
+											<td class="change-answer">
+											</td>
+										</tr>
+										<tr>
+											<td class="no-border">
+												Self-employment details
+											</td>
+											<td class="no-border"></td>
+											<td class="change-answer no-border">
+												<a href="#">
+													Change <span class="visuallyhidden">Name</span>
+												</a>
+											</td>
+										</tr>
+										<tr>
+											<td class="no-border">
+												Job title
+											</td>
+											<td class="no-border">Builder</td>
+											<td class="change-answer no-border">
+											</td>
+										</tr>
+										<tr>
+											<td class="no-border">
+												Annual turnover
+											</td>
+											<td class="no-border">£14,500</td>
+											<td class="change-answer no-border">
+											</td>
+										</tr>
+										<tr>
+											<td class="no-border">
+												Are you behind on tax payments?
+											</td>
+											<td class="no-border"> Yes</td>
+											<td class="change-answer no-border">
+											</td>
+										</tr>
+										<tr>
+											<td class="no-border">
+												Amount you owe?
+											</td>
+											<td class="no-border"> £300</td>
+											<td class="change-answer no-border">
+											</td>
+										</tr>
+										<tr>
+											<td>
+												Reason
+											</td>
+											<td> Reason goes here</td>
+											<td class="change-answer">
+											</td>
+										</tr>
+										<tr>
+											<td class="no-border">
+												Are you paying money as a result of any court orders?
+											</td>
+											<td class="no-border">Yes </td>
+											<td class="change-answer no-border">
+												<a href="#">
+													Change <span class="visuallyhidden">Name</span>
+												</a>
+											</td>
+										</tr>
+										<tr>
+											<td class="no-border">
+												Claim number
+											</td>
+											<td class="no-border">123MC432</td>
+											<td class="change-answer no-border">
+											</td>
+										</tr>
+										<tr>
+											<td class="no-border">
+												Amount you owe
+											</td>
+											<td class="no-border">£1300</td>
+											<td class="change-answer no-border">
+											</td>
+										</tr>
+										<tr>
+											<td>
+												Monthly instalment amount
+											</td>
+											<td>£130 </td>
+											<td class="change-answer ">
+											</td>
+										</tr>
+										<tr>
+											<td class="no-border">
+												Debts you're behind on
+											</td>
+											<td class="no-border"></td>
+											<td class="change-answer no-border">
+												<a href="#">
+													Change <span class="visuallyhidden">Name</span>
+												</a>
+											</td>
+										</tr>
+										<tr>
+											<td class="no-border">
+												Debt type
+											</td>
+											<td class="no-border">Mortgage</td>
+											<td class="change-answer no-border">
+											</td>
+										</tr>
+										<tr>
+											<td>
+												Arrears repayment
+											</td>
+											<td>£130 per month</td>
+											<td class="change-answer ">
+											</td>
+										</tr>
+										<tr>
+											<td class="no-border">
+												Do you have loans or credit card debts?
+											</td>
+											<td class="no-border"> Yes</td>
+											<td class="change-answer no-border">
+												<a href="#">
+													Change <span class="visuallyhidden">Name</span>
+												</a>
+											</td>
+										</tr>
+										<tr>
+											<td class="no-border">
+												1. Debt
+											</td>
+											<td class="no-border">Paying back loan to parent </td>
+											<td class="change-answer no-border">
+											</td>
+										</tr>
+										<tr>
+											<td class="no-border">
+												Total owed
+											</td>
+											<td class="no-border">£1200</td>
+											<td class="change-answer no-border">
+											</td>
+										</tr>
+										<tr>
+											<td class="no-border">
+												Monthly payments
+											</td>
+											<td class="no-border">£100</td>
+											<td class="change-answer no-border">
+											</td>
+										</tr>
+										<tr>
+											<td class="no-border">
+												2. Debt
+											</td>
+											<td class="no-border">Credit card</td>
+											<td class="change-answer no-border">
+											</td>
+										</tr>
+										<tr>
+											<td class="no-border">
+												Total owed
+											</td>
+											<td class="no-border">£1220 </td>
+											<td class="change-answer no-border">
+											</td>
+										</tr>
+										<tr>
+											<td>
+												Monthly payments
+											</td>
+											<td>£130 </td>
+											<td class="change-answer ">
+											</td>
+										</tr>
+										<tr>
+											<td class="no-border">
+												Regular expenses
+											</td>
+											<td class="no-border"> </td>
+											<td class="change-answer no-border">
+												<a href="#">
+													Change <span class="visuallyhidden">Name</span>
+												</a>
+											</td>
+										</tr>
+										<tr>
+											<td class="no-border">
+												Mortgage
+											</td>
+											<td class="no-border">£743 per month</td>
+											<td class="change-answer no-border">
+											</td>
+										</tr>
+										<tr>
+											<td class="no-border">
+												Council Tax
+											</td>
+											<td class="no-border">£120 per month</td>
+											<td class="change-answer no-border">
+											</td>
+										</tr>
+										<tr>
+											<td>
+												Gas
+											</td>
+											<td>£83 per week</td>
+											<td class="change-answer ">
+											</td>
+										</tr>
+
+										<tr>
+											<td class="no-border">
+												Regular income
+											</td>
+											<td class="no-border"> </td>
+											<td class="change-answer no-border">
+												<a href="#">
+													Change <span class="visuallyhidden">Name</span>
+												</a>
+											</td>
+										</tr>
+										<tr>
+											<td class="no-border">
+												Take home pay
+											</td>
+											<td class="no-border">£800 per month</td>
+											<td class="change-answer no-border">
+											</td>
+										</tr>
+										<tr>
+											<td class="no-border">
+												Child Benefit
+											</td>
+											<td class="no-border">£124 per week</td>
+											<td class="change-answer no-border">
+											</td>
+										</tr>
+										<tr>
+											<td>
+												Other income
+											</td>
+											<td>£40 every 2 weeks</td>
+											<td class="change-answer ">
+											</td>
+										</tr>
+										<tr>
+											<td>
+												Briefly explain why you can't pay immediately
+											</td>
+											<td>im broke i aint got a job</td>
+											<td class="change-answer ">
+												<a href="#">
+													Change <span class="visuallyhidden">Name</span>
+												</a>
+											</td>
+										</tr>
+
+
+									</tbody>
+								</table>
+								{% endif %} <!--end of statement of means-->
+
+
+
+							{% if data.radio_select_group=="all" or data.radio_select_group=="Some" or data['check']== 1 or data['check']== 2 or data['check']== 3  or data['check']== 4 or data['check']== 5 or data['check']== 6 or data['counter'] or data['check'] == 11%}
+
+							{% if ( data.radio_select_group == "all" and data['radio-pay-group'] == "Immediately" ) and not data['counter'] %}
+							{% else %}
+							<table class="check-your-answers">
+								<thead>
+									<tr>
+										<th colspan="2">
+											<h2 class="heading-medium">
+												When you'll pay
+											</h2>
+										</th>
+										<th>
+										</th>
+									</tr>
+								</thead>
+								<tbody>
+							{% endif %}
+
+
+									<tr>
+										<td>
+											When will you pay
+										</td>
+										<td>
+											{% if data['radio-pay-group']=="Immediately" or data['check']== 1 or data['check']== 4%}
+											The full amount, no later than {{ now | date( 'add', 5, 'days') | date }}
+											{% elseif data['radio-pay-group']=="Instalments" or data['check']== 2  or data['check']== 5%}
+											By instalments
+											{% elseif data['radio-pay-group']=="Set-date" or data['check']== 3 or data['check']== 6%}
+											The full amount, no later than
+											{% if data['set-day'] %}
+											{{ ( data['set-month'] + ' ' + data['set-day'] + ' ' + data['set-year']) | date('D MMMM YYYY') }}
+											{% else %}
+											{{ now | date( 'add', 5, 'months') | date }}
+											{% endif %}
+											{% else %}
+											The full amount, no later than <span class="dates2"></span>
+											{% endif %}
+										</td>
+										<td class="change-answer">
+											<a href="../task-list/owe-all?return_page={{ '../../task-list' | urlencode }}">
+												Change <span class="visuallyhidden">Name</span>
+											</a>
+										</td>
+									</tr>
+									{% if data['radio-pay-group']=="Instalments" or data['check']== 2 or data['check']== 5%}
+									<tr>
+										<tr>
+											<td class="no-border">
+												Regular payments of
+											</td>
+											<td class="no-border">
+												{% if data['instalment-first-payment'] %}
+												£{{data['instalment-first-payment']}}
+												{% else %}
+												£200
+												{% endif %}
+											</td>
+											<td class="change-answer no-border">
+												<a href="../task-list/owe-all/statement/repayment-plan?return_page={{ '../../task-list' | urlencode }}">
+													Change <span class="visuallyhidden">Name</span>
+												</a>
+											</td>
+										</tr>
+										<tr >
+											<td class="no-border">
+												Frequency of payments
+											</td>
+											<td class="no-border">
+												{% if data['radio-payment-frequency'] %}
+												{{data['radio-payment-frequency']}}
+												{% else %}
+												Monthly
+												{% endif %}
+											</td>
+											<td class="no-border">
+											</td>
+										</tr>
+										<tr>
+											<td class="no-border">
+												Make the first payment on
+											</td>
+											<td class="no-border">
+												{% if data['instalment-day'] %}
+												{{ ( data['instalment-month'] + ' ' + data['instalment-day'] + ' ' + data['instalment-year']) | date('D MMMM YYYY') }}
+												{% else %}
+												1 {{ now | date( 'add', 1, 'months') | date('MMM YYYY') }}
+												{% endif %}
+											</td>
+											<td class="no-border">
+											</td>
+										</tr>
+										<tr >
+											<td>
+												Explain why you can't pay the full amount immediately
+											</td>
+											<td>
+											</td>
+											<td class="change-answer "></td>
+										</tr>
+										{% endif %}
+										{% if data['radio-pay-group']=="Set-date" or data['check']== 3 or data['check']== 6%}
+										<tr>
+											<td>
+												Explain why you can't pay immediately
+											</td>
+											<td>
+												{% if data['non-payment-reason'] %}
+												{{data['non-payment-reason']}}
+												{% else %}
+												I don't earn enough money to pay all at once
+												{% endif %}
+											</td>
+											<td class="change-answer">
+												<a href="#">
+													Change <span class="visuallyhidden">Name</span>
+												</a>
+											</td>
+										</tr>
+										{% endif %}
+									</tbody>
+								</table>
+								{% endif %} <!-- end owe some money -->
+
+
+
+								{% if data.agreement=="complete" and data['radio-settlement'] == 'yes' %}
+								<table class="check-your-answers">
+									<thead>
+										<tr>
+											<th colspan="2">
+												<h2 class="heading-medium">
+													Settlement agreement
+												</h2>
+											</th>
+											<th>
+											</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>
+												The agreement
+											</td>
+											<td >
+												{{ partyName( 'defendant' ) }}
+												{% if data['radio-pay-group']=="Immediately" %}
+												will pay £1,500 immediately. {{ partyName( 'claimant' ) }} will receive the money no later than {{ now | date( 'add', 5, 'days') | date }}. Any cheques or transfers will be clear in {{ partyName( 'claimant' ) }}'s account by this date.
+												{% elseif data['radio-pay-group']=="Instalments"  %}
+												will repay £1,500, in instalments of
+												{% if data['instalment-first-payment'] %}
+												£{{data['instalment-first-payment']}}
+												{% else %}
+												£200
+												{% endif %}
+												{% if data['radio-payment-frequency'] %}
+												{{ data['radio-payment-frequency'] | lower  }}{% else %}
+												every month{% endif %}.
+												<br />The first instalment will be paid by
+												{% if data['instalment-day'] %}
+												{{ ( data['instalment-month'] + ' ' + data['instalment-day'] + ' ' + data['instalment-year']) | date('D MMMM YYYY') }}{% else %}
+												31 March 2018{% endif %}.
+												{% elseif data['radio-pay-group']=="Set-date" %}
+												will pay £1,500 no later than
+												{% if data['set-day'] %}
+												{{ ( data['set-month'] + ' ' + data['set-day'] + ' ' + data['set-year']) | date('D MMMM YYYY') }}
+												{% else %}
+												{{ date | date('add', 1, 'year') | date('D MMMM YYYY') }}
+												{% endif %}
+												{% else %}
+												will £1,500 no later than {{ date | date('add', 1, 'year') | date('D MMMM YYYY') }}.
+												{% endif %}
+											</td>
+											<td class="change-answer">
+												<a href="#">
+													Change <span class="visuallyhidden">Name</span>
+												</a>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												Completion date
+											</td>
+											<td >
+												{% if data['radio-pay-group']=="Immediately" %}
+												{{ now | date( 'add', 5, 'days') | date }}
+												{% elseif data['radio-pay-group']=="Instalments"  %}
+												{{ ( data['instalment-month'] + ' ' + data['instalment-day'] + ' ' + data['instalment-year']) | date('add', 1, 'year') | date('D MMMM YYYY') }}
+												{% elseif data['radio-pay-group']=="Set-date" %}
+												{% if data['set-day'] %}
+												{{ ( data['set-month'] + ' ' + data['set-day'] + ' ' + data['set-year']) | date('D MMMM YYYY') }}
+												{% else %}
+												{{ date | date('add', 1, 'year') | date('D MMMM YYYY') }}
+												{% endif %}
+												{% else %}
+												{{ date | date('add', 1, 'year') | date('D MMMM YYYY') }}
+												{% endif %}
+											</td>
+											<td class="change-answer">
+												<a href="#">
+													Change <span class="visuallyhidden">Name</span>
+												</a>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+								{% endif %} <!--end of settlement agreement-->
+
+
+
+
+
+                <!--  offer made by defendant  -->
+                <table class="check-your-answers">
+                  <thead>
+                    <tr>
+                      <th colspan="2">
+                        <h2 class="heading-medium">
+                          Settle out of court
+                        </h2>
+                      </th>
+                      <th>
+                      </th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+
+                      <tr>
+                        <td>
+                          Make an offer
+                        </td>
+                        <td>
+                          {% if data['madeandsignedagreement'] == 'true'   %}
+                              Yes
+                          {%  else  %}
+                              No
+                          {% endif  %}
+                        </td>
+                        <td class="change-answer">
+                          <a href="">
+                            Change <span class="visuallyhidden">Name</span>
+                          </a>
+                        </td>
+                      </tr>
+
+
+                      {% if data['madeandsignedagreement'] == 'true'   %}
+                          <tr>
+                            <td>
+                              Details
+                            </td>
+                            <td style="white-space: pre-wrap;">{{ data['the-offer-text'] }}</td>
+                            <td class="change-answer">
+                              <a href="">
+                                Change <span class="visuallyhidden">Name</span>
+                              </a>
+                            </td>
+                          </tr>
+
+                          <tr>
+                            <td>
+                              Offer completed by
+                            </td>
+                            <!-- Pay in installment content also needs considering -->
+                            <td>
+                              {{ data['offerDateDay'] }} August 2019
+                            </td>
+                            <td class="change-answer">
+                              <a href="#">
+                                Change <span class="visuallyhidden">Name</span>
+                              </a>
+                            </td>
+                          </tr>
+                      {% endif  %}
+
+                  </tbody>
+                </table>
+
+
+
+								{% if  data.radio_select_group=="Some" or data.radio_select_group2=="amount_claimed" or data.radio_select_group=="Some_paid" or data.amount_paid=="less" or  data.radio_select_group2=="defend_now" or data['check']== 4 or data['check']== 5 or data['check']== 6 or data['check']== 7 or data['check']== 9 or data['check']== 12%}
+								<table class="check-your-answers">
+									<thead>
+										<tr>
+											<th colspan="2">
+												<h2 class="heading-medium">
+													Free telephone mediation
+												</h2>
+											</th>
+											<th>
+											</th>
+										</tr>
+									</thead>
+									<tbody>
+
+										<tr>
+											<td>
+												Will you try free mediation?
+											</td>
+											<td>
+                        {% if data['resolve_dispute']=="complete" %}
+                        No
+                        {% else %}
+                        Yes
+                        {% endif %}
+											</td>
+											<td class="change-answer">
+												<a href="../task-list/mediation?return_page={{ '../../task-list' | urlencode }}">
+													Change <span class="visuallyhidden">Name</span>
+												</a>
+											</td>
+										</tr>
+                    {% if data['resolve_dispute']=="complete" %}
+                    <tr>
+                      <td>
+                        Agree to mediation conditions
+                      </td>
+                      <td>
+                        {% if data['resolve_dispute']=="complete" %}
+                        Yes
+                        {% else %}
+                        No
+                        {% endif %}
+                      </td>
+                      <td class="change-answer">
+                        <a href="../task-list/mediation/statements-all?return_page={{ '../../task-list' | urlencode }}">
+                          Change <span class="visuallyhidden">Name</span>
+                        </a>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Contact number
+                      </td>
+                      <td>
+                        {{ data['phone-defendant'] or '07824999612'}}
+                      </td>
+                      <td class="change-answer">
+                        <a href="../task-list/mediation/previous-phone?return_page={{ '../../task-list' | urlencode }}">
+                          Change <span class="visuallyhidden">Name</span>
+                        </a>
+                      </td>
+                    </tr>
+                    {% endif %}
+
+
+  					{% include "prototypes/prototype-nov-2019/includes/dq-check.html" %}
+
+
+										</tbody>
+									</table>
+									{% endif %}
+									{% if data.radio_cc_group=="Yes" %}
+									<a class="button" href="check-and-send/counterclaim-answers">Continue</a>
+									{% else %}
+									<div class="column-two-thirds">
+										<h2 class="heading-medium">Statement of truth</h2>
+										<p>  The information on this page forms your response. You can see it on the
+										response form after you submit.</p>
+										<p>When you’re satisfied that your answers are accurate, you should tick to “sign” this statement of
+										truth on the form.</p>
+										{% if data['defendant'] == 'org' or data['defendant'] == 'Sole-trader' or data['check']==10 %}
+										<p>You must hold a senior position in your organisation to sign the statement of truth.</p>
+										<details class='form-group'>
+											<summary>
+												<span class="summary">Types of senior position</span>
+											</summary>
+											<div class="panel">
+												<p>A senior position could be a:</p>
+												<ul class="list-bullet list">
+													<li>director</li>
+													<li>treasurer</li>
+													<li>chief executive</li>
+													<li>manager or other officer of the company or corporation</li>
+												</ul>
+												<p>If your corporation isn't registered, a senior position could be:</p>
+									        <ul class="list-bullet list">
+									          <li>the chairperson or president</li>
+									          <li>another officer of the corporation</li>
+									        </ul>
+											</div>
+										</details>
+										<div class="form-group">
+											<label class="form-label" for="claimant_title">Full name</label>
+											<input type="text" class="form-control form-control-1-2" id="claimant_title" name="claimant_title" value="">
+										</div>
+										<div class="form-group">
+											<label class="form-label" for="defendant_firstname">Job title</label>
+											<input class="form-control form-control-1-2" id="defendant_name" name="defendant_name" type="text"
+											value="{{data['defendant_name']}}">
+										</div>
+
+
+										{% endif %}
+
+<div class="form-group">
+	<div class="multiple-choice text">
+		<input id="HasAcceptedTermsAndConditions" type="checkbox" value="true">
+		<label for="HasAcceptedTermsAndConditions"> I believe that the facts stated in this response are true.</label>
+	</div>
+</div>
+
+{% if data['radio_select_group2']=="defend_now" or data['check']== 9  %}
+<div class="form-group">
+	<div class="form-group">
+	  <div class="multiple-choice text">
+	    <input class="" id="HasAcceptedTermsAndConditions2" type="checkbox" value="true">
+	    <label for="HasAcceptedTermsAndConditions2">The hearing requirement details on this page are true to the best of my knowledge.</label>
+	  </div>
+	</div>
+</div>
+
+{% endif %}
+
+	{% if data['counter'] == 'SET-OFF-COUNTER' or data['counter'] == 'FULL-COUNTER' %}
+	<form method="get" action="check-and-send/enter-card" class="form">
+
+	{% else %}
+	<form method="get" action="../confirmation-page?" class="form">
+	{% endif %}
+
+	{% if data.radio_select_group=="all" and data['radio-pay-group']=="Immediately" or data['check']== 1 %}
+	<!-- FA - pay immediately -->
+	<input type="hidden" name="confirmation" value="1">
+	{% elseif data.radio_select_group=="all" and data['radio-pay-group']=="Instalments" or data['check']== 2 %}
+	<!-- FA - pay instalments -->
+	<input type="hidden" name="confirmation" value="2">
+	{% elseif data.radio_select_group=="all" and data['radio-pay-group']=="Set-date" or data['check']== 3 %}
+	<!--  FA - pay set date -->
+	<input type="hidden" name="confirmation" value="3">
+	{% elseif data.radio_select_group=="Some" and data['radio-pay-group']=="Immediately" or data['check']== 4 %}
+	<!-- Amount is too much & pay immediately -->
+	<input type="hidden" name="confirmation" value="4">
+	{% elseif data.radio_select_group=="Some" and data['radio-pay-group']=="Instalments" or data['check']== 5 %}
+	<!-- P/A - Amount is too much & pay instalments -->
+	<input type="hidden" name="confirmation" value="6">
+	{% elseif data.radio_select_group=="Some" and data['radio-pay-group']=="Set-date" or data['check']== 6 %}
+	<!-- P/A - Amount is too much & set date - mediation chosen -->
+	<input type="hidden" name="confirmation" value="7">
+	{% elseif data.radio_select_group=="some_cc" or data['check']== 15 %}
+	<!-- P/A - Amount is too much & set date - mediation chosen -->
+	<input type="hidden" name="confirmation" value="13">
+	{% elseif data.radio_select_group=="Some_paid" or  data.radio_select_group2=="Some_paid" or data['check']== 7 %}
+	<!--  P/A - Paid what I owe & defence -->
+	<input type="hidden" name="confirmation" value="8">
+	{% elseif data.amount_paid=="less"  or data['check']== 11 %}
+	<!-- P/A - Paid what I owe & defence - mediation chosen -->
+	<input type="hidden" name="confirmation" value="10">
+	{% elseif data.amount_paid=="less" or data['check']== 8%}
+	<!--  R/C - I've already paid -->
+	<input type="hidden" name="confirmation" value="16">
+	{% elseif data.radio_select_group=="paid" or data['check']== 9%}
+	<!--  R/C - I've dispute the claim + defence-->
+  <input type="hidden" name="confirmation" value="16">
+  {% elseif data.radio_select_group2=="defend_now" or data['check']== 12%}
+  <!-- R/C - I've dispute the claim + defence - mediation chosen -->
+  <input type="hidden" name="confirmation" value="12">
+  {% elseif data.radio_select_group2=="defend_now_cc" or data['check']== 13%}
+  <!-- R/C - I've dispute the claim + defence + counterclaim -->
+  <input type="hidden" name="confirmation" value="15">
+  <!--{% elseif data.radio_select_group2=="defend_now" and data.radio-indent-group=="No" %}-->
+  <!--&lt;!&ndash; R/C - I've dispute the claim + defence - opted out of mediation &ndash;&gt;-->
+  <!--<input type="hidden" name="confirmation" value="17">-->
+  {% else %}
+  <input type="hidden" name="confirmation" value="1">
+	{% endif %}
+
+
+	<div class="form-group">
+
+    {% if data['vary'] == 'true' %}
+        <div class="form-group">
+          <p><a class="button" href="/prototypes/prototype-nov-2019/defendant/task-list/check-and-send/enter-card">Submit and continue to payment (£50)</a></p>
+        </div>
+
+		{% elif data['counter'] == 'SET-OFF-COUNTER' or data['counter'] == 'FULL-COUNTER'%}
+		    <button id="submit" class="button" >Submit and continue to payment (£70)</button>
+		{% else %}
+		    <button id="submit" class="button" >Submit response</button>
+		{% endif %}
+
+	</div>
+
+</form>
+</div>
+{% endif %}
+</main>
+<form method="post"  action="#" class="form" style="position: absolute;">
+	<select id="check2" name="check2" onchange="window.location.href='check-and-send?check='+this.value">
+		<option  value="0" >Choose</option>
+		<option  value="2" {% if data['check'] == 2 %}selected{% endif %}>1. FA - pay instalments</option>
+		<option  value="3" {% if data['check'] == 3 %}selected{% endif %}>2. FA - pay set date</option>
+		<option  value="5" {% if data['check'] == 5 %}selected{% endif %}>3. P/A - I admit part of the claim & pay instalments</option>
+		<option  value="6" {% if data['check'] == 6 %}selected{% endif %}>4. P/A - I admit part of the claim & set date < 28 days - mediation chosen</option>
+		<option  value="9" {% if data['check'] == 9 %}selected{% endif %}>5. R/C - I've dispute the claim + defence</option>
+		<option  value="12" {% if data['check'] == 12 %}selected{% endif %}>6.1 R/C - I've dispute the claim + defence - mediation chosen</option>
+    <option  value="17" {% if data['check'] == 17 %}selected{% endif %}>6.2 R/C - I've dispute the claim + defence - mediation pilot (opted out)</option>
+		<option  value="8" {% if data['check'] == 8 %}selected{% endif %}>7. R/C - Paid what I owe - full amount paid</option>
+		<option  value="7" {% if data['check'] == 7 %}selected{% endif %}>8. R/C - Paid what I owe - less than claim amount paid </option>
+		<option  value="10" {% if data['check'] == 10 %}selected{% endif %}>9. Show business statement of truth</option>
+		<option  value="11" {% if data['check'] == 11 %}selected{% endif %}>11. Counterclaim - Set off</option>
+	</select>
+</form>
+{% endblock %}

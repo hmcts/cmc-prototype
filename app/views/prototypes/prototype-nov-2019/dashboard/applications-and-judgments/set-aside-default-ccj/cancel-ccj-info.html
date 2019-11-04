@@ -1,0 +1,155 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+
+{% block content %}
+
+
+<main id="content" role="main">
+
+ {% include "includes/phase_banner_beta.html" %}
+
+ <div class="grid-row">
+   <div class="column-two-thirds">
+
+     <!--  <a href="#" onclick="history.go(-1)" class="link-back">Back</a>  -->
+
+     {% if data['afterccjdeadline'] == 'false'  and  data['response-owe'] != 'owe-none-default-ccj' %}
+
+         <h1 class="heading-large">
+           Pay the debt to get the judgment cancelled
+         </h1>
+
+         {% if data['paidwhatiowe'] == 'true' %}
+              <p>{{ partyName( 'claimant' ) }} claims you owe them £1,500. You claim you've paid £500.</p>
+         {% endif %}
+
+
+         <p>If {{ partyName( 'claimant' ) }} confirms you've paid £1,500 {% if data['paidwhatiowe'] == 'true' %}in total{% endif %} before 4pm on {{ now |  date("add", 7, "day") | date( "D MMMM YYYY" ) }}, the judgment will be cancelled.</p>
+         <p>If you pay later, or you dispute all or part of the claim, the judgment will stay on the register for 6 years. You can apply to have it removed, but you'll have to pay a fee of £255.</p>
+
+           <!-- <p><a href="../../party-details/claimant">Get {{ partyName( 'claimant' ) }}'s contact details</a></p> -->
+           <!-- <p>We'll contact you when they confirm you've paid.</p> -->
+           <!-- <p><a class="button" href="/prototypes/prototype-nov-2019/dashboard/applications-and-judgments/set-aside-default-ccj/settle-out-of-court?afterccjdeadline=true">I don't owe the money</a> -->
+
+         <p class="heading-medium">Will you pay {% if data['paidwhatiowe'] == 'true' %}the remaining £1,000{% else %}£1,500{% endif %} before 4pm on {{ now |  date("add", 7, "day") | date( "D MMMM YYYY" ) }}?</p>
+
+         <form
+           name="aspnetForm"
+           method="post"
+           onsubmit="multiNavigation('radio-set-receive-claim', ['Yes', 'No'],
+                                                                  ['../../../defendant/confirmation-page?paywithinmonth=true&',
+                                                                   'settle-out-of-court?afterccjdeadline=true&']);return false;"
+           id="aspnetForm"
+           autocomplete="off">
+
+           <div class="form-group">
+             <fieldset>
+               <div class="multiple-choice" data-target="pay">
+                 <input id="set-aside-yes" type="radio" name="radio-set-receive-claim" value="Yes" aria-controls="paid-off" aria-expanded="false">
+                 <label for="set-aside-yes">Yes</label>
+               </div>
+               <div class="multiple-choice" data-target="vary">
+                 <input id="set-aside-no" type="radio" name="radio-set-receive-claim" value="No" aria-controls="paid-off" aria-expanded="false">
+                 <label for="set-aside-no">No</label>
+               </div>
+             </fieldset>
+           </div>
+
+           <div class="form-group">
+             <input type="submit" class="button" value="Continue" />
+           </div>
+
+         </form>
+
+       </div>
+     </div>
+
+
+     {% else %}
+
+
+
+       <h1 class="heading-large">
+         Do you want to apply to cancel the judgment?
+       </h1>
+
+       <div class="notice text">
+         <i class="icon icon-important">
+           <span class="visually-hidden">Warning</span>
+         </i>
+         <strong class="bold-small">
+           The court will usually only cancel a judgment if it accepts you didn't know about the claim at the time it was issued.
+         </strong>
+       </div>
+
+     <form
+       name="aspnetForm"
+       method="post"
+       onsubmit="multiNavigation('radio-set-receive-claim', ['Yes', 'Yes-fee-help' , 'No','Yes-aftercontact','No-aftercontact'],
+                                                           ['task-list?cancelccj=true&cancelccjanswer=complete&',
+                                                            'applications-help-with-fees?cancelccj=true&',
+                                                            'you-must-pay?cancelccj=false&cancelccjanswer=complete&',
+                                                            'task-list-after-contact?cancelccj=true&cancelccjaftercontact=true&cancelccjaftercontactanswer=complete&',
+                                                            'task-list-after-contact?cancelccj=false&cancelccjaftercontact=false&cancelccjaftercontactanswer=complete&']);return false;"
+       id="aspnetForm"
+       autocomplete="off">
+
+       {% if  data['aftercontact'] == 'true' %}
+           <div class="form-group">
+             <fieldset>
+               <div class="multiple-choice" data-target="pay">
+                 <input id="set-aside-yes-aftercontact" type="radio" name="radio-set-receive-claim" value="Yes-aftercontact" aria-controls="paid-off" aria-expanded="false">
+                 <label for="set-aside-yes-aftercontact">Yes</label>
+               </div>
+               <div class="multiple-choice" data-target="vary">
+                 <input id="set-aside-no-aftercontact" type="radio" name="radio-set-receive-claim" value="No-aftercontact" aria-controls="paid-off" aria-expanded="false">
+                 <label for="set-aside-no-aftercontact">No</label>
+               </div>
+             </fieldset>
+           </div>
+       {% else %}
+           <div class="form-group">
+             <fieldset>
+               <div class="multiple-choice" data-target="pay">
+                 <input id="set-aside-yes" type="radio" name="radio-set-receive-claim" value="Yes" aria-controls="paid-off" aria-expanded="false">
+                 <label for="set-aside-yes">Yes</label>
+               </div>
+
+               <!-- <div class="multiple-choice" data-target="pay">
+                 <input id="set-aside-yes-fee-help" type="radio" name="radio-set-receive-claim" value="Yes-fee-help" aria-controls="paid-off" aria-expanded="false">
+                 <label for="set-aside-yes-fee-help">Yes, but I can't afford the fee</label>
+               </div> -->
+
+               <div class="multiple-choice" data-target="vary">
+                 <input id="set-aside-no" type="radio" name="radio-set-receive-claim" value="No" aria-controls="paid-off" aria-expanded="false">
+                 <label for="set-aside-no">No</label>
+               </div>
+
+             </fieldset>
+           </div>
+       {% endif %}
+
+       <div class="form-group">
+         <input type="submit" class="button" value="Continue" />
+       </div>
+
+
+     {% endif %}
+
+
+ {% include 'prototypes/prototype-nov-2019/includes/contact.html' %}
+</main>
+
+<form method="post"  action="#" class="form" style="float: left;">
+ <select id="control-box2" name="control-box2" onchange="window.location.href='settle-out-of-court?beforeccjdeadline='+this.value">
+   <option value="true">Defendant</option>
+   <option value="true" >- Before 1 month CCJ deadline</option>
+   <option value="false">- After 1 month CCJ deadline</option>
+ </select>
+</form>
+
+
+{% endblock %}

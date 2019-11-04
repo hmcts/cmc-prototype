@@ -1,0 +1,131 @@
+
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-full-width">
+      <!--  <a href="#" onclick="history.go(-1)" class="link-back">Back</a>  -->
+
+      <form method="get" autocomplete="off" action="timeline2">
+
+        <h1 class="heading-large">Tell us if you dispute their timeline</h1>
+
+        <p>Select any events that you dispute. If you don't dispute an event, leave it blank.</p>
+
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Date</th>
+                <th scope="col">What they say happened</th>
+                <th scope="col" style="width: 20%; text-align:">Your view</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>03/11/2017</td>
+                <td>I contacted {% if data.counterclaim=="true" %}{{ partyName( 'claimant' ) }}{%else%}{{ partyName( 'defendant' ) }}{% endif %} to discuss building works on our roof.</td>
+                <td>
+                  <div class="multiple-choice text">
+                    <input id="dispute1" type="checkbox" />
+                    <label for="dispute1" >I dispute this</label>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>06/11/2017</td>
+                <td>We agreed what work should be done and signed a contract.</td>
+                <td>
+                  <div class="multiple-choice text">
+                    <input id="dispute2" type="checkbox" />
+                    <label for="dispute2" >I dispute this</label>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>30/11/2017</td>
+                <td>The work started on the roof.</td>
+                <td>
+                  <div class="multiple-choice text">
+                    <input id="dispute3" type="checkbox" />
+                    <label for="dispute3" >I dispute this</label>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>21/12/2017</td>
+                <td>The work on the roof was completed but I noticed that there was a problem with one
+                section</a>.
+                </td>
+                <td>
+                  <div class="multiple-choice text">
+                    <input id="dispute4" type="checkbox" />
+                    <label for="dispute4" >I dispute this</label>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>27/12/2017</td>
+                <td>I sent an email to {{ partyName( 'defendant' ) }} and asked them to get the problem fixed.</td>
+                <td>
+                  <div class="multiple-choice text">
+                    <input id="dispute5" type="checkbox" />
+                    <label for="dispute5" >I dispute this</label>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>15/01/2018</td>
+                <td>I hadn't had a reply so I told them I would be making a money claim.</td>
+                <td>
+                  <div class="multiple-choice text">
+                    <input id="dispute6" type="checkbox" />
+                    <label for="dispute6" >I dispute this</label>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td >27/12/2017</td>
+                <td>I sent an email to {{ partyName( 'defendant' ) }} and asked them to get the problem fixed.</td>
+                <td>
+                  <div class="multiple-choice text">
+                    <input id="dispute7" type="checkbox" />
+                    <label for="dispute7" >I dispute this</label>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>15/01/2018</td>
+                <td>I hadn't had a reply so I told them I would be making a money claim.</td>
+                <td>
+                  <div class="multiple-choice text">
+                    <input id="dispute8" type="checkbox" />
+                    <label for="dispute8" >I dispute this</label>
+                  </div>
+                </td>
+              </tr>
+          </tbody>
+        </table>
+
+        <!--
+        <p>
+          <textarea style="height: 400px" id="response"></textarea>
+        </p>
+ -->
+      <div class="form-group">
+        <input type="submit" class="button" value="Save and continue"/>
+      </div>
+
+    </form>
+  </div>
+</div>
+{% include 'prototypes/prototype-nov-2019/includes/contact.html' %}
+</main>
+{% endblock %}

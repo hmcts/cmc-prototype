@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<!--[if lt IE 9]><html class="lte-ie8" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--><html lang="en"><!--<![endif]-->
+  <head>
+    <meta charset="utf-8" />
+    <style>
+#content {
+  margin-top:3em;
+  position: relative;
+}
+@page {
+  size: 8.5in 11in;
+  margin: 10%;
+  @top-right {
+    content: "Page " counter(page) " of " counter(pages);
+    /*noinspection CssNoGenericFontName*/
+    font-family: "Open Sans";
+  }
+}
+html {
+  /*noinspection CssNoGenericFontName*/
+  font-family: "Open Sans";
+  max-width: 960px;
+  margin: 0 auto;
+  background:#d9d9d9
+}
+#content{
+  background:#fff;
+  padding:70px;
+  padding-bottom: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+body {
+  counter-reset: section;
+  font-family: "nta", Arial, sans-serif;
+  font-weight: 400;
+  text-transform: none;
+  font-size: 19px;
+  line-height: 1.25;
+  -webkit-font-smoothing: antialiased;
+}
+.section {
+  margin-bottom: 25px;
+}
+.section .section-heading {
+  margin-bottom: 10px;
+}
+.section .section-heading strong:before {
+  counter-increment: section;
+  content: counter(section) ". ";
+}
+table {
+  width: 100%;
+  border-spacing: 0;
+}
+table td {
+  border-bottom: 1px solid #999;
+  padding: 5px;
+  text-align:left;
+  line-height: 1.25;
+  padding: 0.63158em 1.05263em 0.67368em 0;
+  font-size: 18px;
+  vertical-align:top;
+}
+p{
+  font-size: 18px;
+}
+table th {
+ text-align:left;
+ border-bottom: 1px solid #999;
+}
+table td:first-child {
+  width: 280px;
+  vertical-align: top;
+  font-weight:700;
+}
+td.single-cell{
+ font-weight:100!important;
+}
+.no-border{
+  border: none;
+}
+table td:last-child {
+  width: auto;
+}
+header table td, header table tr:last-child td {
+  border: none;
+}
+header td {
+  margin: 0;
+  padding: 0;
+}
+.heading-medium{
+  padding-bottom: 0;
+  margin-bottom: 0.4em;
+  margin-top: 1.5em;
+  font-size:22px;
+}
+.claim-number {
+  font-weight:700;
+  font-size:19px;
+}
+.crestLogo tr td:nth-child(1) {
+  width: 30%;
+}
+.crest{
+  width:80%
+}
+h1 {
+  font-weight:100;
+  font-size:24px;
+}
+.seal{
+  width: 12%;
+  float: right;
+}
+.page-title {
+  text-align:center;
+  padding-top:20px;
+  font-size:14px
+}
+.page-title span{
+  float:right
+}
+.crestLogo{
+  margin-top:40px
+}
+.page-break{
+  background: #d9d9d9;
+  margin-left: -70px;
+  margin-right: -70px;
+  margin-top: 20px;
+}
+.claim-details{
+  text-align:right
+}
+.footer td{
+  font-size:10px;
+  padding-top:40px;
+  border-bottom: none;
+}
+.footer td:nth-child(3){
+  text-align:right
+}
+
+ol {
+    counter-reset: item;
+    list-style-type: none;
+}
+
+li {
+    margin-bottom: 10px;
+}
+
+li:before {
+  content: "2." counters(item, ".") " ";
+  counter-increment: item;
+  position: absolute;
+  left: 70px;
+  color: #888;
+}
+
+</style>
+</head>
+<main id="content"  role="main">
+  <header>
+
+      <table class="crestLogo">
+        <tbody>
+          <tr>
+            <td></td>
+            <td rowspan="2" class="claim-details">
+              <h1>Proposed hearing requirements</h1>
+
+              <p>In the County Court Business Centre Online Civil Money Claims</p>
+
+              <p><strong>Claim number:</strong> 000LR095<br>
+              <strong>Issued on:</strong> {{ now | date('subtract', 5, 'days' ) | date }}<br>
+              <strong>Response submitted on:</strong> {{ now | date }} at 3:25PM</p></td>
+            </tr>
+          </tbody>
+    </table>
+
+
+  </header>
+  {% set inc = 0 %}
+
+
+  <table >
+    <thead>
+      <tr>
+        <th colspan="2">
+          <h2 class="heading-medium" id="name">
+            {% set inc = inc+1 %}{{ inc }}. Defendant's details 
+          </h2>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          {% if data['check'] =='1' %}Company name{% else %}Name{% endif %}:
+        </td>
+        <td>
+          {% if data['check'] =='1' %}Smith Limited{% else %}{{ partyName( 'defendant' ) }}{% endif %}
+        </td>
+      </tr>
+      {% if   data['check']== 1  %}
+      <tr>
+        <td>
+          Contact person:
+        </td>
+        <td>
+         Jane Smith
+       </td>
+     </tr>
+     <tr>
+      {% endif  %}
+      <tr>
+        <tr>
+          <td class="no-border">
+            Address:
+          </td>
+          <td class="no-border">
+           24 Acacia Drive<br>
+           London<br>
+           SW1 H9A<br>
+         </td>
+       </tr>
+              <tr>
+          <td class="">
+            Correspondence address:
+          </td>
+          <td class="">
+            45 Commercial road<br>
+            London<br>
+            W1D 5HF<br>
+          </td>
+        </tr>
+       {% if data['check'] =='1' %}
+       {% else %}
+       <tr>
+        <td>
+          Date of birth:
+        </td>
+        <td>
+          31 January 1970
+        </td>
+      </tr>
+      {% endif %}
+      <tr>
+        <tr>
+          <td>
+            Telephone:
+          </td>
+          <td>
+           {% if data['defendant-phone'] %}{{data['defendant-phone']}}{% else %}07824999612{% endif %}
+         </td>
+       </tr>
+           <tr>
+        <td>
+          Email:
+        </td>
+        <td>
+                    {% if data['check'] =='1' %}{{ partyName( 'defendant', 'email' ) }}@smithlimited.com{% else %}{{ partyName( 'defendant', 'email' ) }}@gmail.com{% endif %}
+
+
+        </td>
+      </tr>
+     </tbody>
+   </table>
+    <table>
+      <thead>
+        <tr>
+          <th colspan="2">
+            <h2 class="heading-medium">
+              {% set inc = inc+1 %}{{ inc }}. Tell us more about the claim
+            </h2>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            Preferred hearing centre
+          </td>
+          <td>
+            {{ data['county_court'] or 'Guildford County Court' }}
+          </td>
+        </tr>
+        <tr>
+          <td class="no-border">
+            Proposed experts
+          </td>
+          <td class="no-border">
+          </td>
+        </tr>
+        <tr>
+          <td class="no-border">
+            Name
+          </td>
+          <td class="no-border">
+            Dave Smith
+          </td>
+        </tr>
+        <tr>
+          <td class="no-border">
+            Area of expertise
+          </td>
+          <td class="no-border">
+            Builder
+          </td>
+        </tr>
+        <tr>
+          <td class="no-border">
+            Expected cost
+          </td>
+          <td class="no-border">
+            £125
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Evidence given
+          </td>
+          <td>
+                      In person
+          </td>
+        </tr>
+        <tr>
+          <td class="no-border">
+            Name
+          </td>
+          <td class="no-border">
+            John Davies
+          </td>
+        </tr>
+        <tr>
+          <td class="no-border">
+            Area of expertise
+          </td>
+          <td class="no-border">
+            Plumber
+          </td>
+        </tr>
+        <tr>
+          <td class="no-border">
+            Expected cost
+          </td>
+          <td class="no-border">
+            £125
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Evidence given
+          </td>
+          <td>
+            In writing
+          </td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>
+            Witnesses
+          </td>
+          <td>
+            {{ data['other-witnesses'] or 2}}
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Will you give evidence yourself?
+          </td>
+          <td>
+            {{ data['self']|capitalize or 'Yes' }}
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Dates unavailable
+          </td>
+          <td>
+            {{ date | date('add', 1, 'week') | date('dddd D MMMM YYYY') }}<br />
+            {{ date | date('add', 12, 'days') | date('dddd D MMMM YYYY') }}<br />
+            {{ date | date('add', 25, 'days') | date('dddd D MMMM YYYY') }}<br />
+            {{ date | date('add', 35, 'days') | date('dddd D MMMM YYYY') }}<br />
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Support required for a hearing
+          </td>
+          <td>
+            Welsh interpreter<br />
+            Disabled access
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Would you feel safe in a courtroom with the claimant?
+          </td>
+          <td>
+            {{ data['safety']|capitalize or 'Yes' }}
+            {% if data['safety-why'] %}<p>{{ data['safety-why'] }}</p>{% endif %}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+
+
+
+  <table class="footer">
+    <tbody>
+      <tr>
+        <tr>
+          <td>
+
+          </td>
+          <td>
+            For further details of the courts www.gov.uk/find-court-tribunal
+          </td>
+          <td >
+            &copy; Crown copyright Page 2 of 2
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+
+  </main>

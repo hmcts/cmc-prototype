@@ -1,0 +1,84 @@
+{% extends "layout.html" %}
+
+
+{% import 'prototypes/prototype-nov-2019/includes/upload.html' as upload %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+
+  {% include "includes/phase_banner_beta.html" %}
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+      <!--  <a href="#" onclick="history.go(-1)" class="link-back">Back</a>  -->
+
+      <h1 class="heading-large">
+        Upload files
+      </h1>
+
+      <p>Upload any documents that help explain why you're asking for this change.</p>
+
+
+      <details class="form-group">
+        <summary><span class="summary">What types of evidence could I have?</span></summary>
+        <div class="panel">
+
+          <p>These could include:</p>
+          <ul class="list list-bullet">
+            <li>a witness statement</li>
+            <li>a statement of case</li>
+            <li>any other evidence relating to the case</li>
+          </ul>
+
+          <p>If you upload a witness statement or statement of case, it must include a statement of truth in this format:</p>
+
+          <p><em>I believe that the facts included in this document are true.</em></br>
+             <em>Signed&nbsp;&nbsp;&nbsp;&nbsp;........................</em></p>
+
+          <p>If you upload a document from someone else, they must sign it, not you.</p>
+
+        </div>
+    </details>
+
+
+      <form class="form-group"  action="../set-aside-default-ccj/any-other-info" method="post" class="form"  onclick="changebutton()">
+        {{ upload.form('evidence', 'Continue') }}
+      </form>
+
+      <div class="form-group"  id="green-button-without-evidence">
+        <br>
+        <p ><a class="button" href="../set-aside-default-ccj/any-other-info?generalappnoevidence=true&">Continue without files</a></p>
+      </div>
+
+
+      <br>
+
+
+    </div>
+  </div>
+
+  {% include 'prototypes/prototype-nov-2019/includes/contact.html' %}
+</main>
+{% endblock %}
+
+
+
+
+{% block extra_js_1 %}
+
+<script type="text/javascript">
+
+  function changebutton()
+  {
+      document.getElementById("green-button-without-evidence").style.display = "none";
+      document.getElementById("blue-link-without-evidence").style.display = "block";
+  }
+
+</script>
+
+{% endblock %}

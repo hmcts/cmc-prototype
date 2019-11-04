@@ -1,0 +1,116 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+
+{% block content %}
+
+
+<main id="content" role="main">
+
+  <script>
+    $(document).ready(function () {
+      $('#your-offer').html(formParam('offer'));
+    });
+  </script>
+
+  <div class="phase-banner-alpha">
+    <p>
+      <strong class="phase-tag">BETA</strong>
+      <span>This is a new service – your <a href="#">feedback</a> will help us to improve it.</span>
+    </p>
+  </div>
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+<div class="breadcrumbs">
+    <ol>
+      <li>
+        <a href="../task-list">Respond to a money claim</a>
+      </li>
+      <li>
+        Suggest a resolution
+      </li>
+    </ol>
+  </div>
+      <h1 class="heading-xlarge">
+        Free mediation
+      </h1>
+
+      <p class="lede">If {{ partyName( 'claimant' ) }} doesn't accept your suggestion, telephone mediation is another way to settle out of
+        court. So we'd like to try to line this up for you, just in case.
+      </p>
+
+      <p>A mediator will:</p>
+      <ul class="list list-bullet">
+        <li>listen to each side separately - you won’t talk to directly to the other side</li>
+        <li>ask you to consider what the other side says</li>
+        <li>help you reach an agreement, if possible</li>
+      </ul>
+
+      <p>
+        <a href="" data-alert="This feature is not available in this demo">More about how mediation works</a>
+      </p>
+
+      <h1 class="heading-medium">
+        Would you try mediation?
+      </h1>
+
+      <form
+        name="aspnetForm"
+        method="post"
+        onsubmit="conditionalNavigation('radio-indent-group', 'Yes', '../../task-list', '../../task-list');return false;"
+        id="aspnetForm"
+        autocomplete="off">
+
+                         <input type="hidden" name="your_suggestion" value="complete">
+                          <input type="hidden" name="your_defence" value="null">
+
+        <div class="form-group">
+          <fieldset>
+
+            <legend class="visually-hidden">Will you try mediation?</legend>
+
+            <p>Over 68% of people who use our mediation service settle on the day.*</p>
+
+            <div class="multiple-choice">
+              <input id="radio-yes" type="radio" name="radio-indent-group" value="Yes">
+              <label for="radio-yes" data-target="yes-info">Yes, I want help to resolve this dispute</label>
+            </div>
+
+            <div class="panel panel-border-narrow js-hidden" id="yes-info">
+              <p>If both you and {{ partyName( 'claimant' ) }} say yes, we'll contact you to try to arrange an appointment and answer
+                any questions you have.</p>
+            </div>
+
+            <div class="multiple-choice">
+              <input id="radio-no" type="radio" name="radio-indent-group" value="No">
+              <label for="radio-no" data-target="no-info">No, I don't want mediation</label>
+            </div>
+
+            <div class="panel panel-border-narrow js-hidden" id="no-info">
+              <p>If {{ partyName( 'claimant' ) }} rejects your suggestion, you might still be able to resolve this dispute with a mediator
+                on the telephone without going to a hearing.</p>
+            </div>
+
+          </fieldset>
+
+         <div class="form-group">
+        <input id="advert-option-next--button" type="submit" value="Save and continue" class="button"
+        data-ignore-double-submit="true">
+        </div>
+        <p><a href="../../task-list">Cancel</a></p>
+
+        </div>
+
+      </form>
+      <p></p><br>
+      <p>*Source: Small Claims Mediation Service statistics, April 2015 to March 2016.
+      <p/>
+    </div>
+  </div>
+{% include 'prototypes/prototype-nov-2019/includes/contact.html' %}
+</main>
+{% endblock %}
