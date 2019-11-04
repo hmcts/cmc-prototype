@@ -1,0 +1,65 @@
+{% extends "layout_task-list.html" %}
+
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+
+{% block home_link %} ../../task-list {% endblock %}
+{% block proposition_header %}
+{% set my_account="1" %}
+
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+
+
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+
+        <!--  <a href="#" onclick="history.go(-1)" class="link-back">Back</a>  -->
+
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+
+        {{formData | safe}}
+
+        <h1 class="heading-large">
+          When do you want to stop claiming interest?
+        </h1>
+       <form method="post" action="{% if data['amount-owed'] %}../../../../defendant/task-list/counter-claim/counter-type{% else %}../total{% endif %}">
+
+        <fieldset>
+         <div class="multiple-choice">
+            <input id="radio-1" type="radio" name="interest-date" value="submitted" {{ checked("interest-date", "Issue date") }}>
+           <label for="radio-1" <strong class="bold">When you submit the claim</strong>
+           <p>If you submit after 4pm it will be the next working day.</p>
+            </label>
+         </div>
+
+           <div class="multiple-choice">
+            <input id="radio-2" type="radio" name="interest-date" value="continue" {{ checked("interest-date", "Issue date") }}>
+             <label for="radio-2" <strong class="bold">Continue until the claim is settled or judgment made</strong>
+            </label>
+          </div>
+        </fieldset>
+
+
+
+
+
+
+        <div class="form-group">
+          <input type="submit" class="button" value="Save and continue"/>
+        </div>
+
+
+      </form>
+
+    </div>
+  </div>
+
+{% include 'prototypes/prototype-nov-2019/includes/contact.html' %}
+</main>
+{% endblock %}

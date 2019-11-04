@@ -1,0 +1,35 @@
+{% extends "layout_task-list.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block home_link %} ../task-list {% endblock %}
+{% block proposition_header %}
+{% set my_account="1" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <!--  <a href="#" onclick="history.go(-1)" class="link-back">Back</a>  -->
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <h1 class="heading-large">
+        Repayment plan accepted
+      </h1>
+
+      <p>The court has accepted your repayment plan.</p>
+
+      <form method="post" action="{% if data['return'] == 'less-than' %}../../../paid-what-owe-less-claim-amount/task-list{% else %}../../task-list{% endif %}">
+
+
+        <input type="hidden" name="payment_method" value="complete">
+
+        <input id="advert-option-next--button" type="submit" value="Save and continue" class="button"
+        data-ignore-double-submit="true">
+      </div>
+    </form>
+  </div>
+</div>
+{% include 'prototypes/prototype-nov-2019/includes/contact.html' %}
+</main>
+{% endblock %}

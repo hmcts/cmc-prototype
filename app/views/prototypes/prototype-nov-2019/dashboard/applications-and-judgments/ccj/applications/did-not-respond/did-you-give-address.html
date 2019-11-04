@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <!--  <a href="#" onclick="history.go(-1)" class="link-back">Back</a>  -->
+      <h1 class="heading-large">
+        Did you tell the claimant you've moved?
+      </h1>
+      <form
+        name="aspnetForm"
+        method="post"
+        onsubmit="multiNavigation('radio-respond', ['yes', 'no'], ['upload-evidence', '']);return false;"
+        id="aspnetForm"
+        autocomplete="off">
+        <div class="form-group">
+          <fieldset>
+            <div class="multiple-choice" data-target="tell-yes">
+              <input id="tell-claimant-yes" type="radio" name="radio-respond" value="yes">
+              <label for="tell-claimant-yes">Yes</label>
+            </div>
+            <div class="panel panel-border-narrow js-hidden" id="tell-yes">
+              <p>Content around stating the truth and may have to prove it at the private hearing.</p>
+            </div>
+            <div class="multiple-choice" data-target="tell-no">
+              <input id="tell-claimant-no" type="radio" name="radio-respond" value="no">
+              <label for="tell-claimant-no">No</label>
+            </div>
+            <div class="panel panel-border-narrow js-hidden" id="tell-no">
+              <p>Content around application might be rejected as setting aside a CCJ is usually only possible if you
+                have a good reason.</p>
+            </div>
+          </fieldset>
+        </div>
+        <div class="form-group">
+          <input type="hidden" name="did-not-receive" value="on">
+          <input type="submit" class="button" value="Save and continue">
+        </div>
+      </form>
+    </div>
+  </div>
+  {% include 'prototypes/prototype-nov-2019/includes/contact.html' %}
+</main>
+{% endblock %}

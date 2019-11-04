@@ -1,0 +1,609 @@
+{% extends "layout_task-list.html" %}
+
+{% block page_title %} Task list {% endblock %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="/public/stylesheets/dm_list.css"/>
+{% endblock %}
+
+{% block proposition_header %}
+    {% set my_account="2" %}
+    {% include "includes/propositional_navigation.html" %}
+{% endblock %}
+
+
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <header class="page-heading page-heading-with-context page-heading-without-breadcrumb">
+
+        {% if data['radio-app-type'] == 'set-aside' %}
+        <h1 class="heading-large">
+          Cancel a judgment
+        </h1>
+        {% elseif data['radio-app-type'] == 'vary' or data['radio-app-type'] == 'general' %}
+        <h1 class="heading-large">
+          Change a judgment
+        </h1>
+        {% else %}
+        <h1 class="heading-large">
+          Respond to a judgment
+        </h1>
+        {% endif %}
+
+        {% if data['justvaryonly'] != 'true' %}
+            <!--  Section 1  -  CONTACT DETAILS  -->
+            <table id="table-of-tasks">
+              <thead>
+                <tr>
+                  <th scope="col" id="col-task">
+                    <span class="task-group">
+                      <span class="group-number" id="task-number"></span>
+                      Your contact details
+                    </span>
+                    <th class="numeric" id="task-status" scope="col" id="col-status">
+                      <span type="hidden" class="visually-hidden">task status</span>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr id="read-rules">
+                    <td class="task">
+                      <a href="/prototypes/prototype-nov-2019/defendant/task-list/your-details?defaultccj=true">
+                        <span class="task-name">Confirm your details </span>
+                      </a>
+                    </td>
+                    <td class="numeric" id="task-status" scope="col" id="col-status">
+                        {% if data.confirmdetails=="complete" %}
+                            {% include "includes/task_status_finished.html" %}
+                        {% else %}
+                            {% include "includes/task_status_incomplete.html" %}
+                        {% endif %}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+
+            <br>
+            <br>
+
+
+
+            {% if data['alreadysettled'] == 'false'  and  data['fulldefence'] == 'false'  and  data['canpaynow'] != 'false'%}
+
+                  <!--  HOW MUCH DO YOU OWE  -->
+                  <table id="table-of-tasks">
+                    <thead>
+                    <tr>
+                      <th scope="col" id="col-task">
+                          <span class="task-group">
+                            <span class="group-number" id="task-number"></span>
+                            About the claim
+                          </span>
+                      <th class="numeric" id="task-status" scope="col" id="col-status">
+                        <span type="hidden" class="visually-hidden">task status</span>
+                      </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+
+                    <!--
+                      <tr id="read-rules">
+                        <td class="task">
+                          <a href="/prototypes/prototype-nov-2019/defendant/task-list/do-you-owe-money?defaultccj=true&">
+                            <span class="task-name">Tell us if you owe {{ partyName( 'claimant' ) }} any money</span>
+                          </a>
+                        </td>
+                        <td class="numeric" id="task-status" scope="col" id="col-status">
+                          {% if data.howmuchyouowe=="complete" %}
+                              {% include "includes/task_status_finished.html" %}
+                          {% else %}
+                              {% include "includes/task_status_incomplete.html" %}
+                          {% endif %}
+                        </td>
+                      </tr>
+                    -->
+
+                      {% if data.paidwhatiowe == 'true' %}
+                          <tr id="their-details">
+                            <td class="task">
+                              <a href="../../../defendant/task-list/your-defence/paid-less">
+                                <span class="task-name">Tell us how much you've paid</span>
+                              </a>
+                            </td>
+                            <td class="numeric" id="task-status" scope="col" id="col-status">
+                              {% if data.how_much_paid=="complete" %}
+                              {% include "includes/task_status_finished.html" %}
+                              {% else %}
+                              {% include "includes/task_status_incomplete.html" %}
+                              {% endif %}
+                            </td>
+                          </tr>
+                      {% endif %}
+
+
+
+                      <!--  FULL ADMIT ONLY - GET THE USER TO PAY -->
+
+                      {% if data['alreadysettled'] == 'false'  and  data['fulldefence'] == 'false'  and  data['lower-amount'] == 'false' %}
+                          <tr id="read-rules">
+                            <td class="task">
+                              <a href="../../../applications/will-you-pay">
+                                <span class="task-name">Will you pay {{ partyName( 'claimant' ) }}?</span>
+                              </a>
+                            </td>
+                            <td class="numeric" id="task-status" scope="col" id="col-status">
+                              {% if data.canpaynowanswered=="complete" %}
+                                  {% include "includes/task_status_finished.html" %}
+                              {% else %}
+                                  {% include "includes/task_status_incomplete.html" %}
+                              {% endif %}
+                            </td>
+                          </tr>
+                      {% endif %}
+
+
+
+                      <!--  PART ADMIT ONLY - Will user pay what they sa they owe -->
+                      {% if data['alreadysettled'] == 'false'  and  data['fulldefence'] == 'false'  and  data['lower-amount'] == 'true' %}
+
+                          <!-- THE USER WILL TRY TO SETTLE WITH CLAIMANT -->
+                            <tr id="read-rules">
+                              <td class="task">
+                                <a href="contact-claimant?contactclaimantstarted=true&contactedclaimantanswered=complete&">
+                                  <span class="task-name">Consider settling the claim</span>
+                                </a>
+                              </td>
+                              <td class="numeric" id="task-status" scope="col" id="col-status">
+                                {% if data.contactedclaimantanswered=="complete" %}
+                                      {% include "includes/task_status_finished.html" %}
+                                {% else %}
+                                      {% include "includes/task_status_incomplete.html" %}
+                                {% endif %}
+                              </td>
+                            </tr>
+
+                      {% endif %}
+
+                </tbody>
+              </table>
+
+              <br>
+              <br>
+
+        {% endif %}
+
+    <!-- end if for just vary only  -->
+        {% endif %}
+
+
+
+
+
+        <!--  the onard links for Guy's reference
+         '../../dashboard/applications-and-judgments/set-aside-default-ccj/pay-in-full-now?lower-amount=false&alreadysettled=false&fulldefence=false&',
+                                                '../../dashboard/applications-and-judgments/set-aside-default-ccj/pay-lower-amount-now?lower-amount=true&alreadysettled=false&fulldefence=false&',
+                                                '../../dashboard/applications-and-judgments/set-aside-default-ccj/cancel-ccj-info?fulldefence=true&lower-amount=false&alreadysettled=false&',
+                                                '../../dashboard/applications-and-judgments/set-aside-default-ccj/already-settled?alreadysettled=true&fulldefence=false&lower-amount=false&'  ]);
+      -->
+
+
+        <!-- REQUEST CCJ TO BE CANCELLED -->
+        {% if  data['canpaynow'] == 'true'  and  data['paidclaimant'] == "complete"
+            or data['alreadysettled'] == 'true'  and  data['claimantupdate'] == "complete"
+            or data['fulldefence'] == 'true'
+            or data['has-settled'] == 'false'  and  data['lower-amount'] == 'true' and data['contactclaimantstarted'] != 'true' %}
+            <table id="table-of-tasks">
+              <thead>
+              <tr>
+                <th scope="col" id="col-task">
+                    <span class="task-group">
+                      <span class="group-number" id="task-number"></span>
+                      {% if data['radio-app-type'] == 'set-aside' %}
+                        Apply to cancel the judgment
+                      {% elseif data['radio-app-type'] == 'vary' or data['radio-app-type'] == 'general' %}
+                        Apply to change the judgment
+                      {% else %}
+                        Respond to the judgment
+                      {% endif %}
+                    </span>
+                </th>
+                <th class="numeric" id="task-status" scope="col" id="col-status"></th>
+              </tr>
+              </thead>
+              <tbody>
+                <tr id="completing-your-claim">
+                  <td class="task">
+
+                    {% if  data['fulldefence'] == 'true'
+                    or data['has-settled'] == 'false'  and  data['lower-amount'] == 'true'  %}
+                        <a href="cancel-ccj-info-interstitial">
+                          <span class="task-name">Decide whether to apply</span>
+                        </a>
+                    {% else %}
+                        <a href="cancel-ccj-info-paid-or-settled">
+                          <span class="task-name">Decide whether to apply</span>
+                        </a>
+                    {% endif %}
+
+
+                  </td>
+                  <td class="numeric" id="task-status" scope="col" id="col-status">
+                    {% if data.cancelccjanswer == 'complete' %}
+                        {% include "includes/task_status_finished.html" %}
+                    {% else %}
+                        {% include "includes/task_status_incomplete.html" %}
+                    {% endif %}
+                  </td>
+                </tr>
+
+
+                <!-- SET ASIDE REASONS -->
+                {% if  data['cancelccj'] == 'true' %}
+                {% if  data['fulldefence'] == 'false' %}
+                <tr id="completing-your-claim">
+                  <td class="task">
+                    <a href="claimant-agree">
+                      <span class="task-name">Get the claimant to agree</span>
+                    </a>
+                  </td>
+                  <td class="numeric" id="task-status" scope="col" id="col-status">
+                    {% if data.claimantagree == 'complete' %}
+                    {% include "includes/task_status_finished.html" %}
+                    {% else %}
+                    {% include "includes/task_status_incomplete.html" %}
+                    {% endif %}
+                  </td>
+                </tr>
+                {% endif %}
+
+
+                <tr id="completing-your-claim">
+                  <td class="task">
+                    <a href="was-letter-received">
+                      <span class="task-name">Explain why you didn't respond</span>
+                    </a>
+                  </td>
+                  <td class="numeric" id="task-status" scope="col" id="col-status">
+                    {% if data.explainreason == 'complete' %}
+                    {% include "includes/task_status_finished.html" %}
+                    {% else %}
+                    {% include "includes/task_status_incomplete.html" %}
+                    {% endif %}
+                  </td>
+                </tr>
+
+                <tr id="completing-your-claim">
+                  <td class="task">
+                    <a href="upload-evidence">
+                      <span class="task-name">Submit any evidence</span>
+                    </a>
+                  </td>
+                  <td class="numeric" id="task-status" scope="col" id="col-status">
+                    {% if data.evidencesection=="complete" %}
+                    {% include "includes/task_status_finished.html" %}
+                    {% else %}
+                    {% include "includes/task_status_incomplete.html" %}
+                    {% endif %}
+                  </td>
+                </tr>
+
+                <tr id="completing-your-claim">
+                  <td class="task">
+                    <a href="any-other-info">
+                      <span class="task-name">Other information</span>
+                    </a>
+                  </td>
+                  <td class="numeric" id="task-status" scope="col" id="col-status">
+                    {% if data.otherinfosection=="complete" %}
+                    {% include "includes/task_status_finished.html" %}
+                    {% else %}
+                    {% include "includes/task_status_incomplete.html" %}
+                    {% endif %}
+                  </td>
+                </tr>
+
+
+
+
+                <!--   Your hearing requirements  -->
+
+                <tr>
+                  <td class="task">
+                    <a href="hearing-requirements-interstitial">
+                      <span class="task-name">Give us details in case there's a hearing</span>
+                    </a>
+                  </td>
+                  <td class="numeric" id="task-status" scope="col" id="col-status">
+                    {% if data.hearing=="complete" %}
+                    {% include "includes/task_status_finished.html" %}
+                    {% else %}
+                    {% include "includes/task_status_incomplete.html" %}
+                    {% endif %}
+                  </td>
+                </tr>
+
+                {% endif %}
+
+
+
+
+
+              </tbody>
+            </table>
+
+            <br>
+            <br>
+        {% endif %}
+
+
+
+
+
+
+
+
+
+        <!--  VARY JUDGMENT -->
+        {% if data['fulldefence'] == 'false'  and  data['lower-amount'] == 'false' and  data['canpaynow'] == 'false'
+            or  data['justvaryonly'] == 'true'
+            or  data['cancelccjanswer'] == 'complete'  and   data['cancelccj'] == 'false'   %}
+        <table id="table-of-tasks">
+          <thead>
+          <tr>
+            <th scope="col" id="col-task">
+                      <span class="task-group">
+                        <span class="group-number" id="task-number"></span>
+                        Change when you pay
+                      </span>
+            </th>
+            <th class="numeric" id="task-status" scope="col" id="col-status"></th>
+          </tr>
+          </thead>
+
+          <tbody>
+
+          <tr id="read-rules">
+            <td class="task">
+              <a href="switch-to-vary">
+                <span class="task-name">Ask to change the judgment</span>
+              </a>
+            </td>
+            <td class="numeric" id="task-status" scope="col" id="col-status">
+              {% if data.varyanswered=="complete" %}
+                  {% include "includes/task_status_finished.html" %}
+              {% else %}
+                  {% include "includes/task_status_incomplete.html" %}
+              {% endif %}
+            </td>
+          </tr>
+
+          <!-- if vary requested -->
+          {% if  data['varyselected'] == 'true'  %}
+          <tr>
+            <td class="task">
+              <a href="../vary/pay-default-ccj-options">
+                <span class="task-name">Request new payment terms</span>
+              </a>
+            </td>
+            <td class="numeric" id="task-status" scope="col" id="col-status">
+              {% if data.newpaymentterms=="complete" %}
+              {% include "includes/task_status_finished.html" %}
+              {% else %}
+              {% include "includes/task_status_incomplete.html" %}
+              {% endif %}
+            </td>
+          </tr>
+
+          {% if  data['varytoimmediately'] != 'true'  %}
+          <tr>
+            <td class="task">
+              <a href="../../../defendant/task-list/owe-all/statement/explanation  ">
+                <span class="task-name">Your financial details</span>
+              </a>
+            </td>
+            <td class="numeric" id="task-status" scope="col" id="col-status">
+              {% if data.financialdetails=="complete" %}
+              {% include "includes/task_status_finished.html" %}
+              {% else %}
+              {% include "includes/task_status_incomplete.html" %}
+              {% endif %}
+            </td>
+          </tr>
+          {% endif %}
+
+          {% endif %}
+
+          </tbody>
+        </table>
+
+        <br>
+        <br>
+        {% endif %}
+
+
+
+
+
+        {% if data['cancelccj'] == 'true'  and  data['fulldefence'] == 'true'
+            or  data['cancelccj'] == 'true'  and  data['lower-amount'] == 'true' %}
+            <!--   Section 4  -  RESPODN TO THE CLAIM  -->
+          <table id="table-of-tasks">
+            <thead>
+              <tr>
+                <th scope="col" id="col-task">
+                    <span class="task-group">
+                      <span class="group-number" id="task-number"></span>
+                      {% if data['radio-app-type'] == 'set-aside' %}
+                        Respond to the original claim
+                      {% else %}
+                        Respond to claim
+                      {% endif %}
+                    </span>
+                </th>
+                <th class="numeric" id="task-status" scope="col" id="col-status"></th>
+              </tr>
+            </thead>
+
+
+            <tbody>
+
+
+            <!--  FULL DEFENCE - SO skip to why DON@T OWE ANYTHING - slightly different from normal defence steps -->
+            <!--
+            {% if data['cancelccj'] == 'true'  and  data['fulldefence'] == 'true' %}
+                <tr id="their-details">
+                  <td class="task">
+                    <a href="defence-options-after-set-aside">
+                      <span class="task-name">Why you don't owe {{ partyName( 'claimant' ) }} any money</span>
+                    </a>
+                  </td>
+                  <td class="numeric" id="task-status" scope="col" id="col-status">
+                    {% if data.whydontowe=="complete" %}
+                        {% include "includes/task_status_finished.html" %}
+                    {% else %}
+                        {% include "includes/task_status_incomplete.html" %}
+                    {% endif %}
+                  </td>
+                </tr>
+            {% endif %}
+            -->
+
+              {% if  data['fulldefence'] == 'true'  %}
+                    <tr id="their-details">
+                      <td class="task">
+                        <a href="defence-options-owe-nothing">
+                          <span class="task-name">Reason for not owing money</span>
+                        </a>
+                      </td>
+                      <td class="numeric" id="task-status" scope="col" id="col-status">
+                        {% if data.reasonfornotowe=="complete" %}
+                            {% include "includes/task_status_finished.html" %}
+                        {% else %}
+                            {% include "includes/task_status_incomplete.html" %}
+                        {% endif %}
+                      </td>
+                    </tr>
+              {% endif %}
+
+
+              <tr id="their-details">
+                <td class="task">
+                  <a href="../../../defendant/task-list/your-defence/defence-1{{formQuery}}">
+                    <span class="task-name">Tell us why you disagree with the claim</span>
+                  </a>
+                </td>
+                <td class="numeric" id="task-status" scope="col" id="col-status">
+                  {% if data.your_defence=="complete" or data.your_defence_pa == "complete" %}
+                      {% include "includes/task_status_finished.html" %}
+                  {% else %}
+                      {% include "includes/task_status_incomplete.html" %}
+                  {% endif %}
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+
+            <br>
+            <br>
+        {% endif %}
+
+
+
+
+
+        <!--  CHECK AND SUBMIT ANSWERS -->
+        <table id="table-of-tasks" class="submit">
+          <thead>
+            <tr>
+              <th scope="col" id="col-task">
+                <span class="task-group">
+                  <span class="group-number" id="task-number"></span>
+                  Submit
+                </span>
+              </th>
+              <th class="numeric" id="task-status" scope="col" id="col-status"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr id="check-and-send">
+              <td>
+                {% if data.varyselected=="true"  %}
+                    <a href="../vary/check-answers-defendant-vary">
+                      <span class="button">Check and submit</span>
+                    </a>
+                {% else %}
+                    <a href="check-answers">
+                      <span class="button">Check and submit</span>
+                    </a>
+                {% endif %}
+             </td>
+            </tr>
+
+
+            <tr id="check-and-send">
+              <td>
+                <br>
+                <p><a href="../../defendant">Save and return</a></p>
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+
+
+
+    </div>
+
+
+
+    <!--  Right side claim details -->
+    <div class="column-one-third">
+      <ul class="actions">
+      </ul>
+      <div class="meta-data" style="margin-left:80px;">
+        <ul role="navigation" class="font-xsmall list">
+          <li><strong class="bold">Claim reference:</strong><br>352MC733</li>
+           <a href='task-list/view-claim'>View claim</a></li>
+        </ul>
+      </div>
+    </div>
+
+
+
+
+
+  </div>
+
+</main>
+
+<form method="post"  action="#" class="form" style="float: left;">
+  <select id="control-box2" name="control-box2" onchange="window.location.href='?'+this.value">
+    <option value="alreadysettled=true&fulldefence=false&lower-amount=false&"
+    {%  if data['alreadysettled'] == 'true'  and  data['fulldefence'] == 'false'  and  data['lower-amount'] == 'false'  %}selected{% endif %}
+    >Already Settled</option>
+
+    <option value="lower-amount=false&alreadysettled=false&fulldefence=false&"
+    {% if data['alreadysettled'] == 'false'  and  data['fulldefence'] == 'false'  and  data['lower-amount'] == 'false' %}selected{% endif %}
+    >Full Admit</option>
+
+    <option value="lower-amount=true&alreadysettled=false&fulldefence=false&"
+    {% if data['alreadysettled'] == 'false'  and  data['fulldefence'] == 'false'  and  data['lower-amount'] == 'true' %}selected{% endif %}
+    >Part Admit</option>
+
+    <option value="fulldefence=true&lower-amount=false&alreadysettled=false&"
+    {% if data['alreadysettled'] == 'false'  and  data['fulldefence'] == 'true'  and  data['lower-amount'] == 'false' %}selected{% endif %}
+    >Full Defence</option>
+  </select>
+</form>
+
+
+
+
+{% endblock %}
+{% block extra_js_1 %}<!-- ticky list javascript one -->{% endblock %}
+{% block extra_js_2 %}<!-- ticky list javascript two -->{% endblock %}

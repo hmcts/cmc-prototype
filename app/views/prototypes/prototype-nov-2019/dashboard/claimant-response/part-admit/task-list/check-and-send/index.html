@@ -1,0 +1,658 @@
+{% extends "layout_task-list.html" %}
+
+{% block page_title %}
+    Check your answers
+{% endblock %}
+
+{% block home_link %} ../task-list {% endblock %}
+
+{% block proposition_header %}
+    {% set my_account="1" %}
+    {% include "includes/propositional_navigation.html" %}
+{% endblock %}
+
+{% block content %}
+  <main id="content" role="main">
+      {% include "includes/phase_banner_beta.html" %}
+
+      <br>
+      <h1 class="heading-large">
+        Check your answers
+      </h1>
+
+
+
+
+      <!--  RESPONDING TO THE DEFENDANTS RESPONSE - AFTER EJECTING SETTLE OUT OF COURT  -->
+
+      <table class="check-your-answers">
+        <thead>
+            <tr>
+              <th colspan="2">
+                <h2 id='cd' class="heading-medium">
+                  Your response
+                </h2>
+              </th>
+              <th>
+              </th>
+            </tr>
+        </thead>
+
+
+        <!--  settle out of court offer made by defendant  -->
+        <tr>
+          <td>
+            Settle out of court
+          </td>
+          <td>
+            {% if  data['offeraccepted'] == 'true'   %}
+                Accept offer
+            {% else %}
+                Reject offer
+            {% endif %}
+          </td>
+          <td class="change-answer">
+            <a href="">
+              Change <span class="visuallyhidden">Name</span>
+            </a>
+          </td>
+        </tr>
+
+        {% if  data['offeraccepted'] == 'true'   %}
+        {% else %}
+            <tr>
+              <td>
+                Reason for rejecting
+              </td>
+              <!-- Pay in installment content also needs considering -->
+              <td style="white-space: pre-wrap;" >{{ data['rejection-reason'] }}</td>
+              <td class="change-answer">
+                <a href="#">
+                  Change <span class="visuallyhidden">Name</span>
+                </a>
+              </td>
+            </tr>
+        {% endif %}
+
+
+
+
+
+
+{% if  data['offeraccepted'] == 'false'   %}
+
+
+        <!--  RESPONSE STUFF -->
+        <tbody>
+          <tr>
+            <td>
+              Do you accept or reject the defendant's admission?
+            </td>
+            <td>
+              {%if data.radio_select_group_owed=="Yes" %}
+                  I accept this amount
+              {%elif data.radio_select_group_owed=="No" %}
+                  I reject this amount
+              {% else %}
+                  I reject this amount
+              {% endif %}
+            </td>
+            <td class="change-answer">
+              <a href="#">
+                Change <span class="visuallyhidden">Why you believe you're owed the money</span>
+              </a>
+            </td>
+          </tr>
+
+
+          {%if data.radio_select_group_owed=="Yes"  and data['radio-pay-group'] != 'Immediately' %}
+              <tr>
+                <td>
+                  Do you accept the defendant's repayment plan?
+                </td>
+                <td>
+                  {%if data['radio-indent-group'] == "accept_stop_claim" %}
+                      I accept this repayment plan
+                  {%elif data['radio-indent-group'] == "reject_stop_claim" %}
+                      I reject this repayment plan
+                  {% else %}
+                      I reject this repayment plan
+                  {% endif %}
+                </td>
+                <td class="change-answer">
+                  <a
+                    href="../task-list/claim-details/reason?return_page={{ '../../task-list/claim-details/check-your-answers' | urlencode }}">
+                    Change <span class="visuallyhidden">Why you believe you're owed the money</span>
+                  </a>
+                </td>
+              </tr>
+
+              {%if data['radio-indent-group'] != "accept_stop_claim" %}
+                  {%if data['radio-indent-group2'] != "reject_stop_claim" %}
+                      <tr>
+                        <td>
+                          How would you like the defendant to pay?
+                        </td>
+                        <td>
+                          {% if data['radio-pay-group'] == "Set-date" %}
+                          In full by {{ now | date('add', 1, 'month' ) | date( "D MMMM YYYY" ) }}
+                          {% elseif data['radio-pay-group'] == "Instalments" %}
+                          By instalments
+                          {% else %}
+                          Immediately
+                          {% endif %}
+                        </td>
+                        <td class="change-answer">
+                          <a
+                            href="../task-list/claim-details/reason?return_page={{ '../../task-list/claim-details/counter-offer' | urlencode }}">
+                            Change <span class="visuallyhidden">Why you believe you're owed the money</span>
+                          </a>
+                        </td>
+                      </tr>
+                  {% endif %}
+              {% endif %}
+
+
+
+        {% if data['radio-indent-group'] != 'accept_stop_claim' and data['radio-pay-group'] == "Instalments" and
+        data['radio-indent-group2'] != "reject_stop_claim" %}
+            <tr>
+              <td class="no-border">
+                Regular payments of
+              </td>
+              <td class="no-border">
+                £{{data['instalment-first-payment']}}
+              </td>
+              <td class="change-answer no-border">
+                <a href="../owe-all/repayment-plan?return_page={{ '../../task-list/owe-all/check-your-answers' | urlencode }}">
+                  Change <span class="visuallyhidden">Name</span>
+                </a>
+              </td>
+            </tr>
+            <tr class="no-border">
+              <td class="no-border">
+                Frequency of payments
+              </td>
+              <td class="no-border">
+                {{ data['radio-payment-frequency'] }}
+              </td>
+              <td class="no-border">
+              </td>
+            </tr>
+            <tr>
+              <td>
+                Date for first instalment
+              </td>
+              <td>
+                {% if data['instalment-day'] %}
+                {{data['instalment-day']}} {{data['instalment-month']}} {{data['instalment-year']}}
+                {% else %}
+                31 March 2018
+                {% endif %}
+              </td>
+              <td>
+              </td>
+            </tr>
+        {% endif %}
+
+
+        {%if data['radio-indent-group2'] == "reject_stop_claim" %}
+            <tr>
+            <tr>
+              <td>
+                Do you wish to propose a repayment plan?
+              </td>
+              <td>
+                I want a judge to make a repayment plan.
+              </td>
+              <td class="change-answer">
+                <a
+                  href="../counter-offer/court-offer?return_page={{ '../../task-list/owe-all/check-your-answers' | urlencode }}">
+                  Change <span class="visuallyhidden">Name</span>
+                </a>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                Your reason for rejecting the court's proposed repayment plan?
+              </td>
+              <td>
+                {% if data['reject_response2']!="" %}
+                {{data['reject_response2']}}
+                {% else %}
+                I want all the money now because i know he has the money .
+                {% endif %}
+              </td>
+              <td class="change-answer">
+                <a
+                  href="../task-list/claim-details/reason?return_page={{ '../../task-list/claim-details/check-your-answers' | urlencode }}">
+                  Change <span class="visuallyhidden">Why you believe you're owed the money</span>
+                </a>
+              </td>
+            </tr>
+        {% endif %}
+
+        </tbody>
+      </table>
+
+
+
+
+      {% if data['proceed'] == 'complete' and data['radio-proceed'] %}
+          <table class="check-your-answers">
+            <thead>
+            <tr>
+              <th colspan="2">
+                <h2 class="heading-medium" id="name">
+                  How you wish to proceed
+                </h2>
+              </th>
+              <th>
+              </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td class="no-border">
+                How do you want to formalise the repayment plan?
+              <td class="no-border">
+                {% if data['radio-proceed']=="settlement" %}Sign a settlement agreement{% else %}Issue a County Court Judgment
+                (CCJ){% endif %}
+              </td>
+              <td class="change-answer no-border">
+                <a href="claim-amount-deduct">
+                  Change
+                </a>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+      {% endif %}
+
+
+
+      {% if data['settlement'] == 'complete' and data['radio-proceed'] == 'settlement' %}
+          <table class="check-your-answers">
+            <thead>
+            <tr>
+              <th colspan="2">
+                <h2 id='cd' class="heading-medium">
+                  Settlement agreement
+                </h2>
+              </th>
+              <th>
+              </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td>
+                The agreement
+              </td>
+              <td>
+
+                {{ partyName( 'defendant' ) }}
+                {% if data['radio-pay-group']=="Immediately" %}
+                will pay £1,200 immediately. {{ partyName( 'claimant' ) }} will receive the money no later than {{ now | date( 'add', 5, 'days') |
+                date }}. Any cheques or transfers will be clear in {{ partyName( 'claimant' ) }}'s account by this date.
+
+                {% elseif data['radio-pay-group']=="Instalments" %}
+                will repay £1,200, in instalments of
+                {% if data['instalment-first-payment'] %}
+                £{{data['instalment-first-payment']}}
+                {% else %}
+                £200
+                {% endif %}
+
+                {% if data['radio-payment-frequency'] %}
+                {{ data['radio-payment-frequency'] | lower }}{% else %}
+                every month{% endif %}.
+                <br/>The first instalment will be paid by
+                {% if data['instalment-day'] %}
+                {{ ( data['instalment-month'] + ' ' + data['instalment-day'] + ' ' + data['instalment-year']) | date('D MMMM
+                YYYY') }}{% else %}
+                31 March 2018{% endif %}.
+
+
+                {% elseif data['radio-pay-group']=="Set-date" %}
+                will pay £1,200 no later than
+                {% if data['set-day'] %}
+                {{ ( data['set-month'] + ' ' + data['set-day'] + ' ' + data['set-year']) | date('D MMMM YYYY') }}
+                {% else %}
+                {{ date | date('add', 1, 'year') | date('D MMMM YYYY') }}
+                {% endif %}
+                {% else %}
+                will pay £1,200 no later than {{ date | date('add', 1, 'year') | date('D MMMM YYYY') }}.
+                {% endif %}
+              </td>
+              <td class="change-answer">
+                <a
+                  href="../task-list/claim-details/reason?return_page={{ '../../task-list/claim-details/check-your-answers' | urlencode }}">
+                  Change <span class="visuallyhidden">Why you believe you're owed the money</span>
+                </a>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                Completion date
+              </td>
+              <td>
+
+                {% if data['radio-pay-group']=="Immediately" %}
+                {{ now | date( 'add', 5, 'days') | date }}
+                {% elseif data['radio-pay-group']=="Instalments" and data['instalment-month'] %}
+                {{ ( data['instalment-month'] + ' ' + data['instalment-day'] + ' ' + data['instalment-year']) | date('add', 1,
+                'year') | date('D MMMM YYYY') }}
+                {% elseif data['radio-pay-group']=="Set-date" %}
+                {% if data['set-day'] %}
+                {{ ( data['set-month'] + ' ' + data['set-day'] + ' ' + data['set-year']) | date('D MMMM YYYY') }}
+                {% else %}
+                {{ date | date('add', 1, 'year') | date('D MMMM YYYY') }}
+                {% endif %}
+                {% else %}
+                {{ date | date('add', 1, 'year') | date('D MMMM YYYY') }}
+                {% endif %}
+
+              </td>
+              <td class="change-answer">
+                <a
+                  href="../task-list/claim-details/reason?return_page={{ '../../task-list/claim-details/check-your-answers' | urlencode }}">
+                  Change <span class="visuallyhidden">Why you believe you're owed the money</span>
+                </a>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+
+
+      {% elseif data['judgment'] == 'complete' and data['radio-proceed'] == 'judgment-pa' %}
+          <table class="check-your-answers">
+              <thead>
+              <tr>
+                <th colspan="2">
+                  <h2 class="heading-medium" id="name">
+                    Judgment request
+                  </h2>
+                </th>
+                <th>
+                </th>
+              </tr>
+              </thead>
+
+              <tbody>
+                  <tr>
+                    <td class="no-border">
+                      Has the defendant paid some of the amount owed?
+                    <td class="no-border">
+                      {% if data['radio-indent-group2']=="Yes" or data['control-box'] == 1 or data['control-box'] == 2 or
+                      data['control-box'] == 3 or data['control-box'] == 4 %}Yes{% elif data['radio-indent-group2']=="No" or
+                      data['control-box'] == 5 or data['control-box'] == 6 %}No{% else %}Yes{% endif %}
+
+                    </td>
+                    <td class="change-answer no-border">
+                      <a href="claim-amount-deduct">
+                        Change <span class="visuallyhidden">Amount defendant is ordered to pay</span>
+                      </a>
+                    </td>
+                  </tr>
+
+              {% if data['radio-indent-group2']=="No" or data['control-box'] == 5 or data['control-box'] == 5 %}
+              {% elseif data['control-box'] == 1 or data['control-box'] == 2 or data['control-box'] == 3 or data['control-box'] ==
+              4 or data['radio-pay-group']=="Immediately" or data['radio-pay-group']=="Set-date" or
+              data['radio-pay-group']=="Instalments"%}
+                  <tr>
+                    <td>
+                      Amount already paid
+                    <td>
+                      £100<br>
+                    </td>
+                    <td class="change-answer"></td>
+                  </tr>
+              {% endif %}
+
+              <tr>
+                <td>
+                  Total to be paid by defendant
+                <td>
+                  {% if data['radio-proceed']=="judgment-pa" %}£1200{%else%}£1643.20{%endif%}<br>
+                </td>
+                <td class="change-answer">
+
+                </td>
+              </tr>
+
+
+              </tbody>
+          </table>
+      {% endif %}
+
+
+
+
+
+      <!--  MEDIATION  -->
+      {% elif data.radio_select_group_owed=="No" %}
+
+        <table class="check-your-answers">
+            <thead>
+                <tr>
+                  <th colspan="2">
+                    <h2 class="heading-medium">
+                      Free telephone mediation
+                    </h2>
+                  </th>
+                  <th>
+                  </th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <td>
+                  Opt out?
+                </td>
+                <td>
+                  {% if data['resolve_dispute']=="complete" %}
+                      No
+                  {% elseif data['meditation_ineligible']=="complete" %}
+                      Yes
+                  {% endif %}
+                </td>
+                <td class="change-answer">
+                  <a
+                    href="../task-list/request-mediation?return_page={{ '../../task-list' | urlencode }}">
+                    Change <span class="visuallyhidden">Why you believe you're owed the money</span>
+                  </a>
+                </td>
+                {% if data['resolve_dispute']=="complete" %}
+                <tr>
+                  <td>
+                    Agree to all statements
+                  </td>
+                  <td>
+                    Yes, I agree
+                  </td>
+                  <td class="change-answer">
+                    <a href="../task-list/request-mediation/statements-all?return_page={{ '../../task-list' | urlencode }}">
+                      Change <span class="visuallyhidden">Name</span>
+                    </a>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>Contact number
+                  </td>
+                  <td>
+                    {{ data['phone-claimant'] or '07123456789'}}
+                  </td>
+                  <td class="change-answer">
+                    <a href="../task-list/request-mediation/previous-phone?return_page={{ '../../task-list' | urlencode }}">
+                      Change <span class="visuallyhidden">Name</span>
+                    </a>
+                  </td>
+                </tr>
+            {% else %}
+            {% endif %}
+            </tbody>
+        </table>
+
+      {% endif %}
+
+    {% endif %}
+
+          </tbody>
+      </table>
+
+
+
+    <!-- OFFER STUFF  -->
+    {% if  data['offeraccepted'] == 'false'   %}
+
+          <!--  Counter offer  -->
+          <table class="check-your-answers">
+            <thead>
+            <tr>
+              <th colspan="2">
+                <h2 class="heading-medium" id="name">
+                  Your offer
+                </h2>
+              </th>
+              <th>
+              </th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr>
+              <td>
+                Make offer
+              </td>
+              <!-- Pay in installment content also needs considering -->
+              <td>
+                {% if data['makecounteroffer'] == 'true'  %}
+                Yes
+                {% else %}
+                No
+                {% endif %}
+              </td>
+              <td class="change-answer">
+                <a href="#">
+                  Change <span class="visuallyhidden">Name</span>
+                </a>
+              </td>
+            </tr>
+
+            {% if data['makecounteroffer'] == 'true'  %}
+            <tr>
+              <td>
+                Details
+              </td>
+              <!-- Pay in installment content also needs considering -->
+              <td  style="white-space: pre-wrap;" >{{ data['the-offer-text'] }}</td>
+              <td class="change-answer">
+                <a href="#">
+                  Change <span class="visuallyhidden">Name</span>
+                </a>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                Offer completed by
+              </td>
+              <!-- Pay in installment content also needs considering -->
+              <td>
+                {{ data['offerDateDay'] }} August 2019
+              </td>
+              <td class="change-answer">
+                <a href="#">
+                  Change <span class="visuallyhidden">Name</span>
+                </a>
+              </td>
+            </tr>
+            {% endif %}
+
+            </tbody>
+          </table>
+
+
+
+          <!--  Further offers  -->
+          {% if  data['theclaimant'] == 'true'  %}
+          <table class="check-your-answers">
+            <thead>
+            <tr>
+              <th colspan="2">
+                <h2 class="heading-medium" id="name">
+                  More offers
+                </h2>
+              </th>
+              <th>
+              </th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr>
+              <td>
+                Allow more offers
+              </td>
+              <!-- Pay in installment content also needs considering -->
+              <td>
+                {% if data['moreoffers'] == 'true'  %}
+                Yes
+                {% elif data['moreoffers'] == 'false'  %}
+                No
+                {% endif %}
+              </td>
+              <td class="change-answer">
+                <a href="#">
+                  Change <span class="visuallyhidden">Name</span>
+                </a>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+          {% endif %}
+
+    {% endif %}
+
+
+
+
+
+
+      {% include "prototypes/prototype-nov-2019/includes/dq-check.html" %}
+
+      <br/>
+
+      <form method="get" action="../../confirmation-page?" class="form">
+          <div class="form-group">
+            <button id="submit" class="button">Submit response</button>
+          </div>
+      </form>
+
+      {% include 'prototypes/prototype-nov-2019/includes/contact.html' %}
+
+</main>
+
+
+
+
+
+<form method="post"  action="#" class="form" style="position: absolute;">
+  <select id="check2" name="check2" onchange="window.location.href='?'+this.value">
+
+    <option  value="offeraccepted=false&"
+             {% if data['offeraccepted'] != 'true' %}selected{% endif %}
+    >Claimant - Rejects out of court offer from defendant</option>
+
+    <option  value="offeraccepted=true&"
+             {% if  data['offeraccepted'] == 'true'  %}selected{% endif %}
+    >Claimant - Accept out of court offer from defendant</option>
+
+
+  </select>
+</form>
+
+{% endblock %}

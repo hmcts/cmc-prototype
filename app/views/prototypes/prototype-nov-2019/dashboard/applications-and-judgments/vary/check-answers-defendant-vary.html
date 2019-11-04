@@ -1,0 +1,871 @@
+{% extends "layout_task-list.html" %}
+
+{% block page_title %}
+Check your answers
+{% endblock %}
+
+{% block home_link %} ../task-list {% endblock %}
+
+{% block proposition_header %}
+{% set my_account="2" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+
+
+{% block content %}
+<main id="content" role="main">
+
+  {% include "includes/phase_banner_beta.html" %}
+
+  <!--  <a href="#" onclick="history.go(-1)" class="link-back">Back</a>  -->
+
+  <h1 class="heading-large">
+    Check your answers
+  </h1>
+
+
+  <!--  YOUR DETAILS  -->
+  <table class="check-your-answers">
+    <thead>
+      <tr>
+        <th colspan="2" class="no-border">
+          <h2 class="heading-medium" id="name">
+            Your details
+          </h2>
+        </th>
+        <th class="no-border">
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+
+    <tr>
+      <td>
+        Full name
+      </td>
+      <td>
+        {{ partyName( 'defendant' ) }}
+      </td>
+      <td class="change-answer">
+        <a href="">
+          Change <span class="visuallyhidden">Name</span>
+        </a>
+      </td>
+    </tr>
+
+    <tr>
+      <td >
+        Address
+      </td>
+      <td>
+        101 Regents Road<br>
+        Shiplake<br>
+        Henley on Thames<br>
+        RG9 4BW
+      </td>
+      <td class="change-answer">
+        <a href="">
+          Change <span class="visuallyhidden"> Name</span>
+        </a>
+      </td>
+    </tr>
+
+
+    <tr>
+      <td>
+        Correspondence address
+      </td>
+      <td>
+        {% if data['correspondence-address']=="Yes" %}
+        {{data['d-addressLine1']}}<br>
+        {{data['d-addressLine2']}}<br>
+        {{data['d-address-town']}}<br>
+        {{data['d-addressPostcode']}}<br>
+        {% else %}
+        Same as address<br>
+        {% endif %}
+      </td>
+      <td class="change-answer">
+        <a href="">
+          Change <span class="visuallyhidden"> Name</span>
+        </a>
+      </td>
+    </tr>
+
+    <tr>
+    <tr>
+      <td>
+        Contact number (optional)
+      </td>
+      <td>
+        {{ data['defendant-phone'] or '07824999612'}}
+      </td>
+      <td class="change-answer">
+        <a href="">
+          Change <span class="visuallyhidden">Name</span>
+        </a>
+      </td>
+    </tr>
+    </tr>
+    </tbody>
+  </table>
+
+
+
+
+  <!--  VARY -->
+  <table class="check-your-answers">
+    <thead>
+        <tr>
+          <th colspan="2" class="no-border">
+            <h2 class="heading-medium" id="name">
+              Change the payment terms
+            </h2>
+          </th>
+          <th class="no-border">
+          </th>
+        </tr>
+    </thead>
+
+
+    <tbody>
+
+    <!-- no longer needed
+    <tr>
+      <td>
+        Pay as set out in the judgment
+      </td>
+      <td style="white-space: pre-wrap;">No</td>
+      <td class="change-answer">
+        <a href="">
+          Change <span class="visuallyhidden">Name</span>
+        </a>
+      </td>
+    </tr>
+
+
+    <tr>
+      <td>
+        Change the payment terms
+      </td>
+      <td style="white-space: pre-wrap;">Yes</td>
+      <td class="change-answer">
+        <a href="">
+          Change <span class="visuallyhidden">Name</span>
+        </a>
+      </td>
+    </tr>
+    -->
+
+    <tr>
+      <td>
+        How you want to pay
+      </td>
+      {% if data['instalments'] == 'true' %}
+          <td style="white-space: pre-wrap;">Instalments</td>
+      {% else %}
+          <td style="white-space: pre-wrap;">By a set date</td>
+      {% endif %}
+      <td class="change-answer">
+        <a href="">
+          Change <span class="visuallyhidden">Name</span>
+        </a>
+      </td>
+    </tr>
+
+
+    {% if data['instalments'] == 'true' %}
+          <tr>
+              <td>
+                Regular payments of
+              </td>
+
+              <td style="white-space: pre-wrap;">£{{data['instalment-first-payment']}}</td>
+
+              <td class="change-answer">
+                <a href="">
+                  Change <span class="visuallyhidden">Name</span>
+                </a>
+              </td>
+          </tr>
+
+          <tr>
+            <td>
+              How often you'll make payments
+            </td>
+
+            <td style="white-space: pre-wrap;">{{ data['radio-payment-frequency'] }} </td>
+
+            <td class="change-answer">
+              <a href="">
+                Change <span class="visuallyhidden">Name</span>
+              </a>
+            </td>
+          </tr>
+
+
+    {% else %}
+        <tr>
+          <td>
+            When you'll pay
+          </td>
+
+          <td style="white-space: pre-wrap;">{{ now |  date("add", 45, "day") | date( "D MMMM YYYY" ) }}</td>
+
+          <td class="change-answer">
+            <a href="">
+              Change <span class="visuallyhidden">Name</span>
+            </a>
+          </td>
+        </tr>
+    {% endif %}
+
+
+
+    </tbody>
+  </table>
+
+
+
+
+
+  <!---  FINANCIAL DETAILS -->
+  <table class="check-your-answers">
+      <thead>
+      <tr>
+        <th colspan="2">
+          <h2 class="heading-medium">
+            Your financial details
+          </h2>
+        </th>
+        <th>
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+
+      <tr>
+        <td class="no-border">
+          Bank and savings accounts
+        </td>
+        <td class="no-border"> </td>
+        <td class="change-answer no-border">
+          <a href="#">
+            Change <span class="visuallyhidden">Name</span>
+          </a>
+        </td>
+      </tr>
+      <tr>
+        <td class="no-border">
+          1. Type of account
+        </td>
+        <td class="no-border">Savings </td>
+        <td class="change-answer no-border">
+        </td>
+      </tr>
+      <tr>
+        <td class="no-border">
+          Balance
+        </td>
+        <td class="no-border">£100 </td>
+        <td class="change-answer no-border">
+        </td>
+      </tr>
+      <tr>
+        <td class="no-border">
+          Joint account
+        </td>
+        <td class="no-border">Yes </td>
+        <td class="change-answer no-border ">
+        </td>
+      </tr>
+      <tr>
+        <td class="no-border">
+          2. Type of account
+        </td>
+        <td class="no-border">Bank </td>
+        <td class="change-answer no-border">
+        </td>
+      </tr>
+      <tr>
+        <td class="no-border">
+          Balance
+        </td>
+        <td class="no-border">£350</td>
+        <td class="change-answer no-border">
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Joint account
+        </td>
+        <td>Yes </td>
+        <td class="change-answer ">
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Are you disabled?
+        </td>
+        <td >
+          Yes
+        </td>
+        <td class="change-answer">
+          <a href="#">
+            Change <span class="visuallyhidden">Name</span>
+          </a>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Are you severely disabled?
+        </td>
+        <td >
+          Yes
+        </td>
+        <td class="change-answer">
+          <a href="#">
+            Change <span class="visuallyhidden">Name</span>
+          </a>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Where do you live?
+        </td>
+        <td >
+          Home you own yourself (including if you have a mortgage)
+        </td>
+        <td class="change-answer">
+          <a href="#">
+            Change <span class="visuallyhidden">Name</span>
+          </a>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Do you live with a partner?
+        </td>
+        <td >
+          Yes
+        </td>
+        <td class="change-answer">
+          <a href="#">
+            Change <span class="visuallyhidden">Name</span>
+          </a>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Is your partner aged 18 or over?
+        </td>
+        <td >
+          Yes
+        </td>
+        <td class="change-answer">
+          <a href="#">
+            Change <span class="visuallyhidden">Name</span>
+          </a>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Does your partner receive a pension?
+        </td>
+        <td >
+          No
+        </td>
+        <td class="change-answer">
+          <a href="#">
+            Change <span class="visuallyhidden">Name</span>
+          </a>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Is your partner disabled?
+        </td>
+        <td >
+          Yes
+        </td>
+        <td class="change-answer">
+          <a href="#">
+            Change <span class="visuallyhidden">Name</span>
+          </a>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Is your partner severely disabled?
+        </td>
+        <td >
+          No
+        </td>
+        <td class="change-answer">
+          <a href="#">
+            Change <span class="visuallyhidden">Name</span>
+          </a>
+        </td>
+      </tr>
+      <tr>
+        <td class="no-border">
+          Children
+        </td>
+        <td class="no-border"></td>
+        <td class="change-answer no-border">
+          <a href="#">
+            Change <span class="visuallyhidden">Name</span>
+          </a>
+        </td>
+      </tr>
+      <tr>
+        <td class="no-border">
+          Do any children live with you?
+        </td>
+        <td class="no-border">Yes</td>
+        <td class="change-answer no-border">
+        </td>
+      </tr>
+      <tr>
+        <td>
+          16 to 19
+        </td>
+        <td >1</td>
+        <td class="change-answer">
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Number of children aged 16 to 19 full-time education or training
+        </td>
+        <td >1</td>
+        <td class="change-answer">
+          <a href="#">
+            Change <span class="visuallyhidden">Name</span>
+          </a>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Are any of the children that live with you disabled?
+        </td>
+        <td>No</td>
+        <td class="change-answer">
+        </td>
+      </tr>
+      <tr>
+        <td class="no-border">
+          Financial support
+        </td>
+        <td class="no-border"></td>
+        <td class="change-answer no-border">
+          <a href="#">
+            Change <span class="visuallyhidden">Name</span>
+          </a>
+        </td>
+      </tr>
+      <tr>
+        <td class="no-border">
+          Do you support anyone else financially?
+        </td>
+        <td class="no-border">Yes</td>
+        <td class="change-answer no-border">
+        </td>
+      </tr>
+      <tr>
+        <td class="no-border">
+          Number of people
+        </td>
+        <td class="no-border">1</td>
+        <td class="change-answer no-border">
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Give details
+        </td>
+        <td>Reason goes here</td>
+        <td class="change-answer ">
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Do you claim Carer’s Allowance or Carer’s Credit?
+        </td>
+        <td>Yes</td>
+        <td class="change-answer">
+          <a href="#">
+            Change <span class="visuallyhidden">Name</span>
+          </a>
+        </td>
+      </tr>
+      <tr>
+        <td class="no-border">
+          Employment details
+        </td>
+        <td class="no-border"></td>
+        <td class="change-answer no-border">
+          <a href="#">
+            Change <span class="visuallyhidden">Name</span>
+          </a>
+        </td>
+      </tr>
+      <tr>
+        <td class="no-border">
+          Do you have a job?
+        </td>
+        <td class="no-border">Yes</td>
+        <td class="change-answer no-border">
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Type of job
+        </td>
+        <td>Employed and self-employed</td>
+        <td class="change-answer ">
+        </td>
+      </tr>
+      <tr>
+        <td class="no-border">
+          Who employs you?
+        </td>
+        <td class="no-border"></td>
+        <td class="change-answer no-border">
+          <a href="#">
+            Change <span class="visuallyhidden">Name</span>
+          </a>
+        </td>
+      </tr>
+      <tr>
+        <td class="no-border">
+          Employer name
+        </td>
+        <td class="no-border">Smith Inc</td>
+        <td class="change-answer no-border">
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Job title
+        </td>
+        <td>HR manager</td>
+        <td class="change-answer">
+        </td>
+      </tr>
+      <tr>
+        <td class="no-border">
+          Self-employment details
+        </td>
+        <td class="no-border"></td>
+        <td class="change-answer no-border">
+          <a href="#">
+            Change <span class="visuallyhidden">Name</span>
+          </a>
+        </td>
+      </tr>
+      <tr>
+        <td class="no-border">
+          Job title
+        </td>
+        <td class="no-border">Builder</td>
+        <td class="change-answer no-border">
+        </td>
+      </tr>
+      <tr>
+        <td class="no-border">
+          Annual turnover
+        </td>
+        <td class="no-border">£14,500</td>
+        <td class="change-answer no-border">
+        </td>
+      </tr>
+      <tr>
+        <td class="no-border">
+          Are you behind on tax payments?
+        </td>
+        <td class="no-border"> Yes</td>
+        <td class="change-answer no-border">
+        </td>
+      </tr>
+      <tr>
+        <td class="no-border">
+          Amount you owe?
+        </td>
+        <td class="no-border"> £300</td>
+        <td class="change-answer no-border">
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Reason
+        </td>
+        <td> Reason goes here</td>
+        <td class="change-answer">
+        </td>
+      </tr>
+      <tr>
+        <td class="no-border">
+          Are you paying money as a result of any court orders?
+        </td>
+        <td class="no-border">Yes </td>
+        <td class="change-answer no-border">
+          <a href="#">
+            Change <span class="visuallyhidden">Name</span>
+          </a>
+        </td>
+      </tr>
+      <tr>
+        <td class="no-border">
+          Claim number
+        </td>
+        <td class="no-border">123MC432</td>
+        <td class="change-answer no-border">
+        </td>
+      </tr>
+      <tr>
+        <td class="no-border">
+          Amount you owe
+        </td>
+        <td class="no-border">£1300</td>
+        <td class="change-answer no-border">
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Monthly instalment amount
+        </td>
+        <td>£130 </td>
+        <td class="change-answer ">
+        </td>
+      </tr>
+      <tr>
+        <td class="no-border">
+          Debts you're behind on
+        </td>
+        <td class="no-border"></td>
+        <td class="change-answer no-border">
+          <a href="#">
+            Change <span class="visuallyhidden">Name</span>
+          </a>
+        </td>
+      </tr>
+      <tr>
+        <td class="no-border">
+          Debt type
+        </td>
+        <td class="no-border">Mortgage</td>
+        <td class="change-answer no-border">
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Arrears repayment
+        </td>
+        <td>£130 per month</td>
+        <td class="change-answer ">
+        </td>
+      </tr>
+      <tr>
+        <td class="no-border">
+          Do you have loans or credit card debts?
+        </td>
+        <td class="no-border"> Yes</td>
+        <td class="change-answer no-border">
+          <a href="#">
+            Change <span class="visuallyhidden">Name</span>
+          </a>
+        </td>
+      </tr>
+      <tr>
+        <td class="no-border">
+          1. Debt
+        </td>
+        <td class="no-border">Paying back loan to parent </td>
+        <td class="change-answer no-border">
+        </td>
+      </tr>
+      <tr>
+        <td class="no-border">
+          Total owed
+        </td>
+        <td class="no-border">£1200</td>
+        <td class="change-answer no-border">
+        </td>
+      </tr>
+      <tr>
+        <td class="no-border">
+          Monthly payments
+        </td>
+        <td class="no-border">£100</td>
+        <td class="change-answer no-border">
+        </td>
+      </tr>
+      <tr>
+        <td class="no-border">
+          2. Debt
+        </td>
+        <td class="no-border">Credit card</td>
+        <td class="change-answer no-border">
+        </td>
+      </tr>
+      <tr>
+        <td class="no-border">
+          Total owed
+        </td>
+        <td class="no-border">£1220 </td>
+        <td class="change-answer no-border">
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Monthly payments
+        </td>
+        <td>£130 </td>
+        <td class="change-answer ">
+        </td>
+      </tr>
+      <tr>
+        <td class="no-border">
+          Regular expenses
+        </td>
+        <td class="no-border"> </td>
+        <td class="change-answer no-border">
+          <a href="#">
+            Change <span class="visuallyhidden">Name</span>
+          </a>
+        </td>
+      </tr>
+      <tr>
+        <td class="no-border">
+          Mortgage
+        </td>
+        <td class="no-border">£743 per month</td>
+        <td class="change-answer no-border">
+        </td>
+      </tr>
+      <tr>
+        <td class="no-border">
+          Council Tax
+        </td>
+        <td class="no-border">£120 per month</td>
+        <td class="change-answer no-border">
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Gas
+        </td>
+        <td>£83 per week</td>
+        <td class="change-answer ">
+        </td>
+      </tr>
+
+      <tr>
+        <td class="no-border">
+          Regular income
+        </td>
+        <td class="no-border"> </td>
+        <td class="change-answer no-border">
+          <a href="#">
+            Change <span class="visuallyhidden">Name</span>
+          </a>
+        </td>
+      </tr>
+      <tr>
+        <td class="no-border">
+          Take home pay
+        </td>
+        <td class="no-border">£800 per month</td>
+        <td class="change-answer no-border">
+        </td>
+      </tr>
+      <tr>
+        <td class="no-border">
+          Child Benefit
+        </td>
+        <td class="no-border">£124 per week</td>
+        <td class="change-answer no-border">
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Other income
+        </td>
+        <td>£40 every 2 weeks</td>
+        <td class="change-answer ">
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Briefly explain why you can't pay immediately
+        </td>
+        <td>im broke i aint got a job</td>
+        <td class="change-answer ">
+          <a href="#">
+            Change <span class="visuallyhidden">Name</span>
+          </a>
+        </td>
+      </tr>
+
+
+      </tbody>
+    </table>
+
+
+
+
+
+
+
+
+
+  <!--  Declaration   -->
+  <!-- needs company option addition  !!   -->
+
+
+
+
+  <br>
+  {% if  data['varyselected'] == 'true'  or  data['justvaryonly'] == 'true'  %}
+  {% if data['varytoimmediately'] == 'true'  %}
+  <p><a class="button" href="../../../defendant/confirmation-page?varyselected=false&">Submit</a></p>
+  {% else %}
+  <h2 class="heading-medium">Declaration</h2>
+  <div class="form-group">
+    <div class="multiple-choice text">
+      <input class="" id="HasAcceptedTermsAndConditions" type="checkbox" value="true">
+      <label for="HasAcceptedTermsAndConditions"> I declare that the details I have given are true to the best of my knowledge.</label>
+    </div>
+  </div>
+  <p><a class="button" href="../../../defendant/task-list/check-and-send/enter-card">Sign, submit and continue to payment (£50)</a></p>
+  {% endif %}
+  {% elif data['cancelccj'] == 'true'  %}
+  <p><a class="button" href="../../../defendant/task-list/check-and-send/enter-card">Submit and continue to payment (£255)</a></p>
+  {% else %}
+  <p><a class="button" href="../../../defendant/confirmation-page">Submit</a></p>
+  {% endif %}
+
+</main>
+
+
+
+<form method="post"  action="#" class="for4" style=" float: left; ">
+
+  <select style="height:25px;" onchange="window.location.href='?'+this.value">
+
+      <option value="instalments=true&"
+              {% if data['instalments'] == 'true' %}selected{% endif %}
+      >Vary to be in installments</option>
+
+      <option value="instalments=false&"
+              {% if data['instalments'] == 'false' %}selected{% endif %}
+      >Vary to be by a set date</option>
+
+  </select>
+
+</form>
+
+
+
+{% endblock %}

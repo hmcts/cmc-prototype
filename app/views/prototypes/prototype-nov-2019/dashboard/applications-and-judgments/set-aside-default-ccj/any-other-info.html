@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+
+
+{% import 'prototypes/prototype-nov-2019/includes/upload.html' as upload %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+
+{% block content %}
+
+
+<main id="content" role="main">
+
+  {% include "includes/phase_banner_beta.html" %}
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+      <!--  <a href="#" onclick="history.go(-1)" class="link-back">Back</a>  -->
+
+      {% if  data['radio-app-type'] == 'set-aside' %}
+      <h1 class="heading-large">
+        Enter anything else relevant to your application to cancel the judgment (optional)
+      </h1>
+      <p>Don't tell us why you dispute the claim - we'll ask for this later.</p>
+      {% else %}
+      <h1 class="heading-large">
+        Enter any other information relevant to your application (optional)
+      </h1>
+      {% endif %}
+
+      {% if  data['general-application'] == 'true' %}
+          {% if  data['general-app-hearing'] == 'true' %}
+                <form action="../../../applications/general-application-hearing-requirements" method="post" class="form">
+          {% else %}
+                <form action="../general-application/check-answers" method="post" class="form">
+          {% endif %}
+      {% else %}
+          <form action="task-list?otherinfosection=complete&scenario=ccjsetaside" method="post" class="form">
+      {% endif %}
+
+            <div class="form-group">
+              <textarea class="form-control form-control-3-4 " id="any-other-information" rows="3"
+                        name="any-other-information" type="text" style="width: 100%; height:93px;">{{ data['any-other-information'] }}</textarea>
+            </div>
+
+            <div class="form-group">
+              <input type="submit" class="button" value="Continue"/>
+            </div>
+
+      </form>
+
+    </div>
+  </div>
+
+  {% include 'prototypes/prototype-nov-2019/includes/contact.html' %}
+</main>
+{% endblock %}

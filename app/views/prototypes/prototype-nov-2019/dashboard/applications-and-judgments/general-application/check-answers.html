@@ -1,0 +1,315 @@
+{% extends "layout_task-list.html" %}
+
+{% block page_title %}
+Check your answers
+{% endblock %}
+
+{% block home_link %} ../task-list {% endblock %}
+
+{% block proposition_header %}
+{% set my_account="2" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+
+
+{% block content %}
+<main id="content" role="main">
+
+  {% include "includes/phase_banner_beta.html" %}
+
+  <!--  <a href="#" onclick="history.go(-1)" class="link-back">Back</a>  -->
+
+  <h1 class="heading-large">
+    Check your answers
+  </h1>
+
+
+
+  <table class="check-your-answers">
+    <thead>
+    <tr>
+      <th colspan="2" class="no-border">
+        <h2 class="heading-medium" id="name">
+
+        </h2>
+      </th>
+      <th class="no-border">
+      </th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <tr>
+      <td>
+        What you've requested
+      </td>
+      <td style="white-space: pre-line">{{ data['general-application-what'] }}</td>
+      <td class="change-answer">
+        <a href="#">
+          Change <span class="visuallyhidden">Name</span>
+        </a>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        Reason for request
+      </td>
+      <td style="white-space: pre-line">{{  data['general-application-why']  }}</td>
+      <td class="change-answer">
+        <a href="#">
+          Change <span class="visuallyhidden">Name</span>
+        </a>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        Requires a hearing
+      </td>
+      <td>
+        {% if  data['generalapphearing'] == 'true' %}
+            Yes
+        {% else %}
+            No
+        {% endif %}
+      </td>
+      <td class="change-answer">
+        <a href="#">
+          Change <span class="visuallyhidden">Name</span>
+        </a>
+      </td>
+    </tr>
+
+
+
+    {% if  data['generalapphearing'] == 'true' %}
+        <tr>
+          <td>
+            Hearing length
+          </td>
+              {% if  data['radio-general-app-hearing-duration'] == 'hearing-duration-different' %}
+                  <td>{{  data['hearing-hours']  }} Hours  {{ data['hearing-mins']  }}  Minutes</td>
+              {% elif  data['radio-general-app-hearing-duration'] == 'hearing-duration-unknown' %}
+                  <td>I don't know</td>
+              {% elif  data['radio-general-app-hearing-duration'] == 'hearing-duration-30' %}
+                  <td>30 minutes</td>
+              {% elif  data['radio-general-app-hearing-duration'] == 'hearing-duration-60' %}
+                  <td>1 hour</td>
+              {% else %}
+                  <td></td>
+              {% endif %}
+          <td class="change-answer">
+            <a href="#">
+              Change <span class="visuallyhidden">Name</span>
+            </a>
+          </td>
+        </tr>
+    {% endif %}
+
+
+    <tr>
+      <td>
+        Other information
+      </td>
+      <td  style="white-space: pre-line">{{ data['any-other-information'] }}</td>
+      <td class="change-answer">
+        <a href="#">
+          Change <span class="visuallyhidden">Name</span>
+        </a>
+      </td>
+    </tr>
+
+
+    </tbody>
+  </table>
+
+
+
+
+
+    {% if  data['generalappnoevidence'] != 'true' %}
+        <!--  EVIDENCE  -->
+        <table class="check-your-answers">
+          <thead>
+
+              <tr>
+                <th colspan="3" class="no-border">
+                  <h2 class="heading-medium" id="name">
+                    Files
+                  </h2>
+                </th>
+              </tr>
+
+          </thead>
+
+
+
+          <tbody>
+
+              <tr>
+                <td>
+                  Exhibit A1
+                </td>
+                <td>
+                  <a href="#">Emails.pdf</a>
+                  <br />You can see the emails dated {{ date | date('subtract', 123, 'days') | date }} and {{ date | date('subtract', 134, 'days') | date }} that they claimed not to receive.
+                </td>
+                <td class="change-answer">
+                  <a href="#">
+                    Change <span class="visuallyhidden">Name</span>
+                  </a>
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  Exhibit A2
+                </td>
+                <td>
+                  <a href="#">Photo 1.jpg</a>
+                  <br />The photos show that the roof was not adequately supported.
+                </td>
+                <td class="change-answer">
+                  <a href="#">
+                    Change <span class="visuallyhidden">Name</span>
+                  </a>
+                </td>
+              </tr>
+
+          </tbody>
+
+        </table>
+    {% endif %}
+
+
+
+
+
+
+    {% if  data['generalapphearing'] == 'true' %}
+
+        <!--  HEARING REQUIREMENTS  -->
+        <table class="check-your-answers">
+          <thead>
+          <tr>
+            <th colspan="2" class="no-border">
+              <h2 class="heading-medium" id="name">
+                Hearing requirements
+              </h2>
+            </th>
+            <th class="no-border">
+            </th>
+          </tr>
+          </thead>
+          <tbody>
+
+
+              <tr>
+                <td>
+                  Support you'd require
+                </td>
+                <td>
+                  No support required
+                </td>
+                <td class="change-answer">
+                  <a href="#">
+                    Change <span class="visuallyhidden">Name</span>
+                  </a>
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  Preferred location for a hearing
+                </td>
+                <td>
+                  Guildford County Court
+                </td>
+                <td class="change-answer">
+                  <a href="#">
+                    Change <span class="visuallyhidden">Name</span>
+                  </a>
+                </td>
+              </tr>
+
+
+              <tr>
+                <td>
+                  Dates you can’t go to a hearing
+                </td>
+                <td>
+                  15 September 2019<br>
+                  16 September 2019<br>
+                  17 September 2019<br>
+                  18 September 2019<br>
+                  19 September 2019<br>
+                </td>
+                <td class="change-answer">
+                  <a href="#">
+                    Change <span class="visuallyhidden">Name</span>
+                  </a>
+                </td>
+              </tr>
+
+
+          </tbody>
+        </table>
+    {% endif %}
+
+  <!--  Declaration   -->
+  <!-- needs company option addition  !!   -->
+
+
+
+
+  <br>
+
+
+  <h2 class="heading-medium">Declaration</h2>
+  <div class="form-group">
+    <div class="multiple-choice text">
+      <input class="" id="HasAcceptedTermsAndConditions" type="checkbox" value="true">
+      <label for="HasAcceptedTermsAndConditions"> I declare that the details I have given are true to the best of my knowledge.</label>
+    </div>
+  </div>
+
+
+  {% if  data['generalapphearing'] == 'true' %}
+      <p><a class="button" href="../../../defendant/task-list/check-and-send/enter-card">Sign, submit and continue to payment (£255)</a></p>
+  {% else %}
+      <p><a class="button" href="../../../defendant/task-list/check-and-send/enter-card">Sign, submit and continue to payment (£100)</a></p>
+  {% endif %}
+
+
+
+
+
+</main>
+
+
+<form method="post"  action="#" class="for4" style=" float: left; ">
+  <select style="height:25px;" onchange="window.location.href='?'+this.value">
+
+    <option value="generalapphearing=true&"
+            {% if data.generalapphearing == 'true' %}selected{% endif %}
+    >General application - With hearing</option>
+
+    <option value="generalapphearing=false&"
+            {% if data.generalapphearing != 'true' %}selected{% endif %}
+    >General application - Without hearing</option>
+
+    <option value="generalappnoevidence=false&"
+            {% if data['generalappnoevidence'] == 'false' %}selected{% endif %}
+    >General application - With evidence</option>
+
+    <option value="generalappnoevidence=true&"
+            {% if data['generalappnoevidence'] == 'true' %}selected{% endif %}
+    >General application - Without evidence</option>
+
+  </select>
+</form>
+
+
+
+{% endblock %}

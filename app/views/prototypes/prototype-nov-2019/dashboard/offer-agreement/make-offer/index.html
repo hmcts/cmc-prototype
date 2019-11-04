@@ -1,0 +1,121 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="2" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <!--  <a href="#" onclick="history.go(-1)" class="link-back">Back</a>  -->
+      <h1 class="heading-large">
+        Make an offer to settle out of court
+      </h1>
+
+      {% if data['defendant'] == "defendant" %}
+          <!-- Content for defendant -->
+          {% if data['newoffer'] == 'true' %}
+              <p>You can avoid a County Court Judgment (CCJ) if you settle out of court.</p>
+              <p>If {{ partyName( 'claimant' ) }} accepts your offer it will become a legal agreement.</p>
+              <p>Offers are private between the claimant and the defendant. Rejected offers can't be mentioned to a judge if there's a hearing.</p>
+          {% else %}
+              <p>You can avoid a County Court Judgment (CCJ) if you settle out of court.</p>
+              <p>If {{ partyName( 'claimant' ) }} accepts your offer you'll both sign a legal agreement.</p>
+              <p>Offers are private between the claimant and the defendant. Rejected offers can't be mentioned to a judge if there's a hearing.</p>
+          {% endif %}
+
+      {% elseif data['defendant'] == "claimant" %}
+          <!-- Content fo claimant -->
+          <p>You can avoid going to a hearing if you settle out of court.</p>
+          <p>Offers are private between the claimant and the defendant. Rejected offers can't be mentioned to a judge if there's a hearing.</p>
+          <p class="panel panel-border-wide">If {{ partyName( 'defendant' ) }} accepts your offer you'll both sign a settlement agreement. The agreement explains what can happen if either party breaks the terms.</p>
+
+      {% else %}
+          <p>You can avoid going to a hearing if you settle out of court.</p>
+          <p>Offers are private between the claimant and the defendant. Rejected offers can't be mentioned to a judge if there's a hearing.</p>
+          <p class="panel panel-border-wide">If {{ partyName( 'defendant' ) }} accepts your offer you'll both sign a settlement agreement. The agreement explains what can happen if either party breaks the terms.</p>
+
+      {% endif %}
+
+
+
+      <div class="form-group">
+
+          <form action="make-offer/offer?makeoffernow=true&the-offer-text=&" method="post">
+
+              <div class='form-group'>
+                <input type="submit" name="commit" value="Continue" class="btn button"/>
+              </div>
+
+              {% if data['newoffer'] == 'true' %}
+
+                  {% if data['fromclaimanttab'] == 'true'  and  data['defendant'] == 'claimant' %}
+                      <!--  return to settle out of court tab  -->
+                      <p><a href="../../dashboard/claimant?claimant=11.00001&defendant=claimant&firstoffer=true&newoffer=true&">
+
+                  {% elif data['returntonine'] == 'true'  and  data['defendant'] != 'claimant' %}
+                      <!--  return to settle out of court tab  -->
+                      <p><a href="../../dashboard/defendant?defendant=9&">
+
+                  {% elif data['respondtoclaimantnocounter'] == 'true' %}
+                      <!--    -->
+                      <p><a href="../defendant?defendant=9&makeoffernow=false&">
+
+                  {% elif data['fromthetasklist'] == 'true' %}
+                      <!--  Defendant respond to claim  -->
+                      <p><a href="../new-offers/allow-another-offer?offerresponse=complete&madeandsignedagreement=false&makecounteroffer=false&">
+
+                  {% elif data['fromtheclaimanttasklist'] == 'true' %}
+                      <!--  Claimant respond to the defendants response  -->
+                      <p><a href="new-offers/allow-another-offer?offerresponse=complete&offeracceptedbyclaimant=false&makecounteroffer=false&">
+
+                  {% else %}
+                      <!--    -->
+                      <p><a href="&makeoffernow=false&">
+                  {% endif %}
+
+                  Don't make an offer</a></p>
+
+              {% endif %}
+          </form>
+
+      </div>
+
+    </div>
+
+</div>
+</div>
+{% include 'prototypes/prototype-nov-2019/includes/contact.html' %}
+</main>
+
+
+<form method="post"  action="#" class="for4" style=" float: left; ">
+  <select style="height:25px;" onchange="window.location.href='?'+this.value">
+    <option value="defendant=defendant&newoffer=false&"
+            {% if data['defendant'] == 'defendant'  and  data['newoffer'] != 'true'  %}selected{% endif %}
+    >Defendant</option>
+
+    <option value="defendant=claimant&newoffer=false&"
+            {% if data['defendant'] == 'claimant'  and  data['newoffer'] != 'true'  %}selected{% endif %}
+    >Claimant</option>
+
+    <option value="defendant=defendant&newoffer=true&"
+            {% if data['defendant'] == 'defendant'  and  data['newoffer'] == 'true'  %}selected{% endif %}
+    >Defendant - New type of offer</option>
+
+    <!--
+    <option value="defendant=claimant&newoffer=true"
+            {% if data['defendant'] == 'claimant'  and  data['newoffer'] == 'true' %}selected{% endif %}
+    >Claimant - New offers</option>
+    -->
+
+  </select>
+</form>
+
+
+
+{% endblock %}

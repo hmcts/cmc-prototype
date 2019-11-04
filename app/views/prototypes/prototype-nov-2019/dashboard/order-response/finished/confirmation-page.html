@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="5" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <div class="govuk-box-highlight">
+        <h1 class="bold-large">You've uploaded witness statements and documents</h1>
+      </div>
+    <h2 class="heading-medium">What happens next</h2>
+
+    {% if data['next'] != 'hearing' %}
+    <p>We'll contact you to tell you what to do next.</p>
+    {% else %}
+    <p>You now need to <a href="../../claimant?claimant=14.1">pay the hearing fee</a>.</p>
+    {% endif %}
+    <p>You can't upload any more witness statements or documents.</p>
+
+    <a href="../../home?dashboard={% if data['next'] == 'hearing' %}1.241{% elseif data['party'] == 'claimant' %}1.29{% else %}2.723{% endif %}&witness=complete" class="button">Go to your account</a>
+
+    {% include "includes/contact.html" %}
+</div>
+</div>
+</main>
+
+<form method="post" action="#" class="form" style="position: absolute;">
+  <select onchange="window.location.href='?next='+this.value">
+    <option>-------- Status --------</option>
+    <option {% if data['next'] != 'hearing' %}selected{% endif %} value="wait">Wait</option>
+    <option  {% if data['next'] == 'hearing' %}selected{% endif %} value="hearing">Pay hearing fee</option>
+  </select>
+</form>
+{% endblock %}
