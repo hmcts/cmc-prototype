@@ -655,12 +655,11 @@
 
               <div class="status-block single">
                 <h2 class="heading-medium">The court has ordered you to send us more details</h2>
-                <p>You need to send {% if data['claimant'] == 11.1001%}general{% endif %} details before 4pm on {{ now | date( 'add', 12, 'days' ) | date }}.</p>
+                {% if data['claimant'] == 11.1%}<p>You need to send details before 4pm on {{ now | date( 'add', 12, 'days' ) | date }}.{% endif %}</p>
 
                 {% if data['claimant'] == 11.1001%}
 
-                <p>You also need to send expert report details before 4pm on {{ now | date( 'add', 18, 'days' ) | date }}.</p>
-
+                <p>The first deadline you must send details by is before 4pm on {{ now | date( 'add', 12, 'days' ) | date }}.
                 {% endif %}
 
                 <p><a href="order-response?party=claimant" class="button">Send us the details</a></p>
@@ -769,7 +768,6 @@
                 <h3 class="heading-small">{{ partyName( 'defendant' ) }} also missed a deadline to respond</h3>
 
                 <p>They now need to respond before 4pm on {{ now | date( 'add', 11, 'days' ) | date }}.</p>
-                <p>If they don't respond by then, the court will cancel their defence and you can request a County Court Judgment (CCJ) against them.</p>
 
 
                 <p><a href="/public/images/order2.pdf" download>Download the court's original order</a> (PDF, 123KB).</p>
