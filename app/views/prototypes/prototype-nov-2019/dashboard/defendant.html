@@ -183,6 +183,14 @@
 
 
 
+              <!--  When Claimant makes a general application   -->
+              {% elseif data['defendant'] == 3.2265 %}
+                  <h2 class="heading-medium">{{ partyName( 'claimant' ) }} has applied to change something about the claim.</h2>
+                  <p>The claim will now continue outside the online service. Your online account won't show any more updates to this claim.</p>
+                  <p>We'll contact you by post and email when the court has reviewed {{ partyName( 'claimant' ) }}'s request.</p>
+                  <p><a href="../defendant/correspondence/forms/general-application">Download their application</a> (PDF, 123KB)</p>
+
+
 
               {% elseif data['defendant'] == 3.23 %}
               <div class="status-block single">
@@ -1754,6 +1762,8 @@
               <p>{{ partyName( 'claimant' ) }} can't request a County Court Judgment against you unless you break the terms.</p>
               <p><a href="party-details/claimant">Contact {{ partyName( 'claimant' ) }}</a> if you need their payment details. Make sure you get receipts for any payments.</p>
 
+
+
               <!--   CCJ set aside requested -->
               {% elseif data['defendant'] == 20 %}
                 <h2 class="heading-medium">You applied to have the County Court Judgment cancelled.</h2>
@@ -1761,7 +1771,28 @@
                 <p>We'll contact you by post and email when the court has reviewed your request. You'll still have the judgment against you until then.</p>
 
 
-              <!--  CCJ has been issued - Defendant should have contacted the claimant - After CCJ Deadline -->
+              <!--   Return to draft CCJ set aside request   -->
+              {% elseif data['defendant'] == 20.55 %}
+                <p>You started an application to cancel the judgment.</p>
+                <p>We'll delete this application if you don't submit it by 4pm on {{ now |  date("add", 70, "day") | date }}.</p>
+                <p><a class="button secondary-button"
+                      href="applications-and-judgments/set-aside-default-ccj/task-list">Resume the application</a></p>
+                <hr>
+                <h2 class="heading-medium">A County Court Judgment (CCJ) has been issued against you</h2>
+                <h3 class="heading-small">You need to pay {{ partyName( 'claimant' ) }} £1,500 immediately</h3>
+                <p>{{ partyName( 'claimant' ) }} made a money claim for £1,500 against you on {{ now |  date("subtract", 50, "day") | date( "D MMMM YYYY" ) }}.</p>
+                <p>Because you didn't respond, a CCJ was issued against you on {{ now |  date("subtract", 7, "day") | date( "D MMMM YYYY" ) }}.</p>
+                <p>If {{ partyName( 'claimant' ) }} confirms you've settled the claim before 4pm on {{ now |  date("add", 23, "day") | date( "D MMMM YYYY" ) }}, the CCJ will be removed from the public register.</p>
+                {% include "../includes/claimants-contact-details.html" %}
+                <h3 class="heading-small">If you don't pay</h3>
+                <p>{{ partyName( 'claimant' ) }} can use enforcement options to recover the money. These include asking the court to:</p>
+                <ul class="list list-bullet">
+                  <li>send bailiffs to collect the money</li>
+                  <li>take money out of your wages or any sale of land or property</li>
+                </ul>
+
+
+                <!--  CCJ has been issued - Defendant should have contacted the claimant - After CCJ Deadline -->
               {% elseif data['defendant'] == 21 %}
               <h2 class="heading-medium">Contact {{ partyName( 'claimant' ) }} to arrange payment</h2>
               <p><a href="party-details/claimant">Get {{ partyName( 'claimant' ) }}'s contact details</a></p>
@@ -1935,7 +1966,7 @@
               <!--  Applications  -->
               <!--  If CCJ then link to vary and setaside  -->
               <!-- do not show this section after an application has been submitted  -->
-              {% if data['defendant'] != 20  and  data['defendant'] != 23  and  data['defendant'] != 3.2258 %}
+              {% if data['defendant'] != 20  and  data['defendant'] != 23  and  data['defendant'] != 3.2258  and  data['defendant'] != 3.2265   %}
                       <hr>
                       <h2 class="heading-small">Apply to change something about the claim</h2>
 
@@ -1973,6 +2004,8 @@
 
             </div>
           </div>
+
+
 
 
 
@@ -4326,6 +4359,7 @@
 
     <option>------ CCJ set aside -------</option>
     <option value="20" {% if data['defendant'] == 20 %}selected{% endif %}>20. CCJ set aside request submitted</option>
+    <option value="20.55" {% if data['defendant'] == 20.55 %}selected{% endif %}>Return to draft CCJ set aside request</option>
     <option value="21" {% if data['defendant'] == 21 %}selected{% endif %}>21. Contacting claimant to pay - After CCJ month deadline</option>
     <option value="21.1" {% if data['defendant'] == 21.1 %}selected{% endif %}>21.1. Contacting claimant to pay - Before CCJ month eadline</option>
     <option value="22" {% if data['defendant'] == 22 %}selected{% endif %}>22. Contacting claimant to settle - After CCJ month deadline</option>
@@ -4343,6 +4377,7 @@
     <option>------  General application  ----------</option>
     <option value="3.2258" {% if data['defendant'] == 3.2258 %}selected{% endif %}>After submitting a general application</option>
     <option value="3.2255" {% if data['defendant'] == 3.2255 %}selected{% endif %}>Return to draft general application</option>
+    <option value="3.2265" {% if data['defendant'] == 3.2265 %}selected{% endif %}>When claimant makes a general application</option>
 
 
 

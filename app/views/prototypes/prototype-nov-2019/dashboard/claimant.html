@@ -39,7 +39,7 @@
             or data['claimant'] == 12 or data['claimant'] == 13.2 or data['claimant'] == 14.1 or data['claimant'] == 14.2 or data['claimant'] == 14.3 or data['claimant'] == 14.4 or data['claimant'] == 14.5 or data['claimant'] == 16  or data['claimant'] == 16.1 or data['claimant'] == 17  or data['claimant'] == 17.01  or data['claimant'] == 20 or data['claimant'] == 20.1 or data['claimant'] == 20.2
             or data['claimant'] == 21 or data['claimant'] == 21.1 or data['claimant'] == 23 or data['claimant'] == 24 or data['claimant'] == 26  or data['claimant'] == 27  or data['claimant'] == 28  or data['claimant'] == 29
             or data['claimant'] == 33  or data['claimant'] == 34  or data['claimant'] == 36  or data['claimant'] == 37
-            or data['claimant'] == 16.14  or  data['claimant'] == 16.15 or   data['claimant'] == 3.12345   %}
+            or data['claimant'] == 16.14  or  data['claimant'] == 16.15 or   data['claimant'] == 3.12345   or   data['claimant'] == 3.12555  %}
             <li role="presentation"><a href="#next-steps" role="tab" tabindex="0" aria-controls="next-steps" aria-selected="true">Latest update</a></li>
             <li role="presentation"><a href="#history" role="tab" tabindex="-1" aria-controls="history">Claim history</a></li>
             <li role="presentation"><a href="#contact" role="tab" tabindex="-1" aria-controls="history">Defendant's details</a></li>
@@ -158,6 +158,17 @@
                   <h2 class="heading-medium">Cancel your request for judgment</h2>
                   <p>You can cancel the request and end the claim or cancel and continue with it.</p>
                   <p><a href="cancel-judgment" class="button secondary-button">Cancel your request for judgment</a></p>
+
+
+
+              <!--  When the Defendant makes a general application  -->
+              {% elif data['claimant'] == 3.12555 %}
+                  <h2 class="heading-medium">{{ partyName( 'defendant' ) }} has applied to change something about the claim.</h2>
+                  <p>The claim will now continue outside the online service. Your online account won't show any more updates to this claim.</p>
+                  <p>We'll contact you by post and email when the court has reviewed {{ partyName( 'defendant' ) }}'s request.</p>
+                  <p><a href="../defendant/correspondence/forms/general-application">Download their application</a> (PDF, 123KB)</p>
+
+
 
 
               {% elseif data['claimant'] == 3.1 %}
@@ -1558,7 +1569,7 @@
             {% endif %}
 
 
-            {% if data['claimant'] != 21.1 and data['claimant'] != 11.1011 and data['claimant'] != 11.105  and   data['claimant'] != 26  and   data['claimant'] != 27 %}
+            {% if data['claimant'] != 21.1 and data['claimant'] != 11.1011 and data['claimant'] != 11.105  and   data['claimant'] != 26  and   data['claimant'] != 27  and   data['claimant'] != 3.12555 %}
                 <div class="column-two-thirds">
                     <!--  General applications  - this will need logic to know that it comes from the claimant  -->
                     <hr>
@@ -3111,7 +3122,7 @@
 
     <option>------- Returning to an application  ----------</option>
     <option value="3.12345" {% if data['claimant'] == 3.12345 %}selected{% endif %}>Return to draft general application</option>
-
+    <option value="3.12555" {% if data['claimant'] == 3.12555 %}selected{% endif %}>When the Defendant makes a general application</option>
 
 
   </select>
