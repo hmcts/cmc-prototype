@@ -1463,6 +1463,54 @@
                 </div>
 
 
+
+              <!--  CCJ vary - New plan proposed by claimant  -->
+              {% elseif data['claimant'] == 28.2 %}
+                  <div class="status-block">
+                    <h2 class="heading-medium">A new County Court Judgment (CCJ) has been issued</h2>
+                    <p>You suggested a new repayment plan. The court accepted this plan.</p>
+                    <p><a href="repayment-plan?who=claimant&amp;plan=instalments">View the repayment plan</a></p>
+                    <p>We'll send a copy of the judgment to you and to {{ partyName( 'defendant' ) }}.</p>
+                  </div>
+
+                  <div class="status-block single">
+                    <h2 class="heading-medium">Ask the court to recover the debt</h2>
+                    <p>If the defendant doesn't pay, you can <a href="https://www.gov.uk/make-court-claim-for-money/enforce-a-judgment">ask the court to recover the debt</a>. There's no guarantee that the court will get your money back.</p>
+                  </div>
+
+
+              <!--  CCJ vary - New plan from determination  -->
+              {% elseif data['claimant'] == 28.4 %}
+                  <div class="status-block">
+                    <h2 class="heading-medium">A new County Court Judgment (CCJ) has been issued</h2>
+                    <p>The court has decided a new repayment plan.</p>
+                    <p><a href="repayment-plan?who=claimant&amp;plan=instalments">View the repayment plan</a></p>
+                    <p>We'll send a copy of the judgment to you and to {{ partyName( 'defendant' ) }}.</p>
+                  </div>
+
+                  <div class="status-block single">
+                    <h2 class="heading-medium">Ask the court to recover the debt</h2>
+                    <p>If the defendant doesn't pay, you can <a href="https://www.gov.uk/make-court-claim-for-money/enforce-a-judgment">ask the court to recover the debt</a>. There's no guarantee that the court will get your money back.</p>
+                  </div>
+
+
+              <!--  CCJ vary - Accepted by default because of no claimant response  -->
+              {% elseif data['claimant'] == 28.6 %}
+                  <div class="status-block">
+                    <h2 class="heading-medium">A new County Court Judgment (CCJ) has been issued</h2>
+                    <p>You accepted {{ partyName( 'defendant' ) }}'s new payment plan.</p>
+                    <p><a href="repayment-plan?who=claimant&amp;plan=instalments">View the repayment plan</a></p>
+                    <p>We'll send a copy of the judgment to you and to {{ partyName( 'defendant' ) }}.</p>
+                  </div>
+
+                  <div class="status-block single">
+                    <h2 class="heading-medium">Ask the court to recover the debt</h2>
+                    <p>If the defendant doesn't pay, you can <a href="https://www.gov.uk/make-court-claim-for-money/enforce-a-judgment">ask the court to recover the debt</a>. There's no guarantee that the court will get your money back.</p>
+                  </div>
+
+
+
+
               {% elseif data['claimant'] == 29 %}
                 <!-- Rejected the Vary request - Redetermination -->
                 <h2 class="heading-medium">A judge will review the case</h2>
@@ -2982,6 +3030,8 @@
 {% include 'prototypes/prototype-nov-2019/includes/contact.html' %}
 
 </main>
+
+
 <form method="post" action="#" class="form" style="position: absolute;">
   <select id="claimant2" name="claimant2" onchange="window.location.href='?claimant='+this.value">
     <option>-------- Claimant view --------</option>
@@ -3120,8 +3170,11 @@
 
     <option>------- CCJ vary by defendant----------</option>
     <option value="26" {% if data['claimant'] == 26 %}selected{% endif %}>CCJ - respond to defendant - pay by set date</option>
-    <option value="27" {% if data['claimant'] == 27 %}selected{% endif %}>CCJ - respond to defendant - pay by installments</option>
-    <option value="28" {% if data['claimant'] == 28 %}selected{% endif %}>CCJ - accepted vary request</option>
+    <!--  no longer needed <option value="27" {% if data['claimant'] == 27 %}selected{% endif %}>CCJ - respond to defendant - pay by installments</option>  -->
+    <option value="28" {% if data['claimant'] == 28 %}selected{% endif %}>CCJ vary - Accepted by claimant</option>
+    <option value="28.2" {% if data['claimant'] == 28.2 %}selected{% endif %}>CCJ vary - New plan proposed by claimant</option>
+    <option value="28.4" {% if data['claimant'] == 28.4 %}selected{% endif %}>CCJ vary - New plan from determination</option>
+    <option value="28.6" {% if data['claimant'] == 28.6 %}selected{% endif %}>CCJ vary - Accepted by default because of no claimant response</option>
     <option value="29" {% if data['claimant'] == 29 %}selected{% endif %}>CCJ - rejected vary request - redetermination </option>
 
 
