@@ -163,18 +163,18 @@
 
               <!--  When the Defendant makes a general application  -->
               {% elif data['claimant'] == 3.12555 %}
-                  <h2 class="heading-medium">{{ partyName( 'defendant' ) }} has applied to change something about the claim.</h2>
-                  <p>The claim will now continue outside the online service. Your online account won't show any more updates to this claim.</p>
+                  <h2 class="heading-medium">{{ partyName( 'defendant' ) }} applied to change something about the claim</h2>
                   <p>We'll contact you by post and email when the court has reviewed {{ partyName( 'defendant' ) }}'s request.</p>
                   <p><a href="../defendant/correspondence/forms/general-application">Download their application</a> (PDF, 123KB)</p>
+                  <p>The claim will now continue outside the online service. Your online account won't show any more updates to this claim.</p>
 
 
-              <!--  Claimant has subitted general application  -->
+              <!--  Claimant has submitted a general application  -->
               {% elseif data['claimant'] == 3.12566 %}
-                  <h2 class="heading-medium">You applied to change something about the claim.</h2>
+                  <h2 class="heading-medium">You applied to change the claim</h2>
                   <p>You might have to go to a hearing.</p>
                   <p>We'll contact you by post and email when the court has reviewed your request.</p>
-
+                  <p>The claim will now continue outside the online service. Your online account won't show any more updates to this claim.</p>
 
 
 
@@ -1004,16 +1004,16 @@
               {% elseif data['claimant'] == 13.12 %}
               <h2 class="heading-medium">Mediation was unsuccessful</h2>
               <p>You weren’t able to resolve your claim against {{ partyName( 'defendant' ) }} using mediation.</p>
-              <p>The court will review the case. We'll contact you to tell you what to do next.</p>
+              <p>You'll have to go to a hearing. We'll contact you with the details.</p>
 
               {% elseif data['claimant'] == 13.13 %}
               <h2 class="heading-medium">Mediation was unsuccessful</h2>
               <p>You weren’t able to resolve your claim against {{ partyName( 'defendant' ) }} using mediation.</p>
-              <p>You need to <a href="forms/dq-form">complete a directions questionnaire</a> form to give us more information in case there's a hearing.</p>
+              <p>You'll have to go to a hearing. We'll contact you with the details.</p>
+              <p>You need to <a href="forms/dq-form">complete a directions questionnaire</a> form to give us more information for the hearing.</p>
               <p>You must make sure we receive the form before 4pm on {{ now | date('add', 19, 'days') | date }} or we'll cancel your claim.</p>
               <p>You also need to send a copy of the form to {{ partyName( 'defendant' ) }}.</p>
               <p>Your online account won't be updated with any more details about this claim.</p>
-
 
               {% elseif data['claimant'] == 13.2 %}
               <div class="status-block single">
@@ -1460,6 +1460,54 @@
                   <h2 class="heading-medium">Ask the court to recover the debt</h2>
                   <p>If the defendant doesn't pay, you can <a href="https://www.gov.uk/make-court-claim-for-money/enforce-a-judgment">ask the court to recover the debt</a>. There's no guarantee that the court will get your money back.</p>
                 </div>
+
+
+
+              <!--  CCJ vary - New plan proposed by claimant  -->
+              {% elseif data['claimant'] == 28.2 %}
+                  <div class="status-block">
+                    <h2 class="heading-medium">A new County Court Judgment (CCJ) has been issued</h2>
+                    <p>You suggested a new repayment plan. The court accepted this plan.</p>
+                    <p><a href="repayment-plan?who=claimant&amp;plan=instalments">View the repayment plan</a></p>
+                    <p>We'll send a copy of the judgment to you and to {{ partyName( 'defendant' ) }}.</p>
+                  </div>
+
+                  <div class="status-block single">
+                    <h2 class="heading-medium">Ask the court to recover the debt</h2>
+                    <p>If the defendant doesn't pay, you can <a href="https://www.gov.uk/make-court-claim-for-money/enforce-a-judgment">ask the court to recover the debt</a>. There's no guarantee that the court will get your money back.</p>
+                  </div>
+
+
+              <!--  CCJ vary - New plan from determination  -->
+              {% elseif data['claimant'] == 28.4 %}
+                  <div class="status-block">
+                    <h2 class="heading-medium">A new County Court Judgment (CCJ) has been issued</h2>
+                    <p>The court has decided a new repayment plan.</p>
+                    <p><a href="repayment-plan?who=claimant&amp;plan=instalments">View the repayment plan</a></p>
+                    <p>We'll send a copy of the judgment to you and to {{ partyName( 'defendant' ) }}.</p>
+                  </div>
+
+                  <div class="status-block single">
+                    <h2 class="heading-medium">Ask the court to recover the debt</h2>
+                    <p>If the defendant doesn't pay, you can <a href="https://www.gov.uk/make-court-claim-for-money/enforce-a-judgment">ask the court to recover the debt</a>. There's no guarantee that the court will get your money back.</p>
+                  </div>
+
+
+              <!--  CCJ vary - Accepted by default because of no claimant response  -->
+              {% elseif data['claimant'] == 28.6 %}
+                  <div class="status-block">
+                    <h2 class="heading-medium">A new County Court Judgment (CCJ) has been issued</h2>
+                    <p>You accepted {{ partyName( 'defendant' ) }}'s new payment plan.</p>
+                    <p><a href="repayment-plan?who=claimant&amp;plan=instalments">View the repayment plan</a></p>
+                    <p>We'll send a copy of the judgment to you and to {{ partyName( 'defendant' ) }}.</p>
+                  </div>
+
+                  <div class="status-block single">
+                    <h2 class="heading-medium">Ask the court to recover the debt</h2>
+                    <p>If the defendant doesn't pay, you can <a href="https://www.gov.uk/make-court-claim-for-money/enforce-a-judgment">ask the court to recover the debt</a>. There's no guarantee that the court will get your money back.</p>
+                  </div>
+
+
 
 
               {% elseif data['claimant'] == 29 %}
@@ -2806,7 +2854,7 @@
 
 
 
-              <!--   When a defendant has request to vary the judgement   -->
+              <!--   When a defendant has request to vary the judgment   -->
               {% if data['claimant'] == 26 or  data['claimant'] == 27 %}
                   <div class="hmcts-timeline__item">
                     <div class="hmcts-timeline__header">
@@ -2981,6 +3029,8 @@
 {% include 'prototypes/prototype-nov-2019/includes/contact.html' %}
 
 </main>
+
+
 <form method="post" action="#" class="form" style="position: absolute;">
   <select id="claimant2" name="claimant2" onchange="window.location.href='?claimant='+this.value">
     <option>-------- Claimant view --------</option>
@@ -3119,8 +3169,11 @@
 
     <option>------- CCJ vary by defendant----------</option>
     <option value="26" {% if data['claimant'] == 26 %}selected{% endif %}>CCJ - respond to defendant - pay by set date</option>
-    <option value="27" {% if data['claimant'] == 27 %}selected{% endif %}>CCJ - respond to defendant - pay by installments</option>
-    <option value="28" {% if data['claimant'] == 28 %}selected{% endif %}>CCJ - accepted vary request</option>
+    <!--  no longer needed <option value="27" {% if data['claimant'] == 27 %}selected{% endif %}>CCJ - respond to defendant - pay by installments</option>  -->
+    <option value="28" {% if data['claimant'] == 28 %}selected{% endif %}>CCJ vary - Accepted by claimant</option>
+    <option value="28.2" {% if data['claimant'] == 28.2 %}selected{% endif %}>CCJ vary - New plan proposed by claimant</option>
+    <option value="28.4" {% if data['claimant'] == 28.4 %}selected{% endif %}>CCJ vary - New plan from determination</option>
+    <option value="28.6" {% if data['claimant'] == 28.6 %}selected{% endif %}>CCJ vary - Accepted by default because of no claimant response</option>
     <option value="29" {% if data['claimant'] == 29 %}selected{% endif %}>CCJ - rejected vary request - redetermination </option>
 
 
@@ -3131,7 +3184,7 @@
     <option value="37" {% if data['claimant'] == 37 %}selected{% endif %}>CCJ - defendant's set aside - claim not settled - not attending hearing</option>
 
     <option>------- Returning to an application  ----------</option>
-    <option value="3.12566" {% if data['claimant'] == 3.12566 %}selected{% endif %}>Claimant has subitted general application</option>
+    <option value="3.12566" {% if data['claimant'] == 3.12566 %}selected{% endif %}>Claimant has submitted a general application</option>
     <option value="3.12345" {% if data['claimant'] == 3.12345 %}selected{% endif %}>Return to draft general application (parallel to other states)</option>
     <option value="3.12555" {% if data['claimant'] == 3.12555 %}selected{% endif %}>When the Defendant makes a general application</option>
 
