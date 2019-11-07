@@ -37,9 +37,10 @@
               or data['claimant'] == 11.1001 or data['claimant'] == 11.1003 or data['claimant'] == 11.101 or data['claimant'] == 11.101 or data['claimant'] == 11.102 or data['claimant'] == 11.103 or data['claimant'] == 11.104 or data['claimant'] == 11.105 or data['claimant'] == 11.11 or data['claimant'] == 11.111 or data['claimant'] == 11.12 or data['claimant'] == 11.13 or data['claimant'] == 11.1011 or data['claimant'] == 11.2 or data['claimant'] == 11.21 or data['claimant'] == 11.3 or data['claimant'] == 11.31
             or data['claimant'] == 11.4 or data['claimant'] == 11.41 or data['claimant'] == 11.42 or data['claimant'] == 11.5 or data['claimant'] == 11.51 or data['claimant'] == 11.52 or data['claimant'] == 11.6 or data['claimant'] == 11.61 or data['claimant'] == 11.7
             or data['claimant'] == 12 or data['claimant'] == 13.2 or data['claimant'] == 14.1 or data['claimant'] == 14.2 or data['claimant'] == 14.3 or data['claimant'] == 14.4 or data['claimant'] == 14.5 or data['claimant'] == 16  or data['claimant'] == 16.1 or data['claimant'] == 17  or data['claimant'] == 17.01  or data['claimant'] == 20 or data['claimant'] == 20.1 or data['claimant'] == 20.2
-            or data['claimant'] == 21 or data['claimant'] == 21.1 or data['claimant'] == 23 or data['claimant'] == 24 or data['claimant'] == 26  or data['claimant'] == 27  or data['claimant'] == 28  or data['claimant'] == 29
+            or data['claimant'] == 21 or data['claimant'] == 21.3 or data['claimant'] == 21.4 or data['claimant'] == 21.5 or data['claimant'] == 21.1 or data['claimant'] == 23 or data['claimant'] == 24 or data['claimant'] == 26  or data['claimant'] == 27  or data['claimant'] == 28  or data['claimant'] == 29
             or data['claimant'] == 33  or data['claimant'] == 34  or data['claimant'] == 36  or data['claimant'] == 37
-            or data['claimant'] == 16.14  or  data['claimant'] == 16.15 or   data['claimant'] == 3.12345   or   data['claimant'] == 3.12555   or   data['claimant'] == 3.12566   %}
+            or data['claimant'] == 16.14  or  data['claimant'] == 16.15 or   data['claimant'] == 3.12345   or   data['claimant'] == 3.12555   or   data['claimant'] == 3.12566
+            or  data['claimant'] == 28.2 or  data['claimant'] == 28.4   or  data['claimant'] == 28.6 %}
             <li role="presentation"><a href="#next-steps" role="tab" tabindex="0" aria-controls="next-steps" aria-selected="true">Latest update</a></li>
             <li role="presentation"><a href="#history" role="tab" tabindex="-1" aria-controls="history">Claim history</a></li>
             <li role="presentation"><a href="#contact" role="tab" tabindex="-1" aria-controls="history">Defendant's details</a></li>
@@ -1391,6 +1392,91 @@
               </div>
             -->
 
+              {% elseif data['claimant'] == 21.3 %}
+              <div>
+                <h2 class="heading-medium">The judge ruled in your favour</h2>
+                <p>A County Court Judgment (CCJ) has been issued against {{ partyName( 'defendant' ) }}.</p>
+                <p>They must pay you £1,643.20.</p>
+
+                <details>
+                  <summary><span class="summary">View judgment amount breakdown</span></summary>
+                    <div class="panel">
+                      <table class="table-form">
+                        <caption class="visuallyhidden"></caption>
+                        <tbody>
+                        <tr>
+                          <th scope="row">Claim amount</th>
+                          <td class="numeric last">
+                            <label class="visuallyhidden" for="amount">Claim amount</label>
+                            <span
+                              class="font-small">£1,500.00</span>
+                          </td>
+                        </tr>
+                        <tr>
+                          <th scope="row">Interest to date</th>
+                          <td class="numeric last">
+                            <label class="visuallyhidden" for="amount">Interest to date</label>
+                            <span
+                              class="font-small">£68.20</span>
+                          </td>
+                        </tr>
+                        <tr>
+                          <th scope="row">Costs</th>
+                          <td class="numeric last">
+                            <label class="visuallyhidden" for="amount">Costs</label>
+                            <span
+                              class="font-small">£75.00</span>
+                          </td>
+                        </tr>
+
+                        <tr>
+                          <th scope="row" style="font-weight: bold">Total amount</th>
+                          <td class="numeric last">
+                            <label class="visuallyhidden" for="amount">Total amount</label>
+                            <span
+                              class="font-small" style="font-weight: bold">£1,643.20</span>
+                          </td>
+                        </tr>
+                        </tbody>
+                      </table>
+
+                    </div>
+                </details>
+
+                <p>They must pay you in instalments of £200 per month.<br />The first instalment must be paid by {{ now | date( 'add', 14, 'days' ) | date }}.</p>
+
+                <p>You need to tell us when you've been paid in full.</p>
+                <p><a href="paid-in-full/claimant" class="button secondary-button">Tell us you've been paid</a></p>
+
+                <p><a href="../claimant/correspondence/judgment">Download the judgment</a> (PDF, 123KB)</p>
+              </div>
+              <hr />
+
+              <div class="status-block single">
+                <h2 class="heading-medium">Ask the court to recover the debt</h2>
+                <p>If the defendant doesn't pay, you can <a href="https://www.gov.uk/make-court-claim-for-money/enforce-a-judgment">ask the court to recover the debt</a>. There's no guarantee that the court will get your money back.</p>
+              </div>
+
+
+              {% elseif data['claimant'] == 21.4 %}
+              <div>
+                <h2 class="heading-medium">The judge ruled in your favour</h2>
+                <p>A County Court Judgment (CCJ) has been issued against {{ partyName( 'defendant' ) }}.</p>
+                <p>They must complete the action ordered by the judge:</p>
+
+                <p><i>"It is ordered that {{ partyName( 'defendant' ) }} repairs {{ partyName( 'claimant' ) }}'s roof by {{ now | date( 'add', 31, 'days' ) | date }} "</i></p>
+
+                <p><a href="../claimant/correspondence/judgment">Download the judgment</a> (PDF, 123KB)</p>
+              </div>
+
+              {% elseif data['claimant'] == 21.5 %}
+              <div>
+                <h2 class="heading-medium">The judge ruled against you</h2>
+                <p>Your claim has been dismissed.</p>
+
+                <p><a href="../claimant/correspondence/judgment">Download the judgment</a> (PDF, 123KB)</p>
+              </div>
+
 
               {% elseif data['claimant'] == 22 %}
               <div class="status-block single">
@@ -1404,11 +1490,9 @@
 
               {% elseif data['claimant'] == 23 %}
                 <div class="status-block single">
-                  <h2 class="heading-medium">Tell us if you'll attend a hearing</h2>
-                  <p>{{ partyName( 'defendant' ) }} has applied to have the County Court Judgment against them removed.</p>
-                  <p>The court has asked you to say whether you'll attend a hearing.</p>
+                  <h2 class="heading-medium">{{ partyName( 'defendant' ) }} applied to cancel the judgment</h2>
+                  <p>The court has asked you to say whether you'll attend a hearing about {{ partyName( 'defendant' ) }}'s application'.</p>
                   <p>The hearing is only about the judgment, not the claim.</p>
-
                   <p><a class="button" href="../applications/claimant-respond-to-hearing">Tell us if you'll attend</a></p>
                 </div>
 
@@ -1460,10 +1544,11 @@
               <!--  CCJ vary - New plan proposed by claimant  -->
               {% elseif data['claimant'] == 28.2 %}
                   <div class="status-block">
-                    <h2 class="heading-medium">A new County Court Judgment (CCJ) has been issued</h2>
-                    <p>You suggested a new repayment plan. The court accepted this plan.</p>
+                    <h2 class="heading-medium">A new County Court Judgment has been issued</h2>
+                    <p>You rejected {{ partyName( 'defendant' ) }}'s new payment plan and proposed an alternative plan.</p>
+                    <p>The court accepted this plan and issued a new judgment.</p>
                     <p><a href="repayment-plan?who=claimant&amp;plan=instalments">View the repayment plan</a></p>
-                    <p>We'll send a copy of the judgment to you and to {{ partyName( 'defendant' ) }}.</p>
+                    <p>We'll send a copy of the new judgment to you and to {{ partyName( 'defendant' ) }}.</p>
                   </div>
 
                   <div class="status-block single">
@@ -1475,10 +1560,9 @@
               <!--  CCJ vary - New plan from determination  -->
               {% elseif data['claimant'] == 28.4 %}
                   <div class="status-block">
-                    <h2 class="heading-medium">A new County Court Judgment (CCJ) has been issued</h2>
-                    <p>The court has decided a new repayment plan.</p>
-                    <p><a href="repayment-plan?who=claimant&amp;plan=instalments">View the repayment plan</a></p>
-                    <p>We'll send a copy of the judgment to you and to {{ partyName( 'defendant' ) }}.</p>
+                    <h2 class="heading-medium">A new County Court Judgment has been issued</h2>
+                    <p>You rejected {{ partyName( 'defendant' ) }}'s new payment plan but accepted an alternative plan proposed by the court.</p>
+                    <p>We'll send a copy of the new judgment to you and to {{ partyName( 'defendant' ) }}.</p>
                   </div>
 
                   <div class="status-block single">
@@ -1490,10 +1574,11 @@
               <!--  CCJ vary - Accepted by default because of no claimant response  -->
               {% elseif data['claimant'] == 28.6 %}
                   <div class="status-block">
-                    <h2 class="heading-medium">A new County Court Judgment (CCJ) has been issued</h2>
-                    <p>You accepted {{ partyName( 'defendant' ) }}'s new payment plan.</p>
+                    <h2 class="heading-medium">A new County Court Judgment has been issued</h2>
+                    <p>{{ partyName( 'defendant' ) }} applied to change how they pay you.</p>
+                    <p>The court accepted their new repayment plan because you didn't respond by the deadline.</p>
                     <p><a href="repayment-plan?who=claimant&amp;plan=instalments">View the repayment plan</a></p>
-                    <p>We'll send a copy of the judgment to you and to {{ partyName( 'defendant' ) }}.</p>
+                    <p>We'll send a copy of the new judgment to you and to {{ partyName( 'defendant' ) }}.</p>
                   </div>
 
                   <div class="status-block single">
@@ -1619,8 +1704,7 @@
             {% endif %}
 
 
-            {% if data['claimant'] != 21.1 and data['claimant'] != 11.1011 and data['claimant'] != 11.105  and   data['claimant'] != 26  and   data['claimant'] != 27
-              and   data['claimant'] != 3.12555    and   data['claimant'] != 3.12566 %}
+            {% if data['claimant'] != 21.1 and data['claimant'] != 21.3 and data['claimant'] != 21.4 and data['claimant'] != 21.5 and data['claimant'] != 11.1011 and data['claimant'] != 11.105 and data['claimant'] != 26 and data['claimant'] != 27 and data['claimant'] != 3.12555 and data['claimant'] != 3.12566 %}
                 <div class="column-two-thirds">
                     <!--  General applications  - this will need logic to know that it comes from the claimant  -->
                     <hr>
@@ -3155,6 +3239,12 @@
     <option value="21.1" {% if data['claimant'] == 21.1 %}selected{% endif %}>Settled - successful mediation</option>
 
 
+    <option>------- Judgment - post-hearing ----------</option>
+    <option value="21.3" {% if data['claimant'] == 21.3 %}selected{% endif %}>Judgment - amount</option>
+    <option value="21.4" {% if data['claimant'] == 21.4 %}selected{% endif %}>Judgment - action</option>
+    <option value="21.5" {% if data['claimant'] == 21.5 %}selected{% endif %}>Judgment - dismissed</option>
+
+
     <option>------- CCJ set aside ----------</option>
     <option value="23" {% if data['claimant'] == 23 %}selected{% endif %}>CCJ - defendant requested set aside</option>
     <option value="24" {% if data['claimant'] == 24 %}selected{% endif %}>CCJ - defendant requested set aside - claimant agreed</option>
@@ -3169,12 +3259,13 @@
     <option value="28.6" {% if data['claimant'] == 28.6 %}selected{% endif %}>CCJ vary - Accepted by default because of no claimant response</option>
     <option value="29" {% if data['claimant'] == 29 %}selected{% endif %}>CCJ - rejected vary request - redetermination </option>
 
-
+    <!--  no longer needed as for MVP this section will be offline
     <option>------- CCJ set aside by defendant----------</option>
     <option value="33" {% if data['claimant'] == 33 %}selected{% endif %}>CCJ - defendant's set aside - claim settled - attending hearing </option>
     <option value="34" {% if data['claimant'] == 34 %}selected{% endif %}>CCJ - defendant's set aside - claim not settled - not attending hearing</option>
     <option value="36" {% if data['claimant'] == 36 %}selected{% endif %}>CCJ - defendant's set aside - claim settled - attending hearing</option>
     <option value="37" {% if data['claimant'] == 37 %}selected{% endif %}>CCJ - defendant's set aside - claim not settled - not attending hearing</option>
+    -->
 
     <option>------- Returning to an application  ----------</option>
     <option value="3.12566" {% if data['claimant'] == 3.12566 %}selected{% endif %}>Claimant has submitted a general application</option>

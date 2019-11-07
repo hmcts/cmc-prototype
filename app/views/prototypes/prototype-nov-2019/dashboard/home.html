@@ -23,20 +23,21 @@
 
       <!-- Claims you've made -->
       {% if claimant_table==true %}
-      <h2 class="heading-medium type-heading claims">
-        Claims you've made
-      </h2>
-      <table class="claim-dashboard claims clickable">
-        <thead>
-        <tr>
-          <th scope="col"><span style="font-size: medium">Claim number</span></th>
-          <th scope="col"><span style="font-size: medium">Defendant name</span></th>
-          <th scope="col"><span style="font-size: medium">Claim amount</span></th>
-          <th scope="col"><span style="font-size: medium">Latest update</span></th>
-          <th scope="col"><span style="font-size: medium">Deadline</span></th>
-          <th scope="col" class="mobile-hide"><span style="font-size: medium">Actions</span></th>
-        </tr>
-        </thead>
+        <h2 class="heading-medium type-heading claims">
+          Claims you've made
+        </h2>
+        <table class="claim-dashboard claims clickable">
+          <thead>
+              <tr>
+                <th scope="col"><span style="font-size: medium">Claim number</span></th>
+                <th scope="col"><span style="font-size: medium">Defendant name</span></th>
+                <th scope="col"><span style="font-size: medium">Claim amount</span></th>
+                <th scope="col"><span style="font-size: medium">Latest update</span></th>
+                <th scope="col"><span style="font-size: medium">Deadline</span></th>
+                <th scope="col" class="mobile-hide"><span style="font-size: medium">Actions</span></th>
+              </tr>
+          </thead>
+
         <tbody>
         {% endif %}
 
@@ -1147,18 +1148,54 @@
 
         <!-- Not in the dashboard spreadsheet -->
         {% if data['dashboard'] == 1.9991 %}
-          <tr class="mobile-table">
-            <td>352MC733</td>
-            <td>{{ partyName( 'defendant' ) }}</td>
-            <td>{% if data['mediation-pilot'] == "on" %}£300{% else %}£1,500{% endif %}</td>
-            <td class="mobile-hide">Tell us if you'll attend a hearing</td>
-            <td>-</td>
-            <td><a href="claimant?claimant=23">View</a></td>
-          </tr>
-          <tr>
-            <td class="mobile-table-status" colspan="3"></td>
-          </tr>
+            <tr class="mobile-table">
+              <td>352MC733</td>
+              <td>{{ partyName( 'defendant' ) }}</td>
+              <td>{% if data['mediation-pilot'] == "on" %}£300{% else %}£1,500{% endif %}</td>
+              <td class="mobile-hide">Tell us if you'll attend a hearing</td>
+              <td>-</td>
+              <td><a href="claimant?claimant=23">View</a></td>
+            </tr>
+            <tr>
+              <td class="mobile-table-status" colspan="3"></td>
+            </tr>
         {% endif %}
+
+
+
+        <!--  After claimant submits a general application   -->
+        {% if data['dashboard'] == 1.9993 %}
+            <tr class="mobile-table">
+              <td>352MC733</td>
+              <td>{{ partyName( 'defendant' ) }}</td>
+              <td>{% if data['mediation-pilot'] == "on" %}£300{% else %}£1,500{% endif %}</td>
+              <td class="mobile-hide">The claim will now continue outside the online service</td>
+              <td>-</td>
+              <td><a href="claimant?claimant=3.12566">View</a></td>
+            </tr>
+            <tr>
+              <td class="mobile-table-status" colspan="3"></td>
+            </tr>
+        {% endif %}
+
+
+
+        <!--  When defendant makes a general application   -->
+        {% if data['dashboard'] == 1.9994 %}
+            <tr class="mobile-table">
+              <td>352MC733</td>
+              <td>{{ partyName( 'defendant' ) }}</td>
+              <td>{% if data['mediation-pilot'] == "on" %}£300{% else %}£1,500{% endif %}</td>
+              <td class="mobile-hide">The claim will now continue outside the online service</td>
+              <td>-</td>
+              <td><a href="claimant?claimant=3.12555">View</a></td>
+            </tr>
+            <tr>
+              <td class="mobile-table-status" colspan="3"></td>
+            </tr>
+        {% endif %}
+
+
 
 
 
@@ -1209,6 +1246,55 @@
           <td class="mobile-table-status" colspan="3"></td>
         </tr>
         {% endif %}
+
+
+        <!--  New plan proposed by claimant  -->
+        {% if data['dashboard'] == 1.999755 %}
+            <tr class="mobile-table">
+              <td>352MC733</td>
+              <td>{{ partyName( 'defendant' ) }}</td>
+              <td>{% if data['mediation-pilot'] == "on" %}£300{% else %}£1,500{% endif %}</td>
+              <td class="mobile-hide">A new County Court Judgment has been issued</td>
+              <td>-</td>
+              <td><a href="claimant?claimant=28.2">View</a></td>
+            </tr>
+            <tr>
+              <td class="mobile-table-status" colspan="3"></td>
+            </tr>
+        {% endif %}
+
+
+        <!--  New plan from determination  -->
+        {% if data['dashboard'] == 1.999766 %}
+            <tr class="mobile-table">
+              <td>352MC733</td>
+              <td>{{ partyName( 'defendant' ) }}</td>
+              <td>{% if data['mediation-pilot'] == "on" %}£300{% else %}£1,500{% endif %}</td>
+              <td class="mobile-hide">A new County Court Judgment has been issued</td>
+              <td>-</td>
+              <td><a href="claimant?claimant=28.4">View</a></td>
+            </tr>
+            <tr>
+              <td class="mobile-table-status" colspan="3"></td>
+            </tr>
+        {% endif %}
+
+
+        <!--  Accepted by default because of no claimant response  -->
+        {% if data['dashboard'] == 1.999777 %}
+            <tr class="mobile-table">
+              <td>352MC733</td>
+              <td>{{ partyName( 'defendant' ) }}</td>
+              <td>{% if data['mediation-pilot'] == "on" %}£300{% else %}£1,500{% endif %}</td>
+              <td class="mobile-hide">A new County Court Judgment has been issued</td>
+              <td>-</td>
+              <td><a href="claimant?claimant=28.6">View</a></td>
+            </tr>
+            <tr>
+              <td class="mobile-table-status" colspan="3"></td>
+            </tr>
+        {% endif %}
+
 
 
         {% if data['dashboard'] == 1.9998 %}
@@ -1319,22 +1405,22 @@
 
       <!-- Claim made against you -->
       {% if defendant_table==true %}
-      <h2 class="heading-medium type-heading">
-        Claims made against you
-      </h2>
-      <table class="claim-dashboard clickable">
-        <thead>
-        <tr>
-          <th scope="col"><span style="font-size: medium">Claim number</span></th>
-          <th scope="col"><span style="font-size: medium">Claimant name</span></th>
-          <th scope="col"><span style="font-size: medium">Claim amount</span></th>
-          <th scope="col"><span style="font-size: medium">Latest update</span></th>
-          <th scope="col"><span style="font-size: medium">Deadline</span></th>
-          <th scope="col" class="mobile-hide"><span style="font-size: medium">Actions</span></th>
-        </tr>
-        </thead>
-        <tbody>
-        {% endif %}
+        <h2 class="heading-medium type-heading">
+          Claims made against you
+        </h2>
+        <table class="claim-dashboard clickable">
+          <thead>
+          <tr>
+            <th scope="col"><span style="font-size: medium">Claim number</span></th>
+            <th scope="col"><span style="font-size: medium">Claimant name</span></th>
+            <th scope="col"><span style="font-size: medium">Claim amount</span></th>
+            <th scope="col"><span style="font-size: medium">Latest update</span></th>
+            <th scope="col"><span style="font-size: medium">Deadline</span></th>
+            <th scope="col" class="mobile-hide"><span style="font-size: medium">Actions</span></th>
+          </tr>
+          </thead>
+          <tbody>
+      {% endif %}
 
         {% if show_all==true or data['dashboard'] == 2.1 %}
         <tr class="mobile-table">
@@ -3380,19 +3466,28 @@
     <option>-------- CCJ set aside --------</option>
     <option value="1.9991" {% if data['dashboard'] == 1.9991 %}selected{% endif %}>CCJ set aside requested by defendant</option>
 
+
+    <option>-------- General Applications --------</option>
+    <option value="1.9993" {% if data['dashboard'] == 1.9993 %}selected{% endif %}>After claimant submits a general application</option>
+    <option value="1.9994" {% if data['dashboard'] == 1.9904 %}selected{% endif %}>When defendant makes a general application</option>
+
+
     <option>-------- CCJ vary --------</option>
-    <option value="1.9995" {% if data['dashboard'] == 1.9995 %}selected{% endif %}>Vary requested - by set date</option>
+    <option value="1.9995" {% if data['dashboard'] == 1.9995 %}selected{% endif %}>Vary requested</option>
     <!--  no longer needed <option value="1.9996" {% if data['dashboard'] == 1.9996 %}selected{% endif %}>Vary requested - installments</option>  -->
     <option value="1.9997" {% if data['dashboard'] == 1.9997 %}selected{% endif %}>Accepted the Vary request</option>
+    <option value="1.999755" {% if data['dashboard'] == 1.999755 %}selected{% endif %}>New plan proposed by claimant</option>
+    <option value="1.999766" {% if data['dashboard'] == 1.999766 %}selected{% endif %}>New plan from determination</option>
+    <option value="1.999777" {% if data['dashboard'] == 1.999777 %}selected{% endif %}>Accepted by default because of no claimant response</option>
     <option value="1.9998" {% if data['dashboard'] == 1.9998 %}selected{% endif %}>Rejected the Vary request - Redetermination</option>
 
-
-    <option>-------- CCJ set aside - responded to hearing request --------</option>
-    <option value="1.999901" {% if data['dashboard'] == 1.999901 %}selected{% endif %}>Attending set aside  hearing - Claim not settled</option>
-    <option value="1.999902" {% if data['dashboard'] == 1.999902 %}selected{% endif %}>Attending set aside  hearing - Claim settled</option>
-    <option value="1.999903" {% if data['dashboard'] == 1.999903 %}selected{% endif %}>Not attending set aside  hearing - Claim not settled</option>
-    <option value="1.999904" {% if data['dashboard'] == 1.999904 %}selected{% endif %}>Not attending set aside  hearing - Claim settled</option>
-
+    <!-- no longer needed as mvp is to have this go offline
+      <option>-------- CCJ set aside - responded to hearing request --------</option>
+      <option value="1.999901" {% if data['dashboard'] == 1.999901 %}selected{% endif %}>Attending set aside  hearing - Claim not settled</option>
+      <option value="1.999902" {% if data['dashboard'] == 1.999902 %}selected{% endif %}>Attending set aside  hearing - Claim settled</option>
+      <option value="1.999903" {% if data['dashboard'] == 1.999903 %}selected{% endif %}>Not attending set aside  hearing - Claim not settled</option>
+      <option value="1.999904" {% if data['dashboard'] == 1.999904 %}selected{% endif %}>Not attending set aside  hearing - Claim settled</option>
+    -->
 
   </select>
 </form>
