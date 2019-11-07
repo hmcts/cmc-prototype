@@ -1763,6 +1763,100 @@
               <p><a href="party-details/claimant">Contact {{ partyName( 'claimant' ) }}</a> if you need their payment details. Make sure you get receipts for any payments.</p>
 
 
+              {% elseif data['defendant'] == 19.1 %}
+              <div>
+                <h2 class="heading-medium">The judge ruled against you</h2>
+
+                <p>A County Court Judgment (CCJ) has been issued against you.</p>
+                <p>You must pay {{ partyName( 'claimant' ) }} £1,643.20.</p>
+
+                <details>
+                  <summary><span class="summary">View judgment amount breakdown</span></summary>
+                    <div class="panel">
+                      <table class="table-form">
+                        <caption class="visuallyhidden"></caption>
+                        <tbody>
+                        <tr>
+                          <th scope="row">Claim amount</th>
+                          <td class="numeric last">
+                            <label class="visuallyhidden" for="amount">Claim amount</label>
+                            <span
+                              class="font-small">£1,500.00</span>
+                          </td>
+                        </tr>
+                        <tr>
+                          <th scope="row">Interest to date</th>
+                          <td class="numeric last">
+                            <label class="visuallyhidden" for="amount">Interest to date</label>
+                            <span
+                              class="font-small">£68.20</span>
+                          </td>
+                        </tr>
+                        <tr>
+                          <th scope="row">Costs</th>
+                          <td class="numeric last">
+                            <label class="visuallyhidden" for="amount">Costs</label>
+                            <span
+                              class="font-small">£75.00</span>
+                          </td>
+                        </tr>
+
+                        <tr>
+                          <th scope="row" style="font-weight: bold">Total amount</th>
+                          <td class="numeric last">
+                            <label class="visuallyhidden" for="amount">Total amount</label>
+                            <span
+                              class="font-small" style="font-weight: bold">£1,643.20</span>
+                          </td>
+                        </tr>
+                        </tbody>
+                      </table>
+
+                    </div>
+                </details>
+
+                <p>You must pay them in full by {{ now | date( 'add', 14, 'days' ) | date }}.</p>
+                <p>If {{ partyName( 'claimant' ) }} confirms you've settled the claim before 4pm on {{ now |  date("add", 31, "day") | date( "D MMMM YYYY" ) }}, the CCJ will be removed from the public register.</p>
+                  
+                {% include "../includes/claimants-contact-details.html" %}
+                <h3 class="heading-small">If you don't pay</h3>
+                <p>{{ partyName( 'claimant' ) }} can ask the court to:</p>
+                <ul class="list list-bullet">
+                  <li>send bailiffs to your home or business to collect the money</li>
+                  <li>order your employer to take money out of your wages</li>
+                  <li>freeze assets or money in your account</li>
+                  <li>order you to use any money from property or land you sell to pay the debt</li>
+                </ul>
+
+                <p><a href="../claimant/correspondence/judgment">Download the judgment</a> (PDF, 123KB)</p>
+              </div>
+
+
+              {% elseif data['defendant'] == 19.2 %}
+              <div>
+                <h2 class="heading-medium">The judge ruled against you</h2>
+                <p>A County Court Judgment (CCJ) has been issued against you.</p>
+                <p>You must complete the action ordered by the judge:</p>
+
+                <p><i>"It is ordered that {{ partyName( 'defendant' ) }} repairs {{ partyName( 'claimant' ) }}'s roof by {{ now | date( 'add', 31, 'days' ) | date }} "</i></p>
+
+                {% include "../includes/claimants-contact-details.html" %}
+                <h3 class="heading-small">If you don't…</h3>
+                <p>???</p>
+
+                <p><a href="../claimant/correspondence/judgment">Download the judgment</a> (PDF, 123KB)</p>
+              </div>
+
+              {% elseif data['defendant'] == 19.3 %}
+              <div>
+                <h2 class="heading-medium">The judge ruled in your favour</h2>
+                <p>The claim against you has been dismissed.</p>
+
+                <p><a href="../claimant/correspondence/judgment">Download the judgment</a> (PDF, 123KB)</p>
+              </div>
+
+
+
 
               <!--   CCJ set aside requested -->
               {% elseif data['defendant'] == 20 %}
@@ -1966,7 +2060,7 @@
               <!--  Applications  -->
               <!--  If CCJ then link to vary and setaside  -->
               <!-- do not show this section after an application has been submitted  -->
-              {% if data['defendant'] != 20  and  data['defendant'] != 23  and  data['defendant'] != 3.2258  and  data['defendant'] != 3.2265   %}
+              {% if data['defendant'] != 19.3 and data['defendant'] != 20 and data['defendant'] != 23 and data['defendant'] != 3.2258 and data['defendant'] != 3.2265   %}
                       <hr>
                       <h2 class="heading-small">Apply to change something about the claim</h2>
 
@@ -1976,6 +2070,7 @@
 
                       <!--  CCJ states  -->
                       {% elseif  data['defendant'] == 3.21  or  data['defendant'] == 3.22  or  data['defendant'] == 17.2  or  data['defendant'] == 17.3  or  data['defendant'] == 3.9031  or
+                             data['defendant'] == 19.1 or data['defendant'] == 19.2 or
                              data['defendant'] == 4.01  or  data['defendant'] == 4.02  or  data['defendant'] == 4.1  or  data['defendant'] == 4.2  or  data['defendant'] == 5.0111  or
                              data['defendant'] == 5.012  or  data['defendant'] == 5.013  or  data['defendant'] == 5.014  or  data['defendant'] == 3.9031  or  data['defendant'] == 5.3001  or
                              data['defendant'] == 5.301  or  data['defendant'] == 5.302  or  data['defendant'] == 5.52   %}
@@ -4356,6 +4451,10 @@
     <option value="18.2" {% if data['defendant'] == 18.2 %}selected{% endif %}>18.2. Not proceeded - past deadline</option>
     <option value="18.3" {% if data['defendant'] == 18.3 %}selected{% endif %}>Settled - successful mediation</option>
 
+    <option>------- Judgment - post-hearing ----------</option>
+    <option value="19.1" {% if data['defendant'] == 19.1 %}selected{% endif %}>Judgment - amount</option>
+    <option value="19.2" {% if data['defendant'] == 19.2 %}selected{% endif %}>Judgment - action</option>
+    <option value="19.3" {% if data['defendant'] == 19.3 %}selected{% endif %}>Judgment - dismissed</option>
 
     <option>------ CCJ set aside -------</option>
     <option value="20" {% if data['defendant'] == 20 %}selected{% endif %}>20. CCJ set aside request submitted</option>
