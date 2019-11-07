@@ -36,7 +36,7 @@
             or data['claimant'] == 10.83 or data['claimant'] == 10.831 or data['claimant'] == 10.832 or data['claimant'] == 10.84 or data['claimant'] == 10.85 or data['claimant'] == 10.9
               or data['claimant'] == 11.1001 or data['claimant'] == 11.1003 or data['claimant'] == 11.101 or data['claimant'] == 11.101 or data['claimant'] == 11.102 or data['claimant'] == 11.103 or data['claimant'] == 11.104 or data['claimant'] == 11.105 or data['claimant'] == 11.11 or data['claimant'] == 11.111 or data['claimant'] == 11.12 or data['claimant'] == 11.13 or data['claimant'] == 11.1011 or data['claimant'] == 11.2 or data['claimant'] == 11.21 or data['claimant'] == 11.3 or data['claimant'] == 11.31
             or data['claimant'] == 11.4 or data['claimant'] == 11.41 or data['claimant'] == 11.42 or data['claimant'] == 11.5 or data['claimant'] == 11.51 or data['claimant'] == 11.52 or data['claimant'] == 11.6 or data['claimant'] == 11.61 or data['claimant'] == 11.7
-            or data['claimant'] == 12 or data['claimant'] == 13.2 or data['claimant'] == 14.1 or data['claimant'] == 14.2 or data['claimant'] == 14.3 or data['claimant'] == 14.4 or data['claimant'] == 14.5 or data['claimant'] == 16  or data['claimant'] == 16.1 or data['claimant'] == 17  or data['claimant'] == 17.01  or data['claimant'] == 20 or data['claimant'] == 20.1 or data['claimant'] == 20.2
+            or data['claimant'] == 12 or data['claimant'] == 13.11 or data['claimant'] == 13.12 or data['claimant'] == 13.2 or data['claimant'] == 14.1 or data['claimant'] == 14.2 or data['claimant'] == 14.3 or data['claimant'] == 14.4 or data['claimant'] == 14.5 or data['claimant'] == 16  or data['claimant'] == 16.1 or data['claimant'] == 17  or data['claimant'] == 17.01  or data['claimant'] == 20 or data['claimant'] == 20.1 or data['claimant'] == 20.2
             or data['claimant'] == 21 or data['claimant'] == 21.3 or data['claimant'] == 21.4 or data['claimant'] == 21.5 or data['claimant'] == 21.1 or data['claimant'] == 23 or data['claimant'] == 24 or data['claimant'] == 26  or data['claimant'] == 27  or data['claimant'] == 28  or data['claimant'] == 29
             or data['claimant'] == 33  or data['claimant'] == 34  or data['claimant'] == 36  or data['claimant'] == 37
             or data['claimant'] == 16.14  or  data['claimant'] == 16.15 or   data['claimant'] == 3.12345   or   data['claimant'] == 3.12555   or   data['claimant'] == 3.12566
@@ -165,17 +165,19 @@
               <!--  When the Defendant makes a general application  -->
               {% elif data['claimant'] == 3.12555 %}
                   <h2 class="heading-medium">{{ partyName( 'defendant' ) }} applied to change something about the claim</h2>
+                  <h3 class="heading-small">The claim will now continue outside the online service</h3>
                   <p>We'll contact you by post and email when the court has reviewed their request.</p>
                   <p><a href="../defendant/correspondence/forms/general-application">Download their application</a> (PDF, 123KB)</p>
-                  <p>The claim will now continue outside the online service. Your online account won't show any more updates to this claim.</p>
+                  <p>Your online account won't show any more updates to this claim.</p>
 
 
               <!--  Claimant has submitted a general application  -->
               {% elseif data['claimant'] == 3.12566 %}
                   <h2 class="heading-medium">You applied to change the claim</h2>
+                  <h3 class="heading-small">The claim will now continue outside the online service</h3>
                   <p>You might have to go to a hearing.</p>
                   <p>We'll contact you by post and email when the court has reviewed your request.</p>
-                  <p>The claim will now continue outside the online service. Your online account won't show any more updates to this claim.</p>
+                  <p>Your online account won't show any more updates to this claim.</p>
 
 
 
@@ -521,7 +523,7 @@
               {% elseif data['claimant'] == 10.6 %}
               <h2 class="heading-medium">You rejected {{ partyName( 'defendant' ) }}'s repayment plan</h2>
               <p>You haven't been able to agree to an alternative plan.</p>
-              <p>A judge will review the case. We'll contact you to tell you what to do next.</p>
+              <p>The court will review the case. We'll contact you to tell you what to do next.</p>
 
               {% elseif data['claimant'] == 10.601 %}
 
@@ -558,13 +560,13 @@
               <!--
                             <h2 class="heading-small">The defendant rejected the repayment plan</h2>
                             <p>They said they can't afford it. They chose not to sign the settlement agreement.</p>
-                            <p>A judge will review the case. We'll contact you to tell you what to do next.</p>
+                            <p>The court will review the case. We'll contact you to tell you what to do next.</p>
               -->
 
               {% elseif data['claimant'] == 10.801 %}
               <h2 class="heading-medium">{{ partyName( 'defendant' ) }} rejected the repayment plan</h2>
               <p>They said they can't afford to pay based on the terms of the County Court Judgment.</p>
-              <p>A judge will review the case. We'll contact you to tell you what to do next.</p>
+              <p>The court will review the case. We'll contact you to tell you what to do next.</p>
 
               {% elseif data['claimant'] == 10.81 %}
                 <h2 class="heading-medium">{{ partyName( 'defendant' ) }} admitted they owe £{{ data['owe-amount'] or '1,200' }}</h2>
@@ -1001,11 +1003,8 @@
               <h2 class="heading-medium">Mediation was unsuccessful</h2>
               <p>You weren’t able to resolve your claim against {{ partyName( 'defendant' ) }} using mediation.</p>
               <p>You'll have to go to a hearing. We'll contact you with the details.</p>
+              <p><a href="../claimant/correspondence/dqs" target="_blank">Download {{ partyName( 'defendant' ) }}'s hearing requirements</a> (PDF, 123KB)</p>
 
-              {% elseif data['claimant'] == 13.12 %}
-              <h2 class="heading-medium">Mediation was unsuccessful</h2>
-              <p>You weren’t able to resolve your claim against {{ partyName( 'defendant' ) }} using mediation.</p>
-              <p>You'll have to go to a hearing. We'll contact you with the details.</p>
 
               {% elseif data['claimant'] == 13.13 %}
               <h2 class="heading-medium">Mediation was unsuccessful</h2>
@@ -1511,7 +1510,7 @@
 
               {% elseif data['claimant'] == 26 or data['claimant'] == 27  %}
                 <!--  Vary requested - by set date and installmanets  -->
-                <h2 class="heading-medium">{{ partyName( 'defendant' ) }} has asked to change how they repay you</h2>
+                <h2 class="heading-medium">{{ partyName( 'defendant' ) }} has asked to change how they pay you</h2>
                 {% if data['claimant'] == 26 %}
                     <!-- by set date -->
                     <p>They've asked to pay in full on 28 July 2019.</p>
@@ -1591,9 +1590,9 @@
 
               {% elseif data['claimant'] == 29 %}
                 <!-- Rejected the Vary request - Redetermination -->
-                <h2 class="heading-medium">A judge will review the case</h2>
+                <h2 class="heading-medium">The court will review the case</h2>
                 <p>You rejected {{ partyName( 'defendant' ) }}'s new payment plan and an alternative plan proposed by the court.</p>
-                <p>A judge will review the case. We'll contact you to tell you what to do next.</p>
+                <p>The court will review the case. We'll contact you to tell you what to do next.</p>
 
 
 
@@ -3162,8 +3161,7 @@
     <option value="10.85" {% if data['claimant'] == 10.85 %}selected{% endif %}>Part admit - rejected - mediation</option>
     <option value="10.9" {% if data['claimant'] == 10.9 %}selected{% endif %}>Defence rejected - with mediation</option>
     <option value="10.91" {% if data['claimant'] == 10.91 %}selected{% endif %}>Defence rejected - no mediation</option>
-    <option value="13.11" {% if data['claimant'] == 13.11 %}selected{% endif %}>Defence rejected - mediation failed - DQs done, going to hearing</option>
-    <option value="13.12" {% if data['claimant'] == 13.12 %}selected{% endif %}>Defence rejected - mediation failed - DQs done, going to legal advisor</option>
+    <option value="13.11" {% if data['claimant'] == 13.11 %}selected{% endif %}>Defence rejected - mediation failed - DQs done</option>
     <option value="13.13" {% if data['claimant'] == 13.13 %}selected{% endif %}>Defence rejected - mediation failed - do paper DQs</option>
     <option value="13.2" {% if data['claimant'] == 13.2 %}selected{% endif %}>Defence rejected - offline DQs</option>
 
