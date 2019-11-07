@@ -175,20 +175,21 @@
 
 
 
-              <!--  Defendant has subitted general application  -->
+              <!--  Defendant has submitted general application  -->
               {% elseif data['defendant'] == 3.2258 %}
-                  <h2 class="heading-medium">You applied to change something about the claim.</h2>
+                  <h2 class="heading-medium">You applied to change the claim</h2>
                   <p>You might have to go to a hearing.</p>
                   <p>We'll contact you by post and email when the court has reviewed your request.</p>
+                  <p>The claim will now continue outside the online service. Your online account won't show any more updates to this claim.</p>
 
 
 
               <!--  When Claimant makes a general application   -->
               {% elseif data['defendant'] == 3.2265 %}
-                  <h2 class="heading-medium">{{ partyName( 'claimant' ) }} has applied to change something about the claim.</h2>
-                  <p>The claim will now continue outside the online service. Your online account won't show any more updates to this claim.</p>
-                  <p>We'll contact you by post and email when the court has reviewed {{ partyName( 'claimant' ) }}'s request.</p>
+                  <h2 class="heading-medium">{{ partyName( 'claimant' ) }} applied to change something about the claim</h2>
+                  <p>We'll contact you by post and email when the court has reviewed their request.</p>
                   <p><a href="../defendant/correspondence/forms/general-application">Download their application</a> (PDF, 123KB)</p>
+                  <p>The claim will now continue outside the online service. Your online account won't show any more updates to this claim.</p>
 
 
 
@@ -811,12 +812,13 @@
               {% elseif data['defendant'] == 5.72 %}
               <h2 class="heading-medium">Mediation was unsuccessful</h2>
               <p>You weren’t able to resolve {{ partyName( 'claimant' ) }}'s claim against you using mediation.</p>
-              <p>The court will review the case. We'll contact you to tell you what to do next.</p>
+              <p>You'll have to go to a hearing. We'll contact you with the details.</p>
 
               {% elseif data['defendant'] == 5.73 %}
               <h2 class="heading-medium">Mediation was unsuccessful</h2>
               <p>You weren’t able to resolve {{ partyName( 'claimant' ) }}'s claim against you using mediation.</p>
-              <p>You need to <a href="forms/dq-form">complete a directions questionnaire</a> form to give us more information in case there's a hearing.</p>
+              <p>You'll have to go to a hearing. We'll contact you with the details.</p>
+              <p>You need to <a href="forms/dq-form">complete a directions questionnaire</a> form to give us more information for the hearing.</p>
               <p>You must make sure we receive the form before 4pm on {{ now | date('add', 19, 'days') | date }} or we'll cancel your defence.</p>
               <p>You also need to send a copy of the form to {{ partyName( 'claimant' ) }}.</p>
               <p>Your online account won't be updated with any more details about this claim.</p>
@@ -1860,9 +1862,10 @@
 
               <!--   CCJ set aside requested -->
               {% elseif data['defendant'] == 20 %}
-                <h2 class="heading-medium">You applied to have the County Court Judgment cancelled.</h2>
-                <p>You might have to go to a hearing.</p>
-                <p>We'll contact you by post and email when the court has reviewed your request. You'll still have the judgment against you until then.</p>
+              <h2 class="heading-medium">You applied to cancel the judgment</h2>
+              <p>You might have to go to a hearing.</p>
+              <p>We'll contact you by post and email when the court has reviewed your request. You'll still have the judgment against you until then.</p>
+              <p>Your online account won't be updated with any more details about this claim.</p>
 
 
               <!--   Return to draft CCJ set aside request   -->
@@ -1973,33 +1976,29 @@
                 <p><a class="button secondary-button" href="applications-and-judgments/set-aside-default-ccj/task-list-after-contact?aftercontact=true&aftersettle=true">Apply to cancel judgment</a></p>
 
 
-
-
-
               {% elseif data['defendant'] == 23 %}
                 <!-- CCJ vary request submitted -->
-                <h2 class="heading-medium">You asked the claimant to change the payment terms</h2>
-                <p>We'll email you on or before {{ now | date( 'add', 14, 'days' ) | date }} with {{ partyName( 'claimant' ) }}'s response.</p>
+                <h2 class="heading-medium">You applied to change how you pay the claimant</h2>
+                <p>{{ partyName( 'claimant' ) }} has until 4pm on {{ now | date( 'add', 14, 'days' ) | date }} to respond. We'll email you when they do.</p>
                 <p>You must continue to follow the terms of the existing judgment until then.</p>
                 <p><a target="_blank" href="../defendant/correspondence/forms/judgment-order?check=1">Download judgment</a> (PDF, 48 KB).</p>
 
 
+                {% elseif data['defendant'] == 24 %}
+                  <!-- CCJ vary - Accepted by claimant -->
+                  <h2 class="heading-medium">A new County Court Judgment has been issued</h2>
+                  <p>{{ partyName( 'claimant' ) }} accepted your new repayment plan.</p>
+                  <p><a href="repayment-plan?who=defendant&amp;plan=instalments">View the repayment plan</a></p>
+                  <p>We'll post a copy of the new judgment to you and to {{ partyName( 'claimant' ) }}.</p>
+                  <p><a href="party-details/claimant">Contact {{ partyName( 'claimant' ) }}</a> if you need their payment details. Make sure you get receipts for any payments.</p>
+
+
               {% elseif data['defendant'] == 24.001 %}
                 <!--  Accepted by default because of no claimant response  -->
-                <h2 class="heading-medium">Pay the new amount in the judgment</h2>
-                <p>A new updated County Court Judgment (CCJ) has been issued.</p>
-                <p>{{ partyName( 'claimant' ) }} didn't respond to your new repayment plan so your plan was accepted.</p>
-                <p><a href="repayment-plan?who=defendant&amp;plan=instalments">View the repayment plan</a></p>
-                <p>We'll post a copy of the judgment to you and to {{ partyName( 'claimant' ) }}.</p>
-                <p><a href="party-details/claimant">Contact {{ partyName( 'claimant' ) }}</a> if you need their payment details. Make sure you get receipts for any payments.</p>
-
-
-              {% elseif data['defendant'] == 24 %}
-                <!-- CCJ vary - Accepted by claimant -->
                 <h2 class="heading-medium">A new County Court Judgment has been issued</h2>
-                <p>{{ partyName( 'claimant' ) }} accepted your new repayment plan.</p>
+                <p>Your new repayment plan was accepted because {{ partyName( 'claimant' ) }} didn't respond by the deadline.</p>
                 <p><a href="repayment-plan?who=defendant&amp;plan=instalments">View the repayment plan</a></p>
-                <p>We'll post a copy of the judgment to you and to {{ partyName( 'claimant' ) }}.</p>
+                <p>We'll post a copy of the new judgment to you and to {{ partyName( 'claimant' ) }}.</p>
                 <p><a href="party-details/claimant">Contact {{ partyName( 'claimant' ) }}</a> if you need their payment details. Make sure you get receipts for any payments.</p>
 
 
@@ -2008,9 +2007,9 @@
                 <!-- CCJ vary - New plan proposed by claimant -->
                 <h2 class="heading-medium">A new County Court Judgment has been issued</h2>
                 <p>{{ partyName( 'claimant' ) }} rejected your new repayment plan.</p>
-                <p>They suggested a new repayment plan. The court accepted this plan based on the financial details you provided.</p>
+                <p>They suggested a new repayment plan. The court accepted this plan, based on your financial details.</p>
                 <p><a href="repayment-plan?who=defendant&amp;plan=instalments">View the repayment plan</a></p>
-                <p>We'll post a copy of the judgment to you and to {{ partyName( 'claimant' ) }}.</p>
+                <p>We'll post a copy of the new judgment to you and to {{ partyName( 'claimant' ) }}.</p>
                 <p><a href="party-details/claimant">Contact {{ partyName( 'claimant' ) }}</a> if you need their payment details. Make sure you get receipts for any payments.</p>
 
 
@@ -2018,19 +2017,20 @@
               {% elseif data['defendant'] == 26 %}
                 <!-- CCJ vary - New plan from determination -->
                 <h2 class="heading-medium">A new County Court Judgment has been issued</h2>
-                <p>{{ partyName( 'claimant' ) }} rejected your repayment plan.</p>
-                <p>The court has decided a new repayment plan. The court believes you can afford this plan, based on the financial details you provided.</p>
+                <p>{{ partyName( 'claimant' ) }} rejected your new repayment plan.</p>
+                <p>They accepted a new repayment plan determined by the court, based on your financial details.</p>
                 <p><a href="repayment-plan?who=defendant&amp;plan=instalments">View the repayment plan</a></p>
-                <p>We'll post a copy of the judgment to you and to {{ partyName( 'claimant' ) }}.</p>
+                <p>We'll post a copy of the new judgment to you and to {{ partyName( 'claimant' ) }}.</p>
                 <p><a href="party-details/claimant">Contact {{ partyName( 'claimant' ) }}</a> if you need their payment details. Make sure you get receipts for any payments.</p>
 
 
               {% elseif data['defendant'] == 27 %}
                 <!-- CCJ vary - New plan from REdetermination -->
                 <h2 class="heading-medium">A judge will review the case</h2>
-                <p>{{ partyName( 'claimant' ) }} has rejected the your repayment plan.</p>
-                <p>The court will review the case.</p>
-                <p>We'll contact you to tell you what to do next.</p>
+                <p>{{ partyName( 'claimant' ) }} rejected your new repayment plan.</p>
+                <p>They also rejected a new repayment plan determined by the court, based on your financial details.</p>
+                <p>The court will review the case. We'll contact you to tell you what to do next.</p>
+                <p>You must continue to follow the terms of the existing judgment until then.</p>
 
 
 
@@ -4290,6 +4290,8 @@
 
   {% include 'prototypes/prototype-nov-2019/includes/contact.html' %}
 </main>
+
+
 <form method="post" action="#" class="form" style="position: absolute;">
   <select id="defendant2" name="defendant2" onchange="window.location.href='?defendant='+this.value">
     <option>-------- Defendant view --------</option>
