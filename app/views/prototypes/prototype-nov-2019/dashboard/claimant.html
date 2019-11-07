@@ -164,7 +164,7 @@
               <!--  When the Defendant makes a general application  -->
               {% elif data['claimant'] == 3.12555 %}
                   <h2 class="heading-medium">{{ partyName( 'defendant' ) }} applied to change something about the claim</h2>
-                  <p>We'll contact you by post and email when the court has reviewed {{ partyName( 'defendant' ) }}'s request.</p>
+                  <p>We'll contact you by post and email when the court has reviewed their request.</p>
                   <p><a href="../defendant/correspondence/forms/general-application">Download their application</a> (PDF, 123KB)</p>
                   <p>The claim will now continue outside the online service. Your online account won't show any more updates to this claim.</p>
 
@@ -1425,32 +1425,26 @@
                 </div>
 
 
-              {% elseif data['claimant'] == 26  or  data['claimant'] == 27  %}
+              {% elseif data['claimant'] == 26 or data['claimant'] == 27  %}
                 <!--  Vary requested - by set date and installmanets  -->
-                <h2 class="heading-medium">Respond to the defendant</h2>
-                <p>{{ partyName( 'defendant' ) }} has asked to change how they repay you.</p>
+                <h2 class="heading-medium">{{ partyName( 'defendant' ) }} has asked to change how they repay you</h2>
                 {% if data['claimant'] == 26 %}
                     <!-- by set date -->
                     <p>They've asked to pay in full on 28 July 2019.</p>
                     <p>Their request will be accepted if you don't respond by {{ now | date( 'add', 14, 'days' ) | date }}.</p>
                     <p><a href="applications-and-judgments/vary/task-list-claimant-response?instalments=false&bysetdate=true&vary=true&" class="button">View and respond</a></p>
-
                 {% elseif data['claimant'] == 27 %}
                       <!-- by installments -->
                       <p>They've asked to pay £100 every month.</p>
                       <p>Their request will be accepted if you don't respond by {{ now | date( 'add', 14, 'days' ) | date }}.</p>
                       <p><a href="applications-and-judgments/vary/task-list-claimant-response?instalments=true&bysetdate=true&vary=true&" class="button">View and respond</a></p>
-
-
                 {% endif %}
-
-
 
 
               {% elseif data['claimant'] == 28 %}
                 <!-- Accepted the Vary request, so CCJ UPDATED -->
                 <div class="status-block">
-                  <h2 class="heading-medium">A new County Court Judgment (CCJ) has been issued</h2>
+                  <h2 class="heading-medium">A new County Court Judgment has been issued</h2>
                   <p>You accepted {{ partyName( 'defendant' ) }}'s new payment plan.</p>
                   <p><a href="repayment-plan?who=claimant&amp;plan=instalments">View the repayment plan</a></p>
                   <p>We'll send a copy of the judgment to you and to {{ partyName( 'defendant' ) }}.</p>
@@ -1465,9 +1459,8 @@
               {% elseif data['claimant'] == 29 %}
                 <!-- Rejected the Vary request - Redetermination -->
                 <h2 class="heading-medium">A judge will review the case</h2>
-                <p>You've rejected the defendant's repayment plan and haven't been able to agree to an alternative plan.</p>
+                <p>You rejected {{ partyName( 'defendant' ) }}'s new payment plan and an alternative plan proposed by the court.</p>
                 <p>A judge will review the case. We'll contact you to tell you what to do next.</p>
-
 
 
 
