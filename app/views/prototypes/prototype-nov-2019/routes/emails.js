@@ -14,7 +14,7 @@ const router = express();
 
 
 
-    // SET ASIDE JUDGEMENT
+    // SET ASIDE JUDGMENT
 
 
     // DEFENDANT - Respond to default CCJ after one month of it being issued
@@ -57,7 +57,7 @@ const router = express();
 
 
 
-    // VARY A JUDGEMENT
+    // VARY A JUDGMENT
 
 
     // CLAIMANT - Update about other party requesting a Vary of the CCJ

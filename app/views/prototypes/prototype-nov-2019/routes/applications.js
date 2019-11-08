@@ -24,7 +24,7 @@ const router = express();
 
 
     // DEFENDANT - Respond to default CCJ withig one month of it being issued
-    router.get('/respond-to-judgement-within-one-month-of-judgement-being-issued', function (req, res)
+    router.get('/respond-to-judgment-within-one-month-of-judgment-being-issued', function (req, res)
     {
       req.session.data = {};
 
@@ -38,7 +38,7 @@ const router = express();
 
 
     // DEFENDANT - Respond to default CCJ within one month of it being issued
-    router.get('/respond-to-judgement-after-one-month-of-judgement-being-issued', function (req, res)
+    router.get('/respond-to-judgment-after-one-month-of-judgment-being-issued', function (req, res)
     {
       req.session.data = {};
 
@@ -56,7 +56,7 @@ const router = express();
     {
         res.redirect('/' + strPath +  'dashboard/applications-and-judgments/set-aside-default-ccj/pay-in-full-now' );
 
-        // If it is before the CCJ 1 month deadline then encourage users to pay immeidatelly, rather than paying whatever the judgement terms are.
+        // If it is before the CCJ 1 month deadline then encourage users to pay immeidatelly, rather than paying whatever the judgment terms are.
         /*
         if(req.session.data['afterccjdeadline'] == 'false')
         {
