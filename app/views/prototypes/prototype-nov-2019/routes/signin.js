@@ -15,7 +15,7 @@ const router = express();
             res.redirect('/' + strPath +  'dashboard/home?dashboard=1.9991' );
           }
 
-          // When a CLAIMANT is asked to respond to the defendant's request to Vary the judgement
+          // When a CLAIMANT is asked to respond to the defendant's request to Vary the judgment
           if (req.session.data['claimantvaryresponse'] == 'true')
           {
             res.redirect('/' + strPath +  'dashboard/claimant?claimant=27' );

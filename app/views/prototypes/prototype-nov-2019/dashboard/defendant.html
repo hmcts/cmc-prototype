@@ -1753,8 +1753,7 @@
               {% elseif data['defendant'] == 18.3 %}
               <h2 class="heading-medium">You both settled the claim through mediation</h2>
               <p>You signed an agreement which means the claim is now ended and sets out the terms of how you must repay {{ partyName( 'claimant' ) }}.</p>
-              <p><a href="../defendant/correspondence/forms/mediation-agreement">Download the agreement</a> (PDF, 123KB)</p>
-              <p>{{ partyName( 'claimant' ) }} can't request a County Court Judgment against you unless you break the terms.</p>
+              <p><a href="https://www.gov.uk/government/publications/form-n182-mediation-settlement-agreement">Download the agreement</a> (PDF, 123KB)</p>
               <p><a href="party-details/claimant">Contact {{ partyName( 'claimant' ) }}</a> if you need their payment details. Make sure you get receipts for any payments.</p>
 
 
@@ -1784,13 +1783,21 @@
                           <td class="numeric last">
                             <label class="visuallyhidden" for="amount">Interest to date</label>
                             <span
-                              class="font-small">£68.20</span>
+                              class="font-small">£8.20</span>
                           </td>
                         </tr>
                         <tr>
                           <th scope="row">Costs</th>
                           <td class="numeric last">
                             <label class="visuallyhidden" for="amount">Costs</label>
+                            <span
+                              class="font-small">£60.00</span>
+                          </td>
+                        </tr>
+                        <tr>
+                          <th scope="row">Claim fee</th>
+                          <td class="numeric last">
+                            <label class="visuallyhidden" for="amount">Claim fee</label>
                             <span
                               class="font-small">£75.00</span>
                           </td>
@@ -1826,23 +1833,7 @@
                 <p><a href="../claimant/correspondence/judgment">Download the judgment</a> (PDF, 123KB)</p>
               </div>
 
-
               {% elseif data['defendant'] == 19.2 %}
-              <div>
-                <h2 class="heading-medium">The judge ruled against you</h2>
-                <p>A County Court Judgment (CCJ) has been issued against you.</p>
-                <p>You must complete the action ordered by the judge:</p>
-
-                <p><i>"It is ordered that {{ partyName( 'defendant' ) }} repairs {{ partyName( 'claimant' ) }}'s roof by {{ now | date( 'add', 31, 'days' ) | date }} "</i></p>
-
-                {% include "../includes/claimants-contact-details.html" %}
-                <h3 class="heading-small">If you don't…</h3>
-                <p>???</p>
-
-                <p><a href="../claimant/correspondence/judgment">Download the judgment</a> (PDF, 123KB)</p>
-              </div>
-
-              {% elseif data['defendant'] == 19.3 %}
               <div>
                 <h2 class="heading-medium">The judge ruled in your favour</h2>
                 <p>The claim against you has been dismissed.</p>
@@ -1975,7 +1966,7 @@
                 <h2 class="heading-medium">You applied to change how you pay the claimant</h2>
                 <p>{{ partyName( 'claimant' ) }} has until 4pm on {{ now | date( 'add', 14, 'days' ) | date }} to respond. We'll email you when they do.</p>
                 <p>You must continue to follow the terms of the existing judgment until then.</p>
-                <p><a target="_blank" href="../defendant/correspondence/forms/judgment-order?check=1">Download judgment</a> (PDF, 48 KB).</p>
+                <p><a target="_blank" href="../defendant/correspondence/forms/judgment-order?check=1">Download existing judgment</a> (PDF, 48 KB).</p>
 
 
                 {% elseif data['defendant'] == 24 %}
@@ -2064,13 +2055,13 @@
 
                       <!--  CCJ states  -->
                       {% elseif  data['defendant'] == 3.21  or  data['defendant'] == 3.22  or  data['defendant'] == 17.2  or  data['defendant'] == 17.3  or  data['defendant'] == 3.9031  or
-                             data['defendant'] == 19.1 or data['defendant'] == 19.2 or
+                             data['defendant'] == 19.1 or
                              data['defendant'] == 4.01  or  data['defendant'] == 4.02  or  data['defendant'] == 4.1  or  data['defendant'] == 4.2  or  data['defendant'] == 5.0111  or
                              data['defendant'] == 5.012  or  data['defendant'] == 5.013  or  data['defendant'] == 5.014  or  data['defendant'] == 3.9031  or  data['defendant'] == 5.3001  or
                              data['defendant'] == 5.301  or  data['defendant'] == 5.302  or  data['defendant'] == 5.52   %}
 
                             <p>You can pay a fee and <a href="../applications/select-type-of-application">ask the court</a> to change something in relation to this claim.</p>
-                            <p>This includes applying to cancel a judgment or change when you pay a claimant.</p>
+                            <p>This includes applying to cancel a judgment or change how you pay a claimant.</p>
                       {% else %}  <!--  Non CCJ states  -->
                           <p>If you think there's something wrong with this claim you can pay a fee and <a href="../applications/defendant-general-application-only">ask the court to change it</a>.</p>
                       {% endif %}
@@ -4447,9 +4438,8 @@
     <option value="18.3" {% if data['defendant'] == 18.3 %}selected{% endif %}>Settled - successful mediation</option>
 
     <option>------- Judgment - post-hearing ----------</option>
-    <option value="19.1" {% if data['defendant'] == 19.1 %}selected{% endif %}>Judgment - amount</option>
-    <option value="19.2" {% if data['defendant'] == 19.2 %}selected{% endif %}>Judgment - action</option>
-    <option value="19.3" {% if data['defendant'] == 19.3 %}selected{% endif %}>Judgment - dismissed</option>
+    <option value="19.1" {% if data['defendant'] == 19.1 %}selected{% endif %}>Judgment</option>
+    <option value="19.2" {% if data['defendant'] == 19.2 %}selected{% endif %}>Judgment - dismissed</option>
 
     <option>------ CCJ set aside -------</option>
     <option value="20" {% if data['defendant'] == 20 %}selected{% endif %}>20. CCJ set aside request submitted</option>
