@@ -21,9 +21,12 @@ Money Claims Prototype
 
 
       <h1 class="heading-large">
-          {% if experts != 'on' %}
-        Complete every task on this page before 4pm on {{ now | date('add', 12, 'days') | date }}  {% endif %}
-        {% if experts == 'on' %}Complete every task on this page before its deadline{% endif %}
+        Complete every task on this page before 
+        {% if experts != 'on' %}
+          4pm on {{ now | date('add', 12, 'days') | date }}
+        {% else %}
+          its deadline
+        {% endif %}
       </h1>
 
       <p>If you don't, {% if data['party'] == "defendant" %}the court may cancel your defence and give you a County Court Judgment (CCJ){% else %}the court may cancel your claim{% endif %}.</p>
@@ -72,6 +75,9 @@ Money Claims Prototype
 
       {% if data['generic'] == 'true' %}
       <h2 class="heading-small">Upload any other information the court ordered you to send</h2>
+      {% if experts == 'on' %}
+      <p>You need to upload these documents before 4pm on {{ now | date('add', 12, 'days') | date }}.</p>
+      {% endif %}
 <!--       <p>[Instructions from legal advisor]</p> -->
       <p>Please provide a copy of the roofing felt manufacturer's fitting instructions which you stated {% if data['party'] == "defendant" %}you followed accurately{% else %}was not followed{% endif %}.</p>
       <div class="form-group">
@@ -80,6 +86,9 @@ Money Claims Prototype
 
       <hr />
       <h2 class="heading-small">Confirm you've done anything else the court ordered</h2>
+      {% if experts == 'on' %}
+      <p>You need to confirm this before 4pm on {{ now | date('add', 12, 'days') | date }}.</p>
+      {% endif %}
 <!--       <p>[Instructions from legal advisor]</p> -->
       <p>Please confirm you have supplied a sample of the disputed roofing material to the {% if data['party'] == "defendant" %}claimant{% else %}defendant{% endif %}.</p>
       <div class="form-group">
