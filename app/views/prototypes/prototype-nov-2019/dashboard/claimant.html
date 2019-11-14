@@ -678,16 +678,21 @@
 
               <div class="status-block single">
                 <h2 class="heading-medium">The court has ordered you to send us more details</h2>
-                {% if data['claimant'] == 11.1%}<p>You need to send details before 4pm on {{ now | date( 'add', 12, 'days' ) | date }}.{% endif %}</p>
+                {% if data['claimant'] == 11.1 %}
+                <p>You need to send details before 4pm on {{ now | date( 'add', 12, 'days' ) | date }}.</p>
+                {% endif %}
 
-                {% if data['claimant'] == 11.1001%}
-
-                <p>The first deadline you must send details by is before 4pm on {{ now | date( 'add', 12, 'days' ) | date }}.
+                {% if data['claimant'] == 11.1001 %}
+                <p>The first deadline you must send details by is before 4pm on {{ now | date( 'add', 12, 'days' ) | date }}.</p>
                 {% endif %}
 
                 <p><a href="order-response?party=claimant" class="button">Send us the details</a></p>
 
-                <p><a href="/public/images/order2.pdf" download>Download the court's order</a> (PDF, 123KB).</p>
+                {% if data['claimant'] == 11.1001 %}
+                <p><a href="/public/images/order-new-complex.pdf" download>Download the court's order</a> (PDF, 123KB).</p>
+                {% else %}
+                <p><a href="/public/images/order-new.pdf" download>Download the court's order</a> (PDF, 123KB).</p>
+                {% endif %}
 
 
                 {% if data['claimant'] == 11.4 %}
@@ -720,7 +725,7 @@
 
                 <p><a href="order-response?party=defendant&generic=true" class="button" style="margin-bottom: 15px">Find out what you need to do</a></p>
 
-                <p><a href="/public/images/order2.pdf" download>Download the court's order</a> (PDF, 123KB).</p>
+                <p><a href="/public/images/order-new-complex.pdf" download>Download the court's order</a> (PDF, 123KB).</p>
                 <hr />
 
                 <h2 class="heading-medium">View the defendant's response to the order</h2>
@@ -734,7 +739,7 @@
                 <p>You need to respond and send details before 4pm on {{ now | date( 'add', 31, 'days' ) | date }} or the court will cancel your claim.</p>
 
                 <p><a href="order-response?party=claimant" class="button">Respond and send details</a></p>
-                <p><a href="/public/images/order2.pdf" download>Download the court's original order</a> (PDF, 123KB).</p>
+                <p><a href="/public/images/order-new.pdf" download>Download the court's original order</a> (PDF, 123KB).</p>
                 <p><a href="../defendant/correspondence/forms/sanction-order?party=claimant">Download the court's follow-up order</a> (PDF, 123KB).</p>
 
                 <hr/>
@@ -761,7 +766,7 @@
                 <p>The deadline was 4pm on {{ minus | date( 'subtract', 1, 'days' ) | date }}.</p>
                 <p>They now need to respond before 4pm on {{ now | date( 'add', 11, 'days' ) | date }}.</p>
                 <p>If they don't respond by then, the court will cancel their defence and you can request a County Court Judgment (CCJ) against them.</p>
-                <p><a href="/public/images/order2.pdf" download>Download the court's original order</a> (PDF, 123KB).</p>
+                <p><a href="/public/images/order-new.pdf" download>Download the court's original order</a> (PDF, 123KB).</p>
                 <p><a href="../defendant/correspondence/forms/sanction-order?party=defendant">Download the court's follow-up order</a> (PDF, 123KB).</p>
                 </ul>
 
@@ -793,7 +798,7 @@
                 <p>They now need to respond before 4pm on {{ now | date( 'add', 31, 'days' ) | date }}.</p>
 
 
-                <p><a href="/public/images/order2.pdf" download>Download the court's original order</a> (PDF, 123KB).</p>
+                <p><a href="/public/images/order-new.pdf" download>Download the court's original order</a> (PDF, 123KB).</p>
                 <p><a href="../defendant/correspondence/forms/sanction-order?party=both">Download the court's follow-up order</a> (PDF, 123KB).</p>
 
               </div>
@@ -870,7 +875,7 @@
                 <p>You need to check what has changed in the order. You must comply with the new order before 4pm on {{ now | date( 'add', 15, 'days' ) | date }}. </p>
                 <p>If you've already sent any documents requested in both orders, you don't need to send them again.</p>
 
-                <p><a href="/public/images/order2.pdf" download>Download the new order</a> (PDF, 123KB).</p>
+                <p><a href="/public/images/order-new.pdf" download>Download the new order</a> (PDF, 123KB).</p>
                 <p><a href="/public/images/order-cancelled.pdf" download>Download the original order</a> (PDF, 123KB), which is now cancelled.</p>
 
                 {% elseif data['claimant'] == 11.13 %}
@@ -881,13 +886,9 @@
 
                 <p>You must comply with the order before 4pm on {{ now | date( 'add', 12, 'days' ) | date }}.</p>
 
-                <p><a href="/public/images/order2.pdf" download>Download the court's order</a> (PDF, 123KB) to find out the details you need to send.</p>
-
-                {% else %}
-
-                <p><a href="/public/images/order2.pdf" download>Download the court's order</a> (PDF, 123KB) to find out the details you need to send.</p>
-
                 {% endif %}
+
+                <p><a href="/public/images/order-new.pdf" download>Download the court's order</a> (PDF, 123KB) to find out the details you need to send.</p>
 
                 <h2 class="heading-small">Deadline for posting the details</h2>
                 <p>You must make sure the court and the defendant receive a letter with the details before 4pm on {{ now | date( 'add', 15, 'days' ) | date }}.</p>
