@@ -36,7 +36,7 @@
             or data['claimant'] == 10.83 or data['claimant'] == 10.831 or data['claimant'] == 10.832 or data['claimant'] == 10.84 or data['claimant'] == 10.85 or data['claimant'] == 10.9
               or data['claimant'] == 11.1001 or data['claimant'] == 11.1003 or data['claimant'] == 11.101 or data['claimant'] == 11.101 or data['claimant'] == 11.102 or data['claimant'] == 11.103 or data['claimant'] == 11.104 or data['claimant'] == 11.105 or data['claimant'] == 11.11 or data['claimant'] == 11.111 or data['claimant'] == 11.12 or data['claimant'] == 11.13 or data['claimant'] == 11.1011 or data['claimant'] == 11.2 or data['claimant'] == 11.21 or data['claimant'] == 11.3 or data['claimant'] == 11.31
             or data['claimant'] == 11.4 or data['claimant'] == 11.41 or data['claimant'] == 11.42 or data['claimant'] == 11.5 or data['claimant'] == 11.51 or data['claimant'] == 11.52 or data['claimant'] == 11.6 or data['claimant'] == 11.61 or data['claimant'] == 11.7
-            or data['claimant'] == 12 or data['claimant'] == 13.11 or data['claimant'] == 13.13 or data['claimant'] == 13.2 or data['claimant'] == 14.1 or data['claimant'] == 14.2 or data['claimant'] == 14.3 or data['claimant'] == 14.4 or data['claimant'] == 14.5 or data['claimant'] == 16  or data['claimant'] == 16.1 or data['claimant'] == 17  or data['claimant'] == 17.01  or data['claimant'] == 20 or data['claimant'] == 20.1 or data['claimant'] == 20.2
+            or data['claimant'] == 12 or data['claimant'] == 13.11 or data['claimant'] == 13.13 or data['claimant'] == 13.2 or data['claimant'] == 14.1 or data['claimant'] == 14.2 or data['claimant'] == 14.3 or data['claimant'] == 14.4 or data['claimant'] == 14.41 or data['claimant'] == 14.5 or data['claimant'] == 16  or data['claimant'] == 16.1 or data['claimant'] == 17  or data['claimant'] == 17.01  or data['claimant'] == 20 or data['claimant'] == 20.1 or data['claimant'] == 20.2
             or data['claimant'] == 21 or data['claimant'] == 21.3 or data['claimant'] == 21.4 or data['claimant'] == 21.1 or data['claimant'] == 23 or data['claimant'] == 24 or data['claimant'] == 26  or data['claimant'] == 27  or data['claimant'] == 28  or data['claimant'] == 29
             or data['claimant'] == 33  or data['claimant'] == 34  or data['claimant'] == 36  or data['claimant'] == 37
             or data['claimant'] == 16.14  or  data['claimant'] == 16.15 or   data['claimant'] == 3.12345   or   data['claimant'] == 3.12555   or   data['claimant'] == 3.12566
@@ -1080,9 +1080,15 @@
               <p><a href="order-response/view?party=defendant&view=them&done=done" class="button secondary-button">See the details the defendant sent to the court</a></p>
 
 
-              {% elseif data['claimant'] == 14.4 %}
+              {% elseif data['claimant'] == 14.4 or data['claimant'] == 14.41 %}
               <div>
+
+                {% if data['claimant'] == 14.4 %}
                 <h2 class="heading-medium">The court has set a hearing date</h2>
+                {% else %}
+                <h2 class="heading-medium">The court has moved the hearing date</h2>
+                {% endif %}
+
                 <p>You should set aside the entire day for the hearing. The length of other hearings may mean yours is delayed.</p>
 
                 <table>
@@ -1104,13 +1110,6 @@
                     </td>
                   </tr>
                 </table>
-
-
-                <h2 class="heading-small">If you can't make this date</h2>
-                <p>If there is an important reason you can't make the date - such as a hospital appointment or another court hearing -  you can <a href="applications-and-judgments/general-application/what">ask the court to change the date</a>.</p>
-                <p>There will be a fee of up to £255 to make this request and there is no guarantee they will change the date.</p>
-
-                <hr />
 
                 <h2 class="heading-medium">Preparing for the hearing</h2>
 
@@ -3202,6 +3201,7 @@
     <option value="14.2" {% if data['claimant'] == 14.2 %}selected{% endif %}>Pay hearing fee - sanctions order</option>
     <option value="14.3" {% if data['claimant'] == 14.3 %}selected{% endif %}>Hearing fee paid</option>
     <option value="14.4" {% if data['claimant'] == 14.4 %}selected{% endif %}>Hearing date set</option>
+    <option value="14.41" {% if data['claimant'] == 14.41 %}selected{% endif %}>Hearing date changed</option>
     <option value="14.5" {% if data['claimant'] == 14.5 %}selected{% endif %}>Hearing fee not paid - claim cancelled</option>
 
     <option>-------  Offers  ----------</option>

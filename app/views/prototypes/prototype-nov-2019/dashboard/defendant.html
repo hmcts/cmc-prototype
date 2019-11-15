@@ -1466,9 +1466,16 @@
 
 
 
-              {% elseif data['defendant'] == 14.4 %}
+              {% elseif data['defendant'] == 14.4 or data['defendant'] == 14.41 %}
               <div>
+
+                {% if data['defendant'] == 14.4 %}
                 <h2 class="heading-medium">The court has set a hearing date</h2>
+                {% else %}
+                <h2 class="heading-medium">The court has changed the hearing date</h2>
+                <p>{{ partyName( 'claimant' ) }} asked the court to move the date of the hearing.</p>
+                {% endif %}
+
                 <p>You should set aside the entire day for the hearing. The length of other hearings may mean yours is delayed.</p>
 
                 <table>
@@ -4428,6 +4435,7 @@
     <option value="14.2" {% if data['defendant'] == 14.2 %}selected{% endif %}>Pay hearing fee - sanctions order</option>
     <option value="14.3" {% if data['defendant'] == 14.3 %}selected{% endif %}>Hearing fee paid</option>
     <option value="14.4" {% if data['defendant'] == 14.4 %}selected{% endif %}>Hearing date set</option>
+    <option value="14.41" {% if data['defendant'] == 14.41 %}selected{% endif %}>Hearing date moved</option>
     <option value="14.5" {% if data['defendant'] == 14.5 %}selected{% endif %}>Hearing fee not paid - claim cancelled</option>
 
 
