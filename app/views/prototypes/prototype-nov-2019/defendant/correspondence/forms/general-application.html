@@ -360,6 +360,66 @@
   </table>
   {% endif %}
 
+
+  <table >
+    <thead>
+    <tr>
+      <th colspan="2">
+        <h2 class="heading-medium">
+          Declaration
+        </h2>
+      </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td class="no-border">
+      </td>
+      <td class="no-border">
+        I declare that the details I have given are true to the best of my knowledge.
+      </td>
+    </tr>
+    {% if  data['check'] =='2' %}
+    <tr>
+      <td class="no-border">
+      </td>
+      <td class="no-border">
+        <strong>Company:</strong> {{ partyName( 'claimant', 'last' ) }} Limited
+      </td>
+    </tr>
+    <tr>
+      <td class="no-border">
+      </td>
+      <td class="no-border">
+        <strong>Name:</strong> Teresa Jones
+      </td>
+    </tr>
+    <tr>
+      <td class="no-border">
+      </td>
+      <td class="no-border">
+        <strong>Job title:</strong> Owner/Director
+      </td>
+    </tr>
+    {% else %}
+    <tr>
+      <td class="no-border">
+      </td>
+      <td class="no-border">{{ partyName( 'claimant' ) }}
+      </td>
+    </tr>
+    {% endif %}
+    <tr>
+      <td>
+      </td>
+      <td>
+        <span class="dates2"></span>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+
   <div style="padding-bottom:80px" > </div>
 
   <!-- Spacing  -->
@@ -421,6 +481,18 @@
     <option value="generalappnoevidence=true&"
             {% if data['generalappnoevidence'] == 'true' %}selected{% endif %}
     >General application - Without evidence</option>
+
+    <option  value="check=1&"
+             {% if data['check'] != 2 and  data['check'] != 3 %}selected{% endif %}
+    >Declaration - Individual </option>
+
+    <option  value="check=2&"
+             {% if data['check'] == 2 %}selected{% endif %}
+    >Declaration - Business</option>
+
+    <option  value="check=3&"
+             {% if data['check'] == 3 %}selected{% endif %}
+    >Declaration - Sole trader</option>
 
   </select>
 </form>
