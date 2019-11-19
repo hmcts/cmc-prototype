@@ -646,11 +646,13 @@
 
               <div class="status-block single">
                 <h2 class="heading-medium">The court has ordered you to send us more details</h2>
-                <p>You need to send {% if data['claimant'] == 11.1001%}general{% endif %} details before 4pm on {{ now | date( 'add', 12, 'days' ) | date }}.</p>
+                {% if data['claimant'] == 11.1 %}
+                <p>You need to send details before 4pm on {{ now | date( 'add', 12, 'days' ) | date }}.</p>
+                {% endif %}
 
 
                 {% if data['claimant'] == 11.1001%}
-                <p>You also need to send expert report details before 4pm on {{ now | date( 'add', 18, 'days' ) | date }}.</p>
+                <p>The first deadline you must send details by is before 4pm on {{ now | date( 'add', 12, 'days' ) | date }}.</p>
 
                 {% endif %}
 
@@ -895,7 +897,7 @@
               <div class="status-block single">
                 <h2 class="heading-medium">You told us you've finished responding</h2>
                 <p>You said you've done everything the court ordered you to do.</p>
-                <p>We'll review the case and contact you to tell you what to do next.</p>
+                <p>We'll contact you when {{ partyName( 'defendant' ) }} has finished responding.</p>
                 <hr />
                 <h2 class="heading-medium">View the responses to the order</h2>
                 <p><a href="order-response/view?party=claimant&view=you" class="button secondary-button">See the details you sent to the court</a></p>
@@ -1191,7 +1193,7 @@
                 <p>You signed an agreement which means the claim is now ended and sets out the terms of how {{ partyName( 'defendant' ) }} must repay you.</p>
                  <p><a href="../claimant/correspondence/mediation-agreement">Download the agreement</a> (PDF, 123KB)</p>
               </div>
-              
+
               <!--
               <div class="status-block single">
                 <h2 class="heading-medium">Request a County Court Judgment</h2>
