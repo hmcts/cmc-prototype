@@ -48,8 +48,12 @@ Money Claims Prototype
 
             <p>You can also email the completed form to moneyclaims@justice.gov.uk</p>
 
-            <h3 class="heading-medium">Send a copy to the {% if data['party'] == 'defendant' %}defendant{%else%}claimant{% endif %}</h3>
-                    <p><a href="../party-details/defendant">Get {% if data['party'] == 'defendant' %}Mary Richards{%else%}Jan Clark{% endif %}'s contact details</a></p>
+            <h3 class="heading-medium">Send a copy to the {% if data['party'] == 'defendant' %}claimant{%else%}defendant{% endif %}</h3>
+                    {% if data['party'] == 'defendant' %}
+                    <p><a href="../party-details/claimant">Get Jan Clark's contact details</a></p>
+                    {%else%}
+                    <p><a href="../party-details/defendant">Get Mary Richards's contact details</a></p>
+                    {% endif %}
 
     <h2 class="heading-medium" style="margin-bottom: 10px;">Help and support</h2>
 
