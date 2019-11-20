@@ -24,8 +24,9 @@ Money Claims Prototype
       <form
         name="aspnetForm"
         method="post"
-        onsubmit="multiNavigation('radio-app-type', ['set-aside', 'vary', 'general'],
+        onsubmit="multiNavigation('radio-app-type', ['set-aside', 'settled-set-aside', 'vary', 'general'],
                                                              ['../set-aside-default-ccj/defence-options?defaultccj=true&',
+                                                             '../set-aside-default-ccj/task-list?alreadysettled=true&fulldefence=false&loweramount=false&howmuchyouowe=complete&cancelccj=false&cancelccjanswer=null&',
                                                               '../vary/task-list?lower-amount=false&alreadysettled=false&fulldefence=false&howmuchyouowe=complete&cancelccj=false&cancelccjanswer=null&response-owe=owe-all-default-ccj&owe-amount=&amount-owed=500&do_you_owe_money=complete&',
                                                               'what?general-application=true&']);return false;"
         id="aspnetForm"
@@ -34,15 +35,28 @@ Money Claims Prototype
         <div class="form-group">
           <fieldset>
 
-            <div class="multiple-choice" data-target="pay">
-              <input id="set-aside" type="radio" name="radio-app-type" value="set-aside" aria-controls="paid-off" aria-expanded="false">
-              <label for="set-aside">Apply to cancel a judgment</label>
-            </div>
 
-            <div class="multiple-choice" data-target="vary">
-              <input id="vary" type="radio" name="radio-app-type" value="vary" aria-controls="paid-off" aria-expanded="false">
-              <label for="vary">Apply to change how you pay the claimant</label>
-            </div>
+            {% if data['defendant'] == 17.3 %}
+              <!--  WHEN the claimant says the claim is settled  -->
+              <div class="multiple-choice" data-target="pay">
+                <input id="settled-set-aside" type="radio" name="radio-app-type" value="settled-set-aside" aria-controls="paid-off" aria-expanded="false">
+                <label for="settled-set-aside">Apply to cancel a judgment</label>
+              </div>
+
+            {% else %}
+                <!-- whent he claimant has nt said the claim is settled  -->
+                <div class="multiple-choice" data-target="pay">
+                  <input id="set-aside" type="radio" name="radio-app-type" value="set-aside" aria-controls="paid-off" aria-expanded="false">
+                  <label for="set-aside">Apply to cancel a judgment</label>
+                </div>
+
+                <div class="multiple-choice" data-target="vary">
+                  <input id="vary" type="radio" name="radio-app-type" value="vary" aria-controls="paid-off" aria-expanded="false">
+                  <label for="vary">Apply to change how you pay the claimant</label>
+                </div>
+            {% endif %}
+
+
             <div class="multiple-choice" data-target="vary">
               <input id="general" type="radio" name="radio-app-type" value="general" aria-controls="paid-off" aria-expanded="false">
               <label for="general">Something else</label>
