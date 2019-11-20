@@ -74,7 +74,11 @@ const router = express();
     // DEFENDANT - Going from any defendant claim details page to the options of what applications to choose, including general
     router.get('/select-type-of-application', function (req, res)
     {
+      var temp = req.session.data['defendant'];
+
       req.session.data = {};
+
+      req.session.data['defendant'] = temp;
 
       res.redirect('/' + strPath +  'dashboard/applications-and-judgments/general-application/type-of-application' );
     });
