@@ -16,16 +16,36 @@ Money Claims Prototype
 
       <!--  <a href="#" onclick="history.go(-1)" class="link-back">Back</a>  -->
 
-      <h1 class="heading-large">
-        Contact {{ partyName( 'claimant' ) }}
-      </h1>
+      <!-- WHEN defendant decides not to set aside and claim is already marked as settled  -->
+      {% if data['defendant'] == 17.3 %}
+          <h1 class="heading-large">
+            Contact {{ partyName( 'claimant' ) }}
+          </h1>
 
-      <p>Ask them to tell us the claim is settled.</p>
+          <p>If you don't want to apply to cancel the judgment you can pay £15 to get a certificate of satisfaction.</p>
 
-      <p>We'll contact you when they confirm you've settled. The judgment will remain but will be marked as satisfied.</p>
+          <p>The judgment will be marked as satisfied on the public register, but some credit agencies may not update their records immediately.
+            You can use the certificate if you need to prove the debt is settled.</p>
 
-      <!-- this is the bottom line because I want to make sure users read the sentence above -->
-      <p><a href="../../party-details/claimant">Get {{ partyName( 'claimant' ) }}'s contact details</a></p>
+          <p><a class="button secondary-button"
+                href="../../paid-in-full/certificate?certificate-type=satisfaction">Apply for a certificate</a></p>
+
+
+
+      <!-- WHEN defendant decides not to set aside and claim is NOT marked as settled  -->
+      {% else %}
+          <h1 class="heading-large">
+            Contact {{ partyName( 'claimant' ) }}
+          </h1>
+
+          <p>Ask them to tell us the claim is settled.</p>
+
+          <p>We'll contact you when they confirm you've settled. The judgment will remain but will be marked as satisfied.</p>
+
+          <!-- this is the bottom line because I want to make sure users read the sentence above -->
+          <p><a href="../../party-details/claimant">Get {{ partyName( 'claimant' ) }}'s contact details</a></p>
+      {% endif %}
+
 
       <!--  Removed by guy because the -->
       <!--
