@@ -193,7 +193,7 @@
 
         <!-- REQUEST CCJ TO BE CANCELLED -->
         {% if  data['canpaynow'] == 'true'  and  data['paidclaimant'] == "complete"
-            or data['alreadysettled'] == 'true'  and  data['claimantupdate'] == "complete"
+            or data['alreadysettled'] == 'true'
             or data['fulldefence'] == 'true'
             or data['has-settled'] == 'false'  and  data['lower-amount'] == 'true' and data['contactclaimantstarted'] != 'true' %}
             <table id="table-of-tasks">
@@ -243,22 +243,23 @@
 
                 <!-- SET ASIDE REASONS -->
                 {% if  data['cancelccj'] == 'true' %}
-                {% if  data['fulldefence'] == 'false' %}
-                <tr id="completing-your-claim">
-                  <td class="task">
-                    <a href="claimant-agree">
-                      <span class="task-name">Get the claimant to agree</span>
-                    </a>
-                  </td>
-                  <td class="numeric" id="task-status" scope="col" id="col-status">
-                    {% if data.claimantagree == 'complete' %}
-                    {% include "includes/task_status_finished.html" %}
-                    {% else %}
-                    {% include "includes/task_status_incomplete.html" %}
+
+                    {% if  data['alreadysettled'] == 'true' %}
+                        <tr id="completing-your-claim">
+                          <td class="task">
+                            <a href="claimant-agree">
+                              <span class="task-name">Get the claimant to agree</span>
+                            </a>
+                          </td>
+                          <td class="numeric" id="task-status" scope="col" id="col-status">
+                            {% if data.claimantagree == 'complete' %}
+                                {% include "includes/task_status_finished.html" %}
+                            {% else %}
+                                {% include "includes/task_status_incomplete.html" %}
+                            {% endif %}
+                          </td>
+                        </tr>
                     {% endif %}
-                  </td>
-                </tr>
-                {% endif %}
 
 
                 <tr id="completing-your-claim">
@@ -269,9 +270,9 @@
                   </td>
                   <td class="numeric" id="task-status" scope="col" id="col-status">
                     {% if data.explainreason == 'complete' %}
-                    {% include "includes/task_status_finished.html" %}
+                        {% include "includes/task_status_finished.html" %}
                     {% else %}
-                    {% include "includes/task_status_incomplete.html" %}
+                        {% include "includes/task_status_incomplete.html" %}
                     {% endif %}
                   </td>
                 </tr>
