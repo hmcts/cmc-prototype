@@ -209,10 +209,10 @@
 
 
     <tr>
-      <td class="no-border">
+      <td class="">
         Address
       </td>
-      <td class="no-border">
+      <td class="">
         101 Regents Road<br>
         Shiplake<br>
         Henley on Thames<br>
@@ -251,13 +251,12 @@
 
 
   <br>
-  <br>
 
 
   <!--  SET ASIDE ANSWERS  -->
   <table class="check-your-answers">
     <thead>
-    <tr class="no-border">
+    <tr class="">
       <th colspan="2" class="no-border">
         <h2 class="heading-medium" id="name">
           Cancel the judgment
@@ -279,8 +278,6 @@
       </td>
 
     </tr>
-
-
 
 
     <tr>
@@ -342,8 +339,6 @@
     </tr>
 
 
-
-
     {% if data['addresscorrect'] == 'true' %}
     <tr>
       <td>
@@ -389,8 +384,6 @@
     </tbody>
   </table>
 
-  <br>
-  <br>
 
 
 
@@ -518,7 +511,7 @@
 
 </tbody>
 </table>
-  <br>
+
   <br>
 
 
@@ -630,14 +623,162 @@
 
     </tbody>
   </table>
-       <div style="padding-bottom:80px" > </div>
+
   {% endif %}
+
+
+
+  <table>
+    <thead>
+    <tr>
+      <th colspan="2">
+        <h2 class="heading-medium">
+          6. Statement of truth
+        </h2>
+      </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td class="no-border">
+      </td>
+      <td class="no-border">
+        I believe that the facts stated in this claim form are true.
+      </td>
+    </tr>
+    {% if data['check']== 3 %}
+    <tr>
+      <td class="no-border">
+      </td>
+      <td class="no-border">
+        <strong>Company:</strong> {{ partyName( 'claimant', 'last' ) }} Limited
+      </td>
+    </tr>
+    <tr>
+      <td class="no-border">
+      </td>
+      <td class="no-border">
+        <strong>Name:</strong> {{ partyName( 'claimant' ) }}
+      </td>
+    </tr>
+    <tr>
+      <td class="no-border">
+      </td>
+      <td class="no-border">
+        <strong>Job title:</strong> Owner/Director
+      </td>
+    </tr>
+
+    {% elseif data['check']== 4 %}
+    <tr>
+      <td class="no-border">
+      </td>
+      <td class="no-border">
+        <strong>Name:</strong> {{ partyName( 'claimant' ) }}
+      </td>
+    </tr>
+    <tr>
+      <td class="no-border">
+      </td>
+      <td class="no-border">
+        <strong>Trading as:</strong> {{ partyName( 'claimant', 'last' ) }} Property
+      </td>
+    </tr>
+    {% else %}
+    <tr>
+      <td class="no-border">
+      </td>
+      <td class="no-border">
+        {{ partyName( 'claimant' ) }}
+      </td>
+    </tr>
+    {% endif %}
+    <tr>
+      <td class="no-border">
+      </td>
+      <td class="no-border">
+        <span class="dates2"></span>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  {% endif %}
+
+
+
+
+
+  <br>
+
+  <table >
+    <thead>
+    <tr>
+      <th colspan="2">
+        <h2 class="heading-medium">
+          Declaration
+        </h2>
+      </th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr>
+      <td class="no-border">
+      </td>
+      <td class="no-border">
+        I declare that the details I have given are true to the best of my knowledge.
+      </td>
+    </tr>
+    {% if  data['check'] =='2' %}
+    <tr>
+      <td class="no-border">
+      </td>
+      <td class="no-border">
+        <strong>Company:</strong> {{ partyName( 'claimant', 'last' ) }} Limited
+      </td>
+    </tr>
+    <tr>
+      <td class="no-border">
+      </td>
+      <td class="no-border">
+        <strong>Name:</strong> Teresa Jones
+      </td>
+    </tr>
+    <tr>
+      <td class="no-border">
+      </td>
+      <td class="no-border">
+        <strong>Job title:</strong> Owner/Director
+      </td>
+    </tr>
+    {% else %}
+    <tr>
+      <td class="no-border">
+      </td>
+      <td class="no-border">{{ partyName( 'claimant' ) }}
+      </td>
+    </tr>
+    {% endif %}
+    <tr>
+      <td>
+      </td>
+      <td>
+        <span class="dates2"></span>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+
+
+
 
   <!--  ALREADY SETTLED  - SO NO DEFENCE NEEDED  -->
   {% if  data['alreadysettled'] == 'true'    %}
-        <div style="padding-bottom:780px" > </div>
+        <div style="padding-bottom:580px" > </div>
 
   {% endif %}
+
 
 
 
@@ -710,6 +851,18 @@
 
       <option value="alreadysettled=true&fulldefence=false&loweramount=false&"
       >Already Settled</option>
+
+      <option  value="check=1&"
+               {% if data['check'] != 2 and  data['check'] != 3 %}selected{% endif %}
+      >Declaration - Individual </option>
+
+      <option  value="check=2&"
+               {% if data['check'] == 2 %}selected{% endif %}
+      >Declaration - Business</option>
+
+      <option  value="check=3&"
+               {% if data['check'] == 3 %}selected{% endif %}
+      >Declaration - Sole trader</option>
 
   </select>
 </form>
