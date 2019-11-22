@@ -387,54 +387,9 @@
 
 
 
-  <!--  EVIDENCE  -->
-  {% if  data['noevidence'] != 'true'  %}
-      <table class="check-your-answers">
-        <thead>
-        <tr>
-          <th colspan="2" class="no-border">
-            <h2 class="heading-medium" id="name">
-              Evidence
-            </h2>
-          </th>
-          <!-- <th>
-          </th>  -->
-        </tr>
-        </thead>
 
-        <tbody>
-        <tr>
-          <td>
-            File 1
-          </td>
-          <td>
-            Emails.pdf
-            <br />You can see the emails from my new landlord.
-          </td>
-          <!-- <td class="change-answer no-border">
-            <a href="upload">Change</a>
-          </td>  -->
-        </tr>
 
-        <tr>
-          <td>
-            File 2
-          </td>
-          <td>
-            Photo 1.jpg
-            <br/>The photos show the flat contract including the move date.
-          </td>
-
-          <!-- <td class="change-answer no-border"></td>  -->
-        </tr>
-
-        </tbody>
-
-      </table>
-  {% else %}
-      <div style="padding-bottom:80px" > </div>
-  {% endif %}
-
+  <!--  PAGE 2  -->
 
   <!--  PAGE BREAK -->
   <table class="footer">
@@ -459,7 +414,56 @@
 
 
   <br>
-  <br>
+
+  <!--  EVIDENCE  -->
+  {% if  data['noevidence'] != 'true'  %}
+      <table class="check-your-answers">
+    <thead>
+    <tr>
+      <th colspan="2" class="no-border">
+        <h2 class="heading-medium" id="name">
+          Evidence
+        </h2>
+      </th>
+      <!-- <th>
+      </th>  -->
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr>
+      <td>
+        File 1
+      </td>
+      <td>
+        Emails.pdf
+        <br />You can see the emails from my new landlord.
+      </td>
+      <!-- <td class="change-answer no-border">
+        <a href="upload">Change</a>
+      </td>  -->
+    </tr>
+
+    <tr>
+      <td>
+        File 2
+      </td>
+      <td>
+        Photo 1.jpg
+        <br/>The photos show the flat contract including the move date.
+      </td>
+
+      <!-- <td class="change-answer no-border"></td>  -->
+    </tr>
+
+    </tbody>
+
+  </table>
+  {% else %}
+      <div style="padding-bottom:10px" > </div>
+  {% endif %}
+
+
   <!--  HEARING REQUIREMENTS  -->
   <table class="check-your-answers">
   <thead>
@@ -511,10 +515,7 @@
 
 </tbody>
 </table>
-
   <br>
-
-
 
 
   <!--  DEFENCE STUFF -->
@@ -623,93 +624,91 @@
 
     </tbody>
   </table>
+  {% endif %}
 
+
+  <!--  STATEMENT OF TRUTH   -->
+  {% if  data['noevidence'] != 'true'  %}
+    <table>
+      <thead>
+      <tr>
+        <th colspan="2">
+          <h2 class="heading-medium">
+            Statement of truth
+          </h2>
+        </th>
+      </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <td class="no-border">
+          </td>
+          <td class="no-border">
+            I believe that the facts stated in this claim form are true.
+          </td>
+        </tr>
+        {% if data['check']== 2 %}
+            <tr>
+              <td class="no-border">
+              </td>
+              <td class="no-border">
+                <strong>Company:</strong> {{ partyName( 'claimant', 'last' ) }} Limited
+              </td>
+            </tr>
+            <tr>
+              <td class="no-border">
+              </td>
+              <td class="no-border">
+                <strong>Name:</strong> {{ partyName( 'claimant' ) }}
+              </td>
+            </tr>
+            <tr>
+              <td class="no-border">
+              </td>
+              <td class="no-border">
+                <strong>Job title:</strong> Owner/Director
+              </td>
+            </tr>
+
+          {% elseif data['check']== 3 %}
+              <tr>
+                <td class="no-border">
+                </td>
+                <td class="no-border">
+                  <strong>Name:</strong> {{ partyName( 'claimant' ) }}
+                </td>
+              </tr>
+              <tr>
+                <td class="no-border">
+                </td>
+                <td class="no-border">
+                  <strong>Trading as:</strong> {{ partyName( 'claimant', 'last' ) }} Property
+                </td>
+              </tr>
+          {% else %}
+              <tr>
+                <td class="no-border">
+                </td>
+                <td class="no-border">
+                  {{ partyName( 'claimant' ) }}
+                </td>
+              </tr>
+          {% endif %}
+          <tr>
+            <td class="">
+            </td>
+            <td class="">
+              <span class="dates2"></span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
   {% endif %}
 
 
 
-  <table>
-    <thead>
-    <tr>
-      <th colspan="2">
-        <h2 class="heading-medium">
-          6. Statement of truth
-        </h2>
-      </th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-      <td class="no-border">
-      </td>
-      <td class="no-border">
-        I believe that the facts stated in this claim form are true.
-      </td>
-    </tr>
-    {% if data['check']== 3 %}
-    <tr>
-      <td class="no-border">
-      </td>
-      <td class="no-border">
-        <strong>Company:</strong> {{ partyName( 'claimant', 'last' ) }} Limited
-      </td>
-    </tr>
-    <tr>
-      <td class="no-border">
-      </td>
-      <td class="no-border">
-        <strong>Name:</strong> {{ partyName( 'claimant' ) }}
-      </td>
-    </tr>
-    <tr>
-      <td class="no-border">
-      </td>
-      <td class="no-border">
-        <strong>Job title:</strong> Owner/Director
-      </td>
-    </tr>
-
-    {% elseif data['check']== 4 %}
-    <tr>
-      <td class="no-border">
-      </td>
-      <td class="no-border">
-        <strong>Name:</strong> {{ partyName( 'claimant' ) }}
-      </td>
-    </tr>
-    <tr>
-      <td class="no-border">
-      </td>
-      <td class="no-border">
-        <strong>Trading as:</strong> {{ partyName( 'claimant', 'last' ) }} Property
-      </td>
-    </tr>
-    {% else %}
-    <tr>
-      <td class="no-border">
-      </td>
-      <td class="no-border">
-        {{ partyName( 'claimant' ) }}
-      </td>
-    </tr>
-    {% endif %}
-    <tr>
-      <td class="no-border">
-      </td>
-      <td class="no-border">
-        <span class="dates2"></span>
-      </td>
-    </tr>
-    </tbody>
-  </table>
-  {% endif %}
-
-
-
-
-
-  <br>
-
+  <!--  DECLARATIONS  -->
   <table >
     <thead>
     <tr>
@@ -772,15 +771,14 @@
 
 
 
-
   <!--  ALREADY SETTLED  - SO NO DEFENCE NEEDED  -->
   {% if  data['alreadysettled'] == 'true'    %}
         <div style="padding-bottom:580px" > </div>
-
   {% endif %}
 
-
-
+  {% if  data['noevidence'] == 'true'  %}
+        <div style="padding-bottom:450px" > </div>
+  {% endif %}
 
 
 
@@ -854,15 +852,15 @@
 
       <option  value="check=1&"
                {% if data['check'] != 2 and  data['check'] != 3 %}selected{% endif %}
-      >Declaration - Individual </option>
+      >Individual </option>
 
       <option  value="check=2&"
                {% if data['check'] == 2 %}selected{% endif %}
-      >Declaration - Business</option>
+      >Business</option>
 
       <option  value="check=3&"
                {% if data['check'] == 3 %}selected{% endif %}
-      >Declaration - Sole trader</option>
+      >Sole trader</option>
 
   </select>
 </form>
