@@ -956,12 +956,7 @@
               {% elseif data['claimant'] == 13.11 %}
               <h2 class="heading-medium">Mediation was unsuccessful</h2>
               <p>You weren’t able to resolve your claim against {{ partyName( 'defendant' ) }} using mediation.</p>
-              <p>You'll have to go to a hearing. We'll contact you with the details.</p>
-
-              {% elseif data['claimant'] == 13.12 %}
-              <h2 class="heading-medium">Mediation was unsuccessful</h2>
-              <p>You weren’t able to resolve your claim against {{ partyName( 'defendant' ) }} using mediation.</p>
-              <p>You'll have to go to a hearing. We'll contact you with the details.</p>
+              <p>The court will review the case. We'll contact you to tell you what to do next.</p>
 
               {% elseif data['claimant'] == 13.13 %}
               <h2 class="heading-medium">Mediation was unsuccessful</h2>
@@ -2419,6 +2414,9 @@
           <li><strong class="bold">Defendant name:</strong><br> <a href="party-details/defendant">Mary Richards</a></li>
           <li><strong class="bold">Claim amount:</strong><br>£1500.00 </li>
           <li><strong class="bold">Claim details:</strong><br><a href="../claimant/correspondence/claim-form-claimant?check=1">Download claim</a> </li>
+          {% if data['claimant'] > 3.4 %}
+          <li><strong class="bold">Defendant response:</strong><br><a href="../defendant/correspondence/forms/claim-form-defendant?check=4">Download response</a> </li>
+          {% endif %}
         </ul>
       </div>
 
@@ -2482,8 +2480,7 @@
     <option value="10.85" {% if data['claimant'] == 10.85 %}selected{% endif %}>Part admit - rejected - mediation</option>
     <option value="10.9" {% if data['claimant'] == 10.9 %}selected{% endif %}>Defence rejected - with mediation</option>
     <option value="10.91" {% if data['claimant'] == 10.91 %}selected{% endif %}>Defence rejected - no mediation</option>
-    <option value="13.11" {% if data['claimant'] == 13.11 %}selected{% endif %}>Defence rejected - mediation failed - DQs done, going to hearing</option>
-    <option value="13.12" {% if data['claimant'] == 13.12 %}selected{% endif %}>Defence rejected - mediation failed - DQs done, going to legal advisor</option>
+    <option value="13.11" {% if data['claimant'] == 13.11 %}selected{% endif %}>Defence rejected - mediation failed - DQs done</option>
     <option value="13.13" {% if data['claimant'] == 13.13 %}selected{% endif %}>Defence rejected - mediation failed - do paper DQs</option>
     <option value="13.2" {% if data['claimant'] == 13.2 %}selected{% endif %}>Defence rejected - offline DQs</option>
 
