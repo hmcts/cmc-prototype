@@ -261,16 +261,55 @@ Check your answers
   <!-- needs company option addition  !!   -->
 
 
-
-
-  <br>
+  {%  if  data['generalappnoevidence'] == 'false' %}
+      <div class="column-two-thirds">
+        <h2 class="heading-medium">Statement of truth</h2>
+        <p>  The information on this page forms your response. You can see it on the
+          response form after you submit.</p>
+        <p>When you’re satisfied that your answers are accurate, you should tick to “sign” this statement of
+          truth on the form.</p>
+        {% if data['defendant'] == 'org'
+            or data['defendant'] == 'Sole-trader'
+            or data['check']==10 %}
+        <p>You must hold a senior position in your organisation to sign the statement of truth.</p>
+        <details class='form-group'>
+          <summary>
+            <span class="summary">Types of senior position</span>
+          </summary>
+          <div class="panel">
+            <p>A senior position could be a:</p>
+            <ul class="list-bullet list">
+              <li>director</li>
+              <li>treasurer</li>
+              <li>chief executive</li>
+              <li>manager or other officer of the company or corporation</li>
+            </ul>
+            <p>If your corporation isn't registered, a senior position could be:</p>
+            <ul class="list-bullet list">
+              <li>the chairperson or president</li>
+              <li>another officer of the corporation</li>
+            </ul>
+          </div>
+        </details>
+        <div class="form-group">
+          <label class="form-label" for="claimant_title">Full name</label>
+          <input type="text" class="form-control form-control-1-2" id="claimant_title" name="claimant_title" value="">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="defendant_firstname">Job title</label>
+          <input class="form-control form-control-1-2" id="defendant_name" name="defendant_name" type="text"
+                 value="{{data['defendant_name']}}">
+        </div>
+      </div>
+        {% endif %}
+    {% endif %}
 
 
   <h2 class="heading-medium">Declaration</h2>
   <div class="form-group">
     <div class="multiple-choice text">
       <input class="" id="HasAcceptedTermsAndConditions" type="checkbox" value="true">
-      <label for="HasAcceptedTermsAndConditions"> I declare that the details I have given are true to the best of my knowledge.</label>
+      <label for="HasAcceptedTermsAndConditions">I declare that the details I have given are true to the best of my knowledge.</label>
     </div>
   </div>
 
