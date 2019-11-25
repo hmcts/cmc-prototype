@@ -108,17 +108,19 @@ Check your answers
     {% endif %}
 
 
-    <tr>
-      <td>
-        Other information
-      </td>
-      <td  style="white-space: pre-line">{{ data['any-other-information'] }}</td>
-      <td class="change-answer">
-        <a href="#">
-          Change <span class="visuallyhidden">Name</span>
-        </a>
-      </td>
-    </tr>
+    {% if  data['otherinfo'] != 'false' %}
+        <tr>
+          <td>
+            Other information
+          </td>
+          <td  style="white-space: pre-line">{{ data['any-other-information'] }} Some text</td>
+          <td class="change-answer">
+            <a href="#">
+              Change <span class="visuallyhidden">Name</span>
+            </a>
+          </td>
+        </tr>
+    {% endif %}
 
 
     </tbody>
@@ -268,54 +270,62 @@ Check your answers
           response form after you submit.</p>
         <p>When you’re satisfied that your answers are accurate, you should tick to “sign” this statement of
           truth on the form.</p>
-        {% if data['defendant'] == 'org'
-            or data['defendant'] == 'Sole-trader'
-            or data['check']==10 %}
-        <p>You must hold a senior position in your organisation to sign the statement of truth.</p>
-        <details class='form-group'>
-          <summary>
-            <span class="summary">Types of senior position</span>
-          </summary>
-          <div class="panel">
-            <p>A senior position could be a:</p>
-            <ul class="list-bullet list">
-              <li>director</li>
-              <li>treasurer</li>
-              <li>chief executive</li>
-              <li>manager or other officer of the company or corporation</li>
-            </ul>
-            <p>If your corporation isn't registered, a senior position could be:</p>
-            <ul class="list-bullet list">
-              <li>the chairperson or president</li>
-              <li>another officer of the corporation</li>
-            </ul>
-          </div>
-        </details>
-        <div class="form-group">
-          <label class="form-label" for="claimant_title">Full name</label>
-          <input type="text" class="form-control form-control-1-2" id="claimant_title" name="claimant_title" value="">
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="defendant_firstname">Job title</label>
-          <input class="form-control form-control-1-2" id="defendant_name" name="defendant_name" type="text"
-                 value="{{data['defendant_name']}}">
-        </div>
-      </div>
+
+        {% if data['check'] == 'org'
+            or data['check'] == 'soletrader'
+            or data['check'] == 10 %}
+              <p>You must hold a senior position in your organisation to sign the statement of truth.</p>
+              <details class='form-group'>
+                <summary>
+                  <span class="summary">Types of senior position</span>
+                </summary>
+                <div class="panel">
+                  <p>A senior position could be a:</p>
+                  <ul class="list-bullet list">
+                    <li>director</li>
+                    <li>treasurer</li>
+                    <li>chief executive</li>
+                    <li>manager or other officer of the company or corporation</li>
+                  </ul>
+                  <p>If your corporation isn't registered, a senior position could be:</p>
+                  <ul class="list-bullet list">
+                    <li>the chairperson or president</li>
+                    <li>another officer of the corporation</li>
+                  </ul>
+                </div>
+              </details>
+              <div class="form-group">
+                <label class="form-label" for="claimant_title">Full name</label>
+                <input type="text" class="form-control form-control-1-2" id="claimant_title" name="claimant_title" value="">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="defendant_firstname">Job title</label>
+                <input class="form-control form-control-1-2" id="defendant_name" name="defendant_name" type="text"
+                       value="{{data['defendant_name']}}">
+              </div>
+            </div>
         {% endif %}
+
+        <div class="form-group">
+          <div class="multiple-choice text">
+            <input id="HasAcceptedTermsAndConditions" type="checkbox" value="true">
+            <label for="HasAcceptedTermsAndConditions">I believe that the facts stated in this application are true.</label>
+          </div>
+        </div>
     {% endif %}
 
 
   <h2 class="heading-medium">Declaration</h2>
   <div class="form-group">
     <div class="multiple-choice text">
-      <input class="" id="HasAcceptedTermsAndConditions" type="checkbox" value="true">
-      <label for="HasAcceptedTermsAndConditions">I declare that the details I have given are true to the best of my knowledge.</label>
+      <input class="" id="declarations" type="checkbox" value="true">
+      <label for="declarations">I declare that the details I have given are true to the best of my knowledge.</label>
     </div>
   </div>
 
 
   {% if  data['generalapphearing'] == 'true' %}
-      <p><a class="button" href="../../../defendant/task-list/check-and-send/enter-card">Sign, submit and continue to payment (£255)</a></p>
+      <p><a class="button" href="../../../defendant/task-list/check-and-send/enter-card">Submit and continue to payment (£255)</a></p>
 
       <tr id="check-and-send">
         <td>
@@ -323,7 +333,7 @@ Check your answers
         </td>
       </tr>
   {% else %}
-      <p><a class="button" href="../../../defendant/task-list/check-and-send/enter-card">Sign, submit and continue to payment (£100)</a></p>
+      <p><a class="button" href="../../../defendant/task-list/check-and-send/enter-card">Submit and continue to payment (£100)</a></p>
   {% endif %}
 
 
@@ -351,6 +361,29 @@ Check your answers
     <option value="generalappnoevidence=true&"
             {% if data['generalappnoevidence'] == 'true' %}selected{% endif %}
     >General application - Without evidence</option>
+
+
+    <option value="otherinfo=true&"
+            {% if data['generalappnoevidence'] == 'false' %}selected{% endif %}
+    >General application - With 'Other information' field</option>
+
+    <option value="otherinfo=false&"
+            {% if data['generalappnoevidence'] == 'true' %}selected{% endif %}
+    >General application - Without 'Other information' field</option>
+
+
+    <option  value="check=1&"
+             {% if data['check'] != 2 and  data['check'] != 3 %}selected{% endif %}
+    >Individual </option>
+
+    <option  value="check=org&"
+             {% if data['check'] == 2 %}selected{% endif %}
+    >Business</option>
+
+    <option  value="check=soletrader&"
+             {% if data['check'] == 3 %}selected{% endif %}
+    >Sole trader</option>
+
 
   </select>
 </form>
