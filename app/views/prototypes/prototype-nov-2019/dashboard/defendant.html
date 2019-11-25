@@ -155,11 +155,7 @@
 
               <!--  Defendant is returning when they have a draft general application  -->
               {% elseif data['defendant'] == 3.2255 %}
-              <p>You started an application to change something about this claim.</p>
-              <p>We'll delete it if you don't submit it by 4pm on {{ now |  date("add", 70, "day") | date }}.</p>
-                  <p><a class="button secondary-button"
-                        href="applications-and-judgments/general-application/what">Resume the application</a></p>
-                  <hr>
+
                   <h2 class="heading-medium">A County Court Judgment (CCJ) has been issued against you</h2>
                   <h3 class="heading-small">You need to pay {{ partyName( 'claimant' ) }} £1,500 immediately</h3>
                   <p>{{ partyName( 'claimant' ) }} made a money claim for £1,500 against you on {{ now |  date("subtract", 50, "day") | date( "D MMMM YYYY" ) }}.</p>
@@ -172,6 +168,12 @@
                     <li>send bailiffs to collect the money</li>
                     <li>take money out of your wages or any sale of land or property</li>
                   </ul>
+                  <hr>
+                  <p>You started an application to change something about this claim.</p>
+                  <p>We'll delete it if you don't submit it by 4pm on {{ now |  date("add", 70, "day") | date }}.</p>
+                  <p><a class="button secondary-button"
+                        href="../applications/select-type-of-application">Resume the application</a></p>
+
 
 
 
@@ -1897,11 +1899,6 @@
 
               <!--   Return to draft CCJ set aside request   -->
               {% elseif data['defendant'] == 20.55 %}
-                <p>You started an application to cancel the judgment.</p>
-                <p>We'll delete this application if you don't submit it by 4pm on {{ now |  date("add", 70, "day") | date }}.</p>
-                <p><a class="button secondary-button"
-                      href="applications-and-judgments/set-aside-default-ccj/task-list">Resume the application</a></p>
-                <hr>
                 <h2 class="heading-medium">A County Court Judgment (CCJ) has been issued against you</h2>
                 <h3 class="heading-small">You need to pay {{ partyName( 'claimant' ) }} £1,500 immediately</h3>
                 <p>{{ partyName( 'claimant' ) }} made a money claim for £1,500 against you on {{ now |  date("subtract", 50, "day") | date( "D MMMM YYYY" ) }}.</p>
@@ -1914,6 +1911,13 @@
                   <li>send bailiffs to collect the money</li>
                   <li>take money out of your wages or any sale of land or property</li>
                 </ul>
+                <hr>
+                <p>You started an application to cancel the judgment.</p>
+                <p>We'll delete this application if you don't submit it by 4pm on {{ now |  date("add", 70, "day") | date }}.</p>
+                <p><a class="button secondary-button"
+                      href="../applications/select-type-of-application">Resume the application</a></p>
+
+
 
 
                 <!--  CCJ has been issued - Defendant should have contacted the claimant - After CCJ Deadline -->
@@ -2052,12 +2056,36 @@
 
 
               {% elseif data['defendant'] == 27 %}
-                <!-- CCJ vary - New plan from REdetermination -->
-                <h2 class="heading-medium">The court will review the case</h2>
-                <p>{{ partyName( 'claimant' ) }} rejected your new repayment plan.</p>
-                <p>They also rejected a new repayment plan determined by the court, based on your financial details.</p>
-                <p>The court will review the case. We'll contact you to tell you what to do next.</p>
-                <p>You must continue to follow the terms of the existing judgment until then.</p>
+                  <!-- CCJ vary - New plan from REdetermination -->
+                  <h2 class="heading-medium">The court will review the case</h2>
+                  <p>{{ partyName( 'claimant' ) }} rejected your new repayment plan.</p>
+                  <p>They also rejected a new repayment plan determined by the court, based on your financial details.</p>
+                  <p>The court will review the case. We'll contact you to tell you what to do next.</p>
+                  <p>You must continue to follow the terms of the existing judgment until then.</p>
+
+              {% elseif data['defendant'] == 29 %}
+                  <!-- Return to draft vary application -->
+
+                  <h2 class="heading-medium">A County Court Judgment (CCJ) has been issued against you</h2>
+                  <h3 class="heading-small">You need to pay {{ partyName( 'claimant' ) }} £1,500 immediately</h3>
+                  <p>{{ partyName( 'claimant' ) }} made a money claim for £1,500 against you on {{ now |  date("subtract", 50, "day") | date( "D MMMM YYYY" ) }}.</p>
+                  <p>Because you didn't respond, a CCJ was issued against you on {{ now |  date("subtract", 7, "day") | date( "D MMMM YYYY" ) }}.</p>
+                  <p>If {{ partyName( 'claimant' ) }} confirms you've settled the claim before 4pm on {{ now |  date("add", 23, "day") | date( "D MMMM YYYY" ) }}, the CCJ will be removed from the public register.</p>
+                  {% include "../includes/claimants-contact-details.html" %}
+                  <h3 class="heading-small">If you don't pay</h3>
+                  <p>{{ partyName( 'claimant' ) }} can ask the court to:</p>
+                  <ul class="list list-bullet">
+                    <li>send bailiffs to your home or business to collect the money</li>
+                    <li>order your employer to take money out of your wages</li>
+                    <li>freeze assets or money in your account</li>
+                    <li>order you to use any money from property or land you sell to pay the debt</li>
+                  </ul>
+                  <hr>
+                  <p>You started an application to change how you pay the claimant.</p>
+                  <p>We'll delete it if you don't submit it by 4pm on {{ now |  date("add", 70, "day") | date }}.</p>
+                  <p><a class="button secondary-button"
+                        href="../applications/select-type-of-application">Resume the application</a></p>
+
 
 
 
@@ -2100,7 +2128,8 @@
                              data['defendant'] == 19.1 or
                              data['defendant'] == 4.01  or  data['defendant'] == 4.02  or  data['defendant'] == 4.1  or  data['defendant'] == 4.2  or  data['defendant'] == 5.0111  or
                              data['defendant'] == 5.012  or  data['defendant'] == 5.013  or  data['defendant'] == 5.014  or  data['defendant'] == 3.9031  or  data['defendant'] == 5.3001  or
-                             data['defendant'] == 5.301  or  data['defendant'] == 5.302  or  data['defendant'] == 5.52   %}
+                             data['defendant'] == 5.301  or  data['defendant'] == 5.302  or  data['defendant'] == 5.52  or
+                             data['defendant'] == 29  or  data['defendant'] == 20.55   or   data['defendant'] == 3.2255 %}
 
                             <p>You can pay a fee and <a href="../applications/select-type-of-application">ask the court</a> to change something in relation to this claim.</p>
                             <p>This includes applying to cancel a judgment or change how you pay a claimant.</p>
@@ -4503,6 +4532,7 @@
     <option value="25" {% if data['defendant'] == 25 %}selected{% endif %}>25. CCJ vary - New plan proposed by claimant</option>
     <option value="26" {% if data['defendant'] == 26 %}selected{% endif %}>26. CCJ vary - New plan from determination</option>
     <option value="27" {% if data['defendant'] == 27 %}selected{% endif %}>27. CCJ vary - Waiting for Redetermination</option>
+    <option value="29" {% if data['defendant'] == 29 %}selected{% endif %}>Return to draft vary application</option>
 
 
     <option>------  General application  ----------</option>
