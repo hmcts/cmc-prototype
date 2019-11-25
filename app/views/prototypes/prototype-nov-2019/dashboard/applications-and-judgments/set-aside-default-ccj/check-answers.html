@@ -588,8 +588,8 @@ Check your answers
           response form after you submit.</p>
         <p>When you’re satisfied that your answers are accurate, you should tick to “sign” this statement of
           truth on the form.</p>
-        {% if data['defendant'] == 'org'
-            or data['defendant'] == 'Sole-trader'
+        {% if data['check'] == 'org'
+            or data['check'] == 'soletrader'
             or data['check']==10 %}
               <p>You must hold a senior position in your organisation to sign the statement of truth.</p>
               <details class='form-group'>
@@ -622,6 +622,16 @@ Check your answers
                </div>
       </div>
         {% endif %}
+
+      <!-- Checkbox for statement of truth -->
+      <div class="form-group">
+        <div class="multiple-choice text">
+          <input id="HasAcceptedTermsAndConditions" type="checkbox" value="true">
+          <label for="HasAcceptedTermsAndConditions"> I believe that the facts stated in this response are true.</label>
+        </div>
+  </div>
+
+
     {% endif %}
 
 
@@ -688,6 +698,18 @@ Check your answers
 
     <option value="alreadysettled=true&fulldefence=false&loweramount=false&"
     >Already Settled</option>
+
+    <option  value="check=1&"
+             {% if data['check'] != 'org' and  data['check'] != 'soletrader' %}selected{% endif %}
+    >Individual </option>
+
+    <option  value="check=org"
+             {% if data['check'] == 'org' %}selected{% endif %}
+    >Business</option>
+
+    <option  value="check=soletrader&"
+             {% if data['check'] == 'soletrader' %}selected{% endif %}
+    >Sole trader</option>
 
 
   </select>
