@@ -87,7 +87,7 @@ module.exports = function(app)
 
 
   app.post( '/prototype-admin/set-names', (req, res) => {
-    
+
     if ( typeof req.session.names === 'undefined' ) {
       req.session.names = {};
       req.session.names.claimant = {};
@@ -107,7 +107,7 @@ module.exports = function(app)
       req.session.names.defendant.last = req.session.data['defendant-last-name'];
     }
 
-    res.render( 'prototype-admin/set-names' );  
+    res.render( 'prototype-admin/set-names' );
   });
 
 
@@ -398,7 +398,7 @@ module.exports = function(app)
   // FULL ADMIT - CLAIMANT RESPONDS TO PAYMENT PLAN - CLAIMANT MAKES PLAN
   app.post( '/' + strPath + 'dashboard/claimant-response/admit-the-claim/task-list/counter-offer/repayment-plan', (req, res) =>
   {
-    req.session.data['validaionhigherthanjudgment'] = 'false';
+    //req.session.data['validaionhigherthanjudgment'] = 'false';
 
     if(req.session.data['defendant'] == 'org' )
     {
@@ -408,12 +408,14 @@ module.exports = function(app)
     {
       res.redirect('/' + strPath + 'dashboard/claimant-response/admit-the-claim/task-list/counter-offer/approved');
     }
+    /*
     else if (req.session.data['instalment-first-payment'] == 300 )
     {
       req.session.data['validaionhigherthanjudgment'] = 'true';
 
       res.render( strPath + 'dashboard/claimant-response/admit-the-claim/task-list/counter-offer/repayment-plan' );
     }
+    */
     else
     {
       res.redirect('/' + strPath + 'dashboard/claimant-response/admit-the-claim/task-list/counter-offer/court-offer');
