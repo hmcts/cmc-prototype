@@ -128,7 +128,7 @@
 
                       <!--  FULL ADMIT ONLY - GET THE USER TO PAY -->
 
-                      {% if data['alreadysettled'] == 'false'  and  data['fulldefence'] == 'false'  and  data['lower-amount'] == 'false' %}
+                      {% if data['alreadysettled'] == 'false'  and  data['fulldefence'] == 'false'  and  data['loweramount'] == 'false' %}
                           <tr id="read-rules">
                             <td class="task">
                               <a href="../../../applications/will-you-pay">
@@ -148,7 +148,7 @@
 
 
                       <!--  PART ADMIT ONLY - Will user pay what they sa they owe -->
-                      {% if data['alreadysettled'] == 'false'  and  data['fulldefence'] == 'false'  and  data['lower-amount'] == 'true' %}
+                      {% if data['alreadysettled'] == 'false'  and  data['fulldefence'] == 'false'  and  data['loweramount'] == 'true' %}
 
                           <!-- THE USER WILL TRY TO SETTLE WITH CLAIMANT -->
                             <tr id="read-rules">
@@ -195,7 +195,7 @@
         {% if  data['canpaynow'] == 'true'  and  data['paidclaimant'] == "complete"
             or data['alreadysettled'] == 'true'
             or data['fulldefence'] == 'true'
-            or data['has-settled'] == 'false'  and  data['lower-amount'] == 'true' and data['contactclaimantstarted'] != 'true' %}
+            or data['has-settled'] == 'false'  and  data['loweramount'] == 'true' and data['contactclaimantstarted'] != 'true' %}
             <table id="table-of-tasks">
               <thead>
               <tr>
@@ -219,7 +219,7 @@
                   <td class="task">
 
                     {% if  data['fulldefence'] == 'true'
-                    or data['has-settled'] == 'false'  and  data['lower-amount'] == 'true'  %}
+                      or data['alreadysettled'] == 'false'  and  data['loweramount'] == 'true'  %}
                         <a href="cancel-ccj-info-interstitial">
                           <span class="task-name">Decide whether to apply</span>
                         </a>
@@ -349,7 +349,7 @@
 
 
         <!--  VARY JUDGMENT -->
-        {% if data['fulldefence'] == 'false'  and  data['lower-amount'] == 'false' and  data['canpaynow'] == 'false'
+        {% if data['fulldefence'] == 'false'  and  data['loweramount'] == 'false' and  data['canpaynow'] == 'false'
             or  data['justvaryonly'] == 'true'
             or  data['cancelccjanswer'] == 'complete'  and   data['cancelccj'] == 'false'   %}
         <table id="table-of-tasks">
@@ -430,7 +430,7 @@
 
 
         {% if data['cancelccj'] == 'true'  and  data['fulldefence'] == 'true'
-            or  data['cancelccj'] == 'true'  and  data['lower-amount'] == 'true' %}
+            or  data['cancelccj'] == 'true'  and  data['loweramount'] == 'true' %}
             <!--   Section 4  -  RESPODN TO THE CLAIM  -->
           <table id="table-of-tasks">
             <thead>
@@ -583,20 +583,20 @@
 
 <form method="post"  action="#" class="form" style="float: left;">
   <select id="control-box2" name="control-box2" onchange="window.location.href='?'+this.value">
-    <option value="alreadysettled=true&fulldefence=false&lower-amount=false&"
-    {%  if data['alreadysettled'] == 'true'  and  data['fulldefence'] == 'false'  and  data['lower-amount'] == 'false'  %}selected{% endif %}
+    <option value="alreadysettled=true&fulldefence=false&loweramount=false&"
+    {%  if data['alreadysettled'] == 'true'  and  data['fulldefence'] == 'false'  and  data['loweramount'] == 'false'  %}selected{% endif %}
     >Already Settled</option>
 
-    <option value="lower-amount=false&alreadysettled=false&fulldefence=false&"
-    {% if data['alreadysettled'] == 'false'  and  data['fulldefence'] == 'false'  and  data['lower-amount'] == 'false' %}selected{% endif %}
+    <option value="loweramount=false&alreadysettled=false&fulldefence=false&"
+    {% if data['alreadysettled'] == 'false'  and  data['fulldefence'] == 'false'  and  data['loweramount'] == 'false' %}selected{% endif %}
     >Full Admit</option>
 
-    <option value="lower-amount=true&alreadysettled=false&fulldefence=false&"
-    {% if data['alreadysettled'] == 'false'  and  data['fulldefence'] == 'false'  and  data['lower-amount'] == 'true' %}selected{% endif %}
+    <option value="loweramount=true&alreadysettled=false&fulldefence=false&"
+    {% if data['alreadysettled'] == 'false'  and  data['fulldefence'] == 'false'  and  data['loweramount'] == 'true' %}selected{% endif %}
     >Part Admit</option>
 
-    <option value="fulldefence=true&lower-amount=false&alreadysettled=false&"
-    {% if data['alreadysettled'] == 'false'  and  data['fulldefence'] == 'true'  and  data['lower-amount'] == 'false' %}selected{% endif %}
+    <option value="fulldefence=true&loweramount=false&alreadysettled=false&"
+    {% if data['alreadysettled'] == 'false'  and  data['fulldefence'] == 'true'  and  data['loweramount'] == 'false' %}selected{% endif %}
     >Full Defence</option>
   </select>
 </form>
