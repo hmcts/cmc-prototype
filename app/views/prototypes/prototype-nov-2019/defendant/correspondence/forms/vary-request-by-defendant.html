@@ -253,8 +253,104 @@
   </table>
 
 
-  <br>
-  <br>
+
+
+
+  <!--  CURRENT PLAN  -->
+  <table class="check-your-answers">
+    <thead>
+    <tr>
+      <th colspan="2" class="no-border">
+        <h2 class="heading-medium" id="name">
+          Existing payment terms
+        </h2>
+      </th>
+      <th class="no-border">
+      </th>
+    </tr>
+    </thead>
+
+
+    <tbody>
+
+    <tr>
+      <td>
+        How to pay
+      </td>
+
+      {% if data['currentlyinfull'] == 'true' %}
+      <td style="white-space: pre-wrap;">The full amount</td>
+      {% elif data['currentlyinstalments'] == 'true' %}
+      <td style="white-space: pre-wrap;">Instalments</td>
+      {% else %}
+      <td style="white-space: pre-wrap;">By a set date</td>
+      {% endif %}
+      <td class="change-answer">
+      </td>
+    </tr>
+
+
+
+    {% if data['currentlyinfull'] == 'true' %}
+    <tr>
+      <td>
+        When to pay
+      </td>
+
+      <td style="white-space: pre-wrap;">Immediately</td>
+
+      <td class="change-answer">
+      </td>
+    </tr>
+
+    {% elif data['currentlyinstalments'] == 'true' %}
+    <tr>
+      <td>
+        Regular payments of
+      </td>
+
+      <td style="white-space: pre-wrap;">£100</td>
+
+      <td class="change-answer">
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        How often to make payments
+      </td>
+
+      <td style="white-space: pre-wrap;">Each week</td>
+
+      <td class="change-answer">
+      </td>
+    </tr>
+
+    {% else %}
+    <tr>
+      <td>
+        When to pay
+      </td>
+
+      <td style="white-space: pre-wrap;">{{ now |  date("add", 7, "day") | date( "D MMMM YYYY" ) }}</td>
+
+      <td class="change-answer">
+      </td>
+    </tr>
+    {% endif %}
+
+
+
+
+
+    </tbody>
+  </table>
+
+
+
+
+
+
 
   <!--  VARY -->
   <table class="check-your-answers">
@@ -343,8 +439,6 @@
   </table>
 
 
-  <br>
-  <br>
 
 
   <!---  FINANCIAL DETAILS -->
@@ -830,12 +924,6 @@
         </td>
         <td>£40 every 2 weeks</td>
       </tr>
-      <tr>
-        <td>
-          Briefly explain why you can't pay immediately
-        </td>
-        <td>I lost my job</td>
-      </tr>
 
 
       </tbody>
@@ -951,6 +1039,18 @@
     <option  value="check=1&"
              {% if data['check'] != 2 and  data['check'] != 3 %}selected{% endif %}
     >Individual </option>
+
+    <option value="currentlyinfull=true&"
+            {% if data['currentlyinfull'] == 'true' %}selected{% endif %}
+    >Vary from immediately</option>
+
+    <option value="currentlyinstalments=true&currentlyinfull=false&"
+            {% if data['currentlyinstalments'] == 'true' %}selected{% endif %}
+    >Vary from installments</option>
+
+    <option value="currentlyinfull=false&currentlyinstalments=false&"
+            {% if data['currentlyinstalments'] == 'false' %}selected{% endif %}
+    >Vary from a set date</option>
 
     <option  value="check=2&"
              {% if data['check'] == 2 %}selected{% endif %}
