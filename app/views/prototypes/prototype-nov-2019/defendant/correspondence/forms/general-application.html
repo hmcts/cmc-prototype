@@ -303,83 +303,90 @@
 
       <!--  IF EVIDENCE AND NO HEARING REQUIREMENTS  -->
       {% if  data['generalapphearing'] != 'true' %}
-          <table>
-        <thead>
-        <tr>
-          <th colspan="2">
-            <h2 class="heading-medium">
-              Statement of truth
-            </h2>
-          </th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-          <td class="no-border">
-          </td>
-          <td class="no-border">
-            I believe that the facts stated in this claim form are true.
-          </td>
-        </tr>
-        {% if data['check']== 2 %}
-        <tr>
-          <td class="no-border">
-          </td>
-          <td class="no-border">
-            <strong>Company:</strong> {{ partyName( 'claimant', 'last' ) }} Limited
-          </td>
-        </tr>
-        <tr>
-          <td class="no-border">
-          </td>
-          <td class="no-border">
-            <strong>Name:</strong> {{ partyName( 'claimant' ) }}
-          </td>
-        </tr>
-        <tr>
-          <td class="no-border">
-          </td>
-          <td class="no-border">
-            <strong>Job title:</strong> Owner/Director
-          </td>
-        </tr>
+  <table>
+    <thead>
+    <tr>
+      <th colspan="2">
+        <h2 class="heading-medium">
+          Statement of truth
+        </h2>
+      </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td class="no-border">
+      </td>
+      <td class="no-border">
+        I believe that the evidence provided in this application is true.
+      </td>
+    </tr>
+    <tr>
+      <td class="no-border">
+      </td>
+      <td class="no-border">
+        I declare that the details I have given are true to the best of my knowledge.
+      </td>
+    </tr>
+    {% if data['check']== 2 %}
+    <tr>
+      <td class="no-border">
+      </td>
+      <td class="no-border">
+        <strong>Company:</strong> {{ partyName( 'claimant', 'last' ) }} Limited
+      </td>
+    </tr>
+    <tr>
+      <td class="no-border">
+      </td>
+      <td class="no-border">
+        <strong>Name:</strong> {{ partyName( 'claimant' ) }}
+      </td>
+    </tr>
+    <tr>
+      <td class="no-border">
+      </td>
+      <td class="no-border">
+        <strong>Job title:</strong> Owner/Director
+      </td>
+    </tr>
 
-        {% elseif  data['check']== 3 %}
-        <tr>
-          <td class="no-border">
-          </td>
-          <td class="no-border">
-            <strong>Name:</strong> {{ partyName( 'claimant' ) }}
-          </td>
-        </tr>
-        <tr>
-          <td class="no-border">
-          </td>
-          <td class="no-border">
-            <strong>Trading as:</strong> {{ partyName( 'claimant', 'last' ) }} Property
-          </td>
-        </tr>
+    {% elseif data['check']== 3   %}
+    <tr>
+      <td class="no-border">
+      </td>
+      <td class="no-border">
+        <strong>Name:</strong> {{ partyName( 'claimant' ) }}
+      </td>
+    </tr>
+    <tr>
+      <td class="no-border">
+      </td>
+      <td class="no-border">
+        <strong>Trading as:</strong> {{ partyName( 'claimant', 'last' ) }} Property
+      </td>
+    </tr>
 
-        {% else %}
-        <tr>
-          <td class="no-border">
-          </td>
-          <td class="no-border">
-            {{ partyName( 'claimant' ) }}
-          </td>
-        </tr>
+    {% else %}
+    <tr>
+      <td class="no-border">
+      </td>
+      <td class="no-border">
+        {{ partyName( 'claimant' ) }}
+      </td>
+    </tr>
 
-        {% endif %}
+    {% endif %}
 
-        <tr>
-          <td class="">
-          </td>
-          <td class="">
-            <span class="dates2"></span>
-          </td>
-        </tr>
-        </tbody>
-      </table>
+    <tr>
+      <td class="">
+      </td>
+      <td class="">
+        <span class="dates2"></span>
+      </td>
+    </tr>
+    </tbody>
+  </table>
 
           <div style="padding-bottom:60px" > </div>
       {% endif %}
@@ -445,7 +452,7 @@
 
 
   <!--  IF ONLY ONE PAGE BECAUSE OF NO HERING OR EVIDENCE  -->
-  {% if  data['generalappnoevidence'] == 'true'  and  data['generalapphearing'] == 'false' %}
+  {% if  data['generalappnoevidence'] == 'true'   %}
 
       <!-- DECLARATON  -->
       <table >
@@ -508,9 +515,11 @@
       </table>
 
       <!-- SPSCING -->
-      <div style="padding-bottom:200px"> </div>
+      <div style="padding-bottom:0px"> </div>
 
   {% endif %}
+
+
 
 
 
@@ -549,7 +558,12 @@
 
 
 
-  {% if  data['generalappnoevidence'] == 'false'  or  data['generalapphearing'] == 'true' %}
+
+
+
+
+
+  {% if  data['generalappnoevidence'] == 'false'  and   data['generalapphearing'] == 'true' %}
 
       <!--  PAGE 2  -->
       <div class="page-break">&nbsp;</div>
@@ -557,8 +571,8 @@
 
 
       <!--  STATEMENT OF TRUTH  -->
-      {% if  data['generalappnoevidence'] != 'true' and  data['generalapphearing'] == 'true' %}
-      <table>
+      {% if  data['generalappnoevidence'] != 'true'  %}
+          <table>
         <thead>
         <tr>
           <th colspan="2">
@@ -573,7 +587,14 @@
           <td class="no-border">
           </td>
           <td class="no-border">
-            I believe that the facts stated in this claim form are true.
+            I believe that the evidence provided in this application is true.
+          </td>
+        </tr>
+        <tr>
+          <td class="no-border">
+          </td>
+          <td class="no-border">
+            I declare that the details I have given are true to the best of my knowledge.
           </td>
         </tr>
         {% if data['check']== 2 %}
@@ -639,65 +660,6 @@
 
 
 
-      <!-- DECLARATON  -->
-      <table >
-        <thead>
-        <tr>
-          <th colspan="2">
-            <h2 class="heading-medium">
-              Declaration
-            </h2>
-          </th>
-        </tr>
-        </thead>
-
-        <tbody>
-        <tr>
-          <td class="no-border">
-          </td>
-          <td class="no-border">
-            I declare that the details I have given are true to the best of my knowledge.
-          </td>
-        </tr>
-        {% if  data['check'] =='2' %}
-            <tr>
-              <td class="no-border">
-              </td>
-              <td class="no-border">
-                <strong>Company:</strong> {{ partyName( 'claimant', 'last' ) }} Limited
-              </td>
-            </tr>
-            <tr>
-              <td class="no-border">
-              </td>
-              <td class="no-border">
-                <strong>Name:</strong> Teresa Jones
-              </td>
-            </tr>
-            <tr>
-              <td class="no-border">
-              </td>
-              <td class="no-border">
-                <strong>Job title:</strong> Owner/Director
-              </td>
-            </tr>
-        {% else %}
-            <tr>
-              <td class="no-border">
-              </td>
-              <td class="no-border">{{ partyName( 'claimant' ) }}
-              </td>
-            </tr>
-        {% endif %}
-        <tr>
-          <td>
-          </td>
-          <td>
-            <span class="dates2"></span>
-          </td>
-        </tr>
-        </tbody>
-      </table>
 
 
 
