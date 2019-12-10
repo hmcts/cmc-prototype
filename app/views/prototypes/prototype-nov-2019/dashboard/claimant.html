@@ -139,13 +139,7 @@
 
               <!--  When the claimant is returning when they have a draft general application  -->
               {% elseif data['claimant'] == 3.12345 %}
-                  <br>
-                  <h3 class="heading-small">Resume your application</h3>
-                  <p>You started an application to change something about this claim.</p>
-                  <p>We'll delete it if you don't submit it by 4pm on {{ now |  date("add", 70, "day") | date }}.</p>
-                  <p><a class="button secondary-button"
-                        href="../applications/claimant-general-application-only">Resume the application</a></p>
-                  <hr>
+
 
                   <div class="status-block single">
                     <h2 class="heading-medium">We've received your request for judgment</h2>
@@ -160,6 +154,7 @@
                   <h2 class="heading-medium">Cancel your request for judgment</h2>
                   <p>You can cancel the request and end the claim or cancel and continue with it.</p>
                   <p><a href="cancel-judgment" class="button secondary-button">Cancel your request for judgment</a></p>
+
 
 
 
@@ -1711,6 +1706,19 @@
                 </div>
 
 
+            {% endif %}
+
+
+
+            <!--  WHEN claimant has started but not finished a general application  -->
+            {% if data['claimant'] == 3.12345 %}
+                <br>
+                <h2 class="heading-small">Resume your application</h2>
+                <p>You started an application to change something about this claim.</p>
+                <p>We'll delete it if you don't submit it by 4pm on {{ now |  date("add", 70, "day") | date }}.</p>
+                <p><a class="button secondary-button"
+                      href="../applications/claimant-general-application-only">Resume the application</a></p>
+                <hr>
             {% endif %}
 
 
