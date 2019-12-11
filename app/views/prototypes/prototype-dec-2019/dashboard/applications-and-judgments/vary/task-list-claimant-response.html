@@ -1,0 +1,175 @@
+{% extends "layout_task-list.html" %}
+
+{% block page_title %} Task list {% endblock %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="/public/stylesheets/dm_list.css"/>
+{% endblock %}
+
+{% block proposition_header %}
+    {% set my_account="2" %}
+    {% include "includes/propositional_navigation.html" %}
+{% endblock %}
+
+
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <header class="page-heading page-heading-with-context page-heading-without-breadcrumb">
+
+
+        <h1 class="heading-large">
+          Judgment change requested
+        </h1>
+
+
+        <!-- Section 1 -->
+        <table id="table-of-tasks">
+            <thead>
+              <tr>
+                <th scope="col" id="col-task">
+                  <span class="task-group">
+                    <span class="group-number" id="task-number">
+                    </span>
+                    See the new payment plan
+                  </span>
+                  <th class="numeric" id="task-status" scope="col" id="col-status">
+                    <span type="hidden" class="visually-hidden">task status</span>
+                  </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr id="read-rules">
+                <td class="task">
+                  <a href="review-proposed-new-plan?vary=true&">
+                    <span class="task-name">View the defendant's proposal</span>
+                  </a>
+                </td>
+                <td class="numeric" id="task-status" scope="col" id="col-status">
+                    {% if data.viewvaryplan=="complete" %}
+                        {% include "includes/task_status_finished.html" %}
+                    {% else %}
+                        {% include "includes/task_status_incomplete.html" %}
+                    {% endif %}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+
+          <br>
+          <br>
+
+
+          <!-- Section 2 -->
+          <table id="table-of-tasks">
+            <thead>
+              <tr>
+                <th scope="col" id="col-task">
+                  <span class="task-group">
+                    <span class="group-number" id="task-number"></span>
+                    Choose what to do next
+                  </span>
+                </th>
+                <th class="numeric" id="task-status" scope="col" id="col-status"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr id="completing-your-claim">
+                <td class="task">
+                  <a href="accept-reject-plan">
+                    <span class="task-name">Accept or reject their repayment plan</span>
+                  </a>
+                </td>
+                <td class="numeric" id="task-status" scope="col" id="col-status">
+                  {% if data.varyresponsedecided=="complete" %}
+                      {% include "includes/task_status_finished.html" %}
+                  {% else %}
+                      {% include "includes/task_status_incomplete.html" %}
+                  {% endif %}
+                </td>
+              </tr>
+
+
+              {% if data.suggestownplan == 'true' %}
+                  <tr id="completing-your-claim">
+                    <td class="task">
+                      <a href="../../claimant-response/admit-the-claim/task-list/counter-offer">
+                        <span class="task-name">Propose a new repayment plan</span>
+                      </a>
+                    </td>
+                    <td class="numeric" id="task-status" scope="col" id="col-status">
+                      {% if data.ownplansuggested == 'complete' %}
+                          {% include "includes/task_status_finished.html" %}
+                      {% else %}
+                          {% include "includes/task_status_incomplete.html" %}
+                      {% endif %}
+                    </td>
+                  </tr>
+              {% endif %}
+
+
+            </tbody>
+          </table>
+
+
+
+          <br>
+          <br>
+
+
+          <!--  SECTION 4 - GREEN BUTTON  -->
+          <table id="table-of-tasks" class="submit">
+            <thead>
+            <tr>
+              <th scope="col" id="col-task">
+                  <span class="task-group">
+                    <span class="group-number" id="task-number"></span>
+                    Submit
+                  </span>
+              </th>
+              <th class="numeric" id="task-status" scope="col" id="col-status"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr id="check-and-send">
+              <td>
+                <a href="check-answers">
+                  <span class="button">Check and submit your response</span>
+                </a>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+
+
+
+    </div>
+
+
+
+    <!--  Right side claim details -->
+    <div class="column-one-third">
+      <ul class="actions">
+      </ul>
+      <div class="meta-data" style="margin-left:80px;">
+        <ul role="navigation" class="font-xsmall list">
+          <li><strong class="bold">Claim reference:</strong><br>352MC733</li>
+           <a href='task-list/view-claim'>View claim</a></li>
+        </ul>
+      </div>
+    </div>
+
+
+
+
+
+  </div>
+
+</main>
+
+{% endblock %}
+{% block extra_js_1 %}<!-- ticky list javascript one -->{% endblock %}
+{% block extra_js_2 %}<!-- ticky list javascript two -->{% endblock %}

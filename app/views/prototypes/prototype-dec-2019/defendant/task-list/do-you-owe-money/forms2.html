@@ -1,0 +1,276 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <!--  <a href="#" onclick="history.go(-1)" class="link-back">Back</a>  -->
+      <h1 class="heading-large">How to complete and send your response</h1>
+      {% if data.radio_select_group=="all" or data['dashboard'] == 1 %}
+
+      <ul class="list list-number">
+        <li>
+          Download the admission form</li>
+        <li>Complete the form on your computer using:
+        <ul class="list list-bullet">
+                <li>Claim number: 000MC023</li>
+                <li>Claimant: {{ partyName( 'claimant' ) }}</li>
+                <li>Defendant: {{ partyName( 'defendant' ) }}</li>
+              </ul>
+            </li>
+            <li>Save the completed form to your computer</li>
+            <li>Email the form to <span class="bold">moneyclaims@justice.gov.uk</span></li>
+          </ul>
+
+      <h3 class="heading-medium">Deadline for sending your response</h3>
+      <p>You must email the form before <strong class="bold">4pm on</strong><strong class="bold">{% if data.radio_select_group_time=="No"%} <span id="Date"></span>{% elseif data.radio_select_group_time=="Yes" %}<span id="Date3"></span>{% else %} <span id="Date"></span>{% endif %}</strong>.</p>
+      <h3 class="heading-medium">Download and complete the form</h3>
+      <ul class="list">
+              <li> <a target="_blank" class="download" download="download" href='{{ asset_path }}/images/admission.pdf'>Download admission form</a> (PDF, 102 KB).</li>
+
+      </ul>
+
+<!--
+      <p>You can also <a href="">download guidance to help you complete the form.</a></p>
+      -->
+
+         {% elseif data.radio_select_group=="amount_less_claimed" or data.radio_select_group=="Some" or data['dashboard'] == 2 or data['dashboard'] == 3%}
+      <ul class="list list-number">
+        <li>
+          Download both the admission and defence forms</li>
+        <li>Complete the forms on your computer using:
+          <ul class="list list-bullet">
+            <li>Claim number: 000MC023</li>
+            <li>Claimant: {{ partyName( 'claimant' ) }}</li>
+            <li>Defendant: {{ partyName( 'defendant' ) }}</li>
+          </ul>
+        </li>
+        <li>Save the completed forms to your computer</li>
+        <li>Email the forms to <span class="bold">moneyclaims@justice.gov.uk</span></li>
+      </ul>
+
+      <h3 class="heading-medium">Deadline for sending your response</h3>
+      <p>You must email the forms before <strong class="bold">4pm on</strong><strong class="bold">{% if data.radio_select_group_time=="No"%} <span id="Date"></span>{% elseif data.radio_select_group_time=="Yes" %}<span id="Date3"></span>{% else %} <span id="Date"></span>{% endif %}</strong>.</p>
+      <h3 class="heading-medium">Download and complete the forms</h3>
+      <ul class="list">
+        <li> <a target="_blank" class="download" download="download" href='{{ asset_path }}/images/admission.pdf'>Download admission form</a> (PDF, 102 KB).</li>
+        <li> <a target="_blank" class="download" download="download" href='{{ asset_path }}/images/OCON9B.pdf'>Download defence form</a> (PDF, 75 KB).</li>
+      </ul>
+
+
+           {% elseif data.radio_select_group=="defend_now_cc" or data['dashboard'] == 4%}
+
+
+      <ul class="list list-number">
+        <li>
+          Download the defence and counterclaim form</li>
+        <li>Complete the form on your computer using:
+          <ul class="list list-bullet">
+            <li>Claim number: 000MC023</li>
+            <li>Claimant: {{ partyName( 'claimant' ) }}</li>
+            <li>Defendant: {{ partyName( 'defendant' ) }}</li>
+          </ul>
+        </li>
+        <li>Save the completed form to your computer</li>
+        <li>Email the form to <span class="bold">moneyclaims@justice.gov.uk</span></li>
+      </ul>
+      <h3 class="heading-medium">Counterclaim fee</h3>
+      <p>You'll need to pay a court fee if you make a counterclaim.</p>
+      <details role="group">
+        <summary role="button" aria-controls="details-content-0" aria-expanded="false">View claim fees</summary>
+        <div class="panel" id="details-content-0" aria-hidden="true">
+          <p>The fee is based on the amount you're claiming, including interest.
+          </p><table class="expandable-demo">
+          <thead>
+          <tr>
+            <th scope="col">Claim amount</th>
+            <th scope="col">Fee</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>
+              <ul class="list">
+                <li>£0.01 to £300</li>
+              </ul>
+            </td>
+            <td>£25</td>
+          </tr>
+          <tr>
+            <td>
+              <ul class="list">
+                <li>£300.01 to £500</li>
+              </ul>
+            </td>
+            <td>£35</td>
+          </tr>
+          <tr>
+            <td>
+              <ul class="list">
+                <li>£500.01 to £1,000</li>
+              </ul>
+            </td>
+            <td>£60</td>
+          </tr>
+          <tr>
+            <td>
+              <ul class="list">
+                <li>£1,000.01 to £1,500</li>
+              </ul>
+            </td>
+            <td>£70</td>
+          </tr>
+          <tr>
+            <td>
+              <ul class="list">
+                <li>£1,500.01 to £3,000</li>
+              </ul>
+            </td>
+            <td>£105</td>
+          </tr>
+          <tr>
+            <td>
+              <ul class="list">
+                <li>£3,000.01 to £5,000</li>
+              </ul>
+            </td>
+            <td>£185</td>
+          </tr>
+          <tr>
+            <td>
+              <ul class="list">
+                <li>£5,000.01 to £10,000</li>
+              </ul>
+            </td>
+            <td>£410</td>
+          </tr>
+          </tbody>
+        </table>
+        </div>
+      </details>
+      <h3 class="heading-medium">Deadline for sending your response</h3>
+      <p>You must email the form before <strong class="bold">4pm on</strong><strong class="bold">{% if data.radio_select_group_time=="No"%} <span id="Date"></span>{% elseif data.radio_select_group_time=="Yes" %}<span id="Date3"></span>{% else %} <span id="Date"></span>{% endif %}</strong>.</p>
+      <h3 class="heading-medium">Download and complete the form</h3>
+      <ul class="list">
+        <li> <a target="_blank" class="download" download="download" href='{{ asset_path }}/images/OCON9B.pdf'>Download the defence and counterclaim form</a> (PDF, 102 KB).</li>
+
+      </ul>
+
+
+             {% else %}
+             <p class="panel panel-border-wide">Complete and email the defence and counterclaim form before <strong class="bold">{% if data.radio_select_group_time=="No"%} <span id="Date"></span>{% elseif data.radio_select_group_time=="Yes" %}<span id="Date3"></span>{% else %} <span id="Date"></span>{% endif %} at 4pm
+             </strong></p>
+             <p>You'll need to pay a court fee if you make a counterclaim.</p>
+             <details role="group">
+              <summary role="button" aria-controls="details-content-0" aria-expanded="false">View claim fees</summary>
+              <div class="panel" id="details-content-0" aria-hidden="true">
+                <p>The fee is based on the amount you're claiming, including interest.
+                </p><table class="expandable-demo">
+                  <thead>
+                    <tr>
+                      <th scope="col">Claim amount</th>
+                      <th scope="col">Fee</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <ul class="list">
+                          <li>£0.01 to £300</li>
+                        </ul>
+                      </td>
+                      <td>£25</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <ul class="list">
+                          <li>£300.01 to £500</li>
+                        </ul>
+                      </td>
+                      <td>£35</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <ul class="list">
+                          <li>£500.01 to £1,000</li>
+                        </ul>
+                      </td>
+                      <td>£60</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <ul class="list">
+                          <li>£1,000.01 to £1,500</li>
+                        </ul>
+                      </td>
+                      <td>£70</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <ul class="list">
+                          <li>£1,500.01 to £3,000</li>
+                        </ul>
+                      </td>
+                      <td>£105</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <ul class="list">
+                          <li>£3,000.01 to £5,000</li>
+                        </ul>
+                      </td>
+                      <td>£185</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <ul class="list">
+                          <li>£5,000.01 to £10,000</li>
+                        </ul>
+                      </td>
+                      <td>£410</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </details>
+            <ul class="list list-number">
+              <li>
+               Complete the <a target="_blank" download="download" href='{{ asset_path }}/images/OCON9B.pdf'>defence and counterclaim</a> form entering these details:
+                 <ul class="list list-bullet">
+                <li>Claim number: 000MC023</li>
+                <li>Claimant: {{ partyName( 'claimant' ) }}</li>
+                <li>Defendant: {{ partyName( 'defendant' ) }}</li>
+              </ul>
+            </li>
+            <li>Save the completed form to your device.</li>
+            <li>Email the form to <span class="bold">moneyclaims@justice.gov.uk</span></li>
+          </ul>
+
+
+
+               {% endif %}
+
+             <h2 class="heading-medium">Help and support</h2>
+            <p><a href="mailto:moneyclaims@justice.gov.uk">moneyclaims@justice.gov.uk</a><br>
+              0300 123 7050<br>
+              Monday to Friday, 9am to 5pm<br />
+            <a href="https://www.gov.uk/call-charges">Find out about call charges</a> <span class="font-xsmall">(opens in a new window)</span></p>
+      </fieldset>
+      <br>
+
+        </div>
+      </div>
+    </main>
+    <form method="post"  action="#" class="for4" style=" float: left;">
+      <select id="dashboard2" name="dashboard2" onchange="window.location.href='forms?dashboard='+this.value">
+        <option  value="0" >Views</option>
+        <option value="1" {% if data['dashboard'] == 1 %}selected{% endif %}>1. I admit all</option>
+        <option value="2" {% if data['dashboard'] == 2 %}selected{% endif %}>2.I admit part of the claim </option>
+        <option value="3" {% if data['dashboard'] == 3 %}selected{% endif %}>3. I owe less than the amount claimed </option>
+        <option value="4" {% if data['dashboard'] == 4 %}selected{% endif %}>4.I dispute and counterclaim </option>
+      </select>
+    </form>
+{% endblock %}

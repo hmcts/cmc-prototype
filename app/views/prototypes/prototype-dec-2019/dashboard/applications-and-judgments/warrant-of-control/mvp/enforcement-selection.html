@@ -1,0 +1,94 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="4" %}
+
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+
+
+<main id="content" role="main">
+
+  {% include "includes/phase_banner_beta.html" %}
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+      <!--  <a href="#" onclick="history.go(-1)" class="link-back">Back</a>  -->
+
+      <h1 class="heading-large">
+        How do you want to try to recover your money?
+      </h1>
+
+      <form
+        name="aspnetForm"
+        method="post"
+        onsubmit="multiNavigation('enforcement', ['Questioning', 'Warrant', 'Earnings', 'Savings', 'Charging-order'], ['bailiffs-selection' +
+         '', '', '', '', '']);return false;"
+        id="aspnetForm"
+        autocomplete="off">
+
+        <div class="form-group">
+          <fieldset>
+
+            <legend class="visually-hidden">How do you want the court to collect your money?</legend>
+            <p>You'll need to provide information on the debtor. Make sure you're applying for the right method by
+              reading its criteria.</p>
+            <div class="multiple-choice">
+              <input id="radio-questioning" type="radio" name="enforcement" value="Questioning">
+              <label for="radio-questioning" data-target="questioning-info" style="font-weight: bold">Send bailiffs to
+                collect payment<span class="form-hint" style="margin-top: 5px">Apply for a warrant or writ of control. The fees vary depending on how much you are owed or what type of bailiff you use.</span></label>
+
+            </div>
+
+            <div class="multiple-choice">
+              <input id="radio-yes" type="radio" name="enforcement" value="Warrant">
+              <label for="radio-yes" data-target="yes-info" style="font-weight: bold">Get money deducted from
+                wages<span class="form-hint" style="margin-top: 5px">Apply for an attachment of earnings order. The court fee is £110.</span></label>
+            </div>
+
+
+            <div class="multiple-choice">
+              <input id="radio-no" type="radio" name="enforcement" value="Earnings">
+              <label for="radio-no" data-target="no-info" style="font-weight: bold">Freeze assets or money in an
+                account<span class="form-hint" style="margin-top: 5px">Apply for a third party debt order. The court fee is £110.</span></label>
+            </div>
+
+
+            <div class="multiple-choice">
+              <input id="radio-repayment" type="radio" name="enforcement" value="Savings">
+              <label for="radio-repayment" data-target="repayment-info" style="font-weight: bold">Charge the debtor's
+                land or property<span class="form-hint" style="margin-top: 5px">Apply for a charging order. The court fee is £110.</span></label>
+            </div>
+
+            <fieldset></fieldset>
+            <details>
+              <summary><span class="summary">Apply to find out their financial situation</span></summary>
+              <div class="panel panel-border-narrow">
+                <p>
+                  Ask the court to order the person or business who owes you money to <a href="">attend court to give
+                  evidence of
+                  their finances</a>, for example bills and statements.
+                </p>
+                <p>The court fee is £55.</p>
+              </div>
+            </details>
+
+        </div>
+
+        <input id="advert-option-next--button" type="submit" value="Save and continue" class="button"
+               data-ignore-double-submit="true">
+
+      </form>
+
+    </div>
+  </div>
+  </div>
+  <fieldset></fieldset>
+  {% include 'prototypes/prototype-dec-2019/includes/contact.html' %}
+</main>
+{% endblock %}

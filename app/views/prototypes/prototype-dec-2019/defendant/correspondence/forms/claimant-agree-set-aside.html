@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<!--[if lt IE 9]><html class="lte-ie8" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--><html lang="en"><!--<![endif]-->
+<head>
+    <meta charset="utf-8" />
+    <style>
+#content {
+  margin-top:3em
+}
+@page {
+  size: 8.5in 11in;
+  margin: 10%;
+  @top-right {
+    content: "Page " counter(page) " of " counter(pages);
+    /*noinspection CssNoGenericFontName*/
+    font-family: "Open Sans";
+  }
+}
+html {
+  /*noinspection CssNoGenericFontName*/
+  font-family: "Open Sans";
+  max-width: 960px;
+  margin: 0 auto;
+  background:#d9d9d9
+}
+#content{
+  background:#fff;
+  padding:70px;
+  padding-bottom: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+body {
+  counter-reset: section;
+  font-family: "nta", Arial, sans-serif;
+  font-weight: 400;
+  text-transform: none;
+  font-size: 19px;
+  line-height: 1.25;
+  -webkit-font-smoothing: antialiased;
+}
+.section {
+  margin-bottom: 25px;
+}
+.section .section-heading {
+  margin-bottom: 10px;
+}
+.section .section-heading strong:before {
+  counter-increment: section;
+  content: counter(section) ". ";
+}
+table {
+  width: 100%;
+  border-spacing: 0;
+}
+table td {
+  border-bottom: 1px solid #999;
+  padding: 5px;
+  text-align:left;
+  line-height: 1.25;
+  padding: 0.63158em 1.05263em 0.67368em 0;
+  font-size: 18px;
+  vertical-align:top;
+}
+p{
+  font-size: 18px;
+}
+table th {
+ text-align:left;
+ border-bottom: 1px solid #999;
+}
+table td:first-child {
+  width: 280px;
+  vertical-align: top;
+  font-weight:700;
+}
+td.single-cell{
+ font-weight:100!important;
+}
+.no-border{
+  border: none;
+}
+table td:last-child {
+  width: auto;
+}
+header table td, header table tr:last-child td {
+  border: none;
+}
+header td {
+  margin: 0;
+  padding: 0;
+}
+.heading-medium{
+  padding-bottom: 0;
+  margin-bottom: 0.4em;
+  margin-top: 1.5em;
+  font-size:22px;
+}
+.claim-number {
+  font-weight:700;
+  font-size:19px;
+}
+.crestLogo tr td:nth-child(1) {
+  width: 30%;
+}
+.crest{
+  width:80%
+}
+h1 {
+  font-weight:100;
+  font-size:24px;
+}
+.seal{
+  width: 12%;
+  float: right;
+  padding-top: 30px;
+}
+.page-title {
+  text-align:center;
+  padding-top:20px;
+  font-size:14px
+}
+.page-title span{
+  float:right
+}
+.crestLogo{
+  margin-top:40px
+}
+.page-break{
+  background: #d9d9d9;
+  margin-left: -70px;
+  margin-right: -70px;
+  margin-top: 20px;
+}
+.claim-details{
+  text-align:right
+}
+.footer td{
+  font-size:10px;
+  padding-top:40px;
+  border-bottom: none;
+}
+.footer td:nth-child(3){
+  text-align:right
+}
+</style>
+<main id="content"  role="main">
+  <header>
+
+    <table class="crestLogo">
+      <tbody>
+        <tr>
+          <td></td>
+          <td rowspan="2" class="claim-details">
+            <h1>Request to cancel County Court Judgment</h1>
+            <p>{{ partyName( 'claimant' ) }} v {{ partyName( 'defendant' ) }}<br>
+            <strong>Claim number:</strong> 000LR095<br>
+              <strong>Date:</strong> {{ now | date }}</p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+  </header>
+
+  <!-- <h2 class="heading-medium">The court has set a hearing date</h2> -->
+
+    <p>I, {{ partyName( 'claimant' ) }}, confirm that my claim against {{ partyName( 'defendant' ) }} is settled.</p>
+    <p>I confirm that I don't object to the court cancelling the County Court Judgment against {{ partyName( 'defendant' ) }}.</p>
+    <br><p>Signed: ………………………………………….</p>
+    <br><p>Date: ………………………………………….</p>
+
+    <table class="footer" style="margin-top: 400px">
+      <tbody>
+        <tr>
+          <td>
+            OCON24
+          </td>
+          <td>
+            For further details of the courts www.gov.uk/find-court-tribunal
+          </td>
+          <td>
+            &copy; Crown copyright Page 1 of 1
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+</main>
+
+<form method="post" action="#" class="form" style="position: absolute;">
+  <select onchange="window.location.href='?party='+this.value">
+    <option value="claimant" {% if data['party'] == 'claimant' %}selected{% endif %}>Claimant</option>
+    <option value="defendant" {% if data['party'] == 'defendant' %}selected{% endif %}>Defendant</option>
+  </select>
+</form>

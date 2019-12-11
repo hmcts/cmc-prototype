@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+
+  {% include "includes/phase_banner_beta.html" %}
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+      <div class="govuk-box-highlight">
+        <h1 class="bold-large">
+          <h1 class="bold-large">You've asked the court to review the order</h1>
+          <p><a href="../../../defendant/correspondence/forms/order-review" class="font-medium" style="color: #FFFFFF">Download request for review of order</a> (PDF, 123KB)</p>
+        </h1>
+      </div>
+
+      <h2 class="heading-medium">What happens next</h2>
+
+      <p>We'll tell {% if data['party'] == 'claimant' %}{{ partyName( 'defendant' ) }}{%else%}{{ partyName( 'claimant' ) }}{% endif %} you've made the request. They'll have until {{ now | date( 'add', 12, 'days' ) | date }} to add comments of their own.</p>
+
+      <p>A judge will then review the order and any comments. We'll contact you both by post to tell you what to do next.</p>
+
+      <p>Continue doing everything the order tells you to do unless you hear that a judge has changed it.</p>
+
+      <p><a href="../../../dashboard/home?dashboard={% if data['party'] == 'claimant' %}1.21{% else %}2.71{% endif %}" class="button">Go to your account</a></p>
+
+      {% include "includes/contact.html" %}
+
+    </div>
+
+  </div>
+</main>
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends "layout_unbranded.html" %}
+{% block page_title %} Your money claims account {% endblock %}
+{% block content %}
+<style type="text/css">
+.report-error {display: none}
+</style>
+<main id="content" role="main">
+  <div class="grid-row">
+    <div class="column-two-thirds">
+            <!--  <a href="#" onclick="history.go(-1)" class="link-back">Back</a>  -->
+
+      <h1 class="heading-large">
+
+        Manage your claim on the Money claims online service (MCOL)
+
+      </h1>
+
+
+
+ {% if data['mcol'] == 1 %}
+ <!--make a claim BETA-->
+      <form method="get" name="registration" action="../../create-account" id="registration">
+                            <p>To manage an existing claim sign in using your email and password.</p>
+
+
+
+       {% elseif data['mcol'] == 5 or data['mcol'] == 2%}
+                    <p>To view an existing claim log in using your 8 digit Government Gateway user ID.</p>
+
+       <form method="get" name="registration" action="mcol" id="registration">
+
+
+          {% elseif data['mcol'] == 4%}
+          <!--return to your claim defendant BETA-->
+                                     <p>To view an existing claim sign in using your email and password.</p>
+
+          <form method="get" name="registration" action="../../sign-in" id="registration">
+           <input type="hidden" name="control-box" value="8">
+           {% else %}
+           <form method="get" name="registration" action="../../sign-in" id="registration">
+            {% endif %}
+
+     <div class="form-group">
+        <input type="submit" class="button" value="Continue to sign in"/>
+      </div>
+</form>
+
+
+
+    </div>
+      </div>
+    {% include 'prototypes/prototype-dec-2019/includes/contact.html' %}
+</main>
+{% endblock %}
