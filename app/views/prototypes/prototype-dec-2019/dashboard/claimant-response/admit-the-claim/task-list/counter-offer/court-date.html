@@ -1,0 +1,72 @@
+{% extends "layout_task-list.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block home_link %} ../task-list {% endblock %}
+{% block proposition_header %}
+{% set my_account="1" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <!--  <a href="#" onclick="history.go(-1)" class="link-back">Back</a>  -->
+  <div class="grid-row">
+
+    <div class="column-two-thirds">
+      <h1 class="heading-large">
+        The defendant can't pay {% if data['claimant-payment-request'] == 'Immediately' %}immediately{% else %}by your proposed date{% endif %}
+      </h1>
+
+      <p>Based on financial details the defendant gave us, we don't believe they can pay {% if data['claimant-payment-request'] == 'Immediately' %}immediately{% else %}by your proposed date{% endif %}.</p>
+
+      <p>The court's calculator has determined 1 {{ now | date('add', 4, 'month' ) | date( 'MMMM YYYY') }} as the date when they can pay you in full.</p>
+
+      <h2 class="heading-medium">Do you accept a repayment date of 1 {{ now | date('add', 4, 'month' ) | date( 'MMMM YYYY') }}?</h2>
+
+
+      {% if data['vary'] == 'true' %}
+        <form
+          name="aspnetForm" method="post" id="aspnetForm"
+          onsubmit="multiNavigation('radio-indent-group2', ['reject_stop_claim', 'accept_stop_claim'], ['../court-payment-method/rejection-reason?determined=reject&courtspaymentplan=true&', '../../../../../dashboard/applications-and-judgments/vary/task-list-claimant-response?ownplansuggested=complete&redeterminationrequested=false&courtspaymentplan=true&']);return false;"
+          autocomplete="off">
+      {% else %}
+        <form
+          name="aspnetForm" method="post" id="aspnetForm"
+          onsubmit="multiNavigation('radio-indent-group2', ['reject_stop_claim', 'accept_stop_claim'], ['../court-payment-method/rejection-reason?determined=reject&', '../../task-list?determined=accept&']);return false;"
+          autocomplete="off">
+      {% endif %}
+
+
+
+
+
+        <div class="form-group">
+
+          <fieldset>
+            <div class="multiple-choice" data-target="accept">
+              <input id="radio-yes" type="radio" name="radio-indent-group2" value="accept_stop_claim">
+              <label for="radio-yes" data-target="yes-info"> Yes</label>
+            </div>
+            <div class="panel panel-border-narrow js-hidden" id="accept">
+              <p>If the defendant agrees to the court plan, the claim will be put on hold. If they don't, a judge will decide a new repayment plan.</p>
+            </div>
+            <div class="multiple-choice" data-target="reject-offer">
+              <input id="radio-no" type="radio" name="radio-indent-group2" value="reject_stop_claim">
+              <label for="radio-no" data-target="no-info">No - I want a judge to determine the repayment plan</label>
+            </div>
+          </fieldset>
+
+          <input type="hidden" name="court_payment_method" value="complete">
+          <input id="advert-option-next--button" type="submit" value="Save and continue" class="button" data-ignore-double-submit="true">
+
+        </div>
+
+    </form>
+
+  </div>
+
+</div>
+{% include 'prototypes/prototype-dec-2019/includes/contact.html' %}
+</main>
+{% endblock %}

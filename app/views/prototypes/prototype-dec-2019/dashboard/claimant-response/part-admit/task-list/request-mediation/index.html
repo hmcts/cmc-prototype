@@ -1,0 +1,104 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+
+<main id="content" role="main">
+
+  {% include "includes/phase_banner_beta.html" %}
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+      <!--  <a href="#" onclick="history.go(-1)" class="link-back">Back</a>  -->
+
+      <h1 class="heading-large">
+        Free telephone mediation
+      </h1>
+
+      {% if data['mediation-pilot']=="on" %}
+      <form method="post" action="request-mediation/how-mediation-works" class="form">
+        <input type="hidden" name="mediation" value="complete">
+
+        <p>We're automatically registering some claims worth £300 or less for free telephone mediation. Your claim has been selected for this.</p>
+
+        <p>We'll tell you how mediation works - you can decide to take part or not.</p>
+
+        <div class="form-group">
+          <input type="submit" class="button" value="How free mediation works"/>
+        </div>
+      </form>
+
+      {%else%}
+
+      <form method="post" action="request-mediation/how-mediation-works" class="form">
+        <input type="hidden" name="mediation" value="complete">
+
+        <p>More than 60% of people who use our free mediation service settle on the day.*</p>
+
+        <p>Continuing the claim doesn't guarantee you get paid - it can mean:</p>
+        <ul class="list list-bullet">
+          <li>it takes longer to resolve your claim</li>
+          <li>you have to go to a court hearing and pay a fee</li>
+        </ul>
+
+        <p>You'll only speak to a mediator about the claim, not to {{ partyName( 'defendant' ) }}.</p>
+
+        <!--<h1 class="heading-medium">-->
+        <!--Will you try mediation?-->
+        <!--</h1>-->
+
+        <!--<input id="your-offer" name="offer" type="hidden">-->
+
+        <!--<div class="form-group">-->
+        <!--<fieldset>-->
+
+        <!--<legend class="visually-hidden">Will you try mediation?</legend>-->
+
+        <!--<div class="multiple-choice" data-target="mediation-confirm">-->
+        <!--<input id="radio-yes" type="radio" name="radio-mediation-group" value="Yes">-->
+        <!--<label for="radio-yes" data-target="yes-info">Yes</label>-->
+        <!--</div>-->
+
+        <!--<div class="panel panel-border-narrow js-hidden" id="mediation-confirm">-->
+        <!--<label class="form-label" for="rate">We'll ask the claimant if they'll try free mediation. If they say no,-->
+        <!--the claim will go to a hearing.</label>-->
+        <!--</div>-->
+
+        <!--<div class="multiple-choice">-->
+        <!--<input id="radio-no" type="radio" name="radio-mediation-group" value="No">-->
+        <!--<label for="radio-no" data-target="no-info">No</label>-->
+        <!--</div>-->
+
+
+        <!--</fieldset>-->
+        <!--<input type="hidden" name="mediation" value="complete">-->
+
+
+        <!--<div class="form-group">-->
+        <!--<input type="submit" class="button" value="Save and continue"/>-->
+        <!--</div>-->
+        <!--<p class="font-xsmall">*Source: Money Claim Mediation Service statistics, November 2017 to October 2018.<p/>-->
+
+        <!--</div>-->
+        <!--</form>-->
+
+        <div class="form-group">
+          <input type="submit" class="button" value="How free mediation works"/>
+        </div>
+        <p class="font-xsmall">*Source: Small Claims Mediation Service statistics, November 2017 to October 2018.
+        <p/>
+
+      </form>
+
+      {% endif %}
+
+      <fieldset></fieldset>
+    </div>
+    {% include 'prototypes/prototype-dec-2019/includes/contact.html' %}
+</main>
+{% endblock %}

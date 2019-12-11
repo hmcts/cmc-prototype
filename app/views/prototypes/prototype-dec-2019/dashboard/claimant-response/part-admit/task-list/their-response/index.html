@@ -1,0 +1,119 @@
+{% extends "layout_task-list.html" %}
+
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+
+{% block home_link %} ../task-list {% endblock %}
+{% block proposition_header %}
+{% set my_account="1" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+
+
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+
+      <!--  <a href="#" onclick="history.go(-1)" class="link-back">Back</a>  -->
+
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+      {% if data['radio-pay-group'] == 'Immediately' %}
+        <form method="post" action="../task-list" class="form">
+      {% else %}
+        <form method="post" action="their-response/view-amount" class="form">
+      {% endif %}
+
+     <h1 class="heading-large">
+      The defendant's response
+    </h1>
+
+      <p>{{ partyName( 'defendant' ) }} admits they owe you  £{{ data['owe-amount'] or '800' }}. They don't believe they owe the full amount claimed.</p>
+
+      {% if data['radio-pay-group'] == 'Set-date' %}
+      <p>They've offered to pay you by {{ now | date( 'add', 3, 'months') | date }}.</p>
+      {% elseif data['radio-pay-group'] == 'Immediately' %}
+      <p>They've offered to pay you immediately.</p>
+      {% else %}
+      <p>They've offered to pay you in instalments.</p>
+      {% endif %}
+
+    <h2 class="heading-medium">Their defence</h2>
+    <p class="heading-small">Why they say they don't owe the amount claimed</p>
+    <p>Because the value of the work is £{{ data['owe-amount'] or '800' }} not £1500.</p>
+
+      <p class="heading-small">Their timeline of events</p>
+      <div class="form-fields">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Date</th>
+              <th scope="col">What happened</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>03/11/2017</td>
+              <td>"I contacted {{ partyName( 'defendant' ) }} to discuss building works on our roof."</td>
+            </tr>
+            <tr>
+              <td>06/11/2017</td>
+              <td>"We agreed what work should be done and signed a contract."</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+
+      <p class="heading-small">Why they disagree with your timeline</p>
+      <p>"I never got the emails they say they sent"</p>
+
+
+      <p class="heading-small">Their evidence</p>
+      <div class="form-fields">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col" style="width: 50%">Type</th>
+              <th scope="col">Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Contracts and agreements</td>
+              <td>I have a signed contract showing that you broke the contract agreement.</td>
+            </tr>
+            <tr>
+              <td class="no-border">Photos</td>
+              <td class="no-border">The photos I've taken show the poor workmanship of the roof repair</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="heading-small">Why they disagree with your evidence</p>
+      <p>I didn't get an email from Sam about this, so I didn't get a chance to sort it out. It would be good to see a
+      copy of the email.</p>
+
+      <h2 class="heading-medium">Full response</h2>
+      <p><a href="../../../../defendant/correspondence/forms/claim-form-defendant?check=9">Download their full response and hearing requirements</a> (PDF, 123KB).</p>
+
+      <input type="hidden" name="their_response" value="complete">
+
+      <div class="form-group">
+
+      <input type="submit" class="button" value="Continue"/>
+
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+
+{% include 'prototypes/prototype-dec-2019/includes/contact.html' %}
+</main>
+{% endblock %}

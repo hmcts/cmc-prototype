@@ -1,0 +1,117 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <!--  <a href="#" onclick="history.go(-1)" class="link-back">Back</a>  -->
+      <h1 class="heading-large">Terms of the agreement</h1>
+
+
+      <form action="../../task-list" method="get" class="form">
+
+
+      <br>
+      <table class="offer-table">
+        <thead>
+          <tr>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>The agreement</td>
+
+            <td>
+              {{ partyName( 'defendant' ) }}
+              {% if data['radio-pay-group']=="Immediately" %}
+              will pay the £{{ data['owe-amount'] or '1,200' }} immediately. {{ partyName( 'claimant' ) }} will receive the money no later than {{ now | date( 'add', 5, 'days') | date }}. Any cheques or transfers will be clear in {{ partyName( 'claimant' ) }}'s account by this date.
+              {% elseif data['radio-pay-group']=="Instalments"  %}
+              will repay £1,200, in instalments of
+                {% if data['instalment-first-payment'] %}
+                £{{data['instalment-first-payment']}}
+                {% else %}
+                £200
+                {% endif %}
+
+                {% if data['radio-payment-frequency'] %}
+                {{ data['radio-payment-frequency'] | lower  }}{% else %}
+                every month{% endif %}.
+              <br />
+              The first instalment will be paid by
+                {% if data['instalment-day'] %}
+                {{ ( data['instalment-month'] + ' ' + data['instalment-day'] + ' ' + data['instalment-year']) | date('D MMMM YYYY') }}{% else %}
+                31 March 2018{% endif %}.
+
+
+              {% elseif data['radio-pay-group']=="Set-date" %}
+              will pay the £{{ data['owe-amount'] or '1,200' }} no later than
+                {% if data['set-day'] %}
+                {{ ( data['set-month'] + ' ' + data['set-day'] + ' ' + data['set-year']) | date('D MMMM YYYY') }}
+                {% else %}
+                {{ date | date('add', 1, 'year') | date('D MMMM YYYY') }}
+                {% endif %}
+              {% else %}
+              will pay the £{{ data['owe-amount'] or '1,200' }} no later than {{ date | date('add', 1, 'year') | date('D MMMM YYYY') }}.
+              {% endif %}
+            </td>
+          </tr>
+          <tr>
+            <td>Completion date</td>
+            <td>
+
+              {% if data['radio-pay-group']=="Immediately" %}
+              {{ now | date( 'add', 5, 'days') | date }}
+              {% elseif data['radio-pay-group']=="Instalments" and data['instalment-month'] %}
+              {{ ( data['instalment-month'] + ' ' + data['instalment-day'] + ' ' + data['instalment-year']) | date('add', 1, 'year') | date('D MMMM YYYY') }}
+              {% elseif data['radio-pay-group']=="Set-date" %}
+                {% if data['set-day'] %}
+                {{ ( data['set-month'] + ' ' + data['set-day'] + ' ' + data['set-year']) | date('D MMMM YYYY') }}
+                {% else %}
+                {{ date | date('add', 1, 'year') | date('D MMMM YYYY') }}
+                {% endif %}
+              {% else %}
+              {{ date | date('add', 1, 'year') | date('D MMMM YYYY') }}
+              {% endif %}
+
+
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div>
+        <h3 class="heading-medium"></h3>
+
+        <p>This agreement settles the claim made by {{ partyName( 'claimant' ) }} against {{ partyName( 'defendant' ) }}. This includes   all money owed in the claim, for example court fees, expenses or interest.</p>
+        <p>Neither party can make any further claims relating to this case, other than to enforce it.</p>
+        <p>Either party can view and download this agreement from their Money Claims account. Both parties should keep a copy of this agreement.</p>
+
+
+        <h3 class="heading-medium">If the agreement is broken</h3>
+        <p>The claimant can request a County Court Judgment (CCJ) for any money still owed from this agreement.</p>
+      </div>
+
+        <h2 class="heading-medium">Sign the agreement</h2>
+
+        <p>Make sure this agreement includes everything you've agreed with {{ partyName( 'defendant' ) }} before signing. You won't be able to change this later.</p>
+        <div class="form-group">
+          <div class="multiple-choice text">
+            <input class="" id="HasAcceptedTermsAndConditions" type="checkbox" value="true">
+            <label for="HasAcceptedTermsAndConditions">I confirm I've read and accept the terms of the agreement.</label>
+          </div>
+        </div>
+
+        <input type="hidden" name="settlement" value="complete">
+        <input id="advert-option-next--button" type="submit" value="Save and continue" class="button">
+
+      </form>
+    </div>
+  </div>
+{% include 'prototypes/prototype-dec-2019/includes/contact.html' %}
+</main>
+{% endblock %}

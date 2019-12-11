@@ -1,0 +1,74 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="2" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <!--  <a href="#" onclick="history.go(-1)" class="link-back">Back</a>  -->
+      <h1 class="heading-large">
+          What are you asking the court to change?
+      </h1>
+
+      <form action="why" method="get" class="form">
+
+        <div class="form-group">
+          <fieldset>
+            <legend class="visually-hidden">Suggest a resolution</legend>
+            <span class="form-hint">
+              Don't include the reason for your request.
+            </span>
+
+            <textarea class="form-control form-control-3-4 form-control-medium"
+                id="general-application-what"
+                rows="4"
+                name="general-application-what"
+                cols="40"
+                type="text"
+                style="width: 95%; height: 90px;}"
+                ></textarea>
+            <br>
+
+            <div class="form-group">
+               <input type="submit" class="button" value="Continue"/>
+            </div>
+
+            <tr id="check-and-send">
+              <td>
+                <p><a href="../../defendant?defendant=3.2255">Save and return</a></p>
+              </td>
+            </tr>
+
+
+          </fieldset>
+        </div>
+
+      </form>
+    </div>
+  </div>
+  {% include 'prototypes/prototype-dec-2019/includes/contact.html' %}
+</main>
+
+
+<form method="post"  action="#" class="for4" style=" float: left; ">
+  <select style="height:25px;" onchange="window.location.href='?type='+this.value">
+    <option value="general"
+            {% if data['type'] != 'adjournment'  %}selected{% endif %}
+            >Generic</option>
+
+    <option value="adjournment"
+            {% if data['type'] == 'adjournment'  %}selected{% endif %}
+            >Adjournment</option>
+
+  </select>
+</form>
+
+
+
+{% endblock %}

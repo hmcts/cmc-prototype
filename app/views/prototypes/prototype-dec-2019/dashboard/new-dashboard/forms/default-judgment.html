@@ -1,0 +1,550 @@
+<style>
+#content {
+  margin-top:3em
+}
+@page {
+  size: 8.5in 11in;
+  margin: 10%;
+  @top-right {
+    content: "Page " counter(page) " of " counter(pages);
+    /*noinspection CssNoGenericFontName*/
+    font-family: "Open Sans";
+  }
+}
+html {
+  /*noinspection CssNoGenericFontName*/
+  font-family: "Open Sans";
+  max-width: 960px;
+  margin: 0 auto;
+  background:#d9d9d9
+}
+#content{
+  background:#fff;
+  padding:70px;
+  padding-bottom: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+body {
+  counter-reset: section;
+  font-family: "nta", Arial, sans-serif;
+  font-weight: 400;
+  text-transform: none;
+  font-size: 19px;
+  line-height: 1.25;
+  -webkit-font-smoothing: antialiased;
+}
+.section {
+  margin-bottom: 25px;
+}
+.section .section-heading {
+  margin-bottom: 10px;
+}
+.section .section-heading strong:before {
+  counter-increment: section;
+  content: counter(section) ". ";
+}
+table {
+  width: 100%;
+  border-spacing: 0;
+}
+table td {
+  border-bottom: 1px solid #999;
+  padding: 5px;
+  text-align:left;
+  line-height: 1.25;
+  padding: 0.63158em 1.05263em 0.67368em 0;
+  font-size: 18px;
+  vertical-align:top;
+}
+p{
+  font-size: 18px;
+}
+table th {
+ text-align:left;
+ border-bottom: 1px solid #999;
+}
+table td:first-child {
+  width: 280px;
+  vertical-align: top;
+  font-weight:700;
+}
+td.single-cell{
+ font-weight:100!important;
+}
+.no-border{
+  border: none;
+}
+table td:last-child {
+  width: auto;
+}
+header table td, header table tr:last-child td {
+  border: none;
+}
+header td {
+  margin: 0;
+  padding: 0;
+}
+.heading-medium{
+  padding-bottom: 0;
+  margin-bottom: 0.4em;
+  margin-top: 1.5em;
+  font-size:22px;
+}
+.claim-number {
+  font-weight:700;
+  font-size:19px;
+}
+.crestLogo tr td:nth-child(1) {
+  width: 30%;
+}
+.crest{
+  width:80%
+}
+h1 {
+  font-weight:100;
+  font-size:24px;
+}
+.seal{
+  width: 12%;
+  float: right;
+}
+.page-title {
+  text-align:center;
+  padding-top:20px;
+  font-size:14px
+}
+.page-title span{
+  float:right
+}
+.crestLogo{
+  margin-top:40px
+}
+.page-break{
+  background: #d9d9d9;
+  margin-left: -70px;
+  margin-right: -70px;
+  margin-top: 20px;
+}
+.claim-details{
+  text-align:right
+}
+.footer td{
+  font-size:10px;
+  padding-top:40px;
+  border-bottom: none;
+}
+.footer td:nth-child(3){
+  text-align:right
+}
+</style>
+<main id="content"  role="main">
+  <header>
+
+      <table class="crestLogo">
+        <tbody>
+          <tr>
+            <td></td>
+            <td rowspan="2" class="claim-details">
+              <h1>Request for judgment by default</h1>
+
+              <p>In the County Court Business Centre Online Civil Money Claims</p>
+
+              <p><strong>Claim number:</strong> 000LR095<br>
+              <strong>Requested:</strong> {{ now | date }} at 3:25PM</p></td>
+            </tr>
+          </tbody>
+    </table>
+    </header>
+    {% if data.counterclaim=="true" %}
+    {%else%}
+    <table >
+      <thead>
+        <tr>
+          <th colspan="2">
+            <h2 class="heading-medium" id="name">
+              1. Claimant's details
+            </h2>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+           {% if  data['check'] =='2'%}Company name{% else %}Name{% endif %}:
+         </td>
+         <td>
+           {% if  data['check'] =='2'%}{{ partyName( 'claimant', 'last' ) }} Limited{% else %}{{ partyName( 'claimant' ) }}{% endif %}
+         </td>
+       </tr>
+       {% if  data['check'] =='2'%}
+       <tr>
+        <td>
+          Contact name:
+        </td>
+        <td>
+         Jane Smith
+       </td>
+     </tr>
+     {% endif %}
+     <tr>
+      <tr>
+        <td class="">
+          Address:
+        </td>
+        <td class="">
+          101 Regents Road<br>
+          Shiplake<br>
+          Henley on Thames<br>
+          RG9 4BW
+        </td>
+      </tr>
+     <tr>
+      <tr>
+        <td>
+          Telephone:
+        </td>
+        <td>
+         07824999612
+       </td>
+     </tr>
+   </tbody>
+ </table>
+ <table >
+  <thead>
+    <tr>
+      <th colspan="2">
+        <h2 class="heading-medium" id="name">
+          2. Defendant's details
+        </h2>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        {% if  data['check'] =='2'%}Organisation name{% else %}Name{% endif %}:
+      </td>
+      <td>
+        {% if  data['check'] =='2'%}Bristol kennel club {% else %}{{ partyName( 'defendant' ) }}{% endif %}
+      </td>
+    </tr>
+    {% if  data['check'] =='2'%}
+    <tr>
+      <td>
+        Contact name:
+      </td>
+      <td>
+       Burt Peters
+     </td>
+   </tr>
+   {% endif %}
+   <tr>
+    <tr>
+      <td class="">
+        Address:
+      </td>
+      <td class="">
+        24 Acacia Drive<br>
+        London<br>
+        SW1 H9A<br>
+      </td>
+    </tr>
+    <tr>
+      <tr>
+        <td>
+          Email:
+        </td>
+        <td>
+          {% if  data['check'] =='2'%}burt@dawgs.com{% else %}{{ partyName( 'defendant', 'email' ) }}@gmail.com{% endif %}
+        </td>
+      </tr>
+      {% if  data['check'] =='2' %}
+      {% else %}
+      <tr>
+        <td>
+          Date of birth:
+        </td>
+        <td>
+         31 January 1982
+       </td>
+     </tr>
+     {% endif %}
+   </tbody>
+ </table>
+ {%endif%}
+ <table class="footer">
+  <tbody>
+    <tr>
+      <tr>
+        <td>
+          N225
+        </td>
+        <td>
+          For further details of the courts www.gov.uk/find-court-tribunal
+        </td>
+        <td >
+          &copy; Crown copyright Page 1 of 2
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="page-break">&nbsp;</div>
+  <p class="page-title"> <span>Claim number: 000LR095</span></p>
+  <table class="check-your-answers">
+    <thead>
+      <tr>
+        <th colspan="2">
+          <h2 id="cd" class="heading-medium">
+            3. Claim amount details
+          </h2>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          Claim amount:
+        </td>
+        <td>
+         &pound;1000
+       </td>
+     </tr>
+     {% if  data['check'] =='1'%}
+     {% else %}
+     <tr>
+      <td>
+        Amount already paid by defendant:
+      </td>
+      <td>
+       &pound;100
+     </td>
+   </tr>
+   {% endif %}
+   {% if  data['check'] =='2'%}
+   <tr>
+    <td>
+      Interest rate claimed:
+    </td>
+    <td>
+     7%
+   </td>
+ </tr>
+ <tr>
+  <td>
+    Date interest is claimed from:
+  </td>
+  <td>
+   1 October 2017
+ </td>
+</tr>
+<tr>
+  <td>
+    Interest daily amount:
+  </td>
+  <td>
+   &pound;0.49
+ </td>
+</tr>
+{% endif %}
+<tr>
+  <td class="bold-medium {% if  data['check'] =='1'%}{% else %}no-border{% endif %}">
+    <span class="bold">How do you want the defendant to pay:</span>
+  </td>
+  <td class=" {% if  data['check'] =='1'%}{% else %}no-border {% endif %}">
+   {% if  data['check'] =='2'%}Instalments{% elseif data['check'] =='3' %}Set date{% else %}Immediately{% endif %}
+ </td>
+</tr>
+{% if  data['check'] =='2'%}
+<tr>
+  <td class="no-border">
+    Instalments of:
+    <td class="no-border">
+     &pound;100
+   </td>
+   <td class="change-answer no-border">
+   </td>
+ </tr>
+ <tr>
+  <td class="no-border">
+    When you want them to make the first payment:
+    <td  class="no-border">
+     23 September 2017
+   </td>
+   <td class="change-answer no-border">
+   </td>
+ </tr>
+ <tr>
+  <td>
+    How often you want them to make this payment:
+    <td>
+     Monthly
+   </td>
+   <td class="change-answer">
+   </td>
+ </tr>
+ {% endif %}
+ {% if  data['check'] =='3'%}
+ <tr>
+  <td >
+    When you want them to pay the amount:
+    <td>
+     15 March 2018
+   </td>
+   <td class="change-answer">
+   </td>
+ </tr>
+ {% endif %}
+</tbody>
+</table>
+<table class="check-your-answers">
+  <thead>
+    <tr>
+      <th colspan="2">
+        <h2 id="cd" class="heading-medium">
+          4. Total amount
+        </h2>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        Claim amount:
+      </td>
+      <td>
+       &pound;{% if  data['check'] =='1'%}1000{% else %}900{% endif %}
+     </td>
+   </tr>
+   {% if data['check'] =='1'%}
+   {% else %}
+   <tr>
+    <td>
+     Interest to date of judgment:
+   </td>
+   <td>
+     &pound;14
+   </td>
+ </tr>
+ {% endif %}
+ <tr>
+  <td>
+    Claim fee:
+  </td>
+  <td>
+   &pound;350
+ </td>
+</tr>
+<tr>
+  <td class="bold-medium">
+    <span class="bold">Total:</span>
+  </td>
+  <td>
+    <strong> &pound;{% if  data['check'] =='1' %}1350{% else %}1364{% endif %}</strong>
+  </td>
+</tr>
+</tbody>
+</table>
+<table >
+  <thead>
+    <tr>
+      <th colspan="2">
+        <h2 class="heading-medium">
+          5. Declaration
+        </h2>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="no-border">
+      </td>
+      <td class="no-border">
+        I declare that the details I have given are true to the best of my knowledge.
+      </td>
+    </tr>
+    {% if  data['check'] =='2' %}
+    <tr>
+      <td class="no-border">
+      </td>
+      <td class="no-border">
+        <strong>Company:</strong> {{ partyName( 'claimant', 'last' ) }} Limited
+      </td>
+    </tr>
+    <tr>
+      <td class="no-border">
+      </td>
+      <td class="no-border">
+        <strong>Name:</strong> Teresa Jones
+      </td>
+    </tr>
+    <tr>
+      <td class="no-border">
+      </td>
+      <td class="no-border">
+        <strong>Job title:</strong> Owner/Director
+      </td>
+    </tr>
+    {% else %}
+    <tr>
+      <td class="no-border">
+      </td>
+      <td class="no-border">{{ partyName( 'claimant' ) }}
+      </td>
+    </tr>
+    {% endif %}
+    <tr>
+      <td>
+      </td>
+      <td>
+        <span class="dates2"></span>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<table class="footer">
+  <tbody>
+    <tr>
+      <tr>
+        <td>
+          N225
+        </td>
+        <td>
+          For further details of the courts www.gov.uk/find-court-tribunal
+        </td>
+        <td >
+          &copy; Crown copyright Page 2 of 2
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</main>
+<form method="post"  action="#" class="form" style="position: absolute">
+  <select id="check2" name="check2" onchange="window.location.href='?check='+this.value">
+    <option  value="0" >Choose</option>
+    <option  value="1" {% if data['check'] == 1 %}selected{% endif %}>1. Immediate payment no interest - individual </option>
+    <option  value="2" {% if data['check'] == 2 %}selected{% endif %}>2. Instalments  - business</option>
+    <option  value="3" {% if data['check'] == 3 %}selected{% endif %}>3. Set date - Sole trader</option>
+  </select>
+</form>
+<script src="{{ asset_path }}/javascripts/jquery-1.11.3.js"></script>
+<script>
+  $(document).ready(function() {
+    var monthNames = [ "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December" ];
+    var monthNamesCal = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+    "Jul", "Aug", "Sept", "Oct", "Nov", "Dec" ];
+    var newDate = new Date();
+    newDate.setDate(newDate.getDate()+ 14) ;
+    var newDate2 = new Date();
+    newDate2.setDate(newDate2.getDate()) ;
+    var newDate3 = new Date();
+    newDate3.setDate(newDate3.getDate()+ 28);
+    var newDate4 = new Date();
+    newDate4.setDate(newDate4.getDate())+ 100 ;
+/*$('#Date').html(" " + newDate.getDate() + ' ' + monthNames[newDate.getMonth()] + ' ' + newDate.getFullYear());
+*/$('#Date, .dates').html(" " + newDate.getDate() + ' ' + monthNames[newDate.getMonth()] + ' ' + newDate.getFullYear());
+$('#Date2, .dates2').html(" " + newDate2.getDate() + ' ' + monthNames[newDate2.getMonth()] + ' ' + newDate2.getFullYear());
+$('#Date3, .dates3').html(" " + newDate3.getDate() + ' ' + monthNames[newDate3.getMonth()] + ' ' + newDate3.getFullYear());
+$('#DateCal, .datesCal').html(" " + newDate4.getDate() + ' ' + monthNamesCal[newDate4.getMonth()] + ' ' + newDate4.getFullYear());
+});
+</script>

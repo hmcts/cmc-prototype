@@ -1,0 +1,66 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="4" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <!--  <a href="#" onclick="history.go(-1)" class="link-back">Back</a>  -->
+      {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and
+      data.return_page.includes('check-your-answers')%}
+      <form method="post" action="{{ data.return_page if data.return_page | length > 0 else '../task-list' }}"
+            class="form">
+        {% else %}
+        <form method="post" action="previous-phone" class="form">
+          {% endif %}
+          {{formData | safe}}
+          <h1 class="heading-large">
+            Mediation call
+          </h1>
+          <div class="">
+            <p>If neither party opts out of mediation, a mediator will arrange a call.</p>
+            <p>The call will take up to an hour, between 9am and 5pm on Monday to Friday.</p>
+
+            <label class="form-label-bold" for="">
+              Enter any dates and times you are not available
+            </label>
+            <span class="hint-underneath">Appointments are limited, content - might not be able to schedule one... think the mediation team will only try to call three times.</span>
+
+          </div>
+
+
+          <fieldset>
+            <legend class="visuallyhidden">
+
+            </legend>
+            <textarea class="form-control"
+                      id="additional-information"
+                      rows="3"
+                      name="additional-information"
+                      type="text"
+                      style="width: 100%"
+                      value="{{data['time-unavailable']}}"></textarea>
+          </fieldset>
+          {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and
+          data.return_page.includes('check-your-answers')%}
+          <div class="form-group">
+            <input type="submit" class="button" value="Save changes"/>
+          </div>
+          <a href="{{ data.return_page if data.return_page | length > 0 else '../task-list' }}">Cancel</a>
+          {% else %}
+          <div class="form-group">
+            <input type="submit" class="button" value="Save and continue"/>
+          </div>
+          {% endif %}
+        </form>
+    </div>
+  </div>
+{% include 'prototypes/prototype-dec-2019/includes/contact.html' %}
+</main>
+{% endblock %}

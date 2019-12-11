@@ -1,0 +1,99 @@
+
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <!--  <a href="#" onclick="history.go(-1)" class="link-back">Back</a>  -->
+
+      <form method="get" autocomplete="off" action="check-and-send">
+
+        <h1 class="heading-large">Do you want to add more details?</h1>
+
+        <p>We'll include these in your witness statement.</p>
+
+
+        <fieldset>
+          <div class="multiple-choice" data-target="details" >
+            <input id="radio-1" type="radio" name="details" value="yes"/>
+            <label for="radio-1">Yes</label>
+          </div>
+          <div class="panel panel-border-narrow js-hidden" id="details">
+
+
+            <details>
+              <summary>See a list of your evidence</summary>
+              <table>
+                <tbody>
+                  <tr>
+                    <td style="width: 100px; font-weight: bold">
+                      Exhibit A1
+                    </td>
+                    <td>
+                      <a href="#">Emails.pdf</a>
+                      <br />You can see the emails dated {{ date | date('subtract', 123, 'days') | date }} and {{ date | date('subtract', 134, 'days') | date }} that they claimed not to receive.
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td style="width: 100px; font-weight: bold">
+                      Exhibit A2
+                    </td>
+                    <td>
+                      <a href="#">Photo 1.jpg</a>
+                      <br />The photos show that the roof was not adequately supported.
+                    </td>
+                    <td class="change-answer no-border"></td>
+                  </tr>
+
+                  <tr>
+                    <td style="width: 100px; font-weight: bold">
+                      Exhibit A3
+                    </td>
+                    <td>
+                      <a href="#">Photo 2.jpg</a>
+                    </td>
+                    <td class="change-answer no-border"></td>
+                  </tr>
+
+                  <tr>
+                    <td style="width: 100px; font-weight: bold">
+                      Exhibit A4
+                    </td>
+                    <td>
+                      <a href="#">Contract.pdf</a>
+                      <br />The signed contract shows the materials we agreed to use.
+                    </td>
+                    <td class="change-answer"></td>
+                  </tr>
+
+                </tbody>
+              </table>
+            </details>
+
+            <textarea style="height: 400px"></textarea>
+          </div>
+          <div class="multiple-choice">
+            <input id="radio-2" type="radio" name="details" value="no" />
+            <label for="radio-2">No</label>
+          </div>
+        </fieldset>
+
+      <div class="form-group">
+        <input type="submit" class="button" value="Save and continue"/>
+      </div>
+
+    </form>
+  </div>
+</div>
+{% include 'prototypes/prototype-dec-2019/includes/contact.html' %}
+</main>
+{% endblock %}
