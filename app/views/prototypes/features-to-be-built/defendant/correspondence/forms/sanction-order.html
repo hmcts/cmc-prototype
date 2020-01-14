@@ -184,9 +184,23 @@ h1 {
 
   <br />
 
-  <p>{% if data['party'] == 'claimant' %}Mary Richards{% elseif data['party'] == 'both' %}Mary Richards and Jan Clark{% else %}Jan Clark{% endif %} missed the deadline to tell us they'd finished uploading their hearing information. The deadline was 4pm on {{ date | date('subtract', 1, 'days') | date }}.</p>
+  <p>{% if data['party'] == 'claimant' %}{{ partyName( 'claimant' ) }}{% elseif data['party'] == 'both' %}{{ partyName( 'claimant' ) }} and {{ partyName( 'defendant' ) }}{% else %}{{ partyName( 'defendant' ) }}{% endif %} missed the deadline to tell the court they'd finished doing what the court ordered them to do. The deadline was 4pm on {{ date | date('subtract', 1, 'days') | date }}.</p>
 
-  <p>They now have until 4pm on {{ date | date('add', 12, 'days') | date }} to upload the hearing information and tell us they've finished, otherwise the court will cancel their {% if data['party'] == 'claimant' %}defence{% else %}claim{% endif %}.</p>
+  {% if data['party'] == 'both' %}
+
+  <p>The court now orders both parties to do everything the court originally ordered, and tell the court they've finished, before 4pm on {{ date | date('add', 12, 'days') | date }}.</p>
+
+  <p>The court will cancel the claim or defence of any party who fails to do this.</p>
+
+  {% elseif data['party'] == 'claimant' or data['party'] == 'defendant' %}
+
+  <p>The court now orders them to do everything the court originally ordered, and tell the court they've finished, before 4pm on {{ date | date('add', 12, 'days') | date }}.
+  <p>If they don't do this, the court will cancel {% if data['party'] == 'claimant' %}their claim{% elseif data['party'] == 'defendant' %}their defence{% elseif data['party'] == 'both' %}their claim or their defence{% endif %}.</p>
+  </p>
+
+
+  {% endif %}
+
 
   <table class="footer" style="margin-top: 600px">
     <tbody>
