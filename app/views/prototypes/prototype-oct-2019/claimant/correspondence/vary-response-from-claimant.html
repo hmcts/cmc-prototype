@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<!--[if lt IE 9]><html class="lte-ie8" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--><html lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8" />
+  <style>
+    #content {
+      margin-top:3em;
+      position: relative;
+    }
+    @page {
+      size: 8.5in 11in;
+      margin: 10%;
+      @top-right {
+        content: "Page " counter(page) " of " counter(pages);
+        /*noinspection CssNoGenericFontName*/
+        font-family: "Open Sans";
+      }
+    }
+    html {
+      /*noinspection CssNoGenericFontName*/
+      font-family: "Open Sans";
+      max-width: 960px;
+      margin: 0 auto;
+      background:#d9d9d9
+    }
+    #content{
+      background:#fff;
+      padding:70px;
+      padding-bottom: 10px;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+    body {
+      counter-reset: section;
+      font-family: "nta", Arial, sans-serif;
+      font-weight: 400;
+      text-transform: none;
+      font-size: 19px;
+      line-height: 1.25;
+      -webkit-font-smoothing: antialiased;
+    }
+    .section {
+      margin-bottom: 25px;
+    }
+    .section .section-heading {
+      margin-bottom: 10px;
+    }
+    .section .section-heading strong:before {
+      counter-increment: section;
+      content: counter(section) ". ";
+    }
+    table {
+      width: 100%;
+      border-spacing: 0;
+    }
+    table td {
+      border-bottom: 1px solid #999;
+      padding: 5px;
+      text-align:left;
+      line-height: 1.25;
+      padding: 0.63158em 1.05263em 0.67368em 0;
+      font-size: 18px;
+      vertical-align:top;
+    }
+    p{
+      font-size: 18px;
+    }
+    table th {
+      text-align:left;
+      border-bottom: 1px solid #999;
+    }
+    table td:first-child {
+      width: 280px;
+      vertical-align: top;
+      font-weight:700;
+    }
+    td.single-cell{
+      font-weight:100!important;
+    }
+    .no-border{
+      border: none;
+    }
+    table td:last-child {
+      width: auto;
+    }
+    header table td, header table tr:last-child td {
+      border: none;
+    }
+    header td {
+      margin: 0;
+      padding: 0;
+    }
+    .heading-medium{
+      padding-bottom: 0;
+      margin-bottom: 0.4em;
+      margin-top: 1.5em;
+      font-size:22px;
+    }
+    .claim-number {
+      font-weight:700;
+      font-size:19px;
+    }
+    .crestLogo tr td:nth-child(1) {
+      width: 30%;
+    }
+    .crest{
+      width:80%
+    }
+    h1 {
+      font-weight:100;
+      font-size:24px;
+    }
+    .seal{
+      width: 12%;
+      float: right;
+    }
+    .page-title {
+      text-align:center;
+      padding-top:20px;
+      font-size:14px
+    }
+    .page-title span{
+      float:right
+    }
+    .crestLogo{
+      margin-top:40px
+    }
+    .page-break{
+      background: #d9d9d9;
+      margin-left: -70px;
+      margin-right: -70px;
+      margin-top: 20px;
+    }
+    .claim-details{
+      text-align:right
+    }
+    .footer td{
+      font-size:10px;
+      padding-top:40px;
+      border-bottom: none;
+    }
+    .footer td:nth-child(3){
+      text-align:right
+    }
+
+    ol {
+      counter-reset: item;
+      list-style-type: none;
+    }
+
+    li {
+      margin-bottom: 10px;
+    }
+
+    li:before {
+      content: "2." counters(item, ".") " ";
+      counter-increment: item;
+      position: absolute;
+      left: 70px;
+      color: #888;
+    }
+
+  </style>
+</head>
+
+
+
+<main id="content"  role="main">
+  <header>
+    <table class="crestLogo">
+      <tbody>
+          <tr>
+            <td></td>
+            <td rowspan="2" class="claim-details">
+              <h1>Response to Vary Judgment request</h1>
+
+              <p>In the County Court Business Centre Online Civil Money Claims</p>
+              <p><strong>Claim number:</strong> 000LR095<br>
+                <strong>Received on:</strong> {{ now | date }} at 3:25PM</p></td>
+
+          </tr>
+      </tbody>
+    </table>
+  </header>
+
+
+
+    <!--  Proposed plan  -->
+    <table class="check-your-answers">
+      <thead>
+      <tr>
+        <th colspan="2"  class="no-border">
+          <h2 class="heading-medium" id="name">
+            Proposed plan
+          </h2>
+        </th>
+        <th class="no-border">
+        </th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <tr>
+        <td>
+          The defendant's proposal
+        </td>
+        <!-- Pay in installment content also needs considering -->
+        <td>
+          Pay in full by 28 July 2019
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          Your response to the plan
+        </td>
+        <!-- Pay in installment content also needs considering -->
+        <td>
+          {% if data.suggestownplan == 'true' %}
+          Rejected
+          {% else %}
+          Accepted
+          {% endif %}
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+
+
+
+
+  <div style="padding-bottom:40px" > </div>
+
+    {% if data.suggestownplan == 'true' %}
+        <!--  Claimant's plan  -->
+        <table class="check-your-answers">
+            <thead>
+            <tr>
+              <th colspan="2" class="no-border">
+                <h2 class="heading-medium" id="name">
+                  Alternative plan
+                </h2>
+              </th>
+              <th class="no-border">
+              </th>
+            </tr>
+            </thead>
+
+
+        <tbody>
+
+            <tr>
+              <td>
+                Your plan
+              </td>
+              <td>
+                Pay in full by 30 June 2019
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                The court's decision on your plan
+              </td>
+              <td>
+                {% if data['courtspaymentplan'] == 'true' %}
+                    Rejected
+                {% else %}
+                    Accepted
+                {% endif %}
+              </td>
+            </tr>
+
+
+            {% if data['courtspaymentplan'] == 'true' %}
+                <tr>
+                  <td>
+                    The court's plan
+                  </td>
+                  <td>
+                    Pay in full by 1 September 2019
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    Your decision on the court's plan
+                  </td>
+                  <td>
+                    {% if data['redeterminationrequested'] == 'true' %}
+                    Rejected
+                    {% else %}
+                    Accepted
+                    {% endif %}
+                  </td>
+                </tr>
+
+                {% if data['redeterminationrequested'] == 'true' %}
+                <tr>
+                  <td>
+                    Your reason for requesting a new plan
+                  </td>
+                  <td style="white-space: pre-wrap;">I know he can pay sooner because he just got a new car.</td>
+                </tr>
+                {% endif %}
+            {% endif %}
+
+
+
+          </tbody>
+        </table>
+    {% endif %}
+
+
+    <div style="padding-bottom:430px" > </div>
+
+
+    <table class="footer">
+      <tbody>
+      <tr>
+        <td>
+
+        </td>
+        <td></td>
+        <td>
+          &copy; Crown copyright Page 1 of 1
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+
+    <div>&nbsp;</div>
+    <!--  <div class="page-break">&nbsp;</div>  -->
+
+
+
+
+
+
+
+
+
+
+
+</main>
+
+
+
+
+
+
+<br>
+<br>
+
+
+
+
+<form method="post"  action="#" class="for4" style=" float: left; ">
+  <select style="height:25px;" onchange="window.location.href='?'+this.value">
+
+    <option value="suggestownplan=false&"
+            {% if data.suggestownplan == 'false' %}selected{% endif %}
+    >Accept defendant's proposed plan</option>
+    <option value="suggestownplan=true&courtspaymentplan=false&"
+            {% if data.suggestownplan == 'true' and data.courtspaymentplan != 'true' %}selected{% endif %}
+    >Claimant's proposed plan accepted by court</option>
+    <option value="suggestownplan=true&courtspaymentplan=true&redeterminationrequested=false&"
+            {% if data['courtspaymentplan'] == 'true' and  data['redeterminationrequested'] != 'true' %}selected{% endif %}
+    >Court's proposed plan accepted by Claimant</option>
+    <option value="suggestownplan=true&courtspaymentplan=true&redeterminationrequested=true&"
+            {% if data.suggestownplan == 'true' and data.courtspaymentplan != 'true' and data['redeterminationrequested'] == 'true' %}selected{% endif %}
+    >Court's proposed plan rejected by Claimant</option>
+  </select>
+</form>
+
+
+<br>
+<br>
+
+
+
+
+
+<script src="{{ asset_path }}/javascripts/jquery-1.11.3.js"></script>
+<script>
+  $(document).ready(function() {
+    var monthNames = [ "January", "February", "March", "April", "May", "June",
+      "July", "August", "September", "October", "November", "December" ];
+    var monthNamesCal = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+      "Jul", "Aug", "Sept", "Oct", "Nov", "Dec" ];
+    var newDate = new Date();
+    newDate.setDate(newDate.getDate()+ 14) ;
+    var newDate2 = new Date();
+    newDate2.setDate(newDate2.getDate()) ;
+    var newDate3 = new Date();
+    newDate3.setDate(newDate3.getDate()+ 28);
+    var newDate4 = new Date();
+    newDate4.setDate(newDate4.getDate())+ 100 ;
+    /*$('#Date').html(" " + newDate.getDate() + ' ' + monthNames[newDate.getMonth()] + ' ' + newDate.getFullYear());
+     */$('#Date, .dates').html(" " + newDate.getDate() + ' ' + monthNames[newDate.getMonth()] + ' ' + newDate.getFullYear());
+    $('#Date2, .dates2').html(" " + newDate2.getDate() + ' ' + monthNames[newDate2.getMonth()] + ' ' + newDate2.getFullYear());
+    $('#Date3, .dates3').html(" " + newDate3.getDate() + ' ' + monthNames[newDate3.getMonth()] + ' ' + newDate3.getFullYear());
+    $('#DateCal, .datesCal').html(" " + newDate4.getDate() + ' ' + monthNamesCal[newDate4.getMonth()] + ' ' + newDate4.getFullYear());
+  });
+</script>

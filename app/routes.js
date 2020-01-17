@@ -17,7 +17,6 @@ router.get('*/prototype-admin/view-data', function(req, res){
 });
 
 
-
 // add your routes here
 
 module.exports = router

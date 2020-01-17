@@ -172,9 +172,48 @@ var addCheckedFunction = function (app, nunjucksEnv) {
   })
 }
 
+var addPartyFunction = function (app, nunjucksEnv) {
+  app.use(function (req, res, next) {
+
+    nunjucksEnv.addGlobal('partyName', function (partyType, nameFormat, textCase) {
+
+      if ( partyType == 'claimant' ){ 
+        strFirstName = ( typeof req.session.names !== 'undefined' && typeof req.session.names.claimant !== 'undefined' && typeof req.session.names.claimant.first !== 'undefined' && req.session.names.claimant.first ) ? req.session.names.claimant.first : 'Sam';
+        strLastName = ( typeof req.session.names !== 'undefined' && typeof req.session.names.claimant !== 'undefined' && typeof req.session.names.claimant.last !== 'undefined'  && req.session.names.claimant.last ) ? req.session.names.claimant.last : 'Clark';
+      } else {
+        strFirstName = ( typeof req.session.names !== 'undefined' && typeof req.session.names.defendant !== 'undefined' && typeof req.session.names.defendant.first !== 'undefined' && req.session.names.defendant.first ) ? req.session.names.defendant.first : 'Alex';
+        strLastName = ( typeof req.session.names !== 'undefined' && typeof req.session.names.defendant !== 'undefined' && typeof req.session.names.defendant.last !== 'undefined' && req.session.names.defendant.last ) ? req.session.names.defendant.last : 'Richards';
+      }
+
+      switch ( nameFormat ) {
+        case 'first':
+          strName = strFirstName;
+          break;
+        case 'last':
+          strName = strLastName;
+          break;
+        case 'email':
+          strName = strFirstName + '.' + strLastName;
+          break;
+        default:
+          strName = strFirstName + ' ' + strLastName;
+          break;  
+      }
+
+      if ( textCase == 'lower' || nameFormat == 'email' ) {
+        strName = strName.toLowerCase();
+      }
+
+      return strName;
+    });
+    next()
+  })
+}
+
 if (useAutoStoreData === 'true') {
   app.use(utils.autoStoreData)
   addCheckedFunction(app, nunjucksAppEnv)
+  addPartyFunction(app, nunjucksAppEnv)
   addCheckedFunction(documentationApp, nunjucksDocumentationEnv)
 }
 
@@ -191,7 +230,7 @@ app.get('/robots.txt', function (req, res) {
 })
 
 app.get('/prototype-admin/clear-data', function (req, res) {
-  req.session.destroy()
+  req.session.data = {}; 
   res.render('prototype-admin/clear-data')
 })
 
@@ -265,6 +304,8 @@ require('./app/views/prototypes/prototype-jul-2019/routes/routes.js')(app);
 require('./app/views/prototypes/prototype-aug-2019/routes/routes.js')(app);
 require('./app/views/prototypes/prototype-sep-2019/routes/routes.js')(app);
 require('./app/views/prototypes/prototype-oct-2019/routes/routes.js')(app);
+require('./app/views/prototypes/prototype-nov-2019/routes/routes.js')(app);
+require('./app/views/prototypes/prototype-dec-2019/routes/routes.js')(app);
 
 // Returns a url to the zip of the latest release on github
 app.get('/prototype-admin/download-latest', function (req, res) {

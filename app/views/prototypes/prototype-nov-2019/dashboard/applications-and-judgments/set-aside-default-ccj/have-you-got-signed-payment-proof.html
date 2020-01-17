@@ -1,0 +1,73 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+
+{% block content %}
+
+
+<main id="content" role="main">
+
+  {% include "includes/phase_banner_beta.html" %}
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+      <!--  <a href="#" onclick="history.go(-1)" class="link-back">Back</a>  -->
+
+
+      {% if data['lower-amount']=="true" %}
+          <h1 class="heading-large">
+            Do you have a document, signed by {{ partyName( 'claimant' ) }}, confirming you've settled?
+          </h1>
+      {% else %}
+          <h1 class="heading-large">
+            Do you have a document, signed by {{ partyName( 'claimant' ) }}, confirming you've paid?
+          </h1>
+      {% endif %}
+
+
+
+      <form
+        name="aspnetForm"
+        method="post"
+        onsubmit="multiNavigation('radio-set-receive-claim', ['Yes', 'Yes-settle', 'No'], ['cancel-ccj-info-paid-or-settled?signedpaymentproof=true&', 'cancel-ccj-info-paid-or-settled?signedconsent=true&', 'cancel-ccj-info-paid-or-settled?signedconsent=false&signedpaymentproof=false&']);return false;"
+        id="aspnetForm"
+        autocomplete="off">
+
+        <div class="form-group">
+          <fieldset>
+
+
+            {% if data['lower-amount']=="true" %}
+                <div class="multiple-choice" data-target="pay">
+                  <input id="set-aside-yes" type="radio" name="radio-set-receive-claim" value="Yes-settle" aria-controls="paid-off" aria-expanded="false">
+                  <label for="set-aside-yes">Yes</label>
+                </div>
+            {% else %}
+                <div class="multiple-choice" data-target="pay">
+                  <input id="set-aside-yes" type="radio" name="radio-set-receive-claim" value="Yes" aria-controls="paid-off" aria-expanded="false">
+                  <label for="set-aside-yes">Yes</label>
+                </div>
+            {% endif %}
+
+            <div class="multiple-choice" data-target="vary">
+              <input id="set-aside-no" type="radio" name="radio-set-receive-claim" value="No" aria-controls="paid-off" aria-expanded="false">
+              <label for="set-aside-no">No</label>
+            </div>
+          </fieldset>
+        </div>
+
+        <div class="form-group">
+          <input type="submit" class="button" value="Continue" />
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+
+  {% include 'prototypes/prototype-nov-2019/includes/contact.html' %}
+</main>
+{% endblock %}

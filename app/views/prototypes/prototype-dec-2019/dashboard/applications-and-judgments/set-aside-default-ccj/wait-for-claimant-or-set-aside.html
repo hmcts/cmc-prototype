@@ -1,0 +1,111 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+
+{% block content %}
+
+
+<main id="content" role="main">
+
+  {% include "includes/phase_banner_beta.html" %}
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+      <!--  <a href="#" onclick="history.go(-1)" class="link-back">Back</a>  -->
+      <div class="">
+          {% if data['lower-amount']=="true" %}
+              <h1 class="heading-large">
+                Settle or apply to cancel the judgment
+              </h1>
+          {% else %}
+              <h1 class="heading-large">
+                Contact {{ partyName( 'claimant' ) }} to arrange payment
+              </h1>
+          {% endif %}
+      </div>
+
+
+      <div class="">
+
+
+          <!-- <p class="heading-medium">Resolving the claim</p> -->
+          <p>If you don't think you owe the full claim amount, you can can try to settle with {{ partyName( 'claimant' ) }}.</p>
+
+          <br>
+          <div class="notice">
+            <i class="icon icon-important">
+              <span class="visually-hidden">Warning</span>
+            </i>
+            <strong class="bold-small">
+              {{ partyName( 'claimant' ) }} can bring enforcement action if you don't comply with the judgment.
+            </strong>
+          </div>
+
+
+          <p>If you can't settle the claim, you can apply to cancel the judgment. It will be put on hold until a judge reviews it. You'll have to pay a fee of £255 and you might have to go to a hearing.</p>
+
+
+
+      <h2 class="heading-medium">Will you try to settle the claim?</h2>
+
+          <form
+            name="aspnetForm"
+            method="post"
+            onsubmit="multiNavigation('radio-set-receive-claim', ['Yes', 'No'],
+                                                        ['settle-part-admit?canpaynowanswered=complete&canpaynow=true&',
+                                                         'was-letter-received?canpaynowanswered=complete&contactclaimantstarted=false&contactedclaimantanswered=complete&has-settled=false&']);return false;"
+            id="aspnetForm"
+            autocomplete="off">
+
+
+            <div class="form-group">
+              <fieldset>
+
+                <div class="multiple-choice" data-target="pay">
+                  <input id="set-aside-yes" type="radio" name="radio-set-receive-claim" value="Yes"  >
+                  <label for="set-aside-yes">Yes, I'll contact the claimant</label>
+                </div>
+                <div class="panel panel-border-narrow js-hidden" id="pay" style="padding-bottom:15px;">
+                  <p>The claimant will still be able to enforce the judgment until they confirm you've settled.</p>
+                </div>
+
+                <div class="multiple-choice" data-target="vary">
+                  <input id="set-aside-no" type="radio" name="radio-set-receive-claim" value="No" >
+                  <label for="set-aside-no">No, I'll apply to cancel the judgment</label>
+                </div>
+                <div class="panel panel-border-narrow js-hidden" id="vary" style="padding-bottom:15px;">
+                  <p>You'll have to pay a £255 fee. You'll also have to enter a defence for the original claim.</p>
+                </div>
+
+
+              </fieldset>
+            </div>
+
+            <div class="form-group">
+              <input type="submit" class="button" value="Continue" />
+            </div>
+
+          </form>
+
+
+
+
+    </div>
+  </div>
+
+  {% include 'prototypes/prototype-dec-2019/includes/contact.html' %}
+</main>
+
+<form method="post"  action="#" class="form" style="float: left;">
+  <select id="control-box2" name="control-box2" onchange="window.location.href='settle-out-of-court?contactclaimantstarted=true&contactedclaimantanswered=complete&'+this.value">
+    <option value="true">Defendant</option>
+    <option value="true" >- Before 1 month CCJ deadline</option>
+    <option value="false">- After 1 month CCJ deadline</option>
+  </select>
+</form>
+
+
+{% endblock %}

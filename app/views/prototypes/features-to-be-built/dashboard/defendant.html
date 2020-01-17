@@ -187,16 +187,29 @@
                 Make sure you get receipts for any payments.</p>
 
               {% elseif data['defendant'] == 3.91 %}
-              <h2 class="heading-medium">We'll contact you to try to arrange a mediation appointment</h2>
-              <p>Jan Clark rejected your admission of £1,200. They believe you owe them the full {% if data['mediation-pilot'] == "on" %}£300{% else %}£1,500{% endif %} claimed.</p>
+              <h2 class="heading-medium">{{ partyName( 'claimant' ) }} rejected your admission of £1,200</h2>
+              <p>They believe you owe them the full {% if data['mediation-pilot'] == "on" %}£300{% else %}£1,500{% endif %} claimed.</p>
               <p>They've agreed to try mediation. We'll contact you to try to arrange an appointment.</p>
               <p><a href="mediation/how-mediation-works">Find out how mediation works</a></p>
+              <p>They've also sent us their hearing requirements.</p>
+              <p><a href="../claimant/correspondence/dqs" target="_blank">Download their hearing requirements</a> (PDF, 123KB)</p>
 
               {% elseif data['defendant'] == 3.92 %}
-              <h2 class="heading-medium">Wait for the court to review the case</h2>
-
-              <p>Jan Clark rejected your admission of £1,200. They believe you owe them the full {% if data['mediation-pilot'] == "on" %}£300{% else %}£1,500{% endif %} claimed.</p>
+              <h2 class="heading-medium">{{ partyName( 'claimant' ) }} rejected your admission of £1,200</h2>
+              <p>They believe you owe them the full {% if data['mediation-pilot'] == "on" %}£300{% else %}£1,500{% endif %} claimed.</p>
               <p>You might have to go to a court hearing. We'll contact you to tell you what to do next.</p>
+              <p>They've also sent us their hearing requirements.</p>
+              <p><a href="../claimant/correspondence/dqs" target="_blank">Download their hearing requirements</a> (PDF, 123KB)</p>
+
+              {% elseif data['defendant'] == 3.921 %}
+              <h2 class="heading-medium">{{ partyName( 'claimant' ) }} rejected your admission of £1,200</h2>
+              <p>They believe you owe them the full {% if data['mediation-pilot'] == "on" %}£300{% else %}£1,500{% endif %} claimed.</p>
+              <p>You'll have to go to a hearing.</p>
+              <p>You need to <a href="forms/dq-form">complete a directions questionnaire</a> form to give us more information before the hearing.</p>
+
+              <p>You must make sure we receive the form before 4pm on {{ now | date('add', 19, 'days') | date }} or we'll cancel your defence.</p>
+
+              <p>You also need to send a copy of the form to {{ partyName( 'claimant' ) }}.</p>
 
 
               {% elseif data['defendant'] == 3.94 %}
@@ -513,9 +526,10 @@
 
 
               {% elseif data['defendant'] == 5.6 %}
-              <h2 class="heading-medium">Wait for the court to review the case</h2>
-              <p>The claimant has rejected your defence.</p>
+              <h2 class="heading-medium">{{ partyName( 'claimant' ) }} rejected your response</h2>
               <p>The court will review the case. We'll contact you to tell you what to do next.</p>
+              <p>They've also sent us their hearing requirements.</p>
+              <p><a href="../claimant/correspondence/dqs" target="_blank">Download their hearing requirements</a> (PDF, 123KB)</p>
 
 
               {% elseif data['defendant'] == 5.601 %}
@@ -529,10 +543,30 @@
 
 
               {% elseif data['defendant'] == 5.61 %}
-              <h2 class="heading-medium">You've both agreed to try mediation</h2>
-              <p>Jan Clark has rejected your defence.</p>
-              <p> We'll contact you to try to arrange a call with the mediator.</p>
+              <h2 class="heading-medium">{{ partyName( 'claimant' ) }} rejected your response</h2>
+              <p>You've both agreed to try mediation. We'll contact you to try to arrange a call with a mediator.</p>
               <p><a href="mediation/how-mediation-works">Find out how mediation works</a></p>
+              <p>They've also sent us their hearing requirements.</p>
+              <p><a href="../claimant/correspondence/dqs" target="_blank">Download their hearing requirements</a> (PDF, 123KB)</p>
+
+              {% elseif data['defendant'] == 5.71 %}
+              <h2 class="heading-medium">You couldn't resolve {{ partyName( 'claimant' ) }}'s claim against you using mediation</h2>
+              <p>The court will review the case. We'll contact you to tell you what to do next.</p>
+              <p><a href="../claimant/correspondence/dqs" target="_blank">Download {{ partyName( 'claimant' ) }}'s hearing requirements</a> (PDF, 123KB)</p>
+
+              {% elseif data['defendant'] == 5.73 %}
+              <h2 class="heading-medium">You couldn't resolve {{ partyName( 'claimant' ) }}'s claim against you using mediation</h2>
+              <p>You'll have to go to a hearing - follow these steps:</p>
+
+                <ol class="list list-number">
+                  <li>  <a href="forms/dq-form">Complete a directions questionnaire</a> form to give us more information before the hearing.</li>
+                  <li>Make sure we receive the form before 4pm on {{ now | date('add', 19, 'days') | date }} or we'll cancel your claim.</li>
+                  <li>Send a copy of the completed form to {{ partyName( 'claimant' ) }}.</li>
+                </ol>
+
+                <h4 class="heading-small">Your defence will now proceed by post</h4>
+
+                <p>This online account won't be updated. No more details will appear here.</p>
 
 
               {% elseif data['defendant'] == 6 %}
@@ -567,35 +601,60 @@
               </div>
 
               {% elseif data['defendant'] == 8.1 %}
-                <h2 class="heading-medium">Wait for the court to review the case</h2>
-                <p>Jan Clark rejected your admission of £1,200.</p>
+              <h2 class="heading-medium">{{ partyName( 'claimant' ) }} rejected your admission of £1,200</h2>
+                <p>They accept that you paid them £1,200, but believe you owe the full {% if data['mediation-pilot'] == "on" %}£300{% else %}£1,500{% endif %} claimed.</p>
+                <p>The court will review the case. You might have to go to a hearing.</p>
+                <p>We'll contact you to tell you what to do next.</p>
+                <p>They've also sent us their hearing requirements.</p>
+                <p><a href="../claimant/correspondence/dqs" target="_blank">Download their hearing requirements</a> (PDF, 123KB)</p>
 
-                <p>They accept that you've paid them £1,200, but believe you owe the full {% if data['mediation-pilot'] == "on" %}£300{% else %}£1,500{% endif %} claimed.</p>
-                <p>You might have to go to a hearing. We'll contact you to tell you what to do next.</p>
+              {% elseif data['defendant'] == 8.11 %}
+              <h2 class="heading-medium">{{ partyName( 'claimant' ) }} rejected your admission of £1,200</h2>
+                <p>They accept that you paid them £1,200, but believe you owe the full {% if data['mediation-pilot'] == "on" %}£300{% else %}£1,500{% endif %} claimed.</p>
+                <p>You'll have to go to a hearing.</p>
+                <p>You need to <a href="forms/dq-form">complete a directions questionnaire</a> form to give us more information before the hearing.</p>
+
+                <p>You must make sure we receive the form before 4pm on {{ now | date('add', 19, 'days') | date }} or we'll cancel your defence.</p>
 
 
+                <p>You also need to send a copy of the form to {{ partyName( 'claimant' ) }}.</p>
 
               {% elseif data['defendant'] == 8.2 %}
               <div class="status-block single">
-                <h2 class="heading-medium">We'll contact you to try to arrange a mediation appointment</h2>
-                <p>Jan Clark rejected your admission of £1,200.</p>
-                <p>They accept that you've paid them £1,200, but believe you owe the full {% if data['mediation-pilot'] == "on" %}£300{% else %}£1,500{% endif %} claimed.</p>
+                <h2 class="heading-medium">{{ partyName( 'claimant' ) }} rejected your admission of £1,200</h2>
+                <p>They accept that you paid them £1,200, but believe you owe the full {% if data['mediation-pilot'] == "on" %}£300{% else %}£1,500{% endif %} claimed.</p>
                 <p>They've agreed to try mediation. We'll contact you to try to arrange an appointment.</p>
+                <p>They've also sent us their hearing requirements.</p>
+                <p><a href="../claimant/correspondence/dqs" target="_blank">Download their hearing requirements</a> (PDF, 123KB)</p>
+              </div>
               </div>
 
               {% elseif data['defendant'] == 8.3 %}
-                <h2 class="heading-medium">Wait for the court to review the case</h2>
-                <p>Jan Clark rejected your admission of £1,200.</p>
-                <p>They said you didn't pay them £1,200.</p>
-                <p>You might have to go to a court hearing. We'll contact you to tell you what to do next.</p>
+              <h2 class="heading-medium">{{ partyName( 'claimant' ) }} rejected your admission of £1,200</h2>
+                <p>They said you didn't pay this amount.</p>
+                <p>The court will review the case. You might have to go to a hearing.</p>
+                <p>We'll contact you to tell you what to do next.</p>
+                <p>They've also sent us their hearing requirements.</p>
+                <p><a href="../claimant/correspondence/dqs" target="_blank">Download their hearing requirements</a> (PDF, 123KB)</p>
+
+              {% elseif data['defendant'] == 8.31 %}
+              <h2 class="heading-medium">{{ partyName( 'claimant' ) }} rejected your admission of £1,200</h2>
+                <p>They said you didn't pay this amount.</p>
+                <p>You'll have to go to a hearing.</p>
+                <p>You need to <a href="forms/dq-form">complete a directions questionnaire</a> form to give us more information before the hearing.</p>
+
+                <p>You must make sure we receive the form before 4pm on {{ now | date('add', 19, 'days') | date }} or we'll cancel your defence.</p>
+
+                <p>You also need to send a copy of the form to {{ partyName( 'claimant' ) }}.</p>
 
 
               {% elseif data['defendant'] == 8.4 %}
               <div class="status-block single">
-                <h2 class="heading-medium">We'll contact you to try to arrange a mediation appointment</h2>
-                <p>Jan Clark rejected your admission of £1,200.</p>
-                <p>They said you didn't pay them £1,200.</p>
+                <h2 class="heading-medium">{{ partyName( 'claimant' ) }} rejected your admission of £1,200</h2>
+                <p>They said you didn't pay them this amount.</p>
                 <p>They've agreed to try mediation. We'll contact you to try to arrange an appointment.</p>
+                <p>They've also sent us their hearing requirements.</p>
+                <p><a href="../claimant/correspondence/dqs" target="_blank">Download their hearing requirements</a> (PDF, 123KB)</p>
               </div>
 
               {% elseif data['defendant'] == 9 %}
@@ -692,22 +751,16 @@
 
               <div class="status-block single">
                 <h2 class="heading-medium">The court has ordered you to send us more details</h2>
-                <p>You need to send these details before 4pm on {{ now | date( 'add', 12, 'days' ) | date }}:</p>
+                {% if data['defendant'] == 12.1 %}<p>You need to send details before 4pm on {{ now | date( 'add', 12, 'days' ) | date }}.{% endif %}</p>
 
-                <ul class="list list-bullet">
-                  <li>any documents relevant to the case, like contracts, agreements or letters</li>
-                  <li>witness statements</li>
-                </ul>
+
 
                 {% if data['defendant'] == 12.1001 %}
-                <p>You also need to send these details before 4pm on {{ now | date( 'add', 18, 'days' ) | date }}:</p>
-                <ul class="list list-bullet">
-                  <li>your expert's report</li>
-                  <li>responses to questions about the expert's report</li>
-                </ul>
+                <p>The first deadline you must send details by is before 4pm on {{ now | date( 'add', 12, 'days' ) | date }}.
+
                 {% endif %}
 
-                <p><a href="order-response?party=defendant" class="button" style="margin-bottom: 15px">Find out more</a></p>
+                <p><a href="order-response?party=defendant" class="button" style="margin-bottom: 15px">Find out what you need to send</a></p>
 
                 <p><a href="/public/images/order2.pdf">Download the court's order</a> (PDF, 123KB).</p>
                 <hr />
@@ -721,7 +774,7 @@
                 {% endif %}
 
                 <h2 class="heading-medium">View the claimant's response to the order</h2>
-                <p><a href="order-response/view?party=claimant" class="button secondary-button">See the details they sent the court</a></p>
+                <p><a href="order-response/view?party=claimant" class="button secondary-button">See the details {{ partyName( 'claimant' ) }} sent to the court</a></p>
 
                 {% if data['defendant'] == 12.6 %}
                 <h3 class="heading-small">View the claimant's response to your request to review the order</h3>
@@ -733,38 +786,28 @@
               {% elseif data['defendant'] == 12.1003 %}
 
               <div class="status-block single">
-                <h2 class="heading-medium">The court has ordered you to send us more details</h2>
-                <p>You need to send these details before 4pm on {{ now | date( 'add', 12, 'days' ) | date }}:</p>
-                <p>The court has ordered you to send these details:</p>
+                <h2 class="heading-medium">The court has ordered you to take actions to prepare for the hearing</h2>
+                <p>You need to send us details and do anything else the court ordered before 4pm on {{ now | date( 'add', 12, 'days' ) | date }}.</p>
 
-                <ul class="list list-bullet">
-                  <li>any documents relevant to the case, like contracts, agreements or letters</li>
-                  <li>witness statements</li>
-                  <li>additional information listed in the order</li>
-                  <li>confirmation you've completed additional actions listed in the order</li>
-                  </ul>
 
-                <p><a href="order-response?party=defendant&generic=true" class="button" style="margin-bottom: 15px">Find out more</a></p>
+                <p><a href="order-response?party=defendant&generic=true" class="button" style="margin-bottom: 15px">Find out what you need to do</a></p>
 
                 <p><a href="/public/images/order2.pdf">Download the court's order</a> (PDF, 123KB).</p>
                 <hr />
 
                 <h2 class="heading-medium">View the claimant's response to the order</h2>
-                <p><a href="order-response/view?party=claimant" class="button secondary-button">See the details they sent the court</a></p>
+                <p><a href="order-response/view?party=claimant" class="button secondary-button">See the details {{ partyName( 'claimant' ) }} sent to the court</a></p>
               </div>
 
               {% elseif data['defendant'] == 12.101 %}
               <div class="status-block single">
-                <h2 class="heading-medium">You didn't respond to the order</h2>
-                <p>You missed the original deadline of 4pm on {{ minus | date( 'subtract', 1, 'days' ) | date }}. You must send details before 4pm on {{ now | date( 'add', 11, 'days' ) | date }}.</p>
-                <p>The court has ordered you to send us:</p>
-                <ul class="list list-bullet">
-                  <li>any documents relevant to the case, like contracts, agreements or letters</li>
-                  <li>witness statements</li>
-                </ul>
-                <h2 class="heading-small">If you don't send us more details</h2>
-                <p>The court will cancel your defence after 4pm on {{ now | date( 'add', 11, 'days' ) | date }} and the claimant can request a County Court Judgment (CCJ) against you.</p>
-                <p><a href="order-response?party=defendant" class="button" style="margin-bottom: 15px">Find out more</a></p>
+                <h2 class="heading-medium">You missed the deadline to respond to the court's order</h2>
+                <p>You need to respond and send details before 4pm on {{ now | date( 'add', 12, 'days' ) | date }}.</p>
+
+                <p>If you don't, the court will cancel your defence and the claimant can request a County Court Judgment (CCJ) against you.</p>
+
+
+                <p><a href="order-response?party=defendant" class="button" style="margin-bottom: 15px">Respond and send details</a></p>
 
 
 
@@ -773,36 +816,33 @@
 
                 <hr />
                 <h2 class="heading-medium">View the claimant's response to the order</h2>
-                <p><a href="order-response/view?party=claimant" class="button secondary-button">See the details they sent the court</a></p>
+                <p><a href="order-response/view?party=claimant" class="button secondary-button">See the details {{ partyName( 'claimant' ) }} sent to the court</a></p>
               </div>
 
 
               {% elseif data['defendant'] == 12.1011 %}
               <div class="status-block single">
-                <h2 class="heading-medium">Your defence has been cancelled</h2>
-                <p>You didn't respond to the court order by the deadline.</p>
+                <h2 class="heading-medium">The court cancelled your defence</h2>
+                <p>This is because you didn't respond to the court's order by the deadline.</p>
                 <p>Jan Clark can now request a County Court Judgment (CCJ) against you. We'll contact you if they do.</p>
               </div>
 
 
               {% elseif data['defendant'] == 12.102 %}
               <div class="status-block single">
-                <h2 class="heading-medium">The claimant didn't respond to the order</h2>
-                <p>Jan Clark missed the original deadline to respond to the court's order.</p>
-                <p>They must now respond before 4pm on {{ now | date( 'add', 11, 'days' ) | date }} or the court will cancel their claim.</p>
-                <h2 class="heading-small">Download documents</h2>
-                <p>You can download:</p>
-                <ul class="list list-bullet">
-                  <li><a href="/public/images/order2.pdf">the court's original order</a>  (PDF, 123KB)</li>
-                  <li><a href="../defendant/correspondence/forms/sanction-order">the court's follow-up order</a> (PDF, 123KB)</li>
+                <h2 class="heading-medium">Sam Clark missed a deadline to respond to the court's order</h2>
+                <p>The deadline was 4pm on {{ minus | date( 'subtract', 1, 'days' ) | date }}.</p>
+                <p>They now need to respond before 4pm on {{ now | date( 'add', 11, 'days' ) | date }} or the court will cancel their claim.</p>
+                <p><a href="/public/images/order2.pdf" download>Download the court's original order</a> (PDF, 123KB).</p>
+                <p><a href="../defendant/correspondence/forms/sanction-order?party=defendant">Download the court's follow-up order</a> (PDF, 123KB).</p>
                 </ul>
 
               </div>
 
               {% elseif data['defendant'] == 12.103 %}
               <div class="status-block single">
-                <h2 class="heading-medium">The claim against you has been cancelled</h2>
-                <p>Jan Clark didn't respond to the court order by the deadline and the court cancelled their claim.</p>
+                <h2 class="heading-medium">The court cancelled Sam Clark's claim against you</h2>
+                <p>This is because Sam Clark didn't respond to the court's order by the deadline.</p>
               </div>
 
 
@@ -862,11 +902,11 @@
 
                 {% if data['defendant'] == 12.12 %}
                 <h2 class="heading-medium">A judge has issued a new order</h2>
-                <h3 class="heading-small">You must comply with the new order before 4pm on {{ now | date( 'add', 15, 'days' ) | date }}</h3>
-                <p>The judge has reviewed the request and issued a new order. You need to check what has changed in the order.</p>
-                <p>If you've already sent any documents requested in both orders, you don't need to send them again.</p>
-                <p><a href="/public/images/order2.pdf">Download the new order</a> (PDF, 123KB).</p>
-                <p><a href="/public/images/order-cancelled.pdf">Download the original order</a> (PDF, 123KB), which is now cancelled.</p>
+                <h2 class="heading-medium">A judge reviewed the request and made a new order</h2>
+                <p>Check the new order to see what's changed and do what it tells you to do before 4pm on {{ now | date( 'add', 15, 'days' ) | date }}.</h3>
+                <p>If you've already done what both orders told you to do, you don't need to repeat this.</p>
+                <p><a href="/public/images/order2.pdf" download>Download the new order</a> (PDF, 123KB).</p>
+                <p><a href="/public/images/order-cancelled.pdf" download>Download the original order</a> (PDF, 123KB), which is now cancelled.</p>
 
                 {% elseif data['defendant'] == 12.13 %}
                 <h2 class="heading-medium">A judge has reviewed the order</h2>
@@ -993,13 +1033,14 @@
 
               {% elseif data['defendant'] == 12.9 %}
               <div class="status-block single">
-                <h2 class="heading-medium">You responded to the order</h2>
-                <p>We'll review the case. We'll contact you to tell you what to do next.</p>
+                <h2 class="heading-medium">You told us you've finished responding</h2>
+                <p>You said you've done everything the court ordered you to do.</p>
+                <p>We'll review the case and contact you to tell you what to do next.</p>
 
                 <hr />
                 <h2 class="heading-medium">View the responses to the order</h2>
                 <p><a href="order-response/view?party=claimant&view=you" class="button secondary-button">See the details you sent to the court</a></p>
-                <p><a href="order-response/view?party=defendant&view=them" class="button secondary-button">See the details the defendant sent to the court</a></p>
+                <p><a href="order-response/view?party=defendant&view=them" class="button secondary-button">See the details {{ partyName( 'claimant' ) }} sent to the court</a></p>
 
               </div>
 
@@ -1055,7 +1096,7 @@
               <hr />
               <h2 class="heading-medium">View the responses to the order</h2>
               <p><a href="order-response/view?party=defendant&view=you" class="button secondary-button">See the details you sent to the court</a></p>
-              <p><a href="order-response/view?party=claimant&view=them" class="button secondary-button">See the details the claimant sent the court</a></p>
+              <p><a href="order-response/view?party=claimant&view=them" class="button secondary-button">See the details {{ partyName( 'claimant' ) }} sent to the court</a></p>
 
 
 
@@ -1071,7 +1112,7 @@
               <hr />
               <h2 class="heading-medium">View the responses to the order</h2>
               <p><a href="order-response/view?party=defendant&view=you" class="button secondary-button">See the details you sent to the court</a></p>
-              <p><a href="order-response/view?party=claimant&view=them" class="button secondary-button">See the details the claimant sent the court</a></p>
+              <p><a href="order-response/view?party=claimant&view=them" class="button secondary-button">See the details {{ partyName( 'claimant' ) }} sent to the court</a></p>
 
 
 
@@ -1082,7 +1123,7 @@
               <hr />
               <h2 class="heading-medium">View the responses to the order</h2>
               <p><a href="order-response/view?party=defendant&view=you" class="button secondary-button">See the details you sent to the court</a></p>
-              <p><a href="order-response/view?party=claimant&view=them" class="button secondary-button">See the details the claimant sent the court</a></p>
+              <p><a href="order-response/view?party=claimant&view=them" class="button secondary-button">See the details {{ partyName( 'claimant' ) }} sent to the court</a></p>
 
 
 
@@ -1157,7 +1198,7 @@
               <hr />
               <h2 class="heading-medium">View the responses to the order</h2>
               <p><a href="order-response/view?party=defendant&view=you" class="button secondary-button">See the details you sent to the court</a></p>
-              <p><a href="order-response/view?party=claimant&view=them" class="button secondary-button">See the details the claimant sent the court</a></p>
+              <p><a href="order-response/view?party=claimant&view=them" class="button secondary-button">See the details {{ partyName( 'claimant' ) }} sent to the court</a></p>
 
 
 
@@ -1183,13 +1224,13 @@
 
               {% elseif data['defendant'] == 17.1 %}
               <h2 class="heading-medium">This claim is settled</h2>
-              <p>Jan Clark confirmed you paid {% if data['mediation-pilot'] == "on" %}£300{% else %}£1,500{% endif %} on {{ now | date('subtract', 2, 'days') | date }}.</p>
+              <p>Jan Clark confirmed you settled on {{ now | date('subtract', 2, 'days') | date }}.</p>
 
 
 
               {% elseif data['defendant'] == 17.2 %}
                 <h2 class="heading-medium">This claim is settled</h2>
-              <p>Jan Clark confirmed you paid {% if data['mediation-pilot'] == "on" %}£300{% else %}£1,500{% endif %} on {{ now | date('subtract', 2, 'days') | date }}.</p>
+              <p>Jan Clark confirmed you settled on {{ now | date('subtract', 2, 'days') | date }}.</p>
               <p>We'll tell the Registry Trust to remove your County Court Judgment (CCJ) from the register of
                 judgments.</p>
               <p>The CCJ won't appear in credit agency searches, though some agencies may not update their records
@@ -1203,8 +1244,7 @@
 
               {% elseif data['defendant'] == 17.3 %}
                 <h2 class="heading-medium">This claim is settled</h2>
-                <p>Jan Clark confirmed you paid {% if data['mediation-pilot'] == "on" %}£300{% else %}£1,500{% endif %} on {{ now | date('subtract', 2, 'days') | date }}. This claim is
-                  now settled.</p>
+                <p>Jan Clark confirmed you settled on {{ now | date('subtract', 2, 'days') | date }}.</p>
                 <p>We'll tell the Registry Trust to mark your County Court Judgment (CCJ) as paid on the register of
                   judgments.</p>
 
@@ -1221,8 +1261,7 @@
 
               {% elseif data['defendant'] == 17.4 %}
                 <h2 class="heading-medium">This claim is settled</h2>
-              <p>Jan Clark confirmed you paid {% if data['mediation-pilot'] == "on" %}£300{% else %}£1,500{% endif %} on {{ now | date('subtract', 2, 'days') | date }}. This claim is
-                now settled.</p>
+              <p>Jan Clark confirmed you settled on {{ now | date('subtract', 2, 'days') | date }}.</p>
               <p>Your CCJ will remain on the register of judgments but it'll be marked as paid. This will happen within
                 2 days, though it may take longer for credit agencies to update their records.</p>
 
@@ -1249,8 +1288,9 @@
               <p>If they want to restart the claim, they need to ask for permission from the court. We'll contact you by post if they do this.</p>
 
               {% elseif data['defendant'] == 18.3 %}
-              <h2 class="heading-medium">You both agreed a settlement through mediation</h2>
-              <p>The claimant can't request a County Court Judgment against you unless you break the terms.</p>
+              <h2 class="heading-medium">You settled the claim through mediation</h2>
+              <p>You made an agreement which means the claim is now ended and sets out the terms of how you must repay {{ partyName( 'claimant' ) }}.</p>
+              <p><a href="../defendant/correspondence/forms/mediation-agreement">Download the agreement</a> (PDF, 123KB)</p>
               <p><a href="party-details/claimant">Contact Jan Clark</a> if you need their payment details. Make sure you get receipts for any payments.</p>
 
 
@@ -3256,16 +3296,14 @@
   <ul role="navigation" class="font-xsmall list">
   <li><strong class="bold">Claimant name:</strong><br> <a href="party-details/claimant">Jan Clark</a></li>
   <li><strong class="bold">Claim amount:</strong><br>£3240.34</li>
-  <li><strong class="bold">Claim details:</strong><br><a
-  href="../claimant/correspondence/claim-form-claimant?check=1">View counterclaim</a></li>
+  <li><strong class="bold">Claim details:</strong><br><a href="idam/view-claim">View claim</a> </li>
   </ul>
   {% else %}
   <ul role="navigation" class="font-xsmall list">
   <li><strong class="bold">Claimant name:</strong><br> <a href="party-details/claimant">Jan Clark</a></li>
   <li><strong class="bold">Claim amount:</strong><br>£1500</li>
-  <li><strong class="bold">Claim details:</strong><br><a
-  href="../claimant/correspondence/claim-form-claimant?check=1">Download claim</a></li>
-  {% if data['defendant'] == 16%}
+  <li><strong class="bold">Claim details:</strong><br><a href="idam/view-claim">View claim</a> </li>
+  {% if data['defendant'] > 3.22 %}
   <li><strong class="bold">Your response:</strong><br><a
   href="../defendant/correspondence/claim-form-defendant?check=9">Download response</a></li>
   {% else %}
@@ -3296,34 +3334,35 @@
     <option value="3.22" {% if data['defendant'] == 3.22 %}selected{% endif %}>Default CCJ issued - Before 1 month deadline</option>
 
     <option>------ Responses to claims -------</option>
-    <option value="3.3" {% if data['defendant'] == 3.3 %}selected{% endif %}>Responded on paper</option>
-    <option value="3.4" {% if data['defendant'] == 3.4 %}selected{% endif %}>Responded on paper - judgment cancelled</option>
-    <option value="3.902" {% if data['defendant'] == 3.902 %}selected{% endif %}>3.902 I admit part of the claim - immediately</option>
-    <option value="3.9" {% if data['defendant'] == 3.9 %}selected{% endif %}>3.9 I admit part of the claim - instalments</option>
-    <option value="3.9001" {% if data['defendant'] == 3.9001 %}selected{% endif %}>3.9001 I admit part of the claim - instalments (organisation)</option>
-    <option value="3.901" {% if data['defendant'] == 3.901 %}selected{% endif %}>3.901 I admit part of the claim - set date</option>
-    <option value="3.9011" {% if data['defendant'] == 3.9011 %}selected{% endif %}>3.9011 I admit part of the claim - set date (organisation)</option>
-    <option value="3.9012" {% if data['defendant'] == 3.9012 %}selected{% endif %}>3.9012 I admit part of the claim - set date - accepted</option>
-    <option value="3.903" {% if data['defendant'] == 3.903 %}selected{% endif %}>3.903 I admit part of the claim - pay immediately - accepted</option>
-    <option value="3.9031" {% if data['defendant'] == 3.9031 %}selected{% endif %}>3.9031 I admit part of the claim - pay immediately - accepted - not paid - CCJ</option>
-    <option value="3.904" {% if data['defendant'] == 3.904 %}selected{% endif %}>3.904 I admit part the claim - instalment plan payment - accepted</option>
-    <option value="3.91" {% if data['defendant'] == 3.91 %}selected{% endif %}>3.91 I admit part of the claim - rejected (mediation)</option>
-    <option value="3.92" {% if data['defendant'] == 3.92 %}selected{% endif %}>3.92 I admit part of the claim - rejected (no mediation)</option>
+    <option value="3.3" {% if data['defendant'] == 3.3 %}selected{% endif %}>3.3. Responded on paper</option>
+    <option value="3.4" {% if data['defendant'] == 3.4 %}selected{% endif %}>3.4. Responded on paper - judgment cancelled</option>
+    <option value="3.902" {% if data['defendant'] == 3.902 %}selected{% endif %}>3.902. I admit part of the claim - immediately</option>
+    <option value="3.9" {% if data['defendant'] == 3.9 %}selected{% endif %}>3.9. I admit part of the claim - instalments</option>
+    <option value="3.9001" {% if data['defendant'] == 3.9001 %}selected{% endif %}>3.9001. I admit part of the claim - instalments (organisation)</option>
+    <option value="3.901" {% if data['defendant'] == 3.901 %}selected{% endif %}>3.901. I admit part of the claim - set date</option>
+    <option value="3.9011" {% if data['defendant'] == 3.9011 %}selected{% endif %}>3.9011. I admit part of the claim - set date (organisation)</option>
+    <option value="3.9012" {% if data['defendant'] == 3.9012 %}selected{% endif %}>3.9012. I admit part of the claim - set date - accepted</option>
+    <option value="3.903" {% if data['defendant'] == 3.903 %}selected{% endif %}>3.903. I admit part of the claim - pay immediately - accepted</option>
+    <option value="3.9031" {% if data['defendant'] == 3.9031 %}selected{% endif %}>3.9031. I admit part of the claim - pay immediately - accepted - not paid - CCJ</option>
+    <option value="3.904" {% if data['defendant'] == 3.904 %}selected{% endif %}>3.904. I admit part the claim - instalment plan payment - accepted</option>
+    <option value="3.91" {% if data['defendant'] == 3.91 %}selected{% endif %}>3.91. I admit part of the claim - rejected (mediation)</option>
+    <option value="3.92" {% if data['defendant'] == 3.92 %}selected{% endif %}>3.92. I admit part of the claim - rejected (no mediation)</option>
+    <option value="3.921" {% if data['defendant'] == 3.921 %}selected{% endif %}>3.921. I admit part of the claim - rejected (no mediation) - paper DQs</option>
     <option value="3.94" {% if data['defendant'] == 3.94 %}selected{% endif %}>3.94. I admit part the claim - rejected - redetermination</option>
-
-    <option value="4" {% if data['defendant'] == 4 %}selected{% endif %}>I admit part of the claim - rejected - court offer - settlement</option>
-    <option value="4.001" {% if data['defendant'] == 4.001 %}selected{% endif %}>I admit part of the claim - rejected - claimant offer - settlement</option>
-    <option value="4.01" {% if data['defendant'] == 4.01 %}selected{% endif %}>I admit part of the claim - rejected - court offer - settlement - not signed - CCJ</option>
-    <option value="4.02" {% if data['defendant'] == 4.02 %}selected{% endif %}>I admit part of the claim - rejected - claimant offer - settlement - not signed - CCJ</option>
-    <option value="4.1" {% if data['defendant'] == 4.1 %}selected{% endif %}>I admit part of the claim - rejected - court offer - CCJ</option>
-    <option value="4.2" {% if data['defendant'] == 4.2 %}selected{% endif %}>I admit part of the claim - rejected - claimant offer - CCJ</option>
-    <option value="8" {% if data['defendant'] == 8 %}selected{% endif %}>4. States paid </option>
-    <option value="8.01" {% if data['defendant'] == 8.01 %}selected{% endif %}>States paid - less than</option>
-    <option value="8.1" {% if data['defendant'] == 8.1 %}selected{% endif %}>States paid - rejected - amount (no mediation)</option>
-    <option value="8.2" {% if data['defendant'] == 8.2 %}selected{% endif %}>States paid - rejected - amount (with mediation)</option>
-    <option value="8.3" {% if data['defendant'] == 8.3 %}selected{% endif %}>States paid - rejected - not paid (no mediation)</option>
-    <option value="8.4" {% if data['defendant'] == 8.4 %}selected{% endif %}>States paid - rejected - not paid (with mediation)</option>
-
+    <option value="4" {% if data['defendant'] == 4 %}selected{% endif %}>4. I admit part of the claim - rejected - court offer - settlement</option>
+    <option value="4.001" {% if data['defendant'] == 4.001 %}selected{% endif %}>4.001. I admit part of the claim - rejected - claimant offer - settlement</option>
+    <option value="4.01" {% if data['defendant'] == 4.01 %}selected{% endif %}>4.01. I admit part of the claim - rejected - court offer - settlement - not signed - CCJ</option>
+    <option value="4.02" {% if data['defendant'] == 4.02 %}selected{% endif %}>4.02. I admit part of the claim - rejected - claimant offer - settlement - not signed - CCJ</option>
+    <option value="4.1" {% if data['defendant'] == 4.1 %}selected{% endif %}>4.1. I admit part of the claim - rejected - court offer - CCJ</option>
+    <option value="4.2" {% if data['defendant'] == 4.2 %}selected{% endif %}>4.2. I admit part of the claim - rejected - claimant offer - CCJ</option>
+    <option value="8" {% if data['defendant'] == 8 %}selected{% endif %}>8. States paid </option>
+    <option value="8.01" {% if data['defendant'] == 8.01 %}selected{% endif %}>8.01. States paid - less than</option>
+    <option value="8.1" {% if data['defendant'] == 8.1 %}selected{% endif %}>8.1. States paid - rejected - amount (no mediation)</option>
+    <option value="8.11" {% if data['defendant'] == 8.11 %}selected{% endif %}>8.11. States paid - rejected - amount (no mediation) - paper DQs</option>
+    <option value="8.2" {% if data['defendant'] == 8.2 %}selected{% endif %}>8.2. States paid - rejected - amount (with mediation)</option>
+    <option value="8.3" {% if data['defendant'] == 8.3 %}selected{% endif %}>8.3. States paid - rejected - not paid (no mediation)</option>
+    <option value="8.31" {% if data['defendant'] == 8.31 %}selected{% endif %}>8.31. States paid - rejected - not paid (no mediation) - paper DQs</option>
+    <option value="8.4" {% if data['defendant'] == 8.4 %}selected{% endif %}>8.4. States paid - rejected - not paid (with mediation)</option>
     <option value="5" {% if data['defendant'] == 5 %}selected{% endif %}>5. I admit all the claim - set date payment</option>
     <option value="5.001" {% if data['defendant'] == 5.001 %}selected{% endif %}>5.001. I admit all the claim - set date payment (organisation)</option>
     <option value="5.011" {% if data['defendant'] == 5.011 %}selected{% endif %}>5.011. I admit all the claim - set date payment - settlement</option>
@@ -3339,10 +3378,10 @@
     <option value="5.201" {% if data['defendant'] == 5.201 %}selected{% endif %}>5.201. I admit all the claim - instalment plan payment accepted - settlement</option>
     <!--    <option value="5.21" {% if data['defendant'] == 5.21 %}selected{% endif %}>5.21. I admit all the claim - instalment plan payment accepted - judgment</option> -->
     <option value="5.2" {% if data['defendant'] == 5.2 %}selected{% endif %}>5.2. I admit all the claim - instalment plan payment accepted - signed</option>
-    <option value="5.3" {% if data['defendant'] == 5.3 %}selected{% endif %}>I admit all of the claim - rejected - court offer - settlement</option>
-    <option value="5.30001" {% if data['defendant'] == 5.30001 %}selected{% endif %}>I admit all of the claim - rejected - claimant offer - settlement</option>
-    <option value="5.3002" {% if data['defendant'] == 5.3002 %}selected{% endif %}>Any admit - settlement rejected</option>
-    <option value="5.3001" {% if data['defendant'] == 5.3001 %}selected{% endif %}>I admit all of the claim - rejected - court offer - settlement - not signed - CCJ</option>
+    <option value="5.3" {% if data['defendant'] == 5.3 %}selected{% endif %}>5.3. I admit all of the claim - rejected - court offer - settlement</option>
+    <option value="5.30001" {% if data['defendant'] == 5.30001 %}selected{% endif %}>5.30001. I admit all of the claim - rejected - claimant offer - settlement</option>
+    <option value="5.3002" {% if data['defendant'] == 5.3002 %}selected{% endif %}>5.3002. Any admit - settlement rejected</option>
+    <option value="5.3001" {% if data['defendant'] == 5.3001 %}selected{% endif %}>5.3001 I admit all of the claim - rejected - court offer - settlement - not signed - CCJ</option>
     <option value="5.301" {% if data['defendant'] == 5.301 %}selected{% endif %}>5.301. I admit all the claim - instalment plan payment - court offer (CCJ)</option>
     <option value="5.302" {% if data['defendant'] == 5.302 %}selected{% endif %}>5.302. I admit all the claim - instalment plan payment - claimant offer (CCJ)</option>
     <option value="5.31" {% if data['defendant'] == 5.31 %}selected{% endif %}>5.31. I admit all the claim - instalment plan payment - court offer (settlement)</option>
@@ -3355,6 +3394,8 @@
     <option value="5.6" {% if data['defendant'] == 5.6 %}selected{% endif %}>5.6. Defence rejected - no mediation</option>
     <option value="5.601" {% if data['defendant'] == 5.601 %}selected{% endif %}>5.6. Defence rejected - no mediation (offline DQs)</option>
     <option value="5.61" {% if data['defendant'] == 5.61 %}selected{% endif %}>5.61. Defence rejected - with mediation</option>
+    <option value="5.71" {% if data['defendant'] == 5.71 %}selected{% endif %}>5.71. Defence rejected - mediation failed - DQs done</option>
+    <option value="5.73" {% if data['defendant'] == 5.73 %}selected{% endif %}>5.73. Defence rejected - mediation failed - do paper DQs</option>
     <option value="9" {% if data['defendant'] == 9 %}selected{% endif %}>9. I dispute the claim </option>
     <option value="11" {% if data['defendant'] == 11 %}selected{% endif %}>11. I dispute the claim + mediation </option>
     <option value="11.1" {% if data['defendant'] == 11.1 %}selected{% endif %}>11.1. I dispute the claim + mediation pilot </option>

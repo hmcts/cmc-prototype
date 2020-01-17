@@ -1,0 +1,40 @@
+{% extends "layout_task-list.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block home_link %} ../task-list {% endblock %}
+{% block proposition_header %}
+{% set my_account="1" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <!--  <a href="#" onclick="history.go(-1)" class="link-back">Back</a>  -->
+  <div class="grid-row">
+
+      <div class="column-two-thirds">
+
+        <h1 class="heading-large">
+          Repayment plan accepted
+        </h1>
+
+        <p>The court has accepted your repayment plan.</p>
+
+
+        {% if data['vary'] == 'true' %}
+          <p><a class="button" href="/prototypes/prototype-nov-2019/dashboard/applications-and-judgments/vary/task-list-claimant-response?ownplansuggested=complete&redeterminationrequested=false&courtspaymentplan=false&courtagreestoplan=true&">Continue</a></p>
+        {% else %}
+          <form method="post" action="../../task-list">
+            <input type="hidden" name="payment_method" value="complete">
+            <input id="advert-option-next--button" type="submit" value="Continue" class="button" data-ignore-double-submit="true">
+          </form>
+        {% endif %}
+
+      </div>
+
+  </div>
+</div>
+{% include 'prototypes/prototype-nov-2019/includes/contact.html' %}
+</main>
+{% endblock %}

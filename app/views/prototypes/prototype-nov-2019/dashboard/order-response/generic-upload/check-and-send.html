@@ -1,0 +1,58 @@
+{% extends "layout_task-list.html" %}
+{% block page_title %}
+Check your answers
+{% endblock %}
+{% block home_link %} ../task-list {% endblock %}
+{% block proposition_header %}
+{% set my_account="1" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <h1 class="heading-large">
+    Check your files before submitting
+  </h1>
+
+  <table class="check-your-answers uploads">
+    <thead>
+      <tr>
+        <th colspan="2">
+          <p>Make sure you've uploaded the right files - you can't remove them after you submit.</p>
+
+        </th>
+        <th>
+        </th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td>
+          File 1
+        </td>
+        <td>
+          <a href="#">Instructions.pdf</a>
+        </td>
+        <td class="change-answer no-border">
+          <a href="upload">Change</a>
+        </td>
+      </tr>
+
+
+    </tbody>
+  </table>
+
+  <br/>
+  <p>You'll be able to add more files after you submit. You need to finish uploading before 4pm on {{ date | date('add', 12, 'days') | date }}.</p>
+
+  <form method="get" action="confirmation-page" class="form">
+    <div class="form-group">
+      <button id="submit" class="button" >Submit</button>
+    </div>
+  </form>
+
+  {% include 'prototypes/prototype-nov-2019/includes/contact.html' %}
+
+</main>
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+
+{% block content %}
+
+
+<main id="content" role="main">
+
+  {% include "includes/phase_banner_beta.html" %}
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+      <!--  <a href="#" onclick="history.go(-1)" class="link-back">Back</a>  -->
+
+      {% if data['generalapphearing'] == 'true' %}
+
+      <h1 class="heading-large">
+          The fee will be £255
+      </h1>
+
+         {% else %}
+
+         <h1 class="heading-large">
+             The fee will be £100
+         </h1>
+         <p>If the court decides there should be a hearing, you'll have to pay an extra £155 or your request will be rejected.</p>
+
+        {% endif %}
+
+         <p>The fee goes to the court, not to the claimant.</p>
+         <p>You can apply for help paying the fee, but you'll have to use paper forms.</p>
+
+        {% if data['generalapphearing'] == 'true' %}
+           <form action="hearing-duration" method="post" class="form">
+         {% else %}
+           <form action="upload-documents" method="post" class="form">
+           {% endif %}
+              <div class="form-group">
+                <input type="submit" class="button" value="I don't need help with the fee" />
+              </div>
+
+              <div class="form-group">
+
+                <p><a href="../general-application/general-help-with-fees?generalselected=true&">Find out if I'm eligible for help</a></p>
+              </div>
+
+
+
+    </div>
+        </div>
+
+  {% include 'prototypes/prototype-nov-2019/includes/contact.html' %}
+</main>
+{% endblock %}

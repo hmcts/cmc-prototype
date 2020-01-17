@@ -19,15 +19,17 @@ Money Claims Prototype
     <div class="column-two-thirds">
       <!--  <a href="#" onclick="history.go(-1)" class="link-back">Back</a>  -->
 
+
       <h1 class="heading-large">
-        Give us more information for a hearing
+          {% if experts != 'on' %}
+        Complete every task on this page before 4pm on {{ now | date('add', 12, 'days') | date }}  {% endif %}
+        {% if experts == 'on' %}Complete every task on this page before its deadline{% endif %}
       </h1>
 
-      {% if experts != 'on' %}
-      <p>You need to complete this page before 4pm on {{ now | date('add', 12, 'days') | date }}.</p>
-      {% endif %}
+      <p>If you don't, {% if data['party'] == "defendant" %}the court may cancel your defence and give you a County Court Judgment (CCJ){% else %}the court may cancel your claim{% endif %}.</p>
 
-      <p>If you don't{% if experts == 'on' %} complete each section of this page before its deadline{% endif %}, {% if data['party'] == "defendant" %}the court may cancel your defence and give you a County Court Judgment (CCJ){% else %}the court may cancel the claim{% endif %}.</p>
+      <p>When you've completed every task, you need to <a href="order-response/finished">tell us you've finished</a>.</p>
+
 
       <hr />
 
@@ -59,6 +61,7 @@ Money Claims Prototype
       <ul class="list list-bullet">
         <li>contracts or agreements relating to the claim</li>
         <li>any relevant text messages, emails or letters</li>
+        <li>[any additional requests]</li>
       </ul>
       <div class="form-group">
         <a href="order-response/evidence" class="secondary-button">Upload documents</a>
@@ -87,7 +90,7 @@ Money Claims Prototype
       {% endif %}
 
 
-
+<!-- WITNESS STATEMENT BUILDER - REMOVED FOR NOW
 
       <h2 class="heading-small">State your version of events</h2>
       {% if data['own-statement'] == 'complete' %}
@@ -110,15 +113,15 @@ Money Claims Prototype
       {% endif %}
 
       <hr />
+-->
 
-
-      <h2 class="heading-small">Complete and upload any third-party witness statements</h2>
+      <h2 class="heading-small">Complete and upload any witness statements</h2>
       {% if data['witness'] == 'complete' %}
       <p>You uploaded these documents on {{ now | date }}:</p>
 
       <ul>
           <li>Steve Smith: <a href="#">Witness statement 1.pdf</a></li>
-          <li>Ben Clark: <a href="#">Witness statement 2.docx</a></li>
+          <li>Ben {{ partyName( 'claimant', 'last' ) }}: <a href="#">Witness statement 2.docx</a></li>
       </ul>
 
       <br />

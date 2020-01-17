@@ -1,0 +1,228 @@
+{% extends "layout_task-list.html" %}
+
+{% block page_title %}
+  Check your answers
+{% endblock %}
+
+{% block home_link %} ../task-list {% endblock %}
+
+{% block proposition_header %}
+  {% set my_account="2" %}
+  {% include "includes/propositional_navigation.html" %}
+{% endblock %}
+
+
+{% block content %}
+<main id="content" role="main">
+
+	{% include "includes/phase_banner_beta.html" %}
+
+  <!--  <a href="#" onclick="history.go(-1)" class="link-back">Back</a>  -->
+
+	<h1 class="heading-large">
+		Check your answers
+	</h1>
+
+
+    <!--  Proposed plan  -->
+	  <table class="check-your-answers">
+      <thead>
+        <tr>
+          <th colspan="2"  class="no-border">
+            <h2 class="heading-medium" id="name">
+              Proposed plan
+            </h2>
+          </th>
+          <th class="no-border">
+          </th>
+        </tr>
+      </thead>
+
+		  <tbody>
+        <tr>
+          <td>
+            The defendant's proposal
+          </td>
+          <!-- Pay in installment content also needs considering -->
+          <td>
+            Pay in full by 28 July 2019
+          </td>
+          <td class="change-answer">
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            Your response to the plan
+          </td>
+          <!-- Pay in installment content also needs considering -->
+          <td>
+            {% if data.suggestownplan == 'true' %}
+                Rejected
+            {% else %}
+                Accepted
+            {% endif %}
+          </td>
+          <td class="change-answer">
+            <a href="#">
+              Change <span class="visuallyhidden">Name</span>
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+
+
+
+    {% if data.suggestownplan == 'true' %}
+
+        <!--  Claimant's plan  -->
+        <table class="check-your-answers">
+          <thead>
+            <tr>
+              <th colspan="2" class="no-border">
+                <h2 class="heading-medium" id="name">
+                  Alternative plan
+                </h2>
+              </th>
+              <th class="no-border">
+              </th>
+            </tr>
+          </thead>
+
+          <tbody>
+
+            <tr>
+              <td>
+                Your plan
+              </td>
+              <td>
+                {% if data.proposedplan == 'immediately'  %}
+                    Pay in full immediately
+                {% elif data.proposedplan == 'setdate'  %}
+                    Pay in full by 30 June 2019
+                {% elif data.proposedplan == 'instalments'  %}
+                    Pay £200 a month
+                {% endif %}
+              </td>
+              <td class="change-answer">
+                <a href="#">
+                  Change <span class="visuallyhidden">Name</span>
+                </a>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                The court's decision on your plan
+              </td>
+              <td>
+                {% if data['courtspaymentplan'] == 'true' %}
+                  Rejected
+                {% else %}
+                  Accepted
+                {% endif %}
+              </td>
+              <td class="change-answer">
+              </td>
+            </tr>
+
+
+            {% if data['courtspaymentplan'] == 'true' %}
+                <tr>
+                  <td>
+                    The court's plan
+                  </td>
+                  <td>
+                    Pay in full by 1 September 2019
+                  </td>
+                  <td class="change-answer">
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    Your decision on the court's plan
+                  </td>
+                  <td>
+                    {% if data['redeterminationrequested'] == 'true' %}
+                        Rejected
+                    {% else %}
+                        Accepted
+                    {% endif %}
+                  </td>
+                  <td class="change-answer">
+                    <a href="#">
+                      Change <span class="visuallyhidden">Name</span>
+                    </a>
+                  </td>
+                </tr>
+
+                {% if data['redeterminationrequested'] == 'true' %}
+                <tr>
+                  <td>
+                    Your reason for requesting a new plan
+                  </td>
+                  <td style="white-space: pre-wrap;">{{ data['reject_response2'] }}</td>
+                  <td class="change-answer">
+                    <a href="#">
+                      Change <span class="visuallyhidden">Name</span>
+                    </a>
+                  </td>
+                </tr>
+                {% endif %}
+
+            {% endif %}
+
+
+
+
+          </tbody>
+        </table>
+
+    {% endif %}
+
+
+
+<!--
+  <br>
+  <h2 class="heading-medium">Declaration</h2>
+  <div class="form-group">
+    <div class="multiple-choice text">
+      <input class="" id="HasAcceptedTermsAndConditions" type="checkbox" value="true">
+      <label for="HasAcceptedTermsAndConditions"> I declare that the details I have given are true to the best of my knowledge.</label>
+    </div>
+  </div>
+
+
+  <br> -->
+      <br>
+
+      <div class="form-group">
+          <p><a class="button" href="confirmation-page-claimants-response">Submit</a></p>
+      </div>
+
+</main>
+
+
+
+<form method="post"  action="#" class="for4" style=" float: left; ">
+  <select style="height:25px;" onchange="window.location.href='?'+this.value">
+    <option value="suggestownplan=false&"
+      {% if data.suggestownplan == 'false' %}selected{% endif %}
+      >Accept defendant's proposed plan</option>
+    <option value="suggestownplan=true&courtspaymentplan=false&"
+      {% if data.suggestownplan == 'true' and data.courtspaymentplan != 'true' %}selected{% endif %}
+      >Claimant's proposed plan accepted by court</option>
+    <option value="suggestownplan=true&courtspaymentplan=true&redeterminationrequested=false&"
+      {% if data['courtspaymentplan'] == 'true' and  data['redeterminationrequested'] != 'true' %}selected{% endif %}
+      >Court's proposed plan accepted by Claimant</option>
+    <option value="suggestownplan=true&courtspaymentplan=true&redeterminationrequested=true&"
+       {% if data.suggestownplan == 'true' and data.courtspaymentplan != 'true' and data['redeterminationrequested'] == 'true' %}selected{% endif %}
+       >Court's proposed plan rejected by Claimant</option>
+  </select>
+</form>
+
+
+{% endblock %}

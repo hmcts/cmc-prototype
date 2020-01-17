@@ -1,0 +1,79 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+
+{% block content %}
+
+
+<main id="content" role="main">
+
+  {% include "includes/phase_banner_beta.html" %}
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+      <h1 class="heading-large">
+        Why do you want to change how you pay {{ partyName( 'claimant' ) }}?
+      </h1>
+
+
+      <form action="task-list?cantpayreason=complete&" method="post" class="form">
+
+
+        <fieldset>
+          <div id="claim-details">
+            <div id="describe-wrapper-claim-details-1" class="">
+
+                <textarea class="form-control"
+                          id="vary-plan-reason"
+                          rows="3"
+                          name="vary-plan-reason"
+                          type="text"
+                          style="width: 90%">{{data['vary-plan-reason']}}</textarea>
+
+            </div>
+          </div>
+        </fieldset>
+
+
+        <div class="form-group">
+          <input type="submit" class="button" value="Save and continue"/>
+        </div>
+
+
+
+      </form>
+
+    </div>
+  </div>
+
+  {% include 'prototypes/prototype-nov-2019/includes/contact.html' %}
+</main>
+
+
+
+<form method="post"  action="#" class="for4" style=" float: left; ">
+  <select style="height:25px;" onchange="window.location.href='?'+this.value">
+
+    <option value="varyselected=true&"
+            {% if data.varyselected == 'true' %}selected{% endif %}
+    >Vary</option>
+
+    <option value="cancelccj=true&"
+            {% if data.cancelccj == 'true' %}selected{% endif %}
+    >Set aside</option>
+
+    <option value="cancelccj=false&varyselected=false&"
+            {% if data.cancelccj != 'true' and  data.varyselected != 'true' %}selected{% endif %}
+    >General</option>
+
+  </select>
+</form>
+
+
+
+
+
+{% endblock %}

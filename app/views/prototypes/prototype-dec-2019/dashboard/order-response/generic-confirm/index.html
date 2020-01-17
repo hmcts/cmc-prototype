@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% import 'prototypes/prototype-dec-2019/includes/upload.html' as upload %}
+{% block content %}
+
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <!--  <a href="#" onclick="history.go(-1)" class="link-back">Back</a>  -->
+
+    <form method="post" action="generic-confirm/confirmation-page" class="form">
+
+      <div class="form-group">
+        <h1 class="heading-large">Confirm you've completed additional actions ordered by the court</h1>
+        <h2 class="heading-small">From the order:</h2>
+        <p>Please confirm you have supplied a sample of the disputed roofing material to the {% if data['party'] == "defendant" %}claimant{% else %}defendant{% endif %}.</p>
+
+        <div class="form-group">
+          <div class="multiple-choice text">
+            <input class="" id="HasAcceptedTermsAndConditions" type="checkbox" value="true">
+            <label for="HasAcceptedTermsAndConditions">I confirm I've done this</label>
+          </div>
+        </div>
+        <form method="post" action="check-and-send/enter-card" class="form form-group">
+          <button id="submit" class="button">Submit</button>
+        </form>
+
+      </div>
+    </form>
+
+    </div>
+  </form>
+</div>
+</div>
+{% include 'prototypes/prototype-dec-2019/includes/contact.html' %}
+</main>
+{% endblock %}

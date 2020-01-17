@@ -1,0 +1,58 @@
+{% extends "layout_task-list.html" %}
+{% block page_title %}
+Check your answers
+{% endblock %}
+{% block home_link %} ../task-list {% endblock %}
+{% block proposition_header %}
+{% set my_account="1" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <h1 class="heading-large">
+    Check your witness statement uploads before submitting
+  </h1>
+  <table class="check-your-answers">
+    <thead>
+      <tr>
+        <th colspan="2">
+          <p>Make sure you've uploaded the right documents - you can't remove documents after you submit.</p>
+
+        </th>
+        <th>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>
+            Uploaded witness statements
+          </td>
+          <td>
+            <ul>
+              <li>Steve Smith: <a href="#">Witness statement 1.pdf</a></li>
+              <li>Ben {{ partyName( 'claimant', 'last' ) }}: <a href="#">Witness statement 2.docx</a></li>
+            </ul></td>
+          <td class="change-answer">
+         <a href="upload">
+          Change
+        </a>
+          </td>
+        </tr>
+
+  </tbody>
+</table>
+
+
+<br />
+
+<p>You'll be able to add more witness statements after you submit. You need to finish uploading before 4pm on {{ date | date('add', 12, 'days') | date }}.</p>
+
+<form method="get" action="confirmation-page" class="form">
+  <div class="form-group">
+    <button id="submit" class="button" >Submit witness statements</button>
+  </div>
+{% include 'prototypes/prototype-nov-2019/includes/contact.html' %}
+</main>
+{% endblock %}
