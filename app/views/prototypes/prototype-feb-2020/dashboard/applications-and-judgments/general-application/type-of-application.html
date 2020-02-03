@@ -1,0 +1,88 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+
+{% block content %}
+
+
+<main id="content" role="main">
+
+  {% include "includes/phase_banner_beta.html" %}
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+      <!--  <a href="#" onclick="history.go(-1)" class="link-back">Back</a>  -->
+
+      <h1 class="heading-large">
+          What do you want to do?
+      </h1>
+
+
+      <form
+        name="aspnetForm"
+        method="post"
+        onsubmit="multiNavigation('radio-app-type', ['set-aside', 'settled-set-aside', 'vary', 'updateofsettle', 'general'],
+                                                             ['../set-aside-default-ccj/defence-options?defaultccj=true&',
+                                                             '../set-aside-default-ccj/task-list?defaultccj=true&alreadysettled=true&fulldefence=false&loweramount=false&howmuchyouowe=complete&cancelccj=false&cancelccjanswer=null&',
+                                                              '../vary/task-list?lower-amount=false&alreadysettled=false&fulldefence=false&howmuchyouowe=complete&cancelccj=false&cancelccjanswer=null&response-owe=owe-all-default-ccj&owe-amount=&amount-owed=500&do_you_owe_money=complete&',
+                                                              '../set-aside-default-ccj/already-settled',
+                                                              'what?general-application=true&']);return false;"
+        id="aspnetForm"
+        autocomplete="off">
+
+        <div class="form-group">
+          <fieldset>
+
+
+            {% if data['defendant'] == 17.3 %}
+              <!--  WHEN the claimant says the claim is settled  -->
+              <div class="multiple-choice" data-target="pay">
+                <input id="settled-set-aside" type="radio" name="radio-app-type" value="settled-set-aside" aria-controls="paid-off" aria-expanded="false">
+                <label for="settled-set-aside">Apply to cancel the judgment</label>
+              </div>
+
+            {% else %}
+                <!-- whent he claimant has not said the claim is settled  -->
+                <div class="multiple-choice" data-target="pay">
+                  <input id="set-aside" type="radio" name="radio-app-type" value="set-aside" aria-controls="paid-off" aria-expanded="false"
+                         {% if data['defendant'] == 20.55 %} checked="checked"  {% endif %}>
+                  <label for="set-aside">Apply to cancel the judgment</label>
+                </div>
+
+                <div class="multiple-choice" data-target="vary">
+                  <input id="vary" type="radio" name="radio-app-type" value="vary" aria-controls="paid-off" aria-expanded="false"
+                         {% if data['defendant'] == 29 %} checked="checked"  {% endif %}>
+                  <label for="vary">Apply to change how you pay the claimant</label>
+                </div>
+
+                <div class="multiple-choice" data-target="updateofsettle">
+                  <input id="updateofsettle" type="radio" name="radio-app-type" value="updateofsettle" aria-controls="paid-off" aria-expanded="false">
+                  <label for="updateofsettle">Ask the court to mark the claim as settled</label>
+                </div>
+            {% endif %}
+
+
+            <div class="multiple-choice" data-target="vary">
+              <input id="general" type="radio" name="radio-app-type" value="general" aria-controls="paid-off" aria-expanded="false"
+                     {% if data['defendant'] == 3.2255 %} checked="checked"  {% endif %}>
+              <label for="general">Something else</label>
+            </div>
+
+          </fieldset>
+        </div>
+
+        <div class="form-group">
+          <input type="submit" class="button" value="Continue" />
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+
+  {% include 'prototypes/prototype-feb-2020/includes/contact.html' %}
+</main>
+{% endblock %}

@@ -1,0 +1,152 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="2" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <!--  <a href="#" onclick="history.go(-1)" class="link-back">Back</a>  -->
+      <h1 class="heading-large">
+          How do you want to pay?
+      </h1>
+
+      <details class="form-group">
+        <summary><span class="summary">View current plan</span></summary>
+        <div class="panel">
+
+          {% if data['instalments'] != 'true' %}
+              <p>You must pay the remaining amount by 28 July 2019.</p>
+          {% else %}
+              <div class="">
+            <table class="instalment-table" >
+              <tbody>
+
+              <tr>
+              </tr>
+              <tr class="">
+                <td class="">
+                  Regular payments of
+                </td>
+                <td class="">
+                  £100
+                </td>
+                <td class="">
+                </td>
+
+              </tr>
+              <tr class="">
+                <td class="">
+                  Frequency of payments
+                </td>
+                <td class="">
+                  Monthly
+                </td>
+                <td class="">
+                </td>
+              </tr>
+
+              <!-- <tr class="">
+                <td class="">
+                  First payment date
+                </td>
+                <td >
+                  1 month after plan is agreed
+                </td>
+                <td>
+                </td>
+              </tr> -->
+
+              </tbody>
+            </table>
+          </div>
+          {% endif %}
+
+        </div>
+      </details>
+
+
+   <form
+     name="aspnetForm"
+     method="post"
+     onsubmit="multiNavigation('radio-pay-group', ['Immediately', 'Set-date', 'Instalments'],
+                                                    ['../set-aside-default-ccj/task-list?newpaymentterms=complete&varytoimmediately=true&',
+                                                    '../../../defendant/task-list/owe-all/pay-by-set-date?vary=true&repaymentplan=false&instalments=false&varyselected=true&',
+                                                    '../../../defendant/task-list/owe-all/statement/repayment-plan?vary=true&repaymentplan=true&instalments=true&varyselected=true&' ]);return false;"
+     id="aspnetForm"
+     autocomplete="off">
+
+
+
+
+      <div class="form-group">
+        <fieldset>
+
+
+          <!--
+          <div class="multiple-choice" data-target="immediately">
+            <input id="radio-immediately" type="radio" name="radio-pay-group" value="Immediately">
+            <label for="radio-immediately">Immediately</label>
+          </div>
+          -->
+          <!--
+          <div class="panel panel-border-narrow js-hidden" id="immediately">
+            <p>You must contact the claimant and pay the full amount within 5 days. Any cheques or transfers must be clear in their account.</p>
+          </div>
+          -->
+
+          <div class="multiple-choice" data-target="set-date">
+              <input id="radio-no" type="radio" name="radio-pay-group" value="Set-date">
+              {% if data['instalments'] == 'true' %}
+                  <label for="radio-no">By a set date</label>
+              {% else %}
+                  <label for="radio-no">By a different date</label>
+              {% endif %}
+          </div>
+
+          <div class="multiple-choice" data-target="instalments">
+              <input id="radio-repayment" type="radio" name="radio-pay-group" value="Instalments">
+              {% if data['instalments'] == 'true' %}
+                  <label for="radio-repayment" data-target="repayment-info">I'll suggest a new repayment plan</label>
+              {% else %}
+                  <label for="radio-repayment" data-target="repayment-info">I'll suggest a repayment plan</label>
+              {% endif %}
+
+          </div>
+
+        </fieldset>
+      </div>
+      <input type="hidden" name="owe_some" value="complete">
+      {% if data.radio_select_group=="Some"%}
+      <input type="hidden" name="owe_some_pa" value="complete">
+      {% else %}
+      <input type="hidden" name="owe_some_fa" value="complete">
+      {% endif %}
+      <div class="form-group">
+        <input type="submit" class="button" value="Save and continue"/>
+      </div>
+    </form>
+  </div>
+</div>
+{% include 'prototypes/prototype-feb-2020/includes/contact.html' %}
+</main>
+
+
+<form method="post"  action="#" class="form" style="position: absolute;">
+  <select id="check2" name="check2" onchange="window.location.href='?vary=true&instalments='+this.value">
+    <option  value="true&"
+             {% if  data['instalments'] == 'true'  %}selected{% endif %}
+              >Vary -  from instalments</option>
+    <option  value="false&"
+             {% if data['instalments'] == 'false'  %}selected{% endif %}
+              >Vary -  from set date</option>
+
+  </select>
+</form>
+
+{% endblock %}

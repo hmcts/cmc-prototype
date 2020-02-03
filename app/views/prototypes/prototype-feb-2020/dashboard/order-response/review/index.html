@@ -1,0 +1,69 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+
+  {% include "includes/phase_banner_beta.html" %}
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+      <!--  <a href="#" onclick="history.go(-1)" class="link-back">Back</a>  -->
+
+       <form
+       name="aspnetForm"
+       method="post"
+       onsubmit="conditionalNavigation('more-time', 'Yes', 'review/problem', 'review/reason');return false;"
+       id="aspnetForm"
+       autocomplete="off">
+
+        <h1 class="heading-large">Do you need more time to respond?</h1>
+
+        <div class="form-group">
+          <fieldset>
+
+            <div class="multiple-choice" data-target="yes-why">
+              <input id="radio-yes" type="radio" name="more-time" value="Yes">
+              <label for="radio-yes">
+                <strong class="bold">Yes</strong>
+                <!--
+                <p>The deadline for you and the {% if data['party'] == "defendant" %}claimant{% else %}defendant{% endif %} will be extended to {{ date | date('add', 31, 'days') | date }}</p>
+                -->
+
+              </label>
+
+
+            </div>
+
+            <div class="form-group panel panel-border-narrow js-hidden" id="yes-why">
+              <p><label for="why">Why do you need more time? (optional)</label></p>
+              <textarea id="why" name="why-time"></textarea>
+            </div>
+
+            <div class="multiple-choice">
+              <input id="radio-no" type="radio" name="more-time" value="No">
+              <label for="radio-no">
+                <strong class="bold">No</strong>
+              </label>
+            </div>
+
+          </fieldset>
+
+          <div class="form-group">
+            <input type="submit" class="button" value="Continue" />
+          </div>
+
+        </div>
+
+    </div>
+
+  </div>
+
+{% include 'prototypes/prototype-feb-2020/includes/contact.html' %}
+</main>
+{% endblock %}

@@ -1,0 +1,405 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="2" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<style>
+.panel-border-narrow  {
+  margin-bottom: 40px;
+}
+</style>
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <!--  <a href="#" onclick="history.go(-1)" class="link-back">Back</a>  -->
+      <form action="why-you-cant-afford" method="post" class="form">
+
+          <div class="form-group">
+
+            <h1 class="heading-large">
+            What regular income do you receive?
+            </h1>
+            <span class="body-text">Select all that apply. The information you enter must be truthful and accurate.</span>
+
+            <div class="multiple-choice" data-target="income-job-details">
+              <input id="income-job" name="income" type="checkbox">
+              <label for="income-job">Income from your job</label>
+            </div>
+            <div class="panel panel-border-narrow js-hidden" id="income-job-details">
+              <label class="form-label" for="income-job-amount">Amount received</label>
+              <p class="form-hint">Include wages, overtime, commission, bonuses</p>
+              <input class="form-control fee pound form-control-1-4" type="text" id="income-job-amount" name="income-job-amount">
+
+              <p class="form-label" style="margin-top: 30px;">Received every:</p>
+              <div class="multiple-choice">
+                <input id="radio-1-job" type="radio" name="radio-group-job" value="4.3333">
+                <label for="radio-1-job">Week</label>
+              </div>
+              <div class="multiple-choice">
+                <input id="radio-2-job" type="radio" name="radio-group-job" value="2.1666">
+                <label for="radio-2-job">2 weeks</label>
+              </div>
+              <div class="multiple-choice">
+                <input id="radio-3-job" type="radio" name="radio-group-job" value="1.0833">
+                <label for="radio-3">4 weeks</label>
+              </div>
+              <div class="multiple-choice">
+                <input id="radio-4-job" type="radio" name="radio-group-job" value="1">
+                <label for="radio-4-job">Month</label>
+              </div>
+            </div>
+
+
+            <div class="multiple-choice" data-target="income-uc-details">
+              <input id="income-uc" name="income" type="checkbox">
+              <label for="income-uc">Universal Credit</label>
+            </div>
+            <div class="panel panel-border-narrow js-hidden" id="income-uc-details">
+              <label class="form-label" for="income-uc-amount">Amount received</label>
+              <input class="form-control fee pound form-control-1-4" type="text" id="income-uc-amount" name="income-uc-amount">
+
+              <p class="form-label" style="margin-top: 30px;">Received every:</p>
+              <div class="multiple-choice">
+                <input id="radio-1-uc" type="radio" name="radio-group-uc" value="4.3333">
+                <label for="radio-1-uc">Week</label>
+              </div>
+              <div class="multiple-choice">
+                <input id="radio-2-uc" type="radio" name="radio-group-uc" value="2.1666">
+                <label for="radio-2-uc">2 weeks</label>
+              </div>
+              <div class="multiple-choice">
+                <input id="radio-3-uc" type="radio" name="radio-group-uc" value="1.0833">
+                <label for="radio-3">4 weeks</label>
+              </div>
+              <div class="multiple-choice">
+                <input id="radio-4-uc" type="radio" name="radio-group-uc" value="1">
+                <label for="radio-4-uc">Month</label>
+              </div>
+            </div>
+
+            <div class="multiple-choice" data-target="income-jsa-details">
+              <input id="income-jsa" name="income" type="checkbox">
+              <label for="income-jsa">Jobseeker's Allowance (income based)</label>
+            </div>
+            <div class="panel panel-border-narrow js-hidden" id="income-jsa-details">
+              <label class="form-label" for="income-jsa-amount">Amount received</label>
+              <input class="form-control fee pound form-control-1-4" type="text" id="income-jsa-amount" name="income-jsa-amount">
+
+              <p class="form-label" style="margin-top: 30px;">Received every:</p>
+              <div class="multiple-choice">
+                <input id="radio-1-jsa" type="radio" name="radio-group-jsa" value="4.3333">
+                <label for="radio-1-jsa">Week</label>
+              </div>
+              <div class="multiple-choice">
+                <input id="radio-2-jsa" type="radio" name="radio-group-jsa" value="2.1666">
+                <label for="radio-2-jsa">2 weeks</label>
+              </div>
+              <div class="multiple-choice">
+                <input id="radio-3-jsa" type="radio" name="radio-group-jsa" value="1.0833">
+                <label for="radio-3">4 weeks</label>
+              </div>
+              <div class="multiple-choice">
+                <input id="radio-4-jsa" type="radio" name="radio-group-jsa" value="1">
+                <label for="radio-4-jsa">Month</label>
+              </div>
+            </div>
+
+
+            <div class="multiple-choice" data-target="income-jsac-details">
+              <input id="income-jsac" name="income" type="checkbox">
+              <label for="income-jsac">Jobseeker's Allowance (contribution based)</label>
+            </div>
+            <div class="panel panel-border-narrow js-hidden" id="income-jsac-details">
+              <label class="form-label" for="income-jsac-amount">Amount received</label>
+              <input class="form-control fee pound form-control-1-4" type="text" id="income-jsac-amount" name="income-jsac-amount">
+
+              <p class="form-label" style="margin-top: 30px;">Received every:</p>
+              <div class="multiple-choice">
+                <input id="radio-1-jsac" type="radio" name="radio-group-jsac" value="4.3333">
+                <label for="radio-1-jsac">Week</label>
+              </div>
+              <div class="multiple-choice">
+                <input id="radio-2-jsac" type="radio" name="radio-group-jsac" value="2.1666">
+                <label for="radio-2-jsac">2 weeks</label>
+              </div>
+              <div class="multiple-choice">
+                <input id="radio-3-jsac" type="radio" name="radio-group-jsac" value="1.0833">
+                <label for="radio-3">4 weeks</label>
+              </div>
+              <div class="multiple-choice">
+                <input id="radio-4-jsac" type="radio" name="radio-group-jsac" value="1">
+                <label for="radio-4-jsac">Month</label>
+              </div>
+            </div>
+
+
+            <div class="multiple-choice" data-target="income-income-details">
+              <input id="income-income" name="income" type="checkbox">
+              <label for="income-income">Income Support</label>
+            </div>
+            <div class="panel panel-border-narrow js-hidden" id="income-income-details">
+              <label class="form-label" for="income-income-amount">Amount received</label>
+              <input class="form-control fee pound form-control-1-4" type="text" id="income-income-amount" name="income-income-amount">
+
+              <p class="form-label" style="margin-top: 30px;">Received every:</p>
+              <div class="multiple-choice">
+                <input id="radio-1-income" type="radio" name="radio-group-income" value="4.3333">
+                <label for="radio-1-income">Week</label>
+              </div>
+              <div class="multiple-choice">
+                <input id="radio-2-income" type="radio" name="radio-group-income" value="2.1666">
+                <label for="radio-2-income">2 weeks</label>
+              </div>
+              <div class="multiple-choice">
+                <input id="radio-3-income" type="radio" name="radio-group-income" value="1.0833">
+                <label for="radio-3">4 weeks</label>
+              </div>
+              <div class="multiple-choice">
+                <input id="radio-4-income" type="radio" name="radio-group-income" value="1">
+                <label for="radio-4-income">Month</label>
+              </div>
+            </div>
+
+
+            <div class="multiple-choice" data-target="income-working-details">
+              <input id="income-working" name="income" type="checkbox">
+              <label for="income-working">Working Tax Credit</label>
+            </div>
+            <div class="panel panel-border-narrow js-hidden" id="income-working-details">
+              <label class="form-label" for="income-working-amount">Amount received</label>
+              <input class="form-control fee pound form-control-1-4" type="text" id="income-working-amount" name="income-working-amount">
+
+              <p class="form-label" style="margin-top: 30px;">Received every:</p>
+              <div class="multiple-choice">
+                <input id="radio-1-working" type="radio" name="radio-group-working" value="4.3333">
+                <label for="radio-1-working">Week</label>
+              </div>
+              <div class="multiple-choice">
+                <input id="radio-2-working" type="radio" name="radio-group-working" value="2.1666">
+                <label for="radio-2-working">2 weeks</label>
+              </div>
+              <div class="multiple-choice">
+                <input id="radio-3-working" type="radio" name="radio-group-working" value="1.0833">
+                <label for="radio-3">4 weeks</label>
+              </div>
+              <div class="multiple-choice">
+                <input id="radio-4-working" type="radio" name="radio-group-working" value="1">
+                <label for="radio-4-working">Month</label>
+              </div>
+            </div>
+
+
+            <div class="multiple-choice" data-target="income-child-details">
+              <input id="income-child" name="income" type="checkbox">
+              <label for="income-child">Child Tax Credit</label>
+            </div>
+            <div class="panel panel-border-narrow js-hidden" id="income-child-details">
+              <label class="form-label" for="income-child-amount">Amount received</label>
+              <input class="form-control fee pound form-control-1-4" type="text" id="income-child-amount" name="income-child-amount">
+
+              <p class="form-label" style="margin-top: 30px;">Received every:</p>
+              <div class="multiple-choice">
+                <input id="radio-1-child" type="radio" name="radio-group-child" value="4.3333">
+                <label for="radio-1-child">Week</label>
+              </div>
+              <div class="multiple-choice">
+                <input id="radio-2-child" type="radio" name="radio-group-child" value="2.1666">
+                <label for="radio-2-child">2 weeks</label>
+              </div>
+              <div class="multiple-choice">
+                <input id="radio-3-child" type="radio" name="radio-group-child" value="1.0833">
+                <label for="radio-3">4 weeks</label>
+              </div>
+              <div class="multiple-choice">
+                <input id="radio-4-child" type="radio" name="radio-group-child" value="1">
+                <label for="radio-4-child">Month</label>
+              </div>
+            </div>
+
+
+
+            <div class="multiple-choice" data-target="income-benefit-details">
+              <input id="income-benefit" name="income" type="checkbox">
+              <label for="income-benefit">Child Benefit</label>
+            </div>
+            <div class="panel panel-border-narrow js-hidden" id="income-benefit-details">
+              <label class="form-label" for="income-benefit-amount">Amount received</label>
+              <input class="form-control fee pound form-control-1-4" type="text" id="income-benefit-amount" name="income-benefit-amount">
+
+              <p class="form-label" style="margin-top: 30px;">Received every:</p>
+              <div class="multiple-choice">
+                <input id="radio-1-benefit" type="radio" name="radio-group-benefit" value="4.3333">
+                <label for="radio-1-benefit">Week</label>
+              </div>
+              <div class="multiple-choice">
+                <input id="radio-2-benefit" type="radio" name="radio-group-benefit" value="2.1666">
+                <label for="radio-2-benefit">2 weeks</label>
+              </div>
+              <div class="multiple-choice">
+                <input id="radio-3-benefit" type="radio" name="radio-group-benefit" value="1.0833">
+                <label for="radio-3">4 weeks</label>
+              </div>
+              <div class="multiple-choice">
+                <input id="radio-4-benefit" type="radio" name="radio-group-benefit" value="1">
+                <label for="radio-4-benefit">Month</label>
+              </div>
+            </div>
+
+
+            <div class="multiple-choice" data-target="income-council-details">
+              <input id="income-council" name="income" type="checkbox">
+              <label for="income-council">Council Tax Support</label>
+            </div>
+            <div class="panel panel-border-narrow js-hidden" id="income-council-details">
+              <label class="form-label" for="income-council-amount">Amount received</label>
+              <input class="form-control fee pound form-control-1-4" type="text" id="income-council-amount" name="income-council-amount">
+
+              <p class="form-label" style="margin-top: 30px;">Received every:</p>
+              <div class="multiple-choice">
+                <input id="radio-1-council" type="radio" name="radio-group-council" value="4.3333">
+                <label for="radio-1-council">Week</label>
+              </div>
+              <div class="multiple-choice">
+                <input id="radio-2-council" type="radio" name="radio-group-council" value="2.1666">
+                <label for="radio-2-council">2 weeks</label>
+              </div>
+              <div class="multiple-choice">
+                <input id="radio-3-council" type="radio" name="radio-group-council" value="1.0833">
+                <label for="radio-3">4 weeks</label>
+              </div>
+              <div class="multiple-choice">
+                <input id="radio-4-council" type="radio" name="radio-group-council" value="1">
+                <label for="radio-4-council">Month</label>
+              </div>
+            </div>
+
+
+            <div class="multiple-choice" data-target="income-pension-details">
+              <input id="income-pension" name="income" type="checkbox">
+              <label for="income-pension">Pension</label>
+            </div>
+            <div class="panel panel-border-narrow js-hidden" id="income-pension-details">
+              <label class="form-label" for="income-pension-amount">Amount received</label>
+              <input class="form-control fee pound form-control-1-4" type="text" id="income-pension-amount" name="income-pension-amount">
+
+              <p class="form-label" style="margin-top: 30px;">Received every:</p>
+              <div class="multiple-choice">
+                <input id="radio-1-pension" type="radio" name="radio-group-pension" value="4.3333">
+                <label for="radio-1-pension">Week</label>
+              </div>
+              <div class="multiple-choice">
+                <input id="radio-2-pension" type="radio" name="radio-group-pension" value="2.1666">
+                <label for="radio-2-pension">2 weeks</label>
+              </div>
+              <div class="multiple-choice">
+                <input id="radio-3-pension" type="radio" name="radio-group-pension" value="1.0833">
+                <label for="radio-3">4 weeks</label>
+              </div>
+              <div class="multiple-choice">
+                <input id="radio-4-pension" type="radio" name="radio-group-pension" value="1">
+                <label for="radio-4-pension">Month</label>
+              </div>
+            </div>
+
+            <div class="multiple-choice" data-target="income-other-details">
+              <input id="income-other" name="income" type="checkbox">
+              <label for="income-other">Other</label>
+            </div>
+            <div class="panel panel-border-narrow js-hidden" id="income-other-details">
+
+              <div id="add-another">
+
+                <div class="form-group">
+                  <label class="form-label" for="income-source">Source of income</label>
+                  <input class="form-control" type="text" id="income-source" name="income-source">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="income-other-amount">Amount received</label>
+                  <input class="form-control fee pound form-control-1-4" type="text" id="income-other-amount" name="income-other-amount">
+                </div>
+
+                <div class="form-group">
+                  <p class="form-label" style="margin-top: 30px;">Received every:</p>
+                  <div class="multiple-choice">
+                    <input id="radio-1-other" type="radio" name="radio-group-other" value="4.3333">
+                    <label for="radio-1-other">Week</label>
+                  </div>
+                  <div class="multiple-choice">
+                    <input id="radio-2-other" type="radio" name="radio-group-other" value="2.1666">
+                    <label for="radio-2-other">2 weeks</label>
+                  </div>
+                  <div class="multiple-choice">
+                    <input id="radio-3-other" type="radio" name="radio-group-other" value="1.0833">
+                    <label for="radio-3">4 weeks</label>
+                  </div>
+                  <div class="multiple-choice">
+                    <input id="radio-4-other" type="radio" name="radio-group-other" value="1">
+                    <label for="radio-4-other">Month</label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group" style="clear: left" id="add-bit">
+                <a class="secondary-button" id="add-another-event-button" style="margin: 16px 0;" href="#">Add another source of income</a>
+              </div>
+
+            </div>
+        </div>
+
+
+      <p id="total" class="heading-small">Total monthly income: £0.00</p>
+
+      <script>
+        $(document).ready(function () {
+          $('#add-another-event-button').click(function (event) {
+            event.preventDefault();
+
+            objSeperator = $('<p style="margin-top:20px;"><a href="">Remove this source of income</a></p><hr>');
+            objSeperator.insertBefore( '#add-bit');
+
+            objItem = $('#add-another').clone();
+            objItem.find( 'input[type=text]' ).val('');
+            objItem.find( '.multiple-choice input' ).prop( "checked", false );
+            objItem.insertBefore( '#add-bit');
+
+          });
+
+          $('input').change( function() {
+
+              intTotal = 0;
+
+              $('input[type=text]').each( function() {
+                intMonthFactor =  $(this).parent('div').find("input:radio:checked").val();
+
+                if (intMonthFactor && $(this).is(':visible')) {
+                  console.log(intMonthFactor);
+                  intTotal = intTotal + $(this).val() * intMonthFactor;
+                }
+              });
+              $('#total').text("Total monthly income: £" +intTotal.toFixed(2));
+          });
+
+        });
+      </script>
+
+        {% if   data['vary'] == 'true'   %}
+            <div>
+                <p><a class="button" href="../../../../dashboard/applications-and-judgments/vary/task-list?financialdetails=complete&" >Save and continue</a></p>
+            </div>
+        {% else  %}
+            <div class="form-group">
+                <input type="submit" class="button" value="Save and continue"/>
+            </div>
+        {% endif %}
+
+    </form>
+  </div>
+</div>
+{% include 'prototypes/prototype-feb-2020/includes/contact.html' %}
+</main>
+{% endblock %}

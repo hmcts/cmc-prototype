@@ -1,0 +1,70 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+
+{% block content %}
+
+
+<main id="content" role="main">
+
+  {% include "includes/phase_banner_beta.html" %}
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+      <!--  <a href="#" onclick="history.go(-1)" class="link-back">Back</a>  -->
+
+      <h1 class="heading-large">
+        Will you pay {{ partyName( 'claimant' ) }} in full?
+      </h1>
+
+      <p>If you pay the full £1,500 immediately, you can apply to have the CCJ cancelled.</p>
+
+
+      <form
+        name="aspnetForm"
+        method="post"
+        onsubmit="multiNavigation('radio-set-receive-claim', ['Yes', 'No'], ['contact-claimant?lower-amount=false', 'switch-to-vary']);return false;"
+        id="aspnetForm"
+        autocomplete="off">
+
+        <div class="form-group">
+          <fieldset>
+            <!-- <p class="heading-medium" style="margin-top:20px">Will you pay {{ partyName( 'claimant' ) }} in full?</p> -->
+
+            <div class="multiple-choice" data-target="pay">
+              <input id="set-aside-yes" type="radio" name="radio-set-receive-claim" value="Yes" aria-controls="paid-off" aria-expanded="false">
+              <label for="set-aside-yes">Yes</label>
+            </div>
+            <div class="multiple-choice" data-target="vary">
+              <input id="set-aside-no" type="radio" name="radio-set-receive-claim" value="No" aria-controls="paid-off" aria-expanded="false">
+              <label for="set-aside-no">No</label>
+            </div>
+          </fieldset>
+        </div>
+
+        <div class="form-group">
+          <input type="submit" class="button" value="Continue" />
+        </div>
+
+      </form>
+
+
+    </div>
+  </div>
+
+  {% include 'prototypes/prototype-feb-2020/includes/contact.html' %}
+</main>
+
+<form method="post"  action="#" class="form" style="float: left;">
+  <select id="control-box2" name="control-box2" onchange="window.location.href='settle-out-of-court?beforeccjdeadline='+this.value">
+    <option value="true">Defendant</option>
+    <option value="true" >- Before 1 month CCJ deadline</option>
+    <option value="false">- After 1 month CCJ deadline</option>
+  </select>
+</form>
+
+
+{% endblock %}

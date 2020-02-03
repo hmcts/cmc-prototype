@@ -1,0 +1,236 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="2" %}
+
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+
+
+<main id="content" role="main">
+
+
+  {% include "includes/phase_banner_beta.html" %}
+
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <!--  <a href="#" onclick="history.go(-1)" class="link-back">Back</a>  -->
+
+
+
+      {% if data['defendant'] == "defendant" %}
+
+
+
+
+
+      <h1 class="heading-large">
+
+        Make a counter offer
+      </h1>
+
+
+      <div class="description-block">
+        <h3 class="heading-small">{{ partyName( 'claimant' ) }}'s offer.</h3>
+        <table class="offer-table">
+          <thead>
+            <tr>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>The offer</td>
+              <td>     I'll pay a maximum of £100 towards any new materials.
+
+              </td>
+            </tr>
+            <tr>
+              <td>Completion date</td>
+              <td>1 December 2018</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+
+
+      <fieldset></fieldset>
+      <form action="confirmation-page" method="post" class="form">
+
+        <div class="form-group">
+          <fieldset>
+
+            <legend class="visually-hidden">Suggest a resolution</legend>
+
+            <label class="form-label-bold" for="offer">
+              <div class="bold-medium">Your counter offer</div>
+              <span class="form-hint">You could offer a payment, fix a problem or return goods.</span>
+            </label>
+            <textarea class="form-control"
+            id="offer"
+            rows="3"
+            name="offer-me"
+            type="text"
+            style="width: 95%"></textarea>
+            <br>
+            <br>
+
+            <label class="form-label-bold" for="claimant_date_of_birth_day">
+              <div class="bold-medium">When will you pay in full or complete your offer?</div>
+            </label>
+            <p>
+            </p>
+
+            <div class="input form-group "><p
+              class="form-hint text">For example, 23 4 2017</p>
+              <div class="input form-group know-date-input">
+                <div class="input form-group tel required claimant_date_of_birth_day"><label
+                  class="tel required form-label"
+                  for="claimant_date_of_birth_day">Day</label><input
+                  class="string tel required form-control" maxlength="2" type="tel"
+                  size="2" name="offerDateDay"
+                  id="claimant_date_of_birth_day"></div>
+                  <div class="input form-group tel required claimant_date_of_birth_month"><label
+                    class="tel required form-label"
+                    for="claimant_date_of_birth_month">Month</label><input
+                    class="string tel required form-control" maxlength="2" type="tel"
+                    size="2" name="offerDateMonth"
+                    id="claimant_date_of_birth_month"></div>
+                    <div class="input form-group tel required claimant_date_of_birth_year"><label
+                      class="tel required form-label"
+                      for="claimant_date_of_birth_year">Year</label><input
+                      class="string tel required form-control" maxlength="4" type="tel"
+                      size="4" name="offerDateYear"
+                      id="claimant_date_of_birth_year"></div>
+                    </div>
+                  </div>
+
+
+
+
+                  <p class="panel panel-border-wide">
+                    {{ partyName( 'claimant' ) }} can accept, reject or make a counter offer.
+                  </p>
+
+                  <div class="form-group">
+
+                    <input type="submit" class="button" value="Submit offer">
+                  </div>
+                </fieldset>
+              </div>
+            </form>
+
+
+            {% else %}
+
+
+            <h1 class="heading-large">
+
+              Make your own offer
+            </h1>
+
+
+            <div class="description-block">
+              <h3 class="heading-small">Their offer</h3>
+              <table class="offer-table">
+                <thead>
+                  <tr>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>The offer</td>
+                    <td>I will fix the roof if you'll give me access and pay for any extra materials.</td>
+                  </tr>
+                  <tr>
+                    <td>By when</td>
+                    <td>1 December 2018</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+
+
+            <fieldset></fieldset>
+            <form action="confirmation-page?radio-indent-group=counter" method="post" class="form">
+
+              <div class="form-group">
+                <fieldset>
+
+                  <legend class="visually-hidden">Suggest a resolution</legend>
+
+                  <label class="form-label-bold" for="offer">
+                    <div class="bold-medium">Your offer</div>
+                    <span class="form-hint">For example suggest they make a payment, fix a problem or return goods.</span>
+                  </label>
+                  <textarea class="form-control"
+                  id="offer"
+                  rows="3"
+                  name="offer-me"
+                  type="text"
+                  style="width: 95%"></textarea>
+                  <br>
+                  <br>
+
+                  <label class="form-label-bold" for="claimant_date_of_birth_day">
+                    <div class="bold-medium">When do you want the offer completed by?</div>
+                  </label>
+
+                  <div class="input form-group "><p
+                    class="form-hint text">For example, 23 4 2017</p>
+                    <div class="input form-group know-date-input">
+                      <div class="input form-group tel required claimant_date_of_birth_day"><label
+                        class="tel required form-label"
+                        for="claimant_date_of_birth_day">Day</label><input
+                        class="string tel required form-control" maxlength="2" type="tel"
+                        size="2" name="offerDateDay"
+                        id="claimant_date_of_birth_day"></div>
+                        <div class="input form-group tel required claimant_date_of_birth_month"><label
+                          class="tel required form-label"
+                          for="claimant_date_of_birth_month">Month</label><input
+                          class="string tel required form-control" maxlength="2" type="tel"
+                          size="2" name="offerDateMonth"
+                          id="claimant_date_of_birth_month"></div>
+                          <div class="input form-group tel required claimant_date_of_birth_year"><label
+                            class="tel required form-label"
+                            for="claimant_date_of_birth_year">Year</label><input
+                            class="string tel required form-control" maxlength="4" type="tel"
+                            size="4" name="offerDateYear"
+                            id="claimant_date_of_birth_year"></div>
+                          </div>
+                        </div>
+
+
+
+
+                        <!-- <p class="panel panel-border-wide">
+                          {{ partyName( 'defendant' ) }} can accept, reject or make another offer.
+                        </p> -->
+
+                        <div class="form-group">
+
+                          <input type="submit" class="button" value="Submit offer">
+                        </div>
+                      </fieldset>
+                    </div>
+                  </form>
+
+
+
+                  {% endif %}
+
+
+
+                </div>
+
+
+              </div>
+            {% include 'prototypes/prototype-feb-2020/includes/contact.html' %}
+</main>
+{% endblock %}

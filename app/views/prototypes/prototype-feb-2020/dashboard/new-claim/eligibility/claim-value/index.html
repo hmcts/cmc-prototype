@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <form
+      name="aspnetForm"
+      method="post"
+      onsubmit="multiNavigation('radio_group3', ['above_total','below', 'dont-know'], ['result?a=10k&', 'hwf', 'result?a=amount-unknown&']);return false;">
+      {{formData | safe}}
+      <!--  <a href="#" onclick="history.go(-1)" class="link-back">Back</a>  -->
+      <h1 class="heading-large">
+        Total amount you're claiming
+      </h1>
+      <p>If you're claiming interest, include that in the amount.</p>
+
+      <fieldset>
+        <legend class="visuallyhidden">
+          Do you live in the UK
+        </legend>
+        <div class="multiple-choice">
+          <input id="radio-1" type="radio" name="radio_group3" value="above_total">
+          <label for="radio-1">More than £10,000</label>
+        </div>
+        <div class="multiple-choice">
+          <input id="radio-2" type="radio" name="radio_group3" value="below">
+          <label for="radio-2">£10,000 or less</label>
+        </div>
+        <div class="multiple-choice">
+          <input id="radio-3" type="radio" name="radio_group3" value="dont-know">
+          <label for="radio-3">I don't know the amount</label>
+        </div>
+      </fieldset>
+      <div class="form-group">
+        <input type="submit" class="button" value="Save and continue"/>
+      </div>
+    </form>
+  </div>
+</div>
+{% include 'prototypes/prototype-feb-2020/includes/contact.html' %}
+</main>
+{% endblock %}

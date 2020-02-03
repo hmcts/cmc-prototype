@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+
+{% block content %}
+
+
+<main id="content" role="main">
+
+  {% include "includes/phase_banner_beta.html" %}
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+      <!--  <a href="#" onclick="history.go(-1)" class="link-back">Back</a>  -->
+
+      <h1 class="heading-large">
+        Contact {{ partyName( 'claimant' ) }} to settle the claim
+      </h1>
+
+      <div class="panel panel-border-narrow" id="pay" style="padding-bottom:15px;">
+        <p>{{ partyName( 'claimant' ) }} can bring enforcement action at any time until they agree the claim is settled. </p>
+      </div>
+
+      <p>Make sure you get receipts for any payments.</p>
+      <p><a href="../../party-details/claimant">Get {{ partyName( 'claimant' ) }}'s contact details</a></p>
+      <p>We'll contact you when they confirm you've settled. The judgment will remain but will be marked as satisfied.</p>
+
+
+
+    </div>
+  </div>
+
+  {% include 'prototypes/prototype-feb-2020/includes/contact.html' %}
+</main>
+
+<form method="post"  action="#" class="form" style="float: left;">
+  <select id="control-box2" name="control-box2" onchange="window.location.href='settle-out-of-court?beforeccjdeadline='+this.value">
+    <option value="true">Defendant</option>
+    <option value="true" >- Before 1 month CCJ deadline</option>
+    <option value="false">- After 1 month CCJ deadline</option>
+  </select>
+</form>
+
+
+{% endblock %}

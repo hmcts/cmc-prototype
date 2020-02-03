@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="5" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <div class="govuk-box-highlight">
+        <h1 class="bold-large">You've uploaded other information the court ordered</h1>
+      </div>
+    <h2 class="heading-medium">What happens next</h2>
+
+    <p>We told the {% if data[‘party’] == ‘claimant’ %}defendant{% else %}claimant{% endif %} that you’ve uploaded information the court ordered. They can view it if they want.</p>
+
+    <p>You still need to:</p>
+    <ol class="list list-bullet">
+      <li><a href="../generic-confirm?upload=complete">confirm you've done anything else the court ordered</a></li>
+<!--       <li><a href="../witness-statements/statement-builder?upload=complete">state your version of events</a></li> -->
+      <li><a href="../witness-statements?upload=complete">upload any witness statements</a></li>
+    </ol>
+
+    <p><h4 class="heading-small">If you've finished</h4></p>
+
+
+    <p>You need to <a href="../finished">tell us you've finished</a>. You must do this before 4pm on {{ now | date('add', 14, 'days') | date }}.</p>
+
+    <p><h4 class="heading-small">Upload more information</h4></p>
+
+    <p>You can upload documents or witness statements until 4pm on {{ now | date('add', 14, 'days') | date }}.</p>
+
+
+    <a href="../../home?dashboard={% if data['party'] == 'defendant' %}2.7102{% else %}1.202{% endif %}&upload=complete" class="button">Go to your account</a>
+
+    {% include "includes/contact.html" %}
+    </div>
+  </div>
+</main>
+{% endblock %}
