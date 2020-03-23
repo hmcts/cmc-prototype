@@ -16,17 +16,34 @@ Money Claims Prototype
       </div>
     <h2 class="heading-medium">What happens next</h2>
 
+    {% if data['next'] != 'hearing' %}
     <p>We'll contact you to tell you what to do next.</p>
+    {% else %}
+
+    <h2 class="heading-small">You need to pay the hearing fee</h2>
+    <p>Everyone has finished responding to the court's order.</p>
     <p>You can't upload any more witness statements or documents.</p>
+    <p>You need to pay £115 before 4pm on {{ now | date( 'add', 33, 'days' ) | date }}.</p>
 
+    <p><a href="../../hearing-fee" class="button">Pay hearing fee</a></p>
 
-    <a href="../../home?dashboard={% if data['party'] == 'claimant' %}1.29{% else %}2.723{% endif %}&witness=complete" class="button">Go to your account</a>
+    {% import "prototypes/features-to-be-built/includes/fee-table.html" as feeTable %}
+    {{ feeTable.show( 'hearing' ) }}
 
-    <h2 class="heading-medium" style="margin-bottom: 10px;">Help and support</h2>
+    {% endif %}
 
-{% import 'prototypes/features-to-be-built/includes/contact-in-page.html' as contact %}
-{{ contact.output('small') }}
+    <a href="../../home?dashboard={% if data['next'] == 'hearing' %}1.241{% elseif data['party'] == 'claimant' %}1.29{% else %}2.723{% endif %}&witness=complete" class="button {% if data['next'] == 'hearing' %}secondary-button{% endif %}">Go to your account</a>
+
+    {% include "includes/contact.html" %}
 </div>
 </div>
 </main>
+
+<form method="post" action="#" class="form" style="position: absolute;">
+  <select onchange="window.location.href='?next='+this.value">
+    <option>-------- Status --------</option>
+    <option {% if data['next'] != 'hearing' %}selected{% endif %} value="wait">Wait</option>
+    <option  {% if data['next'] == 'hearing' %}selected{% endif %} value="hearing">Pay hearing fee</option>
+  </select>
+</form>
 {% endblock %}

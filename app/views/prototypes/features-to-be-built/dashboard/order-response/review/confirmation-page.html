@@ -22,7 +22,7 @@ Money Claims Prototype
 
       <h2 class="heading-medium">What happens next</h2>
 
-      <p>We'll tell {% if data['party'] == 'claimant' %}Mary Richards{%else%}Jan Clark{% endif %} you've made the request. They'll have until {{ now | date( 'add', 12, 'days' ) | date }} to add comments of their own.</p>
+      <p>We'll tell {% if data['party'] == 'claimant' %}{{ partyName( 'defendant' ) }}{%else%}{{ partyName( 'claimant' ) }}{% endif %} you've made the request. They'll have until {{ now | date( 'add', 12, 'days' ) | date }} to add comments of their own.</p>
 
       <p>A judge will then review the order and any comments. We'll contact you both by post to tell you what to do next.</p>
 
@@ -30,10 +30,7 @@ Money Claims Prototype
 
       <p><a href="../../../dashboard/home?dashboard={% if data['party'] == 'claimant' %}1.21{% else %}2.71{% endif %}" class="button">Go to your account</a></p>
 
-      <h2 class="heading-medium" style="margin-bottom: 10px;">Help and support</h2>
-
-{% import 'prototypes/features-to-be-built/includes/contact-in-page.html' as contact %}
-{{ contact.output('small') }}
+      {% include "includes/contact.html" %}
 
     </div>
 
