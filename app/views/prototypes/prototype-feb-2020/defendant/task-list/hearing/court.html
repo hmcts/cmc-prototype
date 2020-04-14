@@ -139,7 +139,7 @@ Money Claims Prototype
 
             <fieldset>
               <div class="multiple-choice" data-target="court-names">
-                <input id="radio-court-name" type="radio" name="court-search" value="name">
+                <input id="radio-court-name" type="radio" name="court-search" value="name" onclick="$('form#aspnetForm').attr('action','name-results');console.log('here');$('form#aspnetForm').attr('onSubmit','');">
                 <label for="radio-court-name">Find and select a court</label>
               </div>
 
@@ -149,7 +149,8 @@ Money Claims Prototype
                         Enter a court name or the name of a place
                     </label>
 
-                    {% include 'prototypes/prototype-feb-2020/includes/courts.html' %}
+                    <input type="text" id="court-name" name="court-name" class="form-control" />
+
                 </div>
 
 
@@ -283,19 +284,6 @@ Money Claims Prototype
 </main>
 <script src="/public/javascripts/lodash-4.17.0.js"></script>
 
-{% if data['fallback'] != 'on' %}
-<script src="/public/javascripts/auto-complete/autocomplete.js"></script>
-<script src="/public/javascripts/auto-complete/init-auto-complete.js"></script>
-<style>
-  #court-names .autocomplete__hint, #court-names input.autocomplete__input {
-    width: 550px;
-  }
-  #court-names__listbox {
-    width: 546px;
-  }
-</style>
-
-{% endif %}
 
 <form method="post" action="#" class="for4" style=" float: left;">
   <select onchange="window.location.href='?reject-court=&fallback=off&scenario='+this.value" id="meh">
