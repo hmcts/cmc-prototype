@@ -1209,6 +1209,21 @@
             </tr>
         {% endif %}
 
+        <!--  When defendant makes a general application by post  -->
+        {% if data['dashboard'] == 1.99941 %}
+            <tr class="mobile-table">
+              <td>352MC733</td>
+              <td>{{ partyName( 'defendant' ) }}</td>
+              <td>{% if data['mediation-pilot'] == "on" %}£300{% else %}£1,500{% endif %}</td>
+              <td class="mobile-hide">The defendant applied to change something about the claim</td>
+              <td>-</td>
+              <td><a href="claimant?claimant=3.12556">View</a></td>
+            </tr>
+            <tr>
+              <td class="mobile-table-status" colspan="3"></td>
+            </tr>
+        {% endif %}
+
 
 
 
@@ -3299,6 +3314,21 @@
             </tr>
         {% endif %}
 
+        <!--  When claimant makes a general application by post -->
+        {% if show_all==true or data['dashboard'] == 2.99941 %}
+            <tr class="mobile-table">
+              <td>352MC733</td>
+              <td>{{ partyName( 'claimant' ) }}</td>
+              <td>{% if data['mediation-pilot'] == "on" %}£300{% else %}£1,500{% endif %}</td>
+              <td class="mobile-hide">The claimant applied to change something about the claim</td>
+              <td>-</td>
+              <td><a href="defendant?defendant=3.2266">View</a></td>
+            </tr>
+            <tr>
+              <td class="mobile-table-status" colspan="3"></td>
+            </tr>
+        {% endif %}
+
 
 
 
@@ -3500,7 +3530,8 @@
 
     <option>-------- General Applications --------</option>
     <option value="1.9993" {% if data['dashboard'] == 1.9993 %}selected{% endif %}>After claimant submits a general application</option>
-    <option value="1.9994" {% if data['dashboard'] == 1.9904 %}selected{% endif %}>When defendant makes a general application</option>
+    <option value="1.9994" {% if data['dashboard'] == 1.9994 %}selected{% endif %}>When defendant makes a general application</option>
+    <option value="1.99941" {% if data['dashboard'] == 1.99941 %}selected{% endif %}>When defendant makes a general application (offline)</option>
 
 
     <option>-------- CCJ vary --------</option>
@@ -3671,6 +3702,7 @@
     <option>-------- General Applications --------</option>
     <option value="2.9993" {% if data['dashboard'] == 2.9993 %}selected{% endif %}>After defendant submits a general application</option>
     <option value="2.9994" {% if data['dashboard'] == 2.9994 %}selected{% endif %}>When claimant makes a general application</option>
+    <option value="2.99941" {% if data['dashboard'] == 2.99941 %}selected{% endif %}>When claimant makes a general application (offline)</option>
 
 
     <option>-------- CCJ vary - defendant waiting for response --------</option>

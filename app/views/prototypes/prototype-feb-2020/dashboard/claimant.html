@@ -39,7 +39,7 @@
             or data['claimant'] == 12 or data['claimant'] == 13.11 or data['claimant'] == 13.13 or data['claimant'] == 13.2 or data['claimant'] == 14.1 or data['claimant'] == 14.2 or data['claimant'] == 14.3 or data['claimant'] == 14.4 or data['claimant'] == 14.41 or data['claimant'] == 14.5 or data['claimant'] == 16  or data['claimant'] == 16.1 or data['claimant'] == 17  or data['claimant'] == 17.01  or data['claimant'] == 20 or data['claimant'] == 20.1 or data['claimant'] == 20.2
             or data['claimant'] == 21 or data['claimant'] == 21.3 or data['claimant'] == 21.4 or data['claimant'] == 21.1 or data['claimant'] == 23 or data['claimant'] == 24 or data['claimant'] == 26  or data['claimant'] == 27  or data['claimant'] == 28  or data['claimant'] == 29
             or data['claimant'] == 33  or data['claimant'] == 34  or data['claimant'] == 36  or data['claimant'] == 37
-            or data['claimant'] == 16.14  or  data['claimant'] == 16.15 or   data['claimant'] == 3.12345   or   data['claimant'] == 3.12555   or   data['claimant'] == 3.12566
+            or data['claimant'] == 16.14  or  data['claimant'] == 16.15 or   data['claimant'] == 3.12345   or   data['claimant'] == 3.12555 or data['claimant'] == 3.12556 or   data['claimant'] == 3.12566
             or  data['claimant'] == 28.2 or  data['claimant'] == 28.4   or  data['claimant'] == 28.6 %}
             <li role="presentation"><a href="#next-steps" role="tab" tabindex="0" aria-controls="next-steps" aria-selected="true">Latest update</a></li>
             <li role="presentation"><a href="#docs" role="tab" tabindex="-1" aria-controls="history">Documents</a></li>
@@ -169,6 +169,13 @@
                   <p>Your online account won't show any more updates to this claim.</p>
 
 
+              <!--  When the Defendant makes a general application by post  -->
+              {% elif data['claimant'] == 3.12556 %}
+                  <h2 class="heading-medium">{{ partyName( 'defendant' ) }} applied to change something about the claim by post</h2>
+                  <h3 class="heading-small">The claim will now continue outside the online service</h3>
+                  <p>We'll post you a copy of their application. This will explain what you need to do next.</p>
+                  <p>Your online account won't show any more updates to this claim.</p>
+
               <!--  Claimant has submitted a general application  -->
               {% elseif data['claimant'] == 3.12566 %}
                   <h2 class="heading-medium">You applied to change the claim</h2>
@@ -176,8 +183,6 @@
                   <p>You might have to go to a hearing.</p>
                   <p>We'll contact you by post to tell you what to do next.</p>
                   <p>Your online account won't show any more updates to this claim.</p>
-
-
 
 
 
@@ -1690,7 +1695,7 @@
             data['claimant'] != 3.2 and data['claimant'] != 9.2 and data['claimant'] != 10.12 and data['claimant'] != 10.01 and
             data['claimant'] != 10.4 and data['claimant'] != 10.5 and data['claimant'] != 10.81 and data['claimant']
             != 10.82 and data['claimant'] != 10.83 and data['claimant'] != 11.1011 and data['claimant'] != 17 and data['claimant'] !=
-            4.2 and data['claimant'] != 4.3 and data['claimant'] != 11.5 and data['claimant'] != 11.105 and data['claimant'] != 14.5 and data['claimant'] != 11.61 and data['claimant'] != 10 and data['claimant'] != 11
+            4.2 and data['claimant'] != 4.3 and data['claimant'] != 11.5 and data['claimant'] != 11.105 and data['claimant'] != 14.5 and data['claimant'] != 11.61 and data['claimant'] != 10 and data['claimant'] != 11 and data['claimant'] != 3.12556
              or data['claimant'] == 26  or data['claimant'] == 27  or data['claimant'] == 28  or data['claimant'] == 29
             or data['claimant'] == 23   or data['claimant'] == 24   or data['claimant'] == 28.2   or data['claimant'] == 28.4   or data['claimant'] == 28.6  %}
 
@@ -1732,7 +1737,7 @@
 
             {% if data['claimant'] != 21.1 and data['claimant'] != 21.5 and data['claimant'] != 11.1011
                 and data['claimant'] != 11.105 and data['claimant'] != 26 and data['claimant'] != 27
-                and data['claimant'] != 3.12555 and data['claimant'] != 3.12566 and   data['claimant'] != 23 %}
+                and data['claimant'] != 3.12555 and data['claimant'] != 3.12556 and data['claimant'] != 3.12566 and   data['claimant'] != 23 %}
                 <div class="column-two-thirds">
                     <!--  General applications  - this will need logic to know that it comes from the claimant  -->
                     <hr>
@@ -3306,6 +3311,7 @@
     <option value="3.12566" {% if data['claimant'] == 3.12566 %}selected{% endif %}>Claimant has submitted a general application</option>
     <option value="3.12345" {% if data['claimant'] == 3.12345 %}selected{% endif %}>Return to draft general application (parallel to other states)</option>
     <option value="3.12555" {% if data['claimant'] == 3.12555 %}selected{% endif %}>When the Defendant makes a general application</option>
+    <option value="3.12556" {% if data['claimant'] == 3.12556 %}selected{% endif %}>When the Defendant makes a general application (offline)</option>
 
 
 
