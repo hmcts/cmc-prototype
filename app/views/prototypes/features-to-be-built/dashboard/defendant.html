@@ -111,6 +111,23 @@
               <option value="12" {% if data['defendant'] == 12 %}selected{% endif %}> </option>
 
 
+              <!--  Defendant has submitted general application  -->
+              {% elseif data['defendant'] == 3.2258 %}
+                  <h2 class="heading-medium">You applied to change the claim</h2>
+                  <h3 class="heading-small">The claim will now continue outside the online service</h3>
+                  <p>You might have to go to a hearing.</p>
+                  <p>We'll contact you by post to tell you what to do next.</p>
+                  <p>Your online account won't show any more updates to this claim.</p>
+
+
+
+              <!--  When Claimant makes a general application   -->
+              {% elseif data['defendant'] == 3.2265 %}
+                  <h2 class="heading-medium">{{ partyName( 'claimant' ) }} applied to change something about the claim</h2>
+                  <h3 class="heading-small">The claim will now continue outside the online service</h3>
+                  <p>We'll contact you by post to tell you what to do next.</p>
+                  <p><a href="../defendant/correspondence/forms/general-application">Download their application</a> (PDF, 123KB)</p>
+                  <p>Your online account won't show any more updates to this claim.</p>
               {% elseif data['defendant'] == 3.3 %}
               <h2 class="heading-medium">The claim will continue by post</h2>
               <p>Because you responded to the claim using a paper form, all further action in this claim will be by post.</p>
@@ -3455,6 +3472,10 @@
     <option value="18.1" {% if data['defendant'] == 18.1 %}selected{% endif %}>18.1. Not proceeded</option>
     <option value="18.2" {% if data['defendant'] == 18.2 %}selected{% endif %}>18.2. Not proceeded - past deadline</option>
     <option value="18.3" {% if data['defendant'] == 18.3 %}selected{% endif %}>Settled - successful mediation</option>
+
+    <option>------  General application  ----------</option>
+    <option value="3.2258" {% if data['defendant'] == 3.2258 %}selected{% endif %}>After submitting a general application</option>
+    <option value="3.2265" {% if data['defendant'] == 3.2265 %}selected{% endif %}>When claimant makes a general application</option>
   </select>
 </form>
 {% endblock %}
