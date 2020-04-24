@@ -1,0 +1,124 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <!--  <a href="#" onclick="history.go(-1)" class="link-back">Back</a>  -->
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+        <form action="expert-required" method="POST" class="form">
+
+          {% if data['reject-court'] != 'yes' and data['scenario'] != 6 and data['scenario'] != 7 %}
+          <h1 class="heading-large">Choose a hearing location</h1>
+          {% else %}
+          <h1 class="heading-large">Request a hearing location</h1>
+          {% endif %}
+
+          <p>The following courts match 'brighton'.</p>
+
+          <p>Select the court you want to request:</p>
+
+
+          <div class="form-group">
+            <fieldset>
+              <div class="multiple-choice">
+                <input id="radio-court-yes" type="radio" name="court" value="yes">
+                <label for="radio-court-yes">Brighton County and Family Court</label>
+
+                <details role="group">
+                  <summary role="button" aria-controls="details-content-0" aria-expanded="false">
+                    <span class="summary">See this court's facilities</span></summary>
+
+                      <div class="panel" id="details-content-0" aria-hidden="true">
+
+                    <h2 class="heading-small">Loop hearing</h2>
+                    <p>Loop hearing facilities are available at the ground floor counter.</p>
+
+                    <h2 class="heading-small">Baby changing facility</h2>
+                    <p>This court has baby changing facilities on the ground floor within the disabled toilet.</p>
+
+                    <h2 class="heading-small">Children's waiting room</h2>
+                    <p>There is a childrens room on the 1st floor. In addition there is a portable toy box available.</p>
+
+                    <h2 class="heading-small">Parking</h2>
+                    <p>The closest public parking is in the Bedford Road car park.</p>
+
+                    <h2 class="heading-small">Refreshments</h2>
+                    <p>Hot and cold vending machines can be found on the ground floor.</p>
+
+                    <h2 class="heading-small">Disabled access</h2>
+                    <p>Disabled toilet facilities. Parking can be arranged by contacting the court in advance.</p>
+
+                    <h2 class="heading-small">Interview room</h2>
+                    <p>here are up to six private interview rooms on the ground floor, with a further six on the second floor.</p>
+
+                    <h2 class="heading-small">Assistance dogs</h2>
+                    <p>Guide dogs are welcome at this court.</p>
+
+                    <h2 class="heading-small">Video facilities</h2>
+                    <p>Court or hearing room video conferencing facilities and prison to court video link facilities are available (by prior arrangement)</p>
+
+                  </div>
+                </details>
+              </div>
+              <div class="multiple-choice" data-target="courtsearch">
+                <input id="radio-court-no" type="radio" name="court" value="no">
+                <label for="radio-court-no">Brighton Hearing Centre</label>
+                <details role="group">
+                  <summary role="button" aria-controls="details-content-0" aria-expanded="false">
+                    <span class="summary">See this court's facilities</span></summary>
+
+                      <div class="panel" id="details-content-0" aria-hidden="true">
+
+                    <h2 class="heading-small">Loop hearing</h2>
+                    <p>Loop hearing facilities are available at the ground floor counter.</p>
+
+                    <h2 class="heading-small">Baby changing facility</h2>
+                    <p>This court has baby changing facilities on the ground floor within the disabled toilet.</p>
+
+                    <h2 class="heading-small">Children's waiting room</h2>
+                    <p>There is a childrens room on the 1st floor. In addition there is a portable toy box available.</p>
+
+                    <h2 class="heading-small">Parking</h2>
+                    <p>The closest public parking is in the Bedford Road car park.</p>
+
+                    <h2 class="heading-small">Refreshments</h2>
+                    <p>Hot and cold vending machines can be found on the ground floor.</p>
+
+                    <h2 class="heading-small">Disabled access</h2>
+                    <p>Disabled toilet facilities. Parking can be arranged by contacting the court in advance.</p>
+
+                    <h2 class="heading-small">Interview room</h2>
+                    <p>here are up to six private interview rooms on the ground floor, with a further six on the second floor.</p>
+
+                    <h2 class="heading-small">Assistance dogs</h2>
+                    <p>Guide dogs are welcome at this court.</p>
+
+                    <h2 class="heading-small">Video facilities</h2>
+                    <p>Court or hearing room video conferencing facilities and prison to court video link facilities are available (by prior arrangement)</p>
+
+                  </div>
+                </details>
+              </div>
+            </fieldset>
+          </div>
+
+          <div class="form-group">
+            <input type="submit" class="button" value="Save and continue">
+          </div>
+
+        </form>
+
+    </div>
+  {% include 'prototypes/features-to-be-built/includes/contact.html' %}
+</main>
+<script src="/public/javascripts/lodash-4.17.0.js"></script>
+
+{% endblock %}
