@@ -1,0 +1,74 @@
+{% extends "layout_task-list.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block home_link %} ../../task-list {% endblock %}
+{% block proposition_header %}
+{% set my_account="1" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% import 'prototypes/prototype-may-2020/includes/address.html' as address %}
+
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}
+  {% else %}
+  <!--  <a href="#" onclick="history.go(-1)" class="link-back">Back</a>  -->
+  {% endif %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+      <form method="post" action="service-address" class="form">
+
+          <h1 class="heading-large">
+            <form method="post" action="your-details/date-of-birth" class="form">
+              Enter the defendant's address
+            </h1>
+
+          {% if data['defendant-type']=="Sole trader" %}
+
+            <p>You can enter the defendant’s residential or trade address. The address must be in England or Wales.</p>
+
+          {% elseif data['defendant-type']=="Company" %}
+            <p>Enter the company’s registered office or a company address that has a connection with the claim. The address must be in England or Wales.</p>
+
+          {% elseif data['defendant-type']=="Organisation" %}
+
+            <p>Enter the organisation's main office or an address that has a connection with the claim. The address must be in England or Wales.</p>
+
+          {% else %}
+
+            <p>The address must be in England or Wales. Your claim may fail if you use the wrong address.</p>
+            <p>You must enter their usual or last known home address. Don't use their work address.</p>
+
+
+          {% endif %}
+
+          {{ address.lookup('defendant') }}
+
+          <br />
+
+    {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}
+    <div class="form-group">
+      <input type="submit" class="button" value="Save changes"/>
+    </div>
+    <a href="{{ data.return_page if data.return_page | length > 0 else '../task-list' }}">Cancel</a>
+    {% else %}
+    <div class="form-group">
+      <input type="submit" class="button" value="Save and continue"/>
+    </div>
+    {% endif %}
+  </form>
+</div>
+</div>
+{% include 'prototypes/prototype-may-2020/includes/contact.html' %}
+</main>
+<form method="post" action="#" class="form" style="position: absolute;">
+  <select onchange="window.location.href='?defendant-type='+this.value">
+    <option value="Individual" {% if data['defendant-type'] == 'Individual' %}selected{% endif %}>Individual</option>
+    <option value="Sole trader" {% if data['defendant-type'] == 'Sole trader' %}selected{% endif %}>Sole trader</option>
+    <option value="Organisation" {% if data['defendant-type'] == 'Organisation' %}selected{% endif %}>Organisation</option>
+  </select>
+</form>
+{% endblock %}

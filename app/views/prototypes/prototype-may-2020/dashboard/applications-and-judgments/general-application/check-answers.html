@@ -1,0 +1,393 @@
+{% extends "layout_task-list.html" %}
+
+{% block page_title %}
+Check your answers
+{% endblock %}
+
+{% block home_link %} ../task-list {% endblock %}
+
+{% block proposition_header %}
+{% set my_account="2" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+
+
+{% block content %}
+<main id="content" role="main">
+
+  {% include "includes/phase_banner_beta.html" %}
+
+  <!--  <a href="#" onclick="history.go(-1)" class="link-back">Back</a>  -->
+
+  <h1 class="heading-large">
+    Check your answers
+  </h1>
+
+
+
+  <table class="check-your-answers">
+    <thead>
+    <tr>
+      <th colspan="2" class="no-border">
+        <h2 class="heading-medium" id="name">
+
+        </h2>
+      </th>
+      <th class="no-border">
+      </th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <tr>
+      <td>
+        What you've requested
+      </td>
+      <td style="white-space: pre-line">{{ data['general-application-what'] }}</td>
+      <td class="change-answer">
+        <a href="#">
+          Change <span class="visuallyhidden">Name</span>
+        </a>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        Reason for request
+      </td>
+      <td style="white-space: pre-line">{{  data['general-application-why']  }}</td>
+      <td class="change-answer">
+        <a href="#">
+          Change <span class="visuallyhidden">Name</span>
+        </a>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        Requires a hearing
+      </td>
+      <td>
+        {% if  data['generalapphearing'] == 'true' %}
+            Yes
+        {% else %}
+            No
+        {% endif %}
+      </td>
+      <td class="change-answer">
+        <a href="#">
+          Change <span class="visuallyhidden">Name</span>
+        </a>
+      </td>
+    </tr>
+
+
+
+    {% if  data['generalapphearing'] == 'true' %}
+        <tr>
+          <td>
+            Hearing length
+          </td>
+              {% if  data['radio-general-app-hearing-duration'] == 'hearing-duration-different' %}
+                  <td>{{  data['hearing-hours']  }} Hours  {{ data['hearing-mins']  }}  Minutes</td>
+              {% elif  data['radio-general-app-hearing-duration'] == 'hearing-duration-unknown' %}
+                  <td>I don't know</td>
+              {% elif  data['radio-general-app-hearing-duration'] == 'hearing-duration-30' %}
+                  <td>30 minutes</td>
+              {% elif  data['radio-general-app-hearing-duration'] == 'hearing-duration-60' %}
+                  <td>1 hour</td>
+              {% else %}
+                  <td></td>
+              {% endif %}
+          <td class="change-answer">
+            <a href="#">
+              Change <span class="visuallyhidden">Name</span>
+            </a>
+          </td>
+        </tr>
+    {% endif %}
+
+
+    {% if  data['otherinfo'] != 'false' %}
+        <tr>
+          <td>
+            Other information
+          </td>
+          <td  style="white-space: pre-line">{{ data['any-other-information'] }} Some text</td>
+          <td class="change-answer">
+            <a href="#">
+              Change <span class="visuallyhidden">Name</span>
+            </a>
+          </td>
+        </tr>
+    {% endif %}
+
+
+    </tbody>
+  </table>
+
+
+
+
+
+    {% if  data['generalappnoevidence'] != 'true' %}
+        <!--  EVIDENCE  -->
+        <table class="check-your-answers">
+          <thead>
+
+              <tr>
+                <th colspan="3" class="no-border">
+                  <h2 class="heading-medium" id="name">
+                    Files
+                  </h2>
+                </th>
+              </tr>
+
+          </thead>
+
+
+
+          <tbody>
+
+              <tr>
+                <td>
+                  Exhibit A1
+                </td>
+                <td>
+                  <a href="#">Emails.pdf</a>
+                  <br />You can see the emails dated {{ date | date('subtract', 123, 'days') | date }} and {{ date | date('subtract', 134, 'days') | date }} that they claimed not to receive.
+                </td>
+                <td class="change-answer">
+                  <a href="#">
+                    Change <span class="visuallyhidden">Name</span>
+                  </a>
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  Exhibit A2
+                </td>
+                <td>
+                  <a href="#">Photo 1.jpg</a>
+                  <br />The photos show that the roof was not adequately supported.
+                </td>
+                <td class="change-answer">
+                  <a href="#">
+                    Change <span class="visuallyhidden">Name</span>
+                  </a>
+                </td>
+              </tr>
+
+          </tbody>
+
+        </table>
+    {% endif %}
+
+
+
+
+
+
+    {% if  data['generalapphearing'] == 'true' %}
+
+        <!--  HEARING REQUIREMENTS  -->
+        <table class="check-your-answers">
+          <thead>
+          <tr>
+            <th colspan="2" class="no-border">
+              <h2 class="heading-medium" id="name">
+                Hearing requirements
+              </h2>
+            </th>
+            <th class="no-border">
+            </th>
+          </tr>
+          </thead>
+          <tbody>
+
+
+              <tr>
+                <td>
+                  Support you'd require
+                </td>
+                <td>
+                  No support required
+                </td>
+                <td class="change-answer">
+                  <a href="#">
+                    Change <span class="visuallyhidden">Name</span>
+                  </a>
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  Preferred location for a hearing
+                </td>
+                <td>
+                  Guildford County Court
+                </td>
+                <td class="change-answer">
+                  <a href="#">
+                    Change <span class="visuallyhidden">Name</span>
+                  </a>
+                </td>
+              </tr>
+
+
+              <tr>
+                <td>
+                  Dates you can’t go to a hearing
+                </td>
+                <td>
+                  15 September 2019<br>
+                  16 September 2019<br>
+                  17 September 2019<br>
+                  18 September 2019<br>
+                  19 September 2019<br>
+                </td>
+                <td class="change-answer">
+                  <a href="#">
+                    Change <span class="visuallyhidden">Name</span>
+                  </a>
+                </td>
+              </tr>
+
+
+          </tbody>
+        </table>
+    {% endif %}
+
+  <!--  Declaration   -->
+  <!-- needs company option addition  !!   -->
+
+
+  {%  if  data['generalappnoevidence'] == 'false' %}
+      <div class="column-two-thirds">
+        <h2 class="heading-medium">Statement of truth</h2>
+        <p>  The information on this page forms your response. You can see it on the
+          response form after you submit.</p>
+        <p>When you’re satisfied that your answers are accurate, you should tick to “sign” this statement of
+          truth on the form.</p>
+
+        {% if data['check'] == 'org'
+            or data['check'] == 'soletrader'
+            or data['check'] == 10 %}
+              <p>You must hold a senior position in your organisation to sign the statement of truth.</p>
+              <details class='form-group'>
+                <summary>
+                  <span class="summary">Types of senior position</span>
+                </summary>
+                <div class="panel">
+                  <p>A senior position could be a:</p>
+                  <ul class="list-bullet list">
+                    <li>director</li>
+                    <li>treasurer</li>
+                    <li>chief executive</li>
+                    <li>manager or other officer of the company or corporation</li>
+                  </ul>
+                  <p>If your corporation isn't registered, a senior position could be:</p>
+                  <ul class="list-bullet list">
+                    <li>the chairperson or president</li>
+                    <li>another officer of the corporation</li>
+                  </ul>
+                </div>
+              </details>
+              <div class="form-group">
+                <label class="form-label" for="claimant_title">Full name</label>
+                <input type="text" class="form-control form-control-1-2" id="claimant_title" name="claimant_title" value="">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="defendant_firstname">Job title</label>
+                <input class="form-control form-control-1-2" id="defendant_name" name="defendant_name" type="text"
+                       value="{{data['defendant_name']}}">
+              </div>
+            </div>
+        {% endif %}
+
+        <div class="form-group">
+          <div class="multiple-choice text">
+            <input id="HasAcceptedTermsAndConditions" type="checkbox" value="true">
+            <label for="HasAcceptedTermsAndConditions"><p>I believe that the facts stated in this application are true.</p><p>I understand that proceedings for contempt of court may be brought against anyone who makes, or causes to be made, a false statement in a document verified by a statement of truth without an honest belief in its truth.</p></label>
+          </div>
+        </div>
+    {% endif %}
+
+
+  <h2 class="heading-medium">Declaration</h2>
+  <div class="form-group">
+    <div class="multiple-choice text">
+      <input class="" id="declarations" type="checkbox" value="true">
+      <label for="declarations">I declare that the details I have given are true to the best of my knowledge.</label>
+    </div>
+  </div>
+
+
+  {% if  data['generalapphearing'] == 'true' %}
+      <p><a class="button" href="../../../defendant/task-list/check-and-send/enter-card">Submit and continue to payment (£255)</a></p>
+
+      <tr id="check-and-send">
+        <td>
+          <p><a href="../../defendant?defendant=3.2255">Save and return</a></p>
+        </td>
+      </tr>
+  {% else %}
+      <p><a class="button" href="../../../defendant/task-list/check-and-send/enter-card">Submit and continue to payment (£100)</a></p>
+  {% endif %}
+
+
+
+
+
+</main>
+
+
+<form method="post"  action="#" class="for4" style=" float: left; ">
+  <select style="height:25px;" onchange="window.location.href='?'+this.value">
+
+    <option value="generalapphearing=true&"
+            {% if data.generalapphearing == 'true' %}selected{% endif %}
+    >General application - With hearing</option>
+
+    <option value="generalapphearing=false&"
+            {% if data.generalapphearing != 'true' %}selected{% endif %}
+    >General application - Without hearing</option>
+
+    <option value="generalappnoevidence=false&"
+            {% if data['generalappnoevidence'] == 'false' %}selected{% endif %}
+    >General application - With evidence</option>
+
+    <option value="generalappnoevidence=true&"
+            {% if data['generalappnoevidence'] == 'true' %}selected{% endif %}
+    >General application - Without evidence</option>
+
+
+    <option value="otherinfo=true&"
+            {% if data['generalappnoevidence'] == 'false' %}selected{% endif %}
+    >General application - With 'Other information' field</option>
+
+    <option value="otherinfo=false&"
+            {% if data['generalappnoevidence'] == 'true' %}selected{% endif %}
+    >General application - Without 'Other information' field</option>
+
+
+    <option  value="check=1&"
+             {% if data['check'] != 2 and  data['check'] != 3 %}selected{% endif %}
+    >Individual </option>
+
+    <option  value="check=org&"
+             {% if data['check'] == 2 %}selected{% endif %}
+    >Business</option>
+
+    <option  value="check=soletrader&"
+             {% if data['check'] == 3 %}selected{% endif %}
+    >Sole trader</option>
+
+
+  </select>
+</form>
+
+
+
+{% endblock %}
