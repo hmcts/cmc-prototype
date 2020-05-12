@@ -12,13 +12,34 @@ Money Claims Prototype
       <form
       name="aspnetForm"
       method="GET"
-      onsubmit="multiNavigation('radio_group4', ['hwf_yes','hwf_no'], ['hwf/number', 'multiple-defendant']);return false;"
+      onsubmit="multiNavigation('payment', ['card','hwf'], ['enter-card', '../../confirmation-page']);return false;"
       id="aspnetForm"
       autocomplete="off">
       {{formData | safe}}
       <!--  <a href="#" onclick="history.go(-1)" class="link-back">Back</a>  -->
+      
+      <h1 class="heading-large">
+        How do you want to pay for your claim?
+      </h1>
+      <fieldset>
+        <div class="multiple-choice">
+          <input id="radio-2" type="radio" name="payment" value="card">
+          <label for="radio-2">By card</label>
+        </div>
+        <div class="multiple-choice" data-target="hwf">
+          <input id="radio-1" type="radio" name="payment" value="hwf">
+          <label for="radio-1">I have a Help With Fees number</label>
+        </div>
+        <div id="hwf" name="hwf" class="panel panel-border-narrow js-hidden">
 
-      {% include "prototypes/prototype-may-2020/includes/hwf.html" %}
+          <div class="form-group">
+            <label class="form-label" for="claimant_firstname">Help With Fees number</label>
+            <input type="text" class="form-control" />
+          </div>
+          <p>Your claim will not be issued until we have verified this.</p>
+
+        </div>
+      </fieldset>
 
       {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}
       <div class="form-group">
