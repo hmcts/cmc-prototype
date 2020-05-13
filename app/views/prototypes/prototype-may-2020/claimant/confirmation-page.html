@@ -24,8 +24,8 @@ Money Claims Prototype
         {% else %}
             <h1 class="bold-large">Claim submitted</h1>
             <br>
-            <p class="">
-              Your claim number: <br><strong class="bold-large">352MC733</strong>
+            <p>
+              Your claim number: <br><strong class="bold-large">{% if data['payment'] == 'hwf' %}1251-5451-8291-3761{% else %}352MC733{% endif %}</strong>
             </p>
             <p>
               <a class="font-medium" target="_blank" href='correspondence/claim-form-claimant?check=1' style="color: #FFFFFF" >Download your claim form</a> (123KB, PDF)
@@ -67,6 +67,16 @@ Money Claims Prototype
                 {% endif %}
             {% endif %}
 
+    {% elseif data['payment'] == 'hwf' %}
+        <p>Your claim will be issued once your Help With Fees application has been confirmed. We'll email you within X days to confirm this.</p>
+        <p>Once the claim is issued, {{ partyName( 'defendant' ) }} will have 14 days to respond to your claim. They can ask for an extra 14 days if they need it.</p>
+        <p>You can request a County Court Judgment (CCJ) against them if they don't respond.</p>
+
+        <h3 class="heading-small">If the defendant pays you</h3>
+        <p>You need to sign in to your account to tell us you've been paid.</p>
+        {% include "includes/survey.html" %}
+             <!--<p> <a class="button" href='../dashboard/home?dashboard=1.2'>Go to your account</a> </p>-->
+        <p> <a class="button" href='../dashboard/new-dashboard/claimant/all-claims?claimant=1'>Go to your account</a> </p>
 
     {% else %}
         <p>{{ partyName( 'defendant' ) }} has until 4pm on <span id="Date"></span> to respond to your claim. They can ask for an extra 14 days if they need it. We'll email you when they respond.</p>
@@ -146,6 +156,9 @@ Money Claims Prototype
     <option  value="claimantresponsetosetaside=true&claimantattending=false&claimsettled=true&"
              {% if data['claimantresponsetosetaside'] == 'true' and data['claimantattending'] == 'false' and data['claimsettled'] == 'true'  %}selected{% endif %}
             >Claimant - Defendant's set aside hearing - Not Attending - Claim already settled</option>
+    <option  value="payment=hwf"
+             {% if data['payment'] == 'hwf'  %}selected{% endif %}
+            >Help with fees</option>
   </select>
 </form>
 
