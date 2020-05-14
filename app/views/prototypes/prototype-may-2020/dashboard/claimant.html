@@ -18,7 +18,7 @@
     <div class="details" style="margin-top: -30px">
         <span style=""><h2 style="">
           <h2 class="heading-medium">{{ partyName( 'claimant' ) }} v {{ partyName( 'defendant' ) }}</h2>
-          <h2 class="font-xsmall" style="margin-top: -10px">Claim number: <span style="">352MC733</span></h2>
+          <h2 class="font-xsmall" style="margin-top: -10px">Claim number: <span style="">{% if data['claimant'] == 1.2 %}1251-5451-8291-3761{% else %}352MC733{% endif %}</span></h2>
     </div>
 
     <div class="column-full-width">
@@ -28,7 +28,7 @@
         <div class="tabs-nav">
           <ul class="tabs-list" role="tablist">
 
-            {% if data['claimant'] == 1 or data['claimant'] == 3.1 or data['claimant'] == 3.11 or data['claimant'] == 3.3 or data['claimant'] == 3.4 or data['claimant'] == 3.5 or data['claimant'] == 3.6 or data['claimant'] == 2 or data['claimant'] == 3 or data['claimant'] == 4 or data['claimant'] == 4.01 or data['claimant'] == 4.1 or data['claimant'] == 4.11 or data['claimant'] == 4.2 or data['claimant'] == 4.3 or data['claimant'] == 5
+            {% if data['claimant'] == 1 or data['claimant'] == 1.2 or data['claimant'] == 3.1 or data['claimant'] == 3.11 or data['claimant'] == 3.3 or data['claimant'] == 3.4 or data['claimant'] == 3.5 or data['claimant'] == 3.6 or data['claimant'] == 2 or data['claimant'] == 3 or data['claimant'] == 4 or data['claimant'] == 4.01 or data['claimant'] == 4.1 or data['claimant'] == 4.11 or data['claimant'] == 4.2 or data['claimant'] == 4.3 or data['claimant'] == 5
             or data['claimant'] == 5.1 or data['claimant'] == 5.11 or data['claimant'] == 5.2 or data['claimant'] == 5.21 or data['claimant'] == 6 or data['claimant'] == 7
              or data['claimant'] == 9 or data['claimant'] == 9.1 or data['claimant'] == 9.2 or data['claimant'] == 10.1 or data['claimant'] == 10.001 or data['claimant'] == 10.01
             or data['claimant'] == 10.02 or data['claimant'] == 10.03 or data['claimant'] == 10.11 or data['claimant'] == 10.4 or data['claimant'] == 10.5 or data['claimant'] == 10.6
@@ -110,6 +110,13 @@
               <h2 class="heading-medium">We've received your claim</h2>
               <p>{{ partyName( 'defendant' ) }} has until 4pm on 24 December 2018 to respond. They can request an extra 14 days if they need it.</p>
               <p>You can request a County Court Judgment against them if they don't respond by the deadline.</p>
+
+
+              {% elseif data['claimant'] == 1.2 %}
+              <h2 class="heading-medium">We've received your claim</h2>
+              <p>Your claim will be issued once your Help With Fees application has been confirmed. We'll email you within 5 days to confirm this.</p>
+              <p>Once the claim is issued, {{ partyName( 'defendant' ) }}  will have 14 days to respond to your claim. They can ask for an extra 14 days if they need it.</p>
+              <p>You can request a County Court Judgment (CCJ) against them if they don't respond.</p>
 
 
               {% elseif data['claimant'] == 2 %}
@@ -1695,7 +1702,7 @@
             <!--</p>-->
             {% endif %}
 
-            {% if data['claimant'] < 20 and data['claimant'] != 10.11 and data['claimant'] != 3 and data['claimant'] != 3.3 and data['claimant'] != 3.4 and data['claimant'] != 18 and
+            {% if data['claimant'] < 20 and data['claimant'] != 1.2 and data['claimant'] != 10.11 and data['claimant'] != 3 and data['claimant'] != 3.3 and data['claimant'] != 3.4 and data['claimant'] != 18 and
             data['claimant'] != 3.2 and data['claimant'] != 9.2 and data['claimant'] != 10.12 and data['claimant'] != 10.01 and
             data['claimant'] != 10.4 and data['claimant'] != 10.5 and data['claimant'] != 10.81 and data['claimant']
             != 10.82 and data['claimant'] != 10.83 and data['claimant'] != 11.1011 and data['claimant'] != 17 and data['claimant'] !=
@@ -1739,7 +1746,7 @@
             {% endif %}
 
 
-            {% if data['claimant'] != 21.1 and data['claimant'] != 21.5 and data['claimant'] != 11.1011
+            {% if data['claimant'] != 1.2 and data['claimant'] != 21.1 and data['claimant'] != 21.5 and data['claimant'] != 11.1011
                 and data['claimant'] != 11.105 and data['claimant'] != 26 and data['claimant'] != 27
                 and data['claimant'] != 3.12555 and data['claimant'] != 3.12556 and data['claimant'] != 3.12566 and   data['claimant'] != 23 %}
                 <div class="column-two-thirds">
@@ -3156,7 +3163,8 @@
 <form method="post" action="#" class="form" style="position: absolute;">
   <select id="claimant2" name="claimant2" onchange="window.location.href='?claimant='+this.value">
     <option>-------- Claimant view --------</option>
-    <option value="1" {% if data['claimant'] == 1 %}selected{% endif %}>Claim being processed</option>
+    <option value="1" {% if data['claimant'] == 1 %}selected{% endif %}>Claim issued</option>
+    <option value="1.2" {% if data['claimant'] == 1.2 %}selected{% endif %}>Claim received (HWF)</option>
     <option value="3.1" {% if data['claimant'] == 3.1 %}selected{% endif %}>More time requested by defendant</option>
     <option value="3.11" {% if data['claimant'] == 3.11 %}selected{% endif %}>More time requested by defendant - judgment cancelled</option>
     <option>-------- CCJs --------</option>
