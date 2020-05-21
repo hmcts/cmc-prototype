@@ -1,0 +1,57 @@
+{% extends "layout.html" %}
+{% block page_title %}
+GOV.UK prototype kit
+{% endblock %}
+{% block home_link %} index {% endblock %}
+{% block proposition_header %}
+{% set my_account="1" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+
+<main id="content" role="main">
+	{% include "includes/phase_banner_beta.html" %}
+
+	<div class="grid-row review-details">
+		<!--  <a href="#" onclick="history.go(-1)" class="link-back">Back</a>  -->
+		<header class="main-header" role="banner">
+			<div class="page-trail">
+				<span class="page-title">Confirm your Help With Fees payment</span>
+			</div>
+		</header>
+
+
+    <div class="column-two-thirds">
+		      
+		<div class="check-details">
+			<table>
+				<tbody>
+					<tr>
+						<td>Help With Fees reference number</td>
+						<td class="table-info">{{ data['hwf_number'] }}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<div class="form-group">
+			<a href="../../confirmation-page"><button class="button">Confirm payment</button></a>
+		</div>
+
+    </div>
+    <div class="column-third">
+      <div class="payment-summary-small" style="margin-top: 0; margin-left: 30px;">
+        <h2>Payment summary</h2>
+        <p>Money Claims {{type}} fee</p>
+        <p class="payment-info"></p>
+        <h3>Total amount:</h3>
+        <p class="payment-amount">£{% if type == 'certificate' %}15{% elseif type == 'hearing' %}115{% else %}75{% endif %}.00</p>
+      </div>
+    </div>
+
+
+
+	</div>
+{% include 'prototypes/prototype-may-2020/includes/contact.html' %}
+</main>
+{% endblock %}
