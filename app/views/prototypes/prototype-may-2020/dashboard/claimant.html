@@ -40,7 +40,7 @@
             or data['claimant'] == 21 or data['claimant'] == 21.3 or data['claimant'] == 21.4 or data['claimant'] == 21.1 or data['claimant'] == 23 or data['claimant'] == 24 or data['claimant'] == 26  or data['claimant'] == 27  or data['claimant'] == 28  or data['claimant'] == 29
             or data['claimant'] == 33  or data['claimant'] == 34  or data['claimant'] == 36  or data['claimant'] == 37
             or data['claimant'] == 16.14  or  data['claimant'] == 16.15 or   data['claimant'] == 3.12345   or   data['claimant'] == 3.12555 or data['claimant'] == 3.12556 or   data['claimant'] == 3.12566
-            or  data['claimant'] == 28.2 or  data['claimant'] == 28.4   or  data['claimant'] == 28.6 %}
+            or  data['claimant'] == 28.2 or  data['claimant'] == 28.4   or  data['claimant'] == 28.6  or  data['claimant'] == 40 %}
             <li role="presentation"><a href="#next-steps" role="tab" tabindex="0" aria-controls="next-steps" aria-selected="true">Latest update</a></li>
             <li role="presentation"><a href="#docs" role="tab" tabindex="-1" aria-controls="history">Documents</a></li>
 <!--            <li role="presentation"><a href="#history" role="tab" tabindex="-1" aria-controls="history">Claim history</a></li> -->
@@ -1665,6 +1665,23 @@
                 <p>We'll then ask {{ partyName( 'defendant' ) }} to respond to your claim.</p>
 
 
+              <!--  Case transferred to local court -->
+              {% elseif data['defendant'] == 40 %}
+                  <h2 class="heading-medium">This case will no longer be updated online</h2>
+                  <p>From now on, the case will be handled on paper by Lincoln County Court.</p>
+                  <p>If you need to send any forms, letters or documents about the claim, send them to this address:</p>
+                  <p>Lincoln County Court<br>
+                    360 High St<br>
+                    Lincoln<br>
+                    LN5 7PS
+                  </p>
+                  <p>If you have any questions about the claim, contact the court.
+                    You can find contact details for Lincoln County Court online using the
+                    <a href="https://www.gov.uk/find-court-tribunal" target="_blank" >court finder service</a> (opens in a new window)</p>
+
+
+
+
               {% endif %}
 
             </div>
@@ -1758,7 +1775,7 @@
 
             {% if data['claimant'] != 1.2 and data['claimant'] != 21.1 and data['claimant'] != 21.5 and data['claimant'] != 11.1011
                 and data['claimant'] != 11.105 and data['claimant'] != 26 and data['claimant'] != 27
-                and data['claimant'] != 3.12555 and data['claimant'] != 3.12556 and data['claimant'] != 3.12566 and   data['claimant'] != 23 %}
+                and data['claimant'] != 3.12555 and data['claimant'] != 3.12556 and data['claimant'] != 3.12566 and   data['claimant'] != 23 and   data['claimant'] != 40 %}
                 <div class="column-two-thirds">
                     <!--  General applications  - this will need logic to know that it comes from the claimant  -->
                     <hr>
@@ -3032,7 +3049,6 @@
 
 
 
-
             </div>
 
           </div>
@@ -3090,6 +3106,9 @@
                 <h2 class="heading-medium">You've rejected the offer</h2>
                 <p>You rejected {{ partyName( 'claimant' ) }}'s offer to settle out of court.</p>
                 <p><a href="offer-agreement/make-offer?theclaimant=true&defendant=claimant&firstoffer=true&" class="button">Make an offer</a></p>
+
+
+
 
 
 
@@ -3335,6 +3354,9 @@
     <option value="3.12555" {% if data['claimant'] == 3.12555 %}selected{% endif %}>When the Defendant makes a general application</option>
     <option value="3.12556" {% if data['claimant'] == 3.12556 %}selected{% endif %}>When the Defendant makes a general application (offline)</option>
 
+
+    <option>------- Case transferred to local court  ----------</option>
+    <option value="40" {% if data['claimant'] == 40 %}selected{% endif %}> Transferred to local court </option>
 
 
   </select>
