@@ -18,7 +18,7 @@
     <div class="details" style="margin-top: -30px">
         <span style=""><h2 style="">
           <h2 class="heading-medium">{{ partyName( 'claimant' ) }} v {{ partyName( 'defendant' ) }}</h2>
-          <h2 class="font-xsmall" style="margin-top: -10px">Claim number: <span style="">{% if data['claimant'] == 1.2 or data['claimant'] == 1.21 %}1251-5451-8291-3761{% else %}352MC733{% endif %}</span></h2>
+          <h2 class="font-xsmall" style="margin-top: -10px">Claim number: <span style="">{% if data['claimant'] == 1.2 or data['claimant'] == 1.21 or data['claimant'] == 1.22 or data['claimant'] == 1.23 or data['claimant'] == 1.24 %}1251-5451-8291-3761{% else %}352MC733{% endif %}</span></h2>
     </div>
 
     <div class="column-full-width">
@@ -28,7 +28,7 @@
         <div class="tabs-nav">
           <ul class="tabs-list" role="tablist">
 
-            {% if data['claimant'] == 1 or data['claimant'] == 1.2 or data['claimant'] == 1.21 or data['claimant'] == 3.1 or data['claimant'] == 3.11 or data['claimant'] == 3.3 or data['claimant'] == 3.4 or data['claimant'] == 3.5 or data['claimant'] == 3.6 or data['claimant'] == 2 or data['claimant'] == 3 or data['claimant'] == 4 or data['claimant'] == 4.01 or data['claimant'] == 4.1 or data['claimant'] == 4.11 or data['claimant'] == 4.2 or data['claimant'] == 4.3 or data['claimant'] == 5
+            {% if data['claimant'] == 1 or data['claimant'] == 1.2 or data['claimant'] == 1.21 or data['claimant'] == 1.22 or data['claimant'] == 1.23 or data['claimant'] == 1.24 or data['claimant'] == 3.1 or data['claimant'] == 3.11 or data['claimant'] == 3.3 or data['claimant'] == 3.4 or data['claimant'] == 3.5 or data['claimant'] == 3.6 or data['claimant'] == 2 or data['claimant'] == 3 or data['claimant'] == 4 or data['claimant'] == 4.01 or data['claimant'] == 4.1 or data['claimant'] == 4.11 or data['claimant'] == 4.2 or data['claimant'] == 4.3 or data['claimant'] == 5
             or data['claimant'] == 5.1 or data['claimant'] == 5.11 or data['claimant'] == 5.2 or data['claimant'] == 5.21 or data['claimant'] == 6 or data['claimant'] == 7
              or data['claimant'] == 9 or data['claimant'] == 9.1 or data['claimant'] == 9.2 or data['claimant'] == 10.1 or data['claimant'] == 10.001 or data['claimant'] == 10.01
             or data['claimant'] == 10.02 or data['claimant'] == 10.03 or data['claimant'] == 10.11 or data['claimant'] == 10.4 or data['claimant'] == 10.5 or data['claimant'] == 10.6
@@ -124,14 +124,36 @@
               <p>We'll tell you how much you need to pay to get the claim issued.</p>
 
               <h3 class="heading-small">After a claim is issued</h3
-
               <p>{{ partyName( 'defendant' ) }} will have 14 days to respond. They can ask for an extra 14 days if they need it.</p>
               <p>You can request a County Court Judgment (CCJ) against them if they don't respond.</p>
 
-
               {% elseif data['claimant'] == 1.21 %}
-              <h2 class="heading-medium">Help With Fees was not granted in full</h2>
-              <p>We have emailed you to tell you what to do next.</p>
+              <h2 class="heading-medium">Invalid Help With Fees number</h2>
+              <p>The Help With Fees reference number you provided (BAG516546) is not valid.</p>
+              <p>Contact us with the correct claim number on 0300 123 7050 or <a href="mailto:moneyclaims@justice.gov.uk?subject=1251-5451-8291-3761">moneyclaims@justice.gov.uk</a>. You will need your claim number, 1251-5451-8291-3761.</p>
+              <p>You can also phone us to pay the fee by card.</p>
+              <p>If you don't contact us within 90 days, the claim will be closed.</p>
+
+              {% elseif data['claimant'] == 1.22 %}
+              <h2 class="heading-medium">More information required</h2>
+              <p>We need more information or evidence before we can make a decision on your Help With Fees applicaiton.</p>
+              <p>We will contact you by (post?) by {{ now | date( 'add', 5, 'days') | date }} to let you know what we require and how to provide it.</p>
+              <p>If you want to issue the claim now, you can pay the fee by card by phoning (0300 123 7050?). You will need your claim number, 1251-5451-8291-3761.</p>
+
+              {% elseif data['claimant'] == 1.23 %}
+              <h2 class="heading-medium">Partial fee required</h2>
+              <p>Your Help With Fees application has been reviewed and you have been granted £40 towards your claim fee.</p>
+              <p>You will need to pay the remaining £30 yourself before your claim is issued.</p>
+              <p>You can pay the fee by card by phoning (0300 123 7050?). You will need your claim number, 1251-5451-8291-3761.</p>
+              <p>If you don't pay the fee within 90 days, the claim will be closed.</p>
+
+              {% elseif data['claimant'] == 1.24 %}
+              <h2 class="heading-medium">Help With Fees application rejected</h2>
+              <p>Your Help With Fees application has been rejected because:</p>
+              <p>The applicant was not found to earn over £1,085 a month.</p>
+              <p>You will need to pay the £70 claim fee yourself before your claim is issued.</p>
+              <p>You can pay the fee by card by phoning (0300 123 7050?). You will need your claim number, 1251-5451-8291-3761.</p>
+              <p>You can appeal this decision by emailing <a href="mailto:moneyclaims@justice.gov.uk?subject=1251-5451-8291-3761">moneyclaims@justice.gov.uk</a>.</p>
 
 
               {% elseif data['claimant'] == 2 %}
@@ -3198,9 +3220,13 @@
     <option>-------- Claimant view --------</option>
     <option value="1" {% if data['claimant'] == 1 %}selected{% endif %}>Claim issued</option>
     <option value="1.2" {% if data['claimant'] == 1.2 %}selected{% endif %}>Claim received (HWF)</option>
-    <option value="1.21" {% if data['claimant'] == 1.21 %}selected{% endif %}>HWF rejected</option>
     <option value="3.1" {% if data['claimant'] == 3.1 %}selected{% endif %}>More time requested by defendant</option>
     <option value="3.11" {% if data['claimant'] == 3.11 %}selected{% endif %}>More time requested by defendant - judgment cancelled</option>
+    <option>-------- HWF rejected --------</option>
+    <option value="1.21" {% if data['claimant'] == 1.21 %}selected{% endif %}>HWF - invalid</option>
+    <option value="1.22" {% if data['claimant'] == 1.22 %}selected{% endif %}>HWF - more info</option>
+    <option value="1.23" {% if data['claimant'] == 1.23 %}selected{% endif %}>HWF - partial</option>
+    <option value="1.24" {% if data['claimant'] == 1.24 %}selected{% endif %}>HWF - rejected</option>
     <option>-------- CCJs --------</option>
     <option value="2" {% if data['claimant'] == 2 %}selected{% endif %}>CCJ - request judgment</option>
     <option value="3" {% if data['claimant'] == 3 %}selected{% endif %}>CCJ - judgment requested</option>
