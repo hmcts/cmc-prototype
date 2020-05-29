@@ -1005,6 +1005,20 @@
         </tr>
         {% endif %}
 
+        {% if show_all==true or data['dashboard'] == 1.145 %}
+        <tr class="mobile-table">
+          <td>1251-5451-8291-3761</td>
+          <td>{{ partyName( 'defendant' ) }}</td>
+          <td>{% if data['mediation-pilot'] == "on" %}£300{% else %}£1,500{% endif %}</td>
+          <td class="mobile-hide">Your claim has been cancelled</td>
+          <td>-</td>
+          <td><a href="claimant?claimant=1.25">View</a></td>
+        </tr>
+        <tr>
+          <td class="mobile-table-status" colspan="3"></td>
+        </tr>
+        {% endif %}
+
         <!-- Not in the dashboard spreadsheet -->
         {% if show_all==true or data['dashboard'] == 1.117 %}
         <tr class="mobile-table">
@@ -3534,6 +3548,7 @@
     <option value="1.142" {% if data['dashboard'] == 1.142 %}selected{% endif %}>HWF - more info</option>
     <option value="1.143" {% if data['dashboard'] == 1.143 %}selected{% endif %}>HWF - partial</option>
     <option value="1.144" {% if data['dashboard'] == 1.144 %}selected{% endif %}>HWF - rejected</option>
+    <option value="1.145" {% if data['dashboard'] == 1.145 %}selected{% endif %}>HWF - no response</option>
     <option>-------- CCJs --------</option>
     <option value="1.3" {% if data['dashboard'] == 1.3 %}selected{% endif %}>CCJ - request judgment</option>
     <option value="1.4" {% if data['dashboard'] == 1.4 %}selected{% endif %}>CCJ - judgment requested</option>
@@ -3639,39 +3654,39 @@
     <option value="1.812" {% if data['dashboard'] == 1.812 %}selected{% endif %}>Judgment - dismissed</option>
 
 
-          <option>-------- CCJ set aside --------</option>
-          <option value="1.9991" {% if data['dashboard'] == 1.9991 %}selected{% endif %}>CCJ set aside requested by defendant</option>
+    <option>-------- CCJ set aside --------</option>
+    <option value="1.9991" {% if data['dashboard'] == 1.9991 %}selected{% endif %}>CCJ set aside requested by defendant</option>
 
 
-          <option>-------- General Applications --------</option>
-          <option value="1.9993" {% if data['dashboard'] == 1.9993 %}selected{% endif %}>After claimant submits a general application</option>
-          <option value="1.9994" {% if data['dashboard'] == 1.9994 %}selected{% endif %}>When defendant makes a general application</option>
-          <option value="1.99941" {% if data['dashboard'] == 1.99941 %}selected{% endif %}>When defendant makes a general application (offline)</option>
+    <option>-------- General Applications --------</option>
+    <option value="1.9993" {% if data['dashboard'] == 1.9993 %}selected{% endif %}>After claimant submits a general application</option>
+    <option value="1.9994" {% if data['dashboard'] == 1.9994 %}selected{% endif %}>When defendant makes a general application</option>
+    <option value="1.99941" {% if data['dashboard'] == 1.99941 %}selected{% endif %}>When defendant makes a general application (offline)</option>
 
 
-          <option>-------- CCJ vary --------</option>
-          <option value="1.9995" {% if data['dashboard'] == 1.9995 %}selected{% endif %}>Vary requested</option>
-          <!--  no longer needed <option value="1.9996" {% if data['dashboard'] == 1.9996 %}selected{% endif %}>Vary requested - installments</option>  -->
-          <option value="1.9997" {% if data['dashboard'] == 1.9997 %}selected{% endif %}>Accepted the Vary request</option>
-          <option value="1.999755" {% if data['dashboard'] == 1.999755 %}selected{% endif %}>New plan proposed by claimant</option>
-          <option value="1.999766" {% if data['dashboard'] == 1.999766 %}selected{% endif %}>New plan from determination</option>
-          <option value="1.999777" {% if data['dashboard'] == 1.999777 %}selected{% endif %}>Accepted by default because of no claimant response</option>
-          <option value="1.9998" {% if data['dashboard'] == 1.9998 %}selected{% endif %}>Rejected the Vary request - Redetermination</option>
+    <option>-------- CCJ vary --------</option>
+    <option value="1.9995" {% if data['dashboard'] == 1.9995 %}selected{% endif %}>Vary requested</option>
+    <!--  no longer needed <option value="1.9996" {% if data['dashboard'] == 1.9996 %}selected{% endif %}>Vary requested - installments</option>  -->
+    <option value="1.9997" {% if data['dashboard'] == 1.9997 %}selected{% endif %}>Accepted the Vary request</option>
+    <option value="1.999755" {% if data['dashboard'] == 1.999755 %}selected{% endif %}>New plan proposed by claimant</option>
+    <option value="1.999766" {% if data['dashboard'] == 1.999766 %}selected{% endif %}>New plan from determination</option>
+    <option value="1.999777" {% if data['dashboard'] == 1.999777 %}selected{% endif %}>Accepted by default because of no claimant response</option>
+    <option value="1.9998" {% if data['dashboard'] == 1.9998 %}selected{% endif %}>Rejected the Vary request - Redetermination</option>
 
-          <!-- no longer needed as mvp is to have this go offline
-            <option>-------- CCJ set aside - responded to hearing request --------</option>
-            <option value="1.999901" {% if data['dashboard'] == 1.999901 %}selected{% endif %}>Attending set aside  hearing - Claim not settled</option>
-            <option value="1.999902" {% if data['dashboard'] == 1.999902 %}selected{% endif %}>Attending set aside  hearing - Claim settled</option>
-            <option value="1.999903" {% if data['dashboard'] == 1.999903 %}selected{% endif %}>Not attending set aside  hearing - Claim not settled</option>
-            <option value="1.999904" {% if data['dashboard'] == 1.999904 %}selected{% endif %}>Not attending set aside  hearing - Claim settled</option>
-          -->
+    <!-- no longer needed as mvp is to have this go offline
+      <option>-------- CCJ set aside - responded to hearing request --------</option>
+      <option value="1.999901" {% if data['dashboard'] == 1.999901 %}selected{% endif %}>Attending set aside  hearing - Claim not settled</option>
+      <option value="1.999902" {% if data['dashboard'] == 1.999902 %}selected{% endif %}>Attending set aside  hearing - Claim settled</option>
+      <option value="1.999903" {% if data['dashboard'] == 1.999903 %}selected{% endif %}>Not attending set aside  hearing - Claim not settled</option>
+      <option value="1.999904" {% if data['dashboard'] == 1.999904 %}selected{% endif %}>Not attending set aside  hearing - Claim settled</option>
+    -->
 
-          <option>-------- Transferred to local court --------</option>
-          <option value="1.9999999991" {% if data['dashboard'] == 1.9999999991 %}selected{% endif %}> Transferred - Date known - Newer claims</option>
-          <option value="1.9999999992" {% if data['dashboard'] == 1.9999999992 %}selected{% endif %}> Transferred - Date not known - Older claims</option>
+    <option>-------- Transferred to local court --------</option>
+    <option value="1.9999999991" {% if data['dashboard'] == 1.9999999991 %}selected{% endif %}> Transferred - Date known - Newer claims</option>
+    <option value="1.9999999992" {% if data['dashboard'] == 1.9999999992 %}selected{% endif %}> Transferred - Date not known - Older claims</option>
 
 
-        </select>
+  </select>
 </form>
 
 

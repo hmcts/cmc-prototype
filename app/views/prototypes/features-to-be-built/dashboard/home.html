@@ -1154,6 +1154,25 @@
               <td class="mobile-table-status" colspan="3"></td>
             </tr>
         {% endif %}
+
+
+        <!-- Transferred to court  -->
+        {% if show_all==true or data['dashboard'] == 1.9999999991 %}
+          <tr class="mobile-table">
+            <td>352MC733</td>
+            <td>{{ partyName( 'defendant' ) }}</td>
+            <td>{% if data['mediation-pilot'] == "on" %}£300{% else %}£1,500{% endif %}</td>
+            <td class="mobile-hide">Case sent to the court</td>
+            <td>-</td>
+            <td><a href="claimant?claimant=40">View</a></td>
+          </tr>
+          <tr>
+            <td class="mobile-table-status" colspan="3"></td>
+          </tr>
+        {% endif %}
+
+
+
         {% if claimant_table==true %}
         </tbody>
       </table>
@@ -2907,6 +2926,26 @@
               <td class="mobile-table-status" colspan="3"></td>
             </tr>
         {% endif %}
+
+
+        <!-- Transferred to local court -->
+        {% if show_all==true or data['dashboard'] == 2.9999999991 %}
+            <tr class="mobile-table">
+              <td>352MC733</td>
+              <td>{{ partyName( 'claimant' ) }}</td>
+              <td>{% if data['mediation-pilot'] == "on" %}£300{% else %}£1,500{% endif %}</td>
+              <td class="mobile-hide">Case sent to court</td>
+              <td>-</td>
+              <td><a href="defendant?defendant=40">View</a></td>
+            </tr>
+            <tr>
+              <td class="mobile-table-status" colspan="3"></td>
+            </tr>
+        {% endif %}
+
+
+
+
         {% if defendant_table==true %}
         </tbody>
       </table>
@@ -3027,8 +3066,15 @@
 
     <option>-------- General Applications --------</option>
     <option value="1.9993" {% if data['dashboard'] == 1.9993 %}selected{% endif %}>After claimant submits a general application</option>
-    <option value="1.99941" {% if data['dashboard'] == 1.99941 %}selected{% endif %}>When defendant makes a general application (offline)</option>  </select>
+    <option value="1.99941" {% if data['dashboard'] == 1.99941 %}selected{% endif %}>When defendant makes a general application (offline)</option>
+
+    <option>-------- Transferred to local court --------</option>
+    <option value="1.9999999991" {% if data['dashboard'] == 1.9999999991 %}selected{% endif %}> Transferred to local court</option>
+
+  </select>
 </form>
+
+
 <form method="post" action="#" class="form" style=" float: left;">
   <select id="dashboard2" name="dashboard2" onchange="window.location.href='home?dashboard='+this.value">
     <option>Defendant view</option>
@@ -3158,7 +3204,11 @@
     <option>-------- General Applications --------</option>
     <option value="2.9993" {% if data['dashboard'] == 2.9993 %}selected{% endif %}>After defendant submits a general application</option>
     <option value="2.99941" {% if data['dashboard'] == 2.99941 %}selected{% endif %}>When claimant makes a general application (offline)</option>
-      </select>
+
+    <option>-------- Transferred to local court --------</option>
+    <option value="2.9999999991" {% if data['dashboard'] == 2.9999999991 %}selected{% endif %}> Transferred to local court</option>
+
+  </select>
     </form>
 
 <script>
