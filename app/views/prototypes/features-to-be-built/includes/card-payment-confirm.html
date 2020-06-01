@@ -1,35 +1,49 @@
 {% macro form(type) %}
 
-<div class="check-details">
-	<table>
-		<tbody>
-			<tr>
-				<td>Card number:</td>
-				<td class="table-info">************7470</td>
-			</tr>
-			<tr>
-				<td>Expiry date:</td>
-				<td class="table-info">11/19</td>
-			</tr>
-			<tr>
-				<td>Name on card:</td>
-				<td class="table-info">{{ data['full-name'] or 'Sam Clarke' }}</td>
-			</tr>
-			<tr>
-				<td>Billing address:</td>
-				<td class="table-info">101 Regents Road, Shiplake, Henley on Thames, RG9 4BW</td>
-			</tr>
-			<tr>
-				<td>Email address:</td>
-				<td class="table-info">samclarke@gmail.com</td>
-			</tr>
-			<tr>
-				<td>Amount to pay:</td>
-				<td class="table-info">£{% if type == 'certificate' %}15{% else %}75{% endif %}</td>
-			</tr>
-		</tbody>
-	</table>
-</div>
+    <div class="column-two-thirds">
+		      
+		<div class="check-details">
+			<table>
+				<tbody>
+					<tr>
+						<td>Card number</td>
+						<td class="table-info">************7470</td>
+					</tr>
+					<tr>
+						<td>Expiry date</td>
+						<td class="table-info">11/19</td>
+					</tr>
+					<tr>
+						<td>Name on card</td>
+						<td class="table-info">{{ data['full-name'] or partyName( 'claimant' ) }}</td>
+					</tr>
+					<tr>
+						<td>Billing address</td>
+						<td class="table-info">101 Regents Road, Shiplake, Henley on Thames, RG9 4BW</td>
+					</tr>
+					<tr>
+						<td>Confirmation email</td>
+						<td class="table-info">{{ partyName( 'claimant', 'email' ) }}@gmail.com</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+
+    </div>
+    <div class="column-third">
+      <div class="payment-summary-small" style="margin-top: -75px; margin-left: 30px;">
+        <h2>Payment summary</h2>
+        <p>Money Claims {{type}} fee</p>
+        <p class="payment-info"></p>
+        <h3>Total amount:</h3>
+        <p class="payment-amount">£{% if type == 'certificate' %}15{% elseif type == 'hearing' %}115{% else %}75{% endif %}.00</p>
+      </div>
+    </div>
+
+
+
+
 <div class="grid-row">
 	<div class="column-two-thirds">
 		<div class="form-group">

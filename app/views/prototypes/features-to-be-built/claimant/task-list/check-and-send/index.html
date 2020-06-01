@@ -44,7 +44,7 @@ Check your answers
       Full name
       </td>
       <td>
-        {% if data['check'] =='1' or data['check'] =='2'  or data['check'] =='3' %}Mrs Jan Clark{% else %}{{data['claimant_name']}}{% endif %}
+        {% if data['check'] =='1' or data['check'] =='2'  or data['check'] =='3' %}{{ partyName( 'claimant' ) }}{% else %}{{data['claimant_name']}}{% endif %}
       </td>
       <td class="change-answer">
         <a href="../task-list/your-details/your-details?return_page={{ '../../task-list/check-and-send#name' | urlencode }}">
@@ -183,7 +183,7 @@ Check your answers
                 Their name
               </td>
               <td>
-               {% if data['check'] =='1' or data['check'] =='2'  or data['check'] =='3' %}Mrs Mary Richards{% else %}{{defendant['defendantName']}}{% endif %}
+               {% if data['check'] =='1' or data['check'] =='2'  or data['check'] =='3' %}{{ partyName( 'defendant' ) }}{% else %}{{defendant['defendantName']}}{% endif %}
              </td>
              <td class="change-answer">
               <a href="../task-list/their-details/enter-details?return_page={{ '../../task-list/check-and-send#their-detail' | urlencode }}">
@@ -262,7 +262,7 @@ Check your answers
                       Their email (optional)
                     </td>
                     <td>
-                     {% if data['check'] =='1' or  data['check'] =='2'  or data['check'] =='3' %}maryrichards@gmail.com{% else %} {{defendant['defendantEmail']}}{% endif %}
+                     {% if data['check'] =='1' or  data['check'] =='2'  or data['check'] =='3' %}{{ partyName( 'defendant', 'email' ) }}@gmail.com{% else %} {{defendant['defendantEmail']}}{% endif %}
                    </td>
                    <td class="change-answer">
                     <a href="../task-list/their-details/email?return_page={{ '../../task-list/check-and-send#their-detail' | urlencode }}">
@@ -336,15 +336,15 @@ Check your answers
                 <td class="change-answer no-border">
                 </td>
               </tr>
-                                       <tr>
-      <td>
-        Total
-      </td>
-      <td>
-       &pound;1,500
-      </td>
-<td></td>
-    </tr>
+              <tr>
+                <td>
+                  Total
+                </td>
+                <td>
+                 &pound;1,500
+                </td>
+                <td></td>
+              </tr>
               {% endif %}
               <tr>
                 <td >
@@ -790,11 +790,12 @@ truth on the form.</p>
   <div class="form-group">
     <div class="multiple-choice text">
       <input class="" id="HasAcceptedTermsAndConditions" type="checkbox" value="true">
-      <label for="HasAcceptedTermsAndConditions"><p>I believe that the facts stated in this claim form are true.</p><p>I understand that proceedings for contempt of court may be brought against anyone who makes, or causes to be made, a false statement in a document verified by a statement of truth without an honest belief in its truth.</p></label>
+      <label for="HasAcceptedTermsAndConditions"> <p>I believe that the facts stated in this claim form are true.</p>
+        <p>I understand that proceedings for contempt of court may be brought against anyone who makes, or causes to be made, a false statement in a document verified by a statement of truth without an honest belief in its truth.</p></label>
     </div>
   </div>
-  <form method="post" action="check-and-send/enter-card" class="form form-group">
-    <button id="submit" class="button" >Submit and continue to payment (£75)</button>
+  <form method="post" action="check-and-send/payment" class="form form-group">
+    <button id="submit" class="button" >Submit</button>
   </form>
 </div>
 <!--<div class="back">-->
