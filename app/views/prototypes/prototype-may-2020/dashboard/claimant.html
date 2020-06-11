@@ -40,7 +40,7 @@
             or data['claimant'] == 21 or data['claimant'] == 21.3 or data['claimant'] == 21.4 or data['claimant'] == 21.1 or data['claimant'] == 23 or data['claimant'] == 24 or data['claimant'] == 26  or data['claimant'] == 27  or data['claimant'] == 28  or data['claimant'] == 29
             or data['claimant'] == 33  or data['claimant'] == 34  or data['claimant'] == 36  or data['claimant'] == 37
             or data['claimant'] == 16.14  or  data['claimant'] == 16.15 or   data['claimant'] == 3.12345   or   data['claimant'] == 3.12555 or data['claimant'] == 3.12556 or   data['claimant'] == 3.12566
-            or  data['claimant'] == 28.2 or  data['claimant'] == 28.4   or  data['claimant'] == 28.6  or  data['claimant'] == 40 %}
+            or  data['claimant'] == 28.2 or  data['claimant'] == 28.4   or  data['claimant'] == 28.6  or  data['claimant'] == 40    or  data['claimant'] == 45  %}
             <li role="presentation"><a href="#next-steps" role="tab" tabindex="0" aria-controls="next-steps" aria-selected="true">Latest update</a></li>
             <li role="presentation"><a href="#docs" role="tab" tabindex="-1" aria-controls="history">Documents</a></li>
 <!--            <li role="presentation"><a href="#history" role="tab" tabindex="-1" aria-controls="history">Claim history</a></li> -->
@@ -1727,6 +1727,23 @@
                   <a target="_blank" href="https://www.gov.uk/find-court-tribunal">Find County Court contact details</a> (opens in a new window).
 
 
+              <!--  Case transferred to local court -->
+              {% elseif data['claimant'] == 45 %}
+                  <h2 class="heading-medium">We've sent this case to Northampton County Court Business Centre</h2>
+                  <p>Your online account won't be updated - any further updates will be by post.</p>
+                  <p>If you need to send any forms, letters or documents about the claim, send them to this address:</p>
+                  <p>Northampton County Court Business Centre<br>
+                    St. Katherine's House<br>
+                    21-27 St. Katherine Street<br>
+                    Northampton<br>
+                    NN1 2LH
+                  </p>
+                  <p>Contact Northampton County Court Business Centre if you have any questions about the claim.</p>
+                  <p>Phone: 0300 123 7050<br>
+                  Email: moneyclaims@justice.gov.uk</p>
+
+
+
 
 
               {% endif %}
@@ -1822,12 +1839,13 @@
 
             {% if data['claimant'] != 1.2 and data['claimant'] != 1.21 and data['claimant'] != 1.22 and data['claimant'] != 1.23 and data['claimant'] != 1.24 and data['claimant'] != 1.25 and data['claimant'] != 21.1 and data['claimant'] != 21.5 and data['claimant'] != 11.1011
                 and data['claimant'] != 11.105 and data['claimant'] != 26 and data['claimant'] != 27
-                and data['claimant'] != 3.12555 and data['claimant'] != 3.12556 and data['claimant'] != 3.12566 and   data['claimant'] != 23 and   data['claimant'] != 40 %}
+                and data['claimant'] != 3.12555 and data['claimant'] != 3.12556 and data['claimant'] != 3.12566 and   data['claimant'] != 23 and   data['claimant'] != 40 and   data['claimant'] != 45%}
                 <div class="column-two-thirds">
                     <!--  General applications  - this will need logic to know that it comes from the claimant  -->
                     <hr>
                     <h3 class="heading-medium">Apply to change something about the claim</h3>
                     <p>You can pay a fee and <a href="../applications/claimant-general-application-only">ask the court</a> to change something in relation to this claim.</p>
+                    <docup>You can pay a fee and <a href="../applications/claimant-general-application-only">ask the court</a> to change something in relation to this claim.</docup>
                     <p>The fee depends on what you're asking the court to change. It can be up to £255.</p>
                 </div>
             {% endif %}
@@ -3410,6 +3428,9 @@
 
     <option>------- Case transferred to local court  ----------</option>
     <option value="40" {% if data['claimant'] == 40 %}selected{% endif %}> Transferred to local court </option>
+
+    <option>------- Case transferred to CCBC  ----------</option>
+    <option value="45" {% if data['claimant'] == 45 %}selected{% endif %}> Transferred to CCBC </option>
 
 
   </select>
