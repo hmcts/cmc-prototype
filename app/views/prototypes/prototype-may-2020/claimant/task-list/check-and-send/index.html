@@ -829,10 +829,41 @@ Check your answers
       </a>
     </td>
   </tr>
+  </tbody>
+</table>
 
+{% if data['hwf'] == 'yes' %}
+<table class="check-your-answers">
+  <thead>
+    <tr>
+      <th colspan="2">
+        <h2 id='cd' class="heading-medium">
+          Help With Fees
+        </h2>
+      </th>
+      <th>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td>
+      Help With Fees reference number
+    </td>
+    <td>
+      {{ data['hwf_number'] }}
+    </td>
+    <td class="change-answer">
+       <a href="payment">
+        Change
+      </a>
+    </td>
+  </tr>
 
   </tbody>
 </table>
+{% endif %}
+
 <div class="column-two-thirds">
   <h2 class="heading-medium">Statement of truth</h2>
 
@@ -884,8 +915,8 @@ truth on the form.</p>
         <p>I understand that proceedings for contempt of court may be brought against anyone who makes, or causes to be made, a false statement in a document verified by a statement of truth without an honest belief in its truth.</p></label>
     </div>
   </div>
-  <form method="post" action="check-and-send/payment" class="form form-group">
-    <button id="submit" class="button" >Submit</button>
+  <form method="post" action="{% if data['hwf'] == 'yes' %}../confirmation-page{% else %}check-and-send/enter-card{% endif %}" class="form form-group">
+    <button id="submit" class="button" >{% if data['hwf'] == 'yes' %}Submit claim{% else %}Submit and continue to payment (£75){% endif %}</button>
   </form>
 </div>
 <!--<div class="back">-->

@@ -9,37 +9,32 @@ Money Claims Prototype
   {% include "includes/phase_banner_beta.html" %}
   <div class="grid-row">
     <div class="column-two-thirds">
-      <form
-      name="aspnetForm"
-      method="GET"
-      onsubmit="multiNavigation('payment', ['card','hwf'], ['enter-card', 'hwf']);return false;"
-      id="aspnetForm"
-      autocomplete="off">
-      {{formData | safe}}
+      <form method="post" action="{{ data.return_page if data.return_page | length > 0 else '../task-list' }}" class="form">
       <!--  <a href="#" onclick="history.go(-1)" class="link-back">Back</a>  -->
 
       <h1 class="heading-large">
-        How do you want to pay for your claim?
+        Do you have a Help With Fees number?
       </h1>
       <fieldset>
-        <div class="multiple-choice">
-          <input id="radio-2" type="radio" name="payment" value="card">
-          <label for="radio-2">By card</label>
+        <div class="multiple-choice" data-target="hwf-panel">
+          <input id="radio-1" type="radio" name="hwf" value="yes">
+          <label for="radio-1">Yes</label>
         </div>
-        <div class="multiple-choice" data-target="hwf">
-          <input id="radio-1" type="radio" name="payment" value="hwf">
-          <label for="radio-1">I have a Help With Fees number</label>
-        </div>
-        <div id="hwf" name="hwf" class="panel panel-border-narrow js-hidden">
+        <div id="hwf-panel" name="hwf-panel" class="panel panel-border-narrow js-hidden">
 
           <div class="form-group">
             <label class="form-label" for="hwf_number">Enter the Help With Fees number</label>
             <input type="text" class="form-control" name="hwf_number" id="hwf_number" />
           </div>
 
-
+        </div>
+        <div class="multiple-choice">
+          <input id="radio-2" type="radio" name="hwf" value="no">
+          <label for="radio-2">No</label>
         </div>
       </fieldset>
+
+      <input type="hidden" class="button" name="hwf_complete" id="hwf_complete" value="complete" />
 
       {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}
       <div class="form-group">
