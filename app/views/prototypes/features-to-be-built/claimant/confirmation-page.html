@@ -16,15 +16,16 @@ Money Claims Prototype
         <h1 class="bold-large">Claim submitted</h1>
             <br>
             <p>
-              <br><strong class="bold-large">{% if data['payment'] == 'hwf' %}Your reference number: 1251-5451-8291-3761{% else %}Your claim number: 352MC733{% endif %}</strong>
+              <br><strong class="bold-large">{% if data['hwf'] == 'yes' %}Your reference number: 1251-5451-8291-3761{% else %}Your claim number: 352MC733{% endif %}</strong>
             </p>
             <p>
-              <a class="font-medium" target="_blank" href='correspondence/claim-form-claimant?check={% if data['payment'] == 'hwf' %}1{% else %}2{% endif %}' style="color: #FFFFFF" >Download your {% if data['payment'] == 'hwf' %}draft {% endif %}claim form</a> (123KB, PDF)
+              <a class="font-medium" target="_blank" href='correspondence/claim-form-claimant?check={% if data['hwf'] == 'yes' %}1{% else %}2{% endif %}' style="color: #FFFFFF" >Download your {% if  data['hwf'] == 'yes' %}draft {% endif %}claim form</a> (123KB, PDF)
             </p>
 
      </div>
      <h2 class="heading-medium">What happens next</h2>
-	{% if data['payment'] == 'hwf' %}
+
+    {% if data['hwf'] == 'yes' %}
         <p>We'll check the result of your Help With Fees application and email you within 5 days.</p>
         <h3 class="heading-small">If you qualify for the whole court fee to be paid</h3>
 
@@ -69,11 +70,11 @@ Money Claims Prototype
 <!--  page states selector  -->
 <form method="post"  action="#" class="form" style="position: absolute;">
   <select id="check2" name="check2" onchange="window.location.href='?'+this.value">
-<option  value="payment="
-             {% if data['payment'] != 'hwf'  %}selected{% endif %}
+<option  value="hwf=no"
+             {% if data['hwf'] == 'no'  %}selected{% endif %}
             >Paid by card</option>
-<option  value="payment=hwf"
-             {% if data['payment'] == 'hwf'  %}selected{% endif %}
+<option  value="hwf=yes"
+             {% if data['hwf'] == 'yes'  %}selected{% endif %}
             >Help with fees</option>
   </select>
 </form>
