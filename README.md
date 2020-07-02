@@ -48,3 +48,7 @@ We have two Slack channels for the Prototype kit. You'll need a government email
 
 * [Slack channel for users of the prototype kit](https://ukgovernmentdigital.slack.com/messages/prototype-kit/)
 * [Slack channel for developers of the prototype kit](https://ukgovernmentdigital.slack.com/messages/prototype-kit-dev/)
+
+ ## Resolving incompatible node & gulp verisons
+ - For developers: please refer below link if you are facing issues due to incompatible versions of node and gulp
+https://timonweb.com/posts/how-to-fix-referenceerror-primordials-is-not-defined-error/
