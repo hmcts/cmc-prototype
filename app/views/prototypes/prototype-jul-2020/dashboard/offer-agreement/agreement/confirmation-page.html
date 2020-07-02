@@ -1,0 +1,328 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+
+{% block proposition_header %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+
+
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+
+      <div class="govuk-box-highlight">
+        {% if data['newoffer'] == 'true'  %}
+
+            {% if  data['firstoffer'] == 'true'  %}
+                {% if data['theclaimant'] == 'true'  %}
+                    <h1 class="bold-large">You've made an offer to settle out of court</h1>
+                {% else %}
+                    <h1 class="bold-large">You've made an offer to settle out of court</h1>
+                {% endif %}
+                <br>
+            {% elif data['offeraccepted'] == 'true'  %}
+                <h1 class="bold-large">You’ve settled out of court</h1>
+                <br>
+                <!--
+                <p><strong class="bold">{{ now | date( "D MMMM YYYY" ) }}</strong></p>
+                <p>
+                  <a class="font-medium" href='../../../defendant/correspondence/forms/agreement?check=2'
+                     style="color: #FFFFFF">Download agreement as a PDF</a>
+                </p>
+                -->
+            {% elif data['offeraccepted'] == 'false'  %}
+                <h1 class="bold-large">You’ve rejected the offer
+                {% if data['makecounteroffer'] == 'true'  %}
+                    and made another offer
+                {% endif %}
+                </h1>
+                <br>
+            {% endif %}
+
+
+        {% elif data['defendant'] == "defendant_signed" or data['type'] == 2 %}
+            <h1 class="bold-large">You’ve settled out of court</h1>
+            <br>
+            <p>
+              <strong class="bold">
+                <!--<span id="Date2"></span>-->
+                23 December 2018
+              </strong>
+            </p>
+            <p>
+              <a class="font-medium" href='../../../defendant/correspondence/forms/agreement?check=2'
+                 style="color: #FFFFFF">Download agreement as a PDF</a>
+            </p>
+
+
+        {% elif data['defendant'] == "offer" or data['defendant'] == "defendant" or data['type'] == 1 %}
+            <h1 class="bold-large">You've signed the agreement</h1>
+
+        {% else %}
+            <h1 class="bold-large">You've signed the agreement</h1>
+            <p>
+              <a class="font-medium" href='../../../defendant/correspondence/forms/agreement?check=2'
+                 style="color: #FFFFFF">Download agreement as a PDF</a>
+            </p>
+        {% endif %}
+
+
+      </div>
+
+
+
+
+      <fieldset>
+        <h2 class="heading-medium">What happens next</h2>
+
+        {% if data['newoffer'] == 'true'  %}
+
+            <!--   DEFENDANT  -->
+            {% if data['theclaimant'] == 'false'  %}
+
+                {% if data['offeraccepted'] == 'true' %}
+                      <p>You need to follow the terms of the agreement.</p>
+                      <p>The agreement explains what can happen if either party breaks the terms.</p>
+                      <p><a href="../defendant/correspondence/forms/agreement?check=2">Download the agreement</a> (PDF, 123KB)</p>
+                      <p><a class="button" href='../../defendant?defendant=16&'>Go to your account</a></p>
+
+                {% elif  data['firstoffer'] == 'true'  %}
+                    <!--  Just an offer made by the defendant -->
+                    <p>{{ partyName( 'claimant' ) }} can accept or reject your offer. We'll contact you if they respond.</p>
+                    <p><a class="button" href='../../defendant?defendant=15.01'>Go to your account</a></p>
+
+                {% elif data['respondtoclaimantofferonly'] == 'true' %}
+                      <!-- rejected offer and made no counter offer -->
+                      <p>The court will review the case. We'll contact you to tell you what to do next.</p>
+                      <p><a class="button" href='../../defendant?defendant=9&'>Go to your account</a></p>
+
+                <!-- when there is a coutneroffer from the claimant which is accepted by the defendant -->
+                {% elif data['respondtoclaimantnocounter'] == 'false' %}
+                      {% if data['makecounteroffer'] == 'true'  %}
+                          <p>{{ partyName( 'claimant' ) }} can accept or reject your offer. We'll contact you if they respond.</p>
+                          <p><a class="button" href='../../defendant?defendant=15.01'>Go to your account</a></p>
+                      {% else %}
+                          <p>The court will review the case. We'll contact you to tell you what to do next.</p>
+                          <p><a class="button" href='../../defendant?defendant=9&'>Go to your account</a></p>
+                      {% endif %}
+
+                {% endif %}
+
+
+            <!--  CLAIMANT -->
+            {% elif data['firstoffer'] == 'true'  %}
+                <p>We'll contact you if {{ partyName( 'defendant' ) }} responds to your offer.</p>
+                <p>You can still continue with your claim.</p>
+                <p><a class="button" href='../../claimant?claimant=11.7'>Go to your account</a></p>
+
+            {% elif data['offeraccepted'] == 'true'  %}
+                <p>You've both signed a settlement agreement.</p>
+                <p>The agreement explains what can happen if either party breaks the terms.</p>
+                <p><a class="button" href='../../claimant?claimant=17'>Go to your account</a></p>
+
+            {% elif data['offeraccepted'] == 'false'  %}
+
+                <!-- counter offer -->
+                {% if data['makecounteroffer'] == 'true'  %}
+                      <p>{{ partyName( 'defendant' ) }} can accept or reject your offer. We'll contact you if they respond.</p>
+                {% endif %}
+
+                <!--  with and without futher offers  -->
+                {% if data['moreoffers'] == 'true'  %}
+                      <p>{{ partyName( 'defendant' ) }} can make you another offer.</p>
+                {% elif data['moreoffers'] == 'false'  %}
+                      <p>You won't receive any more offers from {{ partyName( 'defendant' ) }}.</p>
+                {% endif %}
+
+
+
+                <p>You can still continue with your claim.</p>
+                <p><a class="button" href='../../claimant?claimant=11.1'>Go to your account</a></p>
+
+            {% endif %}
+
+
+
+
+        {% elif data['defendant'] == "defendant" or data['type'] == 1 %}
+            <p>We'll ask {{ partyName( 'claimant' ) }} to sign. If they do the agreement will become a legal contract.</p>
+            {% include "includes/survey.html" %}
+
+            <p><a class="button" href='../../home?dashboard=1.17'>Go to your account</a></p>
+
+        {% elseif data['defendant'] == "defendant_signed" or data['type'] == 2 %}
+            <p>You've both signed a settlement agreement.</p>
+            <p>The agreement explains what can happen if either party breaks the terms.</p>
+            {% include "includes/survey.html" %}
+
+            <!--<p><a class="button" href='../../home?dashboard=2.16'>Go to your account</a></p>-->
+            <p><a class="button" href='../../new-dashboard/defendant/all-claims-7'>Go to your account</a></p>
+
+
+        {% elseif data['defendant'] == "claimant_signed" %}
+        <p>You've both signed a settlement agreement.</p>
+        <p>The agreement explains what can happen if either party breaks the terms.</p>
+            {% include "includes/survey.html" %}
+
+        {% else %}
+            <p>We'll ask {{ partyName( 'defendant' ) }} to sign the agreement. If they do it will become a legal contract.</p>
+              <p>If {{ partyName( 'defendant' ) }} breaks the terms you'll be able to resume your claim.</p>
+            {% include "includes/survey.html" %}
+
+            <!--<p><a class="button" href='../../home?dashboard=1.17'>Go to your account</a></p>-->
+            <p><a class="button" href='../../new-dashboard/claimant/all-claims-5'>Go to your account</a></p>
+
+        {% endif %}
+
+        <br>
+        {% include "includes/contact.html" %}
+
+    </div>
+  </div>
+</main>
+
+
+
+<form method="post" action="#" class="form" style="position: absolute;">
+  <select id="claimant2" name="claimant2" onchange="window.location.href='?'+this.value">
+
+    <option value="type=0&">Choose</option>
+    <option value="type=1&newoffer=false&" {% if data['type'] == 1 %}selected{% endif %}>OLD - 1. Claimant signed agreement</option>
+    <option value="type=2&newoffer=false&" {% if data['type'] == 2 %}selected{% endif %}>OLD - 2. Defendant countersigned agreement</option>
+
+
+    <option  value="newoffer=true&firstoffer=false&theclaimant=true&offeraccepted=true&respondtoclaimantnocounter=false&firstoffer=false&"
+             {% if  data['theclaimant'] == 'true'  and
+                    data['offeraccepted'] == 'true'  %}selected{% endif %}
+                    >NEW - Claimant - Accept offer</option>
+
+
+    <option  value="newoffer=true&firstoffer=true&theclaimant=true&offeraccepted=false&"
+             {% if  data['theclaimant'] == 'true'  and
+                    data['firstoffer'] == 'true'  and
+                    data['offeraccepted'] != 'true'  %}selected{% endif %}
+                    >NEW - Claimant - Make offer only</option>
+
+
+    <option  value="newoffer=true&theclaimant=true&firstoffer=false&offeraccepted=false&makecounteroffer=true&moreoffers=true&"
+             {% if  data['theclaimant'] == 'true'  and
+                    data['firstoffer'] == 'false' and
+                    data['offeraccepted'] == 'false' and
+                    data['makecounteroffer'] == 'true' and
+                    data['moreoffers'] == 'true'  %}selected{% endif %}
+                    >NEW - Claimant - Reject offer - Make counter offer - Allow more offers</option>
+
+
+    <option  value="newoffer=true&theclaimant=true&firstoffer=false&offeraccepted=false&makecounteroffer=true&moreoffers=false&"
+             {% if  data['theclaimant'] == 'true'  and
+                    data['firstoffer'] == 'false' and
+                    data['offeraccepted'] == 'false' and
+                    data['makecounteroffer'] == 'true' and
+                    data['moreoffers'] == 'false'  %}selected{% endif %}
+                    >NEW - Claimant - Reject offer - Make counter offer - Don't allow more offers</option>
+
+
+    <option  value="newoffer=true&theclaimant=true&firstoffer=false&offeraccepted=false&makecounteroffer=false&moreoffers=true&"
+             {% if  data['theclaimant'] == 'true'  and
+                    data['firstoffer'] == 'false' and
+                    data['offeraccepted'] == 'false' and
+                    data['makecounteroffer'] == 'false' and
+                    data['moreoffers'] == 'true'  %}selected{% endif %}
+                    >NEW - Claimant - Reject offer - No counter offer - Allow more offers</option>
+
+
+    <option  value="newoffer=true&theclaimant=true&firstoffer=false&offeraccepted=false&makecounteroffer=false&moreoffers=false&"
+             {% if  data['theclaimant'] == 'true'  and
+                    data['firstoffer'] == 'false' and
+                    data['offeraccepted'] == 'false' and
+                    data['makecounteroffer'] == 'false' and
+                    data['moreoffers'] == 'false'  %}selected{% endif %}
+                    >NEW - Claimant - Reject offer - No counter offer - Don't allow more offers</option>
+
+
+    <option  value="newoffer=true&firstoffer=true&theclaimant=false&respondtoclaimantnocounter=true&respondtoclaimantofferonly=false&offeraccepted=false"
+             {% if  data['theclaimant'] == 'false'  and
+                    data['firstoffer'] == 'true'  %}selected{% endif %}
+                    >NEW - Defendant - Make offer only</option>
+
+
+    <option  value="newoffer=true&theclaimant=false&offeraccepted=true&firstoffer=false&"
+             {% if  data['theclaimant'] == 'false'  and
+                    data['offeraccepted'] == 'true' and
+                    data['firstoffer'] != 'true'  %}selected{% endif %}
+                    >NEW - Defendant - Accept offer</option>
+
+
+    <option  value="newoffer=true&theclaimant=false&offeraccepted=false&firstoffer=false&respondtoclaimantnocounter=true&respondtoclaimantofferonly=true&makecounteroffer=false&"
+             {% if  data['theclaimant'] == 'false'  and
+                    data['offeraccepted'] == 'false'  and
+                    data['firstoffer'] == 'false'  and
+                    data['makecounteroffer'] != 'true'   and
+                    data['respondtoclaimantnocounter'] == 'true'  and
+                    data['respondtoclaimantofferonly'] == 'true'  %}selected{% endif %}
+                    >NEW - Defendant - Reject offer only</option>
+
+
+    <option  value="newoffer=true&theclaimant=false&offeraccepted=false&makecounteroffer=true&firstoffer=false&respondtoclaimantnocounter=false&respondtoclaimantofferonly=false&"
+             {% if  data['theclaimant'] == 'false'  and
+                    data['offeraccepted'] == 'false'  and
+                    data['makecounteroffer'] == 'true'  and
+                    data['firstoffer'] != 'true'  and
+                    data['respondtoclaimantnocounter'] != 'true'  and
+                    data['respondtoclaimantofferonly'] != 'true' %}selected{% endif %}
+                    >NEW - Defendant - Reject offer - Make counter offer</option>
+
+
+    <option  value="newoffer=true&theclaimant=false&offeraccepted=false&makecounteroffer=false&firstoffer=false&respondtoclaimantnocounter=false&respondtoclaimantofferonly=false&"
+             {% if  data['theclaimant'] == 'false'  and
+                    data['offeraccepted'] == 'false'  and
+                    data['makecounteroffer'] == 'false'  and
+                    data['firstoffer'] != 'true'  and
+                    data['respondtoclaimantnocounter'] != 'true'  and
+                    data['respondtoclaimantofferonly'] != 'true' %}selected{% endif %}
+                    >NEW - Defendant - Reject offer - Don't make counter offer</option>
+
+
+  </select>
+</form>
+
+
+
+
+    {% if data['defendant'] == "defendant_signed" %}
+
+    {% else %}
+    <!--
+          <div id="daysPassing" data-dayspassurl="../../new-dashboard/claimant/email3"
+               data-dayspasstimetoprompt="5000" data-dayspassdays="3" style="position: absolute;
+            height: 100%;
+            width: 100%;">
+
+            <div class="spinner-block">
+              <h2 class="govuk-heading-m">Days passing by... <span id="days">3</span></h2>
+              <div class="spinner spinner-1"></div>
+            </div>
+
+          </div>
+
+          <a class="gem-c-pagination__link active" id="triggerDaysPassing" style="position:">
+            <span class="gem-c-pagination__link-title">
+                <svg class="gem-c-pagination__link-icon" xmlns="http://www.w3.org/2000/svg" height="13" width="17"
+                     viewBox="0 0 17 13">
+                  <path fill="currentColor"
+                        d="m10.107-0.0078125-1.4136 1.414 4.2926 4.293h-12.986v2h12.896l-4.1855 3.9766 1.377 1.4492 6.7441-6.4062-6.7246-6.7266z"></path>
+                </svg>
+                <span class="gem-c-pagination__link-text">
+                  Simulate time passing
+                </span>
+            </span>
+          </a>
+    -->
+    {% endif %}
+
+{% endblock %}

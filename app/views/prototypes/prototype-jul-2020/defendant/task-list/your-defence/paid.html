@@ -1,0 +1,93 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="2" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <!--  <a href="#" onclick="history.go(-1)" class="link-back">Back</a>  -->
+      <h1 class="heading-large">
+       How much have you paid the claimant?
+     </h1>
+     <p>The total amount claimed is £1,500. </p>
+     {% if  data['partial'] == 1%}
+     <form name="aspnetForm" method="post" action="paid-amount?radio_select_group2=amount_claimed" id="aspnetForm" autocomplete="off">
+      {% elif  data['partial'] == 2%}
+      <form name="aspnetForm" method="post" action="../../task-list?radio_select_group2=Some_paid&" id="aspnetForm" autocomplete="off">
+        {% else %}
+        <form name="aspnetForm" method="post" action="paid-amount?radio_select_group2=amount_claimed&" id="aspnetForm" autocomplete="off">
+          {% endif %}
+          <div class="form-group">
+
+           <input class="form-control form-control-1-4  fee pound" id="input-text-a" name="owe-amount" type="text" value="{{data['owe-amount']}}">
+         </div>
+                <input type="hidden" name="your_defence" value="complete">
+          <!--        <div class="form-group">
+
+                                <label class="form-label-bold" for="input-text-a">
+                          How did you pay this?
+                                  <p class="form-hint">Example, paid by cheque on the 1 Sept</p>
+                        </label>
+                               <textarea class="form-control form-control-3-4 form-control"
+                                         id="owe-reason"
+                                         rows="4"
+                                         name="owe-reason"
+                                         cols="40"
+                                         type="text"
+                                         style="width: 95%"
+                               ></textarea>
+                    </div>-->
+                <!--<div class="form-group">
+                  <legend class="visually-hidden">What do you want to do?</legend>
+                  <div class="multiple-choice">
+                    <input id="radio-yes" type="radio" name="radio_select_group2" value="amount_claimed" {{ checked("radio_select_group2", "Some") }}>
+                    <label for="radio-yes" data-target="yes-info">
+                      £1,500
+                    </label>
+                    </div>
+                    <div class="multiple-choice" data-target="yes">
+                    <input id="radio-some" type="radio" name="radio_select_group2" value="less_amount_claimed" {{ checked("radio_select_group2", "Paid-some") }}>
+                      <label for="radio-some" data-target="yes-info">
+                        Other amount
+                      </label>
+                      </div>
+                     <div class="panel panel-border-narrow js-hidden" id="yes">
+                        <div class="form-group">
+                        <label class="form-label" for="input-text-a">
+                          Amount
+                        </label>
+                        <input class="form-control form-control-1-4   fee pound" id="input-text-a" type="text">
+                      </div>
+                    </div>
+
+                    </div>-->
+
+            {% if data['owe-amount']=="" %}
+                     <input type="hidden" name="owe-amount" value="900">
+
+        {% else %}
+
+        {% endif %}
+         <div class="form-group">
+          <input type="submit" class="button" value="Save and continue"/>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+</main>
+<form method="post"  action="#" class="form" style="; float: left">
+  <select id="dashboard2" name="dashboard2" onchange="window.location.href='?partial='+this.value">
+    <option  value="0" ></option>
+    <option value="1" {% if data['partial'] == 1 %}selected{% endif %}>1. Total claim amount?</option>
+    <option value="2" {% if data['partial'] == 2 %}selected{% endif %}>2. Less than claim amount</option>
+  </select>
+</form>
+
+{% endblock %}

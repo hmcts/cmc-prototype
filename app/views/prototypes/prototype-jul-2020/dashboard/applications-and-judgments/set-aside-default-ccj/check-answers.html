@@ -1,0 +1,720 @@
+{% extends "layout_task-list.html" %}
+
+{% block page_title %}
+Check your answers
+{% endblock %}
+
+{% block home_link %} ../task-list {% endblock %}
+
+{% block proposition_header %}
+{% set my_account="2" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+
+
+{% block content %}
+<main id="content" role="main">
+
+  {% include "includes/phase_banner_beta.html" %}
+
+  <!--  <a href="#" onclick="history.go(-1)" class="link-back">Back</a>  -->
+
+  <h1 class="heading-large">
+    Check your answers
+  </h1>
+
+
+  <!--  YOUR DETAILS  -->
+  <table class="check-your-answers">
+    <thead>
+    <tr>
+      <th colspan="2" class="no-border">
+        <h2 class="heading-medium" id="name">
+          Your details
+        </h2>
+      </th>
+      <th class="no-border">
+      </th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <tr>
+      <td>
+        Full name
+      </td>
+      <td>
+        {{ partyName( 'defendant' ) }}
+      </td>
+      <td class="change-answer">
+        <a href="../task-list/your-details/index?return_page={{ '../../task-list' | urlencode }}">
+          Change <span class="visuallyhidden">Name</span>
+        </a>
+      </td>
+    </tr>
+
+    <tr>
+    <tr>
+      <td class="no-border">
+        Address
+      </td>
+      <td class="no-border">
+        101 Regents Road<br>
+        Shiplake<br>
+        Henley on Thames<br>
+        RG9 4BW
+      </td>
+      <td class="no-border change-answer">
+        <a href="../task-list/your-details/address?return_page={{ '../../task-list' | urlencode }}">
+          Change <span class="visuallyhidden">Name</span>
+        </a>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        Correspondence address
+      </td>
+      <td>
+        {% if data['correspondence-address']=="Yes" %}
+        {{data['d-addressLine1']}}<br>
+        {{data['d-addressLine2']}}<br>
+        {{data['d-address-town']}}<br>
+        {{data['d-addressPostcode']}}<br>
+        {% else %}
+        Same as address<br>
+        {% endif %}
+      </td>
+      <td class="change-answer">
+      </td>
+    </tr>
+
+    <tr>
+    <tr>
+      <td>
+        Contact number (optional)
+      </td>
+      <td>
+        {{ data['defendant-phone'] or '07824999612'}}
+      </td>
+      <td class="change-answer">
+        <a href="../task-list/your-details/number?return_page={{ '../../task-list' | urlencode }}">
+          Change <span class="visuallyhidden">Name</span>
+        </a>
+      </td>
+    </tr>
+    </tr>
+    </tbody>
+  </table>
+
+
+
+
+
+
+  <!--  SET ASIDE ANSWERS  -->
+  <table class="check-your-answers">
+    <thead>
+    <tr class="no-border">
+      <th colspan="2" class="no-border">
+        <h2 class="heading-medium" id="name">
+          Cancel the judgment
+        </h2>
+      </th>
+      <th class="no-border">
+      </th>
+    </tr>
+    </thead>
+    <tbody>
+
+
+    <tr>
+      <td>
+        Apply to cancel the judgment
+      </td>
+      <td>
+        {% if data['cancelccj'] == 'true' %}
+            Yes
+        {% else %}
+            No
+        {% endif %}
+      </td>
+      <td class="change-answer">
+        <a href="">
+          Change <span class="visuallyhidden">Name</span>
+        </a>
+      </td>
+    </tr>
+
+
+
+
+    <tr>
+      <td>
+        Claim letter received
+      </td>
+      <td>
+        {% if data['letterreeived'] == 'true' %}
+            Yes
+        {% else %}
+            No
+        {% endif %}
+      </td>
+      <td class="change-answer">
+        <a href="../task-list/your-details/index?return_page={{ '../../task-list' | urlencode }}">
+          Change <span class="visuallyhidden">Name</span>
+        </a>
+      </td>
+    </tr>
+
+
+    {% if data['letterreeived'] == 'true' %}
+    <tr>
+      <td>
+        Reason for late response
+      </td>
+      <td style="white-space: pre-wrap;">{{ data['reason-for-not-responding'] }}</td>
+      <td class="change-answer">
+        <a href="">
+          Change <span class="visuallyhidden">Name</span>
+        </a>
+      </td>
+    </tr>
+
+
+    {% else %}
+        <tr>
+          <td>
+            When you found out about the judgment
+          </td>
+          <td>
+            17 March 2019
+          </td>
+          <td class="change-answer">
+            <a href="">
+              Change <span class="visuallyhidden">Name</span>
+            </a>
+          </td>
+        </tr>
+
+
+        <tr>
+          <td>
+            Why you didn't respond until now
+          </td>
+          <td style="white-space: pre-wrap;">{{ data['reason-for-not-responding' ]}}</td>
+          <td class="change-answer">
+            <a href="">
+              Change <span class="visuallyhidden">Name</span>
+            </a>
+          </td>
+        </tr>
+
+
+        <tr>
+          <td>
+            Confirm address on <br>6 December 2018
+          </td>
+          <td>
+            {% if data['addresscorrect'] == 'true' %}
+            Yes
+            {% else %}
+            No
+            {% endif %}
+          </td>
+          <td class="change-answer">
+            <a href="">
+              Change <span class="visuallyhidden">Name</span>
+            </a>
+          </td>
+        </tr>
+
+
+
+
+        {% if data['addresscorrect'] == 'true' %}
+            <tr>
+              <td>
+                Reason for not receiving letter
+              </td>
+              <td style="white-space: pre-wrap;">{{ data['reason-for-not-receive-post'] }}</td>
+              <td class="change-answer">
+                <a href="">
+                  Change <span class="visuallyhidden">Name</span>
+                </a>
+              </td>
+            </tr>
+        {% else %}
+            <tr>
+              <td>
+                Tell claimant new address
+              </td>
+              <td>
+                {% if data['updatedclaimantofaddress'] == 'true' %}
+                Yes
+                {% else %}
+                No
+                {% endif %}
+              </td>
+              <td class="change-answer">
+                <a href="">
+                  Change <span class="visuallyhidden">Name</span>
+                </a>
+              </td>
+            </tr>
+
+            {% if data['updatedclaimantofaddress'] == 'true' %}
+                <tr>
+                  <td>
+                    How you told the claimant
+                  </td>
+                  <td style="white-space: pre-wrap;">{{ data['methodofinformingclaimant'] }}</td>
+                  <td class="change-answer">
+                    <a href="">
+                      Change <span class="visuallyhidden">Name</span>
+                    </a>
+                  </td>
+                </tr>
+            {% endif %}
+
+        {% endif %}
+
+    {% endif %}
+
+    <tr>
+      <td>
+        Any other information
+      </td>
+      <td style="white-space: pre-wrap;">{{ data['any-other-information'] }}</td>
+      <td class="change-answer">
+        <a href="">
+          Change <span class="visuallyhidden">Name</span>
+        </a>
+      </td>
+    </tr>
+
+    </tbody>
+  </table>
+
+
+
+
+
+  {% if  data['noevidence'] != 'true'  %}
+      <!--  EVIDENCE  -->
+      <table class="check-your-answers">
+        <thead>
+            <tr>
+              <th colspan="2" class="no-border">
+                <h2 class="heading-medium" id="name">
+                  Evidence
+                </h2>
+              </th>
+              <!-- <th>
+              </th>  -->
+            </tr>
+        </thead>
+
+        <tbody>
+        <tr>
+          <td>
+            File 1
+          </td>
+          <td>
+            <a href="#">Emails.pdf</a>
+            <br />You can see the emails from my new landlord.
+          </td>
+          <td class="change-answer">
+            <a href="">
+              Change <span class="visuallyhidden">Name</span>
+            </a>
+          </td>
+          <!-- <td class="change-answer no-border">
+            <a href="upload">Change</a>
+          </td>  -->
+        </tr>
+
+        <tr>
+          <td>
+            File 2
+          </td>
+          <td>
+            <a href="#">Photo 1.jpg</a>
+            <br/>The photos show the flat contract including the move date.
+          </td>
+          <td class="change-answer">
+            <a href="">
+              Change <span class="visuallyhidden">Name</span>
+            </a>
+          </td>
+          <!-- <td class="change-answer no-border"></td>  -->
+        </tr>
+
+        </tbody>
+
+      </table>
+  {% endif %}
+
+
+
+
+  <!--  HEARING REQUIREMENTS  -->
+  <table class="check-your-answers">
+    <thead>
+    <tr>
+      <th colspan="2" class="no-border">
+        <h2 class="heading-medium" id="name">
+          Hearing requirements
+        </h2>
+      </th>
+      <th class="no-border">
+      </th>
+    </tr>
+    </thead>
+    <tbody>
+
+          <tr>
+            <td>
+              Support you'd require
+            </td>
+            <td>
+              No support required
+            </td>
+            <td class="change-answer">
+              <a href="#">
+                Change <span class="visuallyhidden">Name</span>
+              </a>
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              Preferred location for a hearing
+            </td>
+            <td>
+              Guildford County Court
+            </td>
+            <td class="change-answer">
+              <a href="#">
+                Change <span class="visuallyhidden">Name</span>
+              </a>
+            </td>
+          </tr>
+
+
+          <tr>
+            <td>
+              Dates you can’t go to a hearing
+            </td>
+            <td>
+              15 September 2019<br>
+              16 September 2019<br>
+              17 September 2019<br>
+              18 September 2019<br>
+              19 September 2019<br>
+            </td>
+            <td class="change-answer">
+              <a href="#">
+                Change <span class="visuallyhidden">Name</span>
+              </a>
+            </td>
+          </tr>
+
+    </tbody>
+  </table>
+
+
+
+
+
+
+  <!--  DEFENCE STUFF -->
+
+  {% if  data['fulldefence'] == 'true'  or   data['loweramount'] == 'true'   %}
+      <table class="check-your-answers">
+        <thead>
+            <tr>
+              <th colspan="2" class="no-border">
+                <h2 class="heading-medium" id="name">
+                  Response to the original claim
+                </h2>
+              </th>
+              <th  class="no-border">
+              </th>
+            </tr>
+        </thead>
+
+
+        <tbody>
+
+          {% if data['fulldefence'] == 'true' %}
+                <tr>
+                  <td>
+                    Reason for not owing money
+                  </td>
+                  <td>
+                    I dispute all of the claim
+                  </td>
+                  <td class="change-answer">
+                    <a href="#">
+                      Change <span class="visuallyhidden">Name</span>
+                    </a>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td >
+                    Why you believe you don't owe the money
+                  </td>
+                  <td >
+                  </td>
+                  <td class="change-answer">
+                    <a href="#">
+                      Change <span class="visuallyhidden"></span>
+                    </a>
+                  </td>
+                </tr>
+          {% elif data['loweramount'] == 'true' %}
+                <tr>
+                  <td>
+                    How much money do you admit you owe?
+                  </td>
+                  <td>
+                     £300
+                  </td>
+                  <td class="change-answer">
+                    <a href="#">
+                      Change <span class="visuallyhidden">Name</span>
+                    </a>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td >
+                    Why do you disagree with the amount claimed?
+                  </td>
+                  <td >
+                  </td>
+                  <td class="change-answer">
+                    <a href="#">
+                      Change <span class="visuallyhidden"></span>
+                    </a>
+                  </td>
+                </tr>
+          {% endif %}
+
+
+          <!-- DEFENCE STUFF-->
+
+              <tr>
+                <td>
+                  Why you disagree with the claim
+                </td>
+                <td>
+
+                </td>
+                <td class="change-answer">
+                  <a href="#">
+                    Change <span class="visuallyhidden">Name</span>
+                  </a>
+                </td>
+              </tr>
+
+
+
+              <tr>
+                <td class="no-border">
+                  Your timeline of what happened (optional)
+                </td>
+                <td class="no-border">
+                </td>
+                <td class="change-answer no-border">
+                  <a href="#">
+                    Change <span class="visuallyhidden">Why you believe you're owed the money</span>
+                  </a>
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  Comments about their timeline (optional)
+                </td>
+                <td>
+                </td>
+                <td class="change-answer">
+                </td>
+              </tr>
+
+
+
+              <tr>
+                <td class="no-border">
+                  Your evidence (optional)
+                </td>
+                <td class="no-border">
+                </td>
+                <td class="change-answer no-border">
+                  <a href="../task-list/claim-details/reason?return_page={{ '../../task-list/claim-details/check-your-answers' | urlencode }}">
+                    Change <span class="visuallyhidden">Why you believe you're owed the money</span>
+                  </a>
+                </td>
+              </tr>
+
+
+
+              <tr>
+                <td>
+                  Comments about their evidence (optional)
+                </td>
+                <td>
+
+                </td>
+                <td class="change-answer">
+                </td>
+              </tr>
+
+
+        </tbody>
+      </table>
+  {% endif %}
+
+
+
+
+  {%  if  data['noevidence'] != 'true'  %}
+      <div class="column-two-thirds">
+        <h2 class="heading-medium">Statement of truth</h2>
+        <p>  The information on this page forms your response. You can see it on the
+          response form after you submit.</p>
+        <p>When you’re satisfied that your answers are accurate, you should tick to “sign” this statement of
+          truth on the form.</p>
+        {% if data['check'] == 'org'
+            or data['check'] == 'soletrader'
+            or data['check']==10 %}
+              <p>You must hold a senior position in your organisation to sign the statement of truth.</p>
+              <details class='form-group'>
+                <summary>
+                  <span class="summary">Types of senior position</span>
+                </summary>
+                <div class="panel">
+                  <p>A senior position could be a:</p>
+                  <ul class="list-bullet list">
+                    <li>director</li>
+                    <li>treasurer</li>
+                    <li>chief executive</li>
+                    <li>manager or other officer of the company or corporation</li>
+                  </ul>
+                  <p>If your corporation isn't registered, a senior position could be:</p>
+                  <ul class="list-bullet list">
+                    <li>the chairperson or president</li>
+                    <li>another officer of the corporation</li>
+                  </ul>
+                </div>
+              </details>
+              <div class="form-group">
+                <label class="form-label" for="claimant_title">Full name</label>
+                <input type="text" class="form-control form-control-1-2" id="claimant_title" name="claimant_title" value="">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="defendant_firstname">Job title</label>
+                <input class="form-control form-control-1-2" id="defendant_name" name="defendant_name" type="text"
+                       value="{{data['defendant_name']}}">
+               </div>
+      </div>
+        {% endif %}
+
+      <!-- Checkbox for statement of truth -->
+      <div class="form-group">
+        <div class="multiple-choice text">
+          <input id="HasAcceptedTermsAndConditions" type="checkbox" value="true">
+          <label for="HasAcceptedTermsAndConditions"><p>I believe that the facts stated in this response are true.</p><p>I understand that proceedings for contempt of court may be brought against anyone who makes, or causes to be made, a false statement in a document verified by a statement of truth without an honest belief in its truth.</p></label>
+        </div>
+  </div>
+
+
+    {% endif %}
+
+
+
+
+  <!--  Declaration   -->
+  <!-- needs company option addition  !!   -->
+  <h2 class="heading-medium">Declaration</h2>
+  <div class="form-group">
+    <div class="multiple-choice text">
+      <input class="" id="HasAcceptedTermsAndConditions" type="checkbox" value="true">
+      <label for="HasAcceptedTermsAndConditions"> I declare that the details I have given are true to the best of my knowledge.</label>
+    </div>
+  </div>
+
+
+
+  <br>
+  {% if  data['varyselected'] == 'true'  or  data['justvaryonly'] == 'true'  %}
+      {% if data['varytoimmediately'] == 'true'  %}
+          <p><a class="button" href="../../../defendant/confirmation-page?varyselected=false&">Submit</a></p>
+      {% else %}
+        <p><a class="button" href="../../../defendant/task-list/check-and-send/enter-card">Sign, submit and continue to payment (£50)</a></p>
+      {% endif %}
+  {% elif data['cancelccj'] == 'true'  %}
+      <p><a class="button" href="../../../defendant/task-list/check-and-send/enter-card">Sign, submit and continue to payment (£255)</a></p>
+  {% else %}
+      <p><a class="button" href="../../../defendant/confirmation-page">Submit</a></p>
+  {% endif %}
+
+</main>
+
+
+
+<form method="post"  action="#" class="for4" style=" float: left; ">
+  <select style="height:25px;" onchange="window.location.href='?'+this.value">
+    <option value="letterreeived=true&"
+            {% if data.letterreeived == 'true' %}selected{% endif %}
+    >Claim received - didn't respond</option>
+
+    <option value="letterreeived=false&addresscorrect=true&"
+            {% if data.letterreeived != 'true' and  data.addresscorrect == 'true' %}selected{% endif %}
+    >Claim not received - correct address - reason for received</option>
+
+    <option value="letterreeived=false&addresscorrect=false&updatedclaimantofaddress=false&"
+            {% if data.letterreeived != 'true' and  data.addresscorrect == 'false' and data['updatedclaimantofaddress'] != 'true'  %}selected{% endif %}
+    >Claim not received - wrong address - didn't update claimant</option>
+
+    <option value="letterreeived=false&addresscorrect=false&updatedclaimantofaddress=true&"
+            {% if data.letterreeived != 'true' and  data.addresscorrect == 'false' and data['updatedclaimantofaddress'] == 'true' %}selected{% endif %}
+    >Claim not received - wrong address - Update claimant</option>
+
+    <option value="noevidence=true&"
+    >Without evidence</option>
+
+    <option value="noevidence=false&"
+    >With evidence</option>
+
+    <option value="alreadysettled=false&fulldefence=true&loweramount=false&"
+    >Full defence</option>
+
+    <option value="alreadysettled=false&fulldefence=false&loweramount=true&"
+    >Part admit</option>
+
+    <option value="alreadysettled=true&fulldefence=false&loweramount=false&"
+    >Already Settled</option>
+
+    <option  value="check=1&"
+             {% if data['check'] != 'org' and  data['check'] != 'soletrader' %}selected{% endif %}
+    >Individual </option>
+
+    <option  value="check=org"
+             {% if data['check'] == 'org' %}selected{% endif %}
+    >Business</option>
+
+    <option  value="check=soletrader&"
+             {% if data['check'] == 'soletrader' %}selected{% endif %}
+    >Sole trader</option>
+
+
+  </select>
+</form>
+
+
+
+{% endblock %}

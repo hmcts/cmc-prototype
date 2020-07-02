@@ -1,0 +1,178 @@
+{% extends "layout_task-list.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block home_link %} ../task-list {% endblock %}
+{% block proposition_header %}
+{% set my_account="1" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <!--  <a href="#" onclick="history.go(-1)" class="link-back">Back</a>  -->
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <h1 class="heading-large">
+        Do you accept the defendant's plan?
+      </h1>
+
+
+      <details class="form-group">
+        <summary><span class="summary">View proposed plan</span></summary>
+        <div class="panel">
+
+          {% if data['instalments'] != 'true' %}
+              <p>{{ partyName( 'defendant' ) }} wants to pay the remaining amount by 28 July 2019.</p>
+          {% else %}
+              <div class="">
+            <table class="instalment-table" >
+              <tbody>
+
+              <tr>
+              </tr>
+              <tr class="">
+                <td class="">
+                  Regular payments of
+                </td>
+                <td class="">
+                  £100
+                </td>
+                <td class="">
+                </td>
+
+              </tr>
+              <tr class="">
+                <td class="">
+                  Frequency of payments
+                </td>
+                <td class="">
+                  Monthly
+                </td>
+                <td class="">
+                </td>
+              </tr>
+
+              <tr class="">
+                <td class="">
+                  First payment date
+                </td>
+                <td >
+                  1 month after plan is agreed
+                </td>
+                <td>
+                </td>
+              </tr>
+
+              </tbody>
+            </table>
+          </div>
+          {% endif %}
+
+        </div>
+      </details>
+
+
+
+
+      <!-- {% if data['instalments'] != 'true' %}
+          <p>They've requested to pay you the remaining amount by 28 July 2019.</p>
+          <p><a href="">Download their full response</a> (PDF, 123KB)</p>
+      {% else %}
+          <p>They've requested to pay you in instalments.</p>
+          <p><a href="">Download their full response</a> (PDF, 123KB)</p>
+          <h2 class="heading-medium">How they want to pay</h2>
+
+          <table class="instalment-table">
+        <tbody>
+        <tr>
+        </tr>
+        <tr class="">
+          <td class="">
+            Regular payments of
+          </td>
+          <td class="">
+            £200
+          </td>
+          <td class="">
+          </td>
+        </tr>
+        <tr class="">
+          <td class="">
+            Frequency of payments
+          </td>
+          <td class="">
+            Monthly
+          </td>
+          <td class="">
+          </td>
+        </tr>
+        <tr class="">
+          <td class="">
+            First payment date
+          </td>
+          <td >
+            28 July 2019
+          </td>
+          <td>
+          </td>
+        </tr>
+
+
+        </tbody>
+      </table>
+      {% endif %}
+
+
+      <h2 class="heading-medium">Do you accept new the repayment plan?</h2> -->
+      <form
+        name="aspnetForm"
+        method="pst"
+        onsubmit="multiNavigation('radio-indent-group', ['reject_stop_claim', 'accept_stop_claim'], ['task-list-claimant-response?varyresponsedecided=complete&suggestownplan=true&', 'task-list-claimant-response?varyresponsedecided=complete&suggestownplan=false&']);return false;"
+        id="aspnetForm"
+        autocomplete="off" %}>
+
+
+        <div class="form-group">
+
+          <fieldset>
+            <div class="multiple-choice">
+              <input id="radio-yes" type="radio" name="radio-indent-group" value="accept_stop_claim">
+              <label for="radio-yes" data-target="yes-info">Yes</label>
+            </div>
+            <div class="multiple-choice" data-target="reject-offer">
+              <input id="radio-no" type="radio" name="radio-indent-group" value="reject_stop_claim">
+              <label for="radio-no">
+                No
+                {% if data['defendant'] == 'org' %}
+                <p class="panel  panel-border-narrow js-hidden" id="reject-offer">The defendant should have sent you their financial details. You'll need to send them to us. We'll issue a CCJ against them. The terms of the CCJ will depend on whether we believe they can afford your suggested repayment plan.</p>
+                {% endif %}
+              </label>
+            </div>
+          </fieldset>
+
+          <input type="hidden" name="payment_method" value="complete">
+          <input id="advert-option-next--button" type="submit" value="Save and continue" class="button" data-ignore-double-submit="true">
+
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+  {% include 'prototypes/prototype-may-2020/includes/contact.html' %}
+</main>
+
+<form method="post"  action="#" class="form" style="position: absolute;">
+  <select id="check2" name="check2" onchange="window.location.href='?vary=true&instalments='+this.value">
+    <option  value="true&"
+             {% if  data['instalments'] == 'true'  %}selected{% endif %}
+    >Change to new instalments</option>
+    <option  value="false&"
+             {% if data['instalments'] == 'false'  %}selected{% endif %}
+    >Change to new set date</option>
+
+  </select>
+</form>
+
+{% endblock %}

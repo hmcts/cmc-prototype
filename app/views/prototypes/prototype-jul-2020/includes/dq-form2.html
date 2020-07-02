@@ -1,0 +1,233 @@
+<style>
+table.new-dq  td, table.new-dq th {
+  border-bottom: none;
+}
+
+table.new-dq td:first-child {
+  font-weight: auto;
+}
+
+table.new-dq td:last-child div {
+  border: 1px solid gray;
+  padding: 5px;
+}
+
+.new-dq h2 {
+  color: #000;
+  background-color: #EDEDED;
+  font-size: 21px !important;
+}
+
+.new-dq h2 span {
+  color: #fff;
+  background-color: #5D514D;
+  padding: 5px;
+}
+</style>
+  <table style="width: 80%" class="new-dq">
+    <thead>
+      <tr>
+        <th colspan="2">
+          <h2 class="heading-medium" id="name">
+            <span>A</span> Your details - {{ party|capitalize }}
+          </h2>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><div>Name</div></td>
+        <td><div>{{ partyName( 'defendant' ) }}</div></td>
+      </tr>
+      <tr>
+        <tr>
+          <td>
+            Address:
+          </td>
+          <td><div>
+           24 Acacia Drive<br>
+           London<br>
+           SW1 H9A<br>
+         </div></td>
+       </tr>
+       <tr>
+        <td><div>
+          Date of birth:
+        </div></td>
+        <td><div>
+          31 January 1970
+        </div></td>
+      </tr>
+      <tr>
+        <tr>
+          <td><div>
+            Telephone:
+          </div></td>
+          <td><div>07824999612</div></td>
+       </tr>
+           <tr>
+        <td><div>
+          Email:
+        </div></td>
+        <td><div>
+                    {% if data['check'] =='1' %}{{ partyName( 'defendant', 'email' ) }}@smithlimited.com{% else %}{{ partyName( 'defendant', 'email' ) }}@gmail.com{% endif %}
+
+
+        </div></td>
+      </tr>
+     </tbody>
+   </table>
+
+  <table style="width: 80%" class="new-dq">
+      <thead>
+        <tr>
+          <th colspan="2">
+            <h2 class="heading-medium">
+              <span>B</span> About the hearing
+            </h2>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <tr>
+          <td>
+            <div>
+              Support required for a hearing
+            </div>
+          </td>
+          <td>
+            <div>
+              Welsh interpreter<br />
+              Disabled access
+            </div>
+          </td>
+        </tr>
+
+        <tr><td><b>Hearing location</b></td></tr>
+        <tr>
+          <td>
+            Preferred hearing centre
+          </div></td>
+          <td><div>Guildford County Court
+          </div></td>
+        </tr>
+        <tr>
+          <td><div>
+            Briefly explain your reasons
+          </div></td>
+          <td><div>
+            I require wheelchair access
+        </tr>
+
+        <tr><td><b>Expert evidence</b></td></tr>
+        <tr>
+          <td>
+            Have you already got a report written by an expert?
+          </div></td>
+          <td><div>
+            Yes
+          </div></td>
+        </tr>
+
+        <tr>
+          <td><div>
+            Report 1
+          </div></td>
+          <td><div>
+            Expert's name: Dave Williams<br />
+            Date of report: {{ date | date('subtract', 1, 'week') | date }}
+          </div></td>
+        </tr>
+
+        <tr>
+          <td><div>
+            Do you want the court's permission to use an expert?
+          </div></td>
+          <td><div>
+            Yes
+          </div></td>
+        </tr>
+        <tr>
+          <td><div>
+            Does the claim involve something an expert can still examine?
+          </div></td>
+          <td><div>
+            Yes
+          </div></td>
+        </tr>
+        <tr>
+          <td><div>
+            What is there to examine?
+          </div></td>
+          <td><div>
+            The damage to the roof is still visible.
+          </div></td>
+        </tr>
+        <tr>
+          <td><div>
+            Briefly explain why you believe an expert is needed
+          </div></td>
+          <td><div>
+            I believe a structural engineer is required to asses whether the joists were sufficiently sized for the load.
+          </div></td>
+        </tr>
+
+        <tr><td><b>Witnesses</b></td></tr>
+        <tr>
+          <td><div>
+            Do you want to give evidence?
+          </div></td>
+          <td><div>
+            {{ data['self']|capitalize or 'Yes' }}
+          </div></td>
+
+        </tr>
+        <tr>
+          <td><div>
+            Other witnesses
+          </div></td>
+          <td><div>
+            {{ data['other-witnesses'] or 2}}
+          </div></td>
+
+        </tr>
+
+        <tr>
+          <td><div>
+            Dates unavailable
+          </div></td>
+          <td><div>
+            {{ date | date('add', 1, 'week') | date('dddd D MMMM YYYY') }}<br />
+            {{ date | date('add', 12, 'days') | date('dddd D MMMM YYYY') }}<br />
+            {{ date | date('add', 25, 'days') | date('dddd D MMMM YYYY') }}<br />
+            {{ date | date('add', 35, 'days') | date('dddd D MMMM YYYY') }}<br />
+          </div></td>
+
+        </tr>
+      </tbody>
+    </table>
+
+
+  <table style="width: 80%" class="new-dq">
+      <thead>
+        <tr>
+          <th colspan="2">
+            <h2 class="heading-medium">
+              <span>C</span> Signature
+            </h2>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+      <tbody>
+        <tr>
+          <td>
+
+              Signed
+            </div></td>
+          <td><div>{% if party == 'claimant' %}{{ partyName( 'claimant' ) }}{% else %}{{ partyName( 'defendant' ) }}{% endif %}<br />{{ now | date( 'subtract', 1, 'day' ) | date }}
+          </div></td>
+        </tr>
+    </tbody>
+  </table>
