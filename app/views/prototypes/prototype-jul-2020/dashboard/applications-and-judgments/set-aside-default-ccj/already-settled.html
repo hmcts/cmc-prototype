@@ -1,0 +1,69 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+
+{% block content %}
+
+
+<main id="content" role="main">
+
+  {% include "includes/phase_banner_beta.html" %}
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+      <!--  <a href="#" onclick="history.go(-1)" class="link-back">Back</a>  -->
+
+      <!-- WHEN defendant decides not to set aside and claim is already marked as settled  -->
+      {% if data['defendant'] == 17.3 %}
+          <h1 class="heading-large">
+          This claim is settled
+          </h1>
+
+          <p>The judgment will stay on the public register for 6 years but will be marked as satisfied.</p>
+            <p>Some credit agencies may not update their records immediately. If you need to prove the debt is settled you can pay £15 to get a certificate of satisfaction.</p>
+
+          <p><a class="button secondary-button"
+                href="../../paid-in-full/certificate?certificate-type=satisfaction">Apply for a certificate</a></p>
+
+          <p></p><a class="" href="../../defendant?defendant=17.3&">Go to your account</a></p>
+
+
+      <!-- WHEN defendant decides not to set aside and claim is NOT marked as settled  -->
+      {% else %}
+          <h1 class="heading-large">
+            Contact {{ partyName( 'claimant' ) }}
+          </h1>
+
+          <p>Ask them to tell us the claim is settled.</p>
+
+          <p>We'll contact you when they confirm you've settled. The judgment will remain but will be marked as satisfied.</p>
+
+          <!-- this is the bottom line because I want to make sure users read the sentence above -->
+          <p><a href="../../party-details/claimant">Get {{ partyName( 'claimant' ) }}'s contact details</a></p>
+      {% endif %}
+
+
+      <!--  Removed by guy because the -->
+      <!--
+        <p class="heading-medium">Apply to cancel the judgment</p>
+        <p>The court will usually only cancel a judgment if it accepts you didn't know about the claim at the time it was issued.</p>
+
+        <div>
+          <a class="button secondary-button" href="cancel-ccj-info-paid-or-settled?claimantupdate=complete&">Find out more</a>
+        </div>
+
+      -->
+
+    </div>
+  </div>
+
+  {% include 'prototypes/prototype-may-2020/includes/contact.html' %}
+</main>
+
+
+
+
+{% endblock %}

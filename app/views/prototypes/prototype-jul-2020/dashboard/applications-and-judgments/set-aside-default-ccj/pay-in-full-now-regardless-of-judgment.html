@@ -1,0 +1,81 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+
+{% block content %}
+
+
+<main id="content" role="main">
+
+  {% include "includes/phase_banner_beta.html" %}
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+      <!--  <a href="#" onclick="history.go(-1)" class="link-back">Back</a>  -->
+
+      <h1 class="heading-large">
+        Will you pay the claimant in full now?
+      </h1>
+
+<p>The judgment will be removed from the register if you pay £1,500 before 4pm on {{ now |  date("add", 9, "day") | date( "D MMMM YYYY" ) }}.</p>
+
+      <form
+        name="aspnetForm"
+        method="post"
+        onsubmit="multiNavigation('radio-set-receive-claim', ['Yes', 'No'],
+                                                              ['task-list?canpaynow=true&canpaynowanswered=complete&',
+                                                               'pay-in-full-now?ccjpaymenttype=instalments&']);return false;"
+        id="aspnetForm"
+        autocomplete="off">
+
+        <div class="form-group">
+          <fieldset>
+
+            <div class="multiple-choice" data-target="pay">
+              <input id="set-aside-yes" type="radio" name="radio-set-receive-claim" value="Yes" >
+              <label for="set-aside-yes">Yes</label>
+            </div>
+            <!-- <div class="panel panel-border-narrow js-hidden" id="pay" style="padding-bottom:15px;">
+             <p>You can pay in full at any time. The judgment will only be marked as satisfied when the claimant confirms you've paid.</p>
+           </div>
+            -->
+
+           <div class="multiple-choice" data-target="vary">
+             <input id="set-aside-no" type="radio" name="radio-set-receive-claim" value="No">
+             <label for="set-aside-no">No</label>
+           </div>
+           <div class="panel panel-border-narrow js-hidden" id="vary" style="padding-bottom:15px;">
+             <p>The judgment will stay on the register for 6 years.</p>
+           </div>
+
+          </fieldset>
+        </div>
+
+        <div class="form-group">
+          <input type="submit" class="button" value="Save and continue" />
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+
+  {% include 'prototypes/prototype-may-2020/includes/contact.html' %}
+</main>
+
+
+
+<form method="post"  action="#" class="form" style="float: left;">
+  <select id="control-box2" name="control-box2" onchange="window.location.href='pay-in-full-now?ccjpaymenttype='+this.value">
+    <option value="immediately"  {% if data['ccjpaymenttype'] == 'immediately' %}selected{% endif %}>Immediately</option>
+    <option value="instalments"  {% if data['ccjpaymenttype'] == 'instalments' %}selected{% endif %} >Instalments</option>
+    <option value="setdate"      {% if data['ccjpaymenttype'] == 'setdate' %}selected{% endif %}>By set date</option>
+  </select>
+</form>
+
+
+
+{% endblock %}

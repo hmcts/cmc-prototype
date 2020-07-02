@@ -1,0 +1,130 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="2" %}
+
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <!--  <a href="#" onclick="history.go(-1)" class="link-back">Back</a>  -->
+      <h1 class="heading-large">
+        How do you respond to the claim?
+      </h1>
+
+      <details class="form-group">
+        <summary><span class="summary">Find out what each response means</span></summary>
+        <div class="panel panel-border-narrow">
+          <h3 class="heading-medium">Admit all of the claim</h3>
+          <p>You have until 4pm on
+            {% if data.radio_select_group_time=="Yes" %}
+            {{ now | date('add', 28, 'days' ) | date }}
+            {% else %}
+            {{ now | date('add', 14, 'days' ) | date }}
+            {% endif %} to admit the claim.</p>
+          <p><h4 class="heading-small">Pay immediately</h4></p>
+          <p>If you admit all of the claim and want to pay it in full, including interest and claim fee, contact the claimant to arrange payment.
+          <p>If you pay at the same time as admitting the claim, you won't get a County Court Judgment (CCJ).<p>
+          <p>You should ask the claimant to give you a receipt.</p>
+          <p><h4 class="heading-small">If you can't pay immediately</h4></P>
+          <p>If you admit all of the claim but can't pay immediately, you can offer to pay the claimant in instalments.</p>
+          <p>If the claimant accepts your offer, they can ask the court to enter a CCJ against you and you’ll be sent an order to pay.</p>
+          <p>If the claimant rejects your offer, they can ask the court to enter a CCJ against you. The court will then decide the repayment plan.</p>
+          <h3 class="heading-medium">Admit part of the claim</h3>
+          <p>You have until 4pm on
+            {% if data.radio_select_group_time=="Yes" %}
+            {{ now | date('add', 28, 'days' ) | date }}
+            {% else %}
+            {{ now | date('add', 14, 'days' ) | date }}
+            {% endif %}  to partly admit the claim.</p>
+          <p><h4 class="heading-small">Pay immediately</h4></p>
+          <p>To admit part of the claim, contact the claimant and pay the amount you believe you owe then send the court your part admission.</p>
+          <p>They can accept the amount you've paid and settle the claim, or ask the court to transfer the claim to a County Court hearing centre.</p>
+          <p><h4 class="heading-small">If you can't pay immediately</h4></P>
+          <p>If the claimant accepts your part-admission and you can’t pay immediately, you can offer to pay in instalments.</p>
+          <p>If the claimant agrees, they can ask court to enter a CCJ against you and you'll be sent an order to pay.</p>
+          <p>If they reject your offer, the court will decide a repayment plan.</p>
+          <h3 class="heading-medium">Reject all of the claim</h3>
+          <p>You have until 4pm on
+            {% if data.radio_select_group_time=="Yes" %}
+            {{ now | date('add', 28, 'days' ) | date }}
+            {% else %}
+            {{ now | date('add', 14, 'days' ) | date }}
+            {% endif %}  to reject all of the claim.</p>
+          <p>If you reject all of the claim, the claim may be transferred to a County Court hearing centre.</p>
+          <p>If you reject because you believe you’ve paid the money, the claimant has 28 days to tell you and the court whether they're proceeding with the claim. If they proceed, the claim may be transferred to a County Court hearing centre. </p>
+          <h4 class="heading-medium">Hearing centre location</h4>
+          <p>If the claim is against you as an individual, the hearing centre will be the nearest one to your home or business.<p>
+          <p>If the claimant is an individual and the claim is against you as an organisation, the hearing centre will be the nearest one to their home or business.</p>
+        </div>
+      </details>
+
+
+       <form
+         name="aspnetForm"
+         method="post"
+         onsubmit="multiNavigation('radio_select_group2', ['owe-all', 'owe-some', 'owe-none', 'settled'],
+                                                        ['task-list?loweramount=false&alreadysettled=false&fulldefence=false&howmuchyouowe=complete&cancelccj=false&cancelccjanswer=null&',
+                                                         'task-list?loweramount=true&alreadysettled=false&fulldefence=false&howmuchyouowe=complete&cancelccj=false&cancelccjanswer=null&',
+                                                         'task-list?fulldefence=true&loweramount=false&alreadysettled=false&howmuchyouowe=complete&cancelccj=false&',
+                                                         'task-list?alreadysettled=true&fulldefence=false&loweramount=false&howmuchyouowe=complete&cancelccj=false&cancelccjanswer=null&']);return false;"
+         id="aspnetForm"
+         autocomplete="off">
+
+         <div class="form-group">
+            <fieldset>
+
+                <!--
+                <div class="multiple-choice">
+                  <input id="radio-yes" type="radio" name="radio_select_group2" value="owe-all">
+                  <label for="radio-yes" data-target="yes-info">
+                    <strong class="bold-small">I admit all of the claim </strong>
+                    <span class="form-hint">You agree you owe the full amount claimed</span>
+                 </label>
+                </div>
+                -->
+
+                <div class="multiple-choice">
+                  <input id="radio-no" type="radio" name="radio_select_group2" value="owe-some">
+                  <label for="radio-no" data-target="yes-info">
+                    <strong class="bold-small">I admit part of the claim  </strong>
+                    <span class="form-hint"> You agree you owe some money but not the full amount claimed</span></label>
+                </div>
+
+                <div class="multiple-choice">
+                  <input id="radio-counter" type="radio" name="radio_select_group2" value="owe-none">
+                  <label for="radio-counter">
+                    <strong class="bold-small">I reject all of the claim</strong>
+                    <span class="form-hint">You've either paid what you believe you owe or you reject the claim</span></label>
+                </div>
+
+                <div class="multiple-choice">
+                  <input id="radio-settled" type="radio" name="radio_select_group2" value="settled">
+                  <label for="radio-settled" data-target="yes-info">
+                    <strong class="">
+                      <strong class="bold-small">I've already settled the claim</strong><br>
+                  </label>
+                </div>
+
+            </fieldset>
+         </div>
+
+         <div class="form-group">
+           <input type="submit" class="button" value="Save and continue" />
+         </div>
+
+      </form>
+
+
+    </div>
+  </div>
+
+{% include 'prototypes/prototype-may-2020/includes/contact.html' %}
+</main>
+{% endblock %}

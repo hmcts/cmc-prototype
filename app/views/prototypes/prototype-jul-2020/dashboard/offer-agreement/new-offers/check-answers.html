@@ -1,0 +1,378 @@
+{% extends "layout_task-list.html" %}
+
+{% block page_title %}
+  Check your answers
+{% endblock %}
+
+{% block home_link %} ../task-list {% endblock %}
+
+{% block proposition_header %}
+  {% set my_account="2" %}
+  {% include "includes/propositional_navigation.html" %}
+{% endblock %}
+
+
+{% block content %}
+<main id="content" role="main">
+
+	{% include "includes/phase_banner_beta.html" %}
+
+  <!--  <a href="#" onclick="history.go(-1)" class="link-back">Back</a>  -->
+
+	<h1 class="heading-large">
+		Check your answers
+	</h1>
+
+
+    {% if  data['firstoffer'] == 'true'  and  data['offeraccepted'] != 'true'  or
+           data['respondtoclaimantnocounter'] == 'false'   and   data['respondtoclaimantofferonly'] == 'true' and  data['offeraccepted'] != 'true'%}
+
+        <table class="check-your-answers">
+          <thead>
+            <tr>
+              <th colspan="2">
+                <h2 class="heading-medium" id="name">
+                    Your offer
+                </h2>
+              </th>
+              <th></th>
+            </tr>
+          </thead>
+
+
+          <tbody>
+              <tr>
+                <td>
+                  Details
+                </td>
+                <!-- Pay in installment content also needs considering -->
+                <td  style="white-space: pre-wrap;" >{{ data['the-offer-text'] }}</td>
+                <td class="change-answer">
+                  <a href="#">
+                    Change <span class="visuallyhidden">Name</span>
+                  </a>
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  Offer completed by
+                </td>
+                <!-- Pay in installment content also needs considering -->
+                <td>
+                  {{ data['offerDateDay'] }} August 2019
+                </td>
+                <td class="change-answer">
+                  <a href="#">
+                    Change <span class="visuallyhidden">Name</span>
+                  </a>
+                </td>
+              </tr>
+
+
+          </tbody>
+        </table>
+
+
+    {%  else  %}
+
+            <!--  Proposed plan  -->
+            <table class="check-your-answers">
+              <thead>
+                <tr>
+                  <th colspan="2">
+                    <h2 class="heading-medium" id="name">
+                      {% if  data['theclaimant'] == 'true'  %}
+                          The defendant's offer
+                      {%  else  %}
+                              The claimant's offer
+                      {%  endif  %}
+                    </h2>
+                  </th>
+                  <th>
+                  </th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr>
+                  <td>
+                    Your response
+                  </td>
+                  <!-- Pay in installment content also needs considering -->
+                  <td>
+                    {% if data['offeraccepted'] == 'true'  %}
+                        Accept the offer
+                    {% else %}
+                        Rejected the offer
+                    {% endif %}
+
+                  </td>
+                  <td class="change-answer">
+                    <a href="#">
+                      Change <span class="visuallyhidden">Name</span>
+                    </a>
+                  </td>
+                </tr>
+
+
+                {% if data['offeraccepted'] == 'true'  %}
+
+                {% else %}
+                    <tr>
+                      <td>
+                        Reason for rejecting
+                      </td>
+                      <!-- Pay in installment content also needs considering -->
+                      <td style="white-space: pre-wrap;" >{{ data['rejection-reason'] }}</td>
+                      <td class="change-answer">
+                        <a href="#">
+                          Change <span class="visuallyhidden">Name</span>
+                        </a>
+                      </td>
+                    </tr>
+                {% endif %}
+
+
+              </tbody>
+            </table>
+
+
+
+
+              {% if data['offeraccepted'] == 'true'  %}
+              {% elif data['respondtoclaimantofferonly'] == 'true'  and  data['theclaimant'] == 'false' %}
+              <!--  Defendant isn't allowed to make another offer, so reason for rejection is going to be used -->
+              {% else %}
+                  <!--  Counter offer  -->
+                  <table class="check-your-answers">
+                    <thead>
+                    <tr>
+                      <th colspan="2">
+                        <h2 class="heading-medium" id="name">
+                          Your offer
+                        </h2>
+                      </th>
+                      <th>
+                      </th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr>
+                      <td>
+                        Make offer
+                      </td>
+                      <!-- Pay in installment content also needs considering -->
+                      <td>
+                        {% if data['makecounteroffer'] == 'true'  %}
+                        Yes
+                        {% else %}
+                        No
+                        {% endif %}
+                      </td>
+                      <td class="change-answer">
+                        <a href="#">
+                          Change <span class="visuallyhidden">Name</span>
+                        </a>
+                      </td>
+                    </tr>
+
+                    {% if data['makecounteroffer'] == 'true'  %}
+                        <tr>
+                          <td>
+                            Details
+                          </td>
+                          <!-- Pay in installment content also needs considering -->
+                          <td  style="white-space: pre-wrap;" >{{ data['the-offer-text'] }}</td>
+                          <td class="change-answer">
+                            <a href="#">
+                              Change <span class="visuallyhidden">Name</span>
+                            </a>
+                          </td>
+                        </tr>
+
+                        <tr>
+                          <td>
+                            Offer completed by
+                          </td>
+                          <!-- Pay in installment content also needs considering -->
+                          <td>
+                            {{ data['offerDateDay'] }} August 2019
+                          </td>
+                          <td class="change-answer">
+                            <a href="#">
+                              Change <span class="visuallyhidden">Name</span>
+                            </a>
+                          </td>
+                        </tr>
+                    {% endif %}
+
+
+
+                    </tbody>
+                  </table>
+
+
+
+
+
+
+              {% endif %}
+      {%  endif  %}
+
+
+      <!--  Further offers  -->
+      {% if  data['theclaimant'] == 'true'  and  data['offeraccepted'] != 'true'  %}
+          <table class="check-your-answers">
+            <thead>
+            <tr>
+              <th colspan="2">
+                <h2 class="heading-medium" id="name">
+                  More offers
+                </h2>
+              </th>
+              <th>
+              </th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr>
+              <td>
+                Allow more offers
+              </td>
+              <!-- Pay in installment content also needs considering -->
+              <td>
+                {% if data['moreoffers'] == 'true'  %}
+                Yes
+                {% elif data['moreoffers'] == 'false'  %}
+                No
+                {% endif %}
+              </td>
+              <td class="change-answer">
+                <a href="#">
+                  Change <span class="visuallyhidden">Name</span>
+                </a>
+              </td>
+            </tr>
+
+            </tbody>
+          </table>
+      {% endif %}
+
+
+      <br>
+      <br>
+
+
+      <div class="form-group">
+        <p><a class="button" href="../agreement/confirmation-page">Submit</a></p>
+      </div>
+
+</main>
+
+
+
+
+
+
+<form method="post"  action="#" class="form" style="position: absolute;">
+  <select id="check2" name="check2" onchange="window.location.href='?'+this.value">
+
+
+    <option  value="firstoffer=false&theclaimant=true&offeraccepted=true&respondtoclaimantnocounter=false&firstoffer=false&"
+             {% if  data['theclaimant'] == 'true'  and
+                    data['offeraccepted'] == 'true'  %}selected{% endif %}
+    >Claimant - Accept offer</option>
+
+
+    <option  value="firstoffer=true&theclaimant=true&offeraccepted=false&"
+             {% if  data['theclaimant'] == 'true'  and
+                    data['firstoffer'] == 'true'  and
+                    data['offeraccepted'] != 'true'  %}selected{% endif %}
+    >Claimant - Make offer only</option>
+
+
+    <option  value="theclaimant=true&firstoffer=false&offeraccepted=false&makecounteroffer=true&moreoffers=true&"
+             {% if  data['theclaimant'] == 'true'  and
+                    data['firstoffer'] == 'false' and
+                    data['offeraccepted'] == 'false' and
+                    data['makecounteroffer'] == 'true' and
+                    data['moreoffers'] == 'true'  %}selected{% endif %}
+    >Claimant - Reject offer - Make counter offer - Allow more offers</option>
+
+
+    <option  value="theclaimant=true&firstoffer=false&offeraccepted=false&makecounteroffer=true&moreoffers=false&"
+             {% if  data['theclaimant'] == 'true'  and
+                    data['firstoffer'] == 'false' and
+                    data['offeraccepted'] == 'false' and
+                    data['makecounteroffer'] == 'true' and
+                    data['moreoffers'] == 'false'  %}selected{% endif %}
+    >Claimant - Reject offer - Make counter offer - Don't allow more offers</option>
+
+
+    <option  value="theclaimant=true&firstoffer=false&offeraccepted=false&makecounteroffer=false&moreoffers=true&"
+             {% if  data['theclaimant'] == 'true'  and
+                    data['firstoffer'] == 'false' and
+                    data['offeraccepted'] == 'false' and
+                    data['makecounteroffer'] == 'false' and
+                    data['moreoffers'] == 'true'  %}selected{% endif %}
+    >Claimant - Reject offer - No counter offer - Allow more offers</option>
+
+
+    <option  value="theclaimant=true&firstoffer=false&offeraccepted=false&makecounteroffer=false&moreoffers=false&"
+             {% if  data['theclaimant'] == 'true'  and
+                    data['firstoffer'] == 'false' and
+                    data['offeraccepted'] == 'false' and
+                    data['makecounteroffer'] == 'false' and
+                    data['moreoffers'] == 'false'  %}selected{% endif %}
+    >Claimant - Reject offer - No counter offer - Don't allow more offers</option>
+
+
+    <option  value="firstoffer=true&theclaimant=false&respondtoclaimantnocounter=true&respondtoclaimantofferonly=false&offeraccepted=false"
+             {% if  data['theclaimant'] == 'false'  and
+                    data['firstoffer'] == 'true'  %}selected{% endif %}
+    >Defendant - Make offer only</option>
+
+
+    <option  value="theclaimant=false&offeraccepted=true&firstoffer=false&"
+             {% if  data['theclaimant'] == 'false'  and
+                    data['offeraccepted'] == 'true' and
+                    data['firstoffer'] != 'true'  %}selected{% endif %}
+    >Defendant - Accept offer</option>
+
+
+    <option  value="theclaimant=false&offeraccepted=false&firstoffer=false&respondtoclaimantnocounter=true&respondtoclaimantofferonly=true&"
+             {% if  data['theclaimant'] == 'false'  and
+                    data['offeraccepted'] == 'false'  and
+                    data['firstoffer'] != 'true'  and
+                    data['respondtoclaimantnocounter'] == 'true'  and
+                    data['respondtoclaimantofferonly'] == 'true'  %}selected{% endif %}
+    >Defendant - Reject offer only</option>
+
+
+    <option  value="theclaimant=false&offeraccepted=false&makecounteroffer=true&firstoffer=false&respondtoclaimantnocounter=false&respondtoclaimantofferonly=false&"
+            {% if  data['theclaimant'] == 'false'  and
+                   data['offeraccepted'] == 'false'  and
+                   data['makecounteroffer'] == 'true'  and
+                   data['firstoffer'] != 'true'  and
+                   data['respondtoclaimantnocounter'] != 'true'  and
+                   data['respondtoclaimantofferonly'] != 'true' %}selected{% endif %}
+    >Defendant - Reject offer - Make counter offer</option>
+
+    <option  value="theclaimant=false&offeraccepted=false&makecounteroffer=false&firstoffer=false&respondtoclaimantnocounter=false&respondtoclaimantofferonly=false&"
+            {% if  data['theclaimant'] == 'false'  and
+                   data['offeraccepted'] == 'false'  and
+                   data['makecounteroffer'] == 'false'  and
+                   data['firstoffer'] != 'true'  and
+                   data['respondtoclaimantnocounter'] != 'true'  and
+                   data['respondtoclaimantofferonly'] != 'true' %}selected{% endif %}
+    >Defendant - Reject offer - Don't make counter offer</option>
+
+  </select>
+</form>
+
+
+
+{% endblock %}

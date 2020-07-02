@@ -1,0 +1,73 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="4" %}
+
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+
+
+<main id="content" role="main">
+
+  {% include "includes/phase_banner_beta.html" %}
+
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+      <!--  <a href="#" onclick="history.go(-1)" class="link-back">Back</a>  -->
+
+      <h1 class="heading-large">
+        How do you want the defendant to pay?
+      </h1>
+
+      <form method="post" action="counter-offer">
+
+        <div class="form-group">
+          <fieldset>
+
+            <legend class="visually-hidden">How do you want the defendant to pay?</legend>
+
+            <div class="multiple-choice">
+              <input id="radio-yes" type="radio" name="claimant-payment-request" value="Immediately">
+              <label for="radio-yes" data-target="yes-info">Immediately</label>
+            </div>
+
+
+            <div class="multiple-choice">
+              <input id="radio-no" type="radio" name="claimant-payment-request" value="Set-date">
+              <label for="radio-no" data-target="no-info">By a set date</label>
+            </div>
+
+
+            <div class="multiple-choice">
+              <input id="radio-repayment" type="radio" name="claimant-payment-request" value="Instalments">
+              <label for="radio-repayment" data-target="repayment-info">By instalments</label>
+            </div>
+          </fieldset>
+        </div>
+
+        <input type="hidden" name="court_payment_method" value="complete">
+        <input id="advert-option-next--button" type="submit" value="Save and continue" class="button"
+               data-ignore-double-submit="true">
+
+      </form>
+
+    </div>
+  </div>
+</main>
+
+
+<form method="post"  action="#" class="for4" style=" float: left;">
+  <select onchange="window.location.href='?radio-pay-group='+this.value">
+      <option value="0">Defendant's proposed payment</option>
+      <option value="Set-date" {% if data['radio-pay-group'] == 'Set-date' %}selected{% endif %}>Set date</option>
+      <option value="Instalments"  {% if data['radio-pay-group'] == 'Instalments' %}selected{% endif %}>Instalments</option>
+  </select>
+</form>
+
+{% endblock %}
