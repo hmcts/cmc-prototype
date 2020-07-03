@@ -1,0 +1,79 @@
+{% extends "layout_task-list.html" %}
+
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+
+{% block home_link %} ../../task-list {% endblock %}
+{% block proposition_header %}
+{% set my_account="1" %}
+
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+
+
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+
+        <a href="#" class="link-back">Back</a>
+
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+
+       <form
+         name="aspnetForm"
+         method="post"
+         onsubmit="multiNavigation('interest-rate2', ['issue-date','particular-date'], ['hwf', 'interest-date/date']);return false;"
+         id="aspnetForm"
+         autocomplete="off">
+        {{formData | safe}}
+
+        <h1 class="heading-large">
+          When are you claiming interest from?
+        </h1>
+
+        <fieldset>
+          <legend class="visuallyhidden">
+            When are you claiming interest from
+          </legend>
+          <div class="multiple-choice">
+            <input id="radio-2" type="radio" name="interest-rate2" value="issue-date" {{ checked("interest-date", "Issue date") }}>
+            <label for="radio-2"><strong class="bold">The date you submit the claim</strong><br>
+              If you submit after 4pm it will be the next working day.
+            </label>
+          </div>
+          <div class="multiple-choice" data-target="particular">
+             <input id="radio-1" name="interest-rate2" type="radio" value="particular-date" {{ checked("interest-date", "Particular date") }}>
+            <label for="radio-1"><strong class="bold">A particular date  </strong><br>
+              For example the date an invoice was overdue or that you told someone they owed you the money.</label>
+          </div>
+
+
+
+        </fieldset>
+
+
+      {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}
+        <div class="form-group">
+          <input type="submit" class="button" value="Save and continue"/>
+        </div>
+
+
+        <a href="{{ data.return_page if data.return_page | length > 0 else '../task-list' }}">Cancel</a>
+
+      {% else %}
+        <div class="form-group">
+          <input type="submit" class="button" value="Save and continue"/>
+        </div>
+
+      {% endif %}
+      </form>
+
+    </div>
+  </div>
+{% include 'prototypes/features-to-be-built/includes/contact.html' %}
+</main>
+{% endblock %}
