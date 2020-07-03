@@ -1,0 +1,111 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="2" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <a href="#" class="link-back">Back</a>
+      <h1 class="heading-large">
+        Make an offer
+      </h1>
+
+      <form action="confirmation" method="get" class="form">
+        <div class="form-group">
+          <fieldset>
+            <legend class="visually-hidden">Suggest a resolution</legend>
+            <span class="form-hint">
+
+                {% if data['defendant'] == "defendant" %}
+              <!-- Content for defendant -->
+
+              <p>Make it clear what you will do and by when. For example: "I will pay you £240 on 29 April 2018 by bank transfer".</p>
+              <p>If you're also asking Jan Clark to do something, say clearly what it is and by when it should be done. For example: "You will fix the roof by 28 April 2018.".</p>
+
+              {% elseif data['defendant'] == "claimant" %}
+              <!-- Content fo claimant -->
+              For example suggest they make a payment, fix a problem or return goods.
+              {% else %}
+              For example a payment, fix a problem or return goods.
+              {% endif %}
+            </span>
+
+            <label class="bold-medium">Your offer</label>
+            <textarea class="form-control form-control-3-4 form-control-large"
+            id="defence-suggestion"
+            rows="4"
+            name="defence-suggestion"
+            cols="40"
+            type="text"
+            style="width: 95%"
+            >{{data['defence-suggestion']}}</textarea>
+            <br>
+            <br>
+            <label class="form-label-bold" for="claimant_date_of_birth_day">
+              <div class="bold-medium">
+
+                {% if data['defendant'] == "defendant" %}
+                <!-- Content for defendant -->
+                When will all parts of this offer be done?
+                {% elseif data['defendant'] == "claimant" %}
+                <!-- Content fo claimant -->
+                When would this be done by?
+                {% else %}
+                When will you complete the offer by?
+                {% endif %}
+              </div>
+
+            </label>
+            <div class="input form-group date optional claimant_date_of_birth field_with_hint"><p
+              class="form-hint text">For example, 23 04 2017</p>
+              <div class="input form-group know-date-input">
+                <div class="input form-group tel required claimant_date_of_birth_day"><label
+                  class="tel required form-label"
+                  for="claimant_date_of_birth_day">Day</label><input
+                  class="string tel required form-control" maxlength="2" type="tel"
+                  size="2" name="offerDateDay"
+                  id="claimant_date_of_birth_day"></div>
+                  <div class="input form-group tel required claimant_date_of_birth_month"><label
+                    class="tel required form-label"
+                    for="claimant_date_of_birth_month">Month</label><input
+                    class="string tel required form-control" maxlength="2" type="tel"
+                    size="2" name="offerDateMonth"
+                    id="claimant_date_of_birth_month"></div>
+                    <div class="input form-group tel required claimant_date_of_birth_year"><label
+                      class="tel required form-label"
+                      for="claimant_date_of_birth_year">Year</label><input
+                      class="string tel required form-control" maxlength="4" type="tel"
+                      size="4" name="offerDateYear"
+                      id="claimant_date_of_birth_year"></div>
+                    </div>
+                  </div>
+                  <div>
+                   <p class="panel panel-border-wide">
+                    {% if data['defendant'] == "defendant" %}
+                    <!-- Content for defendant -->
+                    Jan Clark can accept or reject your offer.
+                    {% elseif data['defendant'] == "claimant" %}
+                    <!-- Content fo claimant -->
+                    Mary Richards can accept or reject your offer.
+                    {% else %}
+                    Jan Clark can accept or reject your offer.
+                    {% endif %}
+                  </p>
+                </div>
+                <div class="form-group">
+                  <input type="submit" class="button" value="Submit offer"/>
+                </div>
+              </fieldset>
+            </div>
+          </form>
+        </div>
+      </div>
+    {% include 'prototypes/features-to-be-built/includes/contact.html' %}
+</main>
+{% endblock %}

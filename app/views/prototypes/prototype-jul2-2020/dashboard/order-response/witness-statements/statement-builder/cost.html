@@ -1,0 +1,137 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <!--  <a href="#" onclick="history.go(-1)" class="link-back">Back</a>  -->
+
+      <form method="get" autocomplete="off" action="resolution">
+
+        <h1 class="heading-large">Tell us why you decided to claim £1,500</h1>
+
+        <p>You should mention evidence that you believe shows the value of the claim, for example repair quotes or receipts. Include exhibit numbers.</p>
+
+        <div class="description-block">
+          <table class="table-form">
+            <caption class="visuallyhidden">Amount payable by defendant</caption>
+            <thead>
+              <tr>
+                <th scope="col">Amount breakdown</th>
+                <th class="numeric last" scope="col">Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Cost of repairing the roof</th>
+                <td class="numeric last">
+
+                  £1000
+                  <span class="font-small">
+                  </span>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">Buying the parts to repair the roof</th>
+                <td class="numeric last">
+
+                  £430
+                  <span class="font-small">
+                  </span>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">Claim fee</th>
+                <td class="numeric last">
+                  <label class="visuallyhidden" for="amount">Claim fee</label>
+                  <span class="font-small">
+                   £70
+                  </span>
+                </td>
+              </tr>
+              <tr>
+                <th scope="col" class="bold no-border">Claim total</th>
+                <td class="numeric last bold no-border">£<span name="subt" id="subt">1,500</span></td>
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+
+        <br />
+
+        <details style="padding-bottom: 25px">
+          <summary>See a list of your evidence</summary>
+
+          <table style="margin-bottom: 10px">
+            <tbody>
+              <tr>
+                <td style="width: 100px; font-weight: bold">
+                  Exhibit A1
+                </td>
+                <td>
+                  <a href="#">Emails.pdf</a>
+                  <br />You can see the emails dated {{ date | date('subtract', 123, 'days') | date }} and {{ date | date('subtract', 134, 'days') | date }} that they claimed not to receive.
+                </td>
+              </tr>
+
+              <tr>
+                <td style="width: 100px; font-weight: bold; ">
+                  Exhibit A2
+                </td>
+                <td>
+                  <a href="#">Photo 1.jpg</a>
+                  <br />The photos show that the roof was not adequately supported.
+                </td>
+                <td class="change-answer no-border"></td>
+              </tr>
+
+              <tr>
+                <td style="width: 100px; font-weight: bold">
+                  Exhibit A3
+                </td>
+                <td>
+                  <a href="#">Photo 2.jpg</a>
+                </td>
+                <td class="change-answer no-border"></td>
+              </tr>
+
+              <tr>
+                <td style="width: 100px; font-weight: bold" class="no-border">
+                  Exhibit A4
+                </td>
+                <td class="no-border">
+                  <a href="#">Contract.pdf</a>
+                  <br />The signed contract shows the materials we agreed to use.
+                </td>
+                <td class="change-answer"></td>
+              </tr>
+
+            </tbody>
+          </table>
+
+          <a href="" class="button secondary-button">Add another evidence file</a>
+
+        </details>
+
+      <div class="form-group">
+        <textarea style="height: 400px" id="no-details"></textarea>
+      </div>
+
+      <div class="form-group">
+        <input type="submit" class="button" value="Save and continue"/>
+      </div>
+
+    </form>
+  </div>
+</div>
+{% include 'prototypes/features-to-be-built/includes/contact.html' %}
+</main>
+{% endblock %}
