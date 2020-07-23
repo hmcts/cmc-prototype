@@ -7,13 +7,22 @@ Money Claims Prototype
 {% block content %}
 <main id="content" role="main">
   {% include "includes/phase_banner_beta.html" %}
+  <div id="errorDiv" style="display :none" class="error-summary" role="group" aria-labelledby="error-summary-heading" tabindex="-1">
+      <h1 class="heading-medium error-summary-heading" id="error-summary-heading">
+        There was a problem
+      </h1>
+      <ul class="error-summary-list">
+        
+          <li><a href="#name[label]">You entered an incorrect reference number</a></li>
+        
+      </ul>
+    </div>
   <div class="grid-row">
     <div class="column-two-thirds">
-      <form method="post" action="total" class="form">
+      <form method="post" action="total" class="form" name = "myForm" onsubmit = "return(validate());">
       <!--  <a href="#" onclick="history.go(-1)" class="link-back">Back</a>  -->
-
       <h1 class="heading-large">
-        Do you have a Help With Fees reference number?
+        Do you have a Help with Fees reference number?
       </h1>
       <p>You'll only have one if you applied for Help With Fees.</p>
       <fieldset>
@@ -25,6 +34,7 @@ Money Claims Prototype
 
           <div class="form-group">
             <label class="form-label" for="hwf_number">Enter your Help With Fees reference number</label>
+            <span id="errorMsg"  style="display :none"  class="error-message">Maximum 11 characters</span>
             <input type="text" class="form-control" name="hwf_number" id="hwf_number" />
           </div>
 
@@ -47,9 +57,36 @@ Money Claims Prototype
         <input type="submit" class="button" value="Save and continue"/>
       </div>
       {% endif %}
+      
     </form>
   </div>
 </div>
 {% include 'prototypes/features-to-be-built/includes/contact.html' %}
+<script src="/public/javascripts/govuk-template.js?0.18.3"></script>
+
+
+<!-- Javascript -->
+<script src="/public/javascripts/jquery-1.11.3.js"></script>
+<script src="/public/javascripts/govuk/selection-buttons.js"></script>
+<script src="/public/javascripts/govuk/shim-links-with-button-role.js"></script>
+<script src="/public/javascripts/govuk/show-hide-content.js"></script>
+<script src="/public/javascripts/application.js"></script>	
+<script type = "text/javascript">
+function validate() {
+      if( document.getElementById("radio-1").checked = true && (document.myForm.hwf_number.value == "" || isNaN( document.myForm.hwf_number.value ) ||
+            document.myForm.hwf_number.value.length > 11) ) {
+            document.myForm.hwf_number.focus() ;
+            document.getElementById("errorDiv").style.display = "block";
+            document.getElementById("errorMsg").style.display = "block";
+            document.getElementById("hwf-panel").classList.add("form-group-error");
+            return false;
+         }
+         else {
+           return true;
+           alert("else");
+         }
+         return( true );
+      }
+      </script>    
 </main>
 {% endblock %}
