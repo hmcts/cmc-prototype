@@ -7,7 +7,18 @@ Money Claims Prototype
 {% block content %}
 <main id="content" role="main">
   {% include "includes/phase_banner_beta.html" %}
-  <div id="errorDiv" style="display :none" class="error-summary" role="group" aria-labelledby="error-summary-heading" tabindex="-1">
+  <div id="errorDiv_1" style="display :none" class="error-summary" role="group" aria-labelledby="error-summary-heading" tabindex="-1">
+      <h1 class="heading-medium error-summary-heading" id="error-summary-heading">
+        There was a problem
+      </h1>
+      <ul class="error-summary-list">
+        
+          <li><a href="#name[label]">Enter Help with Fees reference number</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="errorDiv" style="display :none" class="error-summary" role="group" aria-labelledby="error-summary-heading" tabindex="-1">
       <h1 class="heading-medium error-summary-heading" id="error-summary-heading">
         There was a problem
       </h1>
@@ -17,6 +28,7 @@ Money Claims Prototype
         
       </ul>
     </div>
+
   <div class="grid-row">
     <div class="column-two-thirds">
       <form method="post" action="total" class="form" name = "myForm" onsubmit = "return(validate());">
@@ -78,6 +90,11 @@ function validate() {
             document.myForm.hwf_number.focus() ;
             document.getElementById("errorDiv").style.display = "block";
             document.getElementById("errorMsg").style.display = "block";
+            document.getElementById("hwf-panel").classList.add("form-group-error");
+            return false;
+         } else if( document.getElementById("radio-1").checked == true && document.myForm.hwf_number.value.length == 0) {
+            document.myForm.hwf_number.focus() ;
+            document.getElementById("errorDiv_1").style.display = "block";
             document.getElementById("hwf-panel").classList.add("form-group-error");
             return false;
          }
