@@ -1,0 +1,81 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="2" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <!--  <a href="#" onclick="history.go(-1)" class="link-back">Back</a>  -->
+      <h1 class="heading-large">
+        Are you paying money as a result of any court orders?
+      </h1>
+
+      {% if  data['radio-app-type'] == 'vary' %}
+      <p>Not including the judgment you're applying to change.</p>
+      {% endif %}
+
+          <form action="priority-debts" method="post" class="form">
+             <input type="hidden" name="som" value="complete">
+
+            <div class="multiple-choice" data-target="yes">
+              <input id="radio-repayment" type="radio" name="radio-court-group" value="Yes">
+              <label for="radio-repayment" data-target="repayment-info">Yes</label>
+            </div>
+            <div class="panel panel-border-narrow js-hidden" id="yes">
+             <div class="form-group">
+              <label class="form-label" for="input-text-a">
+                Claim number
+              </label>
+              <input class="form-control form-control-1-4" id="input-text-a" type="text">
+            </div>
+            <!--
+              <div class="form-group">
+               <label class="form-label" for="textarea">
+                 Give details - for example how you're paying and the claim number
+               </label>
+               <textarea class="form-control form-control-3-4" name="textarea" id="textarea" rows="5"></textarea>
+             </div>
+           -->
+             <div class="form-group">
+              <label class="form-label" for="input-text-a">
+                Amount you owe
+              </label>
+              <input class="form-control form-control-1-4 pound fee" id="input-text-a" type="text">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="repayments">
+                Monthly instalment amount
+              </label>
+              <input class="form-control form-control-1-4 pound fee" id="repayments" type="text">
+            </div>
+
+            <a href="#" class="secondary-button">Add another court order</a>
+          </div>
+        </div>
+        <div class="multiple-choice">
+          <input id="radio-no" type="radio" name="radio-court-group" value="no">
+          <label for="radio-no" data-target="no-info">No</label>
+        </div>
+      </div>
+      <div class="form-group">
+        <input type="submit" class="button" value="Save and continue"/>
+      </div>
+    </form>
+  </div>
+</div>
+</main>
+<form method="post"  action="#" class="form" style="; float: left">
+  <select id="dashboard2" name="dashboard2" onchange="window.location.href='?som='+this.value">
+    <option  value="0" >Choose </option>
+    <option value="1" {% if data['som'] == 1 %}selected{% endif %}>1 Individual - calc</option>
+    <option value="2" {% if data['som'] == 2 %}selected{% endif %}>2 Company or organisation</option>
+  </select>
+</form>
+{% endblock %}

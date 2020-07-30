@@ -1,0 +1,76 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="2" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+     <a href="#" onclick="history.go(-1)" class="link-back">Back</a>
+      <h1 class="heading-large">
+          When do you want it?
+      </h1>
+
+      <form action="need-a-hearing" method="get" class="form">
+
+        <div class="form-group">
+          <fieldset>
+            <legend class="visually-hidden">When do you want it?</legend>
+            <span class="form-hint">
+
+            </span>
+
+            <textarea class="form-control form-control-3-4 form-control-medium"
+                id="general-application-why"
+                rows="4"
+                name="general-application-when"
+                cols="40"
+                type="text"
+                style="width: 95%; height: 90px;}"
+                ></textarea>
+            <br>
+
+            <div class="form-group">
+               <input type="submit" class="button" value="Continue"/>
+            </div>
+
+
+            <tr id="check-and-send">
+              <td>
+                <p><a href="../../defendant?defendant=3.2255">Save and return</a></p>
+              </td>
+            </tr>
+
+
+
+          </fieldset>
+        </div>
+
+      </form>
+    </div>
+  </div>
+  {% include 'prototypes/prototype-aug-2020/includes/contact.html' %}
+</main>
+
+
+<form method="post"  action="#" class="for4" style=" float: left; ">
+  <select style="height:25px;" onchange="window.location.href='?'+this.value">
+    <option value="newoffer=false&"
+            {% if data['newoffer'] != 'true'  %}selected{% endif %}
+            >Old type of offer</option>
+
+    <option value="newoffer=true&"
+            {% if data['newoffer'] == 'true'  %}selected{% endif %}
+            >New type of offer</option>
+
+  </select>
+</form>
+
+
+
+{% endblock %}
