@@ -1,0 +1,94 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+
+{% block content %}
+
+
+<main id="content" role="main">
+
+  {% include "includes/phase_banner_beta.html" %}
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+      <!--  <a href="#" onclick="history.go(-1)" class="link-back">Back</a>  -->
+
+      <h1 class="heading-large">
+        Help paying your court fee
+      </h1>
+
+      <p>You might be able to get money off your court fee if you have little or no savings, are on certain benefits or have a low income.</p>
+      <p>If you apply for help, you'll need to complete a paper form to ask the court to change how you pay the claimant.</p>
+
+      {% if data['generalapphearing'] == 'true' %}
+            <p>You can <a href="hearing-duration">continue your application online</a> instead. You'll have to pay the full £255 fee.</p>
+       {% else %}
+             <p>You can <a href="upload-documents">continue your application online</a> instead. You'll have to pay the full £100 fee.</p>
+         {% endif %}
+
+
+      <h3 class="heading-medium">How to ask for help with the fee</h3>
+        <ol class="list list-number">
+        <li>Check whether you're eligible for help</li>
+        <li>Get a reference number</li>
+        <li>Complete a paper form, and include your reference number</li>
+        <li>Send us the form and wait to hear from us</li>
+        </ol>
+
+      <h3 class="heading-medium">Check eligibility and get a reference number</h3>
+      <p><a href="https://www.gov.uk/get-help-with-court-fees" target="_blank">Tell us about your income and savings</a> (opens in a new window) to get a reference number. You should read the information on whether you're eligible first.</p>
+      <p>When asked what number is on your court form, enter <strong class="bold">N245</strong>.</p>
+      <p>You'll get a Help with Fees reference number like this: HWF-ASL-LD2.</p>
+
+      <h3 class="heading-medium">Complete the form and send it to us</h3>
+      <p><a href="https://www.gov.uk/government/publications/form-n245-application-for-suspension-of-a-warrant-and-or-variation-of-an-order" target="_blank">Download form N245</a> (opens in a new window).</p>
+      <p>Enter your Help with Fees reference number in the upper-right of the form.</p>
+
+      <p>Post the completed form to:</p>
+      <p class="keep-formatting">
+        Civil Money Claims<br>
+        St Katharine's House<br>
+        21-27 St Katharine's Street<br>
+        Northampton<br>
+        Northamptonshire<br>
+        NN1 2LH
+      </p>
+
+      <h3 class="heading-medium">What happens next?</h3>
+      <p>We'll review your request. We'll contact you by post if it's unsuccessful or if we need more information.</p>
+      <p>If it is successful the court will review your request to change the claim.</p>
+
+    </div>
+  </div>
+
+  {% include 'prototypes/prototype-aug-2020/includes/contact.html' %}
+</main>
+
+
+
+<form method="post"  action="#" class="for4" style=" float: left; ">
+  <select style="height:25px;" onchange="window.location.href='?'+this.value">
+
+    <option value="varyselected=true&"
+            {% if data.varyselected == 'true' %}selected{% endif %}
+    >Vary</option>
+
+    <option value="cancelccj=true&"
+            {% if data.cancelccj == 'true' %}selected{% endif %}
+    >Set aside</option>
+
+    <option value="cancelccj=false&varyselected=false&"
+            {% if data.cancelccj != 'true' and  data.varyselected != 'true' %}selected{% endif %}
+    >General</option>
+
+  </select>
+</form>
+
+
+
+
+
+{% endblock %}
