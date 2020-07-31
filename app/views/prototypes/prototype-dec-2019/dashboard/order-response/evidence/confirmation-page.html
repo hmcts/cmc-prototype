@@ -16,7 +16,9 @@ Money Claims Prototype
       </div>
     <h2 class="heading-medium">What happens next</h2>
 
-    <p>We’ve told the {% if data[‘party’] == ‘claimant’ %}defendant{% else %}claimant{% endif %} that you’ve uploaded documents. They can view them if they want.</p>
+    <p>The {% if data[‘party’] == ‘claimant’ %}defendant{% else %}claimant{% endif %} has been informed that you have submitted documents. The {% if data[‘party’] == ‘claimant’ %}defendant{% else %}claimant{% endif %}  can view these documents.</p>
+    <!--<p>The claimant has been informed that you have submitted documents. The claimant can view these documents.</p>-->
+    <!--<p>The defendant has been informed that you have submitted documents. The defendant can view these documents.</p>-->
 
     <p>You still need to:</p>
     <ol class="list list-bullet">
@@ -26,14 +28,19 @@ Money Claims Prototype
       <li><a href="../witness-statements?evidence=complete">upload any witness statements</a></li>
         </ol>
 
+        <p>You must do this by 4pm on {{ now | date('add', 14, 'days') | date }}.</p>
     <p><h4 class="heading-small">If you've finished</h4></p>
 
 
-    <p>You need to <a href="../finished">tell us you've finished</a>. You must do this before 4pm on {{ now | date('add', 14, 'days') | date }}.</p>
+    <p>You need to <a href="../finished">tell us you've finished</a>. </p>
 
+      <p>You must do this before 4pm on {{ now | date('add', 14, 'days') | date }}.</p>
+
+      <!--
     <p><h4 class="heading-small">Upload more information</h4></p>
 
     <p>You can upload documents and witness statements until 4pm on {{ now | date('add', 14, 'days') | date }}.</p>
+    -->
 
     <a href="../../home?dashboard={% if data['party'] == 'defendant' %}2.7102{% else %}1.202{% endif %}&evidence=complete" class="button">Go to your account</a>
 
