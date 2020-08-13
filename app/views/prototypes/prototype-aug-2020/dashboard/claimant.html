@@ -15,11 +15,19 @@
 
   <div class="grid-row">
 
-    <div class="details" style="margin-top: -30px">
-        <span style=""><h2 style="">
-          <h2 class="heading-medium">{{ partyName( 'claimant' ) }} v {{ partyName( 'defendant' ) }}</h2>
-          <h2 class="font-xsmall" style="margin-top: -10px"> <span style="">{% if data['claimant'] == 1.2 or data['claimant'] == 1.21 or data['claimant'] == 1.22 or data['claimant'] == 1.23 or data['claimant'] == 1.24 or data['claimant'] == 1.25 %}Claim reference number: 1251-5451-8291-3761{% else %}Claim number: 352MC733{% endif %}</span></h2>
+    {% if data['claimant'] == 0.9 %}
+    <div class="details" style="margin-top: 10px">
+          <h2 class="font-xsmall" style="margin-top: -10px"> <span style="">Claim number: Draft</span></h2>
     </div>
+
+  {% else %}
+      <div class="details" style="margin-top: -30px">
+          <span style="">
+            <h2 class="heading-medium">{{ partyName( 'claimant' ) }} v {{ partyName( 'defendant' ) }}</h2>
+            <h2 class="font-xsmall" style="margin-top: -10px"> <span style="">{% if data['claimant'] == 1.2 or data['claimant'] == 1.21 or data['claimant'] == 1.22 or data['claimant'] == 1.23 or data['claimant'] == 1.24 or data['claimant'] == 1.25 %}Claim reference number: 1251-5451-8291-3761{% else %}Claim number: 352MC733{% endif %}</span></h2>
+      </div>
+  {% endif %}
+
 
     <div class="column-full-width">
 
@@ -28,7 +36,7 @@
         <div class="tabs-nav">
           <ul class="tabs-list" role="tablist">
 
-            {% if data['claimant'] == 1 or data['claimant'] == 1.2 or data['claimant'] == 1.21 or data['claimant'] == 1.22 or data['claimant'] == 1.23 or data['claimant'] == 1.24 or data['claimant'] == 1.25 or data['claimant'] == 3.1 or data['claimant'] == 3.11 or data['claimant'] == 3.3 or data['claimant'] == 3.4 or data['claimant'] == 3.5 or data['claimant'] == 3.6 or data['claimant'] == 2 or data['claimant'] == 3 or data['claimant'] == 4 or data['claimant'] == 4.01 or data['claimant'] == 4.1 or data['claimant'] == 4.11 or data['claimant'] == 4.2 or data['claimant'] == 4.3 or data['claimant'] == 5
+            {% if data['claimant'] == 0.9  or data['claimant'] == 1 or data['claimant'] == 1.2 or data['claimant'] == 1.21 or data['claimant'] == 1.22 or data['claimant'] == 1.23 or data['claimant'] == 1.24 or data['claimant'] == 1.25 or data['claimant'] == 3.1 or data['claimant'] == 3.11 or data['claimant'] == 3.3 or data['claimant'] == 3.4 or data['claimant'] == 3.5 or data['claimant'] == 3.6 or data['claimant'] == 2 or data['claimant'] == 3 or data['claimant'] == 4 or data['claimant'] == 4.01 or data['claimant'] == 4.1 or data['claimant'] == 4.11 or data['claimant'] == 4.2 or data['claimant'] == 4.3 or data['claimant'] == 5
             or data['claimant'] == 5.1 or data['claimant'] == 5.11 or data['claimant'] == 5.2 or data['claimant'] == 5.21 or data['claimant'] == 6 or data['claimant'] == 7
              or data['claimant'] == 9 or data['claimant'] == 9.1 or data['claimant'] == 9.2 or data['claimant'] == 10.1 or data['claimant'] == 10.001 or data['claimant'] == 10.01
             or data['claimant'] == 10.02 or data['claimant'] == 10.03 or data['claimant'] == 10.11 or data['claimant'] == 10.4 or data['claimant'] == 10.5 or data['claimant'] == 10.6
@@ -106,11 +114,15 @@
 
             <div class="tabs-panel-inner text" tabindex="0">
 
-              {% if data['claimant'] == 1 %}
+              {% if data['claimant'] == 0.9 %}
+              <h2 class="heading-medium">This claim has not been submitted</h2>
+              <p>Your claim is saved as a draft.</p>
+              <p><a href="#" class="button">Continue with claim</a></p>
+
+              {% elseif data['claimant'] == 1 %}
               <h2 class="heading-medium">We've received your claim</h2>
               <p>{{ partyName( 'defendant' ) }} has until 4pm on 24 December 2018 to respond. They can request an extra 14 days if they need it.</p>
               <p>You can request a County Court Judgment against them if they don't respond by the deadline.</p>
-
 
               {% elseif data['claimant'] == 1.2 %}
               <h2 class="heading-medium">We're checking your Help With Fees application</h2>
@@ -1788,7 +1800,7 @@
             <!--</p>-->
             {% endif %}
 
-            {% if data['claimant'] < 20 and data['claimant'] != 1.2 and data['claimant'] != 1.21 and data['claimant'] != 1.22 and data['claimant'] != 1.23 and data['claimant'] != 1.24 and data['claimant'] != 1.25 and data['claimant'] != 10.11 and data['claimant'] != 3 and data['claimant'] != 3.3 and data['claimant'] != 3.4 and data['claimant'] != 18 and
+            {% if data['claimant'] < 20 and data['claimant'] != 0.9 and data['claimant'] != 1.2 and data['claimant'] != 1.21 and data['claimant'] != 1.22 and data['claimant'] != 1.23 and data['claimant'] != 1.24 and data['claimant'] != 1.25 and data['claimant'] != 10.11 and data['claimant'] != 3 and data['claimant'] != 3.3 and data['claimant'] != 3.4 and data['claimant'] != 18 and
             data['claimant'] != 3.2 and data['claimant'] != 9.2 and data['claimant'] != 10.12 and data['claimant'] != 10.01 and
             data['claimant'] != 10.4 and data['claimant'] != 10.5 and data['claimant'] != 10.81 and data['claimant']
             != 10.82 and data['claimant'] != 10.83 and data['claimant'] != 11.1011 and data['claimant'] != 17 and data['claimant'] !=
@@ -1832,7 +1844,7 @@
             {% endif %}
 
 
-            {% if data['claimant'] != 1.2 and data['claimant'] != 1.21 and data['claimant'] != 1.22 and data['claimant'] != 1.23 and data['claimant'] != 1.24 and data['claimant'] != 1.25 and data['claimant'] != 21.1 and data['claimant'] != 21.5 and data['claimant'] != 11.1011
+            {% if data['claimant'] != 0.9 and data['claimant'] != 1.2 and data['claimant'] != 1.21 and data['claimant'] != 1.22 and data['claimant'] != 1.23 and data['claimant'] != 1.24 and data['claimant'] != 1.25 and data['claimant'] != 21.1 and data['claimant'] != 21.5 and data['claimant'] != 11.1011
                 and data['claimant'] != 11.105 and data['claimant'] != 26 and data['claimant'] != 27
                 and data['claimant'] != 3.12555 and data['claimant'] != 3.12556 and data['claimant'] != 3.12566 and   data['claimant'] != 23 and   data['claimant'] != 40 and   data['claimant'] != 45%}
                 <div class="column-two-thirds">
@@ -1860,17 +1872,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
         <!--  DOCUMENTS TAB -->
 
         <div class="tabs-panel" id="docs" role="tabpanel" aria-hidden="true">
@@ -1878,7 +1879,10 @@
           <div class="tabs-panel-inner text" tabindex="0">
 
             <h2 class="heading-medium">Claim documents</h2>
+            {% if data['claimant'] == 0.9 %}
+            <p>Any documents you upload will appear here after you submit a claim.</p>
 
+            {% else %}
               <p><a href="/public/images/judgment-order.pdf">Download the judgment order</a> (PDF, 123KB)<br /><span style="color:grey; font-size: 15px">Created: {{ now | date('subtract', 2, 'days') | date }}</span></p>
               <p><a href="../defendant/correspondence/forms/hearing-notice">Download the hearing notice</a> (PDF, 123KB)<br /><span style="color:grey; font-size: 15px">Created: {{ now | date('subtract', 21, 'days') | date }}</span></p>
               <p><a href="/public/images/order-cancelled.pdf" download>Download the original order</a> (PDF, 123KB), which is now cancelled.<br /><span style="color:grey; font-size: 15px">Created: {{ now | date('subtract', 42, 'days') | date }}</span></p>
@@ -1889,7 +1893,7 @@
               <p><a href="../defendant/correspondence/forms/agreement?check=1">Download the settlement agreement</a> (PDF, 123KB)<br /><span style="color:grey; font-size: 15px">Created: {{ now | date('subtract', 132, 'days') | date }}</span></p>
               <p><a href="../defendant/correspondence/forms/claim-form-defendant?check=2">Download the defendant's response</a>  (PDF, 123KB)<br /><span style="color:grey; font-size: 15px">Created: {{ now | date('subtract', 152, 'days') | date }}</span></p>
               <p><a href="../claimant/correspondence/claim-form-claimant?check=2">Download claim</a> (PDF, 123KB)<br /><span style="color:grey; font-size: 15px">Created: {{ now | date('subtract', 174, 'days') | date }}</span></p>
-
+            {% endif %}
           </div>
         </div>
 
@@ -3210,7 +3214,11 @@
         <div class="tabs-panel" id="contact" role="tabpanel">
 
           <div class="tabs-panel-inner text" tabindex="0">
+            {% if data['claimant'] == 0.9 %}
+            <h2 class="heading-medium">This claim has not been submitted</h2>
+            <p>Defendants' details will be updated when claim is submitted.</p>
 
+            {% else %}
             <h2 class="heading-medium">Defendant's details</h2>
 
             <table class="govuk-table">
@@ -3239,7 +3247,7 @@
             </tr>
             </tbody>
           </table>
-
+          {% endif %}
           </div>
         </div>
 
@@ -3257,6 +3265,7 @@
 <form method="post" action="#" class="form" style="position: absolute;">
   <select id="claimant2" name="claimant2" onchange="window.location.href='?claimant='+this.value">
     <option>-------- Claimant view --------</option>
+    <option value="0.9" {% if data['claimant'] == 0.9 %}selected{% endif %}>Draft claim</option>
     <option value="1" {% if data['claimant'] == 1 %}selected{% endif %}>Claim issued</option>
     <option value="1.2" {% if data['claimant'] == 1.2 %}selected{% endif %}>Claim received (HWF)</option>
     <option value="3.1" {% if data['claimant'] == 3.1 %}selected{% endif %}>More time requested by defendant</option>
