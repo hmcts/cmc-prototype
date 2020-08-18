@@ -41,28 +41,18 @@ Check your answers
 
     <tr>
       <td>
-        What are you asking the court to change
+         Asking the court to do
       </td>
       <td style="white-space: pre-line">{{ data['general-application-what'] }}</td>
       <td class="change-answer">
         <a href="what">
-          Change <span class="visuallyhidden"> What are you asking the court to change?</span>
+          Change <span class="visuallyhidden"> Asking the court to do</span>
         </a>
       </td>
     </tr>
 
-    <tr>
-      <td>
-      Reason fopr making this request
-      </td>
-      <td style="white-space: pre-line">{{  data['general-application-why']  }}</td>
-      <td class="change-answer">
-        <a href="why">
-          Change <span class="visuallyhidden">Why are you making this request?</span>
-        </a>
-      </td>
-    </tr>
 
+    <!--
     <tr>
       <td>
       When do you want the change making by
@@ -74,13 +64,14 @@ Check your answers
         </a>
       </td>
     </tr>
+  -->
 
     <tr>
       <td>
         Requires a hearing
       </td>
       <td>
-        {% if  data['generalapphearing'] == 'true' %}
+        {% if  data['general-app-hearing'] == 'true' %}
             Yes
         {% else %}
             No
@@ -95,7 +86,7 @@ Check your answers
 
 
 
-    {% if  data['generalapphearing'] == 'true' %}
+    {% if  data['general-app-hearing'] == 'true' %}
         <tr>
           <td>
             Hearing length
@@ -119,6 +110,46 @@ Check your answers
         </tr>
     {% endif %}
 
+
+        <tr>
+          <td>
+          Have a hearing or trial listed for a future date
+          </td>
+          <td style="white-space: pre-line">{{  data['upcoming-trial']  }}</td>
+          <td class="change-answer">
+            <a href="#">
+              Change <span class="visuallyhidden">Why are you making this request?</span>
+            </a>
+          </td>
+        </tr>
+
+        {% if  data['upcoming-trial'] == 'Yes' %}
+        <tr>
+          <td>
+            Date of hearing or trial
+          </td>
+          <td style="white-space: pre-line">25 Sept 2020</td>
+          <td class="change-answer">
+            <a href="#">
+              Change <span class="visuallyhidden">Date of hearing or trial</span>
+            </a>
+          </td>
+        </tr>
+{% endif %}
+
+
+    <tr>
+      <td>
+      Reason for making this request
+      </td>
+      <td style="white-space: pre-line">{{  data['general-application-why']  }}</td>
+      <td class="change-answer">
+        <a href="why">
+          Change <span class="visuallyhidden">Why are you making this request?</span>
+        </a>
+      </td>
+    </tr>
+
     <!--
     {% if  data['otherinfo'] != 'false' %}
         <tr>
@@ -137,7 +168,6 @@ Check your answers
 
     </tbody>
   </table>
-
 
 
 
@@ -251,11 +281,11 @@ Check your answers
                   Dates you can’t go to a hearing
                 </td>
                 <td>
-                  15 September 2019<br>
-                  16 September 2019<br>
-                  17 September 2019<br>
-                  18 September 2019<br>
-                  19 September 2019<br>
+                  15 September 2020<br>
+                  16 September 2020<br>
+                  17 September 2020<br>
+                  18 September 2020<br>
+                  19 September 2020<br>
                 </td>
                 <td class="change-answer">
                   <a href="#">
@@ -274,12 +304,12 @@ Check your answers
 
 
 
+
+
       <div class="column-two-thirds">
         <h2 class="heading-medium">Statement of truth</h2>
-        <p>  The information on this page forms your response. You can see it on the
-          response form after you submit.</p>
-        <p>When you’re satisfied that your answers are accurate, you should tick to “sign” this statement of
-          truth on the form.</p>
+        <p> The information on this page forms your application.  You can see it on the application form after you submit.</p>
+        <p> When you’re satisfied that your answers are accurate, you should tick to “sign” this statement of truth on the form.</p>
 
         {% if data['check'] == 'org'
             or data['check'] == 'soletrader'
