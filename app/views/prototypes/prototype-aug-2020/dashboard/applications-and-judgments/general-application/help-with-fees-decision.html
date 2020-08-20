@@ -33,8 +33,11 @@ Money Claims Prototype
          <p>The fee goes to the court, not to the claimant.</p>
          <p>You can apply for help paying the fee, but you'll have to use paper forms.</p>
 
-      
-           <form action="upcoming-trial" method="post" class="form">
+         {% if data['general-app-hearing'] == 'true' %}
+           <form action="hearing/support" method="post" class="form">
+             {% else %}
+             <form action="hearing/upcoming-trial" method="post" class="form">
+               {% endif %}
 
               <div class="form-group">
                 <input type="submit" class="button" value="I don't need help with the fee" />
@@ -45,7 +48,7 @@ Money Claims Prototype
                 <p><a href="../general-application/general-help-with-fees?generalselected=true&">Find out if I'm eligible for help</a></p>
               </div>
 
-
+            </form>
 
     </div>
         </div>
