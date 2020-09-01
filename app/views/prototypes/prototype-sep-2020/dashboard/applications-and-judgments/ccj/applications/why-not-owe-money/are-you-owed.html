@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="2" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <!--  <a href="#" onclick="history.go(-1)" class="link-back">Back</a>  -->
+      <h1 class="heading-large">
+        Does {{ partyName( 'claimant' ) }} owe you any money?
+      </h1>
+
+<p>You can claim money back from them if it's connected to this dispute.</p>
+
+      <form method="post" action="defence-1">
+
+        <div class="form-group">
+          <fieldset>
+            <div class="multiple-choice">
+              <input id="radio-owed-yes" type="radio" name="response-owed" value="yes">
+              <label for="radio-owed-yes">Yes</label>
+            </div>
+            <div class="multiple-choice">
+              <input id="radio-owed-no" type="radio" name="response-owed" value="no">
+              <label for="radio-owed-no">No</label>
+            </div>
+          </fieldset>
+        </div>
+
+        <input type="hidden" name="owed_money" value="complete" />
+        <div class="form-group">
+          <input type="submit" class="button" value="Save and continue"/>
+        </div>
+
+      </form>
+    </div>
+  {% include 'prototypes/prototype-may-2020/includes/contact.html' %}
+</main>
+{% endblock %}

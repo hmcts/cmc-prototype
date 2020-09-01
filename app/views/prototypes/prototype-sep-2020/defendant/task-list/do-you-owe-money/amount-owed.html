@@ -1,0 +1,40 @@
+{% extends "layout_task-list.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block home_link %} ../task-list {% endblock %}
+{% block proposition_header %}
+{% set my_account="1" %}
+{% import "prototypes/prototype-may-2020/includes/claim-amount.html" as amount %}
+
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <!--  <a href="#" onclick="history.go(-1)" class="link-back">Back</a>  -->
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+
+      {% if data['response-owe'] == 'owe-none' and data['radio_select_group2'] == 'counter' %}
+        <form method="post" action="confirm-counter" class="form">
+      {% else %}
+        <form method="post" action="counter-interest" class="form">
+      {% endif %}
+
+      {{formData | safe}}
+      {{ amount.form('defendant') }}
+
+
+        </form>
+    </div>
+  </div>
+{% include 'prototypes/prototype-may-2020/includes/contact.html' %}
+</main>
+{% endblock %}
+{% block extra_js_1 %}
+{{ amount.js('defendant') }}
+
+{% endblock %}

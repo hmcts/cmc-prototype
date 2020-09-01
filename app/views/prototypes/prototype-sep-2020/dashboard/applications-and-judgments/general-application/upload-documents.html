@@ -1,0 +1,87 @@
+{% extends "layout.html" %}
+
+
+{% import 'prototypes/prototype-sep-2020/includes/upload.html' as upload %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+
+  {% include "includes/phase_banner_beta.html" %}
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+      <!--  <a href="#" onclick="history.go(-1)" class="link-back">Back</a>  -->
+
+      <h1 class="heading-large">
+        Upload files
+      </h1>
+
+      <p>Any documents you upload must be [PDF, JPG, JPEG, PNG, GIF, BMP, TIFF, DOCX, PPTX or XLSX]. The total file size cannot exceed [10MB].</p>
+
+      <!--
+      <details class="form-group">
+        <summary><span class="summary">Document file types and size limits</span></summary>
+        <div class="panel">
+
+            <p>These could include:</p>
+            <ul class="list list-bullet">
+              <li>You can provide up to [x] documents for this application.</li>
+              <li>You can provide the following file types:  PDF, JPG, JPEG, PNG, GIF, BMP, TIFF, DOCX, PPTX and XLSX.</li>
+              <li>All your documents must be below a total size of [10MB]</li>
+            </ul>
+
+
+
+        </div>
+
+    </details>
+    -->
+
+
+      <form class="form-group"  action="check-answers" method="post" class="form"  onclick="changebutton()">
+        {{ upload.form('evidence', 'Continue') }}
+      </form>
+
+      <div class="form-group"  id="green-button-without-evidence">
+        <br>
+        <p ><a class="button" href="check-answers">Continue without files</a></p>
+
+        <tr id="check-and-send">
+          <td>
+            <p><a href="../../defendant?defendant=3.2255">Save and return</a></p>
+          </td>
+        </tr>
+      </div>
+
+
+      <br>
+
+
+    </div>
+  </div>
+
+  {% include 'prototypes/prototype-sep-2020/includes/contact.html' %}
+</main>
+{% endblock %}
+
+
+
+
+{% block extra_js_1 %}
+
+<script type="text/javascript">
+
+  function changebutton()
+  {
+      document.getElementById("green-button-without-evidence").style.display = "none";
+      document.getElementById("blue-link-without-evidence").style.display = "block";
+  }
+
+</script>
+
+{% endblock %}

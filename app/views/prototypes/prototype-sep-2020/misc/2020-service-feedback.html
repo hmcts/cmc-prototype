@@ -1,0 +1,193 @@
+{% extends "layout_task-list.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block home_link %} ../../task-list {% endblock %}
+{% block proposition_header %}
+{% set my_account="2" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <!--  <a href="#" onclick="history.go(-1)" class="link-back">Back</a>  -->
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+
+      <h1 class="heading-large">Tell us what you think of this service</h1>
+
+      <!--
+      <div class="notice">
+        <i class="icon icon-important">
+          <span class="visually-hidden">Warning</span>
+        </i>
+        <strong class="bold-small">
+          You won't get a reply to feedback left here.
+        </strong>
+      </div>
+      <p><a href="message">Contact us</a> if you need a response.</p>
+      -->
+
+
+      <form class="form" action="feedback-thanks" method="post">
+
+
+
+        <!--  SATISFACTION  -->
+        <h2 class="heading-medium" style="margin-top:30px">How satisfied were you with the service today?</h2>
+        <div class="form-group">
+
+          <fieldset>
+
+            <div class="multiple-choice">
+              <input id="satisfaction-very-satisfied" type="radio" name="radio-satisfaction" value="Very satisfied" >
+              <label for="satisfaction-very-satisfied">Very satisfied</label>
+            </div>
+
+            <div class="multiple-choice">
+              <input id="satisfaction-satisfied" type="radio" name="radio-satisfaction" value="Satisfied" >
+              <label for="satisfaction-satisfied">Satisfied</label>
+            </div>
+
+            <div class="multiple-choice">
+              <input id="satisfaction-neither" type="radio" name="radio-satisfaction" value="Neither satisfied nor dissatisfied" >
+              <label for="satisfaction-neither">Neither satisfied nor dissatisfied</label>
+            </div>
+
+            <div class="multiple-choice">
+              <input id="satisfaction-dissatisfied" type="radio" name="radio-satisfaction" value="Dissatisfied" >
+              <label for="satisfaction-dissatisfied">Dissatisfied</label>
+            </div>
+
+            <div class="multiple-choice">
+              <input id="satisfaction-very-dissatisfied" type="radio" name="radio-satisfaction" value="Very dissatisfied" >
+              <label for="satisfaction-very-dissatisfied">Very dissatisfied</label>
+            </div>
+
+          </fieldset>
+        </div>
+
+
+
+
+        <!--  TASK BEING DONE  -->
+        <h2 class="heading-medium">What were you trying to do today?</h2>
+        <div class="form-group">
+
+          <fieldset>
+
+            <div class="multiple-choice">
+              <input id="task-create-claim" type="radio" name="radio-task" value="Create a claim" >
+              <label for="task-create-claim">Make a claim</label>
+            </div>
+
+            <div class="multiple-choice">
+              <input id="task-respond-to-claim" type="radio" name="radio-task" value="Respond to a claim" >
+              <label for="task-respond-to-claim">Respond to a claim</label>
+            </div>
+
+            <div class="multiple-choice">
+              <input id="task-respond-to-response" type="radio" name="radio-task" value="Respond to a defendant’s response" >
+              <label for="task-respond-to-response">Respond to a defendant’s response</label>
+            </div>
+
+            <div class="multiple-choice">
+              <input id="task-request-CCJ" type="radio" name="radio-task" value="Request a CCJ" >
+              <label for="task-request-CCJ">Request a County Court Judgment (CCJ)</label>
+            </div>
+
+            <div class="multiple-choice"  data-target="other-task">
+              <input id="task-something-else" type="radio" name="radio-task" value="Something else" >
+              <label for="task-something-else" >Something else</label>
+            </div>
+                <div class="panel panel-border-narrow form-group js-hidden" id="other-task" style="padding-bottom:15px;">
+                  <label class="form-label" for="other-task-field">
+
+                  </label>
+                  <input class="form-control" id="other-task-field" type="text">
+                </div>
+
+          </fieldset>
+        </div>
+
+
+
+
+        <!--  SUGGESTED IMPROVEMENTS  -->
+        <div class="form-group">
+
+
+          <h2 class="heading-medium">Do you have any suggestions for how we could improve this service?</h2>
+          <fieldset>
+
+            <div class="multiple-choice">
+              <input id="suggestion-no" type="radio" name="radio-suggestion" value="No">
+              <label for="suggestion-no">No</label>
+            </div>
+
+            <div class="multiple-choice" data-target="suggestion">
+              <input id="suggestion-yes" type="radio" name="radio-suggestion" value="Yes" >
+              <label for="suggestion-yes" >Yes</label>
+            </div>
+            <div class="panel panel-border-narrow form-group js-hidden" id="suggestion" style="padding-bottom:15px;">
+              <label class="form-label" for="suggestion-field">
+                Enter your suggestion
+              </label>
+              <fieldset>
+                <textarea class="textarea" id="suggestion-field" name="suggestion-field" rows="4" cols="" style="height:80px"></textarea>
+              </fieldset>
+            </div>
+
+          </fieldset>
+
+
+
+
+        </div>
+
+
+        <div class="form-group">
+
+            <h2 class="heading-medium">Can we contact you to discuss your experience?</h2>
+            <fieldset>
+
+                <div class="multiple-choice">
+                  <input id="set-aside-no" type="radio" name="radio-contact" value="No">
+                  <label for="set-aside-no">No</label>
+                </div>
+
+                <div class="multiple-choice" data-target="email">
+                  <input id="set-aside-yes" type="radio" name="radio-contact" value="Yes" >
+                  <label for="set-aside-yes" >Yes</label>
+                </div>
+                    <div class="panel panel-border-narrow form-group js-hidden" id="email" style="padding-bottom:15px;">
+                        <label class="form-label" for="emailaddress">
+                          Enter your email address
+                        </label>
+                        <input class="form-control" id="emailaddress" type="text">
+                    </div>
+
+            </fieldset>
+
+        </div>
+
+
+
+
+
+        <div class="form-group">
+          <input type="submit" class="button" value="Submit" />
+        </div>
+
+      </form>
+
+
+
+    </div>
+  </div>
+{% include 'prototypes/prototype-may-2020/includes/contact.html' %}
+</main>
+
+{% endblock %}

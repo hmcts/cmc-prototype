@@ -1,0 +1,58 @@
+{% extends "layout_task-list.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block home_link %} ../task-list {% endblock %}
+{% block proposition_header %}
+{% set my_account="1" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <!--  <a href="#" onclick="history.go(-1)" class="link-back">Back</a>  -->
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <h1 class="heading-large">
+        Choose how to formalise repayment
+      </h1>
+
+      <form method="post" action="../task-list">
+
+      <div class="form-group">
+        <fieldset>
+
+          <legend class="visually-hidden">Choose how to formalise repayment</legend>
+
+          <div class="multiple-choice">
+            <input id="radio-settlement" type="radio" name="radio-proceed" value="settlement">
+            <label for="radio-settlement">
+              <strong class="bold">Sign a settlement agreement</strong>
+              <p>This is a legal agreement between you and the defendant agreeing to the repayment plan. If they break it you can request a County Court Judgment (CCJ). We'll show you a suggested format for the agreement.</p>
+            </label>
+          </div>
+
+          <div class="multiple-choice">
+            <input id="radio-judgment" type="radio" name="radio-proceed" value="judgment-pa">
+            <label for="radio-judgment">
+              <strong class="bold">Request a CCJ</strong>
+              <p>You can ask the court to make a formal order binding the defendant to the repayment plan. This adds the defendant to the CCJ register, which may make it more difficult for them to borrow money to repay you.</p>
+            </label>
+          </div>
+
+
+        </fieldset>
+
+        <div class="form-group">
+          <input type="hidden" name="proceed" value="complete">
+          <input type="submit" class="button" value="Save and continue"/>
+        </div>
+
+      </div>
+
+
+    </div>
+  </div>
+{% include 'prototypes/prototype-may-2020/includes/contact.html' %}
+</main>
+{% endblock %}

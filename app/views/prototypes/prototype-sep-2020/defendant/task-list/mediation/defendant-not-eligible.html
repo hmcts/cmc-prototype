@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="2" %}
+
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+
+
+<main id="content" role="main">
+
+
+  {% include "includes/phase_banner_beta.html" %}
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <!--  <a href="#" onclick="history.go(-1)" class="link-back">Back</a>  -->
+      <form method="post" action="../../{% if data['source'] != 'order' %}task-list{% else %}../dashboard/order-response/mediation/confirmation-page{% endif %}" class="form">
+        {{formData | safe}}
+        <h1 class="heading-large">
+          You can't use free mediation
+        </h1>
+
+        <p>You can only use free mediation if you:</p>
+        <ul class="list list-bullet">
+          <li>are willing to work with a mediator to resolve the claim</li>
+          <li>have enough information about the claim to discuss it in detail</li>
+          <li>can make time for a one-hour call between 8am and 5pm on a weekday</li></ul>
+          <p><a href="#" onclick="history.go(-1)">Go back and change your answers</a> if you agree to these conditions.</p>
+
+        <input type="hidden" name="meditation_ineligible" value="complete">
+
+        <div class="form-group">
+          <input type="submit" class="button" value="Continue without free mediation"/>
+        </div>
+
+
+    </div>
+  </div>
+{% include 'prototypes/prototype-may-2020/includes/contact.html' %}
+</main>
+{% endblock %}

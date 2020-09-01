@@ -1,0 +1,60 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% import 'prototypes/prototype-may-2020/includes/upload.html' as upload %}
+{% block content %}
+
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <!--  <a href="#" onclick="history.go(-1)" class="link-back">Back</a>  -->
+
+    <form method="post" action="evidence/check-and-send" class="form">
+
+      <div class="form-group">
+        <h1 class="heading-large">
+          <a href="how" style="text-decoration:none; color: #000; cursor: default;">Upload your documents</a>
+        </h1>
+
+
+        {% if data['party'] == 'defendant' %}
+        <p>In your defence you said you had these documents:</p>
+        {% else %}
+        <p>When you made your claim you said you had these documents:</p>
+        {% endif %}
+
+        <table class="check-your-answers">
+          <tr>
+            <td>Letters, emails and other correspondence</td>
+            <td>Email correspondence with {% if data['party'] == 'defendant' %}{{ partyName( 'claimant' ) }}{% else %}{{ partyName( 'defendant' ) }}{% endif %}.</td>
+          </tr>
+          <tr>
+            <td>Contracts and agreements</td>
+            <td>A contract signed by {% if data['party'] == 'defendant' %}{{ partyName( 'claimant' ) }}{% else %}{{ partyName( 'defendant' ) }}{% endif %}.</td>
+          </tr>
+          <tr>
+            <td>Photo evidence</td>
+            <td>Photos of the damage to the roof.</td>
+          </tr>
+        </table>
+        <br />
+
+        <p>Upload these documents if they are still relevant. You can also upload any other relevant documents.</p>
+
+        {{ upload.form('evidence', 'Check and submit documents') }}
+
+      </div>
+    </form>
+
+    </div>
+  </form>
+</div>
+</div>
+{% include 'prototypes/prototype-may-2020/includes/contact.html' %}
+</main>
+{% endblock %}

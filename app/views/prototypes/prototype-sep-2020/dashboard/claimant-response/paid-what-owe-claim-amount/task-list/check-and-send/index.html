@@ -1,0 +1,148 @@
+{% extends "layout_task-list.html" %}
+{% block page_title %}
+Check your answers
+{% endblock %}
+{% block home_link %} ../task-list {% endblock %}
+{% block proposition_header %}
+{% set my_account="1" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <h1 class="heading-large">
+    Check your answers
+  </h1>
+  <table class="check-your-answers">
+    <thead>
+    <tr>
+      <th colspan="2">
+        <h2 id='cd' class="heading-medium">
+          Your response
+        </h2>
+      </th>
+      <th>
+      </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>
+        Do you agree the defendant has paid £1500?
+
+
+      </td>
+      <td>
+        {%if data.radio_select_group=="Yes" %}
+        Yes
+
+        {%elif data.radio_select_group=="No" %}
+        No
+        {% else %}
+        No
+        {% endif %}
+      </td>
+      <td class="change-answer">
+        <a href="#">
+          Change <span class="visuallyhidden">Why you believe you're owed the money</span>
+        </a>
+      </td>
+    </tr>
+    {%if data.radio_select_group=="Yes" %}
+
+    {%elif data.radio_select_group=="No" %}
+    <tr>
+      <td>
+        Reason for rejecting their response
+      </td>
+      <td>
+        {% if data['reject_response']!="" %}
+        {{data['reject_response']}}
+        {% else %}
+        They haven't paid and they never will
+        {% endif %}
+      </td>
+      <td class="change-answer">
+        <a
+          href="../task-list/claim-details/reason?return_page={{ '../../task-list/claim-details/check-your-answers' | urlencode }}">
+          Change <span class="visuallyhidden">Why you believe you're owed the money</span>
+        </a>
+      </td>
+    </tr>
+    <table class="check-your-answers">
+      <thead>
+      <tr>
+        <th colspan="2">
+          <h2 class="heading-medium">
+            Free telephone mediation
+          </h2>
+        </th>
+        <th>
+        </th>
+      </tr>
+      </thead>
+      <td>
+        Opt out?
+      </td>
+      <td>
+        {% if data['resolve_dispute']=="complete" %}
+        No
+        {% elseif data['meditation_ineligible']=="complete" %}
+        Yes
+        {% endif %}
+      </td>
+      <td class="change-answer">
+        <a
+          href="../task-list/request-mediation?return_page={{ '../../task-list' | urlencode }}">
+          Change <span class="visuallyhidden">Why you believe you're owed the money</span>
+        </a>
+      </td>
+      {% if data['resolve_dispute']=="complete" %}
+      <tr>
+        <td>
+          Agree to all statements
+        </td>
+        <td>
+          Yes, I agree
+        </td>
+        <td class="change-answer">
+          <a href="../task-list/request-mediation/statements-all?return_page={{ '../../task-list' | urlencode }}">
+            Change <span class="visuallyhidden">Name</span>
+          </a>
+        </td>
+      </tr>
+
+      <tr>
+        <td>Contact number
+        </td>
+        <td>
+          {{ data['phone-claimant'] or '07123456789'}}
+        </td>
+        <td class="change-answer">
+          <a href="../task-list/request-mediation/previous-phone?return_page={{ '../../task-list' | urlencode }}">
+            Change <span class="visuallyhidden">Name</span>
+          </a>
+        </td>
+      </tr>
+      {% else %}
+      {% endif %}
+      </tbody>
+    </table>
+    {% else %}
+    {% endif %}
+    </tbody>
+  </table>
+
+
+  {% include "prototypes/prototype-may-2020/includes/dq-check.html" %}
+
+  <fieldset></fieldset>
+  <form method="get" action="../../confirmation-page?" class="form">
+
+    <div class="form-group">
+      <button id="submit" class="button">Submit response</button>
+    </div>
+    <fieldset></fieldset>
+    {% include 'prototypes/prototype-may-2020/includes/contact.html' %}
+</main>
+{% endblock %}

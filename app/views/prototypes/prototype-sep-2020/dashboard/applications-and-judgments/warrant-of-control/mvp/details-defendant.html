@@ -1,0 +1,57 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="4" %}
+
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+ {% include "includes/phase_banner_beta.html" %}
+ <div class="grid-row">
+  <div class="column-two-thirds">
+    <!--  <a href="#" onclick="history.go(-1)" class="link-back">Back</a>  -->
+    <h1 class="heading-large">
+      <!--<span class="heading-secondary">Enforcement</span>-->
+      Change address of defendant
+    </h1>
+
+    <h2 class="heading-medium"> </h2>
+    <div class="form-group-compound address-item form-group">
+      <label class="form-label" for="addressLine1">Address line 1</label>
+      <input class="form-control" id="addressLine1" name="d-addressLine1" type="text" value="24 Acacia Drive" >
+    </div>
+    <div class="form-group-compound address-item form-group">
+      <label class="form-label" for="addressLine2">Address line 2 (optional)</label>
+      <input  class="form-control" id="addressLine2" name="d-addressLine2" type="text" value="{{data['d-addressLine2']}}">
+    </div>
+    <div class="form-group-compound address-item form-group">
+      <label class="form-label" for="addressLine3">Town or city</label>
+      <input id="addressLine3" name="d-addressLine3" type="text" value="London">
+    </div>
+    <div class="address-item form-group">
+      <label class="form-label" for="addressPostcode">Postcode</label>
+      <input class="form-control form-control-large form-control-1-4" id='d-addressPostcode' name="addressPostcode" type="text" value="SW1 H9A">
+    </div>
+
+    <!--<fieldset></fieldset>-->
+
+    <a class="button" href="check-your-answers" role="button">Save and continue</a>
+
+  </div>
+</main>
+<form method="post"  action="details-defendant" class="form" style="position: absolute;">
+  <select id="control-box" name="control-box" onchange="this.form.submit()">
+    <option  value="0" {% if data['control-box-value'] == 0 %}selected{% endif %}>Choose</option>
+
+    <option  value="1" {% if data['control-box-value'] == 1 %}selected{% endif %}>Individual</option>
+    <option value="2" {% if data['control-box-value'] == 2 %}selected{% endif %}>Sole trader</option>
+    <option value="3" {% if data['control-box-value'] == 3 %}selected{% endif %}>Company</option>
+    <option value="4" {% if data['control-box-value'] == 4 %}selected{% endif %}>Organisation</option>
+  </select>
+
+</form>
+
+{% endblock %}
