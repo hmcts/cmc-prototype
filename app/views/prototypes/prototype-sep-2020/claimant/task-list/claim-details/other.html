@@ -1,0 +1,41 @@
+{% extends "layout_task-list.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block home_link %} ../task-list {% endblock %}
+{% block proposition_header %}
+{% set my_account="1" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <!--  <a href="#" onclick="history.go(-1)" class="link-back">Back</a>  -->
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+      <form method="post" action="../../task-list" >
+
+        <h1 class="heading-large">
+          Do you want to add more information?
+        </h1>
+
+        <p>Make sure you've told us why you believe {% if data['defendant_name'] != '' %}{{data['defendant_name'] }}{% else %}{{ partyName( 'defendant' ) }}{% endif %} owes you money.</p>
+
+
+        <p>You'll have to pay an extra fee if you want to change the details of the claim later.</p>
+
+        <p>
+          <textarea style="height: 200px"></textarea>
+        </p>
+
+        <div class="form-group">
+          <input type="submit" class="button" value="Save and continue"/>
+        </div>
+
+        </form>
+      </div>
+    </div>
+  {% include 'prototypes/prototype-may-2020/includes/contact.html' %}
+</main>
+{% endblock %}

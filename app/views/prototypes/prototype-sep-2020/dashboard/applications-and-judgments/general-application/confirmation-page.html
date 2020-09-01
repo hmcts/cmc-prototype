@@ -1,0 +1,74 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+    Money Claims Prototype
+{% endblock %}
+
+{% block proposition_header %}
+    {% include "includes/propositional_navigation.html" %}
+{% endblock %}
+
+{% block content %}
+<main id="content" role="main">
+	{% include "includes/phase_banner_beta.html" %}
+	<div class="grid-row">
+		<div class="column-two-thirds">
+			<div class="govuk-box-highlight">
+
+
+        <h1 class="bold-large">You've submitted your application</h1>
+
+
+        <br>
+				<p class="">
+					Claim reference: <br><strong class="bold-large">352MC733</strong>
+				</p>
+				<p>
+					<strong >{{ now | date }}</strong>
+				</p>
+
+        <p>
+            <a   href="../../../defendant/correspondence/forms/general-application" target="new" style="color: #FFFFFF" >
+                    Download your request (PDF, 139KB)
+            </a>
+        </p>
+
+		</div>
+
+
+
+      <h2 class="heading-medium">What happens next</h2>
+
+      <p>You will be notified when the court has reviewed your application.</p>
+
+      {% if data['general-app-hearing'] == 'true' %}
+			<p>If there needs to be a hearing you will be sent further information about this.</p>
+      {% else %}
+			<p>If there needs to be a hearing, you’ll have to pay an extra £155. Your application will be rejected if you do not pay.</p>
+      {% endif %}
+
+      {% if data['claimant-application'] == 'true' %}
+		      <p><a class="button" href='../../claimant?claimant=3.12566'>Go to your account</a></p>
+      {% else %}
+          <p><a class="button" href='../../defendant?defendant=3.2258'>Go to your account</a></p>
+      {% endif %}
+
+
+
+
+
+      <br>
+      <br>
+			{% include "includes/survey.html" %}
+
+			{% include "includes/contact.html" %}
+		</div>
+	</div>
+</div>
+</main>
+
+
+
+
+
+{% endblock %}

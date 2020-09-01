@@ -1,0 +1,93 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+
+{% block content %}
+
+
+<main id="content" role="main">
+
+  {% include "includes/phase_banner_beta.html" %}
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+<a href="#" onclick="history.go(-1)" class="link-back">Back</a>
+
+      <h1 class="heading-large">
+          How long do you think the hearing will last?
+      </h1>
+
+
+      <form
+        name="aspnetForm"
+        method="post"
+        onsubmit="multiNavigation('radio-general-app-hearing-duration', ['hearing-duration-unknown', 'hearing-duration-30', 'hearing-duration-60', 'hearing-duration-different'],
+                                                                        ['help-with-fees-decision?general-app-hearing=true&',
+                                                                         'help-with-fees-decision?general-app-hearing=true&',
+                                                                         'help-with-fees-decision?general-app-hearing=true&',
+                                                                         'help-with-fees-decision?general-app-hearing=true&',
+                                                                         'help-with-fees-decision?general-app-hearing=true&']);return false;"
+        id="aspnetForm"
+        autocomplete="off">
+
+
+
+        <div class="form-group">
+          <fieldset>
+            <div class="multiple-choice" data-target="pay">
+              <input id="hearing-duration-unknown" type="radio" name="radio-general-app-hearing-duration" value="hearing-duration-unknown" aria-controls="paid-off" aria-expanded="false">
+              <label for="hearing-duration-unknown">I don't know</label>
+            </div>
+            <div class="multiple-choice" data-target="pay">
+              <input id="hearing-duration-10" type="radio" name="radio-general-app-hearing-duration" value="hearing-duration-30" aria-controls="paid-off" aria-expanded="false">
+              <label for="hearing-duration-10">30 minutes</label>
+            </div>
+            <div class="multiple-choice" data-target="vary">
+              <input id="hearing-duration-20" type="radio" name="radio-general-app-hearing-duration" value="hearing-duration-60" aria-controls="paid-off" aria-expanded="false">
+              <label for="hearing-duration-20">1 hour</label>
+            </div>
+            <div class="multiple-choice" data-target="custom-duration">
+              <input id="hearing-duration-different" type="radio" name="radio-general-app-hearing-duration" value="hearing-duration-different" aria-controls="custom-duration" aria-expanded="false">
+              <label for="hearing-duration-different">A different length</label>
+            </div>
+
+                <div class="panel panel-border-narrow js-hidden" id="custom-duration" style="padding-bottom:15px;">
+                  <div class="form-date">
+
+                      <div class="form-group form-group-day">
+                        <label for="hearing-hours">Hours</label>
+                        <input class="form-control" id="hearing-hours" name="hearing-hours" type="number" pattern="[0-9]*" min="0" max="5" value="{{ data['hearing-hours'] }}">
+                      </div>
+
+                      <div class="form-group form-group-month">
+                        <label for="hearing-mins">Minutes</label>
+                        <input class="form-control" id="hearing-mins" name="hearing-mins" type="number" pattern="[0-9]*" min="0" max="60" value="{{ data['hearing-mins'] }}">
+                      </div>
+
+                  </div>
+                </div>
+          </fieldset>
+        </div>
+
+
+        <div class="form-group">
+          <input type="submit" class="button" value="Continue" />
+        </div>
+
+        <tr id="check-and-send">
+          <td>
+            <p><a href="../../defendant?defendant=3.2255">Save and return</a></p>
+          </td>
+        </tr>
+
+
+      </form>
+
+    </div>
+  </div>
+
+  {% include 'prototypes/prototype-sep-2020/includes/contact.html' %}
+</main>
+{% endblock %}

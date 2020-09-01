@@ -1,0 +1,145 @@
+{% extends "layout_task-list.html" %}
+{% block page_title %}
+Check your answers
+{% endblock %}
+{% block home_link %} ../../task-list {% endblock %}
+{% block proposition_header %}
+{% set my_account="2" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+
+  <h1 class="heading-large">
+    Check your answers <!-- for this task -->
+  </h1>
+  <table class="check-your-answers">
+    <thead>
+      <tr>
+        <th colspan="2">
+          <h2 class="heading-medium">
+            When will you pay?
+
+
+          </h2>
+        </th>
+        <th>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          When will you pay
+        </td>
+        <td>
+          {% if data['radio-pay-group']=="Immediately" %}
+          The full amount within 28 days
+          {% elseif data['radio-pay-group']=="Instalments" %}
+          Instalments
+          {% elseif data['radio-pay-group']=="Set-date" %}
+          The full amount after 28 days
+          {% else %}
+          Immediately
+          {% endif %}
+        </td>
+        <td class="change-answer">
+           <a href="../owe-all/index?return_page={{ '../../task-list/owe-all/check-your-answers' | urlencode }}">
+
+            Change <span class="visuallyhidden">Name</span>
+          </a>
+        </td>
+      </tr>
+      {% if data['radio-pay-group']=="Instalments" %}
+      <tr>
+        <tr>
+          <td class="no-border">
+            Regular payments of
+          </td>
+          <td class="no-border">
+            {% if data['instalment-first-payment']!="" %}
+            £{{data['instalment-first-payment']}}
+            {% else %}
+            £200
+            {% endif %}
+          </td>
+          <td class="change-answer no-border">
+           <a href="../owe-all/repayment-plan?return_page={{ '../../task-list/owe-all/check-your-answers' | urlencode }}">
+            Change <span class="visuallyhidden">Name</span>
+          </a>
+        </td>
+      </tr>
+      <tr >
+        <td class="">
+          Frequency of payments
+        </td>
+        <td class="">
+          {% if data['radio-payment-frequency'] %}
+          {{data['radio-payment-frequency']}}
+          {% else %}
+          Monthly
+          {% endif %}
+        </td>
+        <td class=" ">
+        </td>
+      </tr>
+      <tr class="">
+        <td class="no-border">
+          Make the first payment on
+        </td>
+        <td class="no-border">
+          {% if data['instalment-day']!="" %}
+          {{data['instalment-day']}} {{data['instalment-month']}} {{data['instalment-year']}}
+          {% else %}
+          31 March 2018
+          {% endif %}
+        </td>
+        <td class="no-border">
+        </td>
+      </tr>
+      {% endif %}
+
+      {% if data['radio-pay-group']=="Set-date" %}
+      <tr>
+        <td class="no-border">
+          When you'll pay the amount
+        </td>
+        <td  class="no-border">
+          {% if data['set-day']!="" %}
+          {{data['set-day']}} {{data['set-month']}} {{data['set-year']}}
+          {% else %}
+          31 01 2018
+          {% endif %}
+        </td>
+        <td class="change-answer no-border">
+        <a href="../owe-all/pay-by-set-date?return_page={{ '../../task-list/owe-all/check-your-answers' | urlencode }}">
+
+          Change <span class="visuallyhidden">Name</span>
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Explain why you can't pay immediately
+      </td>
+      <td>
+        {% if data['non-payment-reason']!="" %}
+        {{data['non-payment-reason']}}
+        {% else %}
+        I don't earn enough money to pay all at once
+        {% endif %}
+      </td>
+      <td class="change-answer">
+
+      </td>
+    </tr>
+    {% endif %}
+  </tbody>
+</table>
+<br>
+<br>
+<a href="../../task-list">Return to task list</a>
+{% include 'prototypes/prototype-may-2020/includes/contact.html' %}
+</main>
+{% endblock %}

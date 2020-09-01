@@ -1,0 +1,64 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+
+{% block content %}
+
+
+<main id="content" role="main">
+
+  {% include "includes/phase_banner_beta.html" %}
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+      <!--  <a href="#" onclick="history.go(-1)" class="link-back">Back</a>  -->
+
+      <div class="">
+          <h1 class="heading-large">
+            You could avoid a hearing if the claimant agrees
+          </h1>
+      </div>
+
+      <p>You can ask {{ partyName( 'claimant' ) }} to sign a document saying they're happy for the judgment to be cancelled. You can upload this as supporting evidence.</p>
+
+      <p><a href="../../../defendant/correspondence/forms/claimant-agree-set-aside">Download an example template</a></p>
+
+      <p>If the claimant agrees, it doesn't guarantee that the court will cancel the judgment.
+
+      <p>If they don't agree or you choose not to ask them, you can still continue your request to cancel the judgment.</p>
+
+      {% if data['aftercontact'] == 'true' %}
+          <div>
+            <a class="button" href=task-list-after-contact?claimantagreeaftercontact=complete&">I understand</a>
+          </div>
+      {% else %}
+          <div>
+            <a class="button" href=task-list?claimantagree=complete&">I understand</a>
+          </div>
+      {% endif %}
+
+
+
+
+
+
+
+    </div>
+  </div>
+
+  {% include 'prototypes/prototype-may-2020/includes/contact.html' %}
+</main>
+
+<form method="post"  action="#" class="form" style="float: left;">
+  <select id="control-box2" name="control-box2" onchange="window.location.href='settle-out-of-court?contactclaimantstarted=true&contactedclaimantanswered=complete&'+this.value">
+    <option value="true">Defendant</option>
+    <option value="true" >- Before 1 month CCJ deadline</option>
+    <option value="false">- After 1 month CCJ deadline</option>
+  </select>
+</form>
+
+
+{% endblock %}

@@ -1,0 +1,176 @@
+{% extends "layout_task-list.html" %}
+{% block page_title %} Task list {% endblock %}
+{% block proposition_header %}
+{% set my_account="1" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="/public/stylesheets/dm_list.css"/>{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <header class="page-heading page-heading-with-context page-heading-without-breadcrumb">
+        <h1 class="heading-large">
+          Make a money claim
+        </h1>
+        <table id="table-of-tasks">
+          <thead>
+            <tr>
+              <th scope="col" id="col-task">
+                <span class="task-group">
+                  <span class="group-number" id="task-number"></span>
+                  Consider other options
+                </span>
+                <th class="numeric" id="task-status" scope="col" id="col-status">
+                  <span type="hidden" class="visually-hidden">task status</span>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+
+              <!-- Check rules -->
+              <tr id="read-rules">
+                <td class="task">
+                  <a href="task-list/resolve-dispute{{formQuery}}">
+                    <span class="task-name"> Resolving this dispute</span>
+                  </a>
+                </td>
+                <td class="numeric" id="task-status" scope="col" id="col-status">
+                  {% if data.resolve_dispute=="complete" %}
+                  {% include "includes/task_status_finished.html" %}
+                  {% else %}
+                  {% include "includes/task_status_incomplete.html" %}
+                  {% endif %}
+                </td>
+              </tr>
+
+              <tr id="read-rules">
+                <td class="task">
+                  <a href="task-list/getting-your-money-back{{formQuery}}">
+                    <span class="task-name">Getting money back</span>
+                  </a>
+                </td>
+                <td class="numeric" id="task-status" scope="col" id="col-status">
+                  {% if data.your_money == "complete" %}
+                  {% include "includes/task_status_finished.html" %}
+                  {% else %}
+                  {% include "includes/task_status_incomplete.html" %}
+                  {% endif %}
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+          <br>
+          <br>
+          <table id="table-of-tasks">
+            <thead>
+              <tr>
+                <th scope="col" id="col-task">
+                  <span class="task-group">
+                    <span class="group-number" id="task-number"></span>
+                    Prepare your claim
+                  </span>
+                </th>
+                <th class="numeric" id="task-status" scope="col" id="col-status"></th>
+              </tr>
+            </thead>
+            <tbody>
+            <tr id="your-details">
+              <td class="task">
+                <a href="task-list/your-details{{formQuery}}">
+                  <span class="task-name"> Your details</span>
+                </a>
+              </td>
+              <td class="numeric" id="task-status" scope="col" id="col-status">
+                {% if data.your_details=="complete" %}
+                {% include "includes/task_status_finished.html" %}
+                {% else %}
+                {% include "includes/task_status_incomplete.html" %}
+                {% endif %}
+              </td>
+            </tr>
+            <tr id="their-details">
+              <td class="task">
+                <a href="task-list/their-details/dispute-type{% if data['defendants'].length >1 %}/defendant-add{% endif %}{{formQuery}}">
+                  <span class="task-name"> Their details</span>
+                </a>
+              </td>
+              <td class="numeric" id="task-status" scope="col" id="col-status">
+                {% if data.their_details=="complete" %}
+                {% include "includes/task_status_finished.html" %}
+                {% else %}
+                {% include "includes/task_status_incomplete.html" %}
+                {% endif %}
+              </td>
+            </tr>
+            <tr id="claim-amount">
+              <td class="task">
+                <a href="task-list/claim-amount-alt{{formQuery}}">
+                  <span class="task-name"> Claim amount</span>
+                </a>
+              </td>
+              <td class="numeric" id="task-status" scope="col" id="col-status">
+                {% if data.claim_amount=="complete" %}
+                {% include "includes/task_status_finished.html" %}
+                {% else %}
+                {% include "includes/task_status_incomplete.html" %}
+                {% endif %}
+              </td>
+            </tr>
+            <tr id="claim-details">
+              <td class="task">
+                <a href="task-list/claim-details{{formQuery}} ">
+                  <span class="task-name"> Claim details</span>
+                </a>
+              </td>
+              <td class="numeric" id="task-status" scope="col" id="col-status">
+                {% if data.claim_details=="complete" %}
+                {% include "includes/task_status_finished.html" %}
+                {% else %}
+                {% include "includes/task_status_incomplete.html" %}
+                {% endif %}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <br>
+
+
+        <br>
+        <table id="table-of-tasks" class="submit">
+          <thead>
+            <tr>
+              <th scope="col" id="col-task">
+                <span class="task-group">
+                  <span class="group-number" id="task-number"></span>
+                  Submit
+                </span>
+              </th>
+              <th class="numeric" id="task-status" scope="col" id="col-status"></th>
+            </tr>
+          </thead>
+          <tbody>
+          {% set completed = true if data.resolve_dispute == "complete" and data.completing_your_claim == "complete" and data.your_details == "complete" and data.their_details == "complete" and data.claim_amount == "complete" and data.claim_details == "complete"%}
+
+            <tr id="check-and-send">
+              <td>
+                <a href="task-list/check-and-send{{formQuery}}">
+                 <span class="button"> Check and submit your claim</span>
+                </a>
+              </td>
+            </tr>
+
+        </tbody>
+      </table>
+
+      </div>
+      <div class="column-one-third">
+      </div>
+    </div>
+</main>
+{% endblock %}
+{% block extra_js_1 %}<!-- ticky list javascript one -->{% endblock %}
+{% block extra_js_2 %}<!-- ticky list javascript two -->{% endblock %}

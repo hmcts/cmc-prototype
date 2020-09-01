@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<!--[if lt IE 9]><html class="lte-ie8" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--><html lang="en"><!--<![endif]-->
+<head>
+    <meta charset="utf-8" />
+    <style>
+#content {
+  margin-top:3em
+}
+@page {
+  size: 8.5in 11in;
+  margin: 10%;
+  @top-right {
+    content: "Page " counter(page) " of " counter(pages);
+    /*noinspection CssNoGenericFontName*/
+    font-family: "Open Sans";
+  }
+}
+html {
+  /*noinspection CssNoGenericFontName*/
+  font-family: "Open Sans";
+  max-width: 960px;
+  margin: 0 auto;
+  background:#d9d9d9
+}
+#content{
+  background:#fff;
+  padding:70px;
+  padding-bottom: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+body {
+  counter-reset: section;
+  font-family: "nta", Arial, sans-serif;
+  font-weight: 400;
+  text-transform: none;
+  font-size: 19px;
+  line-height: 1.25;
+  -webkit-font-smoothing: antialiased;
+}
+.section {
+  margin-bottom: 25px;
+}
+.section .section-heading {
+  margin-bottom: 10px;
+}
+.section .section-heading strong:before {
+  counter-increment: section;
+  content: counter(section) ". ";
+}
+table {
+  width: 100%;
+  border-spacing: 0;
+}
+table td {
+  border-bottom: 1px solid #999;
+  padding: 5px;
+  text-align:left;
+  line-height: 1.25;
+  padding: 0.63158em 1.05263em 0.67368em 0;
+  font-size: 18px;
+  vertical-align:top;
+}
+p{
+  font-size: 18px;
+}
+table th {
+ text-align:left;
+ border-bottom: 1px solid #999;
+}
+table td:first-child {
+  width: 280px;
+  vertical-align: top;
+  font-weight:700;
+}
+td.single-cell{
+ font-weight:100!important;
+}
+.no-border{
+  border: none;
+}
+table td:last-child {
+  width: auto;
+}
+header table td, header table tr:last-child td {
+  border: none;
+}
+header td {
+  margin: 0;
+  padding: 0;
+}
+.heading-medium{
+  padding-bottom: 0;
+  margin-bottom: 0.4em;
+  margin-top: 1.5em;
+  font-size:22px;
+}
+.claim-number {
+  font-weight:700;
+  font-size:19px;
+}
+.crestLogo tr td:nth-child(1) {
+  width: 30%;
+}
+.crest{
+  width:80%
+}
+h1 {
+  font-weight:100;
+  font-size:24px;
+}
+.seal{
+  width: 12%;
+  float: right;
+  padding-top: 30px;
+}
+.page-title {
+  text-align:center;
+  padding-top:20px;
+  font-size:14px
+}
+.page-title span{
+  float:right
+}
+.crestLogo{
+  margin-top:40px
+}
+.page-break{
+  background: #d9d9d9;
+  margin-left: -70px;
+  margin-right: -70px;
+  margin-top: 20px;
+}
+.claim-details{
+  text-align:right
+}
+.footer td{
+  font-size:10px;
+  padding-top:40px;
+  border-bottom: none;
+}
+.footer td:nth-child(3){
+  text-align:right
+}
+</style>
+<main id="content"  role="main">
+  <header>
+
+    <table class="crestLogo">
+      <tbody>
+        <tr>
+          <td></td>
+          <td rowspan="2" class="claim-details">
+            <h1>Hearing notice</h1>
+            <p>In the County Court Business Centre Online Civil Money Claims</p>
+            <p><strong>Claim number:</strong> 000LR095<br>
+              <strong>Date:</strong> {{ now | date }}</p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+  </header>
+
+  <h2 class="heading-medium">The court has set a hearing date</h2>
+
+  <p>You should set aside the entire day for the hearing. The length of other hearings may mean yours is delayed.</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th colspan="2">
+          <h2 class="heading-medium" id="name">
+            Hearing details
+          </h2>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tbody>
+        <tr>
+          <td>
+           Claimant
+          </td>
+          <td>
+            {{ partyName( 'claimant' ) }}
+          </td>
+          </tr>
+          <tr>
+          <td>
+            Defendant
+          </td>
+          <td>
+           {{ partyName( 'defendant' ) }}
+          </td>
+        </tr>
+      </tbody>
+      <tr>
+        <td>
+          Date
+        </td>
+        <td>
+          {{ date | date('add', 2, 'months') | date }}
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Time
+        </td>
+        <td>
+          10am
+        </td>
+      </tr>
+      <tr>
+
+      </tr>
+      <tr>
+        <td>
+          Location
+        </td>
+        <td>
+          The County Court at Clerkenwell & Shoreditch<br />
+          29–41 Gee Street<br />
+          London<br />
+          EC1V 3RE
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Additional requirements
+        </td>
+        <td>
+          <i>[Details entered by court staff]</i>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table class="footer" style="margin-top: 400px">
+    <tbody>
+      <tr>
+        <td>
+          OCON24
+        </td>
+        <td>
+          For further details of the courts www.gov.uk/find-court-tribunal
+        </td>
+        <td >
+          &copy; Crown copyright Page 1 of 2
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="page-break">&nbsp;</div>
+  <p class="page-title"> <span>Claim number: 000LR095</span></p>
+  <br />
+  <br />
+
+  <h3 class="heading-medium">Preparing for the hearing</h3>
+
+  <p>Make sure you and any witnesses know the date, time and court location and how to get there.</li>
+
+  <p>You can read about <a href="https://www.gov.uk/make-court-claim-for-money/what-happens-at-the-hearing">how hearings for money claims work.</a></p>
+
+
+  <h4 class="heading-small">What you need to bring</h4>
+
+  <p>You should bring:</p>
+
+  <ul class="list list-bullet">
+    <li>copies of any witness statements or other documents you've uploaded</li>
+    <li>your case number - write it down if you can't remember it</li>
+    <li>a note of anything important you want to say - bring it with you to help you remember</li>
+    <li>a packed lunch - there may be no cafe or restaurant at the court or nearby</li>
+    <li>bottled water - you may have to wait several hours for your hearing</li>
+  </ul>
+
+  <h4 class="heading-small">Going through security at a court building</h4>
+
+  <p>Make sure you check the list of items you can't bring through security: https://www.gov.uk/entering-court-or-tribunal-building</a>.
+
+  <p>The list includes everyday items like full-length umbrellas, knitting needles or liquids in glass bottles.</p>
+
+  <p>You'll have to leave these items with security and collect them on your way out, so it'll be quicker if you bring as few as possible.</p>
+
+
+  <h4 class="heading-small">At the court</h4>
+
+  <p>Follow these steps:</p>
+  <ol class="list list-number">
+    <li>Report to the receptionist or the court usher.</li>
+    <li>Tell them your case number.</li>
+    <li>Wait until someone calls your name.</li>
+  </ol>
+
+
+
+  <table class="footer" style="margin-top: 400px">
+    <tbody>
+      <tr>
+        <td>
+          OCON24
+        </td>
+        <td>
+          For further details of the courts www.gov.uk/find-court-tribunal
+        </td>
+        <td>
+          &copy; Crown copyright Page 1 of 1
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+</main>
+
+<form method="post" action="#" class="form" style="position: absolute;">
+  <select onchange="window.location.href='?party='+this.value">
+    <option value="claimant" {% if data['party'] == 'claimant' %}selected{% endif %}>Claimant</option>
+    <option value="defendant" {% if data['party'] == 'defendant' %}selected{% endif %}>Defendant</option>
+  </select>
+</form>

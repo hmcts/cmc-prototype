@@ -1,0 +1,105 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="2" %}
+
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <!--  <a href="#" onclick="history.go(-1)" class="link-back">Back</a>  -->
+      <h1 class="heading-large">
+
+        Do any children live with you?
+
+      </h1>
+
+
+
+
+
+
+      <form
+      name="aspnetForm"
+      method="get"
+      onsubmit="multiNavigation('radio-dept-group', ['Yes', 'No'], ['education-training', 'maintenance']);return false;"
+      id="aspnetForm"
+      autocomplete="off">
+      <!--
+        <p>
+
+          You're supporting a child if they're either:
+              <ul class="list list-bullet text">
+              <li>under 16 and living with you</li>
+              <li>over 16 and living with you whilst in full-time education or training</li>
+              <li>getting maintenance payments from you or your partner</li>
+              </ul>
+           </p>
+         -->
+
+
+      <div class="form-group">
+        <fieldset>
+
+          <div class="multiple-choice" data-target="yes">
+            <input id="radio-repayment" type="radio" name="radio-dept-group" value="Yes">
+            <label for="radio-repayment" data-target="repayment-info">Yes</label>
+          </div>
+          <div class="panel panel-border-narrow js-hidden" id="yes">
+
+          <p>Enter how many for each age group.</p>
+          <div class="form-group">
+            <label class="form-label" for="input-text-a">
+              Under 11
+            </label>
+            <input class="form-control form-control-1-8" id="under_15" name="under_15" type="text"  value="{{data['under_15']}}">
+          </div>
+
+            <div class="form-group">
+              <label class="form-label" for="input-text-a">
+                11 to 15
+              </label>
+              <input class="form-control form-control-1-8" id="11_15" name="11_15" type="text"  value="{{data['11_15']}}">
+            </div>
+
+
+          <div class="form-group">
+            <label class="form-label" for="input-text-a">
+              16 to 19
+            </label>
+            <input class="form-control form-control-1-8" name="over_16" id="over_16" type="text"  value="{{data['over_16']}}" >
+          </div>
+
+
+
+
+          </div>
+          <div class="multiple-choice">
+            <input id="radio-no" type="radio" name="radio-dept-group" value="No">
+            <label for="radio-no" data-target="no-info">No</label>
+          </div>
+
+        </fieldset>
+      </div>
+
+
+
+
+
+
+
+      <div class="form-group">
+        <input type="submit" class="button" value="Save and continue"/>
+      </div>
+        </form>
+      </div>
+    </div>
+  {% include 'prototypes/prototype-may-2020/includes/contact.html' %}
+</main>
+{% endblock %}
