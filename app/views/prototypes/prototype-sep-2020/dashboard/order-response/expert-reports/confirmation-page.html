@@ -12,18 +12,36 @@ Money Claims Prototype
   <div class="grid-row">
     <div class="column-two-thirds">
       <div class="govuk-box-highlight">
-        <h1 class="bold-large">
-          Expert's documents uploaded</h1>
+        <h1 class="bold-large">You've uploaded expert reports</h1>
       </div>
+      <h2 class="heading-medium">What happens next</h2>
 
-    <h2 class="heading-medium">What happens next</h2>
-    <p>We'll contact you to tell you how to prepare when a hearing date is set.</p>
+      <p>
+        The {{ 'defendant' if data['party'] == 'claimant' else 'claimant' }} has been informed that you have submitted expert reports. The {{ 'defendant' if data['party'] == 'claimant' else 'claimant' }} can view these documents.
+      </p>
 
-    <a href="../../home?dashboard={% if data['party'] == 'defendant' %}2.722{% else %}1.28{% endif %}&expert-report=complete" class="button">Go to your account</a>
+      <p>
+        You can submit other expert reports or documents until 4pm on {{ now | date('add', 14, 'days') | date }}.
+      </p>
 
-    {% include "includes/contact.html" %}
+      <h4 class="heading-small">If you've finished</h4>
+      <p>
+        You need to <a href="../finished">tell us you've finished</a>.
+      </p>
+      <p>
+        You must do this before 4pm on {{ now | date('add', 14, 'days') | date }}.
+      </p>
 
-</div>
-</div>
+      <!-- removed 2020-08-04 -->
+      <!-- <h4 class="heading-small">Upload more information</h4>
+      <p>
+        You can upload documents or witness statements until 4pm on {{ now | date('add', 14, 'days') | date }}.
+      </p> -->
+
+      <a href="../../home?dashboard={% if data['party'] == 'defendant' %}2.722{% else %}1.28{% endif %}&witness=complete" class="button">Go to your account</a>
+
+      {% include "includes/contact.html" %}
+    </div>
+  </div>
 </main>
 {% endblock %}
