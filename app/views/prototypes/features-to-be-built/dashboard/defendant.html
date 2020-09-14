@@ -951,6 +951,9 @@
                 <p>You must comply with the order before 4pm on {{ now | date( 'add', 12, 'days' ) | date }}.</p>
                 <p><a href="/public/images/order2.pdf">Download the court's order</a> (PDF, 123KB) to find out the details you need to send.</p>
 
+
+
+
                 {% else %}
 
                 <h2 class="heading-medium">The court has ordered you to send us more details</h2>
@@ -1078,6 +1081,14 @@
                 <p><a href="order-response/view?party=defendant&view=them" class="button secondary-button">See the documents sent to the court by {{ partyName( 'claimant' ) }}</a></p>
 
               </div>
+
+
+              {% elseif data['defendant'] == 12.99 %}
+              <h2 class="heading-medium">The court ordered you to send details before the hearing</h2>
+              <p>An order has been issued by a Judge. Please follow the instructions in the order issued, adhering to the deadlines against the instruction if applicable.</p>
+
+              <p><a href="#">Download the court's order</a> (PDF, 123KB) to find out the details you need to send.</p>
+
 
               {% elseif data['defendant'] == 13 %}
                   <div class="status-block single">
@@ -3487,6 +3498,7 @@
     <option value="12.103" {% if data['defendant'] == 12.103 %}selected{% endif %}>12.103. Not responded (other party - claim cancelled)</option>
     <option value="12.2" {% if data['defendant'] == 12.2 %}selected{% endif %}>12.2. Responded to order - not confirmed</option>
     <option value="12.9" {% if data['defendant'] == 12.9 %}selected{% endif %}>12.9. Responded to order - confirmed</option>
+    <option value="12.99" {% if data['defendant'] == 12.99 %}selected{% endif %}>12.99. Respond to bespoke order</option>
 <!--
     <option value="12.3" {% if data['defendant'] == 11.3 %}selected{% endif %}>Order review requested - by me (order online, respond to request online)</option>
     <option value="12.4" {% if data['defendant'] == 11.4 %}selected{% endif %}>Order review requested - by other party (order online, respond to request online)</option>
