@@ -35,7 +35,7 @@
             or data['claimant'] == 10.601 or data['claimant'] == 10.61 or data['claimant'] == 10.801 or data['claimant'] == 10.81 or data['claimant'] == 10.82 or data['claimant'] == 3.2
             or data['claimant'] == 10.83 or data['claimant'] == 10.831 or data['claimant'] == 10.832 or data['claimant'] == 10.84 or data['claimant'] == 10.85 or data['claimant'] == 10.9
               or data['claimant'] == 11.1 or data['claimant'] == 11.1001 or data['claimant'] == 11.1003 or data['claimant'] == 11.101 or data['claimant'] == 11.101 or data['claimant'] == 11.102 or data['claimant'] == 11.103 or data['claimant'] == 11.11 or data['claimant'] == 11.111 or data['claimant'] == 11.12 or data['claimant'] == 11.13 or data['claimant'] == 11.1011 or data['claimant'] == 11.2 or data['claimant'] == 11.21 or data['claimant'] == 11.3 or data['claimant'] == 11.31
-            or data['claimant'] == 11.4 or data['claimant'] == 11.41 or data['claimant'] == 11.42 or data['claimant'] == 11.5 or data['claimant'] == 11.51 or data['claimant'] == 11.52 or data['claimant'] == 11.6 or data['claimant'] == 11.61 or data['claimant'] == 11.7
+            or data['claimant'] == 11.4 or data['claimant'] == 11.41 or data['claimant'] == 11.42 or data['claimant'] == 11.5 or data['claimant'] == 11.51 or data['claimant'] == 11.52 or data['claimant'] == 11.6 or data['claimant'] == 11.61 or data['claimant'] == 11.7 or data['claimant'] == 11.99
             or data['claimant'] == 12 or data['claimant'] == 13.2 or data['claimant'] == 14.1 or data['claimant'] == 14.2 or data['claimant'] == 14.3 or data['claimant'] == 14.4 or data['claimant'] == 14.5 or data['claimant'] == 16  or data['claimant'] == 16.1 or data['claimant'] == 17  or data['claimant'] == 17.01  or data['claimant'] == 20 or data['claimant'] == 20.1 or data['claimant'] == 20.2
             or data['claimant'] == 21 or data['claimant'] == 21.1 or data['claimant'] == 23 or data['claimant'] == 24 or data['claimant'] == 26  or data['claimant'] == 27  or data['claimant'] == 28  or data['claimant'] == 29
             or data['claimant'] == 33  or data['claimant'] == 34  or data['claimant'] == 36  or data['claimant'] == 37
@@ -773,6 +773,12 @@
               <p>The court will review the case. We'll contact you to tell you what to do next.</p>
 
 
+              {% elseif data['claimant'] == 11.99 %}
+              <h2 class="heading-medium">The court ordered you to send details before the hearing</h2>
+              <p>An order has been issued by a Judge. Please follow the instructions in the order issued, adhering to the deadlines against the instruction if applicable.</p>
+
+              <p><a href="#">Download the court's order</a> (PDF, 123KB) to find out the details you need to send.</p>
+
 
 
 
@@ -919,8 +925,11 @@
               </div>
 
 
-              {% elseif data['claimant'] == 11.11 or data['claimant'] == 11.3 or data['claimant'] == 11.111 or data['claimant'] == 11.12 or data['claimant'] == 11.13 or data['claimant'] == 11.5 or data['claimant'] == 11.51 or data['claimant'] == 11.52 %}
+              {% elseif data['claimant'] == 11.11 or data['claimant'] == 11.3 or data['claimant'] == 11.111 or data['claimant'] == 11.12 or data['claimant'] == 11.13 or data['claimant'] == 11.5 or data['claimant'] == 11.51 or data['claimant'] == 11.52 or data['claimant'] == 11.99 %}
               <div class="status-block single">
+
+
+
 
                 {% if data['claimant'] == 11.3 %}
                 <h2 class="heading-medium">You asked the court to review the order</h2>
@@ -993,7 +1002,10 @@
 
                 <p><a href="/public/images/order2.pdf">Download the court's order</a> (PDF, 123KB) to find out the details you need to send.</p>
 
+
                 {% else %}
+
+
 
                 <p><a href="/public/images/order2.pdf">Download the court's order</a> (PDF, 123KB) to find out the details you need to send.</p>
 
@@ -1075,7 +1087,7 @@
                 <p>We'll contact you when {{ partyName( 'defendant' ) }} has finished responding.</p>
                 <hr />
                 <h2 class="heading-medium">View the responses to the order</h2>
-                <p><a href="order-response/view?party=claimant&view=you" class="button secondary-button">See the documents sent to the court by you</a></p>
+                <p><a href="order-response/view?party=claimant&view=you" class="button secondary-button">See the details you sent to the court</a></p>
                 <p><a href="order-response/view?party=defendant&view=them" class="button secondary-button">See the details the defendant sent to the court</a></p>
               </div>
 
@@ -1181,8 +1193,8 @@
 
               <hr />
               <h2 class="heading-medium">View the responses to the order</h2>
-              <p><a href="order-response/view?party=claimant&view=you" class="button secondary-button">See the documents sent to the court by you</a></p>
-              <p><a href="order-response/view?party=defendant&view=them" class="button secondary-button">See the documents sent to the court by {{ partyName( 'defandant' ) }}</a></p>
+              <p><a href="order-response/view?party=claimant&view=you" class="button secondary-button">See the details you sent to the court</a></p>
+              <p><a href="order-response/view?party=defendant&view=them" class="button secondary-button">See the details the defendant sent to the court</a></p>
 
 
               {% elseif data['claimant'] == 14.2 %}
@@ -1202,8 +1214,8 @@
 
               <hr />
               <h2 class="heading-medium">View the responses to the order</h2>
-              <p><a href="order-response/view?party=claimant&view=you" class="button secondary-button">See the documents sent to the court by you</a></p>
-              <p><a href="order-response/view?party=defendant&view=them" class="button secondary-button">See the documents sent to the court by {{ partyName( 'defandant' ) }}</a></p>
+              <p><a href="order-response/view?party=claimant&view=you" class="button secondary-button">See the details you sent to the court</a></p>
+              <p><a href="order-response/view?party=defendant&view=them" class="button secondary-button">See the details the defendant sent to the court</a></p>
 
 
 
@@ -1213,8 +1225,8 @@
 
               <hr />
               <h2 class="heading-medium">View the responses to the order</h2>
-              <p><a href="order-response/view?party=claimant&view=you" class="button secondary-button">See the documents sent to the court by you</a></p>
-              <p><a href="order-response/view?party=defendant&view=them" class="button secondary-button">See the documents sent to the court by {{ partyName( 'defandant' ) }}</a></p>
+              <p><a href="order-response/view?party=claimant&view=you" class="button secondary-button">See the details you sent to the court</a></p>
+              <p><a href="order-response/view?party=defendant&view=them" class="button secondary-button">See the details the defendant sent to the court</a></p>
 
 
               {% elseif data['claimant'] == 14.4 %}
@@ -1289,8 +1301,8 @@
 
               <hr />
               <h2 class="heading-medium">View the responses to the order</h2>
-              <p><a href="order-response/view?party=claimant&view=you" class="button secondary-button">See the documents sent to the court by you</a></p>
-              <p><a href="order-response/view?party=defendant&view=them" class="button secondary-button">See the documents sent to the court by {{ partyName( 'defandant' ) }}</a></p>
+              <p><a href="order-response/view?party=claimant&view=you" class="button secondary-button">See the details you sent to the court</a></p>
+              <p><a href="order-response/view?party=defendant&view=them" class="button secondary-button">See the details the defendant sent to the court</a></p>
 
 
               {% elseif data['claimant'] == 14.5 %}
@@ -2752,7 +2764,7 @@
     <option value="11.51" {% if data['claimant'] == 11.51 %}selected{% endif %}>Order review requested - by other party (order offline, respond to request offline)</option>
     <option value="11.52" {% if data['claimant'] == 11.52 %}selected{% endif %}>Order review requested - by other party (order offline, respond to request offline) - past deadline</option>
     <option value="11.6" {% if data['claimant'] == 11.6 %}selected{% endif %}>Order review requested - reviewed by defendant (order online, respond to request online)</option>
-
+    <option value="11.99" {% if data['claimant'] == 11.99 %}selected{% endif %}>11.99: Respond to bespoke order</option>
     <option>------- Hearing ----------</option>
     <option value="14.1" {% if data['claimant'] == 14.1 %}selected{% endif %}>Pay hearing fee</option>
     <option value="14.2" {% if data['claimant'] == 14.2 %}selected{% endif %}>Pay hearing fee - sanctions order</option>
