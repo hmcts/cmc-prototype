@@ -47,7 +47,7 @@
             or data['claimant'] == 12 or data['claimant'] == 13.11 or data['claimant'] == 13.13 or data['claimant'] == 13.2 or data['claimant'] == 14.1 or data['claimant'] == 14.2 or data['claimant'] == 14.3 or data['claimant'] == 14.4 or data['claimant'] == 14.41 or data['claimant'] == 14.5 or data['claimant'] == 16  or data['claimant'] == 16.1 or data['claimant'] == 17  or data['claimant'] == 17.01  or data['claimant'] == 20 or data['claimant'] == 20.1 or data['claimant'] == 20.2
             or data['claimant'] == 21 or data['claimant'] == 21.3 or data['claimant'] == 21.4 or data['claimant'] == 21.1 or data['claimant'] == 23 or data['claimant'] == 24 or data['claimant'] == 26  or data['claimant'] == 27  or data['claimant'] == 28  or data['claimant'] == 29
             or data['claimant'] == 33  or data['claimant'] == 34  or data['claimant'] == 36  or data['claimant'] == 37
-            or data['claimant'] == 16.14  or  data['claimant'] == 16.15 or   data['claimant'] == 3.12345   or   data['claimant'] == 3.12555 or data['claimant'] == 3.12556 or   data['claimant'] == 3.12566
+            or data['claimant'] == 16.14  or  data['claimant'] == 16.15 or   data['claimant'] == 3.12345   or   data['claimant'] == 3.12555 or  data['claimant'] == 3.2258 or data['claimant'] == 3.12556 or   data['claimant'] == 3.12566
             or  data['claimant'] == 28.2 or  data['claimant'] == 28.4   or  data['claimant'] == 28.6  or  data['claimant'] == 40    or  data['claimant'] == 45  %}
             <li role="presentation"><a href="#next-steps" role="tab" tabindex="0" aria-controls="next-steps" aria-selected="true">Latest update</a></li>
             <li role="presentation"><a href="#docs" role="tab" tabindex="-1" aria-controls="history">Documents</a></li>
@@ -233,12 +233,21 @@
                   <p>You can cancel the request and end the claim or cancel and continue with it.</p>
                   <p><a href="cancel-judgment" class="button secondary-button">Cancel your request for judgment</a></p>
 
-
+                  <!--  Claimant has submitted general application  -->
+                  {% elseif data['claimant'] == 3.12566 %}
+                      <h2 class="heading-medium">We've received your application</h2>
+                      <p>You will be:</p>
+                      <ul class="list list-bullet">
+                        <li>notified when the court has reviewed your application</li>
+                        <li>sent further information if there needs to be a hearing</li>
+                      </ul>
+                      <p>If there needs to be a hearing you will be sent further information about this.</p>
+                      <p><a href="#">Download your application form</a> (PDF, 123KB)</p>
 
 
               <!--  When the Defendant makes a general application  -->
               {% elif data['claimant'] == 3.12555 %}
-                  <h2 class="heading-medium">{{ partyName( 'defendant' ) }} applied to change the arrangement about the claim</h2>
+                  <h2 class="heading-medium">{{ partyName( 'defendant' ) }} has made an application in this claim</h2>
                   <p>You will be notified when the court has reviewed their application.</p>
                   <p><a href="#">Download their application form</a> (PDF, 123KB)</p>
 
@@ -3436,9 +3445,9 @@
     -->
 
     <option>------- Returning to an application  ----------</option>
-    <option value="3.12566" {% if data['claimant'] == 3.12566 %}selected{% endif %}>Claimant has submitted a general application</option>
-    <option value="3.12345" {% if data['claimant'] == 3.12345 %}selected{% endif %}>Return to draft general application (parallel to other states)</option>
-    <option value="3.12555" {% if data['claimant'] == 3.12555 %}selected{% endif %}>When the Defendant makes a general application</option>
+      <option value="3.12345" {% if data['claimant'] == 3.12345 %}selected{% endif %}>Return to draft general application (parallel to other states)</option>
+    <option value="3.12566" {% if data['claimant'] == 3.12566 %}selected{% endif %}>Claimant has submitted a general application (online)</option>
+    <option value="3.12555" {% if data['claimant'] == 3.12555 %}selected{% endif %}>When the Defendant makes a general application (online)</option>
     <option value="3.12556" {% if data['claimant'] == 3.12556 %}selected{% endif %}>When the Defendant makes a general application (offline)</option>
 
 
