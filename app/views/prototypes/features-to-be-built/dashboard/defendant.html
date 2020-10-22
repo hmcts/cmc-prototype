@@ -1373,7 +1373,7 @@
 
 
               <!--  ROC-8530 - Scenario 1 - Updates based on the type of paper document received.-->
-              {% elseif data['claimant'] == 48.1 %}
+              {% elseif data['defendant'] == 48.1 %}
                   <h2 class="heading-medium">Your response has been sent to the County Court Business Centre (CCBC)</h2>
                   <p>  CCBC will contact you by post within 10 days to tell you what happens next. </p>
                   <p>You can see the response in the claim documents. You can only view the response.</p>
@@ -1381,14 +1381,40 @@
 
 
                 <!--  ROC-8530 - Scenario 2 - Updates based on the type of paper document received.-->
-                {% elseif data['claimant'] == 48.2 %}
+                {% elseif data['defendant'] == 48.2 %}
                     <h2 class="heading-medium">Your form has been sent to the County Court Business Centre (CCBC)</h2>
                     <p> CCBC will contact you by post within 10 days to tell you what happens next. </p>
                     <p>You can see the response in the claim documents. You can only view the response.</p>
                     <p>The progression of your case will not be affected by any deadlines previously set. <p>
 
 
+                      <!--  ROC-8527 -  Paper response review event changes for 'Non Response Form' document types. -->
+                      {% elseif data['defendant'] == 49 %}
+                      <h2 class="heading-medium">We have received forms relating to your claim</h2>
+                      <p>Your claim will now continue offline. </p>
+                      <p>You can view the response in your account but your account will not be updated.</p>
+                      <p>The progression of your claim will not be affected by any deadlines previously set.
+                        CCBC will contact you by post within 10 days to tell you what happens next.</p>
+
+
+
+
+                        <p>Contact the County Court Business Centre if you have any questions about the claim.</p>
+
+
+                          <p>Phone: 0300 123 1056<br />
+                            Monday to Thursday, 8.30am to 5pm. <br />Friday, 8.30am to 4pm.<br />
+                            <a href="https://www.gov.uk/call-charges">Find out about call charges</a> <span class="font-xsmall">(opens in a new window)</span>
+                          </p>
+
+                          <p>
+                            Email: CCBCAQ@justice.gov.uk
+                          </p>
+                        
+
             {% else %}
+
+
               <h2 class="heading-medium">Your defence is being processed</h2>
               <p> We will email you to explain what to do next.</p>
               {% endif %}
@@ -3562,6 +3588,7 @@
     <option value="45" {% if data['defendant'] == 45 %}selected{% endif %}> Transferred to CCBC </option>
     <option value="48.1" {% if data['defendant'] == 48.1 %}selected{% endif %}> Scenario 1 - Update based on type of paper document received </option>
     <option value="48.2" {% if data['defendant'] == 48.2 %}selected{% endif %}> Scenario 2 - Update based on type of paper document received </option>
+    <option value="49" {% if data['defendant'] == 49 %}selected{% endif %}> Post Paper Response Review </option><!-- ROC-8527 -->
 
 
   </select>
