@@ -1,0 +1,99 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="4" %}
+
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <a href="#" class="link-back">Back</a>
+      <h1 class="heading-large">
+        Judgment amount
+      </h1>
+      <p>The judgment will order the defendant to pay {% if data['interest'] == "yes" %} £5,506.30 {% else %} £5,410 {% endif %} including the claim fee{% if data['interest'] == "yes" %} and any interest{% endif %}, as shown in this table:</p>
+      <form class="form" action="{% if data['radio-proceed'] == "judgment" %}../../../dashboard/claimant-response/admit-the-claim/task-list{% elseif data['radio-proceed'] == "judgment-pa" %}../../../dashboard/claimant-response/part-admit/task-list {% elseif data['radio-proceed'] == 'not-signed' %}check-your-judgment{% else %}payment-options{% endif %}" method="post">
+
+        <table class="table-form">
+          <caption class="visuallyhidden">Amount payable by defendant</caption>
+          <thead>
+            <tr>
+              <th scope="col"></th>
+              <th class="numeric last" scope="col">Amount</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <th scope="row">Amount of claim included</th>
+              <td class="numeric last">
+                <label class="visuallyhidden" for="amount">Claim amount</label>
+
+              <span class="font-small">£5,000</span>
+
+              </td>
+            </tr>
+
+
+              {% if data['interest'] == "yes" %}
+
+              <tr>
+                <th scope="row">
+                  <details style="margin-bottom:0">
+                    <summary>Interest to date included</summary>
+                    <p class="panel">
+                      Interested calcluated with daily interest amount of £1.07 for 90 days<br />
+                      <span class="font-xsmall">({{ now | date('subtract', 90, 'days' ) | date }} to {{ now | date }})</span>
+                    </p>
+                  </details>
+                </th>
+                <td class="numeric last">
+                  <label class="visuallyhidden" for="amount">Claim fee</label>
+                  <span class="font-small">£96.30</span>
+                </td>
+              </tr>
+
+                {% endif %}
+
+          <tr>
+            <th scope="row">Amount of claim fee included</th>
+            <td class="numeric last">
+              <label class="visuallyhidden" for="amount">Claim fee</label>
+              <span class="font-small">£410</span>
+            </td>
+          </tr>
+
+          <tr>
+            <th scope="col" class="bold-medium">Total</th>
+            {% if data['interest'] == "yes" %}
+            <td class="numeric last bold-medium">£5,506.30</td>
+            {% else %}
+            <td class="numeric last bold-medium">£5,410</td>
+            {% endif %}
+            <input type="text" hidden="" value="12{% if data['interest'] == "yes" %}34.24{% else %}00{% endif %}" name="num1" id="num1" />
+          </tr>
+
+        </tbody>
+      </table>
+
+      <input type="hidden" name="judgment" value="complete">
+      <input type="submit" value="Save and continue" class="button">
+    </form>
+
+  </div>
+</div>
+{% include 'prototypes/features-to-be-built/includes/contact.html' %}
+</main>
+<form method="post" action="#" class="form" style="position: absolute;">
+  <select name="interest" onchange="window.location.href='?interest='+this.value">
+    <option value="yes" {% if data['interest'] == 'yes' %}selected{% endif %}>With interest</option>
+    <option value="no" {% if data['interest'] != 'yes' %}selected{% endif %}>Without interest</option>
+  </select>
+</form>
+
+{% endblock %}
