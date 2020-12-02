@@ -16,7 +16,7 @@ Money Claims Prototype
       <h1 class="heading-large">
         Judgment amount
       </h1>
-      <p>The judgment will order the defendant to pay {% if data['interest'] == "yes" %} £5,506.30 {% else %} £5,410 {% endif %} including the claim fee{% if data['interest'] == "yes" %} and any interest{% endif %}, as shown in this table:</p>
+      <p>The judgment will order the defendant to pay {% if data['interest'] == "yes" %} £5,506.30 {% else %} £5,410 {% endif %} including the claim fee{% if data['interest'] == "yes" %} and interest if applicable{% endif %}, as shown in this table:</p>
       <form class="form" action="{% if data['radio-proceed'] == "judgment" %}../../../dashboard/claimant-response/admit-the-claim/task-list{% elseif data['radio-proceed'] == "judgment-pa" %}../../../dashboard/claimant-response/part-admit/task-list {% elseif data['radio-proceed'] == 'not-signed' %}check-your-judgment{% else %}payment-options{% endif %}" method="post">
 
         <table class="table-form">
@@ -30,7 +30,7 @@ Money Claims Prototype
 
           <tbody>
             <tr>
-              <th scope="row">Amount of claim included</th>
+              <th scope="row">Claim amount</th>
               <td class="numeric last">
                 <label class="visuallyhidden" for="amount">Claim amount</label>
 
@@ -45,7 +45,7 @@ Money Claims Prototype
               <tr>
                 <th scope="row">
                   <details style="margin-bottom:0">
-                    <summary>Interest to date included</summary>
+                    <summary>Interest to date</summary>
                     <p class="panel">
                       Interested calcluated with daily interest amount of £1.07 for 90 days<br />
                       <span class="font-xsmall">({{ now | date('subtract', 90, 'days' ) | date }} to {{ now | date }})</span>
@@ -61,7 +61,7 @@ Money Claims Prototype
                 {% endif %}
 
           <tr>
-            <th scope="row">Amount of claim fee included</th>
+            <th scope="row">Claim fee amount</th>
             <td class="numeric last">
               <label class="visuallyhidden" for="amount">Claim fee</label>
               <span class="font-small">£410</span>
