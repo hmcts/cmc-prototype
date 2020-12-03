@@ -16,7 +16,7 @@ Money Claims Prototype
       <h1 class="heading-large">
         Judgment amount
       </h1>
-      <p>The judgment will order the defendant to pay {% if data['interest'] == "yes" %} £5,506.30 {% else %} £5,410 {% endif %} including the claim fee{% if data['interest'] == "yes" %} and interest if applicable{% endif %}, as shown in this table:</p>
+      <p>The judgment will order the defendant to pay {% if data['interest'] == "yes" %} £5,410.00 {% else %} £5,410.00 {% endif %} including the claim fee{% if data['interest'] == "yes" %} and interest if applicable{% endif %}, as shown in this table:</p>
       <form class="form" action="{% if data['radio-proceed'] == "judgment" %}../../../dashboard/claimant-response/admit-the-claim/task-list{% elseif data['radio-proceed'] == "judgment-pa" %}../../../dashboard/claimant-response/part-admit/task-list {% elseif data['radio-proceed'] == 'not-signed' %}check-your-judgment{% else %}payment-options{% endif %}" method="post">
 
         <table class="table-form">
@@ -34,18 +34,18 @@ Money Claims Prototype
               <td class="numeric last">
                 <label class="visuallyhidden" for="amount">Claim amount</label>
 
-              <span class="font-small">£5,000</span>
+              <span class="font-small">£5,000.00</span>
 
               </td>
             </tr>
 
 
               {% if data['interest'] == "yes" %}
-
+              <!--
               <tr>
                 <th scope="row">
                     Interest included
-                    <!--
+
                   <details style="margin-bottom:0">
                     <summary>Interest to date</summary>
                     <p class="panel">
@@ -53,30 +53,30 @@ Money Claims Prototype
                       <span class="font-xsmall">({{ now | date('subtract', 90, 'days' ) | date }} to {{ now | date }})</span>
                     </p>
                   </details>
-                  -->
+
                 </th>
                 <td class="numeric last">
                   <label class="visuallyhidden" for="amount">Claim fee</label>
                   <span class="font-small">£96.30</span>
                 </td>
               </tr>
-
+              -->
                 {% endif %}
 
           <tr>
             <th scope="row">Claim fee amount</th>
             <td class="numeric last">
               <label class="visuallyhidden" for="amount">Claim fee</label>
-              <span class="font-small">£410</span>
+              <span class="font-small">£410.00</span>
             </td>
           </tr>
 
           <tr>
             <th scope="col" class="bold-medium">Total</th>
             {% if data['interest'] == "yes" %}
-            <td class="numeric last bold-medium">£5,506.30</td>
+            <td class="numeric last bold-medium">£5,410.00</td>
             {% else %}
-            <td class="numeric last bold-medium">£5,410</td>
+            <td class="numeric last bold-medium">£5,410.00</td>
             {% endif %}
             <input type="text" hidden="" value="12{% if data['interest'] == "yes" %}34.24{% else %}00{% endif %}" name="num1" id="num1" />
           </tr>
