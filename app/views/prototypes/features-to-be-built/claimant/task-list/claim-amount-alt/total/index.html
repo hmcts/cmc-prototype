@@ -16,8 +16,7 @@ Money Claims Prototype
 <main id="content" role="main">
   {% include "includes/phase_banner_beta.html" %}
 
-      <!--  <a href="#" onclick="history.go(-1)" class="link-back">Back</a>  -->
-
+  <!--  <a href="#" onclick="history.go(-1)" class="link-back">Back</a>  -->
 
   <div class="grid-row">
     <div class="column-two-thirds">
@@ -66,7 +65,7 @@ Money Claims Prototype
               <tfoot>
                 <tr>
                   <th scope="col" style="border-bottom: none">Total claim amount</th>
-                  <td class="numeric last" style="border-bottom: none"><span id="totalAmountDisplay" class="bold-medium">£1583</span></td>
+                  <td class="numeric last" style="border-bottom: none"><span id="totalAmountDisplay" class="bold-medium">£1,081</span></td>
                 </tr>
               </tfoot>
               <tbody>
@@ -84,7 +83,7 @@ Money Claims Prototype
                   <td class="numeric last">
                     <label class="visuallyhidden" for="amount">:  </label>
 
-                    <span id="interestValue" class="font-small">£14</span>
+                    <span id="interestValue" class="font-small">£11</span>
 
                   </td>
                 </tr>
@@ -114,6 +113,40 @@ Money Claims Prototype
           <li>If it's unsuccessful, we'll ask you to pay the claim fee shown on this page in full.</p>
         </ol>
         {% endif %}
+
+        <details>
+          <!-- ROC-8638 -->
+          <summary><span class="summary">How interest to date is calculated</span></summary>
+          <div class="panel panel-border-narrow">
+            <div class="govuk-govspeak direction-ltr rich-govspeak disable-youtube">
+              <!--
+              <p>For most types of debt the rate is usually 8%.</p>
+              <p>To calculate this, use the steps below.</p>
+              <ol class="list list-number">
+                <li>
+                  <p>Work out the yearly interest: take the amount you’re claiming and multiply it by 0.08 (which is 8%).</p>
+                </li>
+                <li>
+                  <p>Work out the daily interest: divide your yearly interest from step 1 by 365 (the number of days in a year).</p>
+                </li>
+                <li>
+                  <p>Work out the total amount of interest: multiply the daily interest from step 2 by the number of days the debt has been overdue.</p>
+                </li>
+              </ol>
+              -->
+
+
+              <p>Using claim amount £1,000:</p>
+                <ul>
+                  <li>the annual interest would be £80 (1000 x 0.08 = 80)</li>
+                  <li>we divide £80 by 365 to get the daily interest: about 22p a day (80 / 365 = 0.22)</li>
+                  <li>after 50 days this would be £11 (50 x 0.22 = 11)</li>
+                </ul>
+
+            </div>
+            <!-- example http://localhost:3000/prototypes/features-to-be-built/claimant/task-list/claim-amount-alt/claim-interest-manual -->
+          </div>
+        </details>
 
         {% if data['counter'] == 'FULL-COUNTER' or data['counter'] == 'SET-OFF-COUNTER' or not data['counter'] %}
 
