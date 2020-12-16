@@ -13,20 +13,17 @@ Money Claims Prototype
   <a href="#" class="link-back">Back</a>
   <div class="grid-row">
     <div class="column-two-thirds">
-      <form method="post" action="../task-list" class="form">
+      <form method="post" action="../../task-list" class="form">
        <h1 class="heading-large">
-
-        The defendant's response
+        How they want to pay
       </h1>
-      <p>Mary Richards admits they owe all the money you’ve claimed.
-        This is the total amount you'll be paid, including the claim fee and interest if applicable.
 
       {% if data['radio-pay-group'] == 'Set-date' %}
-      <p>They've offered to pay you by {{ now | date( 'add', 3, 'months') | date }}.</p>
-      {% else %}
-      <p>They've offered to pay you in instalments.</p>
 
-      <h2 class="heading-medium">How they want to pay</h2>
+      <p>They've offered to pay you in £50 by {{ now | date( 'add', 3, 'months') | date }}. This is the total amount you'll be paid, including the claim fee and interest if applicable.</p>
+
+      {% else %}
+      <p>The defendant suggested this repayment plan:</p>
 
       <table class="instalment-table">
         <tbody>
@@ -37,7 +34,7 @@ Money Claims Prototype
              Regular payments of
            </td>
            <td class="">
-            £200
+            £120
           </td>
           <td class="">
           </td>
@@ -67,7 +64,7 @@ Money Claims Prototype
             Final payment date
           </td>
           <td class="">
-              1 {{ now |  date("add", 13, "month") | date( "MMMM YYYY" ) }}
+              1 {{ now |  date("add", 10, "month") | date( "MMMM YYYY" ) }}
           </td>
           <td class=" ">
           </td>
@@ -77,19 +74,21 @@ Money Claims Prototype
               Length of repayment plan
             </td>
             <td class="">
-              1 year
+              10 months
             </td>
             <td class=" ">
             </td>
           </tr>
       </tbody>
     </table>
+
     {% endif %}
+
 
     {% if data['defendant'] != 'org' %}
 
     <h2 class="heading-small">Why they can't pay the full amount now</h2>
-    <p>"I am heavily in debt at the moment and I'm not earning that much money. {% if data['payment'] == 'full' %}i can pay when i've cleared my debts.{% else %}£200 a month is all i can afford.{% endif %}"</p>
+    <p>"I am heavily in debt at the moment and I'm not earning that much money. {% if data['radio-pay-group'] == 'Set-date' %}I can pay when i've cleared my debts.{% else %}£200 a month is all i can afford.{% endif %}"</p>
 
 
       <details class="form-group">
@@ -317,13 +316,13 @@ Money Claims Prototype
                   Gas
                 </td>
                 <td class="">£83 </td>
-              </tr>             <tr>
+              </tr>
+                            <tr>
                 <td class="no-border bold">
                   Debts
                 </td>
                 <td class="no-border"> </td>
               </tr>
-
               <tr>
                 <td class="no-border">
                   Do they have any debts they are behind on?
@@ -418,12 +417,8 @@ Money Claims Prototype
           </table>
         </div>
       </details>
-    {% endif %}
 
-
-    <h2 class="heading-medium">Full response</h2>
-    <p><a href="../../../../defendant/correspondence/forms/claim-form-defendant?check=9">Download their full response and hearing requirements</a> (PDF, 123KB).</p>
-
+      {% endif %}
 
     <input type="hidden" name="their_response" value="complete">
     <div class="form-group">
