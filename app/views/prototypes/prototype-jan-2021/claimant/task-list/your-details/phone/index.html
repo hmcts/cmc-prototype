@@ -1,0 +1,62 @@
+{% extends "layout_task-list.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block home_link %} ../../task-list {% endblock %}
+{% block proposition_header %}
+{% set my_account="1" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}
+  {% else %}
+  <a href="#" class="link-back">Back</a>
+  {% endif %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}
+      <form method="post" action="{{ data.return_page if data.return_page | length > 0 else '../task-list' }}" class="form">
+        {% else %}
+        <form method="post" action="../../task-list" class="form">
+          {% endif %}
+          {{formData | safe}}
+          <h1 class="heading-large">
+            {% if data['claimant-type']=="Company" %}
+            Enter a phone number (optional)
+            {% elseif data['claimant-type']=="Individual" %}
+            Enter a phone number (optional)
+            {% elseif data['claimant-type']=="Sole trader" %}
+            Enter a phone number (optional)
+            {% else  %}
+            Enter a phone number (optional)
+            {% endif %}
+          </h1>
+          <p>We might need to speak to you about this claim. We'll only call on weekdays between 9am and 5pm.</p>
+          <p>We'll also give your number to the defendant.</p>
+          <fieldset>
+            <legend class="visuallyhidden">
+              Phone
+            </legend>
+            <div class="form-group">
+              <input class="form-control form-control" id="claimant_phone" name="claimant-phone" type="text" value="{{data['claimant-phone']}}">
+            </div>
+          </fieldset>
+          <input type="hidden" name="your_details" value="complete">
+          {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}
+          <div class="form-group">
+            <input type="submit" class="button" value="Save changes"/>
+          </div>
+          <a href="{{ data.return_page if data.return_page | length > 0 else '../task-list' }}">Cancel</a>
+          {% else %}
+          <div class="form-group">
+            <input type="submit" class="button" value="Save and continue"/>
+          </div>
+          {% endif %}
+        </form>
+      </div>
+    </div>
+  {% include 'prototypes/features-to-be-built/includes/contact.html' %}
+</main>
+{% endblock %}

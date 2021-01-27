@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<!--[if lt IE 9]><html class="lte-ie8" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--><html lang="en"><!--<![endif]-->
+<head>
+    <meta charset="utf-8" />
+    <style>
+#content {
+  margin-top:3em
+}
+@page {
+  size: 8.5in 11in;
+  margin: 10%;
+  @top-right {
+    content: "Page " counter(page) " of " counter(pages);
+    /*noinspection CssNoGenericFontName*/
+    font-family: "Open Sans";
+  }
+}
+html {
+  /*noinspection CssNoGenericFontName*/
+  font-family: "Open Sans";
+  max-width: 960px;
+  margin: 0 auto;
+  background:#d9d9d9
+}
+#content{
+  background:#fff;
+  padding:70px;
+  padding-bottom: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+body {
+  counter-reset: section;
+  font-family: "nta", Arial, sans-serif;
+  font-weight: 400;
+  text-transform: none;
+  font-size: 19px;
+  line-height: 1.25;
+  -webkit-font-smoothing: antialiased;
+}
+.section {
+  margin-bottom: 25px;
+}
+.section .section-heading {
+  margin-bottom: 10px;
+}
+.section .section-heading strong:before {
+  counter-increment: section;
+  content: counter(section) ". ";
+}
+table {
+  width: 100%;
+  border-spacing: 0;
+}
+table td {
+  border-bottom: 1px solid #999;
+  padding: 5px;
+  text-align:left;
+  line-height: 1.25;
+  padding: 0.63158em 1.05263em 0.67368em 0;
+  font-size: 18px;
+  vertical-align:top;
+}
+p{
+  font-size: 18px;
+}
+table th {
+ text-align:left;
+ border-bottom: 1px solid #999;
+}
+table td:first-child {
+  width: 280px;
+  vertical-align: top;
+  font-weight:700;
+}
+td.single-cell{
+ font-weight:100!important;
+}
+.no-border{
+  border: none;
+}
+table td:last-child {
+  width: auto;
+}
+header table td, header table tr:last-child td {
+  border: none;
+}
+header td {
+  margin: 0;
+  padding: 0;
+}
+.heading-medium{
+  padding-bottom: 0;
+  margin-bottom: 0.4em;
+  margin-top: 1.5em;
+  font-size:22px;
+}
+.claim-number {
+  font-weight:700;
+  font-size:19px;
+}
+.crestLogo tr td:nth-child(1) {
+  width: 30%;
+}
+.crest{
+  width:80%
+}
+h1 {
+  font-weight:100;
+  font-size:24px;
+}
+.seal{
+  width: 12%;
+  float: right;
+}
+.page-title {
+  text-align:center;
+  padding-top:20px;
+  font-size:14px
+}
+.page-title span{
+  float:right
+}
+.crestLogo{
+  margin-top:40px
+}
+.page-break{
+  background: #d9d9d9;
+  margin-left: -70px;
+  margin-right: -70px;
+  margin-top: 20px;
+}
+.claim-details{
+  text-align:right
+}
+.footer td{
+  font-size:10px;
+  padding-top:40px;
+  border-bottom: none;
+}
+.footer td:nth-child(3){
+  text-align:right
+}
+</style>
+</head>
+<main id="content"  role="main">
+  <header>
+
+
+      <table class="crestLogo">
+        <tbody>
+          <tr>
+            <td></td>
+            <td rowspan="2" class="claim-details">
+              <h1>Settlement Agreement</h1>
+              <p>In the County Court Business Centre Online Civil Money Claims</p>
+              <p><strong>Claim number:</strong> 000LR095<br>
+              <strong>Date of settlement:</strong> {{ now | date | date('D MMMM YYYY')  }} at 3:25PM</p></td>
+            </tr>
+          </tbody>
+    </table>
+    </header>
+    {% if data.counterclaim=="true" %}
+    {%else%}
+    <table >
+      <thead>
+        <tr>
+          <th colspan="2">
+            <h2 class="heading-medium" id="name">
+              1. Claimant's details
+            </h2>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            Name:
+          </td>
+          <td>
+            Mrs Jan Clark
+          </td>
+        </tr>
+        <tr>
+          <tr>
+            <td class="">
+              Address:
+            </td>
+            <td class="">
+              101 Regents Road<br>
+              Shiplake<br>
+              Henley on Thames<br>
+              RG9 4BW
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Date of birth:
+            </td>
+            <td>
+             31 January 1970
+           </td>
+         </tr>
+         <tr>
+          <tr>
+            <td>
+              Telephone:
+            </td>
+            <td>
+             07824999612
+           </td>
+         </tr>
+                 <tr>
+        <td>
+          Email:
+        </td>
+        <td>
+                  jan.clark@gmail.com
+
+
+        </td>
+      </tr>
+       </tbody>
+     </table>
+     <table >
+      <thead>
+        <tr>
+          <th colspan="2">
+            <h2 class="heading-medium" id="name">
+              2. Defendant's details
+            </h2>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            Name:
+          </td>
+          <td>
+            Mrs Mary Richards
+          </td>
+        </tr>
+        <tr>
+          <tr>
+            <td class="">
+              Address:
+            </td>
+            <td class="">
+              24 Acacia Drive<br>
+              London<br>
+              SW1 H9A<br>
+            </td>
+          </tr>
+
+          <tr>
+            <tr>
+              <td>
+                Email:
+              </td>
+              <td>
+                mary.richards@gmail.com
+              </td>
+            </tr>
+
+         </tbody>
+       </table>
+       {%endif%}
+       <table class="footer">
+        <tbody>
+          <tr>
+            <tr>
+          {% if data['check'] == 1 %}
+              <td>
+                OCON Settlement Agreement
+              </td>
+          {%else%}
+              <td>
+                OCON Settlement Agreement A
+              </td>
+          {%endif%}
+              <td>
+                For further details of the courts www.gov.uk/find-court-tribunal
+              </td>
+              <td >
+                &copy; Crown copyright Page 1 of 2
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="page-break">&nbsp;</div>
+        <p class="page-title"> <span>Claim number: 000LR095</span></p>
+        <table class="check-your-answers">
+          <thead>
+            <tr>
+              <th colspan="2">
+                <h2 id="cd" class="heading-medium">
+                  3. What was agreed
+                </h2>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+           <tr>
+            <td class="bold-medium">
+              <span class="bold">The agreement:</span>
+            </td>
+            <td>
+
+            {% if data['check'] == 1 %}
+            Mary Richards: I will fix the roof if Jan Clark will give me access and pay for any extra materials.
+
+            {% elseif data['radio-pay-group']=="Instalments" or data['check'] == 2 %}
+
+              Mary Richards will repay £1,500, in instalments of
+                {% if data['instalment-first-payment'] %}
+                £{{data['instalment-first-payment']}}
+                {% else %}
+                £200
+                {% endif %}
+
+                {% if data['radio-payment-frequency'] %}
+                {{ data['radio-payment-frequency'] | lower  }}{% else %}
+                every month{% endif %}.
+              <br />The first instalment will be paid by
+                {% if data['instalment-day'] %}
+                {{ ( data['instalment-month'] + ' ' + data['instalment-day'] + ' ' + data['instalment-year']) | date('D MMMM YYYY') }}{% else %}
+                31 March 2018{% endif %}.
+
+
+            {% elseif data['radio-pay-group']=="Set-date" or data['check'] == 3 %}
+              Mary Richards will pay £1,500 no later than
+                {% if data['set-day'] %}
+                {{ ( data['set-month'] + ' ' + data['set-day'] + ' ' + data['set-year']) | date('D MMMM YYYY') }}
+                {% else %}
+                {{ date | date('add', 1, 'year') | date('D MMMM YYYY') }}
+                {% endif %}
+
+            {% elseif data['check'] == 4 %}
+              Mary Richards will pay £1,200, no later than
+                {% if data['set-day'] %}
+                {{ ( data['set-month'] + ' ' + data['set-day'] + ' ' + data['set-year']) | date('D MMMM YYYY') }}
+                {% else %}
+                {{ date | date('add', 1, 'year') | date('D MMMM YYYY') }}
+                {% endif %}
+            {% else %}
+              Mary Richards will pay £1,500 no later than {{ date | date('add', 1, 'year') | date('D MMMM YYYY') }}.
+            {% endif %}
+
+           </td>
+         </tr>
+         <tr>
+          <td class="bold-medium">
+            <span class="bold">To be completed by:</span>
+          </td>
+          <td>
+
+            {% if data['check'] == 1 %}
+              {{ date | date('add', 2, 'months') | date('D MMMM YYYY') }}
+
+            {% elseif data['radio-pay-group']=="Instalments" or data['check'] == 2 %}
+
+              {% if data['instalment-month'] %}
+                {{ ( data['instalment-month'] + ' ' + data['instalment-day'] + ' ' + data['instalment-year']) | date('add', 1, 'year') | date('D MMMM YYYY') }}
+              {% else %}
+                  {{ date | date('add', 1, 'year') | date('D MMMM YYYY') }}
+              {% endif %}
+
+            {% elseif data['radio-pay-group']=="Set-date" or data['check'] == 3  or data['check'] == 4 %}
+                {% if data['set-day'] %}
+                {{ ( data['set-month'] + ' ' + data['set-day'] + ' ' + data['set-year']) | date('D MMMM YYYY') }}
+                {% else %}
+                {{ date | date('add', 1, 'year') | date('D MMMM YYYY') }}
+                {% endif %}
+              {% else %}
+              {{ date | date('add', 1, 'year') | date('D MMMM YYYY') }}
+              {% endif %}
+
+
+          </td>
+        </tbody>
+      </table>
+      <table class="check-your-answers">
+        <thead>
+          <tr>
+            <th colspan="2">
+              <h2 id="cd" class="heading-medium">
+                4. What this agreement means
+              </h2>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td colspan="2" class="single-cell">
+
+             {% if data.radio_select_group=="Some" or data['check'] == 4   %}
+              <p>This agreement settles the claim made by Jan Clark against Mary Richards, including the part that Mary Richards admitted.</p>
+
+
+              {%else%}
+              <p>This agreement settles the claim made by Jan Clark against Mary Richards. This includes all money owed in the claim, for example court fees, expenses or interest.</p>
+
+               <p> Neither party can make any further claims relating to this case, other than to enforce it.</p>
+              {%endif%}
+
+              <p>Either party can view and download this agreement from their Money Claims account. Both parties should keep a copy of this agreement.</p>
+
+
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="check-your-answers">
+        <thead>
+          <tr>
+            <th colspan="2">
+              <h2 id="cd" class="heading-medium">
+                If this agreement is broken
+              </h2>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td colspan="2" class="single-cell">
+
+
+              {% if data.radio_select_group=="Some" or data['check'] == 1  %}
+              <p>The claimant can:</p>
+              <ul class="list list-bullet">
+                <li>request a judgment for any money still owed from this agreement</li>
+                <li>resume the original claim or counterclaim for the full amount of the claim</li>
+                <li>ask the court to enforce any of the steps to be taken<p></p>
+              </li>
+              </ul>
+              <p>To apply, download and complete form N244 from HMCTS Formfinder and send it to the County Court Business Centre. You need to say on the form which of the 3 options you're applying for.</a></p>
+
+              {% else %}
+              <p>The claimant can request a County Court Judgment (CCJ) for any money still owed from this agreement.</p>
+              {% endif %}
+
+
+
+
+
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+  {% if true %}
+    <table style="padding-bottom:900px">
+  {% else %}
+    <table >
+  {% endif %}
+      <thead>
+        <tr>
+          <th colspan="2">
+            <h2 class="heading-medium">
+              Signed
+            </h2>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="no-border">Claimant
+          </td>
+          <td class="no-border">Jan Clark<br />{{ now | date( 'subtract', 1, 'day' ) | date }}
+          </td>
+        </tr>
+        <tr>
+          <td class="no-border">Defendant
+          </td>
+          <td class="no-border">Mary Richards<br />{{ now | date }}
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+      <table class="footer">
+        <tbody>
+          <tr>
+            <tr>
+              {% if data['check'] == 1 %}
+                  <td>
+                    OCON Settlement Agreement
+                  </td>
+              {%else%}
+                  <td>
+                    OCON Settlement Agreement A
+                  </td>
+              {%endif%}
+              <td>
+                For further details of the courts www.gov.uk/find-court-tribunal
+              </td>
+              <td >
+                &copy; Crown copyright Page 2 of 2
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </main>
+      <script src="{{ asset_path }}/javascripts/jquery-1.11.3.js"></script>
+      <script>
+        $(document).ready(function() {
+          var monthNames = [ "January", "February", "March", "April", "May", "June",
+          "July", "August", "September", "October", "November", "December" ];
+          var monthNamesCal = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+          "Jul", "Aug", "Sept", "Oct", "Nov", "Dec" ];
+          var newDate = new Date();
+          newDate.setDate(newDate.getDate()+ 14) ;
+          var newDate2 = new Date();
+          newDate2.setDate(newDate2.getDate()) ;
+          var newDate3 = new Date();
+          newDate3.setDate(newDate3.getDate()+ 28);
+          var newDate4 = new Date();
+          newDate4.setDate(newDate4.getDate())+ 100 ;
+/*$('#Date').html(" " + newDate.getDate() + ' ' + monthNames[newDate.getMonth()] + ' ' + newDate.getFullYear());
+*/$('#Date, .dates').html(" " + newDate.getDate() + ' ' + monthNames[newDate.getMonth()] + ' ' + newDate.getFullYear());
+$('#Date2, .dates2').html(" " + newDate2.getDate() + ' ' + monthNames[newDate2.getMonth()] + ' ' + newDate2.getFullYear());
+$('#Date3, .dates3').html(" " + newDate3.getDate() + ' ' + monthNames[newDate3.getMonth()] + ' ' + newDate3.getFullYear());
+$('#DateCal, .datesCal').html(" " + newDate4.getDate() + ' ' + monthNamesCal[newDate4.getMonth()] + ' ' + newDate4.getFullYear());
+});
+</script>
+<form method="post"  action="#" class="form" style="; float: left">
+  <select id="check" name="check" onchange="window.location.href='?check='+this.value">
+    <option value="1" {% if data['check'] == 1 %}selected{% endif %}>Offer</option>
+    <option value="2" {% if data['check'] == 2 %}selected{% endif %}>Instalments</option>
+    <option value="3" {% if data['check'] == 3 %}selected{% endif %}>Set date</option>
+    <option value="4" {% if data['check'] == 4 %}selected{% endif %}>Set date - Part</option>
+  </select>
+</form>

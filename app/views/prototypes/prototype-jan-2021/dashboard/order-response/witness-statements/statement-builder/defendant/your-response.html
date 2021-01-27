@@ -1,0 +1,103 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <!--  <a href="#" onclick="history.go(-1)" class="link-back">Back</a>  -->
+
+      <form method="get" autocomplete="off" action="what-was-agreed">
+
+        <h1 class="heading-large">Confirm the details of your original response</h1>
+
+        <p>Read the information you gave us and tell us if it's still accurate.</p>
+
+        <div class="description-block">
+
+          <h2 class="heading-small">Why you dispute the claim  </h2>
+          <p>{{ partyName( 'defendant' ) }} and I signed a contract for building works on our roof. The work on the roof was completed but there was a problem with one section. I asked {{ partyName( 'defendant' ) }} to get the problem fixed, but hadn't had a reply.</p>
+          <p>I'll have to get another builder to rectify the problem which will cost me £1,500.</p>
+          <p>Therefore, I'm making a money claim for £1,500 to compensate for the extra money I am going to need to spend.</p>
+
+          <h2 class="heading-small">Your timeline of events</h2>
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Date</th>
+                <th scope="col">Your description of the event</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>03/11/2017</td>
+                <td>I contacted {% if data.counterclaim=="true" %}{{ partyName( 'claimant' ) }}{%else%}{{ partyName( 'defendant' ) }}{% endif %} to discuss building works on our roof.</td>
+              </tr>
+              <tr>
+                <td>06/11/2017</td>
+                <td>We agreed what work should be done and signed a contract.</td>
+              </tr>
+              <tr>
+                <td>30/11/2017</td>
+                <td>The work started on the roof.</td>
+              </tr>
+                <td>21/12/2017</td>
+                <td>The work on the roof was completed but I noticed that there was a problem with one
+                section</td>
+              </tr>
+                <td>27/12/2017</td>
+                <td>I sent an email to {{ partyName( 'defendant' ) }} and asked them to get the problem fixed.</td>
+              </tr>
+
+                <td>15/01/2018</td>
+                <td>I hadn't had a reply so I told them I would be making a money claim.</td>
+              </tr>
+
+                <td >27/12/2017</td>
+                <td>I sent an email to {{ partyName( 'defendant' ) }} and asked them to get the problem fixed.</td>
+              </tr>
+
+                <td>15/01/2018</td>
+                <td>I hadn't had a reply so I told them I would be making a money claim.</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h2 class="heading-small">Your original comments on the claimant's timeline of events</h2>
+          <p>I never got the reply {{ partyName( 'claimant' ) }} said they sent in Decemember.</p>
+        </div>
+
+        <h2 class="heading-medium">Is this information still accurate?</h2>
+
+        <fieldset>
+          <div class="multiple-choice">
+            <input id="radio-1" type="radio" name="details" value="yes"/>
+            <label for="radio-1">Yes</label>
+          </div>
+          <div class="multiple-choice" data-target="details" >
+            <input id="radio-2" type="radio" name="details" value="no" />
+            <label for="radio-2">No</label>
+          </div>
+          <div class="panel panel-border-narrow js-hidden" id="details">
+
+            <label for="no-details">Explain what's inaccurate</label>
+            <textarea style="height: 400px" id="no-details"></textarea>
+          </div>
+        </fieldset>
+
+      <div class="form-group">
+        <input type="submit" class="button" value="Save and continue"/>
+      </div>
+
+    </form>
+  </div>
+</div>
+{% include 'prototypes/features-to-be-built/includes/contact.html' %}
+</main>
+{% endblock %}

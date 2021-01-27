@@ -1,0 +1,85 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <!--  <a href="#" onclick="history.go(-1)" class="link-back">Back</a>  -->
+
+      <form method="get" autocomplete="off" action="what-happened">
+
+        <h1 class="heading-large">What did you agree with {{ partyName( 'claimant' ) }}?</h1>
+
+        <p>You should mention any evidence that you believe supports what you say, including exhibit numbers.</p>
+        <details>
+          <summary>See a list of your evidence</summary>
+          <table>
+            <tbody>
+              <tr>
+                <td style="width: 100px; font-weight: bold">
+                  Exhibit A1
+                </td>
+                <td>
+                  <a href="#">Emails.pdf</a>
+                  <br />You can see the emails dated {{ date | date('subtract', 123, 'days') | date }} and {{ date | date('subtract', 134, 'days') | date }} that they claimed not to receive.
+                </td>
+              </tr>
+
+              <tr>
+                <td style="width: 100px; font-weight: bold">
+                  Exhibit A2
+                </td>
+                <td>
+                  <a href="#">Photo 1.jpg</a>
+                  <br />The photos show that the roof was not adequately supported.
+                </td>
+                <td class="change-answer no-border"></td>
+              </tr>
+
+              <tr>
+                <td style="width: 100px; font-weight: bold">
+                  Exhibit A3
+                </td>
+                <td>
+                  <a href="#">Photo 2.jpg</a>
+                </td>
+                <td class="change-answer no-border"></td>
+              </tr>
+
+              <tr>
+                <td style="width: 100px; font-weight: bold">
+                  Exhibit A4
+                </td>
+                <td>
+                  <a href="#">Contract.pdf</a>
+                  <br />The signed contract shows the materials we agreed to use.
+                </td>
+                <td class="change-answer"></td>
+              </tr>
+
+            </tbody>
+          </table>
+
+        </details>
+
+      <div class="form-group">
+        <textarea style="height: 400px" id="no-details"></textarea>
+      </div>
+
+      <div class="form-group">
+        <input type="submit" class="button" value="Save and continue"/>
+      </div>
+
+    </form>
+  </div>
+</div>
+{% include 'prototypes/features-to-be-built/includes/contact.html' %}
+</main>
+{% endblock %}

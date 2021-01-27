@@ -1,0 +1,88 @@
+{% extends "layout_task-list.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block home_link %} index {% endblock %}
+{% block proposition_header %}
+{% set my_account="3" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <div class="govuk-box-highlight">
+        <h1 class="bold-large">Claim submitted</h1>
+            <br>
+            <p>
+              <br><strong class="bold-large">{% if data['hwf'] == 'yes' %}Your reference number: 1251-5451-8291-3761{% else %}Your claim number: 352MC733{% endif %}</strong>
+            </p>
+            <p>
+              <a class="font-medium" target="_blank" href='correspondence/claim-form-claimant?check={% if data['hwf'] == 'yes' %}1{% else %}2{% endif %}' style="color: #FFFFFF" >Download your {% if  data['hwf'] == 'yes' %}draft {% endif %}claim form</a> (123KB, PDF)
+            </p>
+
+     </div>
+     <h2 class="heading-medium">What happens next</h2>
+
+    {% if data['hwf'] == 'yes' %}
+        <p>We'll check the result of your Help With Fees application and email you within 5 days.</p>
+        <h3 class="heading-small">If you qualify for the whole court fee to be paid</h3>
+
+        <p>We'll issue your claim and send it to {{ partyName( 'defendant' ) }}.</p>
+
+        <h3 class="heading-small">If you qualify for part or no court fee to be paid</h3>
+
+        <p>We'll tell you how much you need to pay to get the claim issued.</p>
+
+        <h3 class="heading-small">After a claim is issued</h3>
+
+        <p>{{ partyName( 'defendant' ) }} will have 14 days to respond. They can ask for an extra 14 days if they need it.</p>
+        <p>You can request a County Court Judgment (CCJ) against them if they don't respond.</p>
+
+        <h3 class="heading-small">If the defendant pays you</h3>
+        <p>You need to sign in to your account to tell us you've been paid.</p>
+        {% include "includes/survey.html" %}
+        <p> <a class="button" href='../dashboard/home?dashboard=1.14'>Go to your account</a> </p>
+
+    {% else %}
+
+     <p>Mary Richards has until 4pm on <span id="Date"></span> to respond to your claim. They can ask for an extra 14 days if they need it. We'll email you when they respond.</p>
+     <p>You can request a County Court Judgment (CCJ) against them if they don't respond.</p>
+
+        <h3 class="heading-small">If the defendant pays you</h3>
+     <p>You need to sign in to your account to tell us you've been paid.</p>
+  {% include "includes/survey.html" %}
+      <p> <a class="button" href='../dashboard/home?dashboard=1.2'>Go to your account</a> </p>
+    {% endif %}
+
+      <h2 class="heading-medium" style="margin-bottom: 10px;">Help and support</h2>
+
+      {% import 'prototypes/features-to-be-built/includes/contact-in-page.html' as contact %}
+      {{ contact.output('small') }}
+
+</main>
+
+
+
+
+
+<!--  page states selector  -->
+<form method="post"  action="#" class="form" style="position: absolute;">
+  <select id="check2" name="check2" onchange="window.location.href='?'+this.value">
+<option  value="hwf=no"
+             {% if data['hwf'] == 'no'  %}selected{% endif %}
+            >Paid by card</option>
+<option  value="hwf=yes"
+             {% if data['hwf'] == 'yes'  %}selected{% endif %}
+            >Help with fees</option>
+  </select>
+</form>
+
+
+
+
+
+
+
+{% endblock %}

@@ -1,0 +1,301 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+      <div class="govuk-box-highlight">
+        {% if ( data['radio-proceed'] == "judgment" or data['radio-proceed'] == "judgment-pa" or data['confirmation'] == 2 or data['confirmation'] == 2.1 ) %}
+        <h1 class="bold-large">County Court Judgment issued</h1>
+
+        {% elseif data['radio-indent-group'] == "accept_stop_claim" or data['radio-indent-group'] == "accept_stop_claim_claim_amount" or data['confirmation'] == 1 %}
+        <h1 class="bold-large">You've accepted the repayment plan</h1>
+
+        {% elseif data['radio-indent-group'] == "accept_stop_claim_settled" and data['radio_select_group'] == "No" or data['confirmation'] == 8.1 %}
+        <h1 class="bold-large">You didn't proceed with the claim</h1>
+
+        {% elseif data['radio-indent-group'] == "accept_stop_claim_settled" or data['confirmation'] == 8 %}
+        <h1 class="bold-large">You've accepted their response</h1>
+
+
+        {% elseif ( data['radio-pay-group'] == "Set-date" or data['radio-pay-group'] == "Immediately" ) and
+        data['radio-indent-group'] == "reject_stop_claim" and data['radio-indent-group2'] != "reject_stop_claim" or
+        data['confirmation'] == 3 or data['confirmation'] == 3.1 or ( data['defendant'] == "org" and
+        data['radio-indent-group'] == "reject_stop_claim" )%}
+        <h1 class="bold-large">You've proposed a different repayment plan</h1>
+
+        {% elseif data['radio-indent-group2'] == "accept_stop_claim" or data['radio-indent-group2'] == "accept_stop_claim_claim_amount" or data['confirmation'] == 4 %}
+        <!--  FOCUS THIS ON THE ACCEPTANCE/REJECTION OF THE PAYMENT PLAN  -->
+        <h1 class="bold-large">You've signed a settlement agreement</h1>
+
+        {% elseif data['radio-indent-group2'] == "reject_stop_claim" or data['confirmation'] == 5 %}
+        <h1 class="bold-large">County Court Judgment requested</h1>
+
+        {% elseif ( data['radio_select_group'] == "Yes" and data['mediation'] == 'off' and data['dqs'] == 'off' ) or data['confirmation'] == 9.1 %}
+        <h1 class="bold-large">You've rejected their response</h1>
+
+        {% elseif data['radio-indent-group'] == "mediation-opt" or data['radio-indent-group'] == "mediation-accept" or data['radio-indent-group'] == 'reject_claim_claim_amount' or data['radio-indent-group'] == "set_date"  or  data['confirmation'] == 6 or data['confirmation'] == 7 %}
+        <h1 class="bold-large">You've rejected their response</h1>
+
+        {% elseif data['radio-indent-group'] == "reject_hearing" or data['radio-indent-group'] == "mediation-reject" or data['radio-indent-group'] == "decline-mediation" or data['radio_select_group_owed'] == 'Yes' %}
+        <h1 class="bold-large">You've rejected their response</h1>
+
+        {% elseif data['radio-indent-group'] == "payment_instalments" or data['radio-indent-group'] == "set_date"%}
+        <h1 class="bold-large">Payment request sent to court</h1>
+
+        {% elseif data['radio-pay-group'] == "Immediately" or data['confirmation'] == 0.1 %}
+        <h1 class="bold-large">You've accepted their response</h1>
+
+        {% elseif data['resolve_dispute'] == "complete" %}
+        <h1 class="bold-large">You've rejected their response</h1>
+
+        {% elseif data['radio_select_group'] == "Yes" or data['confirmation'] == 9  or data['meditation_ineligible'] == "complete" %}
+        <h1 class="bold-large">You've rejected their response</h1>
+
+        {% else %}
+        <h1 class="bold-large">You've rejected their response</h1>
+
+        {% endif %}
+
+        <br>
+        <p class="">Your claim number: <br><strong class="bold-large">352MC733</strong></p>
+        <p><strong class="bold">{{ now | date }}</strong></p>
+
+        {% if ( data['radio_select_group'] == "Yes" and data['dqs'] == 'off' ) or ( data['radio-indent-group'] == "accept_stop_claim_settled" ) or data['confirmation'] == 9.1 or data['confirmation'] == 8 or data['confirmation'] == 8.1 %}
+        {% else %}
+
+            {% if data['offeraccepted'] != 'true' and data['confirmation'] == 9 %}
+                      <p>
+                      <a  class="font-medium" href="../../claimant/correspondence/dqs" target="new" style="color: #FFFFFF" >
+                        Download your response (if any) and hearing requirements (PDF, 123KB)</a>.</p>
+
+            {% elseif data['offeraccepted'] != 'true' %}
+                <p>
+                <a  class="font-medium" href="../../claimant/correspondence/dqs" target="new" style="color: #FFFFFF" >
+                  Download your hearing requirements (PDF, 123KB)</a> .</p>
+            {% endif %}
+        {% endif %}
+
+    </div>
+    <fieldset>
+        <h2 class="heading-medium">What happens next</h2>
+
+        {% if ( data['defendant'] == "org" and data['radio-indent-group'] == "reject_stop_claim" ) or data['confirmation'] == 3.1 %}
+
+        <h4 class="heading-small">Send financial details</h4>
+
+        <p>You need to send the defendant's financial details to the court.</p>
+
+        <p>Make sure you include your claim number: 352MC733.</p>
+
+        <p>The court will review the details to see if the defendant can afford your repayment plan.</p>
+
+        <h4 class="heading-small">Use this address</h4>
+
+        <p>The defendant should have sent you the details - send them to:</p>
+
+        <p>
+          Civil Money Claims<br />
+          St. Katharine's House<br />
+          21-27 St. Katharine's Street<br />
+          Northampton<br />
+          NN1 2LH
+        </p>
+
+        <p>Or email them to moneyclaims@justice.gov.uk</p>
+
+        <h4 class="heading-small">If the court believes the defendant can afford your plan</h4>
+
+        <p>A County Court Judgment (CCJ) will be issued. This requires the defendant to pay according to the terms of the plan.
+
+          <h4 class="heading-small">If the court believes the defendant can not afford your plan</h4>
+
+        <p>The court will set its own repayment terms and issue a CCJ.</p>
+
+        <p><a class="button" href='../../dashboard/home?dashboard=1.1151'>Go to your account</a></p>
+
+
+       {% elseif ( data['radio-proceed'] == "judgment" or data['radio-proceed'] == "judgment-pa" or data['confirmation'] == 2  or  data['confirmation'] == 2.1) %}
+
+        {% if data['radio-indent-group'] == 'reject_stop_claim' %}
+        <p>A County Court Judgment has been issued against the defendant.</p>
+        {% else %}
+        <p>A County Court Judgment has been issued against the defendant.</p>
+        {% endif %}
+        {% if ( data['radio-proceed'] == "judgment" or data['radio-proceed'] == "judgment-pa" or data['confirmation'] == 2 or data['confirmation'] == 2.1 ) %}
+
+        <p>We'll post a copy of the judgment to you and to Mary Richards.</p>
+        {% endif %}
+
+        {% include "includes/survey.html" %}
+
+        <p><a class="button" href='../../dashboard/home?dashboard=1.113'>Go to your account</a></p>
+
+        {% elseif data['radio-indent-group'] == "accept_stop_claim" or data['confirmation'] == 1 %}
+        <p>We've emailed Mary Richards to tell them you agree to their repayment plan and ask them to sign the settlement agreement.</p>
+        <p>They must respond before 4pm on {{ now | date('add', 7, 'days') | date }}. We'll email you when they respond.</p>
+        <p>If they sign the agreement, this claim is put on hold.</p>
+        <p>If they don't sign the agreement or reject it, you can request a CCJ against them which orders them to pay in line with the terms of the repayment plan.</p>
+
+        <h2 class="heading-medium">If you don't get paid</h2>
+        <p>If Mary Richards signs the settlement agreement but breaks the terms, you can request a County Court Judgment (CCJ) by signing in to your account.</p>
+
+        <p>After you've requested a CCJ you can ask the court to enforce payment.</p>
+        {% include "includes/survey.html" %}
+
+        <p><a class="button" href='../../dashboard/home?dashboard=1.111'>Go to your account</a></p>
+
+
+        {% elseif ( data['radio-pay-group'] == "Set-date" or data['radio-pay-group'] == "Immediately" ) and
+        data['radio-indent-group'] == "reject_stop_claim" or data['confirmation'] == 3 %}
+        <p>We've emailed {% if data.counterclaim=="true" %}Jan Clark{%else%}Mary Richards{% endif %} your proposed
+          repayment plan and settlement agreement for them to sign.</p>
+        <p>They must respond before 4pm on {{ now | date('add', 7, 'days') | date }}. We'll email you when they
+          respond.</p>
+        <p>If they sign the agreement, this claim is put on hold.</p>
+        <p>If they don't sign the agreement or reject it, you can request a CCJ against them which orders them to pay in line with the terms of the repayment plan.</p>
+        <p>If they don't think they can afford the plan, they can ask for a judge to make a different plan.</p>
+
+        <h2 class="heading-medium">If you don't get paid</h2>
+        <p>If Mary Richards signs the settlement agreement but breaks the terms, you can request a County Court Judgment (CCJ) by signing in to your account.</p>
+
+        <p>After you've requested a CCJ you can ask the court to enforce payment.</p>
+        {% include "includes/survey.html" %}
+
+        <p><a class="button" href='../../dashboard/home?dashboard=1.116'>Go to your account</a></p>
+
+
+
+        {% elseif ( data['radio-indent-group2'] == "accept_stop_claim" or data['radio-indent-group'] == "reject_stop_claim" ) and data['radio-indent-group2'] != "reject_stop_claim"  or data['confirmation'] == 4 %}
+        <p>We've emailed Mary Richards the repayment plan and the settlement agreement for them to sign.</p>
+        <p>They must respond before 4pm on {{ now | date('add', 7, 'days') | date }}. We'll email you when they respond.</p>
+        <p>If they sign the agreement, this claim is put on hold.</p>
+        <p>If they don't sign the agreement or reject it, you can request a CCJ against them which orders them to pay in line with the terms of the repayment plan.</p>
+        <p>If they don't think they can afford the plan, they can ask for a judge to make a different plan.</p>
+
+        <h2 class="heading-medium">If you don't get paid</h2>
+        <p>If Mary Richards signs the settlement agreement but breaks the terms, you can request a County Court Judgment (CCJ) by signing in to your account.</p>
+
+        <p>After you've requested a CCJ you can ask the court to enforce payment.</p>
+        {% include "includes/survey.html" %}
+
+        <p><a class="button" href='../../dashboard/home?dashboard=1.116'>Go to your account</a></p>
+
+
+        {% elseif data['radio-indent-group2'] == "reject_stop_claim" or data['confirmation'] == 5 %}
+        <p>You've requested a County Court Judgment against Mary Richards.</p>
+        <p>When we've processed your request we'll post a copy of the judgment to you and to Mary Richards.</p>
+        <p>A judge will decide what Mary Richards can afford to pay, based on their financial details.</p>
+        <p >We'll contact both you and {% if data.counterclaim=="true" %}Jan Clark{%else%}Mary Richards{% endif %} to tell you what to do next.</p>
+
+        {% include "includes/survey.html" %}
+
+        <p><a class="button" href='../../dashboard/home?dashboard=1.115'>Go to your account</a></p>
+
+        {% elseif data['mediation-opted-in'] == "Continue" or ( data['radio-indent-group'] == "Yes" and data['meditation_ineligible'] != 'complete') or data['radio-indent-group'] == "mediation-accept" or data['radio-mediation-group-0'] == "Yes" or data['confirmation'] == 6 or data['resolve_dispute'] == "complete" %}
+
+        <p>You agreed to resolve the claim using mediation.</p>
+        <p>A mediator will contact you and the defendant in the next 14 days to try to arrange a call.</p>
+        {% include "includes/survey.html" %}
+
+        <p><a class="button" href='../../dashboard/home?dashboard=1.117'>Go to your account</a></p>
+
+        {% elseif data['radio-indent-group'] == "mediation-opt" or data['confirmation'] == 7 %}
+
+        <p>You agreed to try to resolve the claim using mediation.</p>
+
+        <p>A mediator will contact you and the defendant in the next 14 days to try to arrange a call.</p>
+        {% include "includes/survey.html" %}
+
+        <p><a class="button" href='../home'>Go to your account</a></p>
+
+
+        {% elseif data['radio-indent-group'] == "mediation-opt" or data['confirmation'] == 7 %}
+        <p>You offered to try to resolve the claim using mediation. We'll ask Mary Richards if they want to try mediation. We'll email you when they respond.</p>
+        <p>If they agree, a mediator will contact you within 14 days to try to arrange a call. </p>
+        <p>If they reject or don't respond within 7 days the court will review the case. You might have to go to a hearing.</p>
+        <p>We'll contact you to tell you what to do next. </p>
+
+
+        {% include "includes/survey.html" %}
+
+        <p><a class="button" href='../home'>Go to your account</a></p>
+
+
+        {% elif data['radio-indent-group'] == "accept_stop_claim_claim_amount" or data['radio-indent-group'] == "accept_stop_claim_settled" or data['confirmation'] == 8  or data['confirmation'] == 8.1 %}
+            <p>The claim {% if data['radio_select_group'] == 'No' or data['confirmation'] == 8.1 %}has now ended{% else %}is now settled{% endif %}. We've emailed Mary Richards to tell them.</p>
+            {% include "includes/survey.html" %}
+
+        <p><a class="button" href='../../dashboard/home?dashboard=1.1192'>Go to your account</a></p>
+
+        {% elseif ( data['radio_select_group'] == "Yes" and data['mediation'] == 'off' and data['dqs'] == 'off' ) or data['confirmation'] == 9.1 %}
+
+            <p>You need to <a href="../forms/dq-form">complete a directions questionnaire</a> form to tell us your requirements in case there's a hearing.</p>
+                <p>The claim won't proceed if you don't complete and return the form to us before 4pm on {{ data | date( 'add', 14, 'days' ) | date }}.</p>
+                <p>You also need to send a copy of the form to Mary Richards.</p>
+
+            <p><a class="button" href='../home?dashboard=1.192'>Go to your account</a></p>
+
+        {% elseif data['radio-indent-group'] == "mediation-reject" or  data['radio-indent-group'] == 'reject_claim_claim_amount' or  data['radio-indent-group'] == 'No' or data['meditation_ineligible'] == 'complete' or ( data['radio-indent-group'] == 'Yes' and data['meditation_ineligible'] == 'complete' ) or data['radio_select_group'] == "Yes"  or data['confirmation'] == 9  %}
+
+        <p>We'll review the case. We'll contact you to tell you what to do next. </p>
+
+        {% include "includes/survey.html" %}
+        <p><a class="button" href='../home?dashboard=1.62'>Go to your account</a></p>
+
+
+        {% elseif data['radio-pay-group'] == "Immediately" or data['confirmation'] == 0.1 %}
+        {% if data[“mediation-pilot”]==“on” %}
+        <p>The defendant said they'll pay you £200 immediately.</p>
+        {%else%}
+        <p>The defendant said they'll pay you £1,200 immediately.</p>
+        {% endif %}
+        <p>They must make sure you have the money by {{ now | date('add', 5, 'days') | date }}. Any cheques or transfers
+          should be clear in your account by then.</p>
+        <p>You need to tell us if you've settled the claim, for example because the defendant has paid you.</p>
+
+        {% include "includes/survey.html" %}
+        <p><a class="button" href='../home?dashboard=1.1171'>Go to your account</a></p>
+
+        {% endif %}
+
+        <h2 class="heading-medium" style="margin-bottom: 10px;">Help and support</h2>
+
+        {% import 'prototypes/features-to-be-built/includes/contact-in-page.html' as contact %}
+        {{ contact.output('small') }}
+      </fieldset>
+
+    </div>
+  </div>
+</main>
+
+    <form method="post"  action="#" class="for4" style=" float: left;">
+      <select onchange="window.location.href='?confirmation='+this.value">
+          <option value="">Selected</option>
+          <option value="0.1" {% if data['confirmation'] == '0.1' %}selected{% endif %}>Accepted immediate payment</option>
+            <!--<option value="0.5" {% if data['confirmation'] == '0.5' %}selected{% endif %}>Rejects the payment plan</option>-->
+          <option value="1" {% if data['confirmation'] == '1' %}selected{% endif %}>Settlment agreement signed</option>
+          <option value="2"  {% if data['confirmation'] == '2' %}selected{% endif %}>Judgment issued</option>
+          <option value="2.1"  {% if data['confirmation'] == '2.1' %}selected{% endif %}>Judgment issued - no payment</option>
+          <option value="3"  {% if data['confirmation'] == '3' %}selected{% endif %}>Counter offer made</option>
+          <option value="3.1"  {% if data['confirmation'] == '3.1' %}selected{% endif %}>Counter offer made (to company)</option>
+          <option value="4"  {% if data['confirmation'] == '4' %}selected{% endif %}>Court offer accepted</option>
+          <option value="5"  {% if data['confirmation'] == '5' %}selected{% endif %}>Redetermination</option>
+          <option value="6"  {% if data['confirmation'] == '6' %}selected{% endif %}>Mediation accepted</option>
+          <option value="7"  {% if data['confirmation'] == '7' %}selected{% endif %}>Mediation proposed</option>
+          <option value="8"  {% if data['confirmation'] == '8' %}selected{% endif %}>Claim settled</option>
+          <option value="8.1"  {% if data['confirmation'] == 8.1 %}selected{% endif %}>Claim not proceeding</option>
+          <option value="9"  {% if data['confirmation'] == '9' %}selected{% endif %}>Claim proceeding</option>
+          <option value="9.1"  {% if data['confirmation'] == 9.1 %}selected{% endif %}>Claim proceeding - offline dqs</option>
+      </select>
+    </form>
+
+{% endblock %}

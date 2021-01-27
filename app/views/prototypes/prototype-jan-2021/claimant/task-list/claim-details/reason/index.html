@@ -1,0 +1,61 @@
+{% extends "layout_task-list.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block home_link %} ../../task-list {% endblock %}
+{% block proposition_header %}
+{% set my_account="1" %}
+
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <a href="#" class="link-back">Back</a>
+      {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}
+      <form method="post" action="{{ data.return_page if data.return_page | length > 0 else '../task-list' }}" class="form">
+        {% else %}
+        <form method="post" action="timeline" class="form">
+          {% endif %}
+          {{formData | safe}}
+          <h1 class="heading-large">
+            Briefly explain your {% if data['counterclaim'] %}response{% else %}claim{% endif %}
+          </h1>
+          
+          <div>
+            <p>Tell us why you believe {% if data['counterclaim'] %}Jan Clark{% else %}Mary Richards{% endif %} owes you {% if data['counterclaim'] %}£{{ data['counter-amount'] or 500 }}{% else %}money{% endif %}.</p>
+            <p>Don't give us a detailed timeline - we'll ask for that separately.</p>
+            <p>You'll have to pay an extra fee if you want to change the details of the claim later.</p>
+         </div>
+
+
+          <fieldset>
+            <legend class="visuallyhidden">
+              Why you believe you're owed the money
+            </legend>
+            <textarea class="form-control form-control-3-4 form-control-large"
+            id="claim-reason"
+            rows="3"
+            name="claim-reason"
+            type="text"
+            style="width: 100%"
+            value="">{{data['claim-reason']}}</textarea>
+          </fieldset>
+          {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}
+          <div class="form-group">
+            <input type="submit" class="button" value="Save changes"/>
+          </div>
+          <a href="{{ data.return_page if data.return_page | length > 0 else '../task-list' }}">Cancel</a>
+          {% else %}
+          <div class="form-group">
+            <input type="submit" class="button" value="Save and continue"/>
+          </div>
+          {% endif %}
+        </form>
+      </div>
+    </div>
+  {% include 'prototypes/features-to-be-built/includes/contact.html' %}
+</main>
+{% endblock %}
