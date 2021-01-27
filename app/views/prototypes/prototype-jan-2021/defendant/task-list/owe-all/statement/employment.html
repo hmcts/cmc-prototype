@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="2" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <a href="#" class="link-back">Back</a>
+      <h1 class="heading-large">
+         Do you have a job?
+      </h1>
+      <form
+      name="aspnetForm"
+      method="post"
+      onsubmit="multiNavigation('radio_employment_group', ['Yes', 'No'], ['employed', 'unemployed2']);return false;"
+      id="aspnetForm"
+      autocomplete="off">
+      <div class="form-group">
+        <fieldset>
+          <div class="multiple-choice" data-target="yes">
+            <input id="radio-repayment" type="radio" name="radio_employment_group" value="Yes">
+            <label for="radio-repayment" data-target="repayment-info">Yes</label>
+          </div>
+          <div class="panel panel-border-narrow js-hidden" id="yes">
+            <p >What's your employment status?</p>
+            <p class="form-hint"> You can select both</p>
+            <div class="multiple-choice">
+              <input id="radio-employed"  name="employed" type="checkbox" value="employed" {{ checked("employed", "radio-employed") }}>
+              <label for="radio-employed" data-target="repayment-info">Employed</label>
+            </div>
+            <div class="multiple-choice">
+              <input id="radio-self-employed" name="employed" type="checkbox" value="self_employed" {{ checked("self_employed", "radio-employed") }}>
+              <label for="radio-self-employed" data-target="no-info">Self-employed</label>
+            </div>
+          </div>
+          <div class="multiple-choice">
+            <input id="radio-no" type="radio" name="radio_employment_group" value="No">
+            <label for="radio-no" data-target="no-info">No</label>
+          </div>
+        </fieldset>
+      </div>
+      <div class="form-group">
+        <input type="submit" class="button" value="Save and continue"/>
+      </div>
+    </form>
+  </div>
+</div>
+{% include 'prototypes/features-to-be-built/includes/contact.html' %}
+</main>
+{% endblock %}

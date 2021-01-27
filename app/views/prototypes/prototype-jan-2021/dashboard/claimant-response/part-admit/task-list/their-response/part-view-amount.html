@@ -1,0 +1,432 @@
+{% extends "layout_task-list.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block home_link %} ../task-list {% endblock %}
+{% block proposition_header %}
+{% set my_account="1" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <a href="#" class="link-back">Back</a>
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <form method="post" action="../../task-list" class="form">
+       <h1 class="heading-large">
+        How they want to pay
+      </h1>
+
+      {% if data['radio-pay-group'] == 'Set-date' %}
+
+      <p>They've offered to pay you in £50 by {{ now | date( 'add', 3, 'months') | date }}. This is the total amount you'll be paid, including the claim fee and interest if applicable.</p>
+
+      {% else %}
+      <p>The defendant suggested this repayment plan:</p>
+
+      <table class="instalment-table">
+        <tbody>
+          <tr>
+          </tr>
+          <tr class="">
+            <td class="">
+             Regular payments of
+           </td>
+           <td class="">
+            £120
+          </td>
+          <td class="">
+          </td>
+        </tr>
+          <tr class="">
+            <td class="">
+             Frequency of payments
+           </td>
+           <td class="">
+            Weekly
+          </td>
+          <td class="">
+          </td>
+        </tr>
+        <tr class="">
+          <td class="">
+             First payment date
+          </td>
+          <td >
+              1 {{ now |  date("add", 1, "month") | date( "MMMM YYYY" ) }}
+          </td>
+          <td>
+          </td>
+        </tr>
+        <tr>
+          <td class="">
+            Final payment date
+          </td>
+          <td class="">
+              1 {{ now |  date("add", 10, "month") | date( "MMMM YYYY" ) }}
+          </td>
+          <td class=" ">
+          </td>
+        </tr>
+         <tr>
+            <td class="">
+              Length of repayment plan
+            </td>
+            <td class="">
+              10 months
+            </td>
+            <td class=" ">
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+    {% endif %}
+
+
+    {% if data['defendant'] != 'org' %}
+
+    <h2 class="heading-small">Why they can't pay the full amount now</h2>
+    <p>"I am heavily in debt at the moment and I'm not earning that much money. {% if data['radio-pay-group'] == 'Set-date' %}I can pay when i've cleared my debts.{% else %}£200 a month is all i can afford.{% endif %}"</p>
+
+
+      <details class="form-group">
+        <summary>See their financial details</summary>
+        <div class="panel">
+          <table class="instalment-table">
+            <tbody>
+              <tr>
+                <td class="no-border bold">
+                  Bank and savings accounts
+                </td>
+                <td class="no-border"> </td>
+              </tr>
+              <tr>
+                <td class="no-border">
+                  Type of account
+                </td>
+                <td class="no-border">Savings </td>
+              </tr>
+              <tr>
+                <td class="no-border">
+                  Balance
+                </td>
+                <td class="no-border">£100 </td>
+              </tr>
+              <tr>
+                <td class="">
+                  Joint account
+                </td>
+                <td class="">Yes </td>
+              </tr>
+              <tr>
+                <td>
+                  Where are they living?
+                </td>
+                <td >
+                  Home that they own
+                </td>
+              </tr>
+              <tr>
+                <td class="no-border bold">
+                  Children
+                </td>
+                <td class="no-border"></td>
+              </tr>
+              <tr>
+                <td class="no-border">
+                  Do any children live with them?
+                </td>
+                <td class="no-border">Yes</td>
+              </tr>
+              <tr>
+                <td>
+                  How many are aged 16 to 19?
+                </td>
+                <td >1</td>
+              </tr>
+              <tr>
+                <td>
+                How many aged 16 to 19 are in full-time education or training?
+                </td>
+                <td >1</td>
+              </tr>
+              <tr>
+                <td class="no-border bold">
+                  Maintenance
+                </td>
+                <td class="no-border"></td>
+              </tr>
+              <tr>
+                <td class="no-border">
+                  Do they or their partner pay maintenance for any children?
+                </td>
+                <td class="no-border">Yes</td>
+              </tr>
+              <tr>
+                <td>
+                  Number of children
+                </td>
+                <td >2</td>
+              </tr>
+              <tr>
+                <td class="no-border bold">
+                  Financial support
+                </td>
+                <td class="no-border"></td>
+              </tr>
+              <tr>
+                <td class="no-border">
+                  Do they support anyone else financially?
+                </td>
+                <td class="no-border">Yes</td>
+              </tr>
+              <tr>
+                <td class="no-border">
+                  Number of people
+                </td>
+                <td class="no-border">1</td>
+              </tr>
+              <tr>
+                <td class="">
+                  Give details
+                </td>
+                <td class="">Reason goes here</td>
+              </tr>
+              <tr>
+                <td class="no-border bold">
+                  Employment details
+                </td>
+                <td class="no-border"></td>
+              </tr>
+              <tr>
+                <td class="no-border">
+                  Do they have a job?
+                </td>
+                <td class="no-border">Yes</td>
+              </tr>
+              <tr>
+                <td class="">
+                  Type of job
+                </td>
+                <td class="">Employed and Self-employed</td>
+              </tr>
+              <tr>
+                <td class="no-border"></td>
+              </tr>
+              <tr>
+                <td class="no-border">
+                  Employer name
+                </td>
+                <td class="no-border">Smith Inc</td>
+              </tr>
+              <tr>
+                <td class="no-border">
+                  Job title
+                </td>
+                <td class="no-border">HR manager</td>
+              </tr>
+              <tr>
+                <td class="">
+                  List any other paid jobs (optional)
+                </td>
+                <td class=""> </td>
+              </tr>
+              <tr>
+                <td class="no-border bold">
+                  Self-employment details
+                </td>
+                <td class="no-border"></td>
+              </tr>
+              <tr>
+                <td class="no-border">
+                  Job title
+                </td>
+                <td class="no-border">Builder</td>
+              </tr>
+              <tr>
+                <td class="no-border">
+                  Annual turnover
+                </td>
+                <td class="no-border">£14,500</td>
+              </tr>
+              <tr>
+                <td class="no-border">
+                  Are they behind on tax payments?
+                </td>
+                <td class="no-border"> Yes</td>
+              </tr>
+              <tr>
+                <td class="no-border">
+                  Amount they owe?
+                </td>
+                <td class="no-border"> £300</td>
+              </tr>
+              <tr>
+                <td class="">
+                  Reason
+                </td>
+                <td class=""> Reason goes here</td>
+              </tr>
+              <tr>
+                <td class="no-border bold">
+                  Monthly income
+                </td>
+                <td class="no-border"> </td>
+              </tr>
+              <tr>
+                <td class="no-border">
+                  Take home pay
+                </td>
+                <td class="no-border">£800 </td>
+              </tr>
+              <tr>
+                <td class="no-border">
+                  Child benefit
+                </td>
+                <td class="no-border">£124 </td>
+              </tr>
+              <tr>
+                <td class="">
+                  Other income
+                </td>
+                <td class="">£40 </td>
+              </tr>
+              <tr>
+                <td class="no-border bold">
+                  Monthly expenses
+                </td>
+                <td class="no-border"> </td>
+              </tr>
+              <tr>
+                <td class="no-border">
+                  Mortgage
+                </td>
+                <td class="no-border">£743 </td>
+              </tr>
+              <tr>
+                <td class="no-border">
+                  Council Tax
+                </td>
+                <td class="no-border">£120 </td>
+              </tr>
+              <tr>
+                <td class="">
+                  Gas
+                </td>
+                <td class="">£83 </td>
+              </tr>
+                            <tr>
+                <td class="no-border bold">
+                  Debts
+                </td>
+                <td class="no-border"> </td>
+              </tr>
+              <tr>
+                <td class="no-border">
+                  Do they have any debts they are behind on?
+                </td>
+                <td class="no-border"> Yes</td>
+              </tr>
+              <tr>
+                <td class="no-border">
+                  1. Debt
+                </td>
+                <td class="no-border">Mortgage</td>
+              </tr>
+              <tr>
+                <td class="no-border">
+                  Total owed
+                </td>
+                <td class="no-border">£200 </td>
+              </tr>
+              <tr>
+                <td class="no-border">
+                  2. Debt
+                </td>
+                <td class="no-border">Council tax or community charge</td>
+              </tr>
+              <tr>
+                <td class="no-border">
+                  Total owed
+                </td>
+                <td class="no-border">£100 </td>
+              </tr>
+              <tr>
+                <td class="no-border">
+                  3. Debt
+                </td>
+                <td class="no-border">Water</td>
+              </tr>
+              <tr>
+                <td>
+                  Total owed
+                </td>
+                <td>£100 </td>
+              </tr>
+              <tr>
+                <td class="no-border">
+                  Do you have any loan or credit card debts?
+                </td>
+                <td class="no-border"> Yes</td>
+              </tr>
+              <tr>
+                <td class="no-border">
+                  Debt
+                </td>
+                <td class="no-border">Credit card debt</td>
+              </tr>
+              <tr>
+                <td class="no-border">
+                  Total owed
+                </td>
+                <td class="no-border">£1200 </td>
+              </tr>
+              <tr>
+                <td class="">
+                  Monthly payments
+                </td>
+                <td class="">£100 </td>
+              </tr>
+              <tr>
+                <td class="no-border bold">
+                  Court orders
+                </td>
+                <td class="no-border"> </td>
+              </tr>
+              <tr>
+                <td class="no-border">
+                  Has a court ordered you to pay anyone else?
+                </td>
+                <td class="no-border">Yes </td>
+              </tr>
+              <tr>
+                <td class="no-border">
+                  Claim number
+                </td>
+                <td class="no-border">352MC733 </td>
+              </tr>
+              <tr>
+                <td class="">
+                  Amount you owe
+                </td>
+                <td class="">£130 </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
+
+      {% endif %}
+
+    <input type="hidden" name="their_response" value="complete">
+    <div class="form-group">
+      <input type="submit" class="button" value="Continue"/>
+    </div>
+  </form>
+</div>
+</div>
+{% include 'prototypes/features-to-be-built/includes/contact.html' %}
+</main>
+{% endblock %}

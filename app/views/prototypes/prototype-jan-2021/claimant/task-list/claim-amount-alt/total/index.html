@@ -1,0 +1,281 @@
+{% extends "layout_task-list.html" %}
+
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+
+{% block home_link %} ../../task-list {% endblock %}
+{% block proposition_header %}
+{% set my_account="1" %}
+
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+
+
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+
+  <!--  <a href="#" onclick="history.go(-1)" class="link-back">Back</a>  -->
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      {% if data['amount-owed'] %}
+      <form method="post" action="../../../defendant/task-list/counter-claim/counter-proceed" class="form">
+
+      {% elseif data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}
+
+      <form method="post" action="{{ data.return_page if data.return_page | length > 0 else '../task-list' }}" class="form">
+        {% else %}
+
+      <form method="post" action="../../task-list" class="form">
+
+          {% endif %}
+
+          {{formData | safe}}
+
+          <h1 class="heading-large">
+            {% if data['counter'] == 'FULL-COUNTER' or data['counter'] == 'SET-OFF-COUNTER' %}Making a counterclaim{% else %}Total amount you're claiming{% endif %}
+          </h1>
+
+          {% if data['counter'] == 'FULL-COUNTER' %}
+
+          <p>Claiming money from someone who claims against you is called a 'counterclaim'.</p>
+
+          <h2 class="heading-medium">Counterclaim fee</h2>
+          <p>You need to pay a £70 claim fee to make a £{{ data['counter-amount']|numeral }} counterclaim.</p>
+
+          {% elseif data['counter'] == 'SET-OFF-COUNTER' %}
+
+          <p>Claiming money from someone who claims against you is called a 'counterclaim'.</p>
+          <h2 class="heading-medium">Counterclaim fee</h2>
+          <p>You need to pay a £70 fee to make a counterclaim. The fee is based on the difference between your counterclaim amount and what you admitted you owe.</p>
+
+          {% endif %}
+
+          <p>
+
+          <fieldset>
+            <legend class="visuallyhidden">
+              Total amount you're claiming
+            </legend>
+
+            <table class="table-form" style="margin-bottom: 20px;"{% if data['counter'] == 'FULL-COUNTER' or data['counter'] == 'SET-OFF-COUNTER' %} id="counter-table"{% endif %}>
+              <caption class="visuallyhidden"></caption>
+              <tfoot>
+                <tr>
+                  <th scope="col" style="border-bottom: none">Total claim amount</th>
+                  <td class="numeric last" style="border-bottom: none"><span id="totalAmountDisplay" class="bold-medium">£1,081</span></td>
+                </tr>
+              </tfoot>
+              <tbody>
+                <tr>
+                  <th scope="row">Claim amount</th>
+                  <td class="numeric last">
+                    <label class="visuallyhidden" for="amount">Claim amount</label>
+                    <span class="font-small">  £{{data['totalSum'] or data['counter-amount']|numeral }}</span>
+                  </td>
+                </tr>
+                {% if data['radio_group2']=="interest_yes" %}
+
+                <tr>
+                  <th scope="row">Interest to date</th>
+                  <td class="numeric last">
+                    <label class="visuallyhidden" for="amount">:  </label>
+
+                    <span id="interestValue" class="font-small">£11</span>
+
+                  </td>
+                </tr>
+                {% endif %}
+
+                {% if data['counter'] == 'FULL-COUNTER' or data['counter'] == 'SET-OFF-COUNTER' or not data['counter'] %}
+                <tr id="claim-fee">
+                  <th scope="row">Claim fee</th>
+                  <td class="numeric last">
+                    <label class="visuallyhidden" for="amount">Claim fee</label>
+
+                    <span id="interestValue" class="font-small">£70</span>
+
+                  </td>
+                </tr>
+                {% endif %}
+
+            </tbody>
+          </table>
+
+
+       {% if data['hwf'] == 'yes' %}
+        <h4 class="heading-small">We'll review your Help With Fees application after you submit the claim</h4>
+        <ol class="list list-number">
+          <li>If it's successful, you may not have to pay any or all of the claim fee.</li>
+          <li>That would mean the total claim amount would be lower than the amount shown on this page.</li>
+          <li>If it's unsuccessful, we'll ask you to pay the claim fee shown on this page in full.</p>
+        </ol>
+        {% endif %}
+
+        <details>
+          <!-- ROC-8638 -->
+          <summary><span class="summary">How interest to date is calculated</span></summary>
+          <div class="panel panel-border-narrow">
+            <div class="govuk-govspeak direction-ltr rich-govspeak disable-youtube">
+
+
+              <p>For most types of debt the rate is usually 8%.</p>
+              <p>To calculate this, we use the steps below.</p>
+              <ol class="list list-number">
+                <li>
+                  <p>Work out the yearly interest: take the amount you’re claiming and multiply it by 0.08 (which is 8%).</p>
+                </li>
+                <li>
+                  <p>Work out the daily interest: divide your yearly interest from step 1 by 365 (the number of days in a year).</p>
+                </li>
+                <li>
+                  <p>Work out the total amount of interest: multiply the daily interest from step 2 by the number of days the debt has been overdue.</p>
+                </li>
+              </ol>
+
+
+
+              <div class="example">
+                <ul>
+                  <li>The rate of annual interest is 8%.</li>
+                  <li>Annual interest on, for example, £1,000 is £80 (1000 x 0.08)</li>
+                  <li>Daily interest on £1,000 is 22p (80 / 365)</li>
+                  <li>Total amount of interest on £1,000 for 2 days is 44p (80 x 2 / 365)</li>
+                </ul>
+                </div>
+            </div>
+            <!-- example http://localhost:3000/prototypes/features-to-be-built/claimant/task-list/claim-amount-alt/claim-interest-manual -->
+          </div>
+        </details>
+
+        {% if data['counter'] == 'FULL-COUNTER' or data['counter'] == 'SET-OFF-COUNTER' or not data['counter'] %}
+
+        <h4 class="heading-small">If you settle out of court</h4>
+
+        <p>We won't refund your claim fee. You can ask the defendant to pay back your claim fee as part of the settlement.</p>
+
+        {% endif %}
+
+
+
+        {% if ( not data['counter'] ) %}
+        <table style="margin-top: 40px; margin-bottom: 20px">
+          <thead>
+          <tr>
+            <th scope="col">Other fees</th>
+            <th class="numeric" scope="col"></th>
+          </tr>
+          </thead>
+          <tbody>
+
+          <tr>
+            <td>Hearing fee</td>
+            <td class="numeric">£115</td>
+          </tr>
+
+          </tbody>
+        </table>
+
+        <p style="margin-bottom: 50px">You don't have to pay a hearing fee unless the claim goes to a hearing.</p>
+
+        {% endif %}
+
+
+        {% if data['counter'] == 'FULL-COUNTER' or data['counter'] == 'SET-OFF-COUNTER' or not data['counter'] %}
+
+        {% import "prototypes/features-to-be-built/includes/fee-table.html" as feeTable %}
+        {{ feeTable.show( 'claim' if counter else 'both' ) }}
+
+        {% endif %}
+
+          <input type="hidden" name="claim_amount" value="complete">
+          <input type="hidden" id="totalClaimAmount" name="totalClaimAmount">
+
+        </fieldset>
+
+        {% if data['counter'] == 'FULL-COUNTER' or data['counter'] == 'SET-OFF-COUNTER' %}
+
+        <h1 class="heading-medium">
+          Do you want to make this counterclaim?
+        </h1>
+
+        <div class="form-group">
+          <fieldset class="inline">
+
+            <div class="multiple-choice">
+              <input id="radio-yes" type="radio" name="counterclaim-proceed" value="yes">
+              <label for="radio-yes" data-target="yes-info">Yes</label>
+            </div>
+
+            <div class="multiple-choice">
+              <input id="radio-no" type="radio" name="counterclaim-proceed" value="no">
+              <label for="radio-no" data-target="no-info">No</label>
+            </div>
+
+          </fieldset>
+        </div>
+
+        {% endif %}
+
+        <!-- Application to set aside so not normal defence -->
+        {% if data['cancelccj'] == 'true' %}
+            <p><a class="button" href="../../../dashboard/applications-and-judgments/set-aside-default-ccj/task-list?how_much_paid=complete&whydontowe=complete">Continue</a></p>
+        {% else %}
+            {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}
+                <div class="form-group">
+                  <input type="submit" class="button" value="Save and continue"/>
+                </div>
+
+
+                <a href="{{ data.return_page if data.return_page | length > 0 else '../task-list' }}">Cancel</a>
+
+                {% else %}
+                <div class="form-group">
+                  <input type="submit" class="button" value="Save and continue"/>
+                </div>
+            {% endif %}
+
+        {% endif %}
+      </form>
+
+    </div>
+  </div>
+{% include 'prototypes/features-to-be-built/includes/contact.html' %}
+</main>
+
+
+<script type="text/javascript">
+  (function numericInputsSum(targetSpanId, claimAmount, interestValue) {
+
+    claimAmount = parseInt(claimAmount.replace(',', '')) + interestValue;
+
+    var x = '£' + parseFloat(claimAmount, 10).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString();
+
+    if (x.endsWith('.00')) {
+      x = x.replace('.00', '');
+    }
+
+    $('#' + targetSpanId).text(x);
+    $('#totalClaimAmount').val(x)
+
+
+  })('totalAmountDisplay', "{{data['totalSum'] or data['counter-amount']}}", {{data['radio_group2']=="interest_no"}} || {{data['radio_group2']!="interest_yes"}} ? {% if data['amount-owed'] %} 0 : 14 {% else %} 70 : 84{% endif %})
+</script>
+
+<style>
+#counter-table th {
+  font-weight: 400;
+}
+
+#counter-table #totalAmountDisplay {
+  font-weight: 400;
+}
+
+#counter-table #claim-fee th, #counter-table #claim-fee td span {
+  font-weight: 600;
+}
+</style>
+
+{% endblock %}

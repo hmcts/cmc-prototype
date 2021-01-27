@@ -1,0 +1,91 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+
+
+      <div class="govuk-box-highlight">
+              {% if data['defendant'] == "defendant_signed" or data['type'] == 2 %}
+
+        <h1 class="bold-large">You’ve settled out of court</h1>
+        	      <br>
+     <p>
+          <strong class="bold"><span id="Date2"></span></strong>
+        </p>
+          <p>
+        <a class="font-medium" href='../../../defendant/correspondence/forms/agreement?check=2' style="color: #FFFFFF">Download agreement as a PDF</a>
+      </p>
+              {% elif data['defendant'] == "offer" or data['defendant'] == "defendant" or data['type'] == 1%}
+                            <h1 class="bold-large">You've signed the agreement</h1>
+
+              {%else%}
+
+                <h1 class="bold-large">You've signed the agreement</h1>
+  <p>
+        <a class="font-medium" href='../../../defendant/correspondence/forms/agreement?check=2' style="color: #FFFFFF" >Download agreement as a PDF</a>
+      </p>
+        {%endif%}
+
+
+    </div>
+
+
+    <fieldset>
+      <h2 class="heading-medium">What happens next</h2>
+
+
+
+      {% if data['defendant'] == "defendant" or data['type'] == 1 %}
+      <p>Mary Richards will also be asked to sign. The agreement settles the claim once you've both signed.</p>
+  {% include "includes/survey.html" %}
+
+          <p><a class="button" href='../../home?dashboard=1.17'>Go to your account</a></p>
+
+      {% elseif data['defendant'] == "defendant_signed" or data['type'] == 2 %}
+      <p>You've both signed a settlement agreement which replaces the claim.</p>
+  {% include "includes/survey.html" %}
+
+          <p><a class="button" href='../../home?dashboard=2.16'>Go to your account</a></p>
+
+
+      {% elseif data['defendant'] == "claimant_signed"  %}
+        <p>The defendant Mary Richards and you have both signed. This agreement replaces the claim.</p>
+        {% include "includes/survey.html" %}
+
+      {% else %}
+
+      <p>Mary Richards will also be asked to sign. The agreement replaces the claim once you've both signed.</p>
+  {% include "includes/survey.html" %}
+
+          <p><a class="button" href='../../home?dashboard=1.17'>Go to your account</a></p>
+
+      {% endif %}
+
+
+  <h2 class="heading-medium" style="margin-bottom: 10px;">Help and support</h2>
+
+{% import 'prototypes/features-to-be-built/includes/contact-in-page.html' as contact %}
+{{ contact.output('small') }}
+
+  </div>
+</div>
+</main>
+
+<form method="post"  action="#" class="form" style="position: absolute;">
+  <select id="claimant2" name="claimant2" onchange="window.location.href='?type='+this.value">
+    <option  value="0" >Choose</option>
+    <option value="1" {% if data['type'] == 1 %}selected{% endif %}>1. Claimant signed agreement</option>
+    <option value="2" {% if data['type'] == 2 %}selected{% endif %}>2. Defendant countersigned agreement</option>
+
+  </select>
+</form>
+{% endblock %}
