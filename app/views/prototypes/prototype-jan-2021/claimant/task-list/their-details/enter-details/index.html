@@ -1,0 +1,153 @@
+{% extends "layout_task-list.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block home_link %} ../../task-list {% endblock %}
+{% block proposition_header %}
+{% set my_account="1" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% import 'prototypes/features-to-be-built/includes/address.html' as address %}
+
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}
+  {% else %}
+  <a href="#" class="link-back">Back</a>
+  {% endif %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}
+      <form method="post" action="{{ data.return_page if data.return_page | length > 0 else '../task-list' }}" class="form">
+        {% else %}
+          {% endif %}
+          {{formData | safe}}
+                        <form method="post" action="email" class="form">
+
+          {% if data['defendant-type']=="Sole trader" %}
+
+          <h1 class="heading-large">
+            <form method="post" action="your-details/date-of-birth" class="form">
+              Enter the defendant's details
+            </h1>
+            <p>You'll have to pay an extra fee if you later want to change the name of anyone involved with the claim.</p>
+            <div class="form-group">
+              <label class="form-label" for="defendant_name">Full name (include title)</label>
+              <input class="form-control " id="defendant_name" name="defendant_name" type="text"
+              value="{{data['defendant_name']}}">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="defendant_business_name">Trading name (if you know it)</label>
+              <input type="text" class="form-control" id="defendant_business_name"
+              name="defendant_business_name" value="{{data['defendant_business_name']}}">
+            </div>
+            <h2 class="heading-medium">
+              Their address
+            </h2>
+            <p>You can enter the defendant’s residential or trade address. The address must be in England or Wales.</p>
+            {% elseif data['defendant-type']=="Company" %}
+            <h1 class="heading-large">
+              Enter company details
+            </h1>
+
+            <p>You'll have to pay an extra fee if you later want to change the name of a company involved with the claim.</p>
+            <fieldset>
+              <div class="form-group">
+                <label class="form-label" for="defendant_name">Company name</label>
+                <input class="form-control " id="defendant_name" name="defendant_name" type="text"
+                value="{{data['defendant_name']}}">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="defendant-contact-name">Name of contact person (optional) </label>
+                <p class="form-hint">This might be a person you've discussed the claim with</p>
+                <input class="form-control" id="defendant-contact-name" name="defendant-contact-name" type="text"
+                value="{{data['defendant-contact-name']}}">
+              </div>
+            </fieldset>
+            <h2 class="heading-medium">
+              Company address
+            </h2>
+            <p>Enter the company’s registered office or a company address that has a connection with the claim. The address must be in England or Wales.</p>
+            {% elseif data['defendant-type']=="Organisation" %}
+            <h1 class="heading-large">
+              Enter organisation details
+            </h1>
+            <p>You'll have to pay an extra fee if you later want to change the name of an organisation involved with the claim.</p>
+            <fieldset>
+              <div class="form-group">
+                <label class="form-label" for="defendant_name">Organisation name</label>
+                <input class="form-control" id="defendant_name" name="defendant_name" type="text"
+                value="{{data['defendant_name']}}">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="defendant-contact-name">Name of contact person (optional)</label>
+                <p class="form-hint">This might be a person you've discussed the claim with</p>
+                <input class="form-control " id="defendant-contact-name" name="defendant-contact-name" type="text" value="{{data['defendant-contact-name']}}">
+              </div>
+
+
+
+            </fieldset>
+            <h2 class="heading-medium">
+              Organisation address
+            </h2>
+            <p>Enter the organisation's main office or an address that has a connection with the claim. The address must be in England or Wales.</p>
+            {% else %}
+
+            <h1 class="heading-large">
+              {% if data['defendants'].length > 0 %}
+                <span class="form-hint">Defendant {{ data['defendants'].length + 1 }}</span>
+              {% endif %}
+              Enter the defendant's details
+            </h1>
+            <p>You'll have to pay an extra fee if you later want to change the name of anyone involved with the claim.</p>
+
+            <h2 class="heading-medium" style="margin-top: 0.75em">Their name</h2>
+            <fieldset>
+                <div class="form-group-compound address-item form-group">
+                    <label class="form-label" for="name-title">Title</label>
+                    <input class="form-control" value="" id="name-title" style="width: 25%" />
+                </div>
+                <div class="form-group-compound address-item form-group">
+                    <label class="form-label" for="name-first">First name</label>
+                    <input class="form-control" value="" id="name-first" />
+                </div>
+                <div class="form-group-compound address-item form-group">
+                    <label class="form-label" for="name-last">Last name</label>
+                    <input class="form-control" value="" id="name-last" />
+                </div>
+            </fieldset>
+
+
+            <h2 class="heading-medium">
+              Their address
+            </h2>
+            <p>The address must be in England or Wales. Your claim may be invalid if you use the wrong address.</p>
+            <p>You must enter their usual or last known home address. You cannot use their work address.</p>
+
+
+            {% endif %}
+
+         {{ address.lookup('defendant') }}
+
+
+        <br />
+
+
+    {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}
+    <div class="form-group">
+      <input type="submit" class="button" value="Save changes"/>
+    </div>
+    <a href="{{ data.return_page if data.return_page | length > 0 else '../task-list' }}">Cancel</a>
+    {% else %}
+    <div class="form-group">
+      <input type="submit" class="button" value="Save and continue"/>
+    </div>
+    {% endif %}
+  </form>
+</div>
+</div>
+{% include 'prototypes/features-to-be-built/includes/contact.html' %}
+</main>
+{% endblock %}

@@ -1,0 +1,81 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="4" %}
+
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <a href="#" class="link-back">Back</a>
+      <h1 class="heading-large">
+        Judgment amount
+      </h1>
+      <p>The judgment will order the defendant to pay £5,000, including the claim fee and interest if applicable, as shown in this table:</p>
+      <form class="form" action="{% if data['radio-proceed'] == "judgment" %}../../../dashboard/claimant-response/admit-the-claim/task-list{% elseif data['radio-proceed'] == "judgment-pa" %}../../../dashboard/claimant-response/part-admit/task-list {% elseif data['radio-proceed'] == 'not-signed' %}check-your-judgment{% else %}payment-options{% endif %}" method="post">
+
+        <table class="table-form">
+          <caption class="visuallyhidden">Amount payable by defendant</caption>
+          <thead>
+            <tr>
+              <th scope="col"></th>
+              <th class="numeric last" scope="col">Amount</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <th scope="row">Claim amount</th>
+              <td class="numeric last">
+                <label class="visuallyhidden" for="amount">Claim amount</label>
+
+              <span class="font-small">£4,590</span>
+
+              </td>
+            </tr>
+
+          <tr>
+            <th scope="row">Claim fee amount</th>
+            <td class="numeric last">
+              <label class="visuallyhidden" for="amount">Claim fee</label>
+              <span class="font-small">£410</span>
+            </td>
+          </tr>
+
+
+
+
+
+          <tr>
+            <th scope="col" class="bold-medium">Total</th>
+            <td class="numeric last bold-medium">£5,000</td>
+          </tr>
+
+
+
+        </tbody>
+      </table>
+
+      <input type="hidden" name="judgment" value="complete">
+      <input type="submit" value="Save and continue" class="button">
+    </form>
+
+  </div>
+</div>
+{% include 'prototypes/features-to-be-built/includes/contact.html' %}
+</main>
+<!--
+<form method="post" action="#" class="form" style="position: absolute;">
+  <select name="interest" onchange="window.location.href='?interest='+this.value">
+    <option value="yes" {% if data['interest'] == 'yes' %}selected{% endif %}>With interest</option>
+    <option value="no" {% if data['interest'] != 'yes' %}selected{% endif %}>Without interest</option>
+  </select>
+</form>
+-->
+
+{% endblock %}

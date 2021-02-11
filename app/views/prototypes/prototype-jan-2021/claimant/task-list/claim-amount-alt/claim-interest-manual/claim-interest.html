@@ -1,0 +1,44 @@
+{% extends "layout_task-list.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block home_link %} ../../task-list {% endblock %}
+{% block proposition_header %}
+{% set my_account="1" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <form
+        name="aspnetForm"
+        method="post"
+        onsubmit="multiNavigation('continue-interest', ['interest_yes','interest_no'], ['interest', '../hwf']);return false;"
+        id="aspnetForm"
+        autocomplete="off">
+      {{formData | safe}}
+      <a href="#" class="link-back">Back</a>
+      <h1 class="heading-large">
+        Continue to claim interest after you submit your claim?
+      </h1>
+      <fieldset class="inline">
+        <div class="multiple-choice">
+          <input id="radio-1" type="radio" name="continue-interest" value="interest_yes">
+          <label for="radio-1">Yes</label>
+        </div>
+        <div class="multiple-choice">
+          <input id="radio-2" type="radio" name="continue-interest" value="interest_no">
+          <label for="radio-2">No</label>
+        </div>
+      </fieldset>
+      <div class="form-group">
+        <input type="submit" class="button" value="Save and continue"/>
+      </div>
+    </form>
+  </div>
+</div>
+{% include 'prototypes/features-to-be-built/includes/contact.html' %}
+</main>
+{% endblock %}

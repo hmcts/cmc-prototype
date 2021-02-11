@@ -1,0 +1,69 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <form
+      name="aspnetForm"
+      method="GET"
+      onsubmit="multiNavigation('radio_group4', ['hwf_number_yes','hwf_number_no'], ['../result/eligible', '../result/hwf-eligible']);return false;"
+      id="aspnetForm"
+      autocomplete="off">
+      {{formData | safe}}
+      <!--  <a href="#" onclick="history.go(-1)" class="link-back">Back</a>  -->
+
+      <h1 class="heading-large">
+        Do you have a Help with Fees reference number?
+      </h1>
+      <p>You'll only have one if you've already applied for Help with Fees.</p>
+      <fieldset class="inline">
+        <div class="multiple-choice">
+          <input id="radio-1" type="radio" name="radio_group4" value="hwf_number_yes">
+          <label for="radio-1">Yes</label>
+        </div>
+        <div class="multiple-choice" data-target="show-hwf-apply-link">
+          <input id="radio-2" type="radio" name="radio_group4" value="hwf_number_no">
+          <label for="radio-2">No</label>
+        </div>
+
+
+      </fieldset>
+
+      <div class="panel panel-border-narrow js-hidden" id="show-hwf-apply-link">
+        <h3 class="heading-small">
+          Decide whether to apply for Help with Fees
+        </h3>
+        <p>
+        <a href="https://www.gov.uk/get-help-with-court-fees" target="_blank">Apply for Help with Fees (opens in a new tab)</a> and make a claim using a Help with Fees number. If you need to use the paper Help with Fees application rather than the online version then you will not be able to use Online Civil Money Claims to issue your claim.</p>
+        <p>
+          When you apply for Help with Fees you will be asked for the number on your court or tribunal form.  Please note that this as N1.</p>
+          <p>Make a note of the Help with Fees number when you make an application.</p>
+          <p>You will need this number to make your claim when you are returned to this service.
+        
+        </p>
+
+    </div>
+    <br />
+
+      {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}
+      <div class="form-group">
+        <input type="submit" class="button" value="Continue"/>
+      </div>
+      <a href="{{ data.return_page if data.return_page | length > 0 else '../task-list' }}">Cancel</a>
+      {% else %}
+      <div class="form-group">
+        <input type="submit" class="button" value="Save and continue"/>
+      </div>
+      {% endif %}
+    </form>
+  </div>
+</div>
+{% include 'prototypes/features-to-be-built/includes/contact.html' %}
+</main>
+{% endblock %}

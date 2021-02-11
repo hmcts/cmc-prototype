@@ -1,0 +1,154 @@
+  {% set inc = 0 %}
+    <table>
+      <thead>
+        <tr>
+          <th colspan="2">
+            <h2 class="heading-medium">
+              {% set inc = inc+1 %}{{ inc }}. Your hearing requirements
+            </h2>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="no-border">
+            Preferred hearing centre
+          </td>
+          <td class="no-border">
+            {{ data['county_court'] or 'Guildford County Court' }}
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Briefly explain your reasons
+          </td>
+          <td>
+            I require wheelchair access
+        </tr>
+
+        <tr>
+          <td>
+            Do you want the court's permission to use an expert?
+          </td>
+          <td>
+            Yes
+          </td>
+
+        </tr>
+
+        <tr>
+          <td class="no-border">
+            Have you already got a report written by an expert?
+          </td>
+          <td class="no-border">
+            Yes
+          </td>
+        </tr>
+        <tr>
+          <td class="no-border">
+            Report 1
+          </td>
+          <td class="no-border">
+            Expert's name: Dave Williams<br />
+            Date of report: {{ date | date('subtract', 1, 'week') | date }}
+          </td>
+          <td class="change-answer no-border">
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Report 2
+          </td>
+          <td>
+            Expert's name: Steve Wilson<br />
+            Date of report: {{ date | date('subtract', 2, 'week') | date }}
+          </td>
+          <td class="change-answer">
+          </td>
+        </tr>
+
+        <tr>
+          <td class="no-border">
+            Does the claim involve something an expert can still examine?
+          </td>
+          <td class="no-border">
+            Yes
+          </td>
+        </tr>
+        <tr>
+          <td>
+            What is there to examine?
+          </td>
+          <td>
+            The damage to the roof can still be seen.
+          </td>
+          <td class="change-answer">
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Briefly explain why you believe an expert is needed
+          </td>
+          <td>
+            I would like an expert to examine the roof and confirm that the work was not up to a reasonable standard.
+          </td>
+
+        </tr>
+        <tr>
+          <td>
+            Do you want to give evidence as a witness?
+          </td>
+          <td>
+            {{ data['self']|capitalize or 'Yes' }}
+          </td>
+
+        </tr>
+        <tr>
+          <td>
+            Other witnesses
+          </td>
+          <td>
+            {{ data['other-witnesses'] or 2}}
+          </td>
+
+        </tr>
+        <tr>
+          <td>
+            Dates unavailable
+          </td>
+          <td>
+            {{ date | date('add', 1, 'week') | date('dddd D MMMM YYYY') }}<br />
+            {{ date | date('add', 12, 'days') | date('dddd D MMMM YYYY') }}<br />
+            {{ date | date('add', 25, 'days') | date('dddd D MMMM YYYY') }}<br />
+            {{ date | date('add', 35, 'days') | date('dddd D MMMM YYYY') }}<br />
+          </td>
+
+        </tr>
+        <tr>
+          <td>
+            Support required for a hearing
+          </td>
+          <td>
+            Welsh interpreter<br />
+            Disabled access
+          </td>
+
+        </tr>
+      </tbody>
+    </table>
+
+    <br />
+    <br />
+    <br />
+    <table>
+      <tbody>
+        <tr>
+          <td class="no-border">
+            <h2 class="heading-medium" style="margin: 0">
+              Signed
+            </h2></td>
+          <td class="no-border">{% if party == 'claimant' %}Jan Clark{% else %}Mary Richards{% endif %}<br />{{ now | date( 'subtract', 1, 'day' ) | date }}
+          </td>
+        </tr>
+    </tbody>
+  </table>
