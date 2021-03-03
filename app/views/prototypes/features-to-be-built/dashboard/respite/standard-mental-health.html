@@ -1,0 +1,76 @@
+{% extends "layout.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block proposition_header %}
+{% set my_account="4" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <a href="#" class="link-back">Back</a>
+
+
+      <h1 class="heading-large">
+        What type of debt respite scheme is this?
+      </h1>
+      <form
+      name="aspnetForm"
+      method="post"
+      onsubmit="conditionalNavigation('radio-indent-group', 'Yes', 'default-judgment/claim-amount-deduct', 'default-judgment/claim-amount-deduct');return false;"
+      id="aspnetForm"
+      autocomplete="off">
+      <div class="form-group">
+        <fieldset>
+          <legend class="visually-hidden">Do you know the defendant's date of birth?</legend>
+          <div class="multiple-choice" data-target="contact-by-text">
+            <input id="dob-yes" type="radio" name="radio-indent-group" value="Yes">
+            <label for="example-contact-by-text"> Standard</label>
+          </div>
+          <div class="panel panel-border-narrow js-hidden" id="contact-by-text">
+           <div class="form-group">
+            <div class="form-date">
+              <p>Whens the anticipated end date (optional)?</p>
+              <p class="form-hint">For example, 29 05 1985</p>
+              <div class="form-group form-group-day">
+                <label for="dob-day">Day</label>
+                <input class="form-control" id="dob-day" type="number" pattern="[0-9]*" min="0" max="31">
+              </div>
+              <div class="form-group form-group-month">
+                <label for="dob-month">Month</label>
+                <input class="form-control" id="dob-month" type="number" pattern="[0-9]*" min="0" max="12">
+              </div>
+              <div class="form-group form-group-year">
+                <label for="dob-year">Year</label>
+                <input class="form-control" id="dob-year" type="number" pattern="[0-9]*" min="0" max="2014">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="multiple-choice">
+          <input id="radio-no" type="radio" name="radio-indent-group" value="No">
+          <label for="radio-no" data-target="no-info">
+            Mental Health Moratorium <br>
+
+        </div>
+      </div>
+    </fieldset>
+    <input id="advert-option-next--button" type="submit" value="Save and continue" class="button"
+    data-ignore-double-submit="true">
+  </form>
+</div>
+</div>
+</main>
+<form method="post"  action="details-defendant" class="form" style="position: absolute;">
+  <select id="control-box" name="control-box" onchange="this.form.submit()">
+    <option  value="0" {% if data['control-box-value'] == 0 %}selected{% endif %}>Choose</option>
+    <option  value="1" {% if data['control-box-value'] == 1 %}selected{% endif %}>Individual</option>
+    <option value="2" {% if data['control-box-value'] == 2 %}selected{% endif %}>Sole trader</option>
+    <option value="3" {% if data['control-box-value'] == 3 %}selected{% endif %}>Company</option>
+    <option value="4" {% if data['control-box-value'] == 4 %}selected{% endif %}>Organisation</option>
+  </select>
+</form>
+{% endblock %}
