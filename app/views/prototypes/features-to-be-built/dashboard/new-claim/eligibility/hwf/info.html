@@ -1,51 +1,73 @@
-{% extends "layout.html" %}
-
-{% block page_title %}
-Money Claims Prototype
-{% endblock %}
-
-{% block content %}
+{% extends "layout.html" %} {% block page_title %} Money Claims Prototype {%
+endblock %} {% block content %}
 <main id="content" role="main">
   {% include "includes/phase_banner_beta.html" %}
   <div class="grid-row">
     <div class="column-two-thirds">
       <form
-      name="aspnetForm"
-      method="GET"
-      onsubmit="multiNavigation('radio_group4', ['hwf_number_yes','hwf_number_no'], ['./apply', '../hwf']);return false;"
-      id="aspnetForm"
-      autocomplete="off">
-      {{formData | safe}}
-      <!--  <a href="#" onclick="history.go(-1)" class="link-back">Back</a>  -->
+        name="aspnetForm"
+        method="GET"
+        onsubmit="multiNavigation('radio_group4', ['hwf_number_yes','hwf_number_no'], ['./apply', '../hwf']);return false;"
+        id="aspnetForm"
+        autocomplete="off"
+      >
+        {{formData | safe}}
+        <!--  <a href="#" onclick="history.go(-1)" class="link-back">Back</a>  -->
 
-      <h1 class="heading-large">
-        Some useful information about Help with Fees
-      </h1>
-      <p>Making an application for Help with Fees does not guarantee that you will get your fee covered.  You may still have to pay some or all of your court fee to get the claim issued (for the court system to officially start the claim and send details to the other side). When you apply for Help with Fees, you should receive an update from us within 5 working days, giving you the result of your application.
-
-        If you want to apply for Help with Fees, you will complete an online form in a new window. This will give you a reference number. Please note the number and keep it safe, as you will need it later in the claim process.  (NB: if you have more than one claim going on, each claim must have a separate Help with Fees application and reference number).  
-        You can send in your claim as soon as you have the Help with Fees reference number, but the claim will not be issued until the Help with Fees application has been processed by the court.  This is so that you will know what fees are covered and what you still have to pay. If you can’t pay, or choose not to, the claim will not be issued. The claim will stop here unless you change your mind within 95 days.
-        
-        You may be asked by the court to email evidence in support of your application before your claim is issued.
+        <h1 class="heading-large">
+          Some useful information about Help with Fees
+        </h1>
+        <p>
+          Making an application for Help with Fees does not guarantee that you
+          will get your fee covered. You may still have to pay some or all of
+          your court fee to get the claim issued (for the court system to
+          officially start the claim and send details to the other side). When
+          you apply for Help with Fees, you should receive an update from us
+          within 5 working days, giving you the result of your application.
+        </p>
+        <p>
+          If you want to apply for Help with Fees, you will complete an online
+          form in a new window. This will give you a reference number. Please
+          note the number and keep it safe, as you will need it later in the
+          claim process. (NB: if you have more than one claim going on, each
+          claim must have a separate Help with Fees application and reference
+          number). You can send in your claim as soon as you have the Help with
+          Fees reference number, but the claim will not be issued until the Help
+          with Fees application has been processed by the court. This is so that
+          you will know what fees are covered and what you still have to pay. If
+          you can’t pay, or choose not to, the claim will not be issued. The
+          claim will stop here unless you change your mind within 95 days.
+        </p>
+        <p>
+          You may be asked by the court to email evidence in support of your
+          application before your claim is issued.
         </p>
         <h2 class="heading-medium">
           Do you wish to continue to make a Help with Fees Application?
         </h2>
-      <fieldset class="inline">
-        <div class="multiple-choice">
-          <input id="radio-1" type="radio" name="radio_group4" value="hwf_number_yes">
-          <label for="radio-1">Yes</label>
-        </div>
-        <!-- <div class="multiple-choice" data-target="show-hwf-apply-link"> -->
-        <div class="multiple-choice">
-          <input id="radio-2" type="radio" name="radio_group4" value="hwf_number_no">
-          <label for="radio-2">No</label>
-        </div>
+        <fieldset class="inline">
+          <div class="multiple-choice">
+            <input
+              id="radio-1"
+              type="radio"
+              name="radio_group4"
+              value="hwf_number_yes"
+            />
+            <label for="radio-1">Yes</label>
+          </div>
+          <!-- <div class="multiple-choice" data-target="show-hwf-apply-link"> -->
+          <div class="multiple-choice">
+            <input
+              id="radio-2"
+              type="radio"
+              name="radio_group4"
+              value="hwf_number_no"
+            />
+            <label for="radio-2">No</label>
+          </div>
+        </fieldset>
 
-
-      </fieldset>
-
-      <!-- <div class="panel panel-border-narrow js-hidden" id="show-hwf-apply-link">
+        <!-- <div class="panel panel-border-narrow js-hidden" id="show-hwf-apply-link">
         <h3 class="heading-small">
           Decide whether to apply for Help with Fees
         </h3>
@@ -59,21 +81,26 @@ Money Claims Prototype
         </p>
 
     </div> -->
-    <br />
+        <br />
 
-      {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}
-      <div class="form-group">
-        <input type="submit" class="button" value="Continue"/>
-      </div>
-      <a href="{{ data.return_page if data.return_page | length > 0 else '../task-list' }}">Cancel</a>
-      {% else %}
-      <div class="form-group">
-        <input type="submit" class="button" value="Save and continue"/>
-      </div>
-      {% endif %}
-    </form>
+        {% if data.return_page and data.return_page.includes('check-and-send')
+        or data.return_page and
+        data.return_page.includes('check-your-answers')%}
+        <div class="form-group">
+          <input type="submit" class="button" value="Continue" />
+        </div>
+        <a
+          href="{{ data.return_page if data.return_page | length > 0 else '../task-list' }}"
+          >Cancel</a
+        >
+        {% else %}
+        <div class="form-group">
+          <input type="submit" class="button" value="Save and continue" />
+        </div>
+        {% endif %}
+      </form>
+    </div>
   </div>
-</div>
-{% include 'prototypes/features-to-be-built/includes/contact.html' %}
+  {% include 'prototypes/features-to-be-built/includes/contact.html' %}
 </main>
 {% endblock %}
