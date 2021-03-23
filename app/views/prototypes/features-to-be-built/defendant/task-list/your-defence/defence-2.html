@@ -174,12 +174,7 @@ Money Claims Prototype
       
       </tbody>
       </table> 
-    <div class="timeline-row">
-    <div id="add-event-container">
-      <a class="secondary-button" id="add-another-event-button" href="#">Add another event</a>
-    </div>
-    </div>
-    <br>
+ 
   </div>
     <div class="grid-row">
     <div class="column-two-thirds" id="claim-details">
@@ -208,25 +203,26 @@ Money Claims Prototype
 </div>
 {% block page_scripts %}
 
- <script>
-$('button[name="cmdAddRow"]').on('click', function(){
- 
-            $curRow = $(this).closest('tr');
-            $newRow = $curRow.clone(true).attr('value','');
-            $('#myTable tr:last input').val('')
-            $('#myTable tr:last textarea').val('')
-            $newRow.addClass( "rowcolor" );
-            $newRow.find("input").val("").end();
-            $newRow.find("textarea").val("").end();
-            console.log($newRow);
-            $curRow.after($newRow);
-            console.log('added');
-        });
-  
-        $('button[name="cmdDeleteRow"]').on('click', function(){
-   $(this).closest('tr').remove()
-})
-  </script>
+<script>
+  $('button[name="cmdAddRow"]').on('click', function(){
+   
+              $curRow = $(this).closest('tr');
+              $newRow = $curRow.clone(true).attr('value','');
+              $('#myTable tr:last input').val('')
+              $('#myTable tr:last textarea').val('')
+              $newRow.addClass( "rowcolor" );
+              $curRow.removeClass( "rowcolor" );
+              $newRow.find("input").val("").end();
+              $newRow.find("textarea").val("").end();
+              console.log($newRow);
+              $curRow.after($newRow);
+              console.log('added');
+          });
+    
+          $('button[name="cmdDeleteRow"]').on('click', function(){
+     $(this).closest('tr').remove()
+  })
+    </script>
   
 {% endblock %}
 {% include 'prototypes/features-to-be-built/includes/contact.html' %}
