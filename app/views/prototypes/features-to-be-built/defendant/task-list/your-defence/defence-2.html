@@ -112,22 +112,35 @@ Money Claims Prototype
       </thead>
       
       <tbody class="govuk-table__body">
+        <tr class="govuk-table__row">
       
-      <tr class="govuk-table__row">
+          <td class="govuk-table__cell">  <input class="form-control timeline-column-1" type="text" id="date-form-control" name="cd-date-1" value="{{data['cd-date-1']}}" onfocus=></td>
+        
+          <td class="govuk-table__cell " data-sort-value="1568847600000">  <textarea style="width: 90%;" class="timeline-column-text" name="cd-timeline-1" id="timeline-1" value="{{data['cd-timeline-1']}}"  rows="2">{{data['cd-timeline-1']}}</textarea></td>
+        
+          <td class="govuk-table__cell " data-sort-value="59"> <ol>
+         
+              <li></li>
+             
+            <br>
+       <li> <button type="button" class="link" onclick="myFunction()" >Insert another event</button></li>
+          </ol></td>
+        
+        </tr>
+      
+      <tr id ="row2" class="govuk-table__row">
       
         <td class="govuk-table__cell">  <input class="form-control timeline-column-1" type="text" id="date-form-control" name="cd-date-1" value="{{data['cd-date-1']}}" onfocus=></td>
       
         <td class="govuk-table__cell " data-sort-value="1568847600000">  <textarea style="width: 90%;" class="timeline-column-text" name="cd-timeline-1" id="timeline-1" value="{{data['cd-timeline-1']}}"  rows="2">{{data['cd-timeline-1']}}</textarea></td>
       
-        <td class="govuk-table__cell " data-sort-value="59"> 
-          <ol>
-            <li>
-            <li><button type="button" class="link" name="cmdDeleteRow">Remove this event</button></li>
-          
-            <br>
-            <li> <button type="button" class="link" name="cmdAddRow">Insert another event</button></li>
-          </ol>
-      </td>
+        <td class="govuk-table__cell " data-sort-value="59"> <ol>
+        
+          <li><button type="button" class="link" name="cmdDeleteRow">Remove this event</button></li>
+        
+          <br>
+          <li> <button type="button" class="link" name="cmdAddRow">Insert another event</button></li>
+        </ol></td>
       
       </tr>
       <tr class="govuk-table__row">
@@ -204,24 +217,40 @@ Money Claims Prototype
 {% block page_scripts %}
 
 <script>
+
+  function myFunction() {
+    var table = document.getElementById("myTable");
+    var row = table.insertRow(2);
+    var cell1 = row.insertCell(0);
+    var cell2 = row.insertCell(1);
+    var cell3 = row.insertCell(2);
+    cell1.innerHTML = '<input class="form-control timeline-column-1" type="text" id="date-form-control" name="cd-date-1" value="{{data['cd-date-1']}}" onfocus=>';
+    cell2.innerHTML = '  <textarea style="width: 90%;" class="timeline-column-text" name="cd-timeline-1" id="timeline-1" value="{{data['cd-timeline-1']}}"  rows="2">{{data['cd-timeline-1']}}</textarea>';
+    cell3.innerHTML = '<ol><li><button type="button" class="link" name="cmdDeleteRow">Remove this event</button></li><br><li> <button type="button" class="link" name="cmdAddRow">Insert another event</button></li></ol>';
+  row.classList.add('rowcolor')
+  
+  
   $('button[name="cmdAddRow"]').on('click', function(){
    
-              $curRow = $(this).closest('tr');
-              $newRow = $curRow.clone(true).attr('value','');
-              $('#myTable tr:last input').val('')
-              $('#myTable tr:last textarea').val('')
-              $newRow.addClass( "rowcolor" );
-              $curRow.removeClass( "rowcolor" );
-              $newRow.find("input").val("").end();
-              $newRow.find("textarea").val("").end();
-              console.log($newRow);
-              $curRow.after($newRow);
-              console.log('added');
-          });
-    
-          $('button[name="cmdDeleteRow"]').on('click', function(){
-     $(this).closest('tr').remove()
+   $curRow = $(this).closest('tr');
+   $newRow = $curRow.clone(true).attr('value','');   
+   $newRow.addClass( "rowcolor" );
+      
+   $curRow.removeClass( "rowcolor" );
+   $newRow.find("input").val("").end();
+   $newRow.find("textarea").val("").end();
+   console.log($newRow);
+   $curRow.after($newRow);
+   console.log('added');
+  });
+  
+  $('button[name="cmdDeleteRow"]').on('click', function(){
+  $(this).closest('tr').remove()
+  
   })
+  }
+  
+  
     </script>
   
 {% endblock %}
