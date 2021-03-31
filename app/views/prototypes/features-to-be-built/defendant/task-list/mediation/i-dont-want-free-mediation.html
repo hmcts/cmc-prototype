@@ -14,11 +14,23 @@ Money Claims Prototype
 <main id="content" role="main">
 
   {% include "includes/phase_banner_beta.html" %}
-
+  <a href="#" class="link-back">Back</a>
   <div class="grid-row">
+    {% if data.error == "true" %}
+<div class="error-summary" role="group" aria-labelledby="error-summary-heading" tabindex="-1">
+  <h2 class="heading-medium error-summary-heading" id="error-summary-heading">
+    There was a problem
+  </h2>
+  <ul class="error-summary-list">
+    
+      <li><a href="#another-reason">Reason must be 500 characters or fewer</a></li>
+    
+  </ul>
+</div>
+{%endif%}
     <div class="column-two-thirds">
 
-      <a href="#" class="link-back">Back</a>
+  
 
       <h1 class="heading-large">
         I do not agree to free mediation
@@ -27,16 +39,11 @@ Money Claims Prototype
 
       <p>You have chosen not to try free mediation. Please tell us why: </p>
 
-      <form
-        name="aspnetForm"
-        method="post"
-        id="aspnetForm"
-        autocomplete="off"
-        onsubmit="multiNavigation('radio-mediation-group', ['1', '2', '3', '4', '5', '6'], ['../../task-list', '../../task-list', '../../task-list', '../../task-list', '../../task-list', '../../task-list']);return false;">
+      <form name="aspnetForm" method="post" id="aspnetForm" autocomplete="off" action="notAgreeToAediationRoute">
 
         <input id="your-offer" name="offer" type="hidden">
 
-        <div class="form-group">
+        <div class="form-group  {% if data.error == "true" %} form-group-error" {%endif%}>
           <fieldset>
 
             <legend class="visually-hidden">Will you try mediation?</legend>
@@ -69,15 +76,14 @@ Money Claims Prototype
             </div>
 
             <div class="multiple-choice" data-target="another-reason">
-              <input id="radio-6" type="radio" name="radio-mediation-group" value="6">
+              <input id="radio-6" type="radio" name="radio-mediation-group" value="6"  {% if data.error == "true" %}checked {%endif%}>
               <label for="radio-6" data-target="6-info">Another reason (please specify)</label>
             </div>
 
             <div class="panel panel-border-narrow js-hidden" id="another-reason">
-              <label class="form-label" for="">Enter your reason here</label>
-              <!--<span class="form-hint">For example, I don't want to</span>
-              <input class="form-control" id="phone-claimant" type="" name="phone-claimant" value="{{data['phone-claimant']}}">-->
-                <textarea class="govuk-textarea" id="more-detail" name="more-detail" rows="5" aria-describedby="more-detail-hint"></textarea>
+              <label class="form-label" for="another-reason">Enter your reason here</label>
+              {% if data.error == "true" %}  <span class="error-message">Reason must be 500 characters or fewer</span>{%endif%}
+                <textarea class="govuk-textarea" id="more-detail" name="more-detail-reason" rows="5" aria-describedby="more-detail-hint"></textarea>
             </div>
 
             
@@ -85,6 +91,7 @@ Money Claims Prototype
 
 
           </fieldset>
+        </div>
           <input type="hidden" name="mediation" value="complete">
           <div class="form-group">
             <a href="../index">Skip this section</a>
@@ -93,7 +100,7 @@ Money Claims Prototype
             <input type="submit" class="button" value="Save and continue"/>
           </div>
          
-        </div>
+       
       </form>
 
 <p style="font-size: 16px;"> Any information you provide is used solely by HM Courts and Tribunals Service to help us improve our services. Your answers have no impact on the progress or outcome of your case, or on any contact you have with HM Courts and Tribunals Service.</p>

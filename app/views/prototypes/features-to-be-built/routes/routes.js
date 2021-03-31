@@ -235,6 +235,19 @@ module.exports = function(app){
   })
 
 
+  app.post( '/' + strPath + 'defendant/task-list/mediation/notAgreeToAediationRoute', (req, res) => {
+
+      if (req.session.data['more-detail-reason'].length > 500 ) {
+      res.redirect('/' + strPath + 'defendant/task-list/mediation/i-dont-want-free-mediation?error=true');
+    } else {
+      res.redirect( '../../task-list' ); 
+    }
+
+  })
+
+
+
+
   app.get('*/prototype-admin/view-data', function(req, res){
       res.render('prototype-admin/view-data', { data: JSON.stringify( req.session, null, 2) } )
   });
