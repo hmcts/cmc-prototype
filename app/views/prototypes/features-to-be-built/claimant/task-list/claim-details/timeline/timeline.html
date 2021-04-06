@@ -1,0 +1,158 @@
+{% extends "layout_task-list.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block home_link %} ../../task-list {% endblock %}
+{% block proposition_header %}
+{% set my_account="1" %}
+
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-full-width">
+      <!--  <a href="#" onclick="history.go(-1)" class="link-back">Back</a>  -->
+      {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}
+       <form method="post" action="{{ data.return_page if data.return_page | length > 0 else '../task-list' }}" class="form">
+        {% else %}
+      <form method="post" action="evidence" class="form">
+        {% endif %}
+        {{formData | safe}}
+        <h1 class="heading-large">
+          Timeline of events
+        </h1>
+
+        <p>If you don't know the exact date, tell us the month and year.</p>
+
+
+        <p class="bold-small">Example timeline</p>
+        <ul class="list list-bullet">
+          <li>12 January 2017 - John Smith gave me a quote to replace the roof.</li>
+          <li>14 January 2017 - We agreed and signed a contract for the work.</li>
+          <li>21 March 2017 - I noticed a leak on the landing and told Mr Smith about this.</li>
+        </ul>
+
+        <br>
+    
+        <fieldset>
+          <legend class="visuallyhidden">
+            Explain what happened
+          </legend>
+          <table id="myTable" class="govuk-table">
+
+            <thead class="govuk-table__head">
+            <tr class="govuk-table__row">
+            
+              <th scope="col" class="govuk-table__header" aria-sort="ascending"> Date
+        
+              <span class="form-hint">For example, {{ now | date('MMMM YYYY')}} </span></th>
+            
+              <th scope="col" class="govuk-table__header" aria-sort="none"> What happened
+        
+              <span class="form-hint">For example, you might have signed a contract</span></th>
+            
+              <th scope="col" class="govuk-table__header " aria-sort="none">Actions
+                <span class="form-hint"> </span>
+
+              </th>
+             
+            </tr>
+            
+            </thead>
+            
+            <tbody class="govuk-table__body">
+              <tr class="govuk-table__row">
+            
+                <td style=" padding-left:10px;" class="govuk-table__cell">  <input class="form-control timeline-column-1" type="text" id="date-form-control" name="cd-date-1" value="{{data['cd-date-1']}}" onfocus=>
+                  <br><br><button type="button" class="link" name="cmdDeleteRow">Remove this event</button>
+                </td>
+              
+                <td class="govuk-table__cell " data-sort-value="1568847600000">  <textarea style="width: 90%;" class="timeline-column-text" name="cd-timeline-1" id="timeline-1" value="{{data['cd-timeline-1']}}"  rows="2">{{data['cd-timeline-1']}}</textarea></td>
+              
+                <td class="govuk-table__cell " data-sort-value="59">
+                  <ol>
+                
+                    <li> <button id="btn3" type="button" class="link" onclick="">Move up</button></li>
+                
+                    <br>
+                    <li>  <button id="btn4" type="button" class="link" onclick="" >Move down</button> </li>
+                  </ol>
+                </td>
+              
+              </tr>
+            
+          
+        
+            
+           
+            
+            </tbody>
+            </table> 
+      
+         
+
+        </fieldset>
+        <div class="form-group">
+        <button id="btn1" type="button" class="secondary-button" onclick="myFunction()" >Insert another event</button>
+        <button id="btn2" type="button" class="secondary-button visuallyhidden" name="cmdAddRow">Insert another event</button>
+      </div>
+        {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}
+        <div class="form-group">
+          <input type="submit" class="button" value="Save changes"/>
+        </div>
+        <a href="{{ data.return_page if data.return_page | length > 0 else '../task-list' }}">Cancel</a>
+      {% else %}
+        <div class="form-group">
+          <input type="submit" class="button" value="Save and continue"/>
+        </div>
+      {% endif %}
+      </form>
+    </div>
+  </div>
+  {% block page_scripts %}
+<script>
+
+function myFunction() {
+  var table = document.getElementById("myTable");
+  var row = table.insertRow(2);
+  var cell1 = row.insertCell(0);
+  var cell2 = row.insertCell(1);
+  var cell3 = row.insertCell(2);
+  $("#btn1").hide()
+  $("#btn2").removeClass('visuallyhidden')
+  cell1.innerHTML = '<input style="margin-top:0px; margin-left:10px;"class="form-control timeline-column-1" type="text" id="date-form-control" name="cd-date-1" value="{{data['cd-date-1']}}" onfocus=><br><br><button style="margin-left:10px"; type="button" class="link" name="cmdDeleteRow">Remove this event</button>';
+  cell2.innerHTML = '  <textarea style="width: 90%;" class="timeline-column-text" name="cd-timeline-1" id="timeline-1" value="{{data['cd-timeline-1']}}"  rows="2">{{data['cd-timeline-1']}}</textarea>';
+  cell3.innerHTML = '<ol><li> <button id="btn3" type="button" class="link" onclick="">Move up</button></li><br><li>  <button id="btn4" type="button" class="link" onclick="" >Move down</button> </li></ol>';
+row.classList.add('rowcolor')
+
+
+$('button[name="cmdAddRow"]').on('click', function(){
+ 
+ $curRow = $(row);
+ $newRow = $curRow.clone(true).attr('value','');   
+
+    
+ $curRow.removeClass( "rowcolor" );
+ $newRow.find("input").val("").end();
+ $newRow.find("textarea").val("").end();
+ console.log($newRow);
+ $curRow.after($newRow);
+ console.log('added');
+});
+
+$('button[name="cmdDeleteRow"]').on('click', function(){
+$(this).closest('tr').remove()
+
+})
+}
+
+
+  </script>
+{% endblock %}
+
+{% include 'prototypes/prototype-oct-2019/includes/contact.html' %}
+</main>
+{% endblock %}
+
