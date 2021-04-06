@@ -1,0 +1,166 @@
+{% extends "layout_task-list.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block home_link %} ../../task-list {% endblock %}
+{% block proposition_header %}
+{% set my_account="1" %}
+
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="grid-row">
+    <div class="column-full-width">
+      <!--  <a href="#" onclick="history.go(-1)" class="link-back">Back</a>  -->
+      {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}
+       <form method="post" action="{{ data.return_page if data.return_page | length > 0 else '../task-list' }}" class="form">
+        {% else %}
+      <form method="post" action="evidence" class="form">
+        {% endif %}
+        {{formData | safe}}
+        <h1 class="heading-large">
+          Timeline of events
+        </h1>
+
+        <p>If you don't know the exact date, tell us the month and year.</p>
+
+
+        <p class="bold-small">Example timeline</p>
+        <ul class="list list-bullet">
+          <li>12 January 2017 - John Smith gave me a quote to replace the roof.</li>
+          <li>14 January 2017 - We agreed and signed a contract for the work.</li>
+          <li>21 March 2017 - I noticed a leak on the landing and told Mr Smith about this.</li>
+        </ul>
+
+        <br>
+    
+        <fieldset>
+          <legend class="visuallyhidden">
+            Explain what happened
+          </legend>
+          <table id="sort" class="govuk-table">
+
+        
+            <tr class="govuk-table__row">
+            <th></th>
+              <th scope="col" class="govuk-table__header" aria-sort="ascending"> Date
+        
+              <span class="form-hint">For example, {{ now | date('MMMM YYYY')}} </span></th>
+            
+              <th scope="col" class="govuk-table__header" aria-sort="none"> What happened
+        
+              <span class="form-hint">For example, you might have signed a contract</span></th>
+            
+              <th scope="col" class="govuk-table__header " aria-sort="none">Actions
+                <span class="form-hint"> </span>
+
+              </th>
+             
+            </tr>
+            
+      
+            
+          <tbody>
+              <tr  id="tr_clone" class="  govuk-table__row">
+                <td style="width:5%" class="index">grabber</td>
+              <td style="padding-top:30px; padding-left:10px;" class=" govuk-table__cell "> <input  class=" form-control timeline-column-1" type="text" id="date-form-control"
+                name="cd-date-1" value="{{data['cd-date-1']}}" onfocus=>
+               <br><br>
+                <button type="button" class="link" name="cmdDeleteRow">Remove this event</button>
+                </td>
+              
+
+<td class="govuk-table__cell " data-sort-value="1568847600000">
+  <div style="padding-top:15px;" class="form-group"><textarea style="width: 90%; padding-top:15px;"
+      class="timeline-column-text" name="cd-timeline-1" id="timeline-1" value="{{data['cd-timeline-1']}}"
+      rows="2">{{data['cd-timeline-1']}}</textarea></div>
+</td>
+              
+                <td class="govuk-table__cell " data-sort-value="59">
+                  <ol style="padding-top: 15px;">
+              
+                    <li><button type="button" class="link tr_clone_remove" value="Insert above">Insert above</button></li>
+              
+                    <br>
+                    <li> <button type="button" class="link tr_clone_add" value="Insert below">Insert below</button></li>
+                  </ol>
+                </td>
+              
+              </tr>
+            </tbody>
+          
+        
+            
+           
+            
+
+            </table> 
+          
+         
+
+        </fieldset>
+      
+      {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}
+        <div class="form-group">
+          <input type="submit" class="button" value="Save changes"/>
+        </div>
+        <a href="{{ data.return_page if data.return_page | length > 0 else '../task-list' }}">Cancel</a>
+      {% else %}
+        <div class="form-group">
+          <input type="submit" class="button" value="Save and continue"/>
+        </div>
+      {% endif %}
+      </form>
+    </div>
+  </div>
+  {% block page_scripts %}
+<script>
+
+
+$("button.tr_clone_add").on('click', function() {
+  $curRow = $(this).closest('tr');
+  $newRow = $curRow.clone(true).attr('value','');   
+  $curRow.after($newRow.addClass( "rowcolor" ), $curRow.removeClass( "rowcolor" ));
+
+});
+
+$("button.tr_clone_remove").on('click', function() {
+  $curRow = $(this).closest('tr');
+  $newRow = $curRow.clone(true).attr('value','');   
+  $curRow.before($newRow.addClass( "rowcolor" ), $curRow.removeClass( "rowcolor" ));
+});
+
+
+$('button[name="cmdDeleteRow"]').on('click', function(){
+$(this).closest('tr').remove()
+})
+
+var fixHelperModified = function(e, tr) {
+    var $originals = tr.children();
+    var $helper = tr.clone();
+    $helper.children().each(function(index) {
+        $(this).width($originals.eq(index).width())
+    });
+    return $helper;
+},
+    updateIndex = function(e, ui) {
+        $('td.index', ui.item.parent()).each(function (i) {
+            $(this).html(i + 1);
+        });
+    };
+
+$("#sort tbody").sortable({
+    helper: fixHelperModified,
+    stop: updateIndex
+}).disableSelection();
+  </script>
+
+{% endblock %}
+
+{% include 'prototypes/prototype-oct-2019/includes/contact.html' %}
+</main>
+{% endblock %}
+
