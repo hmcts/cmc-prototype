@@ -178,10 +178,10 @@ var addPartyFunction = function (app, nunjucksEnv) {
     nunjucksEnv.addGlobal('partyName', function (partyType, nameFormat, textCase) {
 
       if ( partyType == 'claimant' ){
-        strFirstName = ( typeof req.session.names !== 'undefined' && typeof req.session.names.claimant !== 'undefined' && typeof req.session.names.claimant.first !== 'undefined' && req.session.names.claimant.first ) ? req.session.names.claimant.first : 'Sam';
+        strFirstName = ( typeof req.session.names !== 'undefined' && typeof req.session.names.claimant !== 'undefined' && typeof req.session.names.claimant.first !== 'undefined' && req.session.names.claimant.first ) ? req.session.names.claimant.first : 'Jan';
         strLastName = ( typeof req.session.names !== 'undefined' && typeof req.session.names.claimant !== 'undefined' && typeof req.session.names.claimant.last !== 'undefined'  && req.session.names.claimant.last ) ? req.session.names.claimant.last : 'Clark';
       } else {
-        strFirstName = ( typeof req.session.names !== 'undefined' && typeof req.session.names.defendant !== 'undefined' && typeof req.session.names.defendant.first !== 'undefined' && req.session.names.defendant.first ) ? req.session.names.defendant.first : 'Alex';
+        strFirstName = ( typeof req.session.names !== 'undefined' && typeof req.session.names.defendant !== 'undefined' && typeof req.session.names.defendant.first !== 'undefined' && req.session.names.defendant.first ) ? req.session.names.defendant.first : 'Mary';
         strLastName = ( typeof req.session.names !== 'undefined' && typeof req.session.names.defendant !== 'undefined' && typeof req.session.names.defendant.last !== 'undefined' && req.session.names.defendant.last ) ? req.session.names.defendant.last : 'Richards';
       }
 
