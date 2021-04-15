@@ -9,7 +9,14 @@ Money Claims Prototype
 {% include "includes/propositional_navigation.html" %}
 {% endblock %}
 {% block content %}
-<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<style>
+  #sortable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
+  #sortable tbody { margin: 0 5px 5px 5px; padding: 5px; font-size: 1.2em; height: 1.5em; }
+  html>body #sortable tbody { height: 1.5em; line-height: 1.2em; }
+  .ui-state-highlight { background-color:#f3f2f1; height: 173px; line-height: 922px; }
+  </style>
 <main id="content" role="main">
   {% include "includes/phase_banner_beta.html" %}
   <div class="grid-row">
@@ -25,14 +32,15 @@ Money Claims Prototype
           Timeline of events
         </h1>
 
-        <p>If you don't know the exact date, tell us the month and year.</p>
+        <p>If you do not know the exact date, tell us the month and year.</p>
 
 
         <p class="bold-small">Example timeline</p>
         <ul class="list list-bullet">
-          <li>12 January 2017 - John Smith gave me a quote to replace the roof.</li>
-          <li>14 January 2017 - We agreed and signed a contract for the work.</li>
-          <li>21 March 2017 - I noticed a leak on the landing and told Mr Smith about this.</li>
+          <li>21 March 2021 - I noticed a leak on the landing and told Mr Smith about this.</li>
+          <li>14 February 2021 - We agreed and signed a contract for the work.</li>
+          <li>12 January 2021 - John Smith gave me a quote to replace the roof.</li>
+
         </ul>
 
         <br>
@@ -45,10 +53,10 @@ Money Claims Prototype
 
         
             <tr class="govuk-table__row">
-            <th></th>
+       
               <th scope="col" class="govuk-table__header" aria-sort="ascending"> Date
         
-              <span class="form-hint">For example, {{ now | date('MMMM YYYY')}} </span></th>
+              <span class="form-hint">For example, March 2021 </span></th>
             
               <th scope="col" class="govuk-table__header" aria-sort="none"> What happened
         
@@ -63,13 +71,13 @@ Money Claims Prototype
             
       
             
-          <tbody>
-              <tr  id="tr_clone" class="  govuk-table__row">
-                <td style="width:5%" class="index">grabber</td>
+          <tbody id="sortable" class="ui-state-default">
+              <tr  id="tr_clone" class="  ui-state-default govuk-table__row">
+          
               <td style="padding-top:30px; padding-left:10px;" class=" govuk-table__cell "> <input  class=" form-control timeline-column-1" type="text" id="date-form-control"
                 name="cd-date-1" value="{{data['cd-date-1']}}" onfocus=>
                <br><br>
-                <button type="button" class="link" name="cmdDeleteRow">Remove this event</button>
+                <button type="button" class="link" name="cmdDeleteRow">Remove</button>
                 </td>
               
 
@@ -82,10 +90,10 @@ Money Claims Prototype
                 <td class="govuk-table__cell " data-sort-value="59">
                   <ol style="padding-top: 15px;">
               
-                    <li><button type="button" class="link tr_clone_remove" value="Insert above">Insert above</button></li>
+                    <li><button type="button" class="link tr_clone_remove" value="Insert above">Add above</button></li>
               
                     <br>
-                    <li> <button type="button" class="link tr_clone_add" value="Insert below">Insert below</button></li>
+                    <li> <button type="button" class="link tr_clone_add" value="Insert below">Add below</button></li>
                   </ol>
                 </td>
               
@@ -138,24 +146,14 @@ $('button[name="cmdDeleteRow"]').on('click', function(){
 $(this).closest('tr').remove()
 })
 
-var fixHelperModified = function(e, tr) {
-    var $originals = tr.children();
-    var $helper = tr.clone();
-    $helper.children().each(function(index) {
-        $(this).width($originals.eq(index).width())
-    });
-    return $helper;
-},
-    updateIndex = function(e, ui) {
-        $('td.index', ui.item.parent()).each(function (i) {
-            $(this).html(i + 1);
-        });
-    };
 
-$("#sort tbody").sortable({
-    helper: fixHelperModified,
-    stop: updateIndex
-}).disableSelection();
+
+$( function() {
+    $( "#sortable" ).sortable({
+      placeholder: "ui-state-highlight"
+    });
+    $( "#sortable" ).disableSelection();
+  } );
   </script>
 
 {% endblock %}

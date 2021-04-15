@@ -18,26 +18,73 @@ Money Claims Prototype
       {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}
        <form method="post" action="{{ data.return_page if data.return_page | length > 0 else '../task-list' }}" class="form">
         {% else %}
-      <form method="post" action="evidence" class="form">
+      <form method="post" action="defence-3" class="form">
         {% endif %}
         {{formData | safe}}
-        <h1 class="heading-large">
-          Timeline of events
-        </h1>
-
-        <p>If you do not know the exact date, tell us the month and year.</p>
+       
+      <h1 class="heading-large">Add your timeline of events </h1>
 
 
-        <p class="bold-small">Example timeline</p>
-        <ul class="list list-bullet">
-          <li>12 January 2021 - John Smith gave me a quote to replace the roof.</li>
-          <li>14 February 2021 - We agreed and signed a contract for the work.</li>
-          <li>21 March 2021 - I noticed a leak on the landing and told Mr Smith about this.</li>
-        
-
-        </ul>
-
-        <br>
+      <div class="description-block">
+        <h3 class="heading-small">Their timeline</h3>
+        <div class="form-fields">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Date</th>
+                <th scope="col">What happened</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>03/11/2017</td>
+                <td>I contacted {% if data.counterclaim=="true" %}Jan Clark{%else%}Mary Richards{% endif %} to discuss building works on our roof.</td>
+              </tr>
+              <tr>
+                <td>06/11/2017</td>
+                <td>We agreed what work should be done and signed a contract.</td>
+              </tr>
+              <tr>
+                <td>30/11/2017</td>
+                <td>The work started on the roof.</td>
+              </tr>
+              <tr class="show-more">
+                <td>21/12/2017</td>
+                <td>The work on the roof was completed but I noticed that there was a problem with one
+                section</a>.
+              </td>
+            </tr>
+            <tr  class="show-more">
+              <td>27/12/2017</td>
+              <td>I sent an email to Mary Richards and asked them to get the problem fixed.</td>
+            </tr>
+            <tr class="show-more">
+              <td>15/01/2018</td>
+              <td>I hadn't had a reply so I told them I would be making a money claim.</td>
+            </tr>
+          <tr class="show-more">
+            <td >27/12/2017</td>
+            <td>I sent an email to Mary Richards and asked them to get the problem fixed.</td>
+          </tr>
+          <tr class="show-more">
+            <td>15/01/2018</td>
+            <td>I hadn't had a reply so I told them I would be making a money claim.</td>
+          </tr>
+          <tr >
+            <td class="no-border">
+              <a href="#" class="toggle">Show more</a>
+              <a href="#" class="toggle" style="display: none">Show less</a>
+            </td>
+            <td class="no-border"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div style="padding-top: 30px;"></div>
+  <!-- ROC-5498 -->
+  <h3 class="heading-small">Add your timeline of events (optional)</h3>
+  <p>Include dates if you know them.</p>
     
         <fieldset>
           <legend class="visuallyhidden">
@@ -104,6 +151,24 @@ Money Claims Prototype
 
 
         </fieldset>
+
+        <div class="grid-row">
+          <div class="column-two-thirds" id="claim-details">
+            <div id="describe-wrapper-claim-details-1" class="form-group">
+              <label class="form-label-bold" for="offer">
+                <h3 class="heading-small">Add any comments about their timeline (optional)</h3>
+              </label>
+              <textarea class="form-control form-control-3-4 form-control-medium"
+              id="defence-disagree-timeline"
+              rows="4"
+              name="defence-disagree-timeline"
+              cols="20"
+              type="text"
+              style="width: 95%"
+              data-store="">{{data['defence-disagree-timeline']}}</textarea>
+            </div>
+          </div>
+        </div>
       
       {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and data.return_page.includes('check-your-answers')%}
         <div class="form-group">
@@ -120,13 +185,13 @@ Money Claims Prototype
   </div>
   {% block page_scripts %}
 <script>
-$("table").on("click",".up,.down", function () {});
+$("#sort").on("click",".up,.down", function () {});
 
 $(".addmore").on('click',function(){
 
 	var data="<tr><td style='padding-top:30px; padding-left:10px;' class='govuk-table__cell'> <input  class=' form-control timeline-column-1'><br><br><button type='button' class='link' name='cmdDeleteRow'>Remove</button></td><td style='padding-top:30px; padding-left:10px;' class='govuk-table__cell'> <textarea style='width: 90%; padding-top:15px;' class='' name='' id='' value='' rows=''></textarea> </td>";
     data+="<td><br><button type='button' class='up link'>Move up</button><br><br><button type='button' class='down link' >Move down</button></td> </tr>";
-  $('table').append(data);
+  $('#sort').append(data);
   $("tr:last").addClass("rowcolor")
   $("tr:last").prev().removeClass("rowcolor")
 
@@ -138,7 +203,7 @@ $(this).closest('tr').remove()
 
 
 
-$("table").on("click",".up,.down", function () {
+$("#sort").on("click",".up,.down", function () {
   var row = $(this).parents("tr:first");
   if($(this).is('.up')){
     row.insertBefore(row.prev());
