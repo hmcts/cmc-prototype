@@ -62,7 +62,7 @@ Money Claims Prototype
           {% endif %}
 
           {% endif %}
-
+         
 
           {% if data['scenario'] != 8 and data['scenario'] != 7 %}
           <h1 class="heading-medium">Do you want to {% if data['reject-court'] != 'yes' and data['scenario'] != 6 %}choose{% else %}request{% endif %} {% if data['scenario'] == 5 or data['court-search'] == 'postcode' %}Edmonton County Court{% else %}Guildford County Court{% endif %}?</h1>
@@ -272,8 +272,94 @@ Money Claims Prototype
                 <p><a class="button" href="dates">Continue</a></p>
               </div>
           {% else %}
+          {% if data.scenario === '9' %}
+      
+
+        
+
+        
+
+          
+
+          
+            <h1 class="heading-large">Choose a hearing location</h1>
+            
+  
+            
+  
+            
+            
+  
+              
+                  <p>Tell us your preferred location for a hearing, in case the claim goes to one.</p>
+              
+  
+  
+            <p>We'll use the location you choose unless the claimant has an exceptional reason to object, for example accessibility needs.</p>
+            
+  
+            
+           
+  
+            
+            
+  
+            
+            
+  
+            
+            
+            
+  
+            
+  
+            
+  
+            <div class="form-group " id="">
+          
+  
+              <div class="multiple-choice" data-target="postcode">
+                <input id="radio-court-postcode" type="radio" name="court-search" value="postcode">
+                <label for="radio-court-postcode">Search by postcode</label>
+              </div>
+              <div class="panel panel-border-narrow js-hidden" id="postcode">
+                <div class="form-group">
+                  <label class="form-label" for="county_court">Enter a postcode</label>
+                  <input type="text" id="county_court" name="county_court" class="form-control" style="width: 120px" />
+                </div>
+              </div>
+  
+              <fieldset>
+                <div class="multiple-choice" data-target="court-names">
+                  <input id="radio-court-name" type="radio" name="court-search" value="name" onclick="$('form#aspnetForm').attr('action','name-results');console.log('here');$('form#aspnetForm').attr('onSubmit','');">
+                  <label for="radio-court-name">Find and select a court</label>
+                </div>
+  
+  
+                  <div class="panel js-hidden auto-comp-field" id="court-names">
+                      <label class="form-label" for="court-name">
+                          Enter a court name or the name of a place
+                      </label>
+  
+                      <input type="text" id="court-name" name="court-name" class="form-control" />
+  
+                  </div>
+  
+  
+  
+              </fieldset>
+            </div>
+  
+          
+  
+          
+  
+  
+            
+      
+          {% endif %}
               <div class="form-group">
-                <input type="submit" class="button" value="Save and continue">
+                <input type="submit" class="button" value="Save and continue"> 
               </div>
           {% endif%}
 
@@ -297,6 +383,7 @@ Money Claims Prototype
     <option value="4" {% if data['scenario'] == 4 %}selected{% endif %}>4. Defendant = Individual, User = Claimant</option>
     <option value="6" {% if data['scenario'] == 6 or data['reject-court'] == 'no' %}selected{% endif %}>6. Request other</option>
     <option value="7" {% if data['scenario'] == 7 or data['reject-court'] == 'no' %}selected{% endif %}>7. Request other - fallback</option>
+    <option value="9" {% if data['scenario'] == 9 %}selected{% endif %}>9. - scenario - postcode where court-finder(system logic) couldn't return court nearest to the party's postcode</option>
   </select>
 </form>
 
