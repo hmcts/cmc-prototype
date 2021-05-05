@@ -10,6 +10,18 @@ Money Claims Prototype
 {% endblock %}
 {% block content %}
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+
+<style>
+  #sortable {  cursor: move; list-style-type: none; margin: 0; padding: 0; width: 60%; }
+  #sortable tbody {  margin: 0 5px 5px 5px; padding: 5px; font-size: 1.2em; height: 1.5em; }
+  html>body #sortable tbody {  cursor: move; height: 1.5em; line-height: 1.2em; }
+  .ui-state-highlight {  background-color:#f3f2f1; height: 173px; line-height: 922px; }
+
+  .ui-sortable-helper {
+  border: 3px solid black;
+  background-color:#f3f2f1;
+}
+  </style>
 <main id="content" role="main">
   {% include "includes/phase_banner_beta.html" %}
   <div class="grid-row">
@@ -85,56 +97,55 @@ Money Claims Prototype
   <!-- ROC-5498 -->
   <h3 class="heading-small">Add your timeline of events (optional)</h3>
   <p>Include dates if you know them.</p>
-    
+  <p class="govuk-inset-text">To change the order of your timeline, drag the entry up or down.</p>
         <fieldset>
           <legend class="visuallyhidden">
             Explain what happened
           </legend>
           <table id="sort" class="govuk-table">
 
-        <thead>
+        
             <tr class="govuk-table__row">
-          
+       
               <th scope="col" class="govuk-table__header" aria-sort="ascending"> Date
         
-              <span class="form-hint">For example, March 2021 </span></th>
+              <span class="form-hint">For example, March 2021</span></th>
             
               <th scope="col" class="govuk-table__header" aria-sort="none"> What happened
         
               <span class="form-hint">For example, you might have signed a contract</span></th>
             
-              <th scope="col" class="govuk-table__header " aria-sort="none">Actions
+              <th scope="col" class="govuk-table__header " aria-sort="none">Action
                 <span class="form-hint"> </span>
 
               </th>
              
             </tr>
             
-          </thead>
+      
             
-          <tbody>
-              <tr  id="tr_clone" class="  govuk-table__row">
-              
+          <tbody style="overflow: auto;" id="sortable" class="ui-state-default">
+              <tr  id="tr_clone" class="tr_clone  govuk-table__row">
+             
               <td style="padding-top:30px; padding-left:10px;" class=" govuk-table__cell "> <input  class=" form-control timeline-column-1" type="text" id="date-form-control"
                 name="cd-date-1" value="{{data['cd-date-1']}}" onfocus=>
                <br><br>
-                <button type="button" class="link" name="cmdDeleteRow">Remove</button>
+                
                 </td>
               
 
-
-                <td class="govuk-table__cell " data-sort-value="1568847600000"> <div style="padding-top:15px;" class="form-group"><textarea style="width: 90%; padding-top:15px;"
-                  class="timeline-column-text" name="cd-timeline-1" id="timeline-1" value="{{data['cd-timeline-1']}}"
-                  rows="2">{{data['cd-timeline-1']}}</textarea></div> </td>
+<td class="govuk-table__cell " data-sort-value="1568847600000">
+  <div style="padding-top:15px;" class="form-group"><textarea style="width: 90%; padding-top:15px;"
+      class="timeline-column-text" name="cd-timeline-1" id="timeline-1" value="{{data['cd-timeline-1']}}"
+      rows="2">{{data['cd-timeline-1']}}</textarea></div>
+</td>
               
                 <td class="govuk-table__cell " data-sort-value="59">
-                  <ol style="padding-top: 15px;">
+               
               
-                    <li><button id="up" type="button" value="move up " class="link up">Move up</button></li>
+                <button style="padding-top: 15px;" type="button" class="link" name="cmdDeleteRow">Remove </button>
               
-                    <br>
-                    <li> <button id="down" type="button" value="move down " class="link down" >Move down</button></li>
-                  </ol>
+                    
                 </td>
               
               </tr>
@@ -146,9 +157,11 @@ Money Claims Prototype
             
 
             </table> 
+            <div class="form-group">
+              <button id="btn1" type="button" class="secondary-button" onclick="myFunction()" >Add new</button>
+              <button id="btn2" type="button" class="secondary-button visuallyhidden" name="cmdAddRow">Add new</button>
+            </div>
          
-            <button type="button" class=" addmore secondary-button" value="Insert above">Add new </button>
-
 
         </fieldset>
 
@@ -184,41 +197,59 @@ Money Claims Prototype
     </div>
   </div>
   {% block page_scripts %}
-<script>
-$("#sort").on("click",".up,.down", function () {});
-
-$(".addmore").on('click',function(){
-
-	var data="<tr><td style='padding-top:30px; padding-left:10px;' class='govuk-table__cell'> <input  class=' form-control timeline-column-1'><br><br><button type='button' class='link' name='cmdDeleteRow'>Remove</button></td><td style='padding-top:30px; padding-left:10px;' class='govuk-table__cell'> <textarea style='width: 90%; padding-top:15px;' class='' name='' id='' value='' rows=''></textarea> </td>";
-    data+="<td><br><button type='button' class='up link'>Move up</button><br><br><button type='button' class='down link' >Move down</button></td> </tr>";
-  $('#sort').append(data);
-  $("tr:last").addClass("rowcolor")
-  $("tr:last").prev().removeClass("rowcolor")
-
-  $('button[name="cmdDeleteRow"]').on('click', function(){
-$(this).closest('tr').remove()
-})
-});
+  <script>
 
 
-
-
-$("#sort").on("click",".up,.down", function () {
-  var row = $(this).parents("tr:first");
-  if($(this).is('.up')){
-    row.insertBefore(row.prev());
-  }
-  else{
-    row.insertAfter(row.next());
-  }
-});
-
-
-
-
-
-  </script>
-
+    function myFunction() {
+       var table = document.getElementById("sort");
+       var row = table.insertRow(2);
+       var cell1 = row.insertCell(0);
+       var cell2 = row.insertCell(1);
+       var cell3 = row.insertCell(2);
+       $("#btn1").hide()
+       $("#btn2").removeClass('visuallyhidden')
+       cell1.innerHTML = '<input style="margin-top:0px; margin-left:10px;"class="form-control timeline-column-1" type="text" id="date-form-control" name="cd-date-1" value="{{data['cd-date-1']}}" onfocus=>';
+       cell2.innerHTML = ' <div style="padding-top:15px;" class="form-group"> <textarea style="width: 90%;" class="timeline-column-text" name="cd-timeline-1" id="timeline-1" value="{{data['cd-timeline-1']}}"  rows="2">{{data['cd-timeline-1']}}</textarea></div>';
+       cell3.innerHTML = '<button style="padding-top: 15px;"  type="button" class="link" name="cmdDeleteRow">Remove</button>';
+     row.classList.add('rowcolor')
+      cell1.classList.add('spacing')
+ 
+     
+     
+     $('button[name="cmdAddRow"]').on('click', function(){
+      
+      $curRow = $(row);
+      $newRow = $curRow.clone(true).attr('value','');   
+     
+         
+      $curRow.removeClass( "rowcolor" );
+      $newRow.find("input").val("").end();
+      $newRow.find("textarea").val("").end();
+ 
+      $curRow.after($newRow);
+    
+     });
+     
+     $('button[name="cmdDeleteRow"]').on('click', function(){
+     $(this).closest('tr').remove()
+     
+     })
+ 
+     
+     }
+     
+ 
+ 
+ 
+ 
+ 
+ $( function() {
+     $( "#sortable" ).sortable({
+       placeholder: "ui-state-highlight"
+     });
+     $( "#sortable" ).disableSelection();
+   } );
+   </script>
 {% endblock %}
 
 {% include 'prototypes/prototype-oct-2019/includes/contact.html' %}

@@ -35,7 +35,7 @@ Money Claims Prototype
           {{formData | safe}}
 
           <h1 class="heading-large">
-            {% if data['counter'] == 'FULL-COUNTER' or data['counter'] == 'SET-OFF-COUNTER' %}Making a counterclaim{% else %}Total amount you're claiming*{% endif %}
+            {% if data['counter'] == 'FULL-COUNTER' or data['counter'] == 'SET-OFF-COUNTER' %}Making a counterclaim{% else %}Total amount you're claiming{% endif %}
           </h1>
 
           {% if data['counter'] == 'FULL-COUNTER' %}
@@ -113,7 +113,7 @@ Money Claims Prototype
           <li>If it's unsuccessful, we'll ask you to pay the claim fee shown on this page in full.</p>
         </ol>
         {% endif %}
-
+        {% if data['radio_group2']=="interest_yes" %}
         <details>
           <!-- ROC-8638 -->
           <summary><span class="summary">How interest to date is calculated</span></summary>
@@ -149,7 +149,7 @@ Money Claims Prototype
             <!-- example http://localhost:3000/prototypes/features-to-be-built/claimant/task-list/claim-amount-alt/claim-interest-manual -->
           </div>
         </details>
-
+        {% endif %}
         {% if data['counter'] == 'FULL-COUNTER' or data['counter'] == 'SET-OFF-COUNTER' or not data['counter'] %}
 
         <h4 class="heading-small">If you settle out of court</h4>
@@ -182,7 +182,7 @@ Money Claims Prototype
 
         {% endif %}
 
-        <p>There may be additional fees as your case progresses. <a href="https://www.gov.uk/government/publications/fees-in-the-civil-and-family-courts-main-fees-ex50">Find out more about court fees</a></p>
+        <p>There may be additional fees as your case progresses. <a href="https://www.gov.uk/government/publications/fees-in-the-civil-and-family-courts-main-fees-ex50">Find out more about court fees (opens in a new tab)</a></p>
 
 
        <!-- {% if data['counter'] == 'FULL-COUNTER' or data['counter'] == 'SET-OFF-COUNTER' or not data['counter'] %}
@@ -192,11 +192,13 @@ Money Claims Prototype
 
         {% endif %}-->
 
+       
+
           <input type="hidden" name="claim_amount" value="complete">
           <input type="hidden" id="totalClaimAmount" name="totalClaimAmount">
 
         </fieldset>
-
+       
         {% if data['counter'] == 'FULL-COUNTER' or data['counter'] == 'SET-OFF-COUNTER' %}
 
         <h1 class="heading-medium">
