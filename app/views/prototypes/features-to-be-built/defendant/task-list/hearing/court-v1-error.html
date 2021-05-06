@@ -16,8 +16,8 @@ Money Claims Prototype
     </h2>
     <ul class="error-summary-list">
       
-        <li><a href="#address[postcode][label]">Court must be in England or Wales</a></li>
-
+        <li><a href="#address[postcode][label]">Enter a postcode for England or Wales in the correct format</a></li> 
+        <li><a href="#address[postcode][label]">Enter a court or place name in England or Wales</a></li> 
       
     </ul>
   </div>
@@ -65,7 +65,7 @@ Money Claims Prototype
             {% if data['scenario'] == "ccjsetaside" or data['general-app-hearing'] == "true" %}
                 <p>Tell us your preferred location for a hearing, in case one is needed about the judgment.</p>
             {% else %}
-                <p>Tell us your preferred location for a hearing, in case the claim goes to one.</p>
+                <p>Tell us your preferred location for a hearing, in case the claim goes to one. This must be in England or Wales.</p>
             {% endif %}
 
 
@@ -134,17 +134,18 @@ Money Claims Prototype
             </fieldset>
           </div>
 
-          <div class="form-group form-group-error js-hidden" id="courtsearch">
+          <div class="form-group js-hidden" id="courtsearch">
             <h1 class="heading-medium">Choose another court</h1>
 
             <div class="multiple-choice" data-target="postcode">
-              <input id="radio-court-postcode" type="radio" name="court-search" value="postcode" checked>
+              <input id="radio-court-postcode" type="radio" name="court-search" value="postcode" >
               <label for="radio-court-postcode">Search by postcode</label>
             </div>
-            <div class="panel panel-border-narrow js-hidden" id="postcode">
-              <div class="form-group">
+            <div class="panel panel-border-narrow " id="postcode">
+              <div class="form-group form-group-error ">
                 <label class="form-label" for="county_court">Enter a postcode</label>
-                <span class="error-message">Court must be in England or Wales</span>
+                <span class="form-hint">For example, SW1A 2AA</span>
+                <span class="error-message">Enter a postcode for England or Wales in the correct format</span>
                 <input type="text" id="county_court" name="county_court" class="form-control form-control-error" style="width: 120px" />
               </div>
             </div>
@@ -153,16 +154,18 @@ Money Claims Prototype
               <div class="multiple-choice" data-target="court-names">
                 <input id="radio-court-name" type="radio" name="court-search" value="name" onclick="$('form#aspnetForm').attr('action','name-results');console.log('here');$('form#aspnetForm').attr('onSubmit','');">
                 <label for="radio-court-name">Find and select a court</label>
+                <span class="error-message">Enter a postcode for England or Wales in the correct format</span>
               </div>
 
 
-                <div class="panel js-hidden auto-comp-field" id="court-names">
-                    <label class="form-label" for="court-name">
-                        Enter a court name or the name of a place
+                <div class="panel panel-border-narrow auto-comp-field" id="court-names">
+                  <div class="form-group form-group-error ">
+                    <label class="form-label " for="court-name">
+                      Enter a court or place name in England or Wales
                     </label>
 
-                    <input type="text" id="court-name" name="court-name" class="form-control" />
-
+                    <input type="text" id="court-name" name="court-name" class="form-control form-control-error" >
+</div>
                 </div>
 
 
@@ -327,19 +330,20 @@ Money Claims Prototype
   
             
   
-            <div class="form-group form-group-error" id="">
+            <div class="form-group " id="">
           
   
               <div class="multiple-choice" data-target="postcode">
-                <input id="radio-court-postcode" type="radio" name="court-search" value="postcode" checked="">
+                <input id="radio-court-postcode" type="radio" name="court-search" value="postcode" >
                 <label for="radio-court-postcode">Search by postcode</label>
               </div>
          
-              <div class="panel panel-border-narrow js-hidden" id="postcode">
-                <div class="form-group" >
+              <div class="panel panel-border-narrow " id="postcode">
+                <div class="form-group form-group-error" >
                  
                   <label class="form-label" for="county_court">Enter a postcode</label>
-                  <span class="error-message">Court must be in England or Wales</span>
+                  <span class="form-hint">For example, SW1A 2AA</span>
+                  <span class="error-message">Enter a postcode for England or Wales in the correct format</span>
                   <input type="text" id="county_court" name="county_court" class="form-control form-control-error" style="width: 120px" />
                 </div>
               </div>
@@ -351,13 +355,14 @@ Money Claims Prototype
                 </div>
   
   
-                  <div class="panel js-hidden auto-comp-field" id="court-names">
+                  <div class="panel auto-comp-field " id="court-names">
+                    <div class="form-group form-group-error" >
                       <label class="form-label" for="court-name">
                           Enter a court name or the name of a place
                       </label>
-  
-                      <input type="text" id="court-name" name="court-name" class="form-control" />
-  
+                      <span class="error-message">Enter a court or place name in England or Wales</span>
+                      <input type="text" id="court-name" name="court-name" class="form-control form-control-error" />
+  </div>
                   </div>
   
   
