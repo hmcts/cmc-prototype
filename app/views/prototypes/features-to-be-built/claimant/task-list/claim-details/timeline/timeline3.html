@@ -43,7 +43,13 @@ Money Claims Prototype
           <legend class="visuallyhidden">
             Explain what happened
           </legend>
-          <table id="sort" class="govuk-table">
+          <div id="error1" class="govuk-error-summary hidden" aria-labelledby="error-summary-title" role="alert" tabindex="-1" data-module="govuk-error-summary">
+            <h2 class="govuk-error-summary__title" id="error-summary-title">
+        This cannot be moved up
+            </h2>
+          
+          </div>
+          <table id="sort" class="  govuk-table">
 
         <thead>
             <tr class="govuk-table__row">
@@ -56,7 +62,7 @@ Money Claims Prototype
         
               <span class="form-hint">For example, you might have signed a contract</span></th>
             
-              <th scope="col" class="govuk-table__header " aria-sort="none">Actions
+              <th id="cell2" scope="col" class="govuk-table__header hidden " aria-sort="none">Actions
                 <span class="form-hint"> </span>
 
               </th>
@@ -65,13 +71,13 @@ Money Claims Prototype
             
           </thead>
             
-          <tbody>
-              <tr  id="tr_clone" class="  govuk-table__row">
+          <tbody id="sort2" >
+              <tr  id="tr_clone" class="   govuk-table__row">
               
               <td style="padding-top:30px; padding-left:10px;" class=" govuk-table__cell "> <input  class=" form-control timeline-column-1" type="text" id="date-form-control"
                 name="cd-date-1" value="{{data['cd-date-1']}}" onfocus=>
                <br><br>
-                <button type="button" class="link" name="cmdDeleteRow">Remove</button>
+                <button  type="button" class="rmv link hidden" name="cmdDeleteRow">Remove</button>
                 </td>
               
 
@@ -80,7 +86,7 @@ Money Claims Prototype
                   class="timeline-column-text" name="cd-timeline-1" id="timeline-1" value="{{data['cd-timeline-1']}}"
                   rows="2">{{data['cd-timeline-1']}}</textarea></div> </td>
               
-                <td class="govuk-table__cell " data-sort-value="59">
+                <td id="cell1" class="govuk-table__cell hidden" data-sort-value="59">
                   <ol style="padding-top: 15px;">
               
                     <li><button id="up" type="button" value="move up " class="link up">Move up</button></li>
@@ -99,7 +105,12 @@ Money Claims Prototype
             
 
             </table> 
-         
+            <div id="error2" class="govuk-error-summary hidden" aria-labelledby="error-summary-title" role="alert" tabindex="-1" data-module="govuk-error-summary">
+              <h2 class="govuk-error-summary__title" id="error-summary-title">
+          This cannot be moved down
+              </h2>
+            
+            </div>
             <button type="button" class=" addmore secondary-button" value="Insert above">Add new </button>
 
 
@@ -123,19 +134,50 @@ Money Claims Prototype
 $("table").on("click",".up,.down", function () {});
 
 $(".addmore").on('click',function(){
-
+  $("#sort").removeClass("hidden");
 	var data="<tr><td style='padding-top:30px; padding-left:10px;' class='govuk-table__cell'> <input  class=' form-control timeline-column-1'><br><br><button type='button' class='link' name='cmdDeleteRow'>Remove</button></td><td style='padding-top:30px; padding-left:10px;' class='govuk-table__cell'> <textarea style='width: 90%; padding-top:15px;' class='' name='' id='' value='' rows=''></textarea> </td>";
-    data+="<td><br><button type='button' class='up link'>Move up</button><br><br><button type='button' class='down link' >Move down</button></td> </tr>";
+    data+="<td  class='hidden cell' ><br><button type='button' class='up link'>Move up</button><br><br><button type='button' class='down link' >Move down</button></td> </tr>";
   $('table').append(data);
   $("tr:last").addClass("rowcolor")
   $("tr:last").prev().removeClass("rowcolor")
+ 
+  
+  
+    $(".cell").removeClass("hidden");
+      $("#cell1").removeClass("hidden");
+      $("#cell2").removeClass("hidden");
+  
+  
+    $( ".rmv" ).removeClass("hidden")
+
+
+
+
+
+
+
+
 
   $('button[name="cmdDeleteRow"]').on('click', function(){
-$(this).closest('tr').remove()
+
+
+
+    if($('#sort2 tr').length <= 2) {    
+      $(".rmv").addClass("hidden");
+      $("#cell1").addClass("hidden");
+      $("#cell2").addClass("hidden");
+      $(".cell").addClass("hidden");
+    }
+    $(this).closest('tr').remove();
+
+    $("#error1").addClass("hidden");
+
+    $("#error2").addClass("hidden");
+
+
+
 })
 });
-
-
 
 
 $("table").on("click",".up,.down", function () {
@@ -146,9 +188,26 @@ $("table").on("click",".up,.down", function () {
   else{
     row.insertAfter(row.next());
   }
+
+ 
+
+ 
 });
 
+$("table").on('click',".up:first", function(){
+  $("#error1").removeClass("hidden");
+})
+$("table").on('click',".up:last", function(){
+  $("#error2").addClass("hidden");
+})
 
+$("table").on('click',".down:last", function(){
+  $("#error2").removeClass("hidden");
+})
+
+$("table").on('click',".down:first", function(){
+  $("#error1").addClass("hidden");
+})
 
 
 
