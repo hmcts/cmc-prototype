@@ -1,0 +1,119 @@
+{% extends "layout_task-list.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block home_link %} ../task-list {% endblock %}
+{% block proposition_header %}
+{% set my_account="1" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+{% set completed = true if data.read_rules == "complete" and data.your_details == "complete" and data.their_details == "complete" and data.claim_amount == "complete" and data.claim_details == "complete" %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and
+  data.return_page.includes('check-your-answers')%}
+  {% else %}
+  <a href="#" class="link-back">Back</a>
+  {% endif %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and
+      data.return_page.includes('check-your-answers')%}
+      <form method="post" action="your-details" class="form">
+        {% else %}
+              <form
+                name="aspnetForm"
+                method="post"
+                id="aspnetForm"
+                autocomplete="off"
+                onsubmit="multiNavigation('claimant-type', ['Individual', 'Sole trader','Company', 'Organisation' ], ['your-details/your-details', 'your-details//your-details' , 'your-details/your-details', 'your-details/your-details']);return false;"
+              >
+          {% endif %}
+          {{formData | safe}}
+          <h1 class="heading-large">
+            You have entered Mary Richards for both your name and the defendant's name. Is this correct?
+
+          </h1>
+
+
+          <fieldset>
+            <legend class="visuallyhidden">
+              Do claimant and defendants have same names?
+            </legend>
+            <div class="multiple-choice">
+              <input id="radio-1" type="radio" name="identical-names" value="Continue" {{ checked("defendant-type", "Individual") }}>
+              <label for="radio-1">
+                <strong class="bold-small">Yes</strong><br>
+              </label>
+            </div>
+            <div class="multiple-choice" data-target="cmn">
+              <input id="radio-2" type="radio" name="identical-names" value="Change claimant name" {{ checked("defendant-type", "Sole trader") }}>
+              <label for="radio-2">
+                <strong class="bold-small">No, change my name</strong><br>
+              </label>
+            </div>
+            <div id="cmn" name="cmn" class="panel panel-border-narrow js-hidden">
+
+              <div class="form-group">
+                <label class="form-label" for="hwf_number">Title </label>
+                <input type="text" class="form-control" name="hwf_number" id="hwf_number" style="width: 25%" value="Mrs" />
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="hwf_number">First name</label>
+                <input type="text" class="form-control" name="hwf_number" id="hwf_number" value="Mary" />
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="hwf_number">Last name</label>
+                <input type="text" class="form-control" name="hwf_number" id="hwf_number" value="Richards" />
+              </div>
+    
+    
+            </div>
+
+            <div class="multiple-choice" data-target="cdn">
+              <input id="radio-3" type="radio" name="identical-names" value="Change defendant name">
+              <label for="radio-3">
+                <strong class="bold-small">No, change defendant's name</strong><br>
+              </label>
+            </div>
+            <div id="cdn" name="cdn" class="panel panel-border-narrow js-hidden">
+
+              <div class="form-group">
+                <label class="form-label" for="title">Title </label>
+                <input type="text" class="form-control" name="title" id="title" style="width: 25%" value="Mrs" />
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="first_name">First name</label>
+                <input type="text" class="form-control" name="first_name" id="first_name" value="Mary" />
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="last_name">Last name</label>
+                <input type="text" class="form-control" name="last_name" id="last_name" value="Richards" />
+              </div>
+    
+    
+            </div>
+
+          </fieldset>
+          {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and
+          data.return_page.includes('check-your-answers')%}
+          <div class="form-group">
+            <input type="submit" class="button" value="Save changes"/>
+          </div>
+          <a href="{{ data.return_page if data.return_page | length > 0 else '../task-list' }}">Cancel</a>
+          {% else %}
+          <div class="form-group">
+            <input type="submit" class="button" value="Save and continue"/>
+          </div>
+          {% endif %}
+        </form>
+      </div>
+    </div>
+  {% include 'prototypes/features-to-be-built/includes/contact.html' %}
+</main>
+{% endblock %}
