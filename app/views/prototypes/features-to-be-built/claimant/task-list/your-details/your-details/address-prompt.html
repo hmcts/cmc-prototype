@@ -75,9 +75,17 @@ Money Claims Prototype
               <h2 class="heading-medium">
                 Defendant's address
               </h2>
-              <p>The address must be in England or Wales. Your claim may be invalid if you use the wrong address.</p>
+
+              {% if defendantType=="soletrader" %}
+              <p>You must enter the defendant’s residential or trade address to make a claim against them. The address must be in England or Wales.</p>
+              {% elseif defendantType=="company" %}
+              <p>Enter the company’s registered office or a company address that has a connection with the claim. The address must be in England or Wales.</p>
+              {% elseif defendantType=="organisation" %}
+              <p>Enter the organisation's main office or an organisation address that has a connection with the claim. The address must be in England or Wales.</p>
+              {% else %}
+              <p>Their address must be in England or Wales. Your claim may be invalid if you use the wrong address.</p>
               <p>You must enter their usual or last known home address. You cannot use their work address.</p>
-  
+              {% endif %}
               {{ address.lookup('defendant') }}
     
     
@@ -99,5 +107,10 @@ Money Claims Prototype
       </div>
     </div>
   {% include 'prototypes/features-to-be-built/includes/contact.html' %}
+
+  <div class="dev-notes">
+    <p>NB:  this is not a part of the design</p>
+    <p>Change defendant type: <a href="address-prompt?defendant=individual">Individual</a> | <a href="address-prompt?defendant=soletrader">Sole trader</a> | <a href="address-prompt?defendant=company">Company</a> | <a href="address-prompt?defendant=organisation">Organisation</a></p>
+  </div>
 </main>
 {% endblock %}

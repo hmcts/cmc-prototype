@@ -674,6 +674,14 @@ module.exports = function(app){
   app.post('*/check-check-and-send', clearReturnPageHandler)
   app.get('*/check-your-answers', clearReturnPageHandler)
 
+  
+
+  app.get('*/address-prompt', function (req, res, next) {
+    
+    let defendantType = req.query.defendant;
+    res.render(strPath + "/claimant/task-list/your-details/your-details/address-prompt", {defendantType: defendantType})
+  });
+
   module.exports = app
 
 }
