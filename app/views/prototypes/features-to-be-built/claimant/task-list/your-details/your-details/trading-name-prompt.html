@@ -1,0 +1,94 @@
+{% extends "layout_task-list.html" %}
+{% block page_title %}
+Money Claims Prototype
+{% endblock %}
+{% block home_link %} ../task-list {% endblock %}
+{% block proposition_header %}
+{% set my_account="1" %}
+{% include "includes/propositional_navigation.html" %}
+{% endblock %}
+{% block content %}
+{% set completed = true if data.read_rules == "complete" and data.your_details == "complete" and data.their_details == "complete" and data.claim_amount == "complete" and data.claim_details == "complete" %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and
+  data.return_page.includes('check-your-answers')%}
+  {% else %}
+  <a href="#" class="link-back">Back</a>
+  {% endif %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and
+      data.return_page.includes('check-your-answers')%}
+      <form method="post" action="your-details" class="form">
+        {% else %}
+              <form
+                name="aspnetForm"
+                method="post"
+                id="aspnetForm"
+                autocomplete="off"
+                onsubmit="multiNavigation('claimant-type', ['Individual', 'Sole trader','Company', 'Organisation' ], ['your-details/your-details', 'your-details//your-details' , 'your-details/your-details', 'your-details/your-details']);return false;"
+              >
+          {% endif %}
+          {{formData | safe}}
+          <h1 class="heading-large">
+            <!-- You have entered Mary Richards for both your name and the defendant's name. Is this correct? -->
+            You have entered Flying Elephant as trading name for both you and the defendant. You must change one.
+
+          </h1>
+
+
+          <fieldset>
+            <legend class="visuallyhidden">
+              Do claimant and defendants have same names?
+            </legend>
+
+            <div class="multiple-choice" data-target="cmn">
+              <input id="radio-2" type="radio" name="identical-names" value="Change claimant name" {{ checked("defendant-type", "Sole trader") }}>
+              <label for="radio-2">
+                <strong class="bold-small">Change my trading name</strong><br>
+              </label>
+            </div>
+            <div id="cmn" name="cmn" class="panel panel-border-narrow js-hidden">
+
+              <div class="form-group">
+                <label class="form-label" for="trading_name">Trading as (optional)</label>
+                <span class="form-hint">Sole trader names must not include: ‘limited’, ‘Ltd’, ‘limited liability partnership’, ‘LLP’, ‘public limited company’ or ‘plc’.</span>
+                <input type="text" class="form-control" name="trading_name" id="trading_name" />
+              </div>
+    
+    
+            </div>
+
+            <div class="multiple-choice" data-target="cdn">
+              <input id="radio-3" type="radio" name="identical-names" value="Change defendant name">
+              <label for="radio-3">
+                <strong class="bold-small">Change defendant's trading name</strong><br>
+              </label>
+            </div>
+            <div id="cdn" name="cdn" class="panel panel-border-narrow js-hidden">
+              <div class="form-group">
+                <label class="form-label" for="d_trading_name">Trading as (optional)</label>
+                <span class="form-hint">Sole trader names must not include: ‘limited’, ‘Ltd’, ‘limited liability partnership’, ‘LLP’, ‘public limited company’ or ‘plc’.</span>
+                <input type="text" class="form-control" name="d_trading_name" id="d_trading_name"  />
+              </div>   
+            </div>
+
+          </fieldset>
+          {% if data.return_page and data.return_page.includes('check-and-send') or data.return_page and
+          data.return_page.includes('check-your-answers')%}
+          <div class="form-group">
+            <input type="submit" class="button" value="Save changes"/>
+          </div>
+          <a href="{{ data.return_page if data.return_page | length > 0 else '../task-list' }}">Cancel</a>
+          {% else %}
+          <div class="form-group">
+            <input type="submit" class="button" value="Save and continue"/>
+          </div>
+          {% endif %}
+        </form>
+      </div>
+    </div>
+  {% include 'prototypes/features-to-be-built/includes/contact.html' %}
+</main>
+{% endblock %}
